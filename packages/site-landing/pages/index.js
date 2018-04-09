@@ -1,3 +1,7 @@
-import React from "react";
+import LayoutLanding from "site-components/LayoutLanding";
 
-export default () => <div>Landing Page Placeholder</div>;
+export default () => (
+  <LayoutLanding>
+    <div>Landing Page Placeholder</div>
+  </LayoutLanding>
+);
