@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    "paths": {
+      "site-components/*": ["./packages/site-components/*"]
+    }
+  },
+  "include": ["packages/**/*"],
+  "exclude": [
+    "node_modules",
+    "packages/**/node_modules",
+    "dist",
+    "packages/**/dist"
+  ]
+}

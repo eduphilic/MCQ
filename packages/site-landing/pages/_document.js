@@ -1,3 +1,4 @@
+import React from "react";
 import Document, { Head, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
@@ -13,18 +14,20 @@ export default class MyDocument extends Document {
       <html lang="en">
         <Head>
           <title>Join Uniform</title>
-
           {/* Roboto font for Material UI component library. */}
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+          />
+          <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+            rel="stylesheet"
           />
           {/* Material UI icon font. */}
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
           />
-
           {this.props.styleTags}
         </Head>
         <body>

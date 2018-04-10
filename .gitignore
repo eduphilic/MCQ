@@ -59,6 +59,7 @@ typings/
 
 # Build Output
 .next/
+dist/
 
 # Temporary Development Notes
 development_notes/
