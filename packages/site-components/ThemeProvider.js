@@ -1,11 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { Fragment } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import CssBaseline from "material-ui/CssBaseline";
 import { injectGlobal } from "styled-components";
-import MaterialUIStyleInjectOrder from "../MaterialUIStyleInjectOrder";
+import MaterialUIStyleInjectOrder from "site-components/MaterialUIStyleInjectOrder";
 
-/** @type { React.SFC<{}> } */
-const LayoutLanding = ({ children }) => (
+const ThemeProvider = ({ children }) => (
   <MaterialUIStyleInjectOrder>
     <Fragment>
       <CssBaseline />
@@ -14,11 +14,11 @@ const LayoutLanding = ({ children }) => (
   </MaterialUIStyleInjectOrder>
 );
 
-LayoutLanding.propTypes = {
-  children: propTypes.node.isRequired,
+ThemeProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
-export default LayoutLanding;
+export default ThemeProvider;
 
 /* eslint-disable-next-line no-unused-expressions */
 injectGlobal`
