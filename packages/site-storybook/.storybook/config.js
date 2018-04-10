@@ -1,14 +1,16 @@
 import React from "react";
 import { configure, addDecorator } from "@storybook/react";
 import { setOptions } from "@storybook/addon-options";
-// import { configure as configureViewportAddon } from "@storybook/addon-viewport";
+import { setDefaults } from "@storybook/addon-info";
 import ThemeProvider from "site-components/ThemeProvider";
 
 setOptions({
   addonPanelInRight: true,
 });
 
-// configureViewportAddon({});
+setDefaults({
+  inline: true,
+});
 
 addDecorator(story => <ThemeProvider>{story()}</ThemeProvider>);
 

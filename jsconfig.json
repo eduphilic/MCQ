@@ -7,11 +7,11 @@
       "site-components/*": ["./packages/site-components/*"]
     }
   },
-  "include": ["packages/**/*"],
-  "exclude": [
-    "node_modules",
-    "packages/**/node_modules",
-    "dist",
-    "packages/**/dist"
-  ]
+  "include": [
+    "packages/site-components/*.js",
+    "packages/site-components/assets/*",
+    "packages/site-landing/src/**/*.js",
+    "packages/site-storybook/*.js"
+  ],
+  "exclude": ["node_modules", "packages/**/node_modules", "packages/**/dist"]
 }
