@@ -12,13 +12,15 @@
   ],
   "scripts": {
     "start": "lerna run --parallel start",
-    "build": "lerna run build",
-    "clean": "lerna run clean",
+    "build": "lerna run --stream build ",
+    "clean": "lerna run --stream clean",
+    "test": "cross-env CI=1 lerna run --stream test",
     "lint": "eslint packages/**/**/*.js"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
+    "cross-env": "^5.1.4",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
