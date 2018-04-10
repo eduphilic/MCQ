@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import PageContentCentering from "./PageContentCentering";
+import ThemeProviderDark from "./ThemeProviderDark";
 import * as Components from "./OnboardingHeroSection.components";
 
 /**
@@ -8,24 +9,26 @@ import * as Components from "./OnboardingHeroSection.components";
  * arranging the hero content sections.
  */
 const OnboardingHeroSection = ({ onboardingTextNode, onboardingFormNode }) => (
-  <Components.Section>
-    <PageContentCentering>
-      <Components.ContentsContainer>
-        <Components.PageTitleContainer>
-          <Components.PageTitle>Join Uniform</Components.PageTitle>
-        </Components.PageTitleContainer>
+  <ThemeProviderDark>
+    <Components.Section>
+      <PageContentCentering>
+        <Components.ContentsContainer>
+          <Components.PageTitleContainer>
+            <Components.PageTitle>Join Uniform</Components.PageTitle>
+          </Components.PageTitleContainer>
 
-        <Components.OnboardingContainer>
-          <Components.OnboardingTextSection>
-            {onboardingTextNode}
-          </Components.OnboardingTextSection>
-          <Components.OnboardingFormSection>
-            {onboardingFormNode}
-          </Components.OnboardingFormSection>
-        </Components.OnboardingContainer>
-      </Components.ContentsContainer>
-    </PageContentCentering>
-  </Components.Section>
+          <Components.OnboardingContainer>
+            <Components.OnboardingTextSection>
+              {onboardingTextNode}
+            </Components.OnboardingTextSection>
+            <Components.OnboardingFormSection>
+              {onboardingFormNode}
+            </Components.OnboardingFormSection>
+          </Components.OnboardingContainer>
+        </Components.ContentsContainer>
+      </PageContentCentering>
+    </Components.Section>
+  </ThemeProviderDark>
 );
 
 OnboardingHeroSection.propTypes = {
