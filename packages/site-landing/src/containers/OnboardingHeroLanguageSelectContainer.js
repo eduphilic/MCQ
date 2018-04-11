@@ -6,6 +6,7 @@ export default class OnboardingHeroLanguageSelectContainer extends Component {
     value: "english",
   };
 
+  // eslint-disable-next-line no-unused-vars
   handleValueChange = (event, value) => {
     this.setState({ value });
   };
