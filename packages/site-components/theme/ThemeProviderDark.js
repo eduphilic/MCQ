@@ -1,12 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
-import { theme } from "./ThemeProvider";
-
-const darkTheme = createMuiTheme({
-  ...theme,
-  palette: { type: "dark" },
-});
+import { MuiThemeProvider } from "material-ui/styles";
+import { darkTheme } from "./themes";
 
 const ThemeProviderDark = ({ children }) => (
   <MuiThemeProvider theme={darkTheme}>{children}</MuiThemeProvider>

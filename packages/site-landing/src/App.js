@@ -1,11 +1,13 @@
 import React from "react";
-import ThemeProvider from "site-components/ThemeProvider";
+import { ThemeBaseline, ThemeProvider } from "site-components/theme";
 import Home from "./pages/Home";
 
 const App = () => (
-  <ThemeProvider>
-    <Home />
-  </ThemeProvider>
+  <ThemeBaseline>
+    <ThemeProvider>
+      <Home />
+    </ThemeProvider>
+  </ThemeBaseline>
 );
 
 export default App;

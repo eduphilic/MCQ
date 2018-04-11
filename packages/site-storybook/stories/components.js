@@ -1,5 +1,5 @@
 import React from "react";
-import ThemeProviderDark from "site-components/ThemeProviderDark";
+import { ThemeProviderDark } from "site-components/theme";
 import styled from "styled-components";
 
 const OnboardingDarkBackdropBase = styled.div`

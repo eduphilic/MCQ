@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import PageContentCentering from "./PageContentCentering";
-import ThemeProviderDark from "./ThemeProviderDark";
+import { ThemeProviderDark } from "./theme";
 import * as Components from "./OnboardingHeroSection.components";
 
 /**

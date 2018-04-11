@@ -3,8 +3,7 @@ import { configure, addDecorator } from "@storybook/react";
 import { setOptions } from "@storybook/addon-options";
 import { setDefaults } from "@storybook/addon-info";
 import { withKnobs } from "@storybook/addon-knobs";
-import { Helmet } from "react-helmet";
-import ThemeProvider from "site-components/ThemeProvider";
+import { ThemeBaseline, ThemeProvider } from "site-components/theme";
 
 // Storybook Options
 setOptions({
@@ -20,26 +19,9 @@ addDecorator(withKnobs);
 
 // Load in fonts and baseline styles.
 addDecorator(story => (
-  <ThemeProvider>
-    <Helmet>
-      {/*  Material UI fonts. */}
-      <link
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700"
-        rel="stylesheet"
-      />
-
-      {/* Material UI icons. */}
-      <link
-        href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        rel="stylesheet"
-      />
-    </Helmet>
-    {story()}
-  </ThemeProvider>
+  <ThemeBaseline>
+    <ThemeProvider>{story()}</ThemeProvider>
+  </ThemeBaseline>
 ));
 
 const req = require.context("../stories", true, /\.stories\.js$/);
