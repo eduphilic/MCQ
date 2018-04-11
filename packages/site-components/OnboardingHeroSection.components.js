@@ -32,7 +32,10 @@ export const OnboardingTextSection = styled(Grid).attrs({
   item: true,
   xs: 12,
   md: 8,
-})``;
+})`
+  display: flex;
+  align-items: center;
+`;
 
 export const OnboardingFormSection = styled(Grid).attrs({
   item: true,

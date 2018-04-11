@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import OnboardingHeroSection from "site-components/OnboardingHeroSection";
 import OnboardingHeroLanguageSelectContainer from "../containers/OnboardingHeroLanguageSelectContainer";
+import OnboardingFormsContainer from "../containers/OnboardingFormsContainer";
 
 const Home = () => (
   <Fragment>
@@ -11,7 +12,7 @@ const Home = () => (
             <OnboardingHeroLanguageSelectContainer />
           </Fragment>
         }
-        onboardingFormNode={<div>Placeholder</div>}
+        onboardingFormNode={<OnboardingFormsContainer />}
       />
     </header>
   </Fragment>

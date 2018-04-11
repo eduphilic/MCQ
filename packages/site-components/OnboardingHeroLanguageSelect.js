@@ -1,18 +1,14 @@
 import React from "react";
-/* eslint-disable */
 import PropTypes from "prop-types";
 
-import Radio, { RadioGroup } from "material-ui/Radio";
-import {
-  FormLabel,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-} from "material-ui/Form";
+import Radio from "material-ui/Radio";
+import { FormLabel, FormControl, FormControlLabel } from "material-ui/Form";
 
 import * as Components from "./OnboardingHeroLanguageSelect.components";
 
-/** >>> !!! In progress !!! << */
+/**
+ * Provides visits with the ability to select their preferred display language.
+ */
 const OnboardingHeroLanguageSelect = props => (
   <FormControl component="fieldset" style={{ width: "100%" }}>
     <Components.SelectionContainer>
@@ -42,7 +38,14 @@ const OnboardingHeroLanguageSelect = props => (
 );
 
 OnboardingHeroLanguageSelect.propTypes = {
+  /**
+   * The current value of the select.
+   */
   value: PropTypes.oneOf(["english", "hindi"]).isRequired,
+
+  /**
+   * Called when the selection is changed.
+   */
   onChange: PropTypes.func.isRequired,
 };
 
