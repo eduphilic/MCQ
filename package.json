@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "start": "lerna run --parallel start",
-    "build": "lerna run --stream build ",
+    "build": "lerna run --stream --concurrency 1 build ",
     "clean": "lerna run --stream clean",
     "test": "cross-env CI=1 lerna run --stream test",
     "lint": "eslint packages/**/**/*.js"
