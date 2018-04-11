@@ -25,11 +25,9 @@ const OnboardingHeroLanguageSelect = props => (
       </Components.SelectionSectionContainer>
 
       <Components.SelectionSectionContainer>
-        <RadioGroup
-          aria-label="Language"
+        <Components.SelectionRadioGroup
           value={props.value}
           onChange={props.onChange}
-          row
         >
           <FormControlLabel
             value="english"
@@ -37,7 +35,7 @@ const OnboardingHeroLanguageSelect = props => (
             label="English"
           />
           <FormControlLabel value="hindi" control={<Radio />} label="Hindi" />
-        </RadioGroup>
+        </Components.SelectionRadioGroup>
       </Components.SelectionSectionContainer>
     </Components.SelectionContainer>
   </FormControl>

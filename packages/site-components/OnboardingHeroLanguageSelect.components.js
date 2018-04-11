@@ -1,5 +1,6 @@
 import Grid from "material-ui/Grid";
 import Typography from "material-ui/Typography";
+import { RadioGroup } from "material-ui/Radio";
 
 import styled from "styled-components";
 
@@ -9,10 +10,30 @@ export const SelectionContainer = styled(Grid).attrs({
 
 export const SelectionSectionContainer = styled(Grid).attrs({
   item: true,
-  xs: 12,
-  md: 6,
-})``;
+  xs: true,
+  // xs: 12,
+  // sm: 6,
+  // md: 6,
+})`
+  margin: auto 0;
+
+  &:first-child {
+    flex-grow: 0;
+  }
+
+  &:first-child h3 {
+    white-space: nowrap;
+    margin-right: 20px;
+  }
+`;
 
 export const SelectionLabel = styled(Typography).attrs({
   variant: "subheading",
 })``;
+
+export const SelectionRadioGroup = styled(RadioGroup).attrs({
+  "aria-label": "Select preferred language",
+  row: true,
+})`
+  /* justify-content: space-around; */
+`;

@@ -1,6 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
+import Typography from "material-ui/Typography";
 import styled from "styled-components";
 import OnboardingHeroSection from "site-components/OnboardingHeroSection";
 
@@ -14,7 +15,7 @@ storiesOf("Components", module).add(
   )),
 );
 
-const Placeholder = styled.div`
+const Placeholder = styled(Typography).attrs({ variant: "body1" })`
   display: flex;
   align-items: center;
   height: 400px;
