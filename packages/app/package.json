@@ -1,0 +1,44 @@
+{
+  "private": true,
+  "name": "app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "npm-run-all clean build:*",
+    "build:cra": "react-app-rewired build",
+    "build:mv": "shx mv build dist",
+    "clean": "rimraf build dist",
+    "test": "react-app-rewired test --env=jsdom"
+  },
+  "dependencies": {
+    "components": "^1.0.0",
+    "material-ui": "^1.0.0-beta.41",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-helmet": "^5.2.0",
+    "react-scripts": "2.0.0-next.b2fd8db8",
+    "styled": "^1.0.0",
+    "theme": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.0.0-beta.44",
+    "npm-run-all": "^4.1.2",
+    "react-app-rewire-typescript-babel-preset": "^2.1.1",
+    "react-app-rewired": "^2.0.0",
+    "rimraf": "^2.6.2",
+    "shx": "^0.2.2"
+  },
+  "browserslist": {
+    "development": [
+      "last 2 chrome versions",
+      "last 2 firefox versions",
+      "last 2 edge versions"
+    ],
+    "production": [
+      ">1%",
+      "last 4 versions",
+      "Firefox ESR",
+      "not ie < 11"
+    ]
+  }
+}

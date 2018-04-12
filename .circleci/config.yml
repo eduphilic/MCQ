@@ -52,7 +52,7 @@ jobs:
             if [ $CIRCLE_BRANCH = 'master' ]
             then
               echo 'dev.bhartitest.com,45.77.116.238 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNZ6XoTAtmf2P3fcxYqHpt1U5JQrPdURnaMU4XXkifUj0m7pCiQad4ltk8DpaO/0/zVHGMrcquUZJ7mUJFBrkXc=' >> ~/.ssh/known_hosts
-              scp -r packages/site-landing/dist/* deploy@dev.bhartitest.com:/var/www/
+              scp -r packages/app/dist/* deploy@dev.bhartitest.com:/var/www/
               ssh deploy@dev.bhartitest.com "mkdir -p /var/www/storybook"
-              scp -r packages/site-storybook/dist/* deploy@dev.bhartitest.com:/var/www/storybook/
+              scp -r packages/components/dist/* deploy@dev.bhartitest.com:/var/www/storybook/
             fi

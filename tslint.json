@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-eslint-rules",
+    "tslint-config-airbnb",
+    "tslint-config-prettier"
+  ],
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "rules": {
+    "member-access": false,
+    "interface-name": [true, "never-prefix"],
+    "no-submodule-imports": [true, "material-ui"],
+    "import-name": [true, { "react": "React", "reactDom": "ReactDOM" }],
+    "variable-name": [
+      true,
+      "check-format",
+      "allow-leading-underscore",
+      "allow-pascal-case",
+      "ban-keywords"
+    ],
+    "prettier": true
+  }
+}
