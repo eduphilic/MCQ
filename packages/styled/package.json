@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "name": "styled",
+  "version": "1.0.0",
+  "peerDependencies": {
+    "theme": "^1.0.0"
+  }
+}
