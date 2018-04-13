@@ -1,6 +1,6 @@
-# bhartitest
+# bhartitest [![Circle CI](https://circleci.com/gh/strothj/bhartitest.svg?style=shield&circle-token=540326d76a4d134e7224f1b3b6e280210a343a1c)](https://circleci.com/gh/strothj/bhartitest)
 
-Mock Test practice portal for students applying for Indian Defence Services. [![Circle CI](https://circleci.com/gh/strothj/bhartitest.svg?style=shield&circle-token=540326d76a4d134e7224f1b3b6e280210a343a1c)](https://circleci.com/gh/strothj/bhartitest)
+Mock Test practice portal for students applying for Indian Defence Services.
 
 ## Contents
 
