@@ -1500,6 +1500,12 @@
   dependencies:
     "@types/react" "*"
 
+"@types/storybook__addon-knobs@^3.3.1":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@types/storybook__addon-knobs/-/storybook__addon-knobs-3.3.1.tgz#856e02dd8fe2ff8008f4bd3b65ed0afb98c7912e"
+  dependencies:
+    "@types/react" "*"
+
 "@types/storybook__addon-options@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@types/storybook__addon-options/-/storybook__addon-options-3.2.0.tgz#244dedfb1d548f5d42db994bcfa700220d65e9ef"

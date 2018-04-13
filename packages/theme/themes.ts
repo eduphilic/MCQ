@@ -7,6 +7,9 @@ import { createMuiTheme } from "material-ui/styles";
 
 const theme = {
   palette: {
+    background: {
+      default: "#fff",
+    },
     primary: {
       main: "#2f8d2b", // green
     },
