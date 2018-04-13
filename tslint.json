@@ -10,7 +10,10 @@
     "member-access": false,
     "interface-name": [true, "never-prefix"],
     "no-submodule-imports": [true, "material-ui"],
-    "import-name": [true, { "react": "React", "reactDom": "ReactDOM" }],
+    "import-name": [
+      true,
+      { "react": "React", "reactDom": "ReactDOM", "l10n": "strings" }
+    ],
     "variable-name": [
       true,
       "check-format",
