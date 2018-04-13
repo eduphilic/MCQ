@@ -1494,6 +1494,16 @@
   dependencies:
     csstype "^2.0.0"
 
+"@types/storybook__addon-info@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@types/storybook__addon-info/-/storybook__addon-info-3.2.2.tgz#fba0766527a9e117cb2cc5f6b3b6b108346703e5"
+  dependencies:
+    "@types/react" "*"
+
+"@types/storybook__addon-options@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@types/storybook__addon-options/-/storybook__addon-options-3.2.0.tgz#244dedfb1d548f5d42db994bcfa700220d65e9ef"
+
 "@types/storybook__react@^3.0.7":
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/@types/storybook__react/-/storybook__react-3.0.7.tgz#2ca6ab78e5fe777737aa5880b0bb5228f564e137"
@@ -1631,7 +1641,7 @@ ajv@^5.0.0, ajv@^5.1.0, ajv@^5.1.5, ajv@^5.3.0:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
 
-ajv@^6.0.1, ajv@^6.1.0:
+ajv@^6.0.1, ajv@^6.1.0, ajv@^6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.4.0.tgz#d3aff78e9277549771daf0164cff48482b754fc6"
   dependencies:
@@ -9198,6 +9208,17 @@ react-dev-utils@^5.0.0:
     sockjs-client "1.1.4"
     strip-ansi "3.0.1"
     text-table "0.2.0"
+
+react-docgen-typescript-loader@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-docgen-typescript-loader/-/react-docgen-typescript-loader-2.0.3.tgz#dae883be9091170b0dfff97ba96d6567ef27ccb6"
+  dependencies:
+    ajv "^6.4.0"
+    react-docgen-typescript "^1.2.6"
+
+react-docgen-typescript@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-1.2.6.tgz#d1140c58ee9bfff5481320b9ebd1d0659ecf9913"
 
 react-docgen@^3.0.0-beta11:
   version "3.0.0-beta9"
