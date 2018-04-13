@@ -3,7 +3,7 @@ import styled from "styled";
 
 const PlaceholderImageBase = styled.img.attrs({
   alt: "Placeholder Image",
-  src: "https://via.placeholder.com/350x150",
+  src: "https://via.placeholder.com/350x150?text=Placeholder",
 })`
   display: block;
   width: 100%;

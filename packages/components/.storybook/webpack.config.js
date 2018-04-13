@@ -12,12 +12,31 @@ module.exports = (baseConfig, env, defaultConfig) => {
   );
   babelLoader.include.push(...monorepoPackages);
 
+  // Add SVG React component support like Create React App.
+  babelLoader.query.plugins.unshift([
+    "babel-plugin-named-asset-import",
+    {
+      loaderMap: {
+        svg: {
+          ReactComponent: "svgr/webpack![path]",
+        },
+      },
+    },
+  ]);
+
   // Transpile TypeScript.
   config.module.rules.push({
     test: /\.tsx?$/,
     include: babelLoader.include,
     exclude: babelLoader.exclude,
-    use: ["ts-loader", "react-docgen-typescript-loader"],
+    use: [
+      {
+        loader: babelLoader.loader,
+        query: babelLoader.query,
+      },
+      "ts-loader",
+      "react-docgen-typescript-loader",
+    ],
   });
 
   config.resolve.extensions.push(".ts", ".tsx");

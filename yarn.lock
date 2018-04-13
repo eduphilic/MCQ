@@ -2321,6 +2321,10 @@ babel-plugin-named-asset-import@1.0.0-next.b2fd8db8:
   version "1.0.0-next.b2fd8db8"
   resolved "https://registry.yarnpkg.com/babel-plugin-named-asset-import/-/babel-plugin-named-asset-import-1.0.0-next.b2fd8db8.tgz#bd32f356288cbab326196b5f75547bc0dedf540a"
 
+babel-plugin-named-asset-import@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-named-asset-import/-/babel-plugin-named-asset-import-0.0.0.tgz#aaea26a74fde2599e0a4581d8d05c33a8ca5823b"
+
 babel-plugin-react-docgen@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-react-docgen/-/babel-plugin-react-docgen-1.9.0.tgz#2e79aeed2f93b53a172398f93324fdcf9f02e01f"
