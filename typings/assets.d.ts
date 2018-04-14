@@ -22,7 +22,7 @@ declare module "*.svg" {
   import * as React from "react";
 
   const value: string;
-  const ReactComponent: React.ComponentClass;
+  const ReactComponent: React.ComponentClass<any>;
 
   export default value;
   export { ReactComponent };
