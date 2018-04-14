@@ -1,8 +1,8 @@
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
-import TextField from "material-ui/TextField";
 import Typography from "material-ui/Typography";
 import styled from "styled";
+import { FlatTextField } from "./atoms/FlatTextField";
 
 export const FormsContainer = styled.article`
   display: flex;
@@ -25,44 +25,7 @@ export const FormTitle = styled(Typography).attrs({
   text-transform: uppercase;
 `;
 
-export const FormInput = styled(TextField).attrs({
-  InputProps: {
-    classes: {
-      input: "input",
-      root: "root",
-    },
-    disableUnderline: true,
-  },
-  fullWidth: true,
-})`
-  margin: ${props => props.theme.spacing.unit}px 0;
-
-  .root {
-    padding: 0;
-  }
-
-  .input {
-    width: calc(100% - 24px);
-    height: inherit;
-    padding: 6px 12px;
-    font-size: 12px;
-    font-weight: 500;
-    border: 1px solid #e0e0e0;
-    background-color: #fcfcfc;
-    transition: ${props =>
-      props.theme.transitions.create(["border-color", "box-shadow"])};
-  }
-
-  .input::placeholder {
-    color: #828282;
-    opacity: 1;
-  }
-
-  .input:focus {
-    border-color: #f9d017;
-    box-shadow: 0 0 0 0.05rem rgba(249, 208, 23, 0.25);
-  }
-`;
+export const FormInput = FlatTextField;
 
 export const FormButtonSection = styled.div`
   display: flex;
