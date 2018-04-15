@@ -1,6 +1,8 @@
 {
   "en": {
-    "heroHeader": "JoinUniform"
+    "heroHeader": "JoinUniform",
+
+    "formFieldIsRequired": "${1} is required."
   },
   "hi": {}
 }

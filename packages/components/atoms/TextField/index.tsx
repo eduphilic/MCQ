@@ -1,9 +1,10 @@
 import React, { SFC } from "react";
-import { TextFieldBase, TextFieldBaseProps } from "../../atoms/TextFieldBase";
-import { TextFieldTooltip } from "../../atoms/TextFieldTooltip";
+import { TextFieldBase, TextFieldBaseProps } from "../TextFieldBase";
+import { TextFieldTooltip } from "../TextFieldTooltip";
 
 export type TextFieldProps = TextFieldBaseProps;
 
+/** Flat text field input supporting a custom validation error tooltip. */
 export const TextField: SFC<TextFieldProps> = props => {
   const { error, label, ...rest } = props;
 

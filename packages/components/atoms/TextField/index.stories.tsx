@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { TextField } from ".";
 
-storiesOf("Molecules", module).add(
+storiesOf("Atoms", module).add(
   "TextField",
   withInfo()(() => (
     <TextField

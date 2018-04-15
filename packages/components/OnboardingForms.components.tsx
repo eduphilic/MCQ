@@ -1,8 +1,8 @@
-import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
 import Typography from "material-ui/Typography";
 import styled from "styled";
-import { TextFieldBase } from "./atoms/TextFieldBase";
+import { Button } from "./atoms/Button";
+import { TextField } from "./atoms/TextField";
 
 export const FormsContainer = styled.article`
   display: flex;
@@ -25,7 +25,7 @@ export const FormTitle = styled(Typography).attrs({
   text-transform: uppercase;
 `;
 
-export const FormInput = TextFieldBase;
+export const FormInput = TextField;
 
 export const FormButtonSection = styled.div`
   display: flex;
@@ -33,26 +33,7 @@ export const FormButtonSection = styled.div`
   margin-top: ${props => props.theme.spacing.unit * 2}px;
 `;
 
-export const FormButton = styled(Button).attrs({
-  classes: {
-    label: "label",
-  },
-  size: "small",
-  variant: "raised",
-})`
-  height: 30px;
-  padding: 8px 32px;
-  background-color: transparent;
-
-  &:hover {
-    background-color: #f3f3f3;
-  }
-
-  .label {
-    font-size: 12px;
-    text-transform: none;
-  }
-`;
+export const FormButton = Button;
 
 export const FormPasswordResetButton = styled(FormButton).attrs({
   variant: undefined,
