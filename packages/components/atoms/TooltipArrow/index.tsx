@@ -8,7 +8,7 @@ interface Props {
 }
 
 /** Error arrow for use in form validation tooltip. */
-export const ErrorArrow: SFC<Props> = props => {
+export const TooltipArrow: SFC<Props> = props => {
   const { className, direction = "up" } = props;
 
   return (

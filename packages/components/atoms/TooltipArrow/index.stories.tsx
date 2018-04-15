@@ -1,9 +1,9 @@
 import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { FlatTextField } from ".";
+import { TooltipArrow } from ".";
 
 storiesOf("Atoms", module).add(
-  "FlatTextField",
-  withInfo()(() => <FlatTextField />),
+  "TooltipArrow",
+  withInfo()(() => <TooltipArrow />),
 );

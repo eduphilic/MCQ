@@ -1,9 +1,12 @@
-import TextField, { TextFieldProps } from "material-ui/TextField";
+// tslint:disable-next-line:import-name
+import MuiTextField, { TextFieldProps } from "material-ui/TextField";
 import React, { SFC } from "react";
 import styled from "styled";
 
-const FlatTextFieldBase: SFC<TextFieldProps> = props => (
-  <TextField
+export type TextFieldBaseProps = TextFieldProps;
+
+const TextFieldMuiBase: SFC<TextFieldBaseProps> = props => (
+  <MuiTextField
     {...props}
     InputProps={{
       classes: { input: "input", root: "root" },
@@ -14,7 +17,7 @@ const FlatTextFieldBase: SFC<TextFieldProps> = props => (
 );
 
 /** Material UI text field styled as a flat square input. */
-export const FlatTextField = styled(FlatTextFieldBase)`
+export const TextFieldBase = styled(TextFieldMuiBase)`
   margin: ${props => props.theme.spacing.unit}px 0;
 
   .root {

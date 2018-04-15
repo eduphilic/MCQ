@@ -1,7 +1,7 @@
 import Tooltip from "material-ui/Tooltip";
-import React, { ReactElement } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import styled, { injectGlobal } from "styled";
-import { ErrorArrow } from "../../atoms/ErrorArrow";
+import { TooltipArrow } from "../TooltipArrow";
 
 interface Props {
   /** Target element to apply tooltip to. */
@@ -11,13 +11,13 @@ interface Props {
   open: boolean;
 
   /** Text to display. */
-  title: string;
+  title: ReactNode;
 }
 
 /**
  * Displays a tooltip with a box shadow and an arrow pointing to the field.
  */
-export const FormTooltip = (props: Props) => {
+export const TextFieldTooltip = (props: Props) => {
   const { children, open, title: titleText } = props;
 
   const title = (
@@ -39,9 +39,9 @@ export const FormTooltip = (props: Props) => {
   );
 };
 
-const PositionedErrorArrow = styled(ErrorArrow)`
+const PositionedErrorArrow = styled(TooltipArrow)`
   position: absolute;
-  right: -7px;
+  right: -5px;
   top: -13px;
 `;
 

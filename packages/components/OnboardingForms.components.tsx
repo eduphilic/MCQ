@@ -2,7 +2,7 @@ import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
 import Typography from "material-ui/Typography";
 import styled from "styled";
-import { FlatTextField } from "./atoms/FlatTextField";
+import { TextFieldBase } from "./atoms/TextFieldBase";
 
 export const FormsContainer = styled.article`
   display: flex;
@@ -25,7 +25,7 @@ export const FormTitle = styled(Typography).attrs({
   text-transform: uppercase;
 `;
 
-export const FormInput = FlatTextField;
+export const FormInput = TextFieldBase;
 
 export const FormButtonSection = styled.div`
   display: flex;
