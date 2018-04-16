@@ -2,7 +2,20 @@
   "en": {
     "heroHeader": "JoinUniform",
 
-    "formFieldIsRequired": "${1} is required."
+    "formFieldIsRequired": "${1} is required.",
+
+    "onboardingFormLoginTitle": "Login",
+    "onboardingFormLoginButtonLabel": "Login",
+    "onboardingFormLoginForgotPassword": "Forgot Password?",
+    "onboardingFormSignupTitle": "Signup",
+    "onboardingFormSignupButtonLabel": "Signup",
+    "onboardingFormEnterMobileNumber": "Enter Mobile Number",
+    "onboardingFormEnterMobileNumberFieldValidationDescription":
+      "Mobile number",
+    "onboardingFormEnterPassword": "Enter Password",
+    "onboardingFormEnterPasswordFieldValidationDescription": "Password",
+    "onboardingFormEnterYourName": "Enter Your Name",
+    "onboardingFormEnterYourNameFieldValidationDescription": "Name"
   },
   "hi": {}
 }

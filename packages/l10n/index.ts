@@ -6,6 +6,18 @@ interface Strings extends LocalizedStringsMethods {
 
   // ${1} is required.
   formFieldIsRequired: string;
+
+  onboardingFormLoginTitle: string;
+  onboardingFormLoginButtonLabel: string;
+  onboardingFormLoginForgotPassword: string;
+  onboardingFormSignupTitle: string;
+  onboardingFormSignupButtonLabel: string;
+  onboardingFormEnterMobileNumber: string;
+  onboardingFormEnterMobileNumberFieldValidationDescription: string;
+  onboardingFormEnterPassword: string;
+  onboardingFormEnterPasswordFieldValidationDescription: string;
+  onboardingFormEnterYourName: string;
+  onboardingFormEnterYourNameFieldValidationDescription: string;
 }
 
 const strings: Strings = new LocalizedStrings(stringsJson);

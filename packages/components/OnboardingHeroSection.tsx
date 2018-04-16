@@ -1,5 +1,5 @@
 import React from "react";
-import { DarkTheme } from "theme";
+import { DarkTheme, LightTheme } from "theme";
 import * as Components from "./OnboardingHeroSection.components";
 // import PropTypes from "prop-types";
 import PageContentCentering from "./PageContentCentering";
@@ -25,7 +25,7 @@ const OnboardingHeroSection = ({
               {onboardingTextNode}
             </Components.OnboardingTextSection>
             <Components.OnboardingFormSection>
-              {onboardingFormNode}
+              <LightTheme>{onboardingFormNode}</LightTheme>
             </Components.OnboardingFormSection>
           </Components.OnboardingContainer>
         </Components.ContentsContainer>
