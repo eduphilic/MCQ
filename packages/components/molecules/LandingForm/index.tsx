@@ -1,24 +1,33 @@
 import strings from "l10n";
 import Card, { CardActions, CardContent, CardHeader } from "material-ui/Card";
 import React, { ChangeEventHandler, Component, FormEventHandler } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled";
 import { Button } from "../../atoms/Button";
 import { FormHeader } from "../../atoms/FormHeader";
 import { TextField } from "../../atoms/TextField";
 
-interface FormField {
+export interface FormField {
   name: string;
   description: string;
   placeholder: string;
-  type?: "text" | "tel" | "password";
+  type?: "text" | "tel" | "password" | "email";
 }
 
-interface LandingFormProps {
-  /** Form header text. */
+export interface LandingFormProps {
+  /** Form header label. */
   title: string;
-
+  /** Input fields. */
   fields: FormField[];
-
+  /**
+   * React Router link to the right of the Submit button for a secondary action
+   * like performing a password reset.
+   */
+  secondaryAction?: {
+    href: string;
+    label: string;
+  };
+  /** Called on form submit with field name / value pairs. */
   onSubmit: (values: { [key: string]: string }) => void;
 }
 
@@ -27,6 +36,12 @@ interface LandingFormState {
   errors: { [key: string]: string };
 }
 
+/**
+ * Provides an input form for use on the landing page with basic validation.
+ *
+ * Accepts an optional secondary action (password reset link) for use with React
+ * Router.
+ */
 export class LandingForm extends Component<LandingFormProps, LandingFormState> {
   constructor(props: LandingFormProps) {
     super(props);
@@ -93,7 +108,7 @@ export class LandingForm extends Component<LandingFormProps, LandingFormState> {
   };
 
   render() {
-    const { title, fields } = this.props;
+    const { title, fields, secondaryAction } = this.props;
 
     const textFields = fields.map(f => {
       const { name, placeholder, type } = f;
@@ -115,6 +130,12 @@ export class LandingForm extends Component<LandingFormProps, LandingFormState> {
       );
     });
 
+    const secondaryActionLink = secondaryAction ? (
+      <Link to={secondaryAction.href}>
+        <Button variant="flat">{secondaryAction.label}</Button>
+      </Link>
+    ) : null;
+
     return (
       <form onSubmit={this.handleFormSubmit}>
         <Card>
@@ -122,6 +143,7 @@ export class LandingForm extends Component<LandingFormProps, LandingFormState> {
           <CardContent>{textFields}</CardContent>
           <CardActionsMarginBottom>
             <Button type="submit">Submit</Button>
+            {secondaryActionLink}
           </CardActionsMarginBottom>
         </Card>
       </form>

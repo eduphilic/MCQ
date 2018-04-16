@@ -7,11 +7,12 @@
     "build": "build-storybook -c .storybook -o dist",
     "clean": "rimraf dist"
   },
-  "peerDependencies": {
+  "dependencies": {
     "l10n": "^1.0.0",
     "material-ui": "^1.0.0-beta.41",
     "react": "^16.3.1",
     "react-helmet": "^5.2.0",
+    "react-router-dom": "^4.2.2",
     "styled": "^1.0.0",
     "theme": "^1.0.0"
   },
@@ -26,15 +27,9 @@
     "@storybook/react": "^3.4.1",
     "babel-core": "^6.26.0",
     "babel-plugin-named-asset-import": "^1.0.0-next.b2fd8db8",
-    "l10n": "^1.0.0",
-    "material-ui": "^1.0.0-beta.41",
-    "react": "^16.3.1",
     "react-dev-utils": "^6.0.0-next.b2fd8db8",
     "react-docgen-typescript-loader": "^2.0.3",
     "react-dom": "^16.3.1",
-    "react-helmet": "^5.2.0",
-    "styled": "^1.0.0",
-    "theme": "^1.0.0",
     "ts-loader": "^3.5.0",
     "typescript": "^2.8.1"
   }
