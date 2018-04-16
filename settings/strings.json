@@ -15,7 +15,11 @@
     "onboardingFormEnterPassword": "Enter Password",
     "onboardingFormEnterPasswordFieldValidationDescription": "Password",
     "onboardingFormEnterYourName": "Enter Your Name",
-    "onboardingFormEnterYourNameFieldValidationDescription": "Name"
+    "onboardingFormEnterYourNameFieldValidationDescription": "Name",
+
+    "languageSelectSelectPreferredLanguage": "Select preferred language :",
+    "languageSelectEnglish": "English",
+    "languageSelectHindi": "Hindi"
   },
   "hi": {}
 }

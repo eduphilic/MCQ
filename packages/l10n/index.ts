@@ -18,6 +18,10 @@ interface Strings extends LocalizedStringsMethods {
   onboardingFormEnterPasswordFieldValidationDescription: string;
   onboardingFormEnterYourName: string;
   onboardingFormEnterYourNameFieldValidationDescription: string;
+
+  languageSelectSelectPreferredLanguage: string;
+  languageSelectEnglish: string;
+  languageSelectHindi: string;
 }
 
 const strings: Strings = new LocalizedStrings(stringsJson);

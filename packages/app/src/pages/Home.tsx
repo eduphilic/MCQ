@@ -1,8 +1,8 @@
 // tslint:disable-next-line:no-submodule-imports
 import OnboardingHeroSection from "components/OnboardingHeroSection";
 import React, { SFC } from "react";
+import LanguageSelectContainer from "../containers/LanguageSelectContainer";
 import OnboardingFormsContainer from "../containers/OnboardingFormsContainer";
-import OnboardingHeroLanguageSelectContainer from "../containers/OnboardingHeroLanguageSelectContainer";
 
 const Home: SFC<{}> = () => (
   <>
@@ -10,7 +10,7 @@ const Home: SFC<{}> = () => (
       <OnboardingHeroSection
         onboardingTextNode={
           <>
-            <OnboardingHeroLanguageSelectContainer />
+            <LanguageSelectContainer />
           </>
         }
         onboardingFormNode={<OnboardingFormsContainer />}

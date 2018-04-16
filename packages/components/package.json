@@ -17,6 +17,7 @@
     "theme": "^1.0.0"
   },
   "devDependencies": {
+    "@dump247/storybook-state": "^1.4.0",
     "@storybook/addon-actions": "^3.4.1",
     "@storybook/addon-info": "^3.4.1",
     "@storybook/addon-knobs": "^3.4.1",
