@@ -27,6 +27,12 @@ export const AttemptCourseLabel: SFC<AttemptCourseLabelProps> = props => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  > * {
+    margin-right: ${props => props.theme.spacing.unit}px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 `;
 
 const CourseTitle = styled(Typography).attrs({
