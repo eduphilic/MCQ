@@ -8,6 +8,7 @@ import React, { SFC } from "react";
 import styled, { withProps } from "styled";
 import { DarkTheme, LightTheme } from "theme";
 import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
+import { HeroFooter } from "../../molecules/HeroFooter";
 import { HeroLogo } from "../../molecules/HeroLogo";
 import {
   LanguageSelect,
@@ -48,32 +49,37 @@ export const Hero: SFC<HeroProps> = props => {
 
   return (
     <DarkTheme>
-      <Wrapper
-        backgroundImage={backgroundImage}
-        backgroundAlpha={backgroundAlpha}
-      >
-        <ContentCenterWrapper>
-          <HeroLogo />
-          <DivideWrapper>
-            <div>
-              <LanguageSelectWrapper>
-                <LanguageSelect {...props.languageSelectProps} />
-              </LanguageSelectWrapper>
-              <HeroTextWrapper>
-                <HeroPrimaryText>{strings.heroPrimaryText}</HeroPrimaryText>
-                <HeroSecondaryText>
-                  {strings.heroSecondaryText}
-                </HeroSecondaryText>
-              </HeroTextWrapper>
-            </div>
-            <div>
-              <LightTheme>
-                <OnboardingForms {...props.onboardingFormsProps} />
-              </LightTheme>
-            </div>
-          </DivideWrapper>
-        </ContentCenterWrapper>
-      </Wrapper>
+      <>
+        <Wrapper
+          backgroundImage={backgroundImage}
+          backgroundAlpha={backgroundAlpha}
+        >
+          <ContentCenterWrapper>
+            <HeroLogo />
+
+            <DivideWrapper>
+              <div>
+                <LanguageSelectWrapper>
+                  <LanguageSelect {...props.languageSelectProps} />
+                </LanguageSelectWrapper>
+                <HeroTextWrapper>
+                  <HeroPrimaryText>{strings.heroPrimaryText}</HeroPrimaryText>
+                  <HeroSecondaryText>
+                    {strings.heroSecondaryText}
+                  </HeroSecondaryText>
+                </HeroTextWrapper>
+              </div>
+
+              <div>
+                <LightTheme>
+                  <OnboardingForms {...props.onboardingFormsProps} />
+                </LightTheme>
+              </div>
+            </DivideWrapper>
+          </ContentCenterWrapper>
+        </Wrapper>
+        <HeroFooter />
+      </>
     </DarkTheme>
   );
 };

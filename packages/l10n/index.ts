@@ -25,6 +25,7 @@ interface Strings extends LocalizedStringsMethods {
 
   heroPrimaryText: string;
   heroSecondaryText: string;
+  heroFooterText: string;
 }
 
 const strings: Strings = new LocalizedStrings(stringsJson);

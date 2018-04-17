@@ -23,7 +23,8 @@
 
     "heroPrimaryText": "Prepare for INDIAN Defense Examinations",
     "heroSecondaryText":
-      "Some message can be written here to explain about this website."
+      "Some message can be written here to explain about this website.",
+    "heroFooterText": "To Join Indian Defence, attempt free mock tests here"
   },
   "hi": {}
 }
