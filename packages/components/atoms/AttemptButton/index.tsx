@@ -1,3 +1,4 @@
+import strings from "l10n";
 import Button, { ButtonProps } from "material-ui/Button";
 import React, { SFC } from "react";
 import styled from "styled";
@@ -10,7 +11,11 @@ export type AttemptButtonProps = ButtonProps;
 export const AttemptButton: SFC<AttemptButtonProps> = props => {
   const { children, ...rest } = props;
 
-  return <StyledAttemptButton {...rest as any}>Attempt</StyledAttemptButton>;
+  return (
+    <StyledAttemptButton {...rest as any}>
+      {strings.landingCardAttemptButton}
+    </StyledAttemptButton>
+  );
 };
 
 const StyledAttemptButton = styled(Button).attrs({

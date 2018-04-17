@@ -121,6 +121,10 @@ const DivideWrapper = styled.div`
       flex-basis: 400px;
     }
   }
+
+  ${props => props.theme.breakpoints.down("md")} {
+    margin-top: ${props => props.theme.spacing.unit * 8}px;
+  }
 `;
 
 const LanguageSelectWrapper = styled.div`
@@ -135,8 +139,10 @@ const HeroPrimaryText = styled(Typography).attrs({
   variant: "display2",
 })`
   color: #fff;
-  margin-top: ${props => props.theme.spacing.unit * 3}px;
-  margin-bottom: ${props => props.theme.spacing.unit * 3}px;
+  margin-top: ${props => props.theme.spacing.unit * 8}px;
+  margin-bottom: ${props => props.theme.spacing.unit * 2}px;
+  font-size: 28px;
+  font-weight: 600;
 
   ${props => props.theme.breakpoints.down("xs")} {
     font-size: 40px;
@@ -149,4 +155,5 @@ const HeroSecondaryText = styled(Typography).attrs({
   variant: "headline",
 })`
   margin-bottom: ${props => props.theme.spacing.unit * 3}px;
+  font-size: 18px;
 `;
