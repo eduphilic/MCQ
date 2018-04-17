@@ -2,7 +2,7 @@ import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 
-interface Props {
+export interface LandingTemplateProps {
   /** Hero section node. Image, text, and signup/sign-in forms. */
   heroNode: ReactNode;
 
@@ -16,7 +16,7 @@ interface Props {
 /**
  * Page template for main landing page.
  */
-export const LandingTemplate: SFC<Props> = props => {
+export const LandingTemplate: SFC<LandingTemplateProps> = props => {
   const { heroNode, testCardNodes, footerNode } = props;
 
   return (
