@@ -42,8 +42,6 @@ export const LandingTemplate: SFC<Props> = props => {
 
 const HeaderHeroWrapper = styled.header`
   display: block;
-  height: 0px;
-  min-height: 600px;
 `;
 
 const TestCardWrapper = styled.div`

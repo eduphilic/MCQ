@@ -81,7 +81,7 @@ export const Hero: SFC<HeroProps> = props => {
 const Wrapper = withProps<{
   backgroundAlpha: number;
   backgroundImage: string;
-}>()(styled.header)`
+}>()(styled.div)`
   display: block;
   width: 100%;
   padding: ${props => props.theme.spacing.unit * 3}px 0;
