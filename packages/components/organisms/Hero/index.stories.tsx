@@ -25,7 +25,7 @@ storiesOf("Organisms", module).add(
       const backgroundImage = selectV2(
         "Background Image",
         backgroundImageFilenames,
-        "army (1).jpg",
+        "Army-soldier-1024x782.jpg",
       );
 
       return (
@@ -53,6 +53,7 @@ storiesOf("Organisms", module).add(
 );
 
 const backgroundImageFilenames = [
+  "Army-soldier-1024x782.jpg",
   "060920-F-2034C-010.JPG",
   "080715-F-JZ034-492.JPG",
   "Ajay@EDiting B.jpg",

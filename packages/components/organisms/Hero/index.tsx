@@ -15,14 +15,14 @@ import {
   LanguageSelectProps,
 } from "../../molecules/LanguageSelect";
 
-const defaultBackgroundImage = "army (1).jpg";
+const defaultBackgroundImage = "Army-soldier-1024x782.jpg";
 
 interface HeroProps {
   /**
    * Background image to use for the hero section of the landing page. It is the
    * filename for an image in the folder /packages/app/public/images/hero.
    *
-   * @default "army (1).jpg"
+   * @default "Army-soldier-1024x782.jpg"
    */
   backgroundImage?: string;
 
@@ -30,7 +30,7 @@ interface HeroProps {
    * Controls how much darkening is performed on the hero image to improve the
    * legibility of the text.
    *
-   * @default 0.75
+   * @default 0.55
    */
   backgroundAlpha?: number;
 
@@ -45,7 +45,7 @@ export const Hero: SFC<HeroProps> = props => {
   }/images/hero/${encodeURIComponent(
     props.backgroundImage || defaultBackgroundImage,
   )}`;
-  const backgroundAlpha = props.backgroundAlpha || 0.75;
+  const backgroundAlpha = props.backgroundAlpha || 0.55;
 
   return (
     <DarkTheme>
