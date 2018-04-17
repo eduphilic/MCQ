@@ -154,5 +154,10 @@ export class LandingForm extends Component<LandingFormProps, LandingFormState> {
 export default LandingForm;
 
 const CardActionsMarginBottom = styled(CardActions)`
+  padding-left: ${props => props.theme.spacing.unit * 2}px;
   padding-bottom: ${props => props.theme.spacing.unit * 2}px;
+
+  ${props => props.theme.breakpoints.up("sm")} {
+    padding-left: ${props => props.theme.spacing.unit * 3}px;
+  }
 `;

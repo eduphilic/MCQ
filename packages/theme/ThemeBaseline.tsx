@@ -43,4 +43,13 @@ body {
   font-family: 'Montserrat', sans-serif;
   background-color: #fff;
 }
+
+/* Prevent iPhone page zoom on input selection. */
+@media screen and (-webkit-min-device-pixel-ratio:0) and (max-device-width:1024px) {
+  select,
+  textarea,
+  input {
+    font-size: 16px !important;
+  }
+}
 `;

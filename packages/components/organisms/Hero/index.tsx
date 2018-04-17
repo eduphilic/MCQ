@@ -118,7 +118,9 @@ const DivideWrapper = styled.div`
 `;
 
 const LanguageSelectWrapper = styled.div`
-  height: 25%;
+  ${props => props.theme.breakpoints.up("md")} {
+    height: 25%;
+  }
 `;
 
 const HeroTextWrapper = styled.div``;
@@ -129,6 +131,12 @@ const HeroPrimaryText = styled(Typography).attrs({
   color: #fff;
   margin-top: ${props => props.theme.spacing.unit * 3}px;
   margin-bottom: ${props => props.theme.spacing.unit * 3}px;
+
+  ${props => props.theme.breakpoints.down("xs")} {
+    font-size: 40px;
+    line-height: 44px;
+    letter-spacing: 1px;
+  }
 `;
 
 const HeroSecondaryText = styled(Typography).attrs({
