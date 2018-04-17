@@ -35,19 +35,16 @@ module.exports = (baseConfig, env, defaultConfig) => {
         query: babelLoader.query,
       },
       "ts-loader",
-      "react-docgen-typescript-loader",
+      {
+        loader: "react-docgen-typescript-loader",
+        options: {
+          includes: ["components.*\\.tsx$"],
+          excludes: ["stories\\.tsx$"],
+        },
+      },
     ],
   });
   config.resolve.extensions.push(".ts", ".tsx");
-
-  // Add path to public folder to match Create React App behavior.
-  config.plugins.push(
-    new webpack.DefinePlugin({
-      "process.env.PUBLIC_URL": JSON.stringify(
-        env === "DEVELOPMENT" ? "" : "/storybook",
-      ),
-    }),
-  );
 
   return defaultConfig;
 };

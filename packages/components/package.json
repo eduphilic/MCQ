@@ -4,10 +4,12 @@
   "version": "1.0.0",
   "scripts": {
     "start": "start-storybook -c .storybook -s ../app/public -p 9001",
-    "build": "build-storybook -c .storybook -s ../app/public -o dist",
+    "build": "npm-run-all clean build:*",
+    "build:storybook": "build-storybook -c .storybook -s ../app/public -o dist",
     "clean": "rimraf dist"
   },
   "dependencies": {
+    "@material-ui/icons": "^1.0.0-beta.42",
     "l10n": "^1.0.0",
     "material-ui": "^1.0.0-beta.41",
     "react": "^16.3.1",
@@ -28,9 +30,11 @@
     "@storybook/react": "^3.4.1",
     "babel-core": "^6.26.0",
     "babel-plugin-named-asset-import": "^1.0.0-next.b2fd8db8",
+    "npm-run-all": "^4.1.2",
     "react-dev-utils": "^6.0.0-next.b2fd8db8",
     "react-docgen-typescript-loader": "^2.0.3",
     "react-dom": "^16.3.1",
+    "rimraf": "^2.6.2",
     "ts-loader": "^3.5.0",
     "typescript": "^2.8.1"
   }

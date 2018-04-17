@@ -9,7 +9,12 @@
   "rules": {
     "member-access": false,
     "interface-name": [true, "never-prefix"],
-    "no-submodule-imports": [true, "material-ui", "components"],
+    "no-submodule-imports": [
+      true,
+      "material-ui",
+      "@material-ui/icons",
+      "components"
+    ],
     "import-name": [
       true,
       { "react": "React", "reactDom": "ReactDOM", "l10n": "strings" }
