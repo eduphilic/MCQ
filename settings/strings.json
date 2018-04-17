@@ -30,7 +30,14 @@
 
     "pageFooterText": "Copyright : Eduphilic Consultancy Pvt Ltd 2018",
 
-    "logoutButtonText": "Logout"
+    "logoutButtonText": "Logout",
+
+    "onboardingStep": "Step ${1}",
+    "onboardingSelectEntryType": "Select Entry Type",
+    "onboardingSelectCategory": "Select Category",
+    "onboardingPlan": "Plan",
+    "onboardingPleaseSelectAtLeastOneEntryType":
+      "Please select at least one entry type."
   },
   "hi": {}
 }
