@@ -26,7 +26,9 @@
       "Some message can be written here to explain about this website.",
     "heroFooterText": "To Join Indian Defence, attempt free mock tests here",
 
-    "landingCardAttemptButton": "Attempt"
+    "landingCardAttemptButton": "Attempt",
+
+    "pageFooterText": "Copyright : Eduphilic Consultancy Pvt Ltd 2018"
   },
   "hi": {}
 }

@@ -31,11 +31,7 @@ export const LandingTemplate: SFC<LandingTemplateProps> = props => {
         </MainCardsWrapper>
       </ContentCenterWrapper>
 
-      <FooterWrapper>
-        <ContentCenterWrapper className="footer">
-          {footerNode}
-        </ContentCenterWrapper>
-      </FooterWrapper>
+      <FooterWrapper>{footerNode}</FooterWrapper>
     </>
   );
 };
@@ -50,16 +46,12 @@ const TestCardWrapper = styled.div`
 
 const MainCardsWrapper = styled.main`
   display: block;
-  padding: ${props => props.theme.spacing.unit * 2}px
-    ${props => props.theme.spacing.unit * 4}px;
+  padding: ${props => props.theme.spacing.unit * 2}px 0;
   padding-bottom: ${props => props.theme.spacing.unit * 5}px;
 `;
 
 const FooterWrapper = styled.footer`
   display: block;
-  height: ${props => props.theme.spacing.unit * 4}px;
-
-  .footer {
-    height: 100%;
-  }
+  max-height: ${props => props.theme.spacing.unit * 5}px;
+  overflow: hidden;
 `;

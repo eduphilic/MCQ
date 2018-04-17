@@ -28,6 +28,8 @@ interface Strings extends LocalizedStringsMethods {
   heroFooterText: string;
 
   landingCardAttemptButton: string;
+
+  pageFooterText: string;
 }
 
 const strings: Strings = new LocalizedStrings(stringsJson);

@@ -1,3 +1,4 @@
+import { PageFooter } from "components/atoms/PageFooter";
 import { AttemptCourseCard } from "components/organisms/AttemptCourseCard";
 import { createPlaceholderData as createAttemptCourseCardPlaceholderData } from "components/organisms/AttemptCourseCard/createPlaceholderData";
 import { Hero } from "components/organisms/Hero";
@@ -38,7 +39,7 @@ const Home: SFC<{}> = () => {
         />
       }
       testCardNodes={testCardNodes}
-      footerNode={<div>Footer Node</div>}
+      footerNode={<PageFooter />}
     />
   );
 };
