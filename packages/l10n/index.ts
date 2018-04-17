@@ -30,6 +30,8 @@ interface Strings extends LocalizedStringsMethods {
   landingCardAttemptButton: string;
 
   pageFooterText: string;
+
+  logoutButtonText: string;
 }
 
 const strings: Strings = new LocalizedStrings(stringsJson);

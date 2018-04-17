@@ -28,7 +28,9 @@
 
     "landingCardAttemptButton": "Attempt",
 
-    "pageFooterText": "Copyright : Eduphilic Consultancy Pvt Ltd 2018"
+    "pageFooterText": "Copyright : Eduphilic Consultancy Pvt Ltd 2018",
+
+    "logoutButtonText": "Logout"
   },
   "hi": {}
 }

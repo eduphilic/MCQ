@@ -1,4 +1,5 @@
 import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
+import strings from "l10n";
 import Button from "material-ui/Button";
 import React, { SFC } from "react";
 import styled from "styled";
@@ -15,7 +16,7 @@ export const LogoutButton: SFC<LogoutButtonProps> = props => {
   return (
     <StyledButton onClick={onClick}>
       <LogoutIcon />
-      Logout
+      {strings.logoutButtonText}
     </StyledButton>
   );
 };
