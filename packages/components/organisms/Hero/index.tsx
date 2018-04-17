@@ -9,11 +9,11 @@ import styled, { withProps } from "styled";
 import { DarkTheme, LightTheme } from "theme";
 import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 import { HeroFooter } from "../../molecules/HeroFooter";
-import { HeroLogo } from "../../molecules/HeroLogo";
 import {
   LanguageSelect,
   LanguageSelectProps,
 } from "../../molecules/LanguageSelect";
+import { Logo } from "../../molecules/Logo";
 
 const defaultBackgroundImage = "Army-soldier-1024x782.jpg";
 
@@ -55,7 +55,7 @@ export const Hero: SFC<HeroProps> = props => {
           backgroundAlpha={backgroundAlpha}
         >
           <ContentCenterWrapper>
-            <HeroLogo />
+            <Logo />
 
             <DivideWrapper>
               <div>
