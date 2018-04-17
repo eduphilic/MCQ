@@ -38,8 +38,16 @@ module.exports = (baseConfig, env, defaultConfig) => {
       "react-docgen-typescript-loader",
     ],
   });
-
   config.resolve.extensions.push(".ts", ".tsx");
+
+  // Add path to public folder to match Create React App behavior.
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      "process.env.PUBLIC_URL": JSON.stringify(
+        env === "DEVELOPMENT" ? "" : "/storybook",
+      ),
+    }),
+  );
 
   return defaultConfig;
 };

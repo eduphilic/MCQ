@@ -19,7 +19,11 @@
 
     "languageSelectSelectPreferredLanguage": "Select preferred language :",
     "languageSelectEnglish": "English",
-    "languageSelectHindi": "Hindi"
+    "languageSelectHindi": "Hindi",
+
+    "heroPrimaryText": "Prepare for INDIAN Defense Examinations",
+    "heroSecondaryText":
+      "Some message can be written here to explain about this website."
   },
   "hi": {}
 }

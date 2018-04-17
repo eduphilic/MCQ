@@ -1,22 +1,31 @@
-// tslint:disable-next-line:no-submodule-imports
-import OnboardingHeroSection from "components/OnboardingHeroSection";
+import { Hero } from "components/organisms/Hero";
+import { LandingTemplate } from "components/templates/LandingTemplate";
 import React, { SFC } from "react";
-import LanguageSelectContainer from "../containers/LanguageSelectContainer";
-import OnboardingFormsContainer from "../containers/OnboardingFormsContainer";
 
 const Home: SFC<{}> = () => (
-  <>
-    <header>
-      <OnboardingHeroSection
-        onboardingTextNode={
-          <>
-            <LanguageSelectContainer />
-          </>
-        }
-        onboardingFormNode={<OnboardingFormsContainer />}
+  <LandingTemplate
+    heroNode={
+      <Hero
+        languageSelectProps={{
+          language: "english",
+          onChange: () => {
+            //
+          },
+        }}
+        onboardingFormsProps={{
+          onLoginSubmit: () => {
+            //
+          },
+          onSignupSubmit: () => {
+            //
+          },
+          passwordResetHref: "/forgotPassword",
+        }}
       />
-    </header>
-  </>
+    }
+    testCardNodes={[<div>Test Card Node</div>]}
+    footerNode={<div>Footer Node</div>}
+  />
 );
 
 export default Home;

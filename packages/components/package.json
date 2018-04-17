@@ -3,8 +3,8 @@
   "name": "components",
   "version": "1.0.0",
   "scripts": {
-    "start": "start-storybook -c .storybook -p 9001",
-    "build": "build-storybook -c .storybook -o dist",
+    "start": "start-storybook -c .storybook -s ../app/public -p 9001",
+    "build": "build-storybook -c .storybook -s ../app/public -o dist",
     "clean": "rimraf dist"
   },
   "dependencies": {

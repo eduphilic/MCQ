@@ -131,7 +131,7 @@ export class LandingForm extends Component<LandingFormProps, LandingFormState> {
     });
 
     const secondaryActionLink = secondaryAction ? (
-      <Link to={secondaryAction.href}>
+      <Link to={secondaryAction.href} style={{ marginLeft: "auto" }}>
         <Button variant="flat">{secondaryAction.label}</Button>
       </Link>
     ) : null;

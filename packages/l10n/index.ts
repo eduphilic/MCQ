@@ -22,6 +22,9 @@ interface Strings extends LocalizedStringsMethods {
   languageSelectSelectPreferredLanguage: string;
   languageSelectEnglish: string;
   languageSelectHindi: string;
+
+  heroPrimaryText: string;
+  heroSecondaryText: string;
 }
 
 const strings: Strings = new LocalizedStrings(stringsJson);

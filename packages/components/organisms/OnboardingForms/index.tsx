@@ -7,7 +7,7 @@ import {
   LandingFormProps,
 } from "../../molecules/LandingForm";
 
-interface OnboardingFormsProps {
+export interface OnboardingFormsProps {
   /**
    * Called with the field values on submission of the login form.
    */
@@ -82,6 +82,6 @@ const Wrapper = styled.article`
   height: 100%;
 
   > form:nth-child(2) {
-    margin-top: ${props => props.theme.spacing.unit * 2}px;
+    margin-top: ${props => props.theme.spacing.unit * 4}px;
   }
 `;
