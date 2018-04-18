@@ -10,6 +10,8 @@ Mock Test practice portal for students applying for Indian Defence Services.
   * [1. Collect build output](#1-collect-build-output)
   * [2. Place build output on server](#2-place-build-output-on-server)
 * [Language Text](#language-text)
+* [Settings](#settings)
+  * [1. Page Head (Google Analytics, etc)](#1-page-head)
 * [Development](#development)
 
 ## Installation
@@ -75,6 +77,13 @@ In this example, `Join Uniform` will be used as the hero text for both English a
   }
 }
 ```
+
+## Settings
+
+### 1. Page Head
+
+Custom document tags and scripts can be added to the html template:
+`/packages/app/public/index.html`.
 
 ## Development
 
