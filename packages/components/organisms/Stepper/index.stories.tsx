@@ -7,7 +7,7 @@ import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 
 storiesOf("Organisms", module).add(
   "Stepper",
-  withInfo()(() => {
+  withInfo({ propTablesExclude: [ContentCenterWrapper as any] })(() => {
     const labels = ["Select Entry Type", "Select Category", "Plan"];
     const visitedCount = number("Visited Count", 1, {
       max: 3,
