@@ -12,6 +12,7 @@ Mock Test practice portal for students applying for Indian Defence Services.
 * [Language Text](#language-text)
 * [Settings](#settings)
   * [1. Page Head (Google Analytics, etc)](#1-page-head)
+  * [2. Static Files](#2-static-files)
 * [Development](#development)
 
 ## Installation
@@ -84,6 +85,11 @@ In this example, `Join Uniform` will be used as the hero text for both English a
 
 Custom document tags and scripts can be added to the html template:
 `/packages/app/public/index.html`.
+
+### 2. Static files
+
+Static files like favicon are stored at:
+`/packages/app/public/`.
 
 ## Development
 
