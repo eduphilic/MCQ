@@ -3,6 +3,7 @@ import {
   OnboardingFormsProps,
 } from "components/organisms/OnboardingForms";
 import strings from "l10n";
+import Hidden from "material-ui/Hidden";
 import Typography from "material-ui/Typography";
 import React, { SFC } from "react";
 import styled, { withProps } from "styled";
@@ -62,12 +63,14 @@ export const Hero: SFC<HeroProps> = props => {
                 <LanguageSelectWrapper>
                   <LanguageSelect {...props.languageSelectProps} />
                 </LanguageSelectWrapper>
-                <HeroTextWrapper>
-                  <HeroPrimaryText>{strings.heroPrimaryText}</HeroPrimaryText>
-                  <HeroSecondaryText>
-                    {strings.heroSecondaryText}
-                  </HeroSecondaryText>
-                </HeroTextWrapper>
+                <Hidden smDown>
+                  <HeroTextWrapper>
+                    <HeroPrimaryText>{strings.heroPrimaryText}</HeroPrimaryText>
+                    <HeroSecondaryText>
+                      {strings.heroSecondaryText}
+                    </HeroSecondaryText>
+                  </HeroTextWrapper>
+                </Hidden>
               </div>
 
               <div>
