@@ -1,10 +1,11 @@
 import Typography from "material-ui/Typography";
 import React, { SFC } from "react";
-import styled, { withProps } from "styled";
+import styled from "styled";
+import { Entry, EntryLogo } from "../../atoms/EntryLogo";
 
 export interface AttemptCourseCardHeaderProps {
-  /** Image url of service branch logo. */
-  image: string;
+  /** Entry (military branch) of service to use for image. */
+  entry: Entry;
 
   /** Label text to use under service branch logo. */
   label: string;
@@ -17,11 +18,13 @@ export interface AttemptCourseCardHeaderProps {
 export const AttemptCourseCardHeader: SFC<
   AttemptCourseCardHeaderProps
 > = props => {
-  const { image, label } = props;
+  const { entry, label } = props;
 
   return (
     <Wrapper>
-      <ServiceBranchImage image={image} />
+      <EntryLogoContainer>
+        <EntryLogo entry={entry} />
+      </EntryLogoContainer>
       <Label>{label}</Label>
     </Wrapper>
   );
@@ -32,11 +35,9 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const ServiceBranchImage = withProps<{ image: string }>()(styled.div)`
+const EntryLogoContainer = styled.div`
   width: 160px;
   height: 120px;
-  background-image: url("${props => props.image}");
-  background-size: cover;
 `;
 
 const Label = styled(Typography).attrs({

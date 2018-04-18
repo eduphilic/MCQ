@@ -1,10 +1,11 @@
 import { AttemptCourseCardProps } from ".";
+import { AttemptCourseCardHeaderProps } from "../../molecules/AttemptCourseCardHeader";
 
 export const createPlaceholderData = (
   courseOnClick: (courseIndex: number) => void,
 ) => {
-  const cardHeaderProps = {
-    image: "https://via.placeholder.com/160x120?text=Service%20Branch",
+  const cardHeaderProps: AttemptCourseCardHeaderProps = {
+    entry: "Army",
     label: "Army Mock Tests",
   };
 

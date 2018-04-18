@@ -6,9 +6,6 @@ import { AttemptCourseCardHeader } from ".";
 storiesOf("Molecules", module).add(
   "AttemptCourseCardHeader",
   withInfo()(() => (
-    <AttemptCourseCardHeader
-      image="https://via.placeholder.com/160x120?text=Service%20Branch"
-      label="Army Mock Tests"
-    />
+    <AttemptCourseCardHeader entry="Army" label="Army Mock Tests" />
   )),
 );
