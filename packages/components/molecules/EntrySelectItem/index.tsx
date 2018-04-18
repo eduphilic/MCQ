@@ -1,7 +1,8 @@
 import Typography from "material-ui/Typography";
 import React, { SFC } from "react";
-import styled from "styled";
+import styled, { withProps } from "styled";
 import { Button } from "../../atoms/Button";
+import { CheckmarkableCircle } from "../../atoms/CheckmarkableCircle";
 import { EntryLogo, EntryLogoProps } from "../../atoms/EntryLogo";
 
 export interface EntrySelectItemProps {
@@ -19,26 +20,43 @@ export interface EntrySelectItemProps {
    * Whether item is selected.
    */
   selected: boolean;
+
+  /**
+   * Called when item is clicked.
+   */
+  onClick: () => void;
 }
 
+/**
+ * Entry (military branch) selection item.
+ */
 export const EntrySelectItem: SFC<EntrySelectItemProps> = props => {
-  const { icon: entry, label } = props;
+  const { icon: entry, label, selected, onClick } = props;
 
   return (
-    <Wrapper>
+    <StyledButton selected={selected} onClick={onClick}>
       <Logo entry={entry} />
       <Label>{label}</Label>
-    </Wrapper>
+      <CheckmarkableCircle color="secondary" checked={selected} />
+    </StyledButton>
   );
 };
 
-const Wrapper = styled(Button)`
+const StyledButton = withProps<{ selected: boolean }>()(styled(Button))`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
   height: 64px;
   padding: ${props => props.theme.spacing.unit}px !important;
+  padding-right: ${props => props.theme.spacing.unit * 2}px !important;
+
+  ${props =>
+    props.selected
+      ? `
+          border: 1px solid ${props.theme.palette.secondary.main};
+        `
+      : ""}
 `;
 
 const Logo = styled(EntryLogo)`
@@ -50,5 +68,7 @@ const Logo = styled(EntryLogo)`
 const Label = styled(Typography).attrs({
   variant: "body1",
 })`
-  font-size: 14px;
+  flex: 1;
+  font-size: 16px;
+  text-align: left;
 `;

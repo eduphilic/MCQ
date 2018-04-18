@@ -5,6 +5,8 @@ import styled, { withProps } from "styled";
 export interface CheckmarkableCircleProps {
   /**
    * Color to use when checked. Primary color or secondary color from theme.
+   *
+   * @default primary
    */
   color?: "primary" | "secondary";
 
@@ -26,6 +28,7 @@ export const CheckmarkableCircle: SFC<CheckmarkableCircleProps> = props => {
 
 const Wrapper = withProps<CheckmarkableCircleProps>()(styled.div)`
   display: block;
+  position: relative;
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -38,7 +41,7 @@ const Wrapper = withProps<CheckmarkableCircleProps>()(styled.div)`
   }};
 
   > svg {
-    position: relative;
+    position: absolute;
     width: 20px;
     height: 20px;
     left: 50%;
