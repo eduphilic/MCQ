@@ -4,6 +4,8 @@ import React, { SFC } from "react";
 import styled, { withProps } from "styled";
 
 export interface StepProps {
+  className?: string;
+
   /** The step number. */
   stepNumber: number;
 
@@ -18,14 +20,14 @@ export interface StepProps {
  * Step for the stepper on the onboarding screens.
  */
 export const Step: SFC<StepProps> = props => {
-  const { stepNumber, visited, label } = props;
+  const { className, stepNumber, visited, label } = props;
   const stepLabel = strings.onboardingStep
     // tslint:disable-next-line:no-invalid-template-strings
     .replace("${1}", stepNumber.toString())
     .toUpperCase();
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <Circle visited={visited}>
         {visited && <CircleStepNumber>{stepNumber}</CircleStepNumber>}
       </Circle>
@@ -37,18 +39,19 @@ export const Step: SFC<StepProps> = props => {
   );
 };
 
+export const stepWidth = 128;
+
 const Wrapper = styled.div`
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fff;
+  width: ${stepWidth}px;
 `;
 
 const Circle = withProps<{ visited: boolean }>()(styled.div)`
   position: relative;
   width: ${props => props.theme.spacing.unit * 4}px; /* 32px */
-  height: auto;
-  padding-top: 25%;
+  height: ${props => props.theme.spacing.unit * 4}px; /* 32px */
   border-radius: 50%;
   background-color: ${props =>
     props.visited
@@ -68,6 +71,7 @@ const Label = withProps<{ visited: boolean }>()(
   styled(Typography).attrs({ variant: "button" }),
 )`
   font-size: 14px;
+  text-align: center;
   text-transform: none;
   color: ${props =>
     props.visited ? "#4f4f4f" : props.theme.palette.grey["500"]};
