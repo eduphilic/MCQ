@@ -40,6 +40,8 @@ export const entryDict = new Map<Entry, ComponentClass<any>>([
 ]);
 
 export interface EntryLogoProps {
+  className?: string;
+
   /**
    * One of:
    * ```
@@ -63,8 +65,8 @@ export interface EntryLogoProps {
  * Provides svg images for the different branches of the military (entry).
  */
 export const EntryLogo: SFC<EntryLogoProps> = props => {
-  const { entry } = props;
+  const { className, entry } = props;
   const Component = entryDict.get(entry)!;
 
-  return <Component />;
+  return <Component className={className} />;
 };
