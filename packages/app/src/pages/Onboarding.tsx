@@ -3,14 +3,18 @@ import {
   PanelManager,
   PanelManagerProps,
 } from "components/molecules/PanelManager";
+import { EntrySelect } from "components/organisms/EntrySelect";
+import { createSelectEntryPlaceholderData } from "components/organisms/EntrySelect/createSelectEntryPlaceholderData";
 import {
   OnboardingHeader,
   OnboardingHeaderProps,
 } from "components/organisms/OnboardingHeader";
 import { Stepper } from "components/organisms/Stepper";
 import strings from "l10n";
+import Typography from "material-ui/Typography";
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import styled from "styled";
 
 export const Onboarding = withRouter(props => {
   // Will be replaced with connection to Redux store.
@@ -29,22 +33,36 @@ export const Onboarding = withRouter(props => {
     strings.onboardingPlan,
   ];
 
+  const entrySelectProps = createSelectEntryPlaceholderData();
+
   return (
     <RootPanelManager>
       {rootPanelApi => (
         <ContentCenterWrapper>
           <header>
             <OnboardingHeader {...onboardingHeaderProps} />
-            <Stepper
-              labels={stepperLabels}
-              visitedCount={rootPanelApi.currentPanel + 1}
-            />
+            <StepperWrapper>
+              <Stepper
+                labels={stepperLabels}
+                visitedCount={rootPanelApi.currentPanel + 1}
+              />
+            </StepperWrapper>
           </header>
+          <main>
+            <Typography variant="headline" gutterBottom>
+              {strings.onboardingPleaseSelectAtLeastOneEntryType}
+            </Typography>
+            <EntrySelect {...entrySelectProps} />
+          </main>
         </ContentCenterWrapper>
       )}
     </RootPanelManager>
   );
 });
+
+const StepperWrapper = styled.div`
+  margin: ${props => props.theme.spacing.unit * 6}px 0;
+`;
 
 // This logic should largely be replaced with a connection to Redux store.
 function createPlaceholderPanelManager(panelCount: number) {
