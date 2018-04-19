@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 import { withInfo } from "@storybook/addon-info";
 import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
@@ -19,6 +20,8 @@ storiesOf("Organisms", module).add(
         nextButtonLabel="Next"
         showBackButton
         showNextButton
+        onBackButtonClick={action("onBackButtonClick")}
+        onNextButtonClick={action("onNextButtonClick")}
       />
     </ContentCenterWrapper>
   )),

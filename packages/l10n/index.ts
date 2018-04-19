@@ -38,6 +38,10 @@ interface Strings extends LocalizedStringsMethods {
   onboardingSelectCategory: string;
   onboardingPlan: string;
   onboardingPleaseSelectAtLeastOneEntryType: string;
+
+  navigationBackButtonText: string;
+  navigationNextButtonText: string;
+  navigationFinishButtonText: string;
 }
 
 const strings: Strings = new LocalizedStrings(stringsJson);

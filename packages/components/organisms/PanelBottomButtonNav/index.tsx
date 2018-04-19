@@ -30,6 +30,9 @@ export interface PanelBottomButtonNavProps {
    * Next button label.
    */
   nextButtonLabel: string;
+
+  onBackButtonClick: () => void;
+  onNextButtonClick: () => void;
 }
 
 /**
@@ -43,6 +46,8 @@ export const PanelBottomButtonNav: SFC<PanelBottomButtonNavProps> = props => {
     showNextButton,
     backButtonLabel,
     nextButtonLabel,
+    onBackButtonClick,
+    onNextButtonClick,
   } = props;
 
   return (
@@ -56,10 +61,14 @@ export const PanelBottomButtonNav: SFC<PanelBottomButtonNavProps> = props => {
           </Hidden>
         </LabelWrapper>
 
-        {showBackButton && <Button variant="raised">{backButtonLabel}</Button>}
+        {showBackButton && (
+          <Button variant="raised" onClick={onBackButtonClick}>
+            {backButtonLabel}
+          </Button>
+        )}
 
         {showNextButton && (
-          <Button className="next" variant="raised">
+          <Button className="next" variant="raised" onClick={onNextButtonClick}>
             {nextButtonLabel}
           </Button>
         )}
@@ -71,6 +80,7 @@ export const PanelBottomButtonNav: SFC<PanelBottomButtonNavProps> = props => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: ${props => props.theme.spacing.unit * 4}px;
 `;
 
 const LabelWrapper = styled.div`

@@ -9,6 +9,7 @@ import {
   OnboardingHeader,
   OnboardingHeaderProps,
 } from "components/organisms/OnboardingHeader";
+import { PanelBottomButtonNav } from "components/organisms/PanelBottomButtonNav";
 import { Stepper } from "components/organisms/Stepper";
 import strings from "l10n";
 import Typography from "material-ui/Typography";
@@ -48,12 +49,35 @@ export const Onboarding = withRouter(props => {
               />
             </StepperWrapper>
           </header>
+
           <main>
-            <Typography variant="headline" gutterBottom>
-              {strings.onboardingPleaseSelectAtLeastOneEntryType}
-            </Typography>
-            <EntrySelect {...entrySelectProps} />
+            {rootPanelApi.currentPanel === 0 && (
+              <>
+                <Typography variant="headline" gutterBottom>
+                  {strings.onboardingPleaseSelectAtLeastOneEntryType}
+                </Typography>
+                <EntrySelect {...entrySelectProps} />
+              </>
+            )}
           </main>
+
+          <footer>
+            <PanelBottomButtonNav
+              backButtonLabel={strings.navigationBackButtonText}
+              nextButtonLabel={
+                rootPanelApi.currentPanel === 2
+                  ? strings.navigationFinishButtonText
+                  : strings.navigationNextButtonText
+              }
+              showBackButton={rootPanelApi.currentPanel > 0}
+              showNextButton
+              onBackButtonClick={() => rootPanelApi.gotoPrevious()}
+              onNextButtonClick={() => {
+                if (rootPanelApi.currentPanel === 2) return;
+                rootPanelApi.gotoNext();
+              }}
+            />
+          </footer>
         </ContentCenterWrapper>
       )}
     </RootPanelManager>
