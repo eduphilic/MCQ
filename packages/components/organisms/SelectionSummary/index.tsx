@@ -18,6 +18,12 @@ export interface SelectionSummaryProps {
   selections: string;
 
   /**
+   * Use small bottom margin. This is used when layering on top of another
+   * selection summary component.
+   */
+  smallBottomMargin?: boolean;
+
+  /**
    * Called when the change button is called.
    */
   onChangeClick: () => void;
@@ -28,10 +34,10 @@ export interface SelectionSummaryProps {
  * navigate to a previous flow panel.
  */
 export const SelectionSummary: SFC<SelectionSummaryProps> = props => {
-  const { label, selections, onChangeClick } = props;
+  const { label, selections, onChangeClick, smallBottomMargin } = props;
 
   return (
-    <Wrapper>
+    <Wrapper className={smallBottomMargin ? "small-margin" : ""}>
       <Typography className="label" variant="body2" component="p">
         {label}
       </Typography>
@@ -60,6 +66,10 @@ const Wrapper = styled.div`
   border: 1px solid #e0e0e0;
   border-radius: 2px;
   background-color: #fefefe;
+
+  &.small-margin {
+    margin-bottom: 16px;
+  }
 
   > .label {
     text-transform: uppercase;

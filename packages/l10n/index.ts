@@ -40,8 +40,10 @@ interface Strings extends LocalizedStringsMethods {
 
   onboardingPleaseSelectAtLeastOneEntryType: string;
   onboardingPleaseSelectCategoryTypeEachEntry: string;
+  onboardingPleaseSelectMembershipPlan: string;
 
   onboardingSummarySelectedEntryType: string;
+  onboardingSummarySelectedCategories: string;
 
   navigationBackButtonText: string;
   navigationNextButtonText: string;
