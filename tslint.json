@@ -26,6 +26,7 @@
       "allow-pascal-case",
       "ban-keywords"
     ],
+    "array-type": false,
     "prettier": true
   }
 }
