@@ -32,6 +32,7 @@ export interface PanelManagerApi {
   currentPanel: number;
   canGotoPrevious: boolean;
   canGotoNext: boolean;
+  goto: (panelNumber: number) => void;
   gotoPrevious: () => void;
   gotoNext: () => void;
 }
@@ -61,6 +62,7 @@ export class PanelManager extends Component<PanelManagerProps> {
       currentPanel > 0 && accessiblePanels[currentPanel - 1];
     const canGotoNext =
       currentPanel < panelCount - 1 && accessiblePanels[currentPanel + 1];
+    const goto = (panelNumber: number) => this.handleNavigation(panelNumber);
     const gotoPrevious = () => this.handleNavigation(currentPanel - 1);
     const gotoNext = () => this.handleNavigation(currentPanel + 1);
 
@@ -68,6 +70,7 @@ export class PanelManager extends Component<PanelManagerProps> {
       canGotoNext,
       canGotoPrevious,
       currentPanel,
+      goto,
       gotoNext,
       gotoPrevious,
       panelCount,

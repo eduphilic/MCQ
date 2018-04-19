@@ -36,12 +36,18 @@
     "onboardingSelectEntryType": "Select Entry Type",
     "onboardingSelectCategory": "Select Category",
     "onboardingPlan": "Plan",
+
     "onboardingPleaseSelectAtLeastOneEntryType":
       "Please select at least one entry type.",
+    "onboardingPleaseSelectCategoryTypeEachEntry":
+      "Please select category type in each Entry",
+
+    "onboardingSummarySelectedEntryType": "Selected Entry Type",
 
     "navigationBackButtonText": "Back",
     "navigationNextButtonText": "Next",
-    "navigationFinishButtonText": "Finish"
+    "navigationFinishButtonText": "Finish",
+    "selectionChangeButtonText": "Change"
   },
   "hi": {}
 }

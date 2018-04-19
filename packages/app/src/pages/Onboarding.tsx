@@ -10,6 +10,7 @@ import {
   OnboardingHeaderProps,
 } from "components/organisms/OnboardingHeader";
 import { PanelBottomButtonNav } from "components/organisms/PanelBottomButtonNav";
+import { SelectionSummary } from "components/organisms/SelectionSummary";
 import { Stepper } from "components/organisms/Stepper";
 import strings from "l10n";
 import Typography from "material-ui/Typography";
@@ -57,6 +58,22 @@ export const Onboarding = withRouter(props => {
                   {strings.onboardingPleaseSelectAtLeastOneEntryType}
                 </Typography>
                 <EntrySelect {...entrySelectProps} />
+              </>
+            )}
+
+            {rootPanelApi.currentPanel > 0 && (
+              <SelectionSummary
+                label={strings.onboardingSummarySelectedEntryType}
+                selections="Army, Navy, AirForce"
+                onChangeClick={() => rootPanelApi.goto(0)}
+              />
+            )}
+
+            {rootPanelApi.currentPanel === 1 && (
+              <>
+                <Typography variant="headline" gutterBottom>
+                  {strings.onboardingPleaseSelectCategoryTypeEachEntry}
+                </Typography>
               </>
             )}
           </main>
