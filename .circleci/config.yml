@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Update Yarn
           command: |
-            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.5.1
+            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.6.0
 
       - checkout
 

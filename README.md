@@ -20,7 +20,7 @@ Mock Test practice portal for students applying for Indian Defence Services.
 ### Requirements
 
 * [Node.js][nodejs] - version 8.10+
-* [Yarn][yarn] - version 1.51+
+* [Yarn][yarn] - version 1.6.0+
 
 ```shell
 $ yarn
