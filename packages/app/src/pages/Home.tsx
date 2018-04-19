@@ -6,9 +6,12 @@ import {
   LandingTemplate,
   LandingTemplateProps,
 } from "components/templates/LandingTemplate";
-import React, { SFC } from "react";
+import React from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
-const Home: SFC<{}> = () => {
+type HomeProps = RouteComponentProps<{}> & {};
+
+export const Home = withRouter<HomeProps>(props => {
   const testCardNodes: LandingTemplateProps["testCardNodes"] = [];
   for (let i = 0; i < 3; i += 1) {
     const placeholderData = createAttemptCourseCardPlaceholderData(() => {
@@ -16,6 +19,8 @@ const Home: SFC<{}> = () => {
     });
     testCardNodes.push(<AttemptCourseCard {...placeholderData} />);
   }
+
+  const navigateToOnboarding = () => props.history.push("/welcome");
 
   return (
     <LandingTemplate
@@ -29,12 +34,12 @@ const Home: SFC<{}> = () => {
           }}
           onboardingFormsProps={{
             onLoginSubmit: () => {
-              //
+              navigateToOnboarding();
             },
             onSignupSubmit: () => {
-              //
+              navigateToOnboarding();
             },
-            passwordResetHref: "/forgotPassword",
+            passwordResetHref: "/resetPassword",
           }}
         />
       }
@@ -42,6 +47,4 @@ const Home: SFC<{}> = () => {
       footerNode={<PageFooter />}
     />
   );
-};
-
-export default Home;
+});
