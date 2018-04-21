@@ -49,6 +49,8 @@ interface Strings extends LocalizedStringsMethods {
   navigationNextButtonText: string;
   navigationFinishButtonText: string;
   selectionChangeButtonText: string;
+
+  adminDashboardAppBarTitle: string;
 }
 
 const strings: Strings = new LocalizedStrings(stringsJson);

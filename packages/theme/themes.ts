@@ -3,9 +3,11 @@
  *
  * @see https://material-ui-next.com/customization/default-theme/
  */
-import { createMuiTheme } from "material-ui/styles";
+import createMuiTheme, {
+  ThemeOptions,
+} from "material-ui/styles/createMuiTheme";
 
-const theme = {
+const theme: ThemeOptions = {
   palette: {
     background: {
       default: "#fff",

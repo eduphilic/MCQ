@@ -49,7 +49,9 @@
     "navigationBackButtonText": "Back",
     "navigationNextButtonText": "Next",
     "navigationFinishButtonText": "Finish",
-    "selectionChangeButtonText": "Change"
+    "selectionChangeButtonText": "Change",
+
+    "adminDashboardAppBarTitle": "Admin Dashboard"
   },
   "hi": {}
 }
