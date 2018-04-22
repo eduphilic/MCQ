@@ -7,7 +7,8 @@ import {
   AdminDrawerStateProvider,
 } from "../../molecules/AdminDrawerManager";
 import { AdminAppBar, AdminAppBarProps } from "../../organisms/AdminAppBar";
-import { AdminDrawer, drawerWidth } from "../../organisms/AdminDrawer";
+import { AdminDrawer } from "../../organisms/AdminDrawer";
+import { drawerWidth } from "../../organisms/ResponsiveDrawerFrame";
 
 export interface AdminDashboardTemplateProps {
   adminAppBarProps: AdminAppBarProps;
