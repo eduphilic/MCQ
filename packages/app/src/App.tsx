@@ -6,6 +6,7 @@ import { Home } from "./pages/Home";
 import { Onboarding } from "./pages/Onboarding";
 import { PasswordReset } from "./pages/PasswordReset";
 
+import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { AdminLogin } from "./pages/admin/AdminLogin";
 
 const App = () => (
@@ -19,6 +20,7 @@ const App = () => (
 
           {/* Start Admin Dashboard Routes */}
           <Route exact path="/admin" component={AdminLogin} />
+          <Route path="/admin/dashboard" component={AdminDashboard} />
         </Switch>
       </Router>
     </LightTheme>

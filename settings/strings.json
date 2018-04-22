@@ -55,7 +55,7 @@
 
     "adminLinkDashboard": "Dashboard",
     "adminLinkEntryManager": "Entry Manager",
-    "adminLinkQuestManager": "Quest Manager",
+    "adminLinkQuestionManager": "Question Manager",
     "adminLinkTestManager": "Test Manager",
     "adminLinkUserManager": "User Manager",
     "adminLinkPlanManager": "Plan Manager",
@@ -65,7 +65,13 @@
     "adminLoginFormTitle": "Admin Login",
     "adminLoginHeroTextPrimary": "Prepare for INDIAN Defence Examinations",
     "adminLoginHeroTextSecondary":
-      "Some message can be written here to explain about this website"
+      "Some message can be written here to explain about this website",
+
+    "adminFilterMenuCaption": "Filter By : ",
+
+    "adminPanelUsersSummaryTotalUsers": "Total Users",
+    "adminPanelUsersSummaryActiveUsers": "Active Users",
+    "adminPanelUsersSummaryRegistrationsToday": "Registrations Today"
   },
   "hi": {}
 }

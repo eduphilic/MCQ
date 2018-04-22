@@ -1,3 +1,4 @@
+import { ContentCenterWrapper } from "components/atoms/ContentCenterWrapper";
 import AppBar from "material-ui/AppBar";
 import React, { SFC } from "react";
 import styled from "styled";
@@ -35,7 +36,8 @@ export const AdminDashboardTemplate: SFC<
               className={`content${drawerState.open ? " contentShift" : ""}`}
             >
               <ContentSpacer />
-              {children}
+
+              <ContentCenterWrapper>{children}</ContentCenterWrapper>
             </main>
           </Wrapper>
         )}

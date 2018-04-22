@@ -54,7 +54,7 @@ interface Strings extends LocalizedStringsMethods {
 
   adminLinkDashboard: string;
   adminLinkEntryManager: string;
-  adminLinkQuestManager: string;
+  adminLinkQuestionManager: string;
   adminLinkTestManager: string;
   adminLinkUserManager: string;
   adminLinkPlanManager: string;
@@ -64,6 +64,12 @@ interface Strings extends LocalizedStringsMethods {
   adminLoginFormTitle: string;
   adminLoginHeroTextPrimary: string;
   adminLoginHeroTextSecondary: string;
+
+  adminFilterMenuCaption: string;
+
+  adminPanelUsersSummaryTotalUsers: string;
+  adminPanelUsersSummaryActiveUsers: string;
+  adminPanelUsersSummaryRegistrationsToday: string;
 }
 
 const strings: Strings = new LocalizedStrings(stringsJson);
