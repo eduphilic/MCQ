@@ -52,4 +52,8 @@ body {
     font-size: 16px !important;
   }
 }
+
+html, body, #root {
+  height: 100%;
+}
 `;

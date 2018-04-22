@@ -60,7 +60,12 @@
     "adminLinkUserManager": "User Manager",
     "adminLinkPlanManager": "Plan Manager",
     "adminLinkIndexManager": "Index Manager",
-    "adminLinkRevenueManager": "Revenue Manager"
+    "adminLinkRevenueManager": "Revenue Manager",
+
+    "adminLoginFormTitle": "Admin Login",
+    "adminLoginHeroTextPrimary": "Prepare for INDIAN Defence Examinations",
+    "adminLoginHeroTextSecondary":
+      "Some message can be written here to explain about this website"
   },
   "hi": {}
 }

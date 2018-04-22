@@ -60,6 +60,10 @@ interface Strings extends LocalizedStringsMethods {
   adminLinkPlanManager: string;
   adminLinkIndexManager: string;
   adminLinkRevenueManager: string;
+
+  adminLoginFormTitle: string;
+  adminLoginHeroTextPrimary: string;
+  adminLoginHeroTextSecondary: string;
 }
 
 const strings: Strings = new LocalizedStrings(stringsJson);

@@ -29,7 +29,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-top: ${props => props.theme.spacing.unit * 2}px;
+  padding-top: ${props => props.theme.spacing.unit * 2}px;
 `;
 
 const Text = styled(Typography).attrs({ variant: "headline" })`
