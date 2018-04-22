@@ -8,6 +8,7 @@ import { PasswordReset } from "./pages/PasswordReset";
 
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { AdminLogin } from "./pages/admin/AdminLogin";
+import { AdminPlaceholder } from "./pages/admin/AdminPlaceholder";
 
 const App = () => (
   <ThemeBaseline>
@@ -21,6 +22,7 @@ const App = () => (
           {/* Start Admin Dashboard Routes */}
           <Route exact path="/admin" component={AdminLogin} />
           <Route path="/admin/dashboard" component={AdminDashboard} />
+          <Route path="/admin" component={AdminPlaceholder} />
         </Switch>
       </Router>
     </LightTheme>
