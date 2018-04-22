@@ -8,7 +8,7 @@ import { createPlaceholderAdminAppBarProps } from "../../organisms/AdminAppBar/c
 
 storiesOf("Templates", module).add(
   "AdminDashboardTemplate",
-  withInfo()(() => {
+  withInfo({ inline: false })(() => {
     const props: AdminDashboardTemplateProps = {
       adminAppBarProps: createPlaceholderAdminAppBarProps(),
     };

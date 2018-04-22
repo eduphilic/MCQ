@@ -2,7 +2,7 @@ import strings from "l10n";
 import Card, { CardContent, CardHeader } from "material-ui/Card";
 import Typography from "material-ui/Typography";
 import React, { SFC } from "react";
-import styled from "styled";
+import styled, { css } from "styled";
 import { FilterButton, FilterButtonProps } from "../../molecules/FilterButton";
 import { ReactComponent as ManSvg } from "./man.svg";
 
@@ -53,14 +53,14 @@ export const AdminPanelUsersSummary: SFC<
             </div>
 
             {stats.map(([title, value]) => (
-              <div className="statWrapper" key={title}>
+              <StatWrapper key={title}>
                 <div>
                   <Typography variant="display1">{value}</Typography>
                 </div>
                 <div>
                   <Typography variant="caption">{strings[title]}</Typography>
                 </div>
-              </div>
+              </StatWrapper>
             ))}
           </StatsWrapper>
         </CardContent>
@@ -75,9 +75,21 @@ const Wrapper = styled.div`
   }
 `;
 
+const flexWrap = css`
+  ${({ theme }) => theme.breakpoints.down("xs")} {
+    display: flex;
+    flex-wrap: wrap;
+
+    > div {
+      width: 100%;
+    }
+  }
+`;
+
 const StatsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  ${flexWrap};
 
   .manWrapper,
   .manWrapper svg {
@@ -85,7 +97,20 @@ const StatsWrapper = styled.div`
     height: 64px;
   }
 
-  .statWrapper {
-    margin: 0 8px;
+  ${({ theme }) => theme.breakpoints.down("xs")} {
+    .manWrapper {
+      display: none;
+    }
+  }
+`;
+
+const StatWrapper = styled.div`
+  margin: 0 8px;
+  ${flexWrap};
+
+  ${({ theme }) => theme.breakpoints.down("xs")} {
+    &:not(first-child) {
+      margin-top: ${({ theme }) => theme.spacing.unit}px;
+    }
   }
 `;

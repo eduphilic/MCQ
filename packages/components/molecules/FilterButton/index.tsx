@@ -1,6 +1,7 @@
 import FilterList from "@material-ui/icons/FilterList";
 import strings from "l10n";
 import Button from "material-ui/Button";
+import Hidden from "material-ui/Hidden";
 import Menu, { MenuItem } from "material-ui/Menu";
 import React, { Component } from "react";
 import styled from "styled";
@@ -59,7 +60,10 @@ export class FilterButton extends Component<
       <>
         <Button onClick={this.handleClick}>
           <IconMarginRight />
-          {strings.adminFilterMenuCaption} {value}
+          <Hidden xsDown implementation="css">
+            {strings.adminFilterMenuCaption}
+          </Hidden>
+          {value}
         </Button>
         <Menu
           anchorEl={anchorEl as any}

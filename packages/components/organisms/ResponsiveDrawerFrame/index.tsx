@@ -1,6 +1,6 @@
 import Drawer from "material-ui/Drawer";
 import Hidden from "material-ui/Hidden";
-import React, { ReactNode, SFC } from "react";
+import React, { cloneElement, ReactElement, ReactNode, SFC } from "react";
 import styled, { css } from "styled";
 import {
   DrawerProps,
@@ -25,6 +25,11 @@ export interface ResponsiveDrawerFrameProps extends DrawerProps {
    * Drawer contents node.
    */
   drawerContentsNode: ReactNode;
+
+  /**
+   * Optional theme element to wrap drawer content in.
+   */
+  drawerThemeElement?: ReactElement<any>;
 }
 
 /**
@@ -37,7 +42,11 @@ export const ResponsiveDrawerFrame: SFC<ResponsiveDrawerFrameProps> = props => {
     pageContentsNode,
     mobileOpen,
     drawerContentsNode,
+    drawerThemeElement,
   } = props;
+
+  const withTheme = (node: ReactNode) =>
+    drawerThemeElement ? cloneElement(drawerThemeElement, {}, node) : node;
 
   return (
     <DrawerStateProvider mobileOpen={mobileOpen}>
@@ -48,27 +57,31 @@ export const ResponsiveDrawerFrame: SFC<ResponsiveDrawerFrameProps> = props => {
 
             {/* Mobile Drawer */}
             <Hidden mdUp>
-              <StyledDrawer
-                variant="temporary"
-                anchor="left"
-                open={drawerState.mobileOpen}
-                onClose={drawerState.toggleDrawer}
-                classes={{ paper: "drawer-paper" }}
-                ModalProps={{ keepMounted: true }}
-              >
-                {drawerContentsNode}
-              </StyledDrawer>
+              {withTheme(
+                <StyledDrawer
+                  variant="temporary"
+                  anchor="left"
+                  open={drawerState.mobileOpen}
+                  onClose={drawerState.toggleDrawer}
+                  classes={{ paper: "drawer-paper" }}
+                  ModalProps={{ keepMounted: true }}
+                >
+                  {drawerContentsNode}
+                </StyledDrawer>,
+              )}
             </Hidden>
 
             {/* Tablet/Desktop Drawer */}
             <Hidden smDown implementation="css">
-              <StyledDrawer
-                variant="permanent"
-                open
-                classes={{ paper: "drawer-paper" }}
-              >
-                {drawerContentsNode}
-              </StyledDrawer>
+              {withTheme(
+                <StyledDrawer
+                  variant="permanent"
+                  open
+                  classes={{ paper: "drawer-paper" }}
+                >
+                  {drawerContentsNode}
+                </StyledDrawer>,
+              )}
             </Hidden>
 
             <PageContentsContainer>
@@ -106,13 +119,9 @@ const AppBarContainer = styled.div`
   position: fixed;
   width: 100%;
   ${toolBarHeight};
+  z-index: ${({ theme }) => theme.zIndex.appBar};
 
   ${({ theme }) => theme.breakpoints.up("md")} {
-    width: calc(100% - ${drawerWidth}px);
-    left: ${drawerWidth}px;
-  }
-
-  ${Wrapper}.mobile-open & {
     width: calc(100% - ${drawerWidth}px);
     left: ${drawerWidth}px;
   }
@@ -134,10 +143,6 @@ const PageContentsContainer = styled.div`
   padding: ${({ theme }) => theme.spacing.unit * 3}px;
 
   ${({ theme }) => theme.breakpoints.up("md")} {
-    margin-left: ${drawerWidth}px;
-  }
-
-  ${Wrapper}.mobile-open & {
     margin-left: ${drawerWidth}px;
   }
 `;

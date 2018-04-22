@@ -1,3 +1,4 @@
+import Menu from "@material-ui/icons/Menu";
 import strings from "l10n";
 import Hidden from "material-ui/Hidden";
 import IconButton from "material-ui/IconButton";
@@ -5,11 +6,11 @@ import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import React, { SFC } from "react";
 import styled from "styled";
-import { AdminDrawerStateConsumer } from "../../molecules/AdminDrawerManager";
 import {
   ToolbarProfileMenu,
   ToolbarProfileMenuProps,
 } from "../../molecules/ToolbarProfileMenu";
+import { DrawerStateConsumer } from "../../organisms/ResponsiveDrawerFrame";
 
 // tslint:disable-next-line:no-empty-interface
 export interface AdminAppBarProps extends ToolbarProfileMenuProps {}
@@ -22,16 +23,16 @@ export interface AdminAppBarProps extends ToolbarProfileMenuProps {}
  */
 export const AdminAppBar: SFC<AdminAppBarProps> = props => {
   return (
-    <AdminDrawerStateConsumer>
+    <DrawerStateConsumer>
       {drawerState => (
         <StyledToolbar>
           <IconButton
-            className="menuButton"
+            className="menu-button"
             color="inherit"
             aria-label="Menu"
             onClick={drawerState.toggleDrawer}
           >
-            {drawerState.icon}
+            <Menu />
           </IconButton>
 
           <Hidden smDown implementation="css">
@@ -44,13 +45,19 @@ export const AdminAppBar: SFC<AdminAppBarProps> = props => {
           <ToolbarProfileMenu {...props} />
         </StyledToolbar>
       )}
-    </AdminDrawerStateConsumer>
+    </DrawerStateConsumer>
   );
 };
 
 const StyledToolbar = styled(Toolbar)`
-  .menuButton {
+  .menu-button {
     marginLeft: 12,
     marginRight: 20,
+  }
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    .menu-button {
+      display: none;
+    }
   }
 `;
