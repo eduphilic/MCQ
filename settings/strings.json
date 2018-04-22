@@ -51,7 +51,16 @@
     "navigationFinishButtonText": "Finish",
     "selectionChangeButtonText": "Change",
 
-    "adminDashboardAppBarTitle": "Admin Dashboard"
+    "adminDashboardAppBarTitle": "Admin Dashboard",
+
+    "adminLinkDashboard": "Dashboard",
+    "adminLinkEntryManager": "Entry Manager",
+    "adminLinkQuestManager": "Quest Manager",
+    "adminLinkTestManager": "Test Manager",
+    "adminLinkUserManager": "User Manager",
+    "adminLinkPlanManager": "Plan Manager",
+    "adminLinkIndexManager": "Index Manager",
+    "adminLinkRevenueManager": "Revenue Manager"
   },
   "hi": {}
 }

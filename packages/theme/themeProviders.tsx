@@ -5,8 +5,9 @@ import { darkTheme, lightTheme } from "./themes";
 
 export const LightTheme = createTheme("light");
 export const DarkTheme = createTheme("dark");
+export const AdminAppDrawerTheme = createTheme("adminAppDrawer");
 
-function createTheme(themeType: "light" | "dark") {
+function createTheme(themeType: "light" | "dark" | "adminAppDrawer") {
   const theme = themeType === "light" ? lightTheme : darkTheme;
 
   return (({ children }) => (

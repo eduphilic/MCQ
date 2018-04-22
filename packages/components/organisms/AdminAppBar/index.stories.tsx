@@ -4,14 +4,14 @@ import { storiesOf } from "@storybook/react";
 import AppBar from "material-ui/AppBar";
 import React from "react";
 import { AdminAppBar, AdminAppBarProps } from ".";
-import { createToolbarAvatarPlaceholderProps } from "../../molecules/ToolbarAvatar/createToolbarAvatarPlaceholderProps";
+import { createPlaceholderAdminAppBarProps } from "./createPlaceholderAdminAppBarProps";
 
 storiesOf("Organisms", module).add(
   "AdminAppBar",
   withInfo()(() => {
     const props: AdminAppBarProps = {
+      ...createPlaceholderAdminAppBarProps(),
       onLogoutClick: action("onLogoutClick"),
-      toolbarAvatarProps: createToolbarAvatarPlaceholderProps(),
     };
 
     return (

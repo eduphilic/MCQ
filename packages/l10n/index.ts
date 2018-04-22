@@ -51,6 +51,15 @@ interface Strings extends LocalizedStringsMethods {
   selectionChangeButtonText: string;
 
   adminDashboardAppBarTitle: string;
+
+  adminLinkDashboard: string;
+  adminLinkEntryManager: string;
+  adminLinkQuestManager: string;
+  adminLinkTestManager: string;
+  adminLinkUserManager: string;
+  adminLinkPlanManager: string;
+  adminLinkIndexManager: string;
+  adminLinkRevenueManager: string;
 }
 
 const strings: Strings = new LocalizedStrings(stringsJson);

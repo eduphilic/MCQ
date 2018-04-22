@@ -36,4 +36,13 @@ export const darkTheme = createMuiTheme({
   },
 });
 
+export const adminAppDrawerTheme = createMuiTheme({
+  ...theme,
+  palette: {
+    ...theme.palette,
+    background: { default: "#4f4f4f" },
+    type: "dark",
+  },
+});
+
 export type Theme = typeof lightTheme;
