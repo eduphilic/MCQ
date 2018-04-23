@@ -1,4 +1,4 @@
-import strings from "l10n";
+// import strings from "l10n";
 import Typography from "material-ui/Typography";
 import React, { SFC } from "react";
 import styled, { withProps } from "styled";
@@ -21,10 +21,10 @@ export interface StepProps {
  */
 export const Step: SFC<StepProps> = props => {
   const { className, stepNumber, visited, label } = props;
-  const stepLabel = strings.onboardingStep
-    // tslint:disable-next-line:no-invalid-template-strings
-    .replace("${1}", stepNumber.toString())
-    .toUpperCase();
+  // const stepLabel = strings.onboardingStep
+  //   // tslint:disable-next-line:no-invalid-template-strings
+  //   .replace("${1}", stepNumber.toString())
+  //   .toUpperCase();
 
   return (
     <Wrapper className={className}>
@@ -32,7 +32,7 @@ export const Step: SFC<StepProps> = props => {
         {visited && <CircleStepNumber>{stepNumber}</CircleStepNumber>}
       </Circle>
 
-      <Label visited={visited}>{stepLabel}</Label>
+      {/* <Label visited={visited}>{stepLabel}</Label> */}
 
       <Label visited={visited}>{label}</Label>
     </Wrapper>
@@ -76,7 +76,7 @@ const Label = withProps<{ visited: boolean }>()(
   color: ${props =>
     props.visited ? "#4f4f4f" : props.theme.palette.grey["500"]};
 
-  &:nth-child(2) {
+  /* &:nth-child(2) { */
     margin-top: ${props => props.theme.spacing.unit}px; /* 8px */
-  }
+  /* } */
 `;
