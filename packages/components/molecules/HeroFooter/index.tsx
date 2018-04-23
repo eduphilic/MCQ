@@ -2,7 +2,7 @@ import strings from "l10n";
 import Typography from "material-ui/Typography";
 import React, { SFC } from "react";
 import styled from "styled";
-import armyGreenPng from "./armyGreen.png";
+// import armyGreenPng from "./armyGreen.png";
 
 /**
  * Footer of hero image section of landing page.
@@ -20,19 +20,21 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image:
+  background-color: rgba(23, 133, 70, 0.7);
+
+  > * {
+    margin: ${props => props.theme.spacing.unit * 4}px;
+  }
+`;
+
+/* background-image:
     linear-gradient(
       rgba(0,0,0,0.4),
       rgba(0,0,0, 0.4)
     ),
     url("${armyGreenPng}"
   );
-  background-size: cover;
-
-  > * {
-    margin: ${props => props.theme.spacing.unit * 4}px;
-  }
-`;
+  background-size: cover; */
 
 const Bar = styled.div`
   width: 97px;

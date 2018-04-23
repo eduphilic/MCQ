@@ -1,6 +1,7 @@
 import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
+import armyGreenPng from "./armyGreen.png";
 
 export interface LandingTemplateProps {
   /** Hero section node. Image, text, and signup/sign-in forms. */
@@ -23,13 +24,15 @@ export const LandingTemplate: SFC<LandingTemplateProps> = props => {
     <>
       <HeaderHeroWrapper>{heroNode}</HeaderHeroWrapper>
 
-      <ContentCenterWrapper>
-        <MainCardsWrapper>
-          {testCardNodes.map((testCard, key) => (
-            <TestCardWrapper key={key}>{testCard}</TestCardWrapper>
-          ))}
-        </MainCardsWrapper>
-      </ContentCenterWrapper>
+      <MainContentBackground>
+        <ContentCenterWrapper>
+          <MainCardsWrapper>
+            {testCardNodes.map((testCard, key) => (
+              <TestCardWrapper key={key}>{testCard}</TestCardWrapper>
+            ))}
+          </MainCardsWrapper>
+        </ContentCenterWrapper>
+      </MainContentBackground>
 
       <FooterWrapper>{footerNode}</FooterWrapper>
     </>
@@ -42,6 +45,17 @@ const HeaderHeroWrapper = styled.header`
 
 const TestCardWrapper = styled.div`
   padding: ${props => props.theme.spacing.unit * 2}px 0;
+`;
+
+const MainContentBackground = styled.div`
+  background-image:
+    linear-gradient(
+      rgba(0,0,0,0.4),
+      rgba(0,0,0, 0.4)
+    ),
+    url("${armyGreenPng}"
+  );
+  background-attachment: fixed;
 `;
 
 const MainCardsWrapper = styled.main`
