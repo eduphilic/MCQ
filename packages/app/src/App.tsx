@@ -4,12 +4,15 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { LightTheme, ThemeBaseline } from "theme";
 
 import { Home } from "./pages/Home";
-import { Onboarding } from "./pages/Onboarding";
 import { PasswordReset } from "./pages/PasswordReset";
+
+import { Step1 } from "./pages/onboarding/Step1";
 
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { AdminLogin } from "./pages/admin/AdminLogin";
 import { AdminPlaceholder } from "./pages/admin/AdminPlaceholder";
+
+import { Onboarding } from "./pages/Onboarding";
 
 const App = () => (
   <ThemeBaseline>
@@ -19,7 +22,12 @@ const App = () => (
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/resetPassword" component={PasswordReset} />
-            <Route path="/welcome" component={Onboarding} />
+
+            {/* On-boarding */}
+            <Route path="/welcome/1" component={Step1} />
+
+            {/* TODO: Remove */}
+            <Route path="/welcomeOld" component={Onboarding} />
 
             {/* Start Admin Dashboard Routes */}
             <Route exact path="/admin" component={AdminLogin} />

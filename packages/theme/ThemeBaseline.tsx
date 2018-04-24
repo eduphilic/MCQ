@@ -41,7 +41,7 @@ html {
 
 body {
   font-family: 'Montserrat', sans-serif;
-  background-color: #fff;
+  /* background-color: #fff; */
 }
 
 /* Prevent iPhone page zoom on input selection. */

@@ -71,7 +71,7 @@ export const Onboarding = withRouter(props => {
               <SelectionSummary
                 label={strings.onboardingSummarySelectedEntryType}
                 selections="Army, Navy, AirForce"
-                onChangeClick={() => rootPanelApi.goto(0)}
+                onChangeClickUrl="/welcome/1"
                 smallBottomMargin={rootPanelApi.currentPanel === 2}
               />
             )}
@@ -104,7 +104,7 @@ export const Onboarding = withRouter(props => {
                 <SelectionSummary
                   label={strings.onboardingPleaseSelectMembershipPlan}
                   selections="Soldier GD, Soldier Tradesman"
-                  onChangeClick={() => rootPanelApi.goto(1)}
+                  onChangeClickUrl="/welcome/2"
                 />
 
                 <Typography variant="headline" gutterBottom>

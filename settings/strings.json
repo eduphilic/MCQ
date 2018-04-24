@@ -32,6 +32,9 @@
 
     "logoutButtonText": "Logout",
 
+    "onboardingWelcomeLetsSetupAccount":
+      "Welcome ${1}, let's setup your Uniform account",
+
     "onboardingStep": "Step ${1}",
     "onboardingSelectEntryType": "Select Entry Type",
     "onboardingSelectCategory": "Select Category",

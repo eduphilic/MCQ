@@ -10,7 +10,7 @@ import createMuiTheme, {
 const theme: ThemeOptions = {
   palette: {
     background: {
-      default: "#fff",
+      // default: "#fff",
     },
     primary: {
       main: "#2f8d2b", // green

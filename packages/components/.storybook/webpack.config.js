@@ -35,13 +35,13 @@ module.exports = (baseConfig, env, defaultConfig) => {
         query: babelLoader.query,
       },
       "ts-loader",
-      {
-        loader: "react-docgen-typescript-loader",
-        options: {
-          includes: ["components.*\\.tsx$"],
-          excludes: ["stories\\.tsx$"],
-        },
-      },
+      // {
+      //   loader: "react-docgen-typescript-loader",
+      //   options: {
+      //     includes: ["components.*\\.tsx$"],
+      //     excludes: ["stories\\.tsx$"],
+      //   },
+      // },
     ],
   });
   config.resolve.extensions.push(".ts", ".tsx");

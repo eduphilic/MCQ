@@ -20,7 +20,7 @@ export const Home = withRouter<HomeProps>(props => {
     testCardNodes.push(<AttemptCourseCard {...placeholderData} />);
   }
 
-  const navigateToOnboarding = () => props.history.push("/welcome");
+  const navigateToOnboarding = () => props.history.push("/welcome/1");
 
   return (
     <LandingTemplate

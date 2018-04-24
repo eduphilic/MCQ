@@ -33,6 +33,8 @@ interface Strings extends LocalizedStringsMethods {
 
   logoutButtonText: string;
 
+  onboardingWelcomeLetsSetupAccount: string;
+
   onboardingStep: string;
   onboardingSelectEntryType: string;
   onboardingSelectCategory: string;

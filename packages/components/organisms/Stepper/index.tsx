@@ -8,10 +8,12 @@ export interface StepperProps {
 
   /** Number of steps which were visited. */
   visitedCount: number;
+
+  className?: string;
 }
 
 export const Stepper: SFC<StepperProps> = props => {
-  const { labels, visitedCount } = props;
+  const { className, labels, visitedCount } = props;
 
   const steps: StepProps[] = labels.map((label, index) => ({
     label,
@@ -20,7 +22,7 @@ export const Stepper: SFC<StepperProps> = props => {
   }));
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       {steps.map((step, index) => (
         <StepWithProgressBar
           key={index}

@@ -7,14 +7,16 @@ import styled from "styled";
 export interface LogoutButtonProps {
   /** Called when clicked. */
   onClick: () => void;
+
+  className?: string;
 }
 
 /** Logout button. */
 export const LogoutButton: SFC<LogoutButtonProps> = props => {
-  const { onClick } = props;
+  const { className, onClick } = props;
 
   return (
-    <StyledButton onClick={onClick}>
+    <StyledButton className={className} onClick={onClick}>
       <LogoutIcon />
       {strings.logoutButtonText}
     </StyledButton>

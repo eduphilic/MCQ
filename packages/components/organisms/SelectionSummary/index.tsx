@@ -1,8 +1,8 @@
 import strings from "l10n";
-// import { Button } from "../../atoms/Button";
 import Button from "material-ui/Button";
 import Typography from "material-ui/Typography";
-import React, { SFC } from "react";
+import React from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled";
 import { TextField } from "../../atoms/TextField";
 
@@ -24,17 +24,26 @@ export interface SelectionSummaryProps {
   smallBottomMargin?: boolean;
 
   /**
-   * Called when the change button is called.
+   * Url to navigate to when change button is clicked.
    */
-  onChangeClick: () => void;
+  onChangeClickUrl: string;
 }
 
 /**
  * Summary component. Displays a list of current selections with a button to
  * navigate to a previous flow panel.
  */
-export const SelectionSummary: SFC<SelectionSummaryProps> = props => {
-  const { label, selections, onChangeClick, smallBottomMargin } = props;
+export const SelectionSummary = withRouter<
+  SelectionSummaryProps & RouteComponentProps<any>
+>(props => {
+  const {
+    label,
+    selections,
+    onChangeClickUrl,
+    smallBottomMargin,
+    history,
+  } = props;
+  const onClick = () => history.push(onChangeClickUrl);
 
   return (
     <Wrapper className={smallBottomMargin ? "small-margin" : ""}>
@@ -46,7 +55,7 @@ export const SelectionSummary: SFC<SelectionSummaryProps> = props => {
 
       <Button
         className="button"
-        onClick={onChangeClick}
+        onClick={onClick}
         variant="raised"
         color="primary"
       >
@@ -54,15 +63,14 @@ export const SelectionSummary: SFC<SelectionSummaryProps> = props => {
       </Button>
     </Wrapper>
   );
-};
+});
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   max-width: 800px;
-  padding: 16px 32px;
+  padding: 8px 16px;
   margin: 0 auto;
-  margin-bottom: 48px;
   border: 1px solid #e0e0e0;
   border-radius: 2px;
   background-color: #fefefe;
@@ -72,8 +80,7 @@ const Wrapper = styled.div`
   }
 
   > .label {
-    text-transform: uppercase;
-    font-size: 16px;
+    font-size: 14px;
 
     @media only screen and (max-width: 700px) {
       font-size: 14px;
