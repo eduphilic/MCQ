@@ -6,7 +6,7 @@ import { LightTheme, ThemeBaseline } from "theme";
 import { Home } from "./pages/Home";
 import { PasswordReset } from "./pages/PasswordReset";
 
-import { Step1 } from "./pages/onboarding/Step1";
+import { Step1, Step2, Step3 } from "./pages/OnboardingSteps";
 
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { AdminLogin } from "./pages/admin/AdminLogin";
@@ -25,6 +25,8 @@ const App = () => (
 
             {/* On-boarding */}
             <Route path="/welcome/1" component={Step1} />
+            <Route path="/welcome/2" component={Step2} />
+            <Route path="/welcome/3" component={Step3} />
 
             {/* TODO: Remove */}
             <Route path="/welcomeOld" component={Onboarding} />

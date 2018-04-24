@@ -35,7 +35,7 @@ const Wrapper = withProps<CheckmarkableCircleProps>()(styled.div)`
   background-color: ${props => {
     const { checked, color = "primary" } = props;
     const palette = props.theme.palette;
-    if (!checked) return palette.grey["500"];
+    if (!checked) return palette.grey["300"];
 
     return color === "primary" ? palette.primary.main : palette.secondary.main;
   }};

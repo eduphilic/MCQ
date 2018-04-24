@@ -50,6 +50,11 @@ const StyledButton = withProps<{ selected: boolean }>()(styled(Button))`
   height: 64px;
   padding: ${props => props.theme.spacing.unit}px !important;
   padding-right: ${props => props.theme.spacing.unit * 2}px !important;
+  background-color: #fff;
+
+  &:hover {
+    background-color: #f9f9f9;
+  }
 
   ${props =>
     props.selected

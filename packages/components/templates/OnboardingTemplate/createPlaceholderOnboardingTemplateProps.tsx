@@ -31,6 +31,16 @@ export const createPlaceholderOnboardingTemplateProps = (
 
   return {
     onboardingAppBarProps: { onLogoutButtonClick },
+    panelBottomButtonNavProps: {
+      backButtonLabel: strings.navigationBackButtonText,
+      nextButtonLabel: strings.navigationNextButtonText,
+      // tslint:disable-next-line:no-empty
+      onBackButtonClick: () => {},
+      // tslint:disable-next-line:no-empty
+      onNextButtonClick: () => {},
+      showBackButton: false,
+      showNextButton: true,
+    },
     selectionSummaries,
     stepText: strings.onboardingPleaseSelectAtLeastOneEntryType,
     stepperProps: {

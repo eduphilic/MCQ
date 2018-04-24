@@ -33,6 +33,8 @@ export interface PanelBottomButtonNavProps {
 
   onBackButtonClick: () => void;
   onNextButtonClick: () => void;
+
+  className?: string;
 }
 
 /**
@@ -48,10 +50,11 @@ export const PanelBottomButtonNav: SFC<PanelBottomButtonNavProps> = props => {
     nextButtonLabel,
     onBackButtonClick,
     onNextButtonClick,
+    className,
   } = props;
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <Divider />
 
       <ButtonsWrapper>

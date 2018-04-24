@@ -7,6 +7,10 @@ import {
   OnboardingAppBar,
   OnboardingAppBarProps,
 } from "../../organisms/OnboardingAppBar";
+import {
+  PanelBottomButtonNav,
+  PanelBottomButtonNavProps,
+} from "../../organisms/PanelBottomButtonNav";
 import { Stepper, StepperProps } from "../../organisms/Stepper";
 
 export interface OnboardingTemplateProps {
@@ -35,6 +39,8 @@ export interface OnboardingTemplateProps {
    * Description text of the current step.
    */
   stepText: string;
+
+  panelBottomButtonNavProps: PanelBottomButtonNavProps;
 }
 
 /**
@@ -48,7 +54,10 @@ export const OnboardingTemplate: SFC<OnboardingTemplateProps> = props => {
     selectionSummaries,
     username,
     stepText,
+    children,
+    panelBottomButtonNavProps,
   } = props;
+
   const welcomeText = strings.onboardingWelcomeLetsSetupAccount.replace(
     // tslint:disable-next-line:no-invalid-template-strings
     "${1}",
@@ -67,11 +76,11 @@ export const OnboardingTemplate: SFC<OnboardingTemplateProps> = props => {
         {selectionSummaries}
       </SelectionSummariesWrapper>
 
-      <Typography variant="title">{stepText}</Typography>
+      <StepText>{stepText}</StepText>
 
-      <PageContentsWrapper>Page Contents</PageContentsWrapper>
+      <PageContentsWrapper>{children}</PageContentsWrapper>
 
-      <div>Bottom Toolbar</div>
+      <StyledPanelBottomButtonNav {...panelBottomButtonNavProps} />
     </Wrapper>
   );
 };
@@ -93,6 +102,7 @@ const WelcomeText = styled(Typography).attrs({ variant: "display1" })`
 `;
 
 const StyledStepper = styled(Stepper)`
+  flex-shrink: 0;
   margin: ${({ theme }) => theme.spacing.unit * 5}px 0;
 `;
 
@@ -105,6 +115,14 @@ const SelectionSummariesWrapper = styled.div`
   }
 `;
 
+const StepText = styled(Typography).attrs({ variant: "title" })`
+  margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+`;
+
 const PageContentsWrapper = styled.div`
   flex: 1;
+`;
+
+const StyledPanelBottomButtonNav = styled(PanelBottomButtonNav)`
+  flex-shrink: 0;
 `;
