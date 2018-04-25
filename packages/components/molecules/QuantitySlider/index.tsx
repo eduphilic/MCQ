@@ -1,6 +1,8 @@
 import Grid from "material-ui/Grid";
 import Typography from "material-ui/Typography";
 import React, { ChangeEvent, Component } from "react";
+// tslint:disable-next-line:import-name
+import ResizeObserver from "resize-observer-polyfill";
 import styled, { css } from "styled";
 
 // tslint:disable-next-line:no-empty-interface
@@ -25,6 +27,7 @@ export class QuantitySlider extends Component<
 > {
   private bar: HTMLInputElement | null = null;
   private thumbSymbols: HTMLSpanElement | null = null;
+  private resizeObserver: ResizeObserver | null = null;
 
   constructor(props: QuantitySliderProps) {
     super(props);
@@ -77,10 +80,17 @@ export class QuantitySlider extends Component<
     setTimeout(() => {
       this.setState({ mounted: true });
     }, 100);
+
+    this.resizeObserver = new ResizeObserver(this.updateSymbolsPositioning);
+    this.resizeObserver.observe(this.bar!);
   }
 
   componentWillUnmount() {
     this.setState({ mounted: false });
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+      this.resizeObserver = null;
+    }
   }
 
   render() {
