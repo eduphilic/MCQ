@@ -27,6 +27,7 @@
       "ban-keywords"
     ],
     "array-type": false,
+    "object-literal-sort-keys": false,
     "object-shorthand-properties-first": false,
     "prettier": true
   }

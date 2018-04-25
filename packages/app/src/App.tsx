@@ -12,8 +12,6 @@ import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { AdminLogin } from "./pages/admin/AdminLogin";
 import { AdminPlaceholder } from "./pages/admin/AdminPlaceholder";
 
-import { Onboarding } from "./pages/Onboarding";
-
 const App = () => (
   <ThemeBaseline>
     <LightTheme>
@@ -27,9 +25,6 @@ const App = () => (
             <Route path="/welcome/1" component={Step1} />
             <Route path="/welcome/2" component={Step2} />
             <Route path="/welcome/3" component={Step3} />
-
-            {/* TODO: Remove */}
-            <Route path="/welcomeOld" component={Onboarding} />
 
             {/* Start Admin Dashboard Routes */}
             <Route exact path="/admin" component={AdminLogin} />
