@@ -12,6 +12,7 @@ export interface QuantitySliderProps {
   initialValue?: number;
   itemDescription: string;
   onChange?: (value: number) => void;
+  className?: string;
 }
 
 interface QuantitySliderState {
@@ -84,6 +85,7 @@ export class QuantitySlider extends Component<
 
     this.setState({ value: newValue }, () => {
       this.updateSymbolsPositioning();
+      if (this.props.onChange) this.props.onChange(newValue);
     });
   };
 
@@ -95,6 +97,7 @@ export class QuantitySlider extends Component<
 
     this.resizeObserver = new ResizeObserver(this.updateSymbolsPositioning);
     this.resizeObserver.observe(this.bar!);
+    if (this.props.onChange) this.props.onChange(this.state.value);
   }
 
   componentWillUnmount() {
@@ -106,7 +109,7 @@ export class QuantitySlider extends Component<
   }
 
   render() {
-    const { min, max, step, itemDescription } = this.props;
+    const { min, max, step, itemDescription, className } = this.props;
     const { value, hasFocus, mouseDown, mounted } = this.state;
 
     const ieHide = (isIe || isEdge) && mouseDown;
@@ -122,7 +125,7 @@ export class QuantitySlider extends Component<
     ) as string[]).join(" ");
 
     return (
-      <Wrapper>
+      <Wrapper className={className}>
         <Grid container spacing={8} alignItems="center">
           <Grid item>
             <SelectedItemCountText>

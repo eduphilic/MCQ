@@ -88,6 +88,7 @@ export const OnboardingTemplate: SFC<OnboardingTemplateProps> = props => {
 const Wrapper = styled(ContentCenterWrapper)`
   display: flex;
   flex-direction: column;
+  max-width: 1000px;
   height: 100%;
 `;
 
@@ -115,8 +116,9 @@ const SelectionSummariesWrapper = styled.div`
   }
 `;
 
-const StepText = styled(Typography).attrs({ variant: "title" })`
+const StepText = styled(Typography).attrs({ variant: "subheading" })`
   margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+  font-weight: 500;
 `;
 
 const PageContentsWrapper = styled.div`

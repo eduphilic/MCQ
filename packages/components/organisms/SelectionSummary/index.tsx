@@ -68,7 +68,7 @@ export const SelectionSummary = withRouter<
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  max-width: 800px;
+  /* max-width: 800px; */
   padding: 8px 16px;
   margin: 0 auto;
   border: 1px solid #e0e0e0;

@@ -106,6 +106,8 @@ export default EntrySelect;
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin: -8px;
+  margin-top: 0px;
 `;
 
 const EntrySelectItemWrapper = styled.div`

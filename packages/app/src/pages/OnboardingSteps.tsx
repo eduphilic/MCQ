@@ -4,6 +4,8 @@ import {
 } from "components/molecules/PanelManager";
 import { EntrySelect } from "components/organisms/EntrySelect";
 import { createSelectEntryPlaceholderData } from "components/organisms/EntrySelect/createSelectEntryPlaceholderData";
+import { OnboardingPlanCustomizer } from "components/organisms/OnboardingPlanCustomizer";
+import { createPlaceholderOnboardingPlanCustomizerProps } from "components/organisms/OnboardingPlanCustomizer/createPlaceholderOnboardingPlanCustomizerProps";
 import { OnboardingTemplate } from "components/templates/OnboardingTemplate";
 import { createPlaceholderOnboardingTemplateProps } from "components/templates/OnboardingTemplate/createPlaceholderOnboardingTemplateProps";
 import strings from "l10n";
@@ -95,9 +97,25 @@ export const Step3 = withRouter(props => {
     showBackButton: true,
   };
 
+  const planCustomizerProps = createPlaceholderOnboardingPlanCustomizerProps();
+  const CategoryPanelManager = createPlaceholderPanelManager(3);
+
   return (
     <OnboardingTemplate {...onboardingTemplateProps}>
-      <div>Purchase Selection Component</div>
+      <OnboardingPlanCustomizer {...planCustomizerProps} />
+
+      <CategoryPanelManager>
+        {api => (
+          <Tabs
+            value={api.currentPanel}
+            onChange={(_e, panelNumber) => api.goto(panelNumber)}
+          >
+            <Tab label="Army" />
+            <Tab label="Navy" />
+            <Tab label="AirForce" />>
+          </Tabs>
+        )}
+      </CategoryPanelManager>
     </OnboardingTemplate>
   );
 });
