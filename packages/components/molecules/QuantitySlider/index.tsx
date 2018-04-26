@@ -5,7 +5,6 @@ import React, { ChangeEvent, Component } from "react";
 import ResizeObserver from "resize-observer-polyfill";
 import styled, { css } from "styled";
 
-// tslint:disable-next-line:no-empty-interface
 export interface QuantitySliderProps {
   min: number;
   max: number;
@@ -17,6 +16,7 @@ export interface QuantitySliderProps {
 
 interface QuantitySliderState {
   value: number;
+  hasFocus: boolean;
   mouseDown: boolean;
   mounted: boolean;
 }
@@ -37,11 +37,20 @@ export class QuantitySlider extends Component<
       initialValue === undefined ? Math.floor((max - min) / 2) : initialValue;
 
     this.state = {
+      hasFocus: false,
       mouseDown: false,
       value,
       mounted: false,
     };
   }
+
+  handleFocus = () => {
+    this.setState({ hasFocus: true });
+  };
+
+  handleBlur = () => {
+    this.setState({ hasFocus: false });
+  };
 
   handleMouseDown = () => {
     this.setState({ mouseDown: true });
@@ -95,7 +104,16 @@ export class QuantitySlider extends Component<
 
   render() {
     const { min, max, step, itemDescription } = this.props;
-    const { value, mouseDown, mounted } = this.state;
+    const { value, hasFocus, mouseDown, mounted } = this.state;
+
+    const isIe = window.navigator.userAgent.indexOf("Trident/") > 0;
+    const ieHide = isIe && mouseDown;
+
+    const thumbClasses = ([
+      "material-icons",
+      mounted ? "mounted" : false,
+      ieHide ? "ie-hide" : false,
+    ].filter(c => Boolean(c)) as string[]).join(" ");
 
     return (
       <Wrapper>
@@ -106,20 +124,22 @@ export class QuantitySlider extends Component<
 
           <Grid item xs style={{ position: "relative" }}>
             <Bar
-              className={mouseDown ? "active" : undefined}
+              className={hasFocus ? "active" : undefined}
               min={min}
               max={max}
               step={step}
               value={value}
-              onMouseDown={this.handleMouseDown}
-              onMouseUp={this.handleMouseUp}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur}
               innerRef={c => (this.bar = c)}
               onChange={this.handleValueChange}
               onInput={this.handleValueChange}
+              onMouseDown={this.handleMouseDown}
+              onMouseUp={this.handleMouseUp}
             />
             <ThumbSymbols
               innerRef={c => (this.thumbSymbols = c)}
-              className={`material-icons${mounted ? " mounted" : ""}`}
+              className={thumbClasses}
             >
               keyboard_arrow_left keyboard_arrow_right
             </ThumbSymbols>
@@ -145,6 +165,7 @@ const Wrapper = styled.div`
 const thumbStyle = css`
   width: 40px;
   height: 40px;
+  border: none;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.palette.grey["800"]};
   box-shadow: ${({ theme }) => theme.shadows[6]};
@@ -153,22 +174,18 @@ const thumbStyle = css`
 
 const thumbStyleActive = css`
   background-color: ${({ theme }) => theme.palette.primary.light} !important;
-  box-shadow: ${({ theme }) => theme.shadows[8]};
 `;
 
-const Bar = styled.input.attrs({
-  type: "range",
-})`
-  width: 100%;
-  height: 48px;
-  margin: 0;
-  -webkit-appearance: none;
-  background: transparent;
-
+const browserThumbStyles = css`
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     ${thumbStyle};
+
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
   }
+
   &.active::-webkit-slider-thumb {
     ${thumbStyleActive};
   }
@@ -176,6 +193,7 @@ const Bar = styled.input.attrs({
   &::-moz-range-thumb {
     ${thumbStyle};
   }
+
   &.active::-moz-range-thumb {
     ${thumbStyleActive};
   }
@@ -183,26 +201,71 @@ const Bar = styled.input.attrs({
   &::-ms-thumb {
     ${thumbStyle};
   }
+
   &.active::-ms-thumb {
     ${thumbStyleActive};
   }
+`;
 
-  &:focus {
-    outline: none;
+const trackStyle = css`
+  width: 100%;
+  height: 6px;
+  border-radius: 8px;
+  background: rgba(88, 163, 85, 0.5);
+  cursor: pointer;
+`;
+
+const browserTrackStyles = css`
+  &::-webkit-slider-runnable-track {
+    ${trackStyle};
+  }
+
+  &::-moz-range-track {
+    ${trackStyle};
   }
 
   &::-ms-track {
     width: 100%;
-    background: transparent;
-    border-color: transparent;
+    height: 6px;
     color: transparent;
+    border: none;
+    background: transparent;
     cursor: pointer;
+  }
+
+  &::-ms-tooltip {
+    display: none;
+  }
+
+  &::-ms-fill-lower,
+  &::-ms-fill-upper {
+    border-radius: 8px;
+    background: rgba(88, 163, 85, 0.5);
+  }
+`;
+
+const Bar = styled.input.attrs({
+  type: "range",
+})`
+  width: 100%;
+  height: 60px;
+  padding: 0;
+  margin: 0;
+  -webkit-appearance: none;
+  background: transparent;
+
+  ${browserThumbStyles};
+  ${browserTrackStyles};
+
+  &:focus {
+    outline: none;
   }
 `;
 
 const ThumbSymbols = styled.span`
   position: absolute;
-  top: 17px;
+  box-sizing: border-box;
+  top: 24px;
   color: #fff;
   font-size: 22px !important;
   letter-spacing: -8px !important;
@@ -210,7 +273,17 @@ const ThumbSymbols = styled.span`
   opacity: 0;
   transition: opacity 0.2s;
 
+  /* Internet Explorer specific adjustment */
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    top: 26px;
+    transform: translateX(-2px);
+  }
+
   &.mounted {
     opacity: 1;
+  }
+
+  &.ie-hide {
+    opacity: 0 !important;
   }
 `;
