@@ -21,6 +21,9 @@ interface QuantitySliderState {
   mounted: boolean;
 }
 
+const isIe = window.navigator.userAgent.indexOf("Trident/") > 0;
+const isEdge = window.navigator.userAgent.indexOf("Edge") > -1;
+
 export class QuantitySlider extends Component<
   QuantitySliderProps,
   QuantitySliderState
@@ -106,8 +109,7 @@ export class QuantitySlider extends Component<
     const { min, max, step, itemDescription } = this.props;
     const { value, hasFocus, mouseDown, mounted } = this.state;
 
-    const isIe = window.navigator.userAgent.indexOf("Trident/") > 0;
-    const ieHide = isIe && mouseDown;
+    const ieHide = (isIe || isEdge) && mouseDown;
 
     const thumbClasses = ([
       "material-icons",
@@ -115,16 +117,22 @@ export class QuantitySlider extends Component<
       ieHide ? "ie-hide" : false,
     ].filter(c => Boolean(c)) as string[]).join(" ");
 
+    const barClasses = ([hasFocus ? "active" : false].filter(c =>
+      Boolean(c),
+    ) as string[]).join(" ");
+
     return (
       <Wrapper>
         <Grid container spacing={8} alignItems="center">
           <Grid item>
-            <Typography>{max}</Typography>
+            <SelectedItemCountText>
+              {value} {itemDescription}
+            </SelectedItemCountText>
           </Grid>
 
           <Grid item xs style={{ position: "relative" }}>
             <Bar
-              className={hasFocus ? "active" : undefined}
+              className={barClasses}
               min={min}
               max={max}
               step={step}
@@ -146,9 +154,9 @@ export class QuantitySlider extends Component<
           </Grid>
 
           <Grid item>
-            <Typography>
+            <TotalAvailableItemsText>
               {max} {itemDescription}
-            </Typography>
+            </TotalAvailableItemsText>
           </Grid>
         </Grid>
       </Wrapper>
@@ -158,6 +166,21 @@ export class QuantitySlider extends Component<
 
 const Wrapper = styled.div`
   padding: 0 4px;
+`;
+
+const SelectedItemCountText = styled(Typography).attrs({
+  variant: "body2",
+  component: "span",
+})`
+  width: 80px;
+  padding-bottom: 4px;
+  color: ${({ theme }) => theme.palette.primary.main};
+  text-align: right;
+`;
+
+const TotalAvailableItemsText = styled(SelectedItemCountText)`
+  color: ${({ theme }) => theme.palette.text.secondary};
+  text-align: left;
 `;
 
 // Reference implementation:
@@ -200,6 +223,16 @@ const browserThumbStyles = css`
 
   &::-ms-thumb {
     ${thumbStyle};
+  }
+
+  &::-ms-thumb {
+    ${isEdge
+      ? `
+          position: static;
+          top: 0;
+          transform: none;
+        `
+      : ""};
   }
 
   &.active::-ms-thumb {

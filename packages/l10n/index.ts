@@ -47,6 +47,8 @@ interface Strings extends LocalizedStringsMethods {
   onboardingSummarySelectedEntryType: string;
   onboardingSummarySelectedCategories: string;
 
+  onboardingExamCountRangeCaptionText: string;
+
   navigationBackButtonText: string;
   navigationNextButtonText: string;
   navigationFinishButtonText: string;

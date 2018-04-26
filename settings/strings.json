@@ -49,6 +49,8 @@
     "onboardingSummarySelectedEntryType": "Selected Entry Type",
     "onboardingSummarySelectedCategories": "Selected Categories",
 
+    "onboardingExamCountRangeCaptionText": "Exams",
+
     "navigationBackButtonText": "Back",
     "navigationNextButtonText": "Next",
     "navigationFinishButtonText": "Finish",
