@@ -50,7 +50,7 @@ export class ExamQuantitySelector extends Component<ExamQuantitySelectorProps> {
     return (
       <Grid container spacing={16}>
         <GridItemVerticalAlign>
-          <Typography variant="title" component="span">
+          <Typography variant="title" component="span" style={{ width: 140 }}>
             {props.category}
           </Typography>
         </GridItemVerticalAlign>

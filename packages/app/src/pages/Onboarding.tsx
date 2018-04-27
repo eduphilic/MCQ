@@ -4,13 +4,15 @@ import {
 } from "components/molecules/PanelManager";
 import { EntrySelect } from "components/organisms/EntrySelect";
 import { createSelectEntryPlaceholderData } from "components/organisms/EntrySelect/createSelectEntryPlaceholderData";
-import { createPlaceholderOnboardingPlanCustomizerProps } from "components/organisms/OnboardingPlanCustomizer/createPlaceholderOnboardingPlanCustomizerProps";
 import { OnboardingTemplate } from "components/templates/OnboardingTemplate";
 import { createPlaceholderOnboardingTemplateProps } from "components/templates/OnboardingTemplate/createPlaceholderOnboardingTemplateProps";
 import strings from "l10n";
 import Tabs, { Tab } from "material-ui/Tabs";
-import React, { Component } from "react";
+import React, { Component, ReactElement } from "react";
 import { withRouter } from "react-router-dom";
+
+import { ExamQuantitySelector } from "components/molecules/ExamQuantitySelector";
+import { createPlaceholderExamQuantitySelectorProps } from "components/molecules/ExamQuantitySelector/createPlaceholderExamQuantitySelectorProps";
 
 export const Step1 = withRouter(props => {
   const { history } = props;
@@ -97,6 +99,23 @@ export const Step3 = withRouter(props => {
   };
 
   const CategoryPanelManager = createPlaceholderPanelManager(3);
+  const examQuantitySelectorProps = createPlaceholderExamQuantitySelectorProps();
+  const examQuantitySelectorExamCategories = [
+    "Sol GD",
+    "Sol Tech",
+    "Sol Pharm",
+    "Sol NA",
+  ];
+  const examQuantitySelectors: ReactElement<any>[] = [];
+  for (let i = 0; i < 4; i += 1) {
+    examQuantitySelectors.push(
+      <ExamQuantitySelector
+        key={i}
+        {...examQuantitySelectorProps}
+        category={examQuantitySelectorExamCategories[i]}
+      />,
+    );
+  }
 
   return (
     <OnboardingTemplate {...onboardingTemplateProps}>
@@ -112,6 +131,8 @@ export const Step3 = withRouter(props => {
           </Tabs>
         )}
       </CategoryPanelManager>
+
+      <>{examQuantitySelectors}</>
     </OnboardingTemplate>
   );
 });
