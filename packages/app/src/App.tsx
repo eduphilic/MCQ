@@ -6,7 +6,7 @@ import { LightTheme, ThemeBaseline } from "theme";
 import { Home } from "./pages/Home";
 import { PasswordReset } from "./pages/PasswordReset";
 
-import { Step1, Step2, Step3 } from "./pages/OnboardingSteps";
+import { Step1, Step2, Step3 } from "./pages/Onboarding";
 
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { AdminLogin } from "./pages/admin/AdminLogin";

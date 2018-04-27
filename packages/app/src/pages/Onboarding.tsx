@@ -4,7 +4,6 @@ import {
 } from "components/molecules/PanelManager";
 import { EntrySelect } from "components/organisms/EntrySelect";
 import { createSelectEntryPlaceholderData } from "components/organisms/EntrySelect/createSelectEntryPlaceholderData";
-import { OnboardingPlanCustomizer } from "components/organisms/OnboardingPlanCustomizer";
 import { createPlaceholderOnboardingPlanCustomizerProps } from "components/organisms/OnboardingPlanCustomizer/createPlaceholderOnboardingPlanCustomizerProps";
 import { OnboardingTemplate } from "components/templates/OnboardingTemplate";
 import { createPlaceholderOnboardingTemplateProps } from "components/templates/OnboardingTemplate/createPlaceholderOnboardingTemplateProps";
@@ -97,13 +96,10 @@ export const Step3 = withRouter(props => {
     showBackButton: true,
   };
 
-  const planCustomizerProps = createPlaceholderOnboardingPlanCustomizerProps();
   const CategoryPanelManager = createPlaceholderPanelManager(3);
 
   return (
     <OnboardingTemplate {...onboardingTemplateProps}>
-      <OnboardingPlanCustomizer {...planCustomizerProps} />
-
       <CategoryPanelManager>
         {api => (
           <Tabs
