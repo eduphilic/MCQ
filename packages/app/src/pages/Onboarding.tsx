@@ -53,6 +53,7 @@ export const Step2 = withRouter(props => {
     onBackButtonClick: () => history.push("/welcome/1"),
     onNextButtonClick: () => history.push("/welcome/3"),
     showBackButton: true,
+    label: "Category Selected : Paramilitary (Asst comdt)",
   };
 
   const CategoryPanelManager = createPlaceholderPanelManager(3);
@@ -96,6 +97,8 @@ export const Step3 = withRouter(props => {
     nextButtonLabel: strings.navigationFinishButtonText,
     onBackButtonClick: () => history.push("/welcome/2"),
     showBackButton: true,
+    label: "TOTAL : RS 250",
+    finalScreenStyle: true,
   };
 
   const CategoryPanelManager = createPlaceholderPanelManager(3);

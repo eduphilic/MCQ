@@ -7,6 +7,11 @@ import styled from "styled";
 
 export interface PanelBottomButtonNavProps {
   /**
+   * Bold label text and set background color of final button to primary color.
+   */
+  finalScreenStyle?: boolean;
+
+  /**
    * Optional text label to display to the left of the navigation buttons.
    */
   label?: string;
@@ -43,6 +48,7 @@ export interface PanelBottomButtonNavProps {
  */
 export const PanelBottomButtonNav: SFC<PanelBottomButtonNavProps> = props => {
   const {
+    finalScreenStyle,
     label,
     showBackButton,
     showNextButton,
@@ -59,19 +65,33 @@ export const PanelBottomButtonNav: SFC<PanelBottomButtonNavProps> = props => {
 
       <ButtonsWrapper>
         <LabelWrapper>
-          <Hidden xsDown implementation="css">
-            {label && <Typography variant="body2">{label}</Typography>}
-          </Hidden>
+          {!finalScreenStyle ? (
+            <Hidden xsDown implementation="css">
+              {label && <Typography variant="body2">{label}</Typography>}
+            </Hidden>
+          ) : (
+            <Typography
+              variant="body2"
+              style={finalScreenStyle ? { fontWeight: 600 } : undefined}
+            >
+              {label}
+            </Typography>
+          )}
         </LabelWrapper>
 
         {showBackButton && (
-          <Button variant="raised" onClick={onBackButtonClick}>
+          <Button className="back" variant="raised" onClick={onBackButtonClick}>
             {backButtonLabel}
           </Button>
         )}
 
         {showNextButton && (
-          <Button className="next" variant="raised" onClick={onNextButtonClick}>
+          <Button
+            className={finalScreenStyle ? "final-screen" : "next"}
+            variant="raised"
+            color="secondary"
+            onClick={onNextButtonClick}
+          >
             {nextButtonLabel}
           </Button>
         )}
@@ -99,9 +119,18 @@ const ButtonsWrapper = styled.div`
     color: ${props => props.theme.palette.primary.main};
   }
 
+  .final-screen {
+    font-weight: 600;
+    letter-spacing: 0.03rem;
+  }
+
   > button {
-    background-color: #fff;
     text-transform: none;
+  }
+
+  > button.next,
+  > button.back {
+    background-color: #fff;
   }
 
   > button:last-child {
