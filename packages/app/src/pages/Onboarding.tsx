@@ -4,14 +4,15 @@ import {
 } from "components/molecules/PanelManager";
 import { EntrySelect } from "components/organisms/EntrySelect";
 import { createSelectEntryPlaceholderData } from "components/organisms/EntrySelect/createSelectEntryPlaceholderData";
-import { OnboardingPlanCustomizer } from "components/organisms/OnboardingPlanCustomizer";
-import { createPlaceholderOnboardingPlanCustomizerProps } from "components/organisms/OnboardingPlanCustomizer/createPlaceholderOnboardingPlanCustomizerProps";
 import { OnboardingTemplate } from "components/templates/OnboardingTemplate";
 import { createPlaceholderOnboardingTemplateProps } from "components/templates/OnboardingTemplate/createPlaceholderOnboardingTemplateProps";
 import strings from "l10n";
 import Tabs, { Tab } from "material-ui/Tabs";
-import React, { Component } from "react";
+import React, { Component, ReactElement } from "react";
 import { withRouter } from "react-router-dom";
+
+import { ExamQuantitySelector } from "components/molecules/ExamQuantitySelector";
+import { createPlaceholderExamQuantitySelectorProps } from "components/molecules/ExamQuantitySelector/createPlaceholderExamQuantitySelectorProps";
 
 export const Step1 = withRouter(props => {
   const { history } = props;
@@ -52,6 +53,7 @@ export const Step2 = withRouter(props => {
     onBackButtonClick: () => history.push("/welcome/1"),
     onNextButtonClick: () => history.push("/welcome/3"),
     showBackButton: true,
+    label: "Category Selected : Paramilitary (Asst comdt)",
   };
 
   const CategoryPanelManager = createPlaceholderPanelManager(3);
@@ -95,15 +97,31 @@ export const Step3 = withRouter(props => {
     nextButtonLabel: strings.navigationFinishButtonText,
     onBackButtonClick: () => history.push("/welcome/2"),
     showBackButton: true,
+    label: "TOTAL : RS 250",
+    finalScreenStyle: true,
   };
 
-  const planCustomizerProps = createPlaceholderOnboardingPlanCustomizerProps();
   const CategoryPanelManager = createPlaceholderPanelManager(3);
+  const examQuantitySelectorProps = createPlaceholderExamQuantitySelectorProps();
+  const examQuantitySelectorExamCategories = [
+    "Sol GD",
+    "Sol Tech",
+    "Sol Pharm",
+    "Sol NA",
+  ];
+  const examQuantitySelectors: ReactElement<any>[] = [];
+  for (let i = 0; i < 4; i += 1) {
+    examQuantitySelectors.push(
+      <ExamQuantitySelector
+        key={i}
+        {...examQuantitySelectorProps}
+        category={examQuantitySelectorExamCategories[i]}
+      />,
+    );
+  }
 
   return (
     <OnboardingTemplate {...onboardingTemplateProps}>
-      <OnboardingPlanCustomizer {...planCustomizerProps} />
-
       <CategoryPanelManager>
         {api => (
           <Tabs
@@ -116,6 +134,8 @@ export const Step3 = withRouter(props => {
           </Tabs>
         )}
       </CategoryPanelManager>
+
+      <>{examQuantitySelectors}</>
     </OnboardingTemplate>
   );
 });

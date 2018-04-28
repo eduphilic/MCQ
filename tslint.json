@@ -28,6 +28,7 @@
     ],
     "array-type": false,
     "object-literal-sort-keys": false,
+    "member-ordering": false,
     "object-shorthand-properties-first": false,
     "prettier": true
   }
