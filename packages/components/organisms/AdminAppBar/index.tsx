@@ -6,14 +6,12 @@ import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import React, { SFC } from "react";
 import styled from "styled";
-import {
-  ToolbarProfileMenu,
-  ToolbarProfileMenuProps,
-} from "../../molecules/ToolbarProfileMenu";
+import { LogoutButton, LogoutButtonProps } from "../../molecules/LogoutButton";
 import { DrawerStateConsumer } from "../../organisms/ResponsiveDrawerFrame";
 
-// tslint:disable-next-line:no-empty-interface
-export interface AdminAppBarProps extends ToolbarProfileMenuProps {}
+export interface AdminAppBarProps {
+  onLogoutButtonClick: LogoutButtonProps["onClick"];
+}
 
 /**
  * App bar for admin dashboard. Implements a persistent navigation drawer.
@@ -22,6 +20,8 @@ export interface AdminAppBarProps extends ToolbarProfileMenuProps {}
  * https://material-ui-next.com/demos/drawers/#persistent-drawer
  */
 export const AdminAppBar: SFC<AdminAppBarProps> = props => {
+  const { onLogoutButtonClick } = props;
+
   return (
     <DrawerStateConsumer>
       {drawerState => (
@@ -42,7 +42,7 @@ export const AdminAppBar: SFC<AdminAppBarProps> = props => {
           </Hidden>
           <div style={{ flex: 1 }} />
 
-          <ToolbarProfileMenu {...props} />
+          <LogoutButton onClick={onLogoutButtonClick} />
         </StyledToolbar>
       )}
     </DrawerStateConsumer>
