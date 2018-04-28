@@ -1,81 +1,12 @@
 import LocalizedStrings, { LocalizedStringsMethods } from "react-localization";
-import stringsJson from "../../settings/strings.json";
+import { strings as stringsSettings } from "./strings";
 
-interface Strings extends LocalizedStringsMethods {
-  heroHeader: string;
+type StringEntries = typeof stringsSettings["en"];
 
-  // ${1} is required.
-  formFieldIsRequired: string;
+interface Strings extends StringEntries, LocalizedStringsMethods {}
 
-  onboardingFormLoginTitle: string;
-  onboardingFormLoginButtonLabel: string;
-  onboardingFormLoginForgotPassword: string;
-  onboardingFormSignupTitle: string;
-  onboardingFormSignupButtonLabel: string;
-  onboardingFormEnterMobileNumber: string;
-  onboardingFormEnterMobileNumberFieldValidationDescription: string;
-  onboardingFormEnterPassword: string;
-  onboardingFormEnterPasswordFieldValidationDescription: string;
-  onboardingFormEnterYourName: string;
-  onboardingFormEnterYourNameFieldValidationDescription: string;
-
-  languageSelectSelectPreferredLanguage: string;
-  languageSelectEnglish: string;
-  languageSelectHindi: string;
-
-  heroPrimaryText: string;
-  heroSecondaryText: string;
-  heroFooterText: string;
-
-  landingCardAttemptButton: string;
-
-  pageFooterText: string;
-
-  logoutButtonText: string;
-
-  onboardingWelcomeLetsSetupAccount: string;
-
-  onboardingStep: string;
-  onboardingSelectEntryType: string;
-  onboardingSelectCategory: string;
-  onboardingPlan: string;
-
-  onboardingPleaseSelectAtLeastOneEntryType: string;
-  onboardingPleaseSelectCategoryTypeEachEntry: string;
-  onboardingPleaseSelectMembershipPlan: string;
-
-  onboardingSummarySelectedEntryType: string;
-  onboardingSummarySelectedCategories: string;
-
-  onboardingExamCountRangeCaptionText: string;
-
-  navigationBackButtonText: string;
-  navigationNextButtonText: string;
-  navigationFinishButtonText: string;
-  selectionChangeButtonText: string;
-
-  adminDashboardAppBarTitle: string;
-
-  adminLinkDashboard: string;
-  adminLinkEntryManager: string;
-  adminLinkQuestionManager: string;
-  adminLinkTestManager: string;
-  adminLinkUserManager: string;
-  adminLinkPlanManager: string;
-  adminLinkIndexManager: string;
-  adminLinkRevenueManager: string;
-
-  adminLoginFormTitle: string;
-  adminLoginHeroTextPrimary: string;
-  adminLoginHeroTextSecondary: string;
-
-  adminFilterMenuCaption: string;
-
-  adminPanelUsersSummaryTotalUsers: string;
-  adminPanelUsersSummaryActiveUsers: string;
-  adminPanelUsersSummaryRegistrationsToday: string;
-}
-
-const strings: Strings = new LocalizedStrings(stringsJson);
+const strings: Strings = new LocalizedStrings<StringEntries>(
+  stringsSettings as any,
+);
 
 export default strings;
