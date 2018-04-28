@@ -21,6 +21,7 @@
     "@types/jest": "^22.2.3",
     "@types/react-dom": "^16.0.5",
     "@types/react-helmet": "^5.0.6",
+    "@types/react-redux": "^5.0.19",
     "@types/react-router-dom": "^4.2.6",
     "@types/storybook__addon-actions": "^3.0.3",
     "@types/storybook__addon-info": "^3.2.3",
