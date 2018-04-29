@@ -26,14 +26,16 @@ class AdminLoginBase extends Component<AdminLoginProps> {
           description:
             strings.onboardingFormEnterMobileNumberFieldValidationDescription,
           name: "login",
-          placeholder: strings.onboardingFormEnterMobileNumber,
+          // TODO: Remove development placeholder note (0000)
+          placeholder: strings.onboardingFormEnterMobileNumber + " (0000)",
           type: "tel",
         },
         {
           description:
             strings.onboardingFormEnterPasswordFieldValidationDescription,
           name: "password",
-          placeholder: strings.onboardingFormEnterPassword,
+          // TODO: Remove development placeholder note (admin)
+          placeholder: strings.onboardingFormEnterPassword + " (admin)",
           type: "password",
         },
       ]}

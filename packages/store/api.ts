@@ -61,14 +61,14 @@ const dummyApiClient: ApiClient = {
                     id: "admin-id",
                     firstName: "John",
                     lastName: "Doe",
-                    mobileNumber: "000-000-000",
+                    mobileNumber: "0000",
                     isAdmin: true,
                   }
                 : {
                     id: "user-id",
                     firstName: "John",
                     lastName: "Doe",
-                    mobileNumber: "000-000-000",
+                    mobileNumber: "0001",
                     isAdmin: true,
                   };
             response = user;
