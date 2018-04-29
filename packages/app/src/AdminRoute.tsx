@@ -14,7 +14,7 @@ const AdminRouteBase: SFC<AdminRouteProps> = props => {
     <Route
       {...rest}
       component={authenticated ? Component : undefined}
-      render={() => <Redirect to="/admin" />}
+      render={authenticated ? undefined : () => <Redirect to="/admin" />}
     />
   );
 };
