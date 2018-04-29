@@ -5,10 +5,14 @@ import { AppState, initialAppState } from "./state";
 export const appReducer: Reducer<AppState, actions.AppActions> = (
   state = initialAppState,
   action,
-) => {
+): AppState => {
   switch (action.type) {
     case actions.LOGIN_SUCCESS:
-      return { ...state, authenticationToken: action.authenticationToken };
+      return {
+        ...state,
+        authenticationToken: action.authenticationToken,
+        authenticationError: null,
+      };
 
     case actions.LOGIN_FAILURE:
       return {
@@ -16,6 +20,9 @@ export const appReducer: Reducer<AppState, actions.AppActions> = (
         authenticationToken: null,
         authenticationError: action.authenticationError,
       };
+
+    case actions.LOGIN_STATUS:
+      return { ...state, authenticating: action.authenticating };
 
     case actions.RETRIEVE_USER_SUCCESS:
       return {

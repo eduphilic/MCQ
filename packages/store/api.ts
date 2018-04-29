@@ -88,7 +88,9 @@ const dummyApiClient: ApiClient = {
           return;
         }
         resolve(response);
-      }, 100);
+        // TODO: Lower this latency, set at 2 seconds for development of login
+        // form disabling.
+      }, 2000);
     }),
 };
 
