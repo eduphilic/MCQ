@@ -1,13 +1,11 @@
 import { User } from "../models";
 
-export interface AppState {
-  authenticationToken: string | null;
-  authenticationError: string | null;
-  user: User | null;
-}
+export type AppState = typeof initialAppState;
 
-export const initialAppState: AppState = {
-  authenticationToken: null,
-  authenticationError: null,
-  user: null,
+export const initialAppState = {
+  authenticationToken: null as string | null,
+  authenticationError: null as string | null,
+  authenticating: false,
+
+  user: null as User | null,
 };
