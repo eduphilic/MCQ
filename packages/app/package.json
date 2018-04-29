@@ -17,8 +17,10 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-helmet": "^5.2.0",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "2.0.0-next.b2fd8db8",
+    "redux": "^4.0.0",
     "store": "1.0.0",
     "styled": "^1.0.0",
     "theme": "^1.0.0"

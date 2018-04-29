@@ -9,6 +9,28 @@ export const appReducer: Reducer<AppState, actions.AppActions> = (
   switch (action.type) {
     case actions.LOGIN_SUCCESS:
       return { ...state, authenticationToken: action.authenticationToken };
+
+    case actions.LOGIN_FAILURE:
+      return {
+        ...state,
+        authenticationToken: null,
+        authenticationError: action.authenticationError,
+      };
+
+    case actions.RETRIEVE_USER_SUCCESS:
+      return {
+        ...state,
+        user: action.user,
+        authenticationError: null,
+      };
+
+    case actions.RETRIEVE_USER_FAILURE:
+      return {
+        ...state,
+        user: null,
+        authenticationToken: null,
+      };
+
     default:
       return state;
   }

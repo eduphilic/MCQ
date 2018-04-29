@@ -1,5 +1,6 @@
 import React, { SFC } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { AdminRoute } from "./AdminRoute";
 
 // Requires access to Router.
 import { PersistentScrollPositionProvider } from "components/utils/PersistentScrollPosition";
@@ -27,8 +28,8 @@ export const SiteMap: SFC<{}> = () => (
 
         {/* Start Admin Dashboard Routes */}
         <Route exact path="/admin" component={AdminLogin} />
-        <Route path="/admin/dashboard" component={AdminDashboard} />
-        <Route path="/admin" component={AdminPlaceholder} />
+        <AdminRoute path="/admin/dashboard" component={AdminDashboard} />
+        <AdminRoute path="/admin" component={AdminPlaceholder} />
       </Switch>
     </PersistentScrollPositionProvider>
   </Router>
