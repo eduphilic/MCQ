@@ -36,6 +36,10 @@ export const TextFieldBase = styled(TextFieldMuiBase)`
       props.theme.transitions.create(["border-color", "box-shadow"])};
   }
 
+  .input:disabled {
+    background-color: #eee;
+  }
+
   .input::placeholder {
     color: #828282;
     opacity: 1;
