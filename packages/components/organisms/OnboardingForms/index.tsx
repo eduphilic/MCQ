@@ -2,21 +2,21 @@ import strings from "l10n";
 import React, { SFC } from "react";
 import styled from "styled";
 import {
+  AuthenticationForm,
+  AuthenticationFormProps,
   FormField,
-  LandingForm,
-  LandingFormProps,
-} from "../../molecules/LandingForm";
+} from "../../molecules/AuthenticationForm";
 
 export interface OnboardingFormsProps {
   /**
    * Called with the field values on submission of the login form.
    */
-  onLoginSubmit: LandingFormProps["onSubmit"];
+  onLoginSubmit: AuthenticationFormProps["onSubmit"];
 
   /**
    * Called with the field values on submission of the signup form.
    */
-  onSignupSubmit: LandingFormProps["onSubmit"];
+  onSignupSubmit: AuthenticationFormProps["onSubmit"];
 
   /**
    * React Router link for password reset.
@@ -57,7 +57,7 @@ export const OnboardingForms: SFC<OnboardingFormsProps> = props => {
 
   return (
     <Wrapper>
-      <LandingForm
+      <AuthenticationForm
         title={strings.onboardingFormLoginTitle}
         fields={loginFields}
         onSubmit={onLoginSubmit}
@@ -66,7 +66,7 @@ export const OnboardingForms: SFC<OnboardingFormsProps> = props => {
           label: strings.onboardingFormLoginForgotPassword,
         }}
       />
-      <LandingForm
+      <AuthenticationForm
         title={strings.onboardingFormSignupTitle}
         fields={signupFields}
         onSubmit={onSignupSubmit}

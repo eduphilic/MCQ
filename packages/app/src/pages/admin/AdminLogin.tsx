@@ -1,5 +1,5 @@
 import { AuthenticationErrorSnackbar } from "components/molecules/AuthenticationErrorSnackbar";
-import { LandingForm } from "components/molecules/LandingForm";
+import { AuthenticationForm } from "components/molecules/AuthenticationForm";
 import { AdminLoginTemplate } from "components/templates/AdminLoginTemplate";
 import strings from "l10n";
 import Typography from "material-ui/Typography";
@@ -22,7 +22,7 @@ class AdminLoginBase extends Component<AdminLoginProps> {
   };
 
   generateLoginForm = () => (
-    <LandingForm
+    <AuthenticationForm
       title={strings.adminLoginFormTitle}
       fields={[
         {

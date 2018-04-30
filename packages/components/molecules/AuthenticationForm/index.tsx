@@ -14,7 +14,7 @@ export interface FormField {
   type?: "text" | "tel" | "password" | "email";
 }
 
-export interface LandingFormProps {
+export interface AuthenticationFormProps {
   /** Form header label. */
   title: string;
   /** Input fields. */
@@ -31,19 +31,23 @@ export interface LandingFormProps {
   onSubmit: (values: { [key: string]: string }) => void;
 }
 
-interface LandingFormState {
+interface AuthenticationFormState {
   values: { [key: string]: string };
   errors: { [key: string]: string };
 }
 
 /**
- * Provides an input form for use on the landing page with basic validation.
+ * Provides an input form for use on the landing page and admin login page
+ * with basic validation.
  *
  * Accepts an optional secondary action (password reset link) for use with React
  * Router.
  */
-export class LandingForm extends Component<LandingFormProps, LandingFormState> {
-  constructor(props: LandingFormProps) {
+export class AuthenticationForm extends Component<
+  AuthenticationFormProps,
+  AuthenticationFormState
+> {
+  constructor(props: AuthenticationFormProps) {
     super(props);
 
     const initialValues = props.fields.map(f => f.name).reduce(
@@ -52,7 +56,7 @@ export class LandingForm extends Component<LandingFormProps, LandingFormState> {
         return acc;
       },
       // tslint:disable-next-line:no-object-literal-type-assertion
-      {} as LandingFormState["values"],
+      {} as AuthenticationFormState["values"],
     );
     const initialErrors = { ...initialValues };
 
@@ -151,7 +155,7 @@ export class LandingForm extends Component<LandingFormProps, LandingFormState> {
   }
 }
 
-export default LandingForm;
+export default AuthenticationForm;
 
 const CardActionsMarginBottom = styled(CardActions)`
   padding-left: ${props => props.theme.spacing.unit * 2}px;

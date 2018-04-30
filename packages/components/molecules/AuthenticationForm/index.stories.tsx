@@ -3,17 +3,17 @@ import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { LandingForm } from ".";
+import { AuthenticationForm } from ".";
 
 storiesOf("Molecules", module).add(
-  "LandingForm",
+  "AuthenticationForm",
   withInfo({
     propTablesExclude: [BrowserRouter as any],
   })(() => (
     <BrowserRouter>
       <div style={{ padding: 16, backgroundColor: "#eee" }}>
         <div style={{ width: 330 }}>
-          <LandingForm
+          <AuthenticationForm
             title="Login"
             fields={[
               {
