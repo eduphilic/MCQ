@@ -41,6 +41,9 @@ export const appReducer: Reducer<AppState, actions.AppActions> = (
         authenticationToken: null,
       };
 
+    case actions.LOGIN_SESSION_LOAD_SUCCESS:
+      return { ...state, authenticationToken: action.authenticationToken };
+
     default:
       return state;
   }

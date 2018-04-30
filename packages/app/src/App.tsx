@@ -2,17 +2,21 @@ import React from "react";
 import { createProvider as createStoreProvider } from "store";
 
 import { LightTheme, ThemeBaseline } from "theme";
-import { SiteMap } from "./SiteMap";
+import { LoginSessionLoader } from "./components/LoginSessionLoader";
+import { SiteMap } from "./components/SiteMap";
 
 const StoreProvider = createStoreProvider();
 
 const App = () => (
   <StoreProvider>
-    <ThemeBaseline>
-      <LightTheme>
-        <SiteMap />
-      </LightTheme>
-    </ThemeBaseline>
+    <>
+      <LoginSessionLoader />
+      <ThemeBaseline>
+        <LightTheme>
+          <SiteMap />
+        </LightTheme>
+      </ThemeBaseline>
+    </>
   </StoreProvider>
 );
 

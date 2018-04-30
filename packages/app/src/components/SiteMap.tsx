@@ -5,14 +5,14 @@ import { AdminRoute } from "./AdminRoute";
 // Requires access to Router.
 import { PersistentScrollPositionProvider } from "components/utils/PersistentScrollPosition";
 
-import { Home } from "./pages/Home";
-import { PasswordReset } from "./pages/PasswordReset";
+import { Home } from "../pages/Home";
+import { PasswordReset } from "../pages/PasswordReset";
 
-import { Step1, Step2, Step3 } from "./pages/Onboarding";
+import { Step1, Step2, Step3 } from "../pages/Onboarding";
 
-import { AdminDashboard } from "./pages/admin/AdminDashboard";
-import { AdminLogin } from "./pages/admin/AdminLogin";
-import { AdminPlaceholder } from "./pages/admin/AdminPlaceholder";
+import { AdminDashboard } from "../pages/admin/AdminDashboard";
+import { AdminLogin } from "../pages/admin/AdminLogin";
+import { AdminPlaceholder } from "../pages/admin/AdminPlaceholder";
 
 export const SiteMap: SFC<{}> = () => (
   <Router>

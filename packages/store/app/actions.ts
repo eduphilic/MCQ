@@ -1,3 +1,4 @@
+import lscache from "lscache";
 import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { api } from "../api";
@@ -10,7 +11,8 @@ export type AppActions =
   | LoginStatus
   | LoginFailureClear
   | RetrieveUserSuccess
-  | RetrieveUserFailure;
+  | RetrieveUserFailure
+  | LoginSessionLoadSuccess;
 type ThunkResult<R> = ThunkAction<Promise<R>, AppState, {}, AppActions>;
 
 // #region Authentication
@@ -61,6 +63,7 @@ export const login = (
 
     await dispatch(loginSuccess(authenticationToken));
     await dispatch(retrieveUser(authenticationToken));
+    sessionTokenSave(authenticationToken);
   } catch (e) {
     await dispatch(loginFailure(e.message));
   }
@@ -103,8 +106,59 @@ export const retrieveUser = (
     await dispatch(retrieveUserSuccess(user));
     return user;
   } catch (e) {
+    sessionTokenRemove();
     await dispatch(retrieveUserFailure(e.message));
     return null;
   }
 };
 // #endregion User Account Retrieval
+
+// #region Session Persistence (Local Storage)
+const SESSION_TOKEN_KEY = "AUTHENTICATION_TOKEN";
+const sessionTokenExpirationMinutes = 30 * 24 * 60 /* 30 days */;
+const sessionTokenSave = (authenticationToken: string) => {
+  lscache.set(
+    SESSION_TOKEN_KEY,
+    authenticationToken,
+
+    // Expire if not used after specified number of minutes.
+    sessionTokenExpirationMinutes,
+  );
+};
+
+const sessionTokenRead = (): string | null => {
+  const authenticationToken = lscache.get(SESSION_TOKEN_KEY);
+  if (!authenticationToken) return null;
+
+  // Reset local storage entry expiration.
+  sessionTokenSave(authenticationToken);
+  return authenticationToken;
+};
+
+const sessionTokenRemove = () => {
+  lscache.remove(SESSION_TOKEN_KEY);
+};
+
+export const LOGIN_SESSION_LOAD_SUCCESS = "LOGIN_SESSION_LOAD_SUCCESS";
+interface LoginSessionLoadSuccess
+  extends Action<typeof LOGIN_SESSION_LOAD_SUCCESS> {
+  authenticationToken: string;
+}
+
+const loginSessionLoadSuccess = (
+  authenticationToken: string,
+): LoginSessionLoadSuccess => ({
+  type: LOGIN_SESSION_LOAD_SUCCESS,
+  authenticationToken,
+});
+
+export const loginSessionLoad = (): ThunkResult<void> => async dispatch => {
+  const authenticationToken = sessionTokenRead();
+  if (!authenticationToken) return;
+
+  await dispatch(loginStatus(true));
+  await dispatch(loginSessionLoadSuccess(authenticationToken));
+  await dispatch(retrieveUser(authenticationToken));
+  await dispatch(loginStatus(false));
+};
+// #endregion
