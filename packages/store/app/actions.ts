@@ -8,6 +8,7 @@ export type AppActions =
   | LoginSuccess
   | LoginFailure
   | LoginStatus
+  | LoginFailureClear
   | RetrieveUserSuccess
   | RetrieveUserFailure;
 type ThunkResult<R> = ThunkAction<Promise<R>, AppState, {}, AppActions>;
@@ -38,6 +39,12 @@ interface LoginStatus extends Action<typeof LOGIN_STATUS> {
 const loginStatus = (authenticating: boolean): LoginStatus => ({
   type: LOGIN_STATUS,
   authenticating,
+});
+
+export const LOGIN_FAILURE_CLEAR = "LOGIN_FAILURE_CLEAR";
+interface LoginFailureClear extends Action<typeof LOGIN_FAILURE_CLEAR> {}
+export const loginFailureClear = (): LoginFailureClear => ({
+  type: LOGIN_FAILURE_CLEAR,
 });
 
 export const login = (

@@ -24,6 +24,9 @@ export const appReducer: Reducer<AppState, actions.AppActions> = (
     case actions.LOGIN_STATUS:
       return { ...state, authenticating: action.authenticating };
 
+    case actions.LOGIN_FAILURE_CLEAR:
+      return { ...state, authenticationError: null };
+
     case actions.RETRIEVE_USER_SUCCESS:
       return {
         ...state,

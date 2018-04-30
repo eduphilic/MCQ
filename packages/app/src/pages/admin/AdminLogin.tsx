@@ -1,3 +1,4 @@
+import { AuthenticationErrorSnackbar } from "components/molecules/AuthenticationErrorSnackbar";
 import { LandingForm } from "components/molecules/LandingForm";
 import { AdminLoginTemplate } from "components/templates/AdminLoginTemplate";
 import strings from "l10n";
@@ -10,7 +11,9 @@ import { actions, RootState } from "store";
 interface AdminLoginProps {
   authenticating: boolean;
   authenticated: boolean;
+  authenticationError: string | null;
   onLogin: (login: string, password: string) => any;
+  onSnackbarClose: () => void;
 }
 
 class AdminLoginBase extends Component<AdminLoginProps> {
@@ -54,28 +57,44 @@ class AdminLoginBase extends Component<AdminLoginProps> {
     </div>
   );
 
+  generateSnackbar = () => {
+    const { authenticationError, onSnackbarClose } = this.props;
+
+    return (
+      <AuthenticationErrorSnackbar
+        error={authenticationError}
+        onClose={onSnackbarClose}
+      />
+    );
+  };
+
   render() {
-    const { authenticating, authenticated } = this.props;
+    const { authenticated } = this.props;
 
     if (authenticated) return <Redirect to="/admin/dashboard" />;
 
-    /* tslint:disable-next-line:no-console */
-    console.log("authenticating", authenticating);
-
     const loginForm = this.generateLoginForm();
     const heroNode = this.generateHeroNode();
+    const snackBar = this.generateSnackbar();
 
-    return <AdminLoginTemplate heroNode={heroNode} loginForm={loginForm} />;
+    return (
+      <>
+        <AdminLoginTemplate heroNode={heroNode} loginForm={loginForm} />
+        {snackBar}
+      </>
+    );
   }
 }
 
-const mapStateToProps = (store: RootState) => ({
-  authenticating: store.app.authenticating,
-  authenticated: store.app.user && store.app.user.isAdmin,
+const mapStateToProps = ({ app }: RootState) => ({
+  authenticating: app.authenticating,
+  authenticated: app.user && app.user.isAdmin,
+  authenticationError: app.authenticationError,
 });
 
 const mapDispatchToProps = {
   onLogin: actions.app.login,
+  onSnackbarClose: actions.app.loginFailureClear,
 };
 
 export const AdminLogin = connect(mapStateToProps, mapDispatchToProps)(
