@@ -43,7 +43,7 @@ class AdminLoginBase extends Component<AdminLoginProps> {
         },
       ]}
       onSubmit={this.handleLoginSubmit}
-      disabled={false}
+      disabled={this.props.authenticating}
     />
   );
 
