@@ -11,7 +11,7 @@ storiesOf("Organisms", module).add(
   withInfo()(() => {
     const props: AdminAppBarProps = {
       ...createPlaceholderAdminAppBarProps(),
-      onLogoutClick: action("onLogoutClick"),
+      onLogoutButtonClick: action("onLogoutClick"),
     };
 
     return (
