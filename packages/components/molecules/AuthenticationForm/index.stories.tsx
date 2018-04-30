@@ -1,5 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import { withInfo } from "@storybook/addon-info";
+import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
@@ -12,7 +13,7 @@ storiesOf("Molecules", module).add(
   })(() => (
     <BrowserRouter>
       <div style={{ padding: 16, backgroundColor: "#eee" }}>
-        <div style={{ width: 330 }}>
+        <div style={{ width: 350 }}>
           <AuthenticationForm
             title="Login"
             fields={[
@@ -31,6 +32,7 @@ storiesOf("Molecules", module).add(
             ]}
             onSubmit={action("onSubmit")}
             secondaryAction={{ href: "#", label: "Forgot Password?" }}
+            disabled={boolean("Disabled", false)}
           />
         </div>
       </div>

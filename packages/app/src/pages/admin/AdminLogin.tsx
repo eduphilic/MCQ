@@ -43,6 +43,7 @@ class AdminLoginBase extends Component<AdminLoginProps> {
         },
       ]}
       onSubmit={this.handleLoginSubmit}
+      disabled={false}
     />
   );
 
@@ -88,11 +89,11 @@ class AdminLoginBase extends Component<AdminLoginProps> {
 
 const mapStateToProps = ({ app }: RootState) => ({
   authenticating: app.authenticating,
-  authenticated: app.user && app.user.isAdmin,
+  authenticated: Boolean(app.user && app.user.isAdmin),
   authenticationError: app.authenticationError,
 });
 
-const mapDispatchToProps = {
+const mapDispatchToProps: Partial<AdminLoginProps> = {
   onLogin: actions.app.login,
   onSnackbarClose: actions.app.loginFailureClear,
 };

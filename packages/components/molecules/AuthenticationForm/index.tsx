@@ -1,6 +1,11 @@
 import strings from "l10n";
 import Card, { CardActions, CardContent, CardHeader } from "material-ui/Card";
-import React, { ChangeEventHandler, Component, FormEventHandler } from "react";
+import React, {
+  ChangeEventHandler,
+  cloneElement,
+  Component,
+  FormEventHandler,
+} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled";
 import { Button } from "../../atoms/Button";
@@ -17,8 +22,10 @@ export interface FormField {
 export interface AuthenticationFormProps {
   /** Form header label. */
   title: string;
+
   /** Input fields. */
   fields: FormField[];
+
   /**
    * React Router link to the right of the Submit button for a secondary action
    * like performing a password reset.
@@ -27,6 +34,14 @@ export interface AuthenticationFormProps {
     href: string;
     label: string;
   };
+
+  /**
+   * When true, disabled the login form. This is used during submission of the
+   * form contents so that the user has visual feedback that something is
+   * happening.
+   */
+  disabled: boolean;
+
   /** Called on form submit with field name / value pairs. */
   onSubmit: (values: { [key: string]: string }) => void;
 }
@@ -111,8 +126,31 @@ export class AuthenticationForm extends Component<
     this.setState({ errors, values });
   };
 
+  /**
+   * Return a secondary action link if present in the component's props or null.
+   *
+   * Wraps a button in a React Router link when the form is enabled, otherwise
+   * it sets the disable state on the button.
+   */
+  generateSecondaryActionLink = () => {
+    const { disabled, secondaryAction } = this.props;
+    if (!secondaryAction) return null;
+
+    const button = (
+      <Button variant="flat" disabled={disabled}>
+        {secondaryAction.label}
+      </Button>
+    );
+
+    // Depending on the disable state of the form, either wrap the secondary
+    // action link in a React Router link or a div.
+    const wrapper = disabled ? <div /> : <Link to={secondaryAction.href} />;
+
+    return cloneElement(wrapper, { style: { marginLeft: "auto" } }, button);
+  };
+
   render() {
-    const { title, fields, secondaryAction } = this.props;
+    const { title, fields, disabled } = this.props;
 
     const textFields = fields.map(f => {
       const { name, placeholder, type } = f;
@@ -130,15 +168,12 @@ export class AuthenticationForm extends Component<
           value={value}
           error={hasError}
           label={error}
+          disabled={disabled}
         />
       );
     });
 
-    const secondaryActionLink = secondaryAction ? (
-      <Link to={secondaryAction.href} style={{ marginLeft: "auto" }}>
-        <Button variant="flat">{secondaryAction.label}</Button>
-      </Link>
-    ) : null;
+    const secondaryActionLink = this.generateSecondaryActionLink();
 
     return (
       <form onSubmit={this.handleFormSubmit}>
@@ -146,7 +181,9 @@ export class AuthenticationForm extends Component<
           <CardHeader title={<FormHeader>{title}</FormHeader>} />
           <CardContent>{textFields}</CardContent>
           <CardActionsMarginBottom>
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={disabled}>
+              Submit
+            </Button>
             {secondaryActionLink}
           </CardActionsMarginBottom>
         </Card>

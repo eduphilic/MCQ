@@ -65,11 +65,15 @@ export const OnboardingForms: SFC<OnboardingFormsProps> = props => {
           href: passwordResetHref,
           label: strings.onboardingFormLoginForgotPassword,
         }}
+        // TODO: Add disabled state during submission
+        disabled={false}
       />
       <AuthenticationForm
         title={strings.onboardingFormSignupTitle}
         fields={signupFields}
         onSubmit={onSignupSubmit}
+        // TODO: Add disabled state during submission
+        disabled={false}
       />
     </Wrapper>
   );
