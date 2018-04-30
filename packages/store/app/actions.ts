@@ -70,6 +70,18 @@ export const login = (
 
   await dispatch(loginStatus(false));
 };
+
+export const logout = (): ThunkResult<void> => async () => {
+  sessionTokenRemove();
+
+  // Forward to admin login page if user was visiting admin page, otherwise send
+  // to landing page.
+  const loginPage = /\/admin\//.test(window.document.location.href)
+    ? "/admin"
+    : "/";
+
+  window.document.location.href = loginPage;
+};
 // #endregion Authentication
 
 // #region User Account Retrieval
