@@ -8,13 +8,15 @@
     "yarn": ">= 1.5.1"
   },
   "precommit": [
-    "lint"
+    "lint",
+    "type-check"
   ],
   "scripts": {
     "start": "lerna run --parallel start",
     "build": "lerna run --stream --concurrency 1 build ",
     "clean": "lerna run --stream clean",
     "test": "cross-env CI=1 lerna run --stream test",
+    "type-check": "tsc",
     "lint": "tslint -p ./"
   },
   "devDependencies": {
