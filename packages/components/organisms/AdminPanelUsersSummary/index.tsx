@@ -16,7 +16,14 @@ export interface AdminPanelUsersSummaryProps {
 
   activeUsers: number;
 
-  registrationsToday: number;
+  registrationsCount: number;
+
+  /**
+   * Translation key for the third section's caption. The translation key is
+   * used to lookup the text caption from the localization module. This is done
+   * because the statistics shown here can be changed by the filter setting.
+   */
+  registrationsCountL10Key: keyof typeof strings;
 }
 
 /**
@@ -29,13 +36,14 @@ export const AdminPanelUsersSummary: SFC<
     filterButtonProps,
     totalUsers,
     activeUsers,
-    registrationsToday,
+    registrationsCount,
+    registrationsCountL10Key,
   } = props;
 
   const stats: [keyof typeof strings, number][] = [
     ["adminPanelUsersSummaryTotalUsers", totalUsers],
     ["adminPanelUsersSummaryActiveUsers", activeUsers],
-    ["adminPanelUsersSummaryRegistrationsToday", registrationsToday],
+    [registrationsCountL10Key, registrationsCount],
   ];
 
   return (

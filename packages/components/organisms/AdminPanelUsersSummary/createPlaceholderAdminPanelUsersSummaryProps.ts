@@ -4,6 +4,7 @@ import { createPlaceholderFilterButtonProps } from "../../molecules/FilterButton
 export const createPlaceholderAdminPanelUsersSummaryProps = (): AdminPanelUsersSummaryProps => ({
   activeUsers: 20023,
   filterButtonProps: createPlaceholderFilterButtonProps(),
-  registrationsToday: 565,
+  registrationsCount: 565,
+  registrationsCountL10Key: "adminPanelUsersSummaryRegistrationsToday",
   totalUsers: 25678,
 });

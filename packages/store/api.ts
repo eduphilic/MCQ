@@ -1,3 +1,4 @@
+import { serviceStatistics } from "./api-mock";
 import { User } from "./models";
 
 interface ApiClient {
@@ -72,6 +73,10 @@ const dummyApiClient: ApiClient = {
                     isAdmin: true,
                   };
             response = user;
+            break;
+
+          case "/admin/service_statistics":
+            response = serviceStatistics();
             break;
 
           default: {

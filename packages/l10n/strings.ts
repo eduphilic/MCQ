@@ -78,6 +78,8 @@ export const strings = {
     adminPanelUsersSummaryTotalUsers: "Total Users",
     adminPanelUsersSummaryActiveUsers: "Active Users",
     adminPanelUsersSummaryRegistrationsToday: "Registrations Today",
+    adminPanelUsersSummaryRegistrationsPastWeek: "Registrations Past Week",
+    adminPanelUsersSummaryRegistrationsPastMonth: "Registrations Past Month",
   },
   hi: {},
 };
