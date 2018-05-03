@@ -84,9 +84,9 @@ export const AdminPanelUsersSummary: SFC<
 };
 
 const Wrapper = styled.div`
-  .cardHeaderAction {
+  /* .cardHeaderAction {
     margin-top: 0;
-  }
+  } */
 `;
 
 const flexWrap = css`
