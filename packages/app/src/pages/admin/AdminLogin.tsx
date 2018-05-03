@@ -4,6 +4,7 @@ import { AdminLoginTemplate } from "components/templates/AdminLoginTemplate";
 import strings from "l10n";
 import Typography from "material-ui/Typography";
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { actions, RootState } from "store";
@@ -80,6 +81,9 @@ class AdminLoginBase extends Component<AdminLoginProps> {
 
     return (
       <>
+        <Helmet>
+          <title>Login - JoinUniform</title>
+        </Helmet>
         <AdminLoginTemplate heroNode={heroNode} loginForm={loginForm} />
         {snackBar}
       </>

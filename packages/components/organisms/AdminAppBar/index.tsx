@@ -1,5 +1,4 @@
 import Menu from "@material-ui/icons/Menu";
-import strings from "l10n";
 import Hidden from "material-ui/Hidden";
 import IconButton from "material-ui/IconButton";
 import Toolbar from "material-ui/Toolbar";
@@ -10,6 +9,8 @@ import { LogoutButton, LogoutButtonProps } from "../../molecules/LogoutButton";
 import { DrawerStateConsumer } from "../../organisms/ResponsiveDrawerFrame";
 
 export interface AdminAppBarProps {
+  titleText: string;
+
   onLogoutButtonClick: LogoutButtonProps["onClick"];
 }
 
@@ -20,7 +21,7 @@ export interface AdminAppBarProps {
  * https://material-ui-next.com/demos/drawers/#persistent-drawer
  */
 export const AdminAppBar: SFC<AdminAppBarProps> = props => {
-  const { onLogoutButtonClick } = props;
+  const { titleText, onLogoutButtonClick } = props;
 
   return (
     <DrawerStateConsumer>
@@ -36,8 +37,12 @@ export const AdminAppBar: SFC<AdminAppBarProps> = props => {
           </IconButton>
 
           <Hidden smDown implementation="css">
-            <Typography variant="title" color="inherit">
-              {strings.adminDashboardAppBarTitle}
+            <Typography
+              variant="title"
+              color="inherit"
+              style={{ fontWeight: 400 }}
+            >
+              {titleText}
             </Typography>
           </Hidden>
           <div style={{ flex: 1 }} />

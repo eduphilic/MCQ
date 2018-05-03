@@ -1,5 +1,6 @@
 import AppBar from "material-ui/AppBar";
 import React, { SFC } from "react";
+import { Helmet } from "react-helmet";
 import styled from "styled";
 import { AdminAppDrawerTheme } from "theme";
 import { ContentCenterWrapper } from "../../../../node_modules/components/atoms/ContentCenterWrapper";
@@ -34,12 +35,17 @@ export const AdminDashboardTemplate: SFC<
   );
 
   return (
-    <ResponsiveDrawerFrame
-      appBarNode={appBarNode}
-      drawerContentsNode={drawerContentsNode}
-      drawerThemeElement={<AdminAppDrawerTheme />}
-      pageContentsNode={pageContentsNode}
-    />
+    <>
+      <Helmet>
+        <title>{adminAppBarProps.titleText} - JoinUniform</title>
+      </Helmet>
+      <ResponsiveDrawerFrame
+        appBarNode={appBarNode}
+        drawerContentsNode={drawerContentsNode}
+        drawerThemeElement={<AdminAppDrawerTheme />}
+        pageContentsNode={pageContentsNode}
+      />
+    </>
   );
 };
 

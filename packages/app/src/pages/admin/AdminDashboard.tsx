@@ -44,7 +44,7 @@ class AdminDashboard extends Component<AdminDashboardProps> {
     const { serviceStatistics } = this.props;
 
     return (
-      <AdminDashboardTemplateContainer>
+      <AdminDashboardTemplateContainer titleText="Dashboard">
         <AdminPanelUsersSummary {...usersSummaryProps} />
 
         {/* Membership Status */}
