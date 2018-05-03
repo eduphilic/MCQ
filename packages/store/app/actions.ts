@@ -76,7 +76,7 @@ export const logout = (): ThunkResult<void> => async () => {
 
   // Forward to admin login page if user was visiting admin page, otherwise send
   // to landing page.
-  const loginPage = /\/admin\//.test(window.document.location.href)
+  const loginPage = /\/admin/.test(window.document.location.href)
     ? "/admin"
     : "/";
 
