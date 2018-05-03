@@ -3,6 +3,7 @@ import Card, { CardContent, CardHeader } from "material-ui/Card";
 import Typography from "material-ui/Typography";
 import React, { SFC } from "react";
 import styled, { css } from "styled";
+import { TypographyL10 } from "../../atoms/TypographyL10";
 import { FilterButton, FilterButtonProps } from "../../molecules/FilterButton";
 import { ReactComponent as ManSvg } from "./man.svg";
 
@@ -50,7 +51,12 @@ export const AdminPanelUsersSummary: SFC<
     <Wrapper>
       <Card>
         <CardHeader
-          title="Users"
+          title={
+            <TypographyL10
+              variant="cardTitle"
+              localizationKey="adminDashboardCardUsersTitle"
+            />
+          }
           action={<FilterButton {...filterButtonProps} />}
           classes={{ action: "cardHeaderAction" }}
         />

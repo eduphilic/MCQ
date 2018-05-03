@@ -1,5 +1,6 @@
 import AppBar from "material-ui/AppBar";
 import React, { SFC } from "react";
+import styled from "styled";
 import { AdminAppDrawerTheme } from "theme";
 import { ContentCenterWrapper } from "../../../../node_modules/components/atoms/ContentCenterWrapper";
 import { AdminAppBar, AdminAppBarProps } from "../../organisms/AdminAppBar";
@@ -27,7 +28,9 @@ export const AdminDashboardTemplate: SFC<
   const drawerContentsNode = <AdminDrawerContents />;
 
   const pageContentsNode = (
-    <ContentCenterWrapper>{children}</ContentCenterWrapper>
+    <ContentCenterWrapperWithVerticalMargins>
+      {children}
+    </ContentCenterWrapperWithVerticalMargins>
   );
 
   return (
@@ -39,3 +42,9 @@ export const AdminDashboardTemplate: SFC<
     />
   );
 };
+
+const ContentCenterWrapperWithVerticalMargins = styled(ContentCenterWrapper)`
+  > * {
+    margin-bottom: ${({ theme }) => theme.spacing.unit * 3}px;
+  }
+`;

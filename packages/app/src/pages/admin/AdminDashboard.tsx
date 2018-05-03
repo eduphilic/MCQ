@@ -7,7 +7,6 @@ import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboard
 
 import { FilterButton } from "components/molecules/FilterButton";
 import { createPlaceholderFilterButtonProps } from "components/molecules/FilterButton/createPlaceholderFilterButtonProps";
-import Card, { CardHeader } from "material-ui/Card";
 import Table, { TableBody, TableCell, TableRow } from "material-ui/Table";
 // TODO: Fix this:
 /* tslint:disable-next-line */
@@ -18,7 +17,14 @@ import ExpansionPanel, {
   ExpansionPanelDetails,
   ExpansionPanelSummary,
 } from "material-ui/ExpansionPanel";
-import Typography from "material-ui/Typography";
+// tslint:disable-next-line:import-name
+import MuiTypography from "material-ui/Typography";
+
+import { Typography } from "components/atoms/Typography";
+import { TypographyL10 } from "components/atoms/TypographyL10";
+import Card, { CardContent, CardHeader } from "material-ui/Card";
+import Grid from "material-ui/Grid";
+import { randomNumber } from "placeholder";
 
 interface AdminDashboardProps {
   serviceStatistics: models.ServiceStatistics | null;
@@ -41,17 +47,52 @@ class AdminDashboard extends Component<AdminDashboardProps> {
       <AdminDashboardTemplateContainer>
         <AdminPanelUsersSummary {...usersSummaryProps} />
 
-        {/* Entry wise Users */}
-        <Card style={{ marginTop: 24 }}>
+        {/* Membership Status */}
+        <Card>
           <CardHeader
-            title="Entry wise Users"
+            title={
+              <TypographyL10
+                variant="cardTitle"
+                localizationKey="adminDashboardCardMembershipStatusTitle"
+              />
+            }
+            action={<FilterButton {...filterButtonProps} />}
+          />
+          <CardContent>
+            <Grid container justify="space-around">
+              {["5 Exams", "10 Exams", "20 Exams", "30 Exams"].map(caption => (
+                <Grid key={caption} item xs={12} sm container justify="center">
+                  <div>
+                    <div>
+                      <Typography variant="cardLargeStatText">
+                        {randomNumber()}
+                      </Typography>
+                    </div>
+                    <Typography variant="cardStatCaption">{caption}</Typography>
+                  </div>
+                </Grid>
+              ))}
+            </Grid>
+          </CardContent>
+        </Card>
+
+        {/* Entry wise Users */}
+        <Card>
+          <CardHeader
+            // title="Entry wise Users"
+            title={
+              <TypographyL10
+                variant="cardTitle"
+                localizationKey="adminDashboardCardEntryWiseUsersTitle"
+              />
+            }
             action={<FilterButton {...filterButtonProps} />}
           />
           <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-              <Typography variant="subheading">
+              <MuiTypography variant="subheading">
                 Weekly user registrations per entry
-              </Typography>
+              </MuiTypography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               {serviceStatistics ? (
@@ -74,52 +115,21 @@ class AdminDashboard extends Component<AdminDashboardProps> {
           </ExpansionPanel>
         </Card>
 
-        {/* Membership Status */}
-        <Card style={{ marginTop: 24 }}>
+        {/* Question Bank */}
+        <Card>
           <CardHeader
-            title="Membership Status"
-            action={<FilterButton {...filterButtonProps} />}
+            title={
+              <TypographyL10
+                variant="cardTitle"
+                localizationKey="adminDashboardCardQuestionBankTitle"
+              />
+            }
           />
           <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-              <Typography variant="subheading">
-                Weekly registrations per membership
-              </Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              {serviceStatistics ? (
-                <Table>
-                  <TableBody>
-                    {[
-                      ["membershipTrialUsersToday", "Trial Users"],
-                      ["membershipBronzeUsersToday", "Bronze Pack Users"],
-                      ["membershipSilverUsersToday", "Silver Pack Users"],
-                      ["membershipGoldUsersToday", "Gold Pack Users"],
-                    ].map(([stat, label]) => (
-                      <TableRow key={stat}>
-                        <TableCell>{label}</TableCell>
-                        <TableCell numeric>
-                          {(serviceStatistics as any)[stat]}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              ) : (
-                <div />
-              )}
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-        </Card>
-
-        {/* Question Bank */}
-        <Card style={{ marginTop: 24 }}>
-          <CardHeader title="Question Bank" />
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-              <Typography variant="subheading">
+              <MuiTypography variant="subheading">
                 Questions per Subject
-              </Typography>
+              </MuiTypography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               {serviceStatistics ? (

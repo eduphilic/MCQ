@@ -57,6 +57,11 @@ export const strings = {
     navigationFinishButtonText: "Buy",
     selectionChangeButtonText: "Change",
 
+    adminDashboardCardUsersTitle: "Users",
+    adminDashboardCardMembershipStatusTitle: "Membership Status",
+    adminDashboardCardEntryWiseUsersTitle: "Entry wise Users",
+    adminDashboardCardQuestionBankTitle: "Question Bank",
+
     adminDashboardAppBarTitle: "Admin Dashboard",
 
     adminLinkDashboard: "Dashboard",

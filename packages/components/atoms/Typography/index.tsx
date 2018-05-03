@@ -6,15 +6,33 @@ import React, { SFC } from "react";
 import styled, { css } from "styled";
 
 /** Available typography variants. */
-export const variants: Variant[] = ["body", "cardTitle"];
-type Variant = "body" | "cardTitle";
+export const variants: Variant[] = [
+  "body",
+  "cardTitle",
+  "cardLargeStatText",
+  "cardStatCaption",
+];
+type Variant = "body" | "cardTitle" | "cardLargeStatText" | "cardStatCaption";
+type VariantStyles = Record<
+  Variant,
+  {
+    css?: ReturnType<typeof css> | undefined;
+    variant?: MuiTypographyProps["variant"];
+  }
+>;
 
 // Provide styling overrides for the various typography variants.
 const variantStyles: VariantStyles = {
-  body: css``,
-  cardTitle: css`
-    font-size: 18px;
-  `,
+  body: {},
+  cardTitle: {
+    css: css`
+      font-size: 18px;
+    `,
+  },
+  cardLargeStatText: {
+    variant: "display1",
+  },
+  cardStatCaption: { variant: "caption" },
 };
 
 export interface TypographyProps {
@@ -41,12 +59,15 @@ export interface TypographyProps {
 }
 
 const TypographyBase: SFC<TypographyProps> = props => {
-  const { children, className, component, muiTypographyProps } = props;
+  const { children, className, component, variant, muiTypographyProps } = props;
+
+  const muiVariant = variantStyles[variant || "body"].variant;
 
   return (
     <MuiTypography
       className={className}
       component={component || "span"}
+      variant={muiVariant}
       {...muiTypographyProps}
     >
       {children}
@@ -58,8 +79,7 @@ const TypographyBase: SFC<TypographyProps> = props => {
  * Provides a standard set of text typography to use throughout the application.
  */
 export const Typography = styled(TypographyBase)`
-  ${({ variant }) => (variant ? variantStyles[variant] : variantStyles.body)};
+  ${({ variant }) =>
+    variant ? variantStyles[variant].css : variantStyles.body.css};
 `;
 Typography.displayName = "Typography";
-
-type VariantStyles = Record<Variant, ReturnType<typeof css> | undefined>;
