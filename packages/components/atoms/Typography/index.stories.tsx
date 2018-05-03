@@ -9,7 +9,7 @@ storiesOf("Atoms", module).add(
   withInfo({ propTablesExclude: [Paper as any] })(() => (
     <Paper style={{ maxWidth: 500, padding: 16, marginLeft: 16 }}>
       {variants.map(variant => (
-        <div style={{ margin: "16px" }}>
+        <div key={variant} style={{ margin: "16px" }}>
           <Typography variant={variant}>
             {variant.charAt(0).toUpperCase()}
             {variant.slice(1)}

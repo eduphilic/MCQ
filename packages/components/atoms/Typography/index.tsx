@@ -6,12 +6,15 @@ import React, { SFC } from "react";
 import styled, { css } from "styled";
 
 /** Available typography variants. */
-export const variants: Variant[] = ["body"];
+export const variants: Variant[] = ["body", "cardTitle"];
+type Variant = "body" | "cardTitle";
 
 // Provide styling overrides for the various typography variants.
 const variantStyles: VariantStyles = {
   body: css``,
-  //
+  cardTitle: css`
+    font-size: 18px;
+  `,
 };
 
 export interface TypographyProps {
@@ -58,7 +61,5 @@ export const Typography = styled(TypographyBase)`
   ${({ variant }) => (variant ? variantStyles[variant] : variantStyles.body)};
 `;
 Typography.displayName = "Typography";
-
-type Variant = "body";
 
 type VariantStyles = Record<Variant, ReturnType<typeof css> | undefined>;
