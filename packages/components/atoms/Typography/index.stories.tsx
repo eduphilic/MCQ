@@ -2,7 +2,9 @@ import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import Paper from "material-ui/Paper";
 import React from "react";
-import { Typography, variants } from ".";
+import { Typography, Variant } from ".";
+
+const variants = Object.values(Variant) as Variant[];
 
 storiesOf("Atoms", module).add(
   "Typography",

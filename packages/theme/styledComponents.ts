@@ -23,7 +23,10 @@ export { css, injectGlobal, keyframes, ThemeProvider, withProps };
 export default styled;
 
 // https://github.com/styled-components/styled-components/issues/630
-type ThemedStyledFunction<T> = styledComponents.ThemedStyledFunction<T, Theme>;
+export type ThemedStyledFunction<T> = styledComponents.ThemedStyledFunction<
+  T,
+  Theme
+>;
 
 const withProps = <U>() => <P>(fn: ThemedStyledFunction<P>) =>
   fn as ThemedStyledFunction<P & U>;

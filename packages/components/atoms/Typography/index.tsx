@@ -3,45 +3,34 @@ import MuiTypography, {
   TypographyProps as MuiTypographyProps,
 } from "material-ui/Typography";
 import React, { SFC } from "react";
-import styled, { css } from "styled";
+import styled, { ThemedStyledFunction } from "styled";
 
-/** Available typography variants. */
-export const variants: Variant[] = [
-  "body",
-  "cardTitle",
-  "cardLargeStatText",
-  "cardStatCaption",
-  "tableHeadCell",
-];
-type Variant =
-  | "body"
-  | "cardTitle"
-  | "cardLargeStatText"
-  | "cardStatCaption"
-  | "tableHeadCell";
-type VariantStyles = Record<
-  Variant,
-  {
-    css?: ReturnType<typeof css> | undefined;
-    variant?: MuiTypographyProps["variant"];
-  }
->;
+export enum Variant {
+  body = "body",
+  cardTitle = "cardTitle",
+  cardLargeStatText = "cardLargeStatText",
+  cardStatCaption = "cardStatCaption",
+  tableHeadCell = "tableHeadCell",
+  buttonBold = "buttonBold",
+}
+
+type StyledMuiTypography = ReturnType<ThemedStyledFunction<MuiTypographyProps>>;
 
 // Provide styling overrides for the various typography variants.
-const variantStyles: VariantStyles = {
-  body: {},
-  cardTitle: {
-    css: css`
-      font-size: 18px;
-    `,
-  },
-  cardLargeStatText: {
-    variant: "display1",
-  },
-  cardStatCaption: { variant: "caption" },
-  tableHeadCell: {
-    variant: "body2",
-  },
+const variants: Record<Variant, StyledMuiTypography> = {
+  body: styled(MuiTypography)``,
+
+  cardTitle: styled(MuiTypography)`
+    font-size: 18px;
+  `,
+
+  cardLargeStatText: styled(MuiTypography).attrs({ variant: "display1" })``,
+
+  cardStatCaption: styled(MuiTypography).attrs({ variant: "caption" })``,
+
+  tableHeadCell: styled(MuiTypography).attrs({ variant: "body2" })``,
+
+  buttonBold: styled(MuiTypography).attrs({ variant: "body2" })``,
 };
 
 export interface TypographyProps {
@@ -52,7 +41,7 @@ export interface TypographyProps {
    *
    * @default body
    */
-  variant?: Variant;
+  variant?: keyof typeof Variant;
 
   /**
    * The component to wrap the text in.
@@ -67,28 +56,21 @@ export interface TypographyProps {
   muiTypographyProps?: MuiTypographyProps;
 }
 
-const TypographyBase: SFC<TypographyProps> = props => {
-  const { children, className, component, variant, muiTypographyProps } = props;
-
-  const muiVariant = variantStyles[variant || "body"].variant;
-
-  return (
-    <MuiTypography
-      className={className}
-      component={component || "span"}
-      variant={muiVariant}
-      {...muiTypographyProps}
-    >
-      {children}
-    </MuiTypography>
-  );
-};
-
 /**
  * Provides a standard set of text typography to use throughout the application.
  */
-export const Typography = styled(TypographyBase)`
-  ${({ variant }) =>
-    variant ? variantStyles[variant].css : variantStyles.body.css};
-`;
-Typography.displayName = "Typography";
+export const Typography: SFC<TypographyProps> = props => {
+  const { children, className, component, muiTypographyProps, variant } = props;
+
+  const TypographyBase = variants[variant || "body"];
+
+  return (
+    <TypographyBase
+      className={className}
+      component={component || "span"}
+      {...muiTypographyProps as any}
+    >
+      {children}
+    </TypographyBase>
+  );
+};
