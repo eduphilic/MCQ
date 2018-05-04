@@ -164,9 +164,13 @@ class AdminDashboard extends Component<AdminDashboardProps> {
               <TableBody>
                 {serviceStatistics.questionSubjects.map((subject, index) => (
                   <DashboardTableRow key={subject}>
-                    <TableCell>{subject}</TableCell>
                     <TableCell>
-                      {serviceStatistics.questionCountsPerSubjects[index]}
+                      <Typography>{subject}</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>
+                        {serviceStatistics.questionCountsPerSubjects[index]}
+                      </Typography>
                     </TableCell>
                   </DashboardTableRow>
                 ))}
