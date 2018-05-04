@@ -4,7 +4,6 @@ import React, { SFC } from "react";
 import styled from "styled";
 
 const ButtonBase = styled(MuiButton)`
-  height: 30px;
   padding: 8px 32px;
   background-color: transparent;
 

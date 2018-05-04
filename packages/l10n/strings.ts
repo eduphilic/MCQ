@@ -78,7 +78,7 @@ export const strings = {
     adminLoginHeroTextSecondary:
       "Some message can be written here to explain about this website",
 
-    adminFilterMenuCaption: "Filter By : ",
+    adminFilterMenuCaption: "Filter By:",
 
     adminPanelUsersSummaryTotalUsers: "Total Users",
     adminPanelUsersSummaryActiveUsers: "Active Users",
