@@ -11,8 +11,14 @@ export const variants: Variant[] = [
   "cardTitle",
   "cardLargeStatText",
   "cardStatCaption",
+  "tableHeadCell",
 ];
-type Variant = "body" | "cardTitle" | "cardLargeStatText" | "cardStatCaption";
+type Variant =
+  | "body"
+  | "cardTitle"
+  | "cardLargeStatText"
+  | "cardStatCaption"
+  | "tableHeadCell";
 type VariantStyles = Record<
   Variant,
   {
@@ -33,6 +39,9 @@ const variantStyles: VariantStyles = {
     variant: "display1",
   },
   cardStatCaption: { variant: "caption" },
+  tableHeadCell: {
+    variant: "body2",
+  },
 };
 
 export interface TypographyProps {
