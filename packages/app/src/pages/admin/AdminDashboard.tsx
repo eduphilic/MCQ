@@ -1,30 +1,28 @@
+import strings from "l10n";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actions } from "store";
-import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
+import { actions, models, RootState } from "store";
 
-import { FilterButton } from "components/molecules/FilterButton";
-import { createPlaceholderFilterButtonProps } from "components/molecules/FilterButton/createPlaceholderFilterButtonProps";
-import Table, { TableBody, TableCell, TableRow } from "material-ui/Table";
-// TODO: Fix this:
-/* tslint:disable-next-line */
-import { models, RootState } from "store";
+import Card, { CardHeader } from "material-ui/Card";
+import Table, {
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "material-ui/Table";
 
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import ExpansionPanel, {
-  ExpansionPanelDetails,
-  ExpansionPanelSummary,
-} from "material-ui/ExpansionPanel";
-// tslint:disable-next-line:import-name
-import MuiTypography from "material-ui/Typography";
-
+import { DashboardTableCell } from "components/atoms/DashboardTableCell";
+import { DashboardTableRow } from "components/atoms/DashboardTableRow";
 import { Typography } from "components/atoms/Typography";
 import { TypographyL10 } from "components/atoms/TypographyL10";
 import { DashboardCardStatsContent } from "components/molecules/DashboardCardStatsContent";
-import strings from "l10n";
-import Card, { CardHeader } from "material-ui/Card";
-import { randomNumber } from "placeholder";
+import { FilterButton } from "components/molecules/FilterButton";
+
+import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 import { ReactComponent as ManSvg } from "./man.svg";
+
+import { createPlaceholderFilterButtonProps } from "components/molecules/FilterButton/createPlaceholderFilterButtonProps";
+import { randomNumber } from "placeholder";
 
 interface AdminDashboardProps {
   serviceStatistics: models.ServiceStatistics | null;
@@ -111,31 +109,34 @@ class AdminDashboard extends Component<AdminDashboardProps> {
             }
             action={<FilterButton {...filterButtonProps} />}
           />
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-              <MuiTypography variant="subheading">
-                Weekly user registrations per entry
-              </MuiTypography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              {serviceStatistics ? (
-                <Table>
-                  <TableBody>
-                    {serviceStatistics.entries.map((e, index) => (
-                      <TableRow key={e}>
-                        <TableCell>{e}</TableCell>
-                        <TableCell numeric>
-                          {serviceStatistics.entriesRegistrationsToday[index]}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              ) : (
-                <div />
-              )}
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+          {serviceStatistics && (
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {["Entry", "Signup Count"].map(label => (
+                    <DashboardTableCell key={label} firstCellWidth="50%">
+                      <Typography variant="tableHeadCell">{label}</Typography>
+                    </DashboardTableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {serviceStatistics.entries.map((e, index) => (
+                  <DashboardTableRow key={e}>
+                    <TableCell>
+                      <Typography>{e}</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>
+                        {serviceStatistics.entriesRegistrationsToday[index]}
+                      </Typography>
+                    </TableCell>
+                  </DashboardTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
         </Card>
 
         {/* Question Bank */}
@@ -148,33 +149,30 @@ class AdminDashboard extends Component<AdminDashboardProps> {
               />
             }
           />
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-              <MuiTypography variant="subheading">
-                Questions per Subject
-              </MuiTypography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              {serviceStatistics ? (
-                <Table>
-                  <TableBody>
-                    {serviceStatistics.questionSubjects.map(
-                      (subject, index) => (
-                        <TableRow key={subject}>
-                          <TableCell>{subject}</TableCell>
-                          <TableCell numeric>
-                            {serviceStatistics.questionCountsPerSubjects[index]}
-                          </TableCell>
-                        </TableRow>
-                      ),
-                    )}
-                  </TableBody>
-                </Table>
-              ) : (
-                <div />
-              )}
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+          {serviceStatistics && (
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {["Subjects", "Questions Count"].map(label => (
+                    <DashboardTableCell key={label} firstCellWidth="50%">
+                      <Typography variant="tableHeadCell">{label}</Typography>
+                    </DashboardTableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {serviceStatistics.questionSubjects.map((subject, index) => (
+                  <DashboardTableRow key={subject}>
+                    <TableCell>{subject}</TableCell>
+                    <TableCell>
+                      {serviceStatistics.questionCountsPerSubjects[index]}
+                    </TableCell>
+                  </DashboardTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
         </Card>
       </AdminDashboardTemplateContainer>
     );
