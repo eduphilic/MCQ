@@ -140,7 +140,7 @@ const StyledDrawer = styled(Drawer)`
 `;
 
 const PageContentsContainer = styled.div`
-  padding: ${({ theme }) => theme.spacing.unit * 3}px;
+  padding: ${({ theme }) => theme.spacing.unit * 3}px 0;
 
   ${({ theme }) => theme.breakpoints.up("md")} {
     margin-left: ${drawerWidth}px;
