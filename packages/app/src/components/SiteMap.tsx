@@ -11,6 +11,7 @@ import { PasswordReset } from "../pages/PasswordReset";
 import { Step1, Step2, Step3 } from "../pages/Onboarding";
 
 import { AdminDashboard } from "../pages/admin/AdminDashboard";
+import { AdminEntryManager } from "../pages/admin/AdminEntryManager";
 import { AdminLogin } from "../pages/admin/AdminLogin";
 import { AdminPlaceholder } from "../pages/admin/AdminPlaceholder";
 
@@ -29,6 +30,7 @@ export const SiteMap: SFC<{}> = () => (
         {/* Start Admin Dashboard Routes */}
         <Route exact path="/admin" component={AdminLogin} />
         <AdminRoute path="/admin/dashboard" component={AdminDashboard} />
+        <AdminRoute path="/admin/entry-manager" component={AdminEntryManager} />
         <AdminRoute path="/admin" component={AdminPlaceholder} />
       </Switch>
     </PersistentScrollPositionProvider>
