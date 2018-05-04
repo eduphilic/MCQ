@@ -20,16 +20,37 @@ export const AdminEntryManager: SFC<{}> = () => {
   // @ts-ignore
   const data = [
     [
-      "Officer", // Entry
+      "Army Entry", // Entry
       [
-        "NDA/ACC", // Category
+        "Solider GD", // Category
+        null, // Subcategory
+        10, // Price per paper
+        false, // Activated (true/false)
+      ],
+      [
+        "Solider Tradesman", // Category
+        null, // Subcategory
+        10, // Price per paper
+        true, // Activated (true/false)
+      ],
+      [
+        "Solider Tradesman", // Category
+        "8th Grade", // Subcategory
+        10, // Price per paper
+        true, // Activated (true/false)
+      ],
+      [
+        "Solider GD", // Category
         null, // Subcategory
         10, // Price per paper
         false, // Activated (true/false)
       ],
     ],
-    //
   ];
+  data.push([...data[0]]);
+  data[1][0] = "Navy Entry";
+  data.push([...data[0]]);
+  data[2][0] = "Officer Entry";
 
   return (
     <AdminDashboardTemplateContainer titleText="Entry Manager">
@@ -82,7 +103,10 @@ export const AdminEntryManager: SFC<{}> = () => {
                     <DashboardTableRow key={category as string}>
                       {/* Category label */}
                       <TableCell>
-                        <Typography>{category}</Typography>
+                        <Typography>
+                          {category}
+                          {subcategory && ` ${subcategory}`}
+                        </Typography>
                       </TableCell>
 
                       {/* Chip: category / sub-category */}
@@ -142,5 +166,5 @@ const ChipSubcategory = styled(Chip).attrs({
   label: "sub-category",
 })`
   color: #fff;
-  background-color: #f299fa;
+  background-color: #f2994a;
 `;
