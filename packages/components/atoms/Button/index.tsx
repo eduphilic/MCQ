@@ -15,6 +15,10 @@ const ButtonBase = styled(MuiButton)`
     font-size: 12px;
     text-transform: none;
   }
+
+  & * {
+    color: inherit;
+  }
 `;
 
 /** Material UI button with default styling. */
