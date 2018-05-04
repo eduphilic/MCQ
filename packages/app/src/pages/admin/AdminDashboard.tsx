@@ -1,5 +1,3 @@
-import { AdminPanelUsersSummary } from "components/organisms/AdminPanelUsersSummary";
-import { createPlaceholderAdminPanelUsersSummaryProps } from "components/organisms/AdminPanelUsersSummary/createPlaceholderAdminPanelUsersSummaryProps";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actions } from "store";
@@ -22,9 +20,11 @@ import MuiTypography from "material-ui/Typography";
 
 import { Typography } from "components/atoms/Typography";
 import { TypographyL10 } from "components/atoms/TypographyL10";
-import Card, { CardContent, CardHeader } from "material-ui/Card";
-import Grid from "material-ui/Grid";
+import { DashboardCardStatsContent } from "components/molecules/DashboardCardStatsContent";
+import strings from "l10n";
+import Card, { CardHeader } from "material-ui/Card";
 import { randomNumber } from "placeholder";
+import { ReactComponent as ManSvg } from "./man.svg";
 
 interface AdminDashboardProps {
   serviceStatistics: models.ServiceStatistics | null;
@@ -39,13 +39,42 @@ class AdminDashboard extends Component<AdminDashboardProps> {
   }
 
   render() {
-    const usersSummaryProps = createPlaceholderAdminPanelUsersSummaryProps();
     const filterButtonProps = createPlaceholderFilterButtonProps();
     const { serviceStatistics } = this.props;
 
     return (
       <AdminDashboardTemplateContainer titleText="Dashboard">
-        <AdminPanelUsersSummary {...usersSummaryProps} />
+        {/* Users */}
+        <Card>
+          <CardHeader
+            title={
+              <TypographyL10
+                variant="cardTitle"
+                localizationKey="adminDashboardCardUsersTitle"
+              />
+            }
+            action={<FilterButton {...filterButtonProps} />}
+          />
+          <DashboardCardStatsContent
+            leftIcon={<ManSvg style={{ fill: "#757575" }} />}
+          >
+            {([
+              "adminPanelUsersSummaryTotalUsers",
+              "adminPanelUsersSummaryActiveUsers",
+              "adminPanelUsersSummaryRegistrationsPastWeek",
+            ] as (keyof typeof strings)[]).map(statCaption => (
+              <DashboardCardStatsContent.Item key={statCaption}>
+                <Typography variant="cardLargeStatText">
+                  {randomNumber()}
+                </Typography>
+                <TypographyL10
+                  variant="cardStatCaption"
+                  localizationKey={statCaption}
+                />
+              </DashboardCardStatsContent.Item>
+            ))}
+          </DashboardCardStatsContent>
+        </Card>
 
         {/* Membership Status */}
         <Card>
@@ -58,22 +87,16 @@ class AdminDashboard extends Component<AdminDashboardProps> {
             }
             action={<FilterButton {...filterButtonProps} />}
           />
-          <CardContent>
-            <Grid container justify="space-around">
-              {["5 Exams", "10 Exams", "20 Exams", "30 Exams"].map(caption => (
-                <Grid key={caption} item xs={12} sm container justify="center">
-                  <div>
-                    <div>
-                      <Typography variant="cardLargeStatText">
-                        {randomNumber()}
-                      </Typography>
-                    </div>
-                    <Typography variant="cardStatCaption">{caption}</Typography>
-                  </div>
-                </Grid>
-              ))}
-            </Grid>
-          </CardContent>
+          <DashboardCardStatsContent>
+            {["5 Exams", "10 Exams", "20 Exams", "30 Exams"].map(caption => (
+              <DashboardCardStatsContent.Item key={caption}>
+                <Typography variant="cardLargeStatText">
+                  {randomNumber()}
+                </Typography>
+                <Typography variant="cardStatCaption">{caption}</Typography>
+              </DashboardCardStatsContent.Item>
+            ))}
+          </DashboardCardStatsContent>
         </Card>
 
         {/* Entry wise Users */}
