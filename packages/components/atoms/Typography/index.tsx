@@ -22,6 +22,7 @@ const variants: Record<Variant, StyledMuiTypography> = {
 
   cardTitle: styled(MuiTypography)`
     font-size: 18px;
+    font-weight: 500;
   `,
 
   cardLargeStatText: styled(MuiTypography).attrs({ variant: "display1" })``,
