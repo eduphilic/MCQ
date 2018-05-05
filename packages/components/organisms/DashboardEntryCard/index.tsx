@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styled, { withProps } from "styled";
 
 import Card from "material-ui/Card";
 import Checkbox from "material-ui/Checkbox";
@@ -49,6 +50,31 @@ export class DashboardEntryCard extends Component<
       categorySelected: this.props.categoryLabels.map(() => false),
     });
 
+  handleSelectAllClick = () => {
+    const { categorySelected } = this.state;
+    const selectedCount = categorySelected.reduce((a, c) => (c ? a + 1 : a), 0);
+
+    this.setState({
+      categorySelected: categorySelected.map(
+        () => selectedCount < categorySelected.length,
+      ),
+    });
+  };
+
+  handleRowClick = (index: number) => {
+    const { mode, categorySelected } = this.state;
+
+    if (mode === "deletion") {
+      this.setState({
+        categorySelected: [
+          ...categorySelected.slice(0, index),
+          !categorySelected[index],
+          ...categorySelected.slice(index + 1),
+        ],
+      });
+    }
+  };
+
   render() {
     const {
       entryTitle,
@@ -81,12 +107,12 @@ export class DashboardEntryCard extends Component<
             <TableRow>
               <TableCell padding="checkbox" style={{ width: 72 }}>
                 {mode === "deletion" && (
-                  <Checkbox
+                  <RedCheckbox
                     indeterminate={
                       selectedCount > 0 && selectedCount < itemCount
                     }
                     checked={selectedCount === itemCount}
-                    onChange={noop}
+                    onChange={this.handleSelectAllClick}
                   />
                 )}
               </TableCell>
@@ -102,15 +128,25 @@ export class DashboardEntryCard extends Component<
           {/* Table Contents */}
           <TableBody>
             {categoryLabels.map((label, index) => (
-              <DashboardTableRow key={label}>
-                <TableCell padding="checkbox" />
+              <ClickableTableRow
+                key={label}
+                selected={categorySelected[index]}
+                onClick={() => this.handleRowClick(index)}
+                mode={mode}
+              >
+                <TableCell padding="checkbox">
+                  {mode === "deletion" && (
+                    <RedCheckbox checked={categorySelected[index]} />
+                  )}
+                </TableCell>
+
                 <TableCell>
                   <Typography>{label}</Typography>
                 </TableCell>
                 <TableCell>
                   <Typography>{categoryPrices[index]}</Typography>
                 </TableCell>
-              </DashboardTableRow>
+              </ClickableTableRow>
             ))}
           </TableBody>
         </Table>
@@ -118,3 +154,19 @@ export class DashboardEntryCard extends Component<
     );
   }
 }
+
+const RedCheckbox = styled(Checkbox).attrs({
+  classes: {
+    checked: "checked",
+  },
+})`
+  &.checked {
+    color: #e10050;
+  }
+`;
+
+type ModeProp = Pick<DashboardEntryCardToolbarProps, "mode">;
+
+const ClickableTableRow = withProps<ModeProp>()(styled(DashboardTableRow))`
+  cursor: ${({ mode }) => (mode !== "display" ? "pointer" : "inherit")};
+`;
