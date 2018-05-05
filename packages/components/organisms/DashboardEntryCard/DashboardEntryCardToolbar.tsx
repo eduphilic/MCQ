@@ -95,7 +95,9 @@ export class DashboardEntryCardToolbar extends Component<
             variant="tableHeadCell"
             muiTypographyProps={{ color: "inherit" }}
           >
-            {mode === "edit" ? "Edit Mode" : `${selectedCount} Selected`}
+            {mode === "edit"
+              ? "Edit Mode - Click to Edit Entry"
+              : `${selectedCount} Selected for Deletion`}
           </Typography>
         )}
       </>
