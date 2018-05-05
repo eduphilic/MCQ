@@ -140,18 +140,17 @@ export class DashboardEntryCard extends Component<
                   )}
                 </TableCell>
 
-                <TableCell>
-                  <Typography
-                    muiTypographyProps={{
-                      color: categoryActivated[index] ? "primary" : undefined,
-                    }}
-                  >
-                    {label}
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>{categoryPrices[index]}</Typography>
-                </TableCell>
+                {[label, categoryPrices[index]].map(caption => (
+                  <TableCell key={caption}>
+                    <Typography
+                      muiTypographyProps={{
+                        color: categoryActivated[index] ? "primary" : undefined,
+                      }}
+                    >
+                      {caption}
+                    </Typography>
+                  </TableCell>
+                ))}
               </ClickableTableRow>
             ))}
           </TableBody>
