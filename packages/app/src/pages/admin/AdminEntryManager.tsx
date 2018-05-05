@@ -1,10 +1,8 @@
 import React, { SFC } from "react";
-import styled from "styled";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 import AppBar from "material-ui/AppBar";
 import Card, { CardHeader } from "material-ui/Card";
-import Chip from "material-ui/Chip";
 import { FormControlLabel } from "material-ui/Form";
 import Icon from "material-ui/Icon";
 import IconButton from "material-ui/IconButton";
@@ -23,25 +21,21 @@ export const AdminEntryManager: SFC<{}> = () => {
       "Army Entry", // Entry
       [
         "Solider GD", // Category
-        null, // Subcategory
         10, // Price per paper
         false, // Activated (true/false)
       ],
       [
         "Solider Tradesman", // Category
-        null, // Subcategory
         10, // Price per paper
         true, // Activated (true/false)
       ],
       [
-        "Solider Tradesman", // Category
-        "8th Grade", // Subcategory
+        "Solider Tradesman 8th Grade", // Category
         10, // Price per paper
         true, // Activated (true/false)
       ],
       [
         "Solider GD", // Category
-        null, // Subcategory
         10, // Price per paper
         false, // Activated (true/false)
       ],
@@ -83,9 +77,7 @@ export const AdminEntryManager: SFC<{}> = () => {
                   <Icon style={{ marginRight: 8, color: "#757575" }}>
                     dashboard
                   </Icon>
-                  <Typography variant="cardTitle">
-                    {entryTitle} Entry
-                  </Typography>
+                  <Typography variant="cardTitle">{entryTitle}</Typography>
                 </div>
               }
               action={
@@ -99,19 +91,11 @@ export const AdminEntryManager: SFC<{}> = () => {
             <div style={{ overflowX: "auto" }}>
               <Table style={{ minWidth: 1000 }}>
                 <TableBody>
-                  {rows.map(([category, subcategory, ppp, activated]) => (
+                  {rows.map(([category, ppp, activated]) => (
                     <DashboardTableRow key={category as string}>
                       {/* Category label */}
                       <TableCell>
-                        <Typography>
-                          {category}
-                          {subcategory && ` ${subcategory}`}
-                        </Typography>
-                      </TableCell>
-
-                      {/* Chip: category / sub-category */}
-                      <TableCell>
-                        {subcategory ? <ChipSubcategory /> : <ChipCategory />}
+                        <Typography>{category}</Typography>
                       </TableCell>
 
                       {/* Price per paper */}
@@ -154,17 +138,3 @@ export const AdminEntryManager: SFC<{}> = () => {
     </AdminDashboardTemplateContainer>
   );
 };
-
-const ChipCategory = styled(Chip).attrs({
-  label: "category",
-})`
-  color: #fff;
-  background-color: #3fc439;
-`;
-
-const ChipSubcategory = styled(Chip).attrs({
-  label: "sub-category",
-})`
-  color: #fff;
-  background-color: #f2994a;
-`;
