@@ -80,7 +80,7 @@ export class DashboardEntryCard extends Component<
       entryTitle,
       categoryLabels,
       categoryPrices,
-      // categoryActivated,
+      categoryActivated,
     } = this.props;
     const { mode, categorySelected } = this.state;
     const itemCount = categoryLabels.length;
@@ -141,7 +141,13 @@ export class DashboardEntryCard extends Component<
                 </TableCell>
 
                 <TableCell>
-                  <Typography>{label}</Typography>
+                  <Typography
+                    muiTypographyProps={{
+                      color: categoryActivated[index] ? "primary" : undefined,
+                    }}
+                  >
+                    {label}
+                  </Typography>
                 </TableCell>
                 <TableCell>
                   <Typography>{categoryPrices[index]}</Typography>
