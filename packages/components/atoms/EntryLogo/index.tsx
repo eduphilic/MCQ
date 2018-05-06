@@ -69,7 +69,6 @@ export const EntryLogo: SFC<EntryLogoProps> = props => {
   const { className, entry } = props;
   const image = entryDict.get(entry)!;
 
-  // return <Component className={className} />;
   return <StyledImg className={className} src={image} />;
 };
 
