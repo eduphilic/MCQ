@@ -1,4 +1,4 @@
-import React, { SFC } from "react";
+import React, { ComponentType, SFC } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AdminRoute } from "./AdminRoute";
 
@@ -12,27 +12,48 @@ import { Step1, Step2, Step3 } from "../pages/Onboarding";
 
 import { AdminDashboard } from "../pages/admin/AdminDashboard";
 import { AdminEntryManager } from "../pages/admin/AdminEntryManager";
+import { AdminIndexManager } from "../pages/admin/AdminIndexManager";
 import { AdminLogin } from "../pages/admin/AdminLogin";
-import { AdminPlaceholder } from "../pages/admin/AdminPlaceholder";
+import { AdminPlanManager } from "../pages/admin/AdminPlanManager";
+import { AdminQuestionManager } from "../pages/admin/AdminQuestionManager";
+import { AdminRevenueManager } from "../pages/admin/AdminRevenueManager";
+import { AdminTestManager } from "../pages/admin/AdminTestManager";
+import { AdminUserManager } from "../pages/admin/AdminUserManager";
 
-export const SiteMap: SFC<{}> = () => (
-  <Router>
-    <PersistentScrollPositionProvider>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/resetPassword" component={PasswordReset} />
+export const SiteMap: SFC<{}> = () => {
+  const adminDashboardPages: [string, ComponentType<any>][] = [
+    ["/admin/dashboard", AdminDashboard],
+    ["/admin/entry-manager", AdminEntryManager],
+    ["/admin/index-manager", AdminIndexManager],
+    ["/admin/plan-manager", AdminPlanManager],
+    ["/admin/question-manager", AdminQuestionManager],
+    ["/admin/revenue-manager", AdminRevenueManager],
+    ["/admin/test-manager", AdminTestManager],
+    ["/admin/user-manager", AdminUserManager],
+  ];
+  const adminDashboardPagesNode = adminDashboardPages.map(
+    ([path, component]) => (
+      <AdminRoute key={path} path={path} component={component} />
+    ),
+  );
 
-        {/* On-boarding */}
-        <Route path="/welcome/1" component={Step1} />
-        <Route path="/welcome/2" component={Step2} />
-        <Route path="/welcome/3" component={Step3} />
+  return (
+    <Router>
+      <PersistentScrollPositionProvider>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/resetPassword" component={PasswordReset} />
 
-        {/* Start Admin Dashboard Routes */}
-        <Route exact path="/admin" component={AdminLogin} />
-        <AdminRoute path="/admin/dashboard" component={AdminDashboard} />
-        <AdminRoute path="/admin/entry-manager" component={AdminEntryManager} />
-        <AdminRoute path="/admin" component={AdminPlaceholder} />
-      </Switch>
-    </PersistentScrollPositionProvider>
-  </Router>
-);
+          {/* On-boarding */}
+          <Route path="/welcome/1" component={Step1} />
+          <Route path="/welcome/2" component={Step2} />
+          <Route path="/welcome/3" component={Step3} />
+
+          {/* Start Admin Dashboard Routes */}
+          <Route exact path="/admin" component={AdminLogin} />
+          {adminDashboardPagesNode}
+        </Switch>
+      </PersistentScrollPositionProvider>
+    </Router>
+  );
+};
