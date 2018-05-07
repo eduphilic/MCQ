@@ -11,11 +11,11 @@ type Links = [keyof typeof strings, string][];
 const links: Links = [
   ["adminLinkDashboard", "dashboard"],
   ["adminLinkEntryManager", "entry-manager"],
-  ["adminLinkQuestionManager", "question-manager"],
   ["adminLinkTestManager", "test-manager"],
-  ["adminLinkUserManager", "user-manager"],
-  ["adminLinkPlanManager", "plan-manager"],
   ["adminLinkIndexManager", "index-manager"],
+  ["adminLinkPlanManager", "plan-manager"],
+  ["adminLinkQuestionManager", "question-manager"],
+  ["adminLinkUserManager", "user-manager"],
   ["adminLinkRevenueManager", "revenue-manager"],
 ];
 
