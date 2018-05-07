@@ -48,14 +48,24 @@ const TestCardWrapper = styled.div`
 `;
 
 const MainContentBackground = styled.div`
-  background-image:
-    linear-gradient(
-      rgba(0,0,0,0.4),
-      rgba(0,0,0, 0.4)
-    ),
-    url("${armyGreenPng}"
-  );
-  background-attachment: fixed;
+  &::before {
+    content: " ";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: #2e432e;
+    background-image:
+      linear-gradient(
+        rgba(0,0,0,0.4),
+        rgba(0,0,0, 0.4)
+      ),
+      url("${armyGreenPng}"
+    );
+    will-change: transform;
+    z-index: -1;
+  }
 `;
 
 const MainCardsWrapper = styled.main`

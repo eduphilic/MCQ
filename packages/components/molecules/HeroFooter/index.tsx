@@ -20,7 +20,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(23, 133, 70, 0.7);
+  /* background-color: rgba(23, 133, 70, 0.7); */
+  background-color: #5ba87c;
 
   > * {
     margin: ${props => props.theme.spacing.unit * 4}px;
