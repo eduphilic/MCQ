@@ -46,7 +46,7 @@ export const AdminDrawerContents: SFC<{}> = () => {
         button
         component={props => (
           <Link to="/admin/dashboard" {...props as any}>
-            <Logo />
+            <DrawerLogo />
           </Link>
         )}
       />
@@ -75,5 +75,11 @@ const LogoListItem = styled(ListItem)`
 
   > div {
     width: 100%;
+  }
+`;
+
+const DrawerLogo = styled(Logo)`
+  > svg {
+    width: 44.45px !important;
   }
 `;

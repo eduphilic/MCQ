@@ -12,14 +12,16 @@ export interface LogoProps {
    * @default false
    */
   hideTextMobile?: boolean;
+
+  className?: string;
 }
 
 /** Logo image and logo text for use in hero section of landing page. */
 export const Logo: SFC<LogoProps> = props => {
-  const { hideTextMobile = false } = props;
+  const { className, hideTextMobile = false } = props;
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <LogoImage />
       <HideableLogoText className="text" hideTextMobile={hideTextMobile} />
     </Wrapper>
