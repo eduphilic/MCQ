@@ -22,16 +22,14 @@ module.exports = (baseConfig, env, defaultConfig) => {
           ...createBabelConfig(env),
         },
       },
-      env === "PRODUCTION"
-        ? {
-            loader: require.resolve("react-docgen-typescript-loader"),
-            options: {
-              includes: ["components.*\\.tsx$"],
-              excludes: ["stories\\.tsx$"],
-            },
-          }
-        : false,
-    ].filter(r => Boolean(r)),
+      {
+        loader: require.resolve("react-docgen-typescript-loader"),
+        options: {
+          includes: ["components.*\\.tsx$"],
+          excludes: ["stories\\.tsx$"],
+        },
+      },
+    ],
   });
 
   // Add TypeScript definitions.
