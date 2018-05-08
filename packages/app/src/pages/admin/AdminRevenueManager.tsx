@@ -4,10 +4,10 @@ import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboard
 
 import Menu, { MenuItem } from "material-ui/Menu";
 
-import { Button } from "components/atoms/Button";
 import { Typography } from "components/atoms/Typography";
 import { DashboardSecondaryToolbar } from "components/molecules/DashboardSecondaryToolbar";
 import { DropdownButton } from "components/molecules/DropdownButton";
+import { TypographyButton } from "components/molecules/TypographyButton";
 
 interface AdminRevenueManagerState {
   financialYearDropdownOpen: boolean;
@@ -70,13 +70,13 @@ class AdminRevenueManager extends Component<
             ))}
           </Menu>
 
-          <Button
+          <TypographyButton
             variant="flat"
             color="primary"
             onClick={this.handleViewReportClick}
           >
-            <Typography variant="buttonBold">View Detailed Report</Typography>
-          </Button>
+            View Detailed Report
+          </TypographyButton>
         </DashboardSecondaryToolbar>
 
         {/* */}

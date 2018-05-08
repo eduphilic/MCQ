@@ -1,9 +1,8 @@
 import React, { SFC } from "react";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
-import { Button } from "components/atoms/Button";
-import { Typography } from "components/atoms/Typography";
 import { DashboardSecondaryToolbar } from "components/molecules/DashboardSecondaryToolbar";
+import { TypographyButton } from "components/molecules/TypographyButton";
 
 export const AdminQuestionManager: SFC<{}> = () => {
   //
@@ -14,15 +13,19 @@ export const AdminQuestionManager: SFC<{}> = () => {
       <DashboardSecondaryToolbar>
         <DashboardSecondaryToolbar.Spacer />
 
-        <Button color="primary" variant="flat">
-          <Typography variant="buttonBold">Add Questions</Typography>
-        </Button>
-        <Button color="orange" variant="flat">
-          <Typography variant="buttonBold">Import Questions</Typography>
-        </Button>
-        <Button color="orange" variant="flat">
-          <Typography>Challenged Questions</Typography>
-        </Button>
+        <TypographyButton color="primary" variant="flat">
+          Add Questions
+        </TypographyButton>
+        <TypographyButton color="orange" variant="flat">
+          Import Questions
+        </TypographyButton>
+        <TypographyButton
+          color="orange"
+          variant="flat"
+          typographyVariant="body"
+        >
+          Challenged Questions
+        </TypographyButton>
       </DashboardSecondaryToolbar>
 
       {/* */}
