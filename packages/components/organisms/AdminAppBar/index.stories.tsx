@@ -21,7 +21,7 @@ storiesOf("Organisms", module).add(
 
     const withActionButtonNodesProps: AdminAppBarProps = {
       ...props,
-      actionButtonNodes: [
+      actionButtonElements: [
         <ResponsiveToolbarTypographyButton
           tooltipTitle="Add New Entry"
           iconNode={<Add />}

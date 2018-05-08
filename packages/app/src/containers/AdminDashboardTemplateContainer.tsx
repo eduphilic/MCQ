@@ -9,16 +9,23 @@ import { actions, RootState } from "store";
 interface AdminDashboardTemplateContainerProps {
   titleText: AdminDashboardTemplateProps["adminAppBarProps"]["titleText"];
   onLogoutButtonClick: AdminDashboardTemplateProps["adminAppBarProps"]["onLogoutButtonClick"];
+  actionButtonElements?: AdminDashboardTemplateProps["adminAppBarProps"]["actionButtonElements"];
 }
 
 const AdminDashboardTemplateContainer: SFC<
   AdminDashboardTemplateContainerProps
 > = props => {
-  const { children, titleText, onLogoutButtonClick } = props;
+  const {
+    children,
+    titleText,
+    onLogoutButtonClick,
+    actionButtonElements,
+  } = props;
 
   const adminAppBarProps: AdminDashboardTemplateProps["adminAppBarProps"] = {
     titleText,
     onLogoutButtonClick,
+    actionButtonElements,
   };
 
   return (
@@ -30,7 +37,10 @@ const AdminDashboardTemplateContainer: SFC<
 
 const mapStateToProps = (
   _state: RootState,
-  ownProps: { titleText: AdminDashboardTemplateContainerProps["titleText"] },
+  ownProps: Pick<
+    AdminDashboardTemplateContainerProps,
+    "titleText" | "actionButtonElements"
+  >,
 ) => ({
   titleText: ownProps.titleText,
 });

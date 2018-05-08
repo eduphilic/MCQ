@@ -13,7 +13,10 @@ export interface AdminAppBarProps {
 
   onLogoutButtonClick: LogoutButtonProps["onClick"];
 
-  actionButtonNodes?: ReactElement<any>[];
+  /**
+   * Additional buttons to place to the left of the logout button.
+   */
+  actionButtonElements?: ReactElement<any>[];
 }
 
 /**
@@ -26,12 +29,12 @@ export const AdminAppBar: SFC<AdminAppBarProps> = props => {
   const {
     titleText,
     onLogoutButtonClick,
-    actionButtonNodes: outerActionButtonNodes,
+    actionButtonElements: outerActionButtonElements,
   } = props;
 
-  let actionButtonNodes: typeof outerActionButtonNodes;
-  if (outerActionButtonNodes) {
-    actionButtonNodes = outerActionButtonNodes.map(
+  let actionButtonNodes: typeof outerActionButtonElements;
+  if (outerActionButtonElements) {
+    actionButtonNodes = outerActionButtonElements.map(
       (node, index) => (!node.key ? cloneElement(node, { key: index }) : node),
     );
   }
