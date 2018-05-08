@@ -49,6 +49,8 @@ const Padding = styled.div`
 `;
 
 const StyledButton = styled(Button)`
+  min-width: inherit;
+  margin-right: -12px;
   color: #910f0f;
   text-transform: none;
 `;

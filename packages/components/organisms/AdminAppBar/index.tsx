@@ -56,8 +56,8 @@ export const AdminAppBar: SFC<AdminAppBarProps> = props => {
 
 const StyledToolbar = styled(Toolbar)`
   .menu-button {
-    marginLeft: 12,
-    marginRight: 20,
+    margin-left: -12px;
+    margin-right: 20px;
   }
 
   ${({ theme }) => theme.breakpoints.up("md")} {
