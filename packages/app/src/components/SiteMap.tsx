@@ -17,6 +17,7 @@ import { AdminLogin } from "../pages/admin/AdminLogin";
 import { AdminPlanManager } from "../pages/admin/AdminPlanManager";
 import { AdminQuestionManager } from "../pages/admin/AdminQuestionManager";
 import { AdminRevenueManager } from "../pages/admin/AdminRevenueManager";
+import { AdminRevenueManagerDetails } from "../pages/admin/AdminRevenueManagerDetails";
 import { AdminTestManager } from "../pages/admin/AdminTestManager";
 import { AdminUserManager } from "../pages/admin/AdminUserManager";
 
@@ -27,6 +28,7 @@ export const SiteMap: SFC<{}> = () => {
     ["/admin/index-manager", AdminIndexManager],
     ["/admin/plan-manager", AdminPlanManager],
     ["/admin/question-manager", AdminQuestionManager],
+    ["/admin/revenue-manager/details", AdminRevenueManagerDetails],
     ["/admin/revenue-manager", AdminRevenueManager],
     ["/admin/test-manager", AdminTestManager],
     ["/admin/user-manager", AdminUserManager],
