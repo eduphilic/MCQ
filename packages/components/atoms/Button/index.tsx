@@ -1,13 +1,16 @@
 // tslint:disable-next-line:import-name
-import MuiButton, { ButtonProps } from "material-ui/Button";
+import MuiButton, { ButtonProps as MuiButtonProps } from "material-ui/Button";
 import React, { SFC } from "react";
 import styled from "styled";
 
 const ButtonBase = styled(MuiButton)`
   padding: 8px 32px;
-  background-color: transparent;
 
-  &:hover {
+  &.default-color {
+    background-color: transparent;
+  }
+
+  &.default-color:hover {
     background-color: #f3f3f3;
   }
 
@@ -21,14 +24,21 @@ const ButtonBase = styled(MuiButton)`
   }
 `;
 
+export type ButtonProps = MuiButtonProps;
+
 /** Material UI button with default styling. */
-export const Button: SFC<ButtonProps> = props => (
-  <ButtonBase
-    classes={{
-      label: "label",
-    }}
-    size="small"
-    variant="raised"
-    {...props as any}
-  />
-);
+export const Button: SFC<ButtonProps> = props => {
+  const { color = "default" } = props;
+
+  return (
+    <ButtonBase
+      className={color === "default" ? "default-color" : undefined}
+      classes={{
+        label: "label",
+      }}
+      size="small"
+      variant="raised"
+      {...props as any}
+    />
+  );
+};
