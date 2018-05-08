@@ -1,4 +1,5 @@
 import React, { Component, MouseEvent } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 import Menu, { MenuItem } from "material-ui/Menu";
@@ -13,8 +14,8 @@ interface AdminRevenueManagerState {
   financialYearDropdownAnchorElement: HTMLElement | null;
 }
 
-export class AdminRevenueManager extends Component<
-  {},
+class AdminRevenueManager extends Component<
+  RouteComponentProps<void>,
   AdminRevenueManagerState
 > {
   state: AdminRevenueManagerState = {
@@ -30,6 +31,10 @@ export class AdminRevenueManager extends Component<
 
   handleFinancialYearDropdownClose = () => {
     this.setState({ financialYearDropdownAnchorElement: null });
+  };
+
+  handleViewReportClick = () => {
+    this.props.history.push("/admin/revenue-manager/details");
   };
 
   render() {
@@ -65,7 +70,11 @@ export class AdminRevenueManager extends Component<
             ))}
           </Menu>
 
-          <Button variant="flat" color="primary">
+          <Button
+            variant="flat"
+            color="primary"
+            onClick={this.handleViewReportClick}
+          >
             <Typography variant="buttonBold">View Detailed Report</Typography>
           </Button>
         </DashboardSecondaryToolbar>
@@ -75,3 +84,6 @@ export class AdminRevenueManager extends Component<
     );
   }
 }
+
+const AdminRevenueManagerWithRouter = withRouter(AdminRevenueManager);
+export { AdminRevenueManagerWithRouter as AdminRevenueManager };
