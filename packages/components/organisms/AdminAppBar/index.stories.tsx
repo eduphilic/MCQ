@@ -1,9 +1,13 @@
 import { action } from "@storybook/addon-actions";
 import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
-import AppBar from "material-ui/AppBar";
 import React from "react";
+
+import Add from "@material-ui/icons/Add";
+import AppBar from "material-ui/AppBar";
+
 import { AdminAppBar, AdminAppBarProps } from ".";
+import { ResponsiveToolbarTypographyButton } from "../../molecules/ResponsiveToolbarTypographyButton";
 import { DrawerStateProvider } from "../../organisms/ResponsiveDrawerFrame";
 import { createPlaceholderAdminAppBarProps } from "./createPlaceholderAdminAppBarProps";
 
@@ -15,11 +19,32 @@ storiesOf("Organisms", module).add(
       onLogoutButtonClick: action("onLogoutClick"),
     };
 
+    const withActionButtonNodesProps: AdminAppBarProps = {
+      ...props,
+      actionButtonNodes: [
+        <ResponsiveToolbarTypographyButton
+          tooltipTitle="Add New Entry"
+          iconNode={<Add />}
+          color="orange"
+        >
+          Entry
+        </ResponsiveToolbarTypographyButton>,
+      ],
+    };
+
     return (
       <DrawerStateProvider>
         <div style={{ position: "relative", height: 64 }}>
           <AppBar position="absolute" color="inherit">
             <AdminAppBar {...props} />
+          </AppBar>
+        </div>
+
+        <div style={{ height: 24 }} />
+
+        <div style={{ position: "relative", height: 64 }}>
+          <AppBar position="absolute" color="inherit">
+            <AdminAppBar {...withActionButtonNodesProps} />
           </AppBar>
         </div>
       </DrawerStateProvider>

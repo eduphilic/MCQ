@@ -3,7 +3,7 @@ import Hidden from "material-ui/Hidden";
 import IconButton from "material-ui/IconButton";
 import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
-import React, { SFC } from "react";
+import React, { cloneElement, ReactElement, SFC } from "react";
 import styled from "styled";
 import { LogoutButton, LogoutButtonProps } from "../../molecules/LogoutButton";
 import { DrawerStateConsumer } from "../../organisms/ResponsiveDrawerFrame";
@@ -12,6 +12,8 @@ export interface AdminAppBarProps {
   titleText: string;
 
   onLogoutButtonClick: LogoutButtonProps["onClick"];
+
+  actionButtonNodes?: ReactElement<any>[];
 }
 
 /**
@@ -21,7 +23,18 @@ export interface AdminAppBarProps {
  * https://material-ui-next.com/demos/drawers/#persistent-drawer
  */
 export const AdminAppBar: SFC<AdminAppBarProps> = props => {
-  const { titleText, onLogoutButtonClick } = props;
+  const {
+    titleText,
+    onLogoutButtonClick,
+    actionButtonNodes: outerActionButtonNodes,
+  } = props;
+
+  let actionButtonNodes: typeof outerActionButtonNodes;
+  if (outerActionButtonNodes) {
+    actionButtonNodes = outerActionButtonNodes.map(
+      (node, index) => (!node.key ? cloneElement(node, { key: index }) : node),
+    );
+  }
 
   return (
     <DrawerStateConsumer>
@@ -47,6 +60,7 @@ export const AdminAppBar: SFC<AdminAppBarProps> = props => {
           </Hidden>
           <div style={{ flex: 1 }} />
 
+          {actionButtonNodes}
           <LogoutButton dense onClick={onLogoutButtonClick} />
         </StyledToolbar>
       )}
