@@ -6,6 +6,8 @@ import withWidth, { isWidthDown } from "material-ui/utils/withWidth";
 import React, { SFC } from "react";
 import styled from "styled";
 
+// FIXME: Base this on ResponsiveToolbarTypographyButton.
+
 export interface LogoutButtonProps {
   className?: string;
 

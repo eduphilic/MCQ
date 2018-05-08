@@ -53,14 +53,14 @@ const extendedColors: ExtendedColor[] = ["orange"];
 
 /** Material UI button with default styling. */
 export const Button: SFC<ButtonProps> = props => {
-  const { color = "default", variant, ...rest } = props;
+  const { className, color = "default", variant = "raised", ...rest } = props;
 
   const usesExtendedColor = extendedColors.includes(color as ExtendedColor);
-  const classes: string[] = [];
+  const classes: string[] = className ? [className] : [];
 
   if (color === "default") classes.push("color-default");
   if (color === "orange") classes.push("color-orange");
-  if (variant === "raised" || variant === undefined) classes.push("raised");
+  if (variant === "raised") classes.push("raised");
 
   return (
     <ButtonBase
