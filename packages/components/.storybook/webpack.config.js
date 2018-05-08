@@ -72,6 +72,7 @@ function createBabelConfig(env) {
     ].filter(p => Boolean(p)),
 
     plugins: [
+      "babel-plugin-styled-components",
       [
         require.resolve("babel-plugin-named-asset-import"),
         {
