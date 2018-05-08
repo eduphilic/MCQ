@@ -3,7 +3,7 @@ import React, { SFC } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled";
 import { AdminAppDrawerTheme } from "theme";
-import { ContentCenterWrapper } from "../../../../node_modules/components/atoms/ContentCenterWrapper";
+import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 import { AdminAppBar, AdminAppBarProps } from "../../organisms/AdminAppBar";
 import { AdminDrawerContents } from "../../organisms/AdminDrawerContents";
 import { ResponsiveDrawerFrame } from "../../organisms/ResponsiveDrawerFrame";
