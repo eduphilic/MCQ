@@ -29,8 +29,13 @@ export class DashboardSecondaryToolbar extends Component<
 }
 
 const MultilineMobileToolbar = styled(Toolbar)`
-  ${({ theme }) => theme.breakpoints.down("sm")} {
+  ${({ theme }) => theme.breakpoints.down("xs")} {
     flex-wrap: wrap;
     padding: ${({ theme }) => theme.spacing.unit}px 0;
+
+    * {
+      width: 100%;
+      text-align: left;
+    }
   }
 `;
