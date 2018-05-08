@@ -47,7 +47,7 @@ export const AdminAppBar: SFC<AdminAppBarProps> = props => {
           </Hidden>
           <div style={{ flex: 1 }} />
 
-          <LogoutButton onClick={onLogoutButtonClick} />
+          <LogoutButton dense onClick={onLogoutButtonClick} />
         </StyledToolbar>
       )}
     </DrawerStateConsumer>
