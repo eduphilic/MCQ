@@ -8,7 +8,7 @@ import {
   DrawerStateProvider,
 } from "./DrawerState";
 
-export { DrawerStateConsumer };
+export { DrawerStateConsumer, DrawerStateProvider };
 
 export interface ResponsiveDrawerFrameProps extends DrawerProps {
   /**
