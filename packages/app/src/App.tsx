@@ -1,23 +1,19 @@
 import React from "react";
-import { createProvider as createStoreProvider } from "store";
+import { hot } from "react-hot-loader";
 
 import { LightTheme, ThemeBaseline } from "theme";
 import { LoginSessionLoader } from "./components/LoginSessionLoader";
 import { SiteMap } from "./components/SiteMap";
 
-const StoreProvider = createStoreProvider();
-
 const App = () => (
-  <StoreProvider>
-    <>
-      <LoginSessionLoader />
-      <ThemeBaseline>
-        <LightTheme>
-          <SiteMap />
-        </LightTheme>
-      </ThemeBaseline>
-    </>
-  </StoreProvider>
+  <>
+    <LoginSessionLoader />
+    <ThemeBaseline>
+      <LightTheme>
+        <SiteMap />
+      </LightTheme>
+    </ThemeBaseline>
+  </>
 );
 
-export default App;
+export default hot(module)(App);

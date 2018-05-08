@@ -1,5 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
+import { createProvider as createStoreProvider } from "store";
 import App from "./App";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const StoreProvider = createStoreProvider();
+
+ReactDOM.render(
+  <StoreProvider>
+    <App />
+  </StoreProvider>,
+  document.getElementById("root"),
+);
