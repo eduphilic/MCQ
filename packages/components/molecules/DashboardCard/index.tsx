@@ -8,6 +8,10 @@ import {
   DashboardCardModeProvider,
 } from "./DashboardCardModeContext";
 import {
+  DashboardCardTable,
+  DashboardCardTableProps,
+} from "./DashboardCardTable";
+import {
   DashboardCardTitleToolbar,
   DashboardCardTitleToolbarProps,
 } from "./DashboardCardTitleToolbar";
@@ -17,7 +21,8 @@ export interface DashboardCardProps
       DashboardCardModeContextProps,
       "onItemEditClick" | "onRequestDeleteClick"
     >,
-    Pick<DashboardCardTitleToolbarProps, "editCaptionText"> {
+    Pick<DashboardCardTitleToolbarProps, "editCaptionText">,
+    Pick<DashboardCardTableProps, "columnLabels"> {
   /**
    * Card title. If not provided, no title toolbar is displayed.
    */
@@ -37,6 +42,7 @@ export class DashboardCard extends Component<DashboardCardProps> {
       onItemEditClick,
       onRequestDeleteClick,
       editCaptionText,
+      columnLabels,
     } = this.props;
     const itemKeys = items.map(item => item.key);
 
@@ -55,6 +61,11 @@ export class DashboardCard extends Component<DashboardCardProps> {
               showDeletionButton={Boolean(onRequestDeleteClick)}
             />
           )}
+
+          <DashboardCardTable
+            showCheckboxes={Boolean(onRequestDeleteClick)}
+            columnLabels={columnLabels}
+          />
         </Card>
       </DashboardCardModeProvider>
     );

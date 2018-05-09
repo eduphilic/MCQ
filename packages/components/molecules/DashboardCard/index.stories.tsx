@@ -16,12 +16,15 @@ storiesOf("Molecules", module).add(
       { key: "Soldier Tradesman 8th Grade" },
     ];
 
+    const columnLabels = ["Category", "", "Cost Per Paper", ""];
+
     return (
       <ContentCenterWrapper>
         <DashboardCard
           items={items}
           title="Army Entry"
           editCaptionText="Click to Edit Entry"
+          columnLabels={columnLabels}
           onItemEditClick={action("onItemEditClick")}
           onRequestDeleteClick={action("onRequestDeleteClick")}
         />
