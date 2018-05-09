@@ -12,6 +12,16 @@ export interface DashboardCardModeContextProps {
    * removed or added, the component's internal state will update to reflect.
    */
   itemKeys: string[];
+
+  /**
+   * Called when an item is clicked in edit mode.
+   */
+  onItemEditClick?: (key: string) => any;
+
+  /**
+   * Called when the user requests items be deleted.
+   */
+  onRequestDeleteClick?: (keys: string[]) => any;
 }
 
 interface DashboardCardModeContextState {
@@ -25,6 +35,11 @@ interface DashboardCardModeContextApi {
     enterDeletionMode: () => void;
     exitMode: () => void;
     clickItem: (key: string) => void;
+    requestDelete: () => void;
+    toggleSelectAll: () => void;
+    getSelectedCount: () => number;
+    getIsIndeterminate: () => boolean;
+    getIsAllSelected: () => boolean;
   };
   state: DashboardCardModeContextState;
 }
@@ -44,6 +59,11 @@ const context = createContext<DashboardCardModeContextApi>({
     enterDeletionMode: uninitializedAction,
     exitMode: uninitializedAction,
     clickItem: uninitializedAction,
+    requestDelete: uninitializedAction,
+    toggleSelectAll: uninitializedAction,
+    getSelectedCount: uninitializedAction,
+    getIsIndeterminate: uninitializedAction,
+    getIsAllSelected: uninitializedAction,
   },
   state: initialState,
 });
@@ -133,10 +153,45 @@ export class DashboardCardModeProvider extends Component<
           ...selected.slice(itemIndex + 1),
         ],
       });
+    } else if (this.state.mode === "edit" && this.props.onItemEditClick) {
+      this.props.onItemEditClick(key);
     }
-
-    // TODO: Dispatch event for click in edit mode.
   };
+
+  handleRequestDeleteClick = () => {
+    if (!this.props.onRequestDeleteClick) return;
+    if (this.getSelectedCount() === 0) return;
+
+    const selectedItemKeys = this.props.itemKeys.reduce(
+      (acc, key, index) => {
+        if (this.state.selected[index]) return acc.concat(key);
+        return acc;
+      },
+      [] as string[],
+    );
+
+    if (selectedItemKeys.length === 0) return;
+    this.props.onRequestDeleteClick(selectedItemKeys);
+  };
+
+  handleSelectAll = () => {
+    if (this.state.mode !== "deletion") return;
+
+    this.setState({
+      selected: this.props.itemKeys.map(() => !this.getIsAllSelected()),
+    });
+  };
+
+  getSelectedCount = () =>
+    this.state.selected.reduce((acc, val) => (val ? acc + 1 : acc), 0);
+
+  getIsIndeterminate = () => {
+    const selectedCount = this.getSelectedCount();
+    return selectedCount > 0 && selectedCount < this.state.selected.length;
+  };
+
+  getIsAllSelected = () =>
+    this.getSelectedCount() === this.props.itemKeys.length;
 
   render() {
     const { children } = this.props;
@@ -146,6 +201,11 @@ export class DashboardCardModeProvider extends Component<
         enterDeletionMode: this.handleEnterDeletionMode,
         exitMode: this.handleExitMode,
         clickItem: this.handleItemClick,
+        requestDelete: this.handleRequestDeleteClick,
+        toggleSelectAll: this.handleSelectAll,
+        getSelectedCount: this.getSelectedCount,
+        getIsIndeterminate: this.getIsIndeterminate,
+        getIsAllSelected: this.getIsAllSelected,
       },
       state: this.state,
     };

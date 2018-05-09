@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 import { withInfo } from "@storybook/addon-info";
 import { array } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
@@ -18,7 +19,11 @@ storiesOf("Molecules", module).add(
 
     return (
       <div>
-        <DashboardCardModeProvider itemKeys={itemKeys}>
+        <DashboardCardModeProvider
+          itemKeys={itemKeys}
+          onItemEditClick={action("onItemEditClick")}
+          onRequestDeleteClick={action("onRequestDeleteClick")}
+        >
           <DashboardCardModeConsumer>
             {api => (
               <>
@@ -35,13 +40,40 @@ storiesOf("Molecules", module).add(
                 ) : (
                   <button onClick={api.actions.exitMode}>Exit Mode</button>
                 )}
+                {api.state.mode === "deletion" && (
+                  <button
+                    onClick={api.actions.requestDelete}
+                    disabled={api.actions.getSelectedCount() === 0}
+                  >
+                    Delete Items
+                  </button>
+                )}
 
                 <ul>
+                  {/* Table Header */}
+                  <li onClick={api.actions.toggleSelectAll}>
+                    {api.state.mode === "deletion" && (
+                      <>
+                        <strong>
+                          {api.actions.getIsIndeterminate()
+                            ? "[-]"
+                            : api.actions.getIsAllSelected()
+                              ? "[*]"
+                              : "[ ]"}
+                          &nbsp;
+                        </strong>
+                        Selected Count: {api.actions.getSelectedCount()}
+                      </>
+                    )
+                    //
+                    }
+                  </li>
+
                   {itemKeys.map((key, index) => (
                     <li key={key} onClick={() => api.actions.clickItem(key)}>
                       {api.state.mode === "deletion" && (
                         <strong style={{ marginRight: 8 }}>
-                          Selected: {api.state.selected[index].toString()}
+                          [{api.state.selected[index] ? "*" : " "}]
                         </strong>
                       )}
                       {key}
