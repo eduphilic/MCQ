@@ -42,7 +42,10 @@ export const AdminEntryManager: SFC<{}> = () => {
                   imgUrl: process.env.PUBLIC_URL + "/images/entry/airforce.svg",
                 },
                 { primaryText: "Rs 10 pp" },
-                { switchChecked: false },
+                {
+                  switchChecked: false,
+                  switchTooltipTitle: "Toggle Activation",
+                },
               ],
             },
             {
@@ -51,7 +54,10 @@ export const AdminEntryManager: SFC<{}> = () => {
                 { primaryText: "Soldier Tradesman", secondaryText: "10th" },
                 { imgUrl: process.env.PUBLIC_URL + "/images/entry/army.svg" },
                 { primaryText: "Rs 10 pp" },
-                { switchChecked: true },
+                {
+                  switchChecked: true,
+                  switchTooltipTitle: "Toggle Activation",
+                },
               ],
             },
             {
@@ -66,7 +72,10 @@ export const AdminEntryManager: SFC<{}> = () => {
                     process.env.PUBLIC_URL + "/images/entry/assamrifles.svg",
                 },
                 { primaryText: "Rs 10 pp" },
-                { switchChecked: true },
+                {
+                  switchChecked: true,
+                  switchTooltipTitle: "Toggle Activation",
+                },
               ],
             },
             {
@@ -75,7 +84,10 @@ export const AdminEntryManager: SFC<{}> = () => {
                 { primaryText: "Soldier GD", secondaryText: "12th" },
                 { imgUrl: process.env.PUBLIC_URL + "/images/entry/bsf.svg" },
                 { primaryText: "Rs 10 pp" },
-                { switchChecked: false },
+                {
+                  switchChecked: false,
+                  switchTooltipTitle: "Toggle Activation",
+                },
               ],
             },
           ]}

@@ -1,6 +1,7 @@
 import React, { SFC } from "react";
 
 import Switch from "material-ui/Switch";
+import Tooltip from "material-ui/Tooltip";
 
 import { Typography } from "../../atoms/Typography";
 import { ResponsiveToolbarTypographyButton } from "../../molecules/ResponsiveToolbarTypographyButton";
@@ -29,20 +30,28 @@ export const ColumnItemSingleLine: ColumnItemComponent = ({ itemColumn }) => (
   <Typography>{itemColumn.primaryText}</Typography>
 );
 
-export const ColumnItemSwitch: ColumnItemComponent = ({ itemColumn, mode }) => (
-  <Switch
-    checked={Boolean(itemColumn.switchChecked)}
-    onClick={event => {
-      event.stopPropagation();
-    }}
-    onChange={event => {
-      if (!itemColumn.switchOnChange) return;
-      itemColumn.switchOnChange(event.target.checked);
-    }}
-    disabled={mode !== "edit"}
-    color="primary"
-  />
-);
+export const ColumnItemSwitch: ColumnItemComponent = ({ itemColumn, mode }) => {
+  const component = (
+    <Switch
+      checked={Boolean(itemColumn.switchChecked)}
+      onClick={event => {
+        event.stopPropagation();
+      }}
+      onChange={event => {
+        if (!itemColumn.switchOnChange) return;
+        itemColumn.switchOnChange(event.target.checked);
+      }}
+      disabled={mode !== "edit"}
+      color="primary"
+    />
+  );
+
+  return itemColumn.switchTooltipTitle ? (
+    <Tooltip title={itemColumn.switchTooltipTitle}>{component}</Tooltip>
+  ) : (
+    component
+  );
+};
 
 export const ColumnItemButton: ColumnItemComponent = ({ itemColumn }) => (
   <ResponsiveToolbarTypographyButton

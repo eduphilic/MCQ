@@ -23,7 +23,10 @@ export const AdminTestManager: SFC<{}> = () => {
               key: "0",
               columns: [
                 { primaryText: "Soldier GD", secondaryText: "10th" },
-                { switchChecked: false },
+                {
+                  switchChecked: false,
+                  switchTooltipTitle: "Toggle Test Availability",
+                },
                 {
                   primaryText: "Template",
                   buttonIconNode: <Add />,
@@ -35,7 +38,10 @@ export const AdminTestManager: SFC<{}> = () => {
               key: "1",
               columns: [
                 { primaryText: "Soldier Tradesman", secondaryText: "10th" },
-                { switchChecked: true },
+                {
+                  switchChecked: true,
+                  switchTooltipTitle: "Toggle Test Availability",
+                },
                 {
                   primaryText: "View",
                   buttonIconNode: <Pageview />,
@@ -50,7 +56,10 @@ export const AdminTestManager: SFC<{}> = () => {
                   primaryText: "Soldier Tradesman",
                   secondaryText: "8th",
                 },
-                { switchChecked: true },
+                {
+                  switchChecked: true,
+                  switchTooltipTitle: "Toggle Test Availability",
+                },
                 {
                   primaryText: "View",
                   buttonIconNode: <Pageview />,
@@ -62,7 +71,10 @@ export const AdminTestManager: SFC<{}> = () => {
               key: "3",
               columns: [
                 { primaryText: "Soldier GD", secondaryText: "12th" },
-                { switchChecked: false },
+                {
+                  switchChecked: false,
+                  switchTooltipTitle: "Toggle Test Availability",
+                },
                 {
                   primaryText: "View",
                   buttonIconNode: <Pageview />,
