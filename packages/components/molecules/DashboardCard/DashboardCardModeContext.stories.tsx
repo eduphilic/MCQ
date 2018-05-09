@@ -36,7 +36,18 @@ storiesOf("Molecules", module).add(
                   <button onClick={api.actions.exitMode}>Exit Mode</button>
                 )}
 
-                <ul>{itemKeys.map(key => <li key={key}>{key}</li>)}</ul>
+                <ul>
+                  {itemKeys.map((key, index) => (
+                    <li key={key} onClick={() => api.actions.clickItem(key)}>
+                      {api.state.mode === "deletion" && (
+                        <strong style={{ marginRight: 8 }}>
+                          Selected: {api.state.selected[index].toString()}
+                        </strong>
+                      )}
+                      {key}
+                    </li>
+                  ))}
+                </ul>
               </>
             )}
           </DashboardCardModeConsumer>
