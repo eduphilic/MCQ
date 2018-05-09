@@ -22,7 +22,7 @@ export interface DashboardCardProps
       "onItemEditClick" | "onRequestDeleteClick"
     >,
     Pick<DashboardCardTitleToolbarProps, "editCaptionText">,
-    Pick<DashboardCardTableProps, "columnLabels"> {
+    Pick<DashboardCardTableProps, "columnLabels" | "columnTypes"> {
   /**
    * Card title. If not provided, no title toolbar is displayed.
    */
@@ -43,6 +43,7 @@ export class DashboardCard extends Component<DashboardCardProps> {
       onRequestDeleteClick,
       editCaptionText,
       columnLabels,
+      columnTypes,
     } = this.props;
     const itemKeys = items.map(item => item.key);
 
@@ -65,6 +66,8 @@ export class DashboardCard extends Component<DashboardCardProps> {
           <DashboardCardTable
             showCheckboxes={Boolean(onRequestDeleteClick)}
             columnLabels={columnLabels}
+            columnTypes={columnTypes}
+            items={items}
           />
         </Card>
       </DashboardCardModeProvider>

@@ -1,11 +1,23 @@
-import React, { Component } from "react";
-import styled from "styled";
+import React, { Component, SFC } from "react";
+import styled, { withProps } from "styled";
 
 import Checkbox from "material-ui/Checkbox";
-import Table, { TableCell, TableHead, TableRow } from "material-ui/Table";
+import Table, {
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "material-ui/Table";
 
+import { DashboardTableRow } from "../../atoms/DashboardTableRow";
 import { Typography } from "../../atoms/Typography";
-import { DashboardCardModeConsumer } from "./DashboardCardModeContext";
+import { DashboardCardColumnType } from "./DashboardCardColumnType";
+import { DashboardCardItem } from "./DashboardCardItem";
+import { DashboardCardItemColumn } from "./DashboardCardItemColumn";
+import {
+  DashboardCardModeApi,
+  DashboardCardModeConsumer,
+} from "./DashboardCardModeContext";
 
 export interface DashboardCardTableProps {
   /**
@@ -17,11 +29,38 @@ export interface DashboardCardTableProps {
    * Column labels.
    */
   columnLabels: string[];
+
+  /**
+   * Column types.
+   */
+  columnTypes: DashboardCardColumnType[];
+
+  /**
+   * Items.
+   */
+  items: DashboardCardItem[];
 }
 
 export class DashboardCardTable extends Component<DashboardCardTableProps> {
+  constructor(props: DashboardCardTableProps) {
+    super(props);
+
+    if (props.columnLabels.length !== props.columnTypes.length) {
+      throw new Error("Expected same length columnLabels and columnTypes");
+    }
+  }
+
+  getColumnComponent = (type: DashboardCardColumnType) => {
+    switch (type) {
+      case "dual-line":
+        return ColumnItemDualLine;
+      default:
+        throw new Error(`Unknown column type: ${type}`);
+    }
+  };
+
   render() {
-    const { showCheckboxes, columnLabels } = this.props;
+    const { showCheckboxes, columnTypes, columnLabels, items } = this.props;
 
     return (
       <DashboardCardModeConsumer>
@@ -52,13 +91,55 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
               </TableRow>
             </TableHead>
 
-            {/* */}
+            {/* Table Contents*/}
+            <TableBody>
+              {items.map((item, index) => (
+                <ClickableTableRow
+                  key={item.key}
+                  selected={api.state.selected[index]}
+                  onClick={() => api.actions.clickItem(item.key)}
+                  mode={api.state.mode}
+                >
+                  {showCheckboxes && (
+                    <TableCell padding="checkbox">
+                      {api.state.mode === "deletion" && (
+                        <RedCheckbox checked={api.state.selected[index]} />
+                      )}
+                    </TableCell>
+                  )}
+
+                  {/* Render column item using required component type. */}
+                  {item.columns.map((itemColumn, columnIndex) => {
+                    const ItemColumnComponent = this.getColumnComponent(
+                      columnTypes[columnIndex],
+                    );
+
+                    return (
+                      <TableCell key={`${item.key}-${columnIndex}`}>
+                        <ItemColumnComponent itemColumn={itemColumn} />
+                      </TableCell>
+                    );
+                  })}
+                </ClickableTableRow>
+              ))}
+            </TableBody>
           </Table>
         )}
       </DashboardCardModeConsumer>
     );
   }
 }
+
+const ColumnItemDualLine: SFC<{
+  itemColumn: DashboardCardItemColumn;
+}> = ({ itemColumn }) => (
+  <div style={{ display: "flex", flexDirection: "column" }}>
+    <Typography>{itemColumn.primaryText}</Typography>
+    <Typography muiTypographyProps={{ variant: "caption" }}>
+      {itemColumn.secondaryText}
+    </Typography>
+  </div>
+);
 
 const CheckboxWidthTableCell = styled(TableCell).attrs({ padding: "checkbox" })`
   width: 72px;
@@ -72,4 +153,10 @@ const RedCheckbox = styled(Checkbox).attrs({
   &.checked {
     color: #e10050;
   }
+`;
+
+type ModeProp = Pick<DashboardCardModeApi["state"], "mode">;
+
+const ClickableTableRow = withProps<ModeProp>()(styled(DashboardTableRow))`
+  cursor: ${({ mode }) => (mode !== "display" ? "pointer" : "inherit")};
 `;
