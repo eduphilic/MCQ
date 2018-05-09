@@ -9,7 +9,7 @@ import {
   DashboardCardModeProvider,
 } from "./DashboardCardModeContext";
 
-storiesOf("Molecules", module).add(
+storiesOf("Organisms", module).add(
   "DashboardCardModeProvider",
   withInfo({ propTablesExclude: [DashboardCardModeConsumer as any] })(() => {
     const itemKeys = array(

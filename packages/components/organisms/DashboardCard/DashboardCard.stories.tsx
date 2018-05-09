@@ -8,7 +8,7 @@ import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 import { DashboardCardColumnType } from "./DashboardCardColumnType";
 import { DashboardCardItem } from "./DashboardCardItem";
 
-storiesOf("Molecules", module).add(
+storiesOf("Organisms", module).add(
   "DashboardCard",
   withInfo({ propTablesExclude: [ContentCenterWrapper as any] })(() => {
     const items: DashboardCardItem[] = [
