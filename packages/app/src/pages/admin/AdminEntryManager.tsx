@@ -58,7 +58,7 @@ export const AdminEntryManager: SFC<{}> = () => {
               key: "2",
               columns: [
                 {
-                  primaryText: "Soldier Tradesman 8th Grade",
+                  primaryText: "Soldier Tradesman",
                   secondaryText: "8th",
                 },
                 {

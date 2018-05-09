@@ -17,9 +17,7 @@ export const AdminTestManager: SFC<{}> = () => {
           title={`${title} Entry`}
           columnLabels={["Category", "", ""]}
           columnTypes={["dual-line", "switch", "button"]}
-          editCaptionText="Click to Edit Entry"
           onItemEditClick={noop}
-          onRequestDeleteClick={noop}
           items={[
             {
               key: "0",
@@ -49,7 +47,7 @@ export const AdminTestManager: SFC<{}> = () => {
               key: "2",
               columns: [
                 {
-                  primaryText: "Soldier Tradesman 8th Grade",
+                  primaryText: "Soldier Tradesman",
                   secondaryText: "8th",
                 },
                 { switchChecked: true },

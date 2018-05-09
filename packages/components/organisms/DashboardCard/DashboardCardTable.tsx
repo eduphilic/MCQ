@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled, { withProps } from "styled";
 
 import Checkbox from "material-ui/Checkbox";
+import Hidden from "material-ui/Hidden";
 import Table, {
   TableBody,
   TableCell,
@@ -98,9 +99,11 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
 
                 {/* Column Labels */}
                 {columnLabels.map((label, index) => (
-                  <TableCell key={index}>
-                    <Typography variant="tableHeadCell">{label}</Typography>
-                  </TableCell>
+                  <Hidden key={index} xsDown={columnTypes[index] === "image"}>
+                    <UnpaddedTableCell>
+                      <Typography variant="tableHeadCell">{label}</Typography>
+                    </UnpaddedTableCell>
+                  </Hidden>
                 ))}
               </TableRow>
             </TableHead>
@@ -115,11 +118,11 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
                   mode={api.state.mode}
                 >
                   {showCheckboxes && (
-                    <TableCell padding="checkbox">
+                    <UnpaddedTableCell padding="checkbox">
                       {api.state.mode === "deletion" && (
                         <RedCheckbox checked={api.state.selected[index]} />
                       )}
-                    </TableCell>
+                    </UnpaddedTableCell>
                   )}
 
                   {/* Render column item using required component type. */}
@@ -129,12 +132,17 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
                     );
 
                     return (
-                      <TableCell key={`${item.key}-${columnIndex}`}>
-                        <ItemColumnComponent
-                          itemColumn={itemColumn}
-                          mode={api.state.mode}
-                        />
-                      </TableCell>
+                      <Hidden
+                        key={`${item.key}-${columnIndex}`}
+                        xsDown={columnTypes[columnIndex] === "image"}
+                      >
+                        <UnpaddedTableCell>
+                          <ItemColumnComponent
+                            itemColumn={itemColumn}
+                            mode={api.state.mode}
+                          />
+                        </UnpaddedTableCell>
+                      </Hidden>
                     );
                   })}
                 </ClickableTableRow>
@@ -158,6 +166,13 @@ const RedCheckbox = styled(Checkbox).attrs({
 })`
   &.checked {
     color: #e10050;
+  }
+`;
+
+const UnpaddedTableCell = styled(TableCell)`
+  &:not(:first-child) {
+    padding-left: 0;
+    padding-right: 0;
   }
 `;
 

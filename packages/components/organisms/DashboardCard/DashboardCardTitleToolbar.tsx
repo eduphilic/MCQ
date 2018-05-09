@@ -114,7 +114,8 @@ export class DashboardCardTitleToolbar extends Component<
             muiTypographyProps={{ color: "inherit" }}
           >
             {mode === "edit"
-              ? `Edit Mode${editCaptionText ? " - " : ""}${editCaptionText}`
+              ? `Edit Mode${editCaptionText ? " - " : ""}${editCaptionText ||
+                  ""}`
               : `${selectedCount} Selected for Deletion`}
           </Typography>
         )}
