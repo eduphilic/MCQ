@@ -28,7 +28,7 @@ export const AdminEntryManager: SFC<{}> = () => {
         <DashboardCard
           key={title}
           title={`${title} Entry`}
-          columnLabels={["Category", "", "Cost Per Paper", ""]}
+          columnLabels={["Category", "", "Cost Per Paper", "Activated"]}
           columnTypes={["dual-line", "image", "single-line", "switch"]}
           editCaptionText="Click to Edit Entry"
           onItemEditClick={noop}

@@ -15,7 +15,7 @@ export const AdminTestManager: SFC<{}> = () => {
         <DashboardCard
           key={title}
           title={`${title} Entry`}
-          columnLabels={["Category", "", ""]}
+          columnLabels={["Category", "Availability", ""]}
           columnTypes={["dual-line", "switch", "button"]}
           onItemEditClick={noop}
           items={[
