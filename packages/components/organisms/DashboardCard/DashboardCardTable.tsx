@@ -1,4 +1,4 @@
-import React, { Component, SFC } from "react";
+import React, { Component } from "react";
 import styled, { withProps } from "styled";
 
 import Checkbox from "material-ui/Checkbox";
@@ -11,9 +11,14 @@ import Table, {
 
 import { DashboardTableRow } from "../../atoms/DashboardTableRow";
 import { Typography } from "../../atoms/Typography";
+import {
+  ColumnItemDualLine,
+  ColumnItemImage,
+  ColumnItemSingleLine,
+  ColumnItemSwitch,
+} from "./DashboardCardColumnComponents";
 import { DashboardCardColumnType } from "./DashboardCardColumnType";
 import { DashboardCardItem } from "./DashboardCardItem";
-import { DashboardCardItemColumn } from "./DashboardCardItemColumn";
 import {
   DashboardCardModeApi,
   DashboardCardModeConsumer,
@@ -54,6 +59,12 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
     switch (type) {
       case "dual-line":
         return ColumnItemDualLine;
+      case "image":
+        return ColumnItemImage;
+      case "single-line":
+        return ColumnItemSingleLine;
+      case "switch":
+        return ColumnItemSwitch;
       default:
         throw new Error(`Unknown column type: ${type}`);
     }
@@ -116,7 +127,10 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
 
                     return (
                       <TableCell key={`${item.key}-${columnIndex}`}>
-                        <ItemColumnComponent itemColumn={itemColumn} />
+                        <ItemColumnComponent
+                          itemColumn={itemColumn}
+                          mode={api.state.mode}
+                        />
                       </TableCell>
                     );
                   })}
@@ -129,17 +143,6 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
     );
   }
 }
-
-const ColumnItemDualLine: SFC<{
-  itemColumn: DashboardCardItemColumn;
-}> = ({ itemColumn }) => (
-  <div style={{ display: "flex", flexDirection: "column" }}>
-    <Typography>{itemColumn.primaryText}</Typography>
-    <Typography muiTypographyProps={{ variant: "caption" }}>
-      {itemColumn.secondaryText}
-    </Typography>
-  </div>
-);
 
 const CheckboxWidthTableCell = styled(TableCell).attrs({ padding: "checkbox" })`
   width: 72px;

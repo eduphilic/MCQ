@@ -1,0 +1,44 @@
+import React, { SFC } from "react";
+
+import Switch from "material-ui/Switch";
+
+import { Typography } from "../../atoms/Typography";
+import { DashboardCardItemColumn } from "./DashboardCardItemColumn";
+import { DashboardCardModeApi } from "./DashboardCardModeContext";
+
+type ColumnItemComponent = SFC<{
+  itemColumn: DashboardCardItemColumn;
+  mode: DashboardCardModeApi["state"]["mode"];
+}>;
+
+export const ColumnItemDualLine: ColumnItemComponent = ({ itemColumn }) => (
+  <div style={{ display: "flex", flexDirection: "column" }}>
+    <Typography>{itemColumn.primaryText}</Typography>
+    <Typography muiTypographyProps={{ variant: "caption" }}>
+      {itemColumn.secondaryText}
+    </Typography>
+  </div>
+);
+
+export const ColumnItemImage: ColumnItemComponent = ({ itemColumn }) => (
+  <img style={{ display: "block", maxHeight: 64 }} src={itemColumn.imgUrl} />
+);
+
+export const ColumnItemSingleLine: ColumnItemComponent = ({ itemColumn }) => (
+  <Typography>{itemColumn.primaryText}</Typography>
+);
+
+export const ColumnItemSwitch: ColumnItemComponent = ({ itemColumn, mode }) => (
+  <Switch
+    checked={Boolean(itemColumn.switchChecked)}
+    onClick={event => {
+      event.stopPropagation();
+    }}
+    onChange={event => {
+      if (!itemColumn.switchOnChange) return;
+      itemColumn.switchOnChange(event.target.checked);
+    }}
+    disabled={mode !== "edit"}
+    color="primary"
+  />
+);
