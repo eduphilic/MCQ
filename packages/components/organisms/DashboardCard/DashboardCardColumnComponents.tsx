@@ -3,6 +3,7 @@ import React, { SFC } from "react";
 import Switch from "material-ui/Switch";
 
 import { Typography } from "../../atoms/Typography";
+import { ResponsiveToolbarTypographyButton } from "../../molecules/ResponsiveToolbarTypographyButton";
 import { DashboardCardItemColumn } from "./DashboardCardItemColumn";
 import { DashboardCardModeApi } from "./DashboardCardModeContext";
 
@@ -41,4 +42,13 @@ export const ColumnItemSwitch: ColumnItemComponent = ({ itemColumn, mode }) => (
     disabled={mode !== "edit"}
     color="primary"
   />
+);
+
+export const ColumnItemButton: ColumnItemComponent = ({ itemColumn }) => (
+  <ResponsiveToolbarTypographyButton
+    iconNode={itemColumn.buttonIconNode}
+    tooltipTitle={itemColumn.buttonTooltipTitle}
+  >
+    {itemColumn.primaryText}
+  </ResponsiveToolbarTypographyButton>
 );

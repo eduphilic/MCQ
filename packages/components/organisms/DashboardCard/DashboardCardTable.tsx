@@ -12,6 +12,7 @@ import Table, {
 import { DashboardTableRow } from "../../atoms/DashboardTableRow";
 import { Typography } from "../../atoms/Typography";
 import {
+  ColumnItemButton,
   ColumnItemDualLine,
   ColumnItemImage,
   ColumnItemSingleLine,
@@ -65,6 +66,8 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
         return ColumnItemSingleLine;
       case "switch":
         return ColumnItemSwitch;
+      case "button":
+        return ColumnItemButton;
       default:
         throw new Error(`Unknown column type: ${type}`);
     }
