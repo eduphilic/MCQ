@@ -29,7 +29,7 @@ interface DashboardCardModeContextState {
   selected: boolean[];
 }
 
-interface DashboardCardModeContextApi {
+export interface DashboardCardModeApi {
   actions: {
     enterEditMode: () => void;
     enterDeletionMode: () => void;
@@ -53,7 +53,7 @@ const uninitializedAction = () => {
   throw new Error("Uninitialized action was called.");
 };
 
-const context = createContext<DashboardCardModeContextApi>({
+const context = createContext<DashboardCardModeApi>({
   actions: {
     enterEditMode: uninitializedAction,
     enterDeletionMode: uninitializedAction,
@@ -195,7 +195,7 @@ export class DashboardCardModeProvider extends Component<
 
   render() {
     const { children } = this.props;
-    const api: DashboardCardModeContextApi = {
+    const api: DashboardCardModeApi = {
       actions: {
         enterEditMode: this.handleEnterEditMode,
         enterDeletionMode: this.handleEnterDeletionMode,
