@@ -3,6 +3,9 @@ import styled from "styled";
 import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 import armyGreenPng from "./armyGreen.png";
 
+// TODO: Remove Development Snackbar Link
+import { DevelopmentAdminDashboardSnackbar } from "./DevelopmentAdminDashboardSnackbar";
+
 export interface LandingTemplateProps {
   /** Hero section node. Image, text, and signup/sign-in forms. */
   heroNode: ReactNode;
@@ -22,6 +25,8 @@ export const LandingTemplate: SFC<LandingTemplateProps> = props => {
 
   return (
     <>
+      <DevelopmentAdminDashboardSnackbar />
+
       <HeaderHeroWrapper>{heroNode}</HeaderHeroWrapper>
 
       <MainContentBackground>
