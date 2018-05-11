@@ -3,9 +3,11 @@ import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboard
 
 import { SideSheetButtonMenu } from "components/molecules/SideSheetButtonMenu";
 import { SideSheetFieldGroup } from "components/molecules/SideSheetFieldGroup";
+import { DashboardCard } from "components/organisms/DashboardCard";
 
 export const AdminQuestionManager: SFC<{}> = () => {
-  //
+  // tslint:disable-next-line:no-empty
+  const noop = () => {};
 
   return (
     <AdminDashboardTemplateContainer
@@ -56,7 +58,21 @@ export const AdminQuestionManager: SFC<{}> = () => {
         </>
       }
     >
-      {/* Page Contents*/}
+      <DashboardCard
+        title="Questions"
+        columnLabels={["Question", "Upload Date", "Question Type"]}
+        columnTypes={["single-line", "single-line", "single-line"]}
+        onItemEditClick={noop}
+        onRequestDeleteClick={noop}
+        items={Array.from({ length: 20 }, (_item, index) => ({
+          key: "0",
+          columns: [
+            { primaryText: `${index + 1}. Question Label...` },
+            { primaryText: "Today" },
+            { primaryText: "Single Choice" },
+          ],
+        }))}
+      />
     </AdminDashboardTemplateContainer>
   );
 };
