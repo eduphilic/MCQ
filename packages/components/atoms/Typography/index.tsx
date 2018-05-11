@@ -12,6 +12,7 @@ export enum Variant {
   cardStatCaption = "cardStatCaption",
   tableHeadCell = "tableHeadCell",
   buttonBold = "buttonBold",
+  formFieldTitle = "formFieldTitle",
 }
 
 type StyledMuiTypography = ReturnType<ThemedStyledFunction<MuiTypographyProps>>;
@@ -32,6 +33,10 @@ const variants: Record<Variant, StyledMuiTypography> = {
   tableHeadCell: styled(MuiTypography).attrs({ variant: "body2" })``,
 
   buttonBold: styled(MuiTypography).attrs({ variant: "body2" })``,
+
+  formFieldTitle: styled(MuiTypography).attrs({ variant: "body2" })`
+    color: ${({ theme }) => theme.palette.grey["700"]};
+  `,
 };
 
 export interface TypographyProps {
