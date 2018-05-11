@@ -1,7 +1,6 @@
 import React, { Component, ReactElement } from "react";
 
 import FilterList from "@material-ui/icons/FilterList";
-import Hidden from "material-ui/Hidden";
 
 import { ResponsiveToolbarTypographyButton } from "../../molecules/ResponsiveToolbarTypographyButton";
 import { SideSheetToggleStateConsumer } from "./SideSheetToggleState";
@@ -33,18 +32,19 @@ export class SideSheetToggleButton extends Component<
     } = this.props;
 
     return (
-      <Hidden smUp>
-        <SideSheetToggleStateConsumer>
-          {api => (
+      <SideSheetToggleStateConsumer>
+        {api =>
+          api.toggleButtonVisibility &&
+          !api.fixedPanelVisible && (
             <ResponsiveToolbarTypographyButton
               dense
               iconNode={sideSheetIconElement}
               tooltipTitle={sideSheetIconTooltipTitle}
               onClick={api.toggleOpen}
             />
-          )}
-        </SideSheetToggleStateConsumer>
-      </Hidden>
+          )
+        }
+      </SideSheetToggleStateConsumer>
     );
   }
 }

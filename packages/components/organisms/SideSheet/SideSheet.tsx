@@ -1,9 +1,11 @@
 import React, { Component, ReactNode } from "react";
 import styled, { css, withProps } from "styled";
 
+import Drawer from "material-ui/Drawer";
 import Paper from "material-ui/Paper";
 
 import { Typography } from "../../atoms/Typography";
+import { SideSheetToggleStateConsumer } from "./SideSheetToggleState";
 
 export interface SideSheetProps {
   sideSheetTitle?: string;
@@ -32,16 +34,39 @@ export class SideSheet extends Component<SideSheetProps> {
       </PanelContainer>
     );
 
-    const sheetVisible = Boolean(sideSheetContents);
+    const sheetHasContents = Boolean(sideSheetContents);
 
     return (
-      <SplitContainer sheetVisible={sheetVisible}>
-        {children}
+      <SideSheetToggleStateConsumer>
+        {api => {
+          const fixedSheetVisible = sheetHasContents && api.fixedPanelVisible;
 
-        {sheetVisible && (
-          <PanelFixedPositioning>{panelNode}</PanelFixedPositioning>
-        )}
-      </SplitContainer>
+          if (api.toggleButtonVisibility !== sheetHasContents) {
+            api.setToggleButtonVisibility(sheetHasContents);
+          }
+
+          return (
+            <SplitContainer sheetVisible={fixedSheetVisible}>
+              {children}
+
+              {fixedSheetVisible && (
+                <PanelFixedPositioning>{panelNode}</PanelFixedPositioning>
+              )}
+
+              {!fixedSheetVisible && (
+                <DrawerWithMobileWidth
+                  anchor="right"
+                  elevation={2}
+                  onClose={api.toggleOpen}
+                  open={api.open}
+                >
+                  {panelNode}
+                </DrawerWithMobileWidth>
+              )}
+            </SplitContainer>
+          );
+        }}
+      </SideSheetToggleStateConsumer>
     );
   }
 }
@@ -68,9 +93,10 @@ const PanelContainer = styled.div`
   background-color: ${({ theme }) => theme.palette.background.paper};
 `;
 
-const PanelFixedPositioning = styled(Paper)`
+const PanelFixedPositioning = styled(Paper).attrs({ elevation: 1 })`
   position: fixed;
   right: 0;
+  background-color: transparent !important;
 
   ${createToolbarHeightBasedCss(
     height => `
@@ -78,6 +104,18 @@ const PanelFixedPositioning = styled(Paper)`
       height: calc(100% - ${height}px);
     `,
   )};
+`;
+
+const DrawerWithMobileWidth = styled(Drawer)`
+  ${PanelContainer} {
+    width: calc(100vw - ${({ theme }) => theme.spacing.unit * 7}px);
+  }
+
+  ${({ theme }) => theme.breakpoints.up("sm")} {
+    ${PanelContainer} {
+      max-width: ${panelWidthTablet}px;
+    }
+  }
 `;
 
 function createToolbarHeightBasedCss(render: (height: number) => string) {
