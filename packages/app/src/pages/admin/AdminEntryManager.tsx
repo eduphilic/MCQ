@@ -28,7 +28,12 @@ export const AdminEntryManager: SFC<{}> = () => {
         <DashboardCard
           key={title}
           title={`${title} Entry`}
-          columnLabels={["Category", "", "Cost Per Paper", "Activated"]}
+          columnLabels={[
+            "Category",
+            "Icons",
+            "Cost Per Paper (Rs)",
+            "Activated",
+          ]}
           columnTypes={["dual-line", "image", "single-line", "switch"]}
           editCaptionText="Click to Edit Entry"
           onItemEditClick={noop}
@@ -41,7 +46,7 @@ export const AdminEntryManager: SFC<{}> = () => {
                 {
                   imgUrl: process.env.PUBLIC_URL + "/images/entry/airforce.svg",
                 },
-                { primaryText: "Rs 10 pp" },
+                { primaryText: "10" },
                 {
                   switchChecked: false,
                   switchTooltipTitle: "Toggle Activation",
@@ -53,7 +58,7 @@ export const AdminEntryManager: SFC<{}> = () => {
               columns: [
                 { primaryText: "Soldier Tradesman", secondaryText: "10th" },
                 { imgUrl: process.env.PUBLIC_URL + "/images/entry/army.svg" },
-                { primaryText: "Rs 10 pp" },
+                { primaryText: "10" },
                 {
                   switchChecked: true,
                   switchTooltipTitle: "Toggle Activation",
@@ -71,7 +76,7 @@ export const AdminEntryManager: SFC<{}> = () => {
                   imgUrl:
                     process.env.PUBLIC_URL + "/images/entry/assamrifles.svg",
                 },
-                { primaryText: "Rs 10 pp" },
+                { primaryText: "10" },
                 {
                   switchChecked: true,
                   switchTooltipTitle: "Toggle Activation",
@@ -83,7 +88,7 @@ export const AdminEntryManager: SFC<{}> = () => {
               columns: [
                 { primaryText: "Soldier GD", secondaryText: "12th" },
                 { imgUrl: process.env.PUBLIC_URL + "/images/entry/bsf.svg" },
-                { primaryText: "Rs 10 pp" },
+                { primaryText: "10" },
                 {
                   switchChecked: false,
                   switchTooltipTitle: "Toggle Activation",
