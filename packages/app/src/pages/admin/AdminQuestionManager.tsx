@@ -1,10 +1,8 @@
 import React, { SFC } from "react";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
-import { DashboardSecondaryToolbar } from "components/molecules/DashboardSecondaryToolbar";
 import { SideSheetButtonMenu } from "components/molecules/SideSheetButtonMenu";
 import { SideSheetFieldGroup } from "components/molecules/SideSheetFieldGroup";
-import { TypographyButton } from "components/molecules/TypographyButton";
 
 export const AdminQuestionManager: SFC<{}> = () => {
   //
@@ -58,25 +56,7 @@ export const AdminQuestionManager: SFC<{}> = () => {
         </>
       }
     >
-      {/* Toolbar */}
-      <DashboardSecondaryToolbar>
-        <DashboardSecondaryToolbar.Spacer />
-
-        <TypographyButton color="primary" variant="flat">
-          Add Questions
-        </TypographyButton>
-        <TypographyButton color="orange" variant="flat">
-          Import Questions
-        </TypographyButton>
-        <TypographyButton
-          color="orange"
-          variant="flat"
-          typographyVariant="body"
-        >
-          Challenged Questions
-        </TypographyButton>
-      </DashboardSecondaryToolbar>
-      {/* */}
+      {/* Page Contents*/}
     </AdminDashboardTemplateContainer>
   );
 };
