@@ -12,7 +12,7 @@ export const AdminIndexManager: SFC<{}> = () => {
         <DashboardCard
           key={title}
           title={`${title} Entry`}
-          columnLabels={["Category", "Trial", "Visibility"]}
+          columnLabels={["Category", "Trial Activation", "Card Visibility"]}
           columnTypes={["dual-line", "switch", "switch"]}
           onItemEditClick={noop}
           items={[
