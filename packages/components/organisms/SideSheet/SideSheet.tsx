@@ -87,10 +87,11 @@ const SplitContainer = withProps<SheetVisibleProp>()(styled.div)`
 
 const PanelContainer = styled.div`
   width: ${panelWidthTablet}px;
-  min-height: 100%;
+  height: 100%;
   padding: ${({ theme }) =>
     `${theme.spacing.unit * 3}px ${theme.spacing.unit * 2}px`};
   background-color: ${({ theme }) => theme.palette.background.paper};
+  overflow-y: auto;
 `;
 
 const PanelFixedPositioning = styled(Paper).attrs({ elevation: 1 })`
