@@ -23,7 +23,10 @@ export const ColumnItemDualLine: ColumnItemComponent = ({ itemColumn }) => (
 );
 
 export const ColumnItemImage: ColumnItemComponent = ({ itemColumn }) => (
-  <img style={{ display: "block", height: 64 }} src={itemColumn.imgUrl} />
+  <img
+    style={{ display: "block", height: 64, margin: "4px 0" }}
+    src={itemColumn.imgUrl}
+  />
 );
 
 export const ColumnItemSingleLine: ColumnItemComponent = ({ itemColumn }) => (
