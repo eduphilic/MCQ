@@ -8,7 +8,11 @@ export const AdminQuestionManager: SFC<{}> = () => {
   //
 
   return (
-    <AdminDashboardTemplateContainer titleText="Question Manager">
+    <AdminDashboardTemplateContainer
+      titleText="Question Manager"
+      sideSheetTitle="Filtering Options"
+      sideSheetContents={<div>Filtering Option Placeholder</div>}
+    >
       {/* Toolbar */}
       <DashboardSecondaryToolbar>
         <DashboardSecondaryToolbar.Spacer />

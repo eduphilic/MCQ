@@ -8,7 +8,7 @@ import { withKnobs } from "@storybook/addon-knobs";
 import { ThemeBaseline, LightTheme } from "theme";
 
 setStorybookOptions({
-  addonPanelInRight: true,
+  // addonPanelInRight: true,
   name: "bhartitest",
   url: "https://dev.bhartitest.com/",
 });

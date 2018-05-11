@@ -6,10 +6,21 @@ import React, { SFC } from "react";
 import { connect } from "react-redux";
 import { actions, RootState } from "store";
 
-interface AdminDashboardTemplateContainerProps {
+interface AdminDashboardTemplateContainerOwnProps
+  extends Pick<
+      AdminDashboardTemplateProps,
+      | "sideSheetTitle"
+      | "sideSheetContents"
+      | "sideSheetIconElement"
+      | "sideSheetIconTooltipTitle"
+    > {
   titleText: AdminDashboardTemplateProps["adminAppBarProps"]["titleText"];
-  onLogoutButtonClick: AdminDashboardTemplateProps["adminAppBarProps"]["onLogoutButtonClick"];
   actionButtonElements?: AdminDashboardTemplateProps["adminAppBarProps"]["actionButtonElements"];
+}
+
+interface AdminDashboardTemplateContainerProps
+  extends AdminDashboardTemplateContainerOwnProps {
+  onLogoutButtonClick: AdminDashboardTemplateProps["adminAppBarProps"]["onLogoutButtonClick"];
 }
 
 const AdminDashboardTemplateContainer: SFC<
@@ -20,6 +31,7 @@ const AdminDashboardTemplateContainer: SFC<
     titleText,
     onLogoutButtonClick,
     actionButtonElements,
+    ...rest
   } = props;
 
   const adminAppBarProps: AdminDashboardTemplateProps["adminAppBarProps"] = {
@@ -29,7 +41,7 @@ const AdminDashboardTemplateContainer: SFC<
   };
 
   return (
-    <AdminDashboardTemplate adminAppBarProps={adminAppBarProps}>
+    <AdminDashboardTemplate adminAppBarProps={adminAppBarProps} {...rest}>
       {children}
     </AdminDashboardTemplate>
   );
@@ -37,13 +49,8 @@ const AdminDashboardTemplateContainer: SFC<
 
 const mapStateToProps = (
   _state: RootState,
-  ownProps: Pick<
-    AdminDashboardTemplateContainerProps,
-    "titleText" | "actionButtonElements"
-  >,
-) => ({
-  titleText: ownProps.titleText,
-});
+  ownProps: AdminDashboardTemplateContainerOwnProps,
+) => ownProps;
 
 const mapDispatchToProps: Partial<AdminDashboardTemplateContainerProps> = {
   onLogoutButtonClick: actions.app.logout,
