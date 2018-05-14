@@ -97,17 +97,18 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
             <TableHead>
               <TableRow>
                 {/* Optional checkbox (for cards which have delete option). */}
-                {showCheckboxes && (
-                  <CheckboxWidthTableCell>
-                    {api.state.mode === "deletion" && (
-                      <RedCheckbox
-                        indeterminate={api.actions.getIsIndeterminate()}
-                        checked={api.actions.getIsAllSelected()}
-                        onChange={api.actions.toggleSelectAll}
-                      />
-                    )}
-                  </CheckboxWidthTableCell>
-                )}
+                {showCheckboxes &&
+                  api.state.mode === "deletion" && (
+                    <CheckboxWidthTableCell>
+                      {api.state.mode === "deletion" && (
+                        <RedCheckbox
+                          indeterminate={api.actions.getIsIndeterminate()}
+                          checked={api.actions.getIsAllSelected()}
+                          onChange={api.actions.toggleSelectAll}
+                        />
+                      )}
+                    </CheckboxWidthTableCell>
+                  )}
 
                 {/* Column Labels */}
                 {columnLabels.map((label, index) => (
@@ -129,13 +130,14 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
                   onClick={() => api.actions.clickItem(item.key)}
                   mode={api.state.mode}
                 >
-                  {showCheckboxes && (
-                    <UnpaddedTableCell padding="checkbox">
-                      {api.state.mode === "deletion" && (
-                        <RedCheckbox checked={api.state.selected[index]} />
-                      )}
-                    </UnpaddedTableCell>
-                  )}
+                  {showCheckboxes &&
+                    api.state.mode === "deletion" && (
+                      <UnpaddedTableCell padding="checkbox">
+                        {api.state.mode === "deletion" && (
+                          <RedCheckbox checked={api.state.selected[index]} />
+                        )}
+                      </UnpaddedTableCell>
+                    )}
 
                   {/* Render column item using required component type. */}
                   {item.columns.map((itemColumn, columnIndex) => {
