@@ -7,6 +7,7 @@ import { DashboardCard } from ".";
 import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 import { DashboardCardColumnType } from "./DashboardCardColumnType";
 import { DashboardCardItem } from "./DashboardCardItem";
+import { DashboardCardPaginationProps } from "./DashboardCardPagination";
 
 storiesOf("Organisms", module).add(
   "DashboardCard",
@@ -58,6 +59,13 @@ storiesOf("Organisms", module).add(
       "switch",
     ];
 
+    const paginationProps: DashboardCardPaginationProps = {
+      count: 60,
+      onChangePage: action("onChangePage"),
+      page: 0,
+      rowsPerPage: 30,
+    };
+
     return (
       <ContentCenterWrapper>
         <DashboardCard
@@ -68,6 +76,8 @@ storiesOf("Organisms", module).add(
           columnTypes={columnTypes}
           onItemEditClick={action("onItemEditClick")}
           onRequestDeleteClick={action("onRequestDeleteClick")}
+          paginationProps={paginationProps}
+          paginationListItemType="entries"
         />
       </ContentCenterWrapper>
     );
