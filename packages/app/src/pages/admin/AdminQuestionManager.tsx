@@ -65,7 +65,7 @@ export const AdminQuestionManager: SFC<{}> = () => {
         onItemEditClick={noop}
         onRequestDeleteClick={noop}
         items={Array.from({ length: 20 }, (_item, index) => ({
-          key: "0",
+          key: index.toString(),
           columns: [
             { primaryText: `${index + 1}. Question Label...` },
             { primaryText: "Today" },
