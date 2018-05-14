@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, ReactNode } from "react";
 import styled, { withProps } from "styled";
 
 import Checkbox from "material-ui/Checkbox";
@@ -6,6 +6,7 @@ import Hidden from "material-ui/Hidden";
 import Table, {
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableRow,
 } from "material-ui/Table";
@@ -46,6 +47,11 @@ export interface DashboardCardTableProps {
    * Items.
    */
   items: DashboardCardItem[];
+
+  /**
+   * Optional bottom pagination node.
+   */
+  bottomPaginationNode?: ReactNode;
 }
 
 export class DashboardCardTable extends Component<DashboardCardTableProps> {
@@ -75,7 +81,13 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
   };
 
   render() {
-    const { showCheckboxes, columnTypes, columnLabels, items } = this.props;
+    const {
+      showCheckboxes,
+      columnTypes,
+      columnLabels,
+      items,
+      bottomPaginationNode,
+    } = this.props;
 
     return (
       <DashboardCardModeConsumer>
@@ -148,6 +160,13 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
                 </ClickableTableRow>
               ))}
             </TableBody>
+
+            {/* Optional bottom pagination control. */}
+            {bottomPaginationNode && (
+              <TableFooter>
+                <TableRow>{bottomPaginationNode}</TableRow>
+              </TableFooter>
+            )}
           </Table>
         )}
       </DashboardCardModeConsumer>

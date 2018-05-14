@@ -8,6 +8,11 @@ import {
   DashboardCardModeProvider,
 } from "./DashboardCardModeContext";
 import {
+  DashboardCardPagination,
+  DashboardCardPaginationProps,
+} from "./DashboardCardPagination";
+import { DashboardCardPaginationHeaderToolbar } from "./DashboardCardPaginationHeaderToolbar";
+import {
   DashboardCardTable,
   DashboardCardTableProps,
 } from "./DashboardCardTable";
@@ -32,6 +37,18 @@ export interface DashboardCardProps
    * Data list items.
    */
   items: DashboardCardItem[];
+
+  /**
+   * Optional pagination options. When left undefined, no pagination control is
+   * shown.
+   */
+  paginationProps?: DashboardCardPaginationProps;
+
+  /**
+   * Required if "paginationProps" is provided. The word describing the type of
+   * items in the table, eg. "question". It will be pluralized automatically.
+   */
+  paginationListItemType?: string;
 }
 
 export class DashboardCard extends Component<DashboardCardProps> {
@@ -44,8 +61,16 @@ export class DashboardCard extends Component<DashboardCardProps> {
       editCaptionText,
       columnLabels,
       columnTypes,
+      paginationProps,
+      paginationListItemType,
     } = this.props;
     const itemKeys = items.map(item => item.key);
+
+    const paginationNode = paginationProps ? (
+      <DashboardCardPagination {...paginationProps} />
+    ) : (
+      undefined
+    );
 
     return (
       <DashboardCardModeProvider
@@ -63,11 +88,19 @@ export class DashboardCard extends Component<DashboardCardProps> {
             />
           )}
 
+          {paginationProps && (
+            <DashboardCardPaginationHeaderToolbar
+              {...paginationProps}
+              listItemType={paginationListItemType!}
+            />
+          )}
+
           <DashboardCardTable
             showCheckboxes={Boolean(onRequestDeleteClick)}
             columnLabels={columnLabels}
             columnTypes={columnTypes}
             items={items}
+            bottomPaginationNode={paginationNode}
           />
         </Card>
       </DashboardCardModeProvider>
