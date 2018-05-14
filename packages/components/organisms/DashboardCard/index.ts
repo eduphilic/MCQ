@@ -3,5 +3,7 @@ export * from "./DashboardCardColumnType";
 export * from "./DashboardCardItem";
 export * from "./DashboardCardItemColumn";
 export * from "./DashboardCardModeContext";
+export * from "./DashboardCardPagination";
+export * from "./DashboardCardPaginationHeaderToolbar";
 export * from "./DashboardCardTable";
 export * from "./DashboardCardTitleToolbar";
