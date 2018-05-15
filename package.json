@@ -23,6 +23,7 @@
     "@types/jest": "^22.2.3",
     "@types/lodash.debounce": "^4.0.3",
     "@types/lscache": "^1.0.29",
+    "@types/prop-types": "^15.5.2",
     "@types/react-dom": "^16.0.5",
     "@types/react-helmet": "^5.0.6",
     "@types/react-redux": "^5.0.19",
