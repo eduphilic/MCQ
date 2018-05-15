@@ -2,7 +2,7 @@ import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { DashboardEntryCard, DashboardEntryCardProps } from ".";
-import { ContentCenterWrapper } from "../../../../node_modules/components/atoms/ContentCenterWrapper";
+import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 
 storiesOf("Organisms", module).add(
   "DashboardEntryCard",

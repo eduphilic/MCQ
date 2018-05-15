@@ -12,7 +12,17 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "components/*": ["./packages/components/src/*"],
+      "placeholder": ["./packages/placeholder/src"],
+      "store": ["./packages/store/src"],
+      "styled": ["./packages/styled/src"],
+      "theme": ["./packages/theme/src"],
+      "theme/*": ["./packages/theme/src/*"]
+    },
+    "typeRoots": ["node_modules/@types", "./typings"]
   },
   "exclude": ["node_modules", "**/node_modules/*"]
 }
