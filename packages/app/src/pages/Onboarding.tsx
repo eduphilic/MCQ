@@ -1,3 +1,5 @@
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
 import {
   PanelManager,
   PanelManagerProps,
@@ -7,7 +9,6 @@ import { createSelectEntryPlaceholderData } from "components/organisms/EntrySele
 import { OnboardingTemplate } from "components/templates/OnboardingTemplate";
 import { createPlaceholderOnboardingTemplateProps } from "components/templates/OnboardingTemplate/createPlaceholderOnboardingTemplateProps";
 import strings from "l10n";
-import Tabs, { Tab } from "material-ui/Tabs";
 import React, { Component, ReactElement } from "react";
 import { withRouter } from "react-router-dom";
 

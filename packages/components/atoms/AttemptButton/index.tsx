@@ -1,5 +1,5 @@
+import Button, { ButtonProps } from "@material-ui/core/Button";
 import strings from "l10n";
-import Button, { ButtonProps } from "material-ui/Button";
 import React, { SFC } from "react";
 import styled from "styled";
 

@@ -2,7 +2,8 @@ import React, { Component, MouseEvent } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
-import Menu, { MenuItem } from "material-ui/Menu";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 import { Typography } from "components/atoms/Typography";
 import { DashboardSecondaryToolbar } from "components/molecules/DashboardSecondaryToolbar";

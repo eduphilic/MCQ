@@ -1,8 +1,8 @@
+import Typography from "@material-ui/core/Typography";
 import { AuthenticationErrorSnackbar } from "components/molecules/AuthenticationErrorSnackbar";
 import { AuthenticationForm } from "components/molecules/AuthenticationForm";
 import { AdminLoginTemplate } from "components/templates/AdminLoginTemplate";
 import strings from "l10n";
-import Typography from "material-ui/Typography";
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import { connect } from "react-redux";

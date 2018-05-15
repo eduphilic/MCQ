@@ -1,6 +1,8 @@
 // tslint:disable-next-line:import-name
-import MuiButton, { ButtonProps as MuiButtonProps } from "material-ui/Button";
-import { fade } from "material-ui/styles/colorManipulator";
+import MuiButton, {
+  ButtonProps as MuiButtonProps,
+} from "@material-ui/core/Button";
+import { fade } from "@material-ui/core/styles/colorManipulator";
 import React, { SFC } from "react";
 import styled from "styled";
 import { Theme } from "theme";

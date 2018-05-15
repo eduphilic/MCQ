@@ -1,4 +1,4 @@
-import { TableCell, TableCellProps } from "material-ui/Table";
+import TableCell, { TableCellProps } from "@material-ui/core/TableCell";
 import React, { SFC } from "react";
 import styled from "styled";
 

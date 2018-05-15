@@ -12,6 +12,7 @@
     "no-submodule-imports": [
       true,
       "material-ui",
+      "@material-ui/core",
       "@material-ui/icons",
       "components"
     ],
