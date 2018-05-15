@@ -1,4 +1,5 @@
 import React, { SFC } from "react";
+import styled from "styled";
 
 import Switch from "material-ui/Switch";
 import Tooltip from "material-ui/Tooltip";
@@ -33,9 +34,35 @@ export const ColumnItemSingleLine: ColumnItemComponent = ({ itemColumn }) => (
   <Typography>{itemColumn.primaryText}</Typography>
 );
 
+const StyledSwitch = styled(Switch).attrs({
+  classes: {
+    bar: "bar",
+    checked: "checked",
+    disabled: "disabled",
+  },
+  color: "primary",
+})`
+  .disabled {
+    color: ${({ theme }) => theme.palette.grey[50]};
+  }
+
+  .disabled + .bar {
+    opacity: 0.38;
+  }
+
+  .checked {
+    color: ${({ theme }) => theme.palette.primary.main};
+  }
+
+  .checked + .bar {
+    background-color: ${({ theme }) => theme.palette.primary.main};
+    opacity: 0.5;
+  }
+`;
+
 export const ColumnItemSwitch: ColumnItemComponent = ({ itemColumn, mode }) => {
   const component = (
-    <Switch
+    <StyledSwitch
       checked={Boolean(itemColumn.switchChecked)}
       onClick={event => {
         event.stopPropagation();
