@@ -1,7 +1,12 @@
-import { FormikConfig } from "formik";
+import { Formik, FormikConfig } from "formik";
 import React, { cloneElement, Component, ReactElement } from "react";
 
-import Dialog, { DialogContent, DialogTitle } from "material-ui/Dialog";
+import Button from "material-ui/Button";
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "material-ui/Dialog";
 import withMobileDialog from "material-ui/Dialog/withMobileDialog";
 import { WithWidthProps } from "material-ui/utils/withWidth";
 
@@ -12,6 +17,12 @@ export interface DashboardFormDialogProps<Values extends object>
    */
   children: ReactElement<{ onClick: () => any }>;
 
+  /**
+   * Form validation configuration.
+   *
+   * The onSubmit handler is wrapped. It closed the dialog on successful
+   * resolution of the onSubmit promise.
+   */
   formikConfig: FormikConfig<Values>;
 
   /**
@@ -36,24 +47,56 @@ class DashboardFormDialogBase<Values extends object> extends Component<
 
   handleClickOpen = () => this.setState({ open: true });
 
+  handleSubmit: FormikConfig<Values>["onSubmit"] = async (
+    values,
+    formikActions,
+  ) => {
+    try {
+      await this.props.formikConfig.onSubmit(values, formikActions);
+
+      this.setState({ open: false });
+    } catch (e) {
+      /* tslint:disable-next-line:no-console */
+      console.log("Submission error:", e);
+    }
+  };
+
   render() {
-    const { children, fullScreen } = this.props;
+    const { children, fullScreen, formikConfig } = this.props;
     const { open } = this.state;
 
     const buttonWithOnClickHandler = cloneElement(children, {
       onClick: this.handleClickOpen,
     });
 
+    const formikConfigWithSubmitHook: FormikConfig<Values> = {
+      ...formikConfig,
+      onSubmit: this.handleSubmit,
+    };
+
     return (
       <>
         {buttonWithOnClickHandler}
 
-        <Dialog fullScreen={fullScreen} open={open}>
-          <DialogTitle>Create a New Entry</DialogTitle>
-          <DialogContent>
-            <div>Dialog Content</div>
-          </DialogContent>
-        </Dialog>
+        <Formik
+          {...formikConfigWithSubmitHook}
+          render={api => (
+            <Dialog fullScreen={fullScreen} open={open}>
+              <DialogTitle>Create a New Entry</DialogTitle>
+
+              <DialogContent>{/* */}</DialogContent>
+
+              <DialogActions>
+                <Button
+                  onClick={api.handleSubmit as any}
+                  disabled={api.isSubmitting}
+                >
+                  Submit
+                </Button>
+              </DialogActions>
+            </Dialog>
+          )}
+        />
       </>
     );
   }
