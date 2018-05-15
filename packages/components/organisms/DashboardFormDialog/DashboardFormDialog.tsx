@@ -1,5 +1,6 @@
 import { Formik, FormikConfig } from "formik";
 import React, { cloneElement, Component, ReactElement } from "react";
+import styled from "styled";
 
 import Button from "material-ui/Button";
 import Dialog, {
@@ -9,6 +10,10 @@ import Dialog, {
 } from "material-ui/Dialog";
 import withMobileDialog from "material-ui/Dialog/withMobileDialog";
 import { WithWidthProps } from "material-ui/utils/withWidth";
+
+export type DashboardFormDialogInputElementTypes<
+  Values extends object
+> = Record<keyof Values, "text">;
 
 export interface DashboardFormDialogProps<Values extends object>
   extends Partial<WithWidthProps> {
@@ -24,6 +29,11 @@ export interface DashboardFormDialogProps<Values extends object>
    * resolution of the onSubmit promise.
    */
   formikConfig: FormikConfig<Values>;
+
+  /**
+   * Field types, used to render the proper input elements for value fields.
+   */
+  inputElementTypes: DashboardFormDialogInputElementTypes<Values>;
 
   /**
    * Injected by the Material UI utility "withMobileDialog". It controls whether
@@ -54,6 +64,7 @@ class DashboardFormDialogBase<Values extends object> extends Component<
     try {
       await this.props.formikConfig.onSubmit(values, formikActions);
 
+      formikActions.setSubmitting(false);
       this.setState({ open: false });
     } catch (e) {
       /* tslint:disable-next-line:no-console */
@@ -82,18 +93,17 @@ class DashboardFormDialogBase<Values extends object> extends Component<
           {...formikConfigWithSubmitHook}
           render={api => (
             <Dialog fullScreen={fullScreen} open={open}>
-              <DialogTitle>Create a New Entry</DialogTitle>
+              <FormWithFullContainerSize onSubmit={api.handleSubmit}>
+                <DialogTitle>Create a New Entry</DialogTitle>
 
-              <DialogContent>{/* */}</DialogContent>
+                <DialogContent>{/* */}</DialogContent>
 
-              <DialogActions>
-                <Button
-                  onClick={api.handleSubmit as any}
-                  disabled={api.isSubmitting}
-                >
-                  Submit
-                </Button>
-              </DialogActions>
+                <DialogActions>
+                  <Button type="submit" disabled={api.isSubmitting}>
+                    Submit
+                  </Button>
+                </DialogActions>
+              </FormWithFullContainerSize>
             </Dialog>
           )}
         />
@@ -101,6 +111,13 @@ class DashboardFormDialogBase<Values extends object> extends Component<
     );
   }
 }
+
+const FormWithFullContainerSize = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+`;
 
 // Wrap the base class in the responsiveness utility from Material UI and make
 // use of the typing information for the values.
