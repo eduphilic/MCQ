@@ -1,6 +1,7 @@
 import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React, { ReactNode } from "react";
+
 import { LandingTemplate } from ".";
 import { PlaceholderImage } from "../../atoms/PlaceholderImage";
 

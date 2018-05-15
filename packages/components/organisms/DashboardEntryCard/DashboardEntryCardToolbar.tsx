@@ -1,11 +1,11 @@
 import React, { Component, ReactNode } from "react";
 import styled, { withProps } from "styled";
 
-import Icon from "material-ui/Icon";
-import IconButton from "material-ui/IconButton";
-import { lighten } from "material-ui/styles/colorManipulator";
-import Toolbar from "material-ui/Toolbar";
-import Tooltip from "material-ui/Tooltip";
+import Icon from "@material-ui/core/Icon";
+import IconButton from "@material-ui/core/IconButton";
+import { lighten } from "@material-ui/core/styles/colorManipulator";
+import Toolbar from "@material-ui/core/Toolbar";
+import Tooltip from "@material-ui/core/Tooltip";
 
 import { Typography } from "../../atoms/Typography";
 

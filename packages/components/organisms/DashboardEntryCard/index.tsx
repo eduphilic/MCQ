@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import styled, { withProps } from "styled";
 
-import Card from "material-ui/Card";
-import Checkbox from "material-ui/Checkbox";
-import Table, {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "material-ui/Table";
+import Card from "@material-ui/core/Card";
+import Checkbox from "@material-ui/core/Checkbox";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 
 import { DashboardTableRow } from "../../atoms/DashboardTableRow";
 import { Typography } from "../../atoms/Typography";

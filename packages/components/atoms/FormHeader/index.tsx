@@ -1,4 +1,4 @@
-import Typography, { TypographyProps } from "material-ui/Typography";
+import Typography, { TypographyProps } from "@material-ui/core/Typography";
 import React, { SFC } from "react";
 import styled from "styled";
 

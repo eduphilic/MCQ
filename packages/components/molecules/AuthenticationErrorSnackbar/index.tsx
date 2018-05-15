@@ -1,4 +1,4 @@
-import Snackbar from "material-ui/Snackbar";
+import Snackbar from "@material-ui/core/Snackbar";
 import React, { Component, ReactElement } from "react";
 
 export interface AuthenticationErrorSnackbarProps {

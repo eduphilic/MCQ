@@ -1,7 +1,9 @@
-import Drawer from "material-ui/Drawer";
-import Hidden from "material-ui/Hidden";
 import React, { cloneElement, ReactElement, ReactNode, SFC } from "react";
 import styled, { css } from "styled";
+
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+
 import {
   DrawerProps,
   DrawerStateConsumer,

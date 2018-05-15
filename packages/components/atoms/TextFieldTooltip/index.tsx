@@ -1,4 +1,4 @@
-import Tooltip from "material-ui/Tooltip";
+import Tooltip from "@material-ui/core/Tooltip";
 import React, { ReactElement, ReactNode } from "react";
 import styled, { injectGlobal } from "styled";
 import { TooltipArrow } from "../TooltipArrow";

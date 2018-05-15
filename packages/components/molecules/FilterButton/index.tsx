@@ -1,10 +1,10 @@
+import Hidden from "@material-ui/core/Hidden";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import FilterList from "@material-ui/icons/FilterList";
 import strings from "l10n";
-import Hidden from "material-ui/Hidden";
-import Menu, { MenuItem } from "material-ui/Menu";
 import React, { Component } from "react";
 import styled from "styled";
-// import Button from "material-ui/Button";
 import { Button } from "../../atoms/Button";
 
 export interface FilterButtonProps {

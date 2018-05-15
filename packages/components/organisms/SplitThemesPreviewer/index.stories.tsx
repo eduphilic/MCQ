@@ -1,6 +1,6 @@
+import Typography from "@material-ui/core/Typography";
 import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
-import Typography from "material-ui/Typography";
 import React from "react";
 import { SplitThemesPreviewer } from ".";
 

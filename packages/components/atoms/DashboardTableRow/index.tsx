@@ -1,4 +1,4 @@
-import { TableRow, TableRowProps } from "material-ui/Table";
+import TableRow, { TableRowProps } from "@material-ui/core/TableRow";
 import styled from "styled";
 
 export const DashboardTableRow = styled(TableRow).attrs({

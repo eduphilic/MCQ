@@ -1,8 +1,8 @@
 import React, { Component, ReactNode } from "react";
 import styled, { css, withProps } from "styled";
 
-import Drawer from "material-ui/Drawer";
-import Paper from "material-ui/Paper";
+import Drawer from "@material-ui/core/Drawer";
+import Paper from "@material-ui/core/Paper";
 
 import { Typography } from "../../atoms/Typography";
 import { SideSheetToggleStateConsumer } from "./SideSheetToggleState";

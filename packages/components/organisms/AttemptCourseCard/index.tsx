@@ -1,6 +1,9 @@
-import Card, { CardContent } from "material-ui/Card";
 import React, { SFC } from "react";
 import styled from "styled";
+
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+
 import {
   AttemptCourse,
   AttemptCourseProps,

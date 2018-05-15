@@ -1,10 +1,12 @@
-import Menu from "@material-ui/icons/Menu";
-import Hidden from "material-ui/Hidden";
-import IconButton from "material-ui/IconButton";
-import Toolbar from "material-ui/Toolbar";
-import Typography from "material-ui/Typography";
 import React, { cloneElement, ReactElement, SFC } from "react";
 import styled from "styled";
+
+import Hidden from "@material-ui/core/Hidden";
+import IconButton from "@material-ui/core/IconButton";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Menu from "@material-ui/icons/Menu";
+
 import { LogoutButton, LogoutButtonProps } from "../../molecules/LogoutButton";
 import { DrawerStateConsumer } from "../../organisms/ResponsiveDrawerFrame";
 

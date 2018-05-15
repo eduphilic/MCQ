@@ -2,7 +2,7 @@ import React, { SFC } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled";
 
-import AppBar from "material-ui/AppBar";
+import AppBar from "@material-ui/core/AppBar";
 
 import { AdminAppDrawerTheme } from "theme";
 

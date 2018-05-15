@@ -1,8 +1,11 @@
-import { ContentCenterWrapper } from "components/atoms/ContentCenterWrapper";
-import Grid from "material-ui/Grid";
 import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 import { DarkTheme, LightTheme } from "theme";
+
+import Grid from "@material-ui/core/Grid";
+import Hidden from "@material-ui/core/Hidden";
+
+import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 import { PageFooter } from "../../atoms/PageFooter";
 import { Logo } from "../../molecules/Logo";
 
@@ -26,9 +29,11 @@ export const AdminLoginTemplate: SFC<AdminLoginTemplateProps> = props => {
         <div className="content">
           <ContentCenterWrapper>
             <Grid container>
-              <Grid item sm={8} hidden={{ xsDown: true }}>
-                {heroNode}
-              </Grid>
+              <Hidden xsDown>
+                <Grid item sm={8}>
+                  {heroNode}
+                </Grid>
+              </Hidden>
               <Grid item sm={4} xs={12}>
                 <LightTheme>{loginForm}</LightTheme>
               </Grid>

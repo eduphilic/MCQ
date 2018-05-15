@@ -3,9 +3,9 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { ResponsiveToolbarTypographyButton } from ".";
 
+import Paper from "@material-ui/core/Paper";
+import Toolbar from "@material-ui/core/Toolbar";
 import Add from "@material-ui/icons/Add";
-import Paper from "material-ui/Paper";
-import Toolbar from "material-ui/Toolbar";
 import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 
 storiesOf("Molecules", module).add(

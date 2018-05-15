@@ -1,6 +1,8 @@
-import Toolbar from "material-ui/Toolbar";
 import React, { SFC } from "react";
 import styled from "styled";
+
+import Toolbar from "@material-ui/core/Toolbar";
+
 import { Logo } from "../../molecules/Logo";
 import { LogoutButton } from "../../molecules/LogoutButton";
 

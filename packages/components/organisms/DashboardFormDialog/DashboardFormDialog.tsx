@@ -2,14 +2,13 @@ import { Formik, FormikConfig } from "formik";
 import React, { cloneElement, Component, ReactElement } from "react";
 import styled from "styled";
 
-import Button from "material-ui/Button";
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from "material-ui/Dialog";
-import withMobileDialog from "material-ui/Dialog/withMobileDialog";
-import { WithWidthProps } from "material-ui/utils/withWidth";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import withMobileDialog from "@material-ui/core/withMobileDialog";
+import { WithWidthProps } from "@material-ui/core/withWidth";
 
 export type DashboardFormDialogInputElementTypes<
   Values extends object

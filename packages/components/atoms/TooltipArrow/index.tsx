@@ -1,4 +1,4 @@
-import Icon from "material-ui/Icon";
+import Icon from "@material-ui/core/Icon";
 import React, { SFC } from "react";
 import styled from "styled";
 

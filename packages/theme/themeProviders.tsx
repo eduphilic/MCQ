@@ -1,4 +1,4 @@
-import { MuiThemeProvider } from "material-ui/styles";
+import { MuiThemeProvider } from "@material-ui/core/styles";
 import React, { SFC } from "react";
 import { ThemeProvider as StyledComponentsThemeProvider } from "./styledComponents";
 import { darkTheme, lightTheme } from "./themes";

@@ -1,5 +1,5 @@
-import { Theme } from "material-ui";
-import Typography, { TypographyProps } from "material-ui/Typography";
+import { Theme } from "@material-ui/core/styles";
+import Typography, { TypographyProps } from "@material-ui/core/Typography";
 import React, { SFC } from "react";
 import styled, { withProps } from "styled";
 

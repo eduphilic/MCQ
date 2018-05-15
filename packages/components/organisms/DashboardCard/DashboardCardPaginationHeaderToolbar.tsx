@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Toolbar from "material-ui/Toolbar";
+import Toolbar from "@material-ui/core/Toolbar";
 
 import { Typography } from "../../atoms/Typography";
 import { DashboardCardPaginationProps } from "./DashboardCardPagination";

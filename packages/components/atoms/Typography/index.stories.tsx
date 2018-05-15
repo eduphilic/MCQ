@@ -1,6 +1,6 @@
+import Paper from "@material-ui/core/Paper";
 import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
-import Paper from "material-ui/Paper";
 import React from "react";
 import { Typography, Variant } from ".";
 

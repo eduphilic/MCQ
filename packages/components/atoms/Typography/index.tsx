@@ -1,7 +1,7 @@
 // tslint:disable-next-line:import-name
 import MuiTypography, {
   TypographyProps as MuiTypographyProps,
-} from "material-ui/Typography";
+} from "@material-ui/core/Typography";
 import React, { SFC } from "react";
 import styled, { ThemedStyledFunction } from "styled";
 

@@ -1,9 +1,11 @@
 import strings from "l10n";
-import Button from "material-ui/Button";
-import Typography from "material-ui/Typography";
 import React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled";
+
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+
 import { TextField } from "../../atoms/TextField";
 
 export interface SelectionSummaryProps {

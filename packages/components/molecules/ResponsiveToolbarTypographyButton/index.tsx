@@ -4,8 +4,8 @@ import styled from "styled";
 import { Button, ButtonProps } from "../../atoms/Button";
 import { Typography, TypographyProps } from "../../atoms/Typography";
 
-import Tooltip, { TooltipProps } from "material-ui/Tooltip";
-import withWidth, { isWidthDown } from "material-ui/utils/withWidth";
+import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
+import withWidth, { isWidthDown } from "@material-ui/core/withWidth";
 
 export interface ResponsiveToolbarTypographyButtonProps extends ButtonProps {
   className?: string;

@@ -9,8 +9,8 @@
 /* tslint:disable no-implicit-dependencies no-submodule-imports */
 import React, { SFC } from "react";
 
+import { createGenerateClassName, jssPreset } from "@material-ui/core/styles";
 import { create } from "jss";
-import { createGenerateClassName, jssPreset } from "material-ui/styles";
 // @ts-ignore
 import JssProvider from "react-jss/lib/JssProvider";
 

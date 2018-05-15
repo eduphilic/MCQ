@@ -1,8 +1,12 @@
 import strings from "l10n";
-import List, { ListItem, ListItemText } from "material-ui/List";
 import React, { SFC } from "react";
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled";
+
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+
 import { Logo } from "../../molecules/Logo";
 
 type Links = [keyof typeof strings, string][];

@@ -1,5 +1,5 @@
+import Typography from "@material-ui/core/Typography";
 import strings from "l10n";
-import Typography from "material-ui/Typography";
 import React, { SFC } from "react";
 import styled from "styled";
 

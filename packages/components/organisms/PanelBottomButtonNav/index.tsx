@@ -1,9 +1,10 @@
-import Button from "material-ui/Button";
-import Divider from "material-ui/Divider";
-import Hidden from "material-ui/Hidden";
-import Typography from "material-ui/Typography";
 import React, { SFC } from "react";
 import styled from "styled";
+
+import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
+import Hidden from "@material-ui/core/Hidden";
+import Typography from "@material-ui/core/Typography";
 
 export interface PanelBottomButtonNavProps {
   /**

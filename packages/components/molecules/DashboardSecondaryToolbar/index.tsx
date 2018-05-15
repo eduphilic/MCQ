@@ -1,5 +1,5 @@
-import Paper from "material-ui/Paper";
-import Toolbar from "material-ui/Toolbar";
+import Paper from "@material-ui/core/Paper";
+import Toolbar from "@material-ui/core/Toolbar";
 import React, { Component } from "react";
 import styled from "styled";
 

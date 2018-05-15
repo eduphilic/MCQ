@@ -1,4 +1,4 @@
-import CssBaseline from "material-ui/CssBaseline";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import React, { SFC } from "react";
 import { Helmet } from "react-helmet";
 import { CompatibilityFix } from "./CompatibilityFix";

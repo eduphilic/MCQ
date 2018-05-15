@@ -1,4 +1,4 @@
-import Typography from "material-ui/Typography";
+import Typography from "@material-ui/core/Typography";
 import React, { SFC } from "react";
 import styled from "styled";
 import { Entry, EntryLogo } from "../../atoms/EntryLogo";

@@ -1,4 +1,4 @@
-import Icon from "material-ui/Icon";
+import Icon from "@material-ui/core/Icon";
 import React, { Component } from "react";
 import styled from "styled";
 import { Button, ButtonProps } from "../../atoms/Button";

@@ -1,8 +1,8 @@
+import Button from "@material-ui/core/Button";
+import Tooltip from "@material-ui/core/Tooltip";
+import withWidth, { isWidthDown } from "@material-ui/core/withWidth";
 import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
 import strings from "l10n";
-import Button from "material-ui/Button";
-import Tooltip from "material-ui/Tooltip";
-import withWidth, { isWidthDown } from "material-ui/utils/withWidth";
 import React, { SFC } from "react";
 import styled from "styled";
 

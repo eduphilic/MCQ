@@ -1,10 +1,14 @@
-import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
 import strings from "l10n";
-import Button from "material-ui/Button";
-import { ListItemIcon, ListItemText } from "material-ui/List";
-import Menu, { MenuItem } from "material-ui/Menu";
 import React, { Component, MouseEvent } from "react";
 import styled from "styled";
+
+import Button from "@material-ui/core/Button";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
+
 import { ToolbarAvatar, ToolbarAvatarProps } from "../ToolbarAvatar";
 
 export interface ToolbarProfileMenuProps {

@@ -1,6 +1,8 @@
-import Typography from "material-ui/Typography";
 import React, { Component } from "react";
 import styled from "styled";
+
+import Typography from "@material-ui/core/Typography";
+
 import {
   QuantitySlider,
   QuantitySliderProps,

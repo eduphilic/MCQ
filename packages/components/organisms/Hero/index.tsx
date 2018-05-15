@@ -1,13 +1,15 @@
+import strings from "l10n";
+import React, { SFC } from "react";
+import styled, { withProps } from "styled";
+import { DarkTheme, LightTheme } from "theme";
+
+import Hidden from "@material-ui/core/Hidden";
+import Typography from "@material-ui/core/Typography";
+
 import {
   OnboardingForms,
   OnboardingFormsProps,
 } from "components/organisms/OnboardingForms";
-import strings from "l10n";
-import Hidden from "material-ui/Hidden";
-import Typography from "material-ui/Typography";
-import React, { SFC } from "react";
-import styled, { withProps } from "styled";
-import { DarkTheme, LightTheme } from "theme";
 import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 import { HeroFooter } from "../../molecules/HeroFooter";
 import {

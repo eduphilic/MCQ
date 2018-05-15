@@ -1,5 +1,5 @@
-import Avatar from "material-ui/Avatar";
-import Typography from "material-ui/Typography";
+import Avatar from "@material-ui/core/Avatar";
+import Typography from "@material-ui/core/Typography";
 import React, { SFC } from "react";
 import styled from "styled";
 

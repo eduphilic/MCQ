@@ -1,5 +1,5 @@
-import Grid from "material-ui/Grid";
-import Typography from "material-ui/Typography";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import React, { ChangeEvent, Component } from "react";
 // tslint:disable-next-line:import-name
 import ResizeObserver from "resize-observer-polyfill";

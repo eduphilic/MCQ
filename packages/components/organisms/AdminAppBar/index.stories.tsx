@@ -3,8 +3,8 @@ import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
+import AppBar from "@material-ui/core/AppBar";
 import Add from "@material-ui/icons/Add";
-import AppBar from "material-ui/AppBar";
 
 import { AdminAppBar, AdminAppBarProps } from ".";
 import { ResponsiveToolbarTypographyButton } from "../../molecules/ResponsiveToolbarTypographyButton";

@@ -1,15 +1,14 @@
 import React, { Component, ReactNode } from "react";
 import styled, { withProps } from "styled";
 
-import Checkbox from "material-ui/Checkbox";
-import Hidden from "material-ui/Hidden";
-import Table, {
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableRow,
-} from "material-ui/Table";
+import Checkbox from "@material-ui/core/Checkbox";
+import Hidden from "@material-ui/core/Hidden";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableFooter from "@material-ui/core/TableFooter";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 
 import { DashboardTableRow } from "../../atoms/DashboardTableRow";
 import { Typography } from "../../atoms/Typography";

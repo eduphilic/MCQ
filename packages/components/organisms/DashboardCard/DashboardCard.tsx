@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Card from "material-ui/Card";
+import Card from "@material-ui/core/Card";
 
 import { DashboardCardItem } from "./DashboardCardItem";
 import {

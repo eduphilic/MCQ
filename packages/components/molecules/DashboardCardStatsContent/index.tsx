@@ -1,6 +1,6 @@
-import { CardContent } from "material-ui/Card";
-import Grid from "material-ui/Grid";
-import Hidden from "material-ui/Hidden";
+import CardContent from "@material-ui/core/CardContent";
+import Grid from "@material-ui/core/Grid";
+import Hidden from "@material-ui/core/Hidden";
 import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 

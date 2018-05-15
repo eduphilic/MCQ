@@ -1,8 +1,9 @@
 import React, { Component, MouseEvent } from "react";
 import styled from "styled";
 
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
-import Menu, { MenuItem } from "material-ui/Menu";
 
 import { Typography } from "../../atoms/Typography";
 import { TypographyButton } from "../../molecules/TypographyButton";

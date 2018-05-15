@@ -1,7 +1,9 @@
 import strings from "l10n";
-import Typography from "material-ui/Typography";
 import React, { ReactNode, SFC } from "react";
 import styled from "styled";
+
+import Typography from "@material-ui/core/Typography";
+
 import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 import {
   OnboardingAppBar,

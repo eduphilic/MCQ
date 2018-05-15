@@ -1,8 +1,8 @@
 import React, { SFC } from "react";
 import styled from "styled";
 
-import Switch from "material-ui/Switch";
-import Tooltip from "material-ui/Tooltip";
+import Switch from "@material-ui/core/Switch";
+import Tooltip from "@material-ui/core/Tooltip";
 
 import { Typography } from "../../atoms/Typography";
 import { ResponsiveToolbarTypographyButton } from "../../molecules/ResponsiveToolbarTypographyButton";
