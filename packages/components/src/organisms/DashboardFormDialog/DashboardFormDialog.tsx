@@ -1,10 +1,5 @@
 import { Formik, FormikConfig } from "formik";
-import React, {
-  cloneElement,
-  Component,
-  ComponentType,
-  ReactElement,
-} from "react";
+import React, { cloneElement, Component, ReactElement } from "react";
 import styled from "styled";
 
 import Button from "@material-ui/core/Button";
@@ -12,33 +7,14 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import TextField from "@material-ui/core/TextField";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
 import { WithWidthProps } from "@material-ui/core/withWidth";
 
-export type DashboardFormDialogInputElementTypes<
-  Values extends object
-> = Record<keyof Values, "text">;
-
-export interface FieldConfig {
-  /**
-   * Field type, used to render the proper input component for the field.
-   */
-  inputType: "text";
-
-  /**
-   * Label for the input.
-   */
-  inputLabel: string;
-
-  /**
-   * Placeholder text for input.
-   */
-  placeholder?: string;
-}
+import { DashboardFormDialogFieldConfig } from "./DashboardFormDialogFieldConfig";
+import { DashboardFormDialogFormInput } from "./DashboardFormDialogFormInput";
 
 export type FieldConfigs<Values extends object> = {
-  [key in keyof Values]: FieldConfig
+  [key in keyof Values]: DashboardFormDialogFieldConfig
 };
 
 export interface DashboardFormDialogProps<Values extends object>
@@ -120,39 +96,15 @@ class DashboardFormDialogBase<Values extends object> extends Component<
 
                 <DialogContent>
                   {(Object.keys(api.values) as (keyof Values)[]).map(
-                    (key, index) => {
-                      let InputComponent: ComponentType<any>;
-
-                      switch (fieldConfigs[key].inputType) {
-                        case "text":
-                          InputComponent = TextField;
-                          break;
-                        default:
-                          return null;
-                      }
-
-                      const type = fieldConfigs[key].inputType;
-
-                      return (
-                        <InputComponent
-                          key={key}
-                          type={type}
-                          name={key}
-                          required
-                          autoFocus={index === 0}
-                          value={api.values[key]}
-                          onChange={api.handleChange}
-                          onBlur={api.handleBlur}
-                          label={
-                            api.errors[key] || fieldConfigs[key].inputLabel
-                          }
-                          placeholder={fieldConfigs[key].placeholder}
-                          error={Boolean(api.errors[key])}
-                          fullWidth
-                          margin="dense"
-                        />
-                      );
-                    },
+                    (key, index) => (
+                      <DashboardFormDialogFormInput
+                        key={key}
+                        api={api}
+                        fieldKey={key}
+                        fieldConfig={fieldConfigs[key]}
+                        autoFocus={index === 0}
+                      />
+                    ),
                   )}
                 </DialogContent>
 
