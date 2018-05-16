@@ -84,6 +84,7 @@ class DashboardFormDialogBase<Values extends object> extends Component<
       await this.props.onSubmit(values, formikActions);
 
       formikActions.setSubmitting(false);
+      formikActions.resetForm();
       this.setState({ open: false });
     } catch (e) {
       /* tslint:disable-next-line:no-console */
