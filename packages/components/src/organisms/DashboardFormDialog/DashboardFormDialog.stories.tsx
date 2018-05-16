@@ -1,8 +1,7 @@
 import { storiesOf } from "@storybook/react";
-import { FormikConfig } from "formik";
 import React from "react";
 
-import { DashboardFormDialog, DashboardFormDialogInputElementTypes } from ".";
+import { DashboardFormDialog, FieldConfigs } from ".";
 import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 import { TypographyButton } from "../../molecules/TypographyButton";
 
@@ -13,40 +12,35 @@ interface Values {
 
 storiesOf("Organisms", module).add("DashboardFormDialog", () => {
   // Simulate delay from submitting by way of an api call.
-  const simulatedSubmitDelay = () =>
-    new Promise(resolve => setTimeout(resolve, 1000));
+  const onSubmit = () => new Promise(resolve => setTimeout(resolve, 1000));
 
-  const formikConfig: FormikConfig<Values> = {
-    initialValues: {
-      entryType: "",
-      categoryType: "",
+  const validate = () => Promise.resolve(true);
+
+  const fields: FieldConfigs<Values> = {
+    entryType: {
+      inputType: "text",
+      inputLabel: "Entry Type",
+      placeholder: "Enter Entry name here...",
     },
-    onSubmit: simulatedSubmitDelay,
-    validate: () => Promise.resolve(true),
+    categoryType: {
+      inputType: "text",
+      inputLabel: "Category Type",
+      placeholder: "Enter category name here...",
+    },
   };
 
-  const inputElementTypes: DashboardFormDialogInputElementTypes<Values> = {
-    entryType: "text",
-    categoryType: "text",
-  };
-
-  const inputElementLabels = {
-    entryType: "Entry Type",
-    categoryType: "Category Type",
-  };
-
-  const inputElementPlaceholders = {
-    entryType: "Enter entry name here...",
-    categoryType: "Enter category name here...",
+  const initialValues: Values = {
+    entryType: "",
+    categoryType: "",
   };
 
   return (
     <ContentCenterWrapper style={{ padding: 16 }}>
       <DashboardFormDialog
-        formikConfig={formikConfig}
-        inputElementTypes={inputElementTypes}
-        inputElementLabels={inputElementLabels}
-        inputElementPlaceholders={inputElementPlaceholders}
+        initialValues={initialValues}
+        fieldConfigs={fields}
+        validate={validate}
+        onSubmit={onSubmit}
       >
         <TypographyButton>Open Modal</TypographyButton>
       </DashboardFormDialog>

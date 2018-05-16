@@ -20,35 +20,39 @@ export type DashboardFormDialogInputElementTypes<
   Values extends object
 > = Record<keyof Values, "text">;
 
+export interface FieldConfig {
+  /**
+   * Field type, used to render the proper input component for the field.
+   */
+  inputType: "text";
+
+  /**
+   * Label for the input.
+   */
+  inputLabel: string;
+
+  /**
+   * Placeholder text for input.
+   */
+  placeholder?: string;
+}
+
+export type FieldConfigs<Values extends object> = {
+  [key in keyof Values]: FieldConfig
+};
+
 export interface DashboardFormDialogProps<Values extends object>
-  extends Partial<WithWidthProps> {
+  extends Partial<WithWidthProps>,
+    FormikConfig<Values> {
   /**
    * Child element that accepts an "onClick" handler.
    */
   children: ReactElement<{ onClick: () => any }>;
 
   /**
-   * Form validation configuration.
-   *
-   * The onSubmit handler is wrapped. It closed the dialog on successful
-   * resolution of the onSubmit promise.
+   * Field settings.
    */
-  formikConfig: FormikConfig<Values>;
-
-  /**
-   * Field types, used to render the proper input elements for value fields.
-   */
-  inputElementTypes: DashboardFormDialogInputElementTypes<Values>;
-
-  /**
-   * Labels for input elements.
-   */
-  inputElementLabels: Record<keyof Values, string>;
-
-  /**
-   * Placeholder texts for input elements.
-   */
-  inputElementPlaceholders: Record<keyof Values, string>;
+  fieldConfigs: FieldConfigs<Values>;
 
   /**
    * Injected by the Material UI utility "withMobileDialog". It controls whether
@@ -77,7 +81,7 @@ class DashboardFormDialogBase<Values extends object> extends Component<
     formikActions,
   ) => {
     try {
-      await this.props.formikConfig.onSubmit(values, formikActions);
+      await this.props.onSubmit(values, formikActions);
 
       formikActions.setSubmitting(false);
       this.setState({ open: false });
@@ -90,11 +94,10 @@ class DashboardFormDialogBase<Values extends object> extends Component<
   render() {
     const {
       children,
+      fieldConfigs,
       fullScreen,
-      formikConfig,
-      inputElementTypes,
-      inputElementLabels,
-      inputElementPlaceholders,
+      onSubmit,
+      ...rest
     } = this.props;
     const { open } = this.state;
 
@@ -102,17 +105,13 @@ class DashboardFormDialogBase<Values extends object> extends Component<
       onClick: this.handleClickOpen,
     });
 
-    const formikConfigWithSubmitHook: FormikConfig<Values> = {
-      ...formikConfig,
-      onSubmit: this.handleSubmit,
-    };
-
     return (
       <>
         {buttonWithOnClickHandler}
 
         <Formik
-          {...formikConfigWithSubmitHook}
+          {...rest}
+          onSubmit={this.handleSubmit}
           render={api => (
             <Dialog fullScreen={fullScreen} open={open}>
               <FormFullContainerSize onSubmit={api.handleSubmit}>
@@ -123,7 +122,7 @@ class DashboardFormDialogBase<Values extends object> extends Component<
                     (key, index) => {
                       let InputComponent: ComponentType<any>;
 
-                      switch (inputElementTypes[key]) {
+                      switch (fieldConfigs[key].inputType) {
                         case "text":
                           InputComponent = TextField;
                           break;
@@ -131,7 +130,7 @@ class DashboardFormDialogBase<Values extends object> extends Component<
                           return null;
                       }
 
-                      const type = inputElementTypes[key];
+                      const type = fieldConfigs[key].inputType;
 
                       return (
                         <InputComponent
@@ -143,8 +142,10 @@ class DashboardFormDialogBase<Values extends object> extends Component<
                           value={api.values[key]}
                           onChange={api.handleChange}
                           onBlur={api.handleBlur}
-                          label={api.errors[key] || inputElementLabels[key]}
-                          placeholder={inputElementPlaceholders[key]}
+                          label={
+                            api.errors[key] || fieldConfigs[key].inputLabel
+                          }
+                          placeholder={fieldConfigs[key].placeholder}
                           error={Boolean(api.errors[key])}
                           fullWidth
                           margin="dense"
