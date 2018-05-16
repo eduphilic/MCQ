@@ -8,19 +8,36 @@ import { TypographyButton } from "../../molecules/TypographyButton";
 
 interface Values {
   entryType: string;
+  categoryType: string;
 }
 
 storiesOf("Organisms", module).add("DashboardFormDialog", () => {
+  // Simulate delay from submitting by way of an api call.
+  const simulatedSubmitDelay = () =>
+    new Promise(resolve => setTimeout(resolve, 1000));
+
   const formikConfig: FormikConfig<Values> = {
     initialValues: {
       entryType: "",
+      categoryType: "",
     },
-    // tslint:disable-next-line:no-empty
-    onSubmit: () => {},
+    onSubmit: simulatedSubmitDelay,
+    validate: () => Promise.resolve(true),
   };
 
   const inputElementTypes: DashboardFormDialogInputElementTypes<Values> = {
     entryType: "text",
+    categoryType: "text",
+  };
+
+  const inputElementLabels = {
+    entryType: "Entry Type",
+    categoryType: "Category Type",
+  };
+
+  const inputElementPlaceholders = {
+    entryType: "Enter entry name here...",
+    categoryType: "Enter category name here...",
   };
 
   return (
@@ -28,6 +45,8 @@ storiesOf("Organisms", module).add("DashboardFormDialog", () => {
       <DashboardFormDialog
         formikConfig={formikConfig}
         inputElementTypes={inputElementTypes}
+        inputElementLabels={inputElementLabels}
+        inputElementPlaceholders={inputElementPlaceholders}
       >
         <TypographyButton>Open Modal</TypographyButton>
       </DashboardFormDialog>

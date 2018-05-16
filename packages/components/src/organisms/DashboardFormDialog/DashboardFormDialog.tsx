@@ -1,5 +1,10 @@
 import { Formik, FormikConfig } from "formik";
-import React, { cloneElement, Component, ReactElement } from "react";
+import React, {
+  cloneElement,
+  Component,
+  ComponentType,
+  ReactElement,
+} from "react";
 import styled from "styled";
 
 import Button from "@material-ui/core/Button";
@@ -7,6 +12,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import TextField from "@material-ui/core/TextField";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
 import { WithWidthProps } from "@material-ui/core/withWidth";
 
@@ -33,6 +39,16 @@ export interface DashboardFormDialogProps<Values extends object>
    * Field types, used to render the proper input elements for value fields.
    */
   inputElementTypes: DashboardFormDialogInputElementTypes<Values>;
+
+  /**
+   * Labels for input elements.
+   */
+  inputElementLabels: Record<keyof Values, string>;
+
+  /**
+   * Placeholder texts for input elements.
+   */
+  inputElementPlaceholders: Record<keyof Values, string>;
 
   /**
    * Injected by the Material UI utility "withMobileDialog". It controls whether
@@ -72,7 +88,14 @@ class DashboardFormDialogBase<Values extends object> extends Component<
   };
 
   render() {
-    const { children, fullScreen, formikConfig } = this.props;
+    const {
+      children,
+      fullScreen,
+      formikConfig,
+      inputElementTypes,
+      inputElementLabels,
+      inputElementPlaceholders,
+    } = this.props;
     const { open } = this.state;
 
     const buttonWithOnClickHandler = cloneElement(children, {
@@ -92,17 +115,51 @@ class DashboardFormDialogBase<Values extends object> extends Component<
           {...formikConfigWithSubmitHook}
           render={api => (
             <Dialog fullScreen={fullScreen} open={open}>
-              <FormWithFullContainerSize onSubmit={api.handleSubmit}>
+              <FormFullContainerSize onSubmit={api.handleSubmit}>
                 <DialogTitle>Create a New Entry</DialogTitle>
 
-                <DialogContent>{/* */}</DialogContent>
+                <DialogContent>
+                  {(Object.keys(api.values) as (keyof Values)[]).map(
+                    (key, index) => {
+                      let InputComponent: ComponentType<any>;
+
+                      switch (inputElementTypes[key]) {
+                        case "text":
+                          InputComponent = TextField;
+                          break;
+                        default:
+                          return null;
+                      }
+
+                      const type = inputElementTypes[key];
+
+                      return (
+                        <InputComponent
+                          key={key}
+                          type={type}
+                          name={key}
+                          required
+                          autoFocus={index === 0}
+                          value={api.values[key]}
+                          onChange={api.handleChange}
+                          onBlur={api.handleBlur}
+                          label={api.errors[key] || inputElementLabels[key]}
+                          placeholder={inputElementPlaceholders[key]}
+                          error={Boolean(api.errors[key])}
+                          fullWidth
+                          margin="dense"
+                        />
+                      );
+                    },
+                  )}
+                </DialogContent>
 
                 <DialogActions>
                   <Button type="submit" disabled={api.isSubmitting}>
                     Submit
                   </Button>
                 </DialogActions>
-              </FormWithFullContainerSize>
+              </FormFullContainerSize>
             </Dialog>
           )}
         />
@@ -111,7 +168,7 @@ class DashboardFormDialogBase<Values extends object> extends Component<
   }
 }
 
-const FormWithFullContainerSize = styled.form`
+const FormFullContainerSize = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
