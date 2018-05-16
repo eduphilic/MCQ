@@ -10,11 +10,17 @@ module.exports = (baseConfig, env, defaultConfig) => {
   );
 
   // Add Babel 7 configuration.
-  const monorepoPackages = findMonorepo(path.resolve(__dirname, "..")).pkgs;
+  const monorepoPackages = findMonorepo(path.resolve(__dirname, "..")).pkgs.map(
+    pkgPath => path.resolve(pkgPath, "src"),
+  );
   config.module.rules.unshift({
     test: /\.[jt]sx?$/,
     exclude: /node_modules/,
-    include: [path.resolve(__dirname, ".."), ...monorepoPackages],
+    include: [
+      __dirname,
+      path.resolve(__dirname, "../src"),
+      ...monorepoPackages,
+    ],
     use: [
       {
         loader: require.resolve("babel-loader"),
@@ -34,6 +40,23 @@ module.exports = (baseConfig, env, defaultConfig) => {
 
   // Add TypeScript definitions.
   config.resolve.extensions.push(".ts", ".tsx");
+
+  // Add monorepo path aliases, done because each package has a subdirectory
+  // named "src". Using the settings from tsconfig.json so the settings can be
+  // reused both in the Create React App setup and Storybook.
+  // @ts-ignore
+  const tsconfigJson = require("../../../tsconfig.json");
+  const alias = Object.entries(tsconfigJson.compilerOptions.paths).reduce(
+    (acc, [package, mapping]) => {
+      package = package.replace("/*", "");
+      if (acc[package]) return acc;
+
+      acc[package] = `${package}/src`;
+      return acc;
+    },
+    {},
+  );
+  config.resolve.alias = alias;
 
   return config;
 };

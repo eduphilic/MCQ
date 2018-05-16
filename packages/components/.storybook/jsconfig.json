@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "checkJs": true,
+    "jsx": "react",
+    "baseUrl": ".",
+    "typeRoots": ["node_modules/@types", "../../../typings"]
+  }
+}

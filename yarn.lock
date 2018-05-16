@@ -9671,9 +9671,9 @@ react-addons-create-fragment@^15.5.3:
     loose-envify "^1.3.1"
     object-assign "^4.1.0"
 
-react-app-rewire-typescript-babel-preset@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/react-app-rewire-typescript-babel-preset/-/react-app-rewire-typescript-babel-preset-2.1.1.tgz#ca7113fb874a844695192cf9cd6d0a3fea6a4bd6"
+react-app-rewire-typescript-babel-preset@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-app-rewire-typescript-babel-preset/-/react-app-rewire-typescript-babel-preset-2.1.2.tgz#358fe39ec931d742bf14a503b6e53738b6c9d040"
 
 react-app-rewired@^2.0.0:
   version "2.0.0"

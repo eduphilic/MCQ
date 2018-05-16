@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "components/*": ["./packages/components/src/*"],
+      "l10n": ["./packages/l10n/src"],
       "placeholder": ["./packages/placeholder/src"],
       "store": ["./packages/store/src"],
       "styled": ["./packages/styled/src"],

@@ -1,5 +1,3 @@
-// @ts-check
-/// <reference path="../../../typings/storybook__addon-options.d.ts" />
 import React from "react";
 import { configure, addDecorator } from "@storybook/react";
 import { setOptions as setStorybookOptions } from "@storybook/addon-options";
@@ -24,7 +22,7 @@ addDecorator(story => (
   </ThemeBaseline>
 ));
 
-const req = require.context("..", true, /.stories\.tsx$/);
+const req = require.context("../src", true, /.stories\.tsx$/);
 const loadStories = () => {
   req.keys().forEach(filename => req(filename));
 };
