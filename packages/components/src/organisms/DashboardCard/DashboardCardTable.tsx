@@ -113,7 +113,12 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
                 {columnLabels.map((label, index) => (
                   <Hidden key={index} xsDown={columnTypes[index] === "image"}>
                     <UnpaddedTableCell>
-                      <Typography variant="tableHeadCell">{label}</Typography>
+                      <Typography
+                        variant="tableHeadCell"
+                        padLeftToolbarButton={columnTypes[index] === "button"}
+                      >
+                        {label}
+                      </Typography>
                     </UnpaddedTableCell>
                   </Hidden>
                 ))}

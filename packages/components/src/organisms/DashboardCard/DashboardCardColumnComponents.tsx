@@ -1,4 +1,4 @@
-import React, { SFC } from "react";
+import React, { cloneElement, SFC } from "react";
 import styled from "styled";
 
 import Switch from "@material-ui/core/Switch";
@@ -83,11 +83,18 @@ export const ColumnItemSwitch: ColumnItemComponent = ({ itemColumn, mode }) => {
   );
 };
 
-export const ColumnItemButton: ColumnItemComponent = ({ itemColumn }) => (
-  <ResponsiveToolbarTypographyButton
-    iconNode={itemColumn.buttonIconNode}
-    tooltipTitle={itemColumn.buttonTooltipTitle}
-  >
-    {itemColumn.primaryText}
-  </ResponsiveToolbarTypographyButton>
-);
+export const ColumnItemButton: ColumnItemComponent = ({ itemColumn }) => {
+  const button = (
+    <ResponsiveToolbarTypographyButton
+      onClick={itemColumn.onClick}
+      iconNode={itemColumn.buttonIconNode}
+      tooltipTitle={itemColumn.buttonTooltipTitle}
+    >
+      {itemColumn.primaryText}
+    </ResponsiveToolbarTypographyButton>
+  );
+
+  return itemColumn.wrapper
+    ? cloneElement(itemColumn.wrapper, undefined, button)
+    : button;
+};

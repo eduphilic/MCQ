@@ -60,13 +60,25 @@ export interface TypographyProps {
    * Material UI typography prop overrides to apply.
    */
   muiTypographyProps?: MuiTypographyProps;
+
+  /**
+   * Add left padding for alignment with Toolbar Button.
+   */
+  padLeftToolbarButton?: boolean;
 }
 
 /**
  * Provides a standard set of text typography to use throughout the application.
  */
 export const Typography: SFC<TypographyProps> = props => {
-  const { children, className, component, muiTypographyProps, variant } = props;
+  const {
+    children,
+    className,
+    component,
+    muiTypographyProps,
+    variant,
+    padLeftToolbarButton,
+  } = props;
 
   const TypographyBase = variants[variant || "body"];
 
@@ -74,6 +86,7 @@ export const Typography: SFC<TypographyProps> = props => {
     <TypographyBase
       className={className}
       component={component || "span"}
+      style={padLeftToolbarButton ? { paddingLeft: 32 } : undefined}
       {...muiTypographyProps as any}
     >
       {children}

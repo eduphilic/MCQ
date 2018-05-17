@@ -4,10 +4,40 @@ import Add from "@material-ui/icons/Add";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 
 import { DashboardCard } from "components/organisms/DashboardCard";
+import {
+  DashboardFormDialog,
+  FieldConfigs,
+} from "components/organisms/DashboardFormDialog";
+
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 export const AdminTestManager: SFC<{}> = () => {
   const noop = () => {}; // tslint:disable-line
+
+  const dialogInitialValues = {
+    entryType: "AirForce",
+  };
+
+  const dialogFieldConfigs: FieldConfigs<typeof dialogInitialValues> = {
+    entryType: {
+      inputType: "text-autocomplete",
+      inputLabel: "Select entry",
+      placeholder: "Select Entry here...",
+      suggestions: ["AirForce", "Assam Rifles"],
+    },
+  };
+
+  const dialog = (
+    <DashboardFormDialog
+      initialValues={dialogInitialValues}
+      fieldConfigs={dialogFieldConfigs}
+      onSubmit={noop}
+    />
+  );
+
+  // const dialogNoTest = (
+
+  // )
 
   return (
     <AdminDashboardTemplateContainer titleText="Test Manager">
@@ -15,7 +45,7 @@ export const AdminTestManager: SFC<{}> = () => {
         <DashboardCard
           key={title}
           title={`${title} Entry`}
-          columnLabels={["Category", "Availability", ""]}
+          columnLabels={["Category", "Availability", "Actions"]}
           columnTypes={["dual-line", "switch", "button"]}
           onItemEditClick={noop}
           items={[
@@ -31,6 +61,7 @@ export const AdminTestManager: SFC<{}> = () => {
                   primaryText: "Template",
                   buttonIconNode: <Add />,
                   buttonTooltipTitle: "Add New Template",
+                  // wrapper: dialogNoTest,
                 },
               ],
             },
@@ -82,7 +113,11 @@ export const AdminTestManager: SFC<{}> = () => {
                 },
               ],
             },
-          ]}
+          ].map(i => {
+            (i.columns[2] as any).wrapper =
+              (i.columns[2] as any).wrapper || dialog;
+            return i;
+          })}
         />
       ))}
     </AdminDashboardTemplateContainer>

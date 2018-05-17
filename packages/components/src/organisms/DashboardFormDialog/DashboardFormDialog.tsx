@@ -23,7 +23,7 @@ export interface DashboardFormDialogProps<Values extends object>
   /**
    * Child element that accepts an "onClick" handler.
    */
-  children: ReactElement<{ onClick: () => any }>;
+  children?: ReactElement<{ onClick: () => any }>;
 
   /**
    * Field settings.
@@ -78,9 +78,11 @@ class DashboardFormDialogBase<Values extends object> extends Component<
     } = this.props;
     const { open } = this.state;
 
-    const buttonWithOnClickHandler = cloneElement(children, {
-      onClick: this.handleClickOpen,
-    });
+    const buttonWithOnClickHandler = children
+      ? cloneElement(children as any, {
+          onClick: this.handleClickOpen,
+        })
+      : children;
 
     return (
       <>
