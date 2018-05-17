@@ -35,15 +35,16 @@ storiesOf("Organisms", module).add("DashboardFormDialog", () => {
       suggestions: ["AirForce", "Assam Rifles", "Coast Guard", "ITBP"],
     },
     categoryType: {
-      inputType: "text",
+      inputType: "text-autocomplete",
       inputLabel: "Category Type",
       placeholder: "Enter category name here...",
+      suggestions: ["AFCAT", "NDA", "Paramilitary"],
     },
   };
 
   const initialValues: Values = {
-    entryType: "Entry",
-    categoryType: "Category",
+    entryType: "",
+    categoryType: "",
   };
 
   return (

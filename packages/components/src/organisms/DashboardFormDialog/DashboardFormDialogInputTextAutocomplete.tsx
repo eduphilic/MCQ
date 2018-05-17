@@ -114,7 +114,14 @@ export class DashboardFormDialogInputTextAutocomplete extends Component<
                   anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                   BackdropProps={{ open: false }}
                 >
-                  <Paper square>
+                  <Paper
+                    square
+                    style={{
+                      width: this.inputRef
+                        ? this.inputRef.clientWidth
+                        : undefined,
+                    }}
+                  >
                     {getSuggestions(suggestions, inputValue!).map(
                       (suggestion, index) =>
                         renderSuggestion(
