@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
@@ -11,12 +12,18 @@ interface Values {
 }
 
 storiesOf("Organisms", module).add("DashboardFormDialog", () => {
+  const onSubmitValue = action("onSubmit");
+
   // Simulate delay from submitting by way of an api call.
-  // const onSubmit = () => new Promise(resolve => setTimeout(resolve, 1000));
-  const onSubmit = (value: any) => {
-    /* tslint:disable-next-line:no-console */
-    console.log("value", value);
-  };
+  const onSubmit = (values: object) =>
+    new Promise(resolve =>
+      setTimeout(() => {
+        /* tslint:disable-next-line:no-console */
+        console.log("values", values);
+        onSubmitValue(values);
+        resolve();
+      }, 1000),
+    );
 
   const validate = () => Promise.resolve(true);
 

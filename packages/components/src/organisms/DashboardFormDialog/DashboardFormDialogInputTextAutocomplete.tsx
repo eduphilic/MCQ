@@ -1,6 +1,5 @@
 import Downshift from "downshift";
-import React, { Component, createRef } from "react";
-// import styled from "styled";
+import React, { Component } from "react";
 
 import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
@@ -16,7 +15,7 @@ export interface DashboardFormDialogInputTextAutocompleteProps
 export class DashboardFormDialogInputTextAutocomplete extends Component<
   DashboardFormDialogInputTextAutocompleteProps
 > {
-  private containerRef = createRef<HTMLDivElement>();
+  private inputRef: HTMLInputElement | null = null;
 
   render() {
     const {
@@ -87,7 +86,7 @@ export class DashboardFormDialogInputTextAutocomplete extends Component<
           const { ref, ...inputProps } = getInputProps();
 
           return (
-            <div ref={this.containerRef}>
+            <div>
               <TextField
                 error={error}
                 fullWidth={fullWidth}
@@ -97,7 +96,8 @@ export class DashboardFormDialogInputTextAutocomplete extends Component<
                 // currently wrapped by Material UI in a composite component.
                 // ref: https://github.com/paypal/downshift#getrootprops
                 InputProps={{
-                  inputRef: ref,
+                  // inputRef: ref,
+                  inputRef: c => (this.inputRef = c),
                   ...inputProps,
                 }}
                 {...rest}
@@ -105,12 +105,13 @@ export class DashboardFormDialogInputTextAutocomplete extends Component<
               {getSuggestions(suggestions, inputValue!).length > 0 && (
                 <Popover
                   open={isOpen}
-                  anchorEl={ref || undefined}
+                  anchorEl={this.inputRef || undefined}
                   disableAutoFocus
                   disableEnforceFocus
                   disableRestoreFocus
                   disableBackdropClick
                   hideBackdrop
+                  anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                   BackdropProps={{ open: false }}
                 >
                   <Paper square>
