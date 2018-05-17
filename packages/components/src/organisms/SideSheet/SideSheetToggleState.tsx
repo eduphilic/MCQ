@@ -65,6 +65,9 @@ export class SideSheetToggleStateProvider extends Component<
 
   componentDidMount() {
     window.addEventListener("resize", this.handleResize);
+
+    // Call this on mount to prevent display of side panel on mobile.
+    this.handleResize();
   }
 
   componentWillUnmount() {
