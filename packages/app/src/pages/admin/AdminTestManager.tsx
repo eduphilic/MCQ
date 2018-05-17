@@ -1,7 +1,7 @@
 import React, { SFC } from "react";
 
 import Add from "@material-ui/icons/Add";
-import Pageview from "@material-ui/icons/Pageview";
+import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 
 import { DashboardCard } from "components/organisms/DashboardCard";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
@@ -44,7 +44,7 @@ export const AdminTestManager: SFC<{}> = () => {
                 },
                 {
                   primaryText: "View",
-                  buttonIconNode: <Pageview />,
+                  buttonIconNode: <RemoveRedEye />,
                   buttonTooltipTitle: "Preview Template",
                 },
               ],
@@ -62,7 +62,7 @@ export const AdminTestManager: SFC<{}> = () => {
                 },
                 {
                   primaryText: "View",
-                  buttonIconNode: <Pageview />,
+                  buttonIconNode: <RemoveRedEye />,
                   buttonTooltipTitle: "Preview Template",
                 },
               ],
@@ -77,7 +77,7 @@ export const AdminTestManager: SFC<{}> = () => {
                 },
                 {
                   primaryText: "View",
-                  buttonIconNode: <Pageview />,
+                  buttonIconNode: <RemoveRedEye />,
                   buttonTooltipTitle: "Preview Template",
                 },
               ],
