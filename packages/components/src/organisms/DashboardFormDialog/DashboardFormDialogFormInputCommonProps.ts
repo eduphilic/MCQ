@@ -1,5 +1,7 @@
 import { TextFieldProps } from "@material-ui/core/TextField";
 
+import { DashboardFormDialogFieldConfig } from "./DashboardFormDialogFieldConfig";
+
 type PickProps =
   | "type"
   | "name"
@@ -15,4 +17,5 @@ type PickProps =
   | "margin";
 
 export interface DashboardFormDialogFormInputCommonProps
-  extends Pick<TextFieldProps, PickProps> {}
+  extends Pick<TextFieldProps, PickProps>,
+    Pick<DashboardFormDialogFieldConfig, "suggestions"> {}

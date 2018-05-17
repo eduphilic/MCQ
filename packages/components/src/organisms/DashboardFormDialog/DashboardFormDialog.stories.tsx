@@ -18,9 +18,10 @@ storiesOf("Organisms", module).add("DashboardFormDialog", () => {
 
   const fields: FieldConfigs<Values> = {
     entryType: {
-      inputType: "text",
+      inputType: "text-autocomplete",
       inputLabel: "Entry Type",
       placeholder: "Enter Entry name here...",
+      suggestions: ["Airforce", "Assam Rifles", "Coast Guard", "ITBP"],
     },
     categoryType: {
       inputType: "text",

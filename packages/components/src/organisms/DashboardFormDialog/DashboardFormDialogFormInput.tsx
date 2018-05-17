@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 
 import { DashboardFormDialogFieldConfig } from "./DashboardFormDialogFieldConfig";
 import { DashboardFormDialogFormInputCommonProps } from "./DashboardFormDialogFormInputCommonProps";
+import { DashboardFormDialogInputTextAutocomplete } from "./DashboardFormDialogInputTextAutocomplete";
 
 export interface DashboardFormDialogFormInputProps<Values extends object> {
   api: FormikProps<Values>;
@@ -25,6 +26,8 @@ export class DashboardFormDialogFormInput<
     switch (type) {
       case "text":
         return TextField;
+      case "text-autocomplete":
+        return DashboardFormDialogInputTextAutocomplete;
       default:
         throw new Error(`Unrecognized input type: ${type}`);
     }
@@ -62,6 +65,7 @@ export class DashboardFormDialogFormInput<
         error={Boolean(api.errors[key])}
         fullWidth
         margin="dense"
+        suggestions={fieldConfig.suggestions}
       />
     );
   }
