@@ -90,7 +90,7 @@ class DashboardFormDialogBase<Values extends object> extends Component<
           {...rest}
           onSubmit={this.handleSubmit}
           render={api => (
-            <Dialog fullScreen={fullScreen} open={open}>
+            <DialogSized fullScreen={fullScreen} open={open}>
               <FormFullContainerSize onSubmit={api.handleSubmit}>
                 <DialogTitle>Create a New Entry</DialogTitle>
 
@@ -114,13 +114,19 @@ class DashboardFormDialogBase<Values extends object> extends Component<
                   </Button>
                 </DialogActions>
               </FormFullContainerSize>
-            </Dialog>
+            </DialogSized>
           )}
         />
       </>
     );
   }
 }
+
+const DialogSized = styled(Dialog).attrs({ classes: { paper: "paper" } })`
+  .paper {
+    width: 100%;
+  }
+`;
 
 const FormFullContainerSize = styled.form`
   display: flex;

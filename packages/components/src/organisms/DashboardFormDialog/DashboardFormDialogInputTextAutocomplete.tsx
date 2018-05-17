@@ -1,8 +1,10 @@
 import Downshift from "downshift";
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
+// import styled from "styled";
 
 import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
+import Popover from "@material-ui/core/Popover";
 import TextField from "@material-ui/core/TextField";
 
 import { DashboardFormDialogFormInputCommonProps } from "./DashboardFormDialogFormInputCommonProps";
@@ -14,8 +16,18 @@ export interface DashboardFormDialogInputTextAutocompleteProps
 export class DashboardFormDialogInputTextAutocomplete extends Component<
   DashboardFormDialogInputTextAutocompleteProps
 > {
+  private containerRef = createRef<HTMLDivElement>();
+
   render() {
-    const { suggestions, ...rest } = this.props;
+    const {
+      suggestions,
+      error,
+      fullWidth,
+      margin,
+      label,
+      value,
+      ...rest
+    } = this.props;
 
     if (!suggestions) {
       throw new Error(
@@ -32,30 +44,50 @@ export class DashboardFormDialogInputTextAutocomplete extends Component<
           getItemProps,
           highlightedIndex,
           selectedItem,
+          // getRootProps,
         }) => {
-          const { ref, ...inputProps } = getInputProps();
+          const { ref, ...inputProps } = getInputProps({
+            ...rest,
+            value: value as string,
+          });
 
           return (
-            <div>
+            // <Container {...getRootProps({ refKey: "innerRef" })}>
+            <div ref={this.containerRef}>
               <TextField
-                {...rest}
+                error={error}
+                fullWidth={fullWidth}
+                margin={margin}
+                label={label}
                 InputProps={{ inputRef: ref, ...inputProps }}
               />
-              {isOpen ? (
-                <Paper square>
-                  {getSuggestions(suggestions, inputValue!).map(
-                    (suggestion, index) =>
-                      renderSuggestion(
-                        suggestion,
-                        index,
-                        getItemProps({ item: suggestion }),
-                        highlightedIndex,
-                        selectedItem,
-                      ),
-                  )}
-                </Paper>
-              ) : null}
+              {getSuggestions(suggestions, inputValue!).length > 0 && (
+                <Popover
+                  open={isOpen}
+                  anchorEl={ref || undefined}
+                  disableAutoFocus
+                  disableEnforceFocus
+                  disableRestoreFocus
+                  disableBackdropClick
+                  hideBackdrop
+                  BackdropProps={{ open: false }}
+                >
+                  <Paper square>
+                    {getSuggestions(suggestions, inputValue!).map(
+                      (suggestion, index) =>
+                        renderSuggestion(
+                          suggestion,
+                          index,
+                          getItemProps({ item: suggestion }),
+                          highlightedIndex,
+                          selectedItem,
+                        ),
+                    )}
+                  </Paper>
+                </Popover>
+              )}
             </div>
+            // </Container>
           );
         }}
       </Downshift>
@@ -63,6 +95,19 @@ export class DashboardFormDialogInputTextAutocomplete extends Component<
   }
 }
 
+// const PopoverZ;
+
+// const Container = styled.div`
+//   position: relative;
+// `;
+
+// const PaperAbsolutePositioning = styled(Paper).attrs({ square: true })`
+//   position: absolute;
+//   margin-top: ${({ theme }) => theme.spacing.unit}px;
+//   z-index: 1;
+// `;
+
+// ref: https://material-ui-next.com/demos/autocomplete/#downshift
 function getSuggestions(suggestions: string[], inputValue: string) {
   let count = 0;
 
@@ -80,6 +125,7 @@ function getSuggestions(suggestions: string[], inputValue: string) {
   });
 }
 
+// ref: https://material-ui-next.com/demos/autocomplete/#downshift
 function renderSuggestion(
   suggestion: string,
   index: number,
