@@ -12,7 +12,11 @@ interface Values {
 
 storiesOf("Organisms", module).add("DashboardFormDialog", () => {
   // Simulate delay from submitting by way of an api call.
-  const onSubmit = () => new Promise(resolve => setTimeout(resolve, 1000));
+  // const onSubmit = () => new Promise(resolve => setTimeout(resolve, 1000));
+  const onSubmit = (value: any) => {
+    /* tslint:disable-next-line:no-console */
+    console.log("value", value);
+  };
 
   const validate = () => Promise.resolve(true);
 
@@ -21,7 +25,7 @@ storiesOf("Organisms", module).add("DashboardFormDialog", () => {
       inputType: "text-autocomplete",
       inputLabel: "Entry Type",
       placeholder: "Enter Entry name here...",
-      suggestions: ["Airforce", "Assam Rifles", "Coast Guard", "ITBP"],
+      suggestions: ["AirForce", "Assam Rifles", "Coast Guard", "ITBP"],
     },
     categoryType: {
       inputType: "text",
@@ -31,8 +35,8 @@ storiesOf("Organisms", module).add("DashboardFormDialog", () => {
   };
 
   const initialValues: Values = {
-    entryType: "",
-    categoryType: "",
+    entryType: "Entry",
+    categoryType: "Category",
   };
 
   return (

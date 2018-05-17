@@ -25,7 +25,9 @@ export class DashboardFormDialogInputTextAutocomplete extends Component<
       fullWidth,
       margin,
       label,
+      onChange,
       value,
+      name,
       ...rest
     } = this.props;
 
@@ -36,7 +38,44 @@ export class DashboardFormDialogInputTextAutocomplete extends Component<
     }
 
     return (
-      <Downshift>
+      // Downshift is a utility that handles the logic behind autocompletion.
+      <Downshift
+        defaultInputValue={value as string}
+        // We need to implement an adapter around Downshift's onChange event
+        // because it only sends the changed value and not the source event.
+        // We use Formik above this component which expects to receive a React
+        // event.
+        onChange={newValue => {
+          try {
+            onChange!({
+              // tslint:disable-next-line:no-empty
+              persist: () => {},
+              target: { value: newValue, inputType: "text", name },
+            } as any);
+          } catch (e) {
+            // tslint:disable-next-line:no-console
+            console.warn(
+              `Warning submitting change to upper Formik component: ${e}`,
+            );
+          }
+        }}
+        // We modify Downshift's reducer so that text that isn't in the
+        // suggestion list is also accepted. This allows the user to type new
+        // items in the auto complete box.
+        stateReducer={(state, changes) => {
+          switch (changes.type) {
+            case Downshift.stateChangeTypes.mouseUp:
+              return {
+                ...state,
+                ...changes,
+                inputValue: state.inputValue!,
+                selectedItem: state.inputValue,
+              };
+            default:
+              return changes;
+          }
+        }}
+      >
         {({
           getInputProps,
           isOpen,
@@ -44,22 +83,24 @@ export class DashboardFormDialogInputTextAutocomplete extends Component<
           getItemProps,
           highlightedIndex,
           selectedItem,
-          // getRootProps,
         }) => {
-          const { ref, ...inputProps } = getInputProps({
-            ...rest,
-            value: value as string,
-          });
+          const { ref, ...inputProps } = getInputProps();
 
           return (
-            // <Container {...getRootProps({ refKey: "innerRef" })}>
             <div ref={this.containerRef}>
               <TextField
                 error={error}
                 fullWidth={fullWidth}
                 margin={margin}
                 label={label}
-                InputProps={{ inputRef: ref, ...inputProps }}
+                // Downshift needs to ref to the DOM input element. It is
+                // currently wrapped by Material UI in a composite component.
+                // ref: https://github.com/paypal/downshift#getrootprops
+                InputProps={{
+                  inputRef: ref,
+                  ...inputProps,
+                }}
+                {...rest}
               />
               {getSuggestions(suggestions, inputValue!).length > 0 && (
                 <Popover
@@ -87,25 +128,12 @@ export class DashboardFormDialogInputTextAutocomplete extends Component<
                 </Popover>
               )}
             </div>
-            // </Container>
           );
         }}
       </Downshift>
     );
   }
 }
-
-// const PopoverZ;
-
-// const Container = styled.div`
-//   position: relative;
-// `;
-
-// const PaperAbsolutePositioning = styled(Paper).attrs({ square: true })`
-//   position: absolute;
-//   margin-top: ${({ theme }) => theme.spacing.unit}px;
-//   z-index: 1;
-// `;
 
 // ref: https://material-ui-next.com/demos/autocomplete/#downshift
 function getSuggestions(suggestions: string[], inputValue: string) {
