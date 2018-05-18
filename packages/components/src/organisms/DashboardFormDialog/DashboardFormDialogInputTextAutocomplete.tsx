@@ -1,5 +1,5 @@
 import Downshift from "downshift";
-import React, { Component } from "react";
+import React, { ChangeEvent, Component } from "react";
 
 import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
@@ -40,50 +40,44 @@ export class DashboardFormDialogInputTextAutocomplete extends Component<
       // Downshift is a utility that handles the logic behind autocompletion.
       <Downshift
         defaultInputValue={value as string}
-        // We need to implement an adapter around Downshift's onChange event
-        // because it only sends the changed value and not the source event.
-        // We use Formik above this component which expects to receive a React
-        // event.
-        onChange={newValue => {
+        // We need to intercept input value changes and send them along to
+        // Formik so that we can implement type ahead behavior. By default,
+        // Downshift only accepts values from suggestions. If we manage the
+        // value state in Formik we get type ahead behavior.
+        // ref: https://codesandbox.io/s/82m2px40q9
+        onStateChange={({ inputValue }) => {
+          // Ignore all state changes except the input value change event.
+          if (!inputValue) return;
+
+          // Formik relies on a React change event. Downshift just gives us the
+          // changed value. Here we implement a fake event to satisfy Formik's
+          // requirements.
+          // tslint:disable-next-line:no-object-literal-type-assertion
+          const customInputChangeEvent = {
+            // tslint:disable-next-line:no-empty
+            persist: () => {},
+            target: {
+              name,
+              value: inputValue,
+            },
+          } as ChangeEvent<HTMLInputElement>;
+
+          // Hopefully we don't encounter any errors thrown doing this. Adding
+          // a custom error here in case a future api change in Formik causes
+          // this to stop working. This error will hopefully aid in tracking
+          // down the issue.
           try {
-            onChange!({
-              // tslint:disable-next-line:no-empty
-              persist: () => {},
-              target: { value: newValue, inputType: "text", name },
-            } as any);
+            if (onChange) onChange(customInputChangeEvent);
           } catch (e) {
             // tslint:disable-next-line:no-console
             console.warn(
-              `Warning submitting change to upper Formik component: ${e}`,
+              `Warning submitting change to outer Formik component: ${e}`,
             );
+            throw e;
           }
         }}
-        // We modify Downshift's reducer so that text that isn't in the
-        // suggestion list is also accepted. This allows the user to type new
-        // items in the auto complete box.
-        stateReducer={(state, changes) => {
-          /* tslint:disable-next-line:no-console */
-          // console.log("state", state);
-          /* tslint:disable-next-line:no-console */
-          // console.log("changes", changes);
-          switch (changes.type) {
-            case Downshift.stateChangeTypes.mouseUp:
-              return {
-                ...state,
-                ...changes,
-                inputValue: state.inputValue!,
-                selectedItem: state.inputValue,
-              };
-            case Downshift.stateChangeTypes.changeInput:
-              return {
-                ...state,
-                ...changes,
-                selectedItem: changes.inputValue,
-              };
-            default:
-              return changes;
-          }
-        }}
+        // Refer to Formik's value per the comments on onStateChange.
+        selectedItem={value}
       >
         {({
           getInputProps,

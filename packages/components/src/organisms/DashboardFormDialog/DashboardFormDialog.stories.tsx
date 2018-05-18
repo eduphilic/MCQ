@@ -43,7 +43,7 @@ storiesOf("Organisms", module).add("DashboardFormDialog", () => {
   };
 
   const initialValues: Values = {
-    entryType: "",
+    entryType: "AirForce",
     categoryType: "",
   };
 
