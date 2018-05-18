@@ -62,6 +62,10 @@ export class DashboardFormDialogInputTextAutocomplete extends Component<
         // suggestion list is also accepted. This allows the user to type new
         // items in the auto complete box.
         stateReducer={(state, changes) => {
+          /* tslint:disable-next-line:no-console */
+          // console.log("state", state);
+          /* tslint:disable-next-line:no-console */
+          // console.log("changes", changes);
           switch (changes.type) {
             case Downshift.stateChangeTypes.mouseUp:
               return {
@@ -69,6 +73,12 @@ export class DashboardFormDialogInputTextAutocomplete extends Component<
                 ...changes,
                 inputValue: state.inputValue!,
                 selectedItem: state.inputValue,
+              };
+            case Downshift.stateChangeTypes.changeInput:
+              return {
+                ...state,
+                ...changes,
+                selectedItem: changes.inputValue,
               };
             default:
               return changes;
