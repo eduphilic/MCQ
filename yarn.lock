@@ -1798,12 +1798,12 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-redux@^5.0.19":
-  version "5.0.20"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-5.0.20.tgz#a332f2a97043d6127159956a4639a9fb5dc1f5dc"
+"@types/react-redux@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-6.0.0.tgz#31711592b13ed6d6d2fd4506e5447b00e1f0b484"
   dependencies:
     "@types/react" "*"
-    redux "^3.6.0"
+    redux "^4.0.0"
 
 "@types/react-router-dom@^4.2.6":
   version "4.2.6"
@@ -10239,7 +10239,7 @@ reduce-function-call@^1.0.1:
   version "2.2.0"
   resolved "git://github.com/Cryrivers/redux-thunk.git#5f1b98a21eb14c01c09efd59c807d7e413aa5a63"
 
-redux@^3.6.0, redux@^3.7.2:
+redux@^3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"
   dependencies:
