@@ -2,7 +2,7 @@ export interface DashboardFormDialogFieldConfig {
   /**
    * Field type, used to render the proper input component for the field.
    */
-  inputType: "text" | "text-autocomplete";
+  inputType: "text" | "text-autocomplete" | "file-upload";
 
   /**
    * Label for the input.
@@ -18,4 +18,12 @@ export interface DashboardFormDialogFieldConfig {
    * Autocomplete suggestions.
    */
   suggestions?: string[];
+
+  /**
+   * Accepted file upload types.
+   *
+   * Use `image/*` for any image type (allows a mobile device to allow a user
+   * to take a picture).
+   */
+  acceptedFileTypes?: string;
 }

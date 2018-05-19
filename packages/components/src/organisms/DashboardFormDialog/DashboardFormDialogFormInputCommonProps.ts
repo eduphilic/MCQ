@@ -18,4 +18,4 @@ type PickProps =
 
 export interface DashboardFormDialogFormInputCommonProps
   extends Pick<TextFieldProps, PickProps>,
-    Pick<DashboardFormDialogFieldConfig, "suggestions"> {}
+    Pick<DashboardFormDialogFieldConfig, "suggestions" | "acceptedFileTypes"> {}

@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 
 import { DashboardFormDialogFieldConfig } from "./DashboardFormDialogFieldConfig";
 import { DashboardFormDialogFormInputCommonProps } from "./DashboardFormDialogFormInputCommonProps";
+import { DashboardFormDialogInputFileUpload } from "./DashboardFormDialogInputFileUpload";
 import { DashboardFormDialogInputTextAutocomplete } from "./DashboardFormDialogInputTextAutocomplete";
 
 export interface DashboardFormDialogFormInputProps<Values extends object> {
@@ -28,6 +29,8 @@ export class DashboardFormDialogFormInput<
         return TextField;
       case "text-autocomplete":
         return DashboardFormDialogInputTextAutocomplete;
+      case "file-upload":
+        return DashboardFormDialogInputFileUpload;
       default:
         throw new Error(`Unrecognized input type: ${type}`);
     }

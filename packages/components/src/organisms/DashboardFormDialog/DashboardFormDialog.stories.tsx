@@ -6,11 +6,6 @@ import { DashboardFormDialog, FieldConfigs } from ".";
 import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 import { TypographyButton } from "../../molecules/TypographyButton";
 
-interface Values {
-  entryType: string;
-  categoryType: string;
-}
-
 storiesOf("Organisms", module).add("DashboardFormDialog", () => {
   const onSubmitValue = action("onSubmit");
 
@@ -27,7 +22,13 @@ storiesOf("Organisms", module).add("DashboardFormDialog", () => {
 
   const validate = () => Promise.resolve(true);
 
-  const fields: FieldConfigs<Values> = {
+  const initialValues = {
+    entryType: "AirForce",
+    categoryType: "AFCAT",
+    logo: null as FileList | null,
+  };
+
+  const fields: FieldConfigs<typeof initialValues> = {
     entryType: {
       inputType: "text-autocomplete",
       inputLabel: "Entry Type",
@@ -40,11 +41,12 @@ storiesOf("Organisms", module).add("DashboardFormDialog", () => {
       placeholder: "Enter category name here...",
       suggestions: ["AFCAT", "NDA", "Paramilitary"],
     },
-  };
-
-  const initialValues: Values = {
-    entryType: "AirForce",
-    categoryType: "",
+    logo: {
+      inputType: "file-upload",
+      inputLabel: "Upload Logo",
+      placeholder: "Select logo path here...",
+      acceptedFileTypes: "image/*",
+    },
   };
 
   return (

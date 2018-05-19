@@ -4,20 +4,64 @@ import Add from "@material-ui/icons/Add";
 
 import { ResponsiveToolbarTypographyButton } from "components/molecules/ResponsiveToolbarTypographyButton";
 import { DashboardCard } from "components/organisms/DashboardCard";
+import {
+  DashboardFormDialog,
+  FieldConfigs,
+} from "components/organisms/DashboardFormDialog";
+
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 export const AdminEntryManager: SFC<{}> = () => {
-  const appBarActionButtons = [
-    <ResponsiveToolbarTypographyButton
-      iconNode={<Add />}
-      tooltipTitle="Add New Entry"
-      color="orange"
-    >
-      Entry
-    </ResponsiveToolbarTypographyButton>,
-  ];
-
   const noop = () => {}; // tslint:disable-line
+
+  const dialogFields = {
+    entryType: "Army",
+    categoryType: "",
+    education: "",
+    pricePerPaper: 10,
+  };
+
+  const fieldConfigs: FieldConfigs<typeof dialogFields> = {
+    entryType: {
+      inputLabel: "Entry Type",
+      inputType: "text-autocomplete",
+      placeholder: "Enter Entry name here...",
+      suggestions: ["AirForce", "Army", "Navy"],
+    },
+    categoryType: {
+      inputLabel: "Category Type",
+      inputType: "text-autocomplete",
+      placeholder: "Enter category name here...",
+      suggestions: ["Soldier GD", "Soldier Tradesman", "Soldier GD"],
+    },
+    education: {
+      inputLabel: "Education",
+      inputType: "text-autocomplete",
+      placeholder: "Select Education",
+      suggestions: ["8th", "10th", "12th"],
+    },
+    pricePerPaper: {
+      inputLabel: "Price per paper",
+      inputType: "text",
+      placeholder: "Enter price",
+    },
+  };
+
+  const appBarActionButtons = [
+    <DashboardFormDialog
+      fieldConfigs={fieldConfigs}
+      initialValues={dialogFields}
+      onSubmit={noop}
+    >
+      <ResponsiveToolbarTypographyButton
+        iconNode={<Add />}
+        tooltipTitle="Add New Entry"
+        color="orange"
+      >
+        Entry
+      </ResponsiveToolbarTypographyButton>
+    </DashboardFormDialog>,
+  ];
 
   return (
     <AdminDashboardTemplateContainer
