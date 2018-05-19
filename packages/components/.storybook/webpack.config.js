@@ -32,7 +32,10 @@ module.exports = (baseConfig, env, defaultConfig) => {
         loader: require.resolve("react-docgen-typescript-loader"),
         options: {
           includes: ["components.*\\.tsx$"],
-          excludes: ["stories\\.tsx$"],
+          // FIXME: Issue in docgen typescript package is erroring with
+          // component since either Babel or Storybook update, needs
+          // investigation.
+          excludes: ["stories\\.tsx$", "TextFieldTooltip"],
         },
       },
     ],
@@ -89,7 +92,9 @@ function createBabelConfig(env) {
       ],
       require.resolve("@babel/preset-react"),
       require.resolve("@babel/preset-typescript"),
-      env === "PRODUCTION" ? require.resolve("babel-preset-minify") : false,
+      // FIXME: Causing a build error like, need to resolve and re-enable:
+      // https://github.com/babel/minify/issues/845
+      // env === "PRODUCTION" ? require.resolve("babel-preset-minify") : false,
     ].filter(p => Boolean(p)),
 
     plugins: [

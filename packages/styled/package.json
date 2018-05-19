@@ -3,6 +3,6 @@
   "name": "styled",
   "version": "1.0.0",
   "dependencies": {
-    "theme": "^1.0.0"
+    "theme": "1.0.0"
   }
 }

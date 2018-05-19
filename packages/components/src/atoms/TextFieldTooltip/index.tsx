@@ -1,9 +1,11 @@
-import Tooltip from "@material-ui/core/Tooltip";
-import React, { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode, SFC } from "react";
 import styled, { injectGlobal } from "styled";
+
+import Tooltip from "@material-ui/core/Tooltip";
+
 import { TooltipArrow } from "../TooltipArrow";
 
-interface Props {
+export interface TextFieldTooltipProps {
   /** Target element to apply tooltip to. */
   children: ReactElement<any>;
 
@@ -17,7 +19,7 @@ interface Props {
 /**
  * Displays a tooltip with a box shadow and an arrow pointing to the field.
  */
-export const TextFieldTooltip = (props: Props) => {
+export const TextFieldTooltip: SFC<TextFieldTooltipProps> = props => {
   const { children, open, title: titleText } = props;
 
   const title = (
