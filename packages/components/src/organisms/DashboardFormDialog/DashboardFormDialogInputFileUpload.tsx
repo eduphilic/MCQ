@@ -17,22 +17,36 @@ import InsertDriveFile from "@material-ui/icons/InsertDriveFile";
 import { DashboardFormDialogFormInputCommonProps } from "./DashboardFormDialogFormInputCommonProps";
 
 // tslint:disable-next-line:no-empty-interface
-export interface DashboardFormDialogInputFileUploadProps
-  extends DashboardFormDialogFormInputCommonProps {}
+export interface DashboardFormDialogInputFileUploadProps<Values extends object>
+  extends DashboardFormDialogFormInputCommonProps<Values> {}
 
-export class DashboardFormDialogInputFileUpload extends Component<
-  DashboardFormDialogInputFileUploadProps
-> {
+export class DashboardFormDialogInputFileUpload<
+  Values extends object
+> extends Component<DashboardFormDialogInputFileUploadProps<Values>> {
   private fileInput = createRef<HTMLInputElement>();
 
-  // @ts-ignore
   private handleChange: EventHandler<ChangeEvent<HTMLInputElement>> = event => {
-    /* tslint:disable-next-line:no-console */
-    console.log("event", event);
-    // event.target.files
+    const { files } = event.target;
+    if (!files || files.length === 0) return;
+
+    const { setFieldValue, name } = this.props;
+
+    if (!setFieldValue) {
+      throw new Error(
+        "DashboardFormDialogInputFileUpload requires setFieldValue.",
+      );
+    }
+    if (!name) {
+      throw new Error("DashboardFormDialogInputFileUpload requires name.");
+    }
+
+    setFieldValue(name, files[0]);
   };
 
-  private handleClick: EventHandler<MouseEvent<HTMLDivElement>> = () => {
+  private handleClick: EventHandler<MouseEvent<HTMLDivElement>> = event => {
+    // Prevent control from gaining focus.
+    event.preventDefault();
+
     if (this.fileInput.current) this.fileInput.current.click();
   };
 
@@ -45,9 +59,16 @@ export class DashboardFormDialogInputFileUpload extends Component<
       fullWidth,
       placeholder,
       value,
+
+      // Prevent DOM errors from unused additional props.
+      setFieldValue,
+
       ...rest
     } = this.props;
+
     const inputId = `dialog-file-upload-${name}`;
+    const valueAsFileOrNull = (value as any) as File | null;
+    const filename = valueAsFileOrNull ? valueAsFileOrNull.name : "";
 
     return (
       <>
@@ -56,25 +77,29 @@ export class DashboardFormDialogInputFileUpload extends Component<
           innerRef={this.fileInput as any}
           accept={acceptedFileTypes}
           type="file"
+          onChange={this.handleChange}
         />
 
         <FormControl
           margin={margin}
           fullWidth={fullWidth}
-          onClick={this.handleClick}
+          // Using mousedown event to prevent focus from being transferred to
+          // control. This prevents the unwanted animation where the text label
+          // moves up.
+          onMouseDown={this.handleClick}
         >
           <InputLabel htmlFor={inputId}>{label}</InputLabel>
 
           <InputReadOnlyClickable
             id={inputId}
             type="text"
+            value={filename}
             {...rest}
             endAdornment={
               <InputAdornment position="end">
-                {/* TODO: Preserve button style but not have it as a button.*/}
-                <IconButton>
+                <IconButtonNoHoverStyled>
                   <InsertDriveFile />
-                </IconButton>
+                </IconButtonNoHoverStyled>
               </InputAdornment>
             }
           />
@@ -98,5 +123,11 @@ const InputReadOnlyClickable = styled(Input).attrs({
 })`
   .input {
     cursor: pointer;
+  }
+`;
+
+const IconButtonNoHoverStyled = styled(IconButton)`
+  &:hover {
+    background-color: transparent;
   }
 `;
