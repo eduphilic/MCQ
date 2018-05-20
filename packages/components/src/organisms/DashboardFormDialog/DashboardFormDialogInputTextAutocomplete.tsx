@@ -9,12 +9,13 @@ import TextField from "@material-ui/core/TextField";
 import { DashboardFormDialogFormInputCommonProps } from "./DashboardFormDialogFormInputCommonProps";
 
 // tslint:disable-next-line:no-empty-interface
-export interface DashboardFormDialogInputTextAutocompleteProps
-  extends DashboardFormDialogFormInputCommonProps {}
+export interface DashboardFormDialogInputTextAutocompleteProps<
+  Values extends object
+> extends DashboardFormDialogFormInputCommonProps<Values> {}
 
-export class DashboardFormDialogInputTextAutocomplete extends Component<
-  DashboardFormDialogInputTextAutocompleteProps
-> {
+export class DashboardFormDialogInputTextAutocomplete<
+  Values extends object
+> extends Component<DashboardFormDialogInputTextAutocompleteProps<Values>> {
   private inputRef: HTMLInputElement | null = null;
 
   render() {
@@ -27,6 +28,11 @@ export class DashboardFormDialogInputTextAutocomplete extends Component<
       onChange,
       value,
       name,
+
+      // Prevent DOM errors from unused additional props.
+      setFieldValue,
+      acceptedFileTypes,
+
       ...rest
     } = this.props;
 
