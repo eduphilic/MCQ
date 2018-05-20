@@ -25,7 +25,8 @@ storiesOf("Organisms", module).add("DashboardFormDialog", () => {
   const initialValues = {
     entryType: "AirForce",
     categoryType: "AFCAT",
-    logo: null as FileList | null,
+    normalTextField: "text",
+    logo: null as File | null,
   };
 
   const fields: FieldConfigs<typeof initialValues> = {
@@ -40,6 +41,11 @@ storiesOf("Organisms", module).add("DashboardFormDialog", () => {
       inputLabel: "Category Type",
       placeholder: "Enter category name here...",
       suggestions: ["AFCAT", "NDA", "Paramilitary"],
+    },
+    normalTextField: {
+      inputType: "text",
+      inputLabel: "Just a normal text field (no autocomplete)",
+      placeholder: "Just text...",
     },
     logo: {
       inputType: "file-upload",
