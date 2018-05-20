@@ -1,5 +1,6 @@
 import { TextFieldProps } from "@material-ui/core/TextField";
 
+import { FormikProps } from "formik";
 import { DashboardFormDialogFieldConfig } from "./DashboardFormDialogFieldConfig";
 
 type PickProps =
@@ -16,6 +17,8 @@ type PickProps =
   | "fullWidth"
   | "margin";
 
-export interface DashboardFormDialogFormInputCommonProps
+export interface DashboardFormDialogFormInputCommonProps<Values extends object>
   extends Pick<TextFieldProps, PickProps>,
-    Pick<DashboardFormDialogFieldConfig, "suggestions" | "acceptedFileTypes"> {}
+    Pick<DashboardFormDialogFieldConfig, "suggestions" | "acceptedFileTypes"> {
+  setFieldValue?: FormikProps<Values>["setFieldValue"];
+}

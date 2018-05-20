@@ -1,5 +1,5 @@
 import { FormikProps } from "formik";
-import React, { Component, ComponentType } from "react";
+import React, { Component, ComponentType, SFC } from "react";
 
 import TextField from "@material-ui/core/TextField";
 
@@ -23,10 +23,10 @@ export class DashboardFormDialogFormInput<
 > extends Component<DashboardFormDialogFormInputProps<Values>> {
   private getInputComponentForFieldType = (
     type: DashboardFormDialogFieldConfig["inputType"],
-  ): ComponentType<DashboardFormDialogFormInputCommonProps> => {
+  ): ComponentType<DashboardFormDialogFormInputCommonProps<Values>> => {
     switch (type) {
       case "text":
-        return TextField;
+        return DashboardFormDialogInputText;
       case "text-autocomplete":
         return DashboardFormDialogInputTextAutocomplete;
       case "file-upload":
@@ -48,7 +48,7 @@ export class DashboardFormDialogFormInput<
     const { api, fieldKey: key, fieldConfig, autoFocus } = this.props;
 
     const InputComponent: ComponentType<
-      DashboardFormDialogFormInputCommonProps
+      DashboardFormDialogFormInputCommonProps<Values>
     > = this.getInputComponentForFieldType(fieldConfig.inputType);
 
     const type = this.getInputFormType(fieldConfig.inputType);
@@ -69,7 +69,18 @@ export class DashboardFormDialogFormInput<
         fullWidth
         margin="dense"
         suggestions={fieldConfig.suggestions}
+        setFieldValue={api.setFieldValue}
+        acceptedFileTypes={fieldConfig.acceptedFileTypes}
       />
     );
   }
 }
+
+const DashboardFormDialogInputText: SFC<
+  DashboardFormDialogFormInputCommonProps<object>
+> = props => {
+  // Prevent DOM errors from unused additional props.
+  const { setFieldValue, acceptedFileTypes, ...rest } = props;
+
+  return <TextField {...rest} />;
+};
