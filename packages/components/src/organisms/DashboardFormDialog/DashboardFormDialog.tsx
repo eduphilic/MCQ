@@ -50,9 +50,9 @@ class DashboardFormDialogBase<Values extends object> extends Component<
     open: false,
   };
 
-  handleClickOpen = () => this.setState({ open: true });
+  private handleClickOpen = () => this.setState({ open: true });
 
-  handleSubmit: FormikConfig<Values>["onSubmit"] = async (
+  private handleSubmit: FormikConfig<Values>["onSubmit"] = async (
     values,
     formikActions,
   ) => {
@@ -66,6 +66,11 @@ class DashboardFormDialogBase<Values extends object> extends Component<
       /* tslint:disable-next-line:no-console */
       console.log("Submission error:", e);
     }
+  };
+
+  private handleCancel = (resetForm: () => any) => {
+    this.setState({ open: false });
+    resetForm();
   };
 
   render() {
@@ -111,6 +116,12 @@ class DashboardFormDialogBase<Values extends object> extends Component<
                 </DialogContent>
 
                 <DialogActions>
+                  <Button
+                    disabled={api.isSubmitting}
+                    onClick={() => this.handleCancel(api.resetForm)}
+                  >
+                    Cancel
+                  </Button>
                   <Button type="submit" disabled={api.isSubmitting}>
                     Submit
                   </Button>
