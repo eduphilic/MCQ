@@ -19,6 +19,7 @@ export const AdminEntryManager: SFC<{}> = () => {
     categoryType: "",
     education: "",
     pricePerPaper: 10,
+    logo: null as File | null,
   };
 
   const fieldConfigs: FieldConfigs<typeof dialogFields> = {
@@ -44,6 +45,11 @@ export const AdminEntryManager: SFC<{}> = () => {
       inputLabel: "Price per paper",
       inputType: "text",
       placeholder: "Enter price",
+    },
+    logo: {
+      inputLabel: "Upload Logo",
+      inputType: "file-upload",
+      placeholder: "Select logo path here...",
     },
   };
 
@@ -80,8 +86,10 @@ export const AdminEntryManager: SFC<{}> = () => {
           ]}
           columnTypes={["dual-line", "image", "single-line", "switch"]}
           editCaptionText="Click to Edit Entry"
-          onItemEditClick={noop}
-          onRequestDeleteClick={noop}
+          onItemEditClick={item => alert(`Open edit dialog for item: ${item}`)}
+          onRequestDeleteClick={items =>
+            alert(`Open verification dialog for items: ${items}`)
+          }
           items={[
             {
               key: "0",
