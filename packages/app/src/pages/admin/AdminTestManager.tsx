@@ -124,7 +124,7 @@ export const AdminTestManager: SFC<{}> = () => {
               const wrappedChildren = cloneElement(
                 props.children as ReactElement<any>,
                 {
-                  onClick: () => props.history.push("/admin/dashboard/new"),
+                  onClick: () => props.history.push("/admin/test-manager/new"),
                 },
               );
 
