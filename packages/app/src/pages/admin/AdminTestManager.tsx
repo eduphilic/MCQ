@@ -1,39 +1,43 @@
-import React, { SFC } from "react";
+import React, { cloneElement, ReactElement, SFC } from "react";
+import { withRouter } from "react-router-dom";
 
 import Add from "@material-ui/icons/Add";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 
-import { DashboardCard } from "components/organisms/DashboardCard";
 import {
-  DashboardFormDialog,
-  FieldConfigs,
-} from "components/organisms/DashboardFormDialog";
+  DashboardCard,
+  DashboardCardItemColumn,
+} from "components/organisms/DashboardCard";
+// import {
+//   DashboardFormDialog,
+//   FieldConfigs,
+// } from "components/organisms/DashboardFormDialog";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 export const AdminTestManager: SFC<{}> = () => {
-  const noop = () => {}; // tslint:disable-line
+  // const noop = () => {}; // tslint:disable-line
 
-  const dialogInitialValues = {
-    entryType: "AirForce",
-  };
+  // const dialogInitialValues = {
+  //   entryType: "AirForce",
+  // };
 
-  const dialogFieldConfigs: FieldConfigs<typeof dialogInitialValues> = {
-    entryType: {
-      inputType: "text-autocomplete",
-      inputLabel: "Select entry",
-      placeholder: "Select Entry here...",
-      suggestions: ["AirForce", "Assam Rifles"],
-    },
-  };
+  // const dialogFieldConfigs: FieldConfigs<typeof dialogInitialValues> = {
+  //   entryType: {
+  //     inputType: "text-autocomplete",
+  //     inputLabel: "Select entry",
+  //     placeholder: "Select Entry here...",
+  //     suggestions: ["AirForce", "Assam Rifles"],
+  //   },
+  // };
 
-  const dialog = (
-    <DashboardFormDialog
-      initialValues={dialogInitialValues}
-      fieldConfigs={dialogFieldConfigs}
-      onSubmit={noop}
-    />
-  );
+  // const dialog = (
+  //   <DashboardFormDialog
+  //     initialValues={dialogInitialValues}
+  //     fieldConfigs={dialogFieldConfigs}
+  //     onSubmit={noop}
+  //   />
+  // );
 
   // const dialogNoTest = (
 
@@ -47,7 +51,7 @@ export const AdminTestManager: SFC<{}> = () => {
           title={`${title} Entry`}
           columnLabels={["Category", "Availability", "Actions"]}
           columnTypes={["dual-line", "switch", "button"]}
-          onItemEditClick={noop}
+          onItemEditClick={item => alert(`Open edit page for item: ${item}`)}
           items={[
             {
               key: "0",
@@ -61,7 +65,6 @@ export const AdminTestManager: SFC<{}> = () => {
                   primaryText: "Template",
                   buttonIconNode: <Add />,
                   buttonTooltipTitle: "Add New Template",
-                  // wrapper: dialogNoTest,
                 },
               ],
             },
@@ -113,9 +116,28 @@ export const AdminTestManager: SFC<{}> = () => {
                 },
               ],
             },
-          ].map(i => {
-            (i.columns[2] as any).wrapper =
-              (i.columns[2] as any).wrapper || dialog;
+          ].map((i, index) => {
+            const itemColumn: DashboardCardItemColumn = i.columns[2];
+
+            // Redirect to new template page for Add Template Button
+            const AddTemplateRedirectButton = withRouter(props => {
+              const wrappedChildren = cloneElement(
+                props.children as ReactElement<any>,
+                {
+                  onClick: () => props.history.push("/admin/dashboard/new"),
+                },
+              );
+
+              return <>{wrappedChildren}</>;
+            });
+
+            if (itemColumn.primaryText === "View") {
+              itemColumn.onClick = () =>
+                alert(`Open preview page for item: ${index}`);
+            } else {
+              itemColumn.wrapper = <AddTemplateRedirectButton />;
+            }
+
             return i;
           })}
         />
