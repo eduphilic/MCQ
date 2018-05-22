@@ -25,7 +25,7 @@ storiesOf("Organisms", module).add("DashboardFormDialog", () => {
   const initialValues = {
     entryType: "AirForce",
     categoryType: "AFCAT",
-    normalTextField: "text",
+    normalTextField: "normal text field",
     logo: null as File | null,
   };
 

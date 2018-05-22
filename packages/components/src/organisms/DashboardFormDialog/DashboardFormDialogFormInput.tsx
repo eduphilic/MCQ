@@ -1,8 +1,7 @@
 import { FormikProps } from "formik";
-import React, { Component, ComponentType, SFC } from "react";
+import React, { Component, ComponentType } from "react";
 
-import TextField from "@material-ui/core/TextField";
-
+import { FormikTextField } from "../../molecules/FormikTextField";
 import { DashboardFormDialogFieldConfig } from "./DashboardFormDialogFieldConfig";
 import { DashboardFormDialogFormInputCommonProps } from "./DashboardFormDialogFormInputCommonProps";
 import { DashboardFormDialogInputFileUpload } from "./DashboardFormDialogInputFileUpload";
@@ -25,8 +24,6 @@ export class DashboardFormDialogFormInput<
     type: DashboardFormDialogFieldConfig["inputType"],
   ): ComponentType<DashboardFormDialogFormInputCommonProps<Values>> => {
     switch (type) {
-      case "text":
-        return DashboardFormDialogInputText;
       case "text-autocomplete":
         return DashboardFormDialogInputTextAutocomplete;
       case "file-upload":
@@ -46,6 +43,21 @@ export class DashboardFormDialogFormInput<
 
   render() {
     const { api, fieldKey: key, fieldConfig, autoFocus } = this.props;
+
+    switch (fieldConfig.inputType) {
+      case "text":
+        return (
+          <FormikTextField
+            formikApi={api}
+            name={key}
+            type="text"
+            autoFocus={autoFocus}
+            label={fieldConfig.inputLabel}
+            margin="dense"
+            placeholder={fieldConfig.placeholder}
+          />
+        );
+    }
 
     const InputComponent: ComponentType<
       DashboardFormDialogFormInputCommonProps<Values>
@@ -75,12 +87,3 @@ export class DashboardFormDialogFormInput<
     );
   }
 }
-
-const DashboardFormDialogInputText: SFC<
-  DashboardFormDialogFormInputCommonProps<object>
-> = props => {
-  // Prevent DOM errors from unused additional props.
-  const { setFieldValue, acceptedFileTypes, ...rest } = props;
-
-  return <TextField {...rest} />;
-};
