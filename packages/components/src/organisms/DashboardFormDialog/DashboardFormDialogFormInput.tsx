@@ -1,11 +1,14 @@
 import { FormikProps } from "formik";
 import React, { Component, ComponentType } from "react";
 
-import { FormikTextField } from "../../molecules/FormikTextField";
+import {
+  FormikTextField,
+  FormikTextFieldProps,
+} from "../../molecules/FormikTextField";
+import { FormikTextFieldTypeAhead } from "../../molecules/FormikTextFieldTypeAhead";
 import { DashboardFormDialogFieldConfig } from "./DashboardFormDialogFieldConfig";
 import { DashboardFormDialogFormInputCommonProps } from "./DashboardFormDialogFormInputCommonProps";
 import { DashboardFormDialogInputFileUpload } from "./DashboardFormDialogInputFileUpload";
-import { DashboardFormDialogInputTextAutocomplete } from "./DashboardFormDialogInputTextAutocomplete";
 
 export interface DashboardFormDialogFormInputProps<Values extends object> {
   api: FormikProps<Values>;
@@ -24,8 +27,6 @@ export class DashboardFormDialogFormInput<
     type: DashboardFormDialogFieldConfig["inputType"],
   ): ComponentType<DashboardFormDialogFormInputCommonProps<Values>> => {
     switch (type) {
-      case "text-autocomplete":
-        return DashboardFormDialogInputTextAutocomplete;
       case "file-upload":
         return DashboardFormDialogInputFileUpload;
       default:
@@ -43,18 +44,30 @@ export class DashboardFormDialogFormInput<
 
   render() {
     const { api, fieldKey: key, fieldConfig, autoFocus } = this.props;
+    const { inputLabel: label, placeholder } = fieldConfig;
+
+    const props: FormikTextFieldProps<Values> = {
+      formikApi: api,
+      name: key,
+      type: "text",
+      autoFocus,
+      label,
+      margin: "dense",
+      placeholder,
+    };
 
     switch (fieldConfig.inputType) {
       case "text":
+        return <FormikTextField {...props} />;
+      case "text-autocomplete":
+        if (!fieldConfig.suggestions) {
+          throw new Error("Type ahead requires suggestions be supplied.");
+        }
+
         return (
-          <FormikTextField
-            formikApi={api}
-            name={key}
-            type="text"
-            autoFocus={autoFocus}
-            label={fieldConfig.inputLabel}
-            margin="dense"
-            placeholder={fieldConfig.placeholder}
+          <FormikTextFieldTypeAhead
+            suggestions={fieldConfig.suggestions}
+            {...props}
           />
         );
     }
