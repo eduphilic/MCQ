@@ -4,10 +4,14 @@ import { Formik } from "formik";
 import React from "react";
 
 import { FormikTextFieldTypeAhead } from ".";
+import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 
 storiesOf("Molecules", module).add(
   "FormikTextFieldTypeAhead",
   withInfo()(() => {
+    // tslint:disable-next-line:no-empty
+    const noop = () => {};
+
     const initialValues = {
       entryType: "",
     };
@@ -16,18 +20,19 @@ storiesOf("Molecules", module).add(
     class TypedFormik extends Formik<{}, Values> {}
 
     return (
-      // tslint:disable-next-line:no-empty
-      <TypedFormik initialValues={initialValues} onSubmit={() => {}}>
-        {formikApi => (
-          <FormikTextFieldTypeAhead
-            formikApi={formikApi}
-            name="entryType"
-            label="Entry Type"
-            placeholder="Enter entry type here..."
-            suggestions={["AFCAT", "NDA", "Paramilitary"]}
-          />
-        )}
-      </TypedFormik>
+      <ContentCenterWrapper>
+        <TypedFormik initialValues={initialValues} onSubmit={noop}>
+          {formikApi => (
+            <FormikTextFieldTypeAhead
+              formikApi={formikApi}
+              name="entryType"
+              label="Entry Type"
+              placeholder="Enter entry type here..."
+              suggestions={["AFCAT", "NDA", "Paramilitary"]}
+            />
+          )}
+        </TypedFormik>
+      </ContentCenterWrapper>
     );
   }),
 );

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { Popover } from "./Popover";
+import { Suggestion } from "./Suggestion";
 import { TypeAheadContextConsumer } from "./TypeAheadContext";
 
 // tslint:disable-next-line:no-empty-interface
@@ -18,7 +19,17 @@ export class Suggestions extends Component<SuggestionsProps> {
 
           const suggestions = getSuggestions(possibleSuggestions, inputValue);
 
-          return <Popover>{suggestions.map(s => <p key={s}>{s}</p>)}</Popover>;
+          return (
+            <Popover>
+              {suggestions.map((suggestion, index) => (
+                <Suggestion
+                  key={suggestion}
+                  suggestion={suggestion}
+                  index={index}
+                />
+              ))}
+            </Popover>
+          );
         }}
       </TypeAheadContextConsumer>
     );
