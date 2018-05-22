@@ -11,25 +11,37 @@ export interface TypeAheadContextProviderProps<Values extends object>
   suggestions: string[];
 }
 
+interface TypeAheadContextProviderState {
+  inputRef: HTMLInputElement | null;
+}
+
 interface TypeAheadContextValue {
   formikApi: FormikTextFieldProps<any>["formikApi"];
   downshiftApi: DownshiftApi;
   textFieldProps: Omit<FormikTextFieldProps<any>, "formikApi">;
   suggestions: string[];
+  inputRef: HTMLInputElement | null;
+  setInputRef: (element: HTMLInputElement | null) => void;
 }
 
 const TypeAheadContext = createContext<TypeAheadContextValue | null>(null);
 
 /**
- * Provides TypeAheadApi context value to children which provides:
+ * Provides TypeAheadContextValue context value to children which provides:
  * * formikApi
  * * downshiftApi
  * * textFieldProps
  * * suggestions: `string[]`
  */
 export class TypeAheadContextProvider<Values extends object> extends Component<
-  TypeAheadContextProviderProps<Values>
+  TypeAheadContextProviderProps<Values>,
+  TypeAheadContextProviderState
 > {
+  state: TypeAheadContextProviderState = { inputRef: null };
+
+  private setInputRef = (element: HTMLInputElement | null) =>
+    this.setState({ inputRef: element });
+
   render() {
     const { formikApi, name, children, suggestions, ...rest } = this.props;
     const value = (formikApi.values[name] as any) as string;
@@ -57,6 +69,8 @@ export class TypeAheadContextProvider<Values extends object> extends Component<
                 formikApi,
                 textFieldProps: { ...rest, name },
                 suggestions,
+                inputRef: this.state.inputRef,
+                setInputRef: this.setInputRef,
               }}
             >
               {children}

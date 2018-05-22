@@ -15,7 +15,7 @@ export class TextField extends Component<TextFieldProps> {
         {api => {
           if (!api) throw new Error("Used outside of context.");
 
-          const { formikApi, downshiftApi, textFieldProps } = api;
+          const { formikApi, downshiftApi, textFieldProps, setInputRef } = api;
           const { name, label, fullWidth = true, ...rest } = textFieldProps;
           const inputProps = downshiftApi.getInputProps();
 
@@ -27,7 +27,10 @@ export class TextField extends Component<TextFieldProps> {
               value={formikApi.values[name]}
               fullWidth={fullWidth}
               error={Boolean(formikApi.errors[name])}
-              InputProps={inputProps}
+              InputProps={{
+                ...inputProps,
+                inputRef: setInputRef,
+              }}
             />
           );
         }}

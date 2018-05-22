@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import { Suggestions } from "./Suggestions";
 import { TextField } from "./TextField";
 import {
   TypeAheadContextProvider,
@@ -17,6 +18,7 @@ export class FormikTextFieldTypeAhead<Values extends object> extends Component<
     return (
       <TypeAheadContextProvider {...this.props}>
         <TextField />
+        <Suggestions />
       </TypeAheadContextProvider>
     );
   }
