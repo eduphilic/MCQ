@@ -22,6 +22,8 @@ storiesOf("Molecules", module).add(
           <FormikTextFieldTypeAhead
             formikApi={formikApi}
             name="entryType"
+            label="Entry Type"
+            placeholder="Enter entry type here..."
             suggestions={["AFCAT", "NDA", "Paramilitary"]}
           />
         )}

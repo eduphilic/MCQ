@@ -32,9 +32,9 @@ export class TypeAheadContextProvider<Values extends object> extends Component<
 > {
   render() {
     const { formikApi, name, children, suggestions, ...rest } = this.props;
-    const value = formikApi.values[name];
+    const value = (formikApi.values[name] as any) as string;
 
-    if (typeof value !== "string") {
+    if (typeof value !== "string" && value !== undefined) {
       throw new Error(
         "Only string values are supported in type ahead control.",
       );
@@ -44,7 +44,10 @@ export class TypeAheadContextProvider<Values extends object> extends Component<
       <Downshift
         defaultInputValue={value}
         selectedItem={value}
-        onStateChange={downshiftToFormikChangeAdapter(formikApi.handleChange)}
+        onStateChange={downshiftToFormikChangeAdapter(
+          name,
+          formikApi.handleChange,
+        )}
       >
         {downshiftApi => (
           <div>

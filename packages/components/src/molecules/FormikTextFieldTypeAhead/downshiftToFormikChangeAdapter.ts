@@ -12,6 +12,7 @@ import { ChangeEvent, EventHandler } from "react";
  * ref: https://codesandbox.io/s/82m2px40q9
  */
 export const downshiftToFormikChangeAdapter = (
+  name: string,
   formikChangeEventHandler: EventHandler<ChangeEvent<HTMLInputElement>>,
 ) => {
   const downshiftStateHandler: DownshiftProps["onStateChange"] = ({
@@ -21,14 +22,14 @@ export const downshiftToFormikChangeAdapter = (
     // changed value. Here we implement a fake event to satisfy Formik's
     // requirements.
     // tslint:disable-next-line:no-object-literal-type-assertion
-    const pseudoInputChangeEvent = ({
+    const pseudoInputChangeEvent = {
       // tslint:disable-next-line:no-empty
       persist: () => {},
       target: {
         name,
         value: inputValue,
       },
-    } as any) as ChangeEvent<HTMLInputElement>;
+    } as ChangeEvent<HTMLInputElement>;
 
     // Hopefully we don't encounter any errors thrown doing this. Adding
     // a custom error here in case a future api change in Formik causes

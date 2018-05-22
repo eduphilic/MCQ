@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import { TextField } from "./TextField";
 import {
   TypeAheadContextProvider,
   TypeAheadContextProviderProps,
@@ -15,7 +16,7 @@ export class FormikTextFieldTypeAhead<Values extends object> extends Component<
   render() {
     return (
       <TypeAheadContextProvider {...this.props}>
-        <div>Placeholder</div>
+        <TextField />
       </TypeAheadContextProvider>
     );
   }
