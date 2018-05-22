@@ -23,7 +23,7 @@
       "theme": ["./packages/theme/src"],
       "theme/*": ["./packages/theme/src/*"]
     },
-    "typeRoots": ["node_modules/@types", "./typings"]
+    "typeRoots": ["./typings", "node_modules/@types"]
   },
   "exclude": ["node_modules", "**/node_modules/*"]
 }
