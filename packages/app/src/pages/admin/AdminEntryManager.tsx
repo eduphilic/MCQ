@@ -50,6 +50,7 @@ export const AdminEntryManager: SFC<{}> = () => {
       inputLabel: "Upload Logo",
       inputType: "file-upload",
       placeholder: "Select logo path here...",
+      acceptedFileTypes: "image/*",
     },
   };
 
