@@ -18,11 +18,11 @@ export class Suggestion extends Component<SuggestionProps> {
           if (!api) throw new Error("Used outside of context.");
 
           const { downshiftApi } = api;
-          const { getItemProps, selectedItem } = downshiftApi;
+          const { getItemProps, selectedItem, highlightedIndex } = downshiftApi;
           const { suggestion, index } = this.props;
 
           const itemProps = getItemProps({ item: suggestion });
-          const isHighlighted = index === selectedItem;
+          const isHighlighted = highlightedIndex === index;
           const isSelected =
             ((selectedItem as string | null) || "").indexOf(suggestion) > -1;
 
