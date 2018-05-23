@@ -1,7 +1,8 @@
-import Paper from "@material-ui/core/Paper";
-import Toolbar from "@material-ui/core/Toolbar";
 import React, { Component } from "react";
 import styled from "styled";
+
+import Paper from "@material-ui/core/Paper";
+import Toolbar from "@material-ui/core/Toolbar";
 
 // tslint:disable-next-line:no-empty-interface
 export interface DashboardSecondaryToolbarProps {}
@@ -12,9 +13,17 @@ const Spacer = styled.div`
   }
 `;
 
+const Header = styled.div`
+  ${({ theme }) => theme.breakpoints.down("xs")} {
+    padding: ${({ theme }) =>
+      `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`};
+  }
+`;
+
 export class DashboardSecondaryToolbar extends Component<
   DashboardSecondaryToolbarProps
 > {
+  static Header = Header;
   static Spacer = Spacer;
 
   render() {
