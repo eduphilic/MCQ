@@ -7,9 +7,11 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Grid from "@material-ui/core/Grid";
 
 import { Typography } from "components/atoms/Typography";
+import { DashboardSecondaryToolbar } from "components/molecules/DashboardSecondaryToolbar";
 import { FormikCheckbox } from "components/molecules/FormikCheckbox";
 import { FormikTextField } from "components/molecules/FormikTextField";
 import { FormikTextFieldTypeAhead } from "components/molecules/FormikTextFieldTypeAhead";
+import { TypographyButton } from "components/molecules/TypographyButton";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
@@ -46,6 +48,22 @@ export class AdminTestManagerNewTemplate extends Component<
         {api => {
           return (
             <AdminDashboardTemplateContainer titleText="Test Manager > Add New Template">
+              <DashboardSecondaryToolbar>
+                <Typography variant="cardTitle">
+                  Create a new Test Type
+                </Typography>
+                <DashboardSecondaryToolbar.Spacer />
+                <TypographyButton color="red" variant="flat">
+                  Cancel
+                </TypographyButton>
+                <TypographyButton color="blue" variant="flat">
+                  Preview Test
+                </TypographyButton>
+                <TypographyButton color="primary" variant="flat">
+                  Save
+                </TypographyButton>
+              </DashboardSecondaryToolbar>
+
               <Card>
                 <CardHeader
                   title={
