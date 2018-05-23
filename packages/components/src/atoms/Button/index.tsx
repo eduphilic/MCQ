@@ -1,11 +1,12 @@
+import React, { SFC } from "react";
+import styled from "styled";
+import { Theme } from "theme";
+
 // tslint:disable-next-line:import-name
 import MuiButton, {
   ButtonProps as MuiButtonProps,
 } from "@material-ui/core/Button";
 import { fade } from "@material-ui/core/styles/colorManipulator";
-import React, { SFC } from "react";
-import styled from "styled";
-import { Theme } from "theme";
 
 const ButtonBase = styled(MuiButton)`
   padding: 8px 32px;
@@ -28,13 +29,14 @@ const ButtonBase = styled(MuiButton)`
   }
 
   /* Extended Colors */
-  &.color-orange {
-    color: #f2994a;
+  &.color-orange.raised,
+  &.color-red.raised,
+  &.color-blue.raised {
+    background-color: #fff;
   }
 
-  &.color-orange.raised,
-  &.color-red.raised {
-    background-color: #fff;
+  &.color-orange {
+    color: #f2994a;
   }
 
   &.color-orange.raised:hover {
@@ -48,6 +50,14 @@ const ButtonBase = styled(MuiButton)`
   &.color-red.raised:hover {
     background-color: ${({ theme }) => getHoverBackground("#910f0f", theme)};
   }
+
+  &.color-blue {
+    color: #2d9cdb;
+  }
+
+  &.color-blue.raised:hover {
+    background-color: ${({ theme }) => getHoverBackground("#2d9cdb", theme)};
+  }
   /* End Extended Colors */
 `;
 
@@ -56,11 +66,11 @@ export interface ButtonProps extends Omit<MuiButtonProps, "color"> {
    * Same color options as the Material UI button with the addition of the
    * following additional colors: orange
    */
-  color?: MuiButtonProps["color"] | "orange" | "red";
+  color?: MuiButtonProps["color"] | "orange" | "red" | "blue";
 }
 
 type ExtendedColor = Exclude<ButtonProps["color"], MuiButtonProps["color"]>;
-const extendedColors: ExtendedColor[] = ["orange", "red"];
+const extendedColors: ExtendedColor[] = ["orange", "red", "blue"];
 
 /** Material UI button with default styling. */
 export const Button: SFC<ButtonProps> = props => {
@@ -69,9 +79,9 @@ export const Button: SFC<ButtonProps> = props => {
   const usesExtendedColor = extendedColors.includes(color as ExtendedColor);
   const classes: string[] = className ? [className] : [];
 
-  if (color === "default") classes.push("color-default");
-  if (color === "orange") classes.push("color-orange");
-  if (color === "red") classes.push("color-red");
+  if (["default", ...extendedColors].includes(color)) {
+    classes.push(`color-${color}`);
+  }
   if (variant === "raised") classes.push("raised");
 
   return (
