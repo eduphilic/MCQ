@@ -25,14 +25,20 @@ export class AdminTestManagerNewTemplate extends Component<
     const initialValues = {
       entry: "AirForce",
       category: "Soldier GD",
-      paperCount: 1,
-      inSingleAttemptRequired: false,
+
       paperName: "",
+
+      questionsTotal: 100,
       durationMinutes: 30,
-      totalMarks: 100,
-      passingMarks: "" as number | string,
+
+      marksTotal: 100,
+      marksRequiredToPass: "" as number | string,
+
       marksCorrectAnswer: 3,
       marksDeductedWrongAnswer: "" as number | string,
+
+      partsCount: 1,
+      partsAllRequiredOneSitting: false,
     };
 
     type Values = typeof initialValues;
@@ -98,37 +104,9 @@ export class AdminTestManagerNewTemplate extends Component<
                     left={
                       <FormikTextField
                         formikApi={api}
-                        name="paperCount"
-                        type="number"
-                        label="Number of paper in this test"
-                        placeholder="Number of paper here..."
-                      />
-                    }
-                    right={
-                      <FormikCheckbox
-                        formikApi={api}
-                        name="inSingleAttemptRequired"
-                        label="Candidate to attempt all questions in one go"
-                      />
-                    }
-                  />
-
-                  <TwoColumnRow
-                    left={
-                      <FormikTextField
-                        formikApi={api}
                         name="paperName"
                         label="Paper Name"
                         placeholder="Enter paper name here..."
-                      />
-                    }
-                    right={
-                      <FormikTextField
-                        formikApi={api}
-                        name="durationMinutes"
-                        type="number"
-                        label="Time (minutes)"
-                        placeholder="Enter duration here..."
                       />
                     }
                   />
@@ -146,7 +124,27 @@ export class AdminTestManagerNewTemplate extends Component<
                     left={
                       <FormikTextField
                         formikApi={api}
-                        name="totalMarks"
+                        name="questionsTotal"
+                        type="number"
+                        label="Total Questions"
+                        placeholder="Enter total number of questions here..."
+                      />
+                    }
+                    right={
+                      <FormikTextField
+                        formikApi={api}
+                        name="durationMinutes"
+                        type="number"
+                        label="Time (minutes)"
+                        placeholder="Enter duration here..."
+                      />
+                    }
+                  />
+                  <TwoColumnRow
+                    left={
+                      <FormikTextField
+                        formikApi={api}
+                        name="marksTotal"
                         type="number"
                         label="Total Marks"
                       />
@@ -154,7 +152,7 @@ export class AdminTestManagerNewTemplate extends Component<
                     right={
                       <FormikTextField
                         formikApi={api}
-                        name="passingMarks"
+                        name="marksRequiredToPass"
                         type="number"
                         label="Passing marks"
                         placeholder="Enter marks here"
@@ -177,6 +175,24 @@ export class AdminTestManagerNewTemplate extends Component<
                         type="number"
                         label="Marks deducted for each wrong answer"
                         placeholder="Enter marks here"
+                      />
+                    }
+                  />
+                  <TwoColumnRow
+                    left={
+                      <FormikTextField
+                        formikApi={api}
+                        name="partsCount"
+                        type="number"
+                        label="Number of Parts in this test"
+                        placeholder="Number of parts here..."
+                      />
+                    }
+                    right={
+                      <FormikCheckbox
+                        formikApi={api}
+                        name="partsAllRequiredOneSitting"
+                        label="Candidate to attempt all Parts in one go"
                       />
                     }
                   />
