@@ -32,12 +32,21 @@ const ButtonBase = styled(MuiButton)`
     color: #f2994a;
   }
 
-  &.color-orange.raised {
+  &.color-orange.raised,
+  &.color-red.raised {
     background-color: #fff;
   }
 
   &.color-orange.raised:hover {
     background-color: ${({ theme }) => getHoverBackground("#f2994a", theme)};
+  }
+
+  &.color-red {
+    color: #910f0f;
+  }
+
+  &.color-red.raised:hover {
+    background-color: ${({ theme }) => getHoverBackground("#910f0f", theme)};
   }
   /* End Extended Colors */
 `;
@@ -47,11 +56,11 @@ export interface ButtonProps extends Omit<MuiButtonProps, "color"> {
    * Same color options as the Material UI button with the addition of the
    * following additional colors: orange
    */
-  color?: MuiButtonProps["color"] | "orange";
+  color?: MuiButtonProps["color"] | "orange" | "red";
 }
 
 type ExtendedColor = Exclude<ButtonProps["color"], MuiButtonProps["color"]>;
-const extendedColors: ExtendedColor[] = ["orange"];
+const extendedColors: ExtendedColor[] = ["orange", "red"];
 
 /** Material UI button with default styling. */
 export const Button: SFC<ButtonProps> = props => {
@@ -62,6 +71,7 @@ export const Button: SFC<ButtonProps> = props => {
 
   if (color === "default") classes.push("color-default");
   if (color === "orange") classes.push("color-orange");
+  if (color === "red") classes.push("color-red");
   if (variant === "raised") classes.push("raised");
 
   return (

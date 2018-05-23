@@ -22,6 +22,14 @@ storiesOf("Atoms", module).add(
       <Button color="orange" variant="flat">
         <Typography variant="buttonBold">Orange Button</Typography>
       </Button>
+
+      <Button color="red">
+        <Typography variant="buttonBold">Red Button</Typography>
+      </Button>
+
+      <Button color="red" variant="flat">
+        <Typography variant="buttonBold">Red Button</Typography>
+      </Button>
     </Wrapper>
   )),
 );
