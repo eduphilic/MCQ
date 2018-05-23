@@ -7,6 +7,8 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Grid from "@material-ui/core/Grid";
 
 import { Typography } from "components/atoms/Typography";
+import { FormikCheckbox } from "components/molecules/FormikCheckbox";
+import { FormikTextField } from "components/molecules/FormikTextField";
 import { FormikTextFieldTypeAhead } from "components/molecules/FormikTextFieldTypeAhead";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
@@ -21,6 +23,14 @@ export class AdminTestManagerNewTemplate extends Component<
     const initialValues = {
       entry: "AirForce",
       category: "Soldier GD",
+      paperCount: 1,
+      inSingleAttemptRequired: false,
+      paperName: "",
+      durationMinutes: 30,
+      totalMarks: 100,
+      passingMarks: "" as number | string,
+      marksCorrectAnswer: 3,
+      marksDeductedWrongAnswer: "" as number | string,
     };
 
     type Values = typeof initialValues;
@@ -65,6 +75,93 @@ export class AdminTestManagerNewTemplate extends Component<
                       />
                     }
                   />
+
+                  <TwoColumnRow
+                    left={
+                      <FormikTextField
+                        formikApi={api}
+                        name="paperCount"
+                        type="number"
+                        label="Number of paper in this test"
+                        placeholder="Number of paper here..."
+                      />
+                    }
+                    right={
+                      <FormikCheckbox
+                        formikApi={api}
+                        name="inSingleAttemptRequired"
+                        label="Candidate to attempt all questions in one go"
+                      />
+                    }
+                  />
+
+                  <TwoColumnRow
+                    left={
+                      <FormikTextField
+                        formikApi={api}
+                        name="paperName"
+                        label="Paper Name"
+                        placeholder="Enter paper name here..."
+                      />
+                    }
+                    right={
+                      <FormikTextField
+                        formikApi={api}
+                        name="durationMinutes"
+                        type="number"
+                        label="Time (minutes)"
+                        placeholder="Enter duration here..."
+                      />
+                    }
+                  />
+                </CardContent>
+
+                <CardHeader
+                  title={
+                    <Typography variant="cardTitle">
+                      Marks Distribution
+                    </Typography>
+                  }
+                />
+                <CardContent>
+                  <TwoColumnRow
+                    left={
+                      <FormikTextField
+                        formikApi={api}
+                        name="totalMarks"
+                        type="number"
+                        label="Total Marks"
+                      />
+                    }
+                    right={
+                      <FormikTextField
+                        formikApi={api}
+                        name="passingMarks"
+                        type="number"
+                        label="Passing marks"
+                        placeholder="Enter marks here"
+                      />
+                    }
+                  />
+                  <TwoColumnRow
+                    left={
+                      <FormikTextField
+                        formikApi={api}
+                        name="marksCorrectAnswer"
+                        type="number"
+                        label="Marks for each correct answer"
+                      />
+                    }
+                    right={
+                      <FormikTextField
+                        formikApi={api}
+                        name="marksDeductedWrongAnswer"
+                        type="number"
+                        label="Marks deducted for each wrong answer"
+                        placeholder="Enter marks here"
+                      />
+                    }
+                  />
                 </CardContent>
               </Card>
             </AdminDashboardTemplateContainer>
@@ -79,7 +176,7 @@ const TwoColumnRow: SFC<{ left: ReactNode; right?: ReactNode }> = props => {
   const { left, right } = props;
 
   return (
-    <Grid container spacing={8}>
+    <Grid container spacing={24}>
       <Grid item xs={12} sm={6}>
         {left}
       </Grid>
