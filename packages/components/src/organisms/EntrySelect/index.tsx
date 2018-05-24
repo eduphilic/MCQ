@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled";
-import { Entry } from "../../atoms/EntryLogo";
+
 import {
   EntrySelectItem,
   EntrySelectItemProps,
@@ -8,10 +8,13 @@ import {
 
 export interface EntrySelectProps {
   /**
-   * Item icons and labels. Icon key will be used in the callback as part of the
-   * results list.
+   * Item icons, labels, and optional education requirements.
+   * Icon key will be used in the callback as part of the results list.
    */
-  entries: { icon: Entry; label: string }[];
+  entries: Pick<
+    EntrySelectItemProps,
+    "icon" | "label" | "educationRequirement"
+  >[];
 
   /**
    * Minimum number of selection required. Handler will be called with a boolean
