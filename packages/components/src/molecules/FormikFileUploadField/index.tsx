@@ -1,3 +1,4 @@
+import { FormikProps } from "formik";
 import React, {
   ChangeEvent,
   Component,
@@ -12,33 +13,42 @@ import IconButton from "@material-ui/core/IconButton";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import InputLabel from "@material-ui/core/InputLabel";
+import { TextFieldProps } from "@material-ui/core/TextField";
 import InsertDriveFile from "@material-ui/icons/InsertDriveFile";
 
-import { DashboardFormDialogFormInputCommonProps } from "./DashboardFormDialogFormInputCommonProps";
+/** Used to help generate unique element id's. */
+let instanceCounter = 0;
 
-// tslint:disable-next-line:no-empty-interface
-export interface DashboardFormDialogInputFileUploadProps<Values extends object>
-  extends DashboardFormDialogFormInputCommonProps<Values> {}
+export interface FormikFileUploadFieldProps<Values extends object>
+  extends Pick<TextFieldProps, "label" | "fullWidth" | "margin"> {
+  name: keyof Values;
 
-export class DashboardFormDialogInputFileUpload<
-  Values extends object
-> extends Component<DashboardFormDialogInputFileUploadProps<Values>> {
+  formikApi: FormikProps<Values>;
+
+  /**
+   * Value to pass to the native input's "accept" attribute. It is used to
+   * control the file types allowed for upload.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept
+   */
+  acceptedFileTypes?: string;
+}
+
+/**
+ * Provides a file upload text field. It connects to a Formik instance using the
+ * provided `formikApi` prop.
+ */
+export class FormikFileUploadField<Values extends object> extends Component<
+  FormikFileUploadFieldProps<Values>
+> {
   private fileInput = createRef<HTMLInputElement>();
 
   private handleChange: EventHandler<ChangeEvent<HTMLInputElement>> = event => {
     const { files } = event.target;
     if (!files || files.length === 0) return;
 
-    const { setFieldValue, name } = this.props;
-
-    if (!setFieldValue) {
-      throw new Error(
-        "DashboardFormDialogInputFileUpload requires setFieldValue.",
-      );
-    }
-    if (!name) {
-      throw new Error("DashboardFormDialogInputFileUpload requires name.");
-    }
+    const { name, formikApi: api } = this.props;
+    const { setFieldValue } = api;
 
     setFieldValue(name, files[0]);
   };
@@ -52,23 +62,19 @@ export class DashboardFormDialogInputFileUpload<
 
   render() {
     const {
-      acceptedFileTypes,
       name,
+      formikApi: api,
+      acceptedFileTypes,
       label,
+      fullWidth = true,
       margin,
-      fullWidth,
-      placeholder,
-      value,
-
-      // Prevent DOM errors from unused additional props.
-      setFieldValue,
-
       ...rest
     } = this.props;
 
-    const inputId = `dialog-file-upload-${name}`;
-    const valueAsFileOrNull = (value as any) as File | null;
-    const filename = valueAsFileOrNull ? valueAsFileOrNull.name : "";
+    instanceCounter += 1;
+    const inputId = `formik-file-upload-field-${name}-${instanceCounter}`;
+    const valueFileOrNull = (api.values as { [P: string]: File | null })[name];
+    const filename = valueFileOrNull ? valueFileOrNull.name : "";
 
     return (
       <>
