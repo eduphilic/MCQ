@@ -18,7 +18,7 @@ export const AdminEntryManager: SFC<{}> = () => {
     entryType: "Army",
     entryExplanation: "",
     categoryType: "",
-    education: "",
+    categoryEducation: "",
     pricePerPaper: 10,
     logo: null as File | null,
   };
@@ -41,10 +41,10 @@ export const AdminEntryManager: SFC<{}> = () => {
       placeholder: "Enter category name here...",
       suggestions: ["Soldier GD", "Soldier Tradesman", "Soldier GD"],
     },
-    education: {
-      inputLabel: "Education",
+    categoryEducation: {
+      inputLabel: "Category Education",
       inputType: "text-autocomplete",
-      placeholder: "Select Education",
+      placeholder: "Education requirement for the category",
       suggestions: ["8th", "10th", "12th"],
     },
     pricePerPaper: {
