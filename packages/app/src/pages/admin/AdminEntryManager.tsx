@@ -16,6 +16,7 @@ export const AdminEntryManager: SFC<{}> = () => {
 
   const dialogFields = {
     entryType: "Army",
+    entryExplanation: "",
     categoryType: "",
     education: "",
     pricePerPaper: 10,
@@ -28,6 +29,11 @@ export const AdminEntryManager: SFC<{}> = () => {
       inputType: "text-autocomplete",
       placeholder: "Enter Entry name here...",
       suggestions: ["AirForce", "Army", "Navy"],
+    },
+    entryExplanation: {
+      inputLabel: "Entry Explanation",
+      inputType: "text",
+      placeholder: "Enter Entry Explanation here...",
     },
     categoryType: {
       inputLabel: "Category Type",
