@@ -12,6 +12,7 @@ export const AdminIndexManager: SFC<{}> = () => {
 
   const initialValues = {
     heroBackgroundImage: null as File | null,
+    entryCardBackgroundImage: null as File | null,
   };
 
   type Values = typeof initialValues;
@@ -108,7 +109,14 @@ export const AdminIndexManager: SFC<{}> = () => {
                   ],
                 },
               ]}
-              additionalActionNode={<div>Upload Field Placeholder</div>}
+              additionalActionNode={
+                <FormikFileUploadField
+                  formikApi={api}
+                  name="entryCardBackgroundImage"
+                  label="Click to upload background image"
+                  iconOnly
+                />
+              }
             />
           ))}
         </AdminDashboardTemplateContainer>
