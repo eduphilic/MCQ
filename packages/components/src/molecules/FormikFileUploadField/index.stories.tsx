@@ -30,6 +30,19 @@ storiesOf("Molecules", module).add(
             />
           )}
         </TypedFormik>
+
+        <div style={{ marginTop: 24 }} />
+
+        <TypedFormik initialValues={initialValues} onSubmit={noop}>
+          {api => (
+            <FormikFileUploadField
+              formikApi={api}
+              name="logoImage"
+              label="Logo Image"
+              iconOnly
+            />
+          )}
+        </TypedFormik>
       </ContentCenterWrapper>
     );
   }),

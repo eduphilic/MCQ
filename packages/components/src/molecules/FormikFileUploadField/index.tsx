@@ -14,6 +14,7 @@ import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import InputLabel from "@material-ui/core/InputLabel";
 import { TextFieldProps } from "@material-ui/core/TextField";
+import Tooltip from "@material-ui/core/Tooltip";
 import InsertDriveFile from "@material-ui/icons/InsertDriveFile";
 
 /** Used to help generate unique element id's. */
@@ -35,6 +36,11 @@ export interface FormikFileUploadFieldProps<Values extends object>
    * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept
    */
   acceptedFileTypes?: string;
+
+  /**
+   * Present the control as an icon button instead of a full text field.
+   */
+  iconOnly?: boolean;
 }
 
 /**
@@ -72,6 +78,7 @@ export class FormikFileUploadField<Values extends object> extends Component<
       fullWidth = true,
       margin,
       placeholder,
+      iconOnly,
       ...rest
     } = this.props;
 
@@ -90,30 +97,40 @@ export class FormikFileUploadField<Values extends object> extends Component<
           onChange={this.handleChange}
         />
 
-        <FormControl
-          margin={margin}
-          fullWidth={fullWidth}
-          // Using mousedown event to prevent focus from being transferred to
-          // control. This prevents the unwanted animation where the text label
-          // moves up.
-          onMouseDown={this.handleClick}
-        >
-          <InputLabel htmlFor={inputId}>{label}</InputLabel>
+        {!iconOnly && (
+          <FormControl
+            margin={margin}
+            fullWidth={fullWidth}
+            // Using mousedown event to prevent focus from being transferred to
+            // control. This prevents the unwanted animation where the text label
+            // moves up.
+            onMouseDown={this.handleClick}
+          >
+            <InputLabel htmlFor={inputId}>{label}</InputLabel>
 
-          <InputReadOnlyClickable
-            id={inputId}
-            type="text"
-            value={filename}
-            {...rest}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButtonNoHoverStyled>
-                  <InsertDriveFile />
-                </IconButtonNoHoverStyled>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
+            <InputReadOnlyClickable
+              id={inputId}
+              type="text"
+              value={filename}
+              {...rest}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButtonNoHoverStyled>
+                    <InsertDriveFile />
+                  </IconButtonNoHoverStyled>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+        )}
+
+        {iconOnly && (
+          <Tooltip title={label}>
+            <IconButton onClick={this.handleClick}>
+              <InsertDriveFile />
+            </IconButton>
+          </Tooltip>
+        )}
       </>
     );
   }
