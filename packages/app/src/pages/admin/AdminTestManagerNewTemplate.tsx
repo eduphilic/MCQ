@@ -1,16 +1,19 @@
-import { Formik } from "formik";
+import { FieldArray, Formik } from "formik";
 import React, { Component, ReactNode, SFC } from "react";
+import styled from "styled";
 
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import Grid from "@material-ui/core/Grid";
+import Add from "@material-ui/icons/Add";
 
 import { Typography } from "components/atoms/Typography";
 import { DashboardSecondaryToolbar } from "components/molecules/DashboardSecondaryToolbar";
 import { FormikCheckbox } from "components/molecules/FormikCheckbox";
 import { FormikTextField } from "components/molecules/FormikTextField";
 import { FormikTextFieldTypeAhead } from "components/molecules/FormikTextFieldTypeAhead";
+import { ResponsiveToolbarTypographyButton } from "components/molecules/ResponsiveToolbarTypographyButton";
 import { TypographyButton } from "components/molecules/TypographyButton";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
@@ -39,6 +42,17 @@ export class AdminTestManagerNewTemplate extends Component<
 
       partsCount: 1,
       partsAllRequiredOneSitting: false,
+
+      parts: [
+        {
+          name: "General Knowledge Section",
+          subjects: [
+            {
+              name: "General Knowlege",
+            },
+          ],
+        },
+      ],
     };
 
     type Values = typeof initialValues;
@@ -198,8 +212,136 @@ export class AdminTestManagerNewTemplate extends Component<
                       />
                     }
                   />
+
+                  <Card style={{ marginTop: 24 }}>
+                    <CardHeader
+                      title={
+                        <Typography variant="buttonBold">
+                          Validation text here...
+                        </Typography>
+                      }
+                    />
+                  </Card>
                 </CardContent>
               </Card>
+
+              {/* Sections in Paper toolbar */}
+              <DashboardSecondaryToolbar>
+                <DashboardSecondaryToolbar.Header>
+                  <Typography variant="cardTitle">Sections in paper</Typography>
+                </DashboardSecondaryToolbar.Header>
+                <DashboardSecondaryToolbar.Spacer />
+                <ResponsiveToolbarTypographyButton
+                  color="primary"
+                  iconNode={<Add />}
+                  tooltipTitle="Add Section"
+                >
+                  Section
+                </ResponsiveToolbarTypographyButton>
+              </DashboardSecondaryToolbar>
+
+              {/* Section in Paper */}
+              <FieldArray name="parts">
+                {_arrayHelpers => (
+                  <Card>
+                    {/* Section Name */}
+                    <CardHeader
+                      subheader={
+                        <FormikTextField
+                          formikApi={api}
+                          name={"parts.0.name" as any}
+                          label="Section Name"
+                          placeholder="Enter section name here..."
+                          fullWidth={false}
+                        />
+                      }
+                      action={
+                        <CardHeaderActionButtonSpacing>
+                          <ResponsiveToolbarTypographyButton
+                            color="primary"
+                            iconNode={<Add />}
+                            tooltipTitle="Add Subject"
+                          >
+                            Subject
+                          </ResponsiveToolbarTypographyButton>
+                        </CardHeaderActionButtonSpacing>
+                      }
+                    />
+
+                    <CardContent>
+                      <TwoColumnRow
+                        left={
+                          <FormikTextField
+                            formikApi={api}
+                            name={"parts.0.subjects.0.name" as any}
+                            label="Subject name"
+                            placeholder="General Knowledge"
+                          />
+                        }
+                        right={
+                          <FormikTextField
+                            formikApi={api}
+                            name={"parts.0.subjects.0.questionCount" as any}
+                            type="number"
+                            label="Number of questions"
+                          />
+                        }
+                      />
+
+                      <TwoColumnRow
+                        left={
+                          <FormikTextField
+                            formikApi={api}
+                            name={"parts.0.subjects.0.marksTotal" as any}
+                            type="number"
+                            label="Total Marks"
+                          />
+                        }
+                        right={
+                          <FormikTextField
+                            formikApi={api}
+                            name={
+                              "parts.0.subjects.0.questionsDifficultyEasyPercentage" as any
+                            }
+                            label="Easy Level Questions %"
+                          />
+                        }
+                      />
+
+                      <TwoColumnRow
+                        left={
+                          <FormikTextField
+                            formikApi={api}
+                            name={
+                              "parts.0.subjects.0.questionsDifficultyMediumPercentage" as any
+                            }
+                            label="Medium Level Questions %"
+                          />
+                        }
+                        right={
+                          <FormikTextField
+                            formikApi={api}
+                            name={
+                              "parts.0.subjects.0.questionsDifficultyHardPercentage" as any
+                            }
+                            label="Hard Level Questions %"
+                          />
+                        }
+                      />
+
+                      <Card style={{ marginTop: 24 }}>
+                        <CardHeader
+                          title={
+                            <Typography variant="buttonBold">
+                              Validation text here...
+                            </Typography>
+                          }
+                        />
+                      </Card>
+                    </CardContent>
+                  </Card>
+                )}
+              </FieldArray>
             </AdminDashboardTemplateContainer>
           );
         }}
@@ -222,3 +364,11 @@ const TwoColumnRow: SFC<{ left: ReactNode; right?: ReactNode }> = props => {
     </Grid>
   );
 };
+
+const CardHeaderActionButtonSpacing = styled.div`
+  display: flex;
+  align-items: flex-end;
+  height: 48px;
+  margin-top: 16px;
+  margin-right: 16px;
+`;
