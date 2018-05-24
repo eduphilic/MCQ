@@ -30,6 +30,10 @@ export const Step1 = withRouter(props => {
   };
 
   const entrySelectProps = createSelectEntryPlaceholderData();
+  entrySelectProps.entries = entrySelectProps.entries.map(e => ({
+    ...e,
+    educationRequirement: "12th Science with Maths",
+  }));
 
   return (
     <OnboardingTemplate {...onboardingTemplateProps}>
