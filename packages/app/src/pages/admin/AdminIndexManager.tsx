@@ -1,6 +1,9 @@
 import { Formik } from "formik";
 import React, { SFC } from "react";
 
+import { Typography } from "components/atoms/Typography";
+import { DashboardSecondaryToolbar } from "components/molecules/DashboardSecondaryToolbar";
+import { FormikFileUploadField } from "components/molecules/FormikFileUploadField";
 import { DashboardCard } from "components/organisms/DashboardCard";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
@@ -8,7 +11,7 @@ export const AdminIndexManager: SFC<{}> = () => {
   const noop = () => {}; // tslint:disable-line
 
   const initialValues = {
-    cardBackground: null as File | null,
+    heroBackgroundImage: null as File | null,
   };
 
   type Values = typeof initialValues;
@@ -16,8 +19,27 @@ export const AdminIndexManager: SFC<{}> = () => {
 
   return (
     <TypedFormik initialValues={initialValues} onSubmit={noop}>
-      {_api => (
+      {api => (
         <AdminDashboardTemplateContainer titleText="Index Manager">
+          {/* Hero Background Image Upload Field*/}
+          <DashboardSecondaryToolbar>
+            <DashboardSecondaryToolbar.Header>
+              <Typography variant="cardTitle">
+                Upload Hero background
+              </Typography>
+            </DashboardSecondaryToolbar.Header>
+            <DashboardSecondaryToolbar.Header
+              style={{ flex: 1, paddingBottom: 12 }}
+            >
+              <FormikFileUploadField
+                formikApi={api}
+                name="heroBackgroundImage"
+                acceptedFileTypes="image/*"
+                placeholder="Browse"
+              />
+            </DashboardSecondaryToolbar.Header>
+          </DashboardSecondaryToolbar>
+
           {["AirForce", "Army", "Navy"].map(title => (
             <DashboardCard
               key={title}

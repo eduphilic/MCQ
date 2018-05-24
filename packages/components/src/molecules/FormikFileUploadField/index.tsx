@@ -20,7 +20,10 @@ import InsertDriveFile from "@material-ui/icons/InsertDriveFile";
 let instanceCounter = 0;
 
 export interface FormikFileUploadFieldProps<Values extends object>
-  extends Pick<TextFieldProps, "label" | "fullWidth" | "margin"> {
+  extends Pick<
+      TextFieldProps,
+      "label" | "fullWidth" | "margin" | "placeholder"
+    > {
   name: keyof Values;
 
   formikApi: FormikProps<Values>;
@@ -68,13 +71,14 @@ export class FormikFileUploadField<Values extends object> extends Component<
       label,
       fullWidth = true,
       margin,
+      placeholder,
       ...rest
     } = this.props;
 
     instanceCounter += 1;
     const inputId = `formik-file-upload-field-${name}-${instanceCounter}`;
     const valueFileOrNull = (api.values as { [P: string]: File | null })[name];
-    const filename = valueFileOrNull ? valueFileOrNull.name : "";
+    const filename = valueFileOrNull ? valueFileOrNull.name : placeholder || "";
 
     return (
       <>

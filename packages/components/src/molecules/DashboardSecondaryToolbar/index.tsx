@@ -14,6 +14,9 @@ const Spacer = styled.div`
 `;
 
 const Header = styled.div`
+  flex-shrink: 0;
+  padding-right: 24px;
+
   ${({ theme }) => theme.breakpoints.down("xs")} {
     padding: ${({ theme }) =>
       `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`};
