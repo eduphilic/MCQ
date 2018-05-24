@@ -3,6 +3,7 @@ import { withInfo } from "@storybook/addon-info";
 import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
+
 import { EntrySelectItem } from ".";
 
 storiesOf("Molecules", module).add(
@@ -12,6 +13,14 @@ storiesOf("Molecules", module).add(
       <EntrySelectItem
         icon="AirForce"
         label="AirForce"
+        selected={boolean("Selected", false)}
+        onClick={action("onClick")}
+      />
+      <div style={{ marginTop: 8 }} />
+      <EntrySelectItem
+        icon="AirForce"
+        label="AirForce"
+        educationRequirement="12th Science with Maths"
         selected={boolean("Selected", false)}
         onClick={action("onClick")}
       />

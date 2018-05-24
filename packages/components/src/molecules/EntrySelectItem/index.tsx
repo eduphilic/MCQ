@@ -1,6 +1,8 @@
-import Typography from "@material-ui/core/Typography";
 import React, { SFC } from "react";
 import styled, { withProps } from "styled";
+
+import Typography from "@material-ui/core/Typography";
+
 import { Button } from "../../atoms/Button";
 import { CheckmarkableCircle } from "../../atoms/CheckmarkableCircle";
 import { EntryLogo, EntryLogoProps } from "../../atoms/EntryLogo";
@@ -17,6 +19,11 @@ export interface EntrySelectItemProps {
   label: string;
 
   /**
+   * Education requirement. Shown under label.
+   */
+  educationRequirement?: string;
+
+  /**
    * Whether item is selected.
    */
   selected: boolean;
@@ -31,12 +38,17 @@ export interface EntrySelectItemProps {
  * Entry (military branch) selection item.
  */
 export const EntrySelectItem: SFC<EntrySelectItemProps> = props => {
-  const { icon: entry, label, selected, onClick } = props;
+  const { icon: entry, label, educationRequirement, selected, onClick } = props;
 
   return (
     <StyledButton selected={selected} onClick={onClick}>
       <Logo entry={entry} />
-      <Label>{label}</Label>
+      <TextWrapper>
+        <Label>{label}</Label>
+        {educationRequirement && (
+          <EducationRequirement>{educationRequirement}</EducationRequirement>
+        )}
+      </TextWrapper>
       <CheckmarkableCircle color="secondary" checked={selected} />
     </StyledButton>
   );
@@ -70,10 +82,22 @@ const Logo = styled(EntryLogo)`
   margin-right: ${props => props.theme.spacing.unit}px;
 `;
 
+const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+
 const Label = styled(Typography).attrs({
   variant: "body1",
 })`
   flex: 1;
   font-size: 16px;
   text-align: left;
+`;
+
+const EducationRequirement = Label.extend`
+  font-weight: 500;
+  font-size: 14px;
+  color: #4db7f1;
 `;
