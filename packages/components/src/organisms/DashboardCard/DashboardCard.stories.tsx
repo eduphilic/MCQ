@@ -3,6 +3,8 @@ import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
+import TextField from "@material-ui/core/TextField";
+
 import { DashboardCard } from ".";
 import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 import { DashboardCardColumnType } from "./DashboardCardColumnType";
@@ -78,6 +80,13 @@ storiesOf("Organisms", module).add(
           onRequestDeleteClick={action("onRequestDeleteClick")}
           paginationProps={paginationProps}
           paginationListItemType="entries"
+          additionalActionNode={
+            <TextField
+              name="textField"
+              label="A Custom Action Node"
+              placeholder="Custom action node's contents..."
+            />
+          }
         />
       </ContentCenterWrapper>
     );

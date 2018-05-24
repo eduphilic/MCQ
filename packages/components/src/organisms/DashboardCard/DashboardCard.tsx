@@ -26,7 +26,10 @@ export interface DashboardCardProps
       DashboardCardModeContextProps,
       "onItemEditClick" | "onRequestDeleteClick"
     >,
-    Pick<DashboardCardTitleToolbarProps, "editCaptionText">,
+    Pick<
+      DashboardCardTitleToolbarProps,
+      "editCaptionText" | "additionalActionNode"
+    >,
     Pick<DashboardCardTableProps, "columnLabels" | "columnTypes"> {
   /**
    * Card title. If not provided, no title toolbar is displayed.
@@ -63,6 +66,7 @@ export class DashboardCard extends Component<DashboardCardProps> {
       columnTypes,
       paginationProps,
       paginationListItemType,
+      additionalActionNode,
     } = this.props;
     const itemKeys = items.map(item => item.key);
 
@@ -85,6 +89,7 @@ export class DashboardCard extends Component<DashboardCardProps> {
               editCaptionText={editCaptionText}
               showEditButton={Boolean(onItemEditClick)}
               showDeletionButton={Boolean(onRequestDeleteClick)}
+              additionalActionNode={additionalActionNode}
             />
           )}
 

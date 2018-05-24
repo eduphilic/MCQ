@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, ReactNode } from "react";
 import styled, { withProps } from "styled";
 
 import Icon from "@material-ui/core/Icon";
@@ -32,18 +32,28 @@ export interface DashboardCardTitleToolbarProps {
   showEditButton?: boolean;
 
   /**
-   * Wether to display deletion mode button or not.
+   * Whether to display deletion mode button or not.
    *
    * @default false
    */
   showDeletionButton?: boolean;
+
+  /**
+   * Additional action node. Shown to the left of the edit and delete action
+   * buttons if provided.
+   */
+  additionalActionNode?: ReactNode;
 }
 
 export class DashboardCardTitleToolbar extends Component<
   DashboardCardTitleToolbarProps
 > {
   generateActionsButtonNode = (api: DashboardCardModeApi) => {
-    const { showDeletionButton, showEditButton } = this.props;
+    const {
+      showDeletionButton,
+      showEditButton,
+      additionalActionNode,
+    } = this.props;
     const {
       enterDeletionMode,
       enterEditMode,
@@ -55,6 +65,7 @@ export class DashboardCardTitleToolbar extends Component<
 
     return mode === "display" ? (
       <>
+        {additionalActionNode}
         {showDeletionButton && (
           <Tooltip title="Deletion Mode">
             <IconButton onClick={enterDeletionMode}>
