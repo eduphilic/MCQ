@@ -58,10 +58,10 @@ export const Hero: SFC<HeroProps> = props => {
           backgroundAlpha={backgroundAlpha}
         >
           <ContentCenterWrapper>
-            <Logo />
-
             <DivideWrapper>
               <div>
+                <LogoBottomMargin />
+
                 <LanguageSelectWrapper>
                   <LanguageSelect {...props.languageSelectProps} />
                 </LanguageSelectWrapper>
@@ -111,7 +111,7 @@ const Wrapper = withProps<{
 const DivideWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: ${props => props.theme.spacing.unit * 4}px 0;
+  margin-bottom: ${props => props.theme.spacing.unit * 4}px;
 
   > div:nth-child(1) {
     flex: 1;
@@ -126,10 +126,10 @@ const DivideWrapper = styled.div`
       flex-basis: 400px;
     }
   }
+`;
 
-  ${props => props.theme.breakpoints.down("md")} {
-    margin-top: ${props => props.theme.spacing.unit * 8}px;
-  }
+const LogoBottomMargin = styled(Logo)`
+  margin-bottom: ${({ theme }) => theme.spacing.unit * 4}px;
 `;
 
 const LanguageSelectWrapper = styled.div`
