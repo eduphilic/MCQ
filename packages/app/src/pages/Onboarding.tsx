@@ -1,5 +1,10 @@
+import strings from "l10n";
+import React, { Component, ReactElement } from "react";
+import { withRouter } from "react-router-dom";
+
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
+
 import {
   PanelManager,
   PanelManagerProps,
@@ -8,9 +13,6 @@ import { EntrySelect } from "components/organisms/EntrySelect";
 import { createSelectEntryPlaceholderData } from "components/organisms/EntrySelect/createSelectEntryPlaceholderData";
 import { OnboardingTemplate } from "components/templates/OnboardingTemplate";
 import { createPlaceholderOnboardingTemplateProps } from "components/templates/OnboardingTemplate/createPlaceholderOnboardingTemplateProps";
-import strings from "l10n";
-import React, { Component, ReactElement } from "react";
-import { withRouter } from "react-router-dom";
 
 import { ExamQuantitySelector } from "components/molecules/ExamQuantitySelector";
 import { createPlaceholderExamQuantitySelectorProps } from "components/molecules/ExamQuantitySelector/createPlaceholderExamQuantitySelectorProps";
@@ -59,6 +61,10 @@ export const Step2 = withRouter(props => {
 
   const CategoryPanelManager = createPlaceholderPanelManager(3);
   const entrySelectProps = createSelectEntryPlaceholderData();
+  entrySelectProps.entries = entrySelectProps.entries.map(e => ({
+    ...e,
+    educationRequirement: "12th Science with Maths",
+  }));
 
   return (
     <OnboardingTemplate {...onboardingTemplateProps}>
