@@ -1,4 +1,4 @@
-import { FieldArray, Formik } from "formik";
+import { Formik } from "formik";
 import React, { Component, ReactNode, SFC } from "react";
 import styled from "styled";
 
@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import Grid from "@material-ui/core/Grid";
 import Add from "@material-ui/icons/Add";
+import RemoveCircleOutline from "@material-ui/icons/RemoveCircleOutline";
 
 import { Typography } from "components/atoms/Typography";
 import { DashboardSecondaryToolbar } from "components/molecules/DashboardSecondaryToolbar";
@@ -241,107 +242,277 @@ export class AdminTestManagerNewTemplate extends Component<
               </DashboardSecondaryToolbar>
 
               {/* Section in Paper */}
-              <FieldArray name="parts">
-                {_arrayHelpers => (
-                  <Card>
-                    {/* Section Name */}
+              <Card>
+                {/* Section Name */}
+                <CardHeader
+                  subheader={
+                    <FormikTextField
+                      formikApi={api}
+                      name={"parts.0.name" as any}
+                      label="Section Name"
+                      placeholder="Enter section name here..."
+                      fullWidth={false}
+                    />
+                  }
+                  action={
+                    <CardHeaderActionButtonSpacing>
+                      <ResponsiveToolbarTypographyButton
+                        color="primary"
+                        iconNode={<Add />}
+                        tooltipTitle="Add Subject"
+                      >
+                        Subject
+                      </ResponsiveToolbarTypographyButton>
+                    </CardHeaderActionButtonSpacing>
+                  }
+                />
+
+                {/* Subject Name / Configuration */}
+                <CardContent>
+                  {/* Subject Name, Number of Questions */}
+                  <RemovableTwoColumnRow
+                    left={
+                      <FormikTextField
+                        formikApi={api}
+                        name={"parts.0.subjects.0.name" as any}
+                        label="Subject name"
+                        placeholder="General Knowledge"
+                      />
+                    }
+                    right={
+                      <FormikTextField
+                        formikApi={api}
+                        name={"parts.0.subjects.0.questionCount" as any}
+                        type="number"
+                        label="Number of questions"
+                      />
+                    }
+                  />
+
+                  {/* Total Marks, Easy Level Questions */}
+                  <RemovableTwoColumnRow
+                    marginOnly
+                    left={
+                      <FormikTextField
+                        formikApi={api}
+                        name={"parts.0.subjects.0.marksTotal" as any}
+                        type="number"
+                        label="Total Marks"
+                      />
+                    }
+                    right={
+                      <FormikTextField
+                        formikApi={api}
+                        name={
+                          "parts.0.subjects.0.questionsDifficultyEasyPercentage" as any
+                        }
+                        label="Easy Level Questions %"
+                      />
+                    }
+                  />
+
+                  {/* Medium Level Questions, Hard Level Questions */}
+                  <RemovableTwoColumnRow
+                    marginOnly
+                    left={
+                      <FormikTextField
+                        formikApi={api}
+                        name={
+                          "parts.0.subjects.0.questionsDifficultyMediumPercentage" as any
+                        }
+                        label="Medium Level Questions %"
+                      />
+                    }
+                    right={
+                      <FormikTextField
+                        formikApi={api}
+                        name={
+                          "parts.0.subjects.0.questionsDifficultyHardPercentage" as any
+                        }
+                        label="Hard Level Questions %"
+                      />
+                    }
+                  />
+
+                  {/* Subject Name / Configuration Validation Message */}
+                  <Card style={{ marginTop: 24 }}>
                     <CardHeader
-                      subheader={
-                        <FormikTextField
-                          formikApi={api}
-                          name={"parts.0.name" as any}
-                          label="Section Name"
-                          placeholder="Enter section name here..."
-                          fullWidth={false}
-                        />
-                      }
-                      action={
-                        <CardHeaderActionButtonSpacing>
-                          <ResponsiveToolbarTypographyButton
-                            color="primary"
-                            iconNode={<Add />}
-                            tooltipTitle="Add Subject"
-                          >
-                            Subject
-                          </ResponsiveToolbarTypographyButton>
-                        </CardHeaderActionButtonSpacing>
+                      title={
+                        <Typography variant="buttonBold">
+                          Validation text here...
+                        </Typography>
                       }
                     />
-
-                    <CardContent>
-                      <TwoColumnRow
-                        left={
-                          <FormikTextField
-                            formikApi={api}
-                            name={"parts.0.subjects.0.name" as any}
-                            label="Subject name"
-                            placeholder="General Knowledge"
-                          />
-                        }
-                        right={
-                          <FormikTextField
-                            formikApi={api}
-                            name={"parts.0.subjects.0.questionCount" as any}
-                            type="number"
-                            label="Number of questions"
-                          />
-                        }
-                      />
-
-                      <TwoColumnRow
-                        left={
-                          <FormikTextField
-                            formikApi={api}
-                            name={"parts.0.subjects.0.marksTotal" as any}
-                            type="number"
-                            label="Total Marks"
-                          />
-                        }
-                        right={
-                          <FormikTextField
-                            formikApi={api}
-                            name={
-                              "parts.0.subjects.0.questionsDifficultyEasyPercentage" as any
-                            }
-                            label="Easy Level Questions %"
-                          />
-                        }
-                      />
-
-                      <TwoColumnRow
-                        left={
-                          <FormikTextField
-                            formikApi={api}
-                            name={
-                              "parts.0.subjects.0.questionsDifficultyMediumPercentage" as any
-                            }
-                            label="Medium Level Questions %"
-                          />
-                        }
-                        right={
-                          <FormikTextField
-                            formikApi={api}
-                            name={
-                              "parts.0.subjects.0.questionsDifficultyHardPercentage" as any
-                            }
-                            label="Hard Level Questions %"
-                          />
-                        }
-                      />
-
-                      <Card style={{ marginTop: 24 }}>
-                        <CardHeader
-                          title={
-                            <Typography variant="buttonBold">
-                              Validation text here...
-                            </Typography>
-                          }
-                        />
-                      </Card>
-                    </CardContent>
                   </Card>
-                )}
-              </FieldArray>
+                </CardContent>
+
+                {/* Topics in Subjects*/}
+                <CardHeader
+                  title={
+                    <Typography variant="cardTitle">
+                      Topics in Subjects
+                    </Typography>
+                  }
+                />
+
+                {/* Subject 1's Name */}
+                <CardHeader
+                  subheader={
+                    <FormikTextField
+                      formikApi={api}
+                      name={"parts.0.name" as any}
+                      label="Subject Name"
+                      placeholder="Geography"
+                      fullWidth={false}
+                    />
+                  }
+                  action={
+                    <CardHeaderActionButtonSpacing>
+                      <ResponsiveToolbarTypographyButton
+                        color="primary"
+                        iconNode={<Add />}
+                        tooltipTitle="Add Topic"
+                      >
+                        Topic
+                      </ResponsiveToolbarTypographyButton>
+                    </CardHeaderActionButtonSpacing>
+                  }
+                />
+
+                {/* Subject 1's Topics */}
+                <CardContent>
+                  <RemovableTwoColumnRow
+                    left={
+                      <FormikTextField
+                        formikApi={api}
+                        name={"parts.0.subjects.0.marksTotal" as any}
+                        label="Topic"
+                        placeholder="Regional Geography"
+                      />
+                    }
+                    right={
+                      <FormikTextField
+                        formikApi={api}
+                        name={
+                          "parts.0.subjects.0.questionsDifficultyEasyPercentage" as any
+                        }
+                        type="number"
+                        label="Total Questions"
+                      />
+                    }
+                  />
+
+                  <RemovableTwoColumnRow
+                    left={
+                      <FormikTextField
+                        formikApi={api}
+                        name={"parts.0.subjects.0.marksTotal" as any}
+                        label="Topic"
+                        placeholder="Foreign Lands"
+                      />
+                    }
+                    right={
+                      <FormikTextField
+                        formikApi={api}
+                        name={
+                          "parts.0.subjects.0.questionsDifficultyEasyPercentage" as any
+                        }
+                        type="number"
+                        label="Total Questions"
+                      />
+                    }
+                  />
+
+                  <Card style={{ marginTop: 24 }}>
+                    <CardHeader
+                      title={
+                        <Typography variant="buttonBold">
+                          Validation text here...
+                        </Typography>
+                      }
+                    />
+                  </Card>
+                </CardContent>
+
+                {/* Subject 2's Name */}
+                <CardHeader
+                  subheader={
+                    <FormikTextField
+                      formikApi={api}
+                      name={"parts.0.name" as any}
+                      label="Subject Name"
+                      placeholder="History"
+                      fullWidth={false}
+                    />
+                  }
+                  action={
+                    <CardHeaderActionButtonSpacing>
+                      <ResponsiveToolbarTypographyButton
+                        color="primary"
+                        iconNode={<Add />}
+                        tooltipTitle="Add Topic"
+                      >
+                        Topic
+                      </ResponsiveToolbarTypographyButton>
+                    </CardHeaderActionButtonSpacing>
+                  }
+                />
+
+                {/* Subject 2's Topics */}
+                <CardContent>
+                  <RemovableTwoColumnRow
+                    left={
+                      <FormikTextField
+                        formikApi={api}
+                        name={"parts.0.subjects.0.marksTotal" as any}
+                        label="Topic"
+                        placeholder="Regional Geography"
+                      />
+                    }
+                    right={
+                      <FormikTextField
+                        formikApi={api}
+                        name={
+                          "parts.0.subjects.0.questionsDifficultyEasyPercentage" as any
+                        }
+                        type="number"
+                        label="Total Questions"
+                      />
+                    }
+                  />
+
+                  <RemovableTwoColumnRow
+                    left={
+                      <FormikTextField
+                        formikApi={api}
+                        name={"parts.0.subjects.0.marksTotal" as any}
+                        label="Topic"
+                        placeholder="Foreign Lands"
+                      />
+                    }
+                    right={
+                      <FormikTextField
+                        formikApi={api}
+                        name={
+                          "parts.0.subjects.0.questionsDifficultyEasyPercentage" as any
+                        }
+                        type="number"
+                        label="Total Questions"
+                      />
+                    }
+                  />
+
+                  <Card style={{ marginTop: 24 }}>
+                    <CardHeader
+                      title={
+                        <Typography variant="buttonBold">
+                          Validation text here...
+                        </Typography>
+                      }
+                    />
+                  </Card>
+                </CardContent>
+              </Card>
             </AdminDashboardTemplateContainer>
           );
         }}
@@ -350,7 +521,12 @@ export class AdminTestManagerNewTemplate extends Component<
   }
 }
 
-const TwoColumnRow: SFC<{ left: ReactNode; right?: ReactNode }> = props => {
+interface TwoColumnRowProps {
+  left: ReactNode;
+  right?: ReactNode;
+}
+
+const TwoColumnRow: SFC<TwoColumnRowProps> = props => {
   const { left, right } = props;
 
   return (
@@ -371,4 +547,32 @@ const CardHeaderActionButtonSpacing = styled.div`
   height: 48px;
   margin-top: 16px;
   margin-right: 16px;
+`;
+
+const RemovableTwoColumnRow: SFC<
+  TwoColumnRowProps & { marginOnly?: boolean }
+> = ({ marginOnly, ...rest }) => (
+  <RemovableTwoColumnRowWrapper>
+    <TwoColumnRow {...rest} />
+    <ResponsiveToolbarTypographyButton
+      color="red"
+      iconNode={<RemoveCircleOutline />}
+      tooltipTitle="Remove"
+      dense
+      style={{
+        visibility: marginOnly ? "hidden" : "visible",
+      }}
+    >
+      Remove
+    </ResponsiveToolbarTypographyButton>
+  </RemovableTwoColumnRowWrapper>
+);
+
+const RemovableTwoColumnRowWrapper = styled.div`
+  display: flex;
+  width: 100%;
+
+  &::first-child {
+    flex: 1;
+  }
 `;
