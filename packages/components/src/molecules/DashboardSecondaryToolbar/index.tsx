@@ -13,7 +13,7 @@ const Spacer = styled.div`
   }
 `;
 
-const Header = styled.div`
+const Content = styled.div`
   flex-shrink: 0;
   padding-right: 24px;
 
@@ -26,7 +26,7 @@ const Header = styled.div`
 export class DashboardSecondaryToolbar extends Component<
   DashboardSecondaryToolbarProps
 > {
-  static Header = Header;
+  static Content = Content;
   static Spacer = Spacer;
 
   render() {

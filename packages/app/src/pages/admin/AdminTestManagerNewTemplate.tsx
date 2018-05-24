@@ -70,11 +70,11 @@ export class AdminTestManagerNewTemplate extends Component<
           return (
             <AdminDashboardTemplateContainer titleText="Test Manager > Add New Template">
               <DashboardSecondaryToolbar>
-                <DashboardSecondaryToolbar.Header>
+                <DashboardSecondaryToolbar.Content>
                   <Typography variant="cardTitle">
                     Create a new Test Type
                   </Typography>
-                </DashboardSecondaryToolbar.Header>
+                </DashboardSecondaryToolbar.Content>
                 <DashboardSecondaryToolbar.Spacer />
                 <TypographyButton color="red" variant="flat">
                   Cancel
@@ -228,9 +228,9 @@ export class AdminTestManagerNewTemplate extends Component<
 
               {/* Sections in Paper toolbar */}
               <DashboardSecondaryToolbar>
-                <DashboardSecondaryToolbar.Header>
+                <DashboardSecondaryToolbar.Content>
                   <Typography variant="cardTitle">Sections in paper</Typography>
-                </DashboardSecondaryToolbar.Header>
+                </DashboardSecondaryToolbar.Content>
                 <DashboardSecondaryToolbar.Spacer />
                 <ResponsiveToolbarTypographyButton
                   color="primary"

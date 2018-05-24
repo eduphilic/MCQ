@@ -23,12 +23,12 @@ export const AdminIndexManager: SFC<{}> = () => {
         <AdminDashboardTemplateContainer titleText="Index Manager">
           {/* Hero Background Image Upload Field*/}
           <DashboardSecondaryToolbar>
-            <DashboardSecondaryToolbar.Header>
+            <DashboardSecondaryToolbar.Content>
               <Typography variant="cardTitle">
                 Upload Hero background
               </Typography>
-            </DashboardSecondaryToolbar.Header>
-            <DashboardSecondaryToolbar.Header
+            </DashboardSecondaryToolbar.Content>
+            <DashboardSecondaryToolbar.Content
               style={{ flex: 1, paddingBottom: 12 }}
             >
               <FormikFileUploadField
@@ -37,7 +37,7 @@ export const AdminIndexManager: SFC<{}> = () => {
                 acceptedFileTypes="image/*"
                 placeholder="Browse"
               />
-            </DashboardSecondaryToolbar.Header>
+            </DashboardSecondaryToolbar.Content>
           </DashboardSecondaryToolbar>
 
           {["AirForce", "Army", "Navy"].map(title => (
