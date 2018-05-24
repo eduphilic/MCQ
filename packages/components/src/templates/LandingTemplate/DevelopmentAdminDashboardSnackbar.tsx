@@ -10,8 +10,12 @@ class DevelopmentAdminDashboardSnackbar extends Component<
   DevelopmentAdminDashboardSnackbarProps
 > {
   handleButtonClick = (path: string) => {
-    if (process.env.NODE_ENV === "development" && path === "/storybook") {
-      window.open("http://localhost:9001");
+    if (path === "/storybook") {
+      const url =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:9001"
+          : "/storybook/";
+      window.open(url);
       return;
     }
 
