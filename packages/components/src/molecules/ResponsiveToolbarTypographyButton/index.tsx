@@ -99,7 +99,7 @@ const StyledButton = (styled(Button)`
   min-width: inherit;
 
   &.is-mobile {
-    width: 56px;
+    width: 48px;
     padding: 0;
   }
 ` as any) as typeof Button;
