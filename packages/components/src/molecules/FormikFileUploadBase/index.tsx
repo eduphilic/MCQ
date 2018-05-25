@@ -1,12 +1,11 @@
 import { FormikProps } from "formik";
 import React, {
   ChangeEvent,
-  cloneElement,
   Component,
   createRef,
   EventHandler,
   MouseEvent,
-  ReactElement,
+  ReactNode,
 } from "react";
 import styled from "styled";
 
@@ -33,13 +32,19 @@ export interface FormikFileUploadBaseProps<Values extends object> {
    * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept
    */
   acceptedFileTypes?: string;
+}
 
+export interface FormikFileUploadBaseChildrenProps {
   /**
-   * A child component to render. The onMouseDown handler is set so that this
-   * component can trigger the onClick event of the internal hidden file input
-   * element. onMouseDown is used so that focus behavior can be intercepted.
+   * Render function. It is provided a handler for the onMouseDown event so that
+   * this component can trigger the onClick event of an internal hidden file
+   * input element. onMouseDown is used so that focus behavior can be
+   * intercepted. It provides a field value taken either from the currently
+   * selected file's filename or optional placeholder text.
    */
-  children: ReactElement<{ onMouseDown: () => any; value: string }>;
+  children: (
+    api: { onMouseDown: EventHandler<MouseEvent<any>>; value: string },
+  ) => ReactNode;
 }
 
 /**
@@ -48,7 +53,7 @@ export interface FormikFileUploadBaseProps<Values extends object> {
  * `formikApi` prop.
  */
 export class FormikFileUploadBase<Values extends object> extends Component<
-  FormikFileUploadBaseProps<Values>
+  FormikFileUploadBaseProps<Values> & FormikFileUploadBaseChildrenProps
 > {
   private fileInput = createRef<HTMLInputElement>();
 
@@ -82,14 +87,6 @@ export class FormikFileUploadBase<Values extends object> extends Component<
     const valueAsFile = (api.values as { [P: string]: File | null })[name];
     const filename = valueAsFile ? valueAsFile.name : placeholder || "";
 
-    const elementWithProps = cloneElement(children, {
-      // Using mousedown event to prevent focus from being transferred to
-      // control. This prevents the unwanted animation where the text label
-      // moves up in Material UI.
-      onMouseDown: this.handleClick,
-      value: filename,
-    });
-
     return (
       <>
         <NativeInputHidden
@@ -100,7 +97,7 @@ export class FormikFileUploadBase<Values extends object> extends Component<
           onChange={this.handleChange}
         />
 
-        {elementWithProps}
+        {children({ value: filename, onMouseDown: this.handleClick })}
       </>
     );
   }

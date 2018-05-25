@@ -27,6 +27,7 @@ storiesOf("Molecules", module).add(
               formikApi={api}
               name="logoImage"
               label="Logo Image"
+              acceptedFileTypes="image/*"
             />
           )}
         </TypedFormik>
@@ -39,6 +40,7 @@ storiesOf("Molecules", module).add(
               formikApi={api}
               name="logoImage"
               label="Logo Image"
+              acceptedFileTypes="image/*"
               iconOnly
             />
           )}

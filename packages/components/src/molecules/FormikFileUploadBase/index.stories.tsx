@@ -26,7 +26,11 @@ storiesOf("Molecules", module).add(
             name="someFile"
             acceptedFileTypes="image/*"
           >
-            <button>Upload File</button>
+            {fileUploadApi => (
+              <button onMouseDown={fileUploadApi.onMouseDown}>
+                Upload File
+              </button>
+            )}
           </FormikFileUploadBase>
         )}
       </TypedFormik>
