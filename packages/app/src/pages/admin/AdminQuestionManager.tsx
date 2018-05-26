@@ -62,6 +62,10 @@ export const AdminQuestionManager: SFC<{}> = () => {
                 />
               </SideSheetFieldGroup>
 
+              <SideSheetFieldGroup fieldGroupTitle="Level">
+                <SideSheetButtonMenu options={["Easy", "Medium", "Hard"]} />
+              </SideSheetFieldGroup>
+
               <SideSheetFieldGroup fieldGroupTitle="Entries">
                 <SideSheetButtonMenu
                   options={["All Entries", "AirForce", "Army", "Navy"]}
