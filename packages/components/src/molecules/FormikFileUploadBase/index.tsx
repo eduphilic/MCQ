@@ -90,8 +90,7 @@ export class FormikFileUploadBase<Values extends object> extends Component<
     return (
       <>
         <NativeInputHidden
-          // TODO: Once Styled Components accepts createRef, remove "as any".
-          innerRef={this.fileInput as any}
+          innerRef={this.fileInput}
           accept={acceptedFileTypes}
           type="file"
           onChange={this.handleChange}

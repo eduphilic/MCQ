@@ -1,6 +1,6 @@
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import React, { ChangeEvent, Component } from "react";
+import React, { ChangeEvent, Component, createRef } from "react";
 // tslint:disable-next-line:import-name
 import ResizeObserver from "resize-observer-polyfill";
 import styled, { css } from "styled";
@@ -29,8 +29,8 @@ export class QuantitySlider extends Component<
   QuantitySliderProps,
   QuantitySliderState
 > {
-  private bar: HTMLInputElement | null = null;
-  private thumbSymbols: HTMLSpanElement | null = null;
+  private bar = createRef<HTMLElement>();
+  private thumbSymbols = createRef<HTMLElement>();
   private resizeObserver: ResizeObserver | null = null;
 
   constructor(props: QuantitySliderProps) {
@@ -67,13 +67,13 @@ export class QuantitySlider extends Component<
   updateSymbolsPositioning = () => {
     const max = this.props.max - this.props.min;
     const value = this.state.value - this.props.min;
-    const width = this.bar!.clientWidth - 40;
+    const width = this.bar.current!.clientWidth - 40;
 
     const percent = value / max;
 
     const left = percent * width + 7.5;
 
-    this.thumbSymbols!.style.left = `${left}px`;
+    this.thumbSymbols.current!.style.left = `${left}px`;
   };
 
   handleValueChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -96,7 +96,7 @@ export class QuantitySlider extends Component<
     }, 100);
 
     this.resizeObserver = new ResizeObserver(this.updateSymbolsPositioning);
-    this.resizeObserver.observe(this.bar!);
+    this.resizeObserver.observe(this.bar.current!);
     if (this.props.onChange) this.props.onChange(this.state.value);
   }
 
@@ -142,16 +142,13 @@ export class QuantitySlider extends Component<
               value={value}
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
-              innerRef={c => (this.bar = c)}
+              innerRef={this.bar}
               onChange={this.handleValueChange}
               onInput={this.handleValueChange}
               onMouseDown={this.handleMouseDown}
               onMouseUp={this.handleMouseUp}
             />
-            <ThumbSymbols
-              innerRef={c => (this.thumbSymbols = c)}
-              className={thumbClasses}
-            >
+            <ThumbSymbols innerRef={this.thumbSymbols} className={thumbClasses}>
               keyboard_arrow_left keyboard_arrow_right
             </ThumbSymbols>
           </Grid>
