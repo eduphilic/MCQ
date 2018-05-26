@@ -1,6 +1,10 @@
 import { Formik } from "formik";
 import React, { SFC } from "react";
 
+import Badge from "@material-ui/core/Badge";
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
+import Flag from "@material-ui/icons/Flag";
 import InsertDriveFile from "@material-ui/icons/InsertDriveFile";
 
 import { FormikFileUploadBase } from "components/molecules/FormikFileUploadBase";
@@ -92,16 +96,26 @@ export const AdminQuestionManager: SFC<{}> = () => {
         >
           <DashboardCard
             title="Questions"
-            columnLabels={["Question", "Upload Date", "Question Type"]}
-            columnTypes={["single-line", "single-line", "single-line"]}
+            columnLabels={["Question"]}
+            columnTypes={["dual-line"]}
             onItemEditClick={noop}
             onRequestDeleteClick={noop}
+            additionalActionNode={
+              <Tooltip title="Reported Questions">
+                <IconButton>
+                  <Badge badgeContent="3" color="error">
+                    <Flag />
+                  </Badge>
+                </IconButton>
+              </Tooltip>
+            }
             items={Array.from({ length: 20 }, (_item, index) => ({
               key: index.toString(),
               columns: [
-                { primaryText: `${index + 1}. Question Label...` },
-                { primaryText: "Today" },
-                { primaryText: "Single Choice" },
+                {
+                  primaryText: `${index + 1}. Question Label...`,
+                  secondaryText: "Date uploaded...",
+                },
               ],
             }))}
           />
