@@ -1,5 +1,6 @@
 import { Formik } from "formik";
 import React, { SFC } from "react";
+import { withRouter } from "react-router-dom";
 
 import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
@@ -104,15 +105,7 @@ export const AdminQuestionManager: SFC<{}> = () => {
             columnTypes={["dual-line"]}
             onItemEditClick={noop}
             onRequestDeleteClick={noop}
-            additionalActionNode={
-              <Tooltip title="Reported Questions">
-                <IconButton>
-                  <Badge badgeContent="3" color="error">
-                    <Flag />
-                  </Badge>
-                </IconButton>
-              </Tooltip>
-            }
+            additionalActionNode={<ReportedQuestionsButton />}
             items={Array.from({ length: 20 }, (_item, index) => ({
               key: index.toString(),
               columns: [
@@ -128,3 +121,15 @@ export const AdminQuestionManager: SFC<{}> = () => {
     </TypedFormik>
   );
 };
+
+const ReportedQuestionsButton = withRouter(props => (
+  <Tooltip title="Reported Questions">
+    <IconButton
+      onClick={() => props.history.push("/admin/question-manager/reported")}
+    >
+      <Badge badgeContent="3" color="error">
+        <Flag />
+      </Badge>
+    </IconButton>
+  </Tooltip>
+));
