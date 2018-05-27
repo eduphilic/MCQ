@@ -16,6 +16,7 @@ import {
   ColumnItemButton,
   ColumnItemDualLine,
   ColumnItemImage,
+  ColumnItemProfile,
   ColumnItemSingleLine,
   ColumnItemSwitch,
 } from "./DashboardCardColumnComponents";
@@ -68,6 +69,8 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
         return ColumnItemDualLine;
       case "image":
         return ColumnItemImage;
+      case "profile":
+        return ColumnItemProfile;
       case "single-line":
         return ColumnItemSingleLine;
       case "switch":

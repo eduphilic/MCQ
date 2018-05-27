@@ -30,6 +30,22 @@ export const ColumnItemImage: ColumnItemComponent = ({ itemColumn }) => (
   />
 );
 
+export const ColumnItemProfile: ColumnItemComponent = ({ itemColumn }) => (
+  <ProfileWrapper>
+    {/* Profile image */}
+    <img src={itemColumn.imgUrl} />
+    {/* Dual line text */}
+    <div>
+      <Typography>{itemColumn.primaryText}</Typography>
+      <Typography muiTypographyProps={{ variant: "caption" }}>
+        <a href={`mailto:${itemColumn.secondaryText}`}>
+          {itemColumn.secondaryText}
+        </a>
+      </Typography>
+    </div>
+  </ProfileWrapper>
+);
+
 export const ColumnItemSingleLine: ColumnItemComponent = ({ itemColumn }) => (
   <Typography>{itemColumn.primaryText}</Typography>
 );
@@ -98,3 +114,23 @@ export const ColumnItemButton: ColumnItemComponent = ({ itemColumn }) => {
     ? cloneElement(itemColumn.wrapper, undefined, button)
     : button;
 };
+
+const ProfileWrapper = styled.div`
+  display: flex;
+
+  > img {
+    display: block;
+    height: 64px;
+    margin: 4px 8px 4px 0;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  > div > *:first-child {
+    margin-bottom: 4px;
+  }
+`;
