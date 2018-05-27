@@ -15,6 +15,9 @@ import {
 import profileImage from "./admin-user-manager-placeholder-profile-image.png";
 
 export const AdminUserManager: SFC<{}> = () => {
+  // tslint:disable-next-line:no-empty
+  const noop = () => {};
+
   const cardItems = Array.from({ length: 30 }).map(
     (_item, index) =>
       // tslint:disable-next-line:no-object-literal-type-assertion
@@ -90,9 +93,12 @@ export const AdminUserManager: SFC<{}> = () => {
       }
     >
       <DashboardCard
+        title="Users"
         items={cardItems}
         columnLabels={cardColumnLabels}
         columnTypes={cardColumnTypes}
+        onItemEditClick={noop}
+        onRequestDeleteClick={noop}
       />
     </AdminDashboardTemplateContainer>
   );
