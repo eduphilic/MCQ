@@ -4,6 +4,7 @@ import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboard
 
 import { SideSheetButtonMenu } from "components/molecules/SideSheetButtonMenu";
 import { SideSheetFieldGroup } from "components/molecules/SideSheetFieldGroup";
+import { SideSheetSearchField } from "components/molecules/SideSheetSearchField";
 
 export const AdminUserManager: SFC<{}> = () => {
   //
@@ -13,6 +14,13 @@ export const AdminUserManager: SFC<{}> = () => {
       titleText="User Manager"
       sideSheetContents={
         <>
+          <SideSheetFieldGroup fieldGroupTitle="">
+            <SideSheetSearchField
+              label="Search Users"
+              onSubmit={query => alert(`Initiate search for query: ${query}`)}
+            />
+          </SideSheetFieldGroup>
+
           <SideSheetFieldGroup fieldGroupTitle="Users">
             <SideSheetButtonMenu
               options={[
