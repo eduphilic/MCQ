@@ -102,6 +102,7 @@ const mapDispatchToProps: Partial<AdminLoginProps> = {
   onSnackbarClose: actions.app.loginFailureClear,
 };
 
+// prettier-ignore
 export const AdminLogin = connect(mapStateToProps, mapDispatchToProps)(
   AdminLoginBase,
 );
