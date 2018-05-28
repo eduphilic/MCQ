@@ -54,6 +54,7 @@ storiesOf("Organisms", module).add(
 
 const backgroundImageFilenames = [
   "Army-soldier-1024x782.jpg",
+  "7735008231155760386.png",
   "060920-F-2034C-010.JPG",
   "080715-F-JZ034-492.JPG",
   "Ajay@EDiting B.jpg",
