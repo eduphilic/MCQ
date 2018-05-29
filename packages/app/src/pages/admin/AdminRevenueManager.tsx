@@ -4,11 +4,14 @@ import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboard
 
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import ImportExport from "@material-ui/icons/ImportExport";
 
 import { Typography } from "components/atoms/Typography";
 import { DashboardSecondaryToolbar } from "components/molecules/DashboardSecondaryToolbar";
 import { DropdownButton } from "components/molecules/DropdownButton";
+import { ResponsiveToolbarTypographyButton } from "components/molecules/ResponsiveToolbarTypographyButton";
 import { TypographyButton } from "components/molecules/TypographyButton";
+import { DashboardCard } from "components/organisms/DashboardCard";
 
 interface AdminRevenueManagerState {
   financialYearDropdownOpen: boolean;
@@ -45,15 +48,11 @@ class AdminRevenueManager extends Component<
       <AdminDashboardTemplateContainer titleText="Revenue Manager">
         {/* Financial Year Drop Down / Report Button */}
         <DashboardSecondaryToolbar>
-          <DashboardSecondaryToolbar.Spacer />
-
           <DropdownButton
             variant="flat"
             onClick={this.handleFinancialYearDropdownButtonClick}
           >
-            <Typography variant="buttonBold">
-              Select Financial Year: 2017-18
-            </Typography>
+            <Typography variant="buttonBold">From Date: 27 Feb 2018</Typography>
           </DropdownButton>
           <Menu
             id="simple-menu"
@@ -71,16 +70,97 @@ class AdminRevenueManager extends Component<
             ))}
           </Menu>
 
+          <DropdownButton
+            variant="flat"
+            onClick={this.handleFinancialYearDropdownButtonClick}
+          >
+            <Typography variant="buttonBold">To Date: 27 Feb 2018</Typography>
+          </DropdownButton>
+          <Menu
+            id="simple-menu"
+            anchorEl={financialYearDropdownAnchorElement || undefined}
+            open={Boolean(financialYearDropdownAnchorElement)}
+            onClose={this.handleFinancialYearDropdownClose}
+          >
+            {["2015-2016", "2016-2017", "2017-2018"].map(financialYear => (
+              <MenuItem
+                key={financialYear}
+                onClick={this.handleFinancialYearDropdownClose}
+              >
+                {financialYear}
+              </MenuItem>
+            ))}
+          </Menu>
+
+          <DashboardSecondaryToolbar.Spacer />
+
+          <DropdownButton
+            variant="flat"
+            onClick={this.handleFinancialYearDropdownButtonClick}
+          >
+            <Typography variant="buttonBold">Current Year Report</Typography>
+          </DropdownButton>
+          <Menu
+            id="simple-menu"
+            anchorEl={financialYearDropdownAnchorElement || undefined}
+            open={Boolean(financialYearDropdownAnchorElement)}
+            onClose={this.handleFinancialYearDropdownClose}
+          >
+            {["Current Year Report", "2015-2016", "2016-2017", "2017-2018"].map(
+              financialYear => (
+                <MenuItem
+                  key={financialYear}
+                  onClick={this.handleFinancialYearDropdownClose}
+                >
+                  {financialYear}
+                </MenuItem>
+              ),
+            )}
+          </Menu>
+
           <TypographyButton
             variant="flat"
-            color="primary"
+            color="blue"
             onClick={this.handleViewReportClick}
           >
-            View Detailed Report
+            Submit
           </TypographyButton>
         </DashboardSecondaryToolbar>
 
-        {/* */}
+        {/* Plan Records */}
+        <DashboardCard
+          title="Revenue Report"
+          additionalActionNode={
+            <ResponsiveToolbarTypographyButton
+              iconNode={<ImportExport />}
+              tooltipTitle="Export Report"
+            >
+              Export Report
+            </ResponsiveToolbarTypographyButton>
+          }
+          items={[
+            "Trial Pack",
+            "5 Plan Pack",
+            "10 Pack Plan",
+            "15 Plan Pack",
+            "20 Pack Plan",
+          ].map((plan, index) => ({
+            key: plan,
+            columns: [
+              {
+                primaryText: plan,
+              },
+              {
+                primaryText: ((index + 1) * 200).toString(),
+              },
+              {
+                primaryText: ((index + 1) * 400).toString(),
+              },
+            ],
+          }))}
+          columnLabels={["Plan Name", "No. of Users", "Revenue"]}
+          columnTypes={["single-line", "single-line", "single-line"]}
+        />
       </AdminDashboardTemplateContainer>
     );
   }
