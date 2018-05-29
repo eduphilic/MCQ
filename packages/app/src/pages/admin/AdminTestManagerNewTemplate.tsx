@@ -251,7 +251,7 @@ export class AdminTestManagerNewTemplate extends Component<
                       name={"parts.0.name" as any}
                       label="Section Name"
                       placeholder="Enter section name here..."
-                      fullWidth={false}
+                      fullWidth={true}
                     />
                   }
                   action={
@@ -275,8 +275,8 @@ export class AdminTestManagerNewTemplate extends Component<
                       <FormikTextField
                         formikApi={api}
                         name={"parts.0.subjects.0.name" as any}
-                        label="Subject name"
-                        placeholder="General Knowledge"
+                        label="Subject Name (Integrate with Backend -- Link to Uploaded Excel)"
+                        placeholder="(Integrate with Backend -- Link to Uploaded Excel)"
                       />
                     }
                     right={
@@ -363,7 +363,6 @@ export class AdminTestManagerNewTemplate extends Component<
                       name={"parts.0.name" as any}
                       label="Subject Name"
                       placeholder="Geography"
-                      fullWidth={false}
                     />
                   }
                   action={
@@ -442,7 +441,6 @@ export class AdminTestManagerNewTemplate extends Component<
                       name={"parts.0.name" as any}
                       label="Subject Name"
                       placeholder="History"
-                      fullWidth={false}
                     />
                   }
                   action={
