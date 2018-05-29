@@ -65,11 +65,11 @@ const StyledList = styled(List)`
 `;
 
 const StyledListItem = styled(ListItem)`
-  h3 {
+  span {
     color: #999696;
   }
 
-  &.active h3 {
+  &.active span {
     color: #fff;
   }
 `;
