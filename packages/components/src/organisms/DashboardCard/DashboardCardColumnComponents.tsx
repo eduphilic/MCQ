@@ -32,10 +32,15 @@ export const ColumnItemImage: ColumnItemComponent = ({ itemColumn }) => (
 
 export const ColumnItemProfile: ColumnItemComponent = ({ itemColumn }) => (
   <ProfileWrapper>
+    <div className="profile-newness">
+      <div
+        style={{ visibility: itemColumn.isNewUser ? "visible" : "hidden" }}
+      />
+    </div>
     {/* Profile image */}
-    <img src={itemColumn.imgUrl} />
+    <img className="profile-image" src={itemColumn.imgUrl} />
     {/* Dual line text */}
-    <div>
+    <div className="profile-text">
       <Typography>{itemColumn.primaryText}</Typography>
       <Typography muiTypographyProps={{ variant: "caption" }}>
         <a href={`mailto:${itemColumn.secondaryText}`}>
@@ -118,19 +123,32 @@ export const ColumnItemButton: ColumnItemComponent = ({ itemColumn }) => {
 const ProfileWrapper = styled.div`
   display: flex;
 
-  > img {
-    display: block;
-    height: 64px;
-    margin: 4px 8px 4px 0;
-  }
-
-  > div {
+  .profile-newness {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
-  > div > *:first-child {
+  .profile-newness div {
+    width: 16px;
+    height: 16px;
+    background-color: ${({ theme }) => theme.palette.primary.light};
+    border-radius: 50%;
+  }
+
+  .profile-image {
+    display: block;
+    height: 64px;
+    margin: 4px 8px 4px 0;
+  }
+
+  .profile-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .profile-text > *:first-child {
     margin-bottom: 4px;
   }
 `;

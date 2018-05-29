@@ -35,6 +35,7 @@ export const AdminUserManager: SFC<{}> = () => {
             imgUrl: profileImage,
             primaryText: "User Name",
             secondaryText: "emailed@gmail.com",
+            isNewUser: index < 5,
           },
           {
             primaryText: "14 Jan 2018",

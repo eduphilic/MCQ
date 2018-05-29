@@ -27,4 +27,7 @@ export interface DashboardCardItemColumn {
   // Button
   buttonIconNode?: ReactNode;
   buttonTooltipTitle?: string;
+
+  // Profile
+  isNewUser?: boolean;
 }
