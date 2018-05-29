@@ -1,5 +1,9 @@
 import React, { SFC } from "react";
+import styled from "styled";
 
+import Badge from "@material-ui/core/Badge";
+import Accessibility from "@material-ui/icons/Accessibility";
+import Add from "@material-ui/icons/Add";
 import Email from "@material-ui/icons/Email";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
@@ -94,6 +98,25 @@ export const AdminUserManager: SFC<{}> = () => {
           </SideSheetFieldGroup>
         </>
       }
+      actionButtonElements={[
+        <ResponsiveToolbarTypographyButton
+          key="add"
+          color="orange"
+          iconNode={<Add />}
+          tooltipTitle="Invite New Users"
+        >
+          Invite New Users
+        </ResponsiveToolbarTypographyButton>,
+        <BadgeLeftPositioned key="new" color="error" badgeContent="12">
+          <ResponsiveToolbarTypographyButton
+            color="blue"
+            iconNode={<Accessibility />}
+            tooltipTitle="New Registrations"
+          >
+            New Registrations
+          </ResponsiveToolbarTypographyButton>
+        </BadgeLeftPositioned>,
+      ]}
     >
       <DashboardCard
         title="Users"
@@ -108,9 +131,24 @@ export const AdminUserManager: SFC<{}> = () => {
         items={cardItems}
         columnLabels={cardColumnLabels}
         columnTypes={cardColumnTypes}
-        onItemEditClick={noop}
+        // onItemEditClick={noop}
         onRequestDeleteClick={noop}
       />
     </AdminDashboardTemplateContainer>
   );
 };
+
+const BadgeLeftPositioned = styled(Badge).attrs({
+  classes: { badge: "badge" },
+})`
+  .badge {
+    top: -10px;
+    right: -2px;
+  }
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    .badge {
+      right: 10px;
+    }
+  }
+`;
