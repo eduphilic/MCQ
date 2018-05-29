@@ -1,7 +1,13 @@
 import React, { SFC } from "react";
 
+import Email from "@material-ui/icons/Email";
+
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
+// tslint:disable-next-line:import-name
+import profileImage from "./admin-user-manager-placeholder-profile-image.png";
+
+import { ResponsiveToolbarTypographyButton } from "components/molecules/ResponsiveToolbarTypographyButton";
 import { SideSheetButtonMenu } from "components/molecules/SideSheetButtonMenu";
 import { SideSheetFieldGroup } from "components/molecules/SideSheetFieldGroup";
 import { SideSheetSearchField } from "components/molecules/SideSheetSearchField";
@@ -10,9 +16,6 @@ import {
   DashboardCardColumnType,
   DashboardCardItem,
 } from "components/organisms/DashboardCard";
-
-// tslint:disable-next-line:import-name
-import profileImage from "./admin-user-manager-placeholder-profile-image.png";
 
 export const AdminUserManager: SFC<{}> = () => {
   // tslint:disable-next-line:no-empty
@@ -94,6 +97,14 @@ export const AdminUserManager: SFC<{}> = () => {
     >
       <DashboardCard
         title="Users"
+        additionalActionNode={
+          <ResponsiveToolbarTypographyButton
+            style={{ color: "#757575" }}
+            dense
+            iconNode={<Email />}
+            tooltipTitle="Enter Email Selection Mode"
+          />
+        }
         items={cardItems}
         columnLabels={cardColumnLabels}
         columnTypes={cardColumnTypes}
