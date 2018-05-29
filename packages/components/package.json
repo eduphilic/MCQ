@@ -22,7 +22,8 @@
     "resize-observer-polyfill": "^1.5.0",
     "store": "1.0.0",
     "styled": "1.0.0",
-    "theme": "1.0.0"
+    "theme": "1.0.0",
+    "unstated": "^2.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.49",
