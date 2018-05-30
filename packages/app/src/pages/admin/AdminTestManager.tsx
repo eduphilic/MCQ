@@ -8,40 +8,13 @@ import {
   DashboardCard,
   DashboardCardItemColumn,
 } from "components/organisms/DashboardCard";
-// import {
-//   DashboardFormDialog,
-//   FieldConfigs,
-// } from "components/organisms/DashboardFormDialog";
+import { TestPreviewDialog } from "components/organisms/TestPreviewDialog";
+import { createPlaceholderTestPreviewFieldsProp } from "components/organisms/TestPreviewDialog/createPlaceholderTestPreviewFieldsProp";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 export const AdminTestManager: SFC<{}> = () => {
-  // const noop = () => {}; // tslint:disable-line
-
-  // const dialogInitialValues = {
-  //   entryType: "AirForce",
-  // };
-
-  // const dialogFieldConfigs: FieldConfigs<typeof dialogInitialValues> = {
-  //   entryType: {
-  //     inputType: "text-autocomplete",
-  //     inputLabel: "Select entry",
-  //     placeholder: "Select Entry here...",
-  //     suggestions: ["AirForce", "Assam Rifles"],
-  //   },
-  // };
-
-  // const dialog = (
-  //   <DashboardFormDialog
-  //     initialValues={dialogInitialValues}
-  //     fieldConfigs={dialogFieldConfigs}
-  //     onSubmit={noop}
-  //   />
-  // );
-
-  // const dialogNoTest = (
-
-  // )
+  const testPreviewDialogFields = createPlaceholderTestPreviewFieldsProp();
 
   return (
     <AdminDashboardTemplateContainer titleText="Test Manager">
@@ -116,7 +89,7 @@ export const AdminTestManager: SFC<{}> = () => {
                 },
               ],
             },
-          ].map((i, index) => {
+          ].map(i => {
             const itemColumn: DashboardCardItemColumn = i.columns[2];
 
             // Redirect to new template page for Add Template Button
@@ -132,8 +105,9 @@ export const AdminTestManager: SFC<{}> = () => {
             });
 
             if (itemColumn.primaryText === "View") {
-              itemColumn.onClick = () =>
-                alert(`Open preview page for item: ${index}`);
+              itemColumn.wrapper = (
+                <TestPreviewDialog fields={testPreviewDialogFields} />
+              );
             } else {
               itemColumn.wrapper = <AddTemplateRedirectButton />;
             }

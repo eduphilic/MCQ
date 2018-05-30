@@ -16,6 +16,8 @@ import { FormikTextField } from "components/molecules/FormikTextField";
 import { FormikTextFieldTypeAhead } from "components/molecules/FormikTextFieldTypeAhead";
 import { ResponsiveToolbarTypographyButton } from "components/molecules/ResponsiveToolbarTypographyButton";
 import { TypographyButton } from "components/molecules/TypographyButton";
+import { TestPreviewDialog } from "components/organisms/TestPreviewDialog";
+import { createPlaceholderTestPreviewFieldsProp } from "components/organisms/TestPreviewDialog/createPlaceholderTestPreviewFieldsProp";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
@@ -26,6 +28,8 @@ export class AdminTestManagerNewTemplate extends Component<
   AdminTestManagerNewTemplateProps
 > {
   render() {
+    const testPreviewDialogFields = createPlaceholderTestPreviewFieldsProp();
+
     const initialValues = {
       entry: "AirForce",
       category: "Soldier GD",
@@ -79,9 +83,11 @@ export class AdminTestManagerNewTemplate extends Component<
                 <TypographyButton color="red" variant="flat">
                   Cancel
                 </TypographyButton>
-                <TypographyButton color="blue" variant="flat">
-                  Preview Test
-                </TypographyButton>
+                <TestPreviewDialog fields={testPreviewDialogFields}>
+                  <TypographyButton color="blue" variant="flat">
+                    Preview Test
+                  </TypographyButton>
+                </TestPreviewDialog>
                 <TypographyButton color="primary" variant="flat">
                   Save
                 </TypographyButton>
