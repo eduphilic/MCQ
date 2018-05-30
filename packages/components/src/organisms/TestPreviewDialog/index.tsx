@@ -8,11 +8,13 @@ import React, {
 import styled from "styled";
 
 import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Divider from "@material-ui/core/Divider";
 
 import { Typography } from "../../atoms/Typography";
+import { TypographyButton } from "../../molecules/TypographyButton";
 
 export interface TestPreviewFieldsSectionSubjectTopic {
   topicName: string;
@@ -133,18 +135,27 @@ export class TestPreviewDialog extends Component<
                 {section.sectionSubjects.map(subject => (
                   <Fragment key={subject.subjectName}>
                     {singleField(subject, "Subject", "subjectName")}
-                    {subject.subjectTopics.map(topic =>
-                      threeColumnFieldRow(
-                        topic,
-                        ["Topic", "Topic"],
-                        ["topicName", "topicTotalQuestions"],
-                      ),
-                    )}
+
+                    {subject.subjectTopics.map(topic => (
+                      <Fragment
+                        key={`${subject.subjectName}-${topic.topicName}`}
+                      >
+                        {threeColumnFieldRow(
+                          topic,
+                          ["Topic", "Topic"],
+                          ["topicName", "topicTotalQuestions"],
+                        )}
+                      </Fragment>
+                    ))}
                   </Fragment>
                 ))}
               </Fragment>
             ))}
           </DialogContent>
+
+          <DialogActions>
+            <TypographyButton>Done with Preview</TypographyButton>
+          </DialogActions>
         </Dialog>
       </>
     );
@@ -178,7 +189,7 @@ function threeColumnFieldRow<T extends object>(
     </FieldLabelValuePairContainer>
   ));
   if (labelValuePairs.length === 2) {
-    labelValuePairs.unshift(<FieldLabelValuePairContainer />);
+    labelValuePairs.unshift(<FieldLabelValuePairContainer key="spacer" />);
   }
 
   return <FieldRow>{labelValuePairs}</FieldRow>;
