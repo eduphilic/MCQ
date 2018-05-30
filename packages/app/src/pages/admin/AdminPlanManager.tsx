@@ -15,7 +15,6 @@ export const AdminPlanManager: SFC<{}> = () => {
 
   const dialogFields = {
     planName: "",
-    isFree: "false",
     numTests: 5,
     planValidityDays: 5,
   };
@@ -25,10 +24,6 @@ export const AdminPlanManager: SFC<{}> = () => {
       inputLabel: "Plan Name",
       inputType: "text",
       placeholder: "Enter plan name here...",
-    },
-    isFree: {
-      inputLabel: "Make this plan free (TODO: Make Checkmark)",
-      inputType: "text",
     },
     numTests: {
       inputLabel: "Number of test papers (TODO: Make Number Range)",
