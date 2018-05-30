@@ -278,11 +278,15 @@ export class AdminTestManagerNewTemplate extends Component<
                   {/* Subject Name, Number of Questions */}
                   <RemovableTwoColumnRow
                     left={
-                      <FormikTextField
+                      <FormikTextFieldTypeAhead
                         formikApi={api}
                         name={"parts.0.subjects.0.name" as any}
-                        label="Subject Name (Integrate with Backend -- Link to Uploaded Excel)"
-                        placeholder="(Integrate with Backend -- Link to Uploaded Excel)"
+                        label="Import from Excel or Table"
+                        suggestions={[
+                          "table://tests/army_soldier_gd/1/sections/1",
+                          "file://tests/army_soldier_gd/1/sections/3.xlsx",
+                        ]}
+                        placeholder="Start with table:// or file://"
                       />
                     }
                     right={
