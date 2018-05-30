@@ -154,7 +154,9 @@ export class TestPreviewDialog extends Component<
           </DialogContent>
 
           <DialogActions>
-            <TypographyButton>Done with Preview</TypographyButton>
+            <TypographyButton onClick={this.handleClose}>
+              Done with Preview
+            </TypographyButton>
           </DialogActions>
         </Dialog>
       </>
