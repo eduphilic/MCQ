@@ -1,9 +1,16 @@
-import React, { cloneElement, Component, ReactElement, ReactNode } from "react";
+import React, {
+  cloneElement,
+  Component,
+  Fragment,
+  ReactElement,
+  ReactNode,
+} from "react";
 import styled from "styled";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Divider from "@material-ui/core/Divider";
 
 import { Typography } from "../../atoms/Typography";
 
@@ -101,6 +108,42 @@ export class TestPreviewDialog extends Component<
               ],
             )}
             {singleField(fields, "Duration", "testDuration")}
+
+            {fields.testSections.map((section, sectionIndex) => (
+              <Fragment key={section.sectionName}>
+                <DividerWithBottomMargin />
+
+                {singleField(
+                  section,
+                  `Section ${sectionIndex + 1}`,
+                  "sectionName",
+                )}
+                {singleField(section, "Total Marks", "sectionTotalMarks")}
+                {singleField(section, "Passing Marks", "sectionPassingMarks")}
+                {threeColumnFieldRow(
+                  section,
+                  ["Easy", "Medium", "Hard"],
+                  [
+                    "sectionDifficultyPercentageEasy",
+                    "sectionDifficultyPercentageMedium",
+                    "sectionDifficultyPercentageHard",
+                  ],
+                )}
+
+                {section.sectionSubjects.map(subject => (
+                  <Fragment key={subject.subjectName}>
+                    {singleField(subject, "Subject", "subjectName")}
+                    {subject.subjectTopics.map(topic =>
+                      threeColumnFieldRow(
+                        topic,
+                        ["Topic", "Topic"],
+                        ["topicName", "topicTotalQuestions"],
+                      ),
+                    )}
+                  </Fragment>
+                ))}
+              </Fragment>
+            ))}
           </DialogContent>
         </Dialog>
       </>
@@ -128,16 +171,17 @@ function threeColumnFieldRow<T extends object>(
   titles: string[],
   fieldNames: (keyof T)[],
 ): ReactNode {
-  return (
-    <FieldRow>
-      {titles.map((title, index) => (
-        <FieldLabelValuePairContainer key={fieldNames[index]}>
-          <FieldLabel>{title}:</FieldLabel>
-          <FieldValue>{(fields as any)[fieldNames[index]]}</FieldValue>
-        </FieldLabelValuePairContainer>
-      ))}
-    </FieldRow>
-  );
+  const labelValuePairs = titles.map((title, index) => (
+    <FieldLabelValuePairContainer key={fieldNames[index]}>
+      <FieldLabel>{title}:</FieldLabel>
+      <FieldValue>{(fields as any)[fieldNames[index]]}</FieldValue>
+    </FieldLabelValuePairContainer>
+  ));
+  if (labelValuePairs.length === 2) {
+    labelValuePairs.unshift(<FieldLabelValuePairContainer />);
+  }
+
+  return <FieldRow>{labelValuePairs}</FieldRow>;
 }
 
 const FieldRow = styled.div`
@@ -157,4 +201,8 @@ const FieldLabel = styled(Typography)`
 
 const FieldValue = styled(Typography)`
   margin-left: ${({ theme }) => theme.spacing.unit}px;
+`;
+
+const DividerWithBottomMargin = styled(Divider)`
+  margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
