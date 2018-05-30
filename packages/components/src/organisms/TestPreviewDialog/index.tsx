@@ -5,6 +5,39 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { Typography } from "../../atoms/Typography";
 
+export interface TestPreviewFieldsSectionSubjectTopic {
+  topicName: string;
+  topicTotalQuestions: string;
+}
+
+export interface TestPreviewFieldsSectionSubject {
+  subjectName: string;
+
+  subjectTopics: TestPreviewFieldsSectionSubjectTopic[];
+}
+
+export interface TestPreviewFieldsSection {
+  sectionName: string;
+  sectionTotalMarks: string;
+  sectionPassingMarks: string;
+  sectionDifficultyPercentageEasy: string;
+  sectionDifficultyPercentageMedium: string;
+  sectionDifficultyPercentageHard: string;
+
+  sectionSubjects: TestPreviewFieldsSectionSubject[];
+}
+
+export interface TestPreviewFields {
+  testName: string;
+  testTotalMarks: string;
+  testPassingMarks: string;
+  testMarksCorrectAnswer: string;
+  testMarksIncorrectAnswer: string;
+  testDuration: string;
+
+  testSections: TestPreviewFieldsSection[];
+}
+
 export interface TestPreviewDialogProps {
   /**
    * React element to attach an onClick handler. When the provided element is

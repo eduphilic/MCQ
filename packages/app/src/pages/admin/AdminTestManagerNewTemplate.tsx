@@ -49,7 +49,7 @@ export class AdminTestManagerNewTemplate extends Component<
           name: "General Knowledge Section",
           subjects: [
             {
-              name: "General Knowlege",
+              name: "General Knowledge",
             },
           ],
         },
