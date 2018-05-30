@@ -12,6 +12,10 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Divider from "@material-ui/core/Divider";
+import withMobileDialog, {
+  InjectedProps,
+} from "@material-ui/core/withMobileDialog";
+import { WithWidthProps } from "@material-ui/core/withWidth";
 
 import { Typography } from "../../atoms/Typography";
 import { TypographyButton } from "../../molecules/TypographyButton";
@@ -54,7 +58,7 @@ export interface TestPreviewDialogProps {
    * React element to attach an onClick handler. When the provided element is
    * clicked, the test preview dialog will be displayed.
    */
-  children: ReactElement<{ onClick: () => any }>;
+  children?: ReactElement<{ onClick: () => any }>;
 
   /**
    * Fields to display in test preview.
@@ -70,8 +74,8 @@ interface TestPreviewDialogState {
  * For use in the Admin Dashboard. Displays a preview of an existing test or one
  * being developed.
  */
-export class TestPreviewDialog extends Component<
-  TestPreviewDialogProps,
+class TestPreviewDialog extends Component<
+  TestPreviewDialogProps & InjectedProps & Partial<WithWidthProps>,
   TestPreviewDialogState
 > {
   state: TestPreviewDialogState = {
@@ -82,18 +86,26 @@ export class TestPreviewDialog extends Component<
   handleClose = () => this.setState({ open: false });
 
   render() {
-    const { children, fields } = this.props;
+    const { children, fields, fullScreen } = this.props;
     const { open } = this.state;
 
-    const childWithOnClickEvent = cloneElement(children, {
-      onClick: this.handleOpen,
-    });
+    const childWithOnClickEvent = children
+      ? cloneElement(children as any, {
+          onClick: this.handleOpen,
+        })
+      : null;
 
     return (
       <>
         {childWithOnClickEvent}
 
-        <Dialog fullWidth maxWidth="md" open={open} onClose={this.handleClose}>
+        <Dialog
+          fullScreen={fullScreen}
+          fullWidth
+          maxWidth="md"
+          open={open}
+          onClose={this.handleClose}
+        >
           <DialogTitle>
             <Typography variant="cardTitle">Test Preview</Typography>
           </DialogTitle>
@@ -163,6 +175,12 @@ export class TestPreviewDialog extends Component<
     );
   }
 }
+
+const TestPreviewDialogWithResponsive = withMobileDialog<
+  TestPreviewDialogProps
+>()(TestPreviewDialog);
+
+export { TestPreviewDialogWithResponsive as TestPreviewDialog };
 
 function singleField<T extends object>(
   fields: T,
