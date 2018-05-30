@@ -1,6 +1,8 @@
-import React, { cloneElement, Component, ReactElement } from "react";
+import React, { cloneElement, Component, ReactElement, ReactNode } from "react";
+import styled from "styled";
 
 import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { Typography } from "../../atoms/Typography";
@@ -44,6 +46,11 @@ export interface TestPreviewDialogProps {
    * clicked, the test preview dialog will be displayed.
    */
   children: ReactElement<{ onClick: () => any }>;
+
+  /**
+   * Fields to display in test preview.
+   */
+  fields: TestPreviewFields;
 }
 
 interface TestPreviewDialogState {
@@ -66,7 +73,7 @@ export class TestPreviewDialog extends Component<
   handleClose = () => this.setState({ open: false });
 
   render() {
-    const { children } = this.props;
+    const { children, fields } = this.props;
     const { open } = this.state;
 
     const childWithOnClickEvent = cloneElement(children, {
@@ -77,12 +84,77 @@ export class TestPreviewDialog extends Component<
       <>
         {childWithOnClickEvent}
 
-        <Dialog open={open} onClose={this.handleClose}>
+        <Dialog fullWidth maxWidth="md" open={open} onClose={this.handleClose}>
           <DialogTitle>
             <Typography variant="cardTitle">Test Preview</Typography>
           </DialogTitle>
+          <DialogContent>
+            {singleField(fields, "Test Name", "testName")}
+            {singleField(fields, "Total Marks", "testTotalMarks")}
+            {threeColumnFieldRow(
+              fields,
+              ["Passing marks", "+ marks", "- marks"],
+              [
+                "testPassingMarks",
+                "testMarksCorrectAnswer",
+                "testMarksIncorrectAnswer",
+              ],
+            )}
+            {singleField(fields, "Duration", "testDuration")}
+          </DialogContent>
         </Dialog>
       </>
     );
   }
 }
+
+function singleField<T extends object>(
+  fields: T,
+  title: string,
+  fieldName: keyof T,
+): ReactNode {
+  return (
+    <FieldRow>
+      <FieldLabelValuePairContainer>
+        <FieldLabel>{title}:</FieldLabel>
+        <FieldValue>{(fields as any)[fieldName]}</FieldValue>
+      </FieldLabelValuePairContainer>
+    </FieldRow>
+  );
+}
+
+function threeColumnFieldRow<T extends object>(
+  fields: T,
+  titles: string[],
+  fieldNames: (keyof T)[],
+): ReactNode {
+  return (
+    <FieldRow>
+      {titles.map((title, index) => (
+        <FieldLabelValuePairContainer key={fieldNames[index]}>
+          <FieldLabel>{title}:</FieldLabel>
+          <FieldValue>{(fields as any)[fieldNames[index]]}</FieldValue>
+        </FieldLabelValuePairContainer>
+      ))}
+    </FieldRow>
+  );
+}
+
+const FieldRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+`;
+
+const FieldLabelValuePairContainer = styled.div`
+  display: flex;
+  min-width: 33%;
+`;
+
+const FieldLabel = styled(Typography)`
+  font-weight: 500;
+`;
+
+const FieldValue = styled(Typography)`
+  margin-left: ${({ theme }) => theme.spacing.unit}px;
+`;
