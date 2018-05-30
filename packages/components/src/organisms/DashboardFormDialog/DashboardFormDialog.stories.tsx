@@ -2,7 +2,7 @@ import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { DashboardFormDialog, FieldConfigs } from ".";
+import { DashboardFormDialog, DashboardFormDialogFieldConfigs } from ".";
 import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 import { TypographyButton } from "../../molecules/TypographyButton";
 
@@ -29,7 +29,7 @@ storiesOf("Organisms", module).add("DashboardFormDialog", () => {
     logo: null as File | null,
   };
 
-  const fields: FieldConfigs<typeof initialValues> = {
+  const fields: DashboardFormDialogFieldConfigs<typeof initialValues> = {
     entryType: {
       inputType: "text-autocomplete",
       inputLabel: "Entry Type",

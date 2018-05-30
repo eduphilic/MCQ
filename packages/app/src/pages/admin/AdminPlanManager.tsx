@@ -6,7 +6,7 @@ import { ResponsiveToolbarTypographyButton } from "components/molecules/Responsi
 import { DashboardCard } from "components/organisms/DashboardCard";
 import {
   DashboardFormDialog,
-  FieldConfigs,
+  DashboardFormDialogFieldConfigs,
 } from "components/organisms/DashboardFormDialog";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
@@ -19,19 +19,19 @@ export const AdminPlanManager: SFC<{}> = () => {
     planValidityDays: 5,
   };
 
-  const fieldConfigs: FieldConfigs<typeof dialogFields> = {
+  const fieldConfigs: DashboardFormDialogFieldConfigs<typeof dialogFields> = {
     planName: {
       inputLabel: "Plan Name",
       inputType: "text",
       placeholder: "Enter plan name here...",
     },
     numTests: {
-      inputLabel: "Number of test papers (TODO: Make Number Range)",
-      inputType: "text",
+      inputLabel: "Number of test papers",
+      inputType: "number",
     },
     planValidityDays: {
-      inputLabel: "Plan Validity (TODO: Make Number Range)",
-      inputType: "text",
+      inputLabel: "Plan Validity",
+      inputType: "number",
       placeholder: "Enter in number of days",
     },
   };

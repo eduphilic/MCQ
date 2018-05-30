@@ -6,7 +6,7 @@ import { ResponsiveToolbarTypographyButton } from "components/molecules/Responsi
 import { DashboardCard } from "components/organisms/DashboardCard";
 import {
   DashboardFormDialog,
-  FieldConfigs,
+  DashboardFormDialogFieldConfigs,
 } from "components/organisms/DashboardFormDialog";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
@@ -23,7 +23,7 @@ export const AdminEntryManager: SFC<{}> = () => {
     logo: null as File | null,
   };
 
-  const fieldConfigs: FieldConfigs<typeof dialogFields> = {
+  const fieldConfigs: DashboardFormDialogFieldConfigs<typeof dialogFields> = {
     entryType: {
       inputLabel: "Entry Type",
       inputType: "text-autocomplete",

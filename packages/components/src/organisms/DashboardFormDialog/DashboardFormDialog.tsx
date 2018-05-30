@@ -13,7 +13,7 @@ import { WithWidthProps } from "@material-ui/core/withWidth";
 import { DashboardFormDialogFieldConfig } from "./DashboardFormDialogFieldConfig";
 import { DashboardFormDialogFormInput } from "./DashboardFormDialogFormInput";
 
-export type FieldConfigs<Values extends object> = {
+export type DashboardFormDialogFieldConfigs<Values extends object> = {
   [key in keyof Values]: DashboardFormDialogFieldConfig
 };
 
@@ -28,7 +28,7 @@ export interface DashboardFormDialogProps<Values extends object>
   /**
    * Field settings.
    */
-  fieldConfigs: FieldConfigs<Values>;
+  fieldConfigs: DashboardFormDialogFieldConfigs<Values>;
 
   /**
    * Injected by the Material UI utility "withMobileDialog". It controls whether

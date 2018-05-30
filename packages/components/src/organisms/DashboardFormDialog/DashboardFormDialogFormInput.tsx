@@ -52,6 +52,9 @@ export class DashboardFormDialogFormInput<
           />
         );
 
+      case "number":
+        return <FormikTextField {...props} type="number" />;
+
       case "file-upload":
         return (
           <FormikFileUploadField
