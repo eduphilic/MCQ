@@ -1,5 +1,5 @@
 import React, { SFC } from "react";
-import styled from "styled";
+import styled, { withProps } from "styled";
 
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -20,6 +20,15 @@ export interface AttemptCourseCardProps {
 
   /** Courses to list. */
   courses: AttemptCourseProps[];
+
+  /** Background image to repeat around attempt card. */
+  backgroundImage?: string;
+
+  /**
+   * Background fill color. It is used to fill in vertical spacing gaps between
+   * repeated tiles.
+   */
+  backgroundFill?: string;
 }
 
 /**
@@ -27,7 +36,7 @@ export interface AttemptCourseCardProps {
  * a particular branch of the military service.
  */
 export const AttemptCourseCard: SFC<AttemptCourseCardProps> = props => {
-  const { cardHeaderProps, courses } = props;
+  const { cardHeaderProps, courses, backgroundImage, backgroundFill } = props;
 
   const courseRows: React.ReactNode[] = [];
   for (let i = 0; i < courses.length; i += 2) {
@@ -46,7 +55,10 @@ export const AttemptCourseCard: SFC<AttemptCourseCardProps> = props => {
   }
 
   return (
-    <BackgroundCardWrapper>
+    <BackgroundCardWrapper
+      backgroundImage={backgroundImage}
+      backgroundFill={backgroundFill}
+    >
       <ContentCenterWrapper>
         <Card>
           <CardContent>
@@ -62,8 +74,14 @@ export const AttemptCourseCard: SFC<AttemptCourseCardProps> = props => {
   );
 };
 
-const BackgroundCardWrapper = styled.div`
+const BackgroundCardWrapper = withProps<
+  Pick<AttemptCourseCardProps, "backgroundImage" | "backgroundFill">
+>()(styled.div)`
   padding: 95px 0;
+  background: ${({ backgroundImage }) =>
+    backgroundImage ? `url("${backgroundImage}")` : "none"};
+  background-color: ${({ backgroundFill }) =>
+    backgroundFill ? backgroundFill : "transparent"};
 `;
 
 const Wrapper = styled.div`

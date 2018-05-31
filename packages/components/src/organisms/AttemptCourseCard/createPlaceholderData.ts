@@ -1,5 +1,6 @@
 import { AttemptCourseCardProps } from ".";
 import { AttemptCourseCardHeaderProps } from "../../molecules/AttemptCourseCardHeader";
+import sampleEntryBorderSquarePng from "./sampleEntryBorderSquare.png";
 
 export const createPlaceholderData = (
   courseOnClick: (courseIndex: number) => void,
@@ -21,6 +22,8 @@ export const createPlaceholderData = (
   const placeholderData: AttemptCourseCardProps = {
     cardHeaderProps,
     courses,
+    backgroundImage: sampleEntryBorderSquarePng,
+    backgroundFill: "#0070c0",
   };
 
   return placeholderData;
