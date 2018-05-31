@@ -1,20 +1,14 @@
 import React, { Component, ReactNode } from "react";
 import styled, { withProps } from "styled";
 
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Checkbox from "@material-ui/core/Checkbox";
+import Hidden from "@material-ui/core/Hidden";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableFooter from "@material-ui/core/TableFooter";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import withWidth, {
-  isWidthDown,
-  WithWidthProps,
-} from "@material-ui/core/withWidth";
 
 import { DashboardTableRow } from "../../atoms/DashboardTableRow";
 import { Typography } from "../../atoms/Typography";
@@ -22,19 +16,17 @@ import {
   ColumnItemButton,
   ColumnItemDualLine,
   ColumnItemImage,
-  ColumnItemProfile,
   ColumnItemSingleLine,
   ColumnItemSwitch,
 } from "./DashboardCardColumnComponents";
 import { DashboardCardColumnType } from "./DashboardCardColumnType";
 import { DashboardCardItem } from "./DashboardCardItem";
-import { DashboardCardItemColumn } from "./DashboardCardItemColumn";
 import {
   DashboardCardModeApi,
   DashboardCardModeConsumer,
 } from "./DashboardCardModeContext";
 
-export interface DashboardCardTableProps extends WithWidthProps {
+export interface DashboardCardTableProps {
   /**
    * Render checkboxes and placeholder padding for checkboxes.
    */
@@ -61,7 +53,7 @@ export interface DashboardCardTableProps extends WithWidthProps {
   bottomPaginationNode?: ReactNode;
 }
 
-class DashboardCardTableBase extends Component<DashboardCardTableProps> {
+export class DashboardCardTable extends Component<DashboardCardTableProps> {
   constructor(props: DashboardCardTableProps) {
     super(props);
 
@@ -76,8 +68,6 @@ class DashboardCardTableBase extends Component<DashboardCardTableProps> {
         return ColumnItemDualLine;
       case "image":
         return ColumnItemImage;
-      case "profile":
-        return ColumnItemProfile;
       case "single-line":
         return ColumnItemSingleLine;
       case "switch":
@@ -89,50 +79,6 @@ class DashboardCardTableBase extends Component<DashboardCardTableProps> {
     }
   };
 
-  generateRowCard = (
-    columns: DashboardCardItemColumn[],
-    columnTypes: DashboardCardColumnType[],
-    columnLabels: string[],
-    mode: string,
-  ) => {
-    const cardMediaColumnIndex = columnTypes.findIndex(c => c === "image");
-    const cardMedia =
-      cardMediaColumnIndex !== -1 ? (
-        <FlatCardMedia image={columns[cardMediaColumnIndex].imgUrl} />
-      ) : null;
-    const { width } = this.props;
-
-    return (
-      <FlatCard>
-        {!(isWidthDown("xs", width) && mode === "deletion") && cardMedia}
-
-        <CardContent style={{ flex: 1 }}>
-          {columns.map((itemColumn, columnIndex) => {
-            if (columnIndex === cardMediaColumnIndex) return null;
-
-            const ItemColumnComponent = this.getColumnComponent(
-              columnTypes[columnIndex],
-            );
-
-            return (
-              <FlatCardItemWrapper key={columnIndex}>
-                <Typography variant="tableHeadCell">
-                  {columnLabels[columnIndex] && (
-                    <>{columnLabels[columnIndex]}:&nbsp;</>
-                  )}
-                </Typography>
-                <ItemColumnComponent
-                  itemColumn={itemColumn}
-                  mode={mode as any}
-                />
-              </FlatCardItemWrapper>
-            );
-          })}
-        </CardContent>
-      </FlatCard>
-    );
-  };
-
   render() {
     const {
       showCheckboxes,
@@ -140,34 +86,33 @@ class DashboardCardTableBase extends Component<DashboardCardTableProps> {
       columnLabels,
       items,
       bottomPaginationNode,
-      width,
     } = this.props;
 
     return (
       <DashboardCardModeConsumer>
         {api => (
           <Table>
-            {/* Table Header, hidden on mobile */}
-            {!isWidthDown("sm", width) && (
-              <TableHead>
-                <TableRow>
-                  {/* Optional checkbox (for cards which have delete option). */}
-                  {showCheckboxes &&
-                    api.state.mode === "deletion" && (
-                      <CheckboxWidthTableCell>
-                        {api.state.mode === "deletion" && (
-                          <RedCheckbox
-                            indeterminate={api.actions.getIsIndeterminate()}
-                            checked={api.actions.getIsAllSelected()}
-                            onChange={api.actions.toggleSelectAll}
-                          />
-                        )}
-                      </CheckboxWidthTableCell>
-                    )}
+            {/* Table Header */}
+            <TableHead>
+              <TableRow>
+                {/* Optional checkbox (for cards which have delete option). */}
+                {showCheckboxes &&
+                  api.state.mode === "deletion" && (
+                    <CheckboxWidthTableCell>
+                      {api.state.mode === "deletion" && (
+                        <RedCheckbox
+                          indeterminate={api.actions.getIsIndeterminate()}
+                          checked={api.actions.getIsAllSelected()}
+                          onChange={api.actions.toggleSelectAll}
+                        />
+                      )}
+                    </CheckboxWidthTableCell>
+                  )}
 
-                  {/* Column Labels */}
-                  {columnLabels.map((label, index) => (
-                    <UnpaddedTableCell key={index}>
+                {/* Column Labels */}
+                {columnLabels.map((label, index) => (
+                  <Hidden key={index} xsDown={columnTypes[index] === "image"}>
+                    <UnpaddedTableCell>
                       <Typography
                         variant="tableHeadCell"
                         padLeftToolbarButton={columnTypes[index] === "button"}
@@ -175,10 +120,10 @@ class DashboardCardTableBase extends Component<DashboardCardTableProps> {
                         {label}
                       </Typography>
                     </UnpaddedTableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-            )}
+                  </Hidden>
+                ))}
+              </TableRow>
+            </TableHead>
 
             {/* Table Contents*/}
             <TableBody>
@@ -198,34 +143,26 @@ class DashboardCardTableBase extends Component<DashboardCardTableProps> {
                       </UnpaddedTableCell>
                     )}
 
-                  {/* Render column item using required component type. Hidden on mobile. */}
-                  {!isWidthDown("sm", width) &&
-                    item.columns.map((itemColumn, columnIndex) => {
-                      const ItemColumnComponent = this.getColumnComponent(
-                        columnTypes[columnIndex],
-                      );
+                  {/* Render column item using required component type. */}
+                  {item.columns.map((itemColumn, columnIndex) => {
+                    const ItemColumnComponent = this.getColumnComponent(
+                      columnTypes[columnIndex],
+                    );
 
-                      return (
-                        <UnpaddedTableCell key={`${item.key}-${columnIndex}`}>
+                    return (
+                      <Hidden
+                        key={`${item.key}-${columnIndex}`}
+                        xsDown={columnTypes[columnIndex] === "image"}
+                      >
+                        <UnpaddedTableCell>
                           <ItemColumnComponent
                             itemColumn={itemColumn}
                             mode={api.state.mode}
                           />
                         </UnpaddedTableCell>
-                      );
-                    })}
-
-                  {/* Render column items in a card on mobile. */}
-                  {isWidthDown("sm", width) && (
-                    <UnpaddedTableCell>
-                      {this.generateRowCard(
-                        item.columns,
-                        columnTypes,
-                        columnLabels,
-                        api.state.mode,
-                      )}
-                    </UnpaddedTableCell>
-                  )}
+                      </Hidden>
+                    );
+                  })}
                 </ClickableTableRow>
               ))}
             </TableBody>
@@ -242,8 +179,6 @@ class DashboardCardTableBase extends Component<DashboardCardTableProps> {
     );
   }
 }
-
-export const DashboardCardTable = withWidth()(DashboardCardTableBase);
 
 const CheckboxWidthTableCell = styled(TableCell).attrs({ padding: "checkbox" })`
   width: 72px;
@@ -270,31 +205,4 @@ type ModeProp = Pick<DashboardCardModeApi["state"], "mode">;
 
 const ClickableTableRow = withProps<ModeProp>()(styled(DashboardTableRow))`
   cursor: ${({ mode }) => (mode !== "display" ? "pointer" : "inherit")};
-`;
-
-const FlatCard = styled(Card).attrs({
-  elevation: 0,
-})`
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-`;
-
-const FlatCardMedia = styled(CardMedia)`
-  width: 100px;
-  height: 100px;
-`;
-
-const FlatCardItemWrapper = styled.div`
-  display: flex;
-  margin: 8px 0;
-
-  > *:first-child {
-    flex: 1;
-    align-self: center;
-  }
-
-  > *:nth-child(2) {
-    align-self: center;
-  }
 `;
