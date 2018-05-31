@@ -1,7 +1,5 @@
-import React, { ReactNode, SFC } from "react";
+import React, { Fragment, ReactNode, SFC } from "react";
 import styled from "styled";
-import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
-import armyGreenPng from "./armyGreen.png";
 
 // TODO: Remove Development Snackbar Link
 import { DevelopmentAdminDashboardSnackbar } from "./DevelopmentAdminDashboardSnackbar";
@@ -30,13 +28,9 @@ export const LandingTemplate: SFC<LandingTemplateProps> = props => {
       <HeaderHeroWrapper>{heroNode}</HeaderHeroWrapper>
 
       <MainContentBackground>
-        <ContentCenterWrapper>
-          <MainCardsWrapper>
-            {testCardNodes.map((testCard, key) => (
-              <TestCardWrapper key={key}>{testCard}</TestCardWrapper>
-            ))}
-          </MainCardsWrapper>
-        </ContentCenterWrapper>
+        {testCardNodes.map((testCard, key) => (
+          <Fragment key={key}>{testCard}</Fragment>
+        ))}
       </MainContentBackground>
 
       <FooterWrapper>{footerNode}</FooterWrapper>
@@ -48,10 +42,6 @@ const HeaderHeroWrapper = styled.header`
   display: block;
 `;
 
-const TestCardWrapper = styled.div`
-  padding: ${props => props.theme.spacing.unit * 2}px 0;
-`;
-
 const MainContentBackground = styled.div`
   &::before {
     content: " ";
@@ -60,23 +50,9 @@ const MainContentBackground = styled.div`
     height: 100%;
     left: 0;
     top: 0;
-    background-color: #2e432e;
-    background-image:
-      linear-gradient(
-        rgba(0,0,0,0.4),
-        rgba(0,0,0, 0.4)
-      ),
-      url("${armyGreenPng}"
-    );
     will-change: transform;
     z-index: -1;
   }
-`;
-
-const MainCardsWrapper = styled.main`
-  display: block;
-  padding: ${props => props.theme.spacing.unit * 2}px 0;
-  padding-bottom: ${props => props.theme.spacing.unit * 5}px;
 `;
 
 const FooterWrapper = styled.footer`

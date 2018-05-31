@@ -4,6 +4,7 @@ import styled from "styled";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
+import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 import {
   AttemptCourse,
   AttemptCourseProps,
@@ -45,17 +46,25 @@ export const AttemptCourseCard: SFC<AttemptCourseCardProps> = props => {
   }
 
   return (
-    <Card>
-      <CardContent>
-        <Wrapper>
-          <AttemptCourseCardHeader {...cardHeaderProps} />
+    <BackgroundCardWrapper>
+      <ContentCenterWrapper>
+        <Card>
+          <CardContent>
+            <Wrapper>
+              <AttemptCourseCardHeader {...cardHeaderProps} />
 
-          <CourseRowsWrapper>{courseRows}</CourseRowsWrapper>
-        </Wrapper>
-      </CardContent>
-    </Card>
+              <CourseRowsWrapper>{courseRows}</CourseRowsWrapper>
+            </Wrapper>
+          </CardContent>
+        </Card>
+      </ContentCenterWrapper>
+    </BackgroundCardWrapper>
   );
 };
+
+const BackgroundCardWrapper = styled.div`
+  padding: 95px 0;
+`;
 
 const Wrapper = styled.div`
   display: flex;
