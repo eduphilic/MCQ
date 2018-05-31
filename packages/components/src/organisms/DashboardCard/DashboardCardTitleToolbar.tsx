@@ -20,6 +20,11 @@ export interface DashboardCardTitleToolbarProps {
   title: string;
 
   /**
+   * A node to render to the right of the card title.
+   */
+  titleSiblingNode?: ReactNode;
+
+  /**
    * Instructions caption text shown in edit mode.
    */
   editCaptionText?: string;
@@ -104,7 +109,7 @@ export class DashboardCardTitleToolbar extends Component<
   };
 
   generateCaptionNode = (api: DashboardCardModeApi) => {
-    const { title, editCaptionText } = this.props;
+    const { title, titleSiblingNode, editCaptionText } = this.props;
     const { mode } = api.state;
     const selectedCount = api.actions.getSelectedCount();
 
@@ -115,6 +120,7 @@ export class DashboardCardTitleToolbar extends Component<
           <EntryTitleWrapper>
             <Icon>dashboard</Icon>
             <Typography variant="cardTitle">{title}</Typography>
+            {titleSiblingNode}
           </EntryTitleWrapper>
         )}
 
@@ -174,9 +180,14 @@ const CaptionWrapper = styled.div`
 
 const EntryTitleWrapper = styled.div`
   display: flex;
+  align-items: center;
 
   > *:first-child {
     margin-right: ${({ theme }) => theme.spacing.unit}px;
     color: #757575;
+  }
+
+  > *:nth-child(3) {
+    margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
   }
 `;

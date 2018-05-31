@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 
 import { DashboardCard } from ".";
 import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
+import { TypographyButton } from "../../molecules/TypographyButton";
 import { DashboardCardColumnType } from "./DashboardCardColumnType";
 import { DashboardCardItem } from "./DashboardCardItem";
 import { DashboardCardPaginationProps } from "./DashboardCardPagination";
@@ -73,6 +74,9 @@ storiesOf("Organisms", module).add(
         <DashboardCard
           items={items}
           title="Army Entry"
+          titleSiblingNode={
+            <TypographyButton>Some Sibling Component</TypographyButton>
+          }
           editCaptionText="Click to Edit Entry"
           columnLabels={columnLabels}
           columnTypes={columnTypes}

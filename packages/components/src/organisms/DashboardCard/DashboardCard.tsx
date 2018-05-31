@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, ReactNode } from "react";
 
 import Card from "@material-ui/core/Card";
 
@@ -37,6 +37,11 @@ export interface DashboardCardProps
   title?: string;
 
   /**
+   * A node to render to the right of the card title.
+   */
+  titleSiblingNode?: ReactNode;
+
+  /**
    * Data list items.
    */
   items: DashboardCardItem[];
@@ -58,6 +63,7 @@ export class DashboardCard extends Component<DashboardCardProps> {
   render() {
     const {
       title,
+      titleSiblingNode,
       items,
       onItemEditClick,
       onRequestDeleteClick,
@@ -86,6 +92,7 @@ export class DashboardCard extends Component<DashboardCardProps> {
           {title && (
             <DashboardCardTitleToolbar
               title={title}
+              titleSiblingNode={titleSiblingNode}
               editCaptionText={editCaptionText}
               showEditButton={Boolean(onItemEditClick)}
               showDeletionButton={Boolean(onRequestDeleteClick)}
