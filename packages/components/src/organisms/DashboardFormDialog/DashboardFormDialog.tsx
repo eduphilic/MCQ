@@ -36,6 +36,11 @@ export interface DashboardFormDialogProps<Values extends object>
    * a full screen input form on mobile.
    */
   fullScreen?: boolean;
+
+  /**
+   * Form dialog title.
+   */
+  title: string;
 }
 
 interface DashboardFormDialogState {
@@ -79,6 +84,7 @@ class DashboardFormDialogBase<Values extends object> extends Component<
       fieldConfigs,
       fullScreen,
       onSubmit,
+      title,
       ...rest
     } = this.props;
     const { open } = this.state;
@@ -99,7 +105,7 @@ class DashboardFormDialogBase<Values extends object> extends Component<
           render={api => (
             <DialogSized fullScreen={fullScreen} open={open}>
               <FormFullContainerSize onSubmit={api.handleSubmit}>
-                <DialogTitle>Create a New Entry</DialogTitle>
+                <DialogTitle>{title}</DialogTitle>
 
                 <DialogContent>
                   {(Object.keys(api.values) as (keyof Values)[]).map(

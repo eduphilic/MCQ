@@ -62,6 +62,7 @@ export const AdminEntryManager: SFC<{}> = () => {
 
   const appBarActionButtons = [
     <DashboardFormDialog
+      title="Create a New Entry"
       fieldConfigs={fieldConfigs}
       initialValues={dialogFields}
       onSubmit={noop}

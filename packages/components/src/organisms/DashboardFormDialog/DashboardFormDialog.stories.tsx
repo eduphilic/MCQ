@@ -58,6 +58,7 @@ storiesOf("Organisms", module).add("DashboardFormDialog", () => {
   return (
     <ContentCenterWrapper style={{ padding: 16 }}>
       <DashboardFormDialog
+        title="Create a New Entry"
         initialValues={initialValues}
         fieldConfigs={fields}
         validate={validate}

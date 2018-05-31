@@ -38,6 +38,7 @@ export const AdminPlanManager: SFC<{}> = () => {
 
   const appBarActionButtons = [
     <DashboardFormDialog
+      title="Create a New Plan"
       fieldConfigs={fieldConfigs}
       initialValues={dialogFields}
       onSubmit={noop}
