@@ -19,9 +19,9 @@ export interface EntrySelectItemProps {
   label: string;
 
   /**
-   * Education requirement. Shown under label.
+   * Education requirement or entry explanation. Shown under label.
    */
-  educationRequirement?: string;
+  additionalDescriptionText?: string;
 
   /**
    * Whether item is selected.
@@ -38,15 +38,23 @@ export interface EntrySelectItemProps {
  * Entry (military branch) selection item.
  */
 export const EntrySelectItem: SFC<EntrySelectItemProps> = props => {
-  const { icon: entry, label, educationRequirement, selected, onClick } = props;
+  const {
+    icon: entry,
+    label,
+    additionalDescriptionText,
+    selected,
+    onClick,
+  } = props;
 
   return (
     <StyledButton selected={selected} onClick={onClick}>
       <Logo entry={entry} />
       <TextWrapper>
         <Label>{label}</Label>
-        {educationRequirement && (
-          <EducationRequirement>{educationRequirement}</EducationRequirement>
+        {additionalDescriptionText && (
+          <AdditionalDescriptionText>
+            {additionalDescriptionText}
+          </AdditionalDescriptionText>
         )}
       </TextWrapper>
       <CheckmarkableCircle color="secondary" checked={selected} />
@@ -96,7 +104,7 @@ const Label = styled(Typography).attrs({
   text-align: left;
 `;
 
-const EducationRequirement = Label.extend`
+const AdditionalDescriptionText = Label.extend`
   font-weight: 500;
   font-size: 14px;
   color: #4db7f1;

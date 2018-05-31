@@ -13,7 +13,7 @@ export interface EntrySelectProps {
    */
   entries: Pick<
     EntrySelectItemProps,
-    "icon" | "label" | "educationRequirement"
+    "icon" | "label" | "additionalDescriptionText"
   >[];
 
   /**

@@ -32,7 +32,9 @@ export const Step1 = withRouter(props => {
   const entrySelectProps = createSelectEntryPlaceholderData();
   entrySelectProps.entries = entrySelectProps.entries.map(e => ({
     ...e,
-    educationRequirement: "12th Science with Maths",
+
+    // Links to field "Entry Explanation" in Dashboard->Entry Manager
+    additionalDescriptionText: "For X & Y Category",
   }));
 
   return (
@@ -67,7 +69,9 @@ export const Step2 = withRouter(props => {
   const entrySelectProps = createSelectEntryPlaceholderData();
   entrySelectProps.entries = entrySelectProps.entries.map(e => ({
     ...e,
-    educationRequirement: "12th Science with Maths",
+
+    // Links to field "Education Requirements" in Dashboard->Entry Manager
+    additionalDescriptionText: "12th Science with Maths",
   }));
 
   return (

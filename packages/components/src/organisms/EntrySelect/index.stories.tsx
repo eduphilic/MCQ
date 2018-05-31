@@ -8,11 +8,12 @@ import { ContentCenterWrapper } from "../../atoms/ContentCenterWrapper";
 import { createSelectEntryPlaceholderData } from "./createSelectEntryPlaceholderData";
 
 const props = createSelectEntryPlaceholderData();
-const propsWithEducationRequirements: typeof props = {
+const propsWithAdditionalDescriptionText: typeof props = {
   ...props,
   entries: props.entries.map(e => ({
     ...e,
-    educationRequirement: "12th Science with Maths",
+
+    additionalDescriptionText: "12th Science with Maths",
   })),
 };
 
@@ -25,7 +26,7 @@ storiesOf("Organisms", module).add(
       <div style={{ marginTop: 24 }} />
 
       <EntrySelect
-        {...propsWithEducationRequirements}
+        {...propsWithAdditionalDescriptionText}
         onSelectionChange={action("onSelectionChange")}
       />
     </ContentCenterWrapper>

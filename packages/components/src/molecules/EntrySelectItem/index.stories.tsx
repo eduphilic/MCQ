@@ -20,7 +20,7 @@ storiesOf("Molecules", module).add(
       <EntrySelectItem
         icon="AirForce"
         label="AirForce"
-        educationRequirement="12th Science with Maths"
+        additionalDescriptionText="12th Science with Maths"
         selected={boolean("Selected", false)}
         onClick={action("onClick")}
       />
