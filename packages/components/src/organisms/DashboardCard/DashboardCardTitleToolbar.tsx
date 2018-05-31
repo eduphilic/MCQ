@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from "react";
+import React, { Component, ReactElement, ReactNode } from "react";
 import styled, { withProps } from "styled";
 
 import Icon from "@material-ui/core/Icon";
@@ -68,6 +68,15 @@ export class DashboardCardTitleToolbar extends Component<
     const { mode } = api.state;
     const selectedCount = api.actions.getSelectedCount();
 
+    /**
+     * This is used to selectively wrap an element with a tooltip. Passing a
+     * disabled button as a child to a tooltip causes an error. To prevent the
+     * error, undefined is passed as the title when the element should be
+     * disabled to prevent wrapping with a tooltip.
+     */
+    const maybeWithTooltip = (element: ReactElement<any>, title?: string) =>
+      title ? <Tooltip title={title}>{element}</Tooltip> : element;
+
     return mode === "display" ? (
       <>
         {additionalActionNode}
@@ -88,17 +97,17 @@ export class DashboardCardTitleToolbar extends Component<
       </>
     ) : (
       <>
-        {mode === "deletion" && (
-          <Tooltip
-            title={`Delete ${selectedCount} Selected Item${
-              selectedCount !== 1 ? "s" : ""
-            }`}
-          >
+        {mode === "deletion" &&
+          maybeWithTooltip(
             <IconButton disabled={selectedCount === 0} onClick={requestDelete}>
               <Icon>delete</Icon>
-            </IconButton>
-          </Tooltip>
-        )}
+            </IconButton>,
+            selectedCount !== 0
+              ? `Delete ${selectedCount} Selected Item${
+                  selectedCount !== 1 ? "s" : ""
+                }`
+              : undefined,
+          )}
         <Tooltip title={`Exit ${mode === "edit" ? "Edit" : "Deletion"} Mode`}>
           <IconButton onClick={exitMode}>
             <Icon>done</Icon>

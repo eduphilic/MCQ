@@ -93,10 +93,12 @@ export const AdminEntryManager: SFC<{}> = () => {
           ]}
           columnTypes={["dual-line", "image", "single-line", "switch"]}
           editCaptionText="Click to Edit Entry"
-          onItemEditClick={item => alert(`Open edit dialog for item: ${item}`)}
-          onRequestDeleteClick={items =>
-            alert(`Open verification dialog for items: ${items}`)
-          }
+          onItemEditClick={_item => {
+            // alert(`Open edit dialog for item: ${item}`);
+          }}
+          onRequestDeleteClick={_items => {
+            // alert(`Open verification dialog for items: ${items}`)
+          }}
           items={[
             {
               key: "0",
