@@ -100,10 +100,11 @@ class DashboardCardTableBase extends Component<DashboardCardTableProps> {
       cardMediaColumnIndex !== -1 ? (
         <FlatCardMedia image={columns[cardMediaColumnIndex].imgUrl} />
       ) : null;
+    const { width } = this.props;
 
     return (
       <FlatCard>
-        {cardMedia}
+        {!(isWidthDown("xs", width) && mode === "deletion") && cardMedia}
 
         <CardContent style={{ flex: 1 }}>
           {columns.map((itemColumn, columnIndex) => {
@@ -216,14 +217,14 @@ class DashboardCardTableBase extends Component<DashboardCardTableProps> {
 
                   {/* Render column items in a card on mobile. */}
                   {isWidthDown("sm", width) && (
-                    <TableCell>
+                    <UnpaddedTableCell>
                       {this.generateRowCard(
                         item.columns,
                         columnTypes,
                         columnLabels,
                         api.state.mode,
                       )}
-                    </TableCell>
+                    </UnpaddedTableCell>
                   )}
                 </ClickableTableRow>
               ))}
