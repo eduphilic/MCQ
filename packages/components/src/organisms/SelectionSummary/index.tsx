@@ -3,10 +3,10 @@ import React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled";
 
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 import { TextField } from "../../atoms/TextField";
+import { TypographyButton } from "../../molecules/TypographyButton";
 
 export interface SelectionSummaryProps {
   /**
@@ -55,14 +55,14 @@ export const SelectionSummary = withRouter<
 
       <TextField className="selections" value={selections} disabled />
 
-      <Button
+      <TypographyButton
         className="button"
         onClick={onClick}
         variant="raised"
         color="primary"
       >
         {strings.selectionChangeButtonText}
-      </Button>
+      </TypographyButton>
     </Wrapper>
   );
 });
