@@ -2,6 +2,7 @@ import React, { Component, MouseEvent } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
+import Hidden from "@material-ui/core/Hidden";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ImportExport from "@material-ui/icons/ImportExport";
@@ -43,6 +44,34 @@ class AdminRevenueManager extends Component<
 
   render() {
     const { financialYearDropdownAnchorElement } = this.state;
+
+    const reportYearSelect = (
+      <>
+        <DropdownButton
+          variant="flat"
+          onClick={this.handleFinancialYearDropdownButtonClick}
+        >
+          <Typography variant="buttonBold">Current Year Report</Typography>
+        </DropdownButton>
+        <Menu
+          id="simple-menu"
+          anchorEl={financialYearDropdownAnchorElement || undefined}
+          open={Boolean(financialYearDropdownAnchorElement)}
+          onClose={this.handleFinancialYearDropdownClose}
+        >
+          {["Current Year Report", "2015-2016", "2016-2017", "2017-2018"].map(
+            financialYear => (
+              <MenuItem
+                key={financialYear}
+                onClick={this.handleFinancialYearDropdownClose}
+              >
+                {financialYear}
+              </MenuItem>
+            ),
+          )}
+        </Menu>
+      </>
+    );
 
     return (
       <AdminDashboardTemplateContainer titleText="Revenue Manager">
@@ -94,29 +123,7 @@ class AdminRevenueManager extends Component<
 
           <DashboardSecondaryToolbar.Spacer />
 
-          <DropdownButton
-            variant="flat"
-            onClick={this.handleFinancialYearDropdownButtonClick}
-          >
-            <Typography variant="buttonBold">Current Year Report</Typography>
-          </DropdownButton>
-          <Menu
-            id="simple-menu"
-            anchorEl={financialYearDropdownAnchorElement || undefined}
-            open={Boolean(financialYearDropdownAnchorElement)}
-            onClose={this.handleFinancialYearDropdownClose}
-          >
-            {["Current Year Report", "2015-2016", "2016-2017", "2017-2018"].map(
-              financialYear => (
-                <MenuItem
-                  key={financialYear}
-                  onClick={this.handleFinancialYearDropdownClose}
-                >
-                  {financialYear}
-                </MenuItem>
-              ),
-            )}
-          </Menu>
+          <Hidden smUp>{reportYearSelect}</Hidden>
 
           <TypographyButton
             variant="flat"
@@ -130,6 +137,7 @@ class AdminRevenueManager extends Component<
         {/* Plan Records */}
         <DashboardCard
           title="Revenue Report"
+          titleSiblingNode={<Hidden xsDown>{reportYearSelect}</Hidden>}
           additionalActionNode={
             <ResponsiveToolbarTypographyButton
               iconNode={<ImportExport />}
