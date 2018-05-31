@@ -16,7 +16,7 @@ storiesOf("Organisms", module).add(
   withState(
     { language: "english" },
     withInfo({ propTablesExclude: [Router as any] })(((store: Store<State>) => {
-      const backgroundAlpha = number("Background Alpha", 0.75, {
+      const backgroundAlpha = number("Background Alpha", 0.65, {
         max: 1,
         min: 0.05,
         range: true,
@@ -25,7 +25,7 @@ storiesOf("Organisms", module).add(
       const backgroundImage = selectV2(
         "Background Image",
         backgroundImageFilenames,
-        "Army-soldier-1024x782.jpg",
+        "collage.png",
       );
 
       return (
@@ -63,6 +63,7 @@ const backgroundImageFilenames = [
   "army.jpg",
   "BL09_BP_AIRFORCE_GO_802946f.jpg",
   "cdbfc061959733.5a7ffed5547d9.jpg",
+  "collage.png",
   "crpf.jpg",
   "india-kashmir-unrest-attack_9eff8a06-20e5-11e7-beb7-f1cbdf0743d8.jpg",
   "Indian-Air-Force.jpg",

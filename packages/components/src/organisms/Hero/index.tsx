@@ -18,14 +18,14 @@ import {
 } from "../../molecules/LanguageSelect";
 import { Logo } from "../../molecules/Logo";
 
-const defaultBackgroundImage = "Army-soldier-1024x782.jpg";
+const defaultBackgroundImage = "collage.png";
 
 interface HeroProps {
   /**
    * Background image to use for the hero section of the landing page. It is the
    * filename for an image in the folder /packages/app/public/images/hero.
    *
-   * @default "Army-soldier-1024x782.jpg"
+   * @default "collage.png"
    */
   backgroundImage?: string;
 
