@@ -33,8 +33,7 @@ export const strings = {
 
     logoutButtonText: "Logout",
 
-    onboardingWelcomeLetsSetupAccount:
-      "Welcome ${1}, let's setup your Uniform account",
+    onboardingWelcomeLetsSetupAccount: "Welcome ${1}, let's setup your account",
 
     onboardingStep: "Step ${1}",
     onboardingSelectEntryType: "Select Entry Type",

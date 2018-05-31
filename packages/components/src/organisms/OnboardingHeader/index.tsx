@@ -19,7 +19,7 @@ export const OnboardingHeader: SFC<OnboardingHeaderProps> = props => {
   return (
     <Wrapper>
       <Logo hideTextMobile />
-      <Text>Welcome Jay, let's setup your Uniform account</Text>
+      <Text>Welcome Jay, let's setup your account</Text>
       <LogoutButtonWrapper>
         <LogoutButton {...logoutButtonProps} />
       </LogoutButtonWrapper>
