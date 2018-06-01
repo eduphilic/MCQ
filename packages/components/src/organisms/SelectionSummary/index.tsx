@@ -59,7 +59,8 @@ export const SelectionSummary = withRouter<
         className="button"
         onClick={onClick}
         variant="raised"
-        color="primary"
+        color="yellow"
+        filled
       >
         {strings.selectionChangeButtonText}
       </TypographyButton>
