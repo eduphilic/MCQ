@@ -1,12 +1,49 @@
 import React, { SFC } from "react";
-import styled from "styled";
+import styled, { css } from "styled";
 import { Theme } from "theme";
 
 // tslint:disable-next-line:import-name
 import MuiButton, {
   ButtonProps as MuiButtonProps,
 } from "@material-ui/core/Button";
-import { fade } from "@material-ui/core/styles/colorManipulator";
+import { darken, fade } from "@material-ui/core/styles/colorManipulator";
+
+const createCustomColorCss = (name: string, color: string) => css`
+  &.color-${name} {
+    color: ${color};
+  }
+
+  &.color-${name}.raised {
+    background-color: #fff;
+  }
+
+  &.color-${name}.raised:hover {
+    background-color: ${({ theme }) => getHoverBackground(color, theme)};
+  }
+
+  &.color-${name}.filled {
+    color: ${({ theme }) => theme.palette.getContrastText(color)};
+    background-color: ${color};
+  }
+
+  &.color-${name}.filled:hover {
+    background-color: ${darken(color, 0.2)};
+  }
+`;
+
+const customColors = {
+  orange: createCustomColorCss("orange", "#f2994a"),
+  red: createCustomColorCss("red", "#910f0f"),
+  blue: createCustomColorCss("blue", "#2d9cdb"),
+  yellow: createCustomColorCss("yellow", "#ecd100"),
+};
+
+const customColorsCss = css`
+  ${customColors.orange};
+  ${customColors.red};
+  ${customColors.blue};
+  ${customColors.yellow};
+`;
 
 const ButtonBase = styled(MuiButton)`
   padding: 8px 32px;
@@ -29,36 +66,7 @@ const ButtonBase = styled(MuiButton)`
   }
 
   /* Extended Colors */
-  &.color-orange.raised,
-  &.color-red.raised,
-  &.color-blue.raised {
-    background-color: #fff;
-  }
-
-  &.color-orange {
-    color: #f2994a;
-  }
-
-  &.color-orange.raised:hover {
-    background-color: ${({ theme }) => getHoverBackground("#f2994a", theme)};
-  }
-
-  &.color-red {
-    color: #910f0f;
-  }
-
-  &.color-red.raised:hover {
-    background-color: ${({ theme }) => getHoverBackground("#910f0f", theme)};
-  }
-
-  &.color-blue {
-    color: #2d9cdb;
-  }
-
-  &.color-blue.raised:hover {
-    background-color: ${({ theme }) => getHoverBackground("#2d9cdb", theme)};
-  }
-  /* End Extended Colors */
+  ${customColorsCss};
 `;
 
 export interface ButtonProps extends Omit<MuiButtonProps, "color"> {
@@ -66,15 +74,26 @@ export interface ButtonProps extends Omit<MuiButtonProps, "color"> {
    * Same color options as the Material UI button with the addition of the
    * following additional colors: orange
    */
-  color?: MuiButtonProps["color"] | "orange" | "red" | "blue";
+  color?: MuiButtonProps["color"] | keyof typeof customColors;
+
+  /**
+   * Whether or not the button is filled using the selected color.
+   */
+  filled?: boolean;
 }
 
 type ExtendedColor = Exclude<ButtonProps["color"], MuiButtonProps["color"]>;
-const extendedColors: ExtendedColor[] = ["orange", "red", "blue"];
+const extendedColors = Object.keys(customColors) as ExtendedColor[];
 
 /** Material UI button with default styling. */
 export const Button: SFC<ButtonProps> = props => {
-  const { className, color = "default", variant = "raised", ...rest } = props;
+  const {
+    className,
+    color = "default",
+    variant = "raised",
+    filled,
+    ...rest
+  } = props;
 
   const usesExtendedColor = extendedColors.includes(color as ExtendedColor);
   const classes: string[] = className ? [className] : [];
@@ -83,6 +102,7 @@ export const Button: SFC<ButtonProps> = props => {
     classes.push(`color-${color}`);
   }
   if (variant === "raised") classes.push("raised");
+  if (filled) classes.push("filled");
 
   return (
     <ButtonBase
