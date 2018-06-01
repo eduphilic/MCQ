@@ -1,11 +1,12 @@
+import React, { ChangeEvent, Component, ReactElement } from "react";
+import styled from "styled";
+
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Typography from "@material-ui/core/Typography";
-import React, { ChangeEvent, Component, ReactElement } from "react";
-import styled from "styled";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ExamQuantitySelectorProps {
@@ -22,19 +23,24 @@ export interface ExamQuantitySelectorProps {
   pricingText: string;
 
   /**
-   * Available quantities.
+   * Available quantities (labels).
    */
-  availableQuantities: number[];
+  availableQuantitiesLabels: string[];
 
   /**
-   * Selected quantity.
+   * Available quantities (values).
    */
-  value: number;
+  availableQuantitiesValues: string[];
+
+  /**
+   * Selected quantity value.
+   */
+  value: string;
 
   /**
    * Called on quantity change.
    */
-  onChange: (value: number) => void;
+  onChange: (value: string) => void;
 }
 
 /**
@@ -43,11 +49,17 @@ export interface ExamQuantitySelectorProps {
  */
 export class ExamQuantitySelector extends Component<ExamQuantitySelectorProps> {
   private handleChange = (_event: ChangeEvent<{}>, value: string) => {
-    this.props.onChange(parseInt(value, 10));
+    this.props.onChange(value);
   };
 
   render() {
-    const props = this.props;
+    const {
+      category,
+      pricingText,
+      value,
+      availableQuantitiesValues,
+      availableQuantitiesLabels,
+    } = this.props;
 
     return (
       <Paper style={{ padding: "8px 16px", marginTop: 16 }}>
@@ -58,24 +70,28 @@ export class ExamQuantitySelector extends Component<ExamQuantitySelectorProps> {
               component="span"
               style={{ width: 140, fontWeight: 500 }}
             >
-              {props.category}
+              {category}
             </Typography>
           </GridItemVerticalAlign>
 
           <PricingTextWrapper>
             <Typography variant="subheading" component="span">
-              {props.pricingText}
+              {pricingText}
             </Typography>
           </PricingTextWrapper>
 
           <GridItemVerticalAlign xs={12} sm>
             <QuantityRadioGroup
-              category={props.category}
-              value={props.value}
+              category={category}
+              value={value}
               onChange={this.handleChange}
             >
-              {props.availableQuantities.map(q => (
-                <QuantityRadio key={q} quantity={q} />
+              {availableQuantitiesValues.map((quantityValue, index) => (
+                <QuantityRadio
+                  key={value}
+                  value={quantityValue}
+                  label={availableQuantitiesLabels[index]}
+                />
               ))}
             </QuantityRadioGroup>
           </GridItemVerticalAlign>
@@ -103,7 +119,7 @@ const PricingTextWrapper = styled(GridItemVerticalAlign)`
 const QuantityRadioGroup = styled(
   (props: {
     className?: string;
-    value: number;
+    value: string;
     category: string;
     onChange: (event: ChangeEvent<{}>, value: string) => void;
     children: ReactElement<any>[];
@@ -112,7 +128,7 @@ const QuantityRadioGroup = styled(
       className={props.className}
       aria-label={props.category}
       name={props.category}
-      value={props.value.toString()}
+      value={props.value}
       onChange={props.onChange}
       row
     >
@@ -125,11 +141,11 @@ const QuantityRadioGroup = styled(
 QuantityRadioGroup.displayName = "RadioGroup";
 
 const QuantityRadio = styled(
-  (props: { className?: string; quantity: number }) => (
+  (props: { className?: string; value: string; label: string }) => (
     <FormControlLabel
       className={props.className}
-      value={props.quantity.toString()}
-      label={`${props.quantity} Exams`}
+      value={props.value}
+      label={props.label}
       control={<Radio color="primary" />}
     />
   ),
