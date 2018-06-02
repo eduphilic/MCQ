@@ -11,8 +11,6 @@ import { LogoutButton, LogoutButtonProps } from "../../molecules/LogoutButton";
 import { DrawerStateConsumer } from "../../organisms/ResponsiveDrawerFrame";
 
 export interface AdminAppBarProps {
-  titleText: string;
-
   onLogoutButtonClick: LogoutButtonProps["onClick"];
 
   /**
@@ -29,7 +27,6 @@ export interface AdminAppBarProps {
  */
 export const AdminAppBar: SFC<AdminAppBarProps> = props => {
   const {
-    titleText,
     onLogoutButtonClick,
     actionButtonElements: outerActionButtonElements,
   } = props;
@@ -40,6 +37,8 @@ export const AdminAppBar: SFC<AdminAppBarProps> = props => {
       (node, index) => (!node.key ? cloneElement(node, { key: index }) : node),
     );
   }
+
+  const titleText = "INTEGRATE PAGE TITLE CONTEXT";
 
   return (
     <DrawerStateConsumer>

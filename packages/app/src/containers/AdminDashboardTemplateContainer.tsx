@@ -14,7 +14,6 @@ interface AdminDashboardTemplateContainerOwnProps
       | "sideSheetIconElement"
       | "sideSheetIconTooltipTitle"
     > {
-  titleText: AdminDashboardTemplateProps["adminAppBarProps"]["titleText"];
   actionButtonElements?: AdminDashboardTemplateProps["adminAppBarProps"]["actionButtonElements"];
 }
 
@@ -28,14 +27,12 @@ const AdminDashboardTemplateContainer: SFC<
 > = props => {
   const {
     children,
-    titleText,
     onLogoutButtonClick,
     actionButtonElements,
     ...rest
   } = props;
 
   const adminAppBarProps: AdminDashboardTemplateProps["adminAppBarProps"] = {
-    titleText,
     onLogoutButtonClick,
     actionButtonElements,
   };

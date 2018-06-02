@@ -16,7 +16,6 @@ storiesOf("Organisms", module).add(
           adminAppBarProps={{
             // tslint:disable-next-line:no-empty
             onLogoutButtonClick: () => {},
-            titleText: "SideSheet Example",
           }}
           sideSheetContents={<div>Side Sheet Contents</div>}
         >

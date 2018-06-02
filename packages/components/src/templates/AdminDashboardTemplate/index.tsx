@@ -71,10 +71,12 @@ export const AdminDashboardTemplate: SFC<
     </SideSheet>
   );
 
+  const titleText = "INTEGRATE INTO PAGE TITLE CONTEXT";
+
   return (
     <SideSheetToggleStateProvider>
       <Helmet>
-        <title>{adminAppBarProps.titleText} - JoinUniform</title>
+        <title>{titleText} - JoinUniform</title>
       </Helmet>
       <ResponsiveDrawerFrame
         appBarNode={appBarNode}
