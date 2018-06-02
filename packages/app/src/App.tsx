@@ -2,18 +2,17 @@ import React from "react";
 import { hot } from "react-hot-loader";
 
 import { LightTheme, ThemeBaseline } from "theme";
-import { LoginSessionLoader } from "./components/LoginSessionLoader";
-import { SiteMap } from "./components/SiteMap";
+import { PageTitleProvider } from "./components/PageTitleProvider";
+import { SiteMap } from "./pages";
 
 const App = () => (
-  <>
-    <LoginSessionLoader />
-    <ThemeBaseline>
-      <LightTheme>
+  <ThemeBaseline>
+    <LightTheme>
+      <PageTitleProvider>
         <SiteMap />
-      </LightTheme>
-    </ThemeBaseline>
-  </>
+      </PageTitleProvider>
+    </LightTheme>
+  </ThemeBaseline>
 );
 
 export default hot(module)(App);
