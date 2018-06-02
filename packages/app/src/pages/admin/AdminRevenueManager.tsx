@@ -13,6 +13,7 @@ import { DropdownButton } from "components/molecules/DropdownButton";
 import { ResponsiveToolbarTypographyButton } from "components/molecules/ResponsiveToolbarTypographyButton";
 import { TypographyButton } from "components/molecules/TypographyButton";
 import { DashboardCard } from "components/organisms/DashboardCard";
+import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 
 interface AdminRevenueManagerState {
   financialYearDropdownOpen: boolean;
@@ -74,7 +75,9 @@ class AdminRevenueManager extends Component<
     );
 
     return (
-      <AdminDashboardTemplateContainer titleText="Revenue Manager">
+      <AdminDashboardTemplateContainer>
+        <PageTitleSetter title="Revenue Manager" />
+
         {/* Financial Year Drop Down / Report Button */}
         <DashboardSecondaryToolbar>
           <DropdownButton

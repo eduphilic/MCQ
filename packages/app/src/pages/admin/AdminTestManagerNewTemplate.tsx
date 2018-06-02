@@ -19,6 +19,7 @@ import { TypographyButton } from "components/molecules/TypographyButton";
 import { TestPreviewDialog } from "components/organisms/TestPreviewDialog";
 import { createPlaceholderTestPreviewFieldsProp } from "components/organisms/TestPreviewDialog/createPlaceholderTestPreviewFieldsProp";
 
+import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 // tslint:disable-next-line:no-empty-interface
@@ -72,7 +73,9 @@ export class AdminTestManagerNewTemplate extends Component<
       >
         {api => {
           return (
-            <AdminDashboardTemplateContainer titleText="Test Manager > Add New Template">
+            <AdminDashboardTemplateContainer>
+              <PageTitleSetter title="Test Manager > Add New Template" />
+
               <DashboardSecondaryToolbar>
                 <DashboardSecondaryToolbar.Content>
                   <Typography variant="cardTitle">

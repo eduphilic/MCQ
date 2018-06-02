@@ -23,6 +23,7 @@ import { ReactComponent as ManSvg } from "./man.svg";
 
 import { createPlaceholderFilterButtonProps } from "components/molecules/FilterButton/createPlaceholderFilterButtonProps";
 import { randomNumber } from "placeholder";
+import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 
 interface AdminDashboardProps {
   serviceStatistics: models.ServiceStatistics | null;
@@ -41,7 +42,9 @@ class AdminDashboard extends Component<AdminDashboardProps> {
     const { serviceStatistics } = this.props;
 
     return (
-      <AdminDashboardTemplateContainer titleText="Dashboard">
+      <AdminDashboardTemplateContainer>
+        <PageTitleSetter title="Dashboard" />
+
         {/* Users */}
         <Card>
           <CardHeader

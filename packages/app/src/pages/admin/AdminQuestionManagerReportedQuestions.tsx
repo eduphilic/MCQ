@@ -4,13 +4,13 @@ import { SideSheetButtonMenu } from "components/molecules/SideSheetButtonMenu";
 import { SideSheetFieldGroup } from "components/molecules/SideSheetFieldGroup";
 import { DashboardCard } from "components/organisms/DashboardCard";
 
+import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 export class AdminQuestionManagerReportedQuestions extends Component {
   render() {
     return (
       <AdminDashboardTemplateContainer
-        titleText="Question Manager > Reported Questions"
         sideSheetContents={
           <SideSheetFieldGroup fieldGroupTitle="Questions">
             <SideSheetButtonMenu
@@ -23,6 +23,8 @@ export class AdminQuestionManagerReportedQuestions extends Component {
           </SideSheetFieldGroup>
         }
       >
+        <PageTitleSetter title="Question Manager > Reported Questions" />
+
         <DashboardCard
           title="Reported Questions"
           columnLabels={["Question", "Incorrect Answer", "Incorrect Question"]}

@@ -8,6 +8,7 @@ import {
   DashboardFormDialog,
   DashboardFormDialogFieldConfigs,
 } from "components/organisms/DashboardFormDialog";
+import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 export const AdminPlanManager: SFC<{}> = () => {
@@ -54,10 +55,9 @@ export const AdminPlanManager: SFC<{}> = () => {
   ];
 
   return (
-    <AdminDashboardTemplateContainer
-      titleText="Plan Manager"
-      actionButtonElements={appBarActionButtons}
-    >
+    <AdminDashboardTemplateContainer actionButtonElements={appBarActionButtons}>
+      <PageTitleSetter title="Plan Manager" />
+
       {["Plans"].map(title => (
         <DashboardCard
           key={title}

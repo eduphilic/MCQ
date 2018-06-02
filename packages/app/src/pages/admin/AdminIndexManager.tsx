@@ -5,6 +5,7 @@ import { Typography } from "components/atoms/Typography";
 import { DashboardSecondaryToolbar } from "components/molecules/DashboardSecondaryToolbar";
 import { FormikFileUploadField } from "components/molecules/FormikFileUploadField";
 import { DashboardCard } from "components/organisms/DashboardCard";
+import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 export const AdminIndexManager: SFC<{}> = () => {
@@ -21,7 +22,9 @@ export const AdminIndexManager: SFC<{}> = () => {
   return (
     <TypedFormik initialValues={initialValues} onSubmit={noop}>
       {api => (
-        <AdminDashboardTemplateContainer titleText="Index Manager">
+        <AdminDashboardTemplateContainer>
+          <PageTitleSetter title="Index Manager" />
+
           {/* Hero Background Image Upload Field*/}
           <DashboardSecondaryToolbar>
             <DashboardSecondaryToolbar.Content>

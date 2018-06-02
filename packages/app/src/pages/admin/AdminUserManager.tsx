@@ -20,6 +20,7 @@ import {
   DashboardCardColumnType,
   DashboardCardItem,
 } from "components/organisms/DashboardCard";
+import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 
 export const AdminUserManager: SFC<{}> = () => {
   // tslint:disable-next-line:no-empty
@@ -60,9 +61,10 @@ export const AdminUserManager: SFC<{}> = () => {
 
   return (
     <AdminDashboardTemplateContainer
-      titleText="User Manager"
       sideSheetContents={
         <>
+          <PageTitleSetter title="User Manager" />
+
           <SideSheetFieldGroup fieldGroupTitle="">
             <SideSheetSearchField
               label="Search Users"

@@ -9,6 +9,7 @@ import {
   DashboardFormDialogFieldConfigs,
 } from "components/organisms/DashboardFormDialog";
 
+import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 export const AdminEntryManager: SFC<{}> = () => {
@@ -78,10 +79,9 @@ export const AdminEntryManager: SFC<{}> = () => {
   ];
 
   return (
-    <AdminDashboardTemplateContainer
-      titleText="Entry Manager"
-      actionButtonElements={appBarActionButtons}
-    >
+    <AdminDashboardTemplateContainer actionButtonElements={appBarActionButtons}>
+      <PageTitleSetter title="Entry Manager" />
+
       {["AirForce", "Army", "Navy"].map(title => (
         <DashboardCard
           key={title}
