@@ -11,7 +11,7 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 
 type HomeProps = RouteComponentProps<{}> & {};
 
-export const Home = withRouter<HomeProps>(props => {
+export const LandingHome = withRouter<HomeProps>(props => {
   const testCardNodes: LandingTemplateProps["testCardNodes"] = [];
   for (let i = 0; i < 3; i += 1) {
     const placeholderData = createAttemptCourseCardPlaceholderData(() => {

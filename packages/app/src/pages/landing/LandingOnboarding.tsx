@@ -17,7 +17,7 @@ import { createPlaceholderOnboardingTemplateProps } from "components/templates/O
 import { ExamQuantitySelector } from "components/molecules/ExamQuantitySelector";
 import { createPlaceholderExamQuantitySelectorProps } from "components/molecules/ExamQuantitySelector/createPlaceholderExamQuantitySelectorProps";
 
-export const Step1 = withRouter(props => {
+export const LandingOnboardingStep1 = withRouter(props => {
   const { history } = props;
 
   const onboardingTemplateProps = createPlaceholderOnboardingTemplateProps({
@@ -44,7 +44,7 @@ export const Step1 = withRouter(props => {
   );
 });
 
-export const Step2 = withRouter(props => {
+export const LandingOnboardingStep2 = withRouter(props => {
   const { history } = props;
 
   const onboardingTemplateProps = createPlaceholderOnboardingTemplateProps({
@@ -94,7 +94,7 @@ export const Step2 = withRouter(props => {
   );
 });
 
-export const Step3 = withRouter(props => {
+export const LandingOnboardingStep3 = withRouter(props => {
   const { history } = props;
 
   const onboardingTemplateProps = createPlaceholderOnboardingTemplateProps({
