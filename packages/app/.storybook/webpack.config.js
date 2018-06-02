@@ -28,16 +28,16 @@ module.exports = (baseConfig, env, defaultConfig) => {
           ...createBabelConfig(env),
         },
       },
-      {
-        loader: require.resolve("react-docgen-typescript-loader"),
-        options: {
-          includes: ["components.*\\.tsx$"],
-          // FIXME: Issue in docgen typescript package is erroring with
-          // component since either Babel or Storybook update, needs
-          // investigation.
-          excludes: ["stories\\.tsx$", "TextFieldTooltip"],
-        },
-      },
+      // {
+      //   loader: require.resolve("react-docgen-typescript-loader"),
+      //   options: {
+      //     includes: ["components.*\\.tsx$"],
+      //     // FIXME: Issue in docgen typescript package is erroring with
+      //     // component since either Babel or Storybook update, needs
+      //     // investigation.
+      //     excludes: ["stories\\.tsx$", "TextFieldTooltip"],
+      //   },
+      // },
     ],
   });
 
@@ -59,6 +59,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
     },
     {},
   );
+  alias.components = path.resolve(__dirname, "../src/components");
   config.resolve.alias = alias;
 
   return config;

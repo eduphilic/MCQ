@@ -7,6 +7,7 @@
   ],
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
+    "no-implicit-dependencies": false,
     "member-access": false,
     "interface-name": [true, "never-prefix"],
     "no-submodule-imports": [

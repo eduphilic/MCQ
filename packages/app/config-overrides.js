@@ -1,3 +1,4 @@
+const path = require("path");
 const {
   rewireWebpack: rewireTypescript,
   rewireJest: rewireTypescriptJest,
@@ -35,6 +36,7 @@ module.exports = {
       },
       {},
     );
+    alias.components = path.resolve(__dirname, "src/components");
     rewiredConfig.resolve.alias = {
       ...rewiredConfig.resolve.alias,
       ...alias,
