@@ -8,11 +8,11 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Flag from "@material-ui/icons/Flag";
 import InsertDriveFile from "@material-ui/icons/InsertDriveFile";
 
-import { FormikFileUploadBase } from "components/molecules/FormikFileUploadBase";
-import { ResponsiveToolbarTypographyButton } from "components/molecules/ResponsiveToolbarTypographyButton";
-import { SideSheetButtonMenu } from "components/molecules/SideSheetButtonMenu";
-import { SideSheetFieldGroup } from "components/molecules/SideSheetFieldGroup";
-import { DashboardCard } from "components/organisms/DashboardCard";
+import { DashboardCard } from "components/DashboardCard";
+import { FormikFileUploadBase } from "components/FormikFileUploadBase";
+import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
+import { SideSheetButtonMenu } from "components/SideSheetButtonMenu";
+import { SideSheetFieldGroup } from "components/SideSheetFieldGroup";
 
 import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";

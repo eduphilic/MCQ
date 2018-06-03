@@ -7,12 +7,12 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ImportExport from "@material-ui/icons/ImportExport";
 
-import { Typography } from "components/atoms/Typography";
-import { DashboardSecondaryToolbar } from "components/molecules/DashboardSecondaryToolbar";
-import { DropdownButton } from "components/molecules/DropdownButton";
-import { ResponsiveToolbarTypographyButton } from "components/molecules/ResponsiveToolbarTypographyButton";
-import { TypographyButton } from "components/molecules/TypographyButton";
-import { DashboardCard } from "components/organisms/DashboardCard";
+import { DashboardCard } from "components/DashboardCard";
+import { DashboardSecondaryToolbar } from "components/DashboardSecondaryToolbar";
+import { DropdownButton } from "components/DropdownButton";
+import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
+import { Typography } from "components/Typography";
+import { TypographyButton } from "components/TypographyButton";
 import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 
 interface AdminRevenueManagerState {

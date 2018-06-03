@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import { SideSheetButtonMenu } from "components/molecules/SideSheetButtonMenu";
-import { SideSheetFieldGroup } from "components/molecules/SideSheetFieldGroup";
-import { DashboardCard } from "components/organisms/DashboardCard";
+import { DashboardCard } from "components/DashboardCard";
+import { SideSheetButtonMenu } from "components/SideSheetButtonMenu";
+import { SideSheetFieldGroup } from "components/SideSheetFieldGroup";
 
 import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";

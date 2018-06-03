@@ -11,15 +11,15 @@ import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboard
 // tslint:disable-next-line:import-name
 import profileImage from "./admin-user-manager-placeholder-profile-image.png";
 
-import { ResponsiveToolbarTypographyButton } from "components/molecules/ResponsiveToolbarTypographyButton";
-import { SideSheetButtonMenu } from "components/molecules/SideSheetButtonMenu";
-import { SideSheetFieldGroup } from "components/molecules/SideSheetFieldGroup";
-import { SideSheetSearchField } from "components/molecules/SideSheetSearchField";
 import {
   DashboardCard,
   DashboardCardColumnType,
   DashboardCardItem,
-} from "components/organisms/DashboardCard";
+} from "components/DashboardCard";
+import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
+import { SideSheetButtonMenu } from "components/SideSheetButtonMenu";
+import { SideSheetFieldGroup } from "components/SideSheetFieldGroup";
+import { SideSheetSearchField } from "components/SideSheetSearchField";
 import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 
 export const AdminUserManager: SFC<{}> = () => {

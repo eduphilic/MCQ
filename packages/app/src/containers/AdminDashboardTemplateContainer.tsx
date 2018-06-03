@@ -1,7 +1,7 @@
 import {
   AdminDashboardTemplate,
   AdminDashboardTemplateProps,
-} from "components/templates/AdminDashboardTemplate";
+} from "components/AdminDashboardTemplate";
 import React, { SFC } from "react";
 import { connect } from "react-redux";
 import { actions, RootState } from "store";

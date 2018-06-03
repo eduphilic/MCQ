@@ -11,17 +11,17 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
-import { DashboardTableCell } from "components/atoms/DashboardTableCell";
-import { DashboardTableRow } from "components/atoms/DashboardTableRow";
-import { Typography } from "components/atoms/Typography";
-import { TypographyL10 } from "components/atoms/TypographyL10";
-import { DashboardCardStatsContent } from "components/molecules/DashboardCardStatsContent";
-import { FilterButton } from "components/molecules/FilterButton";
+import { DashboardCardStatsContent } from "components/DashboardCardStatsContent";
+import { DashboardTableCell } from "components/DashboardTableCell";
+import { DashboardTableRow } from "components/DashboardTableRow";
+import { FilterButton } from "components/FilterButton";
+import { Typography } from "components/Typography";
+import { TypographyL10 } from "components/TypographyL10";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 import { ReactComponent as ManSvg } from "./man.svg";
 
-import { createPlaceholderFilterButtonProps } from "components/molecules/FilterButton/createPlaceholderFilterButtonProps";
+import { createPlaceholderFilterButtonProps } from "components/FilterButton/createPlaceholderFilterButtonProps";
 import { randomNumber } from "placeholder";
 import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 

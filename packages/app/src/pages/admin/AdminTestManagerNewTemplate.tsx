@@ -9,15 +9,15 @@ import Grid from "@material-ui/core/Grid";
 import Add from "@material-ui/icons/Add";
 import RemoveCircleOutline from "@material-ui/icons/RemoveCircleOutline";
 
-import { Typography } from "components/atoms/Typography";
-import { DashboardSecondaryToolbar } from "components/molecules/DashboardSecondaryToolbar";
-import { FormikCheckbox } from "components/molecules/FormikCheckbox";
-import { FormikTextField } from "components/molecules/FormikTextField";
-import { FormikTextFieldTypeAhead } from "components/molecules/FormikTextFieldTypeAhead";
-import { ResponsiveToolbarTypographyButton } from "components/molecules/ResponsiveToolbarTypographyButton";
-import { TypographyButton } from "components/molecules/TypographyButton";
-import { TestPreviewDialog } from "components/organisms/TestPreviewDialog";
-import { createPlaceholderTestPreviewFieldsProp } from "components/organisms/TestPreviewDialog/createPlaceholderTestPreviewFieldsProp";
+import { DashboardSecondaryToolbar } from "components/DashboardSecondaryToolbar";
+import { FormikCheckbox } from "components/FormikCheckbox";
+import { FormikTextField } from "components/FormikTextField";
+import { FormikTextFieldTypeAhead } from "components/FormikTextFieldTypeAhead";
+import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
+import { TestPreviewDialog } from "components/TestPreviewDialog";
+import { createPlaceholderTestPreviewFieldsProp } from "components/TestPreviewDialog/createPlaceholderTestPreviewFieldsProp";
+import { Typography } from "components/Typography";
+import { TypographyButton } from "components/TypographyButton";
 
 import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";

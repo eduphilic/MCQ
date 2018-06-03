@@ -5,17 +5,14 @@ import { withRouter } from "react-router-dom";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 
-import {
-  PanelManager,
-  PanelManagerProps,
-} from "components/molecules/PanelManager";
-import { EntrySelect } from "components/organisms/EntrySelect";
-import { createSelectEntryPlaceholderData } from "components/organisms/EntrySelect/createSelectEntryPlaceholderData";
-import { OnboardingTemplate } from "components/templates/OnboardingTemplate";
-import { createPlaceholderOnboardingTemplateProps } from "components/templates/OnboardingTemplate/createPlaceholderOnboardingTemplateProps";
+import { EntrySelect } from "components/EntrySelect";
+import { createSelectEntryPlaceholderData } from "components/EntrySelect/createSelectEntryPlaceholderData";
+import { OnboardingTemplate } from "components/OnboardingTemplate";
+import { createPlaceholderOnboardingTemplateProps } from "components/OnboardingTemplate/createPlaceholderOnboardingTemplateProps";
+import { PanelManager, PanelManagerProps } from "components/PanelManager";
 
-import { ExamQuantitySelector } from "components/molecules/ExamQuantitySelector";
-import { createPlaceholderExamQuantitySelectorProps } from "components/molecules/ExamQuantitySelector/createPlaceholderExamQuantitySelectorProps";
+import { ExamQuantitySelector } from "components/ExamQuantitySelector";
+import { createPlaceholderExamQuantitySelectorProps } from "components/ExamQuantitySelector/createPlaceholderExamQuantitySelectorProps";
 
 export const LandingOnboardingStep1 = withRouter(props => {
   const { history } = props;

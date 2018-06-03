@@ -2,12 +2,12 @@ import React, { SFC } from "react";
 
 import Add from "@material-ui/icons/Add";
 
-import { ResponsiveToolbarTypographyButton } from "components/molecules/ResponsiveToolbarTypographyButton";
-import { DashboardCard } from "components/organisms/DashboardCard";
+import { DashboardCard } from "components/DashboardCard";
 import {
   DashboardFormDialog,
   DashboardFormDialogFieldConfigs,
-} from "components/organisms/DashboardFormDialog";
+} from "components/DashboardFormDialog";
+import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
 
 import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";

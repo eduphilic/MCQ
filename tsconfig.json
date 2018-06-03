@@ -15,7 +15,7 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "components/*": ["./packages/components/src/*"],
+      "components/*": ["./packages/app/src/components/*"],
       "l10n": ["./packages/l10n/src"],
       "placeholder": ["./packages/placeholder/src"],
       "store": ["./packages/store/src"],

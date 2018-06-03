@@ -1,11 +1,11 @@
-import { PageFooter } from "components/atoms/PageFooter";
-import { AttemptCourseCard } from "components/organisms/AttemptCourseCard";
-import { createPlaceholderData as createAttemptCourseCardPlaceholderData } from "components/organisms/AttemptCourseCard/createPlaceholderData";
-import { Hero } from "components/organisms/Hero";
+import { AttemptCourseCard } from "components/AttemptCourseCard";
+import { createPlaceholderData as createAttemptCourseCardPlaceholderData } from "components/AttemptCourseCard/createPlaceholderData";
+import { Hero } from "components/Hero";
 import {
   LandingTemplate,
   LandingTemplateProps,
-} from "components/templates/LandingTemplate";
+} from "components/LandingTemplate";
+import { PageFooter } from "components/PageFooter";
 import React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 

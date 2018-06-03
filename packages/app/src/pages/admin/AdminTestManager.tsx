@@ -7,9 +7,9 @@ import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 import {
   DashboardCard,
   DashboardCardItemColumn,
-} from "components/organisms/DashboardCard";
-import { TestPreviewDialog } from "components/organisms/TestPreviewDialog";
-import { createPlaceholderTestPreviewFieldsProp } from "components/organisms/TestPreviewDialog/createPlaceholderTestPreviewFieldsProp";
+} from "components/DashboardCard";
+import { TestPreviewDialog } from "components/TestPreviewDialog";
+import { createPlaceholderTestPreviewFieldsProp } from "components/TestPreviewDialog/createPlaceholderTestPreviewFieldsProp";
 
 import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";

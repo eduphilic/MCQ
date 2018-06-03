@@ -2,7 +2,7 @@ import React, { ComponentType, SFC } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Requires access to Router.
-import { PersistentScrollPositionProvider } from "components/utils/PersistentScrollPosition";
+import { PersistentScrollPositionProvider } from "components/PersistentScrollPosition";
 
 import * as adminPages from "./admin";
 import { AdminRoute } from "./AdminRoute";
