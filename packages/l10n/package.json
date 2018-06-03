@@ -1,8 +1,0 @@
-{
-  "private": true,
-  "name": "l10n",
-  "version": "1.0.0",
-  "dependencies": {
-    "react-localization": "^1.0.8"
-  }
-}

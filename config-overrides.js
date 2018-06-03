@@ -22,25 +22,7 @@ module.exports = {
       rewiredConfig,
     );
 
-    // Add monorepo path aliases, done because each package has a subdirectory
-    // named "src". Using the settings from tsconfig.json so the settings can be
-    // reused both in the Create React App setup and Storybook.
-    const tsconfigJson = require("../../tsconfig.json");
-    const alias = Object.entries(tsconfigJson.compilerOptions.paths).reduce(
-      (acc, [package, mapping]) => {
-        package = package.replace("/*", "");
-        if (acc[package]) return acc;
-
-        acc[package] = `${package}/src`;
-        return acc;
-      },
-      {},
-    );
-    alias.components = path.resolve(__dirname, "src/components");
-    rewiredConfig.resolve.alias = {
-      ...rewiredConfig.resolve.alias,
-      ...alias,
-    };
+    rewiredConfig.resolve.modules.push(path.join(__dirname, "src"));
 
     return rewiredConfig;
   },

@@ -13,17 +13,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "components/*": ["./packages/app/src/components/*"],
-      "l10n": ["./packages/l10n/src"],
-      "placeholder": ["./packages/placeholder/src"],
-      "store": ["./packages/store/src"],
-      "styled": ["./packages/styled/src"],
-      "theme": ["./packages/theme/src"],
-      "theme/*": ["./packages/theme/src/*"]
-    },
-    "typeRoots": ["./typings", "node_modules/@types"]
+    "baseUrl": "src"
   },
   "exclude": ["node_modules", "**/node_modules/*"]
 }
