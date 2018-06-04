@@ -5,8 +5,7 @@ import { setDefaults as setInfoAddonDefaults } from "@storybook/addon-info";
 import { withKnobs } from "@storybook/addon-knobs";
 
 import { ThemeBaseline, LightTheme } from "theme";
-import { PageTitleProvider } from "components/PageTitleProvider";
-import { PageTitleSetter } from "components/PageTitleSetter";
+import { PageTitleStore, PageTitleSetter } from "stores";
 
 setStorybookOptions({
   // addonPanelInRight: true,
@@ -22,10 +21,10 @@ addDecorator(withKnobs);
 addDecorator(story => (
   <ThemeBaseline>
     <LightTheme>
-      <PageTitleProvider>
+      <PageTitleStore.Provider>
         <PageTitleSetter title="Page Title" />
         {story()}
-      </PageTitleProvider>
+      </PageTitleStore.Provider>
     </LightTheme>
   </ThemeBaseline>
 ));

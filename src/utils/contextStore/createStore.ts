@@ -1,9 +1,17 @@
-import { createContext } from "react";
+import { createContext, SFC } from "react";
 
 import { ActionsType } from "./ActionsType";
 import { createConsumer } from "./createConsumer";
 import { createProvider } from "./createProvider";
+import { createSetter } from "./createSetter";
 
+/**
+ * Creates a store that uses React Context.
+ *
+ * @param initialState Initial store state.
+ * @param actions Action creators to provide state mutation.
+ * @param storeName Optional store name for error messages.
+ */
 export function createStore<State, Actions extends ActionsType<State>>(
   initialState: State,
   actions: Actions,
@@ -22,5 +30,8 @@ export function createStore<State, Actions extends ActionsType<State>>(
   return {
     Provider,
     Consumer,
+    createSetter: createSetter.bind(null, Consumer, storeName) as (
+      field: keyof State,
+    ) => SFC<Pick<State, keyof State>>,
   };
 }

@@ -1,5 +1,7 @@
 import React, { Context, ReactNode, SFC } from "react";
 
+import { createOutsideProviderError } from "./createOutsideProviderError";
+
 /**
  * Creates a context consumer to connect the supplied context store. It throws
  * an error if used outside of the context.
@@ -17,11 +19,7 @@ export const createConsumer = <State, Actions>(
     <context.Consumer>
       {contextStore => {
         if (!contextStore) {
-          throw new Error(
-            `Context consumer used outside of ${
-              storeName ? `${storeName} ` : ""
-            }provider.`,
-          );
+          throw createOutsideProviderError(storeName);
         }
 
         return children(contextStore);

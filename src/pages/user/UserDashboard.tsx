@@ -1,5 +1,5 @@
 import React from "react";
-import { PageTitleSetter } from "../../components/PageTitleSetter";
+import { PageTitleSetter } from "stores";
 
 export const UserDashboard = () => (
   <>

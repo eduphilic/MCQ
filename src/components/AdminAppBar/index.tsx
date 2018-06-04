@@ -8,8 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import Menu from "@material-ui/icons/Menu";
 
 import { LogoutButton, LogoutButtonProps } from "components/LogoutButton";
-import { PageTitleConsumer } from "components/PageTitleConsumer";
 import { DrawerStateConsumer } from "components/ResponsiveDrawerFrame";
+import { PageTitleStore } from "stores";
 
 export interface AdminAppBarProps {
   onLogoutButtonClick: LogoutButtonProps["onClick"];
@@ -53,7 +53,7 @@ export const AdminAppBar: SFC<AdminAppBarProps> = props => {
           </IconButton>
 
           <Hidden smDown implementation="css">
-            <PageTitleConsumer>
+            <PageTitleStore.Consumer>
               {({ title }) => (
                 <Typography
                   variant="title"
@@ -63,7 +63,7 @@ export const AdminAppBar: SFC<AdminAppBarProps> = props => {
                   {title}
                 </Typography>
               )}
-            </PageTitleConsumer>
+            </PageTitleStore.Consumer>
           </Hidden>
           <div style={{ flex: 1 }} />
 

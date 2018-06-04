@@ -7,8 +7,8 @@ import {
   DashboardFormDialog,
   DashboardFormDialogFieldConfigs,
 } from "components/DashboardFormDialog";
-import { PageTitleSetter } from "components/PageTitleSetter";
 import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
+import { PageTitleSetter } from "stores";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 

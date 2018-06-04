@@ -13,12 +13,12 @@ import { DashboardSecondaryToolbar } from "components/DashboardSecondaryToolbar"
 import { FormikCheckbox } from "components/FormikCheckbox";
 import { FormikTextField } from "components/FormikTextField";
 import { FormikTextFieldTypeAhead } from "components/FormikTextFieldTypeAhead";
-import { PageTitleSetter } from "components/PageTitleSetter";
 import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
 import { TestPreviewDialog } from "components/TestPreviewDialog";
 import { createPlaceholderTestPreviewFieldsProp } from "components/TestPreviewDialog/createPlaceholderTestPreviewFieldsProp";
 import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
+import { PageTitleSetter } from "stores";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 

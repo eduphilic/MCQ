@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { AdminLoginTemplate } from "components/AdminLoginTemplate";
 import { AuthenticationErrorSnackbar } from "components/AuthenticationErrorSnackbar";
 import { AuthenticationForm } from "components/AuthenticationForm";
-import { PageTitleSetter } from "components/PageTitleSetter";
+import { PageTitleSetter } from "stores";
 
 interface AdminLoginProps {
   authenticating: boolean;

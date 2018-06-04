@@ -18,6 +18,10 @@ export const createProvider = <State, Actions>(
     state: State = initialState;
     private bindedActions = bindActions.call(this, actions);
 
+    private privateSetState = (update: Partial<State>) => {
+      this.setState(update as Pick<State, keyof State>);
+    };
+
     render() {
       const { children } = this.props;
 
@@ -26,6 +30,7 @@ export const createProvider = <State, Actions>(
           value={{
             ...(this.state as any),
             ...this.bindedActions,
+            privateSetState: this.privateSetState,
           }}
         >
           {children}

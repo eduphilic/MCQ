@@ -4,8 +4,8 @@ import React, { SFC } from "react";
 import { DashboardCard } from "components/DashboardCard";
 import { DashboardSecondaryToolbar } from "components/DashboardSecondaryToolbar";
 import { FormikFileUploadField } from "components/FormikFileUploadField";
-import { PageTitleSetter } from "components/PageTitleSetter";
 import { Typography } from "components/Typography";
+import { PageTitleSetter } from "stores";
 
 import { AdminDashboardTemplateContainer } from "containers/AdminDashboardTemplateContainer";
 

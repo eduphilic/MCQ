@@ -10,10 +10,10 @@ import ImportExport from "@material-ui/icons/ImportExport";
 import { DashboardCard } from "components/DashboardCard";
 import { DashboardSecondaryToolbar } from "components/DashboardSecondaryToolbar";
 import { DropdownButton } from "components/DropdownButton";
-import { PageTitleSetter } from "components/PageTitleSetter";
 import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
 import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
+import { PageTitleSetter } from "stores";
 
 interface AdminRevenueManagerState {
   financialYearDropdownOpen: boolean;

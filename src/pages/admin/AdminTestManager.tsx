@@ -8,9 +8,9 @@ import {
   DashboardCard,
   DashboardCardItemColumn,
 } from "components/DashboardCard";
-import { PageTitleSetter } from "components/PageTitleSetter";
 import { TestPreviewDialog } from "components/TestPreviewDialog";
 import { createPlaceholderTestPreviewFieldsProp } from "components/TestPreviewDialog/createPlaceholderTestPreviewFieldsProp";
+import { PageTitleSetter } from "stores";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 

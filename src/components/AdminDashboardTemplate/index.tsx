@@ -17,7 +17,7 @@ import {
   SideSheetToggleButtonProps,
   SideSheetToggleStateProvider,
 } from "components/SideSheet";
-import { PageTitleConsumer } from "../PageTitleConsumer";
+import { PageTitleStore } from "stores";
 
 export interface AdminDashboardTemplateProps
   extends SideSheetProps,
@@ -74,13 +74,13 @@ export const AdminDashboardTemplate: SFC<
 
   return (
     <SideSheetToggleStateProvider>
-      <PageTitleConsumer>
+      <PageTitleStore.Consumer>
         {({ title }) => (
           <Helmet>
             <title>{title} - JoinUniform</title>
           </Helmet>
         )}
-      </PageTitleConsumer>
+      </PageTitleStore.Consumer>
       <ResponsiveDrawerFrame
         appBarNode={appBarNode}
         drawerContentsNode={drawerContentsNode}
