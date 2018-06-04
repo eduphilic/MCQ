@@ -15,6 +15,7 @@ import { DashboardCardStatsContent } from "components/DashboardCardStatsContent"
 import { DashboardTableCell } from "components/DashboardTableCell";
 import { DashboardTableRow } from "components/DashboardTableRow";
 import { FilterButton } from "components/FilterButton";
+import { PageTitleSetter } from "components/PageTitleSetter";
 import { Typography } from "components/Typography";
 import { TypographyL10 } from "components/TypographyL10";
 
@@ -23,7 +24,6 @@ import { ReactComponent as ManSvg } from "./man.svg";
 
 import { createPlaceholderFilterButtonProps } from "components/FilterButton/createPlaceholderFilterButtonProps";
 import { randomNumber } from "placeholder";
-import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 
 interface AdminDashboardProps {
   serviceStatistics: models.ServiceStatistics | null;

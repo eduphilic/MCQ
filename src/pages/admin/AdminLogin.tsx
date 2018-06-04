@@ -1,13 +1,15 @@
-import Typography from "@material-ui/core/Typography";
-import { AdminLoginTemplate } from "components/AdminLoginTemplate";
-import { AuthenticationErrorSnackbar } from "components/AuthenticationErrorSnackbar";
-import { AuthenticationForm } from "components/AuthenticationForm";
 import strings from "l10n";
 import React, { Component } from "react";
-import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { actions, RootState } from "store";
+
+import Typography from "@material-ui/core/Typography";
+
+import { AdminLoginTemplate } from "components/AdminLoginTemplate";
+import { AuthenticationErrorSnackbar } from "components/AuthenticationErrorSnackbar";
+import { AuthenticationForm } from "components/AuthenticationForm";
+import { PageTitleSetter } from "components/PageTitleSetter";
 
 interface AdminLoginProps {
   authenticating: boolean;
@@ -81,9 +83,8 @@ class AdminLoginBase extends Component<AdminLoginProps> {
 
     return (
       <>
-        <Helmet>
-          <title>Login - JoinUniform</title>
-        </Helmet>
+        <PageTitleSetter title="Login - JoinUniform" />
+
         <AdminLoginTemplate heroNode={heroNode} loginForm={loginForm} />
         {snackBar}
       </>

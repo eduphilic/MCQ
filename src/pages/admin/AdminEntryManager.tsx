@@ -7,9 +7,9 @@ import {
   DashboardFormDialog,
   DashboardFormDialogFieldConfigs,
 } from "components/DashboardFormDialog";
+import { PageTitleSetter } from "components/PageTitleSetter";
 import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
 
-import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 export const AdminEntryManager: SFC<{}> = () => {

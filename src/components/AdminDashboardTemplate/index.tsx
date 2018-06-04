@@ -17,6 +17,7 @@ import {
   SideSheetToggleButtonProps,
   SideSheetToggleStateProvider,
 } from "components/SideSheet";
+import { PageTitleConsumer } from "../PageTitleConsumer";
 
 export interface AdminDashboardTemplateProps
   extends SideSheetProps,
@@ -71,13 +72,15 @@ export const AdminDashboardTemplate: SFC<
     </SideSheet>
   );
 
-  const titleText = "INTEGRATE INTO PAGE TITLE CONTEXT";
-
   return (
     <SideSheetToggleStateProvider>
-      <Helmet>
-        <title>{titleText} - JoinUniform</title>
-      </Helmet>
+      <PageTitleConsumer>
+        {({ title }) => (
+          <Helmet>
+            <title>{title} - JoinUniform</title>
+          </Helmet>
+        )}
+      </PageTitleConsumer>
       <ResponsiveDrawerFrame
         appBarNode={appBarNode}
         drawerContentsNode={drawerContentsNode}

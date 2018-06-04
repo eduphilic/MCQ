@@ -1,8 +1,8 @@
 import React from "react";
 import { hot } from "react-hot-loader";
 
+import { PageTitleProvider } from "components/PageTitleProvider";
 import { LightTheme, ThemeBaseline } from "theme";
-import { PageTitleProvider } from "./components/PageTitleProvider";
 import { SiteMap } from "./pages";
 
 const App = () => (

@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Menu from "@material-ui/icons/Menu";
 
 import { LogoutButton, LogoutButtonProps } from "components/LogoutButton";
+import { PageTitleConsumer } from "components/PageTitleConsumer";
 import { DrawerStateConsumer } from "components/ResponsiveDrawerFrame";
 
 export interface AdminAppBarProps {
@@ -38,8 +39,6 @@ export const AdminAppBar: SFC<AdminAppBarProps> = props => {
     );
   }
 
-  const titleText = "INTEGRATE PAGE TITLE CONTEXT";
-
   return (
     <DrawerStateConsumer>
       {drawerState => (
@@ -54,13 +53,17 @@ export const AdminAppBar: SFC<AdminAppBarProps> = props => {
           </IconButton>
 
           <Hidden smDown implementation="css">
-            <Typography
-              variant="title"
-              color="inherit"
-              style={{ fontWeight: 400 }}
-            >
-              {titleText}
-            </Typography>
+            <PageTitleConsumer>
+              {({ title }) => (
+                <Typography
+                  variant="title"
+                  color="inherit"
+                  style={{ fontWeight: 400 }}
+                >
+                  {title}
+                </Typography>
+              )}
+            </PageTitleConsumer>
           </Hidden>
           <div style={{ flex: 1 }} />
 

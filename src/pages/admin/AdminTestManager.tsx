@@ -8,10 +8,10 @@ import {
   DashboardCard,
   DashboardCardItemColumn,
 } from "components/DashboardCard";
+import { PageTitleSetter } from "components/PageTitleSetter";
 import { TestPreviewDialog } from "components/TestPreviewDialog";
 import { createPlaceholderTestPreviewFieldsProp } from "components/TestPreviewDialog/createPlaceholderTestPreviewFieldsProp";
 
-import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 export const AdminTestManager: SFC<{}> = () => {

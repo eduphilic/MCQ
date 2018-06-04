@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
 import { DashboardCard } from "components/DashboardCard";
+import { PageTitleSetter } from "components/PageTitleSetter/PageTitleSetter";
 import { SideSheetButtonMenu } from "components/SideSheetButtonMenu";
 import { SideSheetFieldGroup } from "components/SideSheetFieldGroup";
 
-import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 export class AdminQuestionManagerReportedQuestions extends Component {

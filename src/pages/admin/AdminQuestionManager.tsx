@@ -10,11 +10,11 @@ import InsertDriveFile from "@material-ui/icons/InsertDriveFile";
 
 import { DashboardCard } from "components/DashboardCard";
 import { FormikFileUploadBase } from "components/FormikFileUploadBase";
+import { PageTitleSetter } from "components/PageTitleSetter";
 import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
 import { SideSheetButtonMenu } from "components/SideSheetButtonMenu";
 import { SideSheetFieldGroup } from "components/SideSheetFieldGroup";
 
-import { PageTitleSetter } from "../../components/PageTitleSetter/PageTitleSetter";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 export const AdminQuestionManager: SFC<{}> = () => {

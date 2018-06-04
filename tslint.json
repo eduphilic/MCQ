@@ -10,13 +10,7 @@
     "no-implicit-dependencies": false,
     "member-access": false,
     "interface-name": [true, "never-prefix"],
-    "no-submodule-imports": [
-      true,
-      "material-ui",
-      "@material-ui/core",
-      "@material-ui/icons",
-      "components"
-    ],
+    "no-submodule-imports": false,
     "import-name": [
       true,
       {

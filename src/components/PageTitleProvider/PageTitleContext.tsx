@@ -1,4 +1,4 @@
-import React, { Component, createContext } from "react";
+import React, { Component, createContext, SFC } from "react";
 import { Helmet } from "react-helmet";
 
 export interface PageTitleApi {
@@ -42,4 +42,16 @@ export class PageTitleProvider extends Component {
   }
 }
 
-export const PageTitleConsumer = PageTitleContext.Consumer;
+export const PageTitleConsumer: SFC<{
+  children: (api: PageTitleApi) => React.ReactNode;
+}> = props => (
+  <PageTitleContext.Consumer>
+    {api => {
+      if (!api) {
+        throw new Error("Used outside of context.");
+      }
+
+      return props.children(api);
+    }}
+  </PageTitleContext.Consumer>
+);
