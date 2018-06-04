@@ -132,6 +132,7 @@ const AppBarContainer = styled.div`
 const StyledDrawer = styled(Drawer)`
   .drawer-paper {
     width: ${drawerWidth}px;
+    background-color: ${({ theme }) => theme.palette.background.default};
   }
 
   ${({ theme }) => theme.breakpoints.up("md")} {

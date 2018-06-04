@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { ResponsiveDrawerFrame } from "components/ResponsiveDrawerFrame";
-import { AdminAppDrawerTheme } from "theme";
+import { UserAppDrawerTheme } from "theme";
 
 // tslint:disable-next-line:no-empty-interface
 export interface UserTemplateProps {}
@@ -18,7 +18,7 @@ export class UserTemplate extends Component<UserTemplateProps> {
       <ResponsiveDrawerFrame
         appBarNode={appBarNode}
         drawerContentsNode={drawerContentsNode}
-        drawerThemeElement={<AdminAppDrawerTheme />}
+        drawerThemeElement={<UserAppDrawerTheme />}
         pageContentsNode={pageContentsNode}
       />
     );
