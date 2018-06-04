@@ -30,10 +30,16 @@ class DevelopmentAdminDashboardSnackbar extends Component<
         action={
           <>
             <Button
+              onClick={() => this.handleButtonClick("/dashboard")}
+              color="secondary"
+            >
+              User
+            </Button>
+            <Button
               onClick={() => this.handleButtonClick("/admin/dashboard")}
               color="secondary"
             >
-              Admin Dashboard
+              Admin
             </Button>
             <Button
               onClick={() => this.handleButtonClick("/storybook")}
