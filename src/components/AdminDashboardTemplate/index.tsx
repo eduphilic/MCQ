@@ -6,9 +6,12 @@ import AppBar from "@material-ui/core/AppBar";
 
 import { AdminAppDrawerTheme } from "theme";
 
-import { AdminAppBar, AdminAppBarProps } from "components/AdminAppBar";
 import { AdminDrawerContents } from "components/AdminDrawerContents";
 import { ContentCenterWrapper } from "components/ContentCenterWrapper";
+import {
+  DashboardAppBar,
+  DashboardAppBarProps,
+} from "components/DashboardAppBar";
 import { ResponsiveDrawerFrame } from "components/ResponsiveDrawerFrame";
 import {
   SideSheet,
@@ -22,7 +25,7 @@ import { PageTitleStore } from "stores";
 export interface AdminDashboardTemplateProps
   extends SideSheetProps,
     SideSheetToggleButtonProps {
-  adminAppBarProps: AdminAppBarProps;
+  dashboardAppBarProps: DashboardAppBarProps;
 }
 
 /**
@@ -32,7 +35,7 @@ export const AdminDashboardTemplate: SFC<
   AdminDashboardTemplateProps
 > = props => {
   const {
-    adminAppBarProps,
+    dashboardAppBarProps,
     children,
     sideSheetTitle,
     sideSheetContents,
@@ -41,9 +44,9 @@ export const AdminDashboardTemplate: SFC<
   } = props;
 
   // Inject side sheet toggle button into app bar action buttons.
-  const adminAppBarPropsWithSideSheetToggleButton: AdminAppBarProps = {
-    ...adminAppBarProps,
-    actionButtonElements: adminAppBarProps.actionButtonElements || [],
+  const adminAppBarPropsWithSideSheetToggleButton: DashboardAppBarProps = {
+    ...dashboardAppBarProps,
+    actionButtonElements: dashboardAppBarProps.actionButtonElements || [],
   };
   adminAppBarPropsWithSideSheetToggleButton.actionButtonElements = [
     ...adminAppBarPropsWithSideSheetToggleButton.actionButtonElements!,
@@ -55,7 +58,7 @@ export const AdminDashboardTemplate: SFC<
 
   const appBarNode = (
     <AppBar color="inherit" position="static">
-      <AdminAppBar {...adminAppBarPropsWithSideSheetToggleButton} />
+      <DashboardAppBar {...adminAppBarPropsWithSideSheetToggleButton} />
     </AppBar>
   );
 

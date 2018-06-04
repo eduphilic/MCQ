@@ -8,18 +8,19 @@ import Add from "@material-ui/icons/Add";
 
 import { DrawerStateProvider } from "components/ResponsiveDrawerFrame";
 import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
-import { AdminAppBar, AdminAppBarProps } from ".";
-import { createPlaceholderAdminAppBarProps } from "./createPlaceholderAdminAppBarProps";
+import { ToolbarProfileMenu } from "components/ToolbarProfileMenu";
+import { DashboardAppBar, DashboardAppBarProps } from ".";
+import { createPlaceholderDashboardAppBarProps } from "./createPlaceholderDashboardAppBarProps";
 
 storiesOf("Components", module).add(
-  "AdminAppBar",
+  "DashboardAppBar",
   withInfo()(() => {
-    const props: AdminAppBarProps = {
-      ...createPlaceholderAdminAppBarProps(),
+    const props: DashboardAppBarProps = {
+      ...createPlaceholderDashboardAppBarProps(),
       onLogoutButtonClick: action("onLogoutClick"),
     };
 
-    const withActionButtonNodesProps: AdminAppBarProps = {
+    const withActionButtonNodesProps: DashboardAppBarProps = {
       ...props,
       actionButtonElements: [
         <ResponsiveToolbarTypographyButton
@@ -36,7 +37,7 @@ storiesOf("Components", module).add(
       <DrawerStateProvider>
         <div style={{ position: "relative", height: 64 }}>
           <AppBar position="absolute" color="inherit">
-            <AdminAppBar {...props} />
+            <DashboardAppBar {...props} />
           </AppBar>
         </div>
 
@@ -44,7 +45,14 @@ storiesOf("Components", module).add(
 
         <div style={{ position: "relative", height: 64 }}>
           <AppBar position="absolute" color="inherit">
-            <AdminAppBar {...withActionButtonNodesProps} />
+            <DashboardAppBar
+              {...withActionButtonNodesProps}
+              logoutButtonElement={
+                <ToolbarProfileMenu
+                  toolbarAvatarProps={{ name: "John Doe", letters: "JD" }}
+                />
+              }
+            />
           </AppBar>
         </div>
       </DrawerStateProvider>

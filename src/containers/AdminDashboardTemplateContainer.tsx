@@ -14,12 +14,12 @@ interface AdminDashboardTemplateContainerOwnProps
       | "sideSheetIconElement"
       | "sideSheetIconTooltipTitle"
     > {
-  actionButtonElements?: AdminDashboardTemplateProps["adminAppBarProps"]["actionButtonElements"];
+  actionButtonElements?: AdminDashboardTemplateProps["dashboardAppBarProps"]["actionButtonElements"];
 }
 
 interface AdminDashboardTemplateContainerProps
   extends AdminDashboardTemplateContainerOwnProps {
-  onLogoutButtonClick: AdminDashboardTemplateProps["adminAppBarProps"]["onLogoutButtonClick"];
+  onLogoutButtonClick: AdminDashboardTemplateProps["dashboardAppBarProps"]["onLogoutButtonClick"];
 }
 
 const AdminDashboardTemplateContainer: SFC<
@@ -32,13 +32,13 @@ const AdminDashboardTemplateContainer: SFC<
     ...rest
   } = props;
 
-  const adminAppBarProps: AdminDashboardTemplateProps["adminAppBarProps"] = {
+  const adminAppBarProps: AdminDashboardTemplateProps["dashboardAppBarProps"] = {
     onLogoutButtonClick,
     actionButtonElements,
   };
 
   return (
-    <AdminDashboardTemplate adminAppBarProps={adminAppBarProps} {...rest}>
+    <AdminDashboardTemplate dashboardAppBarProps={adminAppBarProps} {...rest}>
       {children}
     </AdminDashboardTemplate>
   );

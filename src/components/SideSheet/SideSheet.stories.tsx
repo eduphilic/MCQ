@@ -13,7 +13,7 @@ storiesOf("Components", module).add(
     return (
       <Router>
         <AdminDashboardTemplate
-          adminAppBarProps={{
+          dashboardAppBarProps={{
             // tslint:disable-next-line:no-empty
             onLogoutButtonClick: () => {},
           }}

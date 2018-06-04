@@ -11,22 +11,32 @@ import { LogoutButton, LogoutButtonProps } from "components/LogoutButton";
 import { DrawerStateConsumer } from "components/ResponsiveDrawerFrame";
 import { PageTitleStore } from "stores";
 
-export interface AdminAppBarProps {
-  onLogoutButtonClick: LogoutButtonProps["onClick"];
+export interface DashboardAppBarProps {
+  /**
+   * Called when logout button is clicked.
+   */
+  onLogoutButtonClick?: LogoutButtonProps["onClick"];
 
   /**
    * Additional buttons to place to the left of the logout button.
    */
   actionButtonElements?: ReactElement<any>[];
+
+  /**
+   * Custom element to replace default logout button element. This can be used
+   * to replace the logout button with a profile dropdown control.
+   */
+  logoutButtonElement?: ReactElement<{ onClick?: () => any }>;
 }
 
 /**
- * App bar for admin dashboard. Implements a persistent navigation drawer.
+ * App bar for both admin and user dashboards. Implements a persistent
+ * navigation drawer.
  *
  * The implementation is based on the example here:
  * https://material-ui-next.com/demos/drawers/#persistent-drawer
  */
-export const AdminAppBar: SFC<AdminAppBarProps> = props => {
+export const DashboardAppBar: SFC<DashboardAppBarProps> = props => {
   const {
     onLogoutButtonClick,
     actionButtonElements: outerActionButtonElements,
@@ -38,6 +48,14 @@ export const AdminAppBar: SFC<AdminAppBarProps> = props => {
       (node, index) => (!node.key ? cloneElement(node, { key: index }) : node),
     );
   }
+
+  const logoutButtonElement = props.logoutButtonElement ? (
+    cloneElement(props.logoutButtonElement, {
+      onClick: props.onLogoutButtonClick,
+    })
+  ) : (
+    <LogoutButton dense onClick={onLogoutButtonClick} />
+  );
 
   return (
     <DrawerStateConsumer>
@@ -68,7 +86,7 @@ export const AdminAppBar: SFC<AdminAppBarProps> = props => {
           <div style={{ flex: 1 }} />
 
           {actionButtonNodes}
-          <LogoutButton dense onClick={onLogoutButtonClick} />
+          {logoutButtonElement}
         </StyledToolbar>
       )}
     </DrawerStateConsumer>

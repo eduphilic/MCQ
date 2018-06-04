@@ -20,7 +20,7 @@ export interface ToolbarProfileMenuProps {
   /**
    * Called when the logout menu item is selected.
    */
-  onLogoutClick: () => void;
+  onLogoutClick?: () => void;
 }
 
 interface ToolbarProfileMenuState {
@@ -49,7 +49,7 @@ export class ToolbarProfileMenu extends Component<
   handleItemClick = (item: string) => {
     switch (item) {
       case "logout":
-        this.props.onLogoutClick();
+        if (this.props.onLogoutClick) this.props.onLogoutClick();
         break;
     }
     this.handleClose();
