@@ -17,10 +17,12 @@ module.exports = {
     );
 
     // Add React Hot Reload
-    rewiredConfig = injectBabelPlugin(
-      ["react-hot-loader/babel"],
-      rewiredConfig,
-    );
+    if (env === "development") {
+      rewiredConfig = injectBabelPlugin(
+        ["react-hot-loader/babel"],
+        rewiredConfig,
+      );
+    }
 
     rewiredConfig.resolve.modules.push(path.join(__dirname, "src"));
 

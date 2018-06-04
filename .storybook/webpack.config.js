@@ -36,6 +36,11 @@ module.exports = (baseConfig, env, defaultConfig) => {
       excludes: ["stories\\.tsx$", "TextFieldTooltip"],
     },
   });
+  // Remove thread-loader in production to fix issue with continuos
+  // integration server.
+  if (env === "PRODUCTION") {
+    scriptLoader.use = scriptLoader.use.filter(l => !/thread\-loader/.test(l));
+  }
 
   config.module.rules.unshift(scriptLoader);
   config.resolve = rewiredReactScriptsConfig.resolve;
