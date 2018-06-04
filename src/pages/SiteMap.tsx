@@ -8,6 +8,7 @@ import * as adminPages from "./admin";
 import { AdminRoute } from "./AdminRoute";
 import * as landingPages from "./landing";
 import * as userPages from "./user";
+import { UserRoute } from "./UserRoute";
 
 const pages = { ...adminPages, ...landingPages, ...userPages };
 
@@ -41,7 +42,7 @@ export const SiteMap: SFC<{}> = () => {
   ];
 
   const userPagesNode = userPagesMap.map(([path, component]) => (
-    <Route key={path} path={path} component={component} />
+    <UserRoute key={path} path={path} component={component} />
   ));
 
   return (
