@@ -51,40 +51,40 @@ const dummyApiClient: ApiClient = {
       let response: object;
       let error: string | null = null;
 
-      if (!authenticationToken) {
-        error = `Endpoint ${endpoint} required authentication.`;
-      } else {
-        switch (endpoint) {
-          case "/me":
-            const user: User =
-              authenticationToken === "admin-token"
-                ? {
-                    id: "admin-id",
-                    firstName: "John",
-                    lastName: "Doe",
-                    mobileNumber: "0000",
-                    isAdmin: true,
-                  }
-                : {
-                    id: "user-id",
-                    firstName: "John",
-                    lastName: "Doe",
-                    mobileNumber: "0001",
-                    isAdmin: true,
-                  };
-            response = user;
-            break;
+      // if (!authenticationToken) {
+      //   error = `Endpoint ${endpoint} required authentication.`;
+      // } else {
+      switch (endpoint) {
+        case "/me":
+          const user: User =
+            authenticationToken === "admin-token"
+              ? {
+                  id: "admin-id",
+                  firstName: "John",
+                  lastName: "Doe",
+                  mobileNumber: "0000",
+                  isAdmin: true,
+                }
+              : {
+                  id: "user-id",
+                  firstName: "John",
+                  lastName: "Doe",
+                  mobileNumber: "0001",
+                  isAdmin: true,
+                };
+          response = user;
+          break;
 
-          case "/admin/service_statistics":
-            response = serviceStatistics();
-            break;
+        case "/admin/service_statistics":
+          response = serviceStatistics();
+          break;
 
-          default: {
-            error = `Dummy API Client: Unexpected endpoint: ${endpoint}`;
-            break;
-          }
+        default: {
+          error = `Dummy API Client: Unexpected endpoint: ${endpoint}`;
+          break;
         }
       }
+      // }
 
       // Simulate network latency.
       setTimeout(() => {

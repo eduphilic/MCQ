@@ -30,7 +30,7 @@ class DevelopmentAdminDashboardSnackbar extends Component<
         action={
           <>
             <Button
-              onClick={() => this.handleButtonClick("/admin")}
+              onClick={() => this.handleButtonClick("/admin/dashboard")}
               color="secondary"
             >
               Admin Dashboard
