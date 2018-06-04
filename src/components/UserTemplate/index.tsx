@@ -1,15 +1,16 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
+import { PageTitleStore } from "stores";
 import styled from "styled";
+import { UserAppDrawerTheme } from "theme";
 
 import AppBar from "@material-ui/core/AppBar";
 
 import { ContentCenterWrapper } from "components/ContentCenterWrapper";
 import { DashboardAppBar } from "components/DashboardAppBar";
+import { DrawerContents } from "components/DrawerContents";
 import { ResponsiveDrawerFrame } from "components/ResponsiveDrawerFrame";
 import { ToolbarProfileMenu } from "components/ToolbarProfileMenu";
-import { Helmet } from "react-helmet";
-import { PageTitleStore } from "stores";
-import { UserAppDrawerTheme } from "theme";
 
 // tslint:disable-next-line:no-empty-interface
 export interface UserTemplateProps {}
@@ -17,14 +18,6 @@ export interface UserTemplateProps {}
 export class UserTemplate extends Component<UserTemplateProps> {
   render() {
     const { children } = this.props;
-
-    const drawerContentsNode = <div>Drawer Contents Node</div>;
-
-    const pageContentsNode = (
-      <ContentCenterWrapperWithVerticalMargins>
-        {children}
-      </ContentCenterWrapperWithVerticalMargins>
-    );
 
     const appBarNode = (
       <AppBar color="inherit" position="static">
@@ -36,6 +29,23 @@ export class UserTemplate extends Component<UserTemplateProps> {
           }
         />
       </AppBar>
+    );
+
+    const drawerContentsNode = (
+      <DrawerContents
+        links={[
+          ["userLinkDashboard", "/dashboard"],
+          ["userLinkExamPack", "/exam-pack"],
+          ["userLinkMembership", "/membership"],
+          ["userLinkSettings", "/settings"],
+        ]}
+      />
+    );
+
+    const pageContentsNode = (
+      <ContentCenterWrapperWithVerticalMargins>
+        {children}
+      </ContentCenterWrapperWithVerticalMargins>
     );
 
     return (
