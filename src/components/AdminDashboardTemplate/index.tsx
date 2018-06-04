@@ -6,12 +6,12 @@ import AppBar from "@material-ui/core/AppBar";
 
 import { AdminAppDrawerTheme } from "theme";
 
-import { AdminDrawerContents } from "components/AdminDrawerContents";
 import { ContentCenterWrapper } from "components/ContentCenterWrapper";
 import {
   DashboardAppBar,
   DashboardAppBarProps,
 } from "components/DashboardAppBar";
+import { DrawerContents } from "components/DrawerContents";
 import { ResponsiveDrawerFrame } from "components/ResponsiveDrawerFrame";
 import {
   SideSheet,
@@ -62,7 +62,20 @@ export const AdminDashboardTemplate: SFC<
     </AppBar>
   );
 
-  const drawerContentsNode = <AdminDrawerContents />;
+  const drawerContentsNode = (
+    <DrawerContents
+      links={[
+        ["adminLinkDashboard", "/admin/dashboard"],
+        ["adminLinkEntryManager", "/admin/entry-manager"],
+        ["adminLinkTestManager", "/admin/test-manager"],
+        ["adminLinkIndexManager", "/admin/index-manager"],
+        ["adminLinkPlanManager", "/admin/plan-manager"],
+        ["adminLinkQuestionManager", "/admin/question-manager"],
+        ["adminLinkUserManager", "/admin/user-manager"],
+        ["adminLinkRevenueManager", "/admin/revenue-manager"],
+      ]}
+    />
+  );
 
   const pageContentsNode = (
     <SideSheet

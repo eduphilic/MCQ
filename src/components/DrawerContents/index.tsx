@@ -11,33 +11,28 @@ import { Logo } from "components/Logo";
 
 type Links = [keyof typeof strings, string][];
 
-// Map localization strings to link titles.
-const links: Links = [
-  ["adminLinkDashboard", "dashboard"],
-  ["adminLinkEntryManager", "entry-manager"],
-  ["adminLinkTestManager", "test-manager"],
-  ["adminLinkIndexManager", "index-manager"],
-  ["adminLinkPlanManager", "plan-manager"],
-  ["adminLinkQuestionManager", "question-manager"],
-  ["adminLinkUserManager", "user-manager"],
-  ["adminLinkRevenueManager", "revenue-manager"],
-];
+export interface DrawerContentsProps {
+  /**
+   * An array of: [localizationKey, routerPath].
+   *
+   * The first item is used at the link for the logo image.
+   */
+  links: Links;
+}
 
 /**
- * Contents of the app drawer for the admin dashboard. Contains links to each
- * admin dashboard page.
+ * Contents of the app drawer for the admin and user dashboards. Contains links
+ * to each dashboard page.
  */
-export const AdminDrawerContents: SFC<{}> = () => {
+export const DrawerContents: SFC<DrawerContentsProps> = props => {
+  const { links } = props;
+
   const listLinks = links.map(([title, path]) => (
     <StyledListItem
       key={title}
       button
-      component={props => (
-        <NavLink
-          to={`/admin/${path}`}
-          activeClassName="active"
-          {...props as any}
-        />
+      component={listItemProps => (
+        <NavLink to={path} activeClassName="active" {...listItemProps as any} />
       )}
     >
       <ListItemText>{strings[title]}</ListItemText>
@@ -48,8 +43,8 @@ export const AdminDrawerContents: SFC<{}> = () => {
     <StyledList component="nav">
       <LogoListItem
         button
-        component={props => (
-          <Link to="/admin/dashboard" {...props as any}>
+        component={listItemProps => (
+          <Link to={links[0][1]} {...listItemProps as any}>
             <DrawerLogo />
           </Link>
         )}
