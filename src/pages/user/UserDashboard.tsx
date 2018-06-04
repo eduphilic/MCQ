@@ -3,7 +3,8 @@ import { PageTitleSetter } from "stores";
 
 export const UserDashboard = () => (
   <>
-    <PageTitleSetter title="Test" />
+    <PageTitleSetter title="Dashboard" />
+
     <div>Placeholder</div>
   </>
 );

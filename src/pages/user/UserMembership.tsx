@@ -1,3 +1,10 @@
 import React from "react";
+import { PageTitleSetter } from "stores";
 
-export const UserMembership = () => <div>Placeholder</div>;
+export const UserMembership = () => (
+  <>
+    <PageTitleSetter title="Membership" />
+
+    <div>Placeholder</div>
+  </>
+);

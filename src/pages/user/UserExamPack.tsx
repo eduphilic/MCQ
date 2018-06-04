@@ -1,3 +1,10 @@
 import React from "react";
+import { PageTitleSetter } from "stores";
 
-export const UserExamPack = () => <div>Placeholder</div>;
+export const UserExamPack = () => (
+  <>
+    <PageTitleSetter title="Exam Pack" />
+
+    <div>Placeholder</div>
+  </>
+);
