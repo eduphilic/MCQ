@@ -23,7 +23,7 @@ import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboard
 import { ReactComponent as ManSvg } from "./man.svg";
 
 import { createPlaceholderFilterButtonProps } from "components/FilterButton/createPlaceholderFilterButtonProps";
-import { randomNumber } from "placeholder";
+import { randomNumber } from "utils";
 
 interface AdminDashboardProps {
   serviceStatistics: models.ServiceStatistics | null;
