@@ -14,14 +14,14 @@ export { DrawerStateConsumer, DrawerStateProvider };
 
 export interface ResponsiveDrawerFrameProps extends DrawerProps {
   /**
+   * Page contents node.
+   */
+  children: ReactNode;
+
+  /**
    * AppBar node.
    */
   appBarNode: ReactNode;
-
-  /**
-   * Page contents node.
-   */
-  pageContentsNode: ReactNode;
 
   /**
    * Drawer contents node.
@@ -41,7 +41,7 @@ export interface ResponsiveDrawerFrameProps extends DrawerProps {
 export const ResponsiveDrawerFrame: SFC<ResponsiveDrawerFrameProps> = props => {
   const {
     appBarNode,
-    pageContentsNode,
+    children,
     mobileOpen,
     drawerContentsNode,
     drawerThemeElement,
@@ -89,7 +89,7 @@ export const ResponsiveDrawerFrame: SFC<ResponsiveDrawerFrameProps> = props => {
             <PageContentsContainer>
               <PageContentsAppBarSpacer />
 
-              {pageContentsNode}
+              {children}
             </PageContentsContainer>
           </Wrapper>
         )}

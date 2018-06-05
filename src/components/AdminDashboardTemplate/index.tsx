@@ -1,18 +1,15 @@
 import React, { SFC } from "react";
-import { Helmet } from "react-helmet";
-import styled from "styled";
 
 import AppBar from "@material-ui/core/AppBar";
 
 import { AdminAppDrawerTheme } from "theme";
 
-import { ContentCenterWrapper } from "components/ContentCenterWrapper";
 import {
   DashboardAppBar,
   DashboardAppBarProps,
 } from "components/DashboardAppBar";
+import { DashboardTemplate } from "components/DashboardTemplate";
 import { DrawerContents } from "components/DrawerContents";
-import { ResponsiveDrawerFrame } from "components/ResponsiveDrawerFrame";
 import {
   SideSheet,
   SideSheetProps,
@@ -20,7 +17,6 @@ import {
   SideSheetToggleButtonProps,
   SideSheetToggleStateProvider,
 } from "components/SideSheet";
-import { PageTitleStore } from "stores";
 
 export interface AdminDashboardTemplateProps
   extends SideSheetProps,
@@ -77,38 +73,25 @@ export const AdminDashboardTemplate: SFC<
     />
   );
 
-  const pageContentsNode = (
-    <SideSheet
-      sideSheetTitle={sideSheetTitle}
-      sideSheetContents={sideSheetContents}
-    >
-      <ContentCenterWrapperWithVerticalMargins>
-        {children}
-      </ContentCenterWrapperWithVerticalMargins>
-    </SideSheet>
+  const PageContentsWrapper: SFC<{}> = ({ children: wrapperChildren }) => (
+    <SideSheetToggleStateProvider>
+      <SideSheet
+        sideSheetTitle={sideSheetTitle}
+        sideSheetContents={sideSheetContents}
+      >
+        {wrapperChildren}
+      </SideSheet>
+    </SideSheetToggleStateProvider>
   );
 
   return (
-    <SideSheetToggleStateProvider>
-      <PageTitleStore.Consumer>
-        {({ title }) => (
-          <Helmet>
-            <title>{title} - JoinUniform</title>
-          </Helmet>
-        )}
-      </PageTitleStore.Consumer>
-      <ResponsiveDrawerFrame
-        appBarNode={appBarNode}
-        drawerContentsNode={drawerContentsNode}
-        drawerThemeElement={<AdminAppDrawerTheme />}
-        pageContentsNode={pageContentsNode}
-      />
-    </SideSheetToggleStateProvider>
+    <DashboardTemplate
+      appBarNode={appBarNode}
+      drawerContentsNode={drawerContentsNode}
+      drawerThemeElement={<AdminAppDrawerTheme />}
+      pageContentsWrapperComponent={PageContentsWrapper}
+    >
+      {children}
+    </DashboardTemplate>
   );
 };
-
-const ContentCenterWrapperWithVerticalMargins = styled(ContentCenterWrapper)`
-  > * {
-    margin-bottom: ${({ theme }) => theme.spacing.unit * 3}px;
-  }
-`;

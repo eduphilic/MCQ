@@ -1,15 +1,11 @@
 import React, { Component } from "react";
-import { Helmet } from "react-helmet";
-import { PageTitleStore } from "stores";
-import styled from "styled";
 import { UserAppDrawerTheme } from "theme";
 
 import AppBar from "@material-ui/core/AppBar";
 
-import { ContentCenterWrapper } from "components/ContentCenterWrapper";
 import { DashboardAppBar } from "components/DashboardAppBar";
+import { DashboardTemplate } from "components/DashboardTemplate";
 import { DrawerContents } from "components/DrawerContents";
-import { ResponsiveDrawerFrame } from "components/ResponsiveDrawerFrame";
 import { ToolbarProfileMenu } from "components/ToolbarProfileMenu";
 
 // tslint:disable-next-line:no-empty-interface
@@ -42,34 +38,14 @@ export class UserTemplate extends Component<UserTemplateProps> {
       />
     );
 
-    const pageContentsNode = (
-      <ContentCenterWrapperWithVerticalMargins>
-        {children}
-      </ContentCenterWrapperWithVerticalMargins>
-    );
-
     return (
-      <>
-        <PageTitleStore.Consumer>
-          {({ title }) => (
-            <Helmet>
-              <title>{title} - JoinUniform</title>
-            </Helmet>
-          )}
-        </PageTitleStore.Consumer>
-        <ResponsiveDrawerFrame
-          appBarNode={appBarNode}
-          drawerContentsNode={drawerContentsNode}
-          drawerThemeElement={<UserAppDrawerTheme />}
-          pageContentsNode={pageContentsNode}
-        />
-      </>
+      <DashboardTemplate
+        appBarNode={appBarNode}
+        drawerContentsNode={drawerContentsNode}
+        drawerThemeElement={<UserAppDrawerTheme />}
+      >
+        {children}
+      </DashboardTemplate>
     );
   }
 }
-
-const ContentCenterWrapperWithVerticalMargins = styled(ContentCenterWrapper)`
-  > * {
-    margin-bottom: ${({ theme }) => theme.spacing.unit * 3}px;
-  }
-`;

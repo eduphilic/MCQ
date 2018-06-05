@@ -18,9 +18,10 @@ storiesOf("Components", module).add(
       <ResponsiveDrawerFrame
         mobileOpen={boolean("Mobile Open", false)}
         appBarNode={<Section color="#8989ff">App Bar Node</Section>}
-        pageContentsNode={<Section color="#e46b6b">{pageContents}</Section>}
         drawerContentsNode={<Section color="#54f1b5">Drawer Contents</Section>}
-      />
+      >
+        <Section color="#e46b6b">{pageContents}</Section>
+      </ResponsiveDrawerFrame>
     );
   }),
 );
