@@ -2,11 +2,16 @@ import React, { Component } from "react";
 import { UserAppDrawerTheme } from "theme";
 
 import AppBar from "@material-ui/core/AppBar";
+import Assignment from "@material-ui/icons/Assignment";
+import Dashboard from "@material-ui/icons/Dashboard";
+import Settings from "@material-ui/icons/Settings";
 
 import { DashboardAppBar } from "components/DashboardAppBar";
 import { DashboardTemplate } from "components/DashboardTemplate";
 import { DrawerContents } from "components/DrawerContents";
 import { ToolbarProfileMenu } from "components/ToolbarProfileMenu";
+
+import { AccountCardDetails } from "./AccountCardDetails";
 
 // tslint:disable-next-line:no-empty-interface
 export interface UserTemplateProps {}
@@ -30,10 +35,10 @@ export class UserTemplate extends Component<UserTemplateProps> {
     const drawerContentsNode = (
       <DrawerContents
         links={[
-          ["userLinkDashboard", "/dashboard"],
-          ["userLinkExamPack", "/exam-pack"],
-          ["userLinkMembership", "/membership"],
-          ["userLinkSettings", "/settings"],
+          ["userLinkDashboard", "/dashboard", <Dashboard />],
+          ["userLinkExamPack", "/exam-pack", <Assignment />],
+          ["userLinkMembership", "/membership", <AccountCardDetails />],
+          ["userLinkSettings", "/settings", <Settings />],
         ]}
       />
     );
