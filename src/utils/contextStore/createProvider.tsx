@@ -16,11 +16,27 @@ export const createProvider = <State, Actions>(
 ) => {
   class Provider extends Component<{}, State> {
     state: State = initialState;
+
     private bindedActions = bindActions.call(this, actions);
+
+    /**
+     * Provide a hook to check if the component is still mounted.
+     *
+     * Used in bindActions.ts.
+     */
+    _isMounted = false;
 
     private privateSetState = (update: Partial<State>) => {
       this.setState(update as Pick<State, keyof State>);
     };
+
+    componentDidMount() {
+      this._isMounted = true;
+    }
+
+    componentWillUnmount() {
+      this._isMounted = false;
+    }
 
     render() {
       const { children } = this.props;
