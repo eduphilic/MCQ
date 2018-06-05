@@ -1,2 +1,2 @@
-export { createStore } from "./contextStore";
-export { randomNumber } from "./randomNumber";
+export * from "./contextStore";
+export * from "./randomNumber";
