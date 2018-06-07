@@ -1,6 +1,7 @@
 import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
+import styled from "styled";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -27,15 +28,27 @@ storiesOf("Components", module).add(
 
         <DashboardAppBarIconGroup iconGroupKey="dashboard-app-bar-icon-group-story">
           <>
-            <Button color="inherit">Sign-in</Button>
-            <Button color="inherit">Logout</Button>
+            <ButtonWithRightMargin color="inherit">
+              Sign-in
+            </ButtonWithRightMargin>
+            <ButtonWithRightMargin color="inherit">
+              Logout
+            </ButtonWithRightMargin>
           </>
         </DashboardAppBarIconGroup>
 
         <DashboardAppBarIconGroup iconGroupKey="dashboard-app-bar-icon-group-story-2">
-          <Button color="inherit">Other</Button>
+          <ButtonWithRightMargin color="inherit">Other</ButtonWithRightMargin>
         </DashboardAppBarIconGroup>
       </DashboardAppBarIconStore.Provider>
     );
   }),
 );
+
+const ButtonWithRightMargin = styled(Button)`
+  margin-right: 8px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+`;

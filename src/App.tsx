@@ -1,7 +1,7 @@
 import React from "react";
 import { hot } from "react-hot-loader";
 
-import { PageTitleStore } from "stores";
+import { DashboardAppBarIconStore, PageTitleStore } from "stores";
 import { LightTheme, ThemeBaseline } from "theme";
 import { SiteMap } from "./pages";
 
@@ -9,7 +9,9 @@ const App = () => (
   <ThemeBaseline>
     <LightTheme>
       <PageTitleStore.Provider>
-        <SiteMap />
+        <DashboardAppBarIconStore.Provider>
+          <SiteMap />
+        </DashboardAppBarIconStore.Provider>
       </PageTitleStore.Provider>
     </LightTheme>
   </ThemeBaseline>

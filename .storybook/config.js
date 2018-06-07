@@ -3,9 +3,18 @@ import { configure, addDecorator } from "@storybook/react";
 import { setOptions as setStorybookOptions } from "@storybook/addon-options";
 import { setDefaults as setInfoAddonDefaults } from "@storybook/addon-info";
 import { withKnobs } from "@storybook/addon-knobs";
+import { whyDidYouUpdate } from "why-did-you-update";
 
 import { ThemeBaseline, LightTheme } from "theme";
-import { PageTitleStore, PageTitleSetter } from "stores";
+import {
+  PageTitleStore,
+  PageTitleSetter,
+  DashboardAppBarIconStore,
+} from "stores";
+
+if (process.env.NODE_ENV !== "production") {
+  whyDidYouUpdate(React);
+}
 
 setStorybookOptions({
   // addonPanelInRight: true,
@@ -23,7 +32,9 @@ addDecorator(story => (
     <LightTheme>
       <PageTitleStore.Provider>
         <PageTitleSetter title="Page Title" />
-        {story()}
+        <DashboardAppBarIconStore.Provider>
+          {story()}
+        </DashboardAppBarIconStore.Provider>
       </PageTitleStore.Provider>
     </LightTheme>
   </ThemeBaseline>

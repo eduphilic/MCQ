@@ -1,4 +1,5 @@
 import React, { cloneElement, ReactElement, SFC } from "react";
+import { DashboardAppBarIconStore, PageTitleStore } from "stores";
 import styled from "styled";
 
 import Hidden from "@material-ui/core/Hidden";
@@ -9,7 +10,6 @@ import Menu from "@material-ui/icons/Menu";
 
 import { LogoutButton, LogoutButtonProps } from "components/LogoutButton";
 import { DrawerStateConsumer } from "components/ResponsiveDrawerFrame";
-import { PageTitleStore } from "stores";
 
 export interface DashboardAppBarProps {
   /**
@@ -85,6 +85,9 @@ export const DashboardAppBar: SFC<DashboardAppBarProps> = props => {
           </Hidden>
           <div style={{ flex: 1 }} />
 
+          <DashboardAppBarIconStore.Consumer>
+            {store => store.iconGroups.map(i => i.iconGroupNode)}
+          </DashboardAppBarIconStore.Consumer>
           {actionButtonNodes}
           {logoutButtonElement}
         </StyledToolbar>

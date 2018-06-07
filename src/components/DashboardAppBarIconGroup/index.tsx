@@ -28,6 +28,10 @@ export class DashboardAppBarIconGroup extends Component<{
     return null;
   };
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   componentDidMount() {
     const { children, iconGroupKey } = this.props;
 
@@ -35,7 +39,7 @@ export class DashboardAppBarIconGroup extends Component<{
   }
 
   componentWillUnmount() {
-    if (this.store === null) return;
+    if (!this.store) return;
     this.store.removeIconGroup(this.props.iconGroupKey);
     this.store = null;
   }
