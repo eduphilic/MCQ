@@ -1,4 +1,5 @@
 import React, {
+  ChangeEvent,
   Component,
   ComponentType,
   createRef,
@@ -37,11 +38,38 @@ class DashboardTemplateMobile extends Component<DashboardTemplateMobileProps> {
     return { localizationKey: link[0], routerPath: link[1], icon };
   };
 
+  private handleSwipe = (paneIndex: number) => {
+    const { navigationLinks, history } = this.props;
+    const { routerPath } = this.getLinkValues(navigationLinks[paneIndex]);
+    history.push(routerPath);
+  };
+
+  private getPaneIndexFromRoute = (routerPath?: string) => {
+    const { navigationLinks, history } = this.props;
+
+    const matchPath = routerPath || history.location.pathname;
+
+    const paneIndex = navigationLinks.findIndex(l => l[1] === matchPath);
+    return paneIndex;
+  };
+
+  private handleBottomNavigationChange = (
+    _e: ChangeEvent<{}>,
+    value: string,
+  ) => {
+    const paneIndex = this.getPaneIndexFromRoute(value);
+    this.reactSwipe.current!.slide(
+      paneIndex,
+      250 /* Transition duration time of button ripple animation*/,
+    );
+  };
+
   render() {
     const {
       appBarNode,
       navigationLinks,
       navigationLinkComponentMap,
+      location,
     } = this.props;
 
     const panes: ReactNode[] = [];
@@ -58,7 +86,11 @@ class DashboardTemplateMobile extends Component<DashboardTemplateMobileProps> {
       );
 
       bottomNavigationActions.push(
-        <BottomNavigationAction key={routerPath} icon={icon} />,
+        <BottomNavigationAction
+          key={routerPath}
+          icon={icon}
+          value={routerPath}
+        />,
       );
     });
 
@@ -66,11 +98,23 @@ class DashboardTemplateMobile extends Component<DashboardTemplateMobileProps> {
       <Wrapper>
         {appBarNode}
 
-        <ReactSwipeFlexGrow swipeOptions={{ continuous: false }}>
+        <ReactSwipeFlexGrow
+          innerRef={this.reactSwipe}
+          swipeOptions={{
+            continuous: false,
+            startSlide: this.getPaneIndexFromRoute(),
+            transitionEnd: this.handleSwipe,
+          }}
+        >
           {panes}
         </ReactSwipeFlexGrow>
 
-        <BottomNavigation>{bottomNavigationActions}</BottomNavigation>
+        <BottomNavigation
+          value={location.pathname}
+          onChange={this.handleBottomNavigationChange}
+        >
+          {bottomNavigationActions}
+        </BottomNavigation>
       </Wrapper>
     );
   }

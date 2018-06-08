@@ -1,11 +1,15 @@
 import { storiesOf } from "@storybook/react";
+import createBrowserHistory from "history/createBrowserHistory";
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
 
 import { DashboardTemplateMobile, DashboardTemplateMobileProps } from ".";
 import { generateTemplateProps } from "../UserTemplate/generateTemplateProps";
 
 const stories = storiesOf("Components", module);
+
+const history = createBrowserHistory();
+history.push("/dashboard");
 
 stories.add("DashboardTemplateMobile", () => {
   const navigationLinkComponentMap: DashboardTemplateMobileProps["navigationLinkComponentMap"] = {
@@ -20,12 +24,12 @@ stories.add("DashboardTemplateMobile", () => {
   });
 
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <DashboardTemplateMobile
         appBarNode={appBarNode}
         navigationLinks={navigationLinks}
         navigationLinkComponentMap={navigationLinkComponentMap}
       />
-    </BrowserRouter>
+    </Router>
   );
 });
