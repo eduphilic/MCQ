@@ -1,5 +1,5 @@
 import React, { cloneElement, ReactElement, SFC } from "react";
-import { DashboardAppBarIconStore, PageTitleStore } from "stores";
+import { PageTitleStore } from "stores";
 import styled from "styled";
 
 import Hidden from "@material-ui/core/Hidden";
@@ -85,9 +85,6 @@ export const DashboardAppBar: SFC<DashboardAppBarProps> = props => {
           </Hidden>
           <div style={{ flex: 1 }} />
 
-          <DashboardAppBarIconStore.Consumer>
-            {store => store.iconGroups.map(i => i.iconGroupNode)}
-          </DashboardAppBarIconStore.Consumer>
           {actionButtonNodes}
           {logoutButtonElement}
         </StyledToolbar>
