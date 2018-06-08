@@ -12,7 +12,7 @@ import { DashboardFormDialogFieldConfig } from "./DashboardFormDialogFieldConfig
 export interface DashboardFormDialogFormInputProps<Values extends object> {
   api: FormikProps<Values>;
 
-  fieldKey: keyof Values;
+  fieldKey: Extract<keyof Values, string>;
 
   fieldConfig: DashboardFormDialogFieldConfig;
 

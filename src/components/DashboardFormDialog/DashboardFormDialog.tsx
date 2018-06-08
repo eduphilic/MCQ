@@ -108,17 +108,18 @@ class DashboardFormDialogBase<Values extends object> extends Component<
                 <DialogTitle>{title}</DialogTitle>
 
                 <DialogContent>
-                  {(Object.keys(api.values) as (keyof Values)[]).map(
-                    (key, index) => (
-                      <DashboardFormDialogFormInput
-                        key={key}
-                        api={api}
-                        fieldKey={key}
-                        fieldConfig={fieldConfigs[key]}
-                        autoFocus={index === 0}
-                      />
-                    ),
-                  )}
+                  {(Object.keys(api.values) as (Extract<
+                    keyof Values,
+                    string
+                  >)[]).map((key, index) => (
+                    <DashboardFormDialogFormInput
+                      key={key}
+                      api={api}
+                      fieldKey={key}
+                      fieldConfig={fieldConfigs[key]}
+                      autoFocus={index === 0}
+                    />
+                  ))}
                 </DialogContent>
 
                 <DialogActions>

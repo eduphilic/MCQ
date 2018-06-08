@@ -200,7 +200,7 @@ function singleField<T extends object>(
 function threeColumnFieldRow<T extends object>(
   fields: T,
   titles: string[],
-  fieldNames: (keyof T)[],
+  fieldNames: (Extract<keyof T, string>)[],
 ): ReactNode {
   const labelValuePairs = titles.map((title, index) => (
     <FieldLabelValuePairContainer key={fieldNames[index]}>

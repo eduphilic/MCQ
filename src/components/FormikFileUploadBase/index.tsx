@@ -13,7 +13,7 @@ export interface FormikFileUploadBaseProps<Values extends object> {
   /**
    * Formik field name.
    */
-  name: keyof Values;
+  name: Extract<keyof Values, string>;
 
   /**
    * Formik api passed from its render function.

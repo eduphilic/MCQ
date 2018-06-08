@@ -8,7 +8,7 @@ export interface FormikCheckboxProps<Values extends object> {
   /**
    * Form field name.
    */
-  name: keyof Values;
+  name: Extract<keyof Values, string>;
 
   /**
    * Label text to be displayed to the right of the checkbox.

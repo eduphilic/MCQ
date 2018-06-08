@@ -8,7 +8,7 @@ export interface FormikTextFieldProps<Values extends object>
       TextFieldProps,
       "autoFocus" | "label" | "placeholder" | "fullWidth" | "margin" | "type"
     > {
-  name: keyof Values;
+  name: Extract<keyof Values, string>;
 
   formikApi: FormikProps<Values>;
 }
