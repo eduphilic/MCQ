@@ -13,6 +13,13 @@ import { DrawerStateConsumer } from "components/ResponsiveDrawerFrame";
 
 export interface DashboardAppBarProps {
   /**
+   * Whether to show hamburger button.
+   *
+   * @default true
+   */
+  showHamburgerButton?: boolean;
+
+  /**
    * Called when logout button is clicked.
    */
   onLogoutButtonClick?: LogoutButtonProps["onClick"];
@@ -38,6 +45,7 @@ export interface DashboardAppBarProps {
  */
 export const DashboardAppBar: SFC<DashboardAppBarProps> = props => {
   const {
+    showHamburgerButton = true,
     onLogoutButtonClick,
     actionButtonElements: outerActionButtonElements,
   } = props;
@@ -58,38 +66,40 @@ export const DashboardAppBar: SFC<DashboardAppBarProps> = props => {
   );
 
   return (
-    <DrawerStateConsumer>
-      {drawerState => (
-        <StyledToolbar>
-          <IconButton
-            className="menu-button"
-            color="inherit"
-            aria-label="Menu"
-            onClick={drawerState.toggleDrawer}
-          >
-            <Menu />
-          </IconButton>
-
-          <Hidden smDown implementation="css">
-            <PageTitleStore.Consumer>
-              {({ title }) => (
-                <Typography
-                  variant="title"
-                  color="inherit"
-                  style={{ fontWeight: 400 }}
-                >
-                  {title}
-                </Typography>
-              )}
-            </PageTitleStore.Consumer>
-          </Hidden>
-          <div style={{ flex: 1 }} />
-
-          {actionButtonNodes}
-          {logoutButtonElement}
-        </StyledToolbar>
+    <StyledToolbar>
+      {showHamburgerButton && (
+        <DrawerStateConsumer>
+          {drawerState => (
+            <IconButton
+              className="menu-button"
+              color="inherit"
+              aria-label="Menu"
+              onClick={drawerState.toggleDrawer}
+            >
+              <Menu />
+            </IconButton>
+          )}
+        </DrawerStateConsumer>
       )}
-    </DrawerStateConsumer>
+
+      <Hidden smDown implementation="css">
+        <PageTitleStore.Consumer>
+          {({ title }) => (
+            <Typography
+              variant="title"
+              color="inherit"
+              style={{ fontWeight: 400 }}
+            >
+              {title}
+            </Typography>
+          )}
+        </PageTitleStore.Consumer>
+      </Hidden>
+      <div style={{ flex: 1 }} />
+
+      {actionButtonNodes}
+      {logoutButtonElement}
+    </StyledToolbar>
   );
 };
 

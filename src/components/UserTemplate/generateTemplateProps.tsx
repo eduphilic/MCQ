@@ -19,15 +19,23 @@ interface GeneratedTemplateProps
   navigationLinks: DrawerContentsProps["links"];
 }
 
+const defaultOptions = {
+  showHamburgerButton: true,
+};
+type Options = Partial<typeof defaultOptions>;
+
 /**
  * Generated the props to pass to the DashboardTemplate and
  * DashboardTemplateMobile components. Logic was extracted to make it easier to
  * test the DashboardTemplateMobile component in Storybook.
  */
-export const generateTemplateProps = (): GeneratedTemplateProps => {
+export const generateTemplateProps = (
+  options: Options = defaultOptions,
+): GeneratedTemplateProps => {
   const appBarNode = (
     <AppBar color="inherit" position="static">
       <DashboardAppBar
+        showHamburgerButton={options.showHamburgerButton !== false}
         logoutButtonElement={
           <ToolbarProfileMenu
             toolbarAvatarProps={{ name: "John Doe", letters: "JD" }}
