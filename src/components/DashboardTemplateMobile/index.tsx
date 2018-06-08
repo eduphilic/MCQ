@@ -1,3 +1,4 @@
+import strings from "l10n";
 import React, {
   ChangeEvent,
   Component,
@@ -76,7 +77,7 @@ class DashboardTemplateMobile extends Component<DashboardTemplateMobileProps> {
     const bottomNavigationActions: ReactNode[] = [];
 
     navigationLinks.forEach(l => {
-      const { routerPath, icon } = this.getLinkValues(l);
+      const { routerPath, icon, localizationKey } = this.getLinkValues(l);
       const PaneComponent = navigationLinkComponentMap[routerPath];
 
       panes.push(
@@ -86,10 +87,11 @@ class DashboardTemplateMobile extends Component<DashboardTemplateMobileProps> {
       );
 
       bottomNavigationActions.push(
-        <BottomNavigationAction
+        <BottomNavigationActionNoTextWrap
           key={routerPath}
           icon={icon}
           value={routerPath}
+          label={strings[localizationKey]}
         />,
       );
     });
@@ -110,6 +112,7 @@ class DashboardTemplateMobile extends Component<DashboardTemplateMobileProps> {
         </ReactSwipeFlexGrow>
 
         <BottomNavigation
+          showLabels
           value={location.pathname}
           onChange={this.handleBottomNavigationChange}
         >
@@ -142,4 +145,13 @@ const Pane = styled.div`
   width: 100%;
   height: 100%;
   padding: ${({ theme }) => theme.spacing.unit}px;
+`;
+
+const BottomNavigationActionNoTextWrap = styled(BottomNavigationAction).attrs({
+  classes: { label: "label" },
+})`
+  .label {
+    white-space: nowrap;
+    overflow: hidden;
+  }
 `;
