@@ -6,17 +6,22 @@ import withWidth, {
 } from "@material-ui/core/withWidth";
 
 import { DashboardTemplate } from "components/DashboardTemplate";
-import { DashboardTemplateMobile } from "components/DashboardTemplateMobile";
+import {
+  DashboardTemplateMobile,
+  DashboardTemplateMobileProps,
+} from "components/DashboardTemplateMobile";
 import { DrawerContents } from "components/DrawerContents";
 
 import { generateTemplateProps } from "./generateTemplateProps";
 
 // tslint:disable-next-line:no-empty-interface
-export interface UserTemplateProps extends WithWidthProps {}
+export interface UserTemplateProps extends WithWidthProps {
+  navigationLinkComponentMap: DashboardTemplateMobileProps["navigationLinkComponentMap"];
+}
 
 class UserTemplate extends Component<UserTemplateProps> {
   render() {
-    const { children, width } = this.props;
+    const { children, width, navigationLinkComponentMap } = this.props;
     const {
       appBarNode,
       navigationLinks,
@@ -37,7 +42,11 @@ class UserTemplate extends Component<UserTemplateProps> {
             {children}
           </DashboardTemplate>
         ) : (
-          <DashboardTemplateMobile appBarNode={appBarNode}>
+          <DashboardTemplateMobile
+            appBarNode={appBarNode}
+            navigationLinks={navigationLinks}
+            navigationLinkComponentMap={navigationLinkComponentMap}
+          >
             {children}
           </DashboardTemplateMobile>
         )}

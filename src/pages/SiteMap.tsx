@@ -8,7 +8,7 @@ import * as adminPages from "./admin";
 import { AdminRoute } from "./AdminRoute";
 import * as landingPages from "./landing";
 import * as userPages from "./user";
-import { UserRoute } from "./UserRoute";
+import { UserRoute, UserRouteProps } from "./UserRoute";
 
 const pages = { ...adminPages, ...landingPages, ...userPages };
 
@@ -34,16 +34,23 @@ export const SiteMap: SFC<{}> = () => {
     ),
   );
 
-  const userPagesMap: [string, ComponentType<any>][] = [
-    ["/dashboard", pages.UserDashboard],
-    ["/exam-pack", pages.UserExamPack],
-    ["/membership", pages.UserMembership],
-    ["/settings", pages.UserSettings],
-  ];
+  const userPagesMap: UserRouteProps["navigationLinkComponentMap"] = {
+    "/dashboard": pages.UserDashboard,
+    "/exam-pack": pages.UserExamPack,
+    "/membership": pages.UserMembership,
+    "/settings": pages.UserSettings,
+  };
 
-  const userPagesNode = userPagesMap.map(([path, component]) => (
-    <UserRoute key={path} path={path} component={component} />
-  ));
+  const userPagesNode = Object.entries(userPagesMap).map(
+    ([path, component]) => (
+      <UserRoute
+        key={path}
+        path={path}
+        component={component}
+        navigationLinkComponentMap={userPagesMap}
+      />
+    ),
+  );
 
   return (
     <Router>
