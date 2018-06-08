@@ -91,7 +91,7 @@
     "react-app-rewired": "^2.0.0",
     "react-docgen-typescript-loader": "^2.1.0",
     "rimraf": "^2.6.2",
-    "shx": "^0.2.2",
+    "shx": "^0.3.0",
     "tslint": "^5.10.0",
     "tslint-config-airbnb": "^5.9.2",
     "tslint-config-prettier": "^1.13.0",
