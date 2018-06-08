@@ -14,11 +14,12 @@
     "import-name": [
       true,
       {
+        "downshift": "Downshift",
+        "l10n": "strings",
         "react": "React",
         "reactDom": "ReactDOM",
         "reactLocalization": "LocalizedStrings",
-        "l10n": "strings",
-        "downshift": "Downshift"
+        "reactSwipe": "ReactSwipe"
       }
     ],
     "variable-name": [

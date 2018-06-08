@@ -1,5 +1,6 @@
+import { fromToolbarHeight } from "css";
 import React, { cloneElement, ReactElement, ReactNode, SFC } from "react";
-import styled, { css } from "styled";
+import styled from "styled";
 
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
@@ -100,17 +101,7 @@ export const ResponsiveDrawerFrame: SFC<ResponsiveDrawerFrameProps> = props => {
 
 export const drawerWidth = 240;
 
-export const toolBarHeight = css`
-  height: 56px;
-
-  ${({ theme }) => theme.breakpoints.up("xs")} {
-    height: 48px;
-  }
-
-  ${({ theme }) => theme.breakpoints.up("sm")} {
-    height: 64px;
-  }
-`;
+const toolBarHeight = fromToolbarHeight("height");
 
 const Wrapper = styled.div`
   width: 100%;

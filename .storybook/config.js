@@ -3,7 +3,7 @@ import { configure, addDecorator } from "@storybook/react";
 import { setOptions as setStorybookOptions } from "@storybook/addon-options";
 import { setDefaults as setInfoAddonDefaults } from "@storybook/addon-info";
 import { withKnobs } from "@storybook/addon-knobs";
-import { whyDidYouUpdate } from "why-did-you-update";
+// import { whyDidYouUpdate } from "why-did-you-update";
 
 import { ThemeBaseline, LightTheme } from "theme";
 import {
@@ -12,9 +12,9 @@ import {
   DashboardAppBarIconStore,
 } from "stores";
 
-if (process.env.NODE_ENV !== "production") {
-  whyDidYouUpdate(React);
-}
+// if (process.env.NODE_ENV !== "production") {
+//   whyDidYouUpdate(React);
+// }
 
 setStorybookOptions({
   // addonPanelInRight: true,
