@@ -46,9 +46,7 @@ class UserTemplate extends Component<UserTemplateProps> {
             appBarNode={appBarNode}
             navigationLinks={navigationLinks}
             navigationLinkComponentMap={navigationLinkComponentMap}
-          >
-            {children}
-          </DashboardTemplateMobile>
+          />
         )}
       </>
     );

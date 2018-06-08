@@ -3,6 +3,7 @@ import React, {
   ComponentType,
   createRef,
   ReactElement,
+  ReactNode,
 } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import ReactSwipe from "react-swipe";
@@ -16,7 +17,7 @@ import { DrawerContentsProps } from "../DrawerContents";
 
 // tslint:disable-next-line:no-empty-interface
 export interface DashboardTemplateMobileProps
-  extends Omit<DashboardTemplateProps, "drawerContentsNode">,
+  extends Omit<DashboardTemplateProps, "children" | "drawerContentsNode">,
     RouteComponentProps<{}> {
   navigationLinks: DrawerContentsProps["links"];
   navigationLinkComponentMap: Record<string, ComponentType<any>>;
@@ -37,24 +38,39 @@ class DashboardTemplateMobile extends Component<DashboardTemplateMobileProps> {
   };
 
   render() {
-    const { children, appBarNode, navigationLinks } = this.props;
+    const {
+      appBarNode,
+      navigationLinks,
+      navigationLinkComponentMap,
+    } = this.props;
+
+    const panes: ReactNode[] = [];
+    const bottomNavigationActions: ReactNode[] = [];
+
+    navigationLinks.forEach(l => {
+      const { routerPath, icon } = this.getLinkValues(l);
+      const PaneComponent = navigationLinkComponentMap[routerPath];
+
+      panes.push(
+        <Pane key={routerPath}>
+          <PaneComponent />
+        </Pane>,
+      );
+
+      bottomNavigationActions.push(
+        <BottomNavigationAction key={routerPath} icon={icon} />,
+      );
+    });
 
     return (
       <Wrapper>
         {appBarNode}
 
         <ReactSwipeFlexGrow swipeOptions={{ continuous: false }}>
-          <Pane>{children}</Pane>
-          <Pane>Pane 2</Pane>
-          <Pane>Pane 3</Pane>
+          {panes}
         </ReactSwipeFlexGrow>
 
-        <BottomNavigation>
-          {navigationLinks.map(l => {
-            const { localizationKey, icon } = this.getLinkValues(l);
-            return <BottomNavigationAction key={localizationKey} icon={icon} />;
-          })}
-        </BottomNavigation>
+        <BottomNavigation>{bottomNavigationActions}</BottomNavigation>
       </Wrapper>
     );
   }

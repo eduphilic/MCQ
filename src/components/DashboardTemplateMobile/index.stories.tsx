@@ -9,17 +9,15 @@ const stories = storiesOf("Components", module);
 
 stories.add("DashboardTemplateMobile", () => {
   const navigationLinkComponentMap: DashboardTemplateMobileProps["navigationLinkComponentMap"] = {
-    "/page1": () => <div>Page Contents 1</div>,
-    "/page2": () => <div>Page Contents 2</div>,
-    "/page3": () => <div>Page Contents 3</div>,
-    "/page4": () => <div>Page Contents 4</div>,
+    "/dashboard": () => <div>Page Contents 1</div>,
+    "/exam-pack": () => <div>Page Contents 2</div>,
+    "/membership": () => <div>Page Contents 3</div>,
+    "/settings": () => <div>Page Contents 4</div>,
   };
 
   const { appBarNode, navigationLinks } = generateTemplateProps({
     showHamburgerButton: false,
   });
-
-  const PageComponent = navigationLinkComponentMap["/page1"];
 
   return (
     <BrowserRouter>
@@ -27,9 +25,7 @@ stories.add("DashboardTemplateMobile", () => {
         appBarNode={appBarNode}
         navigationLinks={navigationLinks}
         navigationLinkComponentMap={navigationLinkComponentMap}
-      >
-        <PageComponent />
-      </DashboardTemplateMobile>
+      />
     </BrowserRouter>
   );
 });

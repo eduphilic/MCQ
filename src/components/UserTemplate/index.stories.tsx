@@ -9,20 +9,22 @@ storiesOf("Components", module).add(
   "UserTemplate",
   withInfo({ inline: false, propTablesExclude: [BrowserRouter] })(() => {
     const navigationLinkComponentMap: UserTemplateProps["navigationLinkComponentMap"] = {
-      "/page1": () => <div>Page Contents 1</div>,
-      "/page2": () => <div>Page Contents 2</div>,
-      "/page3": () => <div>Page Contents 3</div>,
-      "/page4": () => <div>Page Contents 4</div>,
+      "/dashboard": () => <div>Page Contents 1</div>,
+      "/exam-pack": () => <div>Page Contents 2</div>,
+      "/membership": () => <div>Page Contents 3</div>,
+      "/settings": () => <div>Page Contents 4</div>,
     };
 
-    const PageComponent = navigationLinkComponentMap["/page1"];
+    const PageComponent = navigationLinkComponentMap["/dashboard"];
 
     return (
-      <BrowserRouter>
-        <UserTemplate navigationLinkComponentMap={navigationLinkComponentMap}>
-          <PageComponent />
-        </UserTemplate>
-      </BrowserRouter>
+      <div style={{ height: "100vh" }}>
+        <BrowserRouter>
+          <UserTemplate navigationLinkComponentMap={navigationLinkComponentMap}>
+            <PageComponent />
+          </UserTemplate>
+        </BrowserRouter>
+      </div>
     );
   }),
 );
