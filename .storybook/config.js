@@ -6,11 +6,7 @@ import { withKnobs } from "@storybook/addon-knobs";
 // import { whyDidYouUpdate } from "why-did-you-update";
 
 import { ThemeBaseline, LightTheme } from "theme";
-import {
-  PageTitleStore,
-  PageTitleSetter,
-  DashboardAppBarIconStore,
-} from "stores";
+import { DashboardAppBarIconStore } from "stores";
 
 // if (process.env.NODE_ENV !== "production") {
 //   whyDidYouUpdate(React);
@@ -30,12 +26,9 @@ addDecorator(withKnobs);
 addDecorator(story => (
   <ThemeBaseline>
     <LightTheme>
-      <PageTitleStore.Provider>
-        <PageTitleSetter title="Page Title" />
-        <DashboardAppBarIconStore.Provider>
-          {story()}
-        </DashboardAppBarIconStore.Provider>
-      </PageTitleStore.Provider>
+      <DashboardAppBarIconStore.Provider>
+        {story()}
+      </DashboardAppBarIconStore.Provider>
     </LightTheme>
   </ThemeBaseline>
 ));

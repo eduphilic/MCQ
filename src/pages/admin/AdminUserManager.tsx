@@ -20,7 +20,6 @@ import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarT
 import { SideSheetButtonMenu } from "components/SideSheetButtonMenu";
 import { SideSheetFieldGroup } from "components/SideSheetFieldGroup";
 import { SideSheetSearchField } from "components/SideSheetSearchField";
-import { PageTitleSetter } from "stores";
 
 export const AdminUserManager: SFC<{}> = () => {
   // tslint:disable-next-line:no-empty
@@ -63,8 +62,6 @@ export const AdminUserManager: SFC<{}> = () => {
     <AdminDashboardTemplateContainer
       sideSheetContents={
         <>
-          <PageTitleSetter title="User Manager" />
-
           <SideSheetFieldGroup fieldGroupTitle="">
             <SideSheetSearchField
               label="Search Users"

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Requires access to Router.
 import { PersistentScrollPositionProvider } from "components/PersistentScrollPosition";
+import { PageTitle } from "./PageTitle";
 
 import { navigationLinksAdmin } from "common/structures/navigationLinksAdmin";
 import { navigationLinksAdminLogin } from "common/structures/navigationLinksAdminLogin";
@@ -46,12 +47,14 @@ export const SiteMap: SFC<{}> = () => {
   return (
     <Router>
       <PersistentScrollPositionProvider>
-        <Switch>
-          {landingPagesNode}
-          {userPagesNode}
-          {adminLoginPageNode}
-          {adminPagesNode}
-        </Switch>
+        <PageTitle>
+          <Switch>
+            {landingPagesNode}
+            {userPagesNode}
+            {adminLoginPageNode}
+            {adminPagesNode}
+          </Switch>
+        </PageTitle>
       </PersistentScrollPositionProvider>
     </Router>
   );

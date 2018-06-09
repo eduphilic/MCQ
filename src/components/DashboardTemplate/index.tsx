@@ -1,6 +1,4 @@
 import React, { ComponentType, SFC } from "react";
-import { Helmet } from "react-helmet";
-import { PageTitleStore } from "stores";
 import styled from "styled";
 
 import { ContentCenterWrapper } from "components/ContentCenterWrapper";
@@ -41,23 +39,13 @@ export const DashboardTemplate: SFC<DashboardTemplateProps> = props => {
   }
 
   return (
-    <>
-      <PageTitleStore.Consumer>
-        {({ title }) => (
-          <Helmet>
-            <title>{title} - JoinUniform</title>
-          </Helmet>
-        )}
-      </PageTitleStore.Consumer>
-
-      <ResponsiveDrawerFrame
-        appBarNode={appBarNode}
-        drawerContentsNode={drawerContentsNode}
-        drawerThemeElement={drawerThemeElement}
-      >
-        {wrappedPageContents}
-      </ResponsiveDrawerFrame>
-    </>
+    <ResponsiveDrawerFrame
+      appBarNode={appBarNode}
+      drawerContentsNode={drawerContentsNode}
+      drawerThemeElement={drawerThemeElement}
+    >
+      {wrappedPageContents}
+    </ResponsiveDrawerFrame>
   );
 };
 

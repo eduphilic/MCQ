@@ -17,13 +17,12 @@ import { DashboardTableRow } from "components/DashboardTableRow";
 import { FilterButton } from "components/FilterButton";
 import { Typography } from "components/Typography";
 import { TypographyL10 } from "components/TypographyL10";
-import { PageTitleSetter } from "stores";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 import { ReactComponent as ManSvg } from "./man.svg";
 
+import { randomNumber } from "common/utils";
 import { createPlaceholderFilterButtonProps } from "components/FilterButton/createPlaceholderFilterButtonProps";
-import { randomNumber } from "utils";
 
 interface AdminDashboardProps {
   serviceStatistics: models.ServiceStatistics | null;
@@ -43,8 +42,6 @@ class AdminDashboard extends Component<AdminDashboardProps> {
 
     return (
       <AdminDashboardTemplateContainer>
-        <PageTitleSetter title="Dashboard" />
-
         {/* Users */}
         <Card>
           <CardHeader

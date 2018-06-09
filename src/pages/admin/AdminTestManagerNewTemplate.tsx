@@ -18,7 +18,6 @@ import { TestPreviewDialog } from "components/TestPreviewDialog";
 import { createPlaceholderTestPreviewFieldsProp } from "components/TestPreviewDialog/createPlaceholderTestPreviewFieldsProp";
 import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
-import { PageTitleSetter } from "stores";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
@@ -74,8 +73,6 @@ export class AdminTestManagerNewTemplate extends Component<
         {api => {
           return (
             <AdminDashboardTemplateContainer>
-              <PageTitleSetter title="Test Manager > Add New Template" />
-
               <DashboardSecondaryToolbar>
                 <DashboardSecondaryToolbar.Content>
                   <Typography variant="cardTitle">

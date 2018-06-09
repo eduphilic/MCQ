@@ -9,7 +9,6 @@ import Typography from "@material-ui/core/Typography";
 import { AdminLoginTemplate } from "components/AdminLoginTemplate";
 import { AuthenticationErrorSnackbar } from "components/AuthenticationErrorSnackbar";
 import { AuthenticationForm } from "components/AuthenticationForm";
-import { PageTitleSetter } from "stores";
 
 interface AdminLoginProps {
   authenticating: boolean;
@@ -83,8 +82,6 @@ class AdminLoginBase extends Component<AdminLoginProps> {
 
     return (
       <>
-        <PageTitleSetter title="Login - JoinUniform" />
-
         <AdminLoginTemplate heroNode={heroNode} loginForm={loginForm} />
         {snackBar}
       </>

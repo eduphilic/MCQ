@@ -5,7 +5,6 @@ import { DashboardCard } from "components/DashboardCard";
 import { DashboardSecondaryToolbar } from "components/DashboardSecondaryToolbar";
 import { FormikFileUploadField } from "components/FormikFileUploadField";
 import { Typography } from "components/Typography";
-import { PageTitleSetter } from "stores";
 
 import { AdminDashboardTemplateContainer } from "containers/AdminDashboardTemplateContainer";
 
@@ -24,8 +23,6 @@ export const AdminIndexManager: SFC<{}> = () => {
     <TypedFormik initialValues={initialValues} onSubmit={noop}>
       {api => (
         <AdminDashboardTemplateContainer>
-          <PageTitleSetter title="Index Manager" />
-
           {/* Hero Background Image Upload Field*/}
           <DashboardSecondaryToolbar>
             <DashboardSecondaryToolbar.Content>

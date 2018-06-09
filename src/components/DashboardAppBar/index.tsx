@@ -1,5 +1,6 @@
+import { getPageTitleFromLocation } from "common/utils";
 import React, { cloneElement, ReactElement, SFC } from "react";
-import { PageTitleStore } from "stores";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled";
 
 import Hidden from "@material-ui/core/Hidden";
@@ -43,12 +44,19 @@ export interface DashboardAppBarProps {
  * The implementation is based on the example here:
  * https://material-ui-next.com/demos/drawers/#persistent-drawer
  */
-export const DashboardAppBar: SFC<DashboardAppBarProps> = props => {
+const DashboardAppBar: SFC<
+  DashboardAppBarProps & RouteComponentProps<{}>
+> = props => {
   const {
     showHamburgerButton = true,
     onLogoutButtonClick,
     actionButtonElements: outerActionButtonElements,
+    location,
   } = props;
+
+  const title = getPageTitleFromLocation(location.pathname, {
+    withoutProductName: true,
+  });
 
   let actionButtonNodes: typeof outerActionButtonElements;
   if (outerActionButtonElements) {
@@ -83,17 +91,9 @@ export const DashboardAppBar: SFC<DashboardAppBarProps> = props => {
       )}
 
       <Hidden smDown implementation="css">
-        <PageTitleStore.Consumer>
-          {({ title }) => (
-            <Typography
-              variant="title"
-              color="inherit"
-              style={{ fontWeight: 400 }}
-            >
-              {title}
-            </Typography>
-          )}
-        </PageTitleStore.Consumer>
+        <Typography variant="title" color="inherit" style={{ fontWeight: 400 }}>
+          {title}
+        </Typography>
       </Hidden>
       <div style={{ flex: 1 }} />
 
@@ -102,6 +102,9 @@ export const DashboardAppBar: SFC<DashboardAppBarProps> = props => {
     </StyledToolbar>
   );
 };
+
+const DashboardAppBarWithRouter = withRouter(DashboardAppBar);
+export { DashboardAppBarWithRouter as DashboardAppBar };
 
 const StyledToolbar = styled(Toolbar)`
   .menu-button {

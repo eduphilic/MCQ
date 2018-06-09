@@ -8,7 +8,6 @@ import {
   DashboardFormDialogFieldConfigs,
 } from "components/DashboardFormDialog";
 import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
-import { PageTitleSetter } from "stores";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
@@ -80,8 +79,6 @@ export const AdminEntryManager: SFC<{}> = () => {
 
   return (
     <AdminDashboardTemplateContainer actionButtonElements={appBarActionButtons}>
-      <PageTitleSetter title="Entry Manager" />
-
       {["AirForce", "Army", "Navy"].map(title => (
         <DashboardCard
           key={title}

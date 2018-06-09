@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { DashboardCard } from "components/DashboardCard";
 import { SideSheetButtonMenu } from "components/SideSheetButtonMenu";
 import { SideSheetFieldGroup } from "components/SideSheetFieldGroup";
-import { PageTitleSetter } from "stores";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
@@ -23,8 +22,6 @@ export class AdminQuestionManagerReportedQuestions extends Component {
           </SideSheetFieldGroup>
         }
       >
-        <PageTitleSetter title="Question Manager > Reported Questions" />
-
         <DashboardCard
           title="Reported Questions"
           columnLabels={["Question", "Incorrect Answer", "Incorrect Question"]}

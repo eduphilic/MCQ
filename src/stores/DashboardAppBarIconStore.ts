@@ -1,5 +1,5 @@
+import { createStore } from "common/utils";
 import { ReactNode } from "react";
-import { createStore } from "utils";
 
 interface IconGroup {
   iconGroupKey: string;
