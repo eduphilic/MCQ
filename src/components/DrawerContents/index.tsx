@@ -1,27 +1,22 @@
 import strings from "l10n";
-import React, { ReactElement, SFC } from "react";
+import React, { SFC } from "react";
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled";
+
+import { NavigationLinks } from "common/types/NavigationLinks";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
-import { Logo } from "components/Logo";
-
-type LinkType =
-  | [keyof typeof strings, string]
-  | [keyof typeof strings, string, ReactElement<any>];
-type Links = LinkType[];
+import { Logo } from "../Logo";
 
 export interface DrawerContentsProps {
   /**
-   * An array of: [localizationKey, routerPath, icon (optional)].
-   *
-   * The first item is used at the link for the logo image.
+   * List of links to include in the drawer.
    */
-  links: Links;
+  links: NavigationLinks;
 }
 
 /**
@@ -31,28 +26,23 @@ export interface DrawerContentsProps {
 export const DrawerContents: SFC<DrawerContentsProps> = props => {
   const { links } = props;
 
-  const listLinks = links.map((link: LinkType) => {
-    const [title, path] = link;
-    let icon: ReactElement<any> | undefined;
-
-    if (link.length === 3) icon = link[2];
+  const listLinks = links.map(link => {
+    const { titleLocalizationKey, to, iconElement } = link;
 
     return (
       <ListItemWithActiveStyle
-        key={title}
+        key={titleLocalizationKey}
         button
         component={listItemProps => (
-          <NavLink
-            to={path}
-            activeClassName="active"
-            {...listItemProps as any}
-          />
+          <NavLink to={to} activeClassName="active" {...listItemProps as any} />
         )}
       >
-        {icon && (
-          <ListItemIconWithActiveStyle>{icon}</ListItemIconWithActiveStyle>
+        {iconElement && (
+          <ListItemIconWithActiveStyle>
+            {iconElement}
+          </ListItemIconWithActiveStyle>
         )}
-        <ListItemText>{strings[title]}</ListItemText>
+        <ListItemText>{strings[titleLocalizationKey]}</ListItemText>
       </ListItemWithActiveStyle>
     );
   });
@@ -62,7 +52,7 @@ export const DrawerContents: SFC<DrawerContentsProps> = props => {
       <LogoListItem
         button
         component={listItemProps => (
-          <Link to={links[0][1]} {...listItemProps as any}>
+          <Link to={links[0].to} {...listItemProps as any}>
             <DrawerLogo />
           </Link>
         )}
