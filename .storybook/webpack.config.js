@@ -1,3 +1,4 @@
+// @ts-nocheck
 const path = require("path");
 
 const reactAppRewired = require("react-app-rewired");
@@ -29,11 +30,11 @@ module.exports = (baseConfig, env, defaultConfig) => {
   scriptLoader.use.push({
     loader: require.resolve("react-docgen-typescript-loader"),
     options: {
-      includes: ["components.*\\.tsx$"],
       // FIXME: Issue in docgen typescript package is erroring with
       // component since either Babel or Storybook update, needs
       // investigation.
       excludes: ["stories\\.tsx$", "TextFieldTooltip"],
+      includes: ["components.*\\.tsx$"],
     },
   });
   // Remove thread-loader in production to fix issue with continuos

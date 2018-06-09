@@ -1645,9 +1645,28 @@
   version "2.0.27"
   resolved "https://registry.yarnpkg.com/@types/swipe/-/swipe-2.0.27.tgz#20316cd9756623ecb36fc2a3a13208aa0a3c2f38"
 
+"@types/tapable@*":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-1.0.2.tgz#e13182e1b69871a422d7863e11a4a6f5b814a4bd"
+
+"@types/uglify-js@*":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@types/uglify-js/-/uglify-js-3.0.2.tgz#f30c75458d18e8ee885c792c04adcb78a13bc286"
+  dependencies:
+    source-map "^0.6.1"
+
 "@types/webpack-env@*":
   version "1.13.6"
   resolved "https://registry.yarnpkg.com/@types/webpack-env/-/webpack-env-1.13.6.tgz#128d1685a7c34d31ed17010fc87d6a12c1de6976"
+
+"@types/webpack@^4.4.0":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.4.0.tgz#c0551b772be241d786c0548812dd75a932f8efb4"
+  dependencies:
+    "@types/node" "*"
+    "@types/tapable" "*"
+    "@types/uglify-js" "*"
+    source-map "^0.6.0"
 
 abab@^1.0.3, abab@^1.0.4:
   version "1.0.4"
@@ -8665,8 +8684,8 @@ preserve@^0.2.0:
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
 prettier@^1.10.2, prettier@^1.13.4:
-  version "1.13.4"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.13.4.tgz#31bbae6990f13b1093187c731766a14036fa72e6"
+  version "1.13.5"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.13.5.tgz#7ae2076998c8edce79d63834e9b7b09fead6bfd0"
 
 pretty-bytes@^4.0.2:
   version "4.0.2"
@@ -9063,8 +9082,8 @@ react-helmet@^5.2.0:
     react-side-effect "^1.1.0"
 
 react-hot-loader@^4.1.2:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.3.0.tgz#3d417797acd6f78bd0291ee225828f5dd78a3829"
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.3.1.tgz#47f59fe09b97ec655e77a1f90819785eda513a86"
   dependencies:
     fast-levenshtein "^2.0.6"
     global "^4.3.0"
@@ -10863,8 +10882,8 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
 typescript@^3.0.0-dev.20180608:
-  version "3.0.0-dev.20180608"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.0.0-dev.20180608.tgz#0143145fd9dc2fc3e0cd166e69faf69f3f2d3354"
+  version "3.0.0-dev.20180609"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.0.0-dev.20180609.tgz#e25f3377eef4bec04207168c9b57d9e94557b4e2"
 
 ua-parser-js@^0.7.9:
   version "0.7.18"
@@ -11369,8 +11388,8 @@ whatwg-mimetype@^2.0.0, whatwg-mimetype@^2.1.0:
   resolved "https://registry.yarnpkg.com/whatwg-mimetype/-/whatwg-mimetype-2.1.0.tgz#f0f21d76cbba72362eb609dbed2a30cd17fcc7d4"
 
 whatwg-url@^6.1.0, whatwg-url@^6.4.0, whatwg-url@^6.4.1:
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-6.4.1.tgz#fdb94b440fd4ad836202c16e9737d511f012fd67"
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-6.5.0.tgz#f2df02bff176fd65070df74ad5ccbb5a199965a8"
   dependencies:
     lodash.sortby "^4.7.0"
     tr46 "^1.0.1"

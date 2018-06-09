@@ -13,7 +13,7 @@ declare module "@storybook/addon-info" {
     options: OptionsCorrected,
   ): (
     storyFn: RenderFunction,
-  ) => (context?: object) => React.ReactElement<WrapStoryProps>;
+  ) => (context?: object) => ReactElement<WrapStoryProps>;
 
   // The props "propTables" and "propTablesExclude" are incorrectly defined.
   // Here we define a new Options interface with corrected definitions.

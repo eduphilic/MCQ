@@ -13,7 +13,16 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "noEmit": true,
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "allowJs": true,
+    "checkJs": true,
+    "maxNodeModuleJsDepth": 0,
+    "typeRoots": ["./typings", "node_modules/@types"]
   },
-  "exclude": ["node_modules", "**/node_modules/*"]
+  "include": [
+    ".storybook/**/*",
+    "src/**/*",
+    "typings/**/*",
+    "config-overrides.js"
+  ]
 }

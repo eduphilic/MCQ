@@ -1,3 +1,4 @@
+/* tslint:disable:object-literal-sort-keys */
 const path = require("path");
 const {
   rewireWebpack: rewireTypescript,
@@ -6,6 +7,11 @@ const {
 const { injectBabelPlugin } = require("react-app-rewired");
 
 module.exports = {
+  /**
+   * @param {import("webpack").Configuration} config
+   * @param {"development" | "production" | "testing"} env
+   * @returns {import("webpack").Configuration}
+   */
   webpack: function(config, env) {
     // Add TypeScript Babel Preset
     let rewiredConfig = rewireTypescript(config);
@@ -24,10 +30,15 @@ module.exports = {
       );
     }
 
+    rewiredConfig.resolve = rewiredConfig.resolve || {};
+    rewiredConfig.resolve.modules = rewiredConfig.resolve.modules || [];
     rewiredConfig.resolve.modules.push(path.join(__dirname, "src"));
 
     return rewiredConfig;
   },
+  /**
+   * @param {object} config
+   */
   jest: function(config) {
     return rewireTypescriptJest(config);
   },
