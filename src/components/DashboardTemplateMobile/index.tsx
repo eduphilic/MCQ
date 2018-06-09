@@ -1,12 +1,6 @@
+import { NavigationLinks } from "common/types/NavigationLinks";
 import strings from "l10n";
-import React, {
-  ChangeEvent,
-  Component,
-  ComponentType,
-  createRef,
-  ReactElement,
-  ReactNode,
-} from "react";
+import React, { ChangeEvent, Component, createRef, ReactNode } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import ReactSwipe from "react-swipe";
 import styled from "styled";
@@ -15,42 +9,34 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 
 import { DashboardTemplateProps } from "../DashboardTemplate";
-import { DrawerContentsProps } from "../DrawerContents";
 
-// tslint:disable-next-line:no-empty-interface
 export interface DashboardTemplateMobileProps
   extends Omit<DashboardTemplateProps, "children" | "drawerContentsNode">,
     RouteComponentProps<{}> {
-  navigationLinks: DrawerContentsProps["links"];
-  navigationLinkComponentMap: Record<string, ComponentType<any>>;
+  /**
+   * Links to render on the bottom navigation.
+   */
+  links: NavigationLinks;
 }
 
+/**
+ * Provides a mobile user dashboard template. It features a bottom navigation
+ * component and allows navigation using left and right swipe gestures.
+ */
 class DashboardTemplateMobile extends Component<DashboardTemplateMobileProps> {
-  // @ts-ignore
   private reactSwipe = createRef<ReactSwipe>();
 
-  private getLinkValues = (
-    link: DashboardTemplateMobileProps["navigationLinks"][0],
-  ) => {
-    // Have to grab third array element due to an issue with the typings.
-    let icon: ReactElement<any> | undefined;
-    if (link.length === 3) icon = link[2];
-
-    return { localizationKey: link[0], routerPath: link[1], icon };
-  };
-
   private handleSwipe = (paneIndex: number) => {
-    const { navigationLinks, history } = this.props;
-    const { routerPath } = this.getLinkValues(navigationLinks[paneIndex]);
-    history.push(routerPath);
+    const { links, history } = this.props;
+    history.push(links[paneIndex].to);
   };
 
   private getPaneIndexFromRoute = (routerPath?: string) => {
-    const { navigationLinks, history } = this.props;
+    const { links, history } = this.props;
 
     const matchPath = routerPath || history.location.pathname;
 
-    const paneIndex = navigationLinks.findIndex(l => l[1] === matchPath);
+    const paneIndex = links.findIndex(l => l.to === matchPath);
     return paneIndex;
   };
 
@@ -66,32 +52,27 @@ class DashboardTemplateMobile extends Component<DashboardTemplateMobileProps> {
   };
 
   render() {
-    const {
-      appBarNode,
-      navigationLinks,
-      navigationLinkComponentMap,
-      location,
-    } = this.props;
+    const { appBarNode, links, location } = this.props;
 
     const panes: ReactNode[] = [];
     const bottomNavigationActions: ReactNode[] = [];
 
-    navigationLinks.forEach(l => {
-      const { routerPath, icon, localizationKey } = this.getLinkValues(l);
-      const PaneComponent = navigationLinkComponentMap[routerPath];
+    links.forEach(l => {
+      const { titleLocalizationKey, to, iconElement } = l;
+      const PaneComponent = l.component;
 
       panes.push(
-        <Pane key={routerPath}>
+        <Pane key={titleLocalizationKey}>
           <PaneComponent />
         </Pane>,
       );
 
       bottomNavigationActions.push(
         <BottomNavigationActionNoTextWrap
-          key={routerPath}
-          icon={icon}
-          value={routerPath}
-          label={strings[localizationKey]}
+          key={titleLocalizationKey}
+          icon={iconElement}
+          value={to}
+          label={strings[titleLocalizationKey]}
         />,
       );
     });
