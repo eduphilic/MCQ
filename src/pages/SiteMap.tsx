@@ -1,56 +1,28 @@
-import React, { ComponentType, SFC } from "react";
+import React, { SFC } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Requires access to Router.
 import { PersistentScrollPositionProvider } from "components/PersistentScrollPosition";
 
-import * as adminPages from "./admin";
+import { navigationLinksAdmin } from "common/structures/navigationLinksAdmin";
+import { navigationLinksUser } from "common/structures/navigationLinksUser";
 import { AdminRoute } from "./AdminRoute";
-import * as landingPages from "./landing";
-import * as userPages from "./user";
-import { UserRoute, UserRouteProps } from "./UserRoute";
-
-const pages = { ...adminPages, ...landingPages, ...userPages };
+import { pages } from "./pages";
+import { UserRoute } from "./UserRoute";
 
 export const SiteMap: SFC<{}> = () => {
-  const adminDashboardPages: [string, ComponentType<any>][] = [
-    ["/admin/dashboard", pages.AdminDashboard],
-    ["/admin/entry-manager", pages.AdminEntryManager],
-    ["/admin/index-manager", pages.AdminIndexManager],
-    ["/admin/plan-manager", pages.AdminPlanManager],
-    [
-      "/admin/question-manager/reported",
-      pages.AdminQuestionManagerReportedQuestions,
-    ],
-    ["/admin/question-manager", pages.AdminQuestionManager],
-    ["/admin/revenue-manager", pages.AdminRevenueManager],
-    ["/admin/test-manager/new", pages.AdminTestManagerNewTemplate],
-    ["/admin/test-manager", pages.AdminTestManager],
-    ["/admin/user-manager", pages.AdminUserManager],
-  ];
-  const adminDashboardPagesNode = adminDashboardPages.map(
-    ([path, component]) => (
-      <AdminRoute key={path} path={path} component={component} />
-    ),
-  );
+  const adminPagesNode = navigationLinksAdmin.map(l => (
+    <AdminRoute key={l.to} path={l.to} component={l.component} />
+  ));
 
-  const userPagesMap: UserRouteProps["navigationLinkComponentMap"] = {
-    "/dashboard": pages.UserDashboard,
-    "/exam-pack": pages.UserExamPack,
-    "/membership": pages.UserMembership,
-    "/settings": pages.UserSettings,
-  };
-
-  const userPagesNode = Object.entries(userPagesMap).map(
-    ([path, component]) => (
-      <UserRoute
-        key={path}
-        path={path}
-        component={component}
-        navigationLinkComponentMap={userPagesMap}
-      />
-    ),
-  );
+  const userPagesNode = navigationLinksUser.map(l => (
+    <UserRoute
+      key={l.to}
+      path={l.to}
+      component={l.component}
+      links={navigationLinksUser}
+    />
+  ));
 
   return (
     <Router>
@@ -69,7 +41,7 @@ export const SiteMap: SFC<{}> = () => {
 
           {/* Start Admin Dashboard Routes */}
           <Route exact path="/admin" component={pages.AdminLogin} />
-          {adminDashboardPagesNode}
+          {adminPagesNode}
         </Switch>
       </PersistentScrollPositionProvider>
     </Router>
