@@ -1,6 +1,13 @@
 import { NavigationLinks } from "common/types/NavigationLinks";
 import strings from "l10n";
-import React, { ChangeEvent, Component, createRef, ReactNode } from "react";
+import React, {
+  ChangeEvent,
+  cloneElement,
+  Component,
+  createRef,
+  ReactElement,
+  ReactNode,
+} from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import ReactSwipe from "react-swipe";
 import styled from "styled";
@@ -17,6 +24,12 @@ export interface DashboardTemplateMobileProps
    * Links to render on the bottom navigation.
    */
   links: NavigationLinks;
+
+  /**
+   * Optional theme element to wrap the bottom navigation component in. This is
+   * used to apply a background color.
+   */
+  themeElement?: ReactElement<any>;
 }
 
 /**
@@ -52,7 +65,10 @@ class DashboardTemplateMobile extends Component<DashboardTemplateMobileProps> {
   };
 
   render() {
-    const { appBarNode, links, location } = this.props;
+    const { appBarNode, links, location, themeElement } = this.props;
+
+    const withTheme = (node: ReactNode) =>
+      themeElement ? cloneElement(themeElement, {}, node) : node;
 
     const panes: ReactNode[] = [];
     const bottomNavigationActions: ReactNode[] = [];
@@ -70,6 +86,7 @@ class DashboardTemplateMobile extends Component<DashboardTemplateMobileProps> {
       bottomNavigationActions.push(
         <BottomNavigationActionNoTextWrap
           key={titleLocalizationKey}
+          className={themeElement ? "with-theme" : undefined}
           icon={iconElement}
           value={to}
           label={strings[titleLocalizationKey]}
@@ -92,13 +109,15 @@ class DashboardTemplateMobile extends Component<DashboardTemplateMobileProps> {
           {panes}
         </ReactSwipeFlexGrow>
 
-        <BottomNavigation
-          showLabels
-          value={location.pathname}
-          onChange={this.handleBottomNavigationChange}
-        >
-          {bottomNavigationActions}
-        </BottomNavigation>
+        {withTheme(
+          <BottomNavigationWithBackgroundColor
+            showLabels
+            value={location.pathname}
+            onChange={this.handleBottomNavigationChange}
+          >
+            {bottomNavigationActions}
+          </BottomNavigationWithBackgroundColor>,
+        )}
       </Wrapper>
     );
   }
@@ -128,9 +147,17 @@ const Pane = styled.div`
   padding: ${({ theme }) => theme.spacing.unit}px;
 `;
 
+const BottomNavigationWithBackgroundColor = styled(BottomNavigation)`
+  background-color: ${({ theme }) => theme.palette.background.default};
+`;
+
 const BottomNavigationActionNoTextWrap = styled(BottomNavigationAction).attrs({
-  classes: { label: "label" },
+  classes: { label: "label", selected: "selected" },
 })`
+  &.with-theme.selected {
+    color: ${({ theme }) => theme.palette.primary.contrastText};
+  }
+
   .label {
     white-space: nowrap;
     overflow: hidden;
