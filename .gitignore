@@ -10,4 +10,3 @@ dist/
 
 # Logs
 *error.log
-lerna-debug.log
