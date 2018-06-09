@@ -1,5 +1,5 @@
 import LocalizedStrings, { LocalizedStringsMethods } from "react-localization";
-import { strings as stringsSettings } from "./strings";
+import { strings as stringsSettings } from "../config/strings";
 
 type StringEntries = typeof stringsSettings["en"];
 
