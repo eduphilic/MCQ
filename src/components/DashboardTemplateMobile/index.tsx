@@ -14,6 +14,7 @@ import styled from "styled";
 
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import Paper from "@material-ui/core/Paper";
 
 import { DashboardTemplateProps } from "../DashboardTemplate";
 
@@ -109,15 +110,17 @@ class DashboardTemplateMobile extends Component<DashboardTemplateMobileProps> {
           {panes}
         </ReactSwipeFlexGrow>
 
-        {withTheme(
-          <BottomNavigationWithBackgroundColor
-            showLabels
-            value={location.pathname}
-            onChange={this.handleBottomNavigationChange}
-          >
-            {bottomNavigationActions}
-          </BottomNavigationWithBackgroundColor>,
-        )}
+        <PaperWithBoxShadowUpperDirection>
+          {withTheme(
+            <BottomNavigationWithBackgroundColor
+              showLabels
+              value={location.pathname}
+              onChange={this.handleBottomNavigationChange}
+            >
+              {bottomNavigationActions}
+            </BottomNavigationWithBackgroundColor>,
+          )}
+        </PaperWithBoxShadowUpperDirection>
       </Wrapper>
     );
   }
@@ -145,6 +148,11 @@ const Pane = styled.div`
   width: 100%;
   height: 100%;
   padding: ${({ theme }) => theme.spacing.unit}px;
+`;
+
+const PaperWithBoxShadowUpperDirection = styled(Paper)`
+  box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.2),
+    0px -2px 2px 0px rgba(0, 0, 0, 0.14), 0px -3px 1px -2px rgba(0, 0, 0, 0.12);
 `;
 
 const BottomNavigationWithBackgroundColor = styled(BottomNavigation)`
