@@ -1,6 +1,6 @@
 import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
-import { navigationLinksAdmin } from "common/structures/NavigationLinksAdmin";
+import { navigationLinksAdmin } from "common/structures/navigationLinksAdmin";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AdminAppDrawerTheme } from "theme";
