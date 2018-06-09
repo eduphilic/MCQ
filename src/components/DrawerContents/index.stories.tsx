@@ -1,5 +1,6 @@
 import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
+import { navigationLinksAdmin } from "common/structures/NavigationLinksAdmin";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AdminAppDrawerTheme } from "theme";
@@ -16,18 +17,7 @@ storiesOf("Components", module).add(
       <Router>
         <AdminAppDrawerTheme>
           <div style={{ width: drawerWidth, backgroundColor: "#424242" }}>
-            <DrawerContents
-              links={[
-                ["adminLinkDashboard", "/admin/dashboard"],
-                ["adminLinkEntryManager", "/admin/entry-manager"],
-                ["adminLinkTestManager", "/admin/test-manager"],
-                ["adminLinkIndexManager", "/admin/index-manager"],
-                ["adminLinkPlanManager", "/admin/plan-manager"],
-                ["adminLinkQuestionManager", "/admin/question-manager"],
-                ["adminLinkUserManager", "/admin/user-manager"],
-                ["adminLinkRevenueManager", "/admin/revenue-manager"],
-              ]}
-            />
+            <DrawerContents links={navigationLinksAdmin} />
           </div>
         </AdminAppDrawerTheme>
       </Router>

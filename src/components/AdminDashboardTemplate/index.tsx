@@ -1,8 +1,7 @@
 import React, { SFC } from "react";
+import { AdminAppDrawerTheme } from "theme";
 
 import AppBar from "@material-ui/core/AppBar";
-
-import { AdminAppDrawerTheme } from "theme";
 
 import {
   DashboardAppBar,
@@ -17,6 +16,8 @@ import {
   SideSheetToggleButtonProps,
   SideSheetToggleStateProvider,
 } from "components/SideSheet";
+
+import { navigationLinksAdmin } from "common/structures/navigationLinksAdmin";
 
 export interface AdminDashboardTemplateProps
   extends SideSheetProps,
@@ -58,20 +59,7 @@ export const AdminDashboardTemplate: SFC<
     </AppBar>
   );
 
-  const drawerContentsNode = (
-    <DrawerContents
-      links={[
-        ["adminLinkDashboard", "/admin/dashboard"],
-        ["adminLinkEntryManager", "/admin/entry-manager"],
-        ["adminLinkTestManager", "/admin/test-manager"],
-        ["adminLinkIndexManager", "/admin/index-manager"],
-        ["adminLinkPlanManager", "/admin/plan-manager"],
-        ["adminLinkQuestionManager", "/admin/question-manager"],
-        ["adminLinkUserManager", "/admin/user-manager"],
-        ["adminLinkRevenueManager", "/admin/revenue-manager"],
-      ]}
-    />
-  );
+  const drawerContentsNode = <DrawerContents links={navigationLinksAdmin} />;
 
   const PageContentsWrapper: SFC<{}> = ({ children: wrapperChildren }) => (
     <SideSheetToggleStateProvider>
