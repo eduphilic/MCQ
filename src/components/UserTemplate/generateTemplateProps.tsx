@@ -2,22 +2,13 @@ import React from "react";
 import { UserAppDrawerTheme } from "theme";
 
 import AppBar from "@material-ui/core/AppBar";
-import Assignment from "@material-ui/icons/Assignment";
-import Dashboard from "@material-ui/icons/Dashboard";
-import Settings from "@material-ui/icons/Settings";
 
-import { DashboardAppBar } from "components/DashboardAppBar";
-import { ToolbarProfileMenu } from "components/ToolbarProfileMenu";
-
+import { DashboardAppBar } from "../DashboardAppBar";
 import { DashboardTemplateProps } from "../DashboardTemplate";
-import { DrawerContentsProps } from "../DrawerContents";
-
-import { AccountCardDetails } from "./AccountCardDetails";
+import { ToolbarProfileMenu } from "../ToolbarProfileMenu";
 
 interface GeneratedTemplateProps
-  extends Omit<DashboardTemplateProps, "children" | "drawerContentsNode"> {
-  navigationLinks: DrawerContentsProps["links"];
-}
+  extends Omit<DashboardTemplateProps, "children" | "drawerContentsNode"> {}
 
 const defaultOptions = {
   showHamburgerButton: true,
@@ -45,18 +36,10 @@ export const generateTemplateProps = (
     </AppBar>
   );
 
-  const navigationLinks: DrawerContentsProps["links"] = [
-    ["userLinkDashboard", "/dashboard", <Dashboard />],
-    ["userLinkExamPack", "/exam-pack", <Assignment />],
-    ["userLinkMembership", "/membership", <AccountCardDetails />],
-    ["userLinkSettings", "/settings", <Settings />],
-  ];
-
   const drawerThemeElement = <UserAppDrawerTheme />;
 
   return {
     appBarNode,
-    navigationLinks,
     drawerThemeElement,
   };
 };
