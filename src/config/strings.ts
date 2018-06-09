@@ -61,17 +61,6 @@ export const strings = {
     adminDashboardCardEntryWiseUsersTitle: "Entry wise Users",
     adminDashboardCardQuestionBankTitle: "Question Bank",
 
-    adminDashboardAppBarTitle: "Admin Dashboard",
-
-    adminLinkDashboard: "Dashboard",
-    adminLinkEntryManager: "Entry Manager",
-    adminLinkQuestionManager: "Question Manager",
-    adminLinkTestManager: "Test Manager",
-    adminLinkUserManager: "User Manager",
-    adminLinkPlanManager: "Plan Manager",
-    adminLinkIndexManager: "Index Manager",
-    adminLinkRevenueManager: "Revenue Manager",
-
     adminLoginFormTitle: "Admin Login",
     adminLoginHeroTextPrimary: "Prepare for INDIAN Defence Examinations",
     adminLoginHeroTextSecondary:
@@ -85,10 +74,29 @@ export const strings = {
     adminPanelUsersSummaryRegistrationsPastWeek: "Registrations Past Week",
     adminPanelUsersSummaryRegistrationsPastMonth: "Registrations Past Month",
 
+    // #region Navigation Link Titles
+    landingLinkHome: "",
+    landingLinkOnboarding1: "Welcome",
+    landingLinkOnboarding2: "Welcome",
+    landingLinkOnboarding3: "Welcome",
+    landingLinkPasswordReset: "Password Reset",
+
+    adminLinkLogin: "Login",
+
+    adminLinkDashboard: "Dashboard",
+    adminLinkEntryManager: "Entry Manager",
+    adminLinkQuestionManager: "Question Manager",
+    adminLinkTestManager: "Test Manager",
+    adminLinkUserManager: "User Manager",
+    adminLinkPlanManager: "Plan Manager",
+    adminLinkIndexManager: "Index Manager",
+    adminLinkRevenueManager: "Revenue Manager",
+
     userLinkDashboard: "Dashboard",
     userLinkExamPack: "Exam Pack",
     userLinkMembership: "Membership",
     userLinkSettings: "Settings",
+    // #endregion
   },
   hi: {},
 };
