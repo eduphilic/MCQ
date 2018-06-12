@@ -52,6 +52,16 @@ export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
     stats,
   } = props;
 
+  const buttonsNode = (
+    <CardContent>
+      {attemptButtonLabel && (
+        <Button color="primary" variant="raised">
+          {attemptButtonLabel}
+        </Button>
+      )}
+    </CardContent>
+  );
+
   return (
     <CardWithBackgroundColor color={color}>
       <VerticalFlexRowsContainer>
@@ -63,15 +73,7 @@ export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
             <Typography>{subtitle}</Typography>
           </TypographyVerticalFlexContainer>
 
-          {!stats && (
-            <CardContent>
-              {attemptButtonLabel && (
-                <Button color="primary" variant="raised">
-                  {attemptButtonLabel}
-                </Button>
-              )}
-            </CardContent>
-          )}
+          {!stats && buttonsNode}
         </FlexRow>
 
         {stats && (
@@ -79,8 +81,15 @@ export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
             <ImageWidthSpacing />
 
             <TypographyVerticalFlexContainer style={{ marginTop: 0 }}>
-              <div>Placeholder</div>
+              {Object.entries(stats).map(([key, value]) => (
+                <StatWrapper key={key}>
+                  <Typography>{key}</Typography>
+                  <Typography>{value}</Typography>
+                </StatWrapper>
+              ))}
             </TypographyVerticalFlexContainer>
+
+            {buttonsNode}
           </FlexRow>
         )}
       </VerticalFlexRowsContainer>
@@ -128,4 +137,17 @@ const TypographyVerticalFlexContainer = styled.div`
   width: 100%;
   height: 64px;
   margin: ${({ theme }) => theme.spacing.unit * 2}px 0;
+`;
+
+const StatWrapper = styled.div`
+  display: flex;
+  width: 100%;
+
+  & > *:first-child {
+    width: 100px;
+  }
+
+  & > *:last-child {
+    flex: 1;
+  }
 `;
