@@ -32,6 +32,11 @@ export interface DashboardTestCardProps {
   color?: "default" | "yellow";
 
   /**
+   * Review button text. If no text is provided, the button is not displayed.
+   */
+  reviewButtonLabel?: string;
+
+  /**
    * Attempt button text. If no text is provided it is not displayed.
    */
   attemptButtonLabel?: string;
@@ -48,17 +53,25 @@ export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
     title,
     subtitle,
     color,
+    reviewButtonLabel,
     attemptButtonLabel,
     stats,
   } = props;
 
   const buttonsNode = (
     <CardContent>
-      {attemptButtonLabel && (
-        <Button color="primary" variant="raised">
-          {attemptButtonLabel}
-        </Button>
-      )}
+      <ButtonsWrapper>
+        {reviewButtonLabel && (
+          <Button color="primary" variant="raised">
+            {reviewButtonLabel}
+          </Button>
+        )}
+        {attemptButtonLabel && (
+          <Button color="primary" variant="raised">
+            {attemptButtonLabel}
+          </Button>
+        )}
+      </ButtonsWrapper>
     </CardContent>
   );
 
@@ -70,7 +83,7 @@ export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
 
           <TypographyVerticalFlexContainer>
             <Typography variant="buttonBold">{title}</Typography>
-            <Typography>{subtitle}</Typography>
+            <Typography variant="cardStatCaption">{subtitle}</Typography>
           </TypographyVerticalFlexContainer>
 
           {!stats && buttonsNode}
@@ -126,11 +139,12 @@ const CardMediaSquareWithMargin = styled(CardMedia)`
 
 const ImageWidthSpacing = styled.div`
   ${logoDimensions};
+  margin-bottom: 0px;
 `;
 
 const TypographyVerticalFlexContainer = styled.div`
   flex: 1;
-  flex-basis: 51%;
+  flex-basis: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -149,5 +163,22 @@ const StatWrapper = styled.div`
 
   & > *:last-child {
     flex: 1;
+  }
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+
+  & > *:not(last-child) {
+    margin-right: ${({ theme }) => theme.spacing.unit}px;
+  }
+
+  ${({ theme }) => theme.breakpoints.up("sm")} {
+    flex-direction: column;
+
+    & > *:not(last-child) {
+      margin-right: 0;
+      margin-bottom: ${({ theme }) => theme.spacing.unit}px;
+    }
   }
 `;
