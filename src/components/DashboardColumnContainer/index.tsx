@@ -18,7 +18,7 @@ export const DashboardColumnContainer: SFC<
   const { children } = props;
 
   const left = children.slice(0, Math.ceil(children.length / 2));
-  const right = children.slice(Math.floor(children.length / 2));
+  const right = children.slice(left.length);
 
   return (
     <FlexWrapper>
