@@ -147,8 +147,15 @@ const ReactSwipeFlexGrow = styled(ReactSwipe)`
 const Pane = styled.div`
   width: 100%;
   height: 100%;
+
+  & > * {
+    margin-top: ${({ theme }) => theme.spacing.unit * 2}px;
+  }
+
+  & > *:last-child {
+    margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+  }
 `;
-// padding: ${({ theme }) => theme.spacing.unit}px;
 
 const PaperWithBoxShadowUpperDirection = styled(Paper)`
   box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.2),
