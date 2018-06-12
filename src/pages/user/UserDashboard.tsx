@@ -1,20 +1,22 @@
 import { entryImages } from "common/structures/entryImages";
 import React, { SFC } from "react";
 
+import { DashboardColumnContainer } from "components/DashboardColumnContainer";
 import {
   DashboardTestCard,
   DashboardTestCardProps,
 } from "components/DashboardTestCard";
 
 export const UserDashboard: SFC<{}> = () => {
+  const freeCard: DashboardTestCardProps = {
+    imageLogoUrl: entryImages.AirForce,
+    title: "Soldier General Duty Free Mock Test",
+    subtitle: "Validity 31st Jan 2019",
+    color: "yellow",
+    attemptButtonLabel: "Revise",
+  };
+
   const cards: DashboardTestCardProps[] = [
-    {
-      imageLogoUrl: entryImages.AirForce,
-      title: "Soldier General Duty Free Mock Test",
-      subtitle: "Validity 31st Jan 2019",
-      color: "yellow",
-      attemptButtonLabel: "Revise",
-    },
     {
       imageLogoUrl: entryImages.AirForce,
       title: "Soldier General Duty 10 Mock Tests Set",
@@ -46,7 +48,24 @@ export const UserDashboard: SFC<{}> = () => {
         Remaining: "18 Tests",
       },
     },
+    {
+      imageLogoUrl: entryImages.AirForce,
+      title: "Soldier General Duty 10 Mock Tests Set",
+      subtitle: "Validity 31st Jan 2019",
+      reviseButtonLabel: "Revise",
+      reviseButtonDisabled: true,
+      attemptButtonLabel: "Attempt",
+      stats: { Attempted: "Nil", Remaining: "10 Tests" },
+    },
   ];
 
-  return <>{cards.map(c => <DashboardTestCard key={c.title} {...c} />)}</>;
+  return (
+    <>
+      <DashboardTestCard {...freeCard} />
+
+      <DashboardColumnContainer>
+        {cards.map(c => <DashboardTestCard key={c.title} {...c} />)}
+      </DashboardColumnContainer>
+    </>
+  );
 };
