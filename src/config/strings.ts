@@ -87,6 +87,7 @@ export const strings = {
     adminLinkEntryManager: "Entry Manager",
     adminLinkQuestionManager: "Question Manager",
     adminLinkTestManager: "Test Manager",
+    adminLinkTestManagerNewTemplate: "",
     adminLinkUserManager: "User Manager",
     adminLinkPlanManager: "Plan Manager",
     adminLinkIndexManager: "Index Manager",
