@@ -32,6 +32,7 @@ const createCustomColorCss = (name: string, color: string) => css`
 `;
 
 const customColors = {
+  primary: createCustomColorCss("primary", "#2f8d2b"),
   orange: createCustomColorCss("orange", "#f2994a"),
   red: createCustomColorCss("red", "#910f0f"),
   blue: createCustomColorCss("blue", "#2d9cdb"),
@@ -39,6 +40,7 @@ const customColors = {
 };
 
 const customColorsCss = css`
+  ${customColors.primary};
   ${customColors.orange};
   ${customColors.red};
   ${customColors.blue};
