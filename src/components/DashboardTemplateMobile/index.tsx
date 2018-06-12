@@ -147,6 +147,7 @@ const ReactSwipeFlexGrow = styled(ReactSwipe)`
 const Pane = styled.div`
   width: 100%;
   height: 100%;
+  overflow-y: auto;
 
   & > * {
     margin-top: ${({ theme }) => theme.spacing.unit * 2}px;
