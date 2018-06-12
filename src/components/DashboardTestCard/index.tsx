@@ -32,14 +32,14 @@ export interface DashboardTestCardProps {
   color?: "default" | "yellow";
 
   /**
-   * Review button text. If no text is provided, the button is not displayed.
+   * Revise button text. If no text is provided, the button is not displayed.
    */
-  reviewButtonLabel?: string;
+  reviseButtonLabel?: string;
 
   /**
-   * Disabled review button.
+   * Disable revise button.
    */
-  reviewButtonDisabled?: boolean;
+  reviseButtonDisabled?: boolean;
 
   /**
    * Attempt button text. If no text is provided it is not displayed.
@@ -58,8 +58,8 @@ export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
     title,
     subtitle,
     color,
-    reviewButtonLabel,
-    reviewButtonDisabled,
+    reviseButtonLabel,
+    reviseButtonDisabled,
     attemptButtonLabel,
     stats,
   } = props;
@@ -67,13 +67,13 @@ export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
   const buttonsNode = (
     <CardContent>
       <ButtonsWrapper>
-        {reviewButtonLabel && (
+        {reviseButtonLabel && (
           <Button
             color="primary"
             variant="raised"
-            disabled={reviewButtonDisabled}
+            disabled={reviseButtonDisabled}
           >
-            {reviewButtonLabel}
+            {reviseButtonLabel}
           </Button>
         )}
         {attemptButtonLabel && (
