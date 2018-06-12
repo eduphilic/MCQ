@@ -160,6 +160,7 @@ const AnnotatedText = styled.span`
 const CardWithBackgroundColor = styled<
   CardProps & Pick<DashboardTestCardProps, "color">
 >(Card as any)`
+  width: 100%;
   background-color: ${({ color }) => (color === "yellow" ? "#ffcb25" : "#fff")};
 `;
 
