@@ -1,4 +1,4 @@
-import React, { SFC } from "react";
+import React, { Fragment, SFC } from "react";
 import styled, { css } from "styled";
 
 import Card, { CardProps } from "@material-ui/core/Card";
@@ -107,7 +107,7 @@ export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
               {Object.entries(stats).map(([key, value]) => (
                 <StatWrapper key={key}>
                   <Typography>{key}</Typography>
-                  <Typography>{value}</Typography>
+                  <Typography>{returnAnnotatedValue(value)}</Typography>
                 </StatWrapper>
               ))}
             </TypographyVerticalFlexContainer>
@@ -119,6 +119,43 @@ export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
     </CardWithBackgroundColor>
   );
 };
+
+/**
+ * Surrounds text in parentheses with an annotation component, which darkens the
+ * text.
+ *
+ * @param value Text value to check for parentheses in.
+ */
+const returnAnnotatedValue = (value: string) => {
+  const startBracketPosition = value.indexOf("(");
+  if (startBracketPosition === -1) return value;
+  const endBracketPosition = value.indexOf(")");
+  if (endBracketPosition < startBracketPosition) return value;
+
+  const beginningText = value.substring(0, startBracketPosition);
+  const annotatedText = value.substring(
+    startBracketPosition,
+    endBracketPosition + 1,
+  );
+  const endingText = value.substring(endBracketPosition + 1);
+
+  const nodes = [];
+  nodes.push(<Fragment key="beginningText">{beginningText}</Fragment>);
+  nodes.push(
+    <span key="annotation" className="annotation">
+      {annotatedText}
+    </span>,
+  );
+  nodes.push(<Fragment key="endingText">{endingText}</Fragment>);
+
+  return <AnnotatedText>{nodes}</AnnotatedText>;
+};
+
+const AnnotatedText = styled.span`
+  .annotation {
+    color: #999696;
+  }
+`;
 
 const CardWithBackgroundColor = styled<
   CardProps & Pick<DashboardTestCardProps, "color">
