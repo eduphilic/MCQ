@@ -1,20 +1,8 @@
-import { Entry } from "components/EntryLogo";
+import { entryImages } from "common/structures/entryImages";
 import { EntrySelectProps } from ".";
 
 export const createSelectEntryPlaceholderData = () => {
-  const options: Entry[] = [
-    "AirForce",
-    "Army",
-    "AssamRifles",
-    "BSF",
-    "CoastGuard",
-    "CRPF",
-    "ITBP",
-    "Navy",
-    "MNS",
-    "Officer",
-    "SSB",
-  ];
+  const options = Object.keys(entryImages) as (keyof typeof entryImages)[];
 
   const entries: EntrySelectProps["entries"] = options.map(o => ({
     icon: o,

@@ -1,11 +1,11 @@
 import Typography from "@material-ui/core/Typography";
-import { Entry, EntryLogo } from "components/EntryLogo";
+import { EntryLogo, EntryLogoProps } from "components/EntryLogo";
 import React, { SFC } from "react";
 import styled from "styled";
 
 export interface AttemptCourseCardHeaderProps {
   /** Entry (military branch) of service to use for image. */
-  entry: Entry;
+  entry: EntryLogoProps["entry"];
 
   /** Label text to use under service branch logo. */
   label: string;
