@@ -43,9 +43,14 @@ class PersistentScrollPositionProviderBase extends Component<
     }
 
     // Restore scroll position if available or scroll to top.
-    const previousScrollPosition = sessionStorage.getItem(location.pathname);
-    if (previousScrollPosition) {
-      window.scrollTo(JSON.parse(previousScrollPosition));
+    const previousScrollPositionString = sessionStorage.getItem(
+      location.pathname,
+    );
+    if (previousScrollPositionString) {
+      const { x, y }: { x: number; y: number } = JSON.parse(
+        previousScrollPositionString,
+      );
+      window.scrollTo(x, y);
     } else {
       window.scrollTo(0, 0);
     }
