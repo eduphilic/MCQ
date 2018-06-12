@@ -26,6 +26,16 @@ module.exports = (baseConfig, env, defaultConfig) => {
     scriptLoaderMatcher,
   );
 
+  // Use a different cache directory than that of Create React App so they don't
+  // overwrite each other's caches.
+  const babelLoader = scriptLoader.use.find(
+    l => l.loader && l.loader.includes("babel"),
+  );
+  babelLoader.options.cacheDirectory = path.resolve(
+    __dirname,
+    "../node_modules/.cache/babel-loader-storybook",
+  );
+
   // Add loader to add documentation for component props.
   scriptLoader.use.push({
     loader: require.resolve("react-docgen-typescript-loader"),
