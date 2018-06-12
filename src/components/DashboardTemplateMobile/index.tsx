@@ -171,6 +171,10 @@ const BottomNavigationWithBackgroundColor = styled(BottomNavigation)`
 const BottomNavigationActionNoTextWrap = styled(BottomNavigationAction).attrs({
   classes: { label: "label", selected: "selected" },
 })`
+  &.with-theme {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
   &.with-theme.selected {
     color: ${({ theme }) => theme.palette.primary.contrastText};
   }
