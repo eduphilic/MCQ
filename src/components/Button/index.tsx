@@ -69,6 +69,15 @@ const ButtonBase = styled(MuiButton)`
 
   /* Extended Colors */
   ${customColorsCss};
+
+  &:disabled {
+    color: rgba(0, 0, 0, 0.26) !important;
+    background-color: transparent !important;
+  }
+
+  &.raised:disabled {
+    background-color: rgba(0, 0, 0, 0.12) !important;
+  }
 `;
 
 export interface ButtonProps extends Omit<MuiButtonProps, "color"> {
