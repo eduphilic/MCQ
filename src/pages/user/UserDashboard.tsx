@@ -20,6 +20,7 @@ export const UserDashboard: SFC<{}> = () => {
       title: "Soldier General Duty 10 Mock Tests Set",
       subtitle: "Validity 31st Jan 2019",
       reviewButtonLabel: "Review",
+      reviewButtonDisabled: true,
       attemptButtonLabel: "Attempt",
       stats: { Attempted: "Nil", Remaining: "10 Tests" },
     },

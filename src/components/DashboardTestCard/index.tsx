@@ -37,6 +37,11 @@ export interface DashboardTestCardProps {
   reviewButtonLabel?: string;
 
   /**
+   * Disabled review button.
+   */
+  reviewButtonDisabled?: boolean;
+
+  /**
    * Attempt button text. If no text is provided it is not displayed.
    */
   attemptButtonLabel?: string;
@@ -54,6 +59,7 @@ export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
     subtitle,
     color,
     reviewButtonLabel,
+    reviewButtonDisabled,
     attemptButtonLabel,
     stats,
   } = props;
@@ -62,7 +68,11 @@ export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
     <CardContent>
       <ButtonsWrapper>
         {reviewButtonLabel && (
-          <Button color="primary" variant="raised">
+          <Button
+            color="primary"
+            variant="raised"
+            disabled={reviewButtonDisabled}
+          >
             {reviewButtonLabel}
           </Button>
         )}
