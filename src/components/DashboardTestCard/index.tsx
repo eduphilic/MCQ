@@ -1,5 +1,5 @@
 import React, { SFC } from "react";
-import styled from "styled";
+import styled, { css } from "styled";
 
 import Card, { CardProps } from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -35,43 +35,88 @@ export interface DashboardTestCardProps {
    * Attempt button text. If no text is provided it is not displayed.
    */
   attemptButtonLabel?: string;
+
+  /**
+   * Rows of key value pairs of status to display under title and subtitle.
+   */
+  stats?: Record<string, string>;
 }
 
 export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
-  const { imageLogoUrl, title, subtitle, color, attemptButtonLabel } = props;
+  const {
+    imageLogoUrl,
+    title,
+    subtitle,
+    color,
+    attemptButtonLabel,
+    stats,
+  } = props;
 
   return (
-    <CardWithFlexWrap color={color}>
-      <CardMediaSquareWithMargin image={imageLogoUrl} />
+    <CardWithBackgroundColor color={color}>
+      <VerticalFlexRowsContainer>
+        <FlexRow>
+          <CardMediaSquareWithMargin image={imageLogoUrl} />
 
-      <TypographyVerticalFlexContainer>
-        <Typography variant="buttonBold">{title}</Typography>
-        <Typography>{subtitle}</Typography>
-      </TypographyVerticalFlexContainer>
+          <TypographyVerticalFlexContainer>
+            <Typography variant="buttonBold">{title}</Typography>
+            <Typography>{subtitle}</Typography>
+          </TypographyVerticalFlexContainer>
 
-      <CardContent>
-        {attemptButtonLabel && (
-          <Button color="primary" variant="raised">
-            {attemptButtonLabel}
-          </Button>
+          {!stats && (
+            <CardContent>
+              {attemptButtonLabel && (
+                <Button color="primary" variant="raised">
+                  {attemptButtonLabel}
+                </Button>
+              )}
+            </CardContent>
+          )}
+        </FlexRow>
+
+        {stats && (
+          <FlexRow>
+            <ImageWidthSpacing />
+
+            <TypographyVerticalFlexContainer style={{ marginTop: 0 }}>
+              <div>Placeholder</div>
+            </TypographyVerticalFlexContainer>
+          </FlexRow>
         )}
-      </CardContent>
-    </CardWithFlexWrap>
+      </VerticalFlexRowsContainer>
+    </CardWithBackgroundColor>
   );
 };
 
-const CardWithFlexWrap = styled<
+const CardWithBackgroundColor = styled<
   CardProps & Pick<DashboardTestCardProps, "color">
 >(Card as any)`
-  display: flex;
-  flex-wrap: wrap;
   background-color: ${({ color }) => (color === "yellow" ? "#ffcb25" : "#fff")};
 `;
 
-const CardMediaSquareWithMargin = styled(CardMedia)`
+const VerticalFlexRowsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const FlexRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const logoDimensions = css`
   width: 64px;
   height: 64px;
   margin: ${({ theme }) => theme.spacing.unit * 2}px;
+`;
+
+const CardMediaSquareWithMargin = styled(CardMedia)`
+  ${logoDimensions};
+`;
+
+const ImageWidthSpacing = styled.div`
+  ${logoDimensions};
 `;
 
 const TypographyVerticalFlexContainer = styled.div`
