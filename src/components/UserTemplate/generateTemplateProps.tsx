@@ -5,7 +5,6 @@ import AppBar from "@material-ui/core/AppBar";
 
 import { DashboardAppBar } from "../DashboardAppBar";
 import { DashboardTemplateProps } from "../DashboardTemplate";
-import { ToolbarProfileMenu } from "../ToolbarProfileMenu";
 
 interface GeneratedTemplateProps
   extends Omit<DashboardTemplateProps, "children" | "drawerContentsNode"> {}
@@ -27,11 +26,6 @@ export const generateTemplateProps = (
     <AppBar color="inherit" position="static">
       <DashboardAppBar
         showHamburgerButton={options.showHamburgerButton !== false}
-        logoutButtonElement={
-          <ToolbarProfileMenu
-            toolbarAvatarProps={{ name: "John Doe", letters: "JD" }}
-          />
-        }
       />
     </AppBar>
   );

@@ -29,12 +29,6 @@ export interface DashboardAppBarProps {
    * Additional buttons to place to the left of the logout button.
    */
   actionButtonElements?: ReactElement<any>[];
-
-  /**
-   * Custom element to replace default logout button element. This can be used
-   * to replace the logout button with a profile dropdown control.
-   */
-  logoutButtonElement?: ReactElement<{ onClick?: () => any }>;
 }
 
 /**
@@ -65,14 +59,6 @@ const DashboardAppBar: SFC<
     );
   }
 
-  const logoutButtonElement = props.logoutButtonElement ? (
-    cloneElement(props.logoutButtonElement, {
-      onClick: props.onLogoutButtonClick,
-    })
-  ) : (
-    <LogoutButton dense onClick={onLogoutButtonClick} />
-  );
-
   return (
     <StyledToolbar>
       {showHamburgerButton && (
@@ -98,7 +84,8 @@ const DashboardAppBar: SFC<
       <div style={{ flex: 1 }} />
 
       {actionButtonNodes}
-      {logoutButtonElement}
+
+      <LogoutButton dense onClick={onLogoutButtonClick} />
     </StyledToolbar>
   );
 };

@@ -1,61 +1,30 @@
-import { action } from "@storybook/addon-actions";
 import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
+import { createMemoryHistory } from "history";
 import React from "react";
+import { Router } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
-import Add from "@material-ui/icons/Add";
 
 import { DrawerStateProvider } from "components/ResponsiveDrawerFrame";
-import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
-import { ToolbarProfileMenu } from "components/ToolbarProfileMenu";
-import { DashboardAppBar, DashboardAppBarProps } from ".";
-import { createPlaceholderDashboardAppBarProps } from "./createPlaceholderDashboardAppBarProps";
+import { DashboardAppBar } from ".";
+
+const history = createMemoryHistory();
+history.push("/admin/dashboard");
 
 storiesOf("Components", module).add(
   "DashboardAppBar",
   withInfo()(() => {
-    const props: DashboardAppBarProps = {
-      ...createPlaceholderDashboardAppBarProps(),
-      onLogoutButtonClick: action("onLogoutClick"),
-    };
-
-    const withActionButtonNodesProps: DashboardAppBarProps = {
-      ...props,
-      actionButtonElements: [
-        <ResponsiveToolbarTypographyButton
-          tooltipTitle="Add New Entry"
-          iconNode={<Add />}
-          color="orange"
-        >
-          Entry
-        </ResponsiveToolbarTypographyButton>,
-      ],
-    };
-
     return (
-      <DrawerStateProvider>
-        <div style={{ position: "relative", height: 64 }}>
-          <AppBar position="absolute" color="inherit">
-            <DashboardAppBar {...props} />
-          </AppBar>
-        </div>
-
-        <div style={{ height: 24 }} />
-
-        <div style={{ position: "relative", height: 64 }}>
-          <AppBar position="absolute" color="inherit">
-            <DashboardAppBar
-              {...withActionButtonNodesProps}
-              logoutButtonElement={
-                <ToolbarProfileMenu
-                  toolbarAvatarProps={{ name: "John Doe", letters: "JD" }}
-                />
-              }
-            />
-          </AppBar>
-        </div>
-      </DrawerStateProvider>
+      <Router history={history}>
+        <DrawerStateProvider>
+          <div style={{ position: "relative", height: 64 }}>
+            <AppBar position="absolute" color="inherit">
+              <DashboardAppBar />
+            </AppBar>
+          </div>
+        </DrawerStateProvider>
+      </Router>
     );
   }),
 );
