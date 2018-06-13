@@ -1,24 +1,15 @@
-import { AttemptCourseCard } from "components/AttemptCourseCard";
-import { createPlaceholderData as createAttemptCourseCardPlaceholderData } from "components/AttemptCourseCard/createPlaceholderData";
-import { Hero } from "components/Hero";
-import {
-  LandingTemplate,
-  LandingTemplateProps,
-} from "components/LandingTemplate";
-import { PageFooter } from "components/PageFooter";
+import { landingAttemptCourseCards } from "common/structures/landingAttemptCourseCards";
 import React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
+
+import { Hero } from "components/Hero";
+import { LandingTemplate } from "components/LandingTemplate";
+import { PageFooter } from "components/PageFooter";
 
 type HomeProps = RouteComponentProps<{}> & {};
 
 export const LandingHome = withRouter<HomeProps>(props => {
-  const testCardNodes: LandingTemplateProps["testCardNodes"] = [];
-  for (let i = 0; i < 3; i += 1) {
-    const placeholderData = createAttemptCourseCardPlaceholderData(() => {
-      //
-    });
-    testCardNodes.push(<AttemptCourseCard {...placeholderData} />);
-  }
+  const testCardNodes = landingAttemptCourseCards();
 
   const navigateToOnboarding = () => props.history.push("/welcome/1");
 

@@ -1,4 +1,5 @@
 import { EntryImages } from "common/types/EntryImages";
+import { fromPublicUrl } from "common/utils";
 
 /**
  * A mapping of "entry" names to their images.
@@ -20,9 +21,7 @@ export const entryImages: EntryImages = {
   SSB: "ssb.svg",
 };
 
-const publicUrl = process.env.PUBLIC_URL;
-
 Object.keys(entryImages).forEach(stringKey => {
   const key = stringKey as keyof EntryImages;
-  entryImages[key] = `${publicUrl}/images/entry/${entryImages[key]}`;
+  entryImages[key] = fromPublicUrl(`/images/entry/${entryImages[key]}`);
 });
