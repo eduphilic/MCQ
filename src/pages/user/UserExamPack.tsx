@@ -6,6 +6,7 @@ import {
   DashboardTestCard,
   DashboardTestCardProps,
 } from "components/DashboardTestCard";
+import { DashboardTestCardColumnHeader } from "components/DashboardTestCardColumnHeader";
 
 export const UserExamPack: SFC<{}> = () => {
   const paidExams: DashboardTestCardProps[] = [
@@ -35,7 +36,7 @@ export const UserExamPack: SFC<{}> = () => {
     },
   ];
 
-  const freeExams: DashboardTestCardProps[] = [
+  const examDetails: DashboardTestCardProps[] = [
     {
       imageLogoUrl: entryImages.AirForce,
       title: "Soldier General Duty 10 Mock Tests Set",
@@ -73,16 +74,24 @@ export const UserExamPack: SFC<{}> = () => {
   return (
     <DashboardColumnContainer>
       {[
-        <div key="paid-exams">
+        <DashboardTestCardColumnHeader
+          key="paid-exams"
+          icon="exam"
+          title="Paid Exams"
+        >
           {paidExams.map(c => (
             <DashboardTestCard key={c.title} {...c} variant="flat" />
           ))}
-        </div>,
-        <div key="free-exams">
-          {freeExams.map(c => (
+        </DashboardTestCardColumnHeader>,
+        <DashboardTestCardColumnHeader
+          key="exam-details"
+          imageLogoUrl={paidExams[0].imageLogoUrl}
+          title={paidExams[0].title}
+        >
+          {examDetails.map(c => (
             <DashboardTestCard key={c.title} {...c} variant="flat" />
           ))}
-        </div>,
+        </DashboardTestCardColumnHeader>,
       ]}
     </DashboardColumnContainer>
   );
