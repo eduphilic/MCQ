@@ -10,6 +10,13 @@ import { Typography } from "components/Typography";
 
 export interface DashboardTestCardProps {
   /**
+   * Style of card. Raised with box shadow or flat with bottom border line.
+   *
+   * @default raised
+   */
+  variant?: "raised" | "flat";
+
+  /**
    * Url of image to display on the left side of the card.
    */
   imageLogoUrl: string;
@@ -54,6 +61,7 @@ export interface DashboardTestCardProps {
 
 export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
   const {
+    variant = "raised",
     imageLogoUrl,
     title,
     subtitle,
@@ -86,7 +94,7 @@ export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
   );
 
   return (
-    <CardWithBackgroundColor color={color}>
+    <CardWithBackgroundColor color={color} variant={variant}>
       <VerticalFlexRowsContainer>
         <FlexRow>
           <CardMediaSquareWithMargin image={imageLogoUrl} />
@@ -158,10 +166,19 @@ const AnnotatedText = styled.span`
 `;
 
 const CardWithBackgroundColor = styled<
-  CardProps & Pick<DashboardTestCardProps, "color">
+  CardProps & Pick<DashboardTestCardProps, "color" | "variant">
 >(Card as any)`
   width: 100%;
   background-color: ${({ color }) => (color === "yellow" ? "#ffcb25" : "#fff")};
+
+  ${({ variant }) =>
+    variant === "flat"
+      ? `
+          min-height: 180px;
+          box-shadow: none;
+          border-bottom: 1px solid #ddd;
+        `
+      : ""};
 `;
 
 const VerticalFlexRowsContainer = styled.div`
