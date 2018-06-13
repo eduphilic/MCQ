@@ -181,24 +181,24 @@ const CardWithBackgroundColor = styled<
       : ""};
 `;
 
-const VerticalFlexRowsContainer = styled.div`
+export const VerticalFlexRowsContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 
-const FlexRow = styled.div`
+export const FlexRow = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
 
-const logoDimensions = css`
+export const logoDimensions = css`
   width: 64px;
   height: 64px;
   margin: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const CardMediaSquareWithMargin = styled(CardMedia)`
+export const CardMediaSquareWithMargin = styled(CardMedia)`
   ${logoDimensions};
 `;
 
