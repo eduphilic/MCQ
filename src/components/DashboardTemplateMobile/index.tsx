@@ -4,19 +4,22 @@ import React, {
   ChangeEvent,
   cloneElement,
   Component,
-  createRef,
+  // createRef,
   ReactElement,
   ReactNode,
 } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import ReactSwipe from "react-swipe";
+// import ReactSwipe from "react-swipe";
 import styled from "styled";
 
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import Paper from "@material-ui/core/Paper";
 
-import { DashboardTemplateProps } from "../DashboardTemplate";
+import { BaseSwippableTemplate } from "components/BaseSwippableTemplate";
+import { DashboardTemplateProps } from "components/DashboardTemplate";
+
+import { getPaneIndexFromRoute } from "./getPaneIndexFromRoute";
 
 export interface DashboardTemplateMobileProps
   extends Omit<DashboardTemplateProps, "children" | "drawerContentsNode">,
@@ -33,56 +36,66 @@ export interface DashboardTemplateMobileProps
   themeElement?: ReactElement<any>;
 }
 
+interface DashboardTemplateMobileState {
+  selectedPane: number;
+}
+
 /**
  * Provides a mobile user dashboard template. It features a bottom navigation
  * component and allows navigation using left and right swipe gestures.
  */
-class DashboardTemplateMobile extends Component<DashboardTemplateMobileProps> {
-  private reactSwipe = createRef<ReactSwipe>();
+class DashboardTemplateMobile extends Component<
+  DashboardTemplateMobileProps,
+  DashboardTemplateMobileState
+> {
+  // private reactSwipe = createRef<ReactSwipe>();
+
+  state: DashboardTemplateMobileState = {
+    selectedPane: getPaneIndexFromRoute(this.props.links, this.props.history),
+  };
 
   private handleSwipe = (paneIndex: number) => {
     const { links, history } = this.props;
     history.push(links[paneIndex].to);
   };
 
-  private getPaneIndexFromRoute = (routerPath?: string) => {
-    const { links, history } = this.props;
-
-    const matchPath = routerPath || history.location.pathname;
-
-    const paneIndex = links.findIndex(l => l.to === matchPath);
-    return paneIndex;
-  };
-
   private handleBottomNavigationChange = (
     _e: ChangeEvent<{}>,
     value: string,
   ) => {
-    const paneIndex = this.getPaneIndexFromRoute(value);
-    this.reactSwipe.current!.slide(
-      paneIndex,
-      250 /* Transition duration time of button ripple animation*/,
-    );
+    const { links, history } = this.props;
+    const paneIndex = getPaneIndexFromRoute(links, history, value);
+    // this.reactSwipe.current!.slide(
+    //   paneIndex,
+    //   250 /* Transition duration time of button ripple animation*/,
+    // );
+    this.setState({ selectedPane: paneIndex });
   };
 
   render() {
     const { appBarNode, links, location, themeElement } = this.props;
+    const { selectedPane } = this.state;
 
     const withTheme = (node: ReactNode) =>
       themeElement ? cloneElement(themeElement, {}, node) : node;
 
-    const panes: ReactNode[] = [];
+    // const panes: ReactNode[] = [];
+    const paneKeyNodeMap: { key: string; node: ReactNode }[] = [];
     const bottomNavigationActions: ReactNode[] = [];
 
     links.forEach(l => {
       const { titleLocalizationKey, to, iconElement } = l;
       const PaneComponent = l.component;
 
-      panes.push(
-        <Pane key={titleLocalizationKey}>
-          <PaneComponent />
-        </Pane>,
-      );
+      // panes.push(
+      //   <Pane key={titleLocalizationKey}>
+      //     <PaneComponent />
+      //   </Pane>,
+      // );
+      paneKeyNodeMap.push({
+        key: titleLocalizationKey,
+        node: <PaneComponent />,
+      });
 
       bottomNavigationActions.push(
         <BottomNavigationActionNoTextWrap
@@ -95,68 +108,96 @@ class DashboardTemplateMobile extends Component<DashboardTemplateMobileProps> {
       );
     });
 
-    return (
-      <Wrapper>
-        {appBarNode}
+    const headerNode = appBarNode;
 
-        <ReactSwipeFlexGrow
-          innerRef={this.reactSwipe}
-          swipeOptions={{
-            continuous: false,
-            startSlide: this.getPaneIndexFromRoute(),
-            transitionEnd: this.handleSwipe,
-          }}
-        >
-          {panes}
-        </ReactSwipeFlexGrow>
-
-        <PaperWithBoxShadowUpperDirection>
-          {withTheme(
-            <BottomNavigationWithBackgroundColor
-              showLabels
-              value={location.pathname}
-              onChange={this.handleBottomNavigationChange}
-            >
-              {bottomNavigationActions}
-            </BottomNavigationWithBackgroundColor>,
-          )}
-        </PaperWithBoxShadowUpperDirection>
-      </Wrapper>
+    const footerNode = (
+      <PaperWithBoxShadowUpperDirection>
+        {withTheme(
+          <BottomNavigationWithBackgroundColor
+            showLabels
+            value={location.pathname}
+            onChange={this.handleBottomNavigationChange}
+          >
+            {bottomNavigationActions}
+          </BottomNavigationWithBackgroundColor>,
+        )}
+      </PaperWithBoxShadowUpperDirection>
     );
+
+    const onPaneChange = this.handleSwipe;
+
+    return (
+      <BaseSwippableTemplate
+        headerNode={headerNode}
+        paneKeyNodeMap={paneKeyNodeMap}
+        footerNode={footerNode}
+        selectedPane={selectedPane}
+        onPaneChange={onPaneChange}
+      />
+    );
+
+    // return (
+    //   <Wrapper>
+    //     {appBarNode}
+
+    //     <ReactSwipeFlexGrow
+    //       innerRef={this.reactSwipe}
+    //       swipeOptions={{
+    //         continuous: false,
+    //         startSlide: this.getPaneIndexFromRoute(),
+    //         transitionEnd: this.handleSwipe,
+    //       }}
+    //     >
+    //       {panes}
+    //     </ReactSwipeFlexGrow>
+
+    //     <PaperWithBoxShadowUpperDirection>
+    //       {withTheme(
+    //         <BottomNavigationWithBackgroundColor
+    //           showLabels
+    //           value={location.pathname}
+    //           onChange={this.handleBottomNavigationChange}
+    //         >
+    //           {bottomNavigationActions}
+    //         </BottomNavigationWithBackgroundColor>,
+    //       )}
+    //     </PaperWithBoxShadowUpperDirection>
+    //   </Wrapper>
+    // );
   }
 }
 
 const DashboardTemplateMobileWithRouter = withRouter(DashboardTemplateMobile);
 export { DashboardTemplateMobileWithRouter as DashboardTemplateMobile };
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-`;
+// const Wrapper = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   width: 100%;
+//   height: 100%;
+// `;
 
-const ReactSwipeFlexGrow = styled(ReactSwipe)`
-  flex: 1;
+// const ReactSwipeFlexGrow = styled(ReactSwipe)`
+//   flex: 1;
 
-  > div {
-    height: 100%;
-  }
-`;
+//   > div {
+//     height: 100%;
+//   }
+// `;
 
-const Pane = styled.div`
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
+// const Pane = styled.div`
+//   width: 100%;
+//   height: 100%;
+//   overflow-y: auto;
 
-  & > * {
-    margin-top: ${({ theme }) => theme.spacing.unit * 2}px;
-  }
+//   & > * {
+//     margin-top: ${({ theme }) => theme.spacing.unit * 2}px;
+//   }
 
-  & > *:last-child {
-    margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
-  }
-`;
+//   & > *:last-child {
+//     margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+//   }
+// `;
 
 const PaperWithBoxShadowUpperDirection = styled(Paper)`
   box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.2),
