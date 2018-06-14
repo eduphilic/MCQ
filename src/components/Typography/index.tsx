@@ -13,6 +13,9 @@ export enum Variant {
   tableHeadCell = "tableHeadCell",
   buttonBold = "buttonBold",
   formFieldTitle = "formFieldTitle",
+
+  examDrawerTitle = "examDrawerTitle",
+  examDrawerSubtitle = "examDrawerSubtitle",
 }
 
 type StyledMuiTypography = ReturnType<ThemedStyledFunction<MuiTypographyProps>>;
@@ -36,6 +39,15 @@ const variants: Record<Variant, StyledMuiTypography> = {
 
   formFieldTitle: styled(MuiTypography).attrs({ variant: "body2" })`
     color: ${({ theme }) => theme.palette.grey["700"]};
+  `,
+
+  examDrawerTitle: styled(MuiTypography).attrs({ variant: "body1" })`
+    font-size: 18px;
+    font-weight: 500;
+  `,
+
+  examDrawerSubtitle: styled(MuiTypography).attrs({ variant: "body1" })`
+    font-size: 18px;
   `,
 };
 
