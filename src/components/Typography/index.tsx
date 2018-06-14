@@ -2,7 +2,7 @@
 import MuiTypography, {
   TypographyProps as MuiTypographyProps,
 } from "@material-ui/core/Typography";
-import React, { SFC } from "react";
+import React, { CSSProperties, SFC } from "react";
 import styled, { ThemedStyledFunction } from "styled";
 
 export enum Variant {
@@ -53,6 +53,7 @@ const variants: Record<Variant, StyledMuiTypography> = {
 
 export interface TypographyProps {
   className?: string;
+  style?: CSSProperties;
 
   /**
    * The style variant of the typography to use.
@@ -86,6 +87,7 @@ export const Typography: SFC<TypographyProps> = props => {
   const {
     children,
     className,
+    style,
     component,
     muiTypographyProps,
     variant,
@@ -98,7 +100,10 @@ export const Typography: SFC<TypographyProps> = props => {
     <TypographyBase
       className={className}
       component={component || "span"}
-      style={padLeftToolbarButton ? { paddingLeft: 32 } : undefined}
+      style={{
+        ...(padLeftToolbarButton ? { paddingLeft: 32 } : {}),
+        ...style,
+      }}
       {...muiTypographyProps as any}
     >
       {children}
