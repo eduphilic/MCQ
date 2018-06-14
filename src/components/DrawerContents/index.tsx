@@ -10,7 +10,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
-import { Logo } from "../Logo";
+import { DrawerLogo } from "components/DrawerLogo";
 
 export interface DrawerContentsProps {
   /**
@@ -93,11 +93,5 @@ const LogoListItem = styled(ListItem)`
 
   > div {
     width: 100%;
-  }
-`;
-
-const DrawerLogo = styled(Logo)`
-  > svg {
-    width: 44.45px !important;
   }
 `;
