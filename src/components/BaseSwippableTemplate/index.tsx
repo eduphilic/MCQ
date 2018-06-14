@@ -19,6 +19,14 @@ export interface BaseSwippableTemplateProps {
   footerNode?: ReactNode;
 
   /**
+   * Animation duration of slide when the prop "selectedPane" changes. Value is
+   * in milliseconds.
+   *
+   * @default 250
+   */
+  slideAnimationDuration?: number;
+
+  /**
    * Pane to display.
    *
    * As part of page navigation, this will be set to the index corresponding to
@@ -27,9 +35,12 @@ export interface BaseSwippableTemplateProps {
    * As part of the exam screen, this will be set to the question currently
    * being viewed.
    */
-  selectedPane?: number;
+  selectedPane: number;
 
-  onPaneChange?: (paneIndex: number) => any;
+  /**
+   * Called when the user slides from one pane to another.
+   */
+  onPaneChange: (paneIndex: number) => any;
 }
 
 /**
@@ -41,6 +52,21 @@ export class BaseSwippableTemplate extends Component<
   BaseSwippableTemplateProps
 > {
   private reactSwipeRef = createRef<ReactSwipe>();
+
+  componentDidUpdate(prevProps: BaseSwippableTemplateProps) {
+    const { slideAnimationDuration, selectedPane } = this.props;
+
+    if (selectedPane === undefined || selectedPane === prevProps.selectedPane) {
+      return;
+    }
+
+    if (!this.reactSwipeRef.current) return;
+
+    this.reactSwipeRef.current.slide(
+      selectedPane,
+      slideAnimationDuration === undefined ? 250 : slideAnimationDuration,
+    );
+  }
 
   render() {
     const {
