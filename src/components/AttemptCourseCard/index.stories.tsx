@@ -3,16 +3,15 @@ import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { AttemptCourseCard } from ".";
-import { createPlaceholderData } from "./createPlaceholderData";
+import { landingAttemptCourseCards } from "common/structures/landingAttemptCourseCards";
 
 storiesOf("Components", module).add(
   "AttemptCourseCard",
   withInfo()(() => {
-    const placeholderData = createPlaceholderData(courseIndex =>
-      action(`Course onClick ${courseIndex}`),
-    );
+    const cards = landingAttemptCourseCards({
+      courseOnClick: courseIndex => action(`Course onClick ${courseIndex}`),
+    });
 
-    return <AttemptCourseCard {...placeholderData} />;
+    return cards[0] as React.ReactElement<any>;
   }),
 );
