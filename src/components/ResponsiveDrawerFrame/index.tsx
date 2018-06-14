@@ -1,3 +1,4 @@
+import { drawerWidth } from "common/css/drawerWidth";
 import { fromToolbarHeight } from "css";
 import React, { cloneElement, ReactElement, ReactNode, SFC } from "react";
 import styled from "styled";
@@ -98,8 +99,6 @@ export const ResponsiveDrawerFrame: SFC<ResponsiveDrawerFrameProps> = props => {
     </DrawerStateProvider>
   );
 };
-
-export const drawerWidth = 240;
 
 const toolBarHeight = fromToolbarHeight("height");
 
