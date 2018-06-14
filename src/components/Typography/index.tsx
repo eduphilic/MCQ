@@ -42,12 +42,12 @@ const variants: Record<Variant, StyledMuiTypography> = {
   `,
 
   examDrawerTitle: styled(MuiTypography).attrs({ variant: "body1" })`
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
   `,
 
   examDrawerSubtitle: styled(MuiTypography).attrs({ variant: "body1" })`
-    font-size: 18px;
+    font-size: 16px;
   `,
 };
 
