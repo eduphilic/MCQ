@@ -8,6 +8,10 @@ import { Typography } from "components/Typography";
 // tslint:disable-next-line:no-empty-interface
 export interface ExamDrawerTimerInfoCardProps {}
 
+/**
+ * Displays the current test, total marks, and remaining test time in the user
+ * dashboard exam page.
+ */
 export const ExamDrawerTimerInfoCard: SFC<
   ExamDrawerTimerInfoCardProps
 > = props => {
@@ -19,11 +23,25 @@ export const ExamDrawerTimerInfoCard: SFC<
         <Typography variant="examDrawerTitle">
           Army Solider GD Test 1
         </Typography>
+
+        <Typography variant="examDrawerSubtitle" style={{ color: "#a6a6a6" }}>
+          Total Marks: 200
+        </Typography>
+
+        <Typography variant="examDrawerTitle" style={{ color: "#ffff00" }}>
+          00:00:00
+        </Typography>
       </Wrapper>
     </UserAppDrawerTheme>
   );
 };
 
 const Wrapper = styled.div`
+  padding: 8px;
+  padding-left: 16px;
   background-color: ${examDrawerInfoCardBackground};
+
+  & > * {
+    margin: 8px 0;
+  }
 `;
