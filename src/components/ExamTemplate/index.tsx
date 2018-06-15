@@ -7,6 +7,7 @@ import withWidth, {
 } from "@material-ui/core/withWidth";
 
 import { DashboardTemplate } from "components/DashboardTemplate";
+import { ExamAppBar } from "components/ExamAppBar";
 import { ExamDrawerContents } from "components/ExamDrawerContents";
 import { ExamTemplateMobile } from "components/ExamTemplateMobile";
 
@@ -21,7 +22,7 @@ const ExamTemplate: SFC<ExamTemplateProps> = props => {
 
   return !showMobileTemplate ? (
     <DashboardTemplate
-      appBarNode={<div>Placeholder</div>}
+      appBarNode={<ExamAppBar showStartExamButton />}
       drawerContentsNode={drawerContentsNode}
       drawerThemeElement={<UserAppDrawerTheme />}
     >
