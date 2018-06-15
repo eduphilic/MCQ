@@ -1,7 +1,8 @@
-import Icon from "@material-ui/core/Icon";
-import { Button, ButtonProps } from "components/Button";
 import React, { Component } from "react";
-import styled from "styled";
+
+import Icon from "@material-ui/core/Icon";
+
+import { Button, ButtonProps } from "components/Button";
 
 export type DropdownButtonProps = ButtonProps;
 
@@ -12,12 +13,8 @@ export class DropdownButton extends Component<DropdownButtonProps> {
     return (
       <Button {...rest}>
         {children}
-        <PositionedDropDownArrow>arrow_drop_down</PositionedDropDownArrow>
+        <Icon>arrow_drop_down</Icon>
       </Button>
     );
   }
 }
-
-const PositionedDropDownArrow = styled(Icon)`
-  /* position: absolute; */
-`;
