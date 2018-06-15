@@ -8,6 +8,7 @@ import { PageTitle } from "./PageTitle";
 import { navigationLinksAdmin } from "common/structures/navigationLinksAdmin";
 import { navigationLinksAdminForms } from "common/structures/navigationLinksAdminForms";
 import { navigationLinksAdminLogin } from "common/structures/navigationLinksAdminLogin";
+import { navigationLinksExam } from "common/structures/navigationLinksExam";
 import { navigationLinksLanding } from "common/structures/navigationLinksLanding";
 import { navigationLinksUser } from "common/structures/navigationLinksUser";
 import { AdminRoute } from "./AdminRoute";
@@ -39,6 +40,10 @@ export const SiteMap: SFC<{}> = () => {
     .concat(navigationLinksAdmin)
     .map(l => <AdminRoute key={l.to} path={l.to} component={l.component} />);
 
+  const examPageNode = navigationLinksExam.map(l => (
+    <Route key={l.titleLocalizationKey} path={l.to} component={l.component} />
+  ));
+
   const userPagesNode = navigationLinksUser.map(l => (
     <UserRoute
       key={l.to}
@@ -57,6 +62,7 @@ export const SiteMap: SFC<{}> = () => {
             {userPagesNode}
             {adminLoginPageNode}
             {adminPagesNode}
+            {examPageNode}
           </Switch>
         </PageTitle>
       </PersistentScrollPositionProvider>

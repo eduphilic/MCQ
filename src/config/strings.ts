@@ -93,6 +93,8 @@ export const strings = {
     adminLinkIndexManager: "Index Manager",
     adminLinkRevenueManager: "Revenue Manager",
 
+    examLinkQuiz: "",
+
     userLinkDashboard: "Dashboard",
     userLinkExamPack: "Exam Pack",
     userLinkMembership: "Membership",
