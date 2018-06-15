@@ -3,17 +3,13 @@ import {
   examQuestionStatusMarkedForReview,
   examQuestionStatusNotAnswered,
   examQuestionStatusNotVisited,
+  examQuestionStatusSelected,
 } from "common/css/colors";
 import { ExamQuestionNavigationState } from "common/types/ExamQuestionNavigationState";
 import React, { Component } from "react";
 import styled, { withProps } from "styled";
 
 import { Typography } from "components/Typography";
-
-type QuestionStatusProp = Pick<
-  ExamQuestionNavigationState["questions"][0],
-  "status"
->;
 
 export interface ExamDrawerQuestionSelectProps {
   navigationState: ExamQuestionNavigationState;
@@ -35,7 +31,13 @@ export class ExamDrawerQuestionSelect extends Component<
             {navigationState.questions
               .slice(nextQuestion, nextQuestion + c.questionCount)
               .map((q, index) => (
-                <QuestionButton key={`${c.title}-${index}`} status={q.status}>
+                <QuestionButton
+                  key={`${c.title}-${index}`}
+                  status={q.status}
+                  selected={
+                    navigationState.currentQuestion === nextQuestion + index
+                  }
+                >
                   <Typography style={{ color: "inherit" }}>
                     {index + 1}
                   </Typography>
@@ -75,7 +77,7 @@ const QuestionButtonWrapper = styled.div`
 `;
 
 const statusColorMap: Record<
-  QuestionStatusProp["status"],
+  QuestionButtonProps["status"],
   { color: string; backgroundColor: string }
 > = {
   answered: { color: "#fff", backgroundColor: examQuestionStatusAnswered },
@@ -93,7 +95,12 @@ const statusColorMap: Record<
   },
 };
 
-const QuestionButton = withProps<QuestionStatusProp>()(styled.button)`
+interface QuestionButtonProps {
+  status: ExamQuestionNavigationState["questions"][0]["status"];
+  selected: boolean;
+}
+
+const QuestionButton = withProps<QuestionButtonProps>()(styled.button)`
   width: 32px;
   height: 32px;
   padding: 0;
@@ -101,7 +108,8 @@ const QuestionButton = withProps<QuestionStatusProp>()(styled.button)`
   margin-bottom: 8px;
   color: ${({ status }) => statusColorMap[status].color};
   background-color: ${({ status }) => statusColorMap[status].backgroundColor};
-  border: none;
+  border: ${({ selected }) =>
+    selected ? `2px solid ${examQuestionStatusSelected}` : "none"};
   border-radius: 50%;
   outline: none;
   cursor: pointer;
