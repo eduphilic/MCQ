@@ -27,24 +27,20 @@ class UserTemplate extends Component<UserTemplateProps> {
     const drawerContentsNode = <DrawerContents links={links} />;
     const showMobileTemplate = isWidthDown("sm", width);
 
-    return (
-      <>
-        {!showMobileTemplate ? (
-          <DashboardTemplate
-            appBarNode={appBarNode}
-            drawerContentsNode={drawerContentsNode}
-            drawerThemeElement={drawerThemeElement}
-          >
-            {children}
-          </DashboardTemplate>
-        ) : (
-          <DashboardTemplateMobile
-            appBarNode={appBarNode}
-            links={links}
-            themeElement={drawerThemeElement}
-          />
-        )}
-      </>
+    return !showMobileTemplate ? (
+      <DashboardTemplate
+        appBarNode={appBarNode}
+        drawerContentsNode={drawerContentsNode}
+        drawerThemeElement={drawerThemeElement}
+      >
+        {children}
+      </DashboardTemplate>
+    ) : (
+      <DashboardTemplateMobile
+        appBarNode={appBarNode}
+        links={links}
+        themeElement={drawerThemeElement}
+      />
     );
   }
 }

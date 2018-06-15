@@ -1,18 +1,25 @@
 import React, { SFC } from "react";
 import { UserAppDrawerTheme } from "theme";
 
+import withWidth, {
+  isWidthDown,
+  WithWidthProps,
+} from "@material-ui/core/withWidth";
+
 import { DashboardTemplate } from "components/DashboardTemplate";
 import { ExamDrawerContents } from "components/ExamDrawerContents";
+import { ExamTemplateMobile } from "components/ExamTemplateMobile";
 
 // tslint:disable-next-line:no-empty-interface
-export interface ExamTemplateProps {}
+export interface ExamTemplateProps extends WithWidthProps {}
 
-export const ExamTemplate: SFC<ExamTemplateProps> = props => {
-  const {} = props;
+const ExamTemplate: SFC<ExamTemplateProps> = props => {
+  const { width } = props;
 
   const drawerContentsNode = <ExamDrawerContents />;
+  const showMobileTemplate = isWidthDown("sm", width);
 
-  return (
+  return !showMobileTemplate ? (
     <DashboardTemplate
       appBarNode={<div>Placeholder</div>}
       drawerContentsNode={drawerContentsNode}
@@ -20,5 +27,10 @@ export const ExamTemplate: SFC<ExamTemplateProps> = props => {
     >
       <div>Placeholder</div>
     </DashboardTemplate>
+  ) : (
+    <ExamTemplateMobile />
   );
 };
+
+const ExamTemplateWithWidth = withWidth()(ExamTemplate);
+export { ExamTemplateWithWidth as ExamTemplate };
