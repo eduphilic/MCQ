@@ -10,7 +10,7 @@ export const examQuestionNavigationState: ExamQuestionNavigationState = {
 
   questions: [
     ...makeQuestions(5, "answered"),
-    ...makeQuestions(10, "not-answered"),
+    ...makeQuestions(10, "not-visited"),
   ],
 
   categories: [

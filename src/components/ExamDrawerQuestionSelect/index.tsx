@@ -1,8 +1,19 @@
+import {
+  examQuestionStatusAnswered,
+  examQuestionStatusMarkedForReview,
+  examQuestionStatusNotAnswered,
+  examQuestionStatusNotVisited,
+} from "common/css/colors";
 import { ExamQuestionNavigationState } from "common/types/ExamQuestionNavigationState";
 import React, { Component } from "react";
-import styled from "styled";
+import styled, { withProps } from "styled";
 
 import { Typography } from "components/Typography";
+
+type QuestionStatusProp = Pick<
+  ExamQuestionNavigationState["questions"][0],
+  "status"
+>;
 
 export interface ExamDrawerQuestionSelectProps {
   navigationState: ExamQuestionNavigationState;
@@ -23,9 +34,11 @@ export class ExamDrawerQuestionSelect extends Component<
           <QuestionButtonWrapper>
             {navigationState.questions
               .slice(nextQuestion, nextQuestion + c.questionCount)
-              .map((_q, index) => (
-                <QuestionButton key={`${c.title}-${index}`}>
-                  {index + 1}
+              .map((q, index) => (
+                <QuestionButton key={`${c.title}-${index}`} status={q.status}>
+                  <Typography style={{ color: "inherit" }}>
+                    {index + 1}
+                  </Typography>
                 </QuestionButton>
               ))}
           </QuestionButtonWrapper>
@@ -61,15 +74,35 @@ const QuestionButtonWrapper = styled.div`
   width: 100%;
 `;
 
-const QuestionButton = styled.button`
+const statusColorMap: Record<
+  QuestionStatusProp["status"],
+  { color: string; backgroundColor: string }
+> = {
+  answered: { color: "#fff", backgroundColor: examQuestionStatusAnswered },
+  "not-answered": {
+    color: "#000",
+    backgroundColor: examQuestionStatusNotAnswered,
+  },
+  "marked-for-review": {
+    color: "#000",
+    backgroundColor: examQuestionStatusMarkedForReview,
+  },
+  "not-visited": {
+    color: "#000",
+    backgroundColor: examQuestionStatusNotVisited,
+  },
+};
+
+const QuestionButton = withProps<QuestionStatusProp>()(styled.button)`
   width: 32px;
   height: 32px;
+  padding: 0;
   margin: 0 4px;
   margin-bottom: 8px;
-  padding: 0;
+  color: ${({ status }) => statusColorMap[status].color};
+  background-color: ${({ status }) => statusColorMap[status].backgroundColor};
   border: none;
   border-radius: 50%;
-  background-color: green;
   outline: none;
   cursor: pointer;
 `;
