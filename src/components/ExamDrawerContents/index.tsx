@@ -1,9 +1,11 @@
+import { examQuestionNavigationState } from "common/structures/examQuestionNavigationState";
 import React, { SFC } from "react";
 import styled from "styled";
 
 import { DrawerLogo } from "components/DrawerLogo";
 import { ExamDrawerQuestionPalette } from "components/ExamDrawerQuestionPalette";
 import { ExamDrawerTimerInfoCard } from "components/ExamDrawerTimerInfoCard";
+import { ExamDrawerQuestionSelect } from "../ExamDrawerQuestionSelect";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ExamDrawerContentsProps {}
@@ -18,6 +20,8 @@ export const ExamDrawerContents: SFC<ExamDrawerContentsProps> = props => {
       <ExamDrawerTimerInfoCard />
 
       <ExamDrawerQuestionPalette />
+
+      <ExamDrawerQuestionSelect navigationState={examQuestionNavigationState} />
     </Wrapper>
   );
 };
