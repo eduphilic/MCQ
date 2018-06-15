@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
+import styled from "styled";
 
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
 
 export type DevelopmentAdminDashboardSnackbarProps = RouteComponentProps<void>;
 
@@ -23,37 +25,40 @@ class DevelopmentAdminDashboardSnackbar extends Component<
   };
 
   render() {
-    return (
-      <Snackbar
-        open
+    const snackbarContent = (
+      <SnackbarContentExtraVerticalHightMobile
         message={<span>Development Build</span>}
         action={
           <>
-            <Button
-              onClick={() => this.handleButtonClick("/dashboard")}
-              color="secondary"
-            >
-              User
-            </Button>
-            <Button
-              onClick={() => this.handleButtonClick("/admin/dashboard")}
-              color="secondary"
-            >
-              Admin
-            </Button>
-            <Button
-              onClick={() => this.handleButtonClick("/storybook")}
-              color="secondary"
-            >
-              Storybook
-            </Button>
+            {[
+              { to: "/dashboard", title: "User" },
+              { to: "/admin/dashboard", title: "Admin" },
+              { to: "/exam", title: "Exam" },
+              { to: "/storybook", title: "Storybook" },
+            ].map(l => (
+              <Button
+                key={l.to}
+                color="secondary"
+                onClick={() => this.handleButtonClick(l.to)}
+              >
+                {l.title}
+              </Button>
+            ))}
           </>
         }
+      />
+    );
+
+    return (
+      <Snackbar
+        open
         anchorOrigin={{
           vertical: "top",
           horizontal: "center",
         }}
-      />
+      >
+        {snackbarContent}
+      </Snackbar>
     );
   }
 }
@@ -65,3 +70,13 @@ const DevelopmentAdminDashboardSnackbarWithRouter = withRouter(
 export {
   DevelopmentAdminDashboardSnackbarWithRouter as DevelopmentAdminDashboardSnackbar,
 };
+
+const SnackbarContentExtraVerticalHightMobile = styled(SnackbarContent).attrs({
+  classes: {
+    action: "action",
+  },
+})`
+  .action {
+    flex-wrap: wrap;
+  }
+`;
