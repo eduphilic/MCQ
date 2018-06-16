@@ -15,9 +15,7 @@ const processStateUpdate: AsyncWorker<StateUpdate, {}> = (task, callback) => {
   const update = actionFunc(task.component.state);
 
   // Only attempt a state update if the component is still mounted.
-  if ((task.component as any)._isMounted) {
-    task.component.setState(update, callback);
-  } else callback();
+  task.component.setState(update, callback);
 };
 
 // Use a queue for state updates to avoid race conditions.
@@ -32,14 +30,14 @@ const q = queue(processStateUpdate);
  * @param actions Action creators to be binded to the setState of the calling component.
  */
 export function bindActions<State, Actions extends ActionsType<State>>(
-  this: Component<{}, State>,
+  contextProviderComponent: Component<{}, State>,
   actions: Actions,
 ) {
   const bindedActions = Object.keys(actions).reduce(
     (acc, key) => {
       acc[key] = (...args: any[]) => {
         q.push({
-          component: this,
+          component: contextProviderComponent,
           actionCreator: actions[key],
           actionCreatorArguments: args,
           actionCreatorName: key,

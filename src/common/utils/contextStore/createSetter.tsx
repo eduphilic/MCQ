@@ -34,13 +34,13 @@ export const createSetter = <State, Actions, Field extends keyof State>(
       const { contextApi } = props;
       if (!contextApi) throw createOutsideProviderError(storeName);
 
-      const { privateSetState } = contextApi as typeof contextApi & {
-        privateSetState: ((update: Partial<State>) => any);
+      const { setState } = contextApi as typeof contextApi & {
+        setState: ((update: Partial<State>) => any);
       };
 
       if (contextApi[field] !== (props as any)[field]) {
         // @ts-ignore
-        privateSetState({ [field]: props[field] });
+        setState({ [field]: props[field] });
       }
 
       return null;

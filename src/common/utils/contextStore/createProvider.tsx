@@ -1,6 +1,8 @@
 import React, { Component, Context } from "react";
 
+import { ActionsType } from "./ActionsType";
 import { bindActions } from "./bindActions";
+import { StoreValue } from "./StoreValue";
 
 /**
  * Provides the state and actions to children components.
@@ -9,49 +11,30 @@ import { bindActions } from "./bindActions";
  * @param actions Actions which can be applied to the store.
  * @param context The React Context to wrap.
  */
-export const createProvider = <State, Actions>(
+export const createProvider = <State, Actions extends ActionsType<State>>(
   initialState: State,
   actions: Actions,
-  context: Context<State & Actions>,
+  context: Context<StoreValue<State, Actions>>,
 ) => {
-  class Provider extends Component<{}, State> {
-    state: State = initialState;
+  class Provider extends Component<{}, StoreValue<State, Actions>> {
+    constructor(props: {}) {
+      super(props);
 
-    private bindedActions = bindActions.call(this, actions);
+      this.state = {
+        ...(initialState as any),
+        ...bindActions(this, actions as any),
+        setState: this._setState,
+      };
+    }
 
-    /**
-     * Provide a hook to check if the component is still mounted.
-     *
-     * Used in bindActions.ts.
-     */
-    _isMounted = false;
-
-    private privateSetState = (update: Partial<State>) => {
-      this.setState(update as Pick<State, keyof State>);
+    private _setState = (update: Partial<State>) => {
+      this.setState(update as Pick<StoreValue<State, Actions>, keyof State>);
     };
-
-    componentDidMount() {
-      this._isMounted = true;
-    }
-
-    componentWillUnmount() {
-      this._isMounted = false;
-    }
 
     render() {
       const { children } = this.props;
 
-      return (
-        <context.Provider
-          value={{
-            ...(this.state as any),
-            ...this.bindedActions,
-            privateSetState: this.privateSetState,
-          }}
-        >
-          {children}
-        </context.Provider>
-      );
+      return <context.Provider value={this.state}>{children}</context.Provider>;
     }
   }
 

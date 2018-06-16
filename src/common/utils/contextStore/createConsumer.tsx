@@ -9,12 +9,12 @@ import { createOutsideProviderError } from "./createOutsideProviderError";
  * @param context The React Context which is consumed.
  * @param storeName Optional store name to display in errors.
  */
-export const createConsumer = <State, Actions>(
-  context: Context<State & Actions>,
+export const createConsumer = <T extends {}>(
+  context: Context<T>,
   storeName?: string,
 ) => {
   const Consumer: SFC<{
-    children: (store: State & Actions) => ReactNode;
+    children: (store: T) => ReactNode;
   }> = ({ children }) => (
     <context.Consumer>
       {contextStore => {
