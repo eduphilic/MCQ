@@ -7,6 +7,7 @@ import { withKnobs } from "@storybook/addon-knobs";
 
 import { ThemeBaseline, LightTheme } from "theme";
 import { DashboardAppBarIconStore } from "stores";
+import { ExamNavigationStorePlaceholderProvider } from "components/ExamNavigationStorePlaceholder";
 
 // if (process.env.NODE_ENV !== "production") {
 //   whyDidYouUpdate(React);
@@ -27,7 +28,9 @@ addDecorator(story => (
   <ThemeBaseline>
     <LightTheme>
       <DashboardAppBarIconStore.Provider>
-        {story()}
+        <ExamNavigationStorePlaceholderProvider>
+          {story()}
+        </ExamNavigationStorePlaceholderProvider>
       </DashboardAppBarIconStore.Provider>
     </LightTheme>
   </ThemeBaseline>

@@ -15,7 +15,7 @@ import { ExamTemplateMobile } from "components/ExamTemplateMobile";
 export interface ExamTemplateProps extends WithWidthProps {}
 
 const ExamTemplate: SFC<ExamTemplateProps> = props => {
-  const { width } = props;
+  const { children, width } = props;
 
   const drawerContentsNode = <ExamDrawerContents />;
   const showMobileTemplate = isWidthDown("sm", width);
@@ -26,7 +26,7 @@ const ExamTemplate: SFC<ExamTemplateProps> = props => {
       drawerContentsNode={drawerContentsNode}
       drawerThemeElement={<UserAppDrawerTheme />}
     >
-      <div>Placeholder</div>
+      {children}
     </DashboardTemplate>
   ) : (
     <ExamTemplateMobile />
