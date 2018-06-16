@@ -1,10 +1,10 @@
 import { createContext, SFC } from "react";
 
 import { ActionsType } from "./ActionsType";
+import { ContextValue } from "./ContextValue";
 import { createConsumer } from "./createConsumer";
 import { createProvider } from "./createProvider";
 import { createSetter } from "./createSetter";
-import { StoreValue } from "./StoreValue";
 
 /**
  * Creates a store that uses React Context.
@@ -18,7 +18,7 @@ export function createStore<State, Actions extends ActionsType<State>>(
   actions: Actions,
   storeName?: string,
 ) {
-  const context = createContext<StoreValue<State, Actions>>(null as any);
+  const context = createContext<ContextValue<State, Actions>>(null as any);
 
   const Provider = createProvider<State, Actions>(
     initialState,
@@ -26,7 +26,7 @@ export function createStore<State, Actions extends ActionsType<State>>(
     context,
   );
 
-  const Consumer = createConsumer<StoreValue<State, Actions>>(
+  const Consumer = createConsumer<ContextValue<State, Actions>>(
     context,
     storeName,
   );

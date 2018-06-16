@@ -2,7 +2,7 @@ import React, { Component, Context } from "react";
 
 import { ActionsType } from "./ActionsType";
 import { bindActions } from "./bindActions";
-import { StoreValue } from "./StoreValue";
+import { ContextValue } from "./ContextValue";
 
 /**
  * Provides the state and actions to children components.
@@ -14,22 +14,18 @@ import { StoreValue } from "./StoreValue";
 export const createProvider = <State, Actions extends ActionsType<State>>(
   initialState: State,
   actions: Actions,
-  context: Context<StoreValue<State, Actions>>,
+  context: Context<ContextValue<State, Actions>>,
 ) => {
-  class Provider extends Component<{}, StoreValue<State, Actions>> {
+  class Provider extends Component<{}, ContextValue<State, Actions>> {
     constructor(props: {}) {
       super(props);
 
       this.state = {
         ...(initialState as any),
         ...bindActions(this, actions as any),
-        setState: this._setState,
+        setState: this.setState.bind(this),
       };
     }
-
-    private _setState = (update: Partial<State>) => {
-      this.setState(update as Pick<StoreValue<State, Actions>, keyof State>);
-    };
 
     render() {
       const { children } = this.props;
