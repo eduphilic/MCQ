@@ -1,8 +1,8 @@
 import React, { SFC } from "react";
 
 import { DashboardColumnContainer } from "components/DashboardColumnContainer";
-import { ExamBluePrint } from "components/ExamBluePrint";
 import { ExamNavigationStorePlaceholderConsumer } from "components/ExamNavigationStorePlaceholder";
+import { ExamOverviewBluePrint } from "components/ExamOverviewBluePrint";
 import { ExamTemplate } from "components/ExamTemplate";
 
 export const ExamQuiz: SFC<{}> = () => {
@@ -12,7 +12,7 @@ export const ExamQuiz: SFC<{}> = () => {
         <ExamTemplate>
           {page === "overview" && (
             <DashboardColumnContainer>
-              {[<ExamBluePrint key="blue-print" />]}
+              {[<ExamOverviewBluePrint key="blue-print" />]}
             </DashboardColumnContainer>
           )}
         </ExamTemplate>

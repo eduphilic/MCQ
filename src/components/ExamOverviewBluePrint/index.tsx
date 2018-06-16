@@ -14,9 +14,9 @@ import { DashboardTableRow } from "components/DashboardTableRow";
 import { Typography } from "components/Typography";
 
 // tslint:disable-next-line:no-empty-interface
-export interface ExamBluePrintProps {}
+export interface ExamOverviewBluePrintProps {}
 
-export const ExamBluePrint: SFC<ExamBluePrintProps> = props => {
+export const ExamOverviewBluePrint: SFC<ExamOverviewBluePrintProps> = props => {
   const {} = props;
 
   return (
