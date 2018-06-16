@@ -11,4 +11,9 @@ export const examBluePrintInfo: ExamBluePrintInfo = [
   "World War 1",
   "Global Warming",
   "Pollution",
-].map(t => ({ subjectTitle: t, questionCount: 50, marksAllocated: 150 }));
+].map((t, index) => ({
+  id: `${t}-${index}`,
+  subjectTitle: t,
+  questionCount: 50,
+  marksAllocated: 150,
+}));
