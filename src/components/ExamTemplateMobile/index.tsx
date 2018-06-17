@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { BaseSwippableTemplate } from "components/BaseSwippableTemplate";
+import { ExamAppBarMobile } from "components/ExamAppBarMobile";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ExamTemplateMobileProps {}
@@ -23,7 +24,7 @@ export class ExamTemplateMobile extends Component<
   render() {
     const { selectedPane } = this.state;
 
-    const headerNode = <div>Header Node</div>;
+    const headerNode = <ExamAppBarMobile />;
 
     const paneKeyNodeMap = Array.from({ length: 16 }, (_item, index) => ({
       key: index.toString(),

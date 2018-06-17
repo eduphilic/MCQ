@@ -12,6 +12,15 @@ export const examDrawerInfoCardBackground = "#1d304b";
  */
 export const examTimerYellow = "#ffff00";
 
+/**
+ * Dark blue color used on top row of the mobile user exam app bar.
+ */
+export const examAppBarTopRow = "#012250";
+/**
+ * Light blue color used on bottom row of the mobile user exam app bar.
+ */
+export const examAppBarBottomRow = "#203864";
+
 export const examQuestionStatusAnswered = "#2f8d2b";
 export const examQuestionStatusNotAnswered = "#eb5757";
 export const examQuestionStatusMarkedForReview = "#56ccf2";

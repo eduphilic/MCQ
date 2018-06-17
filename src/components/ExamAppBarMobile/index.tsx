@@ -1,3 +1,4 @@
+import { examAppBarBottomRow, examAppBarTopRow } from "common/css/colors";
 import { navigationLinksUser } from "common/structures/navigationLinksUser";
 import React, { SFC } from "react";
 import styled, { withProps } from "styled";
@@ -8,6 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
 import Language from "@material-ui/icons/Language";
 
+import { ExamAppBarTimer } from "components/ExamAppBarTimer";
 // import { Typography } from "components/Typography";
 
 const dashboardLink = navigationLinksUser.find(
@@ -26,7 +28,7 @@ export const ExamAppBarMobile: SFC<ExamAppBarMobileProps> = props => {
   return (
     <DarkTheme>
       <AppBar position="static" color="inherit">
-        <Toolbar>
+        <ToolbarHalfHeightDarkBlueBackground>
           <IconButtonGroup position="left">
             <IconButton>{dashboardLink.iconElement}</IconButton>
 
@@ -34,11 +36,30 @@ export const ExamAppBarMobile: SFC<ExamAppBarMobileProps> = props => {
               <Language />
             </IconButton>
           </IconButtonGroup>
-        </Toolbar>
+
+          <ExamAppBarTimer />
+        </ToolbarHalfHeightDarkBlueBackground>
+
+        <ToolbarHalfHeightLightBlueBackground>
+          <div>placeholder</div>
+        </ToolbarHalfHeightLightBlueBackground>
       </AppBar>
     </DarkTheme>
   );
 };
+
+const ToolbarHalfHeight = styled(Toolbar)`
+  height: 32px;
+  min-height: 32px;
+`;
+
+const ToolbarHalfHeightDarkBlueBackground = styled(ToolbarHalfHeight)`
+  background-color: ${examAppBarTopRow};
+`;
+
+const ToolbarHalfHeightLightBlueBackground = styled(ToolbarHalfHeight)`
+  background-color: ${examAppBarBottomRow};
+`;
 
 const IconButtonGroup = withProps<{ position: "left" | "right" }>()(styled.div)`
   display: flex;
