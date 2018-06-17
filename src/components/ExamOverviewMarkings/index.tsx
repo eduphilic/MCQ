@@ -76,7 +76,9 @@ export const ExamOverviewMarkings: SFC<ExamOverviewMarkingsProps> = props => {
 
   const contents = (
     <CardContent>
-      <DashboardColumnContainer>{nodes}</DashboardColumnContainer>
+      <DashboardColumnContainer interlaced={noCard}>
+        {nodes}
+      </DashboardColumnContainer>
     </CardContent>
   );
 

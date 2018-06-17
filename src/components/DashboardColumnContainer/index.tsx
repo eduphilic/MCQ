@@ -6,19 +6,37 @@ export interface DashboardColumnContainerProps {
    * Elements to arrange within columns.
    */
   children: ReactElement<any>[];
+
+  /**
+   * Interlace the children rather than split them. Instead of splitting by
+   * first half and second half, arrange items by alternating left and right.
+   */
+  interlaced?: boolean;
 }
 
 /**
  * Arranges the supplied children into columns. On mobile, the columns are
- * combined into a single column.
+ * combined into a single column. The first half of children are placed on the
+ * left, the rest on the right.
  */
 export const DashboardColumnContainer: SFC<
   DashboardColumnContainerProps
 > = props => {
-  const { children } = props;
+  const { children, interlaced } = props;
 
-  const left = children.slice(0, Math.ceil(children.length / 2));
-  const right = children.slice(left.length);
+  let left: ReactElement<any>[] = [];
+  let right: ReactElement<any>[] = [];
+
+  if (!interlaced) {
+    left = children.slice(0, Math.ceil(children.length / 2));
+    right = children.slice(left.length);
+  } else {
+    const half = Math.ceil(children.length / 2);
+    for (let i = 0; i < half; i += 1) {
+      left.push(children[i]);
+      if (children[half + i]) left.push(children[half + i]);
+    }
+  }
 
   return (
     <FlexWrapper>
