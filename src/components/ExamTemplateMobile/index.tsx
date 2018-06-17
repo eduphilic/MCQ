@@ -1,10 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, ReactNode } from "react";
 
 import { BaseSwippableTemplate } from "components/BaseSwippableTemplate";
 import { ExamAppBarMobile } from "components/ExamAppBarMobile";
 
-// tslint:disable-next-line:no-empty-interface
-export interface ExamTemplateMobileProps {}
+export interface ExamTemplateMobileProps {
+  /**
+   * Render a static view instead of a swipeable pane.
+   */
+  staticView?: ReactNode;
+}
 
 interface ExamTemplateMobileState {
   selectedPane: number;
@@ -22,6 +26,7 @@ export class ExamTemplateMobile extends Component<
     this.setState({ selectedPane: paneIndex });
 
   render() {
+    const { staticView } = this.props;
     const { selectedPane } = this.state;
 
     const headerNode = <ExamAppBarMobile />;
@@ -37,6 +42,7 @@ export class ExamTemplateMobile extends Component<
         paneKeyNodeMap={paneKeyNodeMap}
         selectedPane={selectedPane}
         onPaneChange={this.handlePaneSwipe}
+        staticView={staticView}
       />
     );
   }

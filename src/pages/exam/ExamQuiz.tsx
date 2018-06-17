@@ -4,13 +4,16 @@ import { DashboardColumnContainer } from "components/DashboardColumnContainer";
 import { ExamNavigationStorePlaceholderConsumer } from "components/ExamNavigationStorePlaceholder";
 import { ExamOverviewBluePrint } from "components/ExamOverviewBluePrint";
 import { ExamOverviewMarkings } from "components/ExamOverviewMarkings";
+import { ExamOverviewMobile } from "components/ExamOverviewMobile";
 import { ExamTemplate } from "components/ExamTemplate";
 
 export const ExamQuiz: SFC<{}> = () => {
   return (
     <ExamNavigationStorePlaceholderConsumer>
       {({ page }) => (
-        <ExamTemplate>
+        <ExamTemplate
+          staticView={page === "overview" ? <ExamOverviewMobile /> : undefined}
+        >
           {page === "overview" && (
             <DashboardColumnContainer>
               {[

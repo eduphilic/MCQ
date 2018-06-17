@@ -9,13 +9,18 @@ import withWidth, {
 import { DashboardTemplate } from "components/DashboardTemplate";
 import { ExamAppBar } from "components/ExamAppBar";
 import { ExamDrawerContents } from "components/ExamDrawerContents";
-import { ExamTemplateMobile } from "components/ExamTemplateMobile";
+import {
+  ExamTemplateMobile,
+  ExamTemplateMobileProps,
+} from "components/ExamTemplateMobile";
 
 // tslint:disable-next-line:no-empty-interface
-export interface ExamTemplateProps extends WithWidthProps {}
+export interface ExamTemplateProps
+  extends WithWidthProps,
+    ExamTemplateMobileProps {}
 
 const ExamTemplate: SFC<ExamTemplateProps> = props => {
-  const { children, width } = props;
+  const { children, width, staticView } = props;
 
   const drawerContentsNode = <ExamDrawerContents />;
   const showMobileTemplate = isWidthDown("sm", width);
@@ -29,7 +34,7 @@ const ExamTemplate: SFC<ExamTemplateProps> = props => {
       {children}
     </DashboardTemplate>
   ) : (
-    <ExamTemplateMobile />
+    <ExamTemplateMobile staticView={staticView} />
   );
 };
 
