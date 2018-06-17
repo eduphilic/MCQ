@@ -34,11 +34,15 @@ const titleNodes = titles.map(t => (
   </Typography>
 ));
 
-// tslint:disable-next-line:no-empty-interface
-export interface ExamOverviewMarkingsProps {}
+export interface ExamOverviewMarkingsProps {
+  /**
+   * Render without wrapping the contents in a Material UI Card component.
+   */
+  noCard?: boolean;
+}
 
 export const ExamOverviewMarkings: SFC<ExamOverviewMarkingsProps> = props => {
-  const {} = props;
+  const { noCard } = props;
 
   const statNodes = stats.map(s => {
     let stat: string | number;
@@ -70,14 +74,20 @@ export const ExamOverviewMarkings: SFC<ExamOverviewMarkingsProps> = props => {
 
   const nodes = [...titleNodes, ...statNodes];
 
+  const contents = (
+    <CardContent>
+      <DashboardColumnContainer>{nodes}</DashboardColumnContainer>
+    </CardContent>
+  );
+
+  if (noCard) return contents;
+
   return (
     <Card>
       <CardHeader
         title={<Typography variant="cardTitle">Markings</Typography>}
       />
-      <CardContent>
-        <DashboardColumnContainer>{nodes}</DashboardColumnContainer>
-      </CardContent>
+      {contents}
     </Card>
   );
 };

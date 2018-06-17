@@ -13,40 +13,50 @@ import TableRow from "@material-ui/core/TableRow";
 import { DashboardTableRow } from "components/DashboardTableRow";
 import { Typography } from "components/Typography";
 
-// tslint:disable-next-line:no-empty-interface
-export interface ExamOverviewBluePrintProps {}
+export interface ExamOverviewBluePrintProps {
+  /**
+   * Render the component without wrapping it with a Material UI Card component.
+   */
+  noCard?: boolean;
+}
 
 export const ExamOverviewBluePrint: SFC<ExamOverviewBluePrintProps> = props => {
-  const {} = props;
+  const { noCard } = props;
+
+  const contents = (
+    <Table>
+      <TableHead>
+        <TableRow>
+          {["Subjects Covered", "No. of Questions", "Marks Allocated"].map(
+            t => (
+              <TableCell key={t}>
+                <Typography variant="tableHeadCell">{t}</Typography>
+              </TableCell>
+            ),
+          )}
+        </TableRow>
+      </TableHead>
+
+      <TableBody>
+        {examBluePrintInfo.map(e => (
+          <DashboardTableRow key={e.id}>
+            <TableCell>{e.subjectTitle}</TableCell>
+            <TableCell>{e.questionCount}</TableCell>
+            <TableCell>{e.marksAllocated}</TableCell>
+          </DashboardTableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+
+  if (noCard) return contents;
 
   return (
     <CardFlexGrow>
       <CardHeader
         title={<Typography variant="cardTitle">Blue Print</Typography>}
       />
-      <Table>
-        <TableHead>
-          <TableRow>
-            {["Subjects Covered", "No. of Questions", "Marks Allocated"].map(
-              t => (
-                <TableCell key={t}>
-                  <Typography variant="tableHeadCell">{t}</Typography>
-                </TableCell>
-              ),
-            )}
-          </TableRow>
-        </TableHead>
-
-        <TableBody>
-          {examBluePrintInfo.map(e => (
-            <DashboardTableRow key={e.id}>
-              <TableCell>{e.subjectTitle}</TableCell>
-              <TableCell>{e.questionCount}</TableCell>
-              <TableCell>{e.marksAllocated}</TableCell>
-            </DashboardTableRow>
-          ))}
-        </TableBody>
-      </Table>
+      {contents}
     </CardFlexGrow>
   );
 };
