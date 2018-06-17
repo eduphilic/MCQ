@@ -7,9 +7,12 @@ import { DarkTheme } from "theme";
 import AppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
+import Apps from "@material-ui/icons/Apps";
+import ChevronRight from "@material-ui/icons/ChevronRight";
 import Language from "@material-ui/icons/Language";
 
 import { ExamAppBarTimer } from "components/ExamAppBarTimer";
+import { Typography } from "components/Typography";
 // import { Typography } from "components/Typography";
 
 const dashboardLink = navigationLinksUser.find(
@@ -37,11 +40,30 @@ export const ExamAppBarMobile: SFC<ExamAppBarMobileProps> = props => {
             </IconButton>
           </IconButtonGroup>
 
-          <ExamAppBarTimer />
+          <AppBarCenterContentWrapper>
+            <ExamAppBarTimer />
+          </AppBarCenterContentWrapper>
+
+          <IconButtonGroup position="right">
+            <ButtonSpacer />
+            <IconButton>
+              <ChevronRight />
+            </IconButton>
+          </IconButtonGroup>
         </ToolbarHalfHeightDarkBlueBackground>
 
         <ToolbarHalfHeightLightBlueBackground>
-          <div>placeholder</div>
+          <IconButtonGroup position="left">
+            <IconButton>
+              <Apps />
+            </IconButton>
+          </IconButtonGroup>
+
+          <AppBarCenterContentWrapper>
+            <Typography>Army Soldier GD Test 1</Typography>
+          </AppBarCenterContentWrapper>
+
+          <Typography variant="cardStatCaption">200 MM</Typography>
         </ToolbarHalfHeightLightBlueBackground>
       </AppBar>
     </DarkTheme>
@@ -61,6 +83,12 @@ const ToolbarHalfHeightLightBlueBackground = styled(ToolbarHalfHeight)`
   background-color: ${examAppBarBottomRow};
 `;
 
+const AppBarCenterContentWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+`;
+
 const IconButtonGroup = withProps<{ position: "left" | "right" }>()(styled.div)`
   display: flex;
 
@@ -68,7 +96,12 @@ const IconButtonGroup = withProps<{ position: "left" | "right" }>()(styled.div)`
     position === "left"
       ? `
           margin-left: -12px;
-          margin-right: 20px;
         `
-      : ""};
+      : `
+          margin-right: -12px;
+        `};
+`;
+
+const ButtonSpacer = styled.div`
+  width: 48px;
 `;
