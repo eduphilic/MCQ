@@ -1,6 +1,6 @@
 import { examBluePrintInfo } from "common/structures/examBluePrintInfo";
 import React, { SFC } from "react";
-import styled from "styled";
+import styled, { withProps } from "styled";
 
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -16,6 +16,8 @@ import { Typography } from "components/Typography";
 export interface ExamOverviewBluePrintProps {
   /**
    * Render the component without wrapping it with a Material UI Card component.
+   *
+   * Also reduce the table cell padding to prevent horizontal overflow.
    */
   noCard?: boolean;
 }
@@ -29,9 +31,9 @@ export const ExamOverviewBluePrint: SFC<ExamOverviewBluePrintProps> = props => {
         <TableRow>
           {["Subjects Covered", "No. of Questions", "Marks Allocated"].map(
             t => (
-              <TableCell key={t}>
+              <TableCellWithResponsivePadding key={t} noCard={noCard}>
                 <Typography variant="tableHeadCell">{t}</Typography>
-              </TableCell>
+              </TableCellWithResponsivePadding>
             ),
           )}
         </TableRow>
@@ -40,9 +42,15 @@ export const ExamOverviewBluePrint: SFC<ExamOverviewBluePrintProps> = props => {
       <TableBody>
         {examBluePrintInfo.map(e => (
           <DashboardTableRow key={e.id}>
-            <TableCell>{e.subjectTitle}</TableCell>
-            <TableCell>{e.questionCount}</TableCell>
-            <TableCell>{e.marksAllocated}</TableCell>
+            <TableCellWithResponsivePadding noCard={noCard}>
+              {e.subjectTitle}
+            </TableCellWithResponsivePadding>
+            <TableCellWithResponsivePadding noCard={noCard}>
+              {e.questionCount}
+            </TableCellWithResponsivePadding>
+            <TableCellWithResponsivePadding noCard={noCard}>
+              {e.marksAllocated}
+            </TableCellWithResponsivePadding>
           </DashboardTableRow>
         ))}
       </TableBody>
@@ -63,4 +71,15 @@ export const ExamOverviewBluePrint: SFC<ExamOverviewBluePrintProps> = props => {
 
 const CardFlexGrow = styled(Card)`
   flex: 1;
+`;
+
+const TableCellWithResponsivePadding = withProps<ExamOverviewBluePrintProps>()(
+  styled(TableCell),
+)`
+  ${({ noCard }) =>
+    noCard
+      ? `
+          padding-right: 0;
+        `
+      : ""}
 `;
