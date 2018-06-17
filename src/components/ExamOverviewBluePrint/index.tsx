@@ -1,6 +1,6 @@
 import { examBluePrintInfo } from "common/structures/examBluePrintInfo";
 import React, { SFC } from "react";
-import styled, { withProps } from "styled";
+import styled from "styled";
 
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -73,13 +73,8 @@ const CardFlexGrow = styled(Card)`
   flex: 1;
 `;
 
-const TableCellWithResponsivePadding = withProps<ExamOverviewBluePrintProps>()(
-  styled(TableCell),
-)`
-  ${({ noCard }) =>
-    noCard
-      ? `
-          padding-right: 0;
-        `
-      : ""}
-`;
+const TableCellWithResponsivePadding: SFC<
+  ExamOverviewBluePrintProps
+> = props => (
+  <TableCell style={{ paddingRight: 0 }}>{props.children}</TableCell>
+);
