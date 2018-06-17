@@ -41,6 +41,13 @@ export interface BaseSwippableTemplateProps {
    * Called when the user slides from one pane to another.
    */
   onPaneChange: (paneIndex: number) => any;
+
+  /**
+   * A static view to render in place of the swipe container. When it is
+   * provided, the swipe behavior is disabled and this component is rendered
+   * instead of the panes.
+   */
+  staticView?: ReactNode;
 }
 
 /**
@@ -75,6 +82,7 @@ export class BaseSwippableTemplate extends Component<
       footerNode,
       selectedPane,
       onPaneChange,
+      staticView,
     } = this.props;
 
     const panes = paneKeyNodeMap.map(({ key, node }) => (
@@ -85,16 +93,20 @@ export class BaseSwippableTemplate extends Component<
       <Wrapper>
         {headerNode}
 
-        <ReactSwipeFlexGrow
-          innerRef={this.reactSwipeRef}
-          swipeOptions={{
-            continuous: false,
-            startSlide: selectedPane,
-            transitionEnd: onPaneChange,
-          }}
-        >
-          {panes}
-        </ReactSwipeFlexGrow>
+        {staticView ? (
+          <StaticViewWrapper>{staticView}</StaticViewWrapper>
+        ) : (
+          <ReactSwipeFlexGrow
+            innerRef={this.reactSwipeRef}
+            swipeOptions={{
+              continuous: false,
+              startSlide: selectedPane,
+              transitionEnd: onPaneChange,
+            }}
+          >
+            {panes}
+          </ReactSwipeFlexGrow>
+        )}
 
         {footerNode}
       </Wrapper>
@@ -107,6 +119,12 @@ const Wrapper = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
+  background-color: ${({ theme }) => theme.palette.background.paper};
+`;
+
+const StaticViewWrapper = styled.div`
+  /* flex: 1; */
+  overflow-y: auto;
 `;
 
 const ReactSwipeFlexGrow = styled(ReactSwipe)`
