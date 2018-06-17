@@ -1,6 +1,6 @@
 import { AccountCardDetails } from "common/icons/AccountCardDetails";
 import { NavigationLinks } from "common/types/NavigationLinks";
-import { pages } from "pages/pages";
+import * as userPages from "pages/user";
 import React from "react";
 
 import Assignment from "@material-ui/icons/Assignment";
@@ -14,25 +14,25 @@ export const navigationLinksUser: NavigationLinks = [
   {
     titleLocalizationKey: "userLinkDashboard",
     to: "/dashboard",
-    component: pages.UserDashboard,
+    component: userPages.UserDashboard,
     iconElement: <Dashboard />,
   },
   {
     titleLocalizationKey: "userLinkExamPack",
     to: "/exam-pack",
-    component: pages.UserExamPack,
+    component: userPages.UserExamPack,
     iconElement: <Assignment />,
   },
   {
     titleLocalizationKey: "userLinkMembership",
     to: "/membership",
-    component: pages.UserMembership,
+    component: userPages.UserMembership,
     iconElement: <AccountCardDetails />,
   },
   {
     titleLocalizationKey: "userLinkSettings",
     to: "/settings",
-    component: pages.UserSettings,
+    component: userPages.UserSettings,
     iconElement: <Settings />,
   },
 ];
