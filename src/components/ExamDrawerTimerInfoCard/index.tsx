@@ -1,4 +1,7 @@
-import { examDrawerInfoCardBackground } from "common/css/colors";
+import {
+  examDrawerInfoCardBackground,
+  examTimerYellow,
+} from "common/css/colors";
 import React, { SFC } from "react";
 import styled from "styled";
 import { UserAppDrawerTheme } from "theme";
@@ -28,7 +31,10 @@ export const ExamDrawerTimerInfoCard: SFC<
           Total Marks: 200
         </Typography>
 
-        <Typography variant="examDrawerTitle" style={{ color: "#ffff00" }}>
+        <Typography
+          variant="examDrawerTitle"
+          style={{ color: examTimerYellow }}
+        >
           00:00:00
         </Typography>
       </Wrapper>
