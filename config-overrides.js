@@ -3,6 +3,7 @@ const path = require("path");
 const {
   rewireWebpack: rewireTypescript,
   rewireJest: rewireTypescriptJest,
+  rewireTSLint,
 } = require("react-app-rewire-typescript-babel-preset");
 const { injectBabelPlugin } = require("react-app-rewired");
 
@@ -15,6 +16,7 @@ module.exports = {
   webpack: function(config, env) {
     // Add TypeScript Babel Preset
     let rewiredConfig = rewireTypescript(config);
+    rewiredConfig = rewireTSLint(rewiredConfig);
 
     // Add Styled Components Babel Plugin
     rewiredConfig = injectBabelPlugin(
