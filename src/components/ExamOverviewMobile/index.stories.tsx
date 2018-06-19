@@ -10,7 +10,7 @@ storiesOf("Components", module).add("ExamOverviewMobile", () => {
   //
 
   return (
-    <ContentCenterWrapper style={{ width: 320, marginTop: 24 }}>
+    <ContentCenterWrapper style={{ width: 320, padding: 0, marginTop: 24 }}>
       <Card>
         <ExamOverviewMobile />
       </Card>

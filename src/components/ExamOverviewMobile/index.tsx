@@ -17,6 +17,11 @@ const overviewTabComponentMap: Record<OverviewTab, ReactElement<any>> = {
   [OverviewTab.Markings]: <ExamOverviewMarkings noCard />,
 };
 
+const overviewTabLabelMap: Record<OverviewTab, string> = {
+  [OverviewTab.BluePrint]: "Blue Print",
+  [OverviewTab.Markings]: "Markings",
+};
+
 // tslint:disable-next-line:no-empty-interface
 export interface ExamOverviewMobileProps {}
 
@@ -43,7 +48,15 @@ export class ExamOverviewMobile extends Component<
       <>
         <Tabs fullWidth value={value} onChange={this.handleTabChange}>
           {keys(overviewTabComponentMap).map(key => (
-            <Tab key={key} value={key} label={<Typography>{key}</Typography>} />
+            <Tab
+              key={key}
+              value={key}
+              label={
+                <Typography style={{ textTransform: "none" }}>
+                  {overviewTabLabelMap[key]}
+                </Typography>
+              }
+            />
           ))}
         </Tabs>
 
