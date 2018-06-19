@@ -30,7 +30,7 @@ export const ExamDrawerQuestionPalette: SFC<
             { color: examQuestionStatusNotAnswered, title: "Not Answered" },
             {
               color: examQuestionStatusMarkedForReview,
-              title: "Marked for Review",
+              title: "For Review",
             },
             {
               color: examQuestionStatusNotVisited,
