@@ -16,7 +16,12 @@ module.exports = {
   webpack: function(config, env) {
     // Add TypeScript Babel Preset
     let rewiredConfig = rewireTypescript(config);
-    rewiredConfig = rewireTSLint(rewiredConfig);
+
+    // Integrate TSLint into terminal output while not running in continuous
+    // integration. On Circle CI, this results in an EPIPE error.
+    if (!process.env.CI) {
+      rewiredConfig = rewireTSLint(rewiredConfig);
+    }
 
     // Add Styled Components Babel Plugin
     rewiredConfig = injectBabelPlugin(
