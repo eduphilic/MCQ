@@ -9,11 +9,10 @@ import { generateTemplateProps } from "../UserTemplate/generateTemplateProps";
 
 const stories = storiesOf("Components", module);
 
-const history = createBrowserHistory();
-history.push("/dashboard");
-
 stories.add("DashboardTemplateMobile", () => {
   const { appBarNode } = generateTemplateProps({ showHamburgerButton: false });
+  const history = createBrowserHistory();
+  history.push("/dashboard");
 
   return (
     <Router history={history}>
