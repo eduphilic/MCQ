@@ -15,13 +15,22 @@ export interface ExamAppBarProps {
   showStartExamButton?: boolean;
 
   /**
+   * Called when the start exam button is clicked.
+   */
+  onStartExamButtonClick?: () => any;
+
+  /**
    * Show the submit button.
    */
   showSubmitButton?: boolean;
 }
 
 export const ExamAppBar: SFC<ExamAppBarProps> = props => {
-  const { showStartExamButton, showSubmitButton } = props;
+  const {
+    showStartExamButton,
+    onStartExamButtonClick,
+    showSubmitButton,
+  } = props;
 
   return (
     <AppBar color="inherit" position="static">
@@ -35,7 +44,9 @@ export const ExamAppBar: SFC<ExamAppBarProps> = props => {
         <FlexSpacer />
 
         {showStartExamButton && (
-          <TypographyButton color="primary">Start Exam</TypographyButton>
+          <TypographyButton color="primary" onClick={onStartExamButtonClick}>
+            Start Exam
+          </TypographyButton>
         )}
 
         {showSubmitButton && <TypographyButton>Submit</TypographyButton>}

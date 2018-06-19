@@ -7,8 +7,9 @@ import withWidth, {
 } from "@material-ui/core/withWidth";
 
 import { DashboardTemplate } from "components/DashboardTemplate";
-import { ExamAppBar } from "components/ExamAppBar";
+import { ExamAppBar, ExamAppBarProps } from "components/ExamAppBar";
 import { ExamDrawerContents } from "components/ExamDrawerContents";
+import { ExamNavigationStorePlaceholderConsumer } from "components/ExamNavigationStorePlaceholder";
 import {
   ExamTemplateMobile,
   ExamTemplateMobileProps,
@@ -25,16 +26,27 @@ const ExamTemplate: SFC<ExamTemplateProps> = props => {
   const drawerContentsNode = <ExamDrawerContents />;
   const showMobileTemplate = isWidthDown("sm", width);
 
-  return !showMobileTemplate ? (
-    <DashboardTemplate
-      appBarNode={<ExamAppBar showStartExamButton />}
-      drawerContentsNode={drawerContentsNode}
-      drawerThemeElement={<UserAppDrawerTheme />}
-    >
-      {children}
-    </DashboardTemplate>
-  ) : (
-    <ExamTemplateMobile staticView={staticView} />
+  return (
+    <ExamNavigationStorePlaceholderConsumer>
+      {store => {
+        const examAppBarProps: ExamAppBarProps = {
+          showStartExamButton: store.page === "overview",
+          onStartExamButtonClick: store.startExam,
+        };
+
+        return !showMobileTemplate ? (
+          <DashboardTemplate
+            appBarNode={<ExamAppBar {...examAppBarProps} />}
+            drawerContentsNode={drawerContentsNode}
+            drawerThemeElement={<UserAppDrawerTheme />}
+          >
+            {children}
+          </DashboardTemplate>
+        ) : (
+          <ExamTemplateMobile staticView={staticView} {...examAppBarProps} />
+        );
+      }}
+    </ExamNavigationStorePlaceholderConsumer>
   );
 };
 

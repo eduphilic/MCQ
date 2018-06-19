@@ -11,6 +11,7 @@ import Apps from "@material-ui/icons/Apps";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import Language from "@material-ui/icons/Language";
 
+import { ExamAppBarProps } from "components/ExamAppBar";
 import { ExamAppBarTimer } from "components/ExamAppBarTimer";
 import { Typography } from "components/Typography";
 import { ExamQuestionPalettePopup } from "./ExamQuestionPalettePopup";
@@ -23,10 +24,10 @@ if (!dashboardLink) {
 }
 
 // tslint:disable-next-line:no-empty-interface
-export interface ExamAppBarMobileProps {}
+export interface ExamAppBarMobileProps extends ExamAppBarProps {}
 
 export const ExamAppBarMobile: SFC<ExamAppBarMobileProps> = props => {
-  const {} = props;
+  const { showStartExamButton, onStartExamButtonClick } = props;
 
   return (
     <DarkTheme>
@@ -46,9 +47,13 @@ export const ExamAppBarMobile: SFC<ExamAppBarMobileProps> = props => {
 
           <IconButtonGroup position="right">
             <ButtonSpacer />
-            <IconButton>
-              <ChevronRight />
-            </IconButton>
+            {showStartExamButton ? (
+              <IconButton onClick={onStartExamButtonClick}>
+                <ChevronRight />
+              </IconButton>
+            ) : (
+              <ButtonSpacer />
+            )}
           </IconButtonGroup>
         </ToolbarHalfHeightDarkBlueBackground>
 

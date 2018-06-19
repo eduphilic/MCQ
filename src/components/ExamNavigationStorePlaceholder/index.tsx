@@ -5,7 +5,7 @@ const examNavigationStorePlaceholder = createStore(
     page: "overview" as "overview" | number,
   },
   {
-    test: () => () => ({}),
+    startExam: () => () => ({ page: 0 }),
   },
   "ExamNavigationStorePlaceholder",
 );

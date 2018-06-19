@@ -1,9 +1,12 @@
 import React, { Component, ReactNode } from "react";
 
 import { BaseSwippableTemplate } from "components/BaseSwippableTemplate";
-import { ExamAppBarMobile } from "components/ExamAppBarMobile";
+import {
+  ExamAppBarMobile,
+  ExamAppBarMobileProps,
+} from "components/ExamAppBarMobile";
 
-export interface ExamTemplateMobileProps {
+export interface ExamTemplateMobileProps extends ExamAppBarMobileProps {
   /**
    * Render a static view instead of a swipeable pane.
    */
@@ -26,10 +29,10 @@ export class ExamTemplateMobile extends Component<
     this.setState({ selectedPane: paneIndex });
 
   render() {
-    const { staticView } = this.props;
+    const { staticView, ...rest } = this.props;
     const { selectedPane } = this.state;
 
-    const headerNode = <ExamAppBarMobile />;
+    const headerNode = <ExamAppBarMobile {...rest} />;
 
     const paneKeyNodeMap = Array.from({ length: 16 }, (_item, index) => ({
       key: index.toString(),
