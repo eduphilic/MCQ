@@ -13,7 +13,7 @@ import Language from "@material-ui/icons/Language";
 
 import { ExamAppBarTimer } from "components/ExamAppBarTimer";
 import { Typography } from "components/Typography";
-// import { Typography } from "components/Typography";
+import { ExamQuestionPalettePopup } from "./ExamQuestionPalettePopup";
 
 const dashboardLink = navigationLinksUser.find(
   l => l.titleLocalizationKey === "userLinkDashboard",
@@ -54,9 +54,11 @@ export const ExamAppBarMobile: SFC<ExamAppBarMobileProps> = props => {
 
         <ToolbarHalfHeightLightBlueBackground>
           <IconButtonGroup position="left">
-            <IconButton>
-              <Apps />
-            </IconButton>
+            <ExamQuestionPalettePopup>
+              <IconButton>
+                <Apps />
+              </IconButton>
+            </ExamQuestionPalettePopup>
           </IconButtonGroup>
 
           <AppBarCenterContentWrapper>
