@@ -11,6 +11,11 @@ export interface ExamTemplateMobileProps extends ExamAppBarMobileProps {
    * Render a static view instead of a swipeable pane.
    */
   staticView?: ReactNode;
+
+  /**
+   * The swippable exam pages.
+   */
+  paneKeyNodeMap: { key: string; node: ReactNode }[];
 }
 
 interface ExamTemplateMobileState {
@@ -29,15 +34,10 @@ export class ExamTemplateMobile extends Component<
     this.setState({ selectedPane: paneIndex });
 
   render() {
-    const { staticView, ...rest } = this.props;
+    const { staticView, paneKeyNodeMap, ...rest } = this.props;
     const { selectedPane } = this.state;
 
     const headerNode = <ExamAppBarMobile {...rest} />;
-
-    const paneKeyNodeMap = Array.from({ length: 16 }, (_item, index) => ({
-      key: index.toString(),
-      node: <div>{index}</div>,
-    }));
 
     return (
       <BaseSwippableTemplate

@@ -1,10 +1,15 @@
 import { storiesOf } from "@storybook/react";
+import { examPaneKeyNodeMap } from "common/structures/examPaneKeyNodeMap";
 import React from "react";
 
 import { ExamTemplateMobile } from ".";
 
 storiesOf("Components", module).add("ExamTemplateMobile", () => {
-  //
+  const paneKeyNodeMap = examPaneKeyNodeMap;
 
-  return <ExamTemplateMobile>Placeholder</ExamTemplateMobile>;
+  return (
+    <ExamTemplateMobile paneKeyNodeMap={paneKeyNodeMap}>
+      Placeholder
+    </ExamTemplateMobile>
+  );
 });

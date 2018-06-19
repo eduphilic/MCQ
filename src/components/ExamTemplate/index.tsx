@@ -7,7 +7,7 @@ import withWidth, {
 } from "@material-ui/core/withWidth";
 
 import { DashboardTemplate } from "components/DashboardTemplate";
-import { ExamAppBar, ExamAppBarProps } from "components/ExamAppBar";
+import { ExamAppBar } from "components/ExamAppBar";
 import { ExamDrawerContents } from "components/ExamDrawerContents";
 import { ExamNavigationStorePlaceholderConsumer } from "components/ExamNavigationStorePlaceholder";
 import {
@@ -21,7 +21,7 @@ export interface ExamTemplateProps
     ExamTemplateMobileProps {}
 
 const ExamTemplate: SFC<ExamTemplateProps> = props => {
-  const { children, width, staticView } = props;
+  const { children, width, staticView, paneKeyNodeMap } = props;
 
   const drawerContentsNode = <ExamDrawerContents />;
   const showMobileTemplate = isWidthDown("sm", width);
@@ -29,9 +29,10 @@ const ExamTemplate: SFC<ExamTemplateProps> = props => {
   return (
     <ExamNavigationStorePlaceholderConsumer>
       {store => {
-        const examAppBarProps: ExamAppBarProps = {
+        const examAppBarProps: ExamTemplateMobileProps = {
           showStartExamButton: store.page === "overview",
           onStartExamButtonClick: store.startExam,
+          paneKeyNodeMap,
         };
 
         return !showMobileTemplate ? (
