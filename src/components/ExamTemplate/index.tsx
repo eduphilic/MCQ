@@ -1,4 +1,5 @@
 import React, { SFC } from "react";
+import { Prompt } from "react-router-dom";
 import { UserAppDrawerTheme } from "theme";
 
 import withWidth, {
@@ -35,16 +36,25 @@ const ExamTemplate: SFC<ExamTemplateProps> = props => {
           paneKeyNodeMap,
         };
 
-        return !showMobileTemplate ? (
-          <DashboardTemplate
-            appBarNode={<ExamAppBar {...examAppBarProps} />}
-            drawerContentsNode={drawerContentsNode}
-            drawerThemeElement={<UserAppDrawerTheme />}
-          >
-            {children}
-          </DashboardTemplate>
-        ) : (
-          <ExamTemplateMobile staticView={staticView} {...examAppBarProps} />
+        return (
+          <>
+            <Prompt message="You have an exam in progress, are you sure you want to leave?" />
+
+            {!showMobileTemplate ? (
+              <DashboardTemplate
+                appBarNode={<ExamAppBar {...examAppBarProps} />}
+                drawerContentsNode={drawerContentsNode}
+                drawerThemeElement={<UserAppDrawerTheme />}
+              >
+                {children}
+              </DashboardTemplate>
+            ) : (
+              <ExamTemplateMobile
+                staticView={staticView}
+                {...examAppBarProps}
+              />
+            )}
+          </>
         );
       }}
     </ExamNavigationStorePlaceholderConsumer>
