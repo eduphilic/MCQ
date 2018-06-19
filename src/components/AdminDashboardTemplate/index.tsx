@@ -14,7 +14,7 @@ import {
   SideSheetProps,
   SideSheetToggleButton,
   SideSheetToggleButtonProps,
-  SideSheetToggleStateProvider,
+  SideSheetToggleStoreProvider,
 } from "components/SideSheet";
 
 import { navigationLinksAdmin } from "common/structures/navigationLinksAdmin";
@@ -62,24 +62,24 @@ export const AdminDashboardTemplate: SFC<
   const drawerContentsNode = <DrawerContents links={navigationLinksAdmin} />;
 
   const PageContentsWrapper: SFC<{}> = ({ children: wrapperChildren }) => (
-    <SideSheetToggleStateProvider>
-      <SideSheet
-        sideSheetTitle={sideSheetTitle}
-        sideSheetContents={sideSheetContents}
-      >
-        {wrapperChildren}
-      </SideSheet>
-    </SideSheetToggleStateProvider>
+    <SideSheet
+      sideSheetTitle={sideSheetTitle}
+      sideSheetContents={sideSheetContents}
+    >
+      {wrapperChildren}
+    </SideSheet>
   );
 
   return (
-    <DashboardTemplate
-      appBarNode={appBarNode}
-      drawerContentsNode={drawerContentsNode}
-      drawerThemeElement={<AdminAppDrawerTheme />}
-      pageContentsWrapperComponent={PageContentsWrapper}
-    >
-      {children}
-    </DashboardTemplate>
+    <SideSheetToggleStoreProvider>
+      <DashboardTemplate
+        appBarNode={appBarNode}
+        drawerContentsNode={drawerContentsNode}
+        drawerThemeElement={<AdminAppDrawerTheme />}
+        pageContentsWrapperComponent={PageContentsWrapper}
+      >
+        {children}
+      </DashboardTemplate>
+    </SideSheetToggleStoreProvider>
   );
 };

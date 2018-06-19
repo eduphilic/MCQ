@@ -5,7 +5,8 @@ import Drawer from "@material-ui/core/Drawer";
 import Paper from "@material-ui/core/Paper";
 
 import { Typography } from "components/Typography";
-import { SideSheetToggleStateConsumer } from "./SideSheetToggleState";
+// import { SideSheetToggleStateConsumer } from "./SideSheetToggleState";
+import { SideSheetToggleStoreConsumer } from "./SideSheetToggleStore";
 
 export interface SideSheetProps {
   sideSheetTitle?: string;
@@ -37,12 +38,14 @@ export class SideSheet extends Component<SideSheetProps> {
     const sheetHasContents = Boolean(sideSheetContents);
 
     return (
-      <SideSheetToggleStateConsumer>
-        {api => {
-          const fixedSheetVisible = sheetHasContents && api.fixedPanelVisible;
+      <SideSheetToggleStoreConsumer>
+        {store => {
+          const fixedSheetVisible = sheetHasContents && store.fixedPanelVisible;
 
-          if (api.toggleButtonVisibility !== sheetHasContents) {
-            api.setToggleButtonVisibility(sheetHasContents);
+          if (store.toggleButtonVisibility !== sheetHasContents) {
+            setTimeout(() => {
+              store.setToggleButtonVisibility(sheetHasContents);
+            }, 166);
           }
 
           return (
@@ -57,8 +60,8 @@ export class SideSheet extends Component<SideSheetProps> {
                 <DrawerWithMobileWidth
                   anchor="right"
                   elevation={2}
-                  onClose={api.toggleOpen}
-                  open={api.open}
+                  onClose={store.toggleOpen}
+                  open={store.open}
                 >
                   {panelNode}
                 </DrawerWithMobileWidth>
@@ -66,7 +69,7 @@ export class SideSheet extends Component<SideSheetProps> {
             </SplitContainer>
           );
         }}
-      </SideSheetToggleStateConsumer>
+      </SideSheetToggleStoreConsumer>
     );
   }
 }

@@ -1,3 +1,3 @@
 export * from "./SideSheet";
 export * from "./SideSheetToggleButton";
-export * from "./SideSheetToggleState";
+export * from "./SideSheetToggleStore";

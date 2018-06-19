@@ -3,7 +3,7 @@ import React, { Component, ReactElement } from "react";
 import FilterList from "@material-ui/icons/FilterList";
 
 import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
-import { SideSheetToggleStateConsumer } from "./SideSheetToggleState";
+import { SideSheetToggleStoreConsumer } from "./SideSheetToggleStore";
 
 export interface SideSheetToggleButtonProps {
   /**
@@ -32,19 +32,19 @@ export class SideSheetToggleButton extends Component<
     } = this.props;
 
     return (
-      <SideSheetToggleStateConsumer>
-        {api =>
-          api.toggleButtonVisibility &&
-          !api.fixedPanelVisible && (
+      <SideSheetToggleStoreConsumer>
+        {store =>
+          store.toggleButtonVisibility &&
+          !store.fixedPanelVisible && (
             <ResponsiveToolbarTypographyButton
               dense
               iconNode={sideSheetIconElement}
               tooltipTitle={sideSheetIconTooltipTitle}
-              onClick={api.toggleOpen}
+              onClick={store.toggleOpen}
             />
           )
         }
-      </SideSheetToggleStateConsumer>
+      </SideSheetToggleStoreConsumer>
     );
   }
 }
