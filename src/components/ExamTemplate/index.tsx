@@ -9,6 +9,7 @@ import withWidth, {
 
 import { DashboardTemplate } from "components/DashboardTemplate";
 import { ExamAppBar } from "components/ExamAppBar";
+import { ExamBottomNavFrame } from "components/ExamBottomNavFrame";
 import { ExamDrawerContents } from "components/ExamDrawerContents";
 import { ExamNavigationStorePlaceholderConsumer } from "components/ExamNavigationStorePlaceholder";
 import {
@@ -45,6 +46,9 @@ const ExamTemplate: SFC<ExamTemplateProps> = props => {
                 appBarNode={<ExamAppBar {...examAppBarProps} />}
                 drawerContentsNode={drawerContentsNode}
                 drawerThemeElement={<UserAppDrawerTheme />}
+                pageContentsWrapperComponent={
+                  store.page !== "overview" ? ExamBottomNavFrame : undefined
+                }
               >
                 {children}
               </DashboardTemplate>
