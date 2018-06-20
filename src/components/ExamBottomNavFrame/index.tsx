@@ -7,6 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
 
 import { TypographyButton } from "components/TypographyButton";
+import { ExamNavigationStorePlaceholderConsumer } from "../ExamNavigationStorePlaceholder";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ExamBottomNavFrameProps {}
@@ -19,15 +20,33 @@ export const ExamBottomNavFrame: SFC<ExamBottomNavFrameProps> = props => {
       <PageContentsWrapper>{children}</PageContentsWrapper>
 
       <PaperWithBoxShadowUpperDirection>
-        <ToolbarWithButtonMargins>
-          <TypographyButton>Mark for Review</TypographyButton>
-          <TypographyButton>Clear</TypographyButton>
+        <ExamNavigationStorePlaceholderConsumer>
+          {store => (
+            <ToolbarWithButtonMargins>
+              <TypographyButton>Mark for Review</TypographyButton>
+              <TypographyButton>Clear</TypographyButton>
 
-          <ToolbarSpacer />
+              <ToolbarSpacer />
 
-          <TypographyButton>Previous</TypographyButton>
-          <TypographyButton>Next</TypographyButton>
-        </ToolbarWithButtonMargins>
+              <TypographyButton
+                disabled={!store.previousButtonEnabled}
+                onClick={store.navigatePreviousQuestion}
+              >
+                Previous
+              </TypographyButton>
+
+              {!store.showSubmitExamButton ? (
+                <TypographyButton onClick={store.navigateNextQuestion}>
+                  Next
+                </TypographyButton>
+              ) : (
+                <TypographyButton color="yellow" filled>
+                  Submit Exam
+                </TypographyButton>
+              )}
+            </ToolbarWithButtonMargins>
+          )}
+        </ExamNavigationStorePlaceholderConsumer>
       </PaperWithBoxShadowUpperDirection>
     </Wrapper>
   );

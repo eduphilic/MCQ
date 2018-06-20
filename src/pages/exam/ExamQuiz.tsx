@@ -13,12 +13,12 @@ export const ExamQuiz: SFC<{}> = () => {
 
   return (
     <ExamNavigationStorePlaceholderConsumer>
-      {({ page }) => (
+      {({ showOverviewPage, page }) => (
         <ExamTemplate
-          staticView={page === "overview" ? <ExamOverviewMobile /> : undefined}
+          staticView={showOverviewPage ? <ExamOverviewMobile /> : undefined}
           paneKeyNodeMap={paneKeyNodeMap}
         >
-          {page === "overview" ? (
+          {showOverviewPage ? (
             <DashboardColumnContainer>
               {[
                 <ExamOverviewBluePrint key="blue-print" />,

@@ -32,7 +32,7 @@ const ExamTemplate: SFC<ExamTemplateProps> = props => {
     <ExamNavigationStorePlaceholderConsumer>
       {store => {
         const examAppBarProps: ExamTemplateMobileProps = {
-          showStartExamButton: store.page === "overview",
+          showStartExamButton: store.showOverviewPage,
           onStartExamButtonClick: store.startExam,
           paneKeyNodeMap,
         };
@@ -47,7 +47,7 @@ const ExamTemplate: SFC<ExamTemplateProps> = props => {
                 drawerContentsNode={drawerContentsNode}
                 drawerThemeElement={<UserAppDrawerTheme />}
                 pageContentsWrapperComponent={
-                  store.page !== "overview" ? ExamBottomNavFrame : undefined
+                  !store.showOverviewPage ? ExamBottomNavFrame : undefined
                 }
               >
                 {children}
