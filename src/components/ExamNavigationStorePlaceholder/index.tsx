@@ -19,6 +19,19 @@ const questionCategories: QuestionCategory[] = [
   { title: "Maths", questionCount: 5 },
 ];
 
+const touchQuestion = (
+  questionIndex: number,
+  questions: Question[],
+): Question[] => {
+  if (questions[questionIndex].status !== "not-visited") return questions;
+
+  return [
+    ...questions.slice(0, questionIndex),
+    { ...questions[questionIndex], status: "not-answered" },
+    ...questions.slice(questionIndex + 1),
+  ];
+};
+
 const examNavigationStorePlaceholder = createStore(
   {
     showOverviewPage: true,
@@ -31,16 +44,21 @@ const examNavigationStorePlaceholder = createStore(
     showSubmitExamButton: false,
   },
   {
-    startExam: () => () => ({ showOverviewPage: false }),
+    startExam: () => state => ({
+      showOverviewPage: false,
+      questions: touchQuestion(0, state.questions),
+    }),
     navigatePreviousQuestion: () => state => ({
       currentQuestion: state.currentQuestion - 1,
       previousButtonEnabled: state.currentQuestion - 1 > 0,
       showSubmitExamButton: false,
+      questions: touchQuestion(state.currentQuestion - 1, state.questions),
     }),
     navigateNextQuestion: () => state => ({
       currentQuestion: state.currentQuestion + 1,
       previousButtonEnabled: true,
       showSubmitExamButton: state.currentQuestion + 1 === 14,
+      questions: touchQuestion(state.currentQuestion + 1, state.questions),
     }),
   },
   "ExamNavigationStorePlaceholder",
