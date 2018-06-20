@@ -1,4 +1,3 @@
-import { examQuestionNavigationState } from "common/structures/examQuestionNavigationState";
 import React, { SFC } from "react";
 import styled from "styled";
 
@@ -21,7 +20,7 @@ export const ExamDrawerContents: SFC<ExamDrawerContentsProps> = props => {
 
       <ExamDrawerQuestionPalette />
 
-      <ExamDrawerQuestionSelect navigationState={examQuestionNavigationState} />
+      <ExamDrawerQuestionSelect />
     </Wrapper>
   );
 };

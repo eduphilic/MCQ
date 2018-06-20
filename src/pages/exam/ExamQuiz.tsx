@@ -13,7 +13,7 @@ export const ExamQuiz: SFC<{}> = () => {
 
   return (
     <ExamNavigationStorePlaceholderConsumer>
-      {({ showOverviewPage, page }) => (
+      {({ showOverviewPage, currentQuestion }) => (
         <ExamTemplate
           staticView={showOverviewPage ? <ExamOverviewMobile /> : undefined}
           paneKeyNodeMap={paneKeyNodeMap}
@@ -26,7 +26,7 @@ export const ExamQuiz: SFC<{}> = () => {
               ]}
             </DashboardColumnContainer>
           ) : (
-            paneKeyNodeMap[page].node
+            paneKeyNodeMap[currentQuestion].node
           )}
         </ExamTemplate>
       )}

@@ -5,54 +5,59 @@ import {
   examQuestionStatusNotVisited,
   examQuestionStatusSelected,
 } from "common/css/colors";
-import { ExamQuestionNavigationState } from "common/types/ExamQuestionNavigationState";
 import React, { Component } from "react";
 import styled, { withProps } from "styled";
 
+import {
+  ExamNavigationStorePlaceholderConsumer,
+  Question,
+} from "components/ExamNavigationStorePlaceholder";
 import { Typography } from "components/Typography";
 
-export interface ExamDrawerQuestionSelectProps {
-  navigationState: ExamQuestionNavigationState;
-}
+// tslint:disable-next-line:no-empty-interface
+export interface ExamDrawerQuestionSelectProps {}
 
 export class ExamDrawerQuestionSelect extends Component<
   ExamDrawerQuestionSelectProps
 > {
   render() {
-    const { navigationState } = this.props;
+    return (
+      <ExamNavigationStorePlaceholderConsumer>
+        {store => {
+          let nextQuestion = 0;
+          const sections = store.questionCategories.map(c => {
+            const node = (
+              <Section key={c.title}>
+                <Typography variant="examDrawerSubtitle">{c.title}</Typography>
+                <QuestionButtonWrapper>
+                  {store.questions
+                    .slice(nextQuestion, nextQuestion + c.questionCount)
+                    .map((q, index) => (
+                      <QuestionButton
+                        key={`${c.title}-${index}`}
+                        status={q.status}
+                        selected={
+                          !store.showOverviewPage &&
+                          store.currentQuestion === nextQuestion + index
+                        }
+                      >
+                        <Typography style={{ color: "inherit" }}>
+                          {index + 1}
+                        </Typography>
+                      </QuestionButton>
+                    ))}
+                </QuestionButtonWrapper>
+              </Section>
+            );
 
-    let nextQuestion = 0;
-    const sections = navigationState.categories.map(c => {
-      const node = (
-        <Section key={c.title}>
-          <Typography variant="examDrawerSubtitle">{c.title}</Typography>
+            nextQuestion += c.questionCount;
+            return node;
+          });
 
-          <QuestionButtonWrapper>
-            {navigationState.questions
-              .slice(nextQuestion, nextQuestion + c.questionCount)
-              .map((q, index) => (
-                <QuestionButton
-                  key={`${c.title}-${index}`}
-                  status={q.status}
-                  selected={
-                    navigationState.currentQuestion === nextQuestion + index
-                  }
-                >
-                  <Typography style={{ color: "inherit" }}>
-                    {index + 1}
-                  </Typography>
-                </QuestionButton>
-              ))}
-          </QuestionButtonWrapper>
-        </Section>
-      );
-
-      nextQuestion += c.questionCount;
-
-      return node;
-    });
-
-    return <Wrapper>{sections}</Wrapper>;
+          return <Wrapper>{sections}</Wrapper>;
+        }}
+      </ExamNavigationStorePlaceholderConsumer>
+    );
   }
 }
 
@@ -96,7 +101,7 @@ const statusColorMap: Record<
 };
 
 interface QuestionButtonProps {
-  status: ExamQuestionNavigationState["questions"][0]["status"];
+  status: Question["status"];
   selected: boolean;
 }
 
