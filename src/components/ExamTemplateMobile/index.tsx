@@ -1,10 +1,11 @@
-import React, { Component, ReactNode } from "react";
+import React, { ReactNode, SFC } from "react";
 
 import { BaseSwippableTemplate } from "components/BaseSwippableTemplate";
 import {
   ExamAppBarMobile,
   ExamAppBarMobileProps,
 } from "components/ExamAppBarMobile";
+import { ExamNavigationStorePlaceholderConsumer } from "components/ExamNavigationStorePlaceholder";
 
 export interface ExamTemplateMobileProps extends ExamAppBarMobileProps {
   /**
@@ -18,35 +19,22 @@ export interface ExamTemplateMobileProps extends ExamAppBarMobileProps {
   paneKeyNodeMap: { key: string; node: ReactNode }[];
 }
 
-interface ExamTemplateMobileState {
-  selectedPane: number;
-}
+export const ExamTemplateMobile: SFC<ExamTemplateMobileProps> = props => {
+  const { staticView, paneKeyNodeMap, ...rest } = props;
 
-export class ExamTemplateMobile extends Component<
-  ExamTemplateMobileProps,
-  ExamTemplateMobileState
-> {
-  state: ExamTemplateMobileState = {
-    selectedPane: 0,
-  };
+  const headerNode = <ExamAppBarMobile {...rest} />;
 
-  private handlePaneSwipe = (paneIndex: number) =>
-    this.setState({ selectedPane: paneIndex });
-
-  render() {
-    const { staticView, paneKeyNodeMap, ...rest } = this.props;
-    const { selectedPane } = this.state;
-
-    const headerNode = <ExamAppBarMobile {...rest} />;
-
-    return (
-      <BaseSwippableTemplate
-        headerNode={headerNode}
-        paneKeyNodeMap={paneKeyNodeMap}
-        selectedPane={selectedPane}
-        onPaneChange={this.handlePaneSwipe}
-        staticView={staticView}
-      />
-    );
-  }
-}
+  return (
+    <ExamNavigationStorePlaceholderConsumer>
+      {store => (
+        <BaseSwippableTemplate
+          headerNode={headerNode}
+          paneKeyNodeMap={paneKeyNodeMap}
+          selectedPane={store.currentQuestion}
+          onPaneChange={store.navigateToQuestion}
+          staticView={staticView}
+        />
+      )}
+    </ExamNavigationStorePlaceholderConsumer>
+  );
+};

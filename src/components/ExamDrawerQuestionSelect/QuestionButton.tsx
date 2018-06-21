@@ -22,8 +22,6 @@ export interface QuestionButtonProps
 class QuestionButtonBase extends Component<QuestionButtonProps> {
   private handleClick = () => {
     this.props.onNavigate(this.props.questionIndex);
-    /* tslint:disable-next-line:no-console */
-    console.log("this.props.questionIndex", this.props.questionIndex);
   };
 
   render() {
