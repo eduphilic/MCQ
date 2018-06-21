@@ -1,18 +1,9 @@
-import {
-  examQuestionStatusAnswered,
-  examQuestionStatusMarkedForReview,
-  examQuestionStatusNotAnswered,
-  examQuestionStatusNotVisited,
-  examQuestionStatusSelected,
-} from "common/css/colors";
 import React, { Component } from "react";
-import styled, { withProps } from "styled";
+import styled from "styled";
 
-import {
-  ExamNavigationStorePlaceholderConsumer,
-  Question,
-} from "components/ExamNavigationStorePlaceholder";
+import { ExamNavigationStorePlaceholderConsumer } from "components/ExamNavigationStorePlaceholder";
 import { Typography } from "components/Typography";
+import { QuestionButton } from "./QuestionButton";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ExamDrawerQuestionSelectProps {}
@@ -40,6 +31,8 @@ export class ExamDrawerQuestionSelect extends Component<
                           !store.showOverviewPage &&
                           store.currentQuestion === nextQuestion + index
                         }
+                        questionIndex={index + nextQuestion}
+                        onNavigate={store.navigateToQuestion}
                       >
                         <Typography style={{ color: "inherit" }}>
                           {index + 1}
@@ -79,43 +72,4 @@ const QuestionButtonWrapper = styled.div`
   justify-items: center;
   flex-wrap: wrap;
   width: 100%;
-`;
-
-const statusColorMap: Record<
-  QuestionButtonProps["status"],
-  { color: string; backgroundColor: string }
-> = {
-  answered: { color: "#fff", backgroundColor: examQuestionStatusAnswered },
-  "not-answered": {
-    color: "#000",
-    backgroundColor: examQuestionStatusNotAnswered,
-  },
-  "marked-for-review": {
-    color: "#000",
-    backgroundColor: examQuestionStatusMarkedForReview,
-  },
-  "not-visited": {
-    color: "#000",
-    backgroundColor: examQuestionStatusNotVisited,
-  },
-};
-
-interface QuestionButtonProps {
-  status: Question["status"];
-  selected: boolean;
-}
-
-const QuestionButton = withProps<QuestionButtonProps>()(styled.button)`
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  margin: 0 4px;
-  margin-bottom: 8px;
-  color: ${({ status }) => statusColorMap[status].color};
-  background-color: ${({ status }) => statusColorMap[status].backgroundColor};
-  border: ${({ selected }) =>
-    selected ? `2px solid ${examQuestionStatusSelected}` : "none"};
-  border-radius: 50%;
-  outline: none;
-  cursor: pointer;
 `;
