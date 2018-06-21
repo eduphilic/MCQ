@@ -37,17 +37,21 @@ export class ExamQuestionPalettePopup extends Component<
     anchorEl: null,
   };
 
-  handleClick: EventHandler<MouseEvent<HTMLElement>> = event =>
+  handleToggleButtonClick: EventHandler<MouseEvent<HTMLElement>> = event =>
     this.setState({ anchorEl: event.currentTarget });
 
   handleClose = () => this.setState({ anchorEl: null });
+
+  handleClick = () => {
+    this.handleClose();
+  };
 
   render() {
     const { children } = this.props;
     const { anchorEl } = this.state;
 
     const childWithOnClick = cloneElement(children, {
-      onClick: this.handleClick,
+      onClick: this.handleToggleButtonClick,
     });
 
     return (
@@ -55,6 +59,7 @@ export class ExamQuestionPalettePopup extends Component<
         {childWithOnClick}
 
         <Popover
+          onClick={this.handleClick}
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
           anchorEl={anchorEl ? anchorEl : undefined}
