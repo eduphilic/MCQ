@@ -11,6 +11,7 @@ import styled from "styled";
 import Popover from "@material-ui/core/Popover";
 
 import { ExamDrawerQuestionPalette } from "components/ExamDrawerQuestionPalette";
+import { ExamDrawerQuestionSelect } from "components/ExamDrawerQuestionSelect";
 
 export interface ExamQuestionPalettePopupProps {
   /**
@@ -68,6 +69,7 @@ export class ExamQuestionPalettePopup extends Component<
         >
           <ExamPaletteWrapper>
             <ExamDrawerQuestionPalette />
+            <ExamDrawerQuestionSelect />
           </ExamPaletteWrapper>
         </Popover>
       </>
@@ -77,4 +79,6 @@ export class ExamQuestionPalettePopup extends Component<
 
 const ExamPaletteWrapper = styled.div`
   max-width: ${drawerWidth}px;
+
+  background-color: #1d304b;
 `;
