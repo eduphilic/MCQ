@@ -1,10 +1,10 @@
 import { bottomNavBoxShadow } from "common/css/bottomNavBoxShadow";
 import { examAppBarTopRow } from "common/css/colors";
 import React, { SFC } from "react";
-import styled, { css, withProps } from "styled";
+import styled, { css } from "styled";
 import { AdminAppDrawerTheme } from "theme";
 
-import IconButton from "@material-ui/core/IconButton";
+import IconButton, { IconButtonProps } from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
 import Check from "@material-ui/icons/Check";
@@ -51,10 +51,9 @@ const ToolbarHalfHeight = styled(Toolbar)`
   ${toolbarHeight};
 `;
 
-const IconButtonLessMargin = withProps<{
-  lessLeftMargin?: boolean;
-  lessRightMargin?: boolean;
-}>()(styled(IconButton))`
+const IconButtonLessMargin = styled<
+  IconButtonProps & { lessLeftMargin?: boolean; lessRightMargin?: boolean }
+>(({ lessLeftMargin, lessRightMargin, ...rest }) => <IconButton {...rest} />)`
   ${toolbarHeight};
   ${({ lessLeftMargin }) => (lessLeftMargin ? `margin-left: -12px` : "")};
   ${({ lessRightMargin }) => (lessRightMargin ? `margin-right: -12px` : "")};
