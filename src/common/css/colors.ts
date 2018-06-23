@@ -26,3 +26,6 @@ export const examQuestionStatusNotAnswered = "#eb5757";
 export const examQuestionStatusMarkedForReview = "#56ccf2";
 export const examQuestionStatusNotVisited = "#bdbdbd";
 export const examQuestionStatusSelected = "#f9cb4d";
+
+export const whiteDark = "#f2f2f2";
+export const textGrey = "#a6a6a6";
