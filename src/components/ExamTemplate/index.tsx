@@ -49,6 +49,7 @@ const ExamTemplate: SFC<ExamTemplateProps> = props => {
                 pageContentsWrapperComponent={
                   !store.showOverviewPage ? ExamBottomNavFrame : undefined
                 }
+                backgroundColor={"#fff"}
               >
                 {children}
               </DashboardTemplate>

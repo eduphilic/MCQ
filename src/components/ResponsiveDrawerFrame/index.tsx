@@ -34,6 +34,8 @@ export interface ResponsiveDrawerFrameProps extends DrawerProps {
    * Optional theme element to wrap drawer content in.
    */
   drawerThemeElement?: ReactElement<any>;
+
+  backgroundColor?: string;
 }
 
 /**
@@ -47,6 +49,7 @@ export const ResponsiveDrawerFrame: SFC<ResponsiveDrawerFrameProps> = props => {
     mobileOpen,
     drawerContentsNode,
     drawerThemeElement,
+    backgroundColor,
   } = props;
 
   const withTheme = (node: ReactNode) =>
@@ -88,7 +91,7 @@ export const ResponsiveDrawerFrame: SFC<ResponsiveDrawerFrameProps> = props => {
               )}
             </Hidden>
 
-            <PageContentsContainer>
+            <PageContentsContainer style={{ backgroundColor }}>
               <PageContentsAppBarSpacer />
 
               {children}
@@ -133,6 +136,7 @@ const StyledDrawer = styled(Drawer)`
 `;
 
 const PageContentsContainer = styled.div`
+  height: 100%;
   padding: ${({ theme }) => theme.spacing.unit * 3}px 0;
 
   ${({ theme }) => theme.breakpoints.up("md")} {
