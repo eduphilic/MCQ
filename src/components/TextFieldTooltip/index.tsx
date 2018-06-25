@@ -1,9 +1,10 @@
 import React, { ReactElement, ReactNode, SFC } from "react";
-import styled, { injectGlobal } from "styled";
+import styled from "styled";
+import "./TextFieldTooltip.css";
 
 import Tooltip from "@material-ui/core/Tooltip";
 
-import { TooltipArrow } from "../TooltipArrow";
+import { TooltipArrow } from "components/TooltipArrow";
 
 export interface TextFieldTooltipProps {
   /** Target element to apply tooltip to. */
@@ -30,8 +31,8 @@ export const TextFieldTooltip: SFC<TextFieldTooltipProps> = props => {
   );
 
   const classes = {
-    tooltip: "form-tooltip-override",
-    tooltipPlacementBottom: "form-tooltip-bottom-override",
+    tooltip: "TextFieldTooltip",
+    tooltipPlacementBottom: "TextFieldTooltip-bottom-override",
   };
 
   return (
@@ -45,17 +46,4 @@ const PositionedErrorArrow = styled(TooltipArrow)`
   position: absolute;
   right: -5px;
   top: -13px;
-`;
-
-// tslint:disable-next-line:no-unused-expression
-injectGlobal`
-  .form-tooltip-override {
-    color: #000;
-    background-color: #fff;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16);
-  }
-
-  .form-tooltip-bottom-override {
-    margin-top: 8px;
-  }
 `;
