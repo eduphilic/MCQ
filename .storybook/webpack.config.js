@@ -37,16 +37,13 @@ module.exports = (baseConfig, env, defaultConfig) => {
   );
 
   // Add loader to add documentation for component props.
-  // scriptLoader.use.push({
-  //   loader: require.resolve("react-docgen-typescript-loader"),
-  //   options: {
-  //     // FIXME: Issue in docgen typescript package is erroring with
-  //     // component since either Babel or Storybook update, needs
-  //     // investigation.
-  //     excludes: ["stories\\.tsx$", "TextFieldTooltip"],
-  //     includes: ["components.*\\.tsx$"],
-  //   },
-  // });
+  scriptLoader.use.push({
+    loader: require.resolve("react-docgen-typescript-loader"),
+    options: {
+      excludes: ["stories\\.tsx$"],
+      includes: ["components.*\\.tsx$"],
+    },
+  });
   // Remove thread-loader in production to fix issue with continuos
   // integration server.
   if (env === "PRODUCTION") {
