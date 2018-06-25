@@ -7,10 +7,14 @@ import { ExamOverviewBluePrint } from "components/ExamOverviewBluePrint";
 import { ExamOverviewMarkings } from "components/ExamOverviewMarkings";
 import { ExamOverviewMobile } from "components/ExamOverviewMobile";
 import { ExamTemplate } from "components/ExamTemplate";
-import { ExamHeader, examHeaderPlaceholderProps } from "exam-taking";
-import { ExamLayout } from "exam-taking/components/ExamLayout";
 
-export const ExamQuiz: SFC<{}> = () => {
+import {
+  ExamHeader,
+  examHeaderPlaceholderProps,
+} from "./components/ExamHeader";
+import { ExamLayout } from "./components/ExamLayout";
+
+export const ExamQuizPage: SFC<{}> = () => {
   const paneKeyNodeMap = examPaneKeyNodeMap;
   paneKeyNodeMap[0] = {
     key: "page-0",
