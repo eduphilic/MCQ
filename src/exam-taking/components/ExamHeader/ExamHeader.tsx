@@ -48,7 +48,7 @@ export const ExamHeader: SFC<ExamHeaderProps> = props => {
 
   return (
     <Wrapper>
-      <Typography variant="cardTitle">
+      <Typography variant="examTitle">
         {sectionTitle}&nbsp;
         <MarkingsCaption>({sectionMarkingsCaption})</MarkingsCaption>
       </Typography>
@@ -66,19 +66,23 @@ export const ExamHeader: SFC<ExamHeaderProps> = props => {
 
 const Wrapper = styled.div`
   & > * {
-    margin-bottom: 8px;
+    margin-bottom: 16px;
   }
 `;
 
 const MarkingsCaption = styled.span`
   /* So entire span goes to new line on mobile. */
   display: inline-block;
+  margin-top: 8px;
   color: ${textGrey};
 `;
 
 const Well = styled.div`
-  padding: 8px;
-  margin-left: -8px;
-  margin-right: -8px;
+  padding: 16px 8px;
   background-color: ${whiteDark};
+
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    margin-left: -8px;
+    margin-right: -8px;
+  }
 `;

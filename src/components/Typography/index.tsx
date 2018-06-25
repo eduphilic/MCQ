@@ -16,6 +16,8 @@ export enum Variant {
 
   examDrawerTitle = "examDrawerTitle",
   examDrawerSubtitle = "examDrawerSubtitle",
+
+  examTitle = "examTitle",
 }
 
 type StyledMuiTypography = ReturnType<ThemedStyledFunction<MuiTypographyProps>>;
@@ -48,6 +50,15 @@ const variants: Record<Variant, StyledMuiTypography> = {
 
   examDrawerSubtitle: styled(MuiTypography).attrs({ variant: "body1" })`
     font-size: 16px;
+  `,
+
+  examTitle: styled(MuiTypography).attrs({
+    variant: "display1",
+    color: "inherit",
+  })`
+    ${({ theme }) => theme.breakpoints.down("md")} {
+      font-size: 20px;
+    }
   `,
 };
 
