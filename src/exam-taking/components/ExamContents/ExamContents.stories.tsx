@@ -2,20 +2,25 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
+import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
+import { StorybookPlaceholderImage } from "components/storybook/StorybookPlaceholderImage";
+import { storybookPlaceholderImageUrl } from "components/storybook/storybookPlaceholderImageUrl";
 import { ExamContents } from "./ExamContents";
-import placeholderImage350x150Png from "./placeholder-image-350x150.png";
 
 storiesOf("Exam Taking", module).add("ExamContents", () => {
   const isHorizontal = boolean("Horizontal", true);
   const withImage = boolean("With Image", true);
 
   const orientation = isHorizontal ? "horizontal" : "vertical";
-  const questionImageUrl = withImage ? placeholderImage350x150Png : undefined;
+  const questionImageUrl = withImage ? storybookPlaceholderImageUrl : undefined;
 
   return (
-    <ExamContents
-      orientation={orientation}
-      questionImageUrl={questionImageUrl}
-    />
+    <StorybookContentCenterWrapper>
+      <ExamContents
+        orientation={orientation}
+        questionImageUrl={questionImageUrl}
+        answerNode={<StorybookPlaceholderImage />}
+      />
+    </StorybookContentCenterWrapper>
   );
 });

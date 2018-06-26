@@ -1,10 +1,12 @@
-import React, { SFC } from "react";
+import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 
 import withWidth, {
   isWidthUp,
   WithWidthProps,
 } from "@material-ui/core/withWidth";
+
+import { BlockImage } from "components/BlockImage";
 
 export interface ExamContentsProps extends WithWidthProps {
   /**
@@ -19,23 +21,41 @@ export interface ExamContentsProps extends WithWidthProps {
   orientation?: "horizontal" | "vertical";
 
   /**
+   * Node with answer selection component.
+   */
+  answerNode: ReactNode;
+
+  /**
    * Optional question image.
    */
   questionImageUrl?: string;
 }
 
 const ExamContents: SFC<ExamContentsProps> = props => {
-  const { orientation = "horizontal", width } = props;
+  const {
+    orientation = "horizontal",
+    width,
+    answerNode,
+    questionImageUrl,
+  } = props;
 
   const isHorizontalOrientation =
     orientation === "horizontal" && isWidthUp("sm", width);
+
   const Container = isHorizontalOrientation
     ? ContainerHorizontal
     : ContainerVertical;
 
+  const questionImageNode = questionImageUrl ? (
+    <div>
+      <BlockImage src={questionImageUrl} />
+    </div>
+  ) : null;
+
   return (
     <Container>
-      <div>Placeholder</div>
+      <div>{answerNode}</div>
+      {questionImageNode}
     </Container>
   );
 };
@@ -46,6 +66,11 @@ export { ExamContentsWithWidth as ExamContents };
 const ContainerHorizontal = styled.div`
   display: flex;
   width: 100%;
+
+  > div {
+    width: 100%;
+    padding: ${({ theme }) => theme.spacing.unit}px;
+  }
 `;
 
 const ContainerVertical = ContainerHorizontal.extend`
