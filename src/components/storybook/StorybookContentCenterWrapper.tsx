@@ -6,7 +6,9 @@ export type StorybookContentCenterWrapperProps = Omit<
   HTMLProps<HTMLDivElement>,
   "ref"
 > & {
-  contentCenterWrapperProps?: Omit<HTMLProps<HTMLDivElement>, "ref">;
+  maxWidthPercent?: number;
+
+  centerWrapperProps?: Omit<HTMLProps<HTMLDivElement>, "ref">;
 };
 
 /**
@@ -16,9 +18,15 @@ export type StorybookContentCenterWrapperProps = Omit<
  */
 export const StorybookContentCenterWrapper: SFC<
   StorybookContentCenterWrapperProps
-> = ({ children, contentCenterWrapperProps, ...rest }) => (
-  <Wrapper {...rest}>
-    <ContentCenterWrapper {...contentCenterWrapperProps}>
+> = ({ children, maxWidthPercent, centerWrapperProps, style, ...rest }) => (
+  <Wrapper
+    {...rest}
+    style={{
+      ...style,
+      ...(maxWidthPercent ? { paddingRight: `${100 - maxWidthPercent}%` } : {}),
+    }}
+  >
+    <ContentCenterWrapper {...centerWrapperProps}>
       {children}
     </ContentCenterWrapper>
   </Wrapper>
