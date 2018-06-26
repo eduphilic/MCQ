@@ -14,15 +14,21 @@ export interface ExamAnswerSelectProps {
    * The currently selected answer. If null, then none are selected.
    */
   selectedAnswerIndex: number | null;
+
+  /**
+   * Called when the user clicks an answer.
+   */
+  onChangeAnswerIndex: (selectedAnswerIndex: number) => any;
 }
 
 export const ExamAnswerSelect: SFC<ExamAnswerSelectProps> = props => {
-  const { answerLabels, selectedAnswerIndex } = props;
+  const { answerLabels, selectedAnswerIndex, onChangeAnswerIndex } = props;
 
   const answerNodes = answerLabels.map((label, index) => (
     <AnswerButton
       key={`${index}-${label}`}
       selected={index === selectedAnswerIndex}
+      onClick={() => onChangeAnswerIndex(index)}
     >
       {String.fromCharCode(97 /* Beginning of alphabet */ + index)}.&nbsp;
       {label}
