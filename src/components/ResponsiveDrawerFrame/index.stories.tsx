@@ -1,9 +1,10 @@
 import { withInfo } from "@storybook/addon-info";
 import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { PlaceholderImage } from "components/PlaceholderImage";
 import React, { ReactNode } from "react";
 import styled, { withProps } from "styled";
+
+import { StorybookPlaceholderImage } from "components/storybook/StorybookPlaceholderImage";
 import { ResponsiveDrawerFrame } from ".";
 
 storiesOf("Components", module).add(
@@ -11,7 +12,7 @@ storiesOf("Components", module).add(
   withInfo({ inline: false })(() => {
     const pageContents: ReactNode[] = [];
     for (let i = 0; i < 50; i += 1) {
-      pageContents.push(<PlaceholderImage key={i} />);
+      pageContents.push(<StorybookPlaceholderImage key={i} />);
     }
 
     return (
