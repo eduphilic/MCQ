@@ -66,6 +66,7 @@ export { ExamContentsWithWidth as ExamContents };
 const ContainerHorizontal = styled.div`
   display: flex;
   width: 100%;
+  padding-bottom: ${({ theme }) => theme.spacing.unit}px;
 
   > div {
     width: 100%;

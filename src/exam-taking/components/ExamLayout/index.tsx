@@ -22,6 +22,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   padding: 8px;
+  padding-top: 16px;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 

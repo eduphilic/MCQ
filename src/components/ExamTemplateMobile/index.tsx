@@ -5,7 +5,7 @@ import {
   ExamAppBarMobile,
   ExamAppBarMobileProps,
 } from "components/ExamAppBarMobile";
-import { ExamBottomNavMobile } from "components/ExamBottomNavMobile";
+// import { ExamBottomNavMobile } from "components/ExamBottomNavMobile";
 import { ExamNavigationStorePlaceholderConsumer } from "components/ExamNavigationStorePlaceholder";
 
 export interface ExamTemplateMobileProps extends ExamAppBarMobileProps {
@@ -31,9 +31,9 @@ export const ExamTemplateMobile: SFC<ExamTemplateMobileProps> = props => {
         <BaseSwippableTemplate
           headerNode={headerNode}
           paneKeyNodeMap={paneKeyNodeMap}
-          footerNode={
-            !store.showOverviewPage ? <ExamBottomNavMobile /> : undefined
-          }
+          // footerNode={
+          //   !store.showOverviewPage ? <ExamBottomNavMobile /> : undefined
+          // }
           selectedPane={store.currentQuestion}
           onPaneChange={store.navigateToQuestion}
           staticView={staticView}
