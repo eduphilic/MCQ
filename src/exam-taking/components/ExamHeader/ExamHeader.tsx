@@ -75,6 +75,10 @@ const MarkingsCaption = styled.span`
   display: inline-block;
   margin-top: 8px;
   color: ${textGrey};
+
+  ${({ theme }) => theme.breakpoints.down("xs")} {
+    display: none;
+  }
 `;
 
 const Well = styled.div`
