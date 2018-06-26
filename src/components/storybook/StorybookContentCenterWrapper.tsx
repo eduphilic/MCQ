@@ -12,7 +12,7 @@ export type StorybookContentCenterWrapperProps = Omit<
 /**
  * Wraps ContentCenterWrapper in an outer component for use with Storybook
  * stories. The outer wrapper has a white background and full height/width. It
- * also adds an additional top padding.
+ * also adds an additional top and bottom padding.
  */
 export const StorybookContentCenterWrapper: SFC<
   StorybookContentCenterWrapperProps
@@ -26,7 +26,7 @@ export const StorybookContentCenterWrapper: SFC<
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
-  padding-top: 16px;
+  min-height: 100%;
+  padding: 16px 0;
   background-color: #fff;
 `;
