@@ -3,12 +3,19 @@ import styled from "styled";
 
 export interface ExamLayoutProps {
   headerNode: ReactNode;
+
+  contentsNode: ReactNode;
 }
 
 export const ExamLayout: SFC<ExamLayoutProps> = props => {
-  const { headerNode } = props;
+  const { headerNode, contentsNode } = props;
 
-  return <Wrapper>{headerNode}</Wrapper>;
+  return (
+    <Wrapper>
+      {headerNode}
+      {contentsNode}
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
