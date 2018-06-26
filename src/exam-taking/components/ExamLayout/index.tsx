@@ -17,4 +17,8 @@ const Wrapper = styled.div`
   padding: 8px;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    padding-top: 0;
+  }
 `;
