@@ -1,9 +1,11 @@
 import React, { SFC } from "react";
 import styled from "styled";
 
+import { storybookPlaceholderImageUrl } from "./storybookPlaceholderImageUrl";
+
 const StorybookPlaceholderImageBase = styled.img.attrs({
   alt: "Placeholder Image",
-  src: "https://via.placeholder.com/350x150?text=Placeholder",
+  src: storybookPlaceholderImageUrl,
 })`
   display: block;
   width: 100%;
