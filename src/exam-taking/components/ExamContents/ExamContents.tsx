@@ -8,7 +8,7 @@ import withWidth, {
 
 import { BlockImage } from "components/BlockImage";
 
-export interface ExamContentsProps extends WithWidthProps {
+export interface ExamContentsProps {
   /**
    * Orientation to display the question image and answers.
    *
@@ -31,7 +31,7 @@ export interface ExamContentsProps extends WithWidthProps {
   questionImageUrl?: string;
 }
 
-const ExamContents: SFC<ExamContentsProps> = props => {
+const ExamContents: SFC<ExamContentsProps & WithWidthProps> = props => {
   const {
     orientation = "horizontal",
     width,
@@ -75,4 +75,8 @@ const ContainerHorizontal = styled.div`
 
 const ContainerVertical = ContainerHorizontal.extend`
   flex-direction: column;
+
+  > *:first-child {
+    order: 2;
+  }
 `;
