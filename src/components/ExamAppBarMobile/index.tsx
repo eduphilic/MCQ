@@ -49,7 +49,7 @@ export const ExamAppBarMobile: SFC<ExamAppBarMobileProps> = props => {
             <ButtonSpacer />
             {showStartExamButton ? (
               <IconButton onClick={onStartExamButtonClick}>
-                <ChevronRight />
+                <ChevronRight style={{ fontSize: 40 }} />
               </IconButton>
             ) : (
               <ButtonSpacer />
