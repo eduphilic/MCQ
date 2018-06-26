@@ -19,12 +19,19 @@ import {
 import { ExamLayout } from "./components/ExamLayout";
 
 export const ExamQuizPage: SFC<{}> = () => {
-  const paneKeyNodeMap = examPaneKeyNodeMap;
-  paneKeyNodeMap[0] = {
-    key: "page-0",
+  const paneKeyNodeMap = examPaneKeyNodeMap.map((pane, index) => ({
+    key: pane.key,
     node: (
       <ExamLayout
-        headerNode={<ExamHeader {...examHeaderPlaceholderProps} />}
+        headerNode={
+          <ExamHeader
+            {...{
+              ...examHeaderPlaceholderProps,
+              question: `Q${index +
+                1}. ${examHeaderPlaceholderProps.question.slice(4)}`,
+            }}
+          />
+        }
         contentsNode={
           <ExamContents
             {...examContentsPlaceholderProps}
@@ -35,7 +42,7 @@ export const ExamQuizPage: SFC<{}> = () => {
         }
       />
     ),
-  };
+  }));
 
   return (
     <ExamNavigationStorePlaceholderConsumer>
