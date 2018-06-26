@@ -8,6 +8,10 @@ import { ExamOverviewMarkings } from "components/ExamOverviewMarkings";
 import { ExamOverviewMobile } from "components/ExamOverviewMobile";
 import { ExamTemplate } from "components/ExamTemplate";
 
+import { ExamAnswerSelect } from "./components/ExamAnswerSelect";
+import { examAnswerSelectPlaceholderProps } from "./components/ExamAnswerSelect/ExamAnswerSelect.placeholder";
+import { ExamContents } from "./components/ExamContents";
+import { examContentsPlaceholderProps } from "./components/ExamContents/ExamContents.placeholder";
 import {
   ExamHeader,
   examHeaderPlaceholderProps,
@@ -19,7 +23,17 @@ export const ExamQuizPage: SFC<{}> = () => {
   paneKeyNodeMap[0] = {
     key: "page-0",
     node: (
-      <ExamLayout headerNode={<ExamHeader {...examHeaderPlaceholderProps} />} />
+      <ExamLayout
+        headerNode={<ExamHeader {...examHeaderPlaceholderProps} />}
+        contentsNode={
+          <ExamContents
+            {...examContentsPlaceholderProps}
+            answerNode={
+              <ExamAnswerSelect {...examAnswerSelectPlaceholderProps} />
+            }
+          />
+        }
+      />
     ),
   };
 
