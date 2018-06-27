@@ -57,7 +57,7 @@ export const ExamHeader: SFC<ExamHeaderProps> = props => {
         <Typography>{sectionInstructions}</Typography>
       </Well>
 
-      <Typography>{question}</Typography>
+      <Typography variant="examQuestion">{question}</Typography>
 
       <ExamName>{examName}</ExamName>
     </Wrapper>
@@ -82,6 +82,7 @@ const MarkingsCaption = styled.span`
 `;
 
 const ExamName = styled(Typography)`
+  font-size: 12px;
   color: ${textGrey};
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
