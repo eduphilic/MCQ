@@ -1,8 +1,7 @@
 import React, { SFC } from "react";
 import styled from "styled";
 
-import { Button, ButtonProps } from "components/Button";
-import { Typography } from "components/Typography";
+import { ExamAnswerSelectItem } from "./ExamAnswerSelectItem";
 
 export interface ExamAnswerSelectProps {
   /**
@@ -25,14 +24,13 @@ export const ExamAnswerSelect: SFC<ExamAnswerSelectProps> = props => {
   const { answerLabels, selectedAnswerIndex, onChangeAnswerIndex } = props;
 
   const answerNodes = answerLabels.map((label, index) => (
-    <AnswerButton
+    <ExamAnswerSelectItem
       key={`${index}-${label}`}
+      answerLabel={label}
+      answerIndex={index}
       selected={index === selectedAnswerIndex}
-      onClick={() => onChangeAnswerIndex(index)}
-    >
-      {String.fromCharCode(97 /* Beginning of alphabet */ + index)}.&nbsp;
-      {label}
-    </AnswerButton>
+      onClick={onChangeAnswerIndex}
+    />
   ));
 
   return <Wrapper>{answerNodes}</Wrapper>;
@@ -45,19 +43,4 @@ const Wrapper = styled.div`
   > *:not(:last-child) {
     margin-bottom: ${({ theme }) => theme.spacing.unit}px;
   }
-`;
-
-type AnswerButtonProps = ButtonProps & {
-  className?: string;
-  selected: boolean;
-};
-
-const AnswerButton = styled<AnswerButtonProps>(
-  ({ children, selected, ...rest }) => (
-    <Button variant={selected ? "raised" : "flat"} {...rest}>
-      <Typography>{children}</Typography>
-    </Button>
-  ),
-)`
-  justify-content: flex-start;
 `;
