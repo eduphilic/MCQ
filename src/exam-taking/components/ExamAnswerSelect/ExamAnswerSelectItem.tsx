@@ -36,13 +36,17 @@ export interface ExamAnswerSelectItemProps {
  * A button for an exam answer.
  */
 const ExamAnswerSelectItem: SFC<ExamAnswerSelectItemProps> = props => {
-  const { className, answerLabel, answerIndex, selected } = props;
+  const { className, answerLabel, answerIndex, selected, onClick } = props;
 
   const classnames = `${className} ${selected ? "selected" : ""}`;
   const answerLetter = getAnswerLetterFromIndex(answerIndex);
 
   return (
-    <Button className={classnames} variant="flat">
+    <Button
+      className={classnames}
+      variant="flat"
+      onClick={() => onClick(answerIndex)}
+    >
       <div className="selection-circle">
         <div className="letter-circle">
           <Typography className="answer-letter">{answerLetter}</Typography>
