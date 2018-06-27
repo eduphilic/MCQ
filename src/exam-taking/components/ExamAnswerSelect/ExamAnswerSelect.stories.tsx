@@ -5,7 +5,7 @@ import React from "react";
 
 import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
 import { TypographyButton } from "components/TypographyButton";
-import { ExamAnswerSelect } from ".";
+import { ExamAnswerSelect } from "./ExamAnswerSelect";
 
 const store = createStore(
   {
