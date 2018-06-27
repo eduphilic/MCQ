@@ -1,12 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { hydrate, render } from "react-dom";
 
 import { createProvider as createStoreProvider } from "store";
 import App from "./App";
 
 const StoreProvider = createStoreProvider();
 
-ReactDOM.render(
+const rootElement = document.getElementById("root")!;
+const renderFunc = rootElement.hasChildNodes() ? hydrate : render;
+
+renderFunc(
   <StoreProvider>
     <App />
   </StoreProvider>,
