@@ -14,6 +14,7 @@ import { ExamAppBarProps } from "components/ExamAppBar";
 import { ExamAppBarTimer } from "components/ExamAppBarTimer";
 import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
+import { ExamNavigationStorePlaceholderConsumer } from "../../ExamNavigationStorePlaceholder";
 import { ExamQuestionPalettePopup } from "./ExamQuestionPalettePopup";
 
 const dashboardLink = navigationLinksUser.find(
@@ -30,52 +31,64 @@ export const ExamAppBarMobile: SFC<ExamAppBarMobileProps> = props => {
   const { showStartExamButton, onStartExamButtonClick } = props;
 
   return (
-    <DarkTheme>
-      <AppBar position="static" color="inherit">
-        <ToolbarHalfHeightDarkBlueBackground>
-          <IconButtonGroup position="left">
-            <IconButton>{dashboardLink.iconElement}</IconButton>
+    <ExamNavigationStorePlaceholderConsumer>
+      {({ startSubmission }) => (
+        <DarkTheme>
+          <AppBar position="static" color="inherit">
+            <ToolbarHalfHeightDarkBlueBackground>
+              <IconButtonGroup position="left">
+                <IconButton>{dashboardLink.iconElement}</IconButton>
 
-            <IconButton>
-              <Language />
-            </IconButton>
-          </IconButtonGroup>
+                <IconButton>
+                  <Language />
+                </IconButton>
+              </IconButtonGroup>
 
-          <AppBarCenterContentWrapper>
-            {!showStartExamButton && <ExamAppBarTimer />}
-          </AppBarCenterContentWrapper>
+              <AppBarCenterContentWrapper>
+                {!showStartExamButton && <ExamAppBarTimer />}
+              </AppBarCenterContentWrapper>
 
-          <IconButtonGroup position="right">
-            {showStartExamButton ? (
-              <SubmissionButton onClick={onStartExamButtonClick}>
-                Start Exam
-              </SubmissionButton>
-            ) : (
+              <IconButtonGroup position="right">
+                {showStartExamButton && (
+                  <StartExamButton onClick={onStartExamButtonClick}>
+                    Start Exam
+                  </StartExamButton>
+                )}
+
+                {!showStartExamButton && (
+                  <SubmitExamButton onClick={startSubmission}>
+                    Submit Exam
+                  </SubmitExamButton>
+                )}
+
+                {/* {!showStartExamButton && (
               <>
                 <ButtonSpacer />
                 <ButtonSpacer />
               </>
-            )}
-          </IconButtonGroup>
-        </ToolbarHalfHeightDarkBlueBackground>
+            )} */}
+              </IconButtonGroup>
+            </ToolbarHalfHeightDarkBlueBackground>
 
-        <ToolbarHalfHeightLightBlueBackground>
-          <IconButtonGroup position="left">
-            <ExamQuestionPalettePopup>
-              <IconButton>
-                <Apps />
-              </IconButton>
-            </ExamQuestionPalettePopup>
-          </IconButtonGroup>
+            <ToolbarHalfHeightLightBlueBackground>
+              <IconButtonGroup position="left">
+                <ExamQuestionPalettePopup>
+                  <IconButton>
+                    <Apps />
+                  </IconButton>
+                </ExamQuestionPalettePopup>
+              </IconButtonGroup>
 
-          <AppBarCenterContentWrapper>
-            <Typography>Army Soldier GD Test 1</Typography>
-          </AppBarCenterContentWrapper>
+              <AppBarCenterContentWrapper>
+                <Typography>Army Soldier GD Test 1</Typography>
+              </AppBarCenterContentWrapper>
 
-          <Typography variant="cardStatCaption">200 MM</Typography>
-        </ToolbarHalfHeightLightBlueBackground>
-      </AppBar>
-    </DarkTheme>
+              <Typography variant="cardStatCaption">200 MM</Typography>
+            </ToolbarHalfHeightLightBlueBackground>
+          </AppBar>
+        </DarkTheme>
+      )}
+    </ExamNavigationStorePlaceholderConsumer>
   );
 };
 
@@ -111,11 +124,11 @@ const IconButtonGroup = withProps<{ position: "left" | "right" }>()(styled.div)`
         `};
 `;
 
-const ButtonSpacer = styled.div`
-  width: 48px;
-`;
+// const ButtonSpacer = styled.div`
+//   width: 48px;
+// `;
 
-const SubmissionButton = styled(TypographyButton).attrs({
+const StartExamButton = styled(TypographyButton).attrs({
   color: "lightGreen",
   variant: "outlined",
 })`
@@ -123,3 +136,8 @@ const SubmissionButton = styled(TypographyButton).attrs({
   min-height: 26px;
   padding: 0;
 `;
+
+const SubmitExamButton = styled(StartExamButton).attrs({
+  color: "orange",
+  variant: "flat",
+})``;
