@@ -49,20 +49,30 @@ const Wrapper = styled.div`
   > * {
     margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
   }
+
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    padding: 8px;
+    padding-top: 16px;
+  }
 `;
 
 const StatWrapper = styled.div`
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: calc(25% - ${({ theme }) => theme.spacing.unit}px);
+  width: 100%;
   padding: ${({ theme }) => theme.spacing.unit}px;
   margin-right: ${({ theme }) => theme.spacing.unit}px;
   background-color: ${whiteDark};
 
   > *:first-child {
     margin-bottom: ${({ theme }) => theme.spacing.unit}px;
+  }
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    display: inline-flex;
+    width: calc(25% - ${({ theme }) => theme.spacing.unit}px);
   }
 `;
 
