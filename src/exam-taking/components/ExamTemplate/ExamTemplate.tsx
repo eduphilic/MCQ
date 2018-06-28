@@ -14,10 +14,9 @@ import {
   ExamTemplateMobile,
   ExamTemplateMobileProps,
 } from "components/ExamTemplateMobile";
-import {
-  ExamBottomNavFrame,
-  ExamNavigationStorePlaceholderConsumer,
-} from "exam-taking";
+
+import { ExamNavigationStorePlaceholderConsumer } from "../../ExamNavigationStorePlaceholder";
+import { ExamBottomNavFrame } from "../ExamBottomNavFrame";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ExamTemplateProps

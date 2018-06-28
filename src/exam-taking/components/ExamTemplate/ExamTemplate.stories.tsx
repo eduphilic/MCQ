@@ -4,9 +4,9 @@ import { examPaneKeyNodeMap } from "common/structures/examPaneKeyNodeMap";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 
-import { ExamTemplate } from ".";
+import { ExamTemplate } from "./ExamTemplate";
 
-storiesOf("Components", module).add(
+storiesOf("Exam Taking", module).add(
   "ExamTemplate",
   withInfo({ inline: false })(() => {
     const paneKeyNodeMap = examPaneKeyNodeMap;

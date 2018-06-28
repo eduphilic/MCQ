@@ -5,7 +5,6 @@ import { DashboardColumnContainer } from "components/DashboardColumnContainer";
 import { ExamOverviewBluePrint } from "components/ExamOverviewBluePrint";
 import { ExamOverviewMarkings } from "components/ExamOverviewMarkings";
 import { ExamOverviewMobile } from "components/ExamOverviewMobile";
-import { ExamTemplate } from "components/ExamTemplate";
 
 import { ExamAnswerSelect } from "./components/ExamAnswerSelect";
 import { examAnswerSelectPlaceholderProps } from "./components/ExamAnswerSelect/ExamAnswerSelect.placeholder";
@@ -18,6 +17,7 @@ import {
 import { ExamLayout } from "./components/ExamLayout";
 import { ExamSubmissionSummary } from "./components/ExamSubmissionSummary";
 import { examSubmissionSummaryPlaceholderProps } from "./components/ExamSubmissionSummary/ExamSubmissionSummary.placeholder";
+import { ExamTemplate } from "./components/ExamTemplate";
 import {
   ExamNavigationStorePlaceholderConsumer,
   ExamNavigationStorePlaceholderProvider,
