@@ -38,6 +38,11 @@ const ExamTemplate: SFC<ExamTemplateProps> = props => {
           paneKeyNodeMap,
         };
 
+        const pageContentsWrapperComponent =
+          store.showOverviewPage || store.showSubmissionSummaryPage
+            ? undefined
+            : ExamBottomNavFrame;
+
         return (
           <>
             <Prompt message="You have an exam in progress, are you sure you want to leave?" />
@@ -47,9 +52,7 @@ const ExamTemplate: SFC<ExamTemplateProps> = props => {
                 appBarNode={<ExamAppBar {...examAppBarProps} />}
                 drawerContentsNode={drawerContentsNode}
                 drawerThemeElement={<UserAppDrawerTheme />}
-                pageContentsWrapperComponent={
-                  !store.showOverviewPage ? ExamBottomNavFrame : undefined
-                }
+                pageContentsWrapperComponent={pageContentsWrapperComponent}
                 backgroundColor={"#fff"}
               >
                 {children}
