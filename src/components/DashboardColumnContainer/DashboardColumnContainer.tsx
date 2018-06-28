@@ -31,10 +31,10 @@ export const DashboardColumnContainer: SFC<
     left = children.slice(0, Math.ceil(children.length / 2));
     right = children.slice(left.length);
   } else {
-    const half = Math.ceil(children.length / 2);
-    for (let i = 0; i < half; i += 1) {
+    // const half = Math.ceil(children.length / 2);
+    for (let i = 0; i < children.length; i += 2) {
       left.push(children[i]);
-      if (children[half + i]) left.push(children[half + i]);
+      if (children[i + 1]) right.push(children[i + 1]);
     }
   }
 
