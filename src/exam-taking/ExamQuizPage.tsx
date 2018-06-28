@@ -16,6 +16,8 @@ import {
   examHeaderPlaceholderProps,
 } from "./components/ExamHeader";
 import { ExamLayout } from "./components/ExamLayout";
+import { ExamSubmissionSummary } from "./components/ExamSubmissionSummary";
+import { examSubmissionSummaryPlaceholderProps } from "./components/ExamSubmissionSummary/ExamSubmissionSummary.placeholder";
 import {
   ExamNavigationStorePlaceholderConsumer,
   ExamNavigationStorePlaceholderProvider,
@@ -50,21 +52,29 @@ export const ExamQuizPage: SFC<{}> = () => {
   return (
     <ExamNavigationStorePlaceholderProvider>
       <ExamNavigationStorePlaceholderConsumer>
-        {({ showOverviewPage, currentQuestion }) => (
+        {({ showOverviewPage, showSubmissionSummaryPage, currentQuestion }) => (
           <ExamTemplate
             staticView={showOverviewPage ? <ExamOverviewMobile /> : undefined}
             paneKeyNodeMap={paneKeyNodeMap}
           >
-            {showOverviewPage ? (
+            {showOverviewPage && (
               <DashboardColumnContainer>
                 {[
                   <ExamOverviewBluePrint key="blue-print" />,
                   <ExamOverviewMarkings key="markings" />,
                 ]}
               </DashboardColumnContainer>
-            ) : (
-              paneKeyNodeMap[currentQuestion].node
             )}
+
+            {showSubmissionSummaryPage && (
+              <ExamSubmissionSummary
+                {...examSubmissionSummaryPlaceholderProps}
+              />
+            )}
+
+            {!showOverviewPage &&
+              !showSubmissionSummaryPage &&
+              paneKeyNodeMap[currentQuestion].node}
           </ExamTemplate>
         )}
       </ExamNavigationStorePlaceholderConsumer>

@@ -35,6 +35,7 @@ const touchQuestion = (
 const examNavigationStorePlaceholder = createStore(
   {
     showOverviewPage: true,
+    showSubmissionSummaryPage: false,
 
     currentQuestion: 0,
     questions: [...initialQuestionState],
@@ -47,6 +48,9 @@ const examNavigationStorePlaceholder = createStore(
     startExam: () => state => ({
       showOverviewPage: false,
       questions: touchQuestion(0, state.questions),
+    }),
+    startSubmission: () => () => ({
+      showSubmissionSummaryPage: true,
     }),
     navigatePreviousQuestion: () => state => ({
       currentQuestion: state.currentQuestion - 1,

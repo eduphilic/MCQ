@@ -40,7 +40,11 @@ export const ExamBottomNavFrame: SFC<ExamBottomNavFrameProps> = props => {
                   Next
                 </TypographyButton>
               ) : (
-                <TypographyButton color="yellow" filled>
+                <TypographyButton
+                  color="yellow"
+                  filled
+                  onClick={store.startSubmission}
+                >
                   Submit Exam
                 </TypographyButton>
               )}
