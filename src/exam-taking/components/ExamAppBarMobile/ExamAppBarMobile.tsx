@@ -8,12 +8,12 @@ import AppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
 import Apps from "@material-ui/icons/Apps";
-import ChevronRight from "@material-ui/icons/ChevronRight";
 import Language from "@material-ui/icons/Language";
 
 import { ExamAppBarProps } from "components/ExamAppBar";
 import { ExamAppBarTimer } from "components/ExamAppBarTimer";
 import { Typography } from "components/Typography";
+import { TypographyButton } from "components/TypographyButton";
 import { ExamQuestionPalettePopup } from "./ExamQuestionPalettePopup";
 
 const dashboardLink = navigationLinksUser.find(
@@ -42,17 +42,19 @@ export const ExamAppBarMobile: SFC<ExamAppBarMobileProps> = props => {
           </IconButtonGroup>
 
           <AppBarCenterContentWrapper>
-            <ExamAppBarTimer />
+            {!showStartExamButton && <ExamAppBarTimer />}
           </AppBarCenterContentWrapper>
 
           <IconButtonGroup position="right">
-            <ButtonSpacer />
             {showStartExamButton ? (
-              <IconButton onClick={onStartExamButtonClick}>
-                <ChevronRight style={{ fontSize: 40 }} />
-              </IconButton>
+              <SubmissionButton onClick={onStartExamButtonClick}>
+                Start Exam
+              </SubmissionButton>
             ) : (
-              <ButtonSpacer />
+              <>
+                <ButtonSpacer />
+                <ButtonSpacer />
+              </>
             )}
           </IconButtonGroup>
         </ToolbarHalfHeightDarkBlueBackground>
@@ -111,4 +113,13 @@ const IconButtonGroup = withProps<{ position: "left" | "right" }>()(styled.div)`
 
 const ButtonSpacer = styled.div`
   width: 48px;
+`;
+
+const SubmissionButton = styled(TypographyButton).attrs({
+  color: "lightGreen",
+  variant: "outlined",
+})`
+  width: 100px;
+  min-height: 26px;
+  padding: 0;
 `;

@@ -37,6 +37,7 @@ const customColors = {
   red: createCustomColorCss("red", "#910f0f"),
   blue: createCustomColorCss("blue", "#2d9cdb"),
   yellow: createCustomColorCss("yellow", "#ecd100"),
+  lightGreen: createCustomColorCss("lightGreen", "#4fef48"),
 };
 
 const customColorsCss = css`
@@ -45,6 +46,7 @@ const customColorsCss = css`
   ${customColors.red};
   ${customColors.blue};
   ${customColors.yellow};
+  ${customColors.lightGreen};
 `;
 
 const ButtonBase = styled(MuiButton)`
