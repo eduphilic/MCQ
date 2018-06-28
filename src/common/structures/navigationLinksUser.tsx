@@ -7,6 +7,8 @@ import Assignment from "@material-ui/icons/Assignment";
 import Dashboard from "@material-ui/icons/Dashboard";
 import Settings from "@material-ui/icons/Settings";
 
+import { SettingsPage } from "dashboard";
+
 /**
  * User Dashboard navigation links.
  */
@@ -32,7 +34,7 @@ export const navigationLinksUser: NavigationLinks = [
   {
     titleLocalizationKey: "userLinkSettings",
     to: "/settings",
-    component: userPages.UserSettings,
+    component: SettingsPage,
     iconElement: <Settings />,
   },
 ];
