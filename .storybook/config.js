@@ -7,7 +7,7 @@ import { withKnobs } from "@storybook/addon-knobs";
 
 import { ThemeBaseline, LightTheme } from "theme";
 import { DashboardAppBarIconStore } from "stores";
-import { ExamNavigationStorePlaceholderProvider } from "components/ExamNavigationStorePlaceholder";
+import { ExamNavigationStorePlaceholderProvider } from "exam-taking/ExamNavigationStorePlaceholder";
 
 // if (process.env.NODE_ENV !== "production") {
 //   whyDidYouUpdate(React);

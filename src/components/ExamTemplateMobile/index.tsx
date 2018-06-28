@@ -6,7 +6,7 @@ import {
   ExamAppBarMobileProps,
 } from "components/ExamAppBarMobile";
 // import { ExamBottomNavMobile } from "components/ExamBottomNavMobile";
-import { ExamNavigationStorePlaceholderConsumer } from "components/ExamNavigationStorePlaceholder";
+import { ExamNavigationStorePlaceholderConsumer } from "exam-taking/ExamNavigationStorePlaceholder";
 
 export interface ExamTemplateMobileProps extends ExamAppBarMobileProps {
   /**

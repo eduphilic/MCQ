@@ -11,11 +11,11 @@ import { DashboardTemplate } from "components/DashboardTemplate";
 import { ExamAppBar } from "components/ExamAppBar";
 import { ExamBottomNavFrame } from "components/ExamBottomNavFrame";
 import { ExamDrawerContents } from "components/ExamDrawerContents";
-import { ExamNavigationStorePlaceholderConsumer } from "components/ExamNavigationStorePlaceholder";
 import {
   ExamTemplateMobile,
   ExamTemplateMobileProps,
 } from "components/ExamTemplateMobile";
+import { ExamNavigationStorePlaceholderConsumer } from "exam-taking/ExamNavigationStorePlaceholder";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ExamTemplateProps

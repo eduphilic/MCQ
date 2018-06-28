@@ -8,7 +8,7 @@ import {
 import React, { Component } from "react";
 import styled from "styled";
 
-import { Question } from "components/ExamNavigationStorePlaceholder";
+import { Question } from "exam-taking/ExamNavigationStorePlaceholder";
 
 export interface QuestionButtonProps
   extends React.ClassAttributes<HTMLButtonElement> {

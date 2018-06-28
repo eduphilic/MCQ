@@ -7,7 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
 
 import { TypographyButton } from "components/TypographyButton";
-import { ExamNavigationStorePlaceholderConsumer } from "../ExamNavigationStorePlaceholder";
+import { ExamNavigationStorePlaceholderConsumer } from "exam-taking/ExamNavigationStorePlaceholder";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ExamBottomNavFrameProps {}

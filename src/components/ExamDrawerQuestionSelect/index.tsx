@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled";
 
-import { ExamNavigationStorePlaceholderConsumer } from "components/ExamNavigationStorePlaceholder";
 import { Typography } from "components/Typography";
+import { ExamNavigationStorePlaceholderConsumer } from "exam-taking/ExamNavigationStorePlaceholder";
 import { QuestionButton } from "./QuestionButton";
 
 // tslint:disable-next-line:no-empty-interface

@@ -2,7 +2,6 @@ import { examPaneKeyNodeMap } from "common/structures/examPaneKeyNodeMap";
 import React, { SFC } from "react";
 
 import { DashboardColumnContainer } from "components/DashboardColumnContainer";
-import { ExamNavigationStorePlaceholderConsumer } from "components/ExamNavigationStorePlaceholder";
 import { ExamOverviewBluePrint } from "components/ExamOverviewBluePrint";
 import { ExamOverviewMarkings } from "components/ExamOverviewMarkings";
 import { ExamOverviewMobile } from "components/ExamOverviewMobile";
@@ -17,6 +16,10 @@ import {
   examHeaderPlaceholderProps,
 } from "./components/ExamHeader";
 import { ExamLayout } from "./components/ExamLayout";
+import {
+  ExamNavigationStorePlaceholderConsumer,
+  ExamNavigationStorePlaceholderProvider,
+} from "./ExamNavigationStorePlaceholder";
 
 export const ExamQuizPage: SFC<{}> = () => {
   const paneKeyNodeMap = examPaneKeyNodeMap.map((pane, index) => ({
@@ -45,24 +48,26 @@ export const ExamQuizPage: SFC<{}> = () => {
   }));
 
   return (
-    <ExamNavigationStorePlaceholderConsumer>
-      {({ showOverviewPage, currentQuestion }) => (
-        <ExamTemplate
-          staticView={showOverviewPage ? <ExamOverviewMobile /> : undefined}
-          paneKeyNodeMap={paneKeyNodeMap}
-        >
-          {showOverviewPage ? (
-            <DashboardColumnContainer>
-              {[
-                <ExamOverviewBluePrint key="blue-print" />,
-                <ExamOverviewMarkings key="markings" />,
-              ]}
-            </DashboardColumnContainer>
-          ) : (
-            paneKeyNodeMap[currentQuestion].node
-          )}
-        </ExamTemplate>
-      )}
-    </ExamNavigationStorePlaceholderConsumer>
+    <ExamNavigationStorePlaceholderProvider>
+      <ExamNavigationStorePlaceholderConsumer>
+        {({ showOverviewPage, currentQuestion }) => (
+          <ExamTemplate
+            staticView={showOverviewPage ? <ExamOverviewMobile /> : undefined}
+            paneKeyNodeMap={paneKeyNodeMap}
+          >
+            {showOverviewPage ? (
+              <DashboardColumnContainer>
+                {[
+                  <ExamOverviewBluePrint key="blue-print" />,
+                  <ExamOverviewMarkings key="markings" />,
+                ]}
+              </DashboardColumnContainer>
+            ) : (
+              paneKeyNodeMap[currentQuestion].node
+            )}
+          </ExamTemplate>
+        )}
+      </ExamNavigationStorePlaceholderConsumer>
+    </ExamNavigationStorePlaceholderProvider>
   );
 };
