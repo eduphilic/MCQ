@@ -70,6 +70,7 @@ const examNavigationStorePlaceholder = createStore(
       previousButtonEnabled: questionIndex - 1 > 0,
       showSubmitExamButton: questionIndex === 14,
       questions: touchQuestion(questionIndex, state.questions),
+      showSubmissionSummaryPage: false,
     }),
   },
   "ExamNavigationStorePlaceholder",
