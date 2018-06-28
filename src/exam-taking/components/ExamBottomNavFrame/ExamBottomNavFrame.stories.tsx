@@ -2,9 +2,9 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { ContentCenterWrapper } from "components/ContentCenterWrapper";
-import { ExamBottomNavFrame } from ".";
+import { ExamBottomNavFrame } from "./ExamBottomNavFrame";
 
-storiesOf("Components", module).add("ExamBottomNavFrame", () => {
+storiesOf("Exam Taking", module).add("ExamBottomNavFrame", () => {
   //
 
   return (

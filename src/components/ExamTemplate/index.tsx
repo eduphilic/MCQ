@@ -9,13 +9,15 @@ import withWidth, {
 
 import { DashboardTemplate } from "components/DashboardTemplate";
 import { ExamAppBar } from "components/ExamAppBar";
-import { ExamBottomNavFrame } from "components/ExamBottomNavFrame";
 import { ExamDrawerContents } from "components/ExamDrawerContents";
 import {
   ExamTemplateMobile,
   ExamTemplateMobileProps,
 } from "components/ExamTemplateMobile";
-import { ExamNavigationStorePlaceholderConsumer } from "exam-taking/ExamNavigationStorePlaceholder";
+import {
+  ExamBottomNavFrame,
+  ExamNavigationStorePlaceholderConsumer,
+} from "exam-taking";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ExamTemplateProps
