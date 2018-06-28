@@ -32,7 +32,7 @@ export const ExamAppBarMobile: SFC<ExamAppBarMobileProps> = props => {
 
   return (
     <ExamNavigationStorePlaceholderConsumer>
-      {({ startSubmission }) => (
+      {({ startSubmission, showSubmissionSummaryPage }) => (
         <DarkTheme>
           <AppBar position="static" color="inherit">
             <ToolbarHalfHeightDarkBlueBackground>
@@ -55,18 +55,19 @@ export const ExamAppBarMobile: SFC<ExamAppBarMobileProps> = props => {
                   </StartExamButton>
                 )}
 
-                {!showStartExamButton && (
-                  <SubmitExamButton onClick={startSubmission}>
-                    Submit Exam
-                  </SubmitExamButton>
-                )}
+                {!showStartExamButton &&
+                  !showSubmissionSummaryPage && (
+                    <SubmitExamButton onClick={startSubmission}>
+                      Submit Exam
+                    </SubmitExamButton>
+                  )}
 
-                {/* {!showStartExamButton && (
-              <>
-                <ButtonSpacer />
-                <ButtonSpacer />
-              </>
-            )} */}
+                {showSubmissionSummaryPage && (
+                  <>
+                    <ButtonSpacer />
+                    <ButtonSpacer />
+                  </>
+                )}
               </IconButtonGroup>
             </ToolbarHalfHeightDarkBlueBackground>
 
@@ -124,9 +125,9 @@ const IconButtonGroup = withProps<{ position: "left" | "right" }>()(styled.div)`
         `};
 `;
 
-// const ButtonSpacer = styled.div`
-//   width: 48px;
-// `;
+const ButtonSpacer = styled.div`
+  width: 48px;
+`;
 
 const StartExamButton = styled(TypographyButton).attrs({
   color: "lightGreen",

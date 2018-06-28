@@ -54,7 +54,17 @@ export const ExamQuizPage: SFC<{}> = () => {
       <ExamNavigationStorePlaceholderConsumer>
         {({ showOverviewPage, showSubmissionSummaryPage, currentQuestion }) => (
           <ExamTemplate
-            staticView={showOverviewPage ? <ExamOverviewMobile /> : undefined}
+            staticView={
+              showOverviewPage ? (
+                <ExamOverviewMobile />
+              ) : showSubmissionSummaryPage ? (
+                <ExamSubmissionSummary
+                  {...examSubmissionSummaryPlaceholderProps}
+                />
+              ) : (
+                undefined
+              )
+            }
             paneKeyNodeMap={paneKeyNodeMap}
           >
             {showOverviewPage && (
