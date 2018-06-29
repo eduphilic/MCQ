@@ -8,7 +8,6 @@ import withWidth, {
 } from "@material-ui/core/withWidth";
 
 import { DashboardTemplate } from "components/DashboardTemplate";
-import { ExamAppBar } from "components/ExamAppBar";
 import { ExamDrawerContents } from "components/ExamDrawerContents";
 import {
   ExamTemplateMobile,
@@ -16,6 +15,7 @@ import {
 } from "components/ExamTemplateMobile";
 
 import { ExamNavigationStorePlaceholderConsumer } from "../../ExamNavigationStorePlaceholder";
+import { ExamAppBar } from "../ExamAppBar";
 import { ExamBottomNavFrame } from "../ExamBottomNavFrame";
 
 // tslint:disable-next-line:no-empty-interface

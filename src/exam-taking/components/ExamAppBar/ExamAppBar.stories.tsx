@@ -1,9 +1,9 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { ExamAppBar } from ".";
+import { ExamAppBar } from "./ExamAppBar";
 
-storiesOf("Components", module).add("ExamAppBar", () => {
+storiesOf("Exam Taking", module).add("ExamAppBar", () => {
   //
 
   return <ExamAppBar showStartExamButton />;
