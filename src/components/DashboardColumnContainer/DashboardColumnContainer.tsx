@@ -1,11 +1,11 @@
-import React, { ReactElement, SFC } from "react";
+import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 
 export interface DashboardColumnContainerProps {
   /**
    * Elements to arrange within columns.
    */
-  children: ReactElement<any>[];
+  children: ReactNode[];
 
   /**
    * Interlace the children rather than split them. Instead of splitting by
@@ -24,14 +24,13 @@ export const DashboardColumnContainer: SFC<
 > = props => {
   const { children, interlaced } = props;
 
-  let left: ReactElement<any>[] = [];
-  let right: ReactElement<any>[] = [];
+  let left: ReactNode[] = [];
+  let right: ReactNode[] = [];
 
   if (!interlaced) {
     left = children.slice(0, Math.ceil(children.length / 2));
     right = children.slice(left.length);
   } else {
-    // const half = Math.ceil(children.length / 2);
     for (let i = 0; i < children.length; i += 2) {
       left.push(children[i]);
       if (children[i + 1]) right.push(children[i + 1]);
