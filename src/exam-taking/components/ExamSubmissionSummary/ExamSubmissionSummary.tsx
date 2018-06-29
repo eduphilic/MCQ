@@ -111,13 +111,33 @@ const QuestionAndButtonsWrapper = styled<{
   align-items: center;
   margin: 0 auto;
   margin-top: 16px;
+  text-align: center;
 
   .buttons {
     margin-top: 16px;
   }
 
-  .buttons > *:not(:last-child) {
-    margin-right: 16px;
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .buttons > *:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    .buttons > * {
+      width: 100%;
+    }
+  }
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    .buttons > *:not(:last-child) {
+      margin-right: 16px;
+    }
   }
 `;
 
