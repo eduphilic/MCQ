@@ -5,6 +5,7 @@ import styled from "styled";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
+import Divider from "@material-ui/core/Divider";
 import withWidth, {
   isWidthUp,
   WithWidthProps,
@@ -13,7 +14,10 @@ import withWidth, {
 import { DashboardColumnContainer } from "components/DashboardColumnContainer";
 import { FormikTextField } from "components/FormikTextField";
 import { Typography } from "components/Typography";
-import { TypographyButton } from "components/TypographyButton";
+import {
+  TypographyButton,
+  TypographyButtonProps,
+} from "components/TypographyButton";
 
 const initialBasicInformationValues = {
   firstName: "Anupam",
@@ -21,10 +25,6 @@ const initialBasicInformationValues = {
   dateOfBirth: "12/07/1995",
   phoneNumber: "8956456978",
   email: "apareek@gmail.com",
-
-  currentPassword: "********",
-  newPassword: "********",
-  newPasswordConfirm: "********",
 };
 
 type BasicInformationValues = typeof initialBasicInformationValues;
@@ -32,6 +32,16 @@ const FormikBasicInformation = class extends Formik<
   {},
   BasicInformationValues
 > {};
+
+const initialPasswordValues = {
+  currentPassword: "********",
+  newPassword: "********",
+  newPasswordConfirm: "********",
+};
+
+type PasswordValues = typeof initialPasswordValues;
+// tslint:disable-next-line:max-classes-per-file
+const FormikPasswords = class extends Formik<{}, PasswordValues> {};
 
 const SettingsPage: SFC<WithWidthProps> = props => {
   const { width } = props;
@@ -102,6 +112,51 @@ const SettingsPage: SFC<WithWidthProps> = props => {
           </FormWrapper>
         )}
       </FormikBasicInformation>
+
+      {!isTabletOrAbove && <Divider />}
+
+      <FormikPasswords
+        initialValues={initialPasswordValues}
+        onSubmit={() => alert("Form submission")}
+      >
+        {api => (
+          <FormWrapper>
+            <CardHeader
+              title={<Typography variant="cardTitle">Password</Typography>}
+            />
+            <CardContent>
+              <DashboardColumnContainer interlaced={interlaceFields}>
+                {[
+                  <FormikTextField
+                    key="currentPassword"
+                    formikApi={api}
+                    name="currentPassword"
+                    label="Current Password"
+                    type="password"
+                  />,
+                  <FormSpacer key="spacer" />,
+                  <FormikTextField
+                    key="newPassword"
+                    formikApi={api}
+                    name="newPassword"
+                    label="New Password"
+                    type="password"
+                  />,
+                  <FormikTextField
+                    key="newPasswordConfirm"
+                    formikApi={api}
+                    name="newPasswordConfirm"
+                    label="Confirm New Password"
+                    type="password"
+                  />,
+                  isTabletOrAbove && <FormSpacer key="spacer2" />,
+                  <FormButton key="updatePassword">Update Password</FormButton>,
+                ]}
+              </DashboardColumnContainer>
+            </CardContent>
+          </FormWrapper>
+        )}
+      </FormikPasswords>
     </>
   );
 };
@@ -109,12 +164,30 @@ const SettingsPage: SFC<WithWidthProps> = props => {
 const SettingsPageWithWidth = withWidth()(SettingsPage);
 export { SettingsPageWithWidth as SettingsPage };
 
-const FormButton = styled(TypographyButton)`
-  width: 100%;
+const FormButton = styled<TypographyButtonProps>(({ className, ...rest }) => (
+  <div className={className}>
+    <TypographyButton className="form-button" {...rest} />
+  </div>
+))`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  .form-button {
+    width: 100%;
+  }
 
   ${({ theme }) => theme.breakpoints.up("md")} {
-    width: initial;
-    min-width: 150px;
-    margin-left: calc(100% - 150px);
+    .form-button {
+      width: initial;
+      min-width: 150px;
+    }
+  }
+`;
+
+const FormSpacer = styled.div`
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    height: 48px;
   }
 `;
