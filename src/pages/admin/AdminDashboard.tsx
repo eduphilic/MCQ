@@ -1,7 +1,6 @@
+import { serviceStatistics } from "common/structures/serviceStatistics";
 import strings from "l10n";
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { actions, models, RootState } from "store";
 
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -24,21 +23,12 @@ import { ReactComponent as ManSvg } from "./man.svg";
 import { randomNumber } from "common/utils";
 import { createPlaceholderFilterButtonProps } from "components/FilterButton/createPlaceholderFilterButtonProps";
 
-interface AdminDashboardProps {
-  serviceStatistics: models.ServiceStatistics | null;
-  fetchServiceStatistics: () => void;
-}
+// tslint:disable-next-line:no-empty-interface
+interface AdminDashboardProps {}
 
-class AdminDashboard extends Component<AdminDashboardProps> {
-  constructor(props: AdminDashboardProps) {
-    super(props);
-
-    this.props.fetchServiceStatistics();
-  }
-
+export class AdminDashboard extends Component<AdminDashboardProps> {
   render() {
     const filterButtonProps = createPlaceholderFilterButtonProps();
-    const { serviceStatistics } = this.props;
 
     return (
       <AdminDashboardTemplateContainer>
@@ -182,18 +172,3 @@ class AdminDashboard extends Component<AdminDashboardProps> {
     );
   }
 }
-
-const mapStateToProps = (
-  rootState: RootState,
-): Partial<AdminDashboardProps> => ({
-  serviceStatistics: rootState.admin.serviceStatistics,
-});
-
-const ConnectedAdminDashboard = connect<AdminDashboardProps>(
-  mapStateToProps as any,
-  {
-    fetchServiceStatistics: actions.admin.fetchServiceStatistics,
-  },
-)(AdminDashboard);
-
-export { ConnectedAdminDashboard as AdminDashboard };

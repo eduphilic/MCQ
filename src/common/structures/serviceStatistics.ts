@@ -1,4 +1,4 @@
-import { ServiceStatistics } from "../models/ServiceStatistics";
+import { ServiceStatistics } from "common/types/ServiceStatistics";
 
 const randomNumber = (max = 1000) =>
   Math.floor(Math.random() * Math.floor(max)) + 1;
@@ -30,7 +30,7 @@ const questionSubjects = [
   "Economics",
 ].sort();
 
-export const serviceStatistics = (): ServiceStatistics => ({
+export const serviceStatistics: ServiceStatistics = {
   usersTotal: randomNumber(),
   usersActive: randomNumber(),
   userRegistrationsToday: randomNumber(),
@@ -57,4 +57,4 @@ export const serviceStatistics = (): ServiceStatistics => ({
 
   questionSubjects,
   questionCountsPerSubjects: questionSubjects.map(() => randomNumber()),
-});
+};

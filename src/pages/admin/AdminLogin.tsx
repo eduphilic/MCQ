@@ -1,8 +1,6 @@
 import strings from "l10n";
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { actions, RootState } from "store";
 
 import Typography from "@material-ui/core/Typography";
 
@@ -14,13 +12,13 @@ interface AdminLoginProps {
   authenticating: boolean;
   authenticated: boolean;
   authenticationError: string | null;
-  onLogin: (login: string, password: string) => any;
+  // onLogin: (login: string, password: string) => any;
   onSnackbarClose: () => void;
 }
 
-class AdminLoginBase extends Component<AdminLoginProps> {
-  handleLoginSubmit = (formFields: Record<string, string>) => {
-    this.props.onLogin(formFields.login, formFields.password);
+export class AdminLogin extends Component<AdminLoginProps> {
+  handleLoginSubmit = (_formFields: Record<string, string>) => {
+    // this.props.onLogin(formFields.login, formFields.password);
   };
 
   generateLoginForm = () => (
@@ -88,19 +86,3 @@ class AdminLoginBase extends Component<AdminLoginProps> {
     );
   }
 }
-
-const mapStateToProps = ({ app }: RootState) => ({
-  authenticating: app.authenticating,
-  authenticated: Boolean(app.user && app.user.isAdmin),
-  authenticationError: app.authenticationError,
-});
-
-const mapDispatchToProps: Partial<AdminLoginProps> = {
-  onLogin: actions.app.login,
-  onSnackbarClose: actions.app.loginFailureClear,
-};
-
-// prettier-ignore
-export const AdminLogin = connect(mapStateToProps, mapDispatchToProps)(
-  AdminLoginBase,
-);
