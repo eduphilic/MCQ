@@ -4,7 +4,7 @@ import React from "react";
 
 import { ExamDrawerQuestionPalette } from ".";
 
-storiesOf("Components", module).add("ExamDrawerQuestionPalette", () => {
+storiesOf("Exam Taking", module).add("ExamDrawerQuestionPalette", () => {
   //
 
   return (

@@ -2,9 +2,10 @@ import React, { SFC } from "react";
 import styled from "styled";
 
 import { DrawerLogo } from "components/DrawerLogo";
-import { ExamDrawerQuestionPalette } from "components/ExamDrawerQuestionPalette";
+
 import { ExamDrawerTimerInfoCard } from "components/ExamDrawerTimerInfoCard";
 import { ExamDrawerQuestionSelect } from "../../../components/ExamDrawerQuestionSelect";
+import { ExamDrawerQuestionPalette } from "../ExamDrawerQuestionPalette";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ExamDrawerContentsProps {}

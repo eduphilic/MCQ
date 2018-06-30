@@ -10,8 +10,8 @@ import styled from "styled";
 
 import Popover from "@material-ui/core/Popover";
 
-import { ExamDrawerQuestionPalette } from "components/ExamDrawerQuestionPalette";
 import { ExamDrawerQuestionSelect } from "components/ExamDrawerQuestionSelect";
+import { ExamDrawerQuestionPalette } from "../ExamDrawerQuestionPalette";
 
 export interface ExamQuestionPalettePopupProps {
   /**
