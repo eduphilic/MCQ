@@ -1,5 +1,5 @@
 import { examMarkingsInfo } from "common/structures/examMarkingsInfo";
-import { ExamMarkingsInfo } from "common/types/ExamMarkingsInfo";
+import { IExamMetaMarkings } from "exam-taking/models/IExamMetaMarkings";
 import React, { SFC } from "react";
 import styled from "styled";
 
@@ -19,7 +19,7 @@ const titles = [
   "Marks for wrong answer",
 ];
 
-const stats: (keyof ExamMarkingsInfo)[] = [
+const stats: (keyof IExamMetaMarkings)[] = [
   "totalMarks",
   "passingMarks",
   "totalTimeMinutes",

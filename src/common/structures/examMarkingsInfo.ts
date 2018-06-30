@@ -1,6 +1,6 @@
-import { ExamMarkingsInfo } from "common/types/ExamMarkingsInfo";
+import { IExamMetaMarkings } from "exam-taking/models/IExamMetaMarkings";
 
-export const examMarkingsInfo: ExamMarkingsInfo = {
+export const examMarkingsInfo: IExamMetaMarkings = {
   totalMarks: 200,
   passingMarks: 150,
   totalTimeMinutes: 15,

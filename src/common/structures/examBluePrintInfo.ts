@@ -1,6 +1,6 @@
-import { ExamBluePrintInfo } from "common/types/ExamBluePrintInfo";
+import { IExamMetaSubject } from "exam-taking/models/IExamMetaSubject";
 
-export const examBluePrintInfo: ExamBluePrintInfo = [
+export const examBluePrintInfo: IExamMetaSubject[] = [
   "General Knowledge",
   "General Knowledge",
   "English 1",
@@ -13,7 +13,7 @@ export const examBluePrintInfo: ExamBluePrintInfo = [
   "Pollution",
 ].map((t, index) => ({
   id: `${t}-${index}`,
-  subjectTitle: t,
+  title: { en: t },
   questionCount: 50,
   marksAllocated: 150,
 }));

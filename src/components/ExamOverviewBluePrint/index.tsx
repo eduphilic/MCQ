@@ -43,7 +43,8 @@ export const ExamOverviewBluePrint: SFC<ExamOverviewBluePrintProps> = props => {
         {examBluePrintInfo.map(e => (
           <DashboardTableRow key={e.id}>
             <TableCellWithResponsivePadding noCard={noCard}>
-              {e.subjectTitle}
+              {/* TODO: Choose correct localization string. */}
+              {e.title.en}
             </TableCellWithResponsivePadding>
             <TableCellWithResponsivePadding noCard={noCard}>
               {e.questionCount}
