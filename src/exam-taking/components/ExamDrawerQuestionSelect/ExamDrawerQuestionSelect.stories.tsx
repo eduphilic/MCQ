@@ -3,9 +3,9 @@ import { drawerWidth } from "common/css/drawerWidth";
 import React from "react";
 import { UserAppDrawerTheme } from "theme";
 
-import { ExamDrawerQuestionSelect } from ".";
+import { ExamDrawerQuestionSelect } from "./ExamDrawerQuestionSelect";
 
-storiesOf("Components", module).add("ExamDrawerQuestionSelect", () => {
+storiesOf("Exam Taking", module).add("ExamDrawerQuestionSelect", () => {
   //
 
   return (
