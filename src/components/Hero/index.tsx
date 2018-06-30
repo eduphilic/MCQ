@@ -1,4 +1,4 @@
-import strings from "l10n";
+import { strings } from "localization";
 import React, { SFC } from "react";
 import styled, { withProps } from "styled";
 import { DarkTheme, LightTheme } from "theme";

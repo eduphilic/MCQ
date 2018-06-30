@@ -1,4 +1,4 @@
-import strings from "l10n";
+import { strings } from "localization";
 import React, { SFC } from "react";
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled";

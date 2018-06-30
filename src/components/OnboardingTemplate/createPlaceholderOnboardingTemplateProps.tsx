@@ -1,5 +1,5 @@
 import { SelectionSummary } from "components/SelectionSummary";
-import strings from "l10n";
+import { strings } from "localization";
 import React from "react";
 import { OnboardingTemplateProps } from ".";
 

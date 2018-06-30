@@ -1,8 +1,9 @@
-import Typography from "@material-ui/core/Typography";
-import strings from "l10n";
+import { strings } from "localization";
 import React, { SFC } from "react";
 import styled from "styled";
 // import armyGreenPng from "./armyGreen.png";
+
+import Typography from "@material-ui/core/Typography";
 
 /**
  * Footer of hero image section of landing page.

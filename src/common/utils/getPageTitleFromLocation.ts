@@ -1,5 +1,5 @@
 import { navigationLinksAll } from "common/structures/navigationLinksAll";
-import strings from "l10n";
+import { strings } from "localization";
 
 const defaultOptions = {
   withoutProductName: false,

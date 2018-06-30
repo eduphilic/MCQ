@@ -1,11 +1,4 @@
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-import { Button } from "components/Button";
-import { FormHeader } from "components/FormHeader";
-import { TextField } from "components/TextField";
-import strings from "l10n";
+import { strings } from "localization";
 import React, {
   ChangeEventHandler,
   cloneElement,
@@ -14,6 +7,15 @@ import React, {
 } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled";
+
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardHeader from "@material-ui/core/CardHeader";
+
+import { Button } from "components/Button";
+import { FormHeader } from "components/FormHeader";
+import { TextField } from "components/TextField";
 
 export interface FormField {
   name: string;

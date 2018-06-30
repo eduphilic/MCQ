@@ -1,7 +1,8 @@
-import Button, { ButtonProps } from "@material-ui/core/Button";
-import strings from "l10n";
+import { strings } from "localization";
 import React, { SFC } from "react";
 import styled from "styled";
+
+import Button, { ButtonProps } from "@material-ui/core/Button";
 
 export type AttemptButtonProps = ButtonProps;
 

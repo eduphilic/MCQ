@@ -1,4 +1,4 @@
-import strings from "l10n";
+import { strings } from "localization";
 import React, { Component } from "react";
 import { Typography, TypographyProps } from "../Typography";
 

@@ -1,4 +1,4 @@
-import strings from "l10n";
+import { strings } from "localization";
 import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 

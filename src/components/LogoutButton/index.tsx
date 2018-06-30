@@ -1,10 +1,11 @@
+import { strings } from "localization";
+import React, { SFC } from "react";
+import styled from "styled";
+
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import withWidth, { isWidthDown } from "@material-ui/core/withWidth";
 import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
-import strings from "l10n";
-import React, { SFC } from "react";
-import styled from "styled";
 
 // FIXME: Base this on ResponsiveToolbarTypographyButton.
 

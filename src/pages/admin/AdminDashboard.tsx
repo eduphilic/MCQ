@@ -1,5 +1,5 @@
 import { serviceStatistics } from "common/structures/serviceStatistics";
-import strings from "l10n";
+import { strings } from "localization";
 import React, { Component } from "react";
 
 import Card from "@material-ui/core/Card";

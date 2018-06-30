@@ -9,4 +9,4 @@ const strings: Strings = new LocalizedStrings<StringEntries>(
   stringsSettings as any,
 );
 
-export default strings;
+export { strings };

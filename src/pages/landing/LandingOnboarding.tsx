@@ -1,4 +1,4 @@
-import strings from "l10n";
+import { strings } from "localization";
 import React, { Component, ReactElement } from "react";
 import { withRouter } from "react-router-dom";
 

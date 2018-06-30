@@ -1,6 +1,6 @@
 import { bottomNavBoxShadow } from "common/css/bottomNavBoxShadow";
 import { NavigationLinks } from "common/types/NavigationLinks";
-import strings from "l10n";
+import { strings } from "localization";
 import React, {
   ChangeEvent,
   cloneElement,

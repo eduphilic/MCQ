@@ -1,7 +1,8 @@
-import Typography from "@material-ui/core/Typography";
-import strings from "l10n";
+import { strings } from "localization";
 import React, { SFC } from "react";
 import styled from "styled";
+
+import Typography from "@material-ui/core/Typography";
 
 const LogoTextBase = styled(Typography).attrs({
   children: strings.heroHeader,

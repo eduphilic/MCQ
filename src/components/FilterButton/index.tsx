@@ -1,11 +1,13 @@
+import { strings } from "localization";
+import React, { Component } from "react";
+import styled from "styled";
+
 import Hidden from "@material-ui/core/Hidden";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import FilterList from "@material-ui/icons/FilterList";
+
 import { Button } from "components/Button";
-import strings from "l10n";
-import React, { Component } from "react";
-import styled from "styled";
 
 export interface FilterButtonProps {
   /**

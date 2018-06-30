@@ -1,4 +1,4 @@
-import strings from "l10n";
+import { strings } from "localization";
 import React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled";

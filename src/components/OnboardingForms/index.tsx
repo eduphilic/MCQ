@@ -1,11 +1,12 @@
+import { strings } from "localization";
+import React, { SFC } from "react";
+import styled from "styled";
+
 import {
   AuthenticationForm,
   AuthenticationFormProps,
   FormField,
 } from "components/AuthenticationForm";
-import strings from "l10n";
-import React, { SFC } from "react";
-import styled from "styled";
 
 export interface OnboardingFormsProps {
   /**
