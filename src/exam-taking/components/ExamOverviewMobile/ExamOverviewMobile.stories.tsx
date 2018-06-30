@@ -3,10 +3,10 @@ import React from "react";
 
 import Card from "@material-ui/core/Card";
 
-import { ExamOverviewMobile } from ".";
-import { ContentCenterWrapper } from "../ContentCenterWrapper";
+import { ContentCenterWrapper } from "../../../components/ContentCenterWrapper";
+import { ExamOverviewMobile } from "./ExamOverviewMobile";
 
-storiesOf("Components", module).add("ExamOverviewMobile", () => {
+storiesOf("Exam Taking", module).add("ExamOverviewMobile", () => {
   //
 
   return (

@@ -4,8 +4,8 @@ import Tab from "@material-ui/core/Tab";
 import Tabs, { TabsProps } from "@material-ui/core/Tabs";
 
 import { Typography } from "components/Typography";
-import { ExamOverviewBluePrint } from "../../exam-taking/components/ExamOverviewBluePrint";
-import { ExamOverviewMarkings } from "../../exam-taking/components/ExamOverviewMarkings";
+import { ExamOverviewBluePrint } from "../ExamOverviewBluePrint";
+import { ExamOverviewMarkings } from "../ExamOverviewMarkings";
 
 enum OverviewTab {
   BluePrint = "bluePrint",
