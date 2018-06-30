@@ -1,12 +1,9 @@
 import React, { ReactNode, SFC } from "react";
 
 import { BaseSwippableTemplate } from "components/BaseSwippableTemplate";
-// import { ExamBottomNavMobile } from "components/ExamBottomNavMobile";
-import {
-  ExamAppBarMobile,
-  ExamAppBarMobileProps,
-  ExamNavigationStorePlaceholderConsumer,
-} from "exam-taking";
+
+import { ExamNavigationStorePlaceholderConsumer } from "../../ExamNavigationStorePlaceholder";
+import { ExamAppBarMobile, ExamAppBarMobileProps } from "../ExamAppBarMobile";
 
 export interface ExamTemplateMobileProps extends ExamAppBarMobileProps {
   /**
