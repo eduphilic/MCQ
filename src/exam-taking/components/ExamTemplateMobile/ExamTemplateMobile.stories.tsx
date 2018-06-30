@@ -2,9 +2,9 @@ import { storiesOf } from "@storybook/react";
 import { examPaneKeyNodeMap } from "common/structures/examPaneKeyNodeMap";
 import React from "react";
 
-import { ExamTemplateMobile } from ".";
+import { ExamTemplateMobile } from "./ExamTemplateMobile";
 
-storiesOf("Components", module).add("ExamTemplateMobile", () => {
+storiesOf("Exam Taking", module).add("ExamTemplateMobile", () => {
   const paneKeyNodeMap = examPaneKeyNodeMap;
 
   return (
