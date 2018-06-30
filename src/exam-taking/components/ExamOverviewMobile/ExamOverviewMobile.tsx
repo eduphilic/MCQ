@@ -1,29 +1,26 @@
-import React, { Component, ReactElement } from "react";
+import React, { Component, ReactNode } from "react";
+import { connect } from "react-redux";
+import { State } from "store";
+import { createStoreNullError } from "utils";
 
 import Tab from "@material-ui/core/Tab";
 import Tabs, { TabsProps } from "@material-ui/core/Tabs";
 
 import { Typography } from "components/Typography";
-import { ExamOverviewBluePrint } from "../ExamOverviewBluePrint";
+import {
+  ExamOverviewBluePrint,
+  ExamOverviewBluePrintProps,
+} from "../ExamOverviewBluePrint";
 import { ExamOverviewMarkings } from "../ExamOverviewMarkings";
 
 enum OverviewTab {
-  BluePrint = "bluePrint",
-  Markings = "markings",
+  BluePrint = "Blue Print",
+  Markings = "Markings",
 }
 
-const overviewTabComponentMap: Record<OverviewTab, ReactElement<any>> = {
-  [OverviewTab.BluePrint]: <ExamOverviewBluePrint noCard />,
-  [OverviewTab.Markings]: <ExamOverviewMarkings noCard />,
-};
-
-const overviewTabLabelMap: Record<OverviewTab, string> = {
-  [OverviewTab.BluePrint]: "Blue Print",
-  [OverviewTab.Markings]: "Markings",
-};
-
-// tslint:disable-next-line:no-empty-interface
-export interface ExamOverviewMobileProps {}
+export interface ExamOverviewMobileProps {
+  subjects: ExamOverviewBluePrintProps["subjects"];
+}
 
 interface ExamOverviewMobileState {
   value: OverviewTab;
@@ -42,28 +39,43 @@ export class ExamOverviewMobile extends Component<
   };
 
   render() {
+    const { subjects } = this.props;
     const { value } = this.state;
+
+    const tabs: [OverviewTab, string, ReactNode][] = [
+      [
+        OverviewTab.BluePrint,
+        "Blue Print",
+        <ExamOverviewBluePrint noCard subjects={subjects} />,
+      ],
+      [OverviewTab.Markings, "Markings", <ExamOverviewMarkings noCard />],
+    ];
 
     return (
       <>
         <Tabs fullWidth value={value} onChange={this.handleTabChange}>
-          {keys(overviewTabComponentMap).map(key => (
+          {tabs.map(([key, label]) => (
             <Tab
               key={key}
               value={key}
               label={
                 <Typography style={{ textTransform: "none" }}>
-                  {overviewTabLabelMap[key]}
+                  {label}
                 </Typography>
               }
             />
           ))}
         </Tabs>
 
-        {overviewTabComponentMap[value]}
+        {tabs.find(t => t[0] === value)![2]}
       </>
     );
   }
 }
 
-const keys = Object.keys as <T>(o: T) => (Extract<keyof T, string>)[];
+export const ExamOverviewMobileContainer = connect((state: State) => {
+  const { examMeta } = state.examTaking;
+  if (!examMeta) throw createStoreNullError("examMeta");
+
+  return { subjects: examMeta.subjects };
+})(ExamOverviewMobile);

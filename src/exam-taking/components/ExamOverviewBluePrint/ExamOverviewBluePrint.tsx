@@ -1,6 +1,9 @@
-import { examBluePrintInfo } from "common/structures/examBluePrintInfo";
 import React, { SFC } from "react";
+import { connect } from "react-redux";
+import { State } from "store";
 import styled from "styled";
+import { createStoreNullError } from "utils";
+import { IExamMetaSubject } from "../../models/IExamMetaSubject";
 
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -14,6 +17,8 @@ import { DashboardTableRow } from "components/DashboardTableRow";
 import { Typography } from "components/Typography";
 
 export interface ExamOverviewBluePrintProps {
+  subjects: IExamMetaSubject[];
+
   /**
    * Render the component without wrapping it with a Material UI Card component.
    *
@@ -23,35 +28,36 @@ export interface ExamOverviewBluePrintProps {
 }
 
 export const ExamOverviewBluePrint: SFC<ExamOverviewBluePrintProps> = props => {
-  const { noCard } = props;
+  const { subjects, noCard } = props;
 
   const contents = (
     <Table>
       <TableHead>
         <TableRow>
+          {/* TODO: Add localized strings here. */}
           {["Subjects Covered", "No. of Questions", "Marks Allocated"].map(
             t => (
-              <TableCellWithResponsivePadding key={t} noCard={noCard}>
+              <TableCellWithNoRightPadding key={t}>
                 <Typography variant="tableHeadCell">{t}</Typography>
-              </TableCellWithResponsivePadding>
+              </TableCellWithNoRightPadding>
             ),
           )}
         </TableRow>
       </TableHead>
 
       <TableBody>
-        {examBluePrintInfo.map(e => (
-          <DashboardTableRow key={e.id}>
-            <TableCellWithResponsivePadding noCard={noCard}>
+        {subjects.map(s => (
+          <DashboardTableRow key={s.id}>
+            <TableCellWithNoRightPadding>
               {/* TODO: Choose correct localization string. */}
-              {e.title.en}
-            </TableCellWithResponsivePadding>
-            <TableCellWithResponsivePadding noCard={noCard}>
-              {e.questionCount}
-            </TableCellWithResponsivePadding>
-            <TableCellWithResponsivePadding noCard={noCard}>
-              {e.marksAllocated}
-            </TableCellWithResponsivePadding>
+              {s.title.en}
+            </TableCellWithNoRightPadding>
+            <TableCellWithNoRightPadding>
+              {s.questionCount}
+            </TableCellWithNoRightPadding>
+            <TableCellWithNoRightPadding>
+              {s.marksAllocated}
+            </TableCellWithNoRightPadding>
           </DashboardTableRow>
         ))}
       </TableBody>
@@ -63,6 +69,7 @@ export const ExamOverviewBluePrint: SFC<ExamOverviewBluePrintProps> = props => {
   return (
     <CardFlexGrow>
       <CardHeader
+        /* TODO: Add localized strings here. */
         title={<Typography variant="cardTitle">Blue Print</Typography>}
       />
       {contents}
@@ -70,12 +77,17 @@ export const ExamOverviewBluePrint: SFC<ExamOverviewBluePrintProps> = props => {
   );
 };
 
+export const ExamOverviewBluePrintContainer = connect((state: State) => {
+  const { examMeta } = state.examTaking;
+  if (!examMeta) throw createStoreNullError("examMeta");
+
+  return { subjects: examMeta.subjects };
+})(ExamOverviewBluePrint);
+
 const CardFlexGrow = styled(Card)`
   flex: 1;
 `;
 
-const TableCellWithResponsivePadding: SFC<
-  ExamOverviewBluePrintProps
-> = props => (
-  <TableCell style={{ paddingRight: 0 }}>{props.children}</TableCell>
-);
+const TableCellWithNoRightPadding = styled(TableCell)`
+  padding-right: 0;
+`;
