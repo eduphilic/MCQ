@@ -10,12 +10,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Apps from "@material-ui/icons/Apps";
 import Language from "@material-ui/icons/Language";
 
-import { ExamAppBarTimer } from "components/ExamAppBarTimer";
 import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
 
 import { ExamNavigationStorePlaceholderConsumer } from "../../ExamNavigationStorePlaceholder";
 import { ExamAppBarProps } from "../ExamAppBar";
+import { ExamAppBarTimer } from "../ExamAppBarTimer";
 import { ExamQuestionPalettePopup } from "./ExamQuestionPalettePopup";
 
 const dashboardLink = navigationLinksUser.find(

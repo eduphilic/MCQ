@@ -5,9 +5,9 @@ import { DarkTheme } from "theme";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 
-import { ExamAppBarTimer } from ".";
+import { ExamAppBarTimer } from "./ExamAppBarTimer";
 
-storiesOf("Components", module).add("ExamAppBarTimer", () => {
+storiesOf("Exam Taking", module).add("ExamAppBarTimer", () => {
   //
 
   return (
