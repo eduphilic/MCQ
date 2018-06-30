@@ -3,9 +3,9 @@ import { storiesOf } from "@storybook/react";
 import { drawerWidth } from "common/css/drawerWidth";
 import React from "react";
 
-import { ExamDrawerTimerInfoCard } from ".";
+import { ExamDrawerTimerInfoCard } from "./ExamDrawerTimerInfoCard";
 
-storiesOf("Components", module).add(
+storiesOf("Exam Taking", module).add(
   "ExamDrawerTimerInfoCard",
   withInfo()(() => {
     //

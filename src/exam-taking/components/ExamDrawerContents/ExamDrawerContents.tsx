@@ -3,9 +3,9 @@ import styled from "styled";
 
 import { DrawerLogo } from "components/DrawerLogo";
 
-import { ExamDrawerTimerInfoCard } from "components/ExamDrawerTimerInfoCard";
 import { ExamDrawerQuestionPalette } from "../ExamDrawerQuestionPalette";
 import { ExamDrawerQuestionSelect } from "../ExamDrawerQuestionSelect";
+import { ExamDrawerTimerInfoCard } from "../ExamDrawerTimerInfoCard";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ExamDrawerContentsProps {}
