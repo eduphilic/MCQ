@@ -2,9 +2,9 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { ContentCenterWrapper } from "components/ContentCenterWrapper";
-import { ExamOverviewBluePrint } from ".";
+import { ExamOverviewBluePrint } from "./ExamOverviewBluePrint";
 
-storiesOf("Components", module).add("ExamOverviewBluePrint", () => {
+storiesOf("Exam Taking", module).add("ExamOverviewBluePrint", () => {
   //
 
   return (

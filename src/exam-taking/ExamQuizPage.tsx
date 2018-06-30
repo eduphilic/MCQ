@@ -2,7 +2,6 @@ import { examPaneKeyNodeMap } from "common/structures/examPaneKeyNodeMap";
 import React, { SFC } from "react";
 
 import { DashboardColumnContainer } from "components/DashboardColumnContainer";
-import { ExamOverviewBluePrint } from "components/ExamOverviewBluePrint";
 import { ExamOverviewMarkings } from "components/ExamOverviewMarkings";
 import { ExamOverviewMobile } from "components/ExamOverviewMobile";
 
@@ -15,6 +14,7 @@ import {
   examHeaderPlaceholderProps,
 } from "./components/ExamHeader";
 import { ExamLayout } from "./components/ExamLayout";
+import { ExamOverviewBluePrint } from "./components/ExamOverviewBluePrint";
 import { ExamSubmissionSummary } from "./components/ExamSubmissionSummary";
 import { examSubmissionSummaryPlaceholderProps } from "./components/ExamSubmissionSummary/ExamSubmissionSummary.placeholder";
 import { ExamTemplate } from "./components/ExamTemplate";
