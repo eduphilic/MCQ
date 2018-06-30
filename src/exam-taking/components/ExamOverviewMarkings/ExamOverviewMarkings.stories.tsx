@@ -2,9 +2,9 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { ContentCenterWrapper } from "components/ContentCenterWrapper";
-import { ExamOverviewMarkings } from ".";
+import { ExamOverviewMarkings } from "./ExamOverviewMarkings";
 
-storiesOf("Components", module).add("ExamOverviewMarkings", () => {
+storiesOf("Exam Taking", module).add("ExamOverviewMarkings", () => {
   //
 
   return (

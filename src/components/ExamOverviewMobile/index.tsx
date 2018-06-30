@@ -3,9 +3,9 @@ import React, { Component, ReactElement } from "react";
 import Tab from "@material-ui/core/Tab";
 import Tabs, { TabsProps } from "@material-ui/core/Tabs";
 
-import { ExamOverviewMarkings } from "components/ExamOverviewMarkings";
 import { Typography } from "components/Typography";
 import { ExamOverviewBluePrint } from "../../exam-taking/components/ExamOverviewBluePrint";
+import { ExamOverviewMarkings } from "../../exam-taking/components/ExamOverviewMarkings";
 
 enum OverviewTab {
   BluePrint = "bluePrint",
