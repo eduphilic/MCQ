@@ -11,7 +11,10 @@ import {
   ExamOverviewBluePrint,
   ExamOverviewBluePrintProps,
 } from "../ExamOverviewBluePrint";
-import { ExamOverviewMarkings } from "../ExamOverviewMarkings";
+import {
+  ExamOverviewMarkings,
+  ExamOverviewMarkingsProps,
+} from "../ExamOverviewMarkings";
 
 enum OverviewTab {
   BluePrint = "Blue Print",
@@ -20,6 +23,7 @@ enum OverviewTab {
 
 export interface ExamOverviewMobileProps {
   subjects: ExamOverviewBluePrintProps["subjects"];
+  markings: ExamOverviewMarkingsProps["markings"];
 }
 
 interface ExamOverviewMobileState {
@@ -39,7 +43,7 @@ export class ExamOverviewMobile extends Component<
   };
 
   render() {
-    const { subjects } = this.props;
+    const { subjects, markings } = this.props;
     const { value } = this.state;
 
     const tabs: [OverviewTab, string, ReactNode][] = [
@@ -48,7 +52,11 @@ export class ExamOverviewMobile extends Component<
         "Blue Print",
         <ExamOverviewBluePrint noCard subjects={subjects} />,
       ],
-      [OverviewTab.Markings, "Markings", <ExamOverviewMarkings noCard />],
+      [
+        OverviewTab.Markings,
+        "Markings",
+        <ExamOverviewMarkings noCard markings={markings} />,
+      ],
     ];
 
     return (
@@ -77,5 +85,5 @@ export const ExamOverviewMobileContainer = connect((state: State) => {
   const { examMeta } = state.examTaking;
   if (!examMeta) throw createStoreNullError("examMeta");
 
-  return { subjects: examMeta.subjects };
+  return { subjects: examMeta.subjects, markings: examMeta.markings };
 })(ExamOverviewMobile);

@@ -1,7 +1,9 @@
-import { examMarkingsInfo } from "common/structures/examMarkingsInfo";
 import { IExamMetaMarkings } from "exam-taking/models/IExamMetaMarkings";
 import React, { SFC } from "react";
+import { connect } from "react-redux";
+import { State } from "store";
 import styled from "styled";
+import { createStoreNullError } from "utils";
 
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -35,6 +37,8 @@ const titleNodes = titles.map(t => (
 ));
 
 export interface ExamOverviewMarkingsProps {
+  markings: IExamMetaMarkings;
+
   /**
    * Render without wrapping the contents in a Material UI Card component.
    */
@@ -42,31 +46,31 @@ export interface ExamOverviewMarkingsProps {
 }
 
 export const ExamOverviewMarkings: SFC<ExamOverviewMarkingsProps> = props => {
-  const { noCard } = props;
+  const { markings, noCard } = props;
 
   const statNodes = stats.map(s => {
     let stat: string | number;
 
     switch (s) {
       case "passingMarks":
-        stat = `${(examMarkingsInfo.passingMarks /
-          examMarkingsInfo.totalMarks) *
-          100}% (${examMarkingsInfo.passingMarks})`;
+        stat = `${(markings.passingMarks / markings.totalMarks) * 100}% (${
+          markings.passingMarks
+        })`;
         break;
       case "totalTimeMinutes":
-        stat = `${examMarkingsInfo.totalMarks} minutes`;
+        stat = `${markings.totalMarks} minutes`;
         break;
       case "questionsCount":
-        stat = `${examMarkingsInfo.questionsCount} Questions`;
+        stat = `${markings.questionsCount} Questions`;
         break;
       case "marksPerCorrectAnswer":
-        stat = `+${examMarkingsInfo.marksPerCorrectAnswer} marks`;
+        stat = `+${markings.marksPerCorrectAnswer} marks`;
         break;
       case "marksPerIncorrectAnswer":
-        stat = `-${examMarkingsInfo.marksPerIncorrectAnswer} marks`;
+        stat = `-${markings.marksPerIncorrectAnswer} marks`;
         break;
       default:
-        stat = examMarkingsInfo[s];
+        stat = markings[s];
     }
 
     return <TypographySameHeight key={s}>{stat}</TypographySameHeight>;
@@ -93,6 +97,13 @@ export const ExamOverviewMarkings: SFC<ExamOverviewMarkingsProps> = props => {
     </Card>
   );
 };
+
+export const ExamOverviewMarkingsContainer = connect((state: State) => {
+  const { examMeta } = state.examTaking;
+  if (!examMeta) throw createStoreNullError("examMeta");
+
+  return { markings: examMeta.markings };
+})(ExamOverviewMarkings);
 
 const TypographySameHeight = styled(Typography)`
   height: 24px;

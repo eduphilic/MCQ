@@ -17,7 +17,7 @@ import {
 } from "./components/ExamHeader";
 import { ExamLayout } from "./components/ExamLayout";
 import { ExamOverviewBluePrintContainer } from "./components/ExamOverviewBluePrint";
-import { ExamOverviewMarkings } from "./components/ExamOverviewMarkings";
+import { ExamOverviewMarkingsContainer } from "./components/ExamOverviewMarkings";
 import { ExamOverviewMobileContainer } from "./components/ExamOverviewMobile";
 import { ExamSubmissionSummary } from "./components/ExamSubmissionSummary";
 import { examSubmissionSummaryPlaceholderProps } from "./components/ExamSubmissionSummary/ExamSubmissionSummary.placeholder";
@@ -94,7 +94,7 @@ class ExamQuizPage extends Component<StoreProps> {
                 <DashboardColumnContainer>
                   {[
                     <ExamOverviewBluePrintContainer key="blue-print" />,
-                    <ExamOverviewMarkings key="markings" />,
+                    <ExamOverviewMarkingsContainer key="markings" />,
                   ]}
                 </DashboardColumnContainer>
               )}
