@@ -10,3 +10,8 @@ type ActionCreatorsMapObject = { [actionCreator: string]: FunctionType };
 export type ActionsUnion<A extends ActionCreatorsMapObject> = ReturnType<
   A[keyof A]
 >;
+
+export type ActionHandler<State, Payload = any> = (
+  state: State,
+  action: { type: string; payload?: Payload },
+) => State;
