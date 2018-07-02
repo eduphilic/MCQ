@@ -3,13 +3,16 @@ import { createReducer } from "utils";
 import { Actions, ExamTakingAction } from "./actions";
 import { IExamMeta } from "./models/IExamMeta";
 import { IExamQuestion } from "./models/IExamQuestion";
+import { IExamQuestionCategory } from "./models/IExamQuestionCategory";
 
 import { createExamMetaPlaceholder } from "./placeholders/createExamMetaPlaceholder";
+import { createExamQuestionCategoryPlaceholder } from "./placeholders/createExamQuestionCategoryPlaceholder";
 import { createExamQuestionPlaceholder } from "./placeholders/createExamQuestionPlaceholder";
 
 export interface State {
   examMeta: IExamMeta | null;
   questions: IExamQuestion[] | null;
+  questionCategories: IExamQuestionCategory[] | null;
 
   showOverviewScreen: boolean;
   showSubmissionSummaryScreen: boolean;
@@ -19,6 +22,7 @@ export interface State {
 const initialState: State = {
   examMeta: null,
   questions: null,
+  questionCategories: null,
 
   showOverviewScreen: true,
   showSubmissionSummaryScreen: false,
@@ -29,6 +33,7 @@ const loadPlaceholderExam: ActionHandler<State> = state => ({
   ...state,
   examMeta: createExamMetaPlaceholder(),
   questions: createExamQuestionPlaceholder(),
+  questionCategories: createExamQuestionCategoryPlaceholder(),
 });
 
 /** Updates the visited status of the specified question. */

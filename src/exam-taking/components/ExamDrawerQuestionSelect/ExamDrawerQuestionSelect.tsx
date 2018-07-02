@@ -1,58 +1,110 @@
-import React, { Component } from "react";
+import React, { SFC } from "react";
+import { connect } from "react-redux";
+import { State } from "store";
 import styled from "styled";
+import { actions } from "../../actions";
+import { IExamQuestion } from "../../models/IExamQuestion";
+import { IExamQuestionCategory } from "../../models/IExamQuestionCategory";
 
 import { Typography } from "components/Typography";
-import { ExamNavigationStorePlaceholderConsumer } from "exam-taking/ExamNavigationStorePlaceholder";
 import { QuestionButton } from "./QuestionButton";
 
-// tslint:disable-next-line:no-empty-interface
-export interface ExamDrawerQuestionSelectProps {}
+interface StateProps {
+  questions: IExamQuestion[];
+  questionCategories: IExamQuestionCategory[];
 
-export class ExamDrawerQuestionSelect extends Component<
-  ExamDrawerQuestionSelectProps
-> {
-  render() {
-    return (
-      <ExamNavigationStorePlaceholderConsumer>
-        {store => {
-          let nextQuestion = 0;
-          const sections = store.questionCategories.map(c => {
-            const node = (
-              <Section key={c.title}>
-                <Typography variant="examDrawerSubtitle">{c.title}</Typography>
-                <QuestionButtonWrapper>
-                  {store.questions
-                    .slice(nextQuestion, nextQuestion + c.questionCount)
-                    .map((q, index) => (
-                      <QuestionButton
-                        key={`${c.title}-${index}`}
-                        status={q.status}
-                        selected={
-                          !store.showOverviewPage &&
-                          store.currentQuestion === nextQuestion + index
-                        }
-                        questionIndex={index + nextQuestion}
-                        onNavigate={store.navigateToQuestion}
-                      >
-                        <Typography style={{ color: "inherit" }}>
-                          {index + 1}
-                        </Typography>
-                      </QuestionButton>
-                    ))}
-                </QuestionButtonWrapper>
-              </Section>
-            );
+  /**
+   * Whether to display the currently selected question. This should be false
+   * when either the exam overview or exam submission screens are displayed.
+   */
+  showSelectedQuestionHighlight: boolean;
 
-            nextQuestion += c.questionCount;
-            return node;
-          });
-
-          return <Wrapper>{sections}</Wrapper>;
-        }}
-      </ExamNavigationStorePlaceholderConsumer>
-    );
-  }
+  currentQuestion: number;
 }
+
+interface DispatchProps {
+  navigateToQuestion: (questionIndex: number) => any;
+}
+
+// tslint:disable-next-line:no-empty-interface
+interface OwnProps {}
+
+export type ExamDrawerQuestionSelectProps = StateProps &
+  DispatchProps &
+  OwnProps;
+
+/**
+ * Provides buttons for navigating among the exam questions. It separates the
+ * buttons into groups by category. It displays the current status of the
+ * question (visited/answered/etc...).
+ */
+const ExamDrawerQuestionSelect: SFC<ExamDrawerQuestionSelectProps> = props => {
+  const {
+    questions,
+    questionCategories,
+    showSelectedQuestionHighlight,
+    currentQuestion,
+    navigateToQuestion,
+  } = props;
+
+  let nextQuestion = 0;
+  const sections = questionCategories.map(c => {
+    const node = (
+      // TODO: Use localized string here.
+      <Section key={c.title.en}>
+        {/* TODO: Use localized string here. */}
+        <Typography variant="examDrawerSubtitle">{c.title.en}</Typography>
+        <QuestionButtonWrapper>
+          {questions
+            .slice(nextQuestion, nextQuestion + c.questionCount)
+            .map((q, index) => (
+              <QuestionButton
+                // TODO: Use localized string here.
+                key={`${c.title.en}-${index}`}
+                status={q.status}
+                selected={
+                  showSelectedQuestionHighlight &&
+                  currentQuestion === nextQuestion + index
+                }
+                questionIndex={index + nextQuestion}
+                onNavigate={navigateToQuestion}
+              >
+                <Typography style={{ color: "inherit" }}>
+                  {index + 1}
+                </Typography>
+              </QuestionButton>
+            ))}
+        </QuestionButtonWrapper>
+      </Section>
+    );
+
+    nextQuestion += c.questionCount;
+    return node;
+  });
+
+  return <Wrapper>{sections}</Wrapper>;
+};
+
+const ExamDrawerQuestionSelectContainer = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps,
+  State
+>(
+  state => ({
+    questions: state.examTaking.questions!,
+    questionCategories: state.examTaking.questionCategories!,
+    showSelectedQuestionHighlight:
+      !state.examTaking.showOverviewScreen &&
+      !state.examTaking.showSubmissionSummaryScreen,
+    currentQuestion: state.examTaking.currentQuestion,
+  }),
+  {
+    navigateToQuestion: actions.navigateToQuestion,
+  },
+)(ExamDrawerQuestionSelect);
+
+export { ExamDrawerQuestionSelectContainer as ExamDrawerQuestionSelect };
 
 const Wrapper = styled.div`
   display: flex;
