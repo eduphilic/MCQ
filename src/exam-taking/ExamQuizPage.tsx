@@ -16,9 +16,9 @@ import {
   examHeaderPlaceholderProps,
 } from "./components/ExamHeader";
 import { ExamLayout } from "./components/ExamLayout";
-import { ExamOverviewBluePrintContainer } from "./components/ExamOverviewBluePrint";
-import { ExamOverviewMarkingsContainer } from "./components/ExamOverviewMarkings";
-import { ExamOverviewMobileContainer } from "./components/ExamOverviewMobile";
+import { ExamOverviewBluePrint } from "./components/ExamOverviewBluePrint";
+import { ExamOverviewMarkings } from "./components/ExamOverviewMarkings";
+import { ExamOverviewMobile } from "./components/ExamOverviewMobile";
 import { ExamSubmissionSummary } from "./components/ExamSubmissionSummary";
 import { examSubmissionSummaryPlaceholderProps } from "./components/ExamSubmissionSummary/ExamSubmissionSummary.placeholder";
 import { ExamTemplate } from "./components/ExamTemplate";
@@ -79,7 +79,7 @@ class ExamQuizPage extends Component<StoreProps> {
             <ExamTemplate
               staticView={
                 showOverviewPage ? (
-                  <ExamOverviewMobileContainer />
+                  <ExamOverviewMobile />
                 ) : showSubmissionSummaryPage ? (
                   <ExamSubmissionSummary
                     {...examSubmissionSummaryPlaceholderProps}
@@ -93,8 +93,8 @@ class ExamQuizPage extends Component<StoreProps> {
               {showOverviewPage && (
                 <DashboardColumnContainer>
                   {[
-                    <ExamOverviewBluePrintContainer key="blue-print" />,
-                    <ExamOverviewMarkingsContainer key="markings" />,
+                    <ExamOverviewBluePrint key="blue-print" />,
+                    <ExamOverviewMarkings key="markings" />,
                   ]}
                 </DashboardColumnContainer>
               )}

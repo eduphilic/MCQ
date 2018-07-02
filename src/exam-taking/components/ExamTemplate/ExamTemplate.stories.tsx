@@ -4,17 +4,22 @@ import { examPaneKeyNodeMap } from "common/structures/examPaneKeyNodeMap";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 
+import { PlaceholderProvider } from "../../placeholders/PlaceholderProvider";
 import { ExamTemplate } from "./ExamTemplate";
 
-storiesOf("Exam Taking", module).add(
-  "ExamTemplate",
-  withInfo({ inline: false })(() => {
-    const paneKeyNodeMap = examPaneKeyNodeMap;
+storiesOf("Exam Taking", module)
+  .addDecorator(story => <PlaceholderProvider>{story()}</PlaceholderProvider>)
+  .add(
+    "ExamTemplate",
+    withInfo({ inline: false })(() => {
+      const paneKeyNodeMap = examPaneKeyNodeMap;
 
-    return (
-      <BrowserRouter>
-        <ExamTemplate paneKeyNodeMap={paneKeyNodeMap}>Placeholder</ExamTemplate>
-      </BrowserRouter>
-    );
-  }),
-);
+      return (
+        <BrowserRouter>
+          <ExamTemplate paneKeyNodeMap={paneKeyNodeMap}>
+            Placeholder
+          </ExamTemplate>
+        </BrowserRouter>
+      );
+    }),
+  );

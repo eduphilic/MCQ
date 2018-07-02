@@ -36,16 +36,20 @@ const titleNodes = titles.map(t => (
   </Typography>
 ));
 
-export interface ExamOverviewMarkingsProps {
+interface StateProps {
   markings: IExamMetaMarkings;
+}
 
+interface OwnProps {
   /**
    * Render without wrapping the contents in a Material UI Card component.
    */
   noCard?: boolean;
 }
 
-export const ExamOverviewMarkings: SFC<ExamOverviewMarkingsProps> = props => {
+export type ExamOverviewMarkingsProps = StateProps & OwnProps;
+
+const ExamOverviewMarkings: SFC<ExamOverviewMarkingsProps> = props => {
   const { markings, noCard } = props;
 
   const statNodes = stats.map(s => {
@@ -98,12 +102,16 @@ export const ExamOverviewMarkings: SFC<ExamOverviewMarkingsProps> = props => {
   );
 };
 
-export const ExamOverviewMarkingsContainer = connect((state: State) => {
-  const { examMeta } = state.examTaking;
-  if (!examMeta) throw createStoreNullError("examMeta");
+const ExamOverviewMarkingsContainer = connect<StateProps, {}, OwnProps, State>(
+  state => {
+    const { examMeta } = state.examTaking;
+    if (!examMeta) throw createStoreNullError("examMeta");
 
-  return { markings: examMeta.markings };
-})(ExamOverviewMarkings);
+    return { markings: examMeta.markings };
+  },
+)(ExamOverviewMarkings);
+
+export { ExamOverviewMarkingsContainer as ExamOverviewMarkings };
 
 const TypographySameHeight = styled(Typography)`
   height: 24px;

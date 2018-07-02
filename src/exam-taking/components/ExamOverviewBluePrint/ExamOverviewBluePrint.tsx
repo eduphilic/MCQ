@@ -16,9 +16,11 @@ import TableRow from "@material-ui/core/TableRow";
 import { DashboardTableRow } from "components/DashboardTableRow";
 import { Typography } from "components/Typography";
 
-export interface ExamOverviewBluePrintProps {
+interface StateProps {
   subjects: IExamMetaSubject[];
+}
 
+interface OwnProps {
   /**
    * Render the component without wrapping it with a Material UI Card component.
    *
@@ -27,7 +29,9 @@ export interface ExamOverviewBluePrintProps {
   noCard?: boolean;
 }
 
-export const ExamOverviewBluePrint: SFC<ExamOverviewBluePrintProps> = props => {
+export type ExamOverviewBluePrintProps = StateProps & OwnProps;
+
+const ExamOverviewBluePrint: SFC<ExamOverviewBluePrintProps> = props => {
   const { subjects, noCard } = props;
 
   const contents = (
@@ -77,12 +81,16 @@ export const ExamOverviewBluePrint: SFC<ExamOverviewBluePrintProps> = props => {
   );
 };
 
-export const ExamOverviewBluePrintContainer = connect((state: State) => {
-  const { examMeta } = state.examTaking;
-  if (!examMeta) throw createStoreNullError("examMeta");
+const ExamOverviewBluePrintContainer = connect<StateProps, {}, OwnProps, State>(
+  state => {
+    const { examMeta } = state.examTaking;
+    if (!examMeta) throw createStoreNullError("examMeta");
 
-  return { subjects: examMeta.subjects };
-})(ExamOverviewBluePrint);
+    return { subjects: examMeta.subjects };
+  },
+)(ExamOverviewBluePrint);
+
+export { ExamOverviewBluePrintContainer as ExamOverviewBluePrint };
 
 const CardFlexGrow = styled(Card)`
   flex: 1;
