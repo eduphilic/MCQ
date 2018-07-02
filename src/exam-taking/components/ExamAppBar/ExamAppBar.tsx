@@ -19,6 +19,7 @@ type StateProps = {
 
 type DispatchProps = {
   onStartExamButtonClick: () => any;
+  onSubmitExamButtonClick: () => any;
 };
 
 type OwnProps = {};
@@ -29,8 +30,9 @@ type Props = StateProps & DispatchProps & OwnProps;
 const ExamAppBar: SFC<Props> = props => {
   const {
     showStartExamButton,
-    onStartExamButtonClick,
     showSubmitButton,
+    onStartExamButtonClick,
+    onSubmitExamButtonClick,
   } = props;
 
   return (
@@ -50,20 +52,27 @@ const ExamAppBar: SFC<Props> = props => {
           </TypographyButton>
         )}
 
-        {showSubmitButton && <TypographyButton>Submit</TypographyButton>}
+        {showSubmitButton && (
+          <TypographyButton color="orange" onClick={onSubmitExamButtonClick}>
+            Submit Exam
+          </TypographyButton>
+        )}
       </ToolbarWithButtonMargins>
     </AppBar>
   );
 };
 
 const ExamAppBarContainer = connect<StateProps, DispatchProps, OwnProps, State>(
-  state => ({
-    showStartExamButton: buttonSelector(state.examTaking)
-      .startExamButtonVisible,
-    showSubmitButton: buttonSelector(state.examTaking).submitButtonVisible,
+  ({ examTaking }): StateProps => ({
+    showStartExamButton: buttonSelector(examTaking).startExamButtonVisible,
+    showSubmitButton:
+      !examTaking.showOverviewScreen &&
+      !examTaking.showSubmissionSummaryScreen &&
+      !buttonSelector(examTaking).submitButtonVisible,
   }),
   {
     onStartExamButtonClick: () => actions.navigateToQuestion(0),
+    onSubmitExamButtonClick: actions.displaySubmissionSummaryScreen,
   },
 )(ExamAppBar);
 export { ExamAppBarContainer as ExamAppBar };
