@@ -1,60 +1,97 @@
 import { bottomNavBoxShadow } from "common/css/bottomNavBoxShadow";
 import { fromToolbarHeight } from "common/css/fromToolbarHeight";
 import React, { SFC } from "react";
+import { connect } from "react-redux";
+import { State } from "store";
 import styled from "styled";
+import { actions } from "../../actions";
+import { buttonSelector } from "../../selectors";
 
 import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
 
 import { TypographyButton } from "components/TypographyButton";
-import { ExamNavigationStorePlaceholderConsumer } from "exam-taking/ExamNavigationStorePlaceholder";
 
-// tslint:disable-next-line:no-empty-interface
-export interface ExamBottomNavFrameProps {}
+type StateProps = {
+  previousButtonEnabled: boolean;
+  showSubmitExamButton: boolean;
+};
 
-export const ExamBottomNavFrame: SFC<ExamBottomNavFrameProps> = props => {
-  const { children } = props;
+type DispatchProps = {
+  onPreviousButtonClick: () => any;
+  onNextButtonClick: () => any;
+  onSubmitExamButtonClick: () => any;
+};
+
+type OwnProps = {};
+export { OwnProps as ExamBottomNavFrameProps };
+
+type Props = StateProps & DispatchProps & OwnProps;
+
+const ExamBottomNavFrame: SFC<Props> = props => {
+  const {
+    children,
+    previousButtonEnabled,
+    showSubmitExamButton,
+    onPreviousButtonClick,
+    onNextButtonClick,
+    onSubmitExamButtonClick,
+  } = props;
 
   return (
     <Wrapper>
       <PageContentsWrapper>{children}</PageContentsWrapper>
 
       <PaperWithBoxShadowUpperDirection>
-        <ExamNavigationStorePlaceholderConsumer>
-          {store => (
-            <ToolbarWithButtonMargins>
-              <TypographyButton>Mark for Review</TypographyButton>
-              <TypographyButton>Clear</TypographyButton>
+        <ToolbarWithButtonMargins>
+          <TypographyButton>Mark for Review</TypographyButton>
+          <TypographyButton>Clear</TypographyButton>
 
-              <ToolbarSpacer />
+          <ToolbarSpacer />
 
-              <TypographyButton
-                disabled={!store.previousButtonEnabled}
-                onClick={store.navigatePreviousQuestion}
-              >
-                Previous
-              </TypographyButton>
+          <TypographyButton
+            disabled={!previousButtonEnabled}
+            onClick={onPreviousButtonClick}
+          >
+            Previous
+          </TypographyButton>
 
-              {!store.showSubmitExamButton ? (
-                <TypographyButton onClick={store.navigateNextQuestion}>
-                  Next
-                </TypographyButton>
-              ) : (
-                <TypographyButton
-                  color="yellow"
-                  filled
-                  onClick={store.startSubmission}
-                >
-                  Submit Exam
-                </TypographyButton>
-              )}
-            </ToolbarWithButtonMargins>
+          {!showSubmitExamButton ? (
+            <TypographyButton onClick={onNextButtonClick}>
+              Next
+            </TypographyButton>
+          ) : (
+            <TypographyButton
+              color="yellow"
+              filled
+              onClick={onSubmitExamButtonClick}
+            >
+              Submit Exam
+            </TypographyButton>
           )}
-        </ExamNavigationStorePlaceholderConsumer>
+        </ToolbarWithButtonMargins>
       </PaperWithBoxShadowUpperDirection>
     </Wrapper>
   );
 };
+
+const ExamBottomNavFrameContainer = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps,
+  State
+>(
+  ({ examTaking }): StateProps => ({
+    previousButtonEnabled: buttonSelector(examTaking).previousButtonEnabled,
+    showSubmitExamButton: buttonSelector(examTaking).submitButtonVisible,
+  }),
+  {
+    onPreviousButtonClick: actions.navigateToPreviousQuestion,
+    onNextButtonClick: actions.navigateToNextQuestion,
+    onSubmitExamButtonClick: actions.displaySubmissionSummaryScreen,
+  },
+)(ExamBottomNavFrame);
+export { ExamBottomNavFrameContainer as ExamBottomNavFrame };
 
 // Make the page contents the screen height minus the size of both the top and
 // bottom nav bars. The base template has top and bottom padding of 24px so we

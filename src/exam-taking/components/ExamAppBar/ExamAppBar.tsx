@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { State } from "store";
 import styled from "styled";
 import { actions } from "../../actions";
-import { buttonStateSelector } from "../../selectors";
+import { buttonSelector } from "../../selectors";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -58,9 +58,9 @@ const ExamAppBar: SFC<Props> = props => {
 
 const ExamAppBarContainer = connect<StateProps, DispatchProps, OwnProps, State>(
   state => ({
-    showStartExamButton: buttonStateSelector(state.examTaking)
+    showStartExamButton: buttonSelector(state.examTaking)
       .startExamButtonVisible,
-    showSubmitButton: buttonStateSelector(state.examTaking).submitButtonVisible,
+    showSubmitButton: buttonSelector(state.examTaking).submitButtonVisible,
   }),
   {
     onStartExamButtonClick: () => actions.navigateToQuestion(0),

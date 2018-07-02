@@ -5,7 +5,7 @@ import { State } from "store";
 import styled, { withProps } from "styled";
 import { DarkTheme } from "theme";
 import { actions } from "../../actions";
-import { buttonStateSelector } from "../../selectors";
+import { buttonSelector } from "../../selectors";
 
 import AppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
@@ -112,7 +112,7 @@ const ExamAppBarMobileContainer = connect<
 >(
   state => ({
     showSubmissionSummaryScreen: state.examTaking.showSubmissionSummaryScreen,
-    showStartExamButton: buttonStateSelector(state.examTaking)
+    showStartExamButton: buttonSelector(state.examTaking)
       .startExamButtonVisible,
   }),
   {
