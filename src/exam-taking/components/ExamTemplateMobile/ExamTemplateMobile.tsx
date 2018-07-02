@@ -3,9 +3,9 @@ import React, { ReactNode, SFC } from "react";
 import { BaseSwippableTemplate } from "components/BaseSwippableTemplate";
 
 import { ExamNavigationStorePlaceholderConsumer } from "../../ExamNavigationStorePlaceholder";
-import { ExamAppBarMobile, ExamAppBarMobileProps } from "../ExamAppBarMobile";
+import { ExamAppBarMobile } from "../ExamAppBarMobile";
 
-export interface ExamTemplateMobileProps extends ExamAppBarMobileProps {
+export interface ExamTemplateMobileProps {
   /**
    * Render a static view instead of a swipeable pane.
    */
@@ -18,9 +18,9 @@ export interface ExamTemplateMobileProps extends ExamAppBarMobileProps {
 }
 
 export const ExamTemplateMobile: SFC<ExamTemplateMobileProps> = props => {
-  const { staticView, paneKeyNodeMap, ...rest } = props;
+  const { staticView, paneKeyNodeMap } = props;
 
-  const headerNode = <ExamAppBarMobile {...rest} />;
+  const headerNode = <ExamAppBarMobile />;
 
   return (
     <ExamNavigationStorePlaceholderConsumer>
@@ -28,9 +28,6 @@ export const ExamTemplateMobile: SFC<ExamTemplateMobileProps> = props => {
         <BaseSwippableTemplate
           headerNode={headerNode}
           paneKeyNodeMap={paneKeyNodeMap}
-          // footerNode={
-          //   !store.showOverviewPage ? <ExamBottomNavMobile /> : undefined
-          // }
           selectedPane={store.currentQuestion}
           onPaneChange={store.navigateToQuestion}
           staticView={staticView}

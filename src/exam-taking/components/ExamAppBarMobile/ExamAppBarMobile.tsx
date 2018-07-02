@@ -1,7 +1,11 @@
 import { examAppBarBottomRow, examAppBarTopRow } from "common/css/colors";
 import React, { SFC } from "react";
+import { connect } from "react-redux";
+import { State } from "store";
 import styled, { withProps } from "styled";
 import { DarkTheme } from "theme";
+import { actions } from "../../actions";
+import { buttonStateSelector } from "../../selectors";
 
 import AppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
@@ -13,81 +17,103 @@ import Language from "@material-ui/icons/Language";
 import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
 
-import { ExamNavigationStorePlaceholderConsumer } from "../../ExamNavigationStorePlaceholder";
-import { ExamAppBarProps } from "../ExamAppBar";
 import { ExamAppBarTimer } from "../ExamAppBarTimer";
 import { ExamQuestionPalettePopup } from "./ExamQuestionPalettePopup";
 
-// tslint:disable-next-line:no-empty-interface
-export interface ExamAppBarMobileProps extends ExamAppBarProps {}
+interface StateProps {
+  showSubmissionSummaryScreen: State["examTaking"]["showSubmissionSummaryScreen"];
+  showStartExamButton: boolean;
+}
 
-export const ExamAppBarMobile: SFC<ExamAppBarMobileProps> = props => {
-  const { showStartExamButton, onStartExamButtonClick } = props;
+interface DispatchProps {
+  onStartExamButtonClick: () => void;
+  onSubmitButtonClick: () => void;
+}
+
+export type ExamAppBarMobileProps = StateProps & DispatchProps;
+
+const ExamAppBarMobile: SFC<ExamAppBarMobileProps> = props => {
+  const {
+    showSubmissionSummaryScreen,
+    showStartExamButton,
+    onStartExamButtonClick,
+    onSubmitButtonClick,
+  } = props;
 
   return (
-    <ExamNavigationStorePlaceholderConsumer>
-      {({ startSubmission, showSubmissionSummaryPage }) => (
-        <DarkTheme>
-          <AppBar position="static" color="inherit">
-            <ToolbarHalfHeightDarkBlueBackground>
-              <IconButtonGroup position="left">
-                <IconButton>
-                  <Dashboard />
-                </IconButton>
+    <DarkTheme>
+      <AppBar position="static" color="inherit">
+        <ToolbarHalfHeightDarkBlueBackground>
+          <IconButtonGroup position="left">
+            <IconButton>
+              <Dashboard />
+            </IconButton>
 
-                <IconButton>
-                  <Language />
-                </IconButton>
-              </IconButtonGroup>
+            <IconButton>
+              <Language />
+            </IconButton>
+          </IconButtonGroup>
 
-              <AppBarCenterContentWrapper>
-                {!showStartExamButton && <ExamAppBarTimer />}
-              </AppBarCenterContentWrapper>
+          <AppBarCenterContentWrapper>
+            {!showStartExamButton && <ExamAppBarTimer />}
+          </AppBarCenterContentWrapper>
 
-              <IconButtonGroup position="right">
-                {showStartExamButton && (
-                  <StartExamButton onClick={onStartExamButtonClick}>
-                    Start Exam
-                  </StartExamButton>
-                )}
+          <IconButtonGroup position="right">
+            {showStartExamButton && (
+              <StartExamButton onClick={onStartExamButtonClick}>
+                Start Exam
+              </StartExamButton>
+            )}
 
-                {!showStartExamButton &&
-                  !showSubmissionSummaryPage && (
-                    <SubmitExamButton onClick={startSubmission}>
-                      Submit Exam
-                    </SubmitExamButton>
-                  )}
+            {!showStartExamButton &&
+              !showSubmissionSummaryScreen && (
+                <SubmitExamButton onClick={onSubmitButtonClick}>
+                  Submit Exam
+                </SubmitExamButton>
+              )}
 
-                {showSubmissionSummaryPage && (
-                  <>
-                    <ButtonSpacer />
-                    <ButtonSpacer />
-                  </>
-                )}
-              </IconButtonGroup>
-            </ToolbarHalfHeightDarkBlueBackground>
+            {showSubmissionSummaryScreen && (
+              <>
+                <ButtonSpacer />
+                <ButtonSpacer />
+              </>
+            )}
+          </IconButtonGroup>
+        </ToolbarHalfHeightDarkBlueBackground>
 
-            <ToolbarHalfHeightLightBlueBackground>
-              <IconButtonGroup position="left">
-                <ExamQuestionPalettePopup>
-                  <IconButton>
-                    <Apps />
-                  </IconButton>
-                </ExamQuestionPalettePopup>
-              </IconButtonGroup>
+        <ToolbarHalfHeightLightBlueBackground>
+          <IconButtonGroup position="left">
+            <ExamQuestionPalettePopup>
+              <IconButton>
+                <Apps />
+              </IconButton>
+            </ExamQuestionPalettePopup>
+          </IconButtonGroup>
 
-              <AppBarCenterContentWrapper>
-                <Typography>Army Soldier GD Test 1</Typography>
-              </AppBarCenterContentWrapper>
+          <AppBarCenterContentWrapper>
+            <Typography>Army Soldier GD Test 1</Typography>
+          </AppBarCenterContentWrapper>
 
-              <Typography variant="cardStatCaption">200 MM</Typography>
-            </ToolbarHalfHeightLightBlueBackground>
-          </AppBar>
-        </DarkTheme>
-      )}
-    </ExamNavigationStorePlaceholderConsumer>
+          <Typography variant="cardStatCaption">200 MM</Typography>
+        </ToolbarHalfHeightLightBlueBackground>
+      </AppBar>
+    </DarkTheme>
   );
 };
+
+const ExamAppBarMobileContainer = connect<StateProps, DispatchProps, {}, State>(
+  state => ({
+    showSubmissionSummaryScreen: state.examTaking.showSubmissionSummaryScreen,
+    showStartExamButton: buttonStateSelector(state.examTaking)
+      .startExamButtonVisible,
+  }),
+  {
+    onStartExamButtonClick: () => actions.navigateToQuestion(0),
+    onSubmitButtonClick: actions.displaySubmissionSummaryScreen,
+  },
+)(ExamAppBarMobile);
+
+export { ExamAppBarMobileContainer as ExamAppBarMobile };
 
 const ToolbarHalfHeight = styled(Toolbar)`
   height: 32px;
