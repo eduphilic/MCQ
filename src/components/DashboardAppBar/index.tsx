@@ -1,4 +1,4 @@
-import { getPageTitleFromLocation } from "common/utils";
+import { getPageTitleFromLocation } from "navigation";
 import React, { cloneElement, ReactElement, SFC } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled";

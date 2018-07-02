@@ -3,13 +3,14 @@ import { createEnhancerDevTools } from "./createEnhancerDevTools";
 
 import { reducer as examTaking } from "exam-taking";
 import { reducer as localization } from "localization";
+import { reducer as navigation } from "navigation";
 
 const reducers = {
   localization,
   examTaking,
+  navigation,
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type State = {
   [P in keyof typeof reducers]: ReturnType<typeof reducers[P]>
 };
