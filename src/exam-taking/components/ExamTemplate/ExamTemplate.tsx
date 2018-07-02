@@ -10,7 +10,7 @@ import withWidth, {
 import { DashboardTemplate } from "components/DashboardTemplate";
 
 import { ExamNavigationStorePlaceholderConsumer } from "../../ExamNavigationStorePlaceholder";
-import { ExamAppBar, ExamAppBarProps } from "../ExamAppBar";
+import { ExamAppBar } from "../ExamAppBar";
 import { ExamBottomNavFrame } from "../ExamBottomNavFrame";
 import { ExamDrawerContents } from "../ExamDrawerContents";
 import {
@@ -32,11 +32,6 @@ const ExamTemplate: SFC<ExamTemplateProps> = props => {
   return (
     <ExamNavigationStorePlaceholderConsumer>
       {store => {
-        const examAppBarProps: ExamAppBarProps = {
-          showStartExamButton: store.showOverviewPage,
-          onStartExamButtonClick: store.startExam,
-        };
-
         const pageContentsWrapperComponent =
           store.showOverviewPage || store.showSubmissionSummaryPage
             ? undefined
@@ -48,7 +43,7 @@ const ExamTemplate: SFC<ExamTemplateProps> = props => {
 
             {!showMobileTemplate ? (
               <DashboardTemplate
-                appBarNode={<ExamAppBar {...examAppBarProps} />}
+                appBarNode={<ExamAppBar />}
                 drawerContentsNode={drawerContentsNode}
                 drawerThemeElement={<UserAppDrawerTheme />}
                 pageContentsWrapperComponent={pageContentsWrapperComponent}
@@ -59,7 +54,6 @@ const ExamTemplate: SFC<ExamTemplateProps> = props => {
             ) : (
               <ExamTemplateMobile
                 staticView={staticView}
-                {...examAppBarProps}
                 paneKeyNodeMap={paneKeyNodeMap}
               />
             )}

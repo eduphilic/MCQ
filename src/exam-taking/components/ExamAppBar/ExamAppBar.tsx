@@ -1,5 +1,9 @@
 import React, { SFC } from "react";
+import { connect } from "react-redux";
+import { State } from "store";
 import styled from "styled";
+import { actions } from "../../actions";
+import { buttonStateSelector } from "../../selectors";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -8,24 +12,21 @@ import { DropdownButton } from "components/DropdownButton";
 import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
 
-export interface ExamAppBarProps {
-  /**
-   * Show the start exam button.
-   */
-  showStartExamButton?: boolean;
+type StateProps = {
+  showStartExamButton: boolean;
+  showSubmitButton: boolean;
+};
 
-  /**
-   * Called when the start exam button is clicked.
-   */
-  onStartExamButtonClick?: () => any;
+type DispatchProps = {
+  onStartExamButtonClick: () => any;
+};
 
-  /**
-   * Show the submit button.
-   */
-  showSubmitButton?: boolean;
-}
+type OwnProps = {};
+export { OwnProps as ExamAppBarProps };
 
-export const ExamAppBar: SFC<ExamAppBarProps> = props => {
+type Props = StateProps & DispatchProps & OwnProps;
+
+const ExamAppBar: SFC<Props> = props => {
   const {
     showStartExamButton,
     onStartExamButtonClick,
@@ -54,6 +55,18 @@ export const ExamAppBar: SFC<ExamAppBarProps> = props => {
     </AppBar>
   );
 };
+
+const ExamAppBarContainer = connect<StateProps, DispatchProps, OwnProps, State>(
+  state => ({
+    showStartExamButton: buttonStateSelector(state.examTaking)
+      .startExamButtonVisible,
+    showSubmitButton: buttonStateSelector(state.examTaking).submitButtonVisible,
+  }),
+  {
+    onStartExamButtonClick: () => actions.navigateToQuestion(0),
+  },
+)(ExamAppBar);
+export { ExamAppBarContainer as ExamAppBar };
 
 const ToolbarWithButtonMargins = styled(Toolbar)`
   > *:not(:last-child) {
