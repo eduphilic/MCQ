@@ -2,7 +2,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { ContentCenterWrapper } from "components/ContentCenterWrapper";
-import { PlaceholderProvider } from "../../placeholders/PlaceholderProvider";
+import { PlaceholderProvider } from "store";
 import { ExamOverviewBluePrint } from "./ExamOverviewBluePrint";
 
 const stories = storiesOf("Exam Taking", module);

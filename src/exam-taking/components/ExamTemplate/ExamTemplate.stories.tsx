@@ -4,7 +4,7 @@ import { examPaneKeyNodeMap } from "common/structures/examPaneKeyNodeMap";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 
-import { PlaceholderProvider } from "../../placeholders/PlaceholderProvider";
+import { PlaceholderProvider } from "store";
 import { ExamTemplate } from "./ExamTemplate";
 
 storiesOf("Exam Taking", module)

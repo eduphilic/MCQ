@@ -4,7 +4,7 @@ import React from "react";
 import Card from "@material-ui/core/Card";
 
 import { ContentCenterWrapper } from "components/ContentCenterWrapper";
-import { PlaceholderProvider } from "../../placeholders/PlaceholderProvider";
+import { PlaceholderProvider } from "store";
 import { ExamOverviewMobile } from "./ExamOverviewMobile";
 
 storiesOf("Exam Taking", module).add("ExamOverviewMobile", () => {

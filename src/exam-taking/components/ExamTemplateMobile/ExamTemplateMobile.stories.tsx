@@ -2,7 +2,7 @@ import { storiesOf } from "@storybook/react";
 import { examPaneKeyNodeMap } from "common/structures/examPaneKeyNodeMap";
 import React from "react";
 
-import { PlaceholderProvider } from "../../placeholders/PlaceholderProvider";
+import { PlaceholderProvider } from "store";
 import { ExamTemplateMobile } from "./ExamTemplateMobile";
 
 storiesOf("Exam Taking", module)

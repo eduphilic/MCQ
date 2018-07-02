@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { PlaceholderProvider } from "../../placeholders/PlaceholderProvider";
+import { PlaceholderProvider } from "store";
 import { ExamAppBar } from "./ExamAppBar";
 
 storiesOf("Exam Taking", module)

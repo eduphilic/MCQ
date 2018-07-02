@@ -7,6 +7,7 @@ import { withKnobs } from "@storybook/addon-knobs";
 
 import { ThemeBaseline, LightTheme } from "theme";
 import { DashboardAppBarIconStore } from "stores";
+import { PlaceholderProvider } from "store";
 
 // if (process.env.NODE_ENV !== "production") {
 //   whyDidYouUpdate(React);
@@ -24,13 +25,15 @@ setInfoAddonDefaults({
 
 addDecorator(withKnobs);
 addDecorator(story => (
-  <ThemeBaseline>
-    <LightTheme>
-      <DashboardAppBarIconStore.Provider>
-        {story()}
-      </DashboardAppBarIconStore.Provider>
-    </LightTheme>
-  </ThemeBaseline>
+  <PlaceholderProvider>
+    <ThemeBaseline>
+      <LightTheme>
+        <DashboardAppBarIconStore.Provider>
+          {story()}
+        </DashboardAppBarIconStore.Provider>
+      </LightTheme>
+    </ThemeBaseline>
+  </PlaceholderProvider>
 ));
 
 const req = require.context("../src", true, /.stories\.tsx$/);

@@ -1,7 +1,7 @@
+import { actions as examTakingActions } from "exam-taking";
 import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { createStore } from "store";
-import { actions } from "../actions";
 
 export class PlaceholderProvider extends Component {
   private store = createStore();
@@ -9,7 +9,7 @@ export class PlaceholderProvider extends Component {
   constructor(props: {}) {
     super(props);
 
-    this.store.dispatch(actions.loadPlaceholderExam());
+    this.store.dispatch(examTakingActions.loadPlaceholderExam());
   }
 
   render() {
