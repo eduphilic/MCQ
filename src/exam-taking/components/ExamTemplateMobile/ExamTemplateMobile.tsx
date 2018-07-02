@@ -1,11 +1,21 @@
 import React, { ReactNode, SFC } from "react";
+import { connect } from "react-redux";
+import { State } from "store";
+import { actions } from "../../actions";
 
 import { BaseSwippableTemplate } from "components/BaseSwippableTemplate";
 
-import { ExamNavigationStorePlaceholderConsumer } from "../../ExamNavigationStorePlaceholder";
 import { ExamAppBarMobile } from "../ExamAppBarMobile";
 
-export interface ExamTemplateMobileProps {
+type StateProps = {
+  currentQuestion: number;
+};
+
+type DispatchProps = {
+  onPaneChange: (questionIndex: number) => any;
+};
+
+type OwnProps = {
   /**
    * Render a static view instead of a swipeable pane.
    */
@@ -15,24 +25,38 @@ export interface ExamTemplateMobileProps {
    * The swippable exam pages.
    */
   paneKeyNodeMap: { key: string; node: ReactNode }[];
-}
+};
+export { OwnProps as ExamTemplateMobileProps };
 
-export const ExamTemplateMobile: SFC<ExamTemplateMobileProps> = props => {
-  const { staticView, paneKeyNodeMap } = props;
+type Props = StateProps & DispatchProps & OwnProps;
+
+const ExamTemplateMobile: SFC<Props> = props => {
+  const { staticView, paneKeyNodeMap, currentQuestion, onPaneChange } = props;
 
   const headerNode = <ExamAppBarMobile />;
 
   return (
-    <ExamNavigationStorePlaceholderConsumer>
-      {store => (
-        <BaseSwippableTemplate
-          headerNode={headerNode}
-          paneKeyNodeMap={paneKeyNodeMap}
-          selectedPane={store.currentQuestion}
-          onPaneChange={store.navigateToQuestion}
-          staticView={staticView}
-        />
-      )}
-    </ExamNavigationStorePlaceholderConsumer>
+    <BaseSwippableTemplate
+      headerNode={headerNode}
+      paneKeyNodeMap={paneKeyNodeMap}
+      selectedPane={currentQuestion}
+      onPaneChange={onPaneChange}
+      staticView={staticView}
+    />
   );
 };
+
+const ExamTemplateMobileContainer = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps,
+  State
+>(
+  ({ examTaking }): StateProps => ({
+    currentQuestion: examTaking.currentQuestion,
+  }),
+  {
+    onPaneChange: actions.navigateToQuestion,
+  },
+)(ExamTemplateMobile);
+export { ExamTemplateMobileContainer as ExamTemplateMobile };
