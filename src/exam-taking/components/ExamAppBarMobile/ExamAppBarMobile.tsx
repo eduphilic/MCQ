@@ -20,19 +20,22 @@ import { TypographyButton } from "components/TypographyButton";
 import { ExamAppBarTimer } from "../ExamAppBarTimer";
 import { ExamQuestionPalettePopup } from "./ExamQuestionPalettePopup";
 
-interface StateProps {
-  showSubmissionSummaryScreen: State["examTaking"]["showSubmissionSummaryScreen"];
+type StateProps = {
+  showSubmissionSummaryScreen: boolean;
   showStartExamButton: boolean;
-}
+};
 
-interface DispatchProps {
+type DispatchProps = {
   onStartExamButtonClick: () => void;
   onSubmitButtonClick: () => void;
-}
+};
 
-export type ExamAppBarMobileProps = StateProps & DispatchProps;
+type OwnProps = {};
+export { OwnProps as ExamAppBarMobileProps };
 
-const ExamAppBarMobile: SFC<ExamAppBarMobileProps> = props => {
+type Props = StateProps & DispatchProps & OwnProps;
+
+const ExamAppBarMobile: SFC<Props> = props => {
   const {
     showSubmissionSummaryScreen,
     showStartExamButton,
@@ -101,7 +104,12 @@ const ExamAppBarMobile: SFC<ExamAppBarMobileProps> = props => {
   );
 };
 
-const ExamAppBarMobileContainer = connect<StateProps, DispatchProps, {}, State>(
+const ExamAppBarMobileContainer = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps,
+  State
+>(
   state => ({
     showSubmissionSummaryScreen: state.examTaking.showSubmissionSummaryScreen,
     showStartExamButton: buttonStateSelector(state.examTaking)
