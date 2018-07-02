@@ -26,6 +26,7 @@ export const generateTemplateProps = (
     <AppBar color="inherit" position="static">
       <DashboardAppBar
         showHamburgerButton={options.showHamburgerButton !== false}
+        showAppTitleOnMobile
       />
     </AppBar>
   );

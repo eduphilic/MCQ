@@ -25,6 +25,11 @@ type OwnProps = {
   showHamburgerButton?: boolean;
 
   /**
+   * Whether to display the title in the app bar on mobile viewpoints.
+   */
+  showAppTitleOnMobile?: boolean;
+
+  /**
    * Called when logout button is clicked.
    */
   onLogoutButtonClick?: LogoutButtonProps["onClick"];
@@ -48,6 +53,7 @@ type Props = StateProps & OwnProps;
 const DashboardAppBar: SFC<Props> = props => {
   const {
     showHamburgerButton = true,
+    showAppTitleOnMobile = false,
     onLogoutButtonClick,
     actionButtonElements: outerActionButtonElements,
     locationPageTitleWithoutProductName,
@@ -77,7 +83,7 @@ const DashboardAppBar: SFC<Props> = props => {
         </DrawerStateConsumer>
       )}
 
-      <Hidden smDown implementation="css">
+      <Hidden smDown={!showAppTitleOnMobile} implementation="css">
         <Typography variant="title" color="inherit" style={{ fontWeight: 400 }}>
           {locationPageTitleWithoutProductName}
         </Typography>
