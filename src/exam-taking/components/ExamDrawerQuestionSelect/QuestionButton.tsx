@@ -8,12 +8,12 @@ import {
 import React, { Component } from "react";
 import styled from "styled";
 
-import { Question } from "exam-taking/ExamNavigationStorePlaceholder";
+import { IExamQuestion } from "../../models/IExamQuestion";
 
 export interface QuestionButtonProps
   extends React.ClassAttributes<HTMLButtonElement> {
   className?: string;
-  status: Question["status"];
+  status: IExamQuestion["status"];
   selected: boolean;
   questionIndex: number;
   onNavigate: (questionIndex: number) => any;
