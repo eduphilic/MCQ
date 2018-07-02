@@ -1,6 +1,6 @@
-import { getPageTitleFromLocation } from "navigation";
 import React, { cloneElement, ReactElement, SFC } from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { State } from "store";
 import styled from "styled";
 
 import Hidden from "@material-ui/core/Hidden";
@@ -12,7 +12,11 @@ import Menu from "@material-ui/icons/Menu";
 import { LogoutButton, LogoutButtonProps } from "components/LogoutButton";
 import { DrawerStateConsumer } from "components/ResponsiveDrawerFrame";
 
-export interface DashboardAppBarProps {
+type StateProps = {
+  locationPageTitleWithoutProductName: string;
+};
+
+type OwnProps = {
   /**
    * Whether to show hamburger button.
    *
@@ -29,7 +33,10 @@ export interface DashboardAppBarProps {
    * Additional buttons to place to the left of the logout button.
    */
   actionButtonElements?: ReactElement<any>[];
-}
+};
+export { OwnProps as DashboardAppBarProps };
+
+type Props = StateProps & OwnProps;
 
 /**
  * App bar for both admin and user dashboards. Implements a persistent
@@ -38,19 +45,13 @@ export interface DashboardAppBarProps {
  * The implementation is based on the example here:
  * https://material-ui-next.com/demos/drawers/#persistent-drawer
  */
-const DashboardAppBar: SFC<
-  DashboardAppBarProps & RouteComponentProps<{}>
-> = props => {
+const DashboardAppBar: SFC<Props> = props => {
   const {
     showHamburgerButton = true,
     onLogoutButtonClick,
     actionButtonElements: outerActionButtonElements,
-    location,
+    locationPageTitleWithoutProductName,
   } = props;
-
-  const title = getPageTitleFromLocation(location.pathname, {
-    withoutProductName: true,
-  });
 
   let actionButtonNodes: typeof outerActionButtonElements;
   if (outerActionButtonElements) {
@@ -78,7 +79,7 @@ const DashboardAppBar: SFC<
 
       <Hidden smDown implementation="css">
         <Typography variant="title" color="inherit" style={{ fontWeight: 400 }}>
-          {title}
+          {locationPageTitleWithoutProductName}
         </Typography>
       </Hidden>
       <div style={{ flex: 1 }} />
@@ -90,8 +91,13 @@ const DashboardAppBar: SFC<
   );
 };
 
-const DashboardAppBarWithRouter = withRouter(DashboardAppBar);
-export { DashboardAppBarWithRouter as DashboardAppBar };
+const DashboardAppBarContainer = connect<StateProps, {}, OwnProps, State>(
+  ({ navigation }) => ({
+    locationPageTitleWithoutProductName:
+      navigation.locationPageTitleWithoutProductName,
+  }),
+)(DashboardAppBar);
+export { DashboardAppBarContainer as DashboardAppBar };
 
 const StyledToolbar = styled(Toolbar)`
   .menu-button {
