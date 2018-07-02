@@ -1,6 +1,6 @@
 import { examPaneKeyNodeMap } from "common/structures/examPaneKeyNodeMap";
 import React, { Component } from "react";
-import { connect, DispatchProp } from "react-redux";
+import { connect } from "react-redux";
 import { State } from "store";
 import { actions } from "./actions";
 import { IExamMeta } from "./models/IExamMeta";
@@ -22,24 +22,38 @@ import { ExamOverviewMobile } from "./components/ExamOverviewMobile";
 import { ExamSubmissionSummary } from "./components/ExamSubmissionSummary";
 import { examSubmissionSummaryPlaceholderProps } from "./components/ExamSubmissionSummary/ExamSubmissionSummary.placeholder";
 import { ExamTemplate } from "./components/ExamTemplate";
-import {
-  ExamNavigationStorePlaceholderConsumer,
-  ExamNavigationStorePlaceholderProvider,
-} from "./ExamNavigationStorePlaceholder";
+import { ExamNavigationStorePlaceholderProvider } from "./ExamNavigationStorePlaceholder";
 
-type StoreProps = DispatchProp & {
+interface StateProps {
   examMeta: IExamMeta | null;
-};
+  showOverviewScreen: boolean;
+  showSubmissionSummaryScreen: boolean;
+  currentQuestion: number;
+}
 
-class ExamQuizPage extends Component<StoreProps> {
-  constructor(props: StoreProps) {
+interface DispatchProps {
+  loadPlaceholderExam: () => void;
+}
+
+// tslint:disable-next-line:no-empty-interface
+interface OwnProps {}
+
+type ExamQuizPageProps = StateProps & DispatchProps & OwnProps;
+
+class ExamQuizPage extends Component<ExamQuizPageProps> {
+  constructor(props: ExamQuizPageProps) {
     super(props);
 
-    props.dispatch(actions.loadPlaceholderExam());
+    props.loadPlaceholderExam();
   }
 
   render() {
-    const { examMeta } = this.props;
+    const {
+      examMeta,
+      showOverviewScreen,
+      showSubmissionSummaryScreen,
+      currentQuestion,
+    } = this.props;
 
     if (!examMeta) return null;
 
@@ -70,54 +84,57 @@ class ExamQuizPage extends Component<StoreProps> {
 
     return (
       <ExamNavigationStorePlaceholderProvider>
-        <ExamNavigationStorePlaceholderConsumer>
-          {({
-            showOverviewPage,
-            showSubmissionSummaryPage,
-            currentQuestion,
-          }) => (
-            <ExamTemplate
-              staticView={
-                showOverviewPage ? (
-                  <ExamOverviewMobile />
-                ) : showSubmissionSummaryPage ? (
-                  <ExamSubmissionSummary
-                    {...examSubmissionSummaryPlaceholderProps}
-                  />
-                ) : (
-                  undefined
-                )
-              }
-              paneKeyNodeMap={paneKeyNodeMap}
-            >
-              {showOverviewPage && (
-                <DashboardColumnContainer>
-                  {[
-                    <ExamOverviewBluePrint key="blue-print" />,
-                    <ExamOverviewMarkings key="markings" />,
-                  ]}
-                </DashboardColumnContainer>
-              )}
-
-              {showSubmissionSummaryPage && (
-                <ExamSubmissionSummary
-                  {...examSubmissionSummaryPlaceholderProps}
-                />
-              )}
-
-              {!showOverviewPage &&
-                !showSubmissionSummaryPage &&
-                paneKeyNodeMap[currentQuestion].node}
-            </ExamTemplate>
+        <ExamTemplate
+          staticView={
+            showOverviewScreen ? (
+              <ExamOverviewMobile />
+            ) : showSubmissionSummaryScreen ? (
+              <ExamSubmissionSummary
+                {...examSubmissionSummaryPlaceholderProps}
+              />
+            ) : (
+              undefined
+            )
+          }
+          paneKeyNodeMap={paneKeyNodeMap}
+        >
+          {showOverviewScreen && (
+            <DashboardColumnContainer>
+              {[
+                <ExamOverviewBluePrint key="blue-print" />,
+                <ExamOverviewMarkings key="markings" />,
+              ]}
+            </DashboardColumnContainer>
           )}
-        </ExamNavigationStorePlaceholderConsumer>
+
+          {showSubmissionSummaryScreen && (
+            <ExamSubmissionSummary {...examSubmissionSummaryPlaceholderProps} />
+          )}
+
+          {!showOverviewScreen &&
+            !showSubmissionSummaryScreen &&
+            paneKeyNodeMap[currentQuestion].node}
+        </ExamTemplate>
       </ExamNavigationStorePlaceholderProvider>
     );
   }
 }
 
-const ExamQuizPageContainer = connect((state: State) => ({
-  examMeta: state.examTaking.examMeta,
-}))(ExamQuizPage);
+const ExamQuizPageContainer = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps,
+  State
+>(
+  state => ({
+    examMeta: state.examTaking.examMeta,
+    showOverviewScreen: state.examTaking.showOverviewScreen,
+    showSubmissionSummaryScreen: state.examTaking.showSubmissionSummaryScreen,
+    currentQuestion: state.examTaking.currentQuestion,
+  }),
+  {
+    loadPlaceholderExam: actions.loadPlaceholderExam,
+  },
+)(ExamQuizPage);
 
 export { ExamQuizPageContainer as ExamQuizPage };
