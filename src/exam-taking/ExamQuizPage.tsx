@@ -22,7 +22,6 @@ import { ExamOverviewMobile } from "./components/ExamOverviewMobile";
 import { ExamSubmissionSummary } from "./components/ExamSubmissionSummary";
 import { examSubmissionSummaryPlaceholderProps } from "./components/ExamSubmissionSummary/ExamSubmissionSummary.placeholder";
 import { ExamTemplate } from "./components/ExamTemplate";
-import { ExamNavigationStorePlaceholderProvider } from "./ExamNavigationStorePlaceholder";
 
 interface StateProps {
   examMeta: IExamMeta | null;
@@ -83,39 +82,35 @@ class ExamQuizPage extends Component<ExamQuizPageProps> {
     }));
 
     return (
-      <ExamNavigationStorePlaceholderProvider>
-        <ExamTemplate
-          staticView={
-            showOverviewScreen ? (
-              <ExamOverviewMobile />
-            ) : showSubmissionSummaryScreen ? (
-              <ExamSubmissionSummary
-                {...examSubmissionSummaryPlaceholderProps}
-              />
-            ) : (
-              undefined
-            )
-          }
-          paneKeyNodeMap={paneKeyNodeMap}
-        >
-          {showOverviewScreen && (
-            <DashboardColumnContainer>
-              {[
-                <ExamOverviewBluePrint key="blue-print" />,
-                <ExamOverviewMarkings key="markings" />,
-              ]}
-            </DashboardColumnContainer>
-          )}
-
-          {showSubmissionSummaryScreen && (
+      <ExamTemplate
+        staticView={
+          showOverviewScreen ? (
+            <ExamOverviewMobile />
+          ) : showSubmissionSummaryScreen ? (
             <ExamSubmissionSummary {...examSubmissionSummaryPlaceholderProps} />
-          )}
+          ) : (
+            undefined
+          )
+        }
+        paneKeyNodeMap={paneKeyNodeMap}
+      >
+        {showOverviewScreen && (
+          <DashboardColumnContainer>
+            {[
+              <ExamOverviewBluePrint key="blue-print" />,
+              <ExamOverviewMarkings key="markings" />,
+            ]}
+          </DashboardColumnContainer>
+        )}
 
-          {!showOverviewScreen &&
-            !showSubmissionSummaryScreen &&
-            paneKeyNodeMap[currentQuestion].node}
-        </ExamTemplate>
-      </ExamNavigationStorePlaceholderProvider>
+        {showSubmissionSummaryScreen && (
+          <ExamSubmissionSummary {...examSubmissionSummaryPlaceholderProps} />
+        )}
+
+        {!showOverviewScreen &&
+          !showSubmissionSummaryScreen &&
+          paneKeyNodeMap[currentQuestion].node}
+      </ExamTemplate>
     );
   }
 }
