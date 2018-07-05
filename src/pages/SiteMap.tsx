@@ -15,16 +15,14 @@ import { AdminRoute } from "./AdminRoute";
 import { UserRoute } from "./UserRoute";
 
 export const SiteMap: SFC<{}> = () => {
-  const landingPagesNode = navigationLinksLanding
-    .filter(l => l.to === "/" || l.to === "/resetPassword")
-    .map(l => (
-      <Route
-        key={l.to}
-        exact={l.to === "/"}
-        path={l.to}
-        component={l.component}
-      />
-    ));
+  const landingPagesNode = navigationLinksLanding.map(l => (
+    <Route
+      key={l.to}
+      exact={l.to === "/"}
+      path={l.to}
+      component={l.component}
+    />
+  ));
 
   const adminLoginPageNode = navigationLinksAdminLogin.map(l => (
     <Route

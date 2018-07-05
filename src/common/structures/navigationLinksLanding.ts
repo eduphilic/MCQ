@@ -12,19 +12,4 @@ export const navigationLinksLanding: NavigationLinks = [
     to: "/resetPassword",
     component: landingPages.LandingPasswordReset,
   },
-  {
-    titleLocalizationKey: "landingLinkOnboarding1",
-    to: "/welcome/1",
-    component: landingPages.LandingOnboardingStep1,
-  },
-  {
-    titleLocalizationKey: "landingLinkOnboarding2",
-    to: "/welcome/2",
-    component: landingPages.LandingOnboardingStep2,
-  },
-  {
-    titleLocalizationKey: "landingLinkOnboarding3",
-    to: "/welcome/3",
-    component: landingPages.LandingOnboardingStep3,
-  },
 ];
