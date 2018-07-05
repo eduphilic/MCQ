@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled";
 
-import {
-  EntrySelectItem,
-  EntrySelectItemProps,
-} from "components/EntrySelectItem";
+import { EntrySelectItem, EntrySelectItemProps } from "../EntrySelectItem";
 
 export interface EntrySelectProps {
   /**

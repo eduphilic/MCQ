@@ -5,11 +5,11 @@ import { withRouter } from "react-router-dom";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 
-import { EntrySelect } from "components/EntrySelect";
-import { createSelectEntryPlaceholderData } from "components/EntrySelect/createSelectEntryPlaceholderData";
 import { OnboardingTemplate } from "components/OnboardingTemplate";
 import { createPlaceholderOnboardingTemplateProps } from "components/OnboardingTemplate/createPlaceholderOnboardingTemplateProps";
 import { PanelManager, PanelManagerProps } from "components/PanelManager";
+import { EntrySelect } from "dashboard";
+import { createSelectEntryPlaceholderData } from "dashboard/components/EntrySelect/createSelectEntryPlaceholderData";
 
 import { ExamQuantitySelector } from "components/ExamQuantitySelector";
 import { createPlaceholderExamQuantitySelectorProps } from "components/ExamQuantitySelector/createPlaceholderExamQuantitySelectorProps";
