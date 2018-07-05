@@ -9,20 +9,22 @@ import { navigationLinksAdmin } from "common/structures/navigationLinksAdmin";
 import { navigationLinksAdminForms } from "common/structures/navigationLinksAdminForms";
 import { navigationLinksAdminLogin } from "common/structures/navigationLinksAdminLogin";
 import { navigationLinksExam } from "common/structures/navigationLinksExam";
-// import { navigationLinksLanding } from "common/structures/navigationLinksLanding";
+import { navigationLinksLanding } from "common/structures/navigationLinksLanding";
 import { navigationLinksUser } from "common/structures/navigationLinksUser";
 import { AdminRoute } from "./AdminRoute";
 import { UserRoute } from "./UserRoute";
 
 export const SiteMap: SFC<{}> = () => {
-  // const landingPagesNode = navigationLinksLanding.map(l => (
-  //   <Route
-  //     key={l.to}
-  //     exact={l.to === "/"}
-  //     path={l.to}
-  //     component={l.component}
-  //   />
-  // ));
+  const landingPagesNode = navigationLinksLanding
+    .filter(l => l.to === "/" || l.to === "/resetPassword")
+    .map(l => (
+      <Route
+        key={l.to}
+        exact={l.to === "/"}
+        path={l.to}
+        component={l.component}
+      />
+    ));
 
   const adminLoginPageNode = navigationLinksAdminLogin.map(l => (
     <Route
@@ -60,7 +62,7 @@ export const SiteMap: SFC<{}> = () => {
         <PersistentScrollPositionProvider />
 
         <Switch>
-          {/* {landingPagesNode} */}
+          {landingPagesNode}
           {userPagesNode}
           {adminLoginPageNode}
           {adminPagesNode}
