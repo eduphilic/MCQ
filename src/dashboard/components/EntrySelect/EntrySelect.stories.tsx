@@ -17,7 +17,7 @@ const propsWithAdditionalDescriptionText: typeof props = {
   })),
 };
 
-storiesOf("Components", module).add(
+storiesOf("Dashboard", module).add(
   "EntrySelect",
   withInfo({ propTablesExclude: [ContentCenterWrapper as any] })(() => (
     <ContentCenterWrapper>
