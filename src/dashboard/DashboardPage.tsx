@@ -7,7 +7,7 @@ import {
   DashboardTestCardProps,
 } from "components/DashboardTestCard";
 
-export const UserDashboard: SFC<{}> = () => {
+export const DashboardPage: SFC<{}> = () => {
   const freeCard: DashboardTestCardProps = {
     imageLogoUrl: entryImages.AirForce,
     title: "Soldier General Duty Free Mock Test",

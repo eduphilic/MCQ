@@ -1,6 +1,6 @@
 import React from "react";
 
-export const UserMembership = () => (
+export const MembershipPage = () => (
   <>
     <div>User Membership Page Contents</div>
   </>

@@ -8,7 +8,7 @@ import {
 } from "components/DashboardTestCard";
 import { DashboardTestCardColumnHeader } from "components/DashboardTestCardColumnHeader";
 
-export const UserExamPack: SFC<{}> = () => {
+export const ExamPackPage: SFC<{}> = () => {
   const paidExams: DashboardTestCardProps[] = [
     {
       imageLogoUrl: entryImages.AirForce,

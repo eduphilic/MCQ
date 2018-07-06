@@ -10,9 +10,9 @@ import { navigationLinksAdminForms } from "common/structures/navigationLinksAdmi
 import { navigationLinksAdminLogin } from "common/structures/navigationLinksAdminLogin";
 import { navigationLinksExam } from "common/structures/navigationLinksExam";
 import { navigationLinksLanding } from "common/structures/navigationLinksLanding";
-import { navigationLinksUser } from "common/structures/navigationLinksUser";
 import { AdminRoute } from "./AdminRoute";
-import { UserRoute } from "./UserRoute";
+
+import { DashboardPages } from "dashboard";
 
 export const SiteMap: SFC<{}> = () => {
   const landingPagesNode = navigationLinksLanding.map(l => (
@@ -44,15 +44,6 @@ export const SiteMap: SFC<{}> = () => {
     <Route key={l.titleLocalizationKey} path={l.to} component={l.component} />
   ));
 
-  const userPagesNode = navigationLinksUser.map(l => (
-    <UserRoute
-      key={l.to}
-      path={l.to}
-      component={l.component}
-      links={navigationLinksUser}
-    />
-  ));
-
   return (
     <Router>
       <>
@@ -61,10 +52,13 @@ export const SiteMap: SFC<{}> = () => {
 
         <Switch>
           {landingPagesNode}
-          {userPagesNode}
           {adminLoginPageNode}
           {adminPagesNode}
           {examPageNode}
+          {["/dashboard", "/exam-pack", "/membership", "/settings"].map(l => (
+            <Route key={l} path={l} component={DashboardPages} />
+          ))}
+          />
         </Switch>
       </>
     </Router>
