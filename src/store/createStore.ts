@@ -1,11 +1,13 @@
 import { combineReducers, createStore as createReduxStore } from "redux";
 import { createEnhancerDevTools } from "./createEnhancerDevTools";
 
+import { reducer as dashboard } from "dashboard";
 import { reducer as examTaking } from "exam-taking";
 import { reducer as localization } from "localization";
 import { reducer as navigation } from "navigation";
 
 const reducers = {
+  dashboard,
   localization,
   examTaking,
   navigation,
