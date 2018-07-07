@@ -1,10 +1,17 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
+import { MemoryRouter } from "react-router-dom";
 
 import { AppLayout } from "./AppLayout";
 
-storiesOf("Navigation", module).add("AppLayout", () => {
+const stories = storiesOf("Navigation", module);
+
+stories.addDecorator(story => (
+  <MemoryRouter initialEntries={["/dashboard"]}>{story()}</MemoryRouter>
+));
+
+stories.add("AppLayout", () => {
   //
 
-  return <AppLayout navDrawerTheme="UserAppDrawerTheme" />;
+  return <AppLayout />;
 });

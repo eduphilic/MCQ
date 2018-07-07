@@ -1,37 +1,24 @@
 import { drawerWidth } from "css";
-import React, { ComponentType, SFC } from "react";
+import React, { SFC } from "react";
 import styled from "styled";
-import * as themeComponents from "theme";
 
 import Drawer, { DrawerProps } from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 
-type ThemeComponentName = keyof Pick<
-  typeof themeComponents,
-  "LightTheme" | "DarkTheme" | "AdminAppDrawerTheme" | "UserAppDrawerTheme"
->;
+import { NavTheme } from "./NavTheme";
 
-const themes: Record<ThemeComponentName, ComponentType<{}>> = {
-  LightTheme: themeComponents.LightTheme,
-  DarkTheme: themeComponents.DarkTheme,
-  AdminAppDrawerTheme: themeComponents.AdminAppDrawerTheme,
-  UserAppDrawerTheme: themeComponents.UserAppDrawerTheme,
-};
+export type AppLayoutProps = {};
 
-export type Props = {
-  navDrawerTheme: ThemeComponentName;
-};
-
-export const AppLayout: SFC<Props> = props => {
-  const { navDrawerTheme } = props;
-  const NavDrawerTheme = themes[navDrawerTheme];
-
+export const AppLayout: SFC<AppLayoutProps> = () => {
   return (
     <Wrapper>
+      {/* Side navigation drawer, shown on tablet and above. */}
       <Hidden smDown>
-        <TabletDrawer themeComponent={NavDrawerTheme}>
-          <div>placeholder</div>
-        </TabletDrawer>
+        <NavTheme>
+          <TabletDrawer>
+            <div>placeholder</div>
+          </TabletDrawer>
+        </NavTheme>
       </Hidden>
     </Wrapper>
   );
@@ -42,21 +29,18 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const TabletDrawer = styled<
-  DrawerProps & { themeComponent: ComponentType<{}> }
->(({ themeComponent: Theme, ...rest }) => (
-  <Theme>
-    <Drawer
-      {...rest}
-      variant="permanent"
-      open
-      classes={{
-        paper: "drawer-paper",
-      }}
-    />
-  </Theme>
+const TabletDrawer = styled<DrawerProps>(props => (
+  <Drawer
+    variant="permanent"
+    open
+    classes={{
+      paper: "drawer-paper",
+    }}
+    {...props}
+  />
 ))`
   .drawer-paper {
     width: ${drawerWidth}px;
+    background-color: ${({ theme }) => theme.palette.background.default};
   }
 `;
