@@ -1,4 +1,4 @@
-import { action } from "@storybook/addon-actions";
+// import { action } from "@storybook/addon-actions";
 import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import { ContentCenterWrapper } from "components/ContentCenterWrapper";
@@ -10,7 +10,7 @@ storiesOf("Components", module).add(
   withInfo()(() => (
     <ContentCenterWrapper>
       <OnboardingHeader
-        logoutButtonProps={{ onClick: action("onLogoutButtonClick") }}
+      // logoutButtonProps={{ onClick: action("onLogoutButtonClick") }}
       />
     </ContentCenterWrapper>
   )),

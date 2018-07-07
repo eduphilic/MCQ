@@ -25,8 +25,6 @@ export const AdminDashboardTemplateContainer: SFC<
   const { children, actionButtonElements, ...rest } = props;
 
   const adminAppBarProps: AdminDashboardTemplateProps["dashboardAppBarProps"] = {
-    // tslint:disable-next-line:no-empty
-    onLogoutButtonClick: () => {},
     actionButtonElements,
   };
 

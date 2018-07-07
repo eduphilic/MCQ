@@ -13,10 +13,7 @@ storiesOf("Components", module).add(
     return (
       <Router>
         <AdminDashboardTemplate
-          dashboardAppBarProps={{
-            // tslint:disable-next-line:no-empty
-            onLogoutButtonClick: () => {},
-          }}
+          dashboardAppBarProps={{}}
           sideSheetContents={<div>Side Sheet Contents</div>}
         >
           <div>Placeholder</div>

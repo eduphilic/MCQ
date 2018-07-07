@@ -9,8 +9,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Menu from "@material-ui/icons/Menu";
 
-import { LogoutButton, LogoutButtonProps } from "components/LogoutButton";
 import { DrawerStateConsumer } from "components/ResponsiveDrawerFrame";
+import { LogoutButton } from "navigation";
 
 type StateProps = {
   locationPageTitleWithoutProductName: string;
@@ -28,11 +28,6 @@ type OwnProps = {
    * Whether to display the title in the app bar on mobile viewpoints.
    */
   showAppTitleOnMobile?: boolean;
-
-  /**
-   * Called when logout button is clicked.
-   */
-  onLogoutButtonClick?: LogoutButtonProps["onClick"];
 
   /**
    * Additional buttons to place to the left of the logout button.
@@ -54,7 +49,6 @@ const DashboardAppBar: SFC<Props> = props => {
   const {
     showHamburgerButton = true,
     showAppTitleOnMobile = false,
-    onLogoutButtonClick,
     actionButtonElements: outerActionButtonElements,
     locationPageTitleWithoutProductName,
   } = props;
@@ -92,7 +86,7 @@ const DashboardAppBar: SFC<Props> = props => {
 
       {actionButtonNodes}
 
-      <LogoutButton dense onClick={onLogoutButtonClick} />
+      <LogoutButton />
     </StyledToolbar>
   );
 };

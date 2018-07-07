@@ -4,24 +4,25 @@ import styled from "styled";
 import Typography from "@material-ui/core/Typography";
 
 import { Logo } from "components/Logo";
-import { LogoutButton, LogoutButtonProps } from "components/LogoutButton";
+// import { LogoutButton, LogoutButtonProps } from "components/LogoutButton";
 
+// tslint:disable-next-line:no-empty-interface
 export interface OnboardingHeaderProps {
-  logoutButtonProps: LogoutButtonProps;
+  // logoutButtonProps: LogoutButtonProps;
 }
 
 /**
  * Header for onboarding screens.
  */
-export const OnboardingHeader: SFC<OnboardingHeaderProps> = props => {
-  const { logoutButtonProps } = props;
+export const OnboardingHeader: SFC<OnboardingHeaderProps> = _props => {
+  // const { logoutButtonProps } = props;
 
   return (
     <Wrapper>
       <Logo hideTextMobile />
       <Text>Welcome Jay, let's setup your account</Text>
       <LogoutButtonWrapper>
-        <LogoutButton {...logoutButtonProps} />
+        {/* <LogoutButton {...logoutButtonProps} /> */}
       </LogoutButtonWrapper>
     </Wrapper>
   );

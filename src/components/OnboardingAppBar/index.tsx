@@ -1,10 +1,10 @@
 import React, { SFC } from "react";
-import styled from "styled";
+// import styled from "styled";
 
 import Toolbar from "@material-ui/core/Toolbar";
 
 import { Logo } from "components/Logo";
-import { LogoutButton } from "components/LogoutButton";
+// import { LogoutButton } from "components/LogoutButton";
 
 export interface OnboardingAppBarProps {
   onLogoutButtonClick: () => void;
@@ -13,19 +13,19 @@ export interface OnboardingAppBarProps {
 }
 
 export const OnboardingAppBar: SFC<OnboardingAppBarProps> = props => {
-  const { className, onLogoutButtonClick } = props;
+  const { className /* onLogoutButtonClick */ } = props;
 
   return (
     <header>
       <Toolbar className={className} disableGutters>
         <Logo />
 
-        <StyledLogoutButton onClick={onLogoutButtonClick} />
+        {/* <StyledLogoutButton onClick={onLogoutButtonClick} /> */}
       </Toolbar>
     </header>
   );
 };
 
-const StyledLogoutButton = styled(LogoutButton)`
-  margin-left: auto;
-`;
+// const StyledLogoutButton = styled(LogoutButton)`
+//   margin-left: auto;
+// `;
