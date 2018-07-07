@@ -5,18 +5,21 @@ import styled from "styled";
 import Drawer, { DrawerProps } from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 
+import { DrawerContents, DrawerContentsProps } from "./DrawerContents";
 import { NavTheme } from "./NavTheme";
 
-export type AppLayoutProps = {};
+export type AppLayoutProps = DrawerContentsProps;
 
-export const AppLayout: SFC<AppLayoutProps> = () => {
+export const AppLayout: SFC<AppLayoutProps> = props => {
+  const { links } = props;
+
   return (
     <Wrapper>
       {/* Side navigation drawer, shown on tablet and above. */}
       <Hidden smDown>
         <NavTheme>
           <TabletDrawer>
-            <div>placeholder</div>
+            <DrawerContents links={links} />
           </TabletDrawer>
         </NavTheme>
       </Hidden>
