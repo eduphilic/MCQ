@@ -5,6 +5,7 @@ import styled from "styled";
 import Drawer, { DrawerProps } from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 
+import { AppBar } from "./AppBar";
 import { DrawerContents, DrawerContentsProps } from "./DrawerContents";
 import { NavTheme } from "./NavTheme";
 
@@ -15,6 +16,9 @@ export const AppLayout: SFC<AppLayoutProps> = props => {
 
   return (
     <Wrapper>
+      {/* Top AppBar */}
+      <AppBar />
+
       {/* Side navigation drawer, shown on tablet and above. */}
       <Hidden smDown>
         <NavTheme>
