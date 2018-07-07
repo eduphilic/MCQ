@@ -8,7 +8,6 @@ import {
   DashboardAppBarProps,
 } from "components/DashboardAppBar";
 import { DashboardTemplate } from "components/DashboardTemplate";
-import { DrawerContents } from "components/DrawerContents";
 import {
   SideSheet,
   SideSheetProps,
@@ -16,6 +15,7 @@ import {
   SideSheetToggleButtonProps,
   SideSheetToggleStoreProvider,
 } from "components/SideSheet";
+import { DrawerContents } from "navigation";
 
 import { navigationLinksAdmin } from "common/structures/navigationLinksAdmin";
 

@@ -8,7 +8,7 @@ import withWidth, {
 
 import { DashboardTemplate } from "components/DashboardTemplate";
 import { DashboardTemplateMobile } from "components/DashboardTemplateMobile";
-import { DrawerContents } from "components/DrawerContents";
+import { DrawerContents } from "navigation";
 
 import { generateTemplateProps } from "./generateTemplateProps";
 
