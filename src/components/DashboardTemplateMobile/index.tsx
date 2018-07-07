@@ -1,5 +1,5 @@
-import { bottomNavBoxShadow } from "common/css/bottomNavBoxShadow";
 import { NavigationLinks } from "common/types/NavigationLinks";
+import { bottomNavBoxShadow } from "css";
 import { strings } from "localization";
 import React, {
   ChangeEvent,

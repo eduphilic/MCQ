@@ -5,7 +5,7 @@ import React from "react";
 import { MemoryRouter } from "react-router-dom";
 import { AdminAppDrawerTheme } from "theme";
 
-import { drawerWidth } from "common/css/drawerWidth";
+import { drawerWidth } from "css";
 import { DrawerContents } from ".";
 
 storiesOf("Components", module).add(

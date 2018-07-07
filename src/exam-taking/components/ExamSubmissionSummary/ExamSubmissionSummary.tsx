@@ -1,4 +1,4 @@
-import { whiteDark } from "common/css/colors";
+import { whiteDark } from "css";
 // import lodashOmit from "lodash.omit";
 import lodashPick from "lodash.pick";
 import React, { ReactNode, SFC } from "react";

@@ -1,4 +1,4 @@
-import { examAppBarBottomRow, examAppBarTopRow } from "common/css/colors";
+import { examAppBarBottomRow, examAppBarTopRow } from "css";
 import React, { SFC } from "react";
 import { connect } from "react-redux";
 import { State } from "store";

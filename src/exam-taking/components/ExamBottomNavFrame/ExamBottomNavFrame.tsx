@@ -1,5 +1,4 @@
-import { bottomNavBoxShadow } from "common/css/bottomNavBoxShadow";
-import { fromToolbarHeight } from "common/css/fromToolbarHeight";
+import { bottomNavBoxShadow, fromToolbarHeight } from "css";
 import React, { SFC } from "react";
 import { connect } from "react-redux";
 import { State } from "store";

@@ -1,4 +1,4 @@
-import { examTimerYellow } from "common/css/colors";
+import { examTimerYellow } from "css";
 import React, { Component } from "react";
 import styled, { css } from "styled";
 

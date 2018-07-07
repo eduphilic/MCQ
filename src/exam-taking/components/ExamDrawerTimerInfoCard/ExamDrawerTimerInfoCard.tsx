@@ -1,7 +1,4 @@
-import {
-  examDrawerInfoCardBackground,
-  examTimerYellow,
-} from "common/css/colors";
+import { examDrawerInfoCardBackground, examTimerYellow } from "css";
 import React, { SFC } from "react";
 import styled from "styled";
 import { UserAppDrawerTheme } from "theme";

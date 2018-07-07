@@ -4,7 +4,7 @@ import {
   examQuestionStatusNotAnswered,
   examQuestionStatusNotVisited,
   examQuestionStatusSelected,
-} from "common/css/colors";
+} from "css";
 import React, { Component } from "react";
 import styled from "styled";
 

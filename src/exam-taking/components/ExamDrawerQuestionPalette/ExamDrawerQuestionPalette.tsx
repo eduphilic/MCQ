@@ -4,7 +4,7 @@ import {
   examQuestionStatusMarkedForReview,
   examQuestionStatusNotAnswered,
   examQuestionStatusNotVisited,
-} from "common/css/colors";
+} from "css";
 import React, { SFC } from "react";
 import styled from "styled";
 import { UserAppDrawerTheme } from "theme";

@@ -1,5 +1,4 @@
-import { drawerWidth } from "common/css/drawerWidth";
-import { fromToolbarHeight } from "common/css/fromToolbarHeight";
+import { drawerWidth, fromToolbarHeight } from "css";
 import React, { cloneElement, ReactElement, ReactNode, SFC } from "react";
 import styled from "styled";
 

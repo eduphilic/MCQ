@@ -1,4 +1,4 @@
-import { drawerWidth } from "common/css/drawerWidth";
+import { drawerWidth } from "css";
 import React, {
   cloneElement,
   Component,

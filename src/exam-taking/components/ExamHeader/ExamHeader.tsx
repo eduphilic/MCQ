@@ -1,4 +1,4 @@
-import { textGrey, whiteDark } from "common/css/colors";
+import { textGrey, whiteDark } from "css";
 import React, { SFC } from "react";
 import styled from "styled";
 
