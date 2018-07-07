@@ -4,7 +4,7 @@ import React from "react";
 import Assignment from "@material-ui/icons/Assignment";
 import Dashboard from "@material-ui/icons/Dashboard";
 import Settings from "@material-ui/icons/Settings";
-import { AccountCardDetails } from "common/icons/AccountCardDetails";
+import { AccountCardDetails } from "icons";
 
 import { DashboardPage } from "./DashboardPage";
 import { ExamPackPage } from "./ExamPackPage";

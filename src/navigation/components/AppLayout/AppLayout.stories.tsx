@@ -1,11 +1,11 @@
 import { storiesOf } from "@storybook/react";
-import { AccountCardDetails } from "common/icons/AccountCardDetails";
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
 
 import Assignment from "@material-ui/icons/Assignment";
 import Dashboard from "@material-ui/icons/Dashboard";
 import Settings from "@material-ui/icons/Settings";
+import { AccountCardDetails } from "icons";
 
 import { AppLayout } from "./AppLayout";
 
