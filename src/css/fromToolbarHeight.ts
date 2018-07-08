@@ -1,10 +1,9 @@
-import { CSSProperties } from "react";
 import { css } from "styled";
 
 const defaultValueBuilder = (height: number) => `${height}px`;
 
 export const fromToolbarHeight = (
-  property: keyof CSSProperties,
+  property: string,
   valueBuilder = defaultValueBuilder,
 ) => css`
   ${property}: ${valueBuilder(56)};
