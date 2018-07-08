@@ -1,4 +1,4 @@
-import { drawerWidth } from "css";
+import { drawerWidth, fromToolbarHeight } from "css";
 import React, { SFC } from "react";
 import styled from "styled";
 
@@ -8,6 +8,7 @@ import Hidden from "@material-ui/core/Hidden";
 import { AppBar } from "./AppBar";
 import { DrawerContents, DrawerContentsProps } from "./DrawerContents";
 import { NavTheme } from "./NavTheme";
+import { SwipeableNav } from "./SwipeableNav";
 
 export type AppLayoutProps = DrawerContentsProps;
 
@@ -27,6 +28,13 @@ export const AppLayout: SFC<AppLayoutProps> = props => {
           </TabletDrawer>
         </NavTheme>
       </Hidden>
+
+      <ContentWrapper>
+        {/* Bottom navigation with swipe panels, shown on mobile. */}
+        <Hidden mdUp>
+          <SwipeableNav links={links} />
+        </Hidden>
+      </ContentWrapper>
     </Wrapper>
   );
 };
@@ -34,6 +42,16 @@ export const AppLayout: SFC<AppLayoutProps> = props => {
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
+`;
+
+const ContentWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  ${fromToolbarHeight("padding-top")};
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    margin-left: ${drawerWidth}px;
+  }
 `;
 
 const TabletDrawer = styled<DrawerProps>(props => (
