@@ -9,7 +9,7 @@ export const fromToolbarHeight = (
 ) => css`
   ${property}: ${valueBuilder(56)};
 
-  ${({ theme }) => theme.breakpoints.up("xs")} {
+  ${({ theme }) => theme.breakpoints.up("xs")} and (orientation: landscape) {
     ${property}: ${valueBuilder(48)};
   }
 
