@@ -14,6 +14,7 @@ import BottomNavigationAction, {
 } from "@material-ui/core/BottomNavigationAction";
 import Paper from "@material-ui/core/Paper";
 
+import { PageContentWrapper } from "../PageContentWrapper";
 import { NavTheme } from "./NavTheme";
 
 type OwnProps = {
@@ -55,7 +56,9 @@ class SwipeableNav extends Component<Props> {
           onChangeIndex={this.handlePaneChange}
         >
           {links.map(({ component: PaneComponent, titleLocalizationKey }) => (
-            <PaneComponent key={titleLocalizationKey} />
+            <PageContentWrapper key={titleLocalizationKey}>
+              <PaneComponent />
+            </PageContentWrapper>
           ))}
         </StyledSwipeableViews>
       </Wrapper>

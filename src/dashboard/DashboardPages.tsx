@@ -1,4 +1,4 @@
-import { AppLayout } from "navigation";
+import { AppLayout, PageContentWrapper } from "navigation";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
@@ -33,15 +33,17 @@ class DashboardPages extends Component<Props> {
 
     return (
       <AppLayout links={links}>
-        <Switch>
-          {links.map(({ component: RouteComponent, ...l }) => (
-            <Route
-              key={l.titleLocalizationKey}
-              path={l.to}
-              render={() => <RouteComponent />}
-            />
-          ))}
-        </Switch>
+        <PageContentWrapper>
+          <Switch>
+            {links.map(({ component: RouteComponent, ...l }) => (
+              <Route
+                key={l.titleLocalizationKey}
+                path={l.to}
+                render={() => <RouteComponent />}
+              />
+            ))}
+          </Switch>
+        </PageContentWrapper>
       </AppLayout>
     );
   }
