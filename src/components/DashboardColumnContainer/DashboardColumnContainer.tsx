@@ -1,3 +1,4 @@
+import { fromGutters } from "css";
 import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 
@@ -69,7 +70,5 @@ const FlexColumn = styled.div`
     }
   }
 
-  & > * {
-    margin-bottom: ${({ theme }) => theme.spacing.unit * 3}px;
-  }
+  ${fromGutters(["margin-bottom"], "& > *")};
 `;

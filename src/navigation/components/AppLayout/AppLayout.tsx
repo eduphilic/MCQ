@@ -13,7 +13,7 @@ import { SwipeableNav } from "./SwipeableNav";
 export type AppLayoutProps = DrawerContentsProps;
 
 export const AppLayout: SFC<AppLayoutProps> = props => {
-  const { links } = props;
+  const { children, links } = props;
 
   return (
     <Wrapper>
@@ -34,6 +34,9 @@ export const AppLayout: SFC<AppLayoutProps> = props => {
         <Hidden mdUp>
           <SwipeableNav links={links} />
         </Hidden>
+
+        {/* Tablet/desktop page contents. */}
+        <Hidden smDown>{children}</Hidden>
       </ContentWrapper>
     </Wrapper>
   );

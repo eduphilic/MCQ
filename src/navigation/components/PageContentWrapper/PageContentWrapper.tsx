@@ -1,23 +1,16 @@
-import { gutters } from "css";
-import React, { SFC } from "react";
-import styled from "styled";
+import { fromGutters } from "css";
+import styled, { withProps } from "styled";
 
-export const PageContentWrapper: SFC<{}> = props => {
-  const { children } = props;
-
-  return <Wrapper>{children}</Wrapper>;
+export type PageContentWrapperProps = {
+  verticalGutters?: boolean;
 };
 
-const Wrapper = styled.div`
-  ${({ theme: { spacing, breakpoints } }) => `
-    padding-top: ${spacing.unit * 2}px;
-
-    ${breakpoints.up("sm")} {
-      padding-top: ${spacing.unit * 3}px;
-    }
-  `};
-
-  ${gutters};
+export const PageContentWrapper = withProps<PageContentWrapperProps>()(
+  styled.div,
+)`
+  ${fromGutters(["padding-left", "padding-right", "padding-top"])};
+  ${({ verticalGutters }) =>
+    verticalGutters && fromGutters(["margin-bottom"], "> *:not(:last-child)")}
 
   width: 100%;
   max-width: 1280px;

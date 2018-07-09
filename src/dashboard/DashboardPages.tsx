@@ -33,7 +33,7 @@ class DashboardPages extends Component<Props> {
 
     return (
       <AppLayout links={links}>
-        <PageContentWrapper>
+        <PageContentWrapper verticalGutters>
           <Switch>
             {links.map(({ component: RouteComponent, ...l }) => (
               <Route
