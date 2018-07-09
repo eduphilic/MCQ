@@ -20,7 +20,8 @@
         "reactDom": "ReactDOM",
         "reactLocalization": "LocalizedStrings",
         "reactSwipe": "ReactSwipe",
-        "reactSwipeableViews": "SwipeableViews"
+        "reactSwipeableViews": "SwipeableViews",
+        "propTypes": "PropTypes"
       }
     ],
     "variable-name": [
