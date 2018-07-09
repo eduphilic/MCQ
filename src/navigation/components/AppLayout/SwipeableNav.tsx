@@ -70,23 +70,22 @@ class SwipeableNav extends Component<Props> {
   private handlePaneChange = (paneIndex: number) => {
     const { links } = this.props;
 
+    this.pushRouteToHistory(links[paneIndex].to);
+    this.scrollTop();
+  };
+
+  private scrollTop = () => {
     // Scroll the pane to the top on swipe completion.
     const swipeContainerDiv = document.querySelector<HTMLDivElement>(
       `.${this.scrollTopClass}`,
     )!;
     swipeContainerDiv.scrollTop = 0;
-
-    this.pushRouteToHistory(links[paneIndex].to);
   };
 
   private pushRouteToHistory = (pathname: string) => {
     const { history } = this.props;
 
-    // Delay changing page URL so that swipe animation has time to complete.
-    // Default swipe animation duration is 0.3 seconds.
-    setTimeout(() => {
-      history.push(pathname);
-    }, 350);
+    history.push(pathname);
   };
 
   private getPaneIndexFromRoute = (pathname: string): number => {
@@ -113,7 +112,10 @@ const Wrapper = styled.div`
 `;
 
 const StyledSwipeableViews = styled<Omit<SwipeableViewsProps, "ref">>(props => (
-  <SwipeableViews {...props} />
+  <SwipeableViews
+    {...props}
+    springConfig={{ duration: "0.3s", easeFunction: "linear", delay: "0s" }}
+  />
 ))`
   height: calc(100% - 56px);
   background-color: #fff;
