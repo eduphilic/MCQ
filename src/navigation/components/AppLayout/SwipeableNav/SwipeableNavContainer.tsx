@@ -31,29 +31,28 @@ class SwipeableNavContainer extends Component<Props> {
   }
 
   private handleBottomNavigationButtonClick = (_e: any, pathname: string) => {
-    const { history } = this.props;
-    history.push(pathname);
+    this.pushRouteToHistory(pathname);
   };
 
   private handlePaneChange = (paneIndex: number) => {
     const { links } = this.props;
 
     this.pushRouteToHistory(links[paneIndex].to);
-    this.scrollTop();
-  };
-
-  private scrollTop = () => {
-    // Scroll the pane to the top on swipe completion.
-    const swipeContainerDiv = document.querySelector<HTMLDivElement>(
-      `.${this.scrollTopClass}`,
-    )!;
-    swipeContainerDiv.scrollTop = 0;
   };
 
   private pushRouteToHistory = (pathname: string) => {
     const { history } = this.props;
 
     history.push(pathname);
+    this.scrollTop();
+  };
+
+  private scrollTop = () => {
+    // Scroll the pane to the top on pane change.
+    const swipeContainerDiv = document.querySelector<HTMLDivElement>(
+      `.${this.scrollTopClass}`,
+    )!;
+    swipeContainerDiv.scrollTop = 0;
   };
 
   private getPaneIndexFromRoute = (pathname: string): number => {

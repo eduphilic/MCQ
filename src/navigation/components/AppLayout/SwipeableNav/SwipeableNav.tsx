@@ -79,7 +79,7 @@ const Wrapper = styled.div`
 `;
 
 const StyledBottomNavigation = styled<BottomNavigationProps>(props => (
-  <StyledPaper>
+  <StyledPaper square>
     <BottomNavigation showLabels {...props} />
   </StyledPaper>
 ))`
@@ -111,8 +111,13 @@ const StyledBottomNavigationAction = styled<BottomNavigationActionProps>(
   }
 
   .label {
+    font-size: 10px;
     white-space: nowrap;
     overflow: hidden;
+  }
+
+  &.selected .label {
+    font-size: 13px;
   }
 `;
 
