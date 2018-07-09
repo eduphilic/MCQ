@@ -1,7 +1,7 @@
-import { AppLayout, INavigationLink } from "navigation";
-import React, { Component, ComponentType, SFC } from "react";
+import { AppLayout } from "navigation";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Route, RouteProps, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { State } from "store";
 import { actions } from "./actions";
 import { IEntry } from "./models/IEntry";
@@ -32,16 +32,17 @@ class DashboardPages extends Component<Props> {
     const links = navigationLinks;
 
     return (
-      <Switch>
-        {links.map(l => (
-          <DashboardRoute
-            key={l.titleLocalizationKey}
-            path={l.to}
-            component={l.component}
-            links={links}
-          />
-        ))}
-      </Switch>
+      <AppLayout links={links}>
+        <Switch>
+          {links.map(({ component: RouteComponent, ...l }) => (
+            <Route
+              key={l.titleLocalizationKey}
+              path={l.to}
+              render={() => <RouteComponent />}
+            />
+          ))}
+        </Switch>
+      </AppLayout>
     );
   }
 }
@@ -60,16 +61,3 @@ const DashboardPagesContainer = connect<
   },
 )(DashboardPages);
 export { DashboardPagesContainer as DashboardPages };
-
-const DashboardRoute: SFC<
-  RouteProps & {
-    component: ComponentType<any>;
-    links: INavigationLink[];
-  }
-> = ({ component: RouteComponent, links, ...rest }) => (
-  <Route {...rest}>
-    <AppLayout links={links}>
-      <RouteComponent />
-    </AppLayout>
-  </Route>
-);
