@@ -50,7 +50,7 @@ const ContentWrapper = styled.div`
   ${fromToolbarHeight("padding-top")};
 
   ${({ theme }) => theme.breakpoints.up("md")} {
-    margin-left: ${drawerWidth}px;
+    padding-left: ${drawerWidth}px;
   }
 `;
 
