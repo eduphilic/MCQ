@@ -4,7 +4,14 @@ import { AdminAppDrawerTheme, UserAppDrawerTheme } from "theme";
 
 export const NavTheme: SFC<{}> = ({ children }) => (
   <Switch>
-    {["/dashboard", "/exam-pack", "/membership", "/settings"].map(path => (
+    {[
+      "/dashboard",
+      "/exam-pack",
+      "/membership",
+      "/settings",
+      "/welcome/entries",
+      "/welcome/plans",
+    ].map(path => (
       <Route
         key={path}
         path={path}

@@ -20,6 +20,7 @@ stories.add("AppLayout", () => {
 
   return (
     <AppLayout
+      enableSwipeNavigation
       links={[
         {
           titleLocalizationKey: "userLinkDashboard",

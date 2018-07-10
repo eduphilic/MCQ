@@ -1,18 +1,23 @@
-import { AppLayout, PageContentWrapper } from "navigation";
-import React, { Component } from "react";
+import { AppLayout, INavigationLink, PageContentWrapper } from "navigation";
+import React, { Component, SFC } from "react";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { State } from "store";
 import { actions } from "./actions";
 import { IEntry } from "./models/IEntry";
 import { navigationLinks } from "./navigationLinks";
+import { OnboardingProgress, onboardingProgressSelector } from "./selectors";
+
+// import { OnboardingEntriesPage } from "./OnboardingEntriesPage";
 
 type StateProps = {
   entries: IEntry[] | null;
+  onboardingProgress: OnboardingProgress;
 };
 
 type DispatchProps = {
-  loadPlaceholderEntries: () => {};
+  loadPlaceholderEntries: () => any;
+  loadPlaceholderSubscribedEntries: () => any;
 };
 
 type OwnProps = {};
@@ -24,29 +29,69 @@ class DashboardPages extends Component<Props> {
     super(props);
 
     props.loadPlaceholderEntries();
+    props.loadPlaceholderSubscribedEntries();
   }
 
   render() {
-    if (!this.props.entries) return null;
+    const { entries, onboardingProgress } = this.props;
+    if (!entries || !onboardingProgress) return null;
 
-    const links = navigationLinks;
+    const links = this.buildDashboardLinks();
+    const dashboardRoutes = this.buildDashboardRoutes(links);
 
     return (
-      <AppLayout links={links}>
+      <AppLayout
+        links={links}
+        enableSwipeNavigation={onboardingProgress === "complete"}
+      >
         <PageContentWrapper verticalGutters>
-          <Switch>
-            {links.map(({ component: RouteComponent, ...l }) => (
-              <Route
-                key={l.titleLocalizationKey}
-                path={l.to}
-                render={() => <RouteComponent />}
-              />
-            ))}
-          </Switch>
+          <Switch>{dashboardRoutes}</Switch>
         </PageContentWrapper>
       </AppLayout>
     );
   }
+
+  /**
+   * We disable navigation links here when the onboarding process is still in
+   * progress.
+   */
+  private buildDashboardLinks = (): INavigationLink[] => {
+    const { onboardingProgress } = this.props;
+
+    let RedirectComponent: SFC<any> | undefined;
+
+    switch (onboardingProgress) {
+      case "select-entries": {
+        RedirectComponent = () => <Redirect to="/welcome/entries" />;
+        break;
+      }
+
+      case "complete": {
+        break;
+      }
+    }
+
+    return navigationLinks.map(l => ({
+      ...l,
+      component: RedirectComponent || l.component,
+      disabled: onboardingProgress !== "complete",
+    }));
+  };
+
+  /**
+   * Build the user dashboard routes. These are made available once the user has
+   * finished the onboarding process. If the onboarding process has not been
+   * completed, then redirect the user to one of the onboarding pages.
+   */
+  private buildDashboardRoutes = (links: INavigationLink[]) => {
+    return links.map(({ component: RouteComponent, ...l }) => (
+      <Route
+        key={l.titleLocalizationKey}
+        path={l.to}
+        render={() => <RouteComponent />}
+      />
+    ));
+  };
 }
 
 const DashboardPagesContainer = connect<
@@ -55,11 +100,13 @@ const DashboardPagesContainer = connect<
   OwnProps,
   State
 >(
-  state => ({
-    entries: state.dashboard.entries,
+  ({ dashboard }) => ({
+    entries: dashboard.entries,
+    onboardingProgress: onboardingProgressSelector(dashboard),
   }),
   {
     loadPlaceholderEntries: actions.loadPlaceholderEntries,
+    loadPlaceholderSubscribedEntries: actions.loadPlaceholderSubscribedEntries,
   },
 )(DashboardPages);
 export { DashboardPagesContainer as DashboardPages };

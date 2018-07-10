@@ -57,7 +57,14 @@ export const SiteMap: SFC<{}> = () => {
           {examPageNode}
 
           <MultipathRoute
-            paths={["/dashboard", "/exam-pack", "/membership", "/settings"]}
+            paths={[
+              "/dashboard",
+              "/exam-pack",
+              "/membership",
+              "/settings",
+              "/welcome/entries",
+              "/welcome/plans",
+            ]}
             component={DashboardPages}
           />
         </Switch>

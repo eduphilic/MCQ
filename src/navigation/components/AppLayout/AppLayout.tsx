@@ -10,10 +10,12 @@ import { DrawerContents, DrawerContentsProps } from "./DrawerContents";
 import { NavTheme } from "./NavTheme";
 import { SwipeableNav } from "./SwipeableNav";
 
-export type AppLayoutProps = DrawerContentsProps;
+export type AppLayoutProps = DrawerContentsProps & {
+  enableSwipeNavigation: boolean;
+};
 
 export const AppLayout: SFC<AppLayoutProps> = props => {
-  const { children, links } = props;
+  const { children, links, enableSwipeNavigation } = props;
 
   return (
     <Wrapper>
@@ -32,7 +34,7 @@ export const AppLayout: SFC<AppLayoutProps> = props => {
       <ContentWrapper>
         {/* Bottom navigation with swipe panels, shown on mobile. */}
         <Hidden mdUp>
-          <SwipeableNav links={links} />
+          {enableSwipeNavigation ? <SwipeableNav links={links} /> : children}
         </Hidden>
 
         {/* Tablet/desktop page contents. */}
