@@ -1,4 +1,5 @@
 export * from "./components/AppLayout";
+export * from "./components/BottomToolbarDock";
 export * from "./components/MultipathRoute";
 export * from "./components/PageContentWrapper";
 export * from "./models/INavigationLink";
