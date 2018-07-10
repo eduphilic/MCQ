@@ -38,7 +38,7 @@ const ToolbarWrapper = styled.div`
   bottom: 0;
   z-index: 1;
 
-  ${({ theme }) => theme.breakpoints.up("sm")} {
+  ${({ theme }) => theme.breakpoints.up("md")} {
     padding-left: ${drawerWidth}px;
   }
 `;
