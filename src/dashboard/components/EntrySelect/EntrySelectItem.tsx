@@ -4,8 +4,8 @@ import styled, { withProps } from "styled";
 import Typography from "@material-ui/core/Typography";
 
 import { Button } from "components/Button";
-import { CheckmarkableCircle } from "components/CheckmarkableCircle";
 import { EntryLogo, EntryLogoProps } from "components/EntryLogo";
+import { CheckmarkableCircle } from "./CheckmarkableCircle";
 
 export interface EntrySelectItemProps {
   /**

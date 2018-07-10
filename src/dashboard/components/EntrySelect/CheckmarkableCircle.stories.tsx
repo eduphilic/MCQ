@@ -2,9 +2,13 @@ import { withInfo } from "@storybook/addon-info";
 import { boolean, selectV2 } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { CheckmarkableCircle, CheckmarkableCircleProps } from ".";
 
-storiesOf("Components", module).add(
+import {
+  CheckmarkableCircle,
+  CheckmarkableCircleProps,
+} from "./CheckmarkableCircle";
+
+storiesOf("Dashboard", module).add(
   "CheckmarkableCircle",
   withInfo()(() => (
     <CheckmarkableCircle
