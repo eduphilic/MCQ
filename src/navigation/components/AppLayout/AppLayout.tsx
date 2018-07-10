@@ -34,7 +34,9 @@ export const AppLayout: SFC<AppLayoutProps> = props => {
       <ContentWrapper>
         {/* Bottom navigation with swipe panels, shown on mobile. */}
         <Hidden mdUp>
-          {enableSwipeNavigation ? <SwipeableNav links={links} /> : children}
+          <MobileBackgroundColor>
+            {enableSwipeNavigation ? <SwipeableNav links={links} /> : children}
+          </MobileBackgroundColor>
         </Hidden>
 
         {/* Tablet/desktop page contents. */}
@@ -57,6 +59,12 @@ const ContentWrapper = styled.div`
   ${({ theme }) => theme.breakpoints.up("md")} {
     padding-left: ${drawerWidth}px;
   }
+`;
+
+const MobileBackgroundColor = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
 `;
 
 const TabletDrawer = styled<DrawerProps>(props => (

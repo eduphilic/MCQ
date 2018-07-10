@@ -128,7 +128,6 @@ const StyledSwipeableViews = styled<Omit<SwipeableViewsProps, "ref">>(props => (
   />
 ))`
   height: calc(100% - 56px);
-  background-color: #fff;
 
   /* Enable Momentum Scrolling on iOS */
   overflow-y: scroll;
