@@ -1,17 +1,14 @@
 import React from "react";
 import styled from "styled";
 
-import Button, { ButtonProps } from "@material-ui/core/Button";
-import Tooltip from "@material-ui/core/Tooltip";
+import IconButton, { IconButtonProps } from "@material-ui/core/IconButton";
 import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
 
 /** Logout button. */
-export const LogoutButton = styled<ButtonProps>(props => (
-  <Tooltip title="Logout">
-    <Button {...props}>
-      <PowerSettingsNew />
-    </Button>
-  </Tooltip>
+export const LogoutButton = styled<IconButtonProps>(props => (
+  <IconButton {...props}>
+    <PowerSettingsNew />
+  </IconButton>
 ))`
   min-width: inherit;
   margin-right: -12px;
