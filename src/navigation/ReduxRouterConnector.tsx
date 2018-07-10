@@ -22,6 +22,10 @@ type Props = StateProps & DispatchProps & RouteComponentProps<{}> & OwnProps;
  * Updates the page title to match the currently view page.
  */
 class ReduxRouterConnector extends Component<Props> {
+  componentDidMount() {
+    this.props.onLocationChange(this.props.location.pathname);
+  }
+
   componentDidUpdate(prevProps: Props) {
     if (prevProps.location.pathname === this.props.location.pathname) return;
 

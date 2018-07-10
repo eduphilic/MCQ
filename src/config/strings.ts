@@ -76,7 +76,7 @@ export const strings = {
 
     // #region Navigation Link Titles
     landingLinkHome: "",
-    landingLinkOnboarding1: "Welcome",
+    landingLinkOnboarding1: "Select your Entry",
     landingLinkOnboarding2: "Welcome",
     landingLinkOnboarding3: "Welcome",
     landingLinkPasswordReset: "Password Reset",
