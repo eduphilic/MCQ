@@ -1,5 +1,5 @@
 import React, { SFC } from "react";
-import styled, { withProps } from "styled";
+import styled, { css, withProps } from "styled";
 import { IEntry } from "../../models/IEntry";
 
 import Typography from "@material-ui/core/Typography";
@@ -91,19 +91,24 @@ const TextWrapper = styled.div`
   width: calc(100% - ${textWrapperSizeAdjustment}px);
 `;
 
+const truncate = css`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 const Label = styled(Typography).attrs({
   variant: "body1",
 })`
   flex: 1;
   font-size: 16px;
   text-align: left;
+  ${truncate};
 `;
 
 const AdditionalDescriptionText = Label.extend`
   font-weight: 500;
   font-size: 14px;
   color: #4db7f1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  ${truncate};
 `;
