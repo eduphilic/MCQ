@@ -8,7 +8,7 @@ import { IEntry } from "./models/IEntry";
 import { navigationLinks } from "./navigationLinks";
 import { OnboardingProgress, onboardingProgressSelector } from "./selectors";
 
-// import { OnboardingEntriesPage } from "./OnboardingEntriesPage";
+import { OnboardingEntriesPage } from "./OnboardingEntriesPage";
 
 type StateProps = {
   entries: IEntry[] | null;
@@ -37,6 +37,7 @@ class DashboardPages extends Component<Props> {
     if (!entries || !onboardingProgress) return null;
 
     const links = this.buildDashboardLinks();
+    const onboardingRoutes = this.buildOnboardingRoutes();
     const dashboardRoutes = this.buildDashboardRoutes(links);
 
     return (
@@ -45,11 +46,31 @@ class DashboardPages extends Component<Props> {
         enableSwipeNavigation={onboardingProgress === "complete"}
       >
         <PageContentWrapper verticalGutters>
-          <Switch>{dashboardRoutes}</Switch>
+          <Switch>
+            {onboardingRoutes}
+            {dashboardRoutes}
+          </Switch>
         </PageContentWrapper>
       </AppLayout>
     );
   }
+
+  private buildOnboardingRoutes = () => {
+    const { onboardingProgress } = this.props;
+
+    let RedirectComponent: SFC<{}> | undefined;
+    if (onboardingProgress === "complete") {
+      RedirectComponent = () => <Redirect to="/dashboard" />;
+    }
+
+    return [
+      <Route
+        key="/welcome/entries"
+        path="/welcome/entries"
+        component={RedirectComponent || OnboardingEntriesPage}
+      />,
+    ];
+  };
 
   /**
    * We disable navigation links here when the onboarding process is still in
