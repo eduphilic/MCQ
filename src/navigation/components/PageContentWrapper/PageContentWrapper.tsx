@@ -8,7 +8,7 @@ export type PageContentWrapperProps = {
 export const PageContentWrapper = withProps<PageContentWrapperProps>()(
   styled.div,
 )`
-  ${fromGutters(["padding-left", "padding-right", "padding-top"])};
+  ${fromGutters(["padding"])};
   ${({ verticalGutters }) =>
     verticalGutters && fromGutters(["margin-bottom"], "> *:not(:last-child)")}
 
