@@ -1,27 +1,18 @@
 import React, { SFC } from "react";
 import styled, { withProps } from "styled";
+import { IEntry } from "../../models/IEntry";
 
 import Typography from "@material-ui/core/Typography";
 
+import { BlockImage } from "components/BlockImage";
 import { Button } from "components/Button";
-import { EntryLogo, EntryLogoProps } from "components/EntryLogo";
 import { CheckmarkableCircle } from "./CheckmarkableCircle";
 
-export interface EntrySelectItemProps {
+export type EntrySelectItemProps = {
   /**
-   * Entry (military branch) icon to use.
+   * An available Entry to subscribe to.
    */
-  icon: EntryLogoProps["entry"];
-
-  /**
-   * Label contents.
-   */
-  label: string;
-
-  /**
-   * Education requirement or entry explanation. Shown under label.
-   */
-  additionalDescriptionText?: string;
+  entry: IEntry;
 
   /**
    * Whether item is selected.
@@ -32,31 +23,30 @@ export interface EntrySelectItemProps {
    * Called when item is clicked.
    */
   onClick: () => void;
-}
+};
 
 /**
  * Entry (military branch) selection item.
  */
 export const EntrySelectItem: SFC<EntrySelectItemProps> = props => {
-  const {
-    icon: entry,
-    label,
-    additionalDescriptionText,
-    selected,
-    onClick,
-  } = props;
+  const { entry, selected, onClick } = props;
 
   return (
     <StyledButton selected={selected} onClick={onClick}>
-      <Logo entry={entry} />
+      <StyledBlockImage src={entry.logoUrlByWidth["48"]} />
+
       <TextWrapper>
-        <Label>{label}</Label>
-        {additionalDescriptionText && (
+        {/* TODO: Use localization utility to select current language. */}
+        <Label>{entry.title.en}</Label>
+
+        {entry.subtitle && (
           <AdditionalDescriptionText>
-            {additionalDescriptionText}
+            {/* TODO: Use localization utility to select current language. */}
+            {entry.subtitle.en}
           </AdditionalDescriptionText>
         )}
       </TextWrapper>
+
       <CheckmarkableCircle color="secondary" checked={selected} />
     </StyledButton>
   );
@@ -70,7 +60,7 @@ const StyledButton = withProps<{ selected: boolean }>()(styled(Button))`
   height: 64px;
   padding: ${props => props.theme.spacing.unit}px !important;
   padding-right: ${props => props.theme.spacing.unit * 2}px !important;
-  background-color: #fff;
+  background-color: #fff !important;
 
   &:hover {
     background-color: #f9f9f9;
@@ -84,16 +74,21 @@ const StyledButton = withProps<{ selected: boolean }>()(styled(Button))`
       : ""}
 `;
 
-const Logo = styled(EntryLogo)`
+const StyledBlockImage = styled(BlockImage)`
   width: 48px;
   height: 48px;
-  margin-right: ${props => props.theme.spacing.unit}px;
+  margin-right: ${({ theme }) => theme.spacing.unit}px;
 `;
+
+const textWrapperSizeAdjustment =
+  48 /* entry logo width */ +
+  8 /* entry logo right margin */ +
+  24 /* selection circle width */;
 
 const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
+  width: calc(100% - ${textWrapperSizeAdjustment}px);
 `;
 
 const Label = styled(Typography).attrs({
@@ -108,4 +103,7 @@ const AdditionalDescriptionText = Label.extend`
   font-weight: 500;
   font-size: 14px;
   color: #4db7f1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

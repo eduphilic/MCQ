@@ -31,5 +31,5 @@ export interface IEntry {
    *
    * Additional information like education requirements or entry explanation.
    */
-  subtitle: LocalizedString;
+  subtitle?: LocalizedString;
 }
