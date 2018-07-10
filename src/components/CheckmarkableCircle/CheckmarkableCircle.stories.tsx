@@ -8,7 +8,7 @@ import {
   CheckmarkableCircleProps,
 } from "./CheckmarkableCircle";
 
-storiesOf("Dashboard", module).add(
+storiesOf("Components", module).add(
   "CheckmarkableCircle",
   withInfo()(() => (
     <CheckmarkableCircle

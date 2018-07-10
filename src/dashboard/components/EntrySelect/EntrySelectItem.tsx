@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 
 import { BlockImage } from "components/BlockImage";
 import { Button } from "components/Button";
-import { CheckmarkableCircle } from "./CheckmarkableCircle";
+import { CheckmarkableCircle } from "components/CheckmarkableCircle";
 
 export type EntrySelectItemProps = {
   /**
