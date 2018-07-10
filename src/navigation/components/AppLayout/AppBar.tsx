@@ -9,6 +9,7 @@ import MuiAppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
+import { LanguageToggleButton } from "./LanguageToggleButton";
 import { LogoutButton } from "./LogoutButton";
 
 type StateProps = {
@@ -33,6 +34,7 @@ const AppBar: SFC<Props> = props => {
 
         <FlexSpacer />
 
+        <LanguageToggleButton />
         <LogoutButton />
       </Toolbar>
     </ResponsiveWidthAppBar>
