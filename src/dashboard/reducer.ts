@@ -5,10 +5,14 @@ import { createEntryPlaceholders } from "./placeholders/createEntryPlaceholders"
 
 export type State = {
   entries: IEntry[] | null;
+
+  subscribedEntries: IEntry[] | null;
 };
 
 const initialState: State = {
   entries: null,
+
+  subscribedEntries: null,
 };
 
 export const reducer = createReducer<State, Actions, DashboardAction>(
@@ -17,6 +21,10 @@ export const reducer = createReducer<State, Actions, DashboardAction>(
     [DashboardAction.LoadPlaceholderEntries]: state => ({
       ...state,
       entries: createEntryPlaceholders(),
+    }),
+    [DashboardAction.LoadPlaceholderSubscribedEntries]: state => ({
+      ...state,
+      subscribedEntries: [],
     }),
   },
 );
