@@ -52,7 +52,8 @@ export const createEntryPlaceholders = (): IEntry[] => [
     id: "capf",
     title: { en: "CAPF (BSF, ITBP, CRPF, SSB, CISF)" },
     subtitle: { en: "Asst Comdt, SI/ASI & Constable GD" },
-    logoUrlByWidth: createLogoUrl("capf"),
+    logoUrlByWidth: createLogoUrl("navy"),
+    // logoUrlByWidth: createLogoUrl("capf"),
   },
   {
     id: "coast-guard",
@@ -67,12 +68,14 @@ export const createEntryPlaceholders = (): IEntry[] => [
     id: "railway-protection-force",
     title: { en: "Railway Protection Force" },
     subtitle: { en: "Sub Inspector & Constable" },
-    logoUrlByWidth: createLogoUrl("railwayprotectionforce"),
+    logoUrlByWidth: createLogoUrl("navy"),
+    // logoUrlByWidth: createLogoUrl("railwayprotectionforce"),
   },
   {
     id: "territorial-army",
     title: { en: "Territorial Army" },
     subtitle: { en: "Officer, Tradesman, Soldier GD & Clerk" },
-    logoUrlByWidth: createLogoUrl("territorialarmy"),
+    logoUrlByWidth: createLogoUrl("navy"),
+    // logoUrlByWidth: createLogoUrl("territorialarmy"),
   },
 ];
