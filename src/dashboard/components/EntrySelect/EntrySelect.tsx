@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled";
 import { IEntry } from "../../models/IEntry";
 
+import { fromGutters } from "css";
 import { EntrySelectItem } from "./EntrySelectItem";
 
 export type EntrySelectProps = {
@@ -100,22 +101,10 @@ export default EntrySelect;
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: -8px;
-  margin-top: 0px;
+  padding: 0 4px;
 `;
 
 const EntrySelectItemWrapper = styled.div`
-  ${props => {
-    const margin = props.theme.spacing.unit;
-
-    // On mobile, arrange as one item per line. On tablet or wider, two.
-    return `
-      width: calc(100% - ${margin * 2}px);
-      margin: ${margin}px;
-
-      ${props.theme.breakpoints.up("md")} {
-        width: calc(50% - ${margin * 2}px);
-      }
-    `;
-  }};
+  ${fromGutters(["margin-bottom"])};
+  width: 100%;
 `;
