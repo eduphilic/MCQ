@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 import styled from "styled";
+import { IEntry } from "../../models/IEntry";
 
-import { EntrySelectItem, EntrySelectItemProps } from "./EntrySelectItem";
+import { EntrySelectItem } from "./EntrySelectItem";
 
-export interface EntrySelectProps {
+export type EntrySelectProps = {
   /**
    * Item icons, labels, and optional education requirements.
    * Icon key will be used in the callback as part of the results list.
    */
-  entries: Pick<
-    EntrySelectItemProps,
-    "icon" | "label" | "additionalDescriptionText"
-  >[];
+  entries: IEntry[];
 
   /**
    * Minimum number of selection required. Handler will be called with a boolean
@@ -30,13 +28,13 @@ export interface EntrySelectProps {
    */
   onSelectionChange: (
     hasRequiredSelectionCount: boolean,
-    selections: EntrySelectItemProps["icon"][],
+    selectedItemIDs: string[],
   ) => void;
-}
+};
 
-export interface EntrySelectState {
-  selected: boolean[];
-}
+export type EntrySelectState = {
+  selectedItemIDs: string[];
+};
 
 /**
  * Entry select provides a list of military services which can be selected. It
@@ -44,56 +42,52 @@ export interface EntrySelectState {
  * selections.
  */
 export class EntrySelect extends Component<EntrySelectProps, EntrySelectState> {
-  constructor(props: EntrySelectProps) {
-    super(props);
+  state: EntrySelectState = { selectedItemIDs: [] };
 
-    const { entries } = props;
-    const selected: boolean[] = [];
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < entries.length; i += 1) selected.push(false);
-
-    this.state = { selected };
-  }
-
-  handleItemClick = (index: number) => {
-    const selected = [...this.state.selected];
+  handleItemClick = (entryID: string) => {
+    let selectedItemIDs = [...this.state.selectedItemIDs];
     const {
       maxSelectedCount,
       minSelectedCount,
       onSelectionChange,
-      entries,
     } = this.props;
 
     // Don't select item if we are at the maximum number of selections.
-    const isSelected = selected[index];
-    let totalSelected = selected.reduce((acc, s) => acc + (s ? 1 : 0), 0);
+    const isSelected = selectedItemIDs.find(i => i === entryID) !== undefined;
+    let totalSelected = selectedItemIDs.length;
     if (!isSelected && totalSelected === maxSelectedCount) return;
 
     // Update selections.
-    selected[index] = !selected[index];
-    this.setState({ selected });
+    selectedItemIDs = isSelected
+      ? selectedItemIDs.filter(i => i !== entryID)
+      : selectedItemIDs.concat(entryID);
+    this.setState({ selectedItemIDs });
 
     // Call the handler with the new selection list and whether or not the
     // minimum number of selections are selected.
     totalSelected += isSelected ? -1 : 1;
     const hasRequiredSelectionCount = totalSelected >= minSelectedCount;
-    const selections = entries.filter((_e, i) => selected[i]).map(e => e.icon);
-    onSelectionChange(hasRequiredSelectionCount, selections);
+    onSelectionChange(hasRequiredSelectionCount, selectedItemIDs);
   };
 
   render() {
     const { entries } = this.props;
-    const { selected } = this.state;
+    const { selectedItemIDs } = this.state;
 
-    const selectItems = entries.map((entry, index) => (
-      <EntrySelectItemWrapper key={index}>
-        <EntrySelectItem
-          {...entry}
-          selected={selected[index]}
-          onClick={() => this.handleItemClick(index)}
-        />
-      </EntrySelectItemWrapper>
-    ));
+    const selectItems = entries.map(entry => {
+      const isSelected =
+        selectedItemIDs.find(i => i === entry.id) !== undefined;
+
+      return (
+        <EntrySelectItemWrapper key={entry.id}>
+          <EntrySelectItem
+            entry={entry}
+            selected={isSelected}
+            onClick={() => this.handleItemClick(entry.id)}
+          />
+        </EntrySelectItemWrapper>
+      );
+    });
 
     return <Wrapper>{selectItems}</Wrapper>;
   }

@@ -4,29 +4,19 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { ContentCenterWrapper } from "components/ContentCenterWrapper";
-import { EntrySelect } from ".";
-import { createSelectEntryPlaceholderData } from "./createSelectEntryPlaceholderData";
+import { createEntryPlaceholders } from "../../placeholders/createEntryPlaceholders";
+import { EntrySelect } from "./EntrySelect";
 
-const props = createSelectEntryPlaceholderData();
-const propsWithAdditionalDescriptionText: typeof props = {
-  ...props,
-  entries: props.entries.map(e => ({
-    ...e,
-
-    additionalDescriptionText: "12th Science with Maths",
-  })),
-};
+const entries = createEntryPlaceholders();
 
 storiesOf("Dashboard", module).add(
   "EntrySelect",
   withInfo({ propTablesExclude: [ContentCenterWrapper as any] })(() => (
     <ContentCenterWrapper>
-      <EntrySelect {...props} onSelectionChange={action("onSelectionChange")} />
-
-      <div style={{ marginTop: 24 }} />
-
       <EntrySelect
-        {...propsWithAdditionalDescriptionText}
+        entries={entries}
+        minSelectedCount={1}
+        maxSelectedCount={3}
         onSelectionChange={action("onSelectionChange")}
       />
     </ContentCenterWrapper>
