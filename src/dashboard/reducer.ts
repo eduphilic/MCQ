@@ -35,5 +35,10 @@ export const reducer = createReducer<State, Actions, DashboardAction>(
       ...state,
       subscribedEntries: [],
     }),
+
+    [DashboardAction.SetEntriesPendingPurchase]: (state, action) => ({
+      ...state,
+      entriesPendingPurchase: action.payload,
+    }),
   },
 );

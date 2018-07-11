@@ -12,6 +12,8 @@ export type EntrySelectProps = {
    */
   entries: IEntry[];
 
+  initialSelectedEntries?: string[];
+
   /**
    * Minimum number of selection required. Handler will be called with a boolean
    * indicated whether this requirement has been meet.
@@ -43,7 +45,9 @@ export type EntrySelectState = {
  * selections.
  */
 export class EntrySelect extends Component<EntrySelectProps, EntrySelectState> {
-  state: EntrySelectState = { selectedItemIDs: [] };
+  state: EntrySelectState = {
+    selectedItemIDs: this.props.initialSelectedEntries || [],
+  };
 
   handleItemClick = (entryID: string) => {
     let selectedItemIDs = [...this.state.selectedItemIDs];
