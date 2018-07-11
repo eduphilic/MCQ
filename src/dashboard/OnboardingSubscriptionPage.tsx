@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { State } from "store";
 import { actions as dashboardActions } from "./actions";
 import { IEntry } from "./models/IEntry";
@@ -15,11 +16,23 @@ type OnboardingSubscriptionPageProps = {
   onEntriesPendingPurchaseChange: (entryIDs: IEntry[]) => any;
 };
 
+type OnboardingSubscriptionPageState = {
+  addMoreButtonClicked: boolean;
+};
+
 class OnboardingSubscriptionPage extends Component<
-  OnboardingSubscriptionPageProps
+  OnboardingSubscriptionPageProps,
+  OnboardingSubscriptionPageState
 > {
+  state: OnboardingSubscriptionPageState = {
+    addMoreButtonClicked: false,
+  };
+
   render() {
     const { entries, entrySelectMeta, selectedEntryIDs } = this.props;
+    const { addMoreButtonClicked } = this.state;
+
+    if (addMoreButtonClicked) return <Redirect to="/welcome/entries" push />;
 
     return (
       <>
@@ -50,7 +63,7 @@ class OnboardingSubscriptionPage extends Component<
   };
 
   private handleAddMoreEntriesButtonClick = () => {
-    //
+    this.setState({ addMoreButtonClicked: true });
   };
 }
 
