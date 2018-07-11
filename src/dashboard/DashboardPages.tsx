@@ -9,6 +9,7 @@ import { navigationLinks } from "./navigationLinks";
 import { OnboardingProgress, onboardingProgressSelector } from "./selectors";
 
 import { OnboardingEntriesPage } from "./OnboardingEntriesPage";
+import { OnboardingSubscriptionPage } from "./OnboardingSubscriptionPage";
 
 type StateProps = {
   entries: IEntry[] | null;
@@ -69,6 +70,15 @@ class DashboardPages extends Component<Props> {
         path="/welcome/entries"
         component={RedirectComponent || OnboardingEntriesPage}
       />,
+      <Route
+        key="/welcome/subscriptions"
+        path="/welcome/subscriptions"
+        component={
+          RedirectComponent || onboardingProgress === "select-subscription"
+            ? OnboardingSubscriptionPage
+            : () => <Redirect to="/welcome/entries" />
+        }
+      />,
     ];
   };
 
@@ -84,6 +94,11 @@ class DashboardPages extends Component<Props> {
     switch (onboardingProgress) {
       case "select-entries": {
         RedirectComponent = () => <Redirect to="/welcome/entries" />;
+        break;
+      }
+
+      case "select-subscription": {
+        RedirectComponent = () => <Redirect to="/welcome/subscriptions" />;
         break;
       }
 

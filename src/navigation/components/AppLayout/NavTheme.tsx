@@ -10,7 +10,7 @@ export const NavTheme: SFC<{}> = ({ children }) => (
       "/membership",
       "/settings",
       "/welcome/entries",
-      "/welcome/plans",
+      "/welcome/subscriptions",
     ].map(path => (
       <Route
         key={path}
