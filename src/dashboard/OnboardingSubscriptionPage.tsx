@@ -6,8 +6,11 @@ import { actions as dashboardActions } from "./actions";
 import { IEntry } from "./models/IEntry";
 
 import { Typography } from "components/Typography";
+import { ExamQuantitySelector } from "./components/ExamQuantitySelector";
 import { SelectedEntries } from "./components/SelectedEntries";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
+
+import { createPlaceholderExamQuantitySelectorProps } from "./components/ExamQuantitySelector/createPlaceholderExamQuantitySelectorProps";
 
 type OnboardingSubscriptionPageProps = {
   entries: IEntry[];
@@ -31,6 +34,11 @@ class OnboardingSubscriptionPage extends Component<
   render() {
     const { entries, entrySelectMeta, selectedEntryIDs } = this.props;
     const { addMoreButtonClicked } = this.state;
+    const selectedEntries = entries.filter(e =>
+      selectedEntryIDs.includes(e.id),
+    );
+
+    const placeholderExamQuantitySelectorProps = createPlaceholderExamQuantitySelectorProps();
 
     if (addMoreButtonClicked) return <Redirect to="/welcome/entries" push />;
 
@@ -44,6 +52,19 @@ class OnboardingSubscriptionPage extends Component<
           onEntryRemoveButtonClick={this.handleEntryRemoveButtonClick}
           onAddMoreButtonClick={this.handleAddMoreEntriesButtonClick}
         />
+
+        {/* TODO: Use correct localization */}
+        {selectedEntries.map(e => (
+          <div key={e.id}>
+            <Typography variant="cardTitle">{e.title.en}</Typography>
+            {Array.from({ length: 3 }, (_: any, index) => (
+              <ExamQuantitySelector
+                key={index}
+                {...placeholderExamQuantitySelectorProps}
+              />
+            ))}
+          </div>
+        ))}
       </>
     );
   }
