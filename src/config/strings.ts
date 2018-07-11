@@ -105,5 +105,6 @@ export const strings = {
     navigationNextButtonText: "आगे",
 
     dashboardLinkOnboarding1: "अपनी एन्ट्री चुनें",
+    dashboardLinkOnboarding2: "सदस्यता चुनें",
   },
 };
