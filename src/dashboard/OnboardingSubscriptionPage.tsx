@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Typography } from "components/Typography";
+
 type OnboardingSubscriptionPageProps = {};
 
 export class OnboardingSubscriptionPage extends Component<
@@ -8,7 +10,7 @@ export class OnboardingSubscriptionPage extends Component<
   render() {
     return (
       <>
-        <div>Subscriptions Page Placeholder</div>
+        <Typography variant="cardTitle">Your Selected Entries</Typography>
       </>
     );
   }
