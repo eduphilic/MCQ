@@ -1,3 +1,4 @@
+import { strings } from "localization";
 import { BottomToolbarDock } from "navigation";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -54,7 +55,7 @@ class OnboardingEntriesPage extends Component<
               disabled={isNextButtonDisabled}
               onClick={this.handleNextButtonClick}
             >
-              Next
+              {strings.navigationNextButtonText}
             </TypographyButton>
           </ButtonWrapper>
         </Toolbar>

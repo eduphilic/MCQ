@@ -102,6 +102,8 @@ export const strings = {
     // #endregion
   },
   hi: {
+    navigationNextButtonText: "आगे",
+
     dashboardLinkOnboarding1: "अपनी एन्ट्री चुनें",
   },
 };
