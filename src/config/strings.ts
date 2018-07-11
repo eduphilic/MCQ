@@ -101,5 +101,7 @@ export const strings = {
     userLinkSettings: "Settings",
     // #endregion
   },
-  hi: {},
+  hi: {
+    dashboardLinkOnboarding1: "अपनी एन्ट्री चुनें",
+  },
 };

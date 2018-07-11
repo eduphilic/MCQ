@@ -7,6 +7,7 @@ import { actions } from "./actions";
 
 type StateProps = {
   locationPageTitle: string;
+  localizationLanguage: "en" | "hi";
 };
 
 type DispatchProps = {
@@ -19,7 +20,8 @@ export { OwnProps as ReduxRouterConnectorProps };
 type Props = StateProps & DispatchProps & RouteComponentProps<{}> & OwnProps;
 
 /**
- * Updates the page title to match the currently view page.
+ * Updates the page title to match the currently view page and localization
+ * language.
  */
 class ReduxRouterConnector extends Component<Props> {
   componentDidMount() {
@@ -27,7 +29,12 @@ class ReduxRouterConnector extends Component<Props> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    if (prevProps.location.pathname === this.props.location.pathname) return;
+    if (
+      prevProps.location.pathname === this.props.location.pathname &&
+      prevProps.localizationLanguage === this.props.localizationLanguage
+    ) {
+      return;
+    }
 
     this.props.onLocationChange(this.props.location.pathname);
   }
@@ -49,8 +56,9 @@ class ReduxRouterConnector extends Component<Props> {
 
 const ReduxRouterConnectorContainer = withRouter(
   connect<StateProps, DispatchProps, OwnProps, State>(
-    ({ navigation }): StateProps => ({
+    ({ navigation, localization }): StateProps => ({
       locationPageTitle: navigation.locationPageTitle,
+      localizationLanguage: localization.localizationLanguage,
     }),
     {
       onLocationChange: actions.updateLocation,

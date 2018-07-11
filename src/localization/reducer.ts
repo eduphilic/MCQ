@@ -1,4 +1,5 @@
 import { Actions, LocalizationAction } from "./actions";
+import { strings } from "./strings";
 
 interface State {
   localizationLanguage: "en" | "hi";
@@ -15,6 +16,8 @@ export const reducer = (
   switch (action.type) {
     case LocalizationAction.SetLocalizationLanguage: {
       const { payload: localizationLanguage } = action;
+
+      strings.setLanguage(localizationLanguage);
 
       return { ...state, localizationLanguage };
     }
