@@ -78,7 +78,7 @@ export const strings = {
     landingLinkHome: "",
     landingLinkPasswordReset: "Password Reset",
 
-    dashboardLinkOnboarding1: "Select your Entry",
+    dashboardLinkOnboarding1: "Select Your Entry",
     dashboardLinkOnboarding2: "Subscribe Membership",
 
     adminLinkLogin: "Login",
