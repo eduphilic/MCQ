@@ -1,14 +1,21 @@
-import { Action, ActionWithPayload } from "./action-helpers";
+import { ActionsUnion } from "types";
+import { Action } from "./action-helpers";
 
 export const createReducer = <
   State,
-  Actions extends Action<ActionTypes> | ActionWithPayload<ActionTypes, any>,
+  Actions extends ActionsUnion<any>,
   ActionTypes extends string
 >(
   initialState: State,
-  handlers: Record<ActionTypes, (state: State, action: Actions) => State>,
+  handlers: {
+    [P in ActionTypes]: (
+      state: State,
+      action: Extract<Actions, Action<P>>,
+    ) => State
+  },
 ) => (state: State = initialState, action: Actions): State => {
   if (handlers.hasOwnProperty(action.type)) {
+    // @ts-ignore
     return handlers[action.type](state, action);
   }
 
