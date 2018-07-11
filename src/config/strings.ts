@@ -76,10 +76,10 @@ export const strings = {
 
     // #region Navigation Link Titles
     landingLinkHome: "",
-    landingLinkOnboarding1: "Select your Entry",
-    landingLinkOnboarding2: "Welcome",
-    landingLinkOnboarding3: "Welcome",
     landingLinkPasswordReset: "Password Reset",
+
+    dashboardLinkOnboarding1: "Select your Entry",
+    dashboardLinkOnboarding2: "Subscribe Membership",
 
     adminLinkLogin: "Login",
 

@@ -2,5 +2,14 @@ import { strings } from "localization";
 
 export const routes: {
   path: string;
-  localizationKey: keyof typeof strings;
-}[] = [{ path: "/welcome/entries", localizationKey: "landingLinkOnboarding1" }];
+  pageTitleLocalizationKey: keyof typeof strings;
+}[] = [
+  {
+    path: "/welcome/entries",
+    pageTitleLocalizationKey: "dashboardLinkOnboarding1",
+  },
+  {
+    path: "/welcome/subscriptions",
+    pageTitleLocalizationKey: "dashboardLinkOnboarding2",
+  },
+];
