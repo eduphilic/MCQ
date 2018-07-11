@@ -52,7 +52,7 @@ export const SelectedEntries: SFC<SelectedEntriesProps> = props => {
             )}
 
             {/* TODO: Select correct localization. */}
-            <Typography>{entry.title.en}</Typography>
+            <StyledTypography>{entry.title.en}</StyledTypography>
           </EntryButton>
         ))}
 
@@ -129,4 +129,11 @@ const AddMoreBlock = styled.div`
     height: 100%;
     fill: #828282;
   }
+`;
+
+const StyledTypography = styled(Typography)`
+  text-overflow: ellipsis;
+  max-width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
 `;
