@@ -1,3 +1,5 @@
+import { action } from "@storybook/addon-actions";
+import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
@@ -17,20 +19,19 @@ const entrySelectMeta: IEntrySelectMeta = {
   maxEntriesCount: 3,
 };
 const selectedEntryIDs = entries.slice(0, 3).map(e => e.id);
-const noop = () => {
-  //
-};
 
 stories.add("SelectedEntries", () => {
-  //
+  const selectedEntryIDsToggle = boolean("Minimum Entries", false)
+    ? selectedEntryIDs.slice(0, 1)
+    : selectedEntryIDs;
 
   return (
     <SelectedEntries
       entries={entries}
       entrySelectMeta={entrySelectMeta}
-      selectedEntryIDs={selectedEntryIDs}
-      onEntryRemoveButtonClick={noop}
-      onAddMoreButtonClick={noop}
+      selectedEntryIDs={selectedEntryIDsToggle}
+      onEntryRemoveButtonClick={action("onEntryRemoveButtonClick")}
+      onAddMoreButtonClick={action("onAddMoreButtonClick")}
     />
   );
 });
