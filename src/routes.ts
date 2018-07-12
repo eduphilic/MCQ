@@ -6,10 +6,10 @@ export const routes: {
 }[] = [
   {
     path: "/welcome/entries",
-    pageTitleLocalizationKey: "dashboardLinkOnboarding1",
+    pageTitleLocalizationKey: "routes_Dashboard_OnboardingEntriesPage",
   },
   {
     path: "/welcome/subscriptions",
-    pageTitleLocalizationKey: "dashboardLinkOnboarding2",
+    pageTitleLocalizationKey: "routes_Dashboard_OnboardingSubscriptionPage",
   },
 ];
