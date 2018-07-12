@@ -14,8 +14,6 @@ export const getPageTitleFromLocation = (
 
   let title = page ? strings[page.titleLocalizationKey] : "";
 
-  /* tslint:disable-next-line:no-console */
-  console.log("location", location);
   const route = routes.find(r => r.path === location);
   if (route) title = strings[route.pageTitleLocalizationKey] as string;
 
