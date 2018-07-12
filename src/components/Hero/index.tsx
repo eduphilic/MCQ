@@ -64,9 +64,11 @@ export const Hero: SFC<HeroProps> = props => {
                 </LanguageSelectWrapper>
                 <Hidden smDown>
                   <HeroTextWrapper>
-                    <HeroPrimaryText>{strings.heroPrimaryText}</HeroPrimaryText>
+                    <HeroPrimaryText>
+                      {strings.components_Hero_PrimaryText}
+                    </HeroPrimaryText>
                     <HeroSecondaryText>
-                      {strings.heroSecondaryText}
+                      {strings.components_Hero_SecondaryText}
                     </HeroSecondaryText>
                   </HeroTextWrapper>
                 </Hidden>

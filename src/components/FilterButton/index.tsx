@@ -64,7 +64,7 @@ export class FilterButton extends Component<
         <Button onClick={this.handleClick} variant="flat">
           <IconMarginRight />
           <Hidden xsDown implementation="css">
-            {strings.adminFilterMenuCaption}
+            {strings.components_FilterButton_MenuCaptionText}
           </Hidden>
           &nbsp;{value}
         </Button>

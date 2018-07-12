@@ -55,7 +55,7 @@ class OnboardingEntriesPage extends Component<
               disabled={isNextButtonDisabled}
               onClick={this.handleNextButtonClick}
             >
-              {strings.navigationNextButtonText}
+              {strings.common_NextButtonText}
             </TypographyButton>
           </ButtonWrapper>
         </Toolbar>

@@ -5,7 +5,7 @@ import styled from "styled";
 import Typography from "@material-ui/core/Typography";
 
 const LogoTextBase = styled(Typography).attrs({
-  children: strings.heroHeader,
+  children: strings.components_LogoText_HeroHeader,
   variant: "headline",
 })`
   font-size: 22px;

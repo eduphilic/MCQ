@@ -77,7 +77,10 @@ export class ToolbarProfileMenu extends Component<
             <ListItemIcon className="icon">
               <PowerSettingsNew />
             </ListItemIcon>
-            <ListItemText inset primary={strings.logoutButtonText} />
+            <ListItemText
+              inset
+              primary={strings.components_ToolbarProfileMenu_LogoutButtonText}
+            />
           </LogoutMenuItem>
         </Menu>
       </Wrapper>

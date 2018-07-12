@@ -62,7 +62,7 @@ export const SelectionSummary = withRouter<
         color="yellow"
         filled
       >
-        {strings.selectionChangeButtonText}
+        {strings.components_SelectionSummary_ChangeButtonText}
       </TypographyButton>
     </Wrapper>
   );

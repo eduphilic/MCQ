@@ -23,22 +23,26 @@ export class AdminLogin extends Component<AdminLoginProps> {
 
   generateLoginForm = () => (
     <AuthenticationForm
-      title={strings.adminLoginFormTitle}
+      title={strings.pages_admin_AdminLogin_LoginFormTitle}
       fields={[
         {
           description:
-            strings.onboardingFormEnterMobileNumberFieldValidationDescription,
+            strings.components_OnboardingForms_MobileNumberFieldDescription,
           name: "login",
           // TODO: Remove development placeholder note (0000)
-          placeholder: strings.onboardingFormEnterMobileNumber + " (0000)",
+          placeholder:
+            strings.components_OnboardingForms_MobileNumberFieldPlaceholder +
+            " (0000)",
           type: "tel",
         },
         {
           description:
-            strings.onboardingFormEnterPasswordFieldValidationDescription,
+            strings.components_OnboardingForms_EnterPasswordFieldDescription,
           name: "password",
           // TODO: Remove development placeholder note (admin)
-          placeholder: strings.onboardingFormEnterPassword + " (admin)",
+          placeholder:
+            strings.components_OnboardingForms_EnterPasswordFieldPlaceholder +
+            " (admin)",
           type: "password",
         },
       ]}
@@ -50,10 +54,10 @@ export class AdminLogin extends Component<AdminLoginProps> {
   generateHeroNode = () => (
     <div style={{ marginTop: "10%" }}>
       <Typography variant="display3" gutterBottom>
-        {strings.adminLoginHeroTextPrimary}
+        {strings.pages_admin_AdminLogin_HeroTextPrimary}
       </Typography>
       <Typography variant="display1">
-        {strings.adminLoginHeroTextSecondary}
+        {strings.pages_admin_AdminLogin_HeroTextSecondary}
       </Typography>
     </div>
   );

@@ -11,7 +11,7 @@ storiesOf("Components", module).add(
     return (
       <TypographyL10
         replaceValues={["Some field"]}
-        localizationKey="formFieldIsRequired"
+        localizationKey="components_AuthenticationForm_FieldIsRequired"
       />
     );
   }),

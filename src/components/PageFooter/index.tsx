@@ -7,7 +7,7 @@ import { DarkTheme } from "theme";
 export const PageFooter: SFC<{}> = () => (
   <DarkTheme>
     <Wrapper>
-      <Text>{strings.pageFooterText}</Text>
+      <Text>{strings.components_PageFooter_Text}</Text>
     </Wrapper>
   </DarkTheme>
 );

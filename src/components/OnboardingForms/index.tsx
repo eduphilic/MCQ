@@ -33,24 +33,28 @@ export const OnboardingForms: SFC<OnboardingFormsProps> = props => {
 
   const loginFields: FormField[] = [
     {
-      description: strings.onboardingFormEnterMobileNumberFieldValidationDescription, // prettier-ignore
+      description:
+        strings.components_OnboardingForms_MobileNumberFieldDescription,
       name: "username",
-      placeholder: strings.onboardingFormEnterMobileNumber,
+      placeholder:
+        strings.components_OnboardingForms_MobileNumberFieldPlaceholder,
       type: "tel",
     },
     {
-      description: strings.onboardingFormEnterPasswordFieldValidationDescription, // prettier-ignore
+      description:
+        strings.components_OnboardingForms_EnterPasswordFieldDescription,
       name: "password",
-      placeholder: strings.onboardingFormEnterPassword,
+      placeholder:
+        strings.components_OnboardingForms_EnterPasswordFieldPlaceholder,
       type: "password",
     },
   ];
 
   const signupFields: FormField[] = [
     {
-      description: strings.onboardingFormEnterYourNameFieldValidationDescription, // prettier-ignore
+      description: strings.components_OnboardingForms_EnterNameFieldDescription,
       name: "name",
-      placeholder: strings.onboardingFormEnterYourName,
+      placeholder: strings.components_OnboardingForms_EnterNameFieldPlaceholder,
       type: "text",
     },
     ...loginFields,
@@ -59,18 +63,19 @@ export const OnboardingForms: SFC<OnboardingFormsProps> = props => {
   return (
     <Wrapper>
       <AuthenticationForm
-        title={strings.onboardingFormLoginTitle}
+        title={strings.components_OnboardingForms_LoginFormTitle}
         fields={loginFields}
         onSubmit={onLoginSubmit}
         secondaryAction={{
           href: passwordResetHref,
-          label: strings.onboardingFormLoginForgotPassword,
+          label:
+            strings.components_OnboardingForms_LoginFormForgotPasswordLabel,
         }}
         // TODO: Add disabled state during submission
         disabled={false}
       />
       <AuthenticationForm
-        title={strings.onboardingFormSignupTitle}
+        title={strings.components_OnboardingForms_SignupFormTitle}
         fields={signupFields}
         onSubmit={onSignupSubmit}
         // TODO: Add disabled state during submission

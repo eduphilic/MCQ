@@ -92,10 +92,11 @@ export class AuthenticationForm extends Component<
     Object.entries(values).forEach(([name, value]) => {
       const desc = this.props.fields.find(f => f.name === name)!.description;
 
-      /* tslint:disable-next-line:no-console */
       if (value.trim() === "") {
-        // tslint:disable-next-line:no-invalid-template-strings
-        const errorMessage = strings.formFieldIsRequired.replace("${1}", desc);
+        const errorMessage = strings.components_AuthenticationForm_FieldIsRequired.replace(
+          "{}",
+          desc,
+        );
         errors[name] = errorMessage;
         hasError = true;
       } else errors[name] = "";

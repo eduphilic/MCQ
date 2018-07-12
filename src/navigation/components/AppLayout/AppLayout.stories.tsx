@@ -23,26 +23,26 @@ stories.add("AppLayout", () => {
       enableSwipeNavigation
       links={[
         {
-          titleLocalizationKey: "userLinkDashboard",
+          titleLocalizationKey: "routes_Dashboard_DashboardPage",
           to: "/dashboard",
           component: () => <div />,
           iconElement: <Dashboard />,
         },
         {
-          titleLocalizationKey: "userLinkExamPack",
+          titleLocalizationKey: "routes_Dashboard_ExamPackPage",
           to: "/exam-pack",
           component: () => <div />,
           iconElement: <Assignment />,
           disabled: true,
         },
         {
-          titleLocalizationKey: "userLinkMembership",
+          titleLocalizationKey: "routes_Dashboard_MembershipPage",
           to: "/membership",
           component: () => <div />,
           iconElement: <AccountCardDetails />,
         },
         {
-          titleLocalizationKey: "userLinkSettings",
+          titleLocalizationKey: "routes_Dashboard_SettingsPage",
           to: "/settings",
           component: () => <div />,
           iconElement: <Settings />,

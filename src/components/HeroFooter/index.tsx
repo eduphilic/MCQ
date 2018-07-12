@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 export const HeroFooter: SFC<{}> = () => (
   <Wrapper>
     <Bar />
-    <Text>{strings.heroFooterText}</Text>
+    <Text>{strings.components_HeroFooter_Text}</Text>
   </Wrapper>
 );
 

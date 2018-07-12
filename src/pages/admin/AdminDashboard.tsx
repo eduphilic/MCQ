@@ -38,7 +38,7 @@ export class AdminDashboard extends Component<AdminDashboardProps> {
             title={
               <TypographyL10
                 variant="cardTitle"
-                localizationKey="adminDashboardCardUsersTitle"
+                localizationKey="pages_admin_Dashboard_CardUsersTitle"
               />
             }
             action={<FilterButton {...filterButtonProps} />}
@@ -47,9 +47,9 @@ export class AdminDashboard extends Component<AdminDashboardProps> {
             leftIcon={<ManSvg style={{ fill: "#757575" }} />}
           >
             {([
-              "adminPanelUsersSummaryTotalUsers",
-              "adminPanelUsersSummaryActiveUsers",
-              "adminPanelUsersSummaryRegistrationsPastWeek",
+              "pages_admin_Dashboard_CardUsersStatTotalUsers",
+              "pages_admin_Dashboard_CardUsersStatActiveUsers",
+              "pages_admin_Dashboard_CardUsersStatRegistrationsPastWeek",
             ] as (keyof typeof strings)[]).map(statCaption => (
               <DashboardCardStatsContent.Item key={statCaption}>
                 <Typography variant="cardLargeStatText">
@@ -70,7 +70,7 @@ export class AdminDashboard extends Component<AdminDashboardProps> {
             title={
               <TypographyL10
                 variant="cardTitle"
-                localizationKey="adminDashboardCardMembershipStatusTitle"
+                localizationKey="pages_admin_Dashboard_CardMembershipStatusTitle"
               />
             }
             action={<FilterButton {...filterButtonProps} />}
@@ -94,7 +94,7 @@ export class AdminDashboard extends Component<AdminDashboardProps> {
             title={
               <TypographyL10
                 variant="cardTitle"
-                localizationKey="adminDashboardCardEntryWiseUsersTitle"
+                localizationKey="pages_admin_Dashboard_CardEntryWiseUsersTitle"
               />
             }
             action={<FilterButton {...filterButtonProps} />}
@@ -135,7 +135,7 @@ export class AdminDashboard extends Component<AdminDashboardProps> {
             title={
               <TypographyL10
                 variant="cardTitle"
-                localizationKey="adminDashboardCardQuestionBankTitle"
+                localizationKey="pages_admin_Dashboard_CardQuestionBankTitle"
               />
             }
           />

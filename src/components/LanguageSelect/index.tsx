@@ -31,13 +31,13 @@ export const LanguageSelect: SFC<LanguageSelectProps> = props => {
     <Wrapper>
       <SideWrapper>
         <FormLabel component="legend">
-          <Heading>{strings.languageSelectSelectPreferredLanguage}</Heading>
+          <Heading>{strings.components_LanguageSelect_Text}</Heading>
         </FormLabel>
       </SideWrapper>
 
       <SideWrapper>
         <RadioGroup
-          aria-label={strings.languageSelectSelectPreferredLanguage}
+          aria-label={strings.components_LanguageSelect_Text}
           row
           value={language}
           onChange={event => onChange((event.target as any).value)}
@@ -45,13 +45,13 @@ export const LanguageSelect: SFC<LanguageSelectProps> = props => {
           <FormControlLabel
             value="english"
             control={<Radio />}
-            label={strings.languageSelectEnglish}
+            label={strings.components_LanguageSelect_English}
           />
 
           <FormControlLabel
             value="hindi"
             control={<Radio />}
-            label={strings.languageSelectHindi}
+            label={strings.components_LanguageSelect_Hindi}
           />
         </RadioGroup>
       </SideWrapper>

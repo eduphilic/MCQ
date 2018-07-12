@@ -14,7 +14,7 @@ export const AttemptButton: SFC<AttemptButtonProps> = props => {
 
   return (
     <StyledAttemptButton {...rest as any}>
-      {strings.landingCardAttemptButton}
+      {strings.components_AttemptButton_Text}
     </StyledAttemptButton>
   );
 };
