@@ -1,3 +1,4 @@
+import { fromMobileFlatBorder } from "css";
 import React, { SFC } from "react";
 import styled, { css, withProps } from "styled";
 import { IEntry } from "../../models/IEntry";
@@ -53,6 +54,7 @@ export const EntrySelectItem: SFC<EntrySelectItemProps> = props => {
 };
 
 const StyledButton = withProps<{ selected: boolean }>()(styled(Button))`
+  ${fromMobileFlatBorder()};
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -69,7 +71,7 @@ const StyledButton = withProps<{ selected: boolean }>()(styled(Button))`
   ${props =>
     props.selected
       ? `
-          border: 1px solid ${props.theme.palette.secondary.main};
+          border: 1px solid ${props.theme.palette.secondary.main} !important;
         `
       : ""}
 `;
