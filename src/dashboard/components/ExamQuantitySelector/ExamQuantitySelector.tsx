@@ -8,8 +8,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Typography from "@material-ui/core/Typography";
 
-// tslint:disable-next-line:no-empty-interface
-export interface ExamQuantitySelectorProps {
+export type ExamQuantitySelectorProps = {
   /**
    * Name of the entry category.
    */
@@ -41,7 +40,7 @@ export interface ExamQuantitySelectorProps {
    * Called on quantity change.
    */
   onChange: (value: string) => void;
-}
+};
 
 /**
  * Selection control for selecting the number of exams to purchase from a
