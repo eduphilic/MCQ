@@ -1,3 +1,3 @@
-import { strings } from "../../config/strings";
+import { Strings } from "localization/strings";
 
-export type LocalizationKey = keyof typeof strings["en"];
+export type LocalizationKey = keyof Strings;

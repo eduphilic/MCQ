@@ -1,12 +1,39 @@
 import LocalizedStrings, { LocalizedStringsMethods } from "react-localization";
-import { strings as stringsSettings } from "../config/strings";
 
-type StringEntries = typeof stringsSettings["en"];
+import { commonEn } from "../strings.common.en";
+import { commonHi } from "../strings.common.hi";
+import { componentsEn } from "../strings.components.en";
+import { componentsHi } from "../strings.components.hi";
+import { dashboardEn } from "../strings.dashboard.en";
+import { dashboardHi } from "../strings.dashboard.hi";
+import { pagesEn } from "../strings.pages.en";
+import { pagesHi } from "../strings.pages.hi";
+import { routesEn } from "../strings.routes.en";
+import { routesHi } from "../strings.routes.hi";
 
-interface Strings extends StringEntries, LocalizedStringsMethods {}
+const strings = {
+  en: {
+    ...commonEn,
+    ...componentsEn,
+    ...dashboardEn,
+    ...pagesEn,
+    ...routesEn,
+  },
+  hi: {
+    ...commonHi,
+    ...componentsHi,
+    ...dashboardHi,
+    ...pagesHi,
+    ...routesHi,
+  },
+};
 
-const strings: Strings = new LocalizedStrings<StringEntries>(
-  stringsSettings as any,
-);
+export type Strings = typeof strings["en"];
 
-export { strings };
+type StringsWithLocalizationMethods = Strings & LocalizedStringsMethods;
+
+const localizedStrings: StringsWithLocalizationMethods = new LocalizedStrings<
+  Strings
+>(strings as any);
+
+export { localizedStrings as strings };
