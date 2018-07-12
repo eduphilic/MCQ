@@ -5,6 +5,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { State } from "store";
 import { actions } from "./actions";
 import { IEntry } from "./models/IEntry";
+import { IEntryCategory } from "./models/IEntryCategory";
 import { navigationLinks } from "./navigationLinks";
 import { OnboardingProgress, onboardingProgressSelector } from "./selectors";
 
@@ -13,6 +14,7 @@ import { OnboardingSubscriptionPage } from "./OnboardingSubscriptionPage";
 
 type StateProps = {
   entries: IEntry[] | null;
+  entryCategories: IEntryCategory[] | null;
   onboardingProgress: OnboardingProgress;
 };
 
@@ -38,8 +40,8 @@ class DashboardPages extends Component<Props> {
   }
 
   render() {
-    const { entries, onboardingProgress } = this.props;
-    if (!entries || !onboardingProgress) return null;
+    const { entries, entryCategories, onboardingProgress } = this.props;
+    if (!entries || !entryCategories || !onboardingProgress) return null;
 
     const links = this.buildDashboardLinks();
     const onboardingRoutes = this.buildOnboardingRoutes();
@@ -142,6 +144,7 @@ const DashboardPagesContainer = connect<
 >(
   ({ dashboard }) => ({
     entries: dashboard.entries,
+    entryCategories: dashboard.entryCategories,
     onboardingProgress: onboardingProgressSelector(dashboard),
   }),
   {
