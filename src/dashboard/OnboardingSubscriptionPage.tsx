@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { State } from "store";
+import styled from "styled";
 import { actions as dashboardActions } from "./actions";
 import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
 import { IEntry } from "./models/IEntry";
@@ -10,9 +11,14 @@ import { IEntryCategory } from "./models/IEntryCategory";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
 import { IExamQuantitySelectMeta } from "./models/IExamQuantitySelectMeta";
 
+import Hidden from "@material-ui/core/Hidden";
+
 import { Button } from "components/Button";
 import { Typography } from "components/Typography";
+import { TypographyL10 } from "components/TypographyL10";
+import { BottomToolbarDock } from "navigation";
 import { ExamQuantitySelector } from "./components/ExamQuantitySelector";
+import { OnboardingBottomDockToolbar } from "./components/OnboardingBottomDockToolbar";
 import { SelectedEntries } from "./components/SelectedEntries";
 
 type OnboardingSubscriptionPageProps = {
@@ -57,7 +63,7 @@ class OnboardingSubscriptionPage extends Component<
       selectedEntryIDs,
       examQuantitySelectMeta,
     } = this.props;
-    const { addMoreButtonClicked } = this.state;
+    const { addMoreButtonClicked, total } = this.state;
     const selectedEntries = entries.filter(e =>
       selectedEntryIDs.includes(e.id),
     );
@@ -77,7 +83,30 @@ class OnboardingSubscriptionPage extends Component<
         validate={this.handleFormChange}
       >
         {api => (
-          <>
+          <BottomToolbarDock
+            toolbarNode={
+              <OnboardingBottomDockToolbar>
+                <Hidden xsDown>
+                  <Typography variant="cardTitle">
+                    Subscribe Exam Pack
+                  </Typography>
+                </Hidden>
+
+                <RightToolbarGroup>
+                  <Typography variant="cardTitle" style={{ fontWeight: 600 }}>
+                    Total Rs {total}
+                  </Typography>
+
+                  <Button color="yellow" filled onClick={api.submitForm}>
+                    <TypographyL10
+                      localizationKey="dashboard_OnboardingSubscriptionPage_PayButtonText"
+                      variant="buttonBold"
+                    />
+                  </Button>
+                </RightToolbarGroup>
+              </OnboardingBottomDockToolbar>
+            }
+          >
             <Typography variant="cardTitle">Your Selected Entries</Typography>
             <SelectedEntries
               entries={entries}
@@ -105,11 +134,7 @@ class OnboardingSubscriptionPage extends Component<
                 ))}
               </div>
             ))}
-
-            <p>Total: {this.state.total.toString()}</p>
-
-            <Button onClick={api.submitForm}>Submit</Button>
-          </>
+          </BottomToolbarDock>
         )}
       </Formik>
     );
@@ -185,3 +210,14 @@ const calculateTotal = (
 
   return total;
 };
+
+const RightToolbarGroup = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+
+  > *:first-child {
+    margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
+  }
+`;
