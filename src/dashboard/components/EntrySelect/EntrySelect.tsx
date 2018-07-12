@@ -105,7 +105,6 @@ export default EntrySelect;
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  padding: 0 4px;
 `;
 
 const EntrySelectItemWrapper = styled.div`
