@@ -18,6 +18,7 @@ type StateProps = {
 
 type DispatchProps = {
   loadPlaceholderEntries: () => any;
+  loadPlaceholderEntryCategories: () => any;
   loadPlaceholderSubscribedEntries: () => any;
   loadPlaceholderExamQuantitySelectMeta: () => any;
 };
@@ -31,6 +32,7 @@ class DashboardPages extends Component<Props> {
     super(props);
 
     props.loadPlaceholderEntries();
+    props.loadPlaceholderEntryCategories();
     props.loadPlaceholderSubscribedEntries();
     props.loadPlaceholderExamQuantitySelectMeta();
   }
@@ -144,6 +146,7 @@ const DashboardPagesContainer = connect<
   }),
   {
     loadPlaceholderEntries: actions.loadPlaceholderEntries,
+    loadPlaceholderEntryCategories: actions.loadPlaceholderEntryCategories,
     loadPlaceholderSubscribedEntries: actions.loadPlaceholderSubscribedEntries,
     loadPlaceholderExamQuantitySelectMeta:
       actions.loadPlaceholderExamQuantitySelectMeta,
