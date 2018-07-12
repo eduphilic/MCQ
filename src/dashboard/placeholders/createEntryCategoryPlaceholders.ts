@@ -23,6 +23,6 @@ for (let i = 0; i < entries.length; i += 1) {
   }
 }
 
-export const createEntryCategoryPlaceholders = (): IEntryCategory[] => ({
+export const createEntryCategoryPlaceholders = (): IEntryCategory[] => [
   ...placeholder,
-});
+];
