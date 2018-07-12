@@ -40,7 +40,10 @@ export const reducer = createReducer<State, Actions, DashboardAction>(
     [DashboardAction.LoadPlaceholderEntries]: state => ({
       ...state,
       entries: createEntryPlaceholders(),
-      entrySelectMeta: { minEntriesCount: 1, maxEntriesCount: 3 },
+      entrySelectMeta: {
+        minEntriesCount: 1,
+        maxEntriesCount: createEntryPlaceholders().length,
+      },
     }),
     [DashboardAction.LoadPlaceholderEntryCategories]: state => ({
       ...state,
