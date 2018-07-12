@@ -1,45 +1,38 @@
-import React, { ChangeEvent, Component, ReactElement } from "react";
+import { strings } from "localization";
+import React, { ChangeEvent, Component } from "react";
 import styled from "styled";
+import { LocalizedString } from "types";
+import { IExamQuantitySelectMeta } from "../../models/IExamQuantitySelectMeta";
 
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControlLabel, {
+  FormControlLabelProps,
+} from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
+import RadioGroup, { RadioGroupProps } from "@material-ui/core/RadioGroup";
 import Typography from "@material-ui/core/Typography";
 
 export type ExamQuantitySelectorProps = {
   /**
+   * Settings that dictate the quantities of exams offered for each category.
+   */
+  examQuantitySelectMeta: IExamQuantitySelectMeta;
+
+  /**
    * Name of the entry category.
    */
-  category: string;
+  categoryLabel: LocalizedString;
 
   /**
-   * Pricing text placed to the right next to the category name.
-   *
-   * E.g. (Rs 50 Per exam)
+   * Selected quantity.
    */
-  pricingText: string;
-
-  /**
-   * Available quantities (labels).
-   */
-  availableQuantitiesLabels: string[];
-
-  /**
-   * Available quantities (values).
-   */
-  availableQuantitiesValues: string[];
-
-  /**
-   * Selected quantity value.
-   */
-  value: string;
+  selectedQuantityIndex: number;
 
   /**
    * Called on quantity change.
    */
-  onChange: (value: string) => void;
+  onChange: (quantityIndex: number) => void;
 };
 
 /**
@@ -48,16 +41,14 @@ export type ExamQuantitySelectorProps = {
  */
 export class ExamQuantitySelector extends Component<ExamQuantitySelectorProps> {
   private handleChange = (_event: ChangeEvent<{}>, value: string) => {
-    this.props.onChange(value);
+    this.props.onChange(parseInt(value, 10));
   };
 
   render() {
     const {
-      category,
-      pricingText,
-      value,
-      availableQuantitiesValues,
-      availableQuantitiesLabels,
+      examQuantitySelectMeta,
+      categoryLabel,
+      selectedQuantityIndex,
     } = this.props;
 
     return (
@@ -69,27 +60,31 @@ export class ExamQuantitySelector extends Component<ExamQuantitySelectorProps> {
               component="span"
               style={{ width: 140, fontWeight: 500 }}
             >
-              {category}
+              {/* TODO: Select correct localization. */}
+              {categoryLabel.en}
             </Typography>
           </GridItemVerticalAlign>
 
           <PricingTextWrapper>
             <Typography variant="subheading" component="span">
-              {pricingText}
+              {strings.dashboard_ExamQuantitySelector_PricingText.replace(
+                "{}",
+                examQuantitySelectMeta.examPriceRs.toString(),
+              )}
             </Typography>
           </PricingTextWrapper>
 
           <GridItemVerticalAlign xs={12} sm>
             <QuantityRadioGroup
-              category={category}
-              value={value}
+              value={selectedQuantityIndex.toString()}
               onChange={this.handleChange}
             >
-              {availableQuantitiesValues.map((quantityValue, index) => (
+              {examQuantitySelectMeta.quantities.map((quantityValue, index) => (
                 <QuantityRadio
-                  key={value}
-                  value={quantityValue}
-                  label={availableQuantitiesLabels[index]}
+                  key={`${quantityValue}-${index}`}
+                  value={index.toString()}
+                  // TODO: Select correct localization.
+                  label={examQuantitySelectMeta.quantitiesLabels[index].en}
                 />
               ))}
             </QuantityRadioGroup>
@@ -115,40 +110,15 @@ const PricingTextWrapper = styled(GridItemVerticalAlign)`
   }
 `;
 
-const QuantityRadioGroup = styled(
-  (props: {
-    className?: string;
-    value: string;
-    category: string;
-    onChange: (event: ChangeEvent<{}>, value: string) => void;
-    children: ReactElement<any>[];
-  }) => (
-    <RadioGroup
-      className={props.className}
-      aria-label={props.category}
-      name={props.category}
-      value={props.value}
-      onChange={props.onChange}
-      row
-    >
-      {props.children}
-    </RadioGroup>
-  ),
-)`
+const QuantityRadioGroup = styled<RadioGroupProps>(props => (
+  <RadioGroup row {...props} />
+))`
   flex-grow: 1;
 `;
-QuantityRadioGroup.displayName = "RadioGroup";
 
-const QuantityRadio = styled(
-  (props: { className?: string; value: string; label: string }) => (
-    <FormControlLabel
-      className={props.className}
-      value={props.value}
-      label={props.label}
-      control={<Radio color="primary" />}
-    />
-  ),
-)`
+const QuantityRadio = styled<Omit<FormControlLabelProps, "control">>(props => (
+  <FormControlLabel control={<Radio color="primary" />} {...props} />
+))`
   ${({ theme }) => theme.breakpoints.down("sm")} {
     width: 50%;
     margin-right: 0;
