@@ -9,13 +9,13 @@ import { Typography } from "components/Typography";
 import { ExamQuantitySelector } from "./components/ExamQuantitySelector";
 import { SelectedEntries } from "./components/SelectedEntries";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
-
-import { createPlaceholderExamQuantitySelectorProps } from "./components/ExamQuantitySelector/createPlaceholderExamQuantitySelectorProps";
+import { IExamQuantitySelectMeta } from "./models/IExamQuantitySelectMeta";
 
 type OnboardingSubscriptionPageProps = {
   entries: IEntry[];
   entrySelectMeta: IEntrySelectMeta;
   selectedEntryIDs: string[];
+  examQuantitySelectMeta: IExamQuantitySelectMeta;
   onEntriesPendingPurchaseChange: (entryIDs: IEntry[]) => any;
 };
 
@@ -32,13 +32,16 @@ class OnboardingSubscriptionPage extends Component<
   };
 
   render() {
-    const { entries, entrySelectMeta, selectedEntryIDs } = this.props;
+    const {
+      entries,
+      entrySelectMeta,
+      selectedEntryIDs,
+      examQuantitySelectMeta,
+    } = this.props;
     const { addMoreButtonClicked } = this.state;
     const selectedEntries = entries.filter(e =>
       selectedEntryIDs.includes(e.id),
     );
-
-    const placeholderExamQuantitySelectorProps = createPlaceholderExamQuantitySelectorProps();
 
     if (addMoreButtonClicked) return <Redirect to="/welcome/entries" push />;
 
@@ -60,7 +63,11 @@ class OnboardingSubscriptionPage extends Component<
             {Array.from({ length: 3 }, (_: any, index) => (
               <ExamQuantitySelector
                 key={index}
-                {...placeholderExamQuantitySelectorProps}
+                categoryLabel={{ en: "Sol GD" }}
+                examQuantitySelectMeta={examQuantitySelectMeta}
+                selectedQuantityIndex={0}
+                // tslint:disable-next-line:no-empty
+                onChange={() => {}}
               />
             ))}
           </div>
@@ -93,6 +100,7 @@ const OnboardingSubscriptionPageContainer = connect(
     entries: dashboard.entries,
     entrySelectMeta: dashboard.entrySelectMeta,
     selectedEntryIDs: dashboard.entriesPendingPurchase.map(e => e.id),
+    examQuantitySelectMeta: dashboard.examQuantitySelectMeta,
   }),
   {
     onEntriesPendingPurchaseChange: dashboardActions.setEntriesPendingPurchase,
