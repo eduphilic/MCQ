@@ -7,11 +7,9 @@ import { State } from "store";
 import styled from "styled";
 import { actions as dashboardActions } from "./actions";
 
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-
 import { TypographyButton } from "components/TypographyButton";
 import { EntrySelect } from "./components/EntrySelect";
+import { OnboardingBottomDockToolbar } from "./components/OnboardingBottomDockToolbar";
 import { IEntry } from "./models/IEntry";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
 
@@ -46,20 +44,17 @@ class OnboardingEntriesPage extends Component<
       selectedEntryIds.length < entrySelectMeta.minEntriesCount;
 
     const toolbarNode = (
-      <AppBar position="static" color="default">
-        <Toolbar>
-          <ButtonWrapper>
-            <TypographyButton
-              color="primary"
-              filled
-              disabled={isNextButtonDisabled}
-              onClick={this.handleNextButtonClick}
-            >
-              {strings.common_NextButtonText}
-            </TypographyButton>
-          </ButtonWrapper>
-        </Toolbar>
-      </AppBar>
+      <OnboardingBottomDockToolbar>
+        <FlexSpacer />
+        <TypographyButton
+          color="primary"
+          filled
+          disabled={isNextButtonDisabled}
+          onClick={this.handleNextButtonClick}
+        >
+          {strings.common_NextButtonText}
+        </TypographyButton>
+      </OnboardingBottomDockToolbar>
     );
 
     return (
@@ -104,12 +99,6 @@ const OnboardingEntriesPageContainer = connect(
 )(OnboardingEntriesPage);
 export { OnboardingEntriesPageContainer as OnboardingEntriesPage };
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  max-width: 1232px;
-  height: 100%;
-  margin: 0 auto;
-  align-items: center;
-  justify-content: flex-end;
+const FlexSpacer = styled.div`
+  flex: 1;
 `;
