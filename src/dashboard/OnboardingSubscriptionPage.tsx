@@ -8,11 +8,13 @@ import { IEntry } from "./models/IEntry";
 import { Typography } from "components/Typography";
 import { ExamQuantitySelector } from "./components/ExamQuantitySelector";
 import { SelectedEntries } from "./components/SelectedEntries";
+import { IEntryCategory } from "./models/IEntryCategory";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
 import { IExamQuantitySelectMeta } from "./models/IExamQuantitySelectMeta";
 
 type OnboardingSubscriptionPageProps = {
   entries: IEntry[];
+  entryCategories: IEntryCategory[];
   entrySelectMeta: IEntrySelectMeta;
   selectedEntryIDs: string[];
   examQuantitySelectMeta: IExamQuantitySelectMeta;
@@ -34,6 +36,7 @@ class OnboardingSubscriptionPage extends Component<
   render() {
     const {
       entries,
+      entryCategories,
       entrySelectMeta,
       selectedEntryIDs,
       examQuantitySelectMeta,
@@ -60,10 +63,10 @@ class OnboardingSubscriptionPage extends Component<
         {selectedEntries.map(e => (
           <div key={e.id}>
             <Typography variant="cardTitle">{e.title.en}</Typography>
-            {Array.from({ length: 3 }, (_: any, index) => (
+            {entryCategories.filter(c => c.entryID === e.id).map(c => (
               <ExamQuantitySelector
-                key={index}
-                categoryLabel={{ en: "Sol GD" }}
+                key={c.id}
+                categoryLabel={c.title}
                 examQuantitySelectMeta={examQuantitySelectMeta}
                 selectedQuantityIndex={0}
                 // tslint:disable-next-line:no-empty
@@ -98,6 +101,7 @@ class OnboardingSubscriptionPage extends Component<
 const OnboardingSubscriptionPageContainer = connect(
   ({ dashboard }: State) => ({
     entries: dashboard.entries,
+    entryCategories: dashboard.entryCategories,
     entrySelectMeta: dashboard.entrySelectMeta,
     selectedEntryIDs: dashboard.entriesPendingPurchase.map(e => e.id),
     examQuantitySelectMeta: dashboard.examQuantitySelectMeta,
