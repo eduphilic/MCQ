@@ -7,8 +7,6 @@ import { IExamQuantitySelectMeta } from "../../models/IExamQuantitySelectMeta";
 import FormControlLabel, {
   FormControlLabelProps,
 } from "@material-ui/core/FormControlLabel";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup, { RadioGroupProps } from "@material-ui/core/RadioGroup";
 import Typography from "@material-ui/core/Typography";
@@ -52,61 +50,66 @@ export class ExamQuantitySelector extends Component<ExamQuantitySelectorProps> {
     } = this.props;
 
     return (
-      <Paper style={{ padding: "8px 16px", marginTop: 16 }}>
-        <Grid container>
-          <GridItemVerticalAlign style={{ marginRight: 8 }}>
-            <Typography
-              variant="subheading"
-              component="span"
-              style={{ width: 140, fontWeight: 500 }}
-            >
-              {/* TODO: Select correct localization. */}
-              {categoryLabel.en}
-            </Typography>
-          </GridItemVerticalAlign>
+      <Wrapper>
+        <div>
+          <Typography
+            variant="subheading"
+            component="span"
+            style={{ width: 140, fontWeight: 500 }}
+          >
+            {/* TODO: Select correct localization. */}
+            {categoryLabel.en}
+          </Typography>
+        </div>
 
-          <PricingTextWrapper>
-            <Typography variant="subheading" component="span">
-              {strings.dashboard_ExamQuantitySelector_PricingText.replace(
-                "{}",
-                examQuantitySelectMeta.examPriceRs.toString(),
-              )}
-            </Typography>
-          </PricingTextWrapper>
+        <PricingTextWrapper>
+          <Typography variant="subheading" component="span">
+            {strings.dashboard_ExamQuantitySelector_PricingText.replace(
+              "{}",
+              examQuantitySelectMeta.examPriceRs.toString(),
+            )}
+          </Typography>
+        </PricingTextWrapper>
 
-          <GridItemVerticalAlign xs={12} sm>
-            <QuantityRadioGroup
-              value={selectedQuantityIndex.toString()}
-              onChange={this.handleChange}
-            >
-              {examQuantitySelectMeta.quantities.map((quantityValue, index) => (
-                <QuantityRadio
-                  key={`${quantityValue}-${index}`}
-                  value={index.toString()}
-                  // TODO: Select correct localization.
-                  label={examQuantitySelectMeta.quantitiesLabels[index].en}
-                />
-              ))}
-            </QuantityRadioGroup>
-          </GridItemVerticalAlign>
-        </Grid>
-      </Paper>
+        <QuantityRadioGroup
+          value={selectedQuantityIndex.toString()}
+          onChange={this.handleChange}
+        >
+          {examQuantitySelectMeta.quantities.map((quantityValue, index) => (
+            <QuantityRadio
+              key={`${quantityValue}-${index}`}
+              value={index.toString()}
+              // TODO: Select correct localization.
+              label={examQuantitySelectMeta.quantitiesLabels[index].en}
+            />
+          ))}
+        </QuantityRadioGroup>
+      </Wrapper>
     );
   }
 }
 
-const GridItemVerticalAlign = styled(Grid).attrs({ item: true })`
+const Wrapper = styled.div`
   display: flex;
   align-items: center;
+
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    flex-wrap: wrap;
+
+    > *:nth-child(1),
+    > *:nth-child(2) {
+      margin-bottom: 8px;
+    }
+  }
 `;
 
-const PricingTextWrapper = styled(GridItemVerticalAlign)`
-  flex-grow: 1;
-  justify-content: flex-end;
+const PricingTextWrapper = styled.div`
+  flex: 1;
+  padding-right: 16px;
+  text-align: right;
 
-  ${({ theme }) => theme.breakpoints.up("sm")} {
-    flex-grow: 0;
-    margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    padding-right: 0;
   }
 `;
 
@@ -114,6 +117,7 @@ const QuantityRadioGroup = styled<RadioGroupProps>(props => (
   <RadioGroup row {...props} />
 ))`
   flex-grow: 1;
+  justify-content: space-evenly;
 `;
 
 const QuantityRadio = styled<Omit<FormControlLabelProps, "control">>(props => (
@@ -121,6 +125,7 @@ const QuantityRadio = styled<Omit<FormControlLabelProps, "control">>(props => (
 ))`
   ${({ theme }) => theme.breakpoints.down("sm")} {
     width: 50%;
+    margin-left: 0;
     margin-right: 0;
   }
 `;
