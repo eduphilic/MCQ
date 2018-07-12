@@ -1,5 +1,6 @@
 import { Formik } from "formik";
-import React, { Component } from "react";
+import { strings } from "localization";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { State } from "store";
@@ -11,11 +12,14 @@ import { IEntryCategory } from "./models/IEntryCategory";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
 import { IExamQuantitySelectMeta } from "./models/IExamQuantitySelectMeta";
 
+import { Divider } from "@material-ui/core";
+import CardContent from "@material-ui/core/CardContent";
+import CardHeader from "@material-ui/core/CardHeader";
 import Hidden from "@material-ui/core/Hidden";
 
-import { Button } from "components/Button";
+import { CardMobileFlat } from "components/CardMobileFlat";
 import { Typography } from "components/Typography";
-import { TypographyL10 } from "components/TypographyL10";
+import { TypographyButton } from "components/TypographyButton";
 import { BottomToolbarDock } from "navigation";
 import { ExamQuantitySelector } from "./components/ExamQuantitySelector";
 import { OnboardingBottomDockToolbar } from "./components/OnboardingBottomDockToolbar";
@@ -97,42 +101,68 @@ class OnboardingSubscriptionPage extends Component<
                     Total Rs {total}
                   </Typography>
 
-                  <Button color="yellow" filled onClick={api.submitForm}>
-                    <TypographyL10
-                      localizationKey="dashboard_OnboardingSubscriptionPage_PayButtonText"
-                      variant="buttonBold"
-                    />
-                  </Button>
+                  <TypographyButton
+                    color="yellow"
+                    filled
+                    onClick={api.submitForm}
+                  >
+                    {strings.dashboard_OnboardingSubscriptionPage_PayButtonText}
+                  </TypographyButton>
                 </RightToolbarGroup>
               </OnboardingBottomDockToolbar>
             }
           >
-            <Typography variant="cardTitle">Your Selected Entries</Typography>
-            <SelectedEntries
-              entries={entries}
-              entrySelectMeta={entrySelectMeta}
-              selectedEntryIDs={selectedEntryIDs}
-              onEntryRemoveButtonClick={this.handleEntryRemoveButtonClick}
-              onAddMoreButtonClick={this.handleAddMoreEntriesButtonClick}
-            />
+            <CardMobileFlat>
+              <CardHeader
+                title={
+                  <Typography variant="cardTitle">
+                    Your Selected Entries
+                  </Typography>
+                }
+              />
+              <CardContent>
+                <SelectedEntries
+                  entries={entries}
+                  entrySelectMeta={entrySelectMeta}
+                  selectedEntryIDs={selectedEntryIDs}
+                  onEntryRemoveButtonClick={this.handleEntryRemoveButtonClick}
+                  onAddMoreButtonClick={this.handleAddMoreEntriesButtonClick}
+                />
+              </CardContent>
+            </CardMobileFlat>
 
             {/* TODO: Use correct localization */}
             {selectedEntries.map(e => (
-              <div key={e.id}>
-                <Typography variant="cardTitle">{e.title.en}</Typography>
-                {entryCategories.filter(c => c.entryID === e.id).map(c => (
-                  <ExamQuantitySelector
-                    key={c.id}
-                    categoryLabel={c.title}
-                    examQuantitySelectMeta={examQuantitySelectMeta}
-                    selectedQuantityIndex={api.values[c.id]}
-                    // tslint:disable-next-line:no-empty
-                    onChange={quantityIndex =>
-                      api.setFieldValue(c.id, quantityIndex)
-                    }
-                  />
-                ))}
-              </div>
+              <CardMobileFlat key={e.id}>
+                <CardHeader
+                  title={
+                    <Typography variant="cardTitle">{e.title.en}</Typography>
+                  }
+                />
+
+                <CardContent>
+                  {entryCategories
+                    .filter(c => c.entryID === e.id)
+                    .map((c, index, cc) => (
+                      <Fragment key={c.id}>
+                        <ExamQuantitySelector
+                          categoryLabel={c.title}
+                          examQuantitySelectMeta={examQuantitySelectMeta}
+                          selectedQuantityIndex={api.values[c.id]}
+                          // tslint:disable-next-line:no-empty
+                          onChange={quantityIndex =>
+                            api.setFieldValue(c.id, quantityIndex)
+                          }
+                        />
+                        {index < cc.length - 1 && (
+                          <Hidden mdUp>
+                            <StyledDivider />
+                          </Hidden>
+                        )}
+                      </Fragment>
+                    ))}
+                </CardContent>
+              </CardMobileFlat>
             ))}
           </BottomToolbarDock>
         )}
@@ -218,6 +248,10 @@ const RightToolbarGroup = styled.div`
   justify-content: flex-end;
 
   > *:first-child {
-    margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
+    margin-right: ${({ theme }) => theme.spacing.unit * 4}px;
   }
+`;
+
+const StyledDivider = styled(Divider)`
+  margin: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
