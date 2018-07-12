@@ -63,7 +63,6 @@ const ContentWrapper = styled.div`
 
 const MobileBackgroundColor = styled.div`
   width: 100%;
-  height: 100%;
   background-color: #fff;
 `;
 
