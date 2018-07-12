@@ -15,25 +15,25 @@ export const navigationLinks: INavigationLink[] = [
   {
     to: "/dashboard",
     component: DashboardPage,
-    titleLocalizationKey: "userLinkDashboard",
+    titleLocalizationKey: "routes_Dashboard_DashboardPage",
     iconElement: <Dashboard />,
   },
   {
     to: "/exam-pack",
     component: ExamPackPage,
-    titleLocalizationKey: "userLinkExamPack",
+    titleLocalizationKey: "routes_Dashboard_ExamPackPage",
     iconElement: <Assignment />,
   },
   {
     to: "/membership",
     component: MembershipPage,
-    titleLocalizationKey: "userLinkMembership",
+    titleLocalizationKey: "routes_Dashboard_MembershipPage",
     iconElement: <AccountCardDetails />,
   },
   {
     to: "/settings",
     component: SettingsPage,
-    titleLocalizationKey: "userLinkSettings",
+    titleLocalizationKey: "routes_Dashboard_SettingsPage",
     iconElement: <Settings />,
   },
 ];

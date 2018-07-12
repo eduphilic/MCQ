@@ -3,7 +3,7 @@ import * as adminPages from "pages/admin";
 
 export const navigationLinksAdminLogin: NavigationLinks = [
   {
-    titleLocalizationKey: "adminLinkLogin",
+    titleLocalizationKey: "routes_pages_Admin_AdminLogin",
     to: "/admin",
     component: adminPages.AdminLogin,
   },

@@ -6,7 +6,7 @@ import { ExamQuizPage } from "exam-taking";
  */
 export const navigationLinksExam: NavigationLinks = [
   {
-    titleLocalizationKey: "examLinkQuiz",
+    titleLocalizationKey: "routes_ExamTaking_ExamQuizPage",
     to: "/exam",
     component: ExamQuizPage,
   },

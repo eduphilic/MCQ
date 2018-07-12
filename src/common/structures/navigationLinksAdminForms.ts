@@ -6,7 +6,7 @@ import * as adminPages from "pages/admin";
  */
 export const navigationLinksAdminForms: NavigationLinks = [
   {
-    titleLocalizationKey: "adminLinkTestManagerNewTemplate",
+    titleLocalizationKey: "routes_pages_Admin_AdminTestManagerNewTemplate",
     to: "/admin/test-manager/new",
     component: adminPages.AdminTestManagerNewTemplate,
   },
