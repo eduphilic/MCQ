@@ -107,10 +107,20 @@ const MobileWrapper = styled.div`
   }
 `;
 
-const StyledChip = styled(Chip)`
+const StyledChip = styled(Chip).attrs({
+  classes: { label: "selected-entries-chip-label" },
+})`
   display: flex;
   justify-content: space-between;
   border-radius: 0;
+
+  .selected-entries-chip-label {
+    display: block;
+    min-width: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 `;
 
 const TabletWrapper = styled.div`
