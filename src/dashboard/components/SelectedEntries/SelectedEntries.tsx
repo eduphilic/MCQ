@@ -1,9 +1,10 @@
+// tslint:disable-next-line:import-name
+import Carousel, { CarouselSlideRenderControlProps } from "nuka-carousel";
 import React, { SFC } from "react";
 import styled, { css } from "styled";
 import { IEntry } from "../../models/IEntry";
 import { IEntrySelectMeta } from "../../models/IEntrySelectMeta";
 
-// import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 import Add from "@material-ui/icons/Add";
 import Remove from "@material-ui/icons/Remove";
@@ -37,35 +38,37 @@ export const SelectedEntries: SFC<SelectedEntriesProps> = props => {
   return (
     <>
       <TabletWrapper>
-        {selectedEntries.map(entry => (
-          <EntryButton
-            key={entry.id}
-            disabled={!isDeleteEnabled}
-            onClick={() => onEntryRemoveButtonClick(entry.id)}
-          >
-            <StyledBlockImage src={entry.logoUrlByWidth["48"]} />
+        <StyledCarousel>
+          {selectedEntries.map(entry => (
+            <EntryButton
+              key={entry.id}
+              disabled={!isDeleteEnabled}
+              onClick={() => onEntryRemoveButtonClick(entry.id)}
+            >
+              <StyledBlockImage src={entry.logoUrlByWidth["48"]} />
 
-            {isDeleteEnabled && (
-              <StyledAvatar>
-                <Remove />
-              </StyledAvatar>
-            )}
+              {isDeleteEnabled && (
+                <StyledAvatar>
+                  <Remove />
+                </StyledAvatar>
+              )}
 
-            {/* TODO: Select correct localization. */}
-            <StyledTypography>{entry.title.en}</StyledTypography>
-          </EntryButton>
-        ))}
+              {/* TODO: Select correct localization. */}
+              <StyledTypography>{entry.title.en}</StyledTypography>
+            </EntryButton>
+          ))}
 
-        {isAddMoreEnabled && (
-          <EntryButton onClick={onAddMoreButtonClick}>
-            <AddMoreBlock>
-              <Add />
-            </AddMoreBlock>
+          {isAddMoreEnabled && (
+            <EntryButton onClick={onAddMoreButtonClick}>
+              <AddMoreBlock>
+                <Add />
+              </AddMoreBlock>
 
-            {/* TODO: Select correct localization. */}
-            <Typography>Add More</Typography>
-          </EntryButton>
-        )}
+              {/* TODO: Select correct localization. */}
+              <Typography>Add More</Typography>
+            </EntryButton>
+          )}
+        </StyledCarousel>
       </TabletWrapper>
     </>
   );
@@ -136,4 +139,83 @@ const StyledTypography = styled(Typography)`
   max-width: 100px;
   overflow: hidden;
   white-space: nowrap;
+`;
+
+const StyledCarousel = styled<{ className?: string }>(props => (
+  <div className={props.className}>
+    <Carousel
+      slideWidth="120px"
+      dragging={false}
+      swiping={false}
+      renderCenterLeftControls={null as any}
+      renderCenterRightControls={null as any}
+      renderBottomCenterControls={api => <CarouselBottomNav {...api} />}
+    >
+      {props.children}
+    </Carousel>
+  </div>
+))`
+  width: 100%;
+
+  .slider {
+    height: 132px !important;
+  }
+
+  .slider-frame {
+    padding-top: 4px !important;
+  }
+`;
+
+const CarouselBottomNav = styled<
+  CarouselSlideRenderControlProps & { className?: string }
+>(props => {
+  if (!props.frameWidth || typeof props.frameWidth !== "number") return null;
+  const slidesShown = Math.floor((props.frameWidth + 20) / 120);
+  if (slidesShown === props.slideCount) return null;
+
+  const buttonCount = Math.ceil(props.slideCount / slidesShown);
+  const selectedIndex = Math.floor(props.currentSlide / slidesShown);
+
+  return (
+    <div className={props.className}>
+      {Array.from({ length: buttonCount }, (_, index) => (
+        <div
+          key={index}
+          className={`carousel-bottom-nav-button ${
+            index === selectedIndex
+              ? "carousel-bottom-nav-button--selected"
+              : ""
+          }`}
+          onClick={() => props.goToSlide(index * slidesShown)}
+        >
+          <span />
+        </div>
+      ))}
+    </div>
+  );
+})`
+  display: flex;
+  position: absolute;
+  top: 4px;
+  left: -50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+
+  .carousel-bottom-nav-button {
+    height: 16px;
+    padding-top: 8px;
+  }
+
+  .carousel-bottom-nav-button > span {
+    display: block;
+    width: 100px;
+    height: 2px;
+    margin: 0 8px;
+    border-radius: 8px;
+    background-color: ${({ theme }) => theme.palette.grey["500"]};
+  }
+
+  .carousel-bottom-nav-button--selected > span {
+    background-color: ${({ theme }) => theme.palette.primary.light};
+  }
 `;
