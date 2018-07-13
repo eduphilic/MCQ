@@ -1,4 +1,4 @@
-import { strings } from "localization";
+// import { strings } from "localization";
 import React, { ChangeEvent, Component } from "react";
 import styled from "styled";
 import { LocalizedString } from "types";
@@ -62,14 +62,14 @@ export class ExamQuantitySelector extends Component<ExamQuantitySelectorProps> {
           </Typography>
         </div>
 
-        <PricingTextWrapper>
+        {/* <PricingTextWrapper>
           <Typography variant="subheading" component="span">
             {strings.dashboard_ExamQuantitySelector_PricingText.replace(
               "{}",
               examQuantitySelectMeta.examPriceRs.toString(),
             )}
           </Typography>
-        </PricingTextWrapper>
+        </PricingTextWrapper> */}
 
         <QuantityRadioGroup
           value={selectedQuantityIndex.toString()}
@@ -103,15 +103,15 @@ const Wrapper = styled.div`
   }
 `;
 
-const PricingTextWrapper = styled.div`
-  flex: 1;
-  padding-right: 16px;
-  text-align: right;
+// const PricingTextWrapper = styled.div`
+//   flex: 1;
+//   padding-right: 16px;
+//   text-align: right;
 
-  ${({ theme }) => theme.breakpoints.down("sm")} {
-    padding-right: 0;
-  }
-`;
+//   ${({ theme }) => theme.breakpoints.down("sm")} {
+//     padding-right: 0;
+//   }
+// `;
 
 const QuantityRadioGroup = styled<RadioGroupProps>(props => (
   <RadioGroup row {...props} />
@@ -121,11 +121,17 @@ const QuantityRadioGroup = styled<RadioGroupProps>(props => (
 `;
 
 const QuantityRadio = styled<Omit<FormControlLabelProps, "control">>(props => (
-  <FormControlLabel control={<Radio color="primary" />} {...props} />
+  <FormControlLabel control={<StyledRadio color="primary" />} {...props} />
 ))`
   ${({ theme }) => theme.breakpoints.down("sm")} {
     width: 50%;
     margin-left: 0;
     margin-right: 0;
   }
+`;
+
+/* Remove left padding */
+const StyledRadio = styled(Radio)`
+  width: 24px;
+  margin-right: 12px;
 `;
