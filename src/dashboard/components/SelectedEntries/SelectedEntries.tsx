@@ -110,6 +110,7 @@ const MobileWrapper = styled.div`
 const StyledChip = styled(Chip)`
   display: flex;
   justify-content: space-between;
+  border-radius: 0;
 `;
 
 const TabletWrapper = styled.div`
