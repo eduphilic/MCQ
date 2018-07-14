@@ -22,6 +22,6 @@ export const onboardingProgressSelector = createSelector(
       return "select-entries";
     }
 
-    return null;
+    return "complete";
   },
 );

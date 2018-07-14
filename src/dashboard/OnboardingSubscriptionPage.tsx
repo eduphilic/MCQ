@@ -11,6 +11,7 @@ import { IEntry } from "./models/IEntry";
 import { IEntryCategory } from "./models/IEntryCategory";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
 import { IExamQuantitySelectMeta } from "./models/IExamQuantitySelectMeta";
+import { OnboardingProgress, onboardingProgressSelector } from "./selectors";
 
 import { Divider } from "@material-ui/core";
 import CardContent from "@material-ui/core/CardContent";
@@ -26,6 +27,7 @@ import { OnboardingBottomDockToolbar } from "./components/OnboardingBottomDockTo
 import { SelectedEntries } from "./components/SelectedEntries";
 
 type OnboardingSubscriptionPageProps = {
+  onboardingProgress: OnboardingProgress;
   entries: IEntry[];
   entryCategories: IEntryCategory[];
   entrySelectMeta: IEntrySelectMeta;
@@ -74,6 +76,7 @@ class OnboardingSubscriptionPage extends Component<
 
   render() {
     const {
+      onboardingProgress,
       entries,
       entryCategories,
       entrySelectMeta,
@@ -85,6 +88,10 @@ class OnboardingSubscriptionPage extends Component<
     const selectedEntries = entries.filter(e =>
       selectedEntryIDs.includes(e.id),
     );
+
+    if (onboardingProgress === "complete") {
+      return <Redirect to="/dashboard" push />;
+    }
 
     if (addMoreButtonClicked) return <Redirect to="/welcome/entries" push />;
 
@@ -236,6 +243,7 @@ class OnboardingSubscriptionPage extends Component<
 
 const OnboardingSubscriptionPageContainer = connect(
   ({ dashboard }: State) => ({
+    onboardingProgress: onboardingProgressSelector(dashboard),
     entries: dashboard.entries,
     entryCategories: dashboard.entryCategories,
     entrySelectMeta: dashboard.entrySelectMeta,
