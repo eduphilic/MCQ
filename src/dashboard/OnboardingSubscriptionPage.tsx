@@ -32,6 +32,10 @@ type OnboardingSubscriptionPageProps = {
   selectedEntryIDs: string[];
   examQuantitySelectMeta: IExamQuantitySelectMeta;
   onEntriesPendingPurchaseChange: (entryIDs: IEntry[]) => any;
+  onSubmitPurchase: (
+    entries: IEntry[],
+    subscriptions: ICategorySubscriptions,
+  ) => any;
 };
 
 type OnboardingSubscriptionPageState = {
@@ -75,6 +79,7 @@ class OnboardingSubscriptionPage extends Component<
       entrySelectMeta,
       selectedEntryIDs,
       examQuantitySelectMeta,
+      onSubmitPurchase,
     } = this.props;
     const { addMoreButtonClicked, total, initialValues } = this.state;
     const selectedEntries = entries.filter(e =>
@@ -86,10 +91,9 @@ class OnboardingSubscriptionPage extends Component<
     return (
       <Formik
         initialValues={initialValues}
-        onSubmit={(...args: any[]) => {
-          /* tslint:disable-next-line:no-console */
-          console.log("args", args);
-        }}
+        onSubmit={subscriptions =>
+          onSubmitPurchase(selectedEntries, subscriptions)
+        }
         validateOnChange
         validate={this.handleFormChange}
         // TODO: Remove this hack. This is done so that the Formik form resets.
@@ -240,6 +244,7 @@ const OnboardingSubscriptionPageContainer = connect(
   }),
   {
     onEntriesPendingPurchaseChange: dashboardActions.setEntriesPendingPurchase,
+    onSubmitPurchase: dashboardActions.setSubscribedEntries,
   },
 )(OnboardingSubscriptionPage);
 export { OnboardingSubscriptionPageContainer as OnboardingSubscriptionPage };

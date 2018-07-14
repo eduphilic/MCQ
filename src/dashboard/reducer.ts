@@ -1,6 +1,7 @@
 import { createReducer } from "utils";
 import { Actions, DashboardAction } from "./actions";
 
+import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
 import { IEntry } from "./models/IEntry";
 import { IEntryCategory } from "./models/IEntryCategory";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
@@ -20,6 +21,7 @@ export type State = {
   entriesPendingPurchase: IEntry[];
 
   subscribedEntries: IEntry[] | null;
+  subscribedEntriesSubscriptions: ICategorySubscriptions | null;
 };
 
 const initialState: State = {
@@ -32,6 +34,7 @@ const initialState: State = {
   entriesPendingPurchase: [],
 
   subscribedEntries: null,
+  subscribedEntriesSubscriptions: null,
 };
 
 export const reducer = createReducer<State, Actions, DashboardAction>(
@@ -62,6 +65,12 @@ export const reducer = createReducer<State, Actions, DashboardAction>(
     [DashboardAction.SetEntriesPendingPurchase]: (state, action) => ({
       ...state,
       entriesPendingPurchase: action.payload,
+    }),
+
+    [DashboardAction.SetSubscribedEntries]: (state, action) => ({
+      ...state,
+      subscribedEntries: action.payload.entries,
+      subscribedEntriesSubscriptions: action.payload.subscriptions,
     }),
   },
 );
