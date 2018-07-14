@@ -37,6 +37,7 @@ type OnboardingSubscriptionPageProps = {
 type OnboardingSubscriptionPageState = {
   addMoreButtonClicked: boolean;
   total: number;
+  initialValues: ICategorySubscriptions;
 };
 
 class OnboardingSubscriptionPage extends Component<
@@ -49,6 +50,7 @@ class OnboardingSubscriptionPage extends Component<
       this.createInitialValues(),
       this.props.examQuantitySelectMeta,
     ),
+    initialValues: this.createInitialValues(),
   };
 
   constructor(props: OnboardingSubscriptionPageProps) {
@@ -59,6 +61,13 @@ class OnboardingSubscriptionPage extends Component<
     this.createInitialValues = this.createInitialValues.bind(this);
   }
 
+  componentDidUpdate(prevProps: OnboardingSubscriptionPageProps) {
+    // TODO: Remove this hack. This is done so that the Formik form resets.
+    if (prevProps.selectedEntryIDs !== this.props.selectedEntryIDs) {
+      this.setState({ initialValues: this.createInitialValues() });
+    }
+  }
+
   render() {
     const {
       entries,
@@ -67,14 +76,12 @@ class OnboardingSubscriptionPage extends Component<
       selectedEntryIDs,
       examQuantitySelectMeta,
     } = this.props;
-    const { addMoreButtonClicked, total } = this.state;
+    const { addMoreButtonClicked, total, initialValues } = this.state;
     const selectedEntries = entries.filter(e =>
       selectedEntryIDs.includes(e.id),
     );
 
     if (addMoreButtonClicked) return <Redirect to="/welcome/entries" push />;
-
-    const initialValues = this.createInitialValues();
 
     return (
       <Formik
@@ -85,6 +92,8 @@ class OnboardingSubscriptionPage extends Component<
         }}
         validateOnChange
         validate={this.handleFormChange}
+        // TODO: Remove this hack. This is done so that the Formik form resets.
+        enableReinitialize
       >
         {api => (
           <BottomToolbarDock
@@ -186,6 +195,10 @@ class OnboardingSubscriptionPage extends Component<
     );
 
     onEntriesPendingPurchaseChange(updatedEntries);
+    // TODO: Remove this hack. This is done so that the Formik form resets.
+    setTimeout(() => {
+      this.handleFormChange(this.state.initialValues);
+    }, 100);
   };
 
   private handleAddMoreEntriesButtonClick = () => {
