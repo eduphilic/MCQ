@@ -1,15 +1,15 @@
 import LocalizedStrings, { LocalizedStringsMethods } from "react-localization";
 
-import { commonEn } from "../strings.common.en";
-import { commonHi } from "../strings.common.hi";
-import { componentsEn } from "../strings.components.en";
-import { componentsHi } from "../strings.components.hi";
-import { dashboardEn } from "../strings.dashboard.en";
-import { dashboardHi } from "../strings.dashboard.hi";
-import { pagesEn } from "../strings.pages.en";
-import { pagesHi } from "../strings.pages.hi";
-import { routesEn } from "../strings.routes.en";
-import { routesHi } from "../strings.routes.hi";
+import { commonEn } from "./strings.common.en";
+import { commonHi } from "./strings.common.hi";
+import { componentsEn } from "./strings.components.en";
+import { componentsHi } from "./strings.components.hi";
+import { dashboardEn } from "./strings.dashboard.en";
+import { dashboardHi } from "./strings.dashboard.hi";
+import { pagesEn } from "./strings.pages.en";
+import { pagesHi } from "./strings.pages.hi";
+import { routesEn } from "./strings.routes.en";
+import { routesHi } from "./strings.routes.hi";
 
 const strings = {
   en: {
