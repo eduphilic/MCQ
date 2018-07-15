@@ -55,22 +55,22 @@ class DashboardPages extends Component<Props> {
     const dashboardRoutes = this.buildDashboardRoutes(links);
 
     return (
-      <AppLayout
-        links={links}
-        enableSwipeNavigation={onboardingProgress === "complete"}
-      >
-        <>
+      <>
+        <AppLayout
+          links={links}
+          enableSwipeNavigation={onboardingProgress === "complete"}
+        >
           <PageContentWrapper verticalGutters>
             <Switch>
               {onboardingRoutes}
               {dashboardRoutes}
             </Switch>
           </PageContentWrapper>
+        </AppLayout>
 
-          {onboardingProgress === "complete" &&
-            !postSignupDialogsShown && <PostSignupDialogs />}
-        </>
-      </AppLayout>
+        {onboardingProgress === "complete" &&
+          !postSignupDialogsShown && <PostSignupDialogs />}
+      </>
     );
   }
 
@@ -92,9 +92,10 @@ class DashboardPages extends Component<Props> {
         key="/welcome/subscriptions"
         path="/welcome/subscriptions"
         component={
-          RedirectComponent || onboardingProgress === "select-subscription"
+          RedirectComponent ||
+          (onboardingProgress === "select-subscription"
             ? OnboardingSubscriptionPage
-            : () => <Redirect to="/welcome/entries" />
+            : () => <Redirect to="/welcome/entries" />)
         }
       />,
     ];

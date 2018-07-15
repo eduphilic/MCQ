@@ -2,7 +2,7 @@ import { Formik } from "formik";
 import { strings } from "localization";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import { State } from "store";
 import styled from "styled";
 import { actions as dashboardActions } from "./actions";
@@ -26,19 +26,30 @@ import { ExamQuantitySelector } from "./components/ExamQuantitySelector";
 import { OnboardingBottomDockToolbar } from "./components/OnboardingBottomDockToolbar";
 import { SelectedEntries } from "./components/SelectedEntries";
 
-type OnboardingSubscriptionPageProps = {
+type OwnProps = {};
+export { OwnProps as OnboardingSubscriptionPageProps };
+
+type StateProps = {
   onboardingProgress: OnboardingProgress;
   entries: IEntry[];
   entryCategories: IEntryCategory[];
   entrySelectMeta: IEntrySelectMeta;
   selectedEntryIDs: string[];
   examQuantitySelectMeta: IExamQuantitySelectMeta;
+};
+
+type DispatchProps = {
   onEntriesPendingPurchaseChange: (entryIDs: IEntry[]) => any;
   onSubmitPurchase: (
     entries: IEntry[],
     subscriptions: ICategorySubscriptions,
   ) => any;
 };
+
+type OnboardingSubscriptionPageProps = OwnProps &
+  StateProps &
+  DispatchProps &
+  RouteComponentProps<{}>;
 
 type OnboardingSubscriptionPageState = {
   addMoreButtonClicked: boolean;
@@ -98,9 +109,10 @@ class OnboardingSubscriptionPage extends Component<
     return (
       <Formik
         initialValues={initialValues}
-        onSubmit={subscriptions =>
-          onSubmitPurchase(selectedEntries, subscriptions)
-        }
+        onSubmit={subscriptions => {
+          onSubmitPurchase(selectedEntries, subscriptions);
+          this.props.history.push("/dashboard");
+        }}
         validateOnChange
         validate={this.handleFormChange}
         // TODO: Remove this hack. This is done so that the Formik form resets.
@@ -255,7 +267,13 @@ const OnboardingSubscriptionPageContainer = connect(
     onSubmitPurchase: dashboardActions.setSubscribedEntries,
   },
 )(OnboardingSubscriptionPage);
-export { OnboardingSubscriptionPageContainer as OnboardingSubscriptionPage };
+
+const OnboardingSubscriptionPageContainerWithRouter = withRouter(
+  OnboardingSubscriptionPageContainer,
+);
+export {
+  OnboardingSubscriptionPageContainerWithRouter as OnboardingSubscriptionPage,
+};
 
 const calculateTotal = (
   subscriptions: ICategorySubscriptions,
