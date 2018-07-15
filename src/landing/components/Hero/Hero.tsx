@@ -55,13 +55,17 @@ export const Hero: SFC<HeroProps> = props => {
           backgroundAlpha={backgroundAlpha}
         >
           <ContentCenterWrapper>
+            <LogoAndLanguageSelectWrapper>
+              <LogoBottomMargin />
+              <div>
+                <LanguageSelect {...props.languageSelectProps} />
+              </div>
+            </LogoAndLanguageSelectWrapper>
+
             <DivideWrapper>
               <div>
-                <LogoBottomMargin />
-
-                <LanguageSelectWrapper>
-                  <LanguageSelect {...props.languageSelectProps} />
-                </LanguageSelectWrapper>
+                {/* <LanguageSelectWrapper>
+                </LanguageSelectWrapper> */}
                 <Hidden smDown>
                   <HeroTextWrapper>
                     <HeroPrimaryText>
@@ -104,7 +108,20 @@ const Wrapper = withProps<{
       props.backgroundImage
     }");
     background-size: cover;
-   `}
+    `}
+`;
+
+const LogoAndLanguageSelectWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    flex-wrap: wrap;
+
+    > *:last-child {
+      margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+    }
+  }
 `;
 
 const DivideWrapper = styled.div`
@@ -131,12 +148,6 @@ const LogoBottomMargin = styled(Logo).attrs({
   alternateSecondWordColoring: true,
 })`
   margin-bottom: ${({ theme }) => theme.spacing.unit * 4}px;
-`;
-
-const LanguageSelectWrapper = styled.div`
-  ${props => props.theme.breakpoints.up("md")} {
-    height: 25%;
-  }
 `;
 
 const HeroTextWrapper = styled.div``;
