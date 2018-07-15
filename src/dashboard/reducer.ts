@@ -22,6 +22,8 @@ export type State = {
 
   subscribedEntries: IEntry[] | null;
   subscribedEntriesSubscriptions: ICategorySubscriptions | null;
+
+  postSignupDialogsShown: boolean;
 };
 
 const initialState: State = {
@@ -35,6 +37,8 @@ const initialState: State = {
 
   subscribedEntries: null,
   subscribedEntriesSubscriptions: null,
+
+  postSignupDialogsShown: false,
 };
 
 export const reducer = createReducer<State, Actions, DashboardAction>(
