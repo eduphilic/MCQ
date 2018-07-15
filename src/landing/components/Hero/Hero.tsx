@@ -127,7 +127,9 @@ const DivideWrapper = styled.div`
   }
 `;
 
-const LogoBottomMargin = styled(Logo)`
+const LogoBottomMargin = styled(Logo).attrs({
+  alternateSecondWordColoring: true,
+})`
   margin-bottom: ${({ theme }) => theme.spacing.unit * 4}px;
 `;
 
