@@ -12,7 +12,7 @@ import { navigationLinksExam } from "common/structures/navigationLinksExam";
 import { AdminRoute } from "./AdminRoute";
 
 import { DashboardPages } from "dashboard";
-import { LandingPages } from "landing";
+import { pages as landingPages } from "landing";
 
 export const SiteMap: SFC<{}> = () => {
   const adminLoginPageNode = navigationLinksAdminLogin.map(l => (
@@ -42,7 +42,7 @@ export const SiteMap: SFC<{}> = () => {
         <PersistentScrollPositionProvider />
 
         <Switch>
-          <LandingPages />
+          {landingPages}
 
           {adminLoginPageNode}
           {adminPagesNode}

@@ -1,1 +1,1 @@
-export { LandingPages } from "./LandingPages";
+export * from "./pages";
