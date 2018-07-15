@@ -9,21 +9,12 @@ import { navigationLinksAdmin } from "common/structures/navigationLinksAdmin";
 import { navigationLinksAdminForms } from "common/structures/navigationLinksAdminForms";
 import { navigationLinksAdminLogin } from "common/structures/navigationLinksAdminLogin";
 import { navigationLinksExam } from "common/structures/navigationLinksExam";
-import { navigationLinksLanding } from "common/structures/navigationLinksLanding";
 import { AdminRoute } from "./AdminRoute";
 
 import { DashboardPages } from "dashboard";
+import { LandingPages } from "landing";
 
 export const SiteMap: SFC<{}> = () => {
-  const landingPagesNode = navigationLinksLanding.map(l => (
-    <Route
-      key={l.to}
-      exact={l.to === "/"}
-      path={l.to}
-      component={l.component}
-    />
-  ));
-
   const adminLoginPageNode = navigationLinksAdminLogin.map(l => (
     <Route
       key={l.to}
@@ -51,7 +42,8 @@ export const SiteMap: SFC<{}> = () => {
         <PersistentScrollPositionProvider />
 
         <Switch>
-          {landingPagesNode}
+          <LandingPages />
+
           {adminLoginPageNode}
           {adminPagesNode}
           {examPageNode}

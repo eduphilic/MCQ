@@ -1,0 +1,1 @@
+export { LandingPages } from "./LandingPages";
