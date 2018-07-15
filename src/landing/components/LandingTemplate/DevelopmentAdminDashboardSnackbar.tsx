@@ -53,7 +53,7 @@ class DevelopmentAdminDashboardSnackbar extends Component<
       <Snackbar
         open
         anchorOrigin={{
-          vertical: "top",
+          vertical: "bottom",
           horizontal: "center",
         }}
       >
