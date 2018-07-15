@@ -30,7 +30,7 @@ interface HeroProps {
    * Controls how much darkening is performed on the hero image to improve the
    * legibility of the text.
    *
-   * @default 0.05
+   * @default 0.25
    */
   backgroundAlpha?: number;
 
@@ -45,7 +45,7 @@ export const Hero: SFC<HeroProps> = props => {
   }/images/hero/${encodeURIComponent(
     props.backgroundImage || defaultBackgroundImage,
   )}`;
-  const backgroundAlpha = props.backgroundAlpha || 0.05;
+  const backgroundAlpha = props.backgroundAlpha || 0.25;
 
   return (
     <DarkTheme>
@@ -64,8 +64,6 @@ export const Hero: SFC<HeroProps> = props => {
 
             <DivideWrapper>
               <div>
-                {/* <LanguageSelectWrapper>
-                </LanguageSelectWrapper> */}
                 <Hidden smDown>
                   <HeroTextWrapper>
                     <HeroPrimaryText>
@@ -150,16 +148,20 @@ const LogoBottomMargin = styled(Logo).attrs({
   margin-bottom: ${({ theme }) => theme.spacing.unit * 4}px;
 `;
 
-const HeroTextWrapper = styled.div``;
+const HeroTextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+`;
 
 const HeroPrimaryText = styled(Typography).attrs({
   variant: "display2",
 })`
-  color: #fff;
-  margin-top: ${props => props.theme.spacing.unit * 8}px;
   margin-bottom: ${props => props.theme.spacing.unit * 2}px;
-  font-size: 28px;
+  font-size: 36px;
   font-weight: 600;
+  color: ${({ theme }) => theme.palette.secondary.main};
 
   ${props => props.theme.breakpoints.down("xs")} {
     font-size: 40px;
@@ -171,6 +173,10 @@ const HeroPrimaryText = styled(Typography).attrs({
 const HeroSecondaryText = styled(Typography).attrs({
   variant: "headline",
 })`
-  margin-bottom: ${props => props.theme.spacing.unit * 3}px;
-  font-size: 18px;
+  margin-top: ${props => props.theme.spacing.unit * 3}px;
+  margin-bottom: ${props => props.theme.spacing.unit * 7}px;
+  font-size: 24px;
+  font-weight: 600;
+  text-shadow: 2px 2px #000;
+  color: #63b760;
 `;

@@ -4,9 +4,9 @@ export const componentsEn = {
 
   components_FilterButton_MenuCaptionText: "Filter By:",
 
-  components_Hero_PrimaryText: "Prepare for INDIAN Defense Examinations",
+  components_Hero_PrimaryText: "Prepare for Indian Defense Examinations",
   components_Hero_SecondaryText:
-    "Some message can be written here to explain about this website.",
+    "Use our specially designed mock test to clear written/online examination for defence services.",
 
   components_HeroFooter_Text:
     "To Join Indian Defence, attempt free mock tests here",
