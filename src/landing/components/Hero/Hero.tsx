@@ -8,12 +8,12 @@ import Typography from "@material-ui/core/Typography";
 
 import { ContentCenterWrapper } from "components/ContentCenterWrapper";
 import { HeroFooter } from "components/HeroFooter";
-import { LanguageSelect, LanguageSelectProps } from "components/LanguageSelect";
 import { Logo } from "components/Logo";
 import {
   OnboardingForms,
   OnboardingFormsProps,
 } from "components/OnboardingForms";
+import { LanguageSelect, LanguageSelectProps } from "../LanguageSelect";
 
 const defaultBackgroundImage = "soldier-optimized.png";
 
@@ -57,7 +57,7 @@ export const Hero: SFC<HeroProps> = props => {
           <ContentCenterWrapper>
             <LogoAndLanguageSelectWrapper>
               <LogoBottomMargin />
-              <div>
+              <div style={{ marginTop: 2 }}>
                 <LanguageSelect {...props.languageSelectProps} />
               </div>
             </LogoAndLanguageSelectWrapper>

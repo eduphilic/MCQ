@@ -1,11 +1,12 @@
 import { withState } from "@dump247/storybook-state";
 import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
-import { SplitThemesPreviewer } from "components/SplitThemesPreviewer/index";
 import React from "react";
-import { LanguageSelect, LanguageSelectProps } from ".";
 
-storiesOf("Components", module).add(
+import { SplitThemesPreviewer } from "components/SplitThemesPreviewer/index";
+import { LanguageSelect, LanguageSelectProps } from "./LanguageSelect";
+
+storiesOf("Landing", module).add(
   "LanguageSelect",
   withState<{ language: LanguageSelectProps["language"] }>(
     { language: "english" },
