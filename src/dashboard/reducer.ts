@@ -76,5 +76,10 @@ export const reducer = createReducer<State, Actions, DashboardAction>(
       subscribedEntries: action.payload.entries,
       subscribedEntriesSubscriptions: action.payload.subscriptions,
     }),
+
+    [DashboardAction.SetPostDialogsShown]: (state, action) => ({
+      ...state,
+      postSignupDialogsShown: action.payload,
+    }),
   },
 );

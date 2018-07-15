@@ -13,6 +13,8 @@ export enum DashboardAction {
   SetEntriesPendingPurchase = "[dashboard] Set Entries Pending Purchase",
 
   SetSubscribedEntries = "[dashboard] Set Subscribed Entries",
+
+  SetPostDialogsShown = "[dashboard] Set Post Signup Dialogs Shown",
 }
 
 export const actions = {
@@ -37,6 +39,9 @@ export const actions = {
       entries,
       subscriptions,
     }),
+
+  setPostDialogsShown: (shown: boolean) =>
+    createAction(DashboardAction.SetPostDialogsShown, shown),
 };
 
 export type Actions = ActionsUnion<typeof actions>;

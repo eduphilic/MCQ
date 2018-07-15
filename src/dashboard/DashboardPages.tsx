@@ -9,6 +9,7 @@ import { IEntryCategory } from "./models/IEntryCategory";
 import { navigationLinks } from "./navigationLinks";
 import { OnboardingProgress, onboardingProgressSelector } from "./selectors";
 
+import { PostSignupDialogs } from "./components/PostSignupDialogs/PostSignupDialogs";
 import { OnboardingEntriesPage } from "./OnboardingEntriesPage";
 import { OnboardingSubscriptionPage } from "./OnboardingSubscriptionPage";
 
@@ -16,6 +17,7 @@ type StateProps = {
   entries: IEntry[] | null;
   entryCategories: IEntryCategory[] | null;
   onboardingProgress: OnboardingProgress;
+  postSignupDialogsShown: boolean;
 };
 
 type DispatchProps = {
@@ -40,7 +42,12 @@ class DashboardPages extends Component<Props> {
   }
 
   render() {
-    const { entries, entryCategories, onboardingProgress } = this.props;
+    const {
+      entries,
+      entryCategories,
+      onboardingProgress,
+      postSignupDialogsShown,
+    } = this.props;
     if (!entries || !entryCategories || !onboardingProgress) return null;
 
     const links = this.buildDashboardLinks();
@@ -52,12 +59,17 @@ class DashboardPages extends Component<Props> {
         links={links}
         enableSwipeNavigation={onboardingProgress === "complete"}
       >
-        <PageContentWrapper verticalGutters>
-          <Switch>
-            {onboardingRoutes}
-            {dashboardRoutes}
-          </Switch>
-        </PageContentWrapper>
+        <>
+          <PageContentWrapper verticalGutters>
+            <Switch>
+              {onboardingRoutes}
+              {dashboardRoutes}
+            </Switch>
+          </PageContentWrapper>
+
+          {onboardingProgress === "complete" &&
+            !postSignupDialogsShown && <PostSignupDialogs />}
+        </>
       </AppLayout>
     );
   }
@@ -146,6 +158,7 @@ const DashboardPagesContainer = connect<
     entries: dashboard.entries,
     entryCategories: dashboard.entryCategories,
     onboardingProgress: onboardingProgressSelector(dashboard),
+    postSignupDialogsShown: dashboard.postSignupDialogsShown,
   }),
   {
     loadPlaceholderEntries: actions.loadPlaceholderEntries,

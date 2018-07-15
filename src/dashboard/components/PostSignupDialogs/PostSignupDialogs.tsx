@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { State } from "store";
 import styled from "styled";
+import { actions as dashboardActions } from "../../actions";
 
 import Dialog from "@material-ui/core/Dialog";
-// import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-// import DialogContentText from "@material-ui/core/DialogContentText";
-// import DialogContentTitle from "@material-ui/core/DialogContentTitle";
 
 import withMobileDialog, {
   InjectedProps as WithMobileDialogProps,
@@ -17,12 +17,16 @@ import { TypographyButton } from "components/TypographyButton";
 type OwnProps = {};
 export { OwnProps as PostSignupDialogsProps };
 
+type DispatchProps = {
+  onSubmit: () => any;
+};
+
 type PostSignupDialogsState = {
   dialogGetAlertsShown: boolean;
   dialogAddToHomeScreenShown: boolean;
 };
 
-type Props = OwnProps & WithMobileDialogProps;
+type Props = OwnProps & DispatchProps & WithMobileDialogProps;
 
 class PostSignupDialogs extends Component<Props, PostSignupDialogsState> {
   state: PostSignupDialogsState = {
@@ -98,11 +102,20 @@ class PostSignupDialogs extends Component<Props, PostSignupDialogsState> {
 
   private handleAddToHomeScreenClose = (_response: "accept" | "decline") => {
     this.setState({ dialogAddToHomeScreenShown: true });
+    this.props.onSubmit();
   };
 }
 
-const PostSignupDialogsWithMobileDialog = withMobileDialog()(PostSignupDialogs);
-export { PostSignupDialogsWithMobileDialog as PostSignupDialogs };
+const PostSignupDialogsWithMobileDialog = withMobileDialog<any>()(
+  PostSignupDialogs,
+);
+
+const PostSignupDialogsContainer = connect<{}, DispatchProps, OwnProps, State>(
+  () => ({}),
+  { onSubmit: () => dashboardActions.setPostDialogsShown(true) },
+)(PostSignupDialogsWithMobileDialog);
+
+export { PostSignupDialogsContainer as PostSignupDialogs };
 
 const Wrapper = styled.div`
   display: flex;
