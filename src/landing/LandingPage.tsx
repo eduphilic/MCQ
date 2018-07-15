@@ -3,8 +3,8 @@ import React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { routePathFromLocalizationKey } from "../routes";
 
-import { Hero } from "components/Hero";
 import { PageFooter } from "components/PageFooter";
+import { Hero } from "./components/Hero";
 import { LandingTemplate } from "./components/LandingTemplate";
 
 type Props = RouteComponentProps<{}>;

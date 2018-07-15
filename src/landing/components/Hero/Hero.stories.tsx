@@ -5,13 +5,14 @@ import { number, selectV2 } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
+
 import { Hero } from ".";
 
 interface State {
   language: "english" | "hindi";
 }
 
-storiesOf("Components", module).add(
+storiesOf("Landing", module).add(
   "Hero",
   withState(
     { language: "english" },
