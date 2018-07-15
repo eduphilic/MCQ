@@ -15,14 +15,14 @@ import {
   OnboardingFormsProps,
 } from "components/OnboardingForms";
 
-const defaultBackgroundImage = "collage.png";
+const defaultBackgroundImage = "soldier-optimized.png";
 
 interface HeroProps {
   /**
    * Background image to use for the hero section of the landing page. It is the
    * filename for an image in the folder /packages/app/public/images/hero.
    *
-   * @default "collage.png"
+   * @default "soldier-optimized.png"
    */
   backgroundImage?: string;
 
@@ -30,7 +30,7 @@ interface HeroProps {
    * Controls how much darkening is performed on the hero image to improve the
    * legibility of the text.
    *
-   * @default 0.55
+   * @default 0.05
    */
   backgroundAlpha?: number;
 
@@ -45,7 +45,7 @@ export const Hero: SFC<HeroProps> = props => {
   }/images/hero/${encodeURIComponent(
     props.backgroundImage || defaultBackgroundImage,
   )}`;
-  const backgroundAlpha = props.backgroundAlpha || 0.55;
+  const backgroundAlpha = props.backgroundAlpha || 0.05;
 
   return (
     <DarkTheme>

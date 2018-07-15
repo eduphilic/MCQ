@@ -26,7 +26,7 @@ storiesOf("Landing", module).add(
       const backgroundImage = selectV2(
         "Background Image",
         backgroundImageFilenames,
-        "collage.png",
+        "soldier-optimized.png",
       );
 
       return (
@@ -54,6 +54,7 @@ storiesOf("Landing", module).add(
 );
 
 const backgroundImageFilenames = [
+  "soldier-optimized.png",
   "Army-soldier-1024x782.jpg",
   "7735008231155760386.png",
   "060920-F-2034C-010.JPG",
