@@ -4,8 +4,8 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import { routePathFromLocalizationKey } from "../routes";
 
 import { Hero } from "components/Hero";
-import { LandingTemplate } from "components/LandingTemplate";
 import { PageFooter } from "components/PageFooter";
+import { LandingTemplate } from "./components/LandingTemplate";
 
 type Props = RouteComponentProps<{}>;
 

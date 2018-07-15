@@ -11,7 +11,7 @@ for (let i = 0; i < 3; i += 1) {
   testCardNodes.push(<StorybookPlaceholderImage />);
 }
 
-storiesOf("Components", module).add(
+storiesOf("Landing", module).add(
   "LandingTemplate",
   withInfo()(() => (
     <Router>
