@@ -18,8 +18,8 @@ type OwnProps = {};
 export { OwnProps as PostSignupDialogsProps };
 
 type PostSignupDialogsState = {
-  dialogGetAlertsShown: false;
-  dialogAddToHomeScreenShown: false;
+  dialogGetAlertsShown: boolean;
+  dialogAddToHomeScreenShown: boolean;
 };
 
 type Props = OwnProps & WithMobileDialogProps;
@@ -36,42 +36,68 @@ class PostSignupDialogs extends Component<Props, PostSignupDialogsState> {
 
     const showDialogGetAlerts =
       !dialogGetAlertsShown && !dialogAddToHomeScreenShown;
+    const showDialogAddToHomeScreen =
+      dialogGetAlertsShown && !dialogAddToHomeScreenShown;
 
-    return (
-      <>
-        <Dialog
-          open={showDialogGetAlerts}
-          onClose={this.handleGetAlertsDialogClose}
-          maxWidth="md"
-          fullScreen={fullScreen}
-        >
-          <DialogContent>
-            <Wrapper>
-              <Logo />
-              <TextContentWrapper>
-                <DialogTitleText>Get Alerts</DialogTitleText>
+    const dialogs = [
+      {
+        open: showDialogGetAlerts,
+        onAccept: () => this.handleGetAlertsDialogClose("accept"),
+        onDecline: () => this.handleGetAlertsDialogClose("decline"),
+        title: "Get Alerts",
+        text:
+          "Get latest updates on free mock tests. You can manage alerts from your browser settings if do not want subsequently.",
+        buttonDeclineText: "No Thanks",
+        buttonAcceptText: "Allow",
+      },
+      {
+        open: showDialogAddToHomeScreen,
+        onAccept: () => this.handleAddToHomeScreenClose("accept"),
+        onDecline: () => this.handleAddToHomeScreenClose("decline"),
+        title: "Add to Home Screen",
+        text: "Add shortcut to your home screen for quick access",
+        buttonDeclineText: "No Thanks",
+        buttonAcceptText: "Add",
+      },
+    ];
 
-                <DialogTextContent>
-                  Get latest updates on free mock tests. You can manage alerts
-                  from your browser settings if do not want subsequently.
-                </DialogTextContent>
+    return dialogs.map(d => (
+      <Dialog
+        key={d.title}
+        open={d.open}
+        onClose={d.onDecline}
+        maxWidth="md"
+        fullScreen={fullScreen}
+      >
+        <DialogContent>
+          <Wrapper>
+            <Logo />
+            <TextContentWrapper>
+              <DialogTitleText>{d.title}</DialogTitleText>
 
-                <DialogButtonsWrapper>
-                  <TypographyButton variant="outlined">
-                    No Thanks
-                  </TypographyButton>
-                  <TypographyButton variant="outlined">Allow</TypographyButton>
-                </DialogButtonsWrapper>
-              </TextContentWrapper>
-            </Wrapper>
-          </DialogContent>
-        </Dialog>
-      </>
-    );
+              <DialogTextContent>{d.text}</DialogTextContent>
+
+              <DialogButtonsWrapper>
+                <TypographyButton variant="outlined" onClick={d.onDecline}>
+                  {d.buttonDeclineText}
+                </TypographyButton>
+                <TypographyButton variant="outlined" onClick={d.onAccept}>
+                  {d.buttonAcceptText}
+                </TypographyButton>
+              </DialogButtonsWrapper>
+            </TextContentWrapper>
+          </Wrapper>
+        </DialogContent>
+      </Dialog>
+    ));
   }
 
-  private handleGetAlertsDialogClose = () => {
-    //
+  private handleGetAlertsDialogClose = (_response: "accept" | "decline") => {
+    this.setState({ dialogGetAlertsShown: true });
+  };
+
+  private handleAddToHomeScreenClose = (_response: "accept" | "decline") => {
+    this.setState({ dialogAddToHomeScreenShown: true });
   };
 }
 
