@@ -7,27 +7,31 @@ import DialogContent from "@material-ui/core/DialogContent";
 // import DialogContentText from "@material-ui/core/DialogContentText";
 // import DialogContentTitle from "@material-ui/core/DialogContentTitle";
 
+import withMobileDialog, {
+  InjectedProps as WithMobileDialogProps,
+} from "@material-ui/core/withMobileDialog";
 import { LogoImage } from "components/LogoImage";
 import { Typography } from "components/Typography";
+import { TypographyButton } from "components/TypographyButton";
 
-// tslint:disable-next-line:no-empty-interface
-type PostSignupDialogsProps = {};
+type OwnProps = {};
+export { OwnProps as PostSignupDialogsProps };
 
 type PostSignupDialogsState = {
   dialogGetAlertsShown: false;
   dialogAddToHomeScreenShown: false;
 };
 
-export class PostSignupDialogs extends Component<
-  PostSignupDialogsProps,
-  PostSignupDialogsState
-> {
+type Props = OwnProps & WithMobileDialogProps;
+
+class PostSignupDialogs extends Component<Props, PostSignupDialogsState> {
   state: PostSignupDialogsState = {
     dialogGetAlertsShown: false,
     dialogAddToHomeScreenShown: false,
   };
 
   render() {
+    const { fullScreen } = this.props;
     const { dialogGetAlertsShown, dialogAddToHomeScreenShown } = this.state;
 
     const showDialogGetAlerts =
@@ -39,6 +43,7 @@ export class PostSignupDialogs extends Component<
           open={showDialogGetAlerts}
           onClose={this.handleGetAlertsDialogClose}
           maxWidth="md"
+          fullScreen={fullScreen}
         >
           <DialogContent>
             <Wrapper>
@@ -50,6 +55,13 @@ export class PostSignupDialogs extends Component<
                   Get latest updates on free mock tests. You can manage alerts
                   from your browser settings if do not want subsequently.
                 </DialogTextContent>
+
+                <DialogButtonsWrapper>
+                  <TypographyButton variant="outlined">
+                    No Thanks
+                  </TypographyButton>
+                  <TypographyButton variant="outlined">Allow</TypographyButton>
+                </DialogButtonsWrapper>
               </TextContentWrapper>
             </Wrapper>
           </DialogContent>
@@ -62,6 +74,9 @@ export class PostSignupDialogs extends Component<
     //
   };
 }
+
+const PostSignupDialogsWithMobileDialog = withMobileDialog()(PostSignupDialogs);
+export { PostSignupDialogsWithMobileDialog as PostSignupDialogs };
 
 const Wrapper = styled.div`
   display: flex;
@@ -85,7 +100,7 @@ const Logo = styled<{ className?: string }>(({ className }) => (
     height: 150px;
   }
 
-  ${({ theme }) => theme.breakpoints.down("xs")} {
+  ${({ theme }) => theme.breakpoints.down("sm")} {
     ${LogoImage} {
       display: none;
     }
@@ -121,4 +136,13 @@ const DialogTextContent = styled<{ children: string; className?: string }>(
   text-align: center;
   font-size: 22px;
   color: #000;
+`;
+
+const DialogButtonsWrapper = styled.div`
+  margin-top: 16px;
+  text-align: center;
+
+  & > *:first-child {
+    margin-right: 8px;
+  }
 `;
