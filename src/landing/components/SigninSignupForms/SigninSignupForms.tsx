@@ -6,7 +6,7 @@ import {
   AuthenticationForm,
   AuthenticationFormProps,
   FormField,
-} from "components/AuthenticationForm";
+} from "session";
 
 export type SigninSignupFormsProps = {
   /**

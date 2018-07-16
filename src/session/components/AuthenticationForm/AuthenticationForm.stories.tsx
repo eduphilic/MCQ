@@ -4,9 +4,10 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { AuthenticationForm } from ".";
 
-storiesOf("Components", module).add(
+import { AuthenticationForm } from "./AuthenticationForm";
+
+storiesOf("Session", module).add(
   "AuthenticationForm",
   withInfo({
     propTablesExclude: [BrowserRouter as any],
