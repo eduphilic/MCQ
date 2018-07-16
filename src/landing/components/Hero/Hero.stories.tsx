@@ -6,7 +6,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import { Hero } from ".";
+import { Hero } from "./Hero";
 
 interface State {
   language: "english" | "hindi";
@@ -40,7 +40,7 @@ storiesOf("Landing", module).add(
                 language: store.state.language,
                 onChange: language => store.set({ language }),
               }}
-              onboardingFormsProps={{
+              signinSignupFormsProps={{
                 onLoginSubmit: action("onLoginSubmit"),
                 onSignupSubmit: action("onSignupSubmit"),
                 passwordResetHref: "#",

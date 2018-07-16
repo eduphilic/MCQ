@@ -24,7 +24,7 @@ export const LandingPage = withRouter<Props>(props => {
               //
             },
           }}
-          onboardingFormsProps={{
+          signinSignupFormsProps={{
             onLoginSubmit: () => {
               navigateToOnboarding();
             },

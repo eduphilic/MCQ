@@ -8,7 +8,7 @@ import {
   FormField,
 } from "components/AuthenticationForm";
 
-export interface OnboardingFormsProps {
+export type SigninSignupFormsProps = {
   /**
    * Called with the field values on submission of the login form.
    */
@@ -23,12 +23,12 @@ export interface OnboardingFormsProps {
    * React Router link for password reset.
    */
   passwordResetHref: string;
-}
+};
 
 /**
  * Provides the onboarding page enrollment forms.
  */
-export const OnboardingForms: SFC<OnboardingFormsProps> = props => {
+export const SigninSignupForms: SFC<SigninSignupFormsProps> = props => {
   const { onLoginSubmit, onSignupSubmit, passwordResetHref } = props;
 
   const loginFields: FormField[] = [

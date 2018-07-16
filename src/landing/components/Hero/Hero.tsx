@@ -9,11 +9,11 @@ import Typography from "@material-ui/core/Typography";
 import { ContentCenterWrapper } from "components/ContentCenterWrapper";
 import { HeroFooter } from "components/HeroFooter";
 import { Logo } from "components/Logo";
-import {
-  OnboardingForms,
-  OnboardingFormsProps,
-} from "components/OnboardingForms";
 import { LanguageSelect, LanguageSelectProps } from "../LanguageSelect";
+import {
+  SigninSignupForms,
+  SigninSignupFormsProps,
+} from "../SigninSignupForms";
 
 const defaultBackgroundImage = "soldier-optimized.png";
 
@@ -36,7 +36,7 @@ interface HeroProps {
 
   languageSelectProps: LanguageSelectProps;
 
-  onboardingFormsProps: OnboardingFormsProps;
+  signinSignupFormsProps: SigninSignupFormsProps;
 }
 
 export const Hero: SFC<HeroProps> = props => {
@@ -78,7 +78,7 @@ export const Hero: SFC<HeroProps> = props => {
 
               <div>
                 <LightTheme>
-                  <OnboardingForms {...props.onboardingFormsProps} />
+                  <SigninSignupForms {...props.signinSignupFormsProps} />
                 </LightTheme>
               </div>
             </DivideWrapper>
