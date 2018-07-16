@@ -7,6 +7,7 @@ export enum SessionAction {
   LoginFailure = "[Session] Login Failure",
   SignupSuccess = "[Session] Signup Success",
   SignupFailure = "[Session] Signup Failure",
+  SetSubmittingStatus = "[Session] Set Submitting Status",
 }
 
 export const actions = {
@@ -17,7 +18,10 @@ export const actions = {
   signupSuccess: (user: IUser) =>
     createAction(SessionAction.SignupSuccess, user),
 
-  SignupFailure: () => createAction(SessionAction.SignupFailure),
+  signupFailure: () => createAction(SessionAction.SignupFailure),
+
+  setSubmittingStatus: (isSubmitting: boolean) =>
+    createAction(SessionAction.SetSubmittingStatus, isSubmitting),
 };
 
 export type Actions = ActionsUnion<typeof actions>;
