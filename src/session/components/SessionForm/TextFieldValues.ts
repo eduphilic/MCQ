@@ -1,4 +1,4 @@
-export type Values = {
+export type TextFieldValues = {
   fullName: string;
   phoneNumber: string;
   password: string;

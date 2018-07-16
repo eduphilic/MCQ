@@ -1,19 +1,19 @@
 import { strings } from "localization";
 import { SessionFormProps } from "./SessionForm";
-import { Values } from "./Values";
+import { TextFieldValues } from "./TextFieldValues";
 
 type Type = SessionFormProps["type"];
 
-type FieldProps = Record<
-  keyof Values,
+type TextFieldProps = Record<
+  keyof TextFieldValues,
   {
     placeholder: string;
     type: string;
   }
 >;
 
-export const getLocalizedFieldProps = (_type: Type): FieldProps => {
-  const fieldProps: FieldProps = {
+export const getLocalizedTextFieldProps = (_type: Type): TextFieldProps => {
+  const fieldProps: TextFieldProps = {
     fullName: {
       placeholder: strings.components_OnboardingForms_EnterNameFieldPlaceholder,
       type: "text",
