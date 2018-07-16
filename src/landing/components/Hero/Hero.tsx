@@ -161,6 +161,7 @@ const HeroPrimaryText = styled(Typography).attrs({
   margin-bottom: ${props => props.theme.spacing.unit * 2}px;
   font-size: 36px;
   font-weight: 600;
+  text-shadow: 2px 2px #000;
   color: ${({ theme }) => theme.palette.secondary.main};
 
   ${props => props.theme.breakpoints.down("xs")} {
