@@ -5,12 +5,14 @@ import { reducer as dashboard } from "dashboard";
 import { reducer as examTaking } from "exam-taking";
 import { reducer as localization } from "localization";
 import { reducer as navigation } from "navigation";
+import { reducer as session } from "session";
 
 const reducers = {
   dashboard,
   localization,
   examTaking,
   navigation,
+  session,
 };
 
 export type State = {
