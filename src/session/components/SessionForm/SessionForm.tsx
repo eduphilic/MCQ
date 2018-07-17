@@ -132,7 +132,6 @@ const SessionForm: SFC<Props> = props => {
 
   return (
     <Formik
-      validateOnBlur={false}
       initialValues={initialValues}
       onSubmit={values => handleFormSubmit(props, values)}
       validationSchema={validationSchema}
@@ -144,7 +143,6 @@ const SessionForm: SFC<Props> = props => {
         values,
         errors,
         touched,
-        isValid,
       }) => (
         <form onSubmit={handleSubmit}>
           <CardMobileFlat>
@@ -163,7 +161,7 @@ const SessionForm: SFC<Props> = props => {
             </CardContent>
 
             <CardActionsMarginBottom>
-              <Button type="submit" disabled={!isValid || isSubmitting}>
+              <Button type="submit" disabled={isSubmitting}>
                 {strings.session_SessionForm_SubmitButtonLabel}
               </Button>
 
@@ -177,8 +175,8 @@ const SessionForm: SFC<Props> = props => {
                     name="termsAgreed"
                     checked={values.termsAgreed}
                     onChange={handleChange}
-                    onBlur={handleBlur}
                     disabled={isSubmitting}
+                    error={touched.termsAgreed && errors.termsAgreed}
                   />
                 )}
               </SecondaryActionWrapper>
