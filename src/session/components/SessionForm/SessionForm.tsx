@@ -1,4 +1,5 @@
 import { Formik } from "formik";
+import { strings } from "localization";
 import React, { cloneElement, ReactElement, SFC } from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
@@ -66,7 +67,22 @@ const handleFormSubmit = (values: Values) => {
 
 const SessionForm: SFC<Props> = props => {
   const { type, isSubmitting } = props;
-  const title = "Form Title";
+
+  let formTitle: string;
+  switch (type) {
+    case "user-sign-in": {
+      formTitle = strings.session_SessionForm_FormTitle_UserSignIn;
+      break;
+    }
+    case "user-sign-up": {
+      formTitle = strings.session_SessionForm_FormTitle_UserSignUp;
+      break;
+    }
+    case "admin-sign-in": {
+      formTitle = strings.session_SessionForm_FormTitle_AdminSignIn;
+      break;
+    }
+  }
 
   const textFieldProps = getLocalizedTextFieldProps(type);
 
@@ -88,7 +104,7 @@ const SessionForm: SFC<Props> = props => {
       {({ handleSubmit, handleChange, handleBlur, values, errors }) => (
         <form onSubmit={handleSubmit}>
           <CardMobileFlat>
-            <CardHeader title={<FormHeader>{title}</FormHeader>} />
+            <CardHeader title={<FormHeader>{formTitle}</FormHeader>} />
 
             <CardContent>
               {textFields.map(({ name, element }) =>
@@ -104,7 +120,7 @@ const SessionForm: SFC<Props> = props => {
 
             <CardActionsMarginBottom>
               <Button type="submit" disabled={isSubmitting}>
-                Submit
+                {strings.session_SessionForm_SubmitButtonLabel}
               </Button>
 
               <SecondaryActionWrapper>

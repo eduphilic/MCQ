@@ -33,28 +33,24 @@ export const SigninSignupForms: SFC<SigninSignupFormsProps> = props => {
 
   const loginFields: FormField[] = [
     {
-      description:
-        strings.components_OnboardingForms_MobileNumberFieldDescription,
+      description: "",
       name: "username",
-      placeholder:
-        strings.components_OnboardingForms_MobileNumberFieldPlaceholder,
+      placeholder: strings.session_SessionForm_PhoneNumberFieldPlaceholder,
       type: "tel",
     },
     {
-      description:
-        strings.components_OnboardingForms_EnterPasswordFieldDescription,
+      description: "",
       name: "password",
-      placeholder:
-        strings.components_OnboardingForms_EnterPasswordFieldPlaceholder,
+      placeholder: strings.session_SessionForm_PasswordFieldPlaceholder,
       type: "password",
     },
   ];
 
   const signupFields: FormField[] = [
     {
-      description: strings.components_OnboardingForms_EnterNameFieldDescription,
+      description: "",
       name: "name",
-      placeholder: strings.components_OnboardingForms_EnterNameFieldPlaceholder,
+      placeholder: strings.session_SessionForm_FullNameFieldPlaceholder,
       type: "text",
     },
     ...loginFields,
@@ -63,19 +59,18 @@ export const SigninSignupForms: SFC<SigninSignupFormsProps> = props => {
   return (
     <Wrapper>
       <AuthenticationForm
-        title={strings.components_OnboardingForms_LoginFormTitle}
+        title={strings.session_SessionForm_FormTitle_UserSignIn}
         fields={loginFields}
         onSubmit={onLoginSubmit}
         secondaryAction={{
           href: passwordResetHref,
-          label:
-            strings.components_OnboardingForms_LoginFormForgotPasswordLabel,
+          label: strings.session_SessionForm_PasswordResetLinkLabel,
         }}
         // TODO: Add disabled state during submission
         disabled={false}
       />
       <AuthenticationForm
-        title={strings.components_OnboardingForms_SignupFormTitle}
+        title={strings.session_SessionForm_FormTitle_UserSignUp}
         fields={signupFields}
         onSubmit={onSignupSubmit}
         // TODO: Add disabled state during submission

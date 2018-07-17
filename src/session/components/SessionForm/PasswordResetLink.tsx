@@ -1,3 +1,4 @@
+import { strings } from "localization";
 import React, { SFC } from "react";
 import { routePathFromLocalizationKey } from "routes";
 
@@ -13,6 +14,6 @@ export const PasswordResetLink: SFC<PasswordResetLinkProps> = props => (
     to={routePathFromLocalizationKey(
       "routes_pages_Landing_LandingPasswordReset",
     )}
-    label="Reset Password"
+    label={strings.session_SessionForm_PasswordResetLinkLabel}
   />
 );

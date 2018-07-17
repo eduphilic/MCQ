@@ -17,19 +17,6 @@ export const componentsEn = {
 
   components_LogoText_HeroHeader: "JoinUniform",
 
-  components_OnboardingForms_MobileNumberFieldDescription: "Mobile number",
-  components_OnboardingForms_MobileNumberFieldPlaceholder:
-    "Enter Mobile Number",
-  components_OnboardingForms_EnterPasswordFieldDescription: "Password",
-  components_OnboardingForms_EnterPasswordFieldPlaceholder: "Enter Password",
-  components_OnboardingForms_EnterNameFieldDescription: "Name",
-  components_OnboardingForms_EnterNameFieldPlaceholder: "Enter Your Name",
-  components_OnboardingForms_LoginFormTitle: "Login",
-  components_OnboardingForms_LoginFormLoginButtonLabel: "Login",
-  components_OnboardingForms_LoginFormForgotPasswordLabel: "Forgot Password?",
-  components_OnboardingForms_SignupFormTitle: "Signup",
-  components_OnboardingForms_SignupFormSignupButtonLabel: "Signup",
-
   components_PageFooter_Text: "Copyright : Eduphilic Consultancy Pvt Ltd 2018",
 
   components_SelectionSummary_ChangeButtonText: "Change",

@@ -10,6 +10,8 @@ import { pagesEn } from "./strings.pages.en";
 import { pagesHi } from "./strings.pages.hi";
 import { routesEn } from "./strings.routes.en";
 import { routesHi } from "./strings.routes.hi";
+import { sessionEn } from "./strings.session.en";
+import { sessionHi } from "./strings.session.hi";
 
 const strings = {
   en: {
@@ -18,6 +20,7 @@ const strings = {
     ...dashboardEn,
     ...pagesEn,
     ...routesEn,
+    ...sessionEn,
   },
   hi: {
     ...commonHi,
@@ -25,6 +28,7 @@ const strings = {
     ...dashboardHi,
     ...pagesHi,
     ...routesHi,
+    ...sessionHi,
   },
 };
 

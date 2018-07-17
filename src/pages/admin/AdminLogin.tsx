@@ -26,23 +26,19 @@ export class AdminLogin extends Component<AdminLoginProps> {
       title={strings.pages_admin_AdminLogin_LoginFormTitle}
       fields={[
         {
-          description:
-            strings.components_OnboardingForms_MobileNumberFieldDescription,
+          description: "",
           name: "login",
           // TODO: Remove development placeholder note (0000)
           placeholder:
-            strings.components_OnboardingForms_MobileNumberFieldPlaceholder +
-            " (0000)",
+            strings.session_SessionForm_PhoneNumberFieldPlaceholder + " (0000)",
           type: "tel",
         },
         {
-          description:
-            strings.components_OnboardingForms_EnterPasswordFieldDescription,
+          description: "",
           name: "password",
           // TODO: Remove development placeholder note (admin)
           placeholder:
-            strings.components_OnboardingForms_EnterPasswordFieldPlaceholder +
-            " (admin)",
+            strings.session_SessionForm_PasswordFieldPlaceholder + " (admin)",
           type: "password",
         },
       ]}

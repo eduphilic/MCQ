@@ -1,3 +1,4 @@
+import { strings } from "localization";
 import React from "react";
 import styled from "styled";
 
@@ -20,7 +21,7 @@ export const TermsConditionsCheckbox = styled<TermsConditionsCheckboxProps>(
       <DisableableLink
         disabled={disabled}
         to="/terms-conditions"
-        label="Terms & Conditions"
+        label={strings.session_SessionForm_TermsConditionsCheckbox_Label}
       />
     </div>
   ),
