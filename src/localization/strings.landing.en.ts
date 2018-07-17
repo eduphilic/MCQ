@@ -8,6 +8,7 @@ export const landingEn = {
   landing_Hero_SecondaryText:
     "Use our specially designed mock test to clear written/online examination for defence services.",
 
-  landing_HeroFooter_Text:
-    "To Join Indian Defence, attempt free mock tests here",
+  landing_HeroFooter_TextPrimary: "Free Weekly Mock Test",
+  landing_HeroFooter_TextSecondary:
+    "Instant result with detail analysis report",
 };

@@ -12,8 +12,10 @@ import Typography from "@material-ui/core/Typography";
  */
 export const HeroFooter: SFC<{}> = () => (
   <Wrapper>
-    <Bar />
-    <Text>{strings.landing_HeroFooter_Text}</Text>
+    {/* <Bar /> */}
+    {/* <Text>{strings.landing_HeroFooter_Text}</Text> */}
+    <Text>{strings.landing_Hero_PrimaryText}</Text>
+    <Text>{strings.landing_Hero_SecondaryText}</Text>
   </Wrapper>
 );
 
@@ -27,6 +29,11 @@ const Wrapper = styled.div`
   > * {
     margin: ${props => props.theme.spacing.unit * 4}px;
   }
+
+  > *:first-child {
+    font-size: 26px;
+    margin-bottom: 0;
+  }
 `;
 
 /* background-image:
@@ -38,16 +45,16 @@ const Wrapper = styled.div`
   );
   background-size: cover; */
 
-const Bar = styled.div`
-  width: 97px;
-  height: 5px;
-  background-color: #f2c94c;
-`;
+// const Bar = styled.div`
+//   width: 97px;
+//   height: 5px;
+//   background-color: #f2c94c;
+// `;
 
 const Text = styled(Typography).attrs({
   variant: "title",
 })`
-  margin-top: 0 !important;
+  /* margin-top: 0 !important; */
   font-size: 18px;
   font-size: 18px;
   font-weight: 600;
