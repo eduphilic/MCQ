@@ -1,4 +1,4 @@
-import { strings } from "localization";
+import { LocalizationStateConsumer, strings } from "localization";
 import React, { SFC } from "react";
 import styled from "styled";
 
@@ -9,24 +9,12 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Typography from "@material-ui/core/Typography";
 
-export interface LanguageSelectProps {
-  /**
-   * Current display language.
-   */
-  language: "english" | "hindi";
-
-  /**
-   * Called with the new display language.
-   */
-  onChange: (language: "english" | "hindi") => void;
-}
+export type LanguageSelectProps = {};
 
 /**
  * Provides language selection to visitors of the landing page.
  */
-export const LanguageSelect: SFC<LanguageSelectProps> = props => {
-  const { language, onChange } = props;
-
+export const LanguageSelect: SFC<LanguageSelectProps> = () => {
   return (
     <Wrapper>
       <SideWrapper>
@@ -36,24 +24,28 @@ export const LanguageSelect: SFC<LanguageSelectProps> = props => {
       </SideWrapper>
 
       <SideWrapper>
-        <RadioGroup
-          aria-label={strings.components_LanguageSelect_Text}
-          row
-          value={language}
-          onChange={event => onChange((event.target as any).value)}
-        >
-          <FormControlLabel
-            value="english"
-            control={<Radio />}
-            label={strings.components_LanguageSelect_English}
-          />
+        <LocalizationStateConsumer>
+          {({ localizationLanguage, setLocalizationLanguage }) => (
+            <RadioGroup
+              aria-label={strings.components_LanguageSelect_Text}
+              row
+              value={localizationLanguage}
+              onChange={e => setLocalizationLanguage((e.target as any).value)}
+            >
+              <FormControlLabel
+                value="en"
+                control={<Radio />}
+                label={strings.components_LanguageSelect_English}
+              />
 
-          <FormControlLabel
-            value="hindi"
-            control={<Radio />}
-            label={strings.components_LanguageSelect_Hindi}
-          />
-        </RadioGroup>
+              <FormControlLabel
+                value="hi"
+                control={<Radio />}
+                label={strings.components_LanguageSelect_Hindi}
+              />
+            </RadioGroup>
+          )}
+        </LocalizationStateConsumer>
       </SideWrapper>
     </Wrapper>
   );
