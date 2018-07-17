@@ -7,8 +7,8 @@ import Hidden from "@material-ui/core/Hidden";
 import Typography from "@material-ui/core/Typography";
 
 import { ContentCenterWrapper } from "components/ContentCenterWrapper";
-import { HeroFooter } from "components/HeroFooter";
 import { Logo } from "components/Logo";
+import { HeroFooter } from "../HeroFooter";
 import { LanguageSelect } from "../LanguageSelect";
 import { SigninSignupForms } from "../SigninSignupForms";
 
@@ -54,10 +54,10 @@ export const Hero: SFC<HeroProps> = props => {
                 <Hidden smDown>
                   <HeroTextWrapper>
                     <HeroPrimaryText>
-                      {strings.components_Hero_PrimaryText}
+                      {strings.landing_Hero_PrimaryText}
                     </HeroPrimaryText>
                     <HeroSecondaryText>
-                      {strings.components_Hero_SecondaryText}
+                      {strings.landing_Hero_SecondaryText}
                     </HeroSecondaryText>
                   </HeroTextWrapper>
                 </Hidden>

@@ -4,13 +4,6 @@ export const componentsEn = {
 
   components_FilterButton_MenuCaptionText: "Filter By:",
 
-  components_Hero_PrimaryText: "Prepare for Indian Defense Examinations",
-  components_Hero_SecondaryText:
-    "Use our specially designed mock test to clear written/online examination for defence services.",
-
-  components_HeroFooter_Text:
-    "To Join Indian Defence, attempt free mock tests here",
-
   components_LogoText_HeroHeader: "JoinUniform",
 
   components_PageFooter_Text: "Copyright : Eduphilic Consultancy Pvt Ltd 2018",
