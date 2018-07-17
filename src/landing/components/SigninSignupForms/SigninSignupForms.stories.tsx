@@ -1,4 +1,3 @@
-import { action } from "@storybook/addon-actions";
 import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
@@ -12,11 +11,7 @@ storiesOf("Landing", module).add(
     <div style={{ padding: 16, backgroundColor: "#eee" }}>
       <div style={{ width: 330 }}>
         <BrowserRouter>
-          <SigninSignupForms
-            onLoginSubmit={action("onLoginSubmit")}
-            onSignupSubmit={action("onSignupSubmit")}
-            passwordResetHref="#"
-          />
+          <SigninSignupForms />
         </BrowserRouter>
       </div>
     </div>
