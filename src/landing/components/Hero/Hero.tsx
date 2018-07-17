@@ -48,15 +48,9 @@ export const Hero: SFC<HeroProps> = props => {
           backgroundAlpha={backgroundAlpha}
         >
           <ContentCenterWrapper>
-            <LogoAndLanguageSelectWrapper>
-              <LogoBottomMargin />
-              <div style={{ marginTop: 2 }}>
-                <LanguageSelect />
-              </div>
-            </LogoAndLanguageSelectWrapper>
-
             <DivideWrapper>
               <div>
+                <LogoBottomMargin />
                 <Hidden smDown>
                   <HeroTextWrapper>
                     <HeroPrimaryText>
@@ -70,6 +64,10 @@ export const Hero: SFC<HeroProps> = props => {
               </div>
 
               <div>
+                <div style={{ marginTop: 2, marginBottom: 16 }}>
+                  <LanguageSelect />
+                </div>
+
                 <LightTheme>
                   <SigninSignupForms />
                 </LightTheme>
@@ -102,19 +100,6 @@ const Wrapper = withProps<{
     `}
 `;
 
-const LogoAndLanguageSelectWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  ${({ theme }) => theme.breakpoints.down("sm")} {
-    flex-wrap: wrap;
-
-    > *:last-child {
-      margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
-    }
-  }
-`;
-
 const DivideWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -123,7 +108,7 @@ const DivideWrapper = styled.div`
   > div:nth-child(1) {
     flex: 1;
     width: 100%;
-    margin-bottom: ${props => props.theme.spacing.unit * 4}px;
+    margin-bottom: ${props => props.theme.spacing.unit * 2}px;
   }
 
   > div:nth-child(2) {
@@ -138,7 +123,7 @@ const DivideWrapper = styled.div`
 const LogoBottomMargin = styled(Logo).attrs({
   alternateSecondWordColoring: true,
 })`
-  margin-bottom: ${({ theme }) => theme.spacing.unit * 4}px;
+  margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
 const HeroTextWrapper = styled.div`
