@@ -5,10 +5,11 @@ import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { State } from "store";
 import styled from "styled";
+import { actions } from "../../actions";
+import { IUser } from "../../models/IUser";
 import { FormType } from "./FormType";
 import { getLocalizedTextFieldProps } from "./getLocalizedTextFieldProps";
 import { getValidationSchema } from "./getValidationSchema";
-// import { actions } from "../../actions";
 import { TextFieldValues } from "./TextFieldValues";
 import { Values } from "./Values";
 
@@ -59,9 +60,37 @@ const initialValues: Values = {
   termsAgreed: false,
 };
 
-const handleFormSubmit = (values: Values) => {
-  /* tslint:disable-next-line:no-console */
-  console.log("values", values);
+const handleFormSubmit = (props: Props, values: Values) => {
+  const {
+    type,
+    onUserSigninSubmit,
+    onUserSignupSubmit,
+    onAdminSigninSubmit,
+  } = props;
+
+  alert(`Session form submission: ${JSON.stringify(values, null, 2)}`);
+
+  switch (type) {
+    case "user-sign-in": {
+      onUserSigninSubmit(values.phoneNumber, values.password);
+      return;
+    }
+
+    case "user-sign-up": {
+      onUserSignupSubmit(
+        values.fullName,
+        values.phoneNumber,
+        values.password,
+        values.emailAddress,
+      );
+      return;
+    }
+
+    case "admin-sign-in": {
+      onAdminSigninSubmit(values.phoneNumber, values.password);
+      return;
+    }
+  }
 };
 
 const SessionForm: SFC<Props> = props => {
@@ -105,7 +134,7 @@ const SessionForm: SFC<Props> = props => {
     <Formik
       validateOnBlur={false}
       initialValues={initialValues}
-      onSubmit={handleFormSubmit}
+      onSubmit={values => handleFormSubmit(props, values)}
       validationSchema={validationSchema}
     >
       {({
@@ -161,8 +190,13 @@ const SessionForm: SFC<Props> = props => {
   );
 };
 
-const noop = () => {
-  //
+const dummyUser: IUser = {
+  id: "abc",
+  displayName: "John Doe",
+  email: "john@doe.com",
+  fullName: "John Doe",
+  isAdmin: false,
+  phoneNumber: "123",
 };
 
 const SessionFormContainer = connect<
@@ -173,9 +207,24 @@ const SessionFormContainer = connect<
 >(
   ({ session }) => ({ isSubmitting: session.isSubmitting }),
   {
-    onUserSigninSubmit: noop,
-    onUserSignupSubmit: noop,
-    onAdminSigninSubmit: noop,
+    onUserSigninSubmit: (phoneNumber: string) =>
+      actions.loginSuccess({ ...dummyUser, phoneNumber }),
+    onUserSignupSubmit: (
+      fullName: string,
+      phoneNumber: string,
+      emailAddress: string,
+    ) =>
+      actions.signupSuccess({
+        ...dummyUser,
+        fullName,
+        phoneNumber,
+        email: emailAddress,
+      }),
+    onAdminSigninSubmit: (phoneNumber: string) =>
+      actions.loginSuccess({
+        ...dummyUser,
+        phoneNumber,
+      }),
   },
 )(SessionForm);
 
