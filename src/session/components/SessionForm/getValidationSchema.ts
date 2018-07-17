@@ -33,6 +33,7 @@ export const getValidationSchema = (
   };
 
   if (type !== "user-sign-up") {
+    delete schema.emailAddress;
     delete schema.fullName;
     delete schema.passwordVerify;
     delete schema.termsAgreed;

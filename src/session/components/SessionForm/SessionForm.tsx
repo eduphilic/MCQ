@@ -53,9 +53,9 @@ type TextFields = {
 const initialValues: Values = {
   fullName: "",
   phoneNumber: "",
+  emailAddress: "",
   password: "",
   passwordVerify: "",
-  emailAddress: "",
   termsAgreed: false,
 };
 
@@ -87,6 +87,7 @@ const SessionForm: SFC<Props> = props => {
 
   const textFields = (Object.keys(initialValues) as (keyof TextFieldValues)[])
     .map(name => {
+      if (name === "emailAddress" && type !== "user-sign-up") return null;
       if (name === "fullName" && type !== "user-sign-up") return null;
       if (name === "passwordVerify" && type !== "user-sign-up") return null;
       if (name === ("termsAgreed" as any)) return null;
@@ -102,6 +103,7 @@ const SessionForm: SFC<Props> = props => {
 
   return (
     <Formik
+      validateOnBlur={false}
       initialValues={initialValues}
       onSubmit={handleFormSubmit}
       validationSchema={validationSchema}
@@ -112,6 +114,7 @@ const SessionForm: SFC<Props> = props => {
         handleBlur,
         values,
         errors,
+        touched,
         isValid,
       }) => (
         <form onSubmit={handleSubmit}>
@@ -122,7 +125,7 @@ const SessionForm: SFC<Props> = props => {
               {textFields.map(({ name, element }) =>
                 cloneElement(element, {
                   value: values[name],
-                  error: errors[name],
+                  error: touched[name] && errors[name],
                   label: errors[name],
                   onChange: handleChange,
                   onBlur: handleBlur,

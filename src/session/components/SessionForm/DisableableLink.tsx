@@ -31,4 +31,12 @@ export const DisableableLink = styled<DisableableLinkProps>(props => {
   return cloneElement(wrapper, { className }, button);
 })`
   margin-left: auto;
+
+  * {
+    font-size: 12px;
+  }
+
+  button {
+    padding: 8px 16px;
+  }
 `;

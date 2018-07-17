@@ -28,10 +28,4 @@ export const TermsConditionsCheckbox = styled<TermsConditionsCheckboxProps>(
 )`
   display: flex;
   align-items: center;
-
-  button {
-    padding-left: ${({ theme }) => theme.spacing.unit}px;
-    padding-right: ${({ theme }) => theme.spacing.unit}px;
-    margin-right: ${({ theme }) => theme.spacing.unit * 3}px;
-  }
 `;
