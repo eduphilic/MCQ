@@ -10,10 +10,7 @@ import { ContentCenterWrapper } from "components/ContentCenterWrapper";
 import { HeroFooter } from "components/HeroFooter";
 import { Logo } from "components/Logo";
 import { LanguageSelect, LanguageSelectProps } from "../LanguageSelect";
-import {
-  SigninSignupForms,
-  SigninSignupFormsProps,
-} from "../SigninSignupForms";
+import { SigninSignupForms } from "../SigninSignupForms";
 
 const defaultBackgroundImage = "soldier-optimized.png";
 
@@ -35,8 +32,6 @@ interface HeroProps {
   backgroundAlpha?: number;
 
   languageSelectProps: LanguageSelectProps;
-
-  signinSignupFormsProps: SigninSignupFormsProps;
 }
 
 export const Hero: SFC<HeroProps> = props => {
@@ -78,7 +73,7 @@ export const Hero: SFC<HeroProps> = props => {
 
               <div>
                 <LightTheme>
-                  <SigninSignupForms {...props.signinSignupFormsProps} />
+                  <SigninSignupForms />
                 </LightTheme>
               </div>
             </DivideWrapper>

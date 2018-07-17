@@ -1,5 +1,4 @@
 import { Store, withState } from "@dump247/storybook-state";
-import { action } from "@storybook/addon-actions";
 import { withInfo } from "@storybook/addon-info";
 import { number, selectV2 } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
@@ -39,11 +38,6 @@ storiesOf("Landing", module).add(
               languageSelectProps={{
                 language: store.state.language,
                 onChange: language => store.set({ language }),
-              }}
-              signinSignupFormsProps={{
-                onLoginSubmit: action("onLoginSubmit"),
-                onSignupSubmit: action("onSignupSubmit"),
-                passwordResetHref: "#",
               }}
             />
           </Router>
