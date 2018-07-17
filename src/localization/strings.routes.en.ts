@@ -19,6 +19,7 @@ export const routesEn = {
   routes_pages_Admin_AdminTestManagerNewTemplate: "",
   routes_pages_Admin_AdminUserManager: "User Manager",
 
-  routes_pages_Landing_LandingHome: "",
-  routes_pages_Landing_LandingPasswordReset: "Password Reset",
+  routes_Landing_LandingPage: "",
+  routes_Landing_PasswordResetPage: "Password Reset",
+  routes_Landing_TermsConditions: "Terms & Conditions",
 };

@@ -6,6 +6,8 @@ import { componentsEn } from "./strings.components.en";
 import { componentsHi } from "./strings.components.hi";
 import { dashboardEn } from "./strings.dashboard.en";
 import { dashboardHi } from "./strings.dashboard.hi";
+import { landingEn } from "./strings.landing.en";
+import { landingHi } from "./strings.landing.hi";
 import { pagesEn } from "./strings.pages.en";
 import { pagesHi } from "./strings.pages.hi";
 import { routesEn } from "./strings.routes.en";
@@ -18,6 +20,7 @@ const strings = {
     ...commonEn,
     ...componentsEn,
     ...dashboardEn,
+    ...landingEn,
     ...pagesEn,
     ...routesEn,
     ...sessionEn,
@@ -26,6 +29,7 @@ const strings = {
     ...commonHi,
     ...componentsHi,
     ...dashboardHi,
+    ...landingHi,
     ...pagesHi,
     ...routesHi,
     ...sessionHi,

@@ -32,7 +32,7 @@ export const LandingPage = withRouter<Props>(props => {
               navigateToOnboarding();
             },
             passwordResetHref: routePathFromLocalizationKey(
-              "routes_pages_Landing_LandingPasswordReset",
+              "routes_Landing_PasswordResetPage",
             ),
           }}
         />

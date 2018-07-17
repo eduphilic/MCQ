@@ -7,11 +7,15 @@ export const routes: {
 }[] = [
   {
     path: "/",
-    pageTitleLocalizationKey: "routes_pages_Landing_LandingHome",
+    pageTitleLocalizationKey: "routes_Landing_LandingPage",
   },
   {
     path: "/reset-password",
-    pageTitleLocalizationKey: "routes_pages_Landing_LandingPasswordReset",
+    pageTitleLocalizationKey: "routes_Landing_PasswordResetPage",
+  },
+  {
+    path: "/terms-conditions",
+    pageTitleLocalizationKey: "routes_Landing_TermsConditions",
   },
   {
     path: "/welcome/entries",
