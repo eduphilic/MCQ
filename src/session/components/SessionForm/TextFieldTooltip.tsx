@@ -6,7 +6,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 import { TooltipArrow } from "components/TooltipArrow";
 
-export interface TextFieldTooltipProps {
+export type TextFieldTooltipProps = {
   /** Target element to apply tooltip to. */
   children: ReactElement<any>;
 
@@ -15,7 +15,7 @@ export interface TextFieldTooltipProps {
 
   /** Text to display. */
   title: ReactNode;
-}
+};
 
 /**
  * Displays a tooltip with a box shadow and an arrow pointing to the field.

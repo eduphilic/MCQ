@@ -1,6 +1,7 @@
 import React, { SFC } from "react";
-import { TextFieldBase, TextFieldBaseProps } from "../TextFieldBase";
-import { TextFieldTooltip } from "../TextFieldTooltip";
+
+import { TextFieldBase, TextFieldBaseProps } from "./TextFieldBase";
+import { TextFieldTooltip } from "./TextFieldTooltip";
 
 export type TextFieldProps = TextFieldBaseProps;
 

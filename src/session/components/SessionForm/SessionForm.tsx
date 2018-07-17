@@ -18,10 +18,10 @@ import CardHeader from "@material-ui/core/CardHeader";
 
 import { Button } from "components/Button";
 import { CardMobileFlat } from "components/CardMobileFlat";
-import { TextField, TextFieldProps } from "components/TextField";
 import { FormHeader } from "./FormHeader";
 import { PasswordResetLink } from "./PasswordResetLink";
 import { TermsConditionsCheckbox } from "./TermsConditionsCheckbox";
+import { TextField, TextFieldProps } from "./TextField";
 
 type OwnProps = {
   type: FormType;
