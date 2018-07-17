@@ -10,16 +10,7 @@ export const LandingPage: SFC<{}> = () => {
 
   return (
     <LandingTemplate
-      heroNode={
-        <Hero
-          languageSelectProps={{
-            language: "english",
-            onChange: () => {
-              //
-            },
-          }}
-        />
-      }
+      heroNode={<Hero />}
       testCardNodes={testCardNodes}
       footerNode={<PageFooter />}
     />

@@ -1,21 +1,18 @@
-import { Store, withState } from "@dump247/storybook-state";
 import { withInfo } from "@storybook/addon-info";
 import { number, selectV2 } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 
 import { Hero } from "./Hero";
 
-interface State {
-  language: "english" | "hindi";
-}
-
-storiesOf("Landing", module).add(
-  "Hero",
-  withState(
-    { language: "english" },
-    withInfo({ propTablesExclude: [Router as any] })(((store: Store<State>) => {
+storiesOf("Landing", module)
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add(
+    "Hero",
+    withInfo({ propTablesExclude: [MemoryRouter as any] })(() => {
       const backgroundAlpha = number("Background Alpha", 0.65, {
         max: 1,
         min: 0.05,
@@ -31,21 +28,14 @@ storiesOf("Landing", module).add(
       return (
         <div>
           <p>Background Alpha: {backgroundAlpha}</p>
-          <Router>
-            <Hero
-              backgroundAlpha={backgroundAlpha}
-              backgroundImage={backgroundImage}
-              languageSelectProps={{
-                language: store.state.language,
-                onChange: language => store.set({ language }),
-              }}
-            />
-          </Router>
+          <Hero
+            backgroundAlpha={backgroundAlpha}
+            backgroundImage={backgroundImage}
+          />
         </div>
       );
-    }) as any),
-  ),
-);
+    }),
+  );
 
 const backgroundImageFilenames = [
   "soldier-optimized.png",
