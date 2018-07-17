@@ -11,10 +11,6 @@ export const componentsEn = {
   components_HeroFooter_Text:
     "To Join Indian Defence, attempt free mock tests here",
 
-  components_LanguageSelect_Text: "Preferred language :",
-  components_LanguageSelect_English: "English",
-  components_LanguageSelect_Hindi: "हिंदी",
-
   components_LogoText_HeroHeader: "JoinUniform",
 
   components_PageFooter_Text: "Copyright : Eduphilic Consultancy Pvt Ltd 2018",

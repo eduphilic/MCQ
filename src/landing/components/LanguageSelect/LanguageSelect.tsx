@@ -5,6 +5,7 @@ import styled from "styled";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
+import Hidden from "@material-ui/core/Hidden";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Typography from "@material-ui/core/Typography";
@@ -19,7 +20,12 @@ export const LanguageSelect: SFC<LanguageSelectProps> = () => {
     <Wrapper>
       <SideWrapper>
         <FormLabel component="legend">
-          <Heading>{strings.components_LanguageSelect_Text}</Heading>
+          <Hidden smUp>
+            <Heading>{strings.landing_LanguageSelect_ShortText}</Heading>
+          </Hidden>
+          <Hidden xsDown>
+            <Heading>{strings.landing_LanguageSelect_Text}</Heading>
+          </Hidden>
         </FormLabel>
       </SideWrapper>
 
@@ -27,21 +33,21 @@ export const LanguageSelect: SFC<LanguageSelectProps> = () => {
         <LocalizationStateConsumer>
           {({ localizationLanguage, setLocalizationLanguage }) => (
             <RadioGroup
-              aria-label={strings.components_LanguageSelect_Text}
+              aria-label={strings.landing_LanguageSelect_Text}
               row
               value={localizationLanguage}
               onChange={e => setLocalizationLanguage((e.target as any).value)}
             >
-              <FormControlLabel
+              <StyledFormControlLabel
                 value="en"
-                control={<Radio />}
-                label={strings.components_LanguageSelect_English}
+                control={<StyledRadio />}
+                label={strings.landing_LanguageSelect_English}
               />
 
-              <FormControlLabel
+              <StyledFormControlLabel
                 value="hi"
-                control={<Radio />}
-                label={strings.components_LanguageSelect_Hindi}
+                control={<StyledRadio />}
+                label={strings.landing_LanguageSelect_Hindi}
               />
             </RadioGroup>
           )}
@@ -70,4 +76,17 @@ const SideWrapper = styled.div`
 const Heading = styled(Typography).attrs({ variant: "subheading" })`
   margin-right: ${props => props.theme.spacing.unit * 2}px;
   white-space: nowrap;
+  color: ${({ theme }) => theme.palette.secondary.main};
+`;
+
+const StyledFormControlLabel = styled(FormControlLabel).attrs({
+  classes: { label: "language-select-form-control-label" },
+})`
+  .language-select-form-control-label {
+    color: ${({ theme }) => theme.palette.secondary.main};
+  }
+`;
+
+const StyledRadio = styled(Radio)`
+  color: ${({ theme }) => theme.palette.secondary.main};
 `;
