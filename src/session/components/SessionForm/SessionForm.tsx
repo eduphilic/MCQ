@@ -5,8 +5,12 @@ import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { State } from "store";
 import styled from "styled";
+import { FormType } from "./FormType";
+import { getLocalizedTextFieldProps } from "./getLocalizedTextFieldProps";
+import { getValidationSchema } from "./getValidationSchema";
 // import { actions } from "../../actions";
 import { TextFieldValues } from "./TextFieldValues";
+import { Values } from "./Values";
 
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -14,14 +18,10 @@ import CardHeader from "@material-ui/core/CardHeader";
 
 import { Button } from "components/Button";
 import { CardMobileFlat } from "components/CardMobileFlat";
-import { FormHeader } from "components/FormHeader";
 import { TextField, TextFieldProps } from "components/TextField";
-import { FormType } from "./FormType";
-import { getLocalizedTextFieldProps } from "./getLocalizedTextFieldProps";
-import { getValidationSchema } from "./getValidationSchema";
+import { FormHeader } from "./FormHeader";
 import { PasswordResetLink } from "./PasswordResetLink";
 import { TermsConditionsCheckbox } from "./TermsConditionsCheckbox";
-import { Values } from "./Values";
 
 type OwnProps = {
   type: FormType;

@@ -1,6 +1,7 @@
-import Typography, { TypographyProps } from "@material-ui/core/Typography";
 import React, { SFC } from "react";
 import styled from "styled";
+
+import Typography, { TypographyProps } from "@material-ui/core/Typography";
 
 export type FormHeaderProps = TypographyProps;
 
