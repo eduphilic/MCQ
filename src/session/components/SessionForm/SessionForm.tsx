@@ -16,12 +16,15 @@ import { Button } from "components/Button";
 import { CardMobileFlat } from "components/CardMobileFlat";
 import { FormHeader } from "components/FormHeader";
 import { TextField, TextFieldProps } from "components/TextField";
+import { FormType } from "./FormType";
 import { getLocalizedTextFieldProps } from "./getLocalizedTextFieldProps";
+import { getValidationSchema } from "./getValidationSchema";
 import { PasswordResetLink } from "./PasswordResetLink";
 import { TermsConditionsCheckbox } from "./TermsConditionsCheckbox";
+import { Values } from "./Values";
 
 type OwnProps = {
-  type: "user-sign-in" | "user-sign-up" | "admin-sign-in";
+  type: FormType;
 };
 export { OwnProps as SessionFormProps };
 
@@ -46,10 +49,6 @@ type TextFields = {
   element: ReactElement<TextFieldProps>;
   name: keyof TextFieldValues;
 }[];
-
-type Values = TextFieldValues & {
-  termsAgreed: boolean;
-};
 
 const initialValues: Values = {
   fullName: "",
@@ -99,9 +98,22 @@ const SessionForm: SFC<Props> = props => {
     })
     .filter(f => f !== null) as TextFields;
 
+  const validationSchema = () => getValidationSchema(type);
+
   return (
-    <Formik initialValues={initialValues} onSubmit={handleFormSubmit}>
-      {({ handleSubmit, handleChange, handleBlur, values, errors }) => (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleFormSubmit}
+      validationSchema={validationSchema}
+    >
+      {({
+        handleSubmit,
+        handleChange,
+        handleBlur,
+        values,
+        errors,
+        isValid,
+      }) => (
         <form onSubmit={handleSubmit}>
           <CardMobileFlat>
             <CardHeader title={<FormHeader>{formTitle}</FormHeader>} />
@@ -119,7 +131,7 @@ const SessionForm: SFC<Props> = props => {
             </CardContent>
 
             <CardActionsMarginBottom>
-              <Button type="submit" disabled={isSubmitting}>
+              <Button type="submit" disabled={!isValid || isSubmitting}>
                 {strings.session_SessionForm_SubmitButtonLabel}
               </Button>
 
