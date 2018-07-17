@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 
 import { AdminLoginTemplate } from "components/AdminLoginTemplate";
 import { AuthenticationErrorSnackbar } from "components/AuthenticationErrorSnackbar";
-import { AuthenticationForm } from "session";
+import { SessionForm } from "session";
 
 interface AdminLoginProps {
   authenticating: boolean;
@@ -21,31 +21,7 @@ export class AdminLogin extends Component<AdminLoginProps> {
     // this.props.onLogin(formFields.login, formFields.password);
   };
 
-  generateLoginForm = () => (
-    <AuthenticationForm
-      title={strings.pages_admin_AdminLogin_LoginFormTitle}
-      fields={[
-        {
-          description: "",
-          name: "login",
-          // TODO: Remove development placeholder note (0000)
-          placeholder:
-            strings.session_SessionForm_PhoneNumberFieldPlaceholder + " (0000)",
-          type: "tel",
-        },
-        {
-          description: "",
-          name: "password",
-          // TODO: Remove development placeholder note (admin)
-          placeholder:
-            strings.session_SessionForm_PasswordFieldPlaceholder + " (admin)",
-          type: "password",
-        },
-      ]}
-      onSubmit={this.handleLoginSubmit}
-      disabled={this.props.authenticating}
-    />
-  );
+  generateLoginForm = () => <SessionForm type="admin-sign-in" />;
 
   generateHeroNode = () => (
     <div style={{ marginTop: "10%" }}>
