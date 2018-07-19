@@ -1,6 +1,7 @@
-import React, { Fragment, ReactNode, SFC } from "react";
+import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 
+import { ContentCenterWrapper } from "components/ContentCenterWrapper";
 // TODO: Remove Development Snackbar Link
 import { DevelopmentAdminDashboardSnackbar } from "./DevelopmentAdminDashboardSnackbar";
 
@@ -9,7 +10,7 @@ export interface LandingTemplateProps {
   heroNode: ReactNode;
 
   /** Product offering cards, main content. */
-  testCardNodes: ReactNode[];
+  testCardNode: ReactNode;
 
   /** Page footer. */
   footerNode: ReactNode;
@@ -19,7 +20,7 @@ export interface LandingTemplateProps {
  * Page template for main landing page.
  */
 export const LandingTemplate: SFC<LandingTemplateProps> = props => {
-  const { heroNode, testCardNodes, footerNode } = props;
+  const { heroNode, testCardNode, footerNode } = props;
 
   return (
     <>
@@ -28,9 +29,7 @@ export const LandingTemplate: SFC<LandingTemplateProps> = props => {
       <HeaderHeroWrapper>{heroNode}</HeaderHeroWrapper>
 
       <MainContentBackground>
-        {testCardNodes.map((testCard, key) => (
-          <Fragment key={key}>{testCard}</Fragment>
-        ))}
+        <ContentCenterWrapper>{testCardNode}</ContentCenterWrapper>
       </MainContentBackground>
 
       <FooterWrapper>{footerNode}</FooterWrapper>

@@ -8,7 +8,7 @@ import { LandingTemplate } from ".";
 
 const testCardNodes: ReactNode[] = [];
 for (let i = 0; i < 3; i += 1) {
-  testCardNodes.push(<StorybookPlaceholderImage />);
+  testCardNodes.push(<StorybookPlaceholderImage key={i} />);
 }
 
 storiesOf("Landing", module).add(
@@ -17,7 +17,7 @@ storiesOf("Landing", module).add(
     <Router>
       <LandingTemplate
         heroNode={<StorybookPlaceholderImage />}
-        testCardNodes={testCardNodes}
+        testCardNode={<div>{testCardNodes}</div>}
         footerNode={<StorybookPlaceholderImage />}
       />
     </Router>

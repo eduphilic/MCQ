@@ -118,7 +118,7 @@ const logoSizePixels = 128;
 const blockWidthPixels = logoSizePixels + logoSizePixels / 2;
 
 const Wrapper = styled.div`
-  & > *:not(:last-child) {
+  & > * {
     margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
   }
 `;
