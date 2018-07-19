@@ -5,6 +5,8 @@ import { State } from "store";
 import styled from "styled";
 import { actions } from "../../actions";
 
+import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
+
 import { BlockImage } from "components/BlockImage";
 import { Typography } from "components/Typography";
 
@@ -116,6 +118,8 @@ export { IndexCardsContainer as IndexCards };
 
 const logoSizePixels = 128;
 const blockWidthPixels = logoSizePixels + logoSizePixels / 2;
+const verticalMargin = 50;
+const mobileBreakpoint: Breakpoint = "sm";
 
 const Wrapper = styled.div`
   & > * {
@@ -129,14 +133,28 @@ const CardWrapper = styled<{ className?: string; backgroundColor: string }>(
   display: flex;
   padding-left: ${logoSizePixels}px;
 
-  ${({ backgroundColor }) => `
-  background-image: linear-gradient(
-    to right,
-    ${backgroundColor},
-    ${backgroundColor} ${blockWidthPixels}px,
-    transparent ${blockWidthPixels}px,
-    transparent
-  );
+  ${({ backgroundColor, theme }) => `
+    background-image: linear-gradient(
+      to right,
+      ${backgroundColor},
+      ${backgroundColor} ${blockWidthPixels}px,
+      transparent ${blockWidthPixels}px,
+      transparent
+    );
+
+    ${theme.breakpoints.down(mobileBreakpoint)} {
+      flex-direction: column;
+      align-items: center;
+      padding-left: 0;
+      padding-top: ${verticalMargin}px;
+      background-image: linear-gradient(
+        to bottom,
+        ${backgroundColor},
+        ${backgroundColor} ${verticalMargin + logoSizePixels / 2}px,
+        transparent ${verticalMargin + logoSizePixels / 2}px,
+        transparent
+      );
+    }
   `};
 `;
 
@@ -147,8 +165,12 @@ const EntryLogo = styled<{
 }>(({ className, src }) => <BlockImage className={className} src={src} />)`
   width: ${logoSizePixels}px;
   height: ${logoSizePixels}px;
-  margin: 50px 0;
+  margin: ${verticalMargin}px 0;
   background-color: ${({ backgroundColor }) => `${backgroundColor}`};
+
+  ${({ theme }) => theme.breakpoints.down(mobileBreakpoint)} {
+    margin: 0;
+  }
 `;
 
 const TextSectionWrapper = styled.div`
@@ -157,6 +179,10 @@ const TextSectionWrapper = styled.div`
   flex-direction: column;
   padding: ${({ theme }) => theme.spacing.unit * 3}px 0;
   margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
+
+  ${({ theme }) => theme.breakpoints.down(mobileBreakpoint)} {
+    margin-left: 0;
+  }
 `;
 
 const TitleWrapper = styled.div`
@@ -167,6 +193,16 @@ const TitleWrapper = styled.div`
 
   > :first-child {
     margin-right: 8px;
+  }
+
+  ${({ theme }) => theme.breakpoints.down(mobileBreakpoint)} {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+
+    > :first-child {
+      margin-right: 0;
+    }
   }
 `;
 
@@ -191,4 +227,8 @@ const CategoryPill = styled<{
   border-radius: 8px;
   background-color: ${({ backgroundColor }) => backgroundColor};
   text-align: center;
+
+  ${({ theme }) => theme.breakpoints.down(mobileBreakpoint)} {
+    width: calc(100% / 2 - 16px);
+  }
 `;
