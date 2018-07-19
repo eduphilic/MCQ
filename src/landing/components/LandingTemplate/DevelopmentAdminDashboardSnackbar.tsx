@@ -61,6 +61,11 @@ class DevelopmentAdminDashboardSnackbar extends Component<
             ))}
             <IconButton
               color="inherit"
+              style={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+              }}
               onClick={() => this.setState({ open: false })}
             >
               <Close />
@@ -91,6 +96,7 @@ class DevelopmentAdminDashboardSnackbar extends Component<
                 position: "fixed",
                 bottom: 24,
                 right: 48,
+                zIndex: 9999,
               }}
               onClick={() => this.setState({ open: true })}
             >
