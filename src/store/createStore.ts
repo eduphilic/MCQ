@@ -3,14 +3,16 @@ import { createEnhancerDevTools } from "./createEnhancerDevTools";
 
 import { reducer as dashboard } from "dashboard";
 import { reducer as examTaking } from "exam-taking";
+import { reducer as landing } from "landing";
 import { reducer as localization } from "localization";
 import { reducer as navigation } from "navigation";
 import { reducer as session } from "session";
 
 const reducers = {
   dashboard,
-  localization,
   examTaking,
+  landing,
+  localization,
   navigation,
   session,
 };
