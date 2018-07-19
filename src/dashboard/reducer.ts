@@ -1,9 +1,8 @@
 import { createReducer } from "utils";
 import { Actions, DashboardAction } from "./actions";
 
+import { IEntry, IEntryCategory } from "models";
 import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
-import { IEntry } from "./models/IEntry";
-import { IEntryCategory } from "./models/IEntryCategory";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
 import { IExamQuantitySelectMeta } from "./models/IExamQuantitySelectMeta";
 

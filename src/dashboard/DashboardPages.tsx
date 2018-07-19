@@ -1,11 +1,10 @@
+import { IEntry, IEntryCategory } from "models";
 import { AppLayout, INavigationLink, PageContentWrapper } from "navigation";
 import React, { Component, SFC } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { State } from "store";
 import { actions } from "./actions";
-import { IEntry } from "./models/IEntry";
-import { IEntryCategory } from "./models/IEntryCategory";
 import { navigationLinks } from "./navigationLinks";
 import { OnboardingProgress, onboardingProgressSelector } from "./selectors";
 

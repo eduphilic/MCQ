@@ -1,5 +1,6 @@
 import { Formik } from "formik";
 import { strings } from "localization";
+import { IEntry, IEntryCategory } from "models";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
@@ -7,8 +8,6 @@ import { State } from "store";
 import styled from "styled";
 import { actions as dashboardActions } from "./actions";
 import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
-import { IEntry } from "./models/IEntry";
-import { IEntryCategory } from "./models/IEntryCategory";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
 import { IExamQuantitySelectMeta } from "./models/IExamQuantitySelectMeta";
 import { OnboardingProgress, onboardingProgressSelector } from "./selectors";

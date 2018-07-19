@@ -1,4 +1,4 @@
-import { IEntry } from "../models/IEntry";
+import { IEntry } from "models";
 
 const createLogoUrl = (name: string): IEntry["logoUrlByWidth"] =>
   (["48", "64", "128", "256"] as (keyof IEntry["logoUrlByWidth"])[]).reduce(

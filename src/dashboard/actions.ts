@@ -1,7 +1,7 @@
+import { IEntry } from "models";
 import { ActionsUnion } from "types";
 import { createAction } from "utils";
 import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
-import { IEntry } from "./models/IEntry";
 
 export enum DashboardAction {
   LoadPlaceholderEntries = "[dashboard] Load Placeholder Entires",

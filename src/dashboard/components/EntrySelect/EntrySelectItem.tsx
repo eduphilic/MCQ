@@ -1,7 +1,7 @@
 import { fromMobileFlatBorder } from "css";
+import { IEntry } from "models";
 import React, { SFC } from "react";
 import styled, { css, withProps } from "styled";
-import { IEntry } from "../../models/IEntry";
 
 import Typography from "@material-ui/core/Typography";
 

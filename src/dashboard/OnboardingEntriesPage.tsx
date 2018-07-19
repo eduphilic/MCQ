@@ -8,9 +8,9 @@ import styled from "styled";
 import { actions as dashboardActions } from "./actions";
 
 import { TypographyButton } from "components/TypographyButton";
+import { IEntry } from "models";
 import { EntrySelect } from "./components/EntrySelect";
 import { OnboardingBottomDockToolbar } from "./components/OnboardingBottomDockToolbar";
-import { IEntry } from "./models/IEntry";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
 
 type OnboardingEntriesPageProps = {

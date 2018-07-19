@@ -1,6 +1,6 @@
+import { IEntry } from "models";
 import React, { Component } from "react";
 import styled from "styled";
-import { IEntry } from "../../models/IEntry";
 
 import { fromGutters } from "css";
 import { EntrySelectItem } from "./EntrySelectItem";

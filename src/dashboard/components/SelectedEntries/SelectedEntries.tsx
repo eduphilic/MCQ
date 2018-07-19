@@ -1,8 +1,8 @@
+import { IEntry } from "models";
 // tslint:disable-next-line:import-name
 import Carousel, { CarouselSlideRenderControlProps } from "nuka-carousel";
 import React, { SFC } from "react";
 import styled, { css } from "styled";
-import { IEntry } from "../../models/IEntry";
 import { IEntrySelectMeta } from "../../models/IEntrySelectMeta";
 
 import Avatar from "@material-ui/core/Avatar";
