@@ -18,7 +18,7 @@ const createEntryCategories = (
   names.map(
     (name): IEntryCategory => ({
       id: `${entryID}-${name}`,
-      entryID: name,
+      entryID,
       title: { en: name },
     }),
   );
