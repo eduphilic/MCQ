@@ -3,14 +3,27 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled";
 
 import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
+import Tooltip from "@material-ui/core/Tooltip";
+import Close from "@material-ui/icons/Close";
+import DeveloperBoard from "@material-ui/icons/DeveloperBoard";
 
 export type DevelopmentAdminDashboardSnackbarProps = RouteComponentProps<void>;
 
+type DevelopmentAdminDashboardSnackbarState = {
+  open: boolean;
+};
+
 class DevelopmentAdminDashboardSnackbar extends Component<
-  DevelopmentAdminDashboardSnackbarProps
+  DevelopmentAdminDashboardSnackbarProps,
+  DevelopmentAdminDashboardSnackbarState
 > {
+  state: DevelopmentAdminDashboardSnackbarState = {
+    open: true,
+  };
+
   handleButtonClick = (path: string) => {
     if (path === "/storybook") {
       const url =
@@ -25,6 +38,8 @@ class DevelopmentAdminDashboardSnackbar extends Component<
   };
 
   render() {
+    const { open } = this.state;
+
     const snackbarContent = (
       <SnackbarContentExtraVerticalHightMobile
         message={<span>Development Build</span>}
@@ -44,21 +59,46 @@ class DevelopmentAdminDashboardSnackbar extends Component<
                 {l.title}
               </Button>
             ))}
+            <IconButton
+              color="inherit"
+              onClick={() => this.setState({ open: false })}
+            >
+              <Close />
+            </IconButton>
           </>
         }
       />
     );
 
     return (
-      <Snackbar
-        open
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-      >
-        {snackbarContent}
-      </Snackbar>
+      <>
+        <Snackbar
+          open={open}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+          }}
+        >
+          {snackbarContent}
+        </Snackbar>
+
+        {!open && (
+          <Tooltip title="Development Links">
+            <Button
+              variant="fab"
+              color="secondary"
+              style={{
+                position: "fixed",
+                bottom: 24,
+                right: 48,
+              }}
+              onClick={() => this.setState({ open: true })}
+            >
+              <DeveloperBoard />
+            </Button>
+          </Tooltip>
+        )}
+      </>
     );
   }
 }
