@@ -7,6 +7,9 @@ import { routePathFromLocalizationKey } from "routes";
 import { State } from "store";
 import { LocalizationKey } from "types";
 
+import { BottomToolbarDock } from "navigation";
+import { BottomToolbar } from "./components/BottomToolbar";
+
 type StateProps = {
   entries: IEntry[];
 };
@@ -34,6 +37,8 @@ const onSubmitPlaceholder = (values: any) => {
 const SubscriptionManagementPage: SFC<Props> = props => {
   const { routeEntrySelectLocalizationKey } = props;
 
+  const toolbarNode = <BottomToolbar />;
+
   const entrySelectRoute = routePathFromLocalizationKey(
     routeEntrySelectLocalizationKey,
   );
@@ -41,11 +46,13 @@ const SubscriptionManagementPage: SFC<Props> = props => {
   return (
     <Formik initialValues={initialFormState} onSubmit={onSubmitPlaceholder}>
       {() => (
-        <Switch>
-          <Route path={entrySelectRoute}>
-            <div>Placeholder</div>
-          </Route>
-        </Switch>
+        <BottomToolbarDock toolbarNode={toolbarNode}>
+          <Switch>
+            <Route path={entrySelectRoute}>
+              <div>Placeholder</div>
+            </Route>
+          </Switch>
+        </BottomToolbarDock>
       )}
     </Formik>
   );
