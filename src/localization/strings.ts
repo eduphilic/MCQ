@@ -14,6 +14,8 @@ import { routesEn } from "./strings.routes.en";
 import { routesHi } from "./strings.routes.hi";
 import { sessionEn } from "./strings.session.en";
 import { sessionHi } from "./strings.session.hi";
+import { subscriptionManagementEn } from "./strings.subscription-management.en";
+import { subscriptionManagementHi } from "./strings.subscription-management.hi";
 
 const strings = {
   en: {
@@ -24,6 +26,7 @@ const strings = {
     ...pagesEn,
     ...routesEn,
     ...sessionEn,
+    ...subscriptionManagementEn,
   },
   hi: {
     ...commonHi,
@@ -33,6 +36,7 @@ const strings = {
     ...pagesHi,
     ...routesHi,
     ...sessionHi,
+    ...subscriptionManagementHi,
   },
 };
 
