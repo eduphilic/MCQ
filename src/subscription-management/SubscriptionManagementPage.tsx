@@ -1,13 +1,16 @@
-import { Formik } from "formik";
+import { Formik, FormikProps } from "formik";
+import { strings } from "localization";
 import { IEntry } from "models";
 import React, { SFC } from "react";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { routePathFromLocalizationKey } from "routes";
 import { State } from "store";
+import styled from "styled";
 import { LocalizationKey } from "types";
 import { actions } from "./actions";
 
+import { TypographyButton } from "components/TypographyButton";
 import { BottomToolbarDock } from "navigation";
 import { BottomToolbar } from "./components/BottomToolbar";
 import { EntrySelect } from "./components/EntrySelect";
@@ -21,12 +24,14 @@ type DispatchProps = {
   loadPlaceholderData: () => any;
 };
 
-type OwnProps = {
+type OwnProps = RouteComponentProps<{}> & {
   routeEntrySelectLocalizationKey: LocalizationKey;
 };
 export { OwnProps as SubscriptionManagePageProps };
 
 type Props = StateProps & DispatchProps & OwnProps;
+
+type Page = "entry-select" | "category-select";
 
 type FormState = {
   selectedEntryIDs: string[];
@@ -44,6 +49,7 @@ const onSubmitPlaceholder = (values: any) => {
 const SubscriptionManagementPage: SFC<Props> = props => {
   const {
     routeEntrySelectLocalizationKey,
+    match,
     loaded,
     entries,
     loadPlaceholderData,
@@ -54,48 +60,64 @@ const SubscriptionManagementPage: SFC<Props> = props => {
     return null;
   }
 
-  const toolbarNode = <BottomToolbar />;
-
-  const entrySelectRoute = routePathFromLocalizationKey(
-    routeEntrySelectLocalizationKey,
-  );
+  const page: Page =
+    routePathFromLocalizationKey(routeEntrySelectLocalizationKey) === match.path
+      ? "entry-select"
+      : "category-select";
 
   return (
     <Formik initialValues={initialFormState} onSubmit={onSubmitPlaceholder}>
-      {({ values, setFieldValue }) => (
-        <BottomToolbarDock toolbarNode={toolbarNode}>
-          <Switch>
-            <Route
-              path={entrySelectRoute}
-              render={() => (
-                <EntrySelect
-                  entries={entries}
-                  initialSelectedEntries={values.selectedEntryIDs}
-                  minSelectedCount={1}
-                  maxSelectedCount={entries.length}
-                  onSelectionChange={selectedEntryIDs =>
-                    setFieldValue("selectedEntryIDs", selectedEntryIDs)
-                  }
-                />
-              )}
+      {formikProps => (
+        <BottomToolbarDock toolbarNode={renderToolbarNode(formikProps, page)}>
+          {page === "entry-select" && (
+            <EntrySelect
+              entries={entries}
+              initialSelectedEntries={formikProps.values.selectedEntryIDs}
+              minSelectedCount={1}
+              maxSelectedCount={entries.length}
+              onSelectionChange={selectedEntryIDs =>
+                formikProps.setFieldValue("selectedEntryIDs", selectedEntryIDs)
+              }
             />
-          </Switch>
+          )}
         </BottomToolbarDock>
       )}
     </Formik>
   );
 };
 
-const SubscriptionManagementPageContainer = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps,
-  State
->(
-  ({ subscriptionManagement: { loaded, entries } }) => ({
-    loaded,
-    entries,
-  }),
-  { loadPlaceholderData: actions.loadPlaceholderData },
-)(SubscriptionManagementPage);
+const renderToolbarNode = (
+  _formikProps: FormikProps<FormState>,
+  page: Page,
+) => (
+  <BottomToolbar>
+    {page === "entry-select" ? (
+      <>
+        <FlexSpacer />
+        <TypographyButton
+          color="primary"
+          filled
+          // disabled={isNextButtonDisabled}
+          // onClick={this.handleNextButtonClick}
+        >
+          {strings.common_NextButtonText}
+        </TypographyButton>
+      </>
+    ) : null}
+  </BottomToolbar>
+);
+
+const SubscriptionManagementPageContainer = withRouter(
+  connect<StateProps, DispatchProps, OwnProps, State>(
+    ({ subscriptionManagement: { loaded, entries } }) => ({
+      loaded,
+      entries,
+    }),
+    { loadPlaceholderData: actions.loadPlaceholderData },
+  )(SubscriptionManagementPage),
+);
 export { SubscriptionManagementPageContainer as SubscriptionManagementPage };
+
+const FlexSpacer = styled.div`
+  flex: 1;
+`;
