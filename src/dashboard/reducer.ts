@@ -6,8 +6,8 @@ import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
 import { IExamQuantitySelectMeta } from "./models/IExamQuantitySelectMeta";
 
+import { createEntryPlaceholders } from "subscription-management";
 import { createEntryCategoryPlaceholders } from "./placeholders/createEntryCategoryPlaceholders";
-import { createEntryPlaceholders } from "./placeholders/createEntryPlaceholders";
 import { createExamQuantitySelectMetaPlaceholder } from "./placeholders/createExamQuantitySelectMetaPlaceholder";
 
 export type State = {

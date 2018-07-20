@@ -2,10 +2,10 @@ import { action } from "@storybook/addon-actions";
 import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
+import { createEntryPlaceholders } from "subscription-management";
 
 import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
 import { IEntrySelectMeta } from "../../models/IEntrySelectMeta";
-import { createEntryPlaceholders } from "../../placeholders/createEntryPlaceholders";
 import { SelectedEntries } from "./SelectedEntries";
 
 const stories = storiesOf("Dashboard", module);
