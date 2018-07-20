@@ -69,7 +69,7 @@ class OnboardingEntriesPage extends Component<
     );
   }
 
-  private handleSelectionChange = (_: boolean, selectedEntryIds: string[]) => {
+  private handleSelectionChange = (selectedEntryIds: string[]) => {
     this.setState({ selectedEntryIds });
   };
 

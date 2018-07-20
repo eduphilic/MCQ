@@ -26,13 +26,9 @@ export type EntrySelectProps = {
   maxSelectedCount: number;
 
   /**
-   * Called with a boolean indicated whether the minimum number of items have
-   * been selected and with the icon keys of the selected items.
+   * Called with the entry IDs of the selected items.
    */
-  onSelectionChange: (
-    hasRequiredSelectionCount: boolean,
-    selectedItemIDs: string[],
-  ) => void;
+  onSelectionChange: (selectedItemIDs: string[]) => void;
 };
 
 export type EntrySelectState = {
@@ -51,11 +47,7 @@ export class EntrySelect extends Component<EntrySelectProps, EntrySelectState> {
 
   handleItemClick = (entryID: string) => {
     let selectedItemIDs = [...this.state.selectedItemIDs];
-    const {
-      maxSelectedCount,
-      minSelectedCount,
-      onSelectionChange,
-    } = this.props;
+    const { maxSelectedCount, onSelectionChange } = this.props;
 
     // Don't select item if we are at the maximum number of selections.
     const isSelected = selectedItemIDs.find(i => i === entryID) !== undefined;
@@ -71,8 +63,7 @@ export class EntrySelect extends Component<EntrySelectProps, EntrySelectState> {
     // Call the handler with the new selection list and whether or not the
     // minimum number of selections are selected.
     totalSelected += isSelected ? -1 : 1;
-    const hasRequiredSelectionCount = totalSelected >= minSelectedCount;
-    onSelectionChange(hasRequiredSelectionCount, selectedItemIDs);
+    onSelectionChange(selectedItemIDs);
   };
 
   render() {
