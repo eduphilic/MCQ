@@ -4,6 +4,7 @@ import { createStore } from "store";
 
 import { actions as dashboardActions } from "dashboard";
 import { actions as examTakingActions } from "exam-taking";
+import { actions as subscriptionManagementActions } from "subscription-management";
 
 export class PlaceholderProvider extends Component {
   private store = createStore();
@@ -13,6 +14,7 @@ export class PlaceholderProvider extends Component {
 
     this.store.dispatch(dashboardActions.loadPlaceholderEntries());
     this.store.dispatch(examTakingActions.loadPlaceholderExam());
+    this.store.dispatch(subscriptionManagementActions.loadPlaceholderData());
   }
 
   render() {

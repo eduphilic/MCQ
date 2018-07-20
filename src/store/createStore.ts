@@ -7,6 +7,7 @@ import { reducer as landing } from "landing";
 import { reducer as localization } from "localization";
 import { reducer as navigation } from "navigation";
 import { reducer as session } from "session";
+import { reducer as subscriptionManagement } from "subscription-management";
 
 const reducers = {
   dashboard,
@@ -15,6 +16,7 @@ const reducers = {
   localization,
   navigation,
   session,
+  subscriptionManagement,
 };
 
 export type State = {
