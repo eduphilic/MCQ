@@ -21,8 +21,8 @@ import { CardMobileFlat } from "components/CardMobileFlat";
 import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
 import { BottomToolbarDock } from "navigation";
+import { BottomDockToolbar } from "subscription-management";
 import { ExamQuantitySelector } from "./components/ExamQuantitySelector";
-import { OnboardingBottomDockToolbar } from "./components/OnboardingBottomDockToolbar";
 import { SelectedEntries } from "./components/SelectedEntries";
 
 type OwnProps = {};
@@ -120,7 +120,7 @@ class OnboardingSubscriptionPage extends Component<
         {api => (
           <BottomToolbarDock
             toolbarNode={
-              <OnboardingBottomDockToolbar>
+              <BottomDockToolbar>
                 <Hidden xsDown>
                   <Typography variant="cardTitle">
                     Subscribe Exam Pack
@@ -140,7 +140,7 @@ class OnboardingSubscriptionPage extends Component<
                     {strings.dashboard_OnboardingSubscriptionPage_PayButtonText}
                   </TypographyButton>
                 </RightToolbarGroup>
-              </OnboardingBottomDockToolbar>
+              </BottomDockToolbar>
             }
           >
             <CardMobileFlat>

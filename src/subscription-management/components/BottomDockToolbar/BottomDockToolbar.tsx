@@ -4,7 +4,7 @@ import styled from "styled";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 
-export const OnboardingBottomDockToolbar: SFC<{}> = props => (
+export const BottomDockToolbar: SFC<{}> = props => (
   <AppBar position="static" color="default">
     <Toolbar>
       <ToolbarContentsWrapper>{props.children}</ToolbarContentsWrapper>

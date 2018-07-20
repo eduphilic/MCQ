@@ -4,7 +4,7 @@ import React, { Component, SFC } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { State } from "store";
-import { SubscriptionManagePage } from "subscription-management";
+import { SubscriptionManagementPage } from "subscription-management";
 import { actions } from "./actions";
 import { navigationLinks } from "./navigationLinks";
 import { OnboardingProgress, onboardingProgressSelector } from "./selectors";
@@ -88,7 +88,9 @@ class DashboardPages extends Component<Props> {
         path="/welcome/entries"
         // component={RedirectComponent || OnboardingEntriesPage}
         // component={RedirectComponent || OnboardingEntriesPage}
-        render={() => <SubscriptionManagePage />}
+        render={() => (
+          <SubscriptionManagementPage routeEntrySelectLocalizationKey="routes_Dashboard_OnboardingEntriesPage" />
+        )}
       />,
       <Route
         key="/welcome/subscriptions"

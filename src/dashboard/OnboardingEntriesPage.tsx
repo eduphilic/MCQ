@@ -9,8 +9,8 @@ import { actions as dashboardActions } from "./actions";
 
 import { TypographyButton } from "components/TypographyButton";
 import { IEntry } from "models";
+import { BottomDockToolbar } from "subscription-management";
 import { EntrySelect } from "./components/EntrySelect";
-import { OnboardingBottomDockToolbar } from "./components/OnboardingBottomDockToolbar";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
 
 type OnboardingEntriesPageProps = {
@@ -44,7 +44,7 @@ class OnboardingEntriesPage extends Component<
       selectedEntryIds.length < entrySelectMeta.minEntriesCount;
 
     const toolbarNode = (
-      <OnboardingBottomDockToolbar>
+      <BottomDockToolbar>
         <FlexSpacer />
         <TypographyButton
           color="primary"
@@ -54,7 +54,7 @@ class OnboardingEntriesPage extends Component<
         >
           {strings.common_NextButtonText}
         </TypographyButton>
-      </OnboardingBottomDockToolbar>
+      </BottomDockToolbar>
     );
 
     return (

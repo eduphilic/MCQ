@@ -1,7 +1,22 @@
 import { Formik } from "formik";
+import { IEntry } from "models";
 import React, { SFC } from "react";
+import { connect } from "react-redux";
+import { Route, Switch } from "react-router-dom";
+import { routePathFromLocalizationKey } from "routes";
+import { State } from "store";
+import { LocalizationKey } from "types";
 
-export type SubscriptionManagePageProps = {};
+type StateProps = {
+  entries: IEntry[];
+};
+
+type OwnProps = {
+  routeEntrySelectLocalizationKey: LocalizationKey;
+};
+export { OwnProps as SubscriptionManagePageProps };
+
+type Props = StateProps & OwnProps;
 
 type FormState = {
   selectedEntryIDs: string[];
@@ -16,10 +31,32 @@ const onSubmitPlaceholder = (values: any) => {
   console.log("values", values);
 };
 
-export const SubscriptionManagePage: SFC<SubscriptionManagePageProps> = () => {
+const SubscriptionManagementPage: SFC<Props> = props => {
+  const { routeEntrySelectLocalizationKey } = props;
+
+  const entrySelectRoute = routePathFromLocalizationKey(
+    routeEntrySelectLocalizationKey,
+  );
+
   return (
     <Formik initialValues={initialFormState} onSubmit={onSubmitPlaceholder}>
-      {() => <div>Placeholder</div>}
+      {() => (
+        <Switch>
+          <Route path={entrySelectRoute}>
+            <div>Placeholder</div>
+          </Route>
+        </Switch>
+      )}
     </Formik>
   );
 };
+
+const SubscriptionManagementPageContainer = connect<
+  StateProps,
+  {},
+  OwnProps,
+  State
+>(({ subscriptionManagement: { entries } }) => ({
+  entries,
+}))(SubscriptionManagementPage);
+export { SubscriptionManagementPageContainer as SubscriptionManagementPage };
