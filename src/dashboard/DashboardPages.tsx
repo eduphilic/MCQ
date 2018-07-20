@@ -4,12 +4,13 @@ import React, { Component, SFC } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { State } from "store";
+import { SubscriptionManagePage } from "subscription-management";
 import { actions } from "./actions";
 import { navigationLinks } from "./navigationLinks";
 import { OnboardingProgress, onboardingProgressSelector } from "./selectors";
 
 import { PostSignupDialogs } from "./components/PostSignupDialogs/PostSignupDialogs";
-import { OnboardingEntriesPage } from "./OnboardingEntriesPage";
+// import { OnboardingEntriesPage } from "./OnboardingEntriesPage";
 import { OnboardingSubscriptionPage } from "./OnboardingSubscriptionPage";
 
 type StateProps = {
@@ -85,7 +86,9 @@ class DashboardPages extends Component<Props> {
       <Route
         key="/welcome/entries"
         path="/welcome/entries"
-        component={RedirectComponent || OnboardingEntriesPage}
+        // component={RedirectComponent || OnboardingEntriesPage}
+        // component={RedirectComponent || OnboardingEntriesPage}
+        render={() => <SubscriptionManagePage />}
       />,
       <Route
         key="/welcome/subscriptions"
