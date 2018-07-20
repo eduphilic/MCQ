@@ -1,9 +1,8 @@
-import { LocalizationKey } from "common/types/LocalizationKey";
-import { strings } from "localization";
+import { LocalizationKey } from "types";
 
 export const routes: {
   path: string;
-  pageTitleLocalizationKey: keyof typeof strings;
+  pageTitleLocalizationKey: LocalizationKey;
 }[] = [
   {
     path: "/",

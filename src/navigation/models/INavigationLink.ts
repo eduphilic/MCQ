@@ -1,5 +1,5 @@
-import { LocalizationKey } from "common/types/LocalizationKey";
 import { ComponentType, ReactElement } from "react";
+import { LocalizationKey } from "types";
 
 /**
  * Represents a navigation link for use in the side drawer and bottom navigation
