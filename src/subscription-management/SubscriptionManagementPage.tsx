@@ -26,6 +26,7 @@ type DispatchProps = {
 
 type OwnProps = RouteComponentProps<{}> & {
   routeEntrySelectLocalizationKey: LocalizationKey;
+  routeCategorySelectLocalizationKey: LocalizationKey;
 };
 export { OwnProps as SubscriptionManagePageProps };
 
@@ -49,7 +50,7 @@ const onSubmitPlaceholder = (values: any) => {
 const SubscriptionManagementPage: SFC<Props> = props => {
   const {
     routeEntrySelectLocalizationKey,
-    match,
+    location,
     loaded,
     entries,
     loadPlaceholderData,
@@ -61,7 +62,8 @@ const SubscriptionManagementPage: SFC<Props> = props => {
   }
 
   const page: Page =
-    routePathFromLocalizationKey(routeEntrySelectLocalizationKey) === match.path
+    routePathFromLocalizationKey(routeEntrySelectLocalizationKey) ===
+    location.pathname
       ? "entry-select"
       : "category-select";
 

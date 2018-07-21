@@ -1,5 +1,10 @@
 import { IEntry, IEntryCategory } from "models";
-import { AppLayout, INavigationLink, PageContentWrapper } from "navigation";
+import {
+  AppLayout,
+  INavigationLink,
+  MultipathRoute,
+  PageContentWrapper,
+} from "navigation";
 import React, { Component, SFC } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
@@ -10,8 +15,6 @@ import { navigationLinks } from "./navigationLinks";
 import { OnboardingProgress, onboardingProgressSelector } from "./selectors";
 
 import { PostSignupDialogs } from "./components/PostSignupDialogs/PostSignupDialogs";
-// import { OnboardingEntriesPage } from "./OnboardingEntriesPage";
-import { OnboardingSubscriptionPage } from "./OnboardingSubscriptionPage";
 
 type StateProps = {
   entries: IEntry[] | null;
@@ -62,8 +65,8 @@ class DashboardPages extends Component<Props> {
         >
           <PageContentWrapper verticalGutters>
             <Switch>
-              {onboardingRoutes}
               {dashboardRoutes}
+              {onboardingRoutes}
             </Switch>
           </PageContentWrapper>
         </AppLayout>
@@ -83,23 +86,18 @@ class DashboardPages extends Component<Props> {
     }
 
     return [
-      <Route
-        key="/welcome/entries"
-        path="/welcome/entries"
-        // component={RedirectComponent || OnboardingEntriesPage}
-        // component={RedirectComponent || OnboardingEntriesPage}
-        render={() => (
-          <SubscriptionManagementPage routeEntrySelectLocalizationKey="routes_Dashboard_OnboardingEntriesPage" />
-        )}
-      />,
-      <Route
-        key="/welcome/subscriptions"
-        path="/welcome/subscriptions"
-        component={
-          RedirectComponent ||
-          (onboardingProgress === "select-subscription"
-            ? OnboardingSubscriptionPage
-            : () => <Redirect to="/welcome/entries" />)
+      <MultipathRoute
+        key="onboarding"
+        paths={["/welcome/entries", "/welcome/subscriptions"]}
+        render={() =>
+          RedirectComponent ? (
+            <RedirectComponent />
+          ) : (
+            <SubscriptionManagementPage
+              routeEntrySelectLocalizationKey="routes_Dashboard_OnboardingEntriesPage"
+              routeCategorySelectLocalizationKey="routes_Dashboard_OnboardingSubscriptionPage"
+            />
+          )
         }
       />,
     ];
