@@ -3,7 +3,7 @@ import { IEntry } from "models";
 import React, { Component, Fragment } from "react";
 import { routePathFromLocalizationKey } from "routes";
 import styled from "styled";
-import { Page, PropsWithFormState } from "./types";
+import { FormState, Page, PropsWithFormState } from "./types";
 
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -133,9 +133,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
         initialSelectedEntries={selectedEntryIDs}
         minSelectedCount={minEntriesRequired}
         maxSelectedCount={entries.length}
-        onSelectionChange={value =>
-          this.props.setFieldValue("selectedEntryIDs", value)
-        }
+        onSelectionChange={this.handleEntrySelectionChange}
       />
     ) : (
       <>
@@ -269,17 +267,41 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
     );
   };
 
+  private handleEntrySelectionChange = (selectedEntryIDs: string[]) => {
+    const { categories, values, setFieldValue } = this.props;
+    const currentSelectedQuantities = values.selectedQuantities.slice();
+
+    const selectedCategories = categories.filter(c =>
+      selectedEntryIDs.includes(c.entryID),
+    );
+
+    const selectedQuantities: FormState["selectedQuantities"] = Array.from(
+      { length: selectedCategories.length },
+      (_, index): FormState["selectedQuantities"][0] => {
+        return (
+          currentSelectedQuantities.find(
+            q => q.categoryID === selectedCategories[index].id,
+          ) || { categoryID: selectedCategories[index].id, quantityIndex: 0 }
+        );
+      },
+    );
+
+    setFieldValue("selectedQuantities", selectedQuantities);
+    setFieldValue("selectedEntryIDs", selectedEntryIDs);
+  };
+
+  private handleEntryRemoveButtonClick = (entryID: string) => {
+    const { values } = this.props;
+
+    const selectedEntryIDs = values.selectedEntryIDs.filter(e => e !== entryID);
+
+    this.handleEntrySelectionChange(selectedEntryIDs);
+  };
+
   private handleNextButtonClick = () => {
     const { history } = this.props;
 
     history.push(this.getSubscriptionPageRoute());
-  };
-
-  private handleEntryRemoveButtonClick = (entryID: string) => {
-    const { values, setFieldValue } = this.props;
-
-    const selectedEntryIDs = values.selectedEntryIDs.filter(e => e !== entryID);
-    setFieldValue("selectedEntryIDs", selectedEntryIDs);
   };
 
   private handleAddMoreButtonClick = () => {
