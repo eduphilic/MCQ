@@ -99,6 +99,27 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
     setFieldValue("selectedQuantities", selectedQuantities);
   };
 
+  private getTotal = (): number => {
+    const { values, examQuantitySelectionSettings } = this.props;
+    const { selectedQuantities } = values;
+    const {
+      quantities,
+      quantitiesFreeIndexes,
+      examPriceRs,
+    } = examQuantitySelectionSettings!;
+
+    const total = selectedQuantities.reduce((accumulator, quantity): number => {
+      const quantityIndex = quantity.quantityIndex;
+
+      const free = quantitiesFreeIndexes.includes(quantityIndex);
+      if (free) return accumulator;
+
+      return accumulator + examPriceRs * quantities[quantityIndex];
+    }, 0);
+
+    return total;
+  };
+
   private renderPageContents = () => {
     const { entries, values } = this.props;
     const { selectedEntryIDs } = values;
@@ -205,11 +226,13 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
   };
 
   private renderToolbarNode = () => {
-    const { values } = this.props;
+    const { values, submitForm } = this.props;
     const page = this.getCurrentPage();
 
     const isNextButtonDisabled =
       values.selectedEntryIDs.length < this.getMinimumEntriesRequired();
+
+    const total = this.getTotal();
 
     return (
       <BottomToolbar>
@@ -225,7 +248,23 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
               {strings.common_NextButtonText}
             </TypographyButton>
           </>
-        ) : null}
+        ) : (
+          <>
+            <Hidden xsDown>
+              <Typography variant="cardTitle">Subscribe Exam Pack</Typography>
+            </Hidden>
+
+            <RightToolbarGroup>
+              <Typography variant="cardTitle" style={{ fontWeight: 600 }}>
+                Total Rs {total}
+              </Typography>
+
+              <TypographyButton color="yellow" filled onClick={submitForm}>
+                {strings.dashboard_OnboardingSubscriptionPage_PayButtonText}
+              </TypographyButton>
+            </RightToolbarGroup>
+          </>
+        )}
       </BottomToolbar>
     );
   };
@@ -256,4 +295,15 @@ const FlexSpacer = styled.div`
 
 const StyledDivider = styled(Divider)`
   margin: ${({ theme }) => theme.spacing.unit * 2}px;
+`;
+
+const RightToolbarGroup = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+
+  > *:first-child {
+    margin-right: ${({ theme }) => theme.spacing.unit * 4}px;
+  }
 `;
