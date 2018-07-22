@@ -1,5 +1,5 @@
 import { IEntryCategory } from "models";
-import { createEntryPlaceholders } from "subscription-management";
+import { createEntryPlaceholders } from "./createEntryPlaceholders";
 
 const entries = createEntryPlaceholders();
 

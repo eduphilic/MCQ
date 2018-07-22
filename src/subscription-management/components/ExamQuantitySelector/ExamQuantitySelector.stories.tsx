@@ -10,7 +10,7 @@ import { ExamQuantitySelector } from "./ExamQuantitySelector";
 
 const examQuantitySelectionSettings = createExamQuantitySelectionSettingsPlaceholder();
 
-storiesOf("Dashboard", module).add(
+storiesOf("Subscription Management", module).add(
   "ExamQuantitySelector",
   withInfo()(() => {
     const selectedQuantityIndex = number("selectedQuantityIndex", 0, {

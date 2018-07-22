@@ -1,4 +1,3 @@
-import { IEntry, IEntryCategory } from "models";
 import {
   AppLayout,
   INavigationLink,
@@ -14,43 +13,22 @@ import {
   isOnboardingSelector,
   SubscriptionManagementPage,
 } from "subscription-management";
-import { actions } from "./actions";
 import { navigationLinks } from "./navigationLinks";
 
 import { PostSignupDialogs } from "./components/PostSignupDialogs/PostSignupDialogs";
 
 type StateProps = {
-  entries: IEntry[] | null;
-  entryCategories: IEntryCategory[] | null;
   isOnboarding: boolean;
   postSignupDialogsShown: boolean;
 };
 
-type DispatchProps = {
-  loadPlaceholderEntries: () => any;
-  loadPlaceholderSubscribedEntries: () => any;
-};
-
 type OwnProps = {};
 
-type Props = StateProps & DispatchProps & OwnProps;
+type Props = StateProps & OwnProps;
 
 class DashboardPages extends Component<Props> {
-  constructor(props: Props) {
-    super(props);
-
-    props.loadPlaceholderEntries();
-    props.loadPlaceholderSubscribedEntries();
-  }
-
   render() {
-    const {
-      entries,
-      entryCategories,
-      isOnboarding,
-      postSignupDialogsShown,
-    } = this.props;
-    if (!entries || !entryCategories) return null;
+    const { isOnboarding, postSignupDialogsShown } = this.props;
 
     const links = this.buildDashboardLinks();
     const onboardingRoutes = this.buildOnboardingRoutes();
@@ -148,27 +126,16 @@ class DashboardPages extends Component<Props> {
   };
 }
 
-const DashboardPagesContainer = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps,
-  State
->(
+const DashboardPagesContainer = connect<StateProps, {}, OwnProps, State>(
   (state): StateProps => {
     const {
-      dashboard: { entries, postSignupDialogsShown },
+      dashboard: { postSignupDialogsShown },
     } = state;
 
     return {
-      entries,
-      entryCategories: {} as any,
       isOnboarding: isOnboardingSelector(state),
       postSignupDialogsShown,
     };
-  },
-  {
-    loadPlaceholderEntries: actions.loadPlaceholderEntries,
-    loadPlaceholderSubscribedEntries: actions.loadPlaceholderSubscribedEntries,
   },
 )(DashboardPages);
 export { DashboardPagesContainer as DashboardPages };

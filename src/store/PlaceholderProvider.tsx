@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { createStore } from "store";
 
-import { actions as dashboardActions } from "dashboard";
 import { actions as examTakingActions } from "exam-taking";
 import { actions as subscriptionManagementActions } from "subscription-management";
 
@@ -12,7 +11,6 @@ export class PlaceholderProvider extends Component {
   constructor(props: {}) {
     super(props);
 
-    this.store.dispatch(dashboardActions.loadPlaceholderEntries());
     this.store.dispatch(examTakingActions.loadPlaceholderExam());
     this.store.dispatch(subscriptionManagementActions.loadPlaceholderData());
   }

@@ -2,12 +2,12 @@ import { action } from "@storybook/addon-actions";
 import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { createEntryPlaceholders } from "subscription-management";
+import { createEntryPlaceholders } from "../../placeholders/createEntryPlaceholders";
 
 import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
 import { SelectedEntries } from "./SelectedEntries";
 
-const stories = storiesOf("Dashboard", module);
+const stories = storiesOf("Subscription Management", module);
 stories.addDecorator(story => (
   <StorybookContentCenterWrapper>{story()}</StorybookContentCenterWrapper>
 ));

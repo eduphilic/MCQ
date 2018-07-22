@@ -112,7 +112,7 @@ const PostSignupDialogsWithMobileDialog = withMobileDialog<any>()(
 
 const PostSignupDialogsContainer = connect<{}, DispatchProps, OwnProps, State>(
   () => ({}),
-  { onSubmit: () => dashboardActions.setPostDialogsShown(true) },
+  { onSubmit: dashboardActions.dismissPostSignupDialogs },
 )(PostSignupDialogsWithMobileDialog);
 
 export { PostSignupDialogsContainer as PostSignupDialogs };
