@@ -11,6 +11,7 @@ export type StateProps = {
   entries: IEntry[];
   categories: IEntryCategory[];
   categoryQuantitySelectionSettings: ICategoryQuantitySelectionSettings | null;
+  subscriptions: ICategorySubscriptions | null;
 };
 
 export type DispatchProps = {

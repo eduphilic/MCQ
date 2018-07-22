@@ -26,6 +26,7 @@ const SubscriptionManagementPageContainer = withRouter(
           entries,
           categories,
           categoryQuantitySelectionSettings,
+          subscriptions,
         },
       } = state;
 
@@ -36,6 +37,8 @@ const SubscriptionManagementPageContainer = withRouter(
         entries,
         categories,
         categoryQuantitySelectionSettings,
+
+        subscriptions,
       };
     },
     {

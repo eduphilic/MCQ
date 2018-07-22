@@ -16,6 +16,7 @@ import { TypographyButton } from "components/TypographyButton";
 import { BottomToolbarDock } from "navigation";
 import { BottomToolbar } from "./components/BottomToolbar";
 import { CategoryQuantitySelector } from "./components/CategoryQuantitySelector";
+import { CategorySubscription } from "./components/CategorySubscription";
 import { EntrySelect } from "./components/EntrySelect";
 import { SelectedEntries } from "./components/SelectedEntries";
 
@@ -155,12 +156,50 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
           </CardContent>
         </CardMobileFlat>
 
+        {this.renderCurrentSubscriptions()}
+
         <LocalizationStateConsumer>
           {({ localizationLanguage }) =>
             this.renderQuantitySelectionCards(localizationLanguage)
           }
         </LocalizationStateConsumer>
       </>
+    );
+  };
+
+  private renderCurrentSubscriptions = () => {
+    const {
+      subscriptions,
+      categories,
+      categoryQuantitySelectionSettings,
+    } = this.props;
+
+    if (!subscriptions) return null;
+
+    const getCategoryLabel = (subscription: typeof subscriptions[0]) =>
+      categories.find(c => c.id === subscription.categoryID)!.title;
+
+    return (
+      <CardMobileFlat>
+        <CardHeader
+          title={
+            <Typography variant="cardTitle">Present Subscription</Typography>
+          }
+        />
+
+        <CardContent>
+          {subscriptions.map(s => (
+            <CategorySubscription
+              key={`${s.subscriptionID}-${s.categoryID}`}
+              categoryLabel={getCategoryLabel(s)}
+              categoryQuantitySelectionSettings={
+                categoryQuantitySelectionSettings!
+              }
+              selectedQuantityIndex={s.quantityIndex}
+            />
+          ))}
+        </CardContent>
+      </CardMobileFlat>
     );
   };
 
