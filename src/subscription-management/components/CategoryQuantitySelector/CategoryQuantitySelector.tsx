@@ -1,32 +1,16 @@
 import { LocalizationStateConsumer } from "localization";
 import React, { ChangeEvent, Component } from "react";
 import styled from "styled";
-import { LocalizedString } from "types";
-import { ICategoryQuantitySelectionSettings } from "../../models/ICategoryQuantitySelectionSettings";
 
 import FormControlLabel, {
   FormControlLabelProps,
 } from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup, { RadioGroupProps } from "@material-ui/core/RadioGroup";
-import Typography from "@material-ui/core/Typography";
 
-export type CategoryQuantitySelectorProps = {
-  /**
-   * Settings that dictate the quantities of exams offered for each category.
-   */
-  categoryQuantitySelectionSettings: ICategoryQuantitySelectionSettings;
+import { CategoryItem, CategoryItemProps } from "../CategoryItem";
 
-  /**
-   * Name of the entry category.
-   */
-  categoryLabel: LocalizedString;
-
-  /**
-   * Selected quantity.
-   */
-  selectedQuantityIndex: number;
-
+export type CategoryQuantitySelectorProps = CategoryItemProps & {
   /**
    * Called on quantity change.
    */
@@ -47,24 +31,13 @@ export class CategoryQuantitySelector extends Component<
   render() {
     const {
       categoryQuantitySelectionSettings,
-      categoryLabel,
       selectedQuantityIndex,
     } = this.props;
 
     return (
       <LocalizationStateConsumer>
         {({ localizationLanguage }) => (
-          <Wrapper>
-            <div>
-              <Typography
-                variant="subheading"
-                component="span"
-                style={{ width: 140, fontWeight: 500 }}
-              >
-                {categoryLabel[localizationLanguage] || categoryLabel.en}
-              </Typography>
-            </div>
-
+          <CategoryItem {...this.props}>
             <QuantityRadioGroup
               value={selectedQuantityIndex.toString()}
               onChange={this.handleChange}
@@ -83,26 +56,12 @@ export class CategoryQuantitySelector extends Component<
                 ),
               )}
             </QuantityRadioGroup>
-          </Wrapper>
+          </CategoryItem>
         )}
       </LocalizationStateConsumer>
     );
   }
 }
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-
-  ${({ theme }) => theme.breakpoints.down("sm")} {
-    flex-wrap: wrap;
-
-    > *:nth-child(1),
-    > *:nth-child(2) {
-      margin-bottom: 8px;
-    }
-  }
-`;
 
 const QuantityRadioGroup = styled<RadioGroupProps>(props => (
   <RadioGroup row {...props} />
