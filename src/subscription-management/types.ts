@@ -1,5 +1,5 @@
 import { InjectedFormikProps } from "formik";
-import { IEntry } from "models";
+import { IEntry, IEntryCategory } from "models";
 import { RouteComponentProps } from "react-router-dom";
 import { IExamQuantitySelectionSettings } from "./models/IExamQuantitySelectionSettings";
 
@@ -8,6 +8,7 @@ export type StateProps = {
   isOnboarding: boolean;
 
   entries: IEntry[];
+  categories: IEntryCategory[];
   examQuantitySelectionSettings: IExamQuantitySelectionSettings | null;
 };
 
@@ -25,4 +26,5 @@ export type Page = "entry-select" | "category-select";
 
 export type FormState = {
   selectedEntryIDs: string[];
+  selectedQuantities: { categoryID: string; quantityIndex: number }[];
 };

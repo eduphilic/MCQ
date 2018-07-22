@@ -1,11 +1,14 @@
 import { LocalizationStateConsumer, strings } from "localization";
-import React, { Component } from "react";
+import { IEntry } from "models";
+import React, { Component, Fragment } from "react";
 import { routePathFromLocalizationKey } from "routes";
 import styled from "styled";
 import { Page, PropsWithFormState } from "./types";
 
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
+import Divider from "@material-ui/core/Divider";
+import Hidden from "@material-ui/core/Hidden";
 
 import { CardMobileFlat } from "components/CardMobileFlat";
 import { Typography } from "components/Typography";
@@ -13,6 +16,7 @@ import { TypographyButton } from "components/TypographyButton";
 import { BottomToolbarDock } from "navigation";
 import { BottomToolbar } from "./components/BottomToolbar";
 import { EntrySelect } from "./components/EntrySelect";
+import { ExamQuantitySelector } from "./components/ExamQuantitySelector";
 import { SelectedEntries } from "./components/SelectedEntries";
 
 export class SubscriptionManagementPage extends Component<PropsWithFormState> {
@@ -65,6 +69,34 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
   private getMinimumEntriesRequired = () => {
     const { isOnboarding } = this.props;
     return isOnboarding ? 1 : 0;
+  };
+
+  private getSelectedQuantityIndex = (categoryID: string): number => {
+    const { values } = this.props;
+    const { selectedQuantities } = values;
+
+    const item = selectedQuantities.find(q => q.categoryID === categoryID);
+
+    return item ? item.quantityIndex : 0;
+  };
+
+  private setSelectedQuantityIndex = (
+    categoryID: string,
+    quantityIndex: number,
+  ) => {
+    const { values, setFieldValue } = this.props;
+    let selectedQuantities = values.selectedQuantities.slice();
+
+    const item: (typeof selectedQuantities)[0] = selectedQuantities.find(
+      q => q.categoryID === categoryID,
+    ) || { categoryID, quantityIndex };
+    item.quantityIndex = quantityIndex;
+
+    selectedQuantities = selectedQuantities
+      .filter(q => q.categoryID !== categoryID)
+      .concat(item);
+
+    setFieldValue("selectedQuantities", selectedQuantities);
   };
 
   private renderPageContents = () => {
@@ -136,8 +168,40 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
             examQuantitySelectionSettings!.examPriceRs.toString(),
           )}
         />
+
+        {this.renderQuantitySelectionCardContents(e)}
       </CardMobileFlat>
     ));
+  };
+
+  private renderQuantitySelectionCardContents = (entry: IEntry) => {
+    const { examQuantitySelectionSettings } = this.props;
+
+    const categories = this.props.categories.filter(
+      c => c.entryID === entry.id,
+    );
+
+    return (
+      <CardContent>
+        {categories.map((c, index) => (
+          <Fragment key={c.id}>
+            <ExamQuantitySelector
+              categoryLabel={c.title}
+              examQuantitySelectionSettings={examQuantitySelectionSettings!}
+              selectedQuantityIndex={this.getSelectedQuantityIndex(c.id)}
+              onChange={quantityIndex =>
+                this.setSelectedQuantityIndex(c.id, quantityIndex)
+              }
+            />
+            {index < categories.length - 1 && (
+              <Hidden mdUp>
+                <StyledDivider />
+              </Hidden>
+            )}
+          </Fragment>
+        ))}
+      </CardContent>
+    );
   };
 
   private renderToolbarNode = () => {
@@ -188,4 +252,8 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
 
 const FlexSpacer = styled.div`
   flex: 1;
+`;
+
+const StyledDivider = styled(Divider)`
+  margin: ${({ theme }) => theme.spacing.unit * 2}px;
 `;

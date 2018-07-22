@@ -11,6 +11,7 @@ export { OwnProps as SubscriptionManagementPageProps };
 
 const initialFormState: FormState = {
   selectedEntryIDs: [],
+  selectedQuantities: [],
 };
 
 const onSubmitPlaceholder = (values: any) => {
@@ -24,6 +25,7 @@ const SubscriptionManagementPageContainer = withRouter(
       subscriptionManagement: {
         loaded,
         entries,
+        categories,
         examQuantitySelectionSettings,
       },
     }): StateProps => ({
@@ -31,6 +33,7 @@ const SubscriptionManagementPageContainer = withRouter(
       isOnboarding: true,
 
       entries,
+      categories,
       examQuantitySelectionSettings,
     }),
     { loadPlaceholderData: actions.loadPlaceholderData },
