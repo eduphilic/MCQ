@@ -57,6 +57,13 @@ const SubscriptionManagementPageContainer = withRouter(
             subscriptionID,
           })),
         );
+
+        if (!formikBag.props.isOnboarding) {
+          alert(
+            "Display congratulations or summary of additional subscriptions purchase.",
+          );
+          formikBag.resetForm();
+        }
       },
     })(SubscriptionManagementPage),
   ),

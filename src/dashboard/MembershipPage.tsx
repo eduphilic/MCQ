@@ -1,7 +1,4 @@
 import React from "react";
+import { SubscriptionManagementPage } from "subscription-management";
 
-export const MembershipPage = () => (
-  <>
-    <div>User Membership Page Contents</div>
-  </>
-);
+export const MembershipPage = () => <SubscriptionManagementPage />;

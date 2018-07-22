@@ -1,7 +1,8 @@
 export const routesEn = {
   routes_Dashboard_DashboardPage: "Dashboard",
   routes_Dashboard_ExamPackPage: "Exam Pack",
-  routes_Dashboard_MembershipPage: "Membership",
+  routes_Dashboard_MembershipEntriesPage: "Membership",
+  routes_Dashboard_MembershipSubscriptionPage: "Membership",
   routes_Dashboard_OnboardingEntriesPage: "Select Your Entry",
   routes_Dashboard_OnboardingSubscriptionPage: "Subscribe Membership",
   routes_Dashboard_SettingsPage: "Settings",

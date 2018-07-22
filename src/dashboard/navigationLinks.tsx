@@ -1,5 +1,6 @@
 import { INavigationLink } from "navigation";
 import React from "react";
+import { routePathFromLocalizationKey } from "routes";
 
 import Assignment from "@material-ui/icons/Assignment";
 import Dashboard from "@material-ui/icons/Dashboard";
@@ -13,25 +14,27 @@ import { SettingsPage } from "./SettingsPage";
 
 export const navigationLinks: INavigationLink[] = [
   {
-    to: "/dashboard",
+    to: routePathFromLocalizationKey("routes_Dashboard_DashboardPage"),
     component: DashboardPage,
     titleLocalizationKey: "routes_Dashboard_DashboardPage",
     iconElement: <Dashboard />,
   },
   {
-    to: "/exam-pack",
+    to: routePathFromLocalizationKey("routes_Dashboard_ExamPackPage"),
     component: ExamPackPage,
     titleLocalizationKey: "routes_Dashboard_ExamPackPage",
     iconElement: <Assignment />,
   },
   {
-    to: "/membership",
+    to: routePathFromLocalizationKey(
+      "routes_Dashboard_MembershipSubscriptionPage",
+    ),
     component: MembershipPage,
-    titleLocalizationKey: "routes_Dashboard_MembershipPage",
+    titleLocalizationKey: "routes_Dashboard_MembershipSubscriptionPage",
     iconElement: <AccountCardDetails />,
   },
   {
-    to: "/settings",
+    to: routePathFromLocalizationKey("routes_Dashboard_SettingsPage"),
     component: SettingsPage,
     titleLocalizationKey: "routes_Dashboard_SettingsPage",
     iconElement: <Settings />,

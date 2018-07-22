@@ -8,6 +8,7 @@ import {
 import React, { Component, SFC } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { routePathFromLocalizationKey } from "routes";
 import { State } from "store";
 import {
   isOnboardingSelector,
@@ -75,12 +76,25 @@ class DashboardPages extends Component<Props> {
     const { isOnboarding } = this.props;
 
     let RedirectComponent: SFC<{}> | undefined;
-    if (!isOnboarding) RedirectComponent = () => <Redirect to="/dashboard" />;
+    if (!isOnboarding) {
+      RedirectComponent = () => (
+        <Redirect
+          to={routePathFromLocalizationKey("routes_Dashboard_DashboardPage")}
+        />
+      );
+    }
 
     return [
       <MultipathRoute
         key="onboarding"
-        paths={["/welcome/entries", "/welcome/subscriptions"]}
+        paths={[
+          routePathFromLocalizationKey(
+            "routes_Dashboard_OnboardingEntriesPage",
+          ),
+          routePathFromLocalizationKey(
+            "routes_Dashboard_OnboardingSubscriptionPage",
+          ),
+        ]}
         render={() =>
           RedirectComponent ? (
             <RedirectComponent />
@@ -102,7 +116,13 @@ class DashboardPages extends Component<Props> {
     let RedirectComponent: SFC<any> | undefined;
 
     if (isOnboarding) {
-      RedirectComponent = () => <Redirect to="/welcome/entries" />;
+      RedirectComponent = () => (
+        <Redirect
+          to={routePathFromLocalizationKey(
+            "routes_Dashboard_OnboardingEntriesPage",
+          )}
+        />
+      );
     }
 
     return navigationLinks.map(l => ({

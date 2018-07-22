@@ -44,7 +44,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
     return routePathFromLocalizationKey(
       isOnboarding
         ? "routes_Dashboard_OnboardingEntriesPage"
-        : "routes_Dashboard_OnboardingEntriesPage",
+        : "routes_Dashboard_MembershipEntriesPage",
     );
   };
 
@@ -54,7 +54,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
     return routePathFromLocalizationKey(
       isOnboarding
         ? "routes_Dashboard_OnboardingSubscriptionPage"
-        : "routes_Dashboard_OnboardingSubscriptionPage",
+        : "routes_Dashboard_MembershipSubscriptionPage",
     );
   };
 

@@ -17,6 +17,26 @@ export const routes: {
     pageTitleLocalizationKey: "routes_Landing_TermsConditions",
   },
   {
+    path: "/dashboard",
+    pageTitleLocalizationKey: "routes_Dashboard_DashboardPage",
+  },
+  {
+    path: "/membership/subscriptions",
+    pageTitleLocalizationKey: "routes_Dashboard_MembershipSubscriptionPage",
+  },
+  {
+    path: "/membership/subscriptions/add",
+    pageTitleLocalizationKey: "routes_Dashboard_MembershipEntriesPage",
+  },
+  {
+    path: "/exam-pack",
+    pageTitleLocalizationKey: "routes_Dashboard_ExamPackPage",
+  },
+  {
+    path: "/settings",
+    pageTitleLocalizationKey: "routes_Dashboard_SettingsPage",
+  },
+  {
     path: "/welcome/entries",
     pageTitleLocalizationKey: "routes_Dashboard_OnboardingEntriesPage",
   },
