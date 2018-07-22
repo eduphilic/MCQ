@@ -1,6 +1,7 @@
 import { LocalizationStateConsumer, strings } from "localization";
 import { IEntry } from "models";
 import React, { Component, Fragment } from "react";
+import { Redirect } from "react-router-dom";
 import { routePathFromLocalizationKey } from "routes";
 import styled from "styled";
 import { FormState, Page, PropsWithFormState } from "./types";
@@ -33,7 +34,15 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
     if (!loaded) return null;
 
     return (
-      <BottomToolbarDock toolbarNode={this.renderToolbarNode()}>
+      <BottomToolbarDock
+        name="subscription-management"
+        toolbarNode={this.renderToolbarNode()}
+        matchedRoutes={[
+          this.getEntryPageRoute(),
+          this.getSubscriptionPageRoute(),
+        ]}
+      >
+        {this.renderRedirects()}
         {this.renderPageContents()}
       </BottomToolbarDock>
     );
@@ -119,6 +128,40 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
     }, 0);
 
     return total;
+  };
+
+  private renderRedirects = () => {
+    const {
+      isOnboarding,
+      location: { pathname },
+      values: { selectedEntryIDs },
+    } = this.props;
+
+    // This is needed so that the swipe layout on mobile will navigate properly.
+    if (
+      !isOnboarding &&
+      pathname ===
+        routePathFromLocalizationKey(
+          "routes_Dashboard_OnboardingSubscriptionPage",
+        )
+    ) {
+      return (
+        <Redirect
+          to={routePathFromLocalizationKey("routes_Dashboard_DashboardPage")}
+        />
+      );
+    }
+
+    // User shouldn't be able to pay for 0 subscriptions during onboarding.
+    if (
+      isOnboarding &&
+      pathname !== this.getEntryPageRoute() &&
+      selectedEntryIDs.length === 0
+    ) {
+      return <Redirect to={this.getEntryPageRoute()} />;
+    }
+
+    return null;
   };
 
   private renderPageContents = () => {

@@ -2,6 +2,8 @@ import { bottomNavBoxShadow } from "css";
 import { strings } from "localization";
 import React, { SFC } from "react";
 import SwipeableViews, { SwipeableViewsProps } from "react-swipeable-views";
+// @ts-ignore
+import { TunnelPlaceholder } from "react-tunnels";
 import styled from "styled";
 import { INavigationLink } from "../../../models/INavigationLink";
 
@@ -38,7 +40,7 @@ export const SwipeableNav: SFC<SwipeableNavProps> = props => {
   } = props;
 
   return (
-    <Wrapper>
+    <Wrapper className="swipeable-nav">
       {/* Place bottom navigation first so shadow overlaps swipe panes. */}
       <NavTheme>
         <StyledBottomNavigation
@@ -57,6 +59,7 @@ export const SwipeableNav: SFC<SwipeableNavProps> = props => {
       </NavTheme>
 
       <StyledSwipeableViews
+        animateHeight
         className={swipeableViewsClassName}
         index={swipeableViewsPaneIndex}
         onChangeIndex={onSwipeableViewsChangeIndex}
@@ -80,6 +83,7 @@ const Wrapper = styled.div`
 
 const StyledBottomNavigation = styled<BottomNavigationProps>(props => (
   <StyledPaper square>
+    <TunnelPlaceholder id="swipeable-nav-bottom-navigation-bar" />
     <BottomNavigation showLabels {...props} />
   </StyledPaper>
 ))`

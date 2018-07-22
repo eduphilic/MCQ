@@ -1,5 +1,7 @@
 import { drawerWidth, fromToolbarHeight } from "css";
 import React, { SFC } from "react";
+// @ts-ignore
+import { TunnelProvider } from "react-tunnels";
 import styled from "styled";
 
 import Drawer, { DrawerProps } from "@material-ui/core/Drawer";
@@ -18,31 +20,37 @@ export const AppLayout: SFC<AppLayoutProps> = props => {
   const { children, links, enableSwipeNavigation } = props;
 
   return (
-    <Wrapper>
-      {/* Top AppBar */}
-      <AppBar />
+    <TunnelProvider>
+      <Wrapper>
+        {/* Top AppBar */}
+        <AppBar />
 
-      {/* Side navigation drawer, shown on tablet and above. */}
-      <Hidden smDown>
-        <NavTheme>
-          <TabletDrawer>
-            <DrawerContents links={links} />
-          </TabletDrawer>
-        </NavTheme>
-      </Hidden>
-
-      <ContentWrapper>
-        {/* Bottom navigation with swipe panels, shown on mobile. */}
-        <Hidden mdUp>
-          <MobileBackgroundColor>
-            {enableSwipeNavigation ? <SwipeableNav links={links} /> : children}
-          </MobileBackgroundColor>
+        {/* Side navigation drawer, shown on tablet and above. */}
+        <Hidden smDown>
+          <NavTheme>
+            <TabletDrawer>
+              <DrawerContents links={links} />
+            </TabletDrawer>
+          </NavTheme>
         </Hidden>
 
-        {/* Tablet/desktop page contents. */}
-        <Hidden smDown>{children}</Hidden>
-      </ContentWrapper>
-    </Wrapper>
+        <ContentWrapper>
+          {/* Bottom navigation with swipe panels, shown on mobile. */}
+          <Hidden mdUp>
+            <MobileBackgroundColor>
+              {enableSwipeNavigation ? (
+                <SwipeableNav links={links} />
+              ) : (
+                children
+              )}
+            </MobileBackgroundColor>
+          </Hidden>
+
+          {/* Tablet/desktop page contents. */}
+          <Hidden smDown>{children}</Hidden>
+        </ContentWrapper>
+      </Wrapper>
+    </TunnelProvider>
   );
 };
 
