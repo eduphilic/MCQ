@@ -5,7 +5,6 @@ import React from "react";
 import { createEntryPlaceholders } from "subscription-management";
 
 import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
-import { IEntrySelectMeta } from "../../models/IEntrySelectMeta";
 import { SelectedEntries } from "./SelectedEntries";
 
 const stories = storiesOf("Dashboard", module);
@@ -14,10 +13,8 @@ stories.addDecorator(story => (
 ));
 
 const entries = createEntryPlaceholders();
-const entrySelectMeta: IEntrySelectMeta = {
-  minEntriesCount: 1,
-  maxEntriesCount: 3,
-};
+const minEntriesCount = 1;
+const maxEntriesCount = 3;
 const selectedEntryIDs = entries.slice(0, 3).map(e => e.id);
 
 stories.add("SelectedEntries", () => {
@@ -28,7 +25,8 @@ stories.add("SelectedEntries", () => {
   return (
     <SelectedEntries
       entries={entries}
-      entrySelectMeta={entrySelectMeta}
+      minEntriesCount={minEntriesCount}
+      maxEntriesCount={maxEntriesCount}
       selectedEntryIDs={selectedEntryIDsToggle}
       onEntryRemoveButtonClick={action("onEntryRemoveButtonClick")}
       onAddMoreButtonClick={action("onAddMoreButtonClick")}

@@ -21,9 +21,8 @@ import { CardMobileFlat } from "components/CardMobileFlat";
 import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
 import { BottomToolbarDock } from "navigation";
-import { BottomToolbar } from "subscription-management";
+import { BottomToolbar, SelectedEntries } from "subscription-management";
 import { ExamQuantitySelector } from "./components/ExamQuantitySelector";
-import { SelectedEntries } from "./components/SelectedEntries";
 
 type OwnProps = {};
 export { OwnProps as OnboardingSubscriptionPageProps };
@@ -154,7 +153,8 @@ class OnboardingSubscriptionPage extends Component<
               <CardContent>
                 <SelectedEntries
                   entries={entries}
-                  entrySelectMeta={entrySelectMeta}
+                  minEntriesCount={entrySelectMeta.minEntriesCount}
+                  maxEntriesCount={entrySelectMeta.maxEntriesCount}
                   selectedEntryIDs={selectedEntryIDs}
                   onEntryRemoveButtonClick={this.handleEntryRemoveButtonClick}
                   onAddMoreButtonClick={this.handleAddMoreEntriesButtonClick}

@@ -3,7 +3,6 @@ import { IEntry } from "models";
 import Carousel, { CarouselSlideRenderControlProps } from "nuka-carousel";
 import React, { SFC } from "react";
 import styled, { css } from "styled";
-import { IEntrySelectMeta } from "../../models/IEntrySelectMeta";
 
 import Avatar from "@material-ui/core/Avatar";
 import Chip from "@material-ui/core/Chip";
@@ -16,7 +15,8 @@ import { Typography } from "components/Typography";
 
 export type SelectedEntriesProps = {
   entries: IEntry[];
-  entrySelectMeta: IEntrySelectMeta;
+  minEntriesCount: number;
+  maxEntriesCount: number;
   selectedEntryIDs: string[];
   onEntryRemoveButtonClick: (entryID: string) => any;
   onAddMoreButtonClick: () => any;
@@ -25,17 +25,16 @@ export type SelectedEntriesProps = {
 export const SelectedEntries: SFC<SelectedEntriesProps> = props => {
   const {
     entries,
-    entrySelectMeta,
+    minEntriesCount,
+    maxEntriesCount,
     selectedEntryIDs,
     onEntryRemoveButtonClick,
     onAddMoreButtonClick,
   } = props;
 
   const selectedEntries = entries.filter(e => selectedEntryIDs.includes(e.id));
-  const isDeleteEnabled =
-    selectedEntries.length - 1 >= entrySelectMeta.minEntriesCount;
-  const isAddMoreEnabled =
-    selectedEntries.length < entrySelectMeta.maxEntriesCount;
+  const isDeleteEnabled = selectedEntries.length - 1 >= minEntriesCount;
+  const isAddMoreEnabled = selectedEntries.length < maxEntriesCount;
 
   return (
     <>
