@@ -1,6 +1,7 @@
 import { InjectedFormikProps } from "formik";
 import { IEntry, IEntryCategory } from "models";
 import { RouteComponentProps } from "react-router-dom";
+import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
 import { IExamQuantitySelectionSettings } from "./models/IExamQuantitySelectionSettings";
 
 export type StateProps = {
@@ -14,6 +15,8 @@ export type StateProps = {
 
 export type DispatchProps = {
   loadPlaceholderData: () => any;
+
+  submitSubscriptions: (subscriptions: ICategorySubscriptions) => any;
 };
 
 export type OwnProps = RouteComponentProps<{}> & {};

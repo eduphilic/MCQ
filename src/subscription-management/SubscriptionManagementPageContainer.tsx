@@ -2,6 +2,8 @@ import { withFormik } from "formik";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { State } from "store";
+// tslint:disable-next-line:import-name
+import uuidv1 from "uuid/v1";
 import { actions } from "./actions";
 import { DispatchProps, FormState, OwnProps, Props, StateProps } from "./types";
 
@@ -12,11 +14,6 @@ export { OwnProps as SubscriptionManagementPageProps };
 const initialFormState: FormState = {
   selectedEntryIDs: [],
   selectedQuantities: [],
-};
-
-const onSubmitPlaceholder = (values: any) => {
-  /* tslint:disable-next-line:no-console */
-  console.log("values", values);
 };
 
 const SubscriptionManagementPageContainer = withRouter(
@@ -36,11 +33,26 @@ const SubscriptionManagementPageContainer = withRouter(
       categories,
       examQuantitySelectionSettings,
     }),
-    { loadPlaceholderData: actions.loadPlaceholderData },
+    {
+      loadPlaceholderData: actions.loadPlaceholderData,
+      submitSubscriptions: actions.subscriptionAdditionSuccess,
+    },
   )(
     withFormik<Props, FormState>({
       mapPropsToValues: () => initialFormState,
-      handleSubmit: onSubmitPlaceholder,
+      handleSubmit: (values, formikBag) => {
+        const { selectedQuantities } = values;
+        const { submitSubscriptions } = formikBag.props;
+
+        const subscriptionID = uuidv1();
+
+        submitSubscriptions(
+          selectedQuantities.map(q => ({
+            ...q,
+            subscriptionID,
+          })),
+        );
+      },
     })(SubscriptionManagementPage),
   ),
 );

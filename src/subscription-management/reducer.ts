@@ -1,6 +1,7 @@
 import { IEntry, IEntryCategory } from "models";
 import { createReducer } from "utils";
 import { Actions, SubscriptionManagementAction } from "./actions";
+import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
 import { IExamQuantitySelectionSettings } from "./models/IExamQuantitySelectionSettings";
 
 import { createEntryCategoryPlaceholders } from "./placeholders/createEntryCategoryPlaceholders";
@@ -14,6 +15,8 @@ type State = {
   entries: IEntry[];
   categories: IEntryCategory[];
   examQuantitySelectionSettings: IExamQuantitySelectionSettings | null;
+
+  subscriptions: ICategorySubscriptions | null;
 };
 
 const initialState: State = {
@@ -23,6 +26,8 @@ const initialState: State = {
   entries: [],
   categories: [],
   examQuantitySelectionSettings: null,
+
+  subscriptions: [],
 };
 
 export const reducer = createReducer<
@@ -38,5 +43,13 @@ export const reducer = createReducer<
     entries: createEntryPlaceholders(),
     categories: createEntryCategoryPlaceholders(),
     examQuantitySelectionSettings: createExamQuantitySelectionSettingsPlaceholder(),
+  }),
+
+  [SubscriptionManagementAction.SubscriptionAdditionSuccess]: (
+    state,
+    action,
+  ) => ({
+    ...state,
+    subscriptions: (state.subscriptions || []).concat(action.payload),
   }),
 });
