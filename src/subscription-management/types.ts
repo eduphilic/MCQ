@@ -1,7 +1,6 @@
 import { InjectedFormikProps } from "formik";
 import { IEntry } from "models";
 import { RouteComponentProps } from "react-router-dom";
-import { LocalizationKey } from "types";
 
 export type StateProps = {
   loaded: boolean;
@@ -13,10 +12,7 @@ export type DispatchProps = {
   loadPlaceholderData: () => any;
 };
 
-export type OwnProps = RouteComponentProps<{}> & {
-  routeEntrySelectLocalizationKey: LocalizationKey;
-  routeCategorySelectLocalizationKey: LocalizationKey;
-};
+export type OwnProps = RouteComponentProps<{}> & {};
 
 export type Props = StateProps & DispatchProps & OwnProps;
 

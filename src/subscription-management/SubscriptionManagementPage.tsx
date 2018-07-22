@@ -1,10 +1,15 @@
+import { strings } from "localization";
 import React, { Component } from "react";
 import { routePathFromLocalizationKey } from "routes";
 import styled from "styled";
 import { Page, PropsWithFormState } from "./types";
 
+import CardContent from "@material-ui/core/CardContent";
+import CardHeader from "@material-ui/core/CardHeader";
+
+import { CardMobileFlat } from "components/CardMobileFlat";
+import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
-import { strings } from "localization";
 import { BottomToolbarDock } from "navigation";
 import { BottomToolbar } from "./components/BottomToolbar";
 import { EntrySelect } from "./components/EntrySelect";
@@ -17,34 +22,48 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
   }
 
   render() {
-    const { routeEntrySelectLocalizationKey, loaded, location } = this.props;
+    const { loaded } = this.props;
 
     if (!loaded) return null;
 
-    const page =
-      routePathFromLocalizationKey(routeEntrySelectLocalizationKey) ===
-      location.pathname
-        ? "entry-select"
-        : "category-select";
-
     return (
-      <BottomToolbarDock toolbarNode={renderToolbarNode(page)}>
+      <BottomToolbarDock toolbarNode={this.renderToolbarNode()}>
         {this.renderPageContents()}
       </BottomToolbarDock>
     );
   }
 
-  private getCurrentPage = (): Page => {
-    const {
-      location: { pathname },
-      routeEntrySelectLocalizationKey,
-    } = this.props;
+  private getEntryPageRoute = () => {
+    const { isOnboarding } = this.props;
 
-    const currentPageRoute = routePathFromLocalizationKey(
-      routeEntrySelectLocalizationKey,
+    return routePathFromLocalizationKey(
+      isOnboarding
+        ? "routes_Dashboard_OnboardingEntriesPage"
+        : "routes_Dashboard_OnboardingEntriesPage",
     );
+  };
 
-    return pathname === currentPageRoute ? "entry-select" : "category-select";
+  private getSubscriptionPageRoute = () => {
+    const { isOnboarding } = this.props;
+
+    return routePathFromLocalizationKey(
+      isOnboarding
+        ? "routes_Dashboard_OnboardingSubscriptionPage"
+        : "routes_Dashboard_OnboardingSubscriptionPage",
+    );
+  };
+
+  private getCurrentPage = (): Page => {
+    const { location } = this.props;
+
+    return location.pathname === this.getEntryPageRoute()
+      ? "entry-select"
+      : "category-select";
+  };
+
+  private getMinimumEntriesRequired = () => {
+    const { isOnboarding } = this.props;
+    return isOnboarding ? 1 : 0;
   };
 
   private renderPageContents = () => {
@@ -54,36 +73,56 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
       <EntrySelect
         entries={this.props.entries}
         initialSelectedEntries={this.props.values.selectedEntryIDs}
-        minSelectedCount={1}
+        minSelectedCount={this.getMinimumEntriesRequired()}
         maxSelectedCount={this.props.entries.length}
         onSelectionChange={selectedEntryIDs =>
           this.props.setFieldValue("selectedEntryIDs", selectedEntryIDs)
         }
       />
-    ) : null;
+    ) : (
+      <CardMobileFlat>
+        <CardHeader
+          title={
+            <Typography variant="cardTitle">Your Selected Entries</Typography>
+          }
+        />
+        <CardContent>{/* */}</CardContent>
+      </CardMobileFlat>
+    );
+  };
+
+  private renderToolbarNode = () => {
+    const { values } = this.props;
+    const page = this.getCurrentPage();
+
+    const isNextButtonDisabled =
+      values.selectedEntryIDs.length < this.getMinimumEntriesRequired();
+
+    return (
+      <BottomToolbar>
+        {page === "entry-select" ? (
+          <>
+            <FlexSpacer />
+            <TypographyButton
+              color="primary"
+              filled
+              disabled={isNextButtonDisabled}
+              onClick={this.handleNextButtonClick}
+            >
+              {strings.common_NextButtonText}
+            </TypographyButton>
+          </>
+        ) : null}
+      </BottomToolbar>
+    );
+  };
+
+  private handleNextButtonClick = () => {
+    const { history } = this.props;
+
+    history.push(this.getSubscriptionPageRoute());
   };
 }
-
-const renderToolbarNode = (
-  // _formikProps: FormikProps<FormState>,
-  page: Page,
-) => (
-  <BottomToolbar>
-    {page === "entry-select" ? (
-      <>
-        <FlexSpacer />
-        <TypographyButton
-          color="primary"
-          filled
-          // disabled={isNextButtonDisabled}
-          // onClick={this.handleNextButtonClick}
-        >
-          {strings.common_NextButtonText}
-        </TypographyButton>
-      </>
-    ) : null}
-  </BottomToolbar>
-);
 
 const FlexSpacer = styled.div`
   flex: 1;

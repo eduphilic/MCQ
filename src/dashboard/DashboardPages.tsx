@@ -93,10 +93,7 @@ class DashboardPages extends Component<Props> {
           RedirectComponent ? (
             <RedirectComponent />
           ) : (
-            <SubscriptionManagementPage
-              routeEntrySelectLocalizationKey="routes_Dashboard_OnboardingEntriesPage"
-              routeCategorySelectLocalizationKey="routes_Dashboard_OnboardingSubscriptionPage"
-            />
+            <SubscriptionManagementPage />
           )
         }
       />,
