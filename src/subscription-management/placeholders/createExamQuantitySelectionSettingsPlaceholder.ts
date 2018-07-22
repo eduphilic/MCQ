@@ -1,6 +1,6 @@
-import { IExamQuantitySelectMeta } from "../models/IExamQuantitySelectMeta";
+import { IExamQuantitySelectionSettings } from "../models/IExamQuantitySelectionSettings";
 
-export const createExamQuantitySelectMetaPlaceholder = (): IExamQuantitySelectMeta => ({
+export const createExamQuantitySelectionSettingsPlaceholder = (): IExamQuantitySelectionSettings => ({
   examPriceRs: 50,
   quantities: [5, 10, 20, 1],
   quantitiesLabels: [

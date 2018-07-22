@@ -3,7 +3,7 @@ import { LocalizedString } from "types";
 /**
  * Provides the quantity options for Entry Categories.
  */
-export interface IExamQuantitySelectMeta {
+export interface IExamQuantitySelectionSettings {
   /** Price per exam in (Rs). */
   examPriceRs: number;
 

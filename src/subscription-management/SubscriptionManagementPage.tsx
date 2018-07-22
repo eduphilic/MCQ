@@ -114,7 +114,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
   };
 
   private renderQuantitySelectionCards = (language: "en" | "hi") => {
-    const { entries, examPriceRS, values } = this.props;
+    const { entries, examQuantitySelectionSettings, values } = this.props;
     const { selectedEntryIDs } = values;
 
     const selectedEntries = entries.filter(e =>
@@ -133,7 +133,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
           // Exam pricing text.
           subheader={strings.subscription_management_QuantitySelectionCardPricingText.replace(
             "{}",
-            examPriceRS.toString(),
+            examQuantitySelectionSettings!.examPriceRs.toString(),
           )}
         />
       </CardMobileFlat>

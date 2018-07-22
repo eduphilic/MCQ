@@ -5,10 +5,10 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
-import { createExamQuantitySelectMetaPlaceholder } from "../../placeholders/createExamQuantitySelectMetaPlaceholder";
+import { createExamQuantitySelectionSettingsPlaceholder } from "../../placeholders/createExamQuantitySelectionSettingsPlaceholder";
 import { ExamQuantitySelector } from "./ExamQuantitySelector";
 
-const examQuantitySelectMeta = createExamQuantitySelectMetaPlaceholder();
+const examQuantitySelectionSettings = createExamQuantitySelectionSettingsPlaceholder();
 
 storiesOf("Dashboard", module).add(
   "ExamQuantitySelector",
@@ -23,7 +23,7 @@ storiesOf("Dashboard", module).add(
     return (
       <StorybookContentCenterWrapper>
         <ExamQuantitySelector
-          examQuantitySelectMeta={examQuantitySelectMeta}
+          examQuantitySelectionSettings={examQuantitySelectionSettings}
           categoryLabel={{ en: "Sol GD" }}
           selectedQuantityIndex={selectedQuantityIndex}
           onChange={action("onChange")}

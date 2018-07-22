@@ -1,8 +1,7 @@
-// import { strings } from "localization";
 import React, { ChangeEvent, Component } from "react";
 import styled from "styled";
 import { LocalizedString } from "types";
-import { IExamQuantitySelectMeta } from "../../models/IExamQuantitySelectMeta";
+import { IExamQuantitySelectionSettings } from "../../models/IExamQuantitySelectionSettings";
 
 import FormControlLabel, {
   FormControlLabelProps,
@@ -15,7 +14,7 @@ export type ExamQuantitySelectorProps = {
   /**
    * Settings that dictate the quantities of exams offered for each category.
    */
-  examQuantitySelectMeta: IExamQuantitySelectMeta;
+  examQuantitySelectionSettings: IExamQuantitySelectionSettings;
 
   /**
    * Name of the entry category.
@@ -44,7 +43,7 @@ export class ExamQuantitySelector extends Component<ExamQuantitySelectorProps> {
 
   render() {
     const {
-      examQuantitySelectMeta,
+      examQuantitySelectionSettings,
       categoryLabel,
       selectedQuantityIndex,
     } = this.props;
@@ -62,27 +61,20 @@ export class ExamQuantitySelector extends Component<ExamQuantitySelectorProps> {
           </Typography>
         </div>
 
-        {/* <PricingTextWrapper>
-          <Typography variant="subheading" component="span">
-            {strings.dashboard_ExamQuantitySelector_PricingText.replace(
-              "{}",
-              examQuantitySelectMeta.examPriceRs.toString(),
-            )}
-          </Typography>
-        </PricingTextWrapper> */}
-
         <QuantityRadioGroup
           value={selectedQuantityIndex.toString()}
           onChange={this.handleChange}
         >
-          {examQuantitySelectMeta.quantities.map((quantityValue, index) => (
-            <QuantityRadio
-              key={`${quantityValue}-${index}`}
-              value={index.toString()}
-              // TODO: Select correct localization.
-              label={examQuantitySelectMeta.quantitiesLabels[index].en}
-            />
-          ))}
+          {examQuantitySelectionSettings.quantities.map(
+            (quantityValue, index) => (
+              <QuantityRadio
+                key={`${quantityValue}-${index}`}
+                value={index.toString()}
+                // TODO: Select correct localization.
+                label={examQuantitySelectionSettings.quantitiesLabels[index].en}
+              />
+            ),
+          )}
         </QuantityRadioGroup>
       </Wrapper>
     );

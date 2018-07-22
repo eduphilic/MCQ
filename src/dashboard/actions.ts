@@ -8,7 +8,6 @@ export enum DashboardAction {
   LoadPlaceholderEntryCategories = "[dashboard] Load Placeholder Entry Categories",
 
   LoadPlaceholderSubscribedEntries = "[dashboard] Load Placeholder Subscribed Entries",
-  LoadPlaceholderExamQuantitySelectMeta = "[dashboard] Load Placeholder Exam Quantity Select Meta",
 
   SetEntriesPendingPurchase = "[dashboard] Set Entries Pending Purchase",
 
@@ -25,8 +24,6 @@ export const actions = {
 
   loadPlaceholderSubscribedEntries: () =>
     createAction(DashboardAction.LoadPlaceholderSubscribedEntries),
-  loadPlaceholderExamQuantitySelectMeta: () =>
-    createAction(DashboardAction.LoadPlaceholderExamQuantitySelectMeta),
 
   setEntriesPendingPurchase: (entries: IEntry[]) =>
     createAction(DashboardAction.SetEntriesPendingPurchase, entries),

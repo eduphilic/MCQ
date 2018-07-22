@@ -4,18 +4,15 @@ import { Actions, DashboardAction } from "./actions";
 import { IEntry, IEntryCategory } from "models";
 import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
-import { IExamQuantitySelectMeta } from "./models/IExamQuantitySelectMeta";
 
 import { createEntryPlaceholders } from "subscription-management";
 import { createEntryCategoryPlaceholders } from "./placeholders/createEntryCategoryPlaceholders";
-import { createExamQuantitySelectMetaPlaceholder } from "./placeholders/createExamQuantitySelectMetaPlaceholder";
 
 export type State = {
   entries: IEntry[] | null;
   entryCategories: IEntryCategory[] | null;
 
   entrySelectMeta: IEntrySelectMeta | null;
-  examQuantitySelectMeta: IExamQuantitySelectMeta | null;
 
   entriesPendingPurchase: IEntry[];
 
@@ -30,7 +27,6 @@ const initialState: State = {
   entryCategories: null,
 
   entrySelectMeta: null,
-  examQuantitySelectMeta: null,
 
   entriesPendingPurchase: [],
 
@@ -59,10 +55,6 @@ export const reducer = createReducer<State, Actions, DashboardAction>(
     [DashboardAction.LoadPlaceholderSubscribedEntries]: state => ({
       ...state,
       subscribedEntries: [],
-    }),
-    [DashboardAction.LoadPlaceholderExamQuantitySelectMeta]: state => ({
-      ...state,
-      examQuantitySelectMeta: createExamQuantitySelectMetaPlaceholder(),
     }),
 
     [DashboardAction.SetEntriesPendingPurchase]: (state, action) => ({

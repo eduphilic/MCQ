@@ -9,7 +9,6 @@ import styled from "styled";
 import { actions as dashboardActions } from "./actions";
 import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
-import { IExamQuantitySelectMeta } from "./models/IExamQuantitySelectMeta";
 import { OnboardingProgress, onboardingProgressSelector } from "./selectors";
 
 import { Divider } from "@material-ui/core";
@@ -21,8 +20,12 @@ import { CardMobileFlat } from "components/CardMobileFlat";
 import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
 import { BottomToolbarDock } from "navigation";
-import { BottomToolbar, SelectedEntries } from "subscription-management";
-import { ExamQuantitySelector } from "./components/ExamQuantitySelector";
+import {
+  BottomToolbar,
+  ExamQuantitySelector,
+  IExamQuantitySelectionSettings,
+  SelectedEntries,
+} from "subscription-management";
 
 type OwnProps = {};
 export { OwnProps as OnboardingSubscriptionPageProps };
@@ -33,7 +36,7 @@ type StateProps = {
   entryCategories: IEntryCategory[];
   entrySelectMeta: IEntrySelectMeta;
   selectedEntryIDs: string[];
-  examQuantitySelectMeta: IExamQuantitySelectMeta;
+  examQuantitySelectMeta: IExamQuantitySelectionSettings;
 };
 
 type DispatchProps = {
@@ -182,7 +185,7 @@ class OnboardingSubscriptionPage extends Component<
                       <Fragment key={c.id}>
                         <ExamQuantitySelector
                           categoryLabel={c.title}
-                          examQuantitySelectMeta={examQuantitySelectMeta}
+                          examQuantitySelectionSettings={examQuantitySelectMeta}
                           selectedQuantityIndex={api.values[c.id]}
                           // tslint:disable-next-line:no-empty
                           onChange={quantityIndex =>
@@ -259,7 +262,7 @@ const OnboardingSubscriptionPageContainer = connect(
     entryCategories: dashboard.entryCategories,
     entrySelectMeta: dashboard.entrySelectMeta,
     selectedEntryIDs: dashboard.entriesPendingPurchase.map(e => e.id),
-    examQuantitySelectMeta: dashboard.examQuantitySelectMeta,
+    examQuantitySelectMeta: {} as any,
   }),
   {
     onEntriesPendingPurchaseChange: dashboardActions.setEntriesPendingPurchase,
@@ -276,7 +279,11 @@ export {
 
 const calculateTotal = (
   subscriptions: ICategorySubscriptions,
-  { examPriceRs, quantities, quantitiesFreeIndexes }: IExamQuantitySelectMeta,
+  {
+    examPriceRs,
+    quantities,
+    quantitiesFreeIndexes,
+  }: IExamQuantitySelectionSettings,
 ): number => {
   const total = Object.values(subscriptions).reduce((acc, quantityIndex) => {
     const free = quantitiesFreeIndexes.includes(quantityIndex);

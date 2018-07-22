@@ -1,15 +1,17 @@
 import { IEntry } from "models";
 import { createReducer } from "utils";
 import { Actions, SubscriptionManagementAction } from "./actions";
+import { IExamQuantitySelectionSettings } from "./models/IExamQuantitySelectionSettings";
 
 import { createEntryPlaceholders } from "./placeholders/createEntryPlaceholders";
+import { createExamQuantitySelectionSettingsPlaceholder } from "./placeholders/createExamQuantitySelectionSettingsPlaceholder";
 
 type State = {
   loading: boolean;
   loaded: boolean;
 
   entries: IEntry[];
-  examPriceRS: number;
+  examQuantitySelectionSettings: IExamQuantitySelectionSettings | null;
 };
 
 const initialState: State = {
@@ -17,7 +19,7 @@ const initialState: State = {
   loaded: false,
 
   entries: [],
-  examPriceRS: 0,
+  examQuantitySelectionSettings: null,
 };
 
 export const reducer = createReducer<
@@ -31,6 +33,6 @@ export const reducer = createReducer<
     loaded: true,
 
     entries: createEntryPlaceholders(),
-    examPriceRS: 50,
+    examQuantitySelectionSettings: createExamQuantitySelectionSettingsPlaceholder(),
   }),
 });
