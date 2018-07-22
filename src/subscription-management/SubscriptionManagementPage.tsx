@@ -1,4 +1,4 @@
-import { strings } from "localization";
+import { LocalizationStateConsumer, strings } from "localization";
 import React, { Component } from "react";
 import { routePathFromLocalizationKey } from "routes";
 import styled from "styled";
@@ -85,24 +85,59 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
         }
       />
     ) : (
-      <CardMobileFlat>
-        <CardHeader
-          title={
-            <Typography variant="cardTitle">Your Selected Entries</Typography>
-          }
-        />
-        <CardContent>
-          <SelectedEntries
-            entries={entries}
-            minEntriesCount={minEntriesRequired}
-            maxEntriesCount={entries.length}
-            selectedEntryIDs={selectedEntryIDs}
-            onEntryRemoveButtonClick={this.handleEntryRemoveButtonClick}
-            onAddMoreButtonClick={this.handleAddMoreButtonClick}
+      <>
+        <CardMobileFlat>
+          <CardHeader
+            title={
+              <Typography variant="cardTitle">Your Selected Entries</Typography>
+            }
           />
-        </CardContent>
-      </CardMobileFlat>
+          <CardContent>
+            <SelectedEntries
+              entries={entries}
+              minEntriesCount={minEntriesRequired}
+              maxEntriesCount={entries.length}
+              selectedEntryIDs={selectedEntryIDs}
+              onEntryRemoveButtonClick={this.handleEntryRemoveButtonClick}
+              onAddMoreButtonClick={this.handleAddMoreButtonClick}
+            />
+          </CardContent>
+        </CardMobileFlat>
+
+        <LocalizationStateConsumer>
+          {({ localizationLanguage }) =>
+            this.renderQuantitySelectionCards(localizationLanguage)
+          }
+        </LocalizationStateConsumer>
+      </>
     );
+  };
+
+  private renderQuantitySelectionCards = (language: "en" | "hi") => {
+    const { entries, examPriceRS, values } = this.props;
+    const { selectedEntryIDs } = values;
+
+    const selectedEntries = entries.filter(e =>
+      selectedEntryIDs.includes(e.id),
+    );
+
+    return selectedEntries.map(e => (
+      <CardMobileFlat key={e.id}>
+        <CardHeader
+          // Entry title.
+          title={
+            <Typography variant="cardTitle">
+              {e.title[language] || e.title.en}
+            </Typography>
+          }
+          // Exam pricing text.
+          subheader={strings.subscription_management_QuantitySelectionCardPricingText.replace(
+            "{}",
+            examPriceRS.toString(),
+          )}
+        />
+      </CardMobileFlat>
+    ));
   };
 
   private renderToolbarNode = () => {

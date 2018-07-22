@@ -4,8 +4,10 @@ import { RouteComponentProps } from "react-router-dom";
 
 export type StateProps = {
   loaded: boolean;
-  entries: IEntry[];
   isOnboarding: boolean;
+
+  entries: IEntry[];
+  examPriceRS: number;
 };
 
 export type DispatchProps = {

@@ -9,6 +9,7 @@ type State = {
   loaded: boolean;
 
   entries: IEntry[];
+  examPriceRS: number;
 };
 
 const initialState: State = {
@@ -16,6 +17,7 @@ const initialState: State = {
   loaded: false,
 
   entries: [],
+  examPriceRS: 0,
 };
 
 export const reducer = createReducer<
@@ -27,6 +29,8 @@ export const reducer = createReducer<
     ...state,
     loading: false,
     loaded: true,
+
     entries: createEntryPlaceholders(),
+    examPriceRS: 50,
   }),
 });

@@ -20,10 +20,12 @@ const onSubmitPlaceholder = (values: any) => {
 
 const SubscriptionManagementPageContainer = withRouter(
   connect<StateProps, DispatchProps, OwnProps, State>(
-    ({ subscriptionManagement: { loaded, entries } }) => ({
+    ({ subscriptionManagement: { loaded, entries, examPriceRS } }) => ({
       loaded,
-      entries,
       isOnboarding: true,
+
+      entries,
+      examPriceRS,
     }),
     { loadPlaceholderData: actions.loadPlaceholderData },
   )(

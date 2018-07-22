@@ -1,1 +1,3 @@
-export const subscriptionManagementEn = {};
+export const subscriptionManagementEn = {
+  subscription_management_QuantitySelectionCardPricingText: "(Rs {} Per Exam)",
+};

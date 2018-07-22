@@ -169,7 +169,7 @@ class OnboardingSubscriptionPage extends Component<
                   title={
                     <Typography variant="cardTitle">{e.title.en}</Typography>
                   }
-                  subheader={strings.dashboard_ExamQuantitySelector_PricingText.replace(
+                  subheader={strings.subscription_management_QuantitySelectionCardPricingText.replace(
                     "{}",
                     examQuantitySelectMeta.examPriceRs.toString(),
                   )}
