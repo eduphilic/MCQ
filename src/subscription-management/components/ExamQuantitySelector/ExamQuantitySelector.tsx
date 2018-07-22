@@ -1,3 +1,4 @@
+import { LocalizationStateConsumer } from "localization";
 import React, { ChangeEvent, Component } from "react";
 import styled from "styled";
 import { LocalizedString } from "types";
@@ -49,34 +50,40 @@ export class ExamQuantitySelector extends Component<ExamQuantitySelectorProps> {
     } = this.props;
 
     return (
-      <Wrapper>
-        <div>
-          <Typography
-            variant="subheading"
-            component="span"
-            style={{ width: 140, fontWeight: 500 }}
-          >
-            {/* TODO: Select correct localization. */}
-            {categoryLabel.en}
-          </Typography>
-        </div>
+      <LocalizationStateConsumer>
+        {({ localizationLanguage }) => (
+          <Wrapper>
+            <div>
+              <Typography
+                variant="subheading"
+                component="span"
+                style={{ width: 140, fontWeight: 500 }}
+              >
+                {categoryLabel[localizationLanguage] || categoryLabel.en}
+              </Typography>
+            </div>
 
-        <QuantityRadioGroup
-          value={selectedQuantityIndex.toString()}
-          onChange={this.handleChange}
-        >
-          {examQuantitySelectionSettings.quantities.map(
-            (quantityValue, index) => (
-              <QuantityRadio
-                key={`${quantityValue}-${index}`}
-                value={index.toString()}
-                // TODO: Select correct localization.
-                label={examQuantitySelectionSettings.quantitiesLabels[index].en}
-              />
-            ),
-          )}
-        </QuantityRadioGroup>
-      </Wrapper>
+            <QuantityRadioGroup
+              value={selectedQuantityIndex.toString()}
+              onChange={this.handleChange}
+            >
+              {examQuantitySelectionSettings.quantities.map(
+                (quantityValue, index) => (
+                  <QuantityRadio
+                    key={`${quantityValue}-${index}`}
+                    value={index.toString()}
+                    label={
+                      // prettier-ignore
+                      examQuantitySelectionSettings.quantitiesLabels[index][localizationLanguage] ||
+                      examQuantitySelectionSettings.quantitiesLabels[index].en
+                    }
+                  />
+                ),
+              )}
+            </QuantityRadioGroup>
+          </Wrapper>
+        )}
+      </LocalizationStateConsumer>
     );
   }
 }
@@ -94,16 +101,6 @@ const Wrapper = styled.div`
     }
   }
 `;
-
-// const PricingTextWrapper = styled.div`
-//   flex: 1;
-//   padding-right: 16px;
-//   text-align: right;
-
-//   ${({ theme }) => theme.breakpoints.down("sm")} {
-//     padding-right: 0;
-//   }
-// `;
 
 const QuantityRadioGroup = styled<RadioGroupProps>(props => (
   <RadioGroup row {...props} />
