@@ -13,7 +13,7 @@ import { TypographyButton } from "components/TypographyButton";
 import { BottomToolbarDock } from "navigation";
 import { BottomToolbar } from "./components/BottomToolbar";
 import { EntrySelect } from "./components/EntrySelect";
-// import { SelectedEntries } from "./components/SelectedEntries";
+import { SelectedEntries } from "./components/SelectedEntries";
 
 export class SubscriptionManagementPage extends Component<PropsWithFormState> {
   componentDidMount() {
@@ -68,16 +68,20 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
   };
 
   private renderPageContents = () => {
+    const { entries, values } = this.props;
+    const { selectedEntryIDs } = values;
+
+    const minEntriesRequired = this.getMinimumEntriesRequired();
     const currentPage = this.getCurrentPage();
 
     return currentPage === "entry-select" ? (
       <EntrySelect
-        entries={this.props.entries}
-        initialSelectedEntries={this.props.values.selectedEntryIDs}
-        minSelectedCount={this.getMinimumEntriesRequired()}
-        maxSelectedCount={this.props.entries.length}
-        onSelectionChange={selectedEntryIDs =>
-          this.props.setFieldValue("selectedEntryIDs", selectedEntryIDs)
+        entries={entries}
+        initialSelectedEntries={selectedEntryIDs}
+        minSelectedCount={minEntriesRequired}
+        maxSelectedCount={entries.length}
+        onSelectionChange={value =>
+          this.props.setFieldValue("selectedEntryIDs", value)
         }
       />
     ) : (
@@ -87,7 +91,16 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
             <Typography variant="cardTitle">Your Selected Entries</Typography>
           }
         />
-        <CardContent>{/* */}</CardContent>
+        <CardContent>
+          <SelectedEntries
+            entries={entries}
+            minEntriesCount={minEntriesRequired}
+            maxEntriesCount={entries.length}
+            selectedEntryIDs={selectedEntryIDs}
+            onEntryRemoveButtonClick={this.handleEntryRemoveButtonClick}
+            onAddMoreButtonClick={this.handleAddMoreButtonClick}
+          />
+        </CardContent>
       </CardMobileFlat>
     );
   };
@@ -122,6 +135,19 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
     const { history } = this.props;
 
     history.push(this.getSubscriptionPageRoute());
+  };
+
+  private handleEntryRemoveButtonClick = (entryID: string) => {
+    const { values, setFieldValue } = this.props;
+
+    const selectedEntryIDs = values.selectedEntryIDs.filter(e => e !== entryID);
+    setFieldValue("selectedEntryIDs", selectedEntryIDs);
+  };
+
+  private handleAddMoreButtonClick = () => {
+    const { history } = this.props;
+
+    history.push(this.getEntryPageRoute());
   };
 }
 
