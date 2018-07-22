@@ -5,7 +5,6 @@ import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
 
 export enum DashboardAction {
   LoadPlaceholderEntries = "[dashboard] Load Placeholder Entires",
-  LoadPlaceholderEntryCategories = "[dashboard] Load Placeholder Entry Categories",
 
   LoadPlaceholderSubscribedEntries = "[dashboard] Load Placeholder Subscribed Entries",
 
@@ -19,8 +18,6 @@ export enum DashboardAction {
 export const actions = {
   loadPlaceholderEntries: () =>
     createAction(DashboardAction.LoadPlaceholderEntries),
-  loadPlaceholderEntryCategories: () =>
-    createAction(DashboardAction.LoadPlaceholderEntryCategories),
 
   loadPlaceholderSubscribedEntries: () =>
     createAction(DashboardAction.LoadPlaceholderSubscribedEntries),

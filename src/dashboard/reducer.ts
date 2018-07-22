@@ -1,16 +1,14 @@
 import { createReducer } from "utils";
 import { Actions, DashboardAction } from "./actions";
 
-import { IEntry, IEntryCategory } from "models";
+import { IEntry } from "models";
 import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
 import { IEntrySelectMeta } from "./models/IEntrySelectMeta";
 
 import { createEntryPlaceholders } from "subscription-management";
-import { createEntryCategoryPlaceholders } from "./placeholders/createEntryCategoryPlaceholders";
 
 export type State = {
   entries: IEntry[] | null;
-  entryCategories: IEntryCategory[] | null;
 
   entrySelectMeta: IEntrySelectMeta | null;
 
@@ -24,7 +22,6 @@ export type State = {
 
 const initialState: State = {
   entries: null,
-  entryCategories: null,
 
   entrySelectMeta: null,
 
@@ -46,10 +43,6 @@ export const reducer = createReducer<State, Actions, DashboardAction>(
         minEntriesCount: 1,
         maxEntriesCount: createEntryPlaceholders().length,
       },
-    }),
-    [DashboardAction.LoadPlaceholderEntryCategories]: state => ({
-      ...state,
-      entryCategories: createEntryCategoryPlaceholders(),
     }),
 
     [DashboardAction.LoadPlaceholderSubscribedEntries]: state => ({

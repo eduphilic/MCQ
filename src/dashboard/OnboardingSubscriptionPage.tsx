@@ -259,7 +259,7 @@ const OnboardingSubscriptionPageContainer = connect(
   ({ dashboard }: State) => ({
     onboardingProgress: onboardingProgressSelector(dashboard),
     entries: dashboard.entries,
-    entryCategories: dashboard.entryCategories,
+    entryCategories: {} as any,
     entrySelectMeta: dashboard.entrySelectMeta,
     selectedEntryIDs: dashboard.entriesPendingPurchase.map(e => e.id),
     examQuantitySelectMeta: {} as any,

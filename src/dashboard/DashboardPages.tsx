@@ -25,7 +25,6 @@ type StateProps = {
 
 type DispatchProps = {
   loadPlaceholderEntries: () => any;
-  loadPlaceholderEntryCategories: () => any;
   loadPlaceholderSubscribedEntries: () => any;
 };
 
@@ -38,7 +37,6 @@ class DashboardPages extends Component<Props> {
     super(props);
 
     props.loadPlaceholderEntries();
-    props.loadPlaceholderEntryCategories();
     props.loadPlaceholderSubscribedEntries();
   }
 
@@ -154,13 +152,12 @@ const DashboardPagesContainer = connect<
 >(
   ({ dashboard }) => ({
     entries: dashboard.entries,
-    entryCategories: dashboard.entryCategories,
+    entryCategories: {} as any,
     onboardingProgress: onboardingProgressSelector(dashboard),
     postSignupDialogsShown: dashboard.postSignupDialogsShown,
   }),
   {
     loadPlaceholderEntries: actions.loadPlaceholderEntries,
-    loadPlaceholderEntryCategories: actions.loadPlaceholderEntryCategories,
     loadPlaceholderSubscribedEntries: actions.loadPlaceholderSubscribedEntries,
   },
 )(DashboardPages);
