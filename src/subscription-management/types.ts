@@ -1,8 +1,8 @@
 import { InjectedFormikProps } from "formik";
 import { IEntry, IEntryCategory } from "models";
 import { RouteComponentProps } from "react-router-dom";
+import { ICategoryQuantitySelectionSettings } from "./models/ICategoryQuantitySelectionSettings";
 import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
-import { IExamQuantitySelectionSettings } from "./models/IExamQuantitySelectionSettings";
 
 export type StateProps = {
   loaded: boolean;
@@ -10,7 +10,7 @@ export type StateProps = {
 
   entries: IEntry[];
   categories: IEntryCategory[];
-  examQuantitySelectionSettings: IExamQuantitySelectionSettings | null;
+  categoryQuantitySelectionSettings: ICategoryQuantitySelectionSettings | null;
 };
 
 export type DispatchProps = {

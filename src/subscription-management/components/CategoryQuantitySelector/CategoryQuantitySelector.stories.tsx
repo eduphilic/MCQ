@@ -5,13 +5,13 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
-import { createExamQuantitySelectionSettingsPlaceholder } from "../../placeholders/createExamQuantitySelectionSettingsPlaceholder";
-import { ExamQuantitySelector } from "./ExamQuantitySelector";
+import { createCategoryQuantitySelectionSettingsPlaceholder } from "../../placeholders/createCategoryQuantitySelectionSettingsPlaceholder";
+import { CategoryQuantitySelector } from "./CategoryQuantitySelector";
 
-const examQuantitySelectionSettings = createExamQuantitySelectionSettingsPlaceholder();
+const categoryQuantitySelectionSettings = createCategoryQuantitySelectionSettingsPlaceholder();
 
 storiesOf("Subscription Management", module).add(
-  "ExamQuantitySelector",
+  "CategoryQuantitySelector",
   withInfo()(() => {
     const selectedQuantityIndex = number("selectedQuantityIndex", 0, {
       min: 0,
@@ -22,8 +22,8 @@ storiesOf("Subscription Management", module).add(
 
     return (
       <StorybookContentCenterWrapper>
-        <ExamQuantitySelector
-          examQuantitySelectionSettings={examQuantitySelectionSettings}
+        <CategoryQuantitySelector
+          categoryQuantitySelectionSettings={categoryQuantitySelectionSettings}
           categoryLabel={{ en: "Sol GD" }}
           selectedQuantityIndex={selectedQuantityIndex}
           onChange={action("onChange")}

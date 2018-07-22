@@ -15,8 +15,8 @@ import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
 import { BottomToolbarDock } from "navigation";
 import { BottomToolbar } from "./components/BottomToolbar";
+import { CategoryQuantitySelector } from "./components/CategoryQuantitySelector";
 import { EntrySelect } from "./components/EntrySelect";
-import { ExamQuantitySelector } from "./components/ExamQuantitySelector";
 import { SelectedEntries } from "./components/SelectedEntries";
 
 export class SubscriptionManagementPage extends Component<PropsWithFormState> {
@@ -100,13 +100,13 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
   };
 
   private getTotal = (): number => {
-    const { values, examQuantitySelectionSettings } = this.props;
+    const { values, categoryQuantitySelectionSettings } = this.props;
     const { selectedQuantities } = values;
     const {
       quantities,
       quantitiesFreeIndexes,
       examPriceRs,
-    } = examQuantitySelectionSettings!;
+    } = categoryQuantitySelectionSettings!;
 
     const total = selectedQuantities.reduce((accumulator, quantity): number => {
       const quantityIndex = quantity.quantityIndex;
@@ -165,7 +165,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
   };
 
   private renderQuantitySelectionCards = (language: "en" | "hi") => {
-    const { entries, examQuantitySelectionSettings, values } = this.props;
+    const { entries, categoryQuantitySelectionSettings, values } = this.props;
     const { selectedEntryIDs } = values;
 
     const selectedEntries = entries.filter(e =>
@@ -184,7 +184,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
           // Exam pricing text.
           subheader={strings.subscription_management_QuantitySelectionCardPricingText.replace(
             "{}",
-            examQuantitySelectionSettings!.examPriceRs.toString(),
+            categoryQuantitySelectionSettings!.examPriceRs.toString(),
           )}
         />
 
@@ -194,7 +194,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
   };
 
   private renderQuantitySelectionCardContents = (entry: IEntry) => {
-    const { examQuantitySelectionSettings } = this.props;
+    const { categoryQuantitySelectionSettings } = this.props;
 
     const categories = this.props.categories.filter(
       c => c.entryID === entry.id,
@@ -204,9 +204,11 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
       <CardContent>
         {categories.map((c, index) => (
           <Fragment key={c.id}>
-            <ExamQuantitySelector
+            <CategoryQuantitySelector
               categoryLabel={c.title}
-              examQuantitySelectionSettings={examQuantitySelectionSettings!}
+              categoryQuantitySelectionSettings={
+                categoryQuantitySelectionSettings!
+              }
               selectedQuantityIndex={this.getSelectedQuantityIndex(c.id)}
               onChange={quantityIndex =>
                 this.setSelectedQuantityIndex(c.id, quantityIndex)

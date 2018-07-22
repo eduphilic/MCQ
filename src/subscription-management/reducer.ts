@@ -1,12 +1,12 @@
 import { IEntry, IEntryCategory } from "models";
 import { createReducer } from "utils";
 import { Actions, SubscriptionManagementAction } from "./actions";
+import { ICategoryQuantitySelectionSettings } from "./models/ICategoryQuantitySelectionSettings";
 import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
-import { IExamQuantitySelectionSettings } from "./models/IExamQuantitySelectionSettings";
 
+import { createCategoryQuantitySelectionSettingsPlaceholder } from "./placeholders/createCategoryQuantitySelectionSettingsPlaceholder";
 import { createEntryCategoryPlaceholders } from "./placeholders/createEntryCategoryPlaceholders";
 import { createEntryPlaceholders } from "./placeholders/createEntryPlaceholders";
-import { createExamQuantitySelectionSettingsPlaceholder } from "./placeholders/createExamQuantitySelectionSettingsPlaceholder";
 
 type State = {
   loading: boolean;
@@ -14,7 +14,7 @@ type State = {
 
   entries: IEntry[];
   categories: IEntryCategory[];
-  examQuantitySelectionSettings: IExamQuantitySelectionSettings | null;
+  categoryQuantitySelectionSettings: ICategoryQuantitySelectionSettings | null;
 
   subscriptions: ICategorySubscriptions | null;
 };
@@ -25,7 +25,7 @@ const initialState: State = {
 
   entries: [],
   categories: [],
-  examQuantitySelectionSettings: null,
+  categoryQuantitySelectionSettings: null,
 
   subscriptions: null,
 };
@@ -42,7 +42,7 @@ export const reducer = createReducer<
 
     entries: createEntryPlaceholders(),
     categories: createEntryCategoryPlaceholders(),
-    examQuantitySelectionSettings: createExamQuantitySelectionSettingsPlaceholder(),
+    categoryQuantitySelectionSettings: createCategoryQuantitySelectionSettingsPlaceholder(),
   }),
 
   [SubscriptionManagementAction.SubscriptionAdditionSuccess]: (

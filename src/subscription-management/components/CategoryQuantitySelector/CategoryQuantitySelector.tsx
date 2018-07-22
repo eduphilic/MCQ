@@ -2,7 +2,7 @@ import { LocalizationStateConsumer } from "localization";
 import React, { ChangeEvent, Component } from "react";
 import styled from "styled";
 import { LocalizedString } from "types";
-import { IExamQuantitySelectionSettings } from "../../models/IExamQuantitySelectionSettings";
+import { ICategoryQuantitySelectionSettings } from "../../models/ICategoryQuantitySelectionSettings";
 
 import FormControlLabel, {
   FormControlLabelProps,
@@ -11,11 +11,11 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup, { RadioGroupProps } from "@material-ui/core/RadioGroup";
 import Typography from "@material-ui/core/Typography";
 
-export type ExamQuantitySelectorProps = {
+export type CategoryQuantitySelectorProps = {
   /**
    * Settings that dictate the quantities of exams offered for each category.
    */
-  examQuantitySelectionSettings: IExamQuantitySelectionSettings;
+  categoryQuantitySelectionSettings: ICategoryQuantitySelectionSettings;
 
   /**
    * Name of the entry category.
@@ -37,14 +37,16 @@ export type ExamQuantitySelectorProps = {
  * Selection control for selecting the number of exams to purchase from a
  * particular entry category.
  */
-export class ExamQuantitySelector extends Component<ExamQuantitySelectorProps> {
+export class CategoryQuantitySelector extends Component<
+  CategoryQuantitySelectorProps
+> {
   private handleChange = (_event: ChangeEvent<{}>, value: string) => {
     this.props.onChange(parseInt(value, 10));
   };
 
   render() {
     const {
-      examQuantitySelectionSettings,
+      categoryQuantitySelectionSettings,
       categoryLabel,
       selectedQuantityIndex,
     } = this.props;
@@ -67,15 +69,15 @@ export class ExamQuantitySelector extends Component<ExamQuantitySelectorProps> {
               value={selectedQuantityIndex.toString()}
               onChange={this.handleChange}
             >
-              {examQuantitySelectionSettings.quantities.map(
+              {categoryQuantitySelectionSettings.quantities.map(
                 (quantityValue, index) => (
                   <QuantityRadio
                     key={`${quantityValue}-${index}`}
                     value={index.toString()}
                     label={
                       // prettier-ignore
-                      examQuantitySelectionSettings.quantitiesLabels[index][localizationLanguage] ||
-                      examQuantitySelectionSettings.quantitiesLabels[index].en
+                      categoryQuantitySelectionSettings.quantitiesLabels[index][localizationLanguage] ||
+                      categoryQuantitySelectionSettings.quantitiesLabels[index].en
                     }
                   />
                 ),

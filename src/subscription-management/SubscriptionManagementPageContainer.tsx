@@ -25,7 +25,7 @@ const SubscriptionManagementPageContainer = withRouter(
           loaded,
           entries,
           categories,
-          examQuantitySelectionSettings,
+          categoryQuantitySelectionSettings,
         },
       } = state;
 
@@ -35,7 +35,7 @@ const SubscriptionManagementPageContainer = withRouter(
 
         entries,
         categories,
-        examQuantitySelectionSettings,
+        categoryQuantitySelectionSettings,
       };
     },
     {
