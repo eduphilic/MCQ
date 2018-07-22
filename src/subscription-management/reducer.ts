@@ -27,7 +27,7 @@ const initialState: State = {
   categories: [],
   examQuantitySelectionSettings: null,
 
-  subscriptions: [],
+  subscriptions: null,
 };
 
 export const reducer = createReducer<

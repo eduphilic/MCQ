@@ -9,17 +9,19 @@ import React, { Component, SFC } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { State } from "store";
-import { SubscriptionManagementPage } from "subscription-management";
+import {
+  isOnboardingSelector,
+  SubscriptionManagementPage,
+} from "subscription-management";
 import { actions } from "./actions";
 import { navigationLinks } from "./navigationLinks";
-import { OnboardingProgress, onboardingProgressSelector } from "./selectors";
 
 import { PostSignupDialogs } from "./components/PostSignupDialogs/PostSignupDialogs";
 
 type StateProps = {
   entries: IEntry[] | null;
   entryCategories: IEntryCategory[] | null;
-  onboardingProgress: OnboardingProgress;
+  isOnboarding: boolean;
   postSignupDialogsShown: boolean;
 };
 
@@ -44,10 +46,10 @@ class DashboardPages extends Component<Props> {
     const {
       entries,
       entryCategories,
-      onboardingProgress,
+      isOnboarding,
       postSignupDialogsShown,
     } = this.props;
-    if (!entries || !entryCategories || !onboardingProgress) return null;
+    if (!entries || !entryCategories) return null;
 
     const links = this.buildDashboardLinks();
     const onboardingRoutes = this.buildOnboardingRoutes();
@@ -55,10 +57,7 @@ class DashboardPages extends Component<Props> {
 
     return (
       <>
-        <AppLayout
-          links={links}
-          enableSwipeNavigation={onboardingProgress === "complete"}
-        >
+        <AppLayout links={links} enableSwipeNavigation={!isOnboarding}>
           <PageContentWrapper verticalGutters>
             <Switch>
               {dashboardRoutes}
@@ -67,19 +66,16 @@ class DashboardPages extends Component<Props> {
           </PageContentWrapper>
         </AppLayout>
 
-        {onboardingProgress === "complete" &&
-          !postSignupDialogsShown && <PostSignupDialogs />}
+        {!isOnboarding && !postSignupDialogsShown && <PostSignupDialogs />}
       </>
     );
   }
 
   private buildOnboardingRoutes = () => {
-    const { onboardingProgress } = this.props;
+    const { isOnboarding } = this.props;
 
     let RedirectComponent: SFC<{}> | undefined;
-    if (onboardingProgress === "complete") {
-      RedirectComponent = () => <Redirect to="/dashboard" />;
-    }
+    if (!isOnboarding) RedirectComponent = () => <Redirect to="/dashboard" />;
 
     return [
       <MultipathRoute
@@ -101,30 +97,18 @@ class DashboardPages extends Component<Props> {
    * progress.
    */
   private buildDashboardLinks = (): INavigationLink[] => {
-    const { onboardingProgress } = this.props;
+    const { isOnboarding } = this.props;
 
     let RedirectComponent: SFC<any> | undefined;
 
-    switch (onboardingProgress) {
-      case "select-entries": {
-        RedirectComponent = () => <Redirect to="/welcome/entries" />;
-        break;
-      }
-
-      case "select-subscription": {
-        RedirectComponent = () => <Redirect to="/welcome/subscriptions" />;
-        break;
-      }
-
-      case "complete": {
-        break;
-      }
+    if (isOnboarding) {
+      RedirectComponent = () => <Redirect to="/welcome/entries" />;
     }
 
     return navigationLinks.map(l => ({
       ...l,
       component: RedirectComponent || l.component,
-      disabled: onboardingProgress !== "complete",
+      disabled: isOnboarding,
     }));
   };
 
@@ -150,12 +134,18 @@ const DashboardPagesContainer = connect<
   OwnProps,
   State
 >(
-  ({ dashboard }) => ({
-    entries: dashboard.entries,
-    entryCategories: {} as any,
-    onboardingProgress: onboardingProgressSelector(dashboard),
-    postSignupDialogsShown: dashboard.postSignupDialogsShown,
-  }),
+  (state): StateProps => {
+    const {
+      dashboard: { entries, postSignupDialogsShown },
+    } = state;
+
+    return {
+      entries,
+      entryCategories: {} as any,
+      isOnboarding: isOnboardingSelector(state),
+      postSignupDialogsShown,
+    };
+  },
   {
     loadPlaceholderEntries: actions.loadPlaceholderEntries,
     loadPlaceholderSubscribedEntries: actions.loadPlaceholderSubscribedEntries,

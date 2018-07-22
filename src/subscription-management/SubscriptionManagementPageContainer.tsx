@@ -5,6 +5,7 @@ import { State } from "store";
 // tslint:disable-next-line:import-name
 import uuidv1 from "uuid/v1";
 import { actions } from "./actions";
+import { isOnboardingSelector } from "./selectors";
 import { DispatchProps, FormState, OwnProps, Props, StateProps } from "./types";
 
 import { SubscriptionManagementPage } from "./SubscriptionManagementPage";
@@ -18,21 +19,25 @@ const initialFormState: FormState = {
 
 const SubscriptionManagementPageContainer = withRouter(
   connect<StateProps, DispatchProps, OwnProps, State>(
-    ({
-      subscriptionManagement: {
+    (state): StateProps => {
+      const {
+        subscriptionManagement: {
+          loaded,
+          entries,
+          categories,
+          examQuantitySelectionSettings,
+        },
+      } = state;
+
+      return {
         loaded,
+        isOnboarding: isOnboardingSelector(state),
+
         entries,
         categories,
         examQuantitySelectionSettings,
-      },
-    }): StateProps => ({
-      loaded,
-      isOnboarding: true,
-
-      entries,
-      categories,
-      examQuantitySelectionSettings,
-    }),
+      };
+    },
     {
       loadPlaceholderData: actions.loadPlaceholderData,
       submitSubscriptions: actions.subscriptionAdditionSuccess,
