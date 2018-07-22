@@ -29,6 +29,9 @@ export const navigationLinks: INavigationLink[] = [
     to: routePathFromLocalizationKey(
       "routes_Dashboard_MembershipSubscriptionPage",
     ),
+    alternateMatchPaths: [
+      routePathFromLocalizationKey("routes_Dashboard_MembershipEntriesPage"),
+    ],
     component: MembershipPage,
     titleLocalizationKey: "routes_Dashboard_MembershipSubscriptionPage",
     iconElement: <AccountCardDetails />,

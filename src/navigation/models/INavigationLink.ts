@@ -12,6 +12,17 @@ export interface INavigationLink {
   /** The location to link to. */
   to: string;
 
+  /**
+   * Alternate matched routes. These are paths to other pages which should also
+   * act as matched paths. This is used in situations where multiple pages
+   * correspond to the same navigation link.
+   *
+   * Example:
+   * /membership/subscriptions
+   * /membership/subscriptions/add
+   */
+  alternateMatchPaths?: string[];
+
   /** Page component. */
   component: ComponentType<any>;
 

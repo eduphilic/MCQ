@@ -57,7 +57,16 @@ class SwipeableNavContainer extends Component<Props> {
 
   private getPaneIndexFromRoute = (pathname: string): number => {
     const { links } = this.props;
-    const matchedLinkIndex = links.findIndex(l => l.to === pathname);
+    let matchedLinkIndex = links.findIndex(l => l.to === pathname);
+
+    if (matchedLinkIndex === -1) {
+      matchedLinkIndex = links.findIndex(
+        l =>
+          l.alternateMatchPaths !== undefined &&
+          l.alternateMatchPaths.includes(pathname),
+      );
+    }
+
     const paneIndex = matchedLinkIndex > -1 ? matchedLinkIndex : 0;
     return paneIndex;
   };
