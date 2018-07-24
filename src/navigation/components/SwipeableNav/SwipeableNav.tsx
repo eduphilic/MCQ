@@ -2,10 +2,8 @@ import { bottomNavBoxShadow } from "css";
 import { strings } from "localization";
 import React, { SFC } from "react";
 import SwipeableViews, { SwipeableViewsProps } from "react-swipeable-views";
-// @ts-ignore
-import { TunnelPlaceholder } from "react-tunnels";
 import styled from "styled";
-import { INavigationLink } from "../../../models/INavigationLink";
+import { INavigationLink } from "../../models/INavigationLink";
 
 import BottomNavigation, {
   BottomNavigationProps,
@@ -15,8 +13,9 @@ import BottomNavigationAction, {
 } from "@material-ui/core/BottomNavigationAction";
 import Paper from "@material-ui/core/Paper";
 
-import { PageContentWrapper } from "../../PageContentWrapper";
+import { BottomToolbarDockPortalPlaceholder } from "../BottomToolbarDock";
 import { NavTheme } from "../NavTheme";
+import { PageContentWrapper } from "../PageContentWrapper";
 
 export type SwipeableNavProps = {
   links: INavigationLink[];
@@ -83,7 +82,7 @@ const Wrapper = styled.div`
 
 const StyledBottomNavigation = styled<BottomNavigationProps>(props => (
   <StyledPaper square>
-    <TunnelPlaceholder id="swipeable-nav-bottom-navigation-bar" />
+    <BottomToolbarDockPortalPlaceholder />
     <BottomNavigation showLabels {...props} />
   </StyledPaper>
 ))`

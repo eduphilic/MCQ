@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { INavigationLink } from "../../../models/INavigationLink";
+import { INavigationLink } from "../../models/INavigationLink";
 
 import { SwipeableNav } from "./SwipeableNav";
 
