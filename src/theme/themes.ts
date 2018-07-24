@@ -52,6 +52,15 @@ export const userAppDrawerTheme = createMuiTheme({
     background: { default: "#03285b" },
     type: "dark",
   },
+  // Make portaled bottom navigation app bars have the same background color
+  // as the bottom navigation swipe interface.
+  overrides: {
+    MuiAppBar: {
+      root: {
+        backgroundColor: "#03285b !important",
+      },
+    },
+  },
 });
 
 export type Theme = typeof lightTheme;
