@@ -35,7 +35,6 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
 
     return (
       <BottomToolbarDock
-        name="subscription-management"
         toolbarNode={this.renderToolbarNode()}
         matchedRoutes={[
           this.getEntryPageRoute(),
