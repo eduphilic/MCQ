@@ -15,7 +15,7 @@ import {
 } from "subscription-management";
 import { navigationLinks } from "./navigationLinks";
 
-import { PostSignupDialogs } from "./components/PostSignupDialogs/PostSignupDialogs";
+import { PostSignupDialogs } from "./components/PostSignupDialogs";
 
 type StateProps = {
   isOnboarding: boolean;

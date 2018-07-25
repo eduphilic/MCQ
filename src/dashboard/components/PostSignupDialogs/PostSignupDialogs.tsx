@@ -106,16 +106,20 @@ class PostSignupDialogs extends Component<Props, PostSignupDialogsState> {
   };
 }
 
-const PostSignupDialogsWithMobileDialog = withMobileDialog<any>()(
+const PostSignupDialogsWithMobileDialog = withMobileDialog<Props>()(
   PostSignupDialogs,
 );
+export { PostSignupDialogsWithMobileDialog as PostSignupDialogs };
 
-const PostSignupDialogsContainer = connect<{}, DispatchProps, OwnProps, State>(
+export const PostSignupDialogsContainer = connect<
+  {},
+  DispatchProps,
+  OwnProps,
+  State
+>(
   () => ({}),
   { onSubmit: dashboardActions.dismissPostSignupDialogs },
 )(PostSignupDialogsWithMobileDialog);
-
-export { PostSignupDialogsContainer as PostSignupDialogs };
 
 const Wrapper = styled.div`
   display: flex;
