@@ -4,15 +4,15 @@ import styled from "styled";
 import Paper from "@material-ui/core/Paper";
 import Assignment from "@material-ui/icons/Assignment";
 
+import { Typography } from "components/Typography";
 import {
   CardMediaSquareWithMargin,
   FlexRow,
   logoDimensions,
   VerticalFlexRowsContainer,
-} from "components/DashboardTestCard";
-import { Typography } from "components/Typography";
+} from "../DashboardTestCard";
 
-export interface DashboardTestCardColumnHeaderProps {
+export type DashboardTestCardColumnHeaderProps = {
   /**
    * Icon to display to the left of the header text.
    */
@@ -27,7 +27,7 @@ export interface DashboardTestCardColumnHeaderProps {
    * Title text.
    */
   title: string;
-}
+};
 
 export const DashboardTestCardColumnHeader: SFC<
   DashboardTestCardColumnHeaderProps

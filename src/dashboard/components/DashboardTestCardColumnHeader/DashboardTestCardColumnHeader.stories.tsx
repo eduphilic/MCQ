@@ -1,18 +1,17 @@
 import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
-// import { entryImages } from "common/structures/entryImages";
 import React from "react";
 
-import { ContentCenterWrapper } from "components/ContentCenterWrapper";
-import { DashboardTestCardColumnHeader } from ".";
+import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
+import { DashboardTestCardColumnHeader } from "./DashboardTestCardColumnHeader";
 
-storiesOf("Components", module).add(
+storiesOf("Dashboard", module).add(
   "DashboardTestCardColumnHeader",
   withInfo()(() => {
     //
 
     return (
-      <ContentCenterWrapper>
+      <StorybookContentCenterWrapper>
         <DashboardTestCardColumnHeader
           icon="exam"
           // imageLogoUrl={entryImages.AirForce}
@@ -20,7 +19,7 @@ storiesOf("Components", module).add(
         >
           <div>Card Contents</div>
         </DashboardTestCardColumnHeader>
-      </ContentCenterWrapper>
+      </StorybookContentCenterWrapper>
     );
   }),
 );

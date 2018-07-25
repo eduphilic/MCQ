@@ -5,8 +5,8 @@ import { DashboardColumnContainer } from "components/DashboardColumnContainer";
 import {
   DashboardTestCard,
   DashboardTestCardProps,
-} from "components/DashboardTestCard";
-import { DashboardTestCardColumnHeader } from "components/DashboardTestCardColumnHeader";
+} from "./components/DashboardTestCard";
+import { DashboardTestCardColumnHeader } from "./components/DashboardTestCardColumnHeader";
 
 export const ExamPackPage: SFC<{}> = () => {
   const paidExams: DashboardTestCardProps[] = [
