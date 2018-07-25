@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
-import styled from "styled";
+import styled, { injectGlobal } from "styled";
 import { actions as dashboardActions } from "../../actions";
 
 import Dialog from "@material-ui/core/Dialog";
@@ -73,7 +73,11 @@ class PostSignupDialogs extends Component<Props, PostSignupDialogsState> {
         maxWidth="md"
         fullScreen={fullScreen}
       >
-        <DialogContent>
+        <DialogContent
+          classes={{
+            root: "post-signup-dialogs--dialog-content--root",
+          }}
+        >
           <Wrapper>
             <Logo />
             <TextContentWrapper>
@@ -90,6 +94,7 @@ class PostSignupDialogs extends Component<Props, PostSignupDialogsState> {
                 </TypographyButton>
               </DialogButtonsWrapper>
             </TextContentWrapper>
+            <LogoSpacer />
           </Wrapper>
         </DialogContent>
       </Dialog>
@@ -121,10 +126,13 @@ export const PostSignupDialogsContainer = connect<
   { onSubmit: dashboardActions.dismissPostSignupDialogs },
 )(PostSignupDialogsWithMobileDialog);
 
+const logoSize = 150;
+const fontFamily = "font-family: 'Roboto', sans-serif;";
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-
+  align-items: center;
   ${({ theme }) => theme.breakpoints.up("md")} {
     flex-direction: row;
   }
@@ -135,12 +143,11 @@ const Logo = styled<{ className?: string }>(({ className }) => (
     <LogoImage />
   </div>
 ))`
-  margin-bottom: 8px;
-  text-align: center;
+  margin-left: 32px;
 
   ${LogoImage} {
-    width: 150px;
-    height: 150px;
+    width: ${logoSize}px;
+    height: ${logoSize}px;
   }
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
@@ -150,10 +157,24 @@ const Logo = styled<{ className?: string }>(({ className }) => (
   }
 `;
 
+const LogoSpacer = styled.div`
+  flex-shrink: 0;
+  width: ${logoSize}px;
+  height: ${logoSize}px;
+  margin-right: 32px;
+
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    display: none;
+  }
+`;
+
 const TextContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 32px;
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    padding: 32px;
+  }
 `;
 
 const DialogTitleText = styled<{ children: string; className?: string }>(
@@ -166,7 +187,10 @@ const DialogTitleText = styled<{ children: string; className?: string }>(
     </Typography>
   ),
 )`
-  margin-bottom: 16px;
+  ${fontFamily};
+
+  margin-bottom: 32px;
+  font-size: 40px;
   text-align: center;
   color: #000;
 `;
@@ -176,16 +200,33 @@ const DialogTextContent = styled<{ children: string; className?: string }>(
     <Typography className={className}>{children}</Typography>
   ),
 )`
+  ${fontFamily};
+
   text-align: center;
   font-size: 22px;
   color: #000;
 `;
 
 const DialogButtonsWrapper = styled.div`
-  margin-top: 16px;
+  margin-top: 32px;
   text-align: center;
 
   & > *:first-child {
     margin-right: 8px;
   }
 `;
+
+// Wrapping in try/catch to prevent parsing error in
+// react-docgen-typescript-loader package (used by Storybook).
+try {
+  // tslint:disable-next-line:no-unused-expression
+  injectGlobal`
+  .post-signup-dialogs--dialog-content--root {
+    display: flex;
+    align-items: center;
+  }
+`;
+} catch (e) {
+  /* tslint:disable-next-line:no-console */
+  console.log("e", e);
+}
