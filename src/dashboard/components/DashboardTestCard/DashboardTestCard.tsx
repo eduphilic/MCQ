@@ -8,7 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import { Button } from "components/Button";
 import { Typography } from "components/Typography";
 
-export interface DashboardTestCardProps {
+export type DashboardTestCardProps = {
   /**
    * Style of card. Raised with box shadow or flat with bottom border line.
    *
@@ -57,7 +57,7 @@ export interface DashboardTestCardProps {
    * Rows of key value pairs of status to display under title and subtitle.
    */
   stats?: Record<string, string>;
-}
+};
 
 export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
   const {

@@ -5,7 +5,7 @@ import { DashboardColumnContainer } from "components/DashboardColumnContainer";
 import {
   DashboardTestCard,
   DashboardTestCardProps,
-} from "components/DashboardTestCard";
+} from "./components/DashboardTestCard";
 
 export const DashboardPage: SFC<{}> = () => {
   const freeCard: DashboardTestCardProps = {

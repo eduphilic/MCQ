@@ -3,16 +3,16 @@ import { storiesOf } from "@storybook/react";
 import { entryImages } from "common/structures/entryImages";
 import React from "react";
 
-import { ContentCenterWrapper } from "components/ContentCenterWrapper";
-import { DashboardTestCard } from ".";
+import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
+import { DashboardTestCard } from "./DashboardTestCard";
 
-storiesOf("Components", module).add(
+storiesOf("Dashboard", module).add(
   "DashboardTestCard",
   withInfo()(() => {
     //
 
     return (
-      <ContentCenterWrapper>
+      <StorybookContentCenterWrapper>
         <DashboardTestCard
           color="yellow"
           attemptButtonLabel="Attempt"
@@ -20,7 +20,7 @@ storiesOf("Components", module).add(
           title="Soldier General Duty Free Mock Test"
           subtitle="Validity 31st Jan 2019"
         />
-      </ContentCenterWrapper>
+      </StorybookContentCenterWrapper>
     );
   }),
 );
