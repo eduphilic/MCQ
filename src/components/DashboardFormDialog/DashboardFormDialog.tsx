@@ -161,7 +161,8 @@ export const DashboardFormDialog = <Values extends object>(
   props: DashboardFormDialogProps<Values>,
 ) => {
   const Composed = withMobileDialog<DashboardFormDialogProps<Values>>()(
-    DashboardFormDialogBase,
+    // TODO: Fix this typing issue.
+    DashboardFormDialogBase as any,
   );
 
   return <Composed {...props} />;

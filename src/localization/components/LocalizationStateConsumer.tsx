@@ -1,4 +1,4 @@
-import { Component, ConsumerProps } from "react";
+import { Component, ComponentType, ConsumerProps } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
 import { actions } from "../actions";
@@ -62,5 +62,6 @@ const LocalizationStateConsumerContainer = connect<
   {
     setLocalizationLanguage: actions.setLocalizationLanguage,
   },
-)(LocalizationStateConsumer);
+  // TODO: Fix this typing issue.
+)((LocalizationStateConsumer as any) as ComponentType<Props>);
 export { LocalizationStateConsumerContainer as LocalizationStateConsumer };
