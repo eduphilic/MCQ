@@ -4,9 +4,9 @@ import React, { Fragment } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
 import { StorybookPlaceholderImage } from "components/storybook/StorybookPlaceholderImage";
-import { PersistentScrollPositionProvider } from ".";
+import { PersistentScrollPosition } from "./PersistentScrollPosition";
 
-storiesOf("Components", module).add(
+storiesOf("Navigation", module).add(
   "PersistentScrollPosition",
   withInfo({ inline: false })(() => {
     const pageContents = Array.from({ length: 20 }, (_, index) => (
@@ -18,9 +18,7 @@ storiesOf("Components", module).add(
 
     return (
       <Router>
-        <PersistentScrollPositionProvider>
-          {pageContents}
-        </PersistentScrollPositionProvider>
+        <PersistentScrollPosition>{pageContents}</PersistentScrollPosition>
       </Router>
     );
   }),
