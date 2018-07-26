@@ -1,11 +1,11 @@
 import React, { Fragment, SFC } from "react";
 import styled, { css } from "styled";
 
-import Card, { CardProps } from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 
 import { Button } from "components/Button";
+import { CardMobileFlat, CardMobileFlatProps } from "components/CardMobileFlat";
 import { Typography } from "components/Typography";
 
 export type DashboardTestCardProps = {
@@ -166,8 +166,9 @@ const AnnotatedText = styled.span`
 `;
 
 const CardWithBackgroundColor = styled<
-  CardProps & Pick<DashboardTestCardProps, "color" | "variant">
->(Card as any)`
+  Omit<CardMobileFlatProps, "innerRef"> &
+    Pick<DashboardTestCardProps, "color" | "variant">
+>(({ color, variant, ...rest }) => <CardMobileFlat {...rest} />)`
   width: 100%;
   background-color: ${({ color }) => (color === "yellow" ? "#ffcb25" : "#fff")};
 
