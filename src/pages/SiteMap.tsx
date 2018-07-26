@@ -1,9 +1,11 @@
 import React, { SFC } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-// Requires access to Router.
-import { PersistentScrollPositionProvider } from "components/PersistentScrollPosition";
-import { MultipathRoute, ReduxRouterConnector } from "navigation";
+import {
+  MultipathRoute,
+  PersistentScrollPosition, // Requires access to Router.
+  ReduxRouterConnector,
+} from "navigation";
 
 import { navigationLinksAdmin } from "common/structures/navigationLinksAdmin";
 import { navigationLinksAdminForms } from "common/structures/navigationLinksAdminForms";
@@ -39,7 +41,7 @@ export const SiteMap: SFC<{}> = () => {
     <Router>
       <>
         <ReduxRouterConnector />
-        <PersistentScrollPositionProvider />
+        <PersistentScrollPosition />
 
         <Switch>
           {landingPages}
