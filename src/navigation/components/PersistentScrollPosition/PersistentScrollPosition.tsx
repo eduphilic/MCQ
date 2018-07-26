@@ -53,7 +53,7 @@ class PersistentScrollPosition extends Component<Props, State> {
   state: State = { previousLocation: null };
 
   render() {
-    return this.props.children;
+    return this.props.children || null;
   }
 }
 
