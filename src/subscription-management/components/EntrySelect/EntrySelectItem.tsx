@@ -53,7 +53,9 @@ export const EntrySelectItem: SFC<EntrySelectItemProps> = props => {
   );
 };
 
-const StyledButton = withProps<{ selected: boolean }>()(styled(Button))`
+const StyledButton = withProps<{ selected: boolean }>()(styled(Button)).attrs({
+  classes: { label: "entry-select-item-button-label" },
+})`
   ${fromMobileFlatBorder()};
   display: flex;
   justify-content: flex-start;
@@ -63,6 +65,11 @@ const StyledButton = withProps<{ selected: boolean }>()(styled(Button))`
   padding: ${props => props.theme.spacing.unit}px !important;
   padding-right: ${props => props.theme.spacing.unit * 2}px !important;
   background-color: #fff !important;
+  text-transform: none;
+
+  .entry-select-item-button-label {
+    width: 100%;
+  }
 
   &:hover {
     background-color: #f9f9f9;

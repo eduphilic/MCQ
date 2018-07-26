@@ -28,5 +28,6 @@ export const LanguageButton = styled<LanguageButtonProps>(
   .language-button-label {
     display: flex;
     justify-content: space-between;
+    width: 100%;
   }
 `;
