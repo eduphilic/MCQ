@@ -1,3 +1,5 @@
+import { withInfo } from "@storybook/addon-info";
+import { boolean, selectV2 } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
@@ -13,53 +15,85 @@ import { Face, Font } from "./types";
 import { Typography2, Typography2Variant } from "./Typography2";
 
 storiesOf("Components", module)
+  .addDecorator((story, context) => withInfo({ source: false })(story)(context))
   .addDecorator(story => (
     <StorybookContentCenterWrapper>{story()}</StorybookContentCenterWrapper>
   ))
-  .add("Typography2", () => (
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell>Scale Category</TableCell>
-          <TableCell>Typeface</TableCell>
-          <TableCell>Font</TableCell>
-          <TableCell>Size</TableCell>
-          <TableCell>Case</TableCell>
-          <TableCell>Letter Spacing</TableCell>
-        </TableRow>
-      </TableHead>
+  .add("Typography2", () => {
+    const align = selectV2(
+      "Align",
+      ["inherit", "left", "center", "right", "justify"],
+      "inherit",
+    );
 
-      <TableBody>
-        {(Object.keys(Typography2Variant) as Typography2Variant[]).map(
-          variant => {
-            const [typeface, font, size, casing, spacing] = styleTable[variant];
+    const color = selectV2(
+      "Color",
+      ["inherit", "primary", "secondary", "default", "textSecondary", "error"],
+      "default",
+    );
 
-            return (
-              <TableRow key={variant}>
-                <TableCell>
-                  <Typography2 variant={variant}>{variant}</Typography2>
-                </TableCell>
+    const gutterBottom = boolean("Gutter Bottom", false);
 
-                <TableCell>{key(Face, typeface)}</TableCell>
+    const noWrap = boolean("No Wrap", false);
 
-                <TableCell>
-                  {key(Font, font)} ({font})
-                </TableCell>
+    const paragraph = boolean("Paragraph", false);
 
-                <TableCell>
-                  {size / 16}rem / {size}px
-                </TableCell>
+    return (
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Scale Category</TableCell>
+            <TableCell>Typeface</TableCell>
+            <TableCell>Font</TableCell>
+            <TableCell>Size</TableCell>
+            <TableCell>Case</TableCell>
+            <TableCell>Letter Spacing</TableCell>
+          </TableRow>
+        </TableHead>
 
-                <TableCell>{capitalize(casing)}</TableCell>
+        <TableBody>
+          {(Object.keys(Typography2Variant) as Typography2Variant[]).map(
+            variant => {
+              const [typeface, font, size, casing, spacing] = styleTable[
+                variant
+              ];
 
-                <TableCell>{spacing}</TableCell>
-              </TableRow>
-            );
-          },
-        )}
-      </TableBody>
-    </Table>
-  ));
+              return (
+                <TableRow key={variant}>
+                  <TableCell>
+                    <Typography2
+                      variant={variant}
+                      align={align}
+                      color={color}
+                      gutterBottom={gutterBottom}
+                      noWrap={noWrap}
+                      paragraph={paragraph}
+                    >
+                      {variant}
+                    </Typography2>
+                  </TableCell>
+
+                  <TableCell>{key(Face, typeface)}</TableCell>
+
+                  <TableCell>
+                    {key(Font, font)} ({font})
+                  </TableCell>
+
+                  <TableCell>
+                    {size / 16}rem / {size}px
+                  </TableCell>
+
+                  <TableCell>{capitalize(casing)}</TableCell>
+
+                  <TableCell>{spacing}</TableCell>
+                </TableRow>
+              );
+            },
+          )}
+        </TableBody>
+      </Table>
+    );
+  });
 
 const key = <T extends object>(object: T, value: string) => {
   const name = Object.keys(object).find(
