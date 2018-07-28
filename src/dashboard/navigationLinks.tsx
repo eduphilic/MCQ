@@ -7,9 +7,9 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Settings from "@material-ui/icons/Settings";
 import { AccountCardDetails } from "icons";
 
+import { ExamPackPage } from "exam-review";
+import { SubscriptionManagementPage } from "subscription-management";
 import { DashboardPage } from "./DashboardPage";
-import { ExamPackPage } from "./ExamPackPage";
-import { MembershipPage } from "./MembershipPage";
 import { SettingsPage } from "./SettingsPage";
 
 export const navigationLinks: INavigationLink[] = [
@@ -32,7 +32,7 @@ export const navigationLinks: INavigationLink[] = [
     alternateMatchPaths: [
       routePathFromLocalizationKey("routes_Dashboard_MembershipEntriesPage"),
     ],
-    component: MembershipPage,
+    component: SubscriptionManagementPage,
     titleLocalizationKey: "routes_Dashboard_MembershipSubscriptionPage",
     iconElement: <AccountCardDetails />,
   },
