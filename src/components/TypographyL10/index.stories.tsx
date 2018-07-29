@@ -1,18 +1,14 @@
-import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { TypographyL10 } from ".";
 
-storiesOf("Components", module).add(
-  "TypographyL10",
-  withInfo()(() => {
-    //
+storiesOf("Components", module).add("TypographyL10", () => {
+  //
 
-    return (
-      <TypographyL10
-        replaceValues={["Some field"]}
-        localizationKey="components_AuthenticationForm_FieldIsRequired"
-      />
-    );
-  }),
-);
+  return (
+    <TypographyL10
+      replaceValues={["Some field"]}
+      localizationKey="components_AuthenticationForm_FieldIsRequired"
+    />
+  );
+});

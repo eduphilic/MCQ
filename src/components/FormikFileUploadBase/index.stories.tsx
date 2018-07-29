@@ -1,39 +1,33 @@
-import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
-import { Formik } from "formik";
+import { Formik, FormikProps } from "formik";
 import React from "react";
 
 import { FormikFileUploadBase } from ".";
 
-storiesOf("Components", module).add(
-  "FormikFileUploadBase",
-  withInfo({ propTables: [FormikFileUploadBase] })(() => {
-    // tslint:disable-next-line:no-empty
-    const noop = () => {};
+// tslint:disable-next-line:no-empty
+const noop = () => {};
 
-    const initialValues = {
-      someFile: null as File | null,
-    };
+const initialValues = {
+  someFile: null as File | null,
+};
 
-    type Values = typeof initialValues;
-    class TypedFormik extends Formik<{}, Values> {}
+type Values = typeof initialValues;
 
-    return (
-      <TypedFormik initialValues={initialValues} onSubmit={noop}>
-        {api => (
-          <FormikFileUploadBase
-            formikApi={api}
-            name="someFile"
-            acceptedFileTypes="image/*"
-          >
-            {fileUploadApi => (
-              <button onMouseDown={fileUploadApi.onMouseDown}>
-                Upload File
-              </button>
-            )}
-          </FormikFileUploadBase>
-        )}
-      </TypedFormik>
-    );
-  }),
-);
+storiesOf("Components", module)
+  .addParameters({ info: { propTables: [FormikFileUploadBase] } })
+  .addDecorator(story => (
+    <Formik initialValues={initialValues} onSubmit={noop}>
+      {story()}
+    </Formik>
+  ))
+  .add("FormikFileUploadBase", () => (api: FormikProps<Values>) => (
+    <FormikFileUploadBase<Values>
+      formikApi={api}
+      name="someFile"
+      acceptedFileTypes="image/*"
+    >
+      {fileUploadApi => (
+        <button onMouseDown={fileUploadApi.onMouseDown}>Upload File</button>
+      )}
+    </FormikFileUploadBase>
+  ));

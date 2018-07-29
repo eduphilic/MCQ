@@ -1,5 +1,4 @@
-import { withInfo } from "@storybook/addon-info";
-import { boolean, selectV2 } from "@storybook/addon-knobs";
+import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
@@ -15,18 +14,18 @@ import { Face, Font } from "./types";
 import { Typography2, Typography2Variant } from "./Typography2";
 
 storiesOf("Components", module)
-  .addDecorator((story, context) => withInfo({ source: false })(story)(context))
+  .addParameters({ info: { source: false } })
   .addDecorator(story => (
     <StorybookContentCenterWrapper>{story()}</StorybookContentCenterWrapper>
   ))
   .add("Typography2", () => {
-    const align = selectV2(
+    const align = select(
       "Align",
       ["inherit", "left", "center", "right", "justify"],
       "inherit",
     );
 
-    const color = selectV2(
+    const color = select(
       "Color",
       ["inherit", "primary", "secondary", "default", "textSecondary", "error"],
       "default",

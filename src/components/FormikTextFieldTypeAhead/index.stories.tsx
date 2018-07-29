@@ -1,38 +1,39 @@
-import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
-import { Formik } from "formik";
+import { Formik, FormikProps } from "formik";
 import React from "react";
 
-import { ContentCenterWrapper } from "components/ContentCenterWrapper";
 import { FormikTextFieldTypeAhead } from ".";
+import { StorybookContentCenterWrapper } from "../storybook/StorybookContentCenterWrapper";
 
-storiesOf("Components", module).add(
-  "FormikTextFieldTypeAhead",
-  withInfo()(() => {
-    // tslint:disable-next-line:no-empty
-    const noop = () => {};
+// tslint:disable-next-line:no-empty
+const noop = () => {};
 
-    const initialValues = {
-      entryType: "",
-    };
+const initialValues = {
+  entryType: "",
+};
 
-    type Values = typeof initialValues;
-    class TypedFormik extends Formik<{}, Values> {}
+type Values = typeof initialValues;
 
-    return (
-      <ContentCenterWrapper>
-        <TypedFormik initialValues={initialValues} onSubmit={noop}>
-          {formikApi => (
-            <FormikTextFieldTypeAhead
-              formikApi={formikApi}
-              name="entryType"
-              label="Entry Type"
-              placeholder="Enter entry type here..."
-              suggestions={["AFCAT", "NDA", "Paramilitary"]}
-            />
-          )}
-        </TypedFormik>
-      </ContentCenterWrapper>
-    );
-  }),
-);
+storiesOf("Components", module)
+  .addParameters({
+    info: {
+      propTables: [FormikTextFieldTypeAhead],
+      propTablesExclude: [Formik],
+    },
+  })
+  .addDecorator(story => (
+    <Formik initialValues={initialValues} onSubmit={noop}>
+      {story()}
+    </Formik>
+  ))
+  .add("FormikTextFieldTypeAhead", () => (api: FormikProps<Values>) => (
+    <StorybookContentCenterWrapper>
+      <FormikTextFieldTypeAhead
+        formikApi={api}
+        name="entryType"
+        label="Entry Type"
+        placeholder="Enter entry type here..."
+        suggestions={["AFCAT", "NDA", "Paramilitary"]}
+      />
+    </StorybookContentCenterWrapper>
+  ));

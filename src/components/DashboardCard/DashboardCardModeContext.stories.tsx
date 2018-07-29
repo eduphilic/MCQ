@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import { withInfo } from "@storybook/addon-info";
 import { array } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
@@ -9,9 +8,9 @@ import {
   DashboardCardModeProvider,
 } from "./DashboardCardModeContext";
 
-storiesOf("Components", module).add(
-  "DashboardCardModeProvider",
-  withInfo({ propTablesExclude: [DashboardCardModeConsumer as any] })(() => {
+storiesOf("Components", module)
+  .addParameters({ info: { propTablesExclude: [DashboardCardModeConsumer] } })
+  .add("DashboardCardModeProvider", () => {
     const itemKeys = array(
       "Items",
       Array.from({ length: 10 }, (_item, index) => `Item ${index + 1}`),
@@ -86,5 +85,4 @@ storiesOf("Components", module).add(
         </DashboardCardModeProvider>
       </div>
     );
-  }),
-);
+  });

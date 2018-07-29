@@ -1,4 +1,3 @@
-import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
@@ -7,19 +6,18 @@ import { TypographyButton } from "components/TypographyButton";
 import { TestPreviewDialog } from ".";
 import { createPlaceholderTestPreviewFieldsProp } from "./createPlaceholderTestPreviewFieldsProp";
 
-storiesOf("Components", module).add(
-  "TestPreviewDialog",
-  withInfo({ propTablesExclude: [ContentCenterWrapper, TypographyButton] })(
-    () => {
-      const fields = createPlaceholderTestPreviewFieldsProp();
+storiesOf("Components", module)
+  .addParameters({
+    info: { propTablesExclude: [ContentCenterWrapper, TypographyButton] },
+  })
+  .add("TestPreviewDialog", () => {
+    const fields = createPlaceholderTestPreviewFieldsProp();
 
-      return (
-        <ContentCenterWrapper>
-          <TestPreviewDialog fields={fields}>
-            <TypographyButton>Open Dialog</TypographyButton>
-          </TestPreviewDialog>
-        </ContentCenterWrapper>
-      );
-    },
-  ),
-);
+    return (
+      <ContentCenterWrapper>
+        <TestPreviewDialog fields={fields}>
+          <TypographyButton>Open Dialog</TypographyButton>
+        </TestPreviewDialog>
+      </ContentCenterWrapper>
+    );
+  });

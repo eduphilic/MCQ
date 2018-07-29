@@ -1,13 +1,9 @@
-import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { TypographyButton } from ".";
 
-storiesOf("Components", module).add(
-  "TypographyButton",
-  withInfo()(() => {
-    //
+storiesOf("Components", module).add("TypographyButton", () => {
+  //
 
-    return <TypographyButton>Button with Typography</TypographyButton>;
-  }),
-);
+  return <TypographyButton>Button with Typography</TypographyButton>;
+});

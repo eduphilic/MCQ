@@ -1,5 +1,4 @@
-import { withInfo } from "@storybook/addon-info";
-import { boolean, selectV2 } from "@storybook/addon-knobs";
+import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
@@ -8,18 +7,15 @@ import {
   CheckmarkableCircleProps,
 } from "./CheckmarkableCircle";
 
-storiesOf("Components", module).add(
-  "CheckmarkableCircle",
-  withInfo()(() => (
-    <CheckmarkableCircle
-      checked={boolean("Checked", true)}
-      color={
-        selectV2(
-          "Color",
-          ["primary", "secondary"],
-          "primary",
-        ) as CheckmarkableCircleProps["color"]
-      }
-    />
-  )),
-);
+storiesOf("Components", module).add("CheckmarkableCircle", () => (
+  <CheckmarkableCircle
+    checked={boolean("Checked", true)}
+    color={
+      select(
+        "Color",
+        ["primary", "secondary"],
+        "primary",
+      ) as CheckmarkableCircleProps["color"]
+    }
+  />
+));

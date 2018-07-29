@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
@@ -12,9 +11,9 @@ import { DashboardCardColumnType } from "./DashboardCardColumnType";
 import { DashboardCardItem } from "./DashboardCardItem";
 import { DashboardCardPaginationProps } from "./DashboardCardPagination";
 
-storiesOf("Components", module).add(
-  "DashboardCard",
-  withInfo({ propTablesExclude: [ContentCenterWrapper as any] })(() => {
+storiesOf("Components", module)
+  .addParameters({ info: { propTablesExclude: [ContentCenterWrapper] } })
+  .add("DashboardCard", () => {
     const items: DashboardCardItem[] = [
       {
         key: "0",
@@ -37,8 +36,13 @@ storiesOf("Components", module).add(
       {
         key: "2",
         columns: [
-          { primaryText: "Soldier Tradesman 8th Grade", secondaryText: "8th" },
-          { imgUrl: process.env.PUBLIC_URL + "/images/entry/assamrifles.svg" },
+          {
+            primaryText: "Soldier Tradesman 8th Grade",
+            secondaryText: "8th",
+          },
+          {
+            imgUrl: process.env.PUBLIC_URL + "/images/entry/assamrifles.svg",
+          },
           { primaryText: "Rs 10 pp" },
           { switchChecked: true },
         ],
@@ -94,5 +98,4 @@ storiesOf("Components", module).add(
         />
       </ContentCenterWrapper>
     );
-  }),
-);
+  });

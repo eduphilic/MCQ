@@ -1,21 +1,17 @@
 import { action } from "@storybook/addon-actions";
-import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { SideSheetSearchField } from ".";
 
-storiesOf("Components", module).add(
-  "SideSheetSearchField",
-  withInfo()(() => {
-    //
+storiesOf("Components", module).add("SideSheetSearchField", () => {
+  //
 
-    return (
-      <SideSheetSearchField
-        label="Search Users"
-        placeholder="Search for users here..."
-        onSubmit={action("onSubmit")}
-      />
-    );
-  }),
-);
+  return (
+    <SideSheetSearchField
+      label="Search Users"
+      placeholder="Search for users here..."
+      onSubmit={action("onSubmit")}
+    />
+  );
+});

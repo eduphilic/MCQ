@@ -1,4 +1,3 @@
-import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import styled from "styled";
@@ -10,40 +9,33 @@ import { Button } from "components/Button";
 import { DashboardAppBarIconStore } from "stores";
 import { DashboardAppBarIconGroup } from ".";
 
-storiesOf("Components", module).add(
-  "DashboardAppBarIconGroup",
-  withInfo()(() => {
-    //
-    /* tslint:disable-next-line:no-console */
+storiesOf("Components", module).add("DashboardAppBarIconGroup", () => {
+  //
+  /* tslint:disable-next-line:no-console */
 
-    return (
-      <DashboardAppBarIconStore.Provider>
-        <AppBar position="static">
-          <Toolbar>
-            <DashboardAppBarIconStore.Consumer>
-              {({ iconGroups }) => iconGroups.map(i => i.iconGroupNode)}
-            </DashboardAppBarIconStore.Consumer>
-          </Toolbar>
-        </AppBar>
+  return (
+    <DashboardAppBarIconStore.Provider>
+      <AppBar position="static">
+        <Toolbar>
+          <DashboardAppBarIconStore.Consumer>
+            {({ iconGroups }) => iconGroups.map(i => i.iconGroupNode)}
+          </DashboardAppBarIconStore.Consumer>
+        </Toolbar>
+      </AppBar>
 
-        <DashboardAppBarIconGroup iconGroupKey="dashboard-app-bar-icon-group-story">
-          <>
-            <ButtonWithRightMargin color="inherit">
-              Sign-in
-            </ButtonWithRightMargin>
-            <ButtonWithRightMargin color="inherit">
-              Logout
-            </ButtonWithRightMargin>
-          </>
-        </DashboardAppBarIconGroup>
+      <DashboardAppBarIconGroup iconGroupKey="dashboard-app-bar-icon-group-story">
+        <>
+          <ButtonWithRightMargin color="inherit">Sign-in</ButtonWithRightMargin>
+          <ButtonWithRightMargin color="inherit">Logout</ButtonWithRightMargin>
+        </>
+      </DashboardAppBarIconGroup>
 
-        <DashboardAppBarIconGroup iconGroupKey="dashboard-app-bar-icon-group-story-2">
-          <ButtonWithRightMargin color="inherit">Other</ButtonWithRightMargin>
-        </DashboardAppBarIconGroup>
-      </DashboardAppBarIconStore.Provider>
-    );
-  }),
-);
+      <DashboardAppBarIconGroup iconGroupKey="dashboard-app-bar-icon-group-story-2">
+        <ButtonWithRightMargin color="inherit">Other</ButtonWithRightMargin>
+      </DashboardAppBarIconGroup>
+    </DashboardAppBarIconStore.Provider>
+  );
+});
 
 const ButtonWithRightMargin = styled(Button)`
   margin-right: 8px;

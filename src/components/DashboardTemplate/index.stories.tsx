@@ -1,12 +1,11 @@
-import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { DashboardTemplate } from ".";
 
-storiesOf("Components", module).add(
-  "DashboardTemplate",
-  withInfo({ inline: false })(() => {
+storiesOf("Components", module)
+  .addParameters({ info: { inline: false } })
+  .add("DashboardTemplate", () => {
     //
 
     return (
@@ -17,5 +16,4 @@ storiesOf("Components", module).add(
         Placeholder
       </DashboardTemplate>
     );
-  }),
-);
+  });
