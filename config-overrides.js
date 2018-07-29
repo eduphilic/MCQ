@@ -41,6 +41,11 @@ module.exports = {
     rewiredConfig.resolve.modules = rewiredConfig.resolve.modules || [];
     rewiredConfig.resolve.modules.push(path.join(__dirname, "src"));
 
+    // TODO: Remove once issue with rewire and CRA is resolved.
+    // See: https://github.com/strothj/react-app-rewire-typescript-babel-preset/issues/15
+    // @ts-ignore
+    rewiredConfig.module.strictExportPresence = false;
+
     return rewiredConfig;
   },
   /**

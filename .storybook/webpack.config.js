@@ -44,6 +44,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
       includes: ["components.*\\.tsx$"],
     },
   });
+
   // Remove thread-loader in production to fix issue with continuos
   // integration server.
   if (env === "PRODUCTION") {
