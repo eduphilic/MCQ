@@ -4,7 +4,7 @@ import { routePathFromLocalizationKey } from "routes";
 
 import Assignment from "@material-ui/icons/Assignment";
 import Dashboard from "@material-ui/icons/Dashboard";
-import Settings from "@material-ui/icons/Settings";
+import SettingsOutlined from "@material-ui/icons/SettingsOutlined";
 import { AccountCardDetails } from "icons";
 
 // import { ExamPackPage } from "exam-review";
@@ -41,6 +41,6 @@ export const navigationLinks: INavigationLink[] = [
     to: routePathFromLocalizationKey("routes_Dashboard_SettingsPage"),
     component: SettingsPage,
     titleLocalizationKey: "routes_Dashboard_SettingsPage",
-    iconElement: <Settings />,
+    iconElement: <SettingsOutlined />,
   },
 ];

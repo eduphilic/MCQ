@@ -711,9 +711,9 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@material-ui/core@^1.2.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-1.4.1.tgz#fb041b95a99a8da0fee87e2953b4107df0120e92"
+"@material-ui/core@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-1.4.2.tgz#8a1282e985d4922a4d2b4f7e287d8a716a2fc108"
   dependencies:
     "@babel/runtime" "^7.0.0-beta.42"
     "@types/jss" "^9.5.3"
@@ -735,20 +735,20 @@
     jss-vendor-prefixer "^7.0.0"
     keycode "^2.1.9"
     normalize-scroll-left "^0.1.2"
-    popper.js "^1.0.0"
+    popper.js "^1.14.1"
     prop-types "^15.6.0"
     react-event-listener "^0.6.0"
     react-jss "^8.1.0"
     react-transition-group "^2.2.1"
     recompose "^0.27.0"
-    scroll "^2.0.3"
     warning "^4.0.1"
 
-"@material-ui/icons@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-1.1.0.tgz#4d025df7b0ba6ace8d6710079ed76013a4d26595"
+"@material-ui/icons@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-2.0.0.tgz#f2c4e80d0cb4bbbd433127781da67d93393535f8"
   dependencies:
-    recompose "^0.26.0 || ^0.27.0"
+    "@babel/runtime" "^7.0.0-beta.42"
+    recompose "^0.27.0"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -5375,7 +5375,7 @@ global-prefix@^1.0.1:
     is-windows "^1.0.1"
     which "^1.2.14"
 
-global@^4.3.0, global@^4.3.2, global@~4.3.0:
+global@^4.3.0, global@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/global/-/global-4.3.2.tgz#e76989268a6c74c38908b1305b10fc0e394e9d0f"
   dependencies:
@@ -8172,7 +8172,7 @@ pn@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/pn/-/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
 
-popper.js@^1.0.0:
+popper.js@^1.14.1:
   version "1.14.3"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.3.tgz#1438f98d046acf7b4d78cd502bf418ac64d4f095"
 
@@ -8686,12 +8686,6 @@ raf@3.4.0:
   resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.0.tgz#a28876881b4bc2ca9117d4138163ddb80f781575"
   dependencies:
     performance-now "^2.1.0"
-
-rafl@~1.2.1:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/rafl/-/rafl-1.2.2.tgz#fe930f758211020d47e38815f5196a8be4150740"
-  dependencies:
-    global "~4.3.0"
 
 randomatic@^3.0.0:
   version "3.0.0"
@@ -9240,7 +9234,7 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
-"recompose@^0.26.0 || ^0.27.0", recompose@^0.27.0:
+recompose@^0.27.0:
   version "0.27.1"
   resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.27.1.tgz#1a49e931f183634516633bbb4f4edbfd3f38a7ba"
   dependencies:
@@ -9678,12 +9672,6 @@ schema-utils@^0.4.0, schema-utils@^0.4.3, schema-utils@^0.4.4, schema-utils@^0.4
   dependencies:
     ajv "^6.1.0"
     ajv-keywords "^3.1.0"
-
-scroll@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/scroll/-/scroll-2.0.3.tgz#0951b785544205fd17753bc3d294738ba16fc2ab"
-  dependencies:
-    rafl "~1.2.1"
 
 select-hose@^2.0.0:
   version "2.0.0"
