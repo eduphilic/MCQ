@@ -1,4 +1,4 @@
-import { selectV2 } from "@storybook/addon-knobs";
+import { select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
@@ -16,7 +16,7 @@ storiesOf("Session", module)
     </StorybookContentCenterWrapper>
   ))
   .add("SessionForm", () => {
-    const type = selectV2<SessionFormProps["type"]>(
+    const type = select<SessionFormProps["type"]>(
       "Type",
       ["user-sign-in", "user-sign-up", "admin-sign-in"],
       "user-sign-in",

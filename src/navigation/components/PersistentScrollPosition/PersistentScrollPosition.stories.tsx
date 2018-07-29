@@ -1,4 +1,3 @@
-import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React, { Fragment } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
@@ -6,9 +5,9 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import { StorybookPlaceholderImage } from "components/storybook/StorybookPlaceholderImage";
 import { PersistentScrollPosition } from "./PersistentScrollPosition";
 
-storiesOf("Navigation", module).add(
-  "PersistentScrollPosition",
-  withInfo({ inline: false })(() => {
+storiesOf("Navigation", module)
+  .addParameters({ info: { inline: false } })
+  .add("PersistentScrollPosition", () => {
     const pageContents = Array.from({ length: 20 }, (_, index) => (
       <Fragment key={index}>
         <Link to={`/some-link-${index}`}>Some Link {index}</Link>
@@ -21,5 +20,4 @@ storiesOf("Navigation", module).add(
         <PersistentScrollPosition>{pageContents}</PersistentScrollPosition>
       </Router>
     );
-  }),
-);
+  });

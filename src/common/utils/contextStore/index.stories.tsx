@@ -1,4 +1,4 @@
-import { withInfo } from "@storybook/addon-info";
+// import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
@@ -23,27 +23,24 @@ const store = createStore(
 );
 const TitleSetter = store.createSetter("title");
 
-stories.add(
-  "ContextStore",
-  withInfo()(() => {
-    return (
-      <>
-        <store.Provider>
-          <store.Consumer>
-            {({ title, setTitle }) => <p onClick={setTitle}>{title}</p>}
-          </store.Consumer>
-        </store.Provider>
-      </>
-    );
-  }),
-);
+stories.add("ContextStore", () => {
+  return (
+    <div>
+      <store.Provider>
+        <store.Consumer>
+          {({ title, setTitle }) => <p onClick={setTitle}>{title}</p>}
+        </store.Consumer>
+      </store.Provider>
+    </div>
+  );
+});
 
 stories.add("ContextStore - Setter", () => (
-  <>
+  <div>
     <store.Provider>
       <TitleSetter title="Page Title From Setter" />
 
       <store.Consumer>{({ title }) => <p>{title}</p>}</store.Consumer>
     </store.Provider>
-  </>
+  </div>
 ));

@@ -1,4 +1,3 @@
-import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import { examPaneKeyNodeMap } from "common/structures/examPaneKeyNodeMap";
 import React from "react";
@@ -8,18 +7,14 @@ import { PlaceholderProvider } from "store";
 import { ExamTemplate } from "./ExamTemplate";
 
 storiesOf("Exam Taking", module)
+  .addParameters({ info: { inline: false } })
   .addDecorator(story => <PlaceholderProvider>{story()}</PlaceholderProvider>)
-  .add(
-    "ExamTemplate",
-    withInfo({ inline: false })(() => {
-      const paneKeyNodeMap = examPaneKeyNodeMap;
+  .add("ExamTemplate", () => {
+    const paneKeyNodeMap = examPaneKeyNodeMap;
 
-      return (
-        <BrowserRouter>
-          <ExamTemplate paneKeyNodeMap={paneKeyNodeMap}>
-            Placeholder
-          </ExamTemplate>
-        </BrowserRouter>
-      );
-    }),
-  );
+    return (
+      <BrowserRouter>
+        <ExamTemplate paneKeyNodeMap={paneKeyNodeMap}>Placeholder</ExamTemplate>
+      </BrowserRouter>
+    );
+  });

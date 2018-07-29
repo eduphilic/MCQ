@@ -1,5 +1,4 @@
-import { withInfo } from "@storybook/addon-info";
-import { number, selectV2 } from "@storybook/addon-knobs";
+import { number, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
@@ -7,35 +6,33 @@ import { MemoryRouter } from "react-router-dom";
 import { Hero } from "./Hero";
 
 storiesOf("Landing", module)
+  .addParameters({ info: { propTablesExclude: [MemoryRouter as any] } })
   .addDecorator(story => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
-  .add(
-    "Hero",
-    withInfo({ propTablesExclude: [MemoryRouter as any] })(() => {
-      const backgroundAlpha = number("Background Alpha", 0.65, {
-        max: 1,
-        min: 0.05,
-        range: true,
-        step: 0.05,
-      });
-      const backgroundImage = selectV2(
-        "Background Image",
-        backgroundImageFilenames,
-        "soldier-optimized.png",
-      );
+  .add("Hero", () => {
+    const backgroundAlpha = number("Background Alpha", 0.65, {
+      max: 1,
+      min: 0.05,
+      range: true,
+      step: 0.05,
+    });
+    const backgroundImage = select(
+      "Background Image",
+      backgroundImageFilenames,
+      "soldier-optimized.png",
+    );
 
-      return (
-        <div>
-          <p>Background Alpha: {backgroundAlpha}</p>
-          <Hero
-            backgroundAlpha={backgroundAlpha}
-            backgroundImage={backgroundImage}
-          />
-        </div>
-      );
-    }),
-  );
+    return (
+      <div>
+        <p>Background Alpha: {backgroundAlpha}</p>
+        <Hero
+          backgroundAlpha={backgroundAlpha}
+          backgroundImage={backgroundImage}
+        />
+      </div>
+    );
+  });
 
 const backgroundImageFilenames = [
   "soldier-optimized.png",

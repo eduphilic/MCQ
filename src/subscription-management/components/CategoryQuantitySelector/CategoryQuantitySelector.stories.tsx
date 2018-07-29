@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import { withInfo } from "@storybook/addon-info";
 import { number } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
@@ -12,7 +11,7 @@ const categoryQuantitySelectionSettings = createCategoryQuantitySelectionSetting
 
 storiesOf("Subscription Management", module).add(
   "CategoryQuantitySelector",
-  withInfo()(() => {
+  () => {
     const selectedQuantityIndex = number("selectedQuantityIndex", 0, {
       min: 0,
       max: 3,
@@ -30,5 +29,5 @@ storiesOf("Subscription Management", module).add(
         />
       </StorybookContentCenterWrapper>
     );
-  }),
+  },
 );
