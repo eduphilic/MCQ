@@ -2,6 +2,28 @@
   "private": true,
   "name": "bhartitest",
   "version": "1.0.0",
+  "resolutions": {
+    "@babel/core": "^7.0.0-beta.55",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.55",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.55",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.55",
+    "@babel/plugin-transform-classes": "^7.0.0-beta.55",
+    "@babel/plugin-transform-destructuring": "^7.0.0-beta.55",
+    "@babel/plugin-transform-react-constant-elements": "^7.0.0-beta.55",
+    "@babel/plugin-transform-react-display-name": "^7.0.0-beta.55",
+    "@babel/plugin-transform-regenerator": "^7.0.0-beta.55",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.55",
+    "@babel/preset-env": "^7.0.0-beta.55",
+    "@babel/preset-flow": "^7.0.0-beta.55",
+    "@babel/preset-react": "^7.0.0-beta.55",
+    "@babel/code-frame": "^7.0.0-beta.55",
+    "@babel/parser": "^7.0.0-beta.55",
+    "@babel/traverse": "^7.0.0-beta.55",
+    "@babel/types": "^7.0.0-beta.55",
+    "@babel/helper-annotate-as-pure": "^7.0.0-beta.55",
+    "@babel/runtime": "^7.0.0-beta.55",
+    "babel-eslint": "^9.0.0-beta.3"
+  },
   "engines": {
     "node": ">= 8.10",
     "yarn": ">= 1.5.1"
@@ -68,7 +90,7 @@
     "yup": "^0.25.1"
   },
   "devDependencies": {
-    "@babel/preset-typescript": "^7.0.0-beta.51",
+    "@babel/preset-typescript": "^7.0.0-beta.55",
     "@dump247/storybook-state": "^1.5.0",
     "@storybook/addon-actions": "^3.4.7",
     "@storybook/addon-info": "^3.4.7",
