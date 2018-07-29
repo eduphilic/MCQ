@@ -1,4 +1,9 @@
-import { WrapStoryProps, Options } from "@storybook/addon-info";
+import { Parameters } from "@storybook/react";
+import {
+  WrapStoryProps,
+  Options,
+  OptionsCorrected,
+} from "@storybook/addon-info";
 import { RenderFunction } from "@storybook/react";
 import { ReactElement, ComponentType } from "react";
 
@@ -21,5 +26,11 @@ declare module "@storybook/addon-info" {
     extends Omit<Options, "propTables" | "propTablesExclude"> {
     propTables?: ComponentType<any>[];
     propTablesExclude?: ComponentType<any>[];
+  }
+}
+
+declare module "@storybook/react" {
+  export interface Parameters {
+    info?: OptionsCorrected;
   }
 }
