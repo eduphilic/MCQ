@@ -49,7 +49,8 @@ export const ExamHeader: SFC<ExamHeaderProps> = props => {
   return (
     <Wrapper>
       <Typography variant="examTitle">
-        {sectionTitle}&nbsp;
+        {sectionTitle}
+        &nbsp;
         <MarkingsCaption>({sectionMarkingsCaption})</MarkingsCaption>
       </Typography>
 

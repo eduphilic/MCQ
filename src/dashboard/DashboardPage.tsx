@@ -64,7 +64,9 @@ export const DashboardPage: SFC<{}> = () => {
       <DashboardTestCard {...freeCard} />
 
       <DashboardColumnContainer>
-        {cards.map(c => <DashboardTestCard key={c.title} {...c} />)}
+        {cards.map(c => (
+          <DashboardTestCard key={c.title} {...c} />
+        ))}
       </DashboardColumnContainer>
     </>
   );

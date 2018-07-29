@@ -66,7 +66,8 @@ export class FilterButton extends Component<
           <Hidden xsDown implementation="css">
             {strings.components_FilterButton_MenuCaptionText}
           </Hidden>
-          &nbsp;{value}
+          &nbsp;
+          {value}
         </Button>
         <Menu
           anchorEl={anchorEl as any}

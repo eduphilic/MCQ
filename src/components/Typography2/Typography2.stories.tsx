@@ -79,7 +79,9 @@ storiesOf("Components", module)
                   </TableCell>
 
                   <TableCell>
-                    {size / 16}rem / {size}px
+                    {size / 16}
+                    rem / {size}
+                    px
                   </TableCell>
 
                   <TableCell>{capitalize(casing)}</TableCell>
