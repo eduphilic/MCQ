@@ -152,7 +152,7 @@ const SessionForm: SFC<Props> = props => {
               {textFields.map(({ name, element }) =>
                 cloneElement(element, {
                   value: values[name],
-                  error: touched[name] && errors[name],
+                  error: touched[name] && !!errors[name],
                   label: errors[name],
                   onChange: handleChange,
                   onBlur: handleBlur,
@@ -176,7 +176,7 @@ const SessionForm: SFC<Props> = props => {
                     checked={values.termsAgreed}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    error={touched.termsAgreed && errors.termsAgreed}
+                    error={!!touched.termsAgreed && !!errors.termsAgreed}
                   />
                 )}
               </SecondaryActionWrapper>
