@@ -6,23 +6,24 @@ import React, { Component, createContext } from "react";
 import { FormikTextFieldProps } from "../FormikTextField";
 import { downshiftToFormikChangeAdapter } from "./downshiftToFormikChangeAdapter";
 
-export interface TypeAheadContextProviderProps<Values extends object>
-  extends FormikTextFieldProps<Values> {
+export type TypeAheadContextProviderProps<
+  Values extends object
+> = FormikTextFieldProps<Values> & {
   suggestions: string[];
-}
+};
 
-interface TypeAheadContextProviderState {
+type TypeAheadContextProviderState = {
   inputRef: HTMLInputElement | null;
-}
+};
 
-interface TypeAheadContextValue {
+type TypeAheadContextValue = {
   formikApi: FormikTextFieldProps<any>["formikApi"];
-  downshiftApi: DownshiftApi;
+  downshiftApi: DownshiftApi<string>;
   textFieldProps: Omit<FormikTextFieldProps<any>, "formikApi">;
   suggestions: string[];
   inputRef: HTMLInputElement | null;
   setInputRef: (element: HTMLInputElement | null) => void;
-}
+};
 
 const TypeAheadContext = createContext<TypeAheadContextValue | null>(null);
 

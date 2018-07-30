@@ -2,8 +2,8 @@ import { storiesOf } from "@storybook/react";
 import { Formik, FormikProps } from "formik";
 import React from "react";
 
-import { FormikTextFieldTypeAhead } from ".";
 import { StorybookContentCenterWrapper } from "../storybook/StorybookContentCenterWrapper";
+import { FormikTextFieldTypeAhead } from "./FormikTextFieldTypeAhead";
 
 // tslint:disable-next-line:no-empty
 const noop = () => {};

@@ -15,7 +15,7 @@ export const downshiftToFormikChangeAdapter = (
   name: string,
   formikChangeEventHandler: EventHandler<ChangeEvent<HTMLInputElement>>,
 ) => {
-  const downshiftStateHandler: DownshiftProps["onStateChange"] = ({
+  const downshiftStateHandler: DownshiftProps<string>["onStateChange"] = ({
     inputValue,
   }) => {
     // Formik relies on a React change event. Downshift just gives us the

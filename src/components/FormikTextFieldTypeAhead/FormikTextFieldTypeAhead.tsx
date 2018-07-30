@@ -7,9 +7,9 @@ import {
   TypeAheadContextProviderProps,
 } from "./TypeAheadContext";
 
-// tslint:disable-next-line:no-empty-interface
-export interface FormikTextFieldTypeAheadProps<Values extends object>
-  extends TypeAheadContextProviderProps<Values> {}
+export type FormikTextFieldTypeAheadProps<
+  Values extends object
+> = TypeAheadContextProviderProps<Values>;
 
 export class FormikTextFieldTypeAhead<Values extends object> extends Component<
   FormikTextFieldTypeAheadProps<Values>
