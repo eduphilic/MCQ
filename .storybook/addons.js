@@ -3,5 +3,4 @@ import "@storybook/addon-viewport/register";
 import "@storybook/addon-options/register";
 import "@storybook/addon-actions/register";
 import "@storybook/addon-links/register";
-import "@dump247/storybook-state/register";
 import "components/storybook/StorybookFormikAddon/register";
