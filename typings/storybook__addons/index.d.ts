@@ -22,6 +22,7 @@ declare module "@storybook/addons" {
         render: (state: { active: boolean }) => ReactNode;
       },
     ) => any;
+    onStory: (cb: () => any) => any;
   };
 
   export function makeDecorator<Options, Parameters>(decoratorConfig: {

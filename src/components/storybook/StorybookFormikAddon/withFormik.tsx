@@ -1,4 +1,4 @@
-import { makeDecorator } from "@storybook/addons";
+import addons, { makeDecorator } from "@storybook/addons";
 import { Parameters } from "@storybook/react";
 import { Formik, FormikProps } from "formik";
 import React, { Component, ReactNode } from "react";
@@ -9,7 +9,7 @@ const noop = () => {};
 let formikProps: FormikProps<any> | null = null;
 
 type FormikInstanceProps = Parameters["formik"] & {
-  children: () => ReactNode;
+  children: (values: object) => ReactNode;
 };
 
 class FormikInstance extends Component<FormikInstanceProps> {
@@ -25,7 +25,7 @@ class FormikInstance extends Component<FormikInstanceProps> {
         {nextFormikProps => {
           formikProps = nextFormikProps;
 
-          return children();
+          return children(nextFormikProps.values);
         }}
       </Formik>
     );
@@ -41,7 +41,12 @@ export const withFormik = makeDecorator<{}, NonNullable<Parameters["formik"]>>({
 
     return (
       <FormikInstance initialValues={initialValues} validate={validate}>
-        {() => storyFn(context)}
+        {(values: object) => {
+          const channel = addons.getChannel();
+          channel.emit("FORMIK/update_state", values);
+
+          return storyFn(context);
+        }}
       </FormikInstance>
     );
   },

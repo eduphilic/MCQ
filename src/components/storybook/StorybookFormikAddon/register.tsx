@@ -1,29 +1,60 @@
-import addons from "@storybook/addons";
-// import addons, { AddonsApi } from "@storybook/addons";
-// import { EventEmitter } from "events";
-// import React, { Component } from "react";
+import addons, { AddonsApi } from "@storybook/addons";
+import { EventEmitter } from "events";
+import React, { Component } from "react";
 
-// type Props = {
-//   channel: EventEmitter;
-//   api: AddonsApi;
-//   active: boolean;
-// };
+import { Panel } from "./Panel";
 
-// class Panel extends Component<Props> {
-//   render() {
-//     const { active } = this.props;
+type Props = {
+  channel: EventEmitter;
+  api: AddonsApi;
+  active: boolean;
+};
 
-//     if (!active) return null;
+type State = {
+  formikState: object | null;
+};
 
-//     return <div>Formik Addon</div>;
-//   }
-// }
+class PanelController extends Component<Props, State> {
+  state: State = { formikState: null };
 
-addons.register("FORMIK", _api => {
-  // addons.addPanel("FORMIK/panel", {
-  //   title: "Formik",
-  //   render: ({ active }) => (
-  //     <Panel channel={addons.getChannel()} api={api} active={active} />
-  //   ),
-  // });
+  componentDidMount() {
+    const { channel, api } = this.props;
+
+    channel.on("FORMIK/update_state", this.handleFormikStateUpdate);
+
+    api.onStory(() => {
+      this.handleFormikStateUpdate(null);
+    });
+  }
+
+  componentWillUnmount() {
+    const { channel } = this.props;
+    channel.removeListener("FORMIK/update_state", this.handleFormikStateUpdate);
+  }
+
+  render() {
+    const { active } = this.props;
+    const { formikState } = this.state;
+
+    if (!active) return null;
+
+    return <Panel state={formikState} />;
+  }
+
+  private handleFormikStateUpdate = (formikState: object | null) => {
+    this.setState({ formikState });
+  };
+}
+
+addons.register("FORMIK", api => {
+  addons.addPanel("FORMIK/panel", {
+    title: "State",
+    render: ({ active }) => (
+      <PanelController
+        channel={addons.getChannel()}
+        api={api}
+        active={active}
+      />
+    ),
+  });
 });
