@@ -7,10 +7,9 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import SettingsOutlined from "@material-ui/icons/SettingsOutlined";
 import { AccountCardDetails } from "icons";
 
-// import { ExamPackPage } from "exam-review";
+import { ExamPackPage } from "exam-review";
 import { SubscriptionManagementPage } from "subscription-management";
 import { DashboardPage } from "./DashboardPage";
-import { ExamPackPage } from "./ExamPackPage.old";
 import { SettingsPage } from "./SettingsPage";
 
 export const navigationLinks: INavigationLink[] = [
