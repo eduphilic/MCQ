@@ -2,7 +2,7 @@ import { ActionsUnion } from "types";
 import { createAction } from "utils";
 
 export enum ExamReviewAction {
-  LoadPlaceholderData = "[ExamReviewAction] Load Placeholder Data",
+  LoadPlaceholderData = "[exam-review] Load Placeholder Data",
 }
 
 export const actions = {
