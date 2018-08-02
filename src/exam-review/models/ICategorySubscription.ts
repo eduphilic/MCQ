@@ -18,4 +18,7 @@ export interface ICategorySubscription {
 
   /** Number of exams remaining. */
   examsRemainingCount: number;
+
+  /** Expiration date and time of subscription. */
+  expirationDate: number;
 }
