@@ -1,40 +1,57 @@
 import { ContentCenterWrapper } from "components/ContentCenterWrapper";
-import React, { HTMLProps, SFC } from "react";
+import React, { SFC } from "react";
 import styled from "styled";
 
-export type StorybookContentCenterWrapperProps = Omit<
-  HTMLProps<HTMLDivElement>,
+type GetProps<T> = T extends React.ComponentClass<infer U> ? U : never;
+type ContentCenterWrapperProps = Omit<
+  GetProps<typeof ContentCenterWrapper>,
   "ref"
-> & {
-  maxWidthPercent?: number;
+>;
 
-  centerWrapperProps?: Omit<HTMLProps<HTMLDivElement>, "ref">;
+export type StorybookContentCenterWrapperProps = ContentCenterWrapperProps & {
+  maxWidthPercent?: number;
 };
 
 /**
- * Wraps ContentCenterWrapper in an outer component for use with Storybook
- * stories. The outer wrapper has a white background and full height/width. It
- * also adds an additional top and bottom padding.
+ * Wraps ContentCenterWrapper in for use with Storybook stories. It sets a white
+ * background and allows for limiting the final width of the displayed
+ * component. This is useful to simulate the component being in a column layout.
  */
 export const StorybookContentCenterWrapper: SFC<
   StorybookContentCenterWrapperProps
-> = ({ children, maxWidthPercent, centerWrapperProps, style, ...rest }) => (
-  <Wrapper
-    {...rest}
-    style={{
-      ...style,
-      ...(maxWidthPercent ? { paddingRight: `${100 - maxWidthPercent}%` } : {}),
-    }}
-  >
-    <ContentCenterWrapper {...centerWrapperProps}>
-      {children}
-    </ContentCenterWrapper>
+> = ({ children, maxWidthPercent, ...rest }) => (
+  <Wrapper {...rest}>
+    <ComponentWrapper>{children}</ComponentWrapper>
+
+    <Spacer maxWidthPercent={maxWidthPercent} />
+    <BodyBackgroundColor />
   </Wrapper>
 );
 
-const Wrapper = styled.div`
-  width: 100%;
-  min-height: 100%;
-  padding: 16px 0;
-  background-color: #fff;
+const Wrapper = styled(ContentCenterWrapper)`
+  display: flex;
+  padding: 0 16px;
 `;
+
+const ComponentWrapper = styled.div`
+  flex: 1;
+`;
+
+const Spacer = styled.div<
+  Pick<StorybookContentCenterWrapperProps, "maxWidthPercent">
+>`
+  ${({ maxWidthPercent }) =>
+    maxWidthPercent && `width: ${100 - maxWidthPercent}%`};
+`;
+
+const BodyBackgroundColor = () => (
+  <style
+    dangerouslySetInnerHTML={{
+      __html: `
+                body {
+                  background-color: #fff;
+                }
+              `,
+    }}
+  />
+);
