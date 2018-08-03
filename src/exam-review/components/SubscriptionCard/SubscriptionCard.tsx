@@ -1,4 +1,5 @@
 import React, { SFC } from "react";
+import styled from "styled";
 
 import { CardMobileFlat } from "components/CardMobileFlat";
 import {
@@ -16,14 +17,28 @@ import {
 
 export type SubscriptionCardProps = SubscriptionCardActionsProps &
   SubscriptionCardContentProps &
-  SubscriptionCardHeaderProps;
+  SubscriptionCardHeaderProps & {
+    /**
+     * Called when the top action area (header and content) is clicked. When
+     * this callback is provided, the area is clickable and a cursor is applied.
+     */
+    onClick?: () => void;
+  };
 
 export const SubscriptionCard: SFC<SubscriptionCardProps> = props => {
+  const { onClick, ...rest } = props;
+
   return (
     <CardMobileFlat>
-      <SubscriptionCardHeader {...props} />
-      <SubscriptionCardContent {...props} />
-      <SubscriptionCardActions {...props} />
+      <ActionArea onClick={onClick}>
+        <SubscriptionCardHeader {...rest} />
+        <SubscriptionCardContent {...rest} />
+      </ActionArea>
+      <SubscriptionCardActions {...rest} />
     </CardMobileFlat>
   );
 };
+
+const ActionArea = styled.div`
+  ${({ onClick }) => onClick && "cursor: pointer"};
+`;

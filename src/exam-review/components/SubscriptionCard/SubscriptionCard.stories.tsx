@@ -1,4 +1,5 @@
 import { action } from "@storybook/addon-actions";
+import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { entryImages } from "common/structures/entryImages";
 import React from "react";
@@ -18,6 +19,7 @@ storiesOf("Exam Review", module).add("SubscriptionCard", () => {
       Attempted: "02 Tests",
       Remaining: "08 Tests",
     },
+    onClick: boolean("Clickable", true) ? action("onClick") : undefined,
   };
 
   return (
