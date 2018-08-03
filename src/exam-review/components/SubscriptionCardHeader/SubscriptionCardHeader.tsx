@@ -58,7 +58,7 @@ const Overline = styled<{ className?: string }>(({ children, className }) => (
 `;
 
 const Title = styled<{ className?: string }>(({ children, className }) => (
-  <Typography2 className={className} variant="Body1" paragraph>
+  <Typography2 className={className} variant="H5" paragraph>
     {children}
   </Typography2>
 ))`
