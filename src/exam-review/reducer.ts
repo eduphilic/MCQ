@@ -3,6 +3,7 @@ import { createReducer } from "utils";
 import { Actions, ExamReviewAction } from "./actions";
 import { ICategorySubscription } from "./models/ICategorySubscription";
 
+import { createCategorySubscriptionPlaceholders } from "./placeholders/createCategorySubscriptionPlaceholders";
 import { createEntryPlaceholders } from "./placeholders/createEntryPlaceholders";
 
 type State = {
@@ -29,6 +30,7 @@ export const reducer = createReducer<State, Actions, ExamReviewAction>(
       loading: false,
       loaded: true,
       entries: createEntryPlaceholders(),
+      subscriptions: createCategorySubscriptionPlaceholders(),
     }),
   },
 );
