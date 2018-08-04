@@ -1,7 +1,7 @@
 import { IEntry } from "models";
 
 export const createEntryPlaceholders = (): IEntry[] =>
-  ["Officer", "Army"].map(
+  ["Officer", "Army", "Airforce"].map(
     (name): IEntry => ({
       id: name.toLowerCase(),
       title: { en: name },
