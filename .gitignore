@@ -10,3 +10,6 @@ dist/
 
 # Logs
 *error.log
+
+# Microsoft Office
+~$*.*
