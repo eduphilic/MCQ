@@ -1,9 +1,22 @@
 import { entryImages } from "common/structures/entryImages";
+import { fromToolbarHeight } from "css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
 import styled from "styled";
 import { actions } from "./actions";
+
+import AppBar from "@material-ui/core/AppBar";
+import Dialog from "@material-ui/core/Dialog";
+import IconButton from "@material-ui/core/IconButton";
+import Slide from "@material-ui/core/Slide";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import withWidth, {
+  isWidthDown,
+  WithWidthProps,
+} from "@material-ui/core/withWidth";
+import Close from "@material-ui/icons/Close";
 
 import { SubscriptionCard } from "./components/SubscriptionCard";
 
@@ -16,15 +29,19 @@ type DispatchProps = {
   fetchExamReviewData: () => any;
 };
 
-type Props = StateProps & DispatchProps;
+type OwnProps = WithWidthProps;
+
+type Props = StateProps & DispatchProps & OwnProps;
 
 type ExamPackPageState = {
   selectedSubscription: number | null;
+  dialogOpen: boolean;
 };
 
 class ExamPackPage extends Component<Props, ExamPackPageState> {
   state: ExamPackPageState = {
     selectedSubscription: null,
+    dialogOpen: false,
   };
 
   componentDidMount() {
@@ -37,16 +54,33 @@ class ExamPackPage extends Component<Props, ExamPackPageState> {
   }
 
   render() {
-    const { loaded } = this.props;
-    const { selectedSubscription } = this.state;
+    const { loaded, width } = this.props;
+    const { selectedSubscription, dialogOpen } = this.state;
 
     if (!loaded) return <div>Loading...</div>;
+
+    const isMobile = isWidthDown("sm", width);
 
     const subscriptions: [keyof typeof entryImages, string, boolean][] = [
       ["Officer", "NDA/ ACC", false],
       ["Army", "Soldier Tradesman", true],
       ["AirForce", "Group 'X' & 'Y': Med Asst Trade", false],
     ];
+
+    const subscriptionCards = subscriptions.map((subscription, index) => (
+      <SubscriptionCard
+        key={subscription[0]}
+        imageUrl={entryImages[subscription[0]]}
+        title={subscription[1]}
+        subheader="Validity 31st Jan 2019"
+        overline={subscription[2] ? "1 Free Test" : "10 Mock Tests Set"}
+        stats={{
+          Attempted: "02 Tests",
+          Remaining: "08 Tests",
+        }}
+        onClick={() => this.handleSubscriptionClick(index)}
+      />
+    ));
 
     const testCards =
       selectedSubscription === null
@@ -67,10 +101,18 @@ class ExamPackPage extends Component<Props, ExamPackPageState> {
                   Rank: "733/ Out 2345",
                 }}
                 onReviseButtonClick={
-                  index === 0 ? () => alert(`Revise: ${title}`) : undefined
+                  index === 0
+                    ? this.createDialogCloseHandlerWrapper(() =>
+                        alert(`Revise: ${title}`),
+                      )
+                    : undefined
                 }
                 onAttemptButtonClick={
-                  index === 1 ? () => alert(`Attempt: ${title}`) : undefined
+                  index === 1
+                    ? this.createDialogCloseHandlerWrapper(() =>
+                        alert(`Attempt: ${title}`),
+                      )
+                    : undefined
                 }
                 showDisabledExpiredButton={index > 1}
               />
@@ -78,39 +120,73 @@ class ExamPackPage extends Component<Props, ExamPackPageState> {
           });
 
     return (
-      <TwoColumnWrapper>
-        <div>
-          {subscriptions.map((subscription, index) => (
-            <SubscriptionCard
-              key={subscription[0]}
-              imageUrl={entryImages[subscription[0]]}
-              title={subscription[1]}
-              subheader="Validity 31st Jan 2019"
-              overline={subscription[2] ? "1 Free Test" : "10 Mock Tests Set"}
-              stats={{
-                Attempted: "02 Tests",
-                Remaining: "08 Tests",
-              }}
-              onClick={() => this.handleSubscriptionClick(index)}
-            />
-          ))}
-        </div>
-        <div>{testCards}</div>
-      </TwoColumnWrapper>
+      <>
+        <TwoColumnWrapper>
+          <div>{subscriptionCards}</div>
+          <div>{testCards}</div>
+        </TwoColumnWrapper>
+
+        {isMobile &&
+          selectedSubscription !== null && (
+            <Dialog
+              fullScreen
+              open={dialogOpen}
+              TransitionComponent={TransitionComponent}
+            >
+              <DialogLayout>
+                <AppBar color="inherit">
+                  <Toolbar>
+                    <IconButton
+                      color="inherit"
+                      onClick={this.handleDialogClose}
+                      aria-label="Close"
+                      style={{ marginLeft: -12 }}
+                    >
+                      <Close />
+                    </IconButton>
+                    <Typography variant="title" style={{ fontSize: 18 }}>
+                      {subscriptions[selectedSubscription][1]}
+                    </Typography>
+                  </Toolbar>
+                </AppBar>
+
+                <div>{testCards}</div>
+              </DialogLayout>
+            </Dialog>
+          )}
+      </>
     );
   }
 
   private handleSubscriptionClick = (subscriptionIndex: number) => {
-    this.setState({ selectedSubscription: subscriptionIndex });
+    this.setState({
+      selectedSubscription: subscriptionIndex,
+      dialogOpen: true,
+    });
+  };
+
+  private handleDialogClose = () => {
+    this.setState({
+      dialogOpen: false,
+    });
+  };
+
+  private createDialogCloseHandlerWrapper = (fn: () => any) => {
+    return () => {
+      this.handleDialogClose();
+      return fn();
+    };
   };
 }
 
-const ExamPackPageContainer = connect<StateProps, DispatchProps, {}, State>(
-  ({ examReview: { loaded, loading } }: State) => ({ loaded, loading }),
-  {
-    fetchExamReviewData: actions.loadPlaceholderData,
-  },
-)(ExamPackPage);
+const ExamPackPageContainer = withWidth()(
+  connect<StateProps, DispatchProps, OwnProps, State>(
+    ({ examReview: { loaded, loading } }: State) => ({ loaded, loading }),
+    {
+      fetchExamReviewData: actions.loadPlaceholderData,
+    },
+  )(ExamPackPage),
+);
 export { ExamPackPageContainer as ExamPackPage };
 
 const TwoColumnWrapper = styled.div`
@@ -143,3 +219,21 @@ const TwoColumnWrapper = styled.div`
     }
   }
 `;
+
+const DialogLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  > div:last-child {
+    ${fromToolbarHeight("margin-top")};
+    padding: ${({ theme }) => theme.spacing.unit * 2}px;
+    overflow: auto;
+  }
+
+  > div:last-child > *:not(:last-child) {
+    margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+  }
+`;
+
+const TransitionComponent = (props: any) => <Slide direction="up" {...props} />;
