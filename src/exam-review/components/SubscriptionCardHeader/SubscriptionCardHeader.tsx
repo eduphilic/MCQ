@@ -58,11 +58,12 @@ const Overline = styled<{ className?: string }>(({ children, className }) => (
 `;
 
 const Title = styled<{ className?: string }>(({ children, className }) => (
-  <Typography2 className={className} variant="H5" paragraph>
+  <Typography2 className={className} variant="H6" paragraph>
     {children}
   </Typography2>
 ))`
-  font-weight: 600;
+  margin-bottom: 8px;
+  font-weight: 500;
 `;
 
 const Subheader = styled<{ className?: string }>(({ children, className }) => (
