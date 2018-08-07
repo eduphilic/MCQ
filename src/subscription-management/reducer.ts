@@ -12,6 +12,9 @@ type State = {
   loading: boolean;
   loaded: boolean;
 
+  // TODO: Remove this after development, it is used to skip the onboarding process.
+  skipOnboardingProcess: boolean;
+
   entries: IEntry[];
   categories: IEntryCategory[];
   categoryQuantitySelectionSettings: ICategoryQuantitySelectionSettings | null;
@@ -22,6 +25,9 @@ type State = {
 const initialState: State = {
   loading: true,
   loaded: false,
+
+  // TODO: Remove this after development, it is used to skip the onboarding process.
+  skipOnboardingProcess: false,
 
   entries: [],
   categories: [],
@@ -51,5 +57,11 @@ export const reducer = createReducer<
   ) => ({
     ...state,
     subscriptions: (state.subscriptions || []).concat(action.payload),
+  }),
+
+  // TODO: Remove this after development, it is used to skip the onboarding process.
+  [SubscriptionManagementAction.SetSkipOnboardingProcess]: state => ({
+    ...state,
+    skipOnboardingProcess: true,
   }),
 });
