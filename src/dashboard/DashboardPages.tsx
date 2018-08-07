@@ -11,6 +11,7 @@ import { routePathFromLocalizationKey } from "routes";
 import { State } from "store";
 import {
   isOnboardingSelector,
+  PlaceholderSubscriptionLoader,
   SubscriptionManagementPage,
 } from "subscription-management";
 import { navigationLinks } from "./navigationLinks";
@@ -35,7 +36,9 @@ class DashboardPages extends Component<Props> {
     const dashboardRoutes = this.buildDashboardRoutes(links);
 
     return (
-      <>
+      // TODO: Remove PlaceholderSubscriptionLoader. This is used to skip the
+      // onboarding process during development.
+      <PlaceholderSubscriptionLoader>
         <AppLayout links={links} enableSwipeNavigation={!isOnboarding}>
           <PageContentWrapper verticalGutters>
             <Switch>
@@ -46,7 +49,7 @@ class DashboardPages extends Component<Props> {
         </AppLayout>
 
         {!isOnboarding && !postSignupDialogsShown && <PostSignupDialogs />}
-      </>
+      </PlaceholderSubscriptionLoader>
     );
   }
 
