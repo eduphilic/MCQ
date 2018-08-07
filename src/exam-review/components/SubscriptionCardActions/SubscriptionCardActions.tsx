@@ -59,7 +59,9 @@ export const SubscriptionCardActions: SFC<
       </SmallTypographyButton>
     ));
 
-  return <CardActions>{buttonElements}</CardActions>;
+  return buttonElements.length === 0 ? null : (
+    <CardActions>{buttonElements}</CardActions>
+  );
 };
 
 const SmallTypographyButton = styled<TypographyButtonProps>(TypographyButton)`
