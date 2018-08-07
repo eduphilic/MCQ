@@ -75,6 +75,10 @@ const StyledButton = withProps<{ selected: boolean }>()(styled(Button)).attrs({
     background-color: #f9f9f9;
   }
 
+  &:active {
+    box-shadow: ${({ theme }) => theme.shadows[4]};
+  }
+
   ${props =>
     props.selected
       ? `
