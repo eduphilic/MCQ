@@ -38,6 +38,7 @@ class ExamPackPage extends Component<Props, ExamPackPageState> {
 
   render() {
     const { loaded } = this.props;
+    const { selectedSubscription } = this.state;
 
     if (!loaded) return <div>Loading...</div>;
 
@@ -46,6 +47,35 @@ class ExamPackPage extends Component<Props, ExamPackPageState> {
       ["Army", "Soldier Tradesman", true],
       ["AirForce", "Group 'X' & 'Y': Med Asst Trade", false],
     ];
+
+    const testCards =
+      selectedSubscription === null
+        ? null
+        : Array.from({ length: 10 }, (_, index) => {
+            const subscription = subscriptions[selectedSubscription];
+            const title = `${subscription[1]} Test ${index + 1}`;
+
+            return (
+              <SubscriptionCard
+                key={`${subscription[0]}-${index}`}
+                imageUrl={entryImages[subscription[0]]}
+                title={title}
+                subheader="Validity 31st Jan 2019"
+                stats={{
+                  Attempts: "2345 Users",
+                  Score: "75/200",
+                  Rank: "733/ Out 2345",
+                }}
+                onReviseButtonClick={
+                  index === 0 ? () => alert(`Revise: ${title}`) : undefined
+                }
+                onAttemptButtonClick={
+                  index === 1 ? () => alert(`Attempt: ${title}`) : undefined
+                }
+                showDisabledExpiredButton={index > 1}
+              />
+            );
+          });
 
     return (
       <TwoColumnWrapper>
@@ -65,7 +95,7 @@ class ExamPackPage extends Component<Props, ExamPackPageState> {
             />
           ))}
         </div>
-        <div>Column 2</div>
+        <div>{testCards}</div>
       </TwoColumnWrapper>
     );
   }
