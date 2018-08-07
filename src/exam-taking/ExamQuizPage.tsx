@@ -7,6 +7,7 @@ import { IExamMeta } from "./models/IExamMeta";
 
 import { DashboardColumnContainer } from "components/DashboardColumnContainer";
 
+import { ExamTakingTourModal } from "exam-taking-tour";
 import { ExamAnswerSelect } from "./components/ExamAnswerSelect";
 import { examAnswerSelectPlaceholderProps } from "./components/ExamAnswerSelect/ExamAnswerSelect.placeholder";
 import { ExamContents } from "./components/ExamContents";
@@ -82,35 +83,42 @@ class ExamQuizPage extends Component<ExamQuizPageProps> {
     }));
 
     return (
-      <ExamTemplate
-        staticView={
-          showOverviewScreen ? (
-            <ExamOverviewMobile />
-          ) : showSubmissionSummaryScreen ? (
-            <ExamSubmissionSummary {...examSubmissionSummaryPlaceholderProps} />
-          ) : (
-            undefined
-          )
-        }
-        paneKeyNodeMap={paneKeyNodeMap}
-      >
-        {showOverviewScreen && (
-          <DashboardColumnContainer>
-            {[
-              <ExamOverviewBluePrint key="blue-print" />,
-              <ExamOverviewMarkings key="markings" />,
-            ]}
-          </DashboardColumnContainer>
-        )}
+      <>
+        <ExamTemplate
+          staticView={
+            showOverviewScreen ? (
+              <ExamOverviewMobile />
+            ) : showSubmissionSummaryScreen ? (
+              <ExamSubmissionSummary
+                {...examSubmissionSummaryPlaceholderProps}
+              />
+            ) : (
+              undefined
+            )
+          }
+          paneKeyNodeMap={paneKeyNodeMap}
+        >
+          {showOverviewScreen && (
+            <DashboardColumnContainer>
+              {[
+                <ExamOverviewBluePrint key="blue-print" />,
+                <ExamOverviewMarkings key="markings" />,
+              ]}
+            </DashboardColumnContainer>
+          )}
 
-        {showSubmissionSummaryScreen && (
-          <ExamSubmissionSummary {...examSubmissionSummaryPlaceholderProps} />
-        )}
+          {showSubmissionSummaryScreen && (
+            <ExamSubmissionSummary {...examSubmissionSummaryPlaceholderProps} />
+          )}
+
+          {!showOverviewScreen &&
+            !showSubmissionSummaryScreen &&
+            paneKeyNodeMap[currentQuestion].node}
+        </ExamTemplate>
 
         {!showOverviewScreen &&
-          !showSubmissionSummaryScreen &&
-          paneKeyNodeMap[currentQuestion].node}
-      </ExamTemplate>
+          !showSubmissionSummaryScreen && <ExamTakingTourModal />}
+      </>
     );
   }
 }
