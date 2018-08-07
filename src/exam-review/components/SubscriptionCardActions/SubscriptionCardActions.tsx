@@ -29,12 +29,14 @@ export const SubscriptionCardActions: SFC<
           color: "primary",
           children:
             strings.examReview_SubscriptionCardActions_ReviseButtonTitle,
+          onClick: onReviseButtonClick,
         }
       : null,
     onAttemptButtonClick
       ? {
           children:
             strings.examReview_SubscriptionCardActions_AttemptButtonTitle,
+          onClick: onAttemptButtonClick,
         }
       : null,
     showDisabledExpiredButton
@@ -60,10 +62,14 @@ export const SubscriptionCardActions: SFC<
     ));
 
   return buttonElements.length === 0 ? null : (
-    <CardActions>{buttonElements}</CardActions>
+    <StyledCardActions>{buttonElements}</StyledCardActions>
   );
 };
 
 const SmallTypographyButton = styled<TypographyButtonProps>(TypographyButton)`
   padding: 4px 24px;
+`;
+
+const StyledCardActions = styled(CardActions)`
+  justify-content: flex-end;
 `;
