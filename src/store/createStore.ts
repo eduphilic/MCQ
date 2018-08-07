@@ -1,35 +1,26 @@
-import { combineReducers, createStore as createReduxStore } from "redux";
+import { createStore as createReduxStore, Store } from "redux";
 import { createEnhancerDevTools } from "./createEnhancerDevTools";
+import { rootReducer, State } from "./rootReducer";
 
-import { reducer as dashboard } from "dashboard";
-import { reducer as examReview } from "exam-review";
-import { reducer as examTaking } from "exam-taking";
-import { reducer as landing } from "landing";
-import { reducer as localization } from "localization";
-import { reducer as navigation } from "navigation";
-import { reducer as session } from "session";
-import { reducer as subscriptionManagement } from "subscription-management";
+export { State };
 
-const reducers = {
-  dashboard,
-  examReview,
-  examTaking,
-  landing,
-  localization,
-  navigation,
-  session,
-  subscriptionManagement,
-};
-
-export type State = {
-  [P in keyof typeof reducers]: ReturnType<typeof reducers[P]>
-};
+// Hold reference to store here to prevent error from react-hot-loader and Redux
+// about the store being replaced.
+let store: Store;
 
 const createStore = () => {
-  const store = createReduxStore(
-    combineReducers(reducers),
-    createEnhancerDevTools(),
-  );
+  if (!store) {
+    store = createReduxStore(rootReducer, createEnhancerDevTools());
+  }
+
+  // Explicit opt in to reducer hot module replacement is required, so do it
+  // here.
+  if (module.hot) {
+    module.hot.accept("./rootReducer", () => {
+      const nextRootReducer = require("./rootReducer").rootReducer;
+      store.replaceReducer(nextRootReducer);
+    });
+  }
 
   return store;
 };
