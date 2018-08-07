@@ -1,4 +1,3 @@
-/* tslint:disable:object-literal-sort-keys */
 const path = require("path");
 const {
   rewireWebpack: rewireTypescript,
@@ -8,6 +7,13 @@ const {
 const { injectBabelPlugin } = require("react-app-rewired");
 
 module.exports = {
+  /**
+   * @param {object} config
+   */
+  jest: function(config) {
+    return rewireTypescriptJest(config);
+  },
+
   /**
    * @param {import("webpack").Configuration} config
    * @param {"development" | "production" | "testing"} env
@@ -22,6 +28,17 @@ module.exports = {
     if (!process.env.CI) {
       rewiredConfig = rewireTSLint(rewiredConfig);
     }
+
+    // // Ignore Storybook stories to improve performance.
+    // const babelLoader = getLoader(
+    //   rewiredConfig.module.rules,
+    //   rule =>
+    //     rule.test &&
+    //     Array.isArray(rule.use) &&
+    //     rule.use.find(r => r.loader && /babel-loader/.test(r.loader)),
+    // );
+    // console.log(babelLoader);
+    // process.exit(0);
 
     // Add Styled Components Babel Plugin
     rewiredConfig = injectBabelPlugin(
@@ -47,11 +64,5 @@ module.exports = {
     rewiredConfig.module.strictExportPresence = false;
 
     return rewiredConfig;
-  },
-  /**
-   * @param {object} config
-   */
-  jest: function(config) {
-    return rewireTypescriptJest(config);
   },
 };
