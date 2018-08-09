@@ -337,7 +337,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
 
             <RightToolbarGroup>
               <Typography variant="cardTitle" style={{ fontWeight: 600 }}>
-                Total Rs {total}
+                Total ₹ Rs {total}
               </Typography>
 
               <TypographyButton color="yellow" filled onClick={submitForm}>
