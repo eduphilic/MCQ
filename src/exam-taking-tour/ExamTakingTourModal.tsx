@@ -1,5 +1,9 @@
-import React, { Component } from "react";
-import { ArcherContainer, ArcherElement } from "react-archer";
+import React, { Component, SFC } from "react";
+import {
+  ArcherContainer,
+  ArcherElement,
+  ArcherElementProps,
+} from "react-archer";
 import { createPortal } from "react-dom";
 import styled from "styled";
 
@@ -56,26 +60,113 @@ class ExamTakingTourModal extends Component<Props, State> {
           arrowLength={4}
           arrowThickness={2.5}
         >
-          <div style={{ display: "flex", width: "100vw" }}>
+          <ToolbarRow>
+            <ToolbarButtonSpacer />
+            <ToolbarHalfButtonSpacer />
+
             <ArcherElement id="dashboard-button">
-              <div style={{ width: 40, height: 32 }} />
+              <ToolbarButton />
             </ArcherElement>
+
+            <ToolbarButtonSpacer />
+            <ArcherElement id="change-language-button">
+              <ToolbarButton />
+            </ArcherElement>
+
+            <ToolbarPauseButtonWrapper>
+              <ArcherElement id="pause-button">
+                <ToolbarPauseButton />
+              </ArcherElement>
+            </ToolbarPauseButtonWrapper>
+
+            <ArcherElement id="submit-exam-button">
+              <SubmitExamButton />
+            </ArcherElement>
+          </ToolbarRow>
+
+          <ToolbarRow>
+            <ToolbarButtonSpacer />
+            <ArcherElement id="question-palette-button">
+              <ToolbarButton />
+            </ArcherElement>
+          </ToolbarRow>
+
+          <div
+            style={{ display: "flex", justifyContent: "center", marginTop: 32 }}
+          >
+            <Description
+              id="pause-button-description"
+              relations={[
+                {
+                  from: { anchor: "top" },
+                  to: { anchor: "bottom", id: "pause-button" },
+                },
+              ]}
+            >
+              Pause Exam
+            </Description>
           </div>
 
-          <div style={{ display: "flex", marginTop: 128, paddingLeft: 100 }}>
-            <ArcherElement
+          <div
+            style={{ display: "flex", justifyContent: "center", marginTop: 16 }}
+          >
+            <Description
+              id="submit-exam-button-description"
+              relations={[
+                {
+                  from: { anchor: "right" },
+                  to: { anchor: "bottom", id: "submit-exam-button" },
+                },
+              ]}
+            >
+              Submit Exam
+            </Description>
+          </div>
+
+          <div
+            style={{ display: "flex", justifyContent: "center", marginTop: 24 }}
+          >
+            <Description
+              id="change-language-button-description"
+              relations={[
+                {
+                  from: { anchor: "left" },
+                  to: { anchor: "bottom", id: "change-language-button" },
+                },
+              ]}
+            >
+              Change Language
+            </Description>
+          </div>
+
+          {/* <div style={{ display: "flex", marginTop: 32, paddingLeft: 100 }}>
+            <Description
               id="dashboard-button-description"
               relations={[
                 {
                   from: { anchor: "left" },
-                  to: { anchor: "right", id: "dashboard-button" },
+                  to: { anchor: "bottom", id: "dashboard-button" },
                 },
               ]}
             >
-              <div style={{ paddingLeft: 4 }}>
-                <Typography style={{ color: "#fff" }}>Exit Exam</Typography>
-              </div>
-            </ArcherElement>
+              Exit Exam
+            </Description>
+          </div> */}
+
+          <div style={{ display: "flex", marginTop: 24, paddingLeft: 100 }}>
+            <Description
+              id="question-palette-button-description"
+              relations={[
+                {
+                  from: { anchor: "left" },
+                  to: { anchor: "bottom", id: "question-palette-button" },
+                },
+              ]}
+            >
+              Exit Exam <br />
+              <br />
+              Question Palette
+            </Description>
           </div>
 
           <ProgressionButton>OK, GOT IT!</ProgressionButton>
@@ -111,30 +202,52 @@ const Wrapper = styled.div<{ revealAppBar: boolean }>`
   );
 `;
 
-// const AppBar = styled.div`
-//   display: flex;
-//   width: 100%;
-//   height: 32px;
-// `;
+const ToolbarRow = styled.div`
+  display: flex;
+  width: 100vw;
+  height: 32px;
 
-// const AppBarIcon = styled.div`
-//   width: 50px;
-//   height: 32px;
-// `;
+  ${({ theme }) => theme.breakpoints.up("sm")} {
+    padding-left: 8px;
+  }
+`;
 
-// type StyleProp = React.DetailedHTMLProps<
-//   React.HTMLAttributes<HTMLDivElement>,
-//   HTMLDivElement
-// >["style"];
-// const InfoBox = styled<{ className?: string; style?: StyleProp }>(
-//   ({ children, className, style }) => (
-//     <div className={className} style={style}>
-//       <Typography style={{ color: "#fff" }}>{children}</Typography>
-//     </div>
-//   ),
-// )`
-//   color: #fff;
-// `;
+const ToolbarButtonSpacer = styled.div`
+  width: 16px;
+`;
+
+const ToolbarHalfButtonSpacer = styled.div`
+  width: 8px;
+`;
+
+const ToolbarButton = styled.div`
+  width: 24px;
+  height: 32px;
+`;
+
+const ToolbarPauseButtonWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+`;
+
+const ToolbarPauseButton = styled.div`
+  width: 120px;
+  height: 32px;
+`;
+
+const SubmitExamButton = styled.div`
+  width: 100px;
+  height: 32px;
+`;
+
+const Description: SFC<ArcherElementProps> = ({ children, ...rest }) => (
+  <ArcherElement {...rest}>
+    <div style={{ paddingLeft: 4, paddingRight: 4 }}>
+      <Typography style={{ color: "#fff" }}>{children}</Typography>
+    </div>
+  </ArcherElement>
+);
 
 const ProgressionButton = styled<TypographyButtonProps>(props => (
   <TypographyButton {...props} color="primary" filled />
