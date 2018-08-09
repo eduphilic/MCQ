@@ -2,12 +2,12 @@ import { storiesOf } from "@storybook/react";
 import React, { SFC } from "react";
 
 import { formik } from "components/storybook/StorybookFormikAddon";
-import { BaseSwippableTemplate } from ".";
+import { BaseSwippableTemplate } from "./BaseSwippableTemplate";
 
 const initialValues = { selectedPane: 0 };
 type Values = typeof initialValues;
 
-storiesOf("Components", module)
+storiesOf("BaseSwippableTemplate", module)
   .addParameters({ formik: { initialValues } })
   .add("BaseSwippableTemplate", () => {
     const { paneKeyNodeMap, selectedPane, onPaneChange } = getProps();

@@ -2,7 +2,7 @@ import React, { Component, createRef, ReactNode } from "react";
 import ReactSwipe from "react-swipe";
 import styled from "styled";
 
-export interface BaseSwippableTemplateProps {
+export type BaseSwippableTemplateProps = {
   /**
    * Header node. Used for the app bar.
    */
@@ -48,7 +48,7 @@ export interface BaseSwippableTemplateProps {
    * instead of the panes.
    */
   staticView?: ReactNode;
-}
+};
 
 /**
  * Provides a vertical layout with app bar, swippable panes, and optional bottom
