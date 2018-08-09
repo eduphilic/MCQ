@@ -1162,13 +1162,6 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react-swipe@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@types/react-swipe/-/react-swipe-5.0.2.tgz#3a90217d293edadbb910c94fb8815ba6f9642ee8"
-  dependencies:
-    "@types/react" "*"
-    "@types/swipe" "*"
-
 "@types/react-swipeable-views@^0.12.1":
   version "0.12.1"
   resolved "https://registry.yarnpkg.com/@types/react-swipeable-views/-/react-swipeable-views-0.12.1.tgz#7745b2e74907832cec0b2ee5341b02109ee6dd29"
@@ -1213,10 +1206,6 @@
   dependencies:
     "@types/react" "*"
     "@types/webpack-env" "*"
-
-"@types/swipe@*":
-  version "2.0.27"
-  resolved "https://registry.yarnpkg.com/@types/swipe/-/swipe-2.0.27.tgz#20316cd9756623ecb36fc2a3a13208aa0a3c2f38"
 
 "@types/tapable@*":
   version "1.0.4"
@@ -9789,14 +9778,6 @@ react-style-proptype@^3.0.0:
   resolved "https://registry.yarnpkg.com/react-style-proptype/-/react-style-proptype-3.2.1.tgz#7cfeb9b87ec7ab9dcbde9715170ed10c11fb86aa"
   dependencies:
     prop-types "^15.5.4"
-
-react-swipe@^5.1.1:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/react-swipe/-/react-swipe-5.1.1.tgz#5aeb08afc5efec13507aed6e5841360821e9f0d1"
-  dependencies:
-    object-assign "^4.1.1"
-    prop-types "^15.6.0"
-    swipe-js-iso "^2.0.4"
 
 react-swipeable-views-core@^0.12.14:
   version "0.12.14"
