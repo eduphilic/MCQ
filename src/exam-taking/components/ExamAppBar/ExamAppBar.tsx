@@ -8,9 +8,8 @@ import { buttonSelector } from "../../selectors";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 
-import { DropdownButton } from "components/DropdownButton";
-import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
+import { LanguageToggleButton } from "localization";
 
 type StateProps = {
   showStartExamButton: boolean;
@@ -40,12 +39,6 @@ const ExamAppBar: SFC<Props> = props => {
       <ToolbarWithButtonMargins>
         <TypographyButton>{"<"} Dashboard</TypographyButton>
 
-        <DropdownButton>
-          <Typography variant="buttonBold">English</Typography>
-        </DropdownButton>
-
-        <FlexSpacer />
-
         {showStartExamButton && (
           <TypographyButton color="primary" onClick={onStartExamButtonClick}>
             Start Exam
@@ -57,6 +50,10 @@ const ExamAppBar: SFC<Props> = props => {
             Submit Exam
           </TypographyButton>
         )}
+
+        <FlexSpacer />
+
+        <LanguageToggleButton />
       </ToolbarWithButtonMargins>
     </AppBar>
   );
