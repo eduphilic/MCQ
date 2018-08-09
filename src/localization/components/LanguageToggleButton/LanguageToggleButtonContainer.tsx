@@ -1,7 +1,7 @@
-import { actions as localizationActions } from "localization";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
+import { actions as localizationActions } from "../../actions";
 
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
