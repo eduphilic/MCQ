@@ -58,7 +58,9 @@ export const SwipeableNav: SFC<SwipeableNavProps> = props => {
       </NavTheme>
 
       <StyledSwipeableViews
-        animateHeight
+        // Dynamically setting height causes some panes to be cut short when
+        // resizing the window horizontally.
+        // animateHeight
         className={swipeableViewsClassName}
         index={swipeableViewsPaneIndex}
         onChangeIndex={onSwipeableViewsChangeIndex}
