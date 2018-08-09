@@ -21,13 +21,14 @@ import {
 type OwnProps = {};
 type State = {
   portalElement: HTMLDivElement | null;
+  open: boolean;
 };
 type Props = OwnProps & WithWidthProps;
 
 export { OwnProps as ExamTakingTourModalProps };
 
 class ExamTakingTourModal extends Component<Props, State> {
-  state: State = { portalElement: null };
+  state: State = { portalElement: null, open: true };
 
   componentDidMount() {
     const portalElement = document.createElement("div");
@@ -47,10 +48,10 @@ class ExamTakingTourModal extends Component<Props, State> {
 
   render() {
     const { width } = this.props;
-    const { portalElement } = this.state;
+    const { portalElement, open } = this.state;
 
     const isMobile = isWidthDown("sm", width);
-    if (!isMobile || !portalElement) return null;
+    if (!isMobile || !portalElement || !open) return null;
 
     const portalContents = (
       <Wrapper revealAppBar>
@@ -169,13 +170,19 @@ class ExamTakingTourModal extends Component<Props, State> {
             </Description>
           </div>
 
-          <ProgressionButton>OK, GOT IT!</ProgressionButton>
+          <ProgressionButton onClick={this.handleCloseButtonClick}>
+            OK, GOT IT!
+          </ProgressionButton>
         </ArcherContainer>
       </Wrapper>
     );
 
     return createPortal(portalContents, portalElement);
   }
+
+  private handleCloseButtonClick = () => {
+    this.setState({ open: false });
+  };
 }
 
 const ExamTakingTourModalWithWidth = withWidth()(ExamTakingTourModal);
