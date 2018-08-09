@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { State } from "store";
 import { actions } from "../../actions";
 
-import { BaseSwippableTemplate } from "components/BaseSwippableTemplate";
+import { BaseSwippableTemplate } from "../BaseSwippableTemplate";
 
 import { ExamAppBarMobile } from "../ExamAppBarMobile";
 
