@@ -1,5 +1,5 @@
-import React, { Component, createRef, ReactNode } from "react";
-import ReactSwipe from "react-swipe";
+import React, { Component, ReactNode } from "react";
+import SwipeableViews, { SwipeableViewsProps } from "react-swipeable-views";
 import styled from "styled";
 
 export type BaseSwippableTemplateProps = {
@@ -58,22 +58,7 @@ export type BaseSwippableTemplateProps = {
 export class BaseSwippableTemplate extends Component<
   BaseSwippableTemplateProps
 > {
-  private reactSwipeRef = createRef<ReactSwipe>();
-
-  componentDidUpdate(prevProps: BaseSwippableTemplateProps) {
-    const { slideAnimationDuration, selectedPane } = this.props;
-
-    if (selectedPane === undefined || selectedPane === prevProps.selectedPane) {
-      return;
-    }
-
-    if (!this.reactSwipeRef.current) return;
-
-    this.reactSwipeRef.current.slide(
-      selectedPane,
-      slideAnimationDuration === undefined ? 250 : slideAnimationDuration,
-    );
-  }
+  private readonly scrollTopTargetClass = "swipeable-views-scroll-top-target";
 
   render() {
     const {
@@ -81,7 +66,6 @@ export class BaseSwippableTemplate extends Component<
       paneKeyNodeMap,
       footerNode,
       selectedPane,
-      onPaneChange,
       staticView,
     } = this.props;
 
@@ -96,22 +80,35 @@ export class BaseSwippableTemplate extends Component<
         {staticView ? (
           <StaticViewWrapper>{staticView}</StaticViewWrapper>
         ) : (
-          <ReactSwipeFlexGrow
-            innerRef={this.reactSwipeRef}
-            swipeOptions={{
-              continuous: false,
-              startSlide: selectedPane,
-              transitionEnd: onPaneChange,
-            }}
+          <StyledSwipeableViews
+            className={this.scrollTopTargetClass}
+            index={selectedPane}
+            onChangeIndex={this.handlePaneChange}
           >
             {panes}
-          </ReactSwipeFlexGrow>
+          </StyledSwipeableViews>
         )}
 
         {footerNode}
       </Wrapper>
     );
   }
+
+  /**
+   * Scroll to top of page on pane change and then notify handler passed from
+   * prop.
+   */
+  private handlePaneChange = (paneIndex: number) => {
+    const scrollTopTargetElement = document.querySelector(
+      `.${this.scrollTopTargetClass}`,
+    );
+
+    if (scrollTopTargetElement) {
+      scrollTopTargetElement.scrollTop = 0;
+    }
+
+    this.props.onPaneChange(paneIndex);
+  };
 }
 
 const Wrapper = styled.div`
@@ -123,21 +120,23 @@ const Wrapper = styled.div`
 `;
 
 const StaticViewWrapper = styled.div`
-  /* flex: 1; */
   overflow-y: auto;
 `;
 
-const ReactSwipeFlexGrow = styled(ReactSwipe)`
+const StyledSwipeableViews = styled<Omit<SwipeableViewsProps, "ref">>(props => (
+  <SwipeableViews
+    {...props}
+    springConfig={{ duration: "0.3s", easeFunction: "linear", delay: "0s" }}
+  />
+))`
   flex: 1;
 
-  > div {
-    height: 100%;
-  }
+  /* Enable Momentum Scrolling on iOS */
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 `;
 
 const Pane = styled.div`
-  width: 100%;
-  height: 100%;
   overflow-y: auto;
 
   & > * {
