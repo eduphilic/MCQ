@@ -7,7 +7,7 @@ import Assignment from "@material-ui/icons/Assignment";
 import SettingsOutlined from "@material-ui/icons/SettingsOutlined";
 import { AccountCardDetails } from "icons";
 
-import { ExamPackPage } from "exam-review";
+import { ExamPackPage } from "features/exam-review";
 import { SubscriptionManagementPage } from "features/subscription-management";
 // import { DashboardPage } from "./DashboardPage";
 import { SettingsPage } from "./SettingsPage";
