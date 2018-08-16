@@ -67,11 +67,13 @@ const QuantityRadioGroup = styled<RadioGroupProps>(props => (
   <RadioGroup row {...props} />
 ))`
   flex-grow: 1;
-  justify-content: space-evenly;
+  justify-content: space-between;
 `;
 
-const QuantityRadio = styled<Omit<FormControlLabelProps, "control">>(props => (
-  <FormControlLabel control={<StyledRadio color="primary" />} {...props} />
+const QuantityRadio = styled<
+  Omit<FormControlLabelProps, "innerRef" | "control">
+>(props => (
+  <StyledLabel control={<StyledRadio color="primary" />} {...props} />
 ))`
   ${({ theme }) => theme.breakpoints.down("sm")} {
     width: 50%;
@@ -84,4 +86,9 @@ const QuantityRadio = styled<Omit<FormControlLabelProps, "control">>(props => (
 const StyledRadio = styled(Radio)`
   width: 24px;
   margin-right: 12px;
+`;
+
+/* Remove left negative margin. */
+const StyledLabel = styled(FormControlLabel)`
+  margin-left: 0;
 `;

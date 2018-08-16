@@ -34,7 +34,7 @@ export const CategoryItem: SFC<CategoryItemProps> = props => {
             <Typography
               variant="subheading"
               component="span"
-              style={{ width: 140, fontWeight: 500 }}
+              style={{ fontSize: 14, fontWeight: 500 }}
             >
               {categoryLabel[localizationLanguage] || categoryLabel.en}
             </Typography>
@@ -48,17 +48,5 @@ export const CategoryItem: SFC<CategoryItemProps> = props => {
 };
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  min-height: 48px;
   margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
-
-  ${({ theme }) => theme.breakpoints.down("sm")} {
-    flex-wrap: wrap;
-
-    > *:nth-child(1),
-    > *:nth-child(2) {
-      margin-bottom: 8px;
-    }
-  }
 `;
