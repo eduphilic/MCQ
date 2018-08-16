@@ -14,4 +14,9 @@ export interface IEntryCategory {
    * Example: Sol GD.
    */
   title: LocalizedString;
+
+  /**
+   * Education requirements for entry category.
+   */
+  education?: LocalizedString;
 }
