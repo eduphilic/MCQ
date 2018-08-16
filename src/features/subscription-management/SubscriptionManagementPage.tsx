@@ -12,6 +12,7 @@ import Divider from "@material-ui/core/Divider";
 import Hidden from "@material-ui/core/Hidden";
 
 import { CardMobileFlat } from "components/CardMobileFlat";
+import { RupeeFontSpan } from "components/RupeeFontSpan";
 import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
 import { BottomToolbarDock } from "features/navigation";
@@ -19,6 +20,7 @@ import { BottomToolbar } from "./components/BottomToolbar";
 import { CategoryQuantitySelector } from "./components/CategoryQuantitySelector";
 import { CategorySubscription } from "./components/CategorySubscription";
 import { EntrySelect } from "./components/EntrySelect";
+import { QuantitySelectionCardHeader } from "./components/QuantitySelectionCardHeader";
 import { SelectedEntries } from "./components/SelectedEntries";
 
 export class SubscriptionManagementPage extends Component<PropsWithFormState> {
@@ -200,11 +202,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
 
         {this.renderCurrentSubscriptions()}
 
-        <LocalizationStateConsumer>
-          {({ localizationLanguage }) =>
-            this.renderQuantitySelectionCards(localizationLanguage)
-          }
-        </LocalizationStateConsumer>
+        {this.renderQuantitySelectionCards()}
       </>
     );
   };
@@ -245,7 +243,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
     );
   };
 
-  private renderQuantitySelectionCards = (language: "en" | "hi") => {
+  private renderQuantitySelectionCards = () => {
     const { entries, categoryQuantitySelectionSettings, values } = this.props;
     const { selectedEntryIDs } = values;
 
@@ -253,25 +251,25 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
       selectedEntryIDs.includes(e.id),
     );
 
-    return selectedEntries.map(e => (
-      <CardMobileFlat key={e.id}>
-        <CardHeader
-          // Entry title.
-          title={
-            <Typography variant="cardTitle">
-              {e.title[language] || e.title.en}
-            </Typography>
-          }
-          // Exam pricing text.
-          subheader={strings.subscription_management_QuantitySelectionCardPricingText.replace(
-            "{}",
-            categoryQuantitySelectionSettings!.examPriceRs.toString(),
-          )}
-        />
+    return (
+      <LocalizationStateConsumer>
+        {({ localizationLanguage }) =>
+          selectedEntries.map(e => (
+            <CardMobileFlat key={e.id}>
+              <QuantitySelectionCardHeader
+                // Entry title.
+                title={e.title[localizationLanguage] || e.title.en}
+                pricePerExamRs={categoryQuantitySelectionSettings!.examPriceRs}
+                // Entry logo image.
+                imageUrl={e.logoUrlByWidth["48"]}
+              />
 
-        {this.renderQuantitySelectionCardContents(e)}
-      </CardMobileFlat>
-    ));
+              {this.renderQuantitySelectionCardContents(e)}
+            </CardMobileFlat>
+          ))
+        }
+      </LocalizationStateConsumer>
+    );
   };
 
   private renderQuantitySelectionCardContents = (entry: IEntry) => {
@@ -337,7 +335,9 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
 
             <RightToolbarGroup>
               <Typography variant="cardTitle" style={{ fontWeight: 600 }}>
-                Total ₹ Rs {total}
+                Total&nbsp;
+                <RupeeFontSpan>R</RupeeFontSpan>
+                &nbsp;Rs {total}
               </Typography>
 
               <TypographyButton color="yellow" filled onClick={submitForm}>
