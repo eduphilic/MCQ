@@ -31,7 +31,7 @@ export const createEntryPlaceholders = (): IEntry[] => [
   {
     id: "airforce",
     title: { en: "Airforce" },
-    subtitle: { en: "GROUP 'X', Group 'Y'" },
+    subtitle: { en: "Group 'X', Group 'Y'" },
     logoUrlByWidth: createLogoUrl("airforce"),
   },
   {
