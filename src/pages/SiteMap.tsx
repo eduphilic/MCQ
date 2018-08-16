@@ -14,7 +14,7 @@ import { navigationLinksExam } from "common/structures/navigationLinksExam";
 import { AdminRoute } from "./AdminRoute";
 
 import { DashboardPages } from "features/dashboard";
-import { pages as landingPages } from "landing";
+import { pages as landingPages } from "features/landing";
 
 export const SiteMap: SFC<{}> = () => {
   const adminLoginPageNode = navigationLinksAdminLogin.map(l => (
