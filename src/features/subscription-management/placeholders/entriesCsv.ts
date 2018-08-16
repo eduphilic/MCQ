@@ -183,7 +183,7 @@ Army Havildar,"Hav Surveyor Auto Carto
 ,,,General Knowledge(Gen Awareness + Science + Arts stream),50,100,,Qualifying Marks In Paper 2,48
 ,,,PAPER 2(MCQ),50,100,60 Mins,For every right answer,2 Marks
 ,,,Budh Religion Subject,50,100,,Negative Marks for every wrong answer,1/2 Marks
-Airforce Airman,GROUP 'X' Trades (Technical except Education Instructor),10th ,PAPER 1(MCQ),50,100,60 Mins,Qualifying Marks ,32
+Airforce Airman,Group 'X' Trades (Technical except Education Instructor),10th ,PAPER 1(MCQ),50,100,60 Mins,Qualifying Marks ,32
 ,,,English,10,20,,For every right answer,2 Marks
 ,,,Physics,20,40,,Negative Marks for every wrong answer,1/2 Marks
 ,,,Mathematics,20,40,,,
