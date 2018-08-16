@@ -15,7 +15,7 @@ import {
   SideSheetToggleButtonProps,
   SideSheetToggleStoreProvider,
 } from "components/SideSheet";
-import { DrawerContents } from "navigation";
+import { DrawerContents } from "features/navigation";
 
 import { navigationLinksAdmin } from "common/structures/navigationLinksAdmin";
 

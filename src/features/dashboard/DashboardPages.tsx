@@ -1,14 +1,14 @@
 import {
-  isOnboardingSelector,
-  PlaceholderSubscriptionLoader,
-  SubscriptionManagementPage,
-} from "features/subscription-management";
-import {
   AppLayout,
   INavigationLink,
   MultipathRoute,
   PageContentWrapper,
-} from "navigation";
+} from "features/navigation";
+import {
+  isOnboardingSelector,
+  PlaceholderSubscriptionLoader,
+  SubscriptionManagementPage,
+} from "features/subscription-management";
 import React, { Component, SFC } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";

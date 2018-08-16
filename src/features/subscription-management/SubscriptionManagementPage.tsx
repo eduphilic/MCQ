@@ -14,7 +14,7 @@ import Hidden from "@material-ui/core/Hidden";
 import { CardMobileFlat } from "components/CardMobileFlat";
 import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
-import { BottomToolbarDock } from "navigation";
+import { BottomToolbarDock } from "features/navigation";
 import { BottomToolbar } from "./components/BottomToolbar";
 import { CategoryQuantitySelector } from "./components/CategoryQuantitySelector";
 import { CategorySubscription } from "./components/CategorySubscription";

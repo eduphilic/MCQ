@@ -1,4 +1,4 @@
-import { INavigationLink } from "navigation";
+import { INavigationLink } from "features/navigation";
 import React from "react";
 import { routePathFromLocalizationKey } from "routes";
 

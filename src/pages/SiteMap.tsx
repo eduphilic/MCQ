@@ -5,7 +5,7 @@ import {
   MultipathRoute,
   PersistentScrollPosition, // Requires access to Router.
   ReduxRouterConnector,
-} from "navigation";
+} from "features/navigation";
 
 import { navigationLinksAdmin } from "common/structures/navigationLinksAdmin";
 import { navigationLinksAdminForms } from "common/structures/navigationLinksAdminForms";

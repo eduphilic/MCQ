@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Menu from "@material-ui/icons/Menu";
 
 import { DrawerStateConsumer } from "components/ResponsiveDrawerFrame";
-import { LogoutButton } from "navigation";
+import { LogoutButton } from "features/navigation";
 
 type StateProps = {
   locationPageTitleWithoutProductName: string;
