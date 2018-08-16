@@ -8,7 +8,7 @@ import SettingsOutlined from "@material-ui/icons/SettingsOutlined";
 import { AccountCardDetails } from "icons";
 
 import { ExamPackPage } from "exam-review";
-import { SubscriptionManagementPage } from "subscription-management";
+import { SubscriptionManagementPage } from "features/subscription-management";
 // import { DashboardPage } from "./DashboardPage";
 import { SettingsPage } from "./SettingsPage";
 

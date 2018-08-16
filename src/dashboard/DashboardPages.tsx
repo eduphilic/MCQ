@@ -1,4 +1,9 @@
 import {
+  isOnboardingSelector,
+  PlaceholderSubscriptionLoader,
+  SubscriptionManagementPage,
+} from "features/subscription-management";
+import {
   AppLayout,
   INavigationLink,
   MultipathRoute,
@@ -9,11 +14,6 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { routePathFromLocalizationKey } from "routes";
 import { State } from "store";
-import {
-  isOnboardingSelector,
-  PlaceholderSubscriptionLoader,
-  SubscriptionManagementPage,
-} from "subscription-management";
 import { navigationLinks } from "./navigationLinks";
 
 import { PostSignupDialogs } from "./components/PostSignupDialogs";
