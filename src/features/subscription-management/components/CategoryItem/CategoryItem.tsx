@@ -51,6 +51,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   min-height: 48px;
+  margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
     flex-wrap: wrap;
