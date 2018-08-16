@@ -8,9 +8,12 @@ import FormControlLabel, {
 import Radio from "@material-ui/core/Radio";
 import RadioGroup, { RadioGroupProps } from "@material-ui/core/RadioGroup";
 
-import { CategoryItem, CategoryItemProps } from "../CategoryItem";
+import {
+  CategoryQuantitySelectorItem,
+  CategoryQuantitySelectorItemProps,
+} from "../CategoryQuantitySelectorItem";
 
-export type CategoryQuantitySelectorProps = CategoryItemProps & {
+export type CategoryQuantitySelectorProps = CategoryQuantitySelectorItemProps & {
   /**
    * Called on quantity change.
    */
@@ -37,7 +40,7 @@ export class CategoryQuantitySelector extends Component<
     return (
       <LocalizationStateConsumer>
         {({ localizationLanguage }) => (
-          <CategoryItem {...this.props}>
+          <CategoryQuantitySelectorItem {...this.props}>
             <QuantityRadioGroup
               value={selectedQuantityIndex.toString()}
               onChange={this.handleChange}
@@ -56,7 +59,7 @@ export class CategoryQuantitySelector extends Component<
                 ),
               )}
             </QuantityRadioGroup>
-          </CategoryItem>
+          </CategoryQuantitySelectorItem>
         )}
       </LocalizationStateConsumer>
     );

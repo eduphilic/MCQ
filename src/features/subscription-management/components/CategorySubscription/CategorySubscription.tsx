@@ -5,9 +5,12 @@ import { LocalizedString } from "types";
 
 import Typography from "@material-ui/core/Typography";
 
-import { CategoryItem, CategoryItemProps } from "../CategoryItem";
+import {
+  CategoryQuantitySelectorItem,
+  CategoryQuantitySelectorItemProps,
+} from "../CategoryQuantitySelectorItem";
 
-export type CategorySubscriptionProps = CategoryItemProps & {
+export type CategorySubscriptionProps = CategoryQuantitySelectorItemProps & {
   categoryLabel: LocalizedString;
 };
 
@@ -20,7 +23,7 @@ export const CategorySubscription: SFC<CategorySubscriptionProps> = props => {
   return (
     <LocalizationStateConsumer>
       {({ localizationLanguage }) => (
-        <CategoryItem {...props}>
+        <CategoryQuantitySelectorItem {...props}>
           <RightTextGroupWrapper>
             <Typography>
               {quantityLabel[localizationLanguage] || quantityLabel.en}
@@ -28,7 +31,7 @@ export const CategorySubscription: SFC<CategorySubscriptionProps> = props => {
 
             <TypographyRed>Expiring on 3 Jul 2018</TypographyRed>
           </RightTextGroupWrapper>
-        </CategoryItem>
+        </CategoryQuantitySelectorItem>
       )}
     </LocalizationStateConsumer>
   );

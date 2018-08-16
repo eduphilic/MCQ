@@ -6,7 +6,7 @@ import { ICategoryQuantitySelectionSettings } from "../../models/ICategoryQuanti
 
 import Typography from "@material-ui/core/Typography";
 
-export type CategoryItemProps = {
+export type CategoryQuantitySelectorItemProps = {
   /**
    * Settings that dictate the quantities of exams offered for each category.
    */
@@ -23,7 +23,9 @@ export type CategoryItemProps = {
   selectedQuantityIndex: number;
 };
 
-export const CategoryItem: SFC<CategoryItemProps> = props => {
+export const CategoryQuantitySelectorItem: SFC<
+  CategoryQuantitySelectorItemProps
+> = props => {
   const { children, categoryLabel } = props;
 
   return (
