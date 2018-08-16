@@ -7,7 +7,7 @@ import { IExamMeta } from "./models/IExamMeta";
 
 import { DashboardColumnContainer } from "components/DashboardColumnContainer";
 
-import { ExamTakingTourModal } from "exam-taking-tour";
+import { ExamTakingTourModal } from "features/exam-taking-tour";
 import { ExamAnswerSelect } from "./components/ExamAnswerSelect";
 import { examAnswerSelectPlaceholderProps } from "./components/ExamAnswerSelect/ExamAnswerSelect.placeholder";
 import { ExamContents } from "./components/ExamContents";
