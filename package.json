@@ -30,7 +30,6 @@
     "yarn": ">= 1.5.1"
   },
   "precommit": [
-    "lint",
     "type-check"
   ],
   "browserslist": {
