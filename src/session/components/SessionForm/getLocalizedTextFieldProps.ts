@@ -1,4 +1,4 @@
-import { strings } from "localization";
+import { strings } from "features/localization";
 import { FormType } from "./FormType";
 import { TextFieldValues } from "./TextFieldValues";
 

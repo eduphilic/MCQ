@@ -4,8 +4,8 @@ import { reducer as dashboard } from "features/dashboard";
 import { reducer as examReview } from "features/exam-review";
 import { reducer as examTaking } from "features/exam-taking";
 import { reducer as landing } from "features/landing";
+import { reducer as localization } from "features/localization";
 import { reducer as subscriptionManagement } from "features/subscription-management";
-import { reducer as localization } from "localization";
 import { reducer as navigation } from "navigation";
 import { reducer as session } from "session";
 

@@ -1,5 +1,5 @@
 import { navigationLinksAll } from "common/structures/navigationLinksAll";
-import { strings } from "localization";
+import { strings } from "features/localization";
 import { routes } from "../routes";
 
 const defaultOptions = {

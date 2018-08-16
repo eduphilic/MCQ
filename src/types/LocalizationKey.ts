@@ -1,3 +1,3 @@
-import { Strings } from "localization/strings";
+import { Strings } from "features/localization/strings";
 
 export type LocalizationKey = keyof Strings;

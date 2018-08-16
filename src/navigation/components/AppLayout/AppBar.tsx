@@ -9,7 +9,7 @@ import MuiAppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-import { LanguageToggleButton } from "localization";
+import { LanguageToggleButton } from "features/localization";
 import { LogoutButton } from "./LogoutButton";
 
 type StateProps = {

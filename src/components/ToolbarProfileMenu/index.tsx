@@ -1,4 +1,4 @@
-import { strings } from "localization";
+import { strings } from "features/localization";
 import React, { Component, MouseEvent } from "react";
 import styled from "styled";
 

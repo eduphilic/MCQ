@@ -1,4 +1,4 @@
-import { LocalizationStateConsumer } from "localization";
+import { LocalizationStateConsumer } from "features/localization";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { State } from "store";

@@ -1,4 +1,4 @@
-import { LocalizationStateConsumer, strings } from "localization";
+import { LocalizationStateConsumer, strings } from "features/localization";
 import React, { SFC } from "react";
 import styled from "styled";
 

@@ -1,5 +1,5 @@
 import Typography from "@material-ui/core/Typography";
-import { strings } from "localization";
+import { strings } from "features/localization";
 import React, { SFC } from "react";
 import styled from "styled";
 import { DarkTheme } from "theme";

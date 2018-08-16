@@ -1,4 +1,4 @@
-import { strings } from "localization";
+import { strings } from "features/localization";
 import React, { SFC } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled";

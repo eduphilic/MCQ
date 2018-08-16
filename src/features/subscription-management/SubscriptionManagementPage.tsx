@@ -1,4 +1,4 @@
-import { LocalizationStateConsumer, strings } from "localization";
+import { LocalizationStateConsumer, strings } from "features/localization";
 import { IEntry } from "models";
 import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";

@@ -1,5 +1,5 @@
 import { bottomNavBoxShadow } from "css";
-import { strings } from "localization";
+import { strings } from "features/localization";
 import React, { SFC } from "react";
 import SwipeableViews, { SwipeableViewsProps } from "react-swipeable-views";
 import styled from "styled";

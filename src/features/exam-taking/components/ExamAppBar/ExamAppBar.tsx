@@ -9,7 +9,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 
 import { TypographyButton } from "components/TypographyButton";
-import { LanguageToggleButton } from "localization";
+import { LanguageToggleButton } from "features/localization";
 
 type StateProps = {
   showStartExamButton: boolean;

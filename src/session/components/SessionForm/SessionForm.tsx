@@ -1,5 +1,5 @@
+import { strings } from "features/localization";
 import { Formik } from "formik";
-import { strings } from "localization";
 import React, { cloneElement, ReactElement, SFC } from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
