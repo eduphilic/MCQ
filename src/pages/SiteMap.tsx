@@ -13,7 +13,7 @@ import { navigationLinksAdminLogin } from "common/structures/navigationLinksAdmi
 import { navigationLinksExam } from "common/structures/navigationLinksExam";
 import { AdminRoute } from "./AdminRoute";
 
-import { DashboardPages } from "dashboard";
+import { DashboardPages } from "features/dashboard";
 import { pages as landingPages } from "landing";
 
 export const SiteMap: SFC<{}> = () => {

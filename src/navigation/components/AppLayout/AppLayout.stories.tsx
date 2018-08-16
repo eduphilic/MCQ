@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
-import { navigationLinks } from "../../../dashboard/navigationLinks";
+import { navigationLinks } from "../../../features/dashboard/navigationLinks";
 
 import { AppLayout } from "./AppLayout";
 

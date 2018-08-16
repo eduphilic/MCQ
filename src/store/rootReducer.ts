@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 
-import { reducer as dashboard } from "dashboard";
 import { reducer as examReview } from "exam-review";
 import { reducer as examTaking } from "exam-taking";
+import { reducer as dashboard } from "features/dashboard";
 import { reducer as subscriptionManagement } from "features/subscription-management";
 import { reducer as landing } from "landing";
 import { reducer as localization } from "localization";
