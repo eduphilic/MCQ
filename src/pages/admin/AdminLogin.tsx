@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 
 import { AdminLoginTemplate } from "components/AdminLoginTemplate";
 import { AuthenticationErrorSnackbar } from "components/AuthenticationErrorSnackbar";
-import { SessionForm } from "session";
+import { SessionForm } from "features/session";
 
 interface AdminLoginProps {
   authenticating: boolean;
