@@ -17,7 +17,7 @@ export const createEntryPlaceholders = (): IEntry[] => [
     subtitle: {
       en: "NDA, CDA, ACC, AFCAT, Asst ComdtBSF (ITBP, CRPF, SSB, CISF), & MNS",
     },
-    logoUrlByWidth: createLogoUrl("officer"),
+    logoUrlByWidth: createLogoUrl("upsc"),
   },
   {
     id: "army",
@@ -52,8 +52,7 @@ export const createEntryPlaceholders = (): IEntry[] => [
     id: "capf",
     title: { en: "CAPF (BSF, ITBP, CRPF, SSB, CISF)" },
     subtitle: { en: "Asst Comdt, SI/ASI & Constable GD" },
-    logoUrlByWidth: createLogoUrl("navy"),
-    // logoUrlByWidth: createLogoUrl("capf"),
+    logoUrlByWidth: createLogoUrl("ssc"),
   },
   {
     id: "coast-guard",
@@ -68,14 +67,12 @@ export const createEntryPlaceholders = (): IEntry[] => [
     id: "railway-protection-force",
     title: { en: "Railway Protection Force" },
     subtitle: { en: "Sub Inspector & Constable" },
-    logoUrlByWidth: createLogoUrl("navy"),
-    // logoUrlByWidth: createLogoUrl("railwayprotectionforce"),
+    logoUrlByWidth: createLogoUrl("railway"),
   },
   {
     id: "territorial-army",
     title: { en: "Territorial Army" },
     subtitle: { en: "Officer, Tradesman, Soldier GD & Clerk" },
-    logoUrlByWidth: createLogoUrl("navy"),
-    // logoUrlByWidth: createLogoUrl("territorialarmy"),
+    logoUrlByWidth: createLogoUrl("territorialarmy"),
   },
 ];
