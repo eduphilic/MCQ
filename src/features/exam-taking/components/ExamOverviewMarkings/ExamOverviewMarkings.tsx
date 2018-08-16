@@ -1,4 +1,4 @@
-import { IExamMetaMarkings } from "exam-taking/models/IExamMetaMarkings";
+import { IExamMetaMarkings } from "features/exam-taking/models/IExamMetaMarkings";
 import React, { SFC } from "react";
 import { connect } from "react-redux";
 import { State } from "store";

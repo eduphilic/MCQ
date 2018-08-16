@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { createStore } from "store";
 
-import { actions as examTakingActions } from "exam-taking";
+import { actions as examTakingActions } from "features/exam-taking";
 import { actions as subscriptionManagementActions } from "features/subscription-management";
 
 export class PlaceholderProvider extends Component {
