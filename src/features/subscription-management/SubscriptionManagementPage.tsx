@@ -285,6 +285,9 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
           <Fragment key={c.id}>
             <CategoryQuantitySelector
               categoryLabel={c.title}
+              education={
+                c.education || { en: "(Placeholder education requirements)" }
+              }
               categoryQuantitySelectionSettings={
                 categoryQuantitySelectionSettings!
               }
