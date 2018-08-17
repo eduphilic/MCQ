@@ -228,15 +228,25 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
         />
 
         <CardContent>
-          {subscriptions.map(s => (
-            <CategorySubscription
-              key={`${s.subscriptionID}-${s.categoryID}`}
-              categoryLabel={getCategoryLabel(s)}
-              categoryQuantitySelectionSettings={
-                categoryQuantitySelectionSettings!
-              }
-              selectedQuantityIndex={s.quantityIndex}
-            />
+          {subscriptions.map((s, index) => (
+            <>
+              <CategorySubscription
+                key={`${s.subscriptionID}-${s.categoryID}`}
+                categoryLabel={getCategoryLabel(s)}
+                categoryQuantitySelectionSettings={
+                  categoryQuantitySelectionSettings!
+                }
+                selectedQuantityIndex={s.quantityIndex}
+                onRenewButtonClick={
+                  index < 2
+                    ? () => alert("Subscription renewal flow")
+                    : undefined
+                }
+              />
+              {index < subscriptions.length - 1 && (
+                <Divider style={{ marginBottom: 16 }} />
+              )}
+            </>
           ))}
         </CardContent>
       </CardMobileFlat>

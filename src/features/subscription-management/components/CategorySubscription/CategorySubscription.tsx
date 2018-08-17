@@ -4,6 +4,7 @@ import styled from "styled";
 import { LocalizedString } from "types";
 
 import Typography from "@material-ui/core/Typography";
+import { TypographyButton } from "components/TypographyButton";
 
 import {
   CategoryQuantitySelectorItem,
@@ -12,10 +13,20 @@ import {
 
 export type CategorySubscriptionProps = CategoryQuantitySelectorItemProps & {
   categoryLabel: LocalizedString;
+
+  /**
+   * Called when the renew button is clicked. If it is not provided, the renew
+   * button is not displayed.
+   */
+  onRenewButtonClick?: () => void;
 };
 
 export const CategorySubscription: SFC<CategorySubscriptionProps> = props => {
-  const { categoryQuantitySelectionSettings, selectedQuantityIndex } = props;
+  const {
+    categoryQuantitySelectionSettings,
+    selectedQuantityIndex,
+    onRenewButtonClick,
+  } = props;
 
   const quantityLabel =
     categoryQuantitySelectionSettings.quantitiesLabels[selectedQuantityIndex];
@@ -24,29 +35,33 @@ export const CategorySubscription: SFC<CategorySubscriptionProps> = props => {
     <LocalizationStateConsumer>
       {({ localizationLanguage }) => (
         <CategoryQuantitySelectorItem {...props}>
-          <RightTextGroupWrapper>
+          <TextGroupWrapper>
             <Typography>
               {quantityLabel[localizationLanguage] || quantityLabel.en}
             </Typography>
 
+            <div />
+
             <TypographyRed>Expiring on 3 Jul 2018</TypographyRed>
-          </RightTextGroupWrapper>
+
+            <RenewButton onClick={onRenewButtonClick}>Renew</RenewButton>
+          </TextGroupWrapper>
         </CategoryQuantitySelectorItem>
       )}
     </LocalizationStateConsumer>
   );
 };
 
-const RightTextGroupWrapper = styled.div`
+const TextGroupWrapper = styled.div`
   display: flex;
   flex-grow: 1;
 
-  > *:first-child {
-    width: 25%;
+  > *:nth-child(2) {
+    flex: 1;
   }
 
   > *:last-child {
-    width: 75%;
+    width: 100px;
   }
 
   ${({ theme }) => theme.breakpoints.down("xs")} {
@@ -60,4 +75,31 @@ const RightTextGroupWrapper = styled.div`
 
 const TypographyRed = styled(Typography)`
   color: ${({ theme }) => theme.palette.error.main};
+`;
+
+const RenewButton = styled<{ className?: string; onClick?: () => void }>(
+  ({ className, children, onClick }) => (
+    <TypographyButton
+      className={className}
+      variant="raised"
+      color="primary"
+      filled
+      size="small"
+      style={{ visibility: onClick ? undefined : "hidden" }}
+      onClick={onClick}
+    >
+      {children}
+    </TypographyButton>
+  ),
+)`
+  width: 100px;
+  min-width: initial;
+  padding: 4px 20px;
+
+  margin-top: 8px;
+
+  ${({ theme }) => theme.breakpoints.up("sm")} {
+    margin-top: 0;
+    margin-left: 16px;
+  }
 `;
