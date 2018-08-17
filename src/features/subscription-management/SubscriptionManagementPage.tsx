@@ -200,9 +200,9 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
           </CardContent>
         </CardMobileFlat>
 
-        {this.renderCurrentSubscriptions()}
-
         {this.renderQuantitySelectionCards()}
+
+        {this.renderCurrentSubscriptions()}
       </>
     );
   };
