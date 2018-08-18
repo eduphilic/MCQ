@@ -15,6 +15,7 @@
       true,
       {
         "downshift": "Downshift",
+        "immer": "produce",
         "l10n": "strings",
         "propTypes": "PropTypes",
         "react": "React",
