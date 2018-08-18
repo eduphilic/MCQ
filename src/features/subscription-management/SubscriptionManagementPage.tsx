@@ -169,11 +169,35 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
   };
 
   private renderPageContents = () => {
-    const { entries, values, isOnboarding } = this.props;
+    const {
+      entries: intermediateEntries,
+      values,
+      isOnboarding,
+      subscriptions,
+      categories,
+    } = this.props;
     const { selectedEntryIDs } = values;
 
     const minEntriesRequired = this.getMinimumEntriesRequired();
     const currentPage = this.getCurrentPage();
+
+    // Filter entries by those which still have available categories to
+    // subscribe to.
+    // FIXME: Very bad performance here. The needs to be memoized.
+    const entries = intermediateEntries.filter(entry => {
+      const entryCategories = categories.filter(
+        category => category.entryID === entry.id,
+      );
+
+      const entrySubscriptions = (subscriptions || []).filter(
+        subscription =>
+          entryCategories.find(
+            entryCategory => entryCategory.id === subscription.categoryID,
+          ) !== undefined,
+      );
+
+      return entryCategories.length !== entrySubscriptions.length;
+    });
 
     return currentPage === "entry-select" ? (
       <EntrySelect
@@ -185,27 +209,29 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
       />
     ) : (
       <>
-        <CardMobileFlat>
-          <CardHeader
-            title={
-              <Typography variant="cardTitle">
-                {isOnboarding
-                  ? "Your Selected Entries"
-                  : "Subscribe New Categories"}
-              </Typography>
-            }
-          />
-          <CardContent>
-            <SelectedEntries
-              entries={entries}
-              minEntriesCount={minEntriesRequired}
-              maxEntriesCount={entries.length}
-              selectedEntryIDs={selectedEntryIDs}
-              onEntryRemoveButtonClick={this.handleEntryRemoveButtonClick}
-              onAddMoreButtonClick={this.handleAddMoreButtonClick}
+        {entries.length > 0 && (
+          <CardMobileFlat>
+            <CardHeader
+              title={
+                <Typography variant="cardTitle">
+                  {isOnboarding
+                    ? "Your Selected Entries"
+                    : "Subscribe New Categories"}
+                </Typography>
+              }
             />
-          </CardContent>
-        </CardMobileFlat>
+            <CardContent>
+              <SelectedEntries
+                entries={entries}
+                minEntriesCount={minEntriesRequired}
+                maxEntriesCount={entries.length}
+                selectedEntryIDs={selectedEntryIDs}
+                onEntryRemoveButtonClick={this.handleEntryRemoveButtonClick}
+                onAddMoreButtonClick={this.handleAddMoreButtonClick}
+              />
+            </CardContent>
+          </CardMobileFlat>
+        )}
 
         {this.renderQuantitySelectionCards()}
 
@@ -289,11 +315,12 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
   };
 
   private renderQuantitySelectionCardContents = (entry: IEntry) => {
-    const { categoryQuantitySelectionSettings } = this.props;
+    const { categoryQuantitySelectionSettings, subscriptions } = this.props;
 
-    const categories = this.props.categories.filter(
-      c => c.entryID === entry.id,
-    );
+    const categories = this.props.categories
+      .filter(c => c.entryID === entry.id)
+      // Filter out any categories which are already subscribed to.
+      .filter(c => !(subscriptions || []).find(s => s.categoryID === c.id));
 
     return (
       <CardContent>
