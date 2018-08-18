@@ -2,8 +2,7 @@ import { withFormik } from "formik";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { State } from "store";
-// tslint:disable-next-line:import-name
-import uuidv1 from "uuid/v1";
+import uuid from "uuid/v1";
 import { actions } from "./actions";
 import { isOnboardingSelector } from "./selectors";
 import { DispatchProps, FormState, OwnProps, Props, StateProps } from "./types";
@@ -52,7 +51,7 @@ const SubscriptionManagementPageContainer = withRouter(
         const { selectedQuantities } = values;
         const { submitSubscriptions } = formikBag.props;
 
-        const subscriptionID = uuidv1();
+        const subscriptionID = uuid();
 
         submitSubscriptions(
           selectedQuantities.map(q => ({

@@ -16,12 +16,13 @@
       {
         "downshift": "Downshift",
         "l10n": "strings",
+        "propTypes": "PropTypes",
         "react": "React",
         "reactDom": "ReactDOM",
         "reactLocalization": "LocalizedStrings",
         "reactSwipe": "ReactSwipe",
         "reactSwipeableViews": "SwipeableViews",
-        "propTypes": "PropTypes"
+        "v1": "uuid"
       }
     ],
     "variable-name": [
