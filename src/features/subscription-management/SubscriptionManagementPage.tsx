@@ -166,7 +166,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
   };
 
   private renderPageContents = () => {
-    const { entries, values } = this.props;
+    const { entries, values, isOnboarding } = this.props;
     const { selectedEntryIDs } = values;
 
     const minEntriesRequired = this.getMinimumEntriesRequired();
@@ -185,7 +185,11 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
         <CardMobileFlat>
           <CardHeader
             title={
-              <Typography variant="cardTitle">Your Selected Entries</Typography>
+              <Typography variant="cardTitle">
+                {isOnboarding
+                  ? "Your Selected Entries"
+                  : "Subscribe New Categories"}
+              </Typography>
             }
           />
           <CardContent>
