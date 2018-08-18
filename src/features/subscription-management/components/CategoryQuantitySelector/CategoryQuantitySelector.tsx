@@ -2,10 +2,10 @@ import { LocalizationStateConsumer } from "features/localization";
 import React, { ChangeEvent, Component } from "react";
 import styled from "styled";
 
+import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel, {
   FormControlLabelProps,
 } from "@material-ui/core/FormControlLabel";
-import Radio from "@material-ui/core/Radio";
 import RadioGroup, { RadioGroupProps } from "@material-ui/core/RadioGroup";
 
 import {
@@ -52,7 +52,7 @@ export class CategoryQuantitySelector extends Component<
             >
               {categoryQuantitySelectionSettings.quantities.map(
                 (quantityValue, index) => (
-                  <QuantityRadio
+                  <QuantityCheckbox
                     key={`${quantityValue}-${index}`}
                     value={index.toString()}
                     label={
@@ -71,6 +71,8 @@ export class CategoryQuantitySelector extends Component<
   }
 }
 
+// FIXME: Should RadioGroup be swapped out for FormGroup since the control was
+// swapped from Radio to Checkbox?
 const QuantityRadioGroup = styled<RadioGroupProps>(props => (
   <RadioGroup row {...props} />
 ))`
@@ -78,10 +80,10 @@ const QuantityRadioGroup = styled<RadioGroupProps>(props => (
   justify-content: space-between;
 `;
 
-const QuantityRadio = styled<
+const QuantityCheckbox = styled<
   Omit<FormControlLabelProps, "innerRef" | "control">
 >(props => (
-  <StyledLabel control={<StyledRadio color="primary" />} {...props} />
+  <StyledLabel control={<StyledCheckbox color="primary" />} {...props} />
 ))`
   ${({ theme }) => theme.breakpoints.down("sm")} {
     width: 50%;
@@ -91,7 +93,7 @@ const QuantityRadio = styled<
 `;
 
 /* Remove left padding */
-const StyledRadio = styled(Radio)`
+const StyledCheckbox = styled(Checkbox)`
   width: 24px;
   margin-right: 12px;
 `;
