@@ -333,6 +333,11 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
     const isNextButtonDisabled =
       values.selectedEntryIDs.length < this.getMinimumEntriesRequired();
 
+    const isPayButtonDisabled =
+      values.selectedQuantities.find(
+        quantity => quantity.quantityIndex !== null,
+      ) === undefined;
+
     const total = this.getTotal();
 
     return (
@@ -362,7 +367,12 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
                 &nbsp; {total}
               </Typography>
 
-              <TypographyButton color="yellow" filled onClick={submitForm}>
+              <TypographyButton
+                color="yellow"
+                filled
+                onClick={submitForm}
+                disabled={isPayButtonDisabled}
+              >
                 {strings.dashboard_OnboardingSubscriptionPage_PayButtonText}
               </TypographyButton>
             </RightToolbarGroup>
