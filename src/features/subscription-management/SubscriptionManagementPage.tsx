@@ -393,7 +393,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
         return (
           currentSelectedQuantities.find(
             q => q.categoryID === selectedCategories[index].id,
-          ) || { categoryID: selectedCategories[index].id, quantityIndex: 0 }
+          ) || { categoryID: selectedCategories[index].id, quantityIndex: null }
         );
       },
     );
