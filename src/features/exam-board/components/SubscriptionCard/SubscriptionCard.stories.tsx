@@ -7,7 +7,7 @@ import React from "react";
 import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
 import { SubscriptionCard, SubscriptionCardProps } from "./SubscriptionCard";
 
-storiesOf("Exam Review", module).add("SubscriptionCard", () => {
+storiesOf("Exam Board", module).add("SubscriptionCard", () => {
   const props: SubscriptionCardProps = {
     title: "Solder General Duty",
     subheader: "Validity 31st Jan 2019",

@@ -7,7 +7,7 @@ import { CardMobileFlat } from "components/CardMobileFlat";
 import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
 import { SubscriptionCardActions } from "./SubscriptionCardActions";
 
-storiesOf("Exam Review", module).add("SubscriptionCardActions", () => {
+storiesOf("Exam Board", module).add("SubscriptionCardActions", () => {
   const onReviseButtonClick = boolean("With Revise Button", true)
     ? action("onReviseButtonClick")
     : undefined;

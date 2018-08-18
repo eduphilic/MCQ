@@ -7,7 +7,7 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import SettingsOutlined from "@material-ui/icons/SettingsOutlined";
 import { AccountCardDetails } from "icons";
 
-import { ExamPackPage } from "features/exam-review";
+import { ExamBoardPage } from "features/exam-board";
 import { ProgressOverviewPage } from "features/progress-overview";
 import { SubscriptionManagementPage } from "features/subscription-management";
 import { SettingsPage } from "./SettingsPage";
@@ -22,9 +22,9 @@ export const navigationLinks: INavigationLink[] = [
     iconElement: <Dashboard />,
   },
   {
-    to: routePathFromLocalizationKey("routes_Dashboard_ExamPackPage"),
-    component: ExamPackPage,
-    titleLocalizationKey: "routes_Dashboard_ExamPackPage",
+    to: routePathFromLocalizationKey("routes_ExamBoard_ExamBoardPage"),
+    component: ExamBoardPage,
+    titleLocalizationKey: "routes_ExamBoard_ExamBoardPage",
     iconElement: <Assignment />,
   },
   {

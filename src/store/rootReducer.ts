@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
 import { reducer as dashboard } from "features/dashboard";
-import { reducer as examReview } from "features/exam-review";
+import { reducer as examBoard } from "features/exam-board";
 import { reducer as examTaking } from "features/exam-taking";
 import { reducer as landing } from "features/landing";
 import { reducer as localization } from "features/localization";
@@ -11,7 +11,7 @@ import { reducer as subscriptionManagement } from "features/subscription-managem
 
 const reducers = {
   dashboard,
-  examReview,
+  examBoard,
   examTaking,
   landing,
   localization,

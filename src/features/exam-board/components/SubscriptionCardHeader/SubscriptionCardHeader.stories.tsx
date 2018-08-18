@@ -7,7 +7,7 @@ import { CardMobileFlat } from "components/CardMobileFlat";
 import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
 import { SubscriptionCardHeader } from "./SubscriptionCardHeader";
 
-storiesOf("Exam Review", module).add("SubscriptionCardHeader", () => {
+storiesOf("Exam Board", module).add("SubscriptionCardHeader", () => {
   const withOverline = boolean("With Overline", true);
   const Card = boolean("With Card", true) ? CardMobileFlat : null;
 

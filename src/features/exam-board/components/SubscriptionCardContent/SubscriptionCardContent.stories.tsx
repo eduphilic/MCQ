@@ -6,7 +6,7 @@ import { CardMobileFlat } from "components/CardMobileFlat";
 import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
 import { SubscriptionCardContent } from "./SubscriptionCardContent";
 
-storiesOf("Exam Review", module).add("SubscriptionCardContent", () => {
+storiesOf("Exam Board", module).add("SubscriptionCardContent", () => {
   const stats = {
     Attempted: "02 Tests",
     Remaining: "08 Tests",

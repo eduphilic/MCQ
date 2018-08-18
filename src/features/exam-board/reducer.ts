@@ -1,6 +1,6 @@
 import { IEntry } from "models";
 import { createReducer } from "utils";
-import { Actions, ExamReviewAction } from "./actions";
+import { Actions, ActionTypes } from "./actions";
 import { ICategorySubscription } from "./models/ICategorySubscription";
 
 import { createCategorySubscriptionPlaceholders } from "./placeholders/createCategorySubscriptionPlaceholders";
@@ -22,10 +22,10 @@ const initialState: State = {
   subscriptions: null,
 };
 
-export const reducer = createReducer<State, Actions, ExamReviewAction>(
+export const reducer = createReducer<State, Actions, ActionTypes>(
   initialState,
   {
-    [ExamReviewAction.LoadPlaceholderData]: state => ({
+    [ActionTypes.LoadPlaceholderData]: state => ({
       ...state,
       loading: false,
       loaded: true,

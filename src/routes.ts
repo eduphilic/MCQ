@@ -30,7 +30,7 @@ export const routes: {
   },
   {
     path: "/exam-pack",
-    pageTitleLocalizationKey: "routes_Dashboard_ExamPackPage",
+    pageTitleLocalizationKey: "routes_ExamBoard_ExamBoardPage",
   },
   {
     path: "/settings",

@@ -6,8 +6,8 @@ import { componentsEn } from "./strings.components.en";
 import { componentsHi } from "./strings.components.hi";
 import { dashboardEn } from "./strings.dashboard.en";
 import { dashboardHi } from "./strings.dashboard.hi";
-import { examReviewEn } from "./strings.exam-review.en";
-import { examReviewHi } from "./strings.exam-review.hi";
+import { examBoardEn } from "./strings.exam-board.en";
+import { examBoardHi } from "./strings.exam-board.hi";
 import { landingEn } from "./strings.landing.en";
 import { landingHi } from "./strings.landing.hi";
 import { pagesEn } from "./strings.pages.en";
@@ -24,7 +24,7 @@ const strings = {
     ...commonEn,
     ...componentsEn,
     ...dashboardEn,
-    ...examReviewEn,
+    ...examBoardEn,
     ...landingEn,
     ...pagesEn,
     ...routesEn,
@@ -35,7 +35,7 @@ const strings = {
     ...commonHi,
     ...componentsHi,
     ...dashboardHi,
-    ...examReviewHi,
+    ...examBoardHi,
     ...landingHi,
     ...pagesHi,
     ...routesHi,

@@ -33,13 +33,13 @@ type OwnProps = WithWidthProps;
 
 type Props = StateProps & DispatchProps & OwnProps;
 
-type ExamPackPageState = {
+type ExamBoardPageState = {
   selectedSubscription: number | null;
   dialogOpen: boolean;
 };
 
-class ExamPackPage extends Component<Props, ExamPackPageState> {
-  state: ExamPackPageState = {
+class ExamBoardPage extends Component<Props, ExamBoardPageState> {
+  state: ExamBoardPageState = {
     selectedSubscription: null,
     dialogOpen: false,
   };
@@ -179,15 +179,15 @@ class ExamPackPage extends Component<Props, ExamPackPageState> {
   };
 }
 
-const ExamPackPageContainer = withWidth()(
+const ExamBoardPageContainer = withWidth()(
   connect<StateProps, DispatchProps, OwnProps, State>(
-    ({ examReview: { loaded, loading } }: State) => ({ loaded, loading }),
+    ({ examBoard: { loaded, loading } }: State) => ({ loaded, loading }),
     {
       fetchExamReviewData: actions.loadPlaceholderData,
     },
-  )(ExamPackPage),
+  )(ExamBoardPage),
 );
-export { ExamPackPageContainer as ExamPackPage };
+export { ExamBoardPageContainer as ExamBoardPage };
 
 const TwoColumnWrapper = styled.div`
   display: flex;

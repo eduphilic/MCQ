@@ -27,22 +27,21 @@ export const SubscriptionCardActions: SFC<
     onReviseButtonClick
       ? {
           color: "primary",
-          children:
-            strings.examReview_SubscriptionCardActions_ReviseButtonTitle,
+          children: strings.examBoard_SubscriptionCardActions_ReviseButtonTitle,
           onClick: onReviseButtonClick,
         }
       : null,
     onAttemptButtonClick
       ? {
           children:
-            strings.examReview_SubscriptionCardActions_AttemptButtonTitle,
+            strings.examBoard_SubscriptionCardActions_AttemptButtonTitle,
           onClick: onAttemptButtonClick,
         }
       : null,
     showDisabledExpiredButton
       ? {
           children:
-            strings.examReview_SubscriptionCardActions_ExpiredButtonTitle,
+            strings.examBoard_SubscriptionCardActions_ExpiredButtonTitle,
           disabled: true,
         }
       : null,
