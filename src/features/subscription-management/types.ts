@@ -30,5 +30,5 @@ export type Page = "entry-select" | "category-select";
 
 export type FormState = {
   selectedEntryIDs: string[];
-  selectedQuantities: { categoryID: string; quantityIndex: number }[];
+  selectedQuantities: { categoryID: string; quantityIndex: number | null }[];
 };

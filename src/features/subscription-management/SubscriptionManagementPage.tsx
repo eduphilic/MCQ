@@ -82,18 +82,18 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
     return isOnboarding ? 1 : 0;
   };
 
-  private getSelectedQuantityIndex = (categoryID: string): number => {
+  private getSelectedQuantityIndex = (categoryID: string): number | null => {
     const { values } = this.props;
     const { selectedQuantities } = values;
 
     const item = selectedQuantities.find(q => q.categoryID === categoryID);
 
-    return item ? item.quantityIndex : 0;
+    return item ? item.quantityIndex : null;
   };
 
   private setSelectedQuantityIndex = (
     categoryID: string,
-    quantityIndex: number,
+    quantityIndex: number | null,
   ) => {
     const { values, setFieldValue } = this.props;
     let selectedQuantities = values.selectedQuantities.slice();
@@ -121,6 +121,9 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
 
     const total = selectedQuantities.reduce((accumulator, quantity): number => {
       const quantityIndex = quantity.quantityIndex;
+
+      // If no quantities are selected, just return the current total.
+      if (quantityIndex === null) return accumulator;
 
       const free = quantitiesFreeIndexes.includes(quantityIndex);
       if (free) return accumulator;
@@ -306,12 +309,6 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
               }
               selectedQuantityIndex={this.getSelectedQuantityIndex(c.id)}
               onChange={quantityIndex => {
-                // TODO: Add proper handling of this case.
-                if (quantityIndex === null) {
-                  throw new Error(
-                    "Unhandled null value from quantity selector.",
-                  );
-                }
                 this.setSelectedQuantityIndex(c.id, quantityIndex);
               }}
             />
