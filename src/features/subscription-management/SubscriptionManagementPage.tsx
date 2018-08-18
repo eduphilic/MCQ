@@ -233,9 +233,8 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
 
         <CardContent>
           {subscriptions.map((s, index) => (
-            <>
+            <Fragment key={`${s.subscriptionID}-${s.categoryID}`}>
               <CategorySubscription
-                key={`${s.subscriptionID}-${s.categoryID}`}
                 categoryLabel={getCategoryLabel(s)}
                 categoryQuantitySelectionSettings={
                   categoryQuantitySelectionSettings!
@@ -250,7 +249,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
               {index < subscriptions.length - 1 && (
                 <Divider style={{ marginBottom: 16 }} />
               )}
-            </>
+            </Fragment>
           ))}
         </CardContent>
       </CardMobileFlat>
