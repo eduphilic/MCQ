@@ -23,9 +23,9 @@ export type CategoryQuantitySelectorItemProps = {
   education?: LocalizedString;
 
   /**
-   * Selected quantity.
+   * Selected quantity or null for no selection.
    */
-  selectedQuantityIndex: number;
+  selectedQuantityIndex: number | null;
 };
 
 export const CategoryQuantitySelectorItem: SFC<

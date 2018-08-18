@@ -28,6 +28,14 @@ export const CategorySubscription: SFC<CategorySubscriptionProps> = props => {
     onRenewButtonClick,
   } = props;
 
+  // TODO: Filter this upstream from this component. In progress support of
+  // de-selecting quantities during onboarding.
+  if (selectedQuantityIndex === null) {
+    throw new Error(
+      "Unfiltered subscription was passed. It has a quantity index of null",
+    );
+  }
+
   const quantityLabel =
     categoryQuantitySelectionSettings.quantitiesLabels[selectedQuantityIndex];
 

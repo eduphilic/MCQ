@@ -42,7 +42,12 @@ export class CategoryQuantitySelector extends Component<
         {({ localizationLanguage }) => (
           <CategoryQuantitySelectorItem {...this.props}>
             <QuantityRadioGroup
-              value={selectedQuantityIndex.toString()}
+              // Value supports a non-checked state when passed the value "null".
+              value={
+                selectedQuantityIndex !== null
+                  ? selectedQuantityIndex.toString()
+                  : undefined
+              }
               onChange={this.handleChange}
             >
               {categoryQuantitySelectionSettings.quantities.map(

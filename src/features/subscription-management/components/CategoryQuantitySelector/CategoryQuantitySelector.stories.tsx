@@ -1,33 +1,45 @@
-import { action } from "@storybook/addon-actions";
-import { number } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
 import { createCategoryQuantitySelectionSettingsPlaceholder } from "../../placeholders/createCategoryQuantitySelectionSettingsPlaceholder";
+import { createEntryCategoryPlaceholders } from "../../placeholders/createEntryCategoryPlaceholders";
+
+import CardContent from "@material-ui/core/CardContent";
+import { CardMobileFlat } from "components/CardMobileFlat";
+import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
+import { formik } from "components/storybook/StorybookFormikAddon";
 import { CategoryQuantitySelector } from "./CategoryQuantitySelector";
 
 const categoryQuantitySelectionSettings = createCategoryQuantitySelectionSettingsPlaceholder();
+const category = createEntryCategoryPlaceholders()[1];
 
-storiesOf("Subscription Management", module).add(
-  "CategoryQuantitySelector",
-  () => {
-    const selectedQuantityIndex = number("selectedQuantityIndex", 0, {
-      min: 0,
-      max: 3,
-      step: 1,
-      range: false,
-    });
+const stories = storiesOf("Subscription Management", module);
 
-    return (
-      <StorybookContentCenterWrapper>
-        <CategoryQuantitySelector
-          categoryQuantitySelectionSettings={categoryQuantitySelectionSettings}
-          categoryLabel={{ en: "Sol GD" }}
-          selectedQuantityIndex={selectedQuantityIndex}
-          onChange={action("onChange")}
-        />
-      </StorybookContentCenterWrapper>
-    );
-  },
-);
+const initialValues = {
+  selectedQuantityIndex: null as number | null,
+};
+
+stories.addParameters({ formik: { initialValues } });
+
+stories.addDecorator(story => (
+  <StorybookContentCenterWrapper>
+    <CardMobileFlat>
+      <CardContent>{story()}</CardContent>
+    </CardMobileFlat>
+  </StorybookContentCenterWrapper>
+));
+
+stories.add("CategoryQuantitySelector", () => {
+  const store = formik<typeof initialValues>();
+
+  return (
+    <CategoryQuantitySelector
+      categoryQuantitySelectionSettings={categoryQuantitySelectionSettings}
+      categoryLabel={category.title}
+      selectedQuantityIndex={store.values.selectedQuantityIndex}
+      onChange={quantityIndex =>
+        store.setFieldValue("selectedQuantityIndex", quantityIndex)
+      }
+    />
+  );
+});
