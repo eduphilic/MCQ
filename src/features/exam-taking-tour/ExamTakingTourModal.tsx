@@ -1,4 +1,4 @@
-import React, { Component, ReactNode, SFC } from "react";
+import React, { Component, SFC } from "react";
 import {
   ArcherContainer,
   ArcherElement,
@@ -17,19 +17,19 @@ import {
   TypographyButton,
   TypographyButtonProps,
 } from "components/TypographyButton";
+import { ReactComponent as SwipeIcon } from "./swipe.svg";
 
 type OwnProps = {};
 type State = {
   portalElement: HTMLDivElement | null;
   open: boolean;
-  page: "page1" | "page2";
 };
 type Props = OwnProps & WithWidthProps;
 
 export { OwnProps as ExamTakingTourModalProps };
 
 class ExamTakingTourModal extends Component<Props, State> {
-  state: State = { portalElement: null, open: true, page: "page1" };
+  state: State = { portalElement: null, open: true };
 
   componentDidMount() {
     const portalElement = document.createElement("div");
@@ -49,136 +49,137 @@ class ExamTakingTourModal extends Component<Props, State> {
 
   render() {
     const { width } = this.props;
-    const { portalElement, open, page } = this.state;
+    const { portalElement, open } = this.state;
 
     const isMobile = isWidthDown("sm", width);
     if (!isMobile || !portalElement || !open) return null;
 
-    let portalContents: ReactNode;
-
-    if (page === "page1") {
-      portalContents = (
-        <Wrapper revealAppBar={false}>
-          <div
+    const portalContents = (
+      <Wrapper revealAppBar>
+        <div
+          style={{
+            position: "fixed",
+            width: "30vmin",
+            height: "30vmin",
+            left: "50%",
+            top: "60%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <SwipeIcon style={{ fill: "#669b64" }} />
+          <Typography
             style={{
-              position: "fixed",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
+              position: "absolute",
+              width: "200%",
+              left: "-50%",
+              paddingTop: 16,
+              fontSize: 13,
+              textAlign: "center",
               color: "#fff",
             }}
           >
-            Placeholder (Finger Swipe Image)
+            Swipe LEFT/RIGHT to goto next or previous questions
+          </Typography>
+        </div>
+
+        <ArcherContainer
+          strokeColor="#669b64"
+          strokeWidth={4}
+          arrowLength={4}
+          arrowThickness={2.5}
+        >
+          <ToolbarRow>
+            <ToolbarButtonSpacer />
+            <ToolbarHalfButtonSpacer />
+
+            <ArcherElement id="dashboard-button">
+              <ToolbarButton />
+            </ArcherElement>
+
+            <ToolbarButtonSpacer />
+            <ArcherElement id="change-language-button">
+              <ToolbarButton />
+            </ArcherElement>
+
+            <ToolbarPauseButtonWrapper>
+              <ArcherElement id="pause-button">
+                <ToolbarPauseButton />
+              </ArcherElement>
+            </ToolbarPauseButtonWrapper>
+
+            <ArcherElement id="submit-exam-button">
+              <SubmitExamButton />
+            </ArcherElement>
+          </ToolbarRow>
+
+          <ToolbarRow>
+            <ToolbarButtonSpacer />
+            <ArcherElement id="question-palette-button">
+              <ToolbarButton />
+            </ArcherElement>
+          </ToolbarRow>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: 32,
+            }}
+          >
+            <Description
+              id="pause-button-description"
+              relations={[
+                {
+                  from: { anchor: "top" },
+                  to: { anchor: "bottom", id: "pause-button" },
+                },
+              ]}
+            >
+              Pause Exam
+            </Description>
           </div>
 
-          <ProgressionButton onClick={this.handleNextButtonClick}>
-            NEXT
-          </ProgressionButton>
-        </Wrapper>
-      );
-    }
-
-    if (page === "page2") {
-      portalContents = (
-        <Wrapper revealAppBar>
-          <ArcherContainer
-            strokeColor="#669b64"
-            strokeWidth={4}
-            arrowLength={4}
-            arrowThickness={2.5}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: 16,
+            }}
           >
-            <ToolbarRow>
-              <ToolbarButtonSpacer />
-              <ToolbarHalfButtonSpacer />
-
-              <ArcherElement id="dashboard-button">
-                <ToolbarButton />
-              </ArcherElement>
-
-              <ToolbarButtonSpacer />
-              <ArcherElement id="change-language-button">
-                <ToolbarButton />
-              </ArcherElement>
-
-              <ToolbarPauseButtonWrapper>
-                <ArcherElement id="pause-button">
-                  <ToolbarPauseButton />
-                </ArcherElement>
-              </ToolbarPauseButtonWrapper>
-
-              <ArcherElement id="submit-exam-button">
-                <SubmitExamButton />
-              </ArcherElement>
-            </ToolbarRow>
-
-            <ToolbarRow>
-              <ToolbarButtonSpacer />
-              <ArcherElement id="question-palette-button">
-                <ToolbarButton />
-              </ArcherElement>
-            </ToolbarRow>
-
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: 32,
-              }}
+            <Description
+              id="submit-exam-button-description"
+              relations={[
+                {
+                  from: { anchor: "right" },
+                  to: { anchor: "bottom", id: "submit-exam-button" },
+                },
+              ]}
             >
-              <Description
-                id="pause-button-description"
-                relations={[
-                  {
-                    from: { anchor: "top" },
-                    to: { anchor: "bottom", id: "pause-button" },
-                  },
-                ]}
-              >
-                Pause Exam
-              </Description>
-            </div>
+              Submit Exam
+            </Description>
+          </div>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: 16,
-              }}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: 24,
+            }}
+          >
+            <Description
+              id="change-language-button-description"
+              relations={[
+                {
+                  from: { anchor: "left" },
+                  to: { anchor: "bottom", id: "change-language-button" },
+                },
+              ]}
             >
-              <Description
-                id="submit-exam-button-description"
-                relations={[
-                  {
-                    from: { anchor: "right" },
-                    to: { anchor: "bottom", id: "submit-exam-button" },
-                  },
-                ]}
-              >
-                Submit Exam
-              </Description>
-            </div>
+              Change Language
+            </Description>
+          </div>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: 24,
-              }}
-            >
-              <Description
-                id="change-language-button-description"
-                relations={[
-                  {
-                    from: { anchor: "left" },
-                    to: { anchor: "bottom", id: "change-language-button" },
-                  },
-                ]}
-              >
-                Change Language
-              </Description>
-            </div>
-
-            {/* <div style={{ display: "flex", marginTop: 32, paddingLeft: 100 }}>
+          {/* <div style={{ display: "flex", marginTop: 32, paddingLeft: 100 }}>
             <Description
               id="dashboard-button-description"
               relations={[
@@ -192,36 +193,31 @@ class ExamTakingTourModal extends Component<Props, State> {
             </Description>
           </div> */}
 
-            <div style={{ display: "flex", marginTop: 24, paddingLeft: 100 }}>
-              <Description
-                id="question-palette-button-description"
-                relations={[
-                  {
-                    from: { anchor: "left" },
-                    to: { anchor: "bottom", id: "question-palette-button" },
-                  },
-                ]}
-              >
-                Exit Exam <br />
-                <br />
-                Question Palette
-              </Description>
-            </div>
+          <div style={{ display: "flex", marginTop: 24, paddingLeft: 100 }}>
+            <Description
+              id="question-palette-button-description"
+              relations={[
+                {
+                  from: { anchor: "left" },
+                  to: { anchor: "bottom", id: "question-palette-button" },
+                },
+              ]}
+            >
+              Exit Exam <br />
+              <br />
+              Question Palette
+            </Description>
+          </div>
 
-            <ProgressionButton onClick={this.handleCloseButtonClick}>
-              OK, GOT IT!
-            </ProgressionButton>
-          </ArcherContainer>
-        </Wrapper>
-      );
-    }
+          <ProgressionButton onClick={this.handleCloseButtonClick}>
+            OK, GOT IT!
+          </ProgressionButton>
+        </ArcherContainer>
+      </Wrapper>
+    );
 
     return createPortal(portalContents, portalElement);
   }
-
-  private handleNextButtonClick = () => {
-    this.setState({ page: "page2" });
-  };
 
   private handleCloseButtonClick = () => {
     this.setState({ open: false });
