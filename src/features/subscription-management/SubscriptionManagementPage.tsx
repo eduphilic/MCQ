@@ -359,7 +359,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
               <Typography variant="cardTitle" style={{ fontWeight: 600 }}>
                 Total&nbsp;
                 <RupeeFontSpan>R</RupeeFontSpan>
-                &nbsp;Rs {total}
+                &nbsp; {total}
               </Typography>
 
               <TypographyButton color="yellow" filled onClick={submitForm}>
