@@ -7,7 +7,7 @@ import { BaseSwippableTemplate } from "./BaseSwippableTemplate";
 const initialValues = { selectedPane: 0 };
 type Values = typeof initialValues;
 
-storiesOf("BaseSwippableTemplate", module)
+storiesOf("Exam Taking", module)
   .addParameters({ formik: { initialValues } })
   .add("BaseSwippableTemplate", () => {
     const { paneKeyNodeMap, selectedPane, onPaneChange } = getProps();
