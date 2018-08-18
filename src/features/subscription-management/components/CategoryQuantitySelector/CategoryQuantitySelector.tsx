@@ -6,7 +6,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel, {
   FormControlLabelProps,
 } from "@material-ui/core/FormControlLabel";
-import RadioGroup, { RadioGroupProps } from "@material-ui/core/RadioGroup";
+import FormGroup, { FormGroupProps } from "@material-ui/core/FormGroup";
 
 import {
   CategoryQuantitySelectorItem,
@@ -17,7 +17,7 @@ export type CategoryQuantitySelectorProps = CategoryQuantitySelectorItemProps & 
   /**
    * Called on quantity change.
    */
-  onChange: (quantityIndex: number) => void;
+  onChange: (quantityIndex: number | null) => void;
 };
 
 /**
@@ -27,8 +27,13 @@ export type CategoryQuantitySelectorProps = CategoryQuantitySelectorItemProps & 
 export class CategoryQuantitySelector extends Component<
   CategoryQuantitySelectorProps
 > {
-  private handleChange = (_event: ChangeEvent<{}>, value: string) => {
-    this.props.onChange(parseInt(value, 10));
+  private handleChange = (event: ChangeEvent<{}>, checked: boolean) => {
+    const selectedQuantityIndex = parseInt(
+      (event as ChangeEvent<HTMLInputElement>).target.value,
+      10,
+    );
+
+    this.props.onChange(checked ? selectedQuantityIndex : null);
   };
 
   render() {
@@ -41,20 +46,14 @@ export class CategoryQuantitySelector extends Component<
       <LocalizationStateConsumer>
         {({ localizationLanguage }) => (
           <CategoryQuantitySelectorItem {...this.props}>
-            <QuantityRadioGroup
-              // Value supports a non-checked state when passed the value "null".
-              value={
-                selectedQuantityIndex !== null
-                  ? selectedQuantityIndex.toString()
-                  : undefined
-              }
-              onChange={this.handleChange}
-            >
+            <QuantityFormGroup>
               {categoryQuantitySelectionSettings.quantities.map(
                 (quantityValue, index) => (
                   <QuantityCheckbox
                     key={`${quantityValue}-${index}`}
                     value={index.toString()}
+                    checked={selectedQuantityIndex === index}
+                    onChange={this.handleChange}
                     label={
                       // prettier-ignore
                       categoryQuantitySelectionSettings.quantitiesLabels[index][localizationLanguage] ||
@@ -63,7 +62,7 @@ export class CategoryQuantitySelector extends Component<
                   />
                 ),
               )}
-            </QuantityRadioGroup>
+            </QuantityFormGroup>
           </CategoryQuantitySelectorItem>
         )}
       </LocalizationStateConsumer>
@@ -71,10 +70,8 @@ export class CategoryQuantitySelector extends Component<
   }
 }
 
-// FIXME: Should RadioGroup be swapped out for FormGroup since the control was
-// swapped from Radio to Checkbox?
-const QuantityRadioGroup = styled<RadioGroupProps>(props => (
-  <RadioGroup row {...props} />
+const QuantityFormGroup = styled<FormGroupProps>(props => (
+  <FormGroup row {...props} />
 ))`
   flex-grow: 1;
   justify-content: space-between;
@@ -101,4 +98,5 @@ const StyledCheckbox = styled(Checkbox)`
 /* Remove left negative margin. */
 const StyledLabel = styled(FormControlLabel)`
   margin-left: 0;
+  user-select: none;
 `;

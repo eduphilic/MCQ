@@ -305,9 +305,15 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
                 categoryQuantitySelectionSettings!
               }
               selectedQuantityIndex={this.getSelectedQuantityIndex(c.id)}
-              onChange={quantityIndex =>
-                this.setSelectedQuantityIndex(c.id, quantityIndex)
-              }
+              onChange={quantityIndex => {
+                // TODO: Add proper handling of this case.
+                if (quantityIndex === null) {
+                  throw new Error(
+                    "Unhandled null value from quantity selector.",
+                  );
+                }
+                this.setSelectedQuantityIndex(c.id, quantityIndex);
+              }}
             />
             {index < categories.length - 1 && (
               <Hidden mdUp>
