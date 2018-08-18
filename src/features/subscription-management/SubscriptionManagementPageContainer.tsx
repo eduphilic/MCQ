@@ -48,14 +48,19 @@ const SubscriptionManagementPageContainer = withRouter(
     withFormik<Props, FormState>({
       mapPropsToValues: () => initialFormState,
       handleSubmit: (values, formikBag) => {
-        const { selectedQuantities } = values;
+        const { selectedQuantities: intermediateSelectedQuantities } = values;
         const { submitSubscriptions } = formikBag.props;
 
+        // Filter out category quantities that are un-selected (null).
+        const selectedQuantities = intermediateSelectedQuantities.filter(
+          quantity => quantity.quantityIndex !== null,
+        );
         const subscriptionID = uuid();
 
         submitSubscriptions(
-          selectedQuantities.map(q => ({
-            ...q,
+          selectedQuantities.map(quantity => ({
+            categoryID: quantity.categoryID,
+            quantityIndex: quantity.quantityIndex!,
             subscriptionID,
           })),
         );
