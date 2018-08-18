@@ -18,7 +18,7 @@ export const routes: {
   },
   {
     path: "/dashboard",
-    pageTitleLocalizationKey: "routes_Dashboard_DashboardPage",
+    pageTitleLocalizationKey: "routes_ProgressOverview_ProgressOverviewPage",
   },
   {
     path: "/membership/subscriptions",

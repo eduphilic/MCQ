@@ -60,7 +60,9 @@ class DashboardPages extends Component<Props> {
     if (!isOnboarding) {
       RedirectComponent = () => (
         <Redirect
-          to={routePathFromLocalizationKey("routes_Dashboard_DashboardPage")}
+          to={routePathFromLocalizationKey(
+            "routes_ProgressOverview_ProgressOverviewPage",
+          )}
         />
       );
     }

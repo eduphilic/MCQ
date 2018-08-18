@@ -151,7 +151,9 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
     ) {
       return (
         <Redirect
-          to={routePathFromLocalizationKey("routes_Dashboard_DashboardPage")}
+          to={routePathFromLocalizationKey(
+            "routes_ProgressOverview_ProgressOverviewPage",
+          )}
         />
       );
     }

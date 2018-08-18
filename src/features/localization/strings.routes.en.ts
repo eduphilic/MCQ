@@ -1,5 +1,4 @@
 export const routesEn = {
-  routes_Dashboard_DashboardPage: "Dashboard",
   routes_Dashboard_ExamPackPage: "Exam Pack",
   routes_Dashboard_MembershipEntriesPage: "Membership",
   routes_Dashboard_MembershipSubscriptionPage: "Membership",
@@ -23,4 +22,6 @@ export const routesEn = {
   routes_Landing_LandingPage: "",
   routes_Landing_PasswordResetPage: "Password Reset",
   routes_Landing_TermsConditions: "Terms & Conditions",
+
+  routes_ProgressOverview_ProgressOverviewPage: "Dashboard",
 };
