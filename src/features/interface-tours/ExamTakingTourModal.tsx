@@ -11,40 +11,16 @@ import {
   TypographyButton,
   TypographyButtonProps,
 } from "components/TypographyButton";
+import { SwipeInstructions } from "./components/SwipeInstructions";
 import { TourPortal } from "./components/TourPortal";
 import { TourPortalContents } from "./components/TourPortalContents";
-import { ReactComponent as SwipeIcon } from "./swipe.svg";
 
 export const ExamTakingTourModal: SFC = () => {
   return (
     <TourPortal>
       {({ closeModal }) => (
         <TourPortalContents>
-          <div
-            style={{
-              position: "fixed",
-              width: "30vmin",
-              height: "30vmin",
-              left: "50%",
-              top: "60%",
-              transform: "translate(-50%, -50%)",
-            }}
-          >
-            <SwipeIcon style={{ fill: "#669b64" }} />
-            <Typography
-              style={{
-                position: "absolute",
-                width: "200%",
-                left: "-50%",
-                paddingTop: 16,
-                fontSize: 13,
-                textAlign: "center",
-                color: "#fff",
-              }}
-            >
-              Swipe LEFT/RIGHT to goto next or previous questions
-            </Typography>
-          </div>
+          <SwipeInstructions />
 
           <ArcherContainer
             strokeColor="#669b64"
