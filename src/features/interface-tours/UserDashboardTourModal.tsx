@@ -2,6 +2,7 @@ import React, { SFC } from "react";
 import { ArrowContainer } from "./components/ArrowContainer";
 import { ArrowTargetRow } from "./components/ArrowTargetRow";
 import { SwipeInstructions } from "./components/SwipeInstructions";
+import { TourDismissalButton } from "./components/TourDismissalButton";
 import { TourPortal } from "./components/TourPortal";
 import { TourPortalContents } from "./components/TourPortalContents";
 
@@ -20,7 +21,9 @@ export const UserDashboardTourModal: SFC = () => {
             </ArrowTargetRow>
           </ArrowContainer>
 
-          <button onClick={closeModal}>Close Modal</button>
+          <TourDismissalButton onClick={closeModal}>
+            OK, GOT IT!
+          </TourDismissalButton>
         </TourPortalContents>
       )}
     </TourPortal>
