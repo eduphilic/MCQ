@@ -8,6 +8,7 @@ import {
   TypographyButtonProps,
 } from "components/TypographyButton";
 import { ArrowContainer } from "./components/ArrowContainer";
+import { ArrowTargetDescription } from "./components/ArrowTargetDescription";
 import { ArrowTargetRow } from "./components/ArrowTargetRow";
 import { ArrowTargetRowItem } from "./components/ArrowTargetRowItem";
 import { SwipeInstructions } from "./components/SwipeInstructions";
@@ -51,25 +52,22 @@ export const ExamTakingTourModal: SFC = () => {
               </ArcherElement>
             </ArrowTargetRow>
 
-            <div
+            <ArrowTargetDescription
+              id="pause-button-description"
+              relations={[
+                {
+                  from: { anchor: "top" },
+                  to: { anchor: "bottom", id: "pause-button" },
+                },
+              ]}
               style={{
                 display: "flex",
                 justifyContent: "center",
                 marginTop: 32,
               }}
             >
-              <Description
-                id="pause-button-description"
-                relations={[
-                  {
-                    from: { anchor: "top" },
-                    to: { anchor: "bottom", id: "pause-button" },
-                  },
-                ]}
-              >
-                Pause Exam
-              </Description>
-            </div>
+              Pause Exam
+            </ArrowTargetDescription>
 
             <div
               style={{
