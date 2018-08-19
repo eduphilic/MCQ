@@ -6,3 +6,4 @@ export * from "./components/PersistentScrollPosition";
 export * from "./models/INavigationLink";
 export * from "./reducer";
 export * from "./ReduxRouterConnector";
+export * from "./routes";

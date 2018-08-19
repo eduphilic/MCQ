@@ -1,6 +1,8 @@
-import { INavigationLink } from "features/navigation";
+import {
+  INavigationLink,
+  routePathFromLocalizationKey,
+} from "features/navigation";
 import React from "react";
-import { routePathFromLocalizationKey } from "routes";
 
 import Assignment from "@material-ui/icons/Assignment";
 import Dashboard from "@material-ui/icons/Dashboard";

@@ -2,7 +2,6 @@ import { LocalizationStateConsumer, strings } from "features/localization";
 import { IEntry } from "models";
 import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";
-import { routePathFromLocalizationKey } from "routes";
 import styled from "styled";
 import { FormState, Page, PropsWithFormState } from "./types";
 
@@ -15,7 +14,10 @@ import { CardMobileFlat } from "components/CardMobileFlat";
 import { RupeeFontSpan } from "components/RupeeFontSpan";
 import { Typography } from "components/Typography";
 import { TypographyButton } from "components/TypographyButton";
-import { BottomToolbarDock } from "features/navigation";
+import {
+  BottomToolbarDock,
+  routePathFromLocalizationKey,
+} from "features/navigation";
 import { BottomToolbar } from "./components/BottomToolbar";
 import { CategoryQuantitySelector } from "./components/CategoryQuantitySelector";
 import { CategorySubscription } from "./components/CategorySubscription";

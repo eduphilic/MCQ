@@ -1,6 +1,6 @@
+import { routePathFromLocalizationKey } from "features/navigation";
 import React from "react";
 import { Route } from "react-router-dom";
-import { routePathFromLocalizationKey } from "../../routes";
 
 import { LandingPage } from "./LandingPage";
 import { PasswordResetPage } from "./PasswordResetPage";

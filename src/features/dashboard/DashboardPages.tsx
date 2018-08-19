@@ -4,6 +4,7 @@ import {
   INavigationLink,
   MultipathRoute,
   PageContentWrapper,
+  routePathFromLocalizationKey,
 } from "features/navigation";
 import {
   isOnboardingSelector,
@@ -13,7 +14,6 @@ import {
 import React, { Component, SFC } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { routePathFromLocalizationKey } from "routes";
 import { State } from "store";
 import { navigationLinks } from "./navigationLinks";
 

@@ -1,6 +1,6 @@
 import { navigationLinksAll } from "common/structures/navigationLinksAll";
 import { strings } from "features/localization";
-import { routes } from "../../routes";
+import { routes } from "./routes";
 
 const defaultOptions = {
   withoutProductName: false,
