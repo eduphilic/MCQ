@@ -20,7 +20,9 @@ export const ExamTakingTourModal: SFC = () => {
     <TourPortal>
       {({ closeModal }) => (
         <TourPortalContents>
-          <SwipeInstructions />
+          <SwipeInstructions>
+            Swipe LEFT/RIGHT to goto next or previous questions
+          </SwipeInstructions>
 
           <ArcherContainer
             strokeColor="#669b64"

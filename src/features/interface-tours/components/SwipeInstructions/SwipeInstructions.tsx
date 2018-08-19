@@ -4,11 +4,17 @@ import styled from "styled";
 import { colors } from "../../colors";
 import { ReactComponent as SwipeImage } from "./swipe.svg";
 
-export const SwipeInstructions = styled<{ className?: string }>(
-  ({ className }) => (
+export type SwipeInstructionsProps = {
+  className?: string;
+
+  children: string;
+};
+
+export const SwipeInstructions = styled<SwipeInstructionsProps>(
+  ({ className, children }) => (
     <div className={className}>
       <StyledSwipeImage />
-      <InstructionsText />
+      <InstructionsText>{children}</InstructionsText>
     </div>
   ),
 )`
@@ -24,11 +30,11 @@ const StyledSwipeImage = styled(SwipeImage)`
   fill: ${colors.green};
 `;
 
-const InstructionsText = styled<{ className?: string }>(({ className }) => (
-  <Typography className={className}>
-    Swipe LEFT/RIGHT to goto next or previous questions
-  </Typography>
-))`
+const InstructionsText = styled<SwipeInstructionsProps>(
+  ({ className, children }) => (
+    <Typography className={className}>{children}</Typography>
+  ),
+)`
   position: absolute;
   width: 200%;
   left: -50%;
