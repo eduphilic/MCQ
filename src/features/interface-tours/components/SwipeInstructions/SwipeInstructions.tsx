@@ -8,6 +8,13 @@ export type SwipeInstructionsProps = {
   className?: string;
 
   children: string;
+
+  /**
+   * Offset from the top of the screen.
+   *
+   * Example: 60%.
+   */
+  topOffset: string;
 };
 
 export const SwipeInstructions = styled<SwipeInstructionsProps>(
@@ -22,7 +29,7 @@ export const SwipeInstructions = styled<SwipeInstructionsProps>(
   width: 30vmin;
   height: 30vmin;
   left: 50%;
-  top: 60%;
+  top: ${({ topOffset }) => topOffset};
   transform: translate(-50%, -50%);
 `;
 
@@ -30,7 +37,12 @@ const StyledSwipeImage = styled(SwipeImage)`
   fill: ${colors.green};
 `;
 
-const InstructionsText = styled<SwipeInstructionsProps>(
+type InstructionsTextProps = {
+  className?: string;
+  children: string;
+};
+
+const InstructionsText = styled<InstructionsTextProps>(
   ({ className, children }) => (
     <Typography className={className}>{children}</Typography>
   ),

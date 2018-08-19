@@ -17,7 +17,7 @@ export const ExamTakingTourModal: SFC = () => {
     <TourPortal>
       {({ closeModal }) => (
         <TourPortalContents>
-          <SwipeInstructions>
+          <SwipeInstructions topOffset="60%">
             Swipe LEFT/RIGHT to goto next or previous questions
           </SwipeInstructions>
 

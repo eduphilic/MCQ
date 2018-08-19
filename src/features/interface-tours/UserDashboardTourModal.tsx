@@ -13,7 +13,7 @@ export const UserDashboardTourModal: SFC = () => {
     <TourPortal>
       {({ closeModal }) => (
         <TourPortalContents>
-          <SwipeInstructions>
+          <SwipeInstructions topOffset="50%">
             Swipe LEFT/RIGHT to goto next or previous dashboard pages.
           </SwipeInstructions>
 
