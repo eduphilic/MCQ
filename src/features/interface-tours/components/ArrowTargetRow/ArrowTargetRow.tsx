@@ -10,7 +10,10 @@ export const ArrowTargetRow = styled.div<ArrowTargetRowProps>`
   width: 100vw;
 
   ${({ variant }) => (variant === "toolbar" ? toolbarHeight : `height: 32px;`)};
-  ${({ variant }) => (variant === "toolbar" ? `` : `padding: 0 8px;`)};
+
+  ${({ theme }) => theme.breakpoints.up("sm")} {
+    ${({ variant }) => (variant === "toolbar" ? `` : `padding: 0 8px;`)};
+  }
 `;
 
 const toolbarHeight = fromToolbarHeight("height");
