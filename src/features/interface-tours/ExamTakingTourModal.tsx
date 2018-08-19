@@ -119,20 +119,6 @@ export const ExamTakingTourModal: SFC = () => {
               </Description>
             </div>
 
-            {/* <div style={{ display: "flex", marginTop: 32, paddingLeft: 100 }}>
-            <Description
-              id="dashboard-button-description"
-              relations={[
-                {
-                  from: { anchor: "left" },
-                  to: { anchor: "bottom", id: "dashboard-button" },
-                },
-              ]}
-            >
-              Exit Exam
-            </Description>
-          </div> */}
-
             <div style={{ display: "flex", marginTop: 24, paddingLeft: 100 }}>
               <Description
                 id="question-palette-button-description"
