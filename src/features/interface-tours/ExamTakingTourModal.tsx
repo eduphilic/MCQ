@@ -1,9 +1,5 @@
 import React, { SFC } from "react";
-import {
-  ArcherContainer,
-  ArcherElement,
-  ArcherElementProps,
-} from "react-archer";
+import { ArcherElement, ArcherElementProps } from "react-archer";
 import styled from "styled";
 
 import { Typography } from "components/Typography";
@@ -11,6 +7,7 @@ import {
   TypographyButton,
   TypographyButtonProps,
 } from "components/TypographyButton";
+import { ArrowContainer } from "./components/ArrowContainer";
 import { SwipeInstructions } from "./components/SwipeInstructions";
 import { TourPortal } from "./components/TourPortal";
 import { TourPortalContents } from "./components/TourPortalContents";
@@ -24,12 +21,7 @@ export const ExamTakingTourModal: SFC = () => {
             Swipe LEFT/RIGHT to goto next or previous questions
           </SwipeInstructions>
 
-          <ArcherContainer
-            strokeColor="#669b64"
-            strokeWidth={4}
-            arrowLength={4}
-            arrowThickness={2.5}
-          >
+          <ArrowContainer>
             <ToolbarRow>
               <ToolbarButtonSpacer />
               <ToolbarHalfButtonSpacer />
@@ -140,7 +132,7 @@ export const ExamTakingTourModal: SFC = () => {
             <ProgressionButton onClick={closeModal}>
               OK, GOT IT!
             </ProgressionButton>
-          </ArcherContainer>
+          </ArrowContainer>
         </TourPortalContents>
       )}
     </TourPortal>
