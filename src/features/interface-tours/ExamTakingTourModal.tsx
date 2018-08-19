@@ -12,13 +12,14 @@ import {
   TypographyButtonProps,
 } from "components/TypographyButton";
 import { TourPortal } from "./components/TourPortal";
+import { TourPortalContents } from "./components/TourPortalContents";
 import { ReactComponent as SwipeIcon } from "./swipe.svg";
 
 export const ExamTakingTourModal: SFC = () => {
   return (
     <TourPortal>
       {({ closeModal }) => (
-        <Wrapper revealAppBar>
+        <TourPortalContents>
           <div
             style={{
               position: "fixed",
@@ -176,32 +177,11 @@ export const ExamTakingTourModal: SFC = () => {
               OK, GOT IT!
             </ProgressionButton>
           </ArcherContainer>
-        </Wrapper>
+        </TourPortalContents>
       )}
     </TourPortal>
   );
 };
-
-const Wrapper = styled.div<{ revealAppBar: boolean }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  background: linear-gradient(
-    to bottom,
-    ${({ revealAppBar }) =>
-        revealAppBar
-          ? `
-            rgba(0, 0, 0, 0),
-            rgba(0, 0, 0, 0) 64px,
-            rgba(0, 0, 0, 0.85) 64px,
-            `
-          : `rgba(0, 0, 0, 0.85),`}
-      rgba(0, 0, 0, 0.75)
-  );
-`;
 
 const ToolbarRow = styled.div`
   display: flex;
