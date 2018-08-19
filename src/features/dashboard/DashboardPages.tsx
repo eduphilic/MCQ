@@ -1,3 +1,4 @@
+import { UserDashboardTourModal } from "features/interface-tours";
 import {
   AppLayout,
   INavigationLink,
@@ -49,6 +50,8 @@ class DashboardPages extends Component<Props> {
         </AppLayout>
 
         {!isOnboarding && !postSignupDialogsShown && <PostSignupDialogs />}
+
+        {!isOnboarding && postSignupDialogsShown && <UserDashboardTourModal />}
       </PlaceholderSubscriptionLoader>
     );
   }
