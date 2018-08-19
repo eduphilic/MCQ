@@ -9,6 +9,7 @@ import {
 } from "components/TypographyButton";
 import { ArrowContainer } from "./components/ArrowContainer";
 import { ArrowTargetRow } from "./components/ArrowTargetRow";
+import { ArrowTargetRowItem } from "./components/ArrowTargetRowItem";
 import { SwipeInstructions } from "./components/SwipeInstructions";
 import { TourPortal } from "./components/TourPortal";
 import { TourPortalContents } from "./components/TourPortalContents";
@@ -24,17 +25,13 @@ export const ExamTakingTourModal: SFC = () => {
 
           <ArrowContainer>
             <ArrowTargetRow variant="exam-half-toolbar">
-              <ToolbarButtonSpacer />
-              <ToolbarHalfButtonSpacer />
+              <ArrowTargetRowItem
+                id="dashboard-button"
+                width={24}
+                marginLeft={32}
+              />
 
-              <ArcherElement id="dashboard-button">
-                <ToolbarButton />
-              </ArcherElement>
-
-              <ToolbarButtonSpacer />
-              <ArcherElement id="change-language-button">
-                <ToolbarButton />
-              </ArcherElement>
+              <ArrowTargetRowItem id="change-language-button" width={40} />
 
               <ToolbarPauseButtonWrapper>
                 <ArcherElement id="pause-button">
@@ -142,10 +139,6 @@ export const ExamTakingTourModal: SFC = () => {
 
 const ToolbarButtonSpacer = styled.div`
   width: 16px;
-`;
-
-const ToolbarHalfButtonSpacer = styled.div`
-  width: 8px;
 `;
 
 const ToolbarButton = styled.div`

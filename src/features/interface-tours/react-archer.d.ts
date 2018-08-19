@@ -23,6 +23,10 @@ declare module "react-archer" {
       };
       label?: string;
     }[];
+    style?: React.DetailedHTMLProps<
+      React.HTMLAttributes<HTMLDivElement>,
+      HTMLDivElement
+    >["style"];
   }
 
   export const ArcherContainer: React.ComponentType<ArcherContainerProps>;
