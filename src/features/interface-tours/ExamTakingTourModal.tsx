@@ -3,15 +3,12 @@ import { ArcherElement, ArcherElementProps } from "react-archer";
 import styled from "styled";
 
 import { Typography } from "components/Typography";
-import {
-  TypographyButton,
-  TypographyButtonProps,
-} from "components/TypographyButton";
 import { ArrowContainer } from "./components/ArrowContainer";
 import { ArrowTargetDescription } from "./components/ArrowTargetDescription";
 import { ArrowTargetRow } from "./components/ArrowTargetRow";
 import { ArrowTargetRowItem } from "./components/ArrowTargetRowItem";
 import { SwipeInstructions } from "./components/SwipeInstructions";
+import { TourDismissalButton } from "./components/TourDismissalButton";
 import { TourPortal } from "./components/TourPortal";
 import { TourPortalContents } from "./components/TourPortalContents";
 
@@ -125,9 +122,9 @@ export const ExamTakingTourModal: SFC = () => {
               </Description>
             </div>
 
-            <ProgressionButton onClick={closeModal}>
+            <TourDismissalButton onClick={closeModal}>
               OK, GOT IT!
-            </ProgressionButton>
+            </TourDismissalButton>
           </ArrowContainer>
         </TourPortalContents>
       )}
@@ -167,12 +164,3 @@ const Description: SFC<ArcherElementProps> = ({ children, ...rest }) => (
     </div>
   </ArcherElement>
 );
-
-const ProgressionButton = styled<TypographyButtonProps>(props => (
-  <TypographyButton {...props} color="primary" filled />
-))`
-  position: fixed;
-  left: 50%;
-  bottom: 24px;
-  transform: translateX(-50%);
-`;
