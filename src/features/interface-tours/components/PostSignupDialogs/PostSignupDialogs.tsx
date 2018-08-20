@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
 import styled, { injectGlobal } from "styled";
-import { actions as dashboardActions } from "../../actions";
+import { actions } from "../../actions";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -123,7 +123,7 @@ export const PostSignupDialogsContainer = connect<
   State
 >(
   () => ({}),
-  { onSubmit: dashboardActions.dismissPostSignupDialogs },
+  { onSubmit: actions.dismissPostSignupDialogs },
 )(PostSignupDialogsWithMobileDialog);
 
 const logoSize = 150;

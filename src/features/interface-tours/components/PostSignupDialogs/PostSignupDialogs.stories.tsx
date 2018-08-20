@@ -9,7 +9,7 @@ import { PostSignupDialogs } from "./PostSignupDialogs";
 const initialValues = { showDialogs: false, key: 0 };
 type Values = typeof initialValues;
 
-storiesOf("Dashboard", module)
+storiesOf("Interface Tours", module)
   .addParameters({ formik: { initialValues } })
   .addDecorator(story => (
     <StorybookContentCenterWrapper>{story()}</StorybookContentCenterWrapper>

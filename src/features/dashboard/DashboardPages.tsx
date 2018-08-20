@@ -1,4 +1,8 @@
-import { UserDashboardTourModal } from "features/interface-tours";
+import {
+  PostSignupDialogs,
+  postSignupDialogsShownSelector,
+  UserDashboardTourModal,
+} from "features/interface-tours";
 import {
   AppLayout,
   INavigationLink,
@@ -16,8 +20,6 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { State } from "store";
 import { navigationLinks } from "./navigationLinks";
-
-import { PostSignupDialogs } from "./components/PostSignupDialogs";
 
 type StateProps = {
   isOnboarding: boolean;
@@ -135,15 +137,9 @@ class DashboardPages extends Component<Props> {
 }
 
 const DashboardPagesContainer = connect<StateProps, {}, OwnProps, State>(
-  (state): StateProps => {
-    const {
-      dashboard: { postSignupDialogsShown },
-    } = state;
-
-    return {
-      isOnboarding: isOnboardingSelector(state),
-      postSignupDialogsShown,
-    };
-  },
+  (state): StateProps => ({
+    isOnboarding: isOnboardingSelector(state),
+    postSignupDialogsShown: postSignupDialogsShownSelector(state),
+  }),
 )(DashboardPages);
 export { DashboardPagesContainer as DashboardPages };
