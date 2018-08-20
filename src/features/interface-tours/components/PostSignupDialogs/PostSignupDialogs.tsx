@@ -133,6 +133,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   ${({ theme }) => theme.breakpoints.up("md")} {
     flex-direction: row;
   }
@@ -151,6 +152,21 @@ const Logo = styled<{ className?: string }>(({ className }) => (
   }
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-left: 0;
+    margin-bottom: 16px;
+
+    ${LogoImage} {
+      position: absolute;
+      width: ${logoSize * 0.8}px;
+      height: ${logoSize * 0.8}px;
+      bottom: 16px;
+    }
+  }
+
+  ${({ theme }) => theme.breakpoints.down("sm")} and (orientation: landscape) {
     ${LogoImage} {
       display: none;
     }
