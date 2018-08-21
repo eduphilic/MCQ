@@ -1,5 +1,5 @@
 import React, { SFC } from "react";
 
-export const ProgressOverviewPage: SFC = () => (
+export const DashboardOverviewPage: SFC = () => (
   <div>Progress Overview Page Placeholder</div>
 );

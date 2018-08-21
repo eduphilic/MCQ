@@ -9,8 +9,8 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import SettingsOutlined from "@material-ui/icons/SettingsOutlined";
 import { AccountCardDetails } from "icons";
 
+import { DashboardOverviewPage } from "features/dashboard-overview";
 import { ExamBoardPage } from "features/exam-board";
-import { ProgressOverviewPage } from "features/progress-overview";
 import { SubscriptionManagementPage } from "features/subscription-management";
 import { SettingsPage } from "./SettingsPage";
 
@@ -19,7 +19,7 @@ export const navigationLinks: INavigationLink[] = [
     to: routePathFromLocalizationKey(
       "routes_ProgressOverview_ProgressOverviewPage",
     ),
-    component: ProgressOverviewPage,
+    component: DashboardOverviewPage,
     titleLocalizationKey: "routes_ProgressOverview_ProgressOverviewPage",
     iconElement: <Dashboard />,
   },
