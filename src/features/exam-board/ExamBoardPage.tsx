@@ -7,17 +7,12 @@ import styled from "styled";
 import { actions } from "./actions";
 
 import AppBar from "@material-ui/core/AppBar";
-import Dialog from "@material-ui/core/Dialog";
 import IconButton from "@material-ui/core/IconButton";
-import Slide from "@material-ui/core/Slide";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import withWidth, {
-  isWidthDown,
-  WithWidthProps,
-} from "@material-ui/core/withWidth";
 import Close from "@material-ui/icons/Close";
 
+import { Dialog } from "components/Dialog";
 import { SubscriptionCard } from "./components/SubscriptionCard";
 
 type StateProps = {
@@ -29,7 +24,7 @@ type DispatchProps = {
   fetchExamReviewData: () => any;
 };
 
-type OwnProps = WithWidthProps;
+type OwnProps = {};
 
 type Props = StateProps & DispatchProps & OwnProps;
 
@@ -54,12 +49,10 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
   }
 
   render() {
-    const { loaded, width } = this.props;
+    const { loaded } = this.props;
     const { selectedSubscription, dialogOpen } = this.state;
 
     if (!loaded) return <div>Loading...</div>;
-
-    const isMobile = isWidthDown("sm", width);
 
     const subscriptions: [keyof typeof entryImages, string, boolean][] = [
       ["Officer", "NDA/ ACC", false],
@@ -126,34 +119,29 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
           <div>{testCards}</div>
         </TwoColumnWrapper>
 
-        {isMobile &&
-          selectedSubscription !== null && (
-            <Dialog
-              fullScreen
-              open={dialogOpen}
-              TransitionComponent={TransitionComponent}
-            >
-              <DialogLayout>
-                <AppBar color="inherit">
-                  <Toolbar>
-                    <IconButton
-                      color="inherit"
-                      onClick={this.handleDialogClose}
-                      aria-label="Close"
-                      style={{ marginLeft: -12 }}
-                    >
-                      <Close />
-                    </IconButton>
-                    <Typography variant="title" style={{ fontSize: 18 }}>
-                      {subscriptions[selectedSubscription][1]}
-                    </Typography>
-                  </Toolbar>
-                </AppBar>
+        {selectedSubscription !== null && (
+          <Dialog variant="fullScreenMobileHidden" open={dialogOpen}>
+            <DialogLayout>
+              <AppBar color="inherit">
+                <Toolbar>
+                  <IconButton
+                    color="inherit"
+                    onClick={this.handleDialogClose}
+                    aria-label="Close"
+                    style={{ marginLeft: -12 }}
+                  >
+                    <Close />
+                  </IconButton>
+                  <Typography variant="title" style={{ fontSize: 18 }}>
+                    {subscriptions[selectedSubscription][1]}
+                  </Typography>
+                </Toolbar>
+              </AppBar>
 
-                <div>{testCards}</div>
-              </DialogLayout>
-            </Dialog>
-          )}
+              <div>{testCards}</div>
+            </DialogLayout>
+          </Dialog>
+        )}
       </>
     );
   }
@@ -179,14 +167,17 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
   };
 }
 
-const ExamBoardPageContainer = withWidth()(
-  connect<StateProps, DispatchProps, OwnProps, State>(
-    ({ examBoard: { loaded, loading } }: State) => ({ loaded, loading }),
-    {
-      fetchExamReviewData: actions.loadPlaceholderData,
-    },
-  )(ExamBoardPage),
-);
+const ExamBoardPageContainer = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps,
+  State
+>(
+  ({ examBoard: { loaded, loading } }: State) => ({ loaded, loading }),
+  {
+    fetchExamReviewData: actions.loadPlaceholderData,
+  },
+)(ExamBoardPage);
 export { ExamBoardPageContainer as ExamBoardPage };
 
 const TwoColumnWrapper = styled.div`
@@ -235,5 +226,3 @@ const DialogLayout = styled.div`
     margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
   }
 `;
-
-const TransitionComponent = (props: any) => <Slide direction="up" {...props} />;
