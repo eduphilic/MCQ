@@ -3,7 +3,7 @@ import styled from "styled";
 
 import CardContent from "@material-ui/core/CardContent";
 
-import { Typography2 } from "componentsV0/Typography2";
+import { Typography } from "components/Typography";
 
 export type SubscriptionCardContentProps = {
   stats: Record<string, string>;
@@ -18,8 +18,8 @@ export const SubscriptionCardContent: SFC<
     <CardContent>
       {Object.entries(stats).map(([key, value], index) => (
         <StatRow key={`${key}-${index}`}>
-          <Typography2 variant="Subtitle2">{key}</Typography2>
-          <Typography2 variant="Subtitle2">{value}</Typography2>
+          <Typography variant="Subtitle2">{key}</Typography>
+          <Typography variant="Subtitle2">{value}</Typography>
         </StatRow>
       ))}
     </CardContent>

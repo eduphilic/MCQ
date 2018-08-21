@@ -1,7 +1,7 @@
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
+import { Typography } from "components/Typography";
 import { CardMobileFlat } from "componentsV0/CardMobileFlat";
-import { Typography2 } from "componentsV0/Typography2";
 import React, { SFC } from "react";
 import styled from "styled";
 
@@ -21,8 +21,8 @@ export const OverviewCard: SFC<OverviewCardProps> = props => {
       <CardContent>
         {Object.entries(stats).map(([key, value], index) => (
           <StatRow key={`${key}-${index}`}>
-            <Typography2 variant="Subtitle2">{key}</Typography2>
-            <Typography2 variant="Subtitle2">{value}</Typography2>
+            <Typography variant="Subtitle2">{key}</Typography>
+            <Typography variant="Subtitle2">{value}</Typography>
           </StatRow>
         ))}
       </CardContent>

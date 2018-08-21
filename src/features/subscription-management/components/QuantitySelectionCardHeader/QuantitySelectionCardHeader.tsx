@@ -2,9 +2,9 @@ import { strings } from "features/localization";
 import React, { SFC } from "react";
 import styled from "styled";
 
+import { Typography } from "components/Typography";
 import { BlockImage } from "componentsV0/BlockImage";
 import { RupeeFontSpan } from "componentsV0/RupeeFontSpan";
-import { Typography2 } from "componentsV0/Typography2";
 
 export type QuantitySelectionCardHeaderProps = {
   /** Card title. */
@@ -56,21 +56,21 @@ const Image = styled(BlockImage)`
 `;
 
 const Title = styled<{ className?: string }>(({ children, className }) => (
-  <Typography2 className={className} variant="H6" paragraph>
+  <Typography className={className} variant="H6" paragraph>
     {children}
-  </Typography2>
+  </Typography>
 ))`
   margin-bottom: 8px;
   font-weight: 500;
 `;
 
 const Subheader = styled<{ className?: string }>(({ children, className }) => (
-  <Typography2
+  <Typography
     className={className}
     variant="Subtitle2"
     gutterBottom
     color="textSecondary"
   >
     {children}
-  </Typography2>
+  </Typography>
 ))``;

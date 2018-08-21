@@ -7,7 +7,7 @@ const variants = Object.values(Variant) as Variant[];
 
 storiesOf("Components", module)
   .addParameters({ info: { propTablesExclude: [Paper] } })
-  .add("Typography", () => (
+  .add("Typography (old)", () => (
     <Paper style={{ maxWidth: 500, padding: 16, marginLeft: 16 }}>
       {variants.map(variant => (
         <div key={variant} style={{ margin: "16px" }}>

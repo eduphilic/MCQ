@@ -8,7 +8,7 @@ import MuiTypography, {
   TypographyProps as MuiTypographyProps,
 } from "@material-ui/core/Typography";
 
-export { Variant as Typography2Variant };
+export { Variant as TypographyVariant };
 
 type BaseSharedProps =
   | "align"
@@ -17,7 +17,7 @@ type BaseSharedProps =
   | "noWrap"
   | "paragraph";
 
-export type Typography2Props = Pick<MuiTypographyProps, BaseSharedProps> & {
+export type TypographyProps = Pick<MuiTypographyProps, BaseSharedProps> & {
   /**
    * CSS classname for extensibility.
    */
@@ -63,7 +63,7 @@ export type Typography2Props = Pick<MuiTypographyProps, BaseSharedProps> & {
  *
  * @see https://material.io/design/typography/the-type-system.html
  */
-export const Typography2: SFC<Typography2Props> = (props: Typography2Props) => {
+export const Typography: SFC<TypographyProps> = props => {
   const { variant = Variant.Body1, component, ...rest } = props;
 
   const componentVariant = styles[variant];

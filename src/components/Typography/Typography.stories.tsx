@@ -11,14 +11,14 @@ import TableRow from "@material-ui/core/TableRow";
 import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
 import { styleTable } from "./styleTable";
 import { Face, Font } from "./types";
-import { Typography2, Typography2Variant } from "./Typography2";
+import { Typography, TypographyVariant } from "./Typography";
 
 storiesOf("Components", module)
   .addParameters({ info: { source: false } })
   .addDecorator(story => (
     <StorybookContentCenterWrapper>{story()}</StorybookContentCenterWrapper>
   ))
-  .add("Typography2", () => {
+  .add("Typography", () => {
     const align = select(
       "Align",
       ["inherit", "left", "center", "right", "justify"],
@@ -51,7 +51,7 @@ storiesOf("Components", module)
         </TableHead>
 
         <TableBody>
-          {(Object.keys(Typography2Variant) as Typography2Variant[]).map(
+          {(Object.keys(TypographyVariant) as TypographyVariant[]).map(
             variant => {
               const [typeface, font, size, casing, spacing] = styleTable[
                 variant
@@ -60,7 +60,7 @@ storiesOf("Components", module)
               return (
                 <TableRow key={variant}>
                   <TableCell>
-                    <Typography2
+                    <Typography
                       variant={variant}
                       align={align}
                       color={color}
@@ -69,7 +69,7 @@ storiesOf("Components", module)
                       paragraph={paragraph}
                     >
                       {variant}
-                    </Typography2>
+                    </Typography>
                   </TableCell>
 
                   <TableCell>{key(Face, typeface)}</TableCell>
