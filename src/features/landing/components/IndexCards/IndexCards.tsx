@@ -7,8 +7,8 @@ import { actions } from "../../actions";
 
 import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 
-import { BlockImage } from "components/BlockImage";
-import { Typography } from "components/Typography";
+import { BlockImage } from "componentsV0/BlockImage";
+import { Typography } from "componentsV0/Typography";
 
 import { createIndexCardEntryPlaceholders } from "../../placeholders/createIndexCardEntryPlaceholders";
 

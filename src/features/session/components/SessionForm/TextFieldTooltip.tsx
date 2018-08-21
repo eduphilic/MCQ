@@ -4,7 +4,7 @@ import "./TextFieldTooltip.css";
 
 import Tooltip from "@material-ui/core/Tooltip";
 
-import { TooltipArrow } from "components/TooltipArrow";
+import { TooltipArrow } from "componentsV0/TooltipArrow";
 
 export type TextFieldTooltipProps = {
   /** Target element to apply tooltip to. */

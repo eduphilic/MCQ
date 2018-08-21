@@ -10,18 +10,18 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
-import { DashboardCardStatsContent } from "components/DashboardCardStatsContent";
-import { DashboardTableCell } from "components/DashboardTableCell";
-import { DashboardTableRow } from "components/DashboardTableRow";
-import { FilterButton } from "components/FilterButton";
-import { Typography } from "components/Typography";
-import { TypographyL10 } from "components/TypographyL10";
+import { DashboardCardStatsContent } from "componentsV0/DashboardCardStatsContent";
+import { DashboardTableCell } from "componentsV0/DashboardTableCell";
+import { DashboardTableRow } from "componentsV0/DashboardTableRow";
+import { FilterButton } from "componentsV0/FilterButton";
+import { Typography } from "componentsV0/Typography";
+import { TypographyL10 } from "componentsV0/TypographyL10";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 import { ReactComponent as ManSvg } from "./man.svg";
 
 import { randomNumber } from "common/utils";
-import { createPlaceholderFilterButtonProps } from "components/FilterButton/createPlaceholderFilterButtonProps";
+import { createPlaceholderFilterButtonProps } from "componentsV0/FilterButton/createPlaceholderFilterButtonProps";
 
 // tslint:disable-next-line:no-empty-interface
 interface AdminDashboardProps {}

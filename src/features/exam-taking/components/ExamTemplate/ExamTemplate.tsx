@@ -9,7 +9,7 @@ import withWidth, {
   WithWidthProps,
 } from "@material-ui/core/withWidth";
 
-import { DashboardTemplate } from "components/DashboardTemplate";
+import { DashboardTemplate } from "componentsV0/DashboardTemplate";
 
 import { ExamAppBar } from "../ExamAppBar";
 import { ExamBottomNavFrame } from "../ExamBottomNavFrame";

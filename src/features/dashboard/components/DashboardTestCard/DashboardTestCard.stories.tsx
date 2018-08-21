@@ -2,7 +2,7 @@ import { storiesOf } from "@storybook/react";
 import { entryImages } from "common/structures/entryImages";
 import React from "react";
 
-import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
+import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
 import { DashboardTestCard } from "./DashboardTestCard";
 
 storiesOf("Dashboard", module).add("DashboardTestCard", () => {

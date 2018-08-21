@@ -17,8 +17,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 
-import { Button } from "components/Button";
-import { CardMobileFlat } from "components/CardMobileFlat";
+import { Button } from "componentsV0/Button";
+import { CardMobileFlat } from "componentsV0/CardMobileFlat";
 import { FormHeader } from "./FormHeader";
 import { PasswordResetLink } from "./PasswordResetLink";
 import { TermsConditionsCheckbox } from "./TermsConditionsCheckbox";

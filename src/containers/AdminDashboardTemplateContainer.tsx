@@ -1,7 +1,7 @@
 import {
   AdminDashboardTemplate,
   AdminDashboardTemplateProps,
-} from "components/AdminDashboardTemplate";
+} from "componentsV0/AdminDashboardTemplate";
 import React, { SFC } from "react";
 
 interface AdminDashboardTemplateContainerOwnProps

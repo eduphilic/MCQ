@@ -4,8 +4,8 @@ import styled, { css } from "styled";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import Check from "@material-ui/icons/Check";
 
-import { Button } from "components/Button";
-import { Typography } from "components/Typography";
+import { Button } from "componentsV0/Button";
+import { Typography } from "componentsV0/Typography";
 
 export interface ExamAnswerSelectItemProps {
   className?: string;

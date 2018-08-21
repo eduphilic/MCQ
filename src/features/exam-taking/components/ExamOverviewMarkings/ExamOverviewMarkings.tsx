@@ -9,8 +9,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 
-import { DashboardColumnContainer } from "components/DashboardColumnContainer";
-import { Typography } from "components/Typography";
+import { DashboardColumnContainer } from "componentsV0/DashboardColumnContainer";
+import { Typography } from "componentsV0/Typography";
 
 const titles = [
   "Total Marks",

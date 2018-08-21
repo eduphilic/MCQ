@@ -2,7 +2,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { createCategoryQuantitySelectionSettingsPlaceholder } from "../../placeholders/createCategoryQuantitySelectionSettingsPlaceholder";
 
-import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
+import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
 import { CategorySubscription } from "./CategorySubscription";
 
 const categoryQuantitySelectionSettings = createCategoryQuantitySelectionSettingsPlaceholder();

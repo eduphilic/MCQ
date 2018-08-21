@@ -2,7 +2,7 @@ import { storiesOf } from "@storybook/react";
 import React, { Fragment } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
-import { StorybookPlaceholderImage } from "components/storybook/StorybookPlaceholderImage";
+import { StorybookPlaceholderImage } from "componentsV0/storybook/StorybookPlaceholderImage";
 import { PersistentScrollPosition } from "./PersistentScrollPosition";
 
 storiesOf("Navigation", module)

@@ -2,7 +2,7 @@ import React, { SFC } from "react";
 import { ArcherElement, ArcherElementProps } from "react-archer";
 import styled from "styled";
 
-import { Typography } from "components/Typography";
+import { Typography } from "componentsV0/Typography";
 import { ArrowContainer } from "./components/ArrowContainer";
 import { ArrowTargetDescription } from "./components/ArrowTargetDescription";
 import { ArrowTargetRow } from "./components/ArrowTargetRow";

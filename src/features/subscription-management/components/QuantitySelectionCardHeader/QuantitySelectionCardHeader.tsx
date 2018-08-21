@@ -2,9 +2,9 @@ import { strings } from "features/localization";
 import React, { SFC } from "react";
 import styled from "styled";
 
-import { BlockImage } from "components/BlockImage";
-import { RupeeFontSpan } from "components/RupeeFontSpan";
-import { Typography2 } from "components/Typography2";
+import { BlockImage } from "componentsV0/BlockImage";
+import { RupeeFontSpan } from "componentsV0/RupeeFontSpan";
+import { Typography2 } from "componentsV0/Typography2";
 
 export type QuantitySelectionCardHeaderProps = {
   /** Card title. */

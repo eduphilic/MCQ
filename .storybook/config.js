@@ -3,7 +3,7 @@ import { configure, addDecorator } from "@storybook/react";
 import { setOptions as setStorybookOptions } from "@storybook/addon-options";
 import { withInfo } from "@storybook/addon-info";
 import { withKnobs } from "@storybook/addon-knobs";
-import { withFormik } from "components/storybook/StorybookFormikAddon";
+import { withFormik } from "componentsV0/storybook/StorybookFormikAddon";
 
 import { ThemeBaseline, LightTheme } from "theme";
 import { DashboardAppBarIconStore } from "stores";

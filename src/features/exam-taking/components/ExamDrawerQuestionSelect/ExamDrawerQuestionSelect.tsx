@@ -6,7 +6,7 @@ import { actions } from "../../actions";
 import { IExamQuestion } from "../../models/IExamQuestion";
 import { IExamQuestionCategory } from "../../models/IExamQuestionCategory";
 
-import { Typography } from "components/Typography";
+import { Typography } from "componentsV0/Typography";
 import { QuestionButton } from "./QuestionButton";
 
 interface StateProps {

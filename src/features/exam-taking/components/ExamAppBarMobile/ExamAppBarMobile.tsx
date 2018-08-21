@@ -14,8 +14,8 @@ import Apps from "@material-ui/icons/Apps";
 import Dashboard from "@material-ui/icons/Dashboard";
 import Language from "@material-ui/icons/Language";
 
-import { Typography } from "components/Typography";
-import { TypographyButton } from "components/TypographyButton";
+import { Typography } from "componentsV0/Typography";
+import { TypographyButton } from "componentsV0/TypographyButton";
 
 import { ExamAppBarTimer } from "../ExamAppBarTimer";
 import { ExamQuestionPalettePopup } from "./ExamQuestionPalettePopup";

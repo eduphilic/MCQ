@@ -6,7 +6,7 @@ import CardActions from "@material-ui/core/CardActions";
 import {
   TypographyButton,
   TypographyButtonProps,
-} from "components/TypographyButton";
+} from "componentsV0/TypographyButton";
 
 export type SubscriptionCardActionsProps = {
   showDisabledExpiredButton?: boolean;

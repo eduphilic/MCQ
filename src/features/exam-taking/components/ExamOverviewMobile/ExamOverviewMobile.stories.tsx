@@ -3,7 +3,7 @@ import React from "react";
 
 import Card from "@material-ui/core/Card";
 
-import { ContentCenterWrapper } from "components/ContentCenterWrapper";
+import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 import { PlaceholderProvider } from "store";
 import { ExamOverviewMobile } from "./ExamOverviewMobile";
 

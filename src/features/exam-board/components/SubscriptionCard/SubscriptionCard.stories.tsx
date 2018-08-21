@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { entryImages } from "common/structures/entryImages";
 import React from "react";
 
-import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
+import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
 import { SubscriptionCard, SubscriptionCardProps } from "./SubscriptionCard";
 
 storiesOf("Exam Board", module).add("SubscriptionCard", () => {

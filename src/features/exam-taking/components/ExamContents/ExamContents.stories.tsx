@@ -2,9 +2,9 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
-import { StorybookPlaceholderImage } from "components/storybook/StorybookPlaceholderImage";
-import { storybookPlaceholderImageUrl } from "components/storybook/storybookPlaceholderImageUrl";
+import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
+import { StorybookPlaceholderImage } from "componentsV0/storybook/StorybookPlaceholderImage";
+import { storybookPlaceholderImageUrl } from "componentsV0/storybook/storybookPlaceholderImageUrl";
 import { ExamContents } from "./ExamContents";
 
 storiesOf("Exam Taking", module).add("ExamContents", () => {

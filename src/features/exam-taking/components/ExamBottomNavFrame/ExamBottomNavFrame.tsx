@@ -9,7 +9,7 @@ import { buttonSelector } from "../../selectors";
 import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
 
-import { TypographyButton } from "components/TypographyButton";
+import { TypographyButton } from "componentsV0/TypographyButton";
 
 type StateProps = {
   previousButtonEnabled: boolean;

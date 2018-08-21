@@ -5,7 +5,7 @@ import { State } from "store";
 import { actions } from "./actions";
 import { IExamMeta } from "./models/IExamMeta";
 
-import { DashboardColumnContainer } from "components/DashboardColumnContainer";
+import { DashboardColumnContainer } from "componentsV0/DashboardColumnContainer";
 
 import { ExamTakingTourModal } from "features/interface-tours";
 import { ExamAnswerSelect } from "./components/ExamAnswerSelect";

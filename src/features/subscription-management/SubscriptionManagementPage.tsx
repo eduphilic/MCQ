@@ -10,10 +10,10 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Divider from "@material-ui/core/Divider";
 import Hidden from "@material-ui/core/Hidden";
 
-import { CardMobileFlat } from "components/CardMobileFlat";
-import { RupeeFontSpan } from "components/RupeeFontSpan";
-import { Typography } from "components/Typography";
-import { TypographyButton } from "components/TypographyButton";
+import { CardMobileFlat } from "componentsV0/CardMobileFlat";
+import { RupeeFontSpan } from "componentsV0/RupeeFontSpan";
+import { Typography } from "componentsV0/Typography";
+import { TypographyButton } from "componentsV0/TypographyButton";
 import {
   BottomToolbarDock,
   routePathFromLocalizationKey,

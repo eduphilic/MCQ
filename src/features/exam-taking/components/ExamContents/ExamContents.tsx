@@ -6,7 +6,7 @@ import withWidth, {
   WithWidthProps,
 } from "@material-ui/core/withWidth";
 
-import { BlockImage } from "components/BlockImage";
+import { BlockImage } from "componentsV0/BlockImage";
 
 export interface ExamContentsProps {
   /**

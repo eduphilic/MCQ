@@ -1,7 +1,7 @@
 import { entryImages } from "common/structures/entryImages";
 import React, { SFC } from "react";
 
-import { DashboardColumnContainer } from "components/DashboardColumnContainer";
+import { DashboardColumnContainer } from "componentsV0/DashboardColumnContainer";
 import {
   DashboardTestCard,
   DashboardTestCardProps,

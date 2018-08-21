@@ -4,8 +4,8 @@ import { Redirect } from "react-router-dom";
 
 import Typography from "@material-ui/core/Typography";
 
-import { AdminLoginTemplate } from "components/AdminLoginTemplate";
-import { AuthenticationErrorSnackbar } from "components/AuthenticationErrorSnackbar";
+import { AdminLoginTemplate } from "componentsV0/AdminLoginTemplate";
+import { AuthenticationErrorSnackbar } from "componentsV0/AuthenticationErrorSnackbar";
 import { SessionForm } from "features/session";
 
 interface AdminLoginProps {

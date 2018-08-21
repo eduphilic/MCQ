@@ -2,7 +2,7 @@ import { storiesOf } from "@storybook/react";
 import React, { ReactNode } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import { StorybookPlaceholderImage } from "components/storybook/StorybookPlaceholderImage";
+import { StorybookPlaceholderImage } from "componentsV0/storybook/StorybookPlaceholderImage";
 import { LandingTemplate } from ".";
 
 const testCardNodes: ReactNode[] = [];

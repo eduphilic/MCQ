@@ -1,10 +1,10 @@
 import { Formik } from "formik";
 import React, { SFC } from "react";
 
-import { DashboardCard } from "components/DashboardCard";
-import { DashboardSecondaryToolbar } from "components/DashboardSecondaryToolbar";
-import { FormikFileUploadField } from "components/FormikFileUploadField";
-import { Typography } from "components/Typography";
+import { DashboardCard } from "componentsV0/DashboardCard";
+import { DashboardSecondaryToolbar } from "componentsV0/DashboardSecondaryToolbar";
+import { FormikFileUploadField } from "componentsV0/FormikFileUploadField";
+import { Typography } from "componentsV0/Typography";
 
 import { AdminDashboardTemplateContainer } from "containers/AdminDashboardTemplateContainer";
 

@@ -2,7 +2,7 @@ import React, { cloneElement } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled";
 
-import { TypographyButton } from "components/TypographyButton";
+import { TypographyButton } from "componentsV0/TypographyButton";
 
 export type DisableableLinkProps = {
   className?: string;

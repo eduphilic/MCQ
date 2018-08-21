@@ -10,8 +10,8 @@ import Hidden from "@material-ui/core/Hidden";
 import Add from "@material-ui/icons/Add";
 import Remove from "@material-ui/icons/Remove";
 
-import { BlockImage } from "components/BlockImage";
-import { Typography } from "components/Typography";
+import { BlockImage } from "componentsV0/BlockImage";
+import { Typography } from "componentsV0/Typography";
 
 export type SelectedEntriesProps = {
   entries: IEntry[];

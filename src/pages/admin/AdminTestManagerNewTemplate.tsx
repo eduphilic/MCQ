@@ -9,15 +9,15 @@ import Grid from "@material-ui/core/Grid";
 import Add from "@material-ui/icons/Add";
 import RemoveCircleOutline from "@material-ui/icons/RemoveCircleOutline";
 
-import { DashboardSecondaryToolbar } from "components/DashboardSecondaryToolbar";
-import { FormikCheckbox } from "components/FormikCheckbox";
-import { FormikTextField } from "components/FormikTextField";
-import { FormikTextFieldTypeAhead } from "components/FormikTextFieldTypeAhead";
-import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
-import { TestPreviewDialog } from "components/TestPreviewDialog";
-import { createPlaceholderTestPreviewFieldsProp } from "components/TestPreviewDialog/createPlaceholderTestPreviewFieldsProp";
-import { Typography } from "components/Typography";
-import { TypographyButton } from "components/TypographyButton";
+import { DashboardSecondaryToolbar } from "componentsV0/DashboardSecondaryToolbar";
+import { FormikCheckbox } from "componentsV0/FormikCheckbox";
+import { FormikTextField } from "componentsV0/FormikTextField";
+import { FormikTextFieldTypeAhead } from "componentsV0/FormikTextFieldTypeAhead";
+import { ResponsiveToolbarTypographyButton } from "componentsV0/ResponsiveToolbarTypographyButton";
+import { TestPreviewDialog } from "componentsV0/TestPreviewDialog";
+import { createPlaceholderTestPreviewFieldsProp } from "componentsV0/TestPreviewDialog/createPlaceholderTestPreviewFieldsProp";
+import { Typography } from "componentsV0/Typography";
+import { TypographyButton } from "componentsV0/TypographyButton";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 

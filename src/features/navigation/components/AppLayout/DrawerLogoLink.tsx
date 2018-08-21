@@ -5,7 +5,7 @@ import { INavigationLink } from "../../models/INavigationLink";
 
 import ListItem from "@material-ui/core/ListItem";
 
-import { DrawerLogo } from "components/DrawerLogo";
+import { DrawerLogo } from "componentsV0/DrawerLogo";
 
 export type DrawerLogoLinkProps = INavigationLink & { className?: string };
 

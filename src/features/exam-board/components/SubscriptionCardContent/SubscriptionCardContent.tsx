@@ -3,7 +3,7 @@ import styled from "styled";
 
 import CardContent from "@material-ui/core/CardContent";
 
-import { Typography2 } from "components/Typography2";
+import { Typography2 } from "componentsV0/Typography2";
 
 export type SubscriptionCardContentProps = {
   stats: Record<string, string>;

@@ -4,8 +4,8 @@ import lodashPick from "lodash.pick";
 import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 
-import { Typography } from "components/Typography";
-import { TypographyButton } from "components/TypographyButton";
+import { Typography } from "componentsV0/Typography";
+import { TypographyButton } from "componentsV0/TypographyButton";
 
 export interface ExamStats {
   totalQuestionsCount: number;

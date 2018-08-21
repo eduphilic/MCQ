@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { ContentCenterWrapper } from "components/ContentCenterWrapper";
+import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 import { PlaceholderProvider } from "store";
 import { ExamBottomNavFrame } from "./ExamBottomNavFrame";
 

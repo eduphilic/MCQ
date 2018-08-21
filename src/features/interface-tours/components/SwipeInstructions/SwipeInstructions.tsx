@@ -1,4 +1,4 @@
-import { Typography } from "components/Typography";
+import { Typography } from "componentsV0/Typography";
 import React from "react";
 import styled from "styled";
 import { colors } from "../../colors";

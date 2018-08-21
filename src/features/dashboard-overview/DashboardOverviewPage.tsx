@@ -1,6 +1,6 @@
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
-import { CardMobileFlat } from "components/CardMobileFlat";
+import { CardMobileFlat } from "componentsV0/CardMobileFlat";
 import { SelectedEntries } from "features/subscription-management";
 import React, { SFC } from "react";
 import { OverviewCard } from "./components/OverviewCard";

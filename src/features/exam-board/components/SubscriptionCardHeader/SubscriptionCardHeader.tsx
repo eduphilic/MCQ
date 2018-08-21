@@ -1,8 +1,8 @@
 import React, { SFC } from "react";
 import styled from "styled";
 
-import { BlockImage } from "components/BlockImage";
-import { Typography2 } from "components/Typography2";
+import { BlockImage } from "componentsV0/BlockImage";
+import { Typography2 } from "componentsV0/Typography2";
 
 export type SubscriptionCardHeaderProps = {
   /** Card title. */

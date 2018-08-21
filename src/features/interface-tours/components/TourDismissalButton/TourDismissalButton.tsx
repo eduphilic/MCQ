@@ -1,7 +1,7 @@
 import {
   TypographyButton,
   TypographyButtonProps,
-} from "components/TypographyButton";
+} from "componentsV0/TypographyButton";
 import React from "react";
 import styled from "styled";
 

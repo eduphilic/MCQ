@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import React, { SFC } from "react";
 
-import { formik } from "components/storybook/StorybookFormikAddon";
+import { formik } from "componentsV0/storybook/StorybookFormikAddon";
 import { BaseSwippableTemplate } from "./BaseSwippableTemplate";
 
 const initialValues = { selectedPane: 0 };

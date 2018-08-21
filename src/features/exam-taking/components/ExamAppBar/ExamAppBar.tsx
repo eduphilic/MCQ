@@ -8,7 +8,7 @@ import { buttonSelector } from "../../selectors";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 
-import { TypographyButton } from "components/TypographyButton";
+import { TypographyButton } from "componentsV0/TypographyButton";
 import { LanguageToggleButton } from "features/localization";
 
 type StateProps = {

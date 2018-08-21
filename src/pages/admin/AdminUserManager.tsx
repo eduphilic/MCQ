@@ -15,11 +15,11 @@ import {
   DashboardCard,
   DashboardCardColumnType,
   DashboardCardItem,
-} from "components/DashboardCard";
-import { ResponsiveToolbarTypographyButton } from "components/ResponsiveToolbarTypographyButton";
-import { SideSheetButtonMenu } from "components/SideSheetButtonMenu";
-import { SideSheetFieldGroup } from "components/SideSheetFieldGroup";
-import { SideSheetSearchField } from "components/SideSheetSearchField";
+} from "componentsV0/DashboardCard";
+import { ResponsiveToolbarTypographyButton } from "componentsV0/ResponsiveToolbarTypographyButton";
+import { SideSheetButtonMenu } from "componentsV0/SideSheetButtonMenu";
+import { SideSheetFieldGroup } from "componentsV0/SideSheetFieldGroup";
+import { SideSheetSearchField } from "componentsV0/SideSheetSearchField";
 
 export const AdminUserManager: SFC<{}> = () => {
   // tslint:disable-next-line:no-empty

@@ -5,9 +5,9 @@ import styled, { css, withProps } from "styled";
 
 import Typography from "@material-ui/core/Typography";
 
-import { BlockImage } from "components/BlockImage";
-import { Button } from "components/Button";
-import { CheckmarkableCircle } from "components/CheckmarkableCircle";
+import { BlockImage } from "componentsV0/BlockImage";
+import { Button } from "componentsV0/Button";
+import { CheckmarkableCircle } from "componentsV0/CheckmarkableCircle";
 
 export type EntrySelectItemProps = {
   /**

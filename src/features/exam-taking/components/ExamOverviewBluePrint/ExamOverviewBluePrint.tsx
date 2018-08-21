@@ -13,8 +13,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
-import { DashboardTableRow } from "components/DashboardTableRow";
-import { Typography } from "components/Typography";
+import { DashboardTableRow } from "componentsV0/DashboardTableRow";
+import { Typography } from "componentsV0/Typography";
 
 interface StateProps {
   subjects: IExamMetaSubject[];

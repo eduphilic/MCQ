@@ -4,7 +4,7 @@ import styled from "styled";
 import { LocalizedString } from "types";
 
 import Typography from "@material-ui/core/Typography";
-import { TypographyButton } from "components/TypographyButton";
+import { TypographyButton } from "componentsV0/TypographyButton";
 
 import {
   CategoryQuantitySelectorItem,

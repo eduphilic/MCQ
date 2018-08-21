@@ -1,7 +1,7 @@
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
-import { CardMobileFlat } from "components/CardMobileFlat";
-import { Typography2 } from "components/Typography2";
+import { CardMobileFlat } from "componentsV0/CardMobileFlat";
+import { Typography2 } from "componentsV0/Typography2";
 import React, { SFC } from "react";
 import styled from "styled";
 

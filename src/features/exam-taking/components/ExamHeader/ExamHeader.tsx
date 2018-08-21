@@ -2,7 +2,7 @@ import { textGrey, whiteDark } from "css";
 import React, { SFC } from "react";
 import styled from "styled";
 
-import { Typography } from "components/Typography";
+import { Typography } from "componentsV0/Typography";
 
 export interface ExamHeaderProps {
   /**

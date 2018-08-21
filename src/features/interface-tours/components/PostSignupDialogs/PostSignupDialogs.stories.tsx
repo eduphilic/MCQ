@@ -1,9 +1,9 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Button } from "components/Button";
-import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
-import { formik } from "components/storybook/StorybookFormikAddon";
+import { Button } from "componentsV0/Button";
+import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
+import { formik } from "componentsV0/storybook/StorybookFormikAddon";
 import { PostSignupDialogs } from "./PostSignupDialogs";
 
 const initialValues = { showDialogs: false, key: 0 };

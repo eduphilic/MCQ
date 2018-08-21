@@ -11,13 +11,13 @@ import withWidth, {
   WithWidthProps,
 } from "@material-ui/core/withWidth";
 
-import { DashboardColumnContainer } from "components/DashboardColumnContainer";
-import { FormikTextField } from "components/FormikTextField";
-import { Typography } from "components/Typography";
+import { DashboardColumnContainer } from "componentsV0/DashboardColumnContainer";
+import { FormikTextField } from "componentsV0/FormikTextField";
+import { Typography } from "componentsV0/Typography";
 import {
   TypographyButton,
   TypographyButtonProps,
-} from "components/TypographyButton";
+} from "componentsV0/TypographyButton";
 
 const initialBasicInformationValues = {
   firstName: "Anupam",

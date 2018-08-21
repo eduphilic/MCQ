@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import Pause from "@material-ui/icons/Pause";
 import PlayArrow from "@material-ui/icons/PlayArrow";
 
-import { Typography } from "components/Typography";
+import { Typography } from "componentsV0/Typography";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ExamAppBarTimerProps {}

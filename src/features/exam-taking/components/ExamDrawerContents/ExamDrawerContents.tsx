@@ -1,7 +1,7 @@
 import React, { SFC } from "react";
 import styled from "styled";
 
-import { DrawerLogo } from "components/DrawerLogo";
+import { DrawerLogo } from "componentsV0/DrawerLogo";
 
 import { ExamDrawerQuestionPalette } from "../ExamDrawerQuestionPalette";
 import { ExamDrawerQuestionSelect } from "../ExamDrawerQuestionSelect";

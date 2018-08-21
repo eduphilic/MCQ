@@ -1,7 +1,7 @@
 import React, { SFC } from "react";
 import styled from "styled";
 
-import { CardMobileFlat } from "components/CardMobileFlat";
+import { CardMobileFlat } from "componentsV0/CardMobileFlat";
 import {
   SubscriptionCardActions,
   SubscriptionCardActionsProps,

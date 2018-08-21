@@ -4,9 +4,12 @@ import styled, { css } from "styled";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 
-import { Button } from "components/Button";
-import { CardMobileFlat, CardMobileFlatProps } from "components/CardMobileFlat";
-import { Typography } from "components/Typography";
+import { Button } from "componentsV0/Button";
+import {
+  CardMobileFlat,
+  CardMobileFlatProps,
+} from "componentsV0/CardMobileFlat";
+import { Typography } from "componentsV0/Typography";
 
 export type DashboardTestCardProps = {
   /**

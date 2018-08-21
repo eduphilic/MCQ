@@ -1,9 +1,9 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
-import { formik } from "components/storybook/StorybookFormikAddon";
-import { TypographyButton } from "components/TypographyButton";
+import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
+import { formik } from "componentsV0/storybook/StorybookFormikAddon";
+import { TypographyButton } from "componentsV0/TypographyButton";
 import { ExamAnswerSelect } from "./ExamAnswerSelect";
 
 const initialValues = { selectedAnswerIndex: null as number | null };

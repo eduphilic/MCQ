@@ -3,8 +3,8 @@ import { storiesOf } from "@storybook/react";
 import { entryImages } from "common/structures/entryImages";
 import React, { cloneElement } from "react";
 
-import { CardMobileFlat } from "components/CardMobileFlat";
-import { StorybookContentCenterWrapper } from "components/storybook/StorybookContentCenterWrapper";
+import { CardMobileFlat } from "componentsV0/CardMobileFlat";
+import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
 import { SubscriptionCardHeader } from "./SubscriptionCardHeader";
 
 storiesOf("Exam Board", module).add("SubscriptionCardHeader", () => {

@@ -3,7 +3,7 @@ import styled from "styled";
 
 import Button, { ButtonProps } from "@material-ui/core/Button";
 
-import { CheckmarkableCircle } from "components/CheckmarkableCircle";
+import { CheckmarkableCircle } from "componentsV0/CheckmarkableCircle";
 
 export type LanguageButtonProps = ButtonProps & {
   selected: boolean;

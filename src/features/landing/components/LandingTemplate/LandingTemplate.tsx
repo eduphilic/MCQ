@@ -1,7 +1,7 @@
 import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 
-import { ContentCenterWrapper } from "components/ContentCenterWrapper";
+import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 // TODO: Remove Development Snackbar Link
 import { DevelopmentAdminDashboardSnackbar } from "./DevelopmentAdminDashboardSnackbar";
 

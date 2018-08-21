@@ -9,7 +9,7 @@ import React, { SFC } from "react";
 import styled from "styled";
 import { UserAppDrawerTheme } from "theme";
 
-import { Typography } from "components/Typography";
+import { Typography } from "componentsV0/Typography";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ExamDrawerQuestionPaletteProps {}

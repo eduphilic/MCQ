@@ -1,4 +1,4 @@
-import { Typography } from "components/Typography";
+import { Typography } from "componentsV0/Typography";
 import React, { SFC } from "react";
 import { ArcherElement, ArcherElementProps } from "react-archer";
 

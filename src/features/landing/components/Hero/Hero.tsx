@@ -6,8 +6,8 @@ import { DarkTheme, LightTheme } from "theme";
 import Hidden from "@material-ui/core/Hidden";
 import Typography from "@material-ui/core/Typography";
 
-import { ContentCenterWrapper } from "components/ContentCenterWrapper";
-import { Logo } from "components/Logo";
+import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
+import { Logo } from "componentsV0/Logo";
 import { HeroFooter } from "../HeroFooter";
 import { LanguageSelect } from "../LanguageSelect";
 import { SigninSignupForms } from "../SigninSignupForms";
