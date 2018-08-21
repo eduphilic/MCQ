@@ -36,7 +36,12 @@ const Dialog: SFC<Props> = props => {
   }
 
   return (
-    <MuiDialog open={open} fullScreen TransitionComponent={SlideUpTransition}>
+    <MuiDialog
+      open={open}
+      fullScreen
+      scroll="paper"
+      TransitionComponent={SlideUpTransition}
+    >
       {children}
     </MuiDialog>
   );
