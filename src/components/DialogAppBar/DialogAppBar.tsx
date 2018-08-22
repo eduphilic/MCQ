@@ -17,6 +17,9 @@ export type DialogAppBarProps = {
    * @default close
    */
   closeIcon?: "back" | "close";
+
+  /** Called when the close button is clicked. */
+  onCloseButtonClick: () => void;
 };
 
 export const DialogAppBar: SFC<DialogAppBarProps> = props => {
@@ -27,9 +30,9 @@ export const DialogAppBar: SFC<DialogAppBarProps> = props => {
     <StyledDialogTitle>
       <AppBar color="inherit" position="static">
         <Toolbar>
-          <IconButton color="inherit">
+          <CloseButton onClick={onCloseButtonClick}>
             <CloseIconComponent />
-          </IconButton>
+          </CloseButton>
 
           <Typography variant="Subtitle2">{title}</Typography>
         </Toolbar>
@@ -45,9 +48,6 @@ const StyledDialogTitle = styled<{ className?: string }>(
     </DialogTitle>
   ),
 )`
-  padding: 0;
-  z-index: ${({ theme }) => theme.zIndex.appBar};
-`;
   padding: 0;
   z-index: ${({ theme }) => theme.zIndex.appBar};
 `;
