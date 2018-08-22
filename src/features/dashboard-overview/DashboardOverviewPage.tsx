@@ -2,7 +2,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import { CardMobileFlat } from "componentsV0/CardMobileFlat";
 import { SelectedEntries } from "features/subscription-management";
-import React, { SFC } from "react";
+import React, { Component } from "react";
 import { OverviewCard, OverviewCardStat } from "./components/OverviewCard";
 
 import { createEntryCategoryPlaceholders } from "../subscription-management/placeholders/createEntryCategoryPlaceholders";
@@ -13,30 +13,39 @@ const categories = createEntryCategoryPlaceholders();
 // tslint:disable-next-line:no-empty
 const noop = () => {};
 
-export const DashboardOverviewPage: SFC = () => (
-  <>
-    <OverviewCard title="Rank" stats={createPlaceholderStats()} />
+export class DashboardOverviewPage extends Component {
+  render() {
+    return (
+      <>
+        <OverviewCard title="Rank" stats={createPlaceholderStats()} />
 
-    <CardMobileFlat>
-      <CardHeader title="Your Selected Entries" />
-      <CardContent>
-        <SelectedEntries
-          entries={entries}
-          minEntriesCount={2}
-          maxEntriesCount={2}
-          selectedEntryIDs={entries.map(entry => entry.id)}
-          onEntryRemoveButtonClick={noop}
-          onAddMoreButtonClick={noop}
+        <CardMobileFlat>
+          <CardHeader title="Your Selected Entries" />
+          <CardContent>
+            <SelectedEntries
+              entries={entries}
+              minEntriesCount={2}
+              maxEntriesCount={2}
+              selectedEntryIDs={entries.map(entry => entry.id)}
+              onEntryRemoveButtonClick={noop}
+              onAddMoreButtonClick={noop}
+            />
+          </CardContent>
+        </CardMobileFlat>
+
+        <OverviewCard
+          title="Exam Pattern"
+          stats={createPlaceholderExamPatternStats()}
+          onStatValueClick={this.handleStatClick}
         />
-      </CardContent>
-    </CardMobileFlat>
+      </>
+    );
+  }
 
-    <OverviewCard
-      title="Exam Pattern"
-      stats={createPlaceholderExamPatternStats()}
-    />
-  </>
-);
+  private handleStatClick = (_id: string) => {
+    alert(`Clicked ${_id}`);
+  };
+}
 
 const createPlaceholderStats = () => {
   const stats: OverviewCardStat[] = entries.map(
