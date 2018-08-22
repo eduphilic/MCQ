@@ -48,3 +48,21 @@ const StyledDialogTitle = styled<{ className?: string }>(
   padding: 0;
   z-index: ${({ theme }) => theme.zIndex.appBar};
 `;
+  padding: 0;
+  z-index: ${({ theme }) => theme.zIndex.appBar};
+`;
+
+const CloseButton = styled<{ className?: string; onClick: () => void }>(
+  props => (
+    <IconButton
+      className={props.className}
+      color="inherit"
+      onClick={props.onClick}
+    >
+      {props.children}
+    </IconButton>
+  ),
+)`
+  margin-left: -12px;
+  margin-right: 20px;
+`;
