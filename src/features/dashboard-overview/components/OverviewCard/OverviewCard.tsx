@@ -112,6 +112,7 @@ const ValueButton = styled(Button)`
   }
 
   * {
+    /* TODO: Pull this color value from a central location or theme */
     color: #2d9cdb !important;
   }
 `;
