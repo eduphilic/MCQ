@@ -1,4 +1,4 @@
-import { IExamMeta } from "../models/IExamMeta";
+import { IExamMeta } from "features/exam-overview";
 
 export const createExamMetaPlaceholder = (): IExamMeta => ({
   subjects: [

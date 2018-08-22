@@ -1,9 +1,9 @@
+import { IExamMetaSubject } from "features/exam-overview";
 import React, { SFC } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
 import styled from "styled";
 import { createStoreNullError } from "utils";
-import { IExamMetaSubject } from "../../models/IExamMetaSubject";
 
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";

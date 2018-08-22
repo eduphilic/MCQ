@@ -1,9 +1,9 @@
 import { examPaneKeyNodeMap } from "common/structures/examPaneKeyNodeMap";
+import { IExamMeta } from "features/exam-overview";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
 import { actions } from "./actions";
-import { IExamMeta } from "./models/IExamMeta";
 
 import { DashboardColumnContainer } from "componentsV0/DashboardColumnContainer";
 
