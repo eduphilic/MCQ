@@ -3,7 +3,6 @@ import React, { SFC } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
 import styled from "styled";
-import { createStoreNullError } from "utils";
 
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -103,12 +102,9 @@ const ExamOverviewMarkings: SFC<ExamOverviewMarkingsProps> = props => {
 };
 
 const ExamOverviewMarkingsContainer = connect<StateProps, {}, OwnProps, State>(
-  state => {
-    const { examMeta } = state.examTaking;
-    if (!examMeta) throw createStoreNullError("examMeta");
-
-    return { markings: examMeta.markings };
-  },
+  (state: State): StateProps => ({
+    markings: state.examOverview.examMeta.markings,
+  }),
 )(ExamOverviewMarkings);
 
 export { ExamOverviewMarkingsContainer as ExamOverviewMarkings };

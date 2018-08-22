@@ -3,7 +3,6 @@ import React, { SFC } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
 import styled from "styled";
-import { createStoreNullError } from "utils";
 
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -82,12 +81,9 @@ const ExamOverviewBluePrint: SFC<ExamOverviewBluePrintProps> = props => {
 };
 
 const ExamOverviewBluePrintContainer = connect<StateProps, {}, OwnProps, State>(
-  state => {
-    const { examMeta } = state.examTaking;
-    if (!examMeta) throw createStoreNullError("examMeta");
-
-    return { subjects: examMeta.subjects };
-  },
+  (state): StateProps => ({
+    subjects: state.examOverview.examMeta.subjects,
+  }),
 )(ExamOverviewBluePrint);
 
 export { ExamOverviewBluePrintContainer as ExamOverviewBluePrint };

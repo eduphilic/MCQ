@@ -1,5 +1,4 @@
 import { examPaneKeyNodeMap } from "common/structures/examPaneKeyNodeMap";
-import { IExamMeta } from "features/exam-overview";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
@@ -25,7 +24,6 @@ import { examSubmissionSummaryPlaceholderProps } from "./components/ExamSubmissi
 import { ExamTemplate } from "./components/ExamTemplate";
 
 interface StateProps {
-  examMeta: IExamMeta | null;
   showOverviewScreen: boolean;
   showSubmissionSummaryScreen: boolean;
   currentQuestion: number;
@@ -49,13 +47,10 @@ class ExamQuizPage extends Component<ExamQuizPageProps> {
 
   render() {
     const {
-      examMeta,
       showOverviewScreen,
       showSubmissionSummaryScreen,
       currentQuestion,
     } = this.props;
-
-    if (!examMeta) return null;
 
     const paneKeyNodeMap = examPaneKeyNodeMap.map((pane, index) => ({
       key: pane.key,
@@ -130,7 +125,6 @@ const ExamQuizPageContainer = connect<
   State
 >(
   state => ({
-    examMeta: state.examTaking.examMeta,
     showOverviewScreen: state.examTaking.showOverviewScreen,
     showSubmissionSummaryScreen: state.examTaking.showSubmissionSummaryScreen,
     currentQuestion: state.examTaking.currentQuestion,
