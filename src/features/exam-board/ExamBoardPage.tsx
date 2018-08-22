@@ -1,18 +1,13 @@
 import { entryImages } from "common/structures/entryImages";
-import { fromToolbarHeight } from "css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
 import styled from "styled";
 import { actions } from "./actions";
 
-import AppBar from "@material-ui/core/AppBar";
-import IconButton from "@material-ui/core/IconButton";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Close from "@material-ui/icons/Close";
-
 import { Dialog } from "components/Dialog";
+import { DialogAppBar } from "components/DialogAppBar";
+import { DialogContent } from "components/DialogContent";
 import { SubscriptionCard } from "./components/SubscriptionCard";
 
 type StateProps = {
@@ -121,25 +116,12 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
 
         {selectedSubscription !== null && (
           <Dialog variant="fullScreenMobileHidden" open={dialogOpen}>
-            <DialogLayout>
-              <AppBar color="inherit">
-                <Toolbar>
-                  <IconButton
-                    color="inherit"
-                    onClick={this.handleDialogClose}
-                    aria-label="Close"
-                    style={{ marginLeft: -12 }}
-                  >
-                    <Close />
-                  </IconButton>
-                  <Typography variant="title" style={{ fontSize: 18 }}>
-                    {subscriptions[selectedSubscription][1]}
-                  </Typography>
-                </Toolbar>
-              </AppBar>
+            <DialogAppBar
+              title={subscriptions[selectedSubscription][1]}
+              onCloseButtonClick={this.handleDialogClose}
+            />
 
-              <div>{testCards}</div>
-            </DialogLayout>
+            <DialogContent>{testCards}</DialogContent>
           </Dialog>
         )}
       </>
@@ -208,21 +190,5 @@ const TwoColumnWrapper = styled.div`
       display: block;
       padding-left: ${({ theme }) => (theme.spacing.unit * 3) / 2}px;
     }
-  }
-`;
-
-const DialogLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  > div:last-child {
-    ${fromToolbarHeight("margin-top")};
-    padding: ${({ theme }) => theme.spacing.unit * 2}px;
-    overflow: auto;
-  }
-
-  > div:last-child > *:not(:last-child) {
-    margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
   }
 `;
