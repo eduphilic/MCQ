@@ -3,7 +3,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import { CardMobileFlat } from "componentsV0/CardMobileFlat";
 import { SelectedEntries } from "features/subscription-management";
 import React, { SFC } from "react";
-import { OverviewCard } from "./components/OverviewCard";
+import { OverviewCard, OverviewCardStat } from "./components/OverviewCard";
 
 import { createEntryCategoryPlaceholders } from "../subscription-management/placeholders/createEntryCategoryPlaceholders";
 import { createEntryPlaceholders } from "../subscription-management/placeholders/createEntryPlaceholders";
@@ -30,20 +30,38 @@ export const DashboardOverviewPage: SFC = () => (
         />
       </CardContent>
     </CardMobileFlat>
+
+    <OverviewCard
+      title="Exam Pattern"
+      stats={createPlaceholderExamPatternStats()}
+    />
   </>
 );
 
 const createPlaceholderStats = () => {
-  const stats = entries.map((entry, index) => {
-    const category = categories.find(c => c.entryID === entry.id)!;
+  const stats: OverviewCardStat[] = entries.map(
+    (entry, index): OverviewCardStat => {
+      const category = categories.find(c => c.entryID === entry.id)!;
 
-    return {
-      [`${category.title.en} (${entry.title.en})`]: `123/999 (92% from ${5 +
-        index * 3} papers)`,
-    };
-  });
+      const title = `${category.title.en} (${entry.title.en})`;
+      const value = `123/999 (92% from ${5 + index * 3} papers)`;
 
-  return stats.reduce((accumulator, stat) => {
-    return { ...accumulator, ...stat };
-  }, {});
+      return {
+        id: title,
+        title,
+        value,
+      };
+    },
+  );
+
+  return stats;
+};
+
+const createPlaceholderExamPatternStats = () => {
+  const stats = createPlaceholderStats();
+
+  return stats.map(stat => ({
+    ...stat,
+    value: "View",
+  }));
 };

@@ -7,10 +7,16 @@ import { Typography } from "components/Typography";
 import { CardMobileFlat } from "componentsV0/CardMobileFlat";
 import React, { SFC } from "react";
 
+export type OverviewCardStat = {
+  id: string;
+  title: string;
+  value: string;
+};
+
 export type OverviewCardProps = {
   title: string;
 
-  stats: Record<string, string>;
+  stats: OverviewCardStat[];
 };
 
 export const OverviewCard: SFC<OverviewCardProps> = props => {
@@ -23,18 +29,18 @@ export const OverviewCard: SFC<OverviewCardProps> = props => {
       <CardContent>
         <Grid container spacing={16}>
           <Grid item xs={12}>
-            {Object.entries(stats).map(([key, value], index) => (
-              <Grid key={`${key}-${index}`} container spacing={16}>
+            {stats.map((stat, index) => (
+              <Grid key={`${stat.id}-${index}`} container spacing={16}>
                 <Grid item xs={12} md={6}>
-                  <Typography variant="Subtitle2">{key}</Typography>
+                  <Typography variant="Subtitle2">{stat.title}</Typography>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                  <Typography variant="Subtitle2">{value}</Typography>
+                  <Typography variant="Subtitle2">{stat.value}</Typography>
                 </Grid>
 
-                {index < Object.keys(stats).length - 1 && (
+                {index < stats.length - 1 && (
                   <Hidden mdUp>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} style={{ marginBottom: 8 }}>
                       <Divider />
                     </Grid>
                   </Hidden>
