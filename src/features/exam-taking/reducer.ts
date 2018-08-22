@@ -1,16 +1,13 @@
 import { ActionHandler } from "types";
 import { createReducer } from "utils";
 import { Actions, ExamTakingAction } from "./actions";
-import { IExamMeta } from "./models/IExamMeta";
 import { IExamQuestion } from "./models/IExamQuestion";
 import { IExamQuestionCategory } from "./models/IExamQuestionCategory";
 
-import { createExamMetaPlaceholder } from "./placeholders/createExamMetaPlaceholder";
 import { createExamQuestionCategoryPlaceholder } from "./placeholders/createExamQuestionCategoryPlaceholder";
 import { createExamQuestionPlaceholder } from "./placeholders/createExamQuestionPlaceholder";
 
 export interface State {
-  examMeta: IExamMeta | null;
   questions: IExamQuestion[] | null;
   questionCategories: IExamQuestionCategory[] | null;
 
@@ -20,7 +17,6 @@ export interface State {
 }
 
 const initialState: State = {
-  examMeta: null,
   questions: null,
   questionCategories: null,
 
@@ -31,7 +27,6 @@ const initialState: State = {
 
 const loadPlaceholderExam: ActionHandler<State> = state => ({
   ...state,
-  examMeta: createExamMetaPlaceholder(),
   questions: createExamQuestionPlaceholder(),
   questionCategories: createExamQuestionCategoryPlaceholder(),
 });
