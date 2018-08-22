@@ -1,4 +1,4 @@
-export * from "./models/IExamMeta";
-export * from "./models/IExamMetaMarkings";
-export * from "./models/IExamMetaSubject";
+export * from "./components/ExamOverviewBluePrint";
+export * from "./components/ExamOverviewMarkings";
+export * from "./components/ExamOverviewMobile";
 export * from "./reducer";

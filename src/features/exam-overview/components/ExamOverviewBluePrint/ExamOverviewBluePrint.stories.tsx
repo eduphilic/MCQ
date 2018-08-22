@@ -5,7 +5,7 @@ import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 import { PlaceholderProvider } from "store";
 import { ExamOverviewBluePrint } from "./ExamOverviewBluePrint";
 
-const stories = storiesOf("Exam Taking", module);
+const stories = storiesOf("Exam Overview", module);
 
 stories.addDecorator(story => (
   <PlaceholderProvider>{story()}</PlaceholderProvider>

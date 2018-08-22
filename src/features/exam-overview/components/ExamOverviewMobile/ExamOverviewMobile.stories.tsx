@@ -7,7 +7,7 @@ import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 import { PlaceholderProvider } from "store";
 import { ExamOverviewMobile } from "./ExamOverviewMobile";
 
-storiesOf("Exam Taking", module).add("ExamOverviewMobile", () => {
+storiesOf("Exam Overview", module).add("ExamOverviewMobile", () => {
   //
 
   return (

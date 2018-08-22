@@ -1,8 +1,8 @@
-import { IExamMetaMarkings } from "features/exam-overview";
 import React, { SFC } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
 import styled from "styled";
+import { IExamMetaMarkings } from "../../models/IExamMetaMarkings";
 
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
