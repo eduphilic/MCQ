@@ -1,14 +1,18 @@
 import React, { SFC } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
-import styled from "styled";
 import { IExamMetaMarkings } from "../../models/IExamMetaMarkings";
 
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
+import Hidden from "@material-ui/core/Hidden";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 
-import { DashboardColumnContainer } from "componentsV0/DashboardColumnContainer";
+import { DashboardTableRow } from "componentsV0/DashboardTableRow";
 import { Typography } from "componentsV0/Typography";
 
 const titles = [
@@ -20,7 +24,7 @@ const titles = [
   "Marks for wrong answer",
 ];
 
-const stats: (keyof IExamMetaMarkings)[] = [
+const statFieldKeys: (keyof IExamMetaMarkings)[] = [
   "totalMarks",
   "passingMarks",
   "totalTimeMinutes",
@@ -29,30 +33,9 @@ const stats: (keyof IExamMetaMarkings)[] = [
   "marksPerIncorrectAnswer",
 ];
 
-const titleNodes = titles.map(t => (
-  <Typography key={t} variant="buttonBold">
-    {t}
-  </Typography>
-));
-
-interface StateProps {
-  markings: IExamMetaMarkings;
-}
-
-interface OwnProps {
-  /**
-   * Render without wrapping the contents in a Material UI Card component.
-   */
-  noCard?: boolean;
-}
-
-export type ExamOverviewMarkingsProps = StateProps & OwnProps;
-
-const ExamOverviewMarkings: SFC<ExamOverviewMarkingsProps> = props => {
-  const { markings, noCard } = props;
-
-  const statNodes = stats.map(s => {
-    let stat: string | number;
+const renderStats = (markings: IExamMetaMarkings) =>
+  statFieldKeys.map(s => {
+    let stat: string;
 
     switch (s) {
       case "passingMarks":
@@ -73,20 +56,51 @@ const ExamOverviewMarkings: SFC<ExamOverviewMarkingsProps> = props => {
         stat = `-${markings.marksPerIncorrectAnswer} marks`;
         break;
       default:
-        stat = markings[s];
+        stat = markings[s].toString();
     }
 
-    return <TypographySameHeight key={s}>{stat}</TypographySameHeight>;
+    return stat;
   });
 
-  const nodes = [...titleNodes, ...statNodes];
+interface StateProps {
+  markings: IExamMetaMarkings;
+}
+
+interface OwnProps {
+  /**
+   * Render without wrapping the contents in a Material UI Card component.
+   */
+  noCard?: boolean;
+}
+
+export type ExamOverviewMarkingsProps = StateProps & OwnProps;
+
+const ExamOverviewMarkings: SFC<ExamOverviewMarkingsProps> = props => {
+  const { markings, noCard } = props;
+
+  const stats = renderStats(markings);
 
   const contents = (
-    <CardContent>
-      <DashboardColumnContainer interlaced={noCard}>
-        {nodes}
-      </DashboardColumnContainer>
-    </CardContent>
+    <Table>
+      {/* Show a blank table head on desktop so both ExamOverviewMarkings and
+          ExamOverviewBluePrint have the same height header/toolbar. */}
+      <Hidden smDown>
+        <TableHead>
+          <TableRow>
+            <TableCell />
+            <TableCell />
+          </TableRow>
+        </TableHead>
+      </Hidden>
+      <TableBody>
+        {titles.map((title, index) => (
+          <DashboardTableRow key={title}>
+            <TableCell>{titles[index]}</TableCell>
+            <TableCell>{stats[index]}</TableCell>
+          </DashboardTableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 
   if (noCard) return contents;
@@ -108,7 +122,3 @@ const ExamOverviewMarkingsContainer = connect<StateProps, {}, OwnProps, State>(
 )(ExamOverviewMarkings);
 
 export { ExamOverviewMarkingsContainer as ExamOverviewMarkings };
-
-const TypographySameHeight = styled(Typography)`
-  height: 24px;
-`;
