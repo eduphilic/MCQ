@@ -9,6 +9,7 @@ import {
   ExamOverviewMobile,
 } from "features/exam-overview";
 import React, { Component } from "react";
+import styled from "styled";
 
 type State = {
   open: boolean;
@@ -43,7 +44,11 @@ export class ExamOverviewDialog extends Component<{}, State> {
           </Hidden>
 
           <Hidden mdUp>
-            <ExamOverviewMobile />
+            {/* Remove empty space around component due to padding from dialog
+                content component. */}
+            <NegativeHorizontalMarginDiv>
+              <ExamOverviewMobile />
+            </NegativeHorizontalMarginDiv>
           </Hidden>
         </DialogContent>
       </Dialog>
@@ -72,3 +77,7 @@ export class ExamOverviewDialog extends Component<{}, State> {
     });
   };
 }
+
+const NegativeHorizontalMarginDiv = styled.div`
+  margin: -16px -16px;
+`;
