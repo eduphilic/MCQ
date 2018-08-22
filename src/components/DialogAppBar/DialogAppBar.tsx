@@ -2,9 +2,9 @@ import AppBar from "@material-ui/core/AppBar";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import IconButton from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import Close from "@material-ui/icons/Close";
+import { Typography } from "components/Typography";
 import React, { SFC } from "react";
 import styled from "styled";
 
@@ -20,7 +20,7 @@ export type DialogAppBarProps = {
 };
 
 export const DialogAppBar: SFC<DialogAppBarProps> = props => {
-  const { closeIcon = "close", title } = props;
+  const { title, closeIcon = "close", onCloseButtonClick } = props;
   const CloseIconComponent = closeIcon === "close" ? Close : ArrowBack;
 
   return (
@@ -31,7 +31,7 @@ export const DialogAppBar: SFC<DialogAppBarProps> = props => {
             <CloseIconComponent />
           </IconButton>
 
-          <Typography variant="title">{title}</Typography>
+          <Typography variant="Subtitle2">{title}</Typography>
         </Toolbar>
       </AppBar>
     </StyledDialogTitle>
