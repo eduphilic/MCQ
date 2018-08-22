@@ -4,11 +4,8 @@ import styled, { css } from "styled";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 
+import { Card, CardProps } from "components/Card";
 import { Button } from "componentsV0/Button";
-import {
-  CardMobileFlat,
-  CardMobileFlatProps,
-} from "componentsV0/CardMobileFlat";
 import { Typography } from "componentsV0/Typography";
 
 export type DashboardTestCardProps = {
@@ -169,9 +166,8 @@ const AnnotatedText = styled.span`
 `;
 
 const CardWithBackgroundColor = styled<
-  Omit<CardMobileFlatProps, "innerRef"> &
-    Pick<DashboardTestCardProps, "color" | "variant">
->(({ color, variant, ...rest }) => <CardMobileFlat {...rest} />)`
+  CardProps & Pick<DashboardTestCardProps, "color" | "variant">
+>(({ color, variant, ...rest }) => <Card {...rest} />)`
   width: 100%;
   background-color: ${({ color }) => (color === "yellow" ? "#ffcb25" : "#fff")};
 

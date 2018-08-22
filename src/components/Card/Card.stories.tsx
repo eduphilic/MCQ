@@ -1,24 +1,24 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Typography } from "@material-ui/core";
 import CardContent from "@material-ui/core/CardContent";
+import { Typography } from "components/Typography";
 
-import { StorybookContentCenterWrapper } from "../storybook/StorybookContentCenterWrapper";
-import { CardMobileFlat } from "./CardMobileFlat";
+import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
+import { Card } from "./Card";
 
 storiesOf("Components", module)
   .addDecorator(story => (
     <StorybookContentCenterWrapper>{story()}</StorybookContentCenterWrapper>
   ))
-  .add("CardMobileFlat", () => {
+  .add("Card", () => {
     //
 
     return (
-      <CardMobileFlat>
+      <Card>
         <CardContent>
           <Typography color="textSecondary">Word of the Day</Typography>
         </CardContent>
-      </CardMobileFlat>
+      </Card>
     );
   });

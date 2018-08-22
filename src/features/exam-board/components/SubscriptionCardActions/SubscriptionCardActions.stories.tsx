@@ -3,7 +3,7 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React, { cloneElement } from "react";
 
-import { CardMobileFlat } from "componentsV0/CardMobileFlat";
+import { Card } from "components/Card";
 import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
 import { SubscriptionCardActions } from "./SubscriptionCardActions";
 
@@ -27,7 +27,7 @@ storiesOf("Exam Board", module).add("SubscriptionCardActions", () => {
   );
 
   const component = boolean("With Card", true)
-    ? cloneElement(<CardMobileFlat />, undefined, cardActions)
+    ? cloneElement(<Card />, undefined, cardActions)
     : cardActions;
 
   return (

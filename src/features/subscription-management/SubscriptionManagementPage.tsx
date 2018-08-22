@@ -10,7 +10,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Divider from "@material-ui/core/Divider";
 import Hidden from "@material-ui/core/Hidden";
 
-import { CardMobileFlat } from "componentsV0/CardMobileFlat";
+import { Card } from "components/Card";
 import { RupeeFontSpan } from "componentsV0/RupeeFontSpan";
 import { Typography } from "componentsV0/Typography";
 import { TypographyButton } from "componentsV0/TypographyButton";
@@ -214,7 +214,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
     ) : (
       <>
         {entries.length > 0 && (
-          <CardMobileFlat>
+          <Card>
             <CardHeader
               title={
                 <Typography variant="cardTitle">
@@ -234,7 +234,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
                 onAddMoreButtonClick={this.handleAddMoreButtonClick}
               />
             </CardContent>
-          </CardMobileFlat>
+          </Card>
         )}
 
         {this.renderQuantitySelectionCards()}
@@ -257,7 +257,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
       categories.find(c => c.id === subscription.categoryID)!.title;
 
     return (
-      <CardMobileFlat>
+      <Card>
         <CardHeader
           title={
             <Typography variant="cardTitle">Present Subscription</Typography>
@@ -285,7 +285,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
             </Fragment>
           ))}
         </CardContent>
-      </CardMobileFlat>
+      </Card>
     );
   };
 
@@ -301,7 +301,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
       <LocalizationStateConsumer>
         {({ localizationLanguage }) =>
           selectedEntries.map(e => (
-            <CardMobileFlat key={e.id}>
+            <Card key={e.id}>
               <QuantitySelectionCardHeader
                 // Entry title.
                 title={e.title[localizationLanguage] || e.title.en}
@@ -311,7 +311,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
               />
 
               {this.renderQuantitySelectionCardContents(e)}
-            </CardMobileFlat>
+            </Card>
           ))
         }
       </LocalizationStateConsumer>

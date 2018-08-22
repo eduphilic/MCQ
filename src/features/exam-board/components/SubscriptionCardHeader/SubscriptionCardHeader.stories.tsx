@@ -3,13 +3,13 @@ import { storiesOf } from "@storybook/react";
 import { entryImages } from "common/structures/entryImages";
 import React, { cloneElement } from "react";
 
-import { CardMobileFlat } from "componentsV0/CardMobileFlat";
+import { Card } from "components/Card";
 import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
 import { SubscriptionCardHeader } from "./SubscriptionCardHeader";
 
 storiesOf("Exam Board", module).add("SubscriptionCardHeader", () => {
   const withOverline = boolean("With Overline", true);
-  const Card = boolean("With Card", true) ? CardMobileFlat : null;
+  const CardComponent = boolean("With Card", true) ? Card : null;
 
   const component = (
     <SubscriptionCardHeader
@@ -20,8 +20,8 @@ storiesOf("Exam Board", module).add("SubscriptionCardHeader", () => {
     />
   );
 
-  const wrappedComponent = Card
-    ? cloneElement(<Card />, undefined, component)
+  const wrappedComponent = CardComponent
+    ? cloneElement(<CardComponent />, undefined, component)
     : component;
 
   return (

@@ -1,7 +1,7 @@
 import React, { SFC } from "react";
 import styled from "styled";
 
-import { CardMobileFlat } from "componentsV0/CardMobileFlat";
+import { Card } from "components/Card";
 import {
   SubscriptionCardActions,
   SubscriptionCardActionsProps,
@@ -40,9 +40,7 @@ export const SubscriptionCard: SFC<SubscriptionCardProps> = props => {
 };
 
 const StyledCardMobileFlat = styled<{ className?: string; hoverable: boolean }>(
-  ({ className, children }) => (
-    <CardMobileFlat className={className}>{children}</CardMobileFlat>
-  ),
+  ({ className, children }) => <Card className={className}>{children}</Card>,
 )`
   transition: ${({ theme }) =>
     theme.transitions.create("box-shadow", {

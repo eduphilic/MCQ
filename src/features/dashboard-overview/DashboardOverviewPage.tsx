@@ -1,6 +1,6 @@
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
-import { CardMobileFlat } from "componentsV0/CardMobileFlat";
+import { Card } from "components/Card";
 import { SelectedEntries } from "features/subscription-management";
 import React, { Component } from "react";
 import { OverviewCard, OverviewCardStat } from "./components/OverviewCard";
@@ -19,7 +19,7 @@ export class DashboardOverviewPage extends Component {
       <>
         <OverviewCard title="Rank" stats={createPlaceholderStats()} />
 
-        <CardMobileFlat>
+        <Card>
           <CardHeader title="Your Selected Entries" />
           <CardContent>
             <SelectedEntries
@@ -31,7 +31,7 @@ export class DashboardOverviewPage extends Component {
               onAddMoreButtonClick={noop}
             />
           </CardContent>
-        </CardMobileFlat>
+        </Card>
 
         <OverviewCard
           title="Exam Pattern"

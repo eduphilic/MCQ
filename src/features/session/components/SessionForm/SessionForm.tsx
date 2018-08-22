@@ -17,8 +17,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 
+import { Card } from "components/Card";
 import { Button } from "componentsV0/Button";
-import { CardMobileFlat } from "componentsV0/CardMobileFlat";
 import { FormHeader } from "./FormHeader";
 import { PasswordResetLink } from "./PasswordResetLink";
 import { TermsConditionsCheckbox } from "./TermsConditionsCheckbox";
@@ -145,7 +145,7 @@ const SessionForm: SFC<Props> = props => {
         touched,
       }) => (
         <form onSubmit={handleSubmit}>
-          <CardMobileFlat>
+          <Card>
             <CardHeader title={<FormHeader>{formTitle}</FormHeader>} />
 
             <CardContent>
@@ -181,7 +181,7 @@ const SessionForm: SFC<Props> = props => {
                 )}
               </SecondaryActionWrapper>
             </CardActionsMarginBottom>
-          </CardMobileFlat>
+          </Card>
         </form>
       )}
     </Formik>

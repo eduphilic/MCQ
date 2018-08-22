@@ -4,8 +4,8 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
+import { Card } from "components/Card";
 import { Typography } from "components/Typography";
-import { CardMobileFlat } from "componentsV0/CardMobileFlat";
 import React, { SFC } from "react";
 import styled from "styled";
 
@@ -31,7 +31,7 @@ export const OverviewCard: SFC<OverviewCardProps> = props => {
   const { title, stats } = props;
 
   return (
-    <CardMobileFlat>
+    <Card>
       <CardHeader title={title} />
 
       <CardContent>
@@ -58,7 +58,7 @@ export const OverviewCard: SFC<OverviewCardProps> = props => {
           </Grid>
         </Grid>
       </CardContent>
-    </CardMobileFlat>
+    </Card>
   );
 };
 
