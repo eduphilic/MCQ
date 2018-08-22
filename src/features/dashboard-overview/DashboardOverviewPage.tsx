@@ -2,7 +2,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import { Card } from "components/Card";
 import { SelectedEntries } from "features/subscription-management";
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
+import { ExamOverviewDialog } from "./components/ExamOverviewDialog";
 import { OverviewCard, OverviewCardStat } from "./components/OverviewCard";
 
 import { createEntryCategoryPlaceholders } from "../subscription-management/placeholders/createEntryCategoryPlaceholders";
@@ -14,6 +15,8 @@ const categories = createEntryCategoryPlaceholders();
 const noop = () => {};
 
 export class DashboardOverviewPage extends Component {
+  private dialogRef = createRef<ExamOverviewDialog>();
+
   render() {
     return (
       <>
@@ -38,12 +41,16 @@ export class DashboardOverviewPage extends Component {
           stats={createPlaceholderExamPatternStats()}
           onStatValueClick={this.handleStatClick}
         />
+
+        <ExamOverviewDialog ref={this.dialogRef} />
       </>
     );
   }
 
   private handleStatClick = (_id: string) => {
-    alert(`Clicked ${_id}`);
+    if (this.dialogRef.current) {
+      this.dialogRef.current.openDialogForCategory("some-category-id");
+    }
   };
 }
 
