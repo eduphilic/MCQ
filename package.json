@@ -127,7 +127,7 @@
     "prettier": "^1.14.0",
     "react-app-rewire-typescript-babel-preset": "^2.3.0",
     "react-app-rewired": "^2.0.0",
-    "react-docgen-typescript-loader": "^2.1.0",
+    "react-docgen-typescript-loader": "^3.0.0-rc.0",
     "rimraf": "^2.6.2",
     "shx": "^0.3.0",
     "tslint": "^5.10.0",

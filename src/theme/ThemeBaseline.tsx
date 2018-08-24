@@ -29,8 +29,9 @@ export const ThemeBaseline: SFC<{}> = ({ children }) => (
   </CompatibilityFix>
 );
 
-// tslint:disable-next-line:no-unused-expression
-injectGlobal`
+try {
+  // tslint:disable-next-line:no-unused-expression
+  injectGlobal`
 html {
   box-sizing: border-box;
 }
@@ -57,3 +58,6 @@ html, body, #root {
   height: 100%;
 }
 `;
+} catch (e) {
+  //
+}

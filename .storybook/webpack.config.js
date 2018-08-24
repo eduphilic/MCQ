@@ -39,10 +39,6 @@ module.exports = (baseConfig, env, defaultConfig) => {
   // Add loader to add documentation for component props.
   scriptLoader.use.push({
     loader: require.resolve("react-docgen-typescript-loader"),
-    options: {
-      excludes: ["stories\\.tsx$"],
-      includes: ["components.*\\.tsx$"],
-    },
   });
 
   // Remove thread-loader in production to fix issue with continuos
