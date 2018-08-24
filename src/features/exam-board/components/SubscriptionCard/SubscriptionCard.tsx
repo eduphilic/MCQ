@@ -2,6 +2,7 @@ import React, { SFC } from "react";
 import styled from "styled";
 
 import { Card } from "components/Card";
+import { CardHeader, CardHeaderProps } from "components/CardHeader";
 import {
   SubscriptionCardActions,
   SubscriptionCardActionsProps,
@@ -10,14 +11,10 @@ import {
   SubscriptionCardContent,
   SubscriptionCardContentProps,
 } from "../SubscriptionCardContent";
-import {
-  SubscriptionCardHeader,
-  SubscriptionCardHeaderProps,
-} from "../SubscriptionCardHeader";
 
 export type SubscriptionCardProps = SubscriptionCardActionsProps &
   SubscriptionCardContentProps &
-  SubscriptionCardHeaderProps & {
+  CardHeaderProps & {
     /**
      * Called when the top action area (header and content) is clicked. When
      * this callback is provided, the area is clickable and a cursor is applied.
@@ -31,7 +28,7 @@ export const SubscriptionCard: SFC<SubscriptionCardProps> = props => {
   return (
     <StyledCardMobileFlat hoverable={!!onClick}>
       <ActionArea onClick={onClick}>
-        <SubscriptionCardHeader {...rest} />
+        <CardHeader {...rest} />
         <SubscriptionCardContent {...rest} />
       </ActionArea>
       <SubscriptionCardActions {...rest} />

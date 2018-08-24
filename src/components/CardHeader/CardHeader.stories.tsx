@@ -5,18 +5,20 @@ import React, { cloneElement } from "react";
 
 import { Card } from "components/Card";
 import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
-import { SubscriptionCardHeader } from "./SubscriptionCardHeader";
+import { CardHeader } from "./CardHeader";
 
-storiesOf("Exam Board", module).add("SubscriptionCardHeader", () => {
+storiesOf("Components", module).add("CardHeader", () => {
+  const withSubheader = boolean("With Subheader", true);
+  const withImage = boolean("With Image", true);
   const withOverline = boolean("With Overline", true);
   const CardComponent = boolean("With Card", true) ? Card : null;
 
   const component = (
-    <SubscriptionCardHeader
+    <CardHeader
       title="Soldier General Duty"
-      subheader="Validity 31st Jan 2019"
+      subheader={withSubheader ? "Validity 31st Jan 2019" : undefined}
       overline={withOverline ? "10 Mock Tests Set" : undefined}
-      imageUrl={entryImages.AirForce}
+      imageUrl={withImage ? entryImages.AirForce : undefined}
     />
   );
 

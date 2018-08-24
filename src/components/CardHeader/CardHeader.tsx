@@ -4,28 +4,26 @@ import styled from "styled";
 import { Typography } from "components/Typography";
 import { BlockImage } from "componentsV0/BlockImage";
 
-export type SubscriptionCardHeaderProps = {
+export type CardHeaderProps = {
   /** Card title. */
   title: string;
 
   /** Subheader contents. */
-  subheader: string;
+  subheader?: string;
 
   /** Image url. */
-  imageUrl: string;
+  imageUrl?: string;
 
   /** Overline contents. */
   overline?: string;
 };
 
-export const SubscriptionCardHeader: SFC<
-  SubscriptionCardHeaderProps
-> = props => {
+export const CardHeader: SFC<CardHeaderProps> = props => {
   const { title, subheader, imageUrl, overline } = props;
 
   return (
     <Wrapper>
-      <Image src={imageUrl} />
+      {imageUrl && <Image src={imageUrl} />}
 
       <div>
         {overline && <Overline>{overline}</Overline>}
@@ -58,7 +56,7 @@ const Overline = styled<{ className?: string }>(({ children, className }) => (
 `;
 
 const Title = styled<{ className?: string }>(({ children, className }) => (
-  <Typography className={className} variant="H6" paragraph>
+  <Typography className={className} variant="H5" paragraph>
     {children}
   </Typography>
 ))`
