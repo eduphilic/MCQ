@@ -6,7 +6,7 @@ import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 import { TypographyButton } from "componentsV0/TypographyButton";
 import { DashboardFormDialog, DashboardFormDialogFieldConfigs } from ".";
 
-storiesOf("Components", module).add("DashboardFormDialog", () => {
+storiesOf("Components V0", module).add("DashboardFormDialog", () => {
   const onSubmitValue = action("onSubmit");
 
   // Simulate delay from submitting by way of an api call.

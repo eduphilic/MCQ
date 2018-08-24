@@ -4,7 +4,7 @@ import React from "react";
 
 import { SideSheetSearchField } from ".";
 
-storiesOf("Components", module).add("SideSheetSearchField", () => {
+storiesOf("Components V0", module).add("SideSheetSearchField", () => {
   //
 
   return (

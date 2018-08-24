@@ -6,7 +6,7 @@ import { TypographyButton } from "componentsV0/TypographyButton";
 import { TestPreviewDialog } from ".";
 import { createPlaceholderTestPreviewFieldsProp } from "./createPlaceholderTestPreviewFieldsProp";
 
-storiesOf("Components", module)
+storiesOf("Components V0", module)
   .addParameters({
     info: { propTablesExclude: [ContentCenterWrapper, TypographyButton] },
   })

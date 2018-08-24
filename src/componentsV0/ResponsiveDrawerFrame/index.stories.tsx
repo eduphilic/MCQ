@@ -6,7 +6,7 @@ import styled from "styled";
 import { StorybookPlaceholderImage } from "componentsV0/storybook/StorybookPlaceholderImage";
 import { ResponsiveDrawerFrame } from ".";
 
-storiesOf("Components", module)
+storiesOf("Components V0", module)
   .addParameters({ info: { inline: false } })
   .add("ResponsiveDrawerFrame", () => {
     const pageContents: ReactNode[] = [];

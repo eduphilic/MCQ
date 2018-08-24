@@ -4,7 +4,7 @@ import React from "react";
 import { ToolbarAvatar } from ".";
 import placeholderJpg from "./placeholder.jpg";
 
-storiesOf("Components", module).add("ToolbarAvatar", () => {
+storiesOf("Components V0", module).add("ToolbarAvatar", () => {
   const useImage = boolean("Use Image", true);
 
   return (

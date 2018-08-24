@@ -5,7 +5,7 @@ import React from "react";
 import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
 import { DashboardColumnContainer } from ".";
 
-storiesOf("Components", module).add("DashboardColumnContainer", () => {
+storiesOf("Components V0", module).add("DashboardColumnContainer", () => {
   const children = Array.from({ length: 10 }, (_, index) => (
     <div key={index} style={{ width: 200, height: 100 }}>
       Child {index.toString()}

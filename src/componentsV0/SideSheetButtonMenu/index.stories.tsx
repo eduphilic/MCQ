@@ -5,7 +5,7 @@ import React from "react";
 
 import { SideSheetButtonMenu } from ".";
 
-storiesOf("Components", module).add("SideSheetButtonMenu", () => {
+storiesOf("Components V0", module).add("SideSheetButtonMenu", () => {
   //
 
   return (

@@ -10,7 +10,7 @@ const initialValues = {
 
 type Values = typeof initialValues;
 
-storiesOf("Components", module)
+storiesOf("Components V0", module)
   .addParameters({ formik: { initialValues } })
   .add("FormikCheckbox", () => {
     const api = formik<Values>();

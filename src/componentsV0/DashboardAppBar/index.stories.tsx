@@ -12,7 +12,7 @@ import { DashboardAppBar } from ".";
 const history = createMemoryHistory();
 history.push("/admin/dashboard");
 
-storiesOf("Components", module)
+storiesOf("Components V0", module)
   .addDecorator(story => <PlaceholderProvider>{story()}</PlaceholderProvider>)
   .add("DashboardAppBar", () => {
     return (

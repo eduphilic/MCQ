@@ -4,7 +4,7 @@ import React from "react";
 import { FilterButton } from ".";
 import { createPlaceholderFilterButtonProps } from "./createPlaceholderFilterButtonProps";
 
-storiesOf("Components", module).add("FilterButton", () => {
+storiesOf("Components V0", module).add("FilterButton", () => {
   const props = createPlaceholderFilterButtonProps();
 
   return <FilterButton {...props} onChange={action("onChange")} />;

@@ -8,7 +8,7 @@ import { storiesOf } from "@storybook/react";
 import React, { ReactNode } from "react";
 import { DashboardTableRow } from ".";
 
-storiesOf("Components", module).add("DashboardTableRow", () => {
+storiesOf("Components V0", module).add("DashboardTableRow", () => {
   const cells: ReactNode[] = [];
   for (let i = 0; i < 10; i += 1) {
     cells.push(

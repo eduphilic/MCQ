@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import { AdminDashboardTemplate } from "componentsV0/AdminDashboardTemplate";
 
-storiesOf("Components", module).add("SideSheet", () => {
+storiesOf("Components V0", module).add("SideSheet", () => {
   //
 
   return (

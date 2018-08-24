@@ -3,7 +3,7 @@ import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 import React from "react";
 import { OnboardingHeader } from ".";
 
-storiesOf("Components", module).add("OnboardingHeader", () => (
+storiesOf("Components V0", module).add("OnboardingHeader", () => (
   <ContentCenterWrapper>
     <OnboardingHeader
     // logoutButtonProps={{ onClick: action("onLogoutButtonClick") }}

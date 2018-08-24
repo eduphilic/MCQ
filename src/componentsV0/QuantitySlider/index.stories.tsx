@@ -3,7 +3,7 @@ import React from "react";
 import { QuantitySlider } from ".";
 import { createPlaceholderQuantitySliderProps } from "./createPlaceholderQuantitySliderProps";
 
-storiesOf("Components", module).add("QuantitySlider", () => {
+storiesOf("Components V0", module).add("QuantitySlider", () => {
   const props = createPlaceholderQuantitySliderProps();
 
   return (

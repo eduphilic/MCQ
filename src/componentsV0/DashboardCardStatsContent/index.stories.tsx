@@ -2,7 +2,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { DashboardCardStatsContent } from ".";
 
-storiesOf("Components", module).add("DashboardCardStatsContent", () => {
+storiesOf("Components V0", module).add("DashboardCardStatsContent", () => {
   //
 
   return (

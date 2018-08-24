@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { PanelManager } from ".";
 
-storiesOf("Components", module).add("PanelManager", () => {
+storiesOf("Components V0", module).add("PanelManager", () => {
   const numberOpts = {
     max: 5,
     min: 1,

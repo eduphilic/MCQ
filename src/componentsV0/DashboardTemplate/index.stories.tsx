@@ -3,7 +3,7 @@ import React from "react";
 
 import { DashboardTemplate } from ".";
 
-storiesOf("Components", module)
+storiesOf("Components V0", module)
   .addParameters({ info: { inline: false } })
   .add("DashboardTemplate", () => {
     //

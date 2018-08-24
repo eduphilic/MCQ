@@ -5,7 +5,7 @@ import React from "react";
 
 import { Logo } from "./Logo";
 
-storiesOf("Components", module).add("Logo", () => (
+storiesOf("Components V0", module).add("Logo", () => (
   <SplitThemesPreviewer>
     <Logo
       hideTextMobile={boolean("Hide text on mobile", false)}

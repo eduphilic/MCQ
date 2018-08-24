@@ -6,7 +6,7 @@ import { Button, ButtonProps } from ".";
 import { ContentCenterWrapper } from "../ContentCenterWrapper";
 import { Typography } from "../Typography";
 
-storiesOf("Components", module).add("Button", () => (
+storiesOf("Components V0", module).add("Button", () => (
   <Wrapper>
     {/* Colors */}
     {[

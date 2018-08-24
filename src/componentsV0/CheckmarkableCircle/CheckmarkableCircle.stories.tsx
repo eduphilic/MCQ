@@ -7,7 +7,7 @@ import {
   CheckmarkableCircleProps,
 } from "./CheckmarkableCircle";
 
-storiesOf("Components", module).add("CheckmarkableCircle", () => (
+storiesOf("Components V0", module).add("CheckmarkableCircle", () => (
   <CheckmarkableCircle
     checked={boolean("Checked", true)}
     color={

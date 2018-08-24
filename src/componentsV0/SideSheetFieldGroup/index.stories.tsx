@@ -4,7 +4,7 @@ import React from "react";
 import { Typography } from "componentsV0/Typography";
 import { SideSheetFieldGroup } from ".";
 
-storiesOf("Components", module).add("SideSheetFieldGroup", () => {
+storiesOf("Components V0", module).add("SideSheetFieldGroup", () => {
   //
 
   return (

@@ -4,7 +4,7 @@ import React from "react";
 
 import { ToolbarProfileMenu } from ".";
 
-storiesOf("Components", module).add("ToolbarProfileMenu", () => (
+storiesOf("Components V0", module).add("ToolbarProfileMenu", () => (
   <div style={{ display: "flex", padding: 20, backgroundColor: "#eee" }}>
     <div style={{ backgroundColor: "#fff" }}>
       <ToolbarProfileMenu

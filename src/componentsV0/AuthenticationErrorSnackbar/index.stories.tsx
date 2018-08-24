@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { AuthenticationErrorSnackbar } from ".";
 
-storiesOf("Components", module).add("AuthenticationErrorSnackbar", () => {
+storiesOf("Components V0", module).add("AuthenticationErrorSnackbar", () => {
   //
 
   return (

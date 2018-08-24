@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import { AdminDashboardTemplate, AdminDashboardTemplateProps } from ".";
 
-storiesOf("Components", module)
+storiesOf("Components V0", module)
   .addParameters({
     info: { inline: false },
   })

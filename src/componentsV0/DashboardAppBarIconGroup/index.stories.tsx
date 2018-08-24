@@ -9,7 +9,7 @@ import { Button } from "componentsV0/Button";
 import { DashboardAppBarIconStore } from "stores";
 import { DashboardAppBarIconGroup } from ".";
 
-storiesOf("Components", module).add("DashboardAppBarIconGroup", () => {
+storiesOf("Components V0", module).add("DashboardAppBarIconGroup", () => {
   //
   /* tslint:disable-next-line:no-console */
 

@@ -3,7 +3,7 @@ import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 import React from "react";
 import { DashboardEntryCard, DashboardEntryCardProps } from ".";
 
-storiesOf("Components", module).add("DashboardEntryCard", () => {
+storiesOf("Components V0", module).add("DashboardEntryCard", () => {
   const dashboardEntryCardProps: DashboardEntryCardProps = {
     entryTitle: "Army",
     categoryLabels: [

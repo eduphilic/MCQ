@@ -8,7 +8,7 @@ import Add from "@material-ui/icons/Add";
 import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
 import { ResponsiveToolbarTypographyButton } from ".";
 
-storiesOf("Components", module)
+storiesOf("Components V0", module)
   .addParameters({
     info: { propTablesExclude: [StorybookContentCenterWrapper] },
   })

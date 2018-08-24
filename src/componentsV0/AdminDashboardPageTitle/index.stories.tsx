@@ -2,7 +2,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { AdminDashboardPageTitle } from ".";
 
-storiesOf("Components", module).add("AdminDashboardPageTitle", () => {
+storiesOf("Components V0", module).add("AdminDashboardPageTitle", () => {
   //
 
   return (

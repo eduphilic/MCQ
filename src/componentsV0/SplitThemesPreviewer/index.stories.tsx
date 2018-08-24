@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { SplitThemesPreviewer } from ".";
 
-storiesOf("Components", module).add("SplitThemesPreviewer", () => (
+storiesOf("Components V0", module).add("SplitThemesPreviewer", () => (
   <SplitThemesPreviewer>
     <Typography variant="headline">Themed Text</Typography>
   </SplitThemesPreviewer>

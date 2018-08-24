@@ -5,7 +5,7 @@ import { Typography, Variant } from ".";
 
 const variants = Object.values(Variant) as Variant[];
 
-storiesOf("Components", module)
+storiesOf("Components V0", module)
   .addParameters({ info: { propTablesExclude: [Paper] } })
   .add("Typography (old)", () => (
     <Paper style={{ maxWidth: 500, padding: 16, marginLeft: 16 }}>

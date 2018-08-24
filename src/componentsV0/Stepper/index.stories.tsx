@@ -4,7 +4,7 @@ import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 import React from "react";
 import { Stepper } from ".";
 
-storiesOf("Components", module)
+storiesOf("Components V0", module)
   .addParameters({ info: { propTablesExclude: [ContentCenterWrapper as any] } })
   .add("Stepper", () => {
     const labels = ["Select Entry Type", "Select Category", "Plan"];

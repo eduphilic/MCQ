@@ -11,7 +11,7 @@ const initialValues = {
 
 type Values = typeof initialValues;
 
-storiesOf("Components", module)
+storiesOf("Components V0", module)
   .addParameters({ formik: { initialValues } })
   .add("FormikTextFieldTypeAhead", () => {
     const api = formik<Values>();

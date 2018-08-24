@@ -4,7 +4,7 @@ import React from "react";
 import { StorybookPlaceholderImage } from "componentsV0/storybook/StorybookPlaceholderImage";
 import { ContentCenterWrapper } from ".";
 
-storiesOf("Components", module).add("ContentCenterWrapper", () => (
+storiesOf("Components V0", module).add("ContentCenterWrapper", () => (
   <div style={{ height: 500 }}>
     <ContentCenterWrapper>
       <StorybookPlaceholderImage />

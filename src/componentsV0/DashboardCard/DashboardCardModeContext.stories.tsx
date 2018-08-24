@@ -8,7 +8,7 @@ import {
   DashboardCardModeProvider,
 } from "./DashboardCardModeContext";
 
-storiesOf("Components", module)
+storiesOf("Components V0", module)
   .addParameters({ info: { propTablesExclude: [DashboardCardModeConsumer] } })
   .add("DashboardCardModeProvider", () => {
     const itemKeys = array(

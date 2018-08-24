@@ -5,7 +5,7 @@ import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 import React from "react";
 import { PanelBottomButtonNav } from ".";
 
-storiesOf("Components", module).add("PanelBottomButtonNav", () => (
+storiesOf("Components V0", module).add("PanelBottomButtonNav", () => (
   <ContentCenterWrapper>
     <PanelBottomButtonNav
       label={

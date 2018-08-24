@@ -11,7 +11,7 @@ import { DashboardCardColumnType } from "./DashboardCardColumnType";
 import { DashboardCardItem } from "./DashboardCardItem";
 import { DashboardCardPaginationProps } from "./DashboardCardPagination";
 
-storiesOf("Components", module)
+storiesOf("Components V0", module)
   .addParameters({ info: { propTablesExclude: [ContentCenterWrapper] } })
   .add("DashboardCard", () => {
     const items: DashboardCardItem[] = [
