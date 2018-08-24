@@ -1,10 +1,10 @@
 import Button from "@material-ui/core/Button";
 import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import { Card } from "components/Card";
+import { CardHeader } from "components/CardHeader";
 import { Typography } from "components/Typography";
 import React, { SFC } from "react";
 import styled from "styled";
