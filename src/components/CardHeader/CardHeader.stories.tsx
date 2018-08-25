@@ -1,4 +1,4 @@
-import { boolean } from "@storybook/addon-knobs";
+import { boolean, radios } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { entryImages } from "common/structures/entryImages";
 import React, { cloneElement } from "react";
@@ -10,6 +10,11 @@ import { CardHeader } from "./CardHeader";
 storiesOf("Components", module).add("CardHeader", () => {
   const withSubheader = boolean("With Subheader", true);
   const withImage = boolean("With Image", true);
+  const imageSize = radios(
+    "Image Size",
+    { "48": 48 as 48, "80": 80 as 80 },
+    "80",
+  );
   const withOverline = boolean("With Overline", true);
   const CardComponent = boolean("With Card", true) ? Card : null;
 
@@ -19,6 +24,7 @@ storiesOf("Components", module).add("CardHeader", () => {
       subheader={withSubheader ? "Validity 31st Jan 2019" : undefined}
       overline={withOverline ? "10 Mock Tests Set" : undefined}
       imageUrl={withImage ? entryImages.AirForce : undefined}
+      imageSize={imageSize}
     />
   );
 

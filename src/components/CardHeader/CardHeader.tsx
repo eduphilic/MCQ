@@ -1,4 +1,4 @@
-import React, { SFC } from "react";
+import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 
 import { Typography } from "components/Typography";
@@ -6,24 +6,31 @@ import { BlockImage } from "componentsV0/BlockImage";
 
 export type CardHeaderProps = {
   /** Card title. */
-  title: string;
+  title: ReactNode;
 
   /** Subheader contents. */
-  subheader?: string;
+  subheader?: ReactNode;
 
   /** Image url. */
   imageUrl?: string;
+
+  /**
+   * Image size.
+   *
+   * @default 80
+   */
+  imageSize?: 48 | 80;
 
   /** Overline contents. */
   overline?: string;
 };
 
 export const CardHeader: SFC<CardHeaderProps> = props => {
-  const { title, subheader, imageUrl, overline } = props;
+  const { title, subheader, imageUrl, imageSize = 80, overline } = props;
 
   return (
     <Wrapper>
-      {imageUrl && <Image src={imageUrl} />}
+      {imageUrl && <Image src={imageUrl} size={imageSize} />}
 
       <div>
         {overline && <Overline>{overline}</Overline>}
@@ -38,6 +45,7 @@ export const CardHeader: SFC<CardHeaderProps> = props => {
 
 const Wrapper = styled.div`
   display: flex;
+  align-items: center;
   padding: ${({ theme }) => theme.spacing.unit * 2}px;
 
   ${({ theme }) => theme.breakpoints.up("sm")} {
@@ -46,9 +54,11 @@ const Wrapper = styled.div`
   }
 `;
 
-const Image = styled(BlockImage)`
-  width: 80px;
-  height: 80px;
+const Image = styled<{ className?: string; src: string; size: number }>(
+  props => <BlockImage className={props.className} src={props.src} />,
+)`
+  width: ${props => props.size}px;
+  height: ${props => props.size}px;
   margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
