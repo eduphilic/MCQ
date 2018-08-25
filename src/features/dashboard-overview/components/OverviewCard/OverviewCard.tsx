@@ -73,9 +73,8 @@ const renderStatKey = (props: OverviewCardProps, id: string) => {
   }
 
   const keyNode = <Typography variant="Subtitle2">{stat.title}</Typography>;
-  if (!props.onStatValueClick) return keyNode;
 
-  return <VerticallySpacedKeyWrapper>{keyNode}</VerticallySpacedKeyWrapper>;
+  return <RowWrapper>{keyNode}</RowWrapper>;
 };
 
 const renderStatValue = (props: OverviewCardProps, id: string) => {
@@ -86,7 +85,9 @@ const renderStatValue = (props: OverviewCardProps, id: string) => {
 
   const { onStatValueClick } = props;
   const valueNode = <Typography variant="Subtitle2">{stat.value}</Typography>;
-  if (!onStatValueClick) return valueNode;
+  if (!onStatValueClick) {
+    return <RowWrapper>{valueNode}</RowWrapper>;
+  }
 
   return (
     <ValueButton
@@ -99,7 +100,7 @@ const renderStatValue = (props: OverviewCardProps, id: string) => {
   );
 };
 
-const VerticallySpacedKeyWrapper = styled.div`
+const RowWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
