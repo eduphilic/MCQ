@@ -1,9 +1,7 @@
 import { strings } from "features/localization";
 import React, { SFC } from "react";
-import styled from "styled";
 
-import { Typography } from "components/Typography";
-import { BlockImage } from "componentsV0/BlockImage";
+import { CardHeader } from "components/CardHeader";
 import { RupeeFontSpan } from "componentsV0/RupeeFontSpan";
 
 export type QuantitySelectionCardHeaderProps = {
@@ -23,13 +21,10 @@ export const QuantitySelectionCardHeader: SFC<
   const { title, pricePerExamRs, imageUrl } = props;
 
   return (
-    <Wrapper>
-      <Image src={imageUrl} />
-
-      <div>
-        <Title>{title}</Title>
-
-        <Subheader>
+    <CardHeader
+      title={title}
+      subheader={
+        <>
           <RupeeFontSpan>B</RupeeFontSpan>
           &nbsp;
           {pricePerExamRs}
@@ -38,39 +33,10 @@ export const QuantitySelectionCardHeader: SFC<
             "{}",
             "3", // Number of months subscription is valid,
           )}
-        </Subheader>
-      </div>
-    </Wrapper>
+        </>
+      }
+      imageUrl={imageUrl}
+      imageSize={48}
+    />
   );
 };
-
-const Wrapper = styled.div`
-  display: flex;
-  padding: ${({ theme }) => theme.spacing.unit * 2}px;
-`;
-
-const Image = styled(BlockImage)`
-  width: 48px;
-  height: 48px;
-  margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
-`;
-
-const Title = styled<{ className?: string }>(({ children, className }) => (
-  <Typography className={className} variant="H6" paragraph>
-    {children}
-  </Typography>
-))`
-  margin-bottom: 8px;
-  font-weight: 500;
-`;
-
-const Subheader = styled<{ className?: string }>(({ children, className }) => (
-  <Typography
-    className={className}
-    variant="Subtitle2"
-    gutterBottom
-    color="textSecondary"
-  >
-    {children}
-  </Typography>
-))``;
