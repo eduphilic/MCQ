@@ -43,13 +43,13 @@ module.exports = (baseConfig, env, defaultConfig) => {
   const scriptLoaderLoaders = scriptLoader.use;
   scriptLoader.use = undefined;
   scriptLoader.oneOf = [
-    {
-      test: /components.*\.tsx?$/,
-      use: [
-        ...scriptLoaderLoaders,
-        require.resolve("react-docgen-typescript-loader"),
-      ],
-    },
+    // {
+    //   test: /components.*\.tsx?$/,
+    //   use: [
+    //     ...scriptLoaderLoaders,
+    //     require.resolve("react-docgen-typescript-loader"),
+    //   ],
+    // },
     {
       use: scriptLoaderLoaders,
     },
