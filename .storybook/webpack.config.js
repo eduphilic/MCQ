@@ -36,16 +36,24 @@ module.exports = (baseConfig, env, defaultConfig) => {
     "../node_modules/.cache/babel-loader-storybook",
   );
 
-  // Add loader to add documentation for component props.
-  scriptLoader.use.push({
-    loader: require.resolve("react-docgen-typescript-loader"),
-  });
-
-  // Remove thread-loader in production to fix issue with continuos
-  // integration server.
-  // if (env === "PRODUCTION") {
+  // Remove thread-loader to fix issue with continuos integration server.
   scriptLoader.use = scriptLoader.use.filter(l => !/thread\-loader/.test(l));
-  // }
+
+  // Add loader to add documentation for component props.
+  const scriptLoaderLoaders = scriptLoader.use;
+  scriptLoader.use = undefined;
+  scriptLoader.oneOf = [
+    {
+      test: /components.*\.tsx?$/,
+      use: [
+        ...scriptLoaderLoaders,
+        require.resolve("react-docgen-typescript-loader"),
+      ],
+    },
+    {
+      use: scriptLoaderLoaders,
+    },
+  ];
 
   config.module.rules.unshift(scriptLoader);
   config.resolve = rewiredReactScriptsConfig.resolve;
