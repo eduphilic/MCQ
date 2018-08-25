@@ -39,6 +39,11 @@ export const CardHeader: SFC<CardHeaderProps> = props => {
 const Wrapper = styled.div`
   display: flex;
   padding: ${({ theme }) => theme.spacing.unit * 2}px;
+
+  ${({ theme }) => theme.breakpoints.up("sm")} {
+    padding: ${({ theme }) => theme.spacing.unit * 2}px
+      ${({ theme }) => theme.spacing.unit * 3}px;
+  }
 `;
 
 const Image = styled(BlockImage)`
@@ -61,7 +66,6 @@ const Title = styled<{ className?: string }>(({ children, className }) => (
   </Typography>
 ))`
   margin-bottom: 8px;
-  font-weight: 500;
 `;
 
 const Subheader = styled<{ className?: string }>(({ children, className }) => (
