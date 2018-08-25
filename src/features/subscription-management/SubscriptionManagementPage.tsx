@@ -6,11 +6,11 @@ import styled from "styled";
 import { FormState, Page, PropsWithFormState } from "./types";
 
 import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
 import Divider from "@material-ui/core/Divider";
 import Hidden from "@material-ui/core/Hidden";
 
 import { Card } from "components/Card";
+import { CardHeader } from "components/CardHeader";
 import { RupeeFontSpan } from "componentsV0/RupeeFontSpan";
 import { Typography } from "componentsV0/Typography";
 import { TypographyButton } from "componentsV0/TypographyButton";
@@ -217,11 +217,9 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
           <Card>
             <CardHeader
               title={
-                <Typography variant="cardTitle">
-                  {isOnboarding
-                    ? "Your Selected Entries"
-                    : "Subscribe New Categories"}
-                </Typography>
+                isOnboarding
+                  ? "Your Selected Entries"
+                  : "Subscribe New Categories"
               }
             />
             <CardContent>
@@ -258,11 +256,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
 
     return (
       <Card>
-        <CardHeader
-          title={
-            <Typography variant="cardTitle">Present Subscription</Typography>
-          }
-        />
+        <CardHeader title="Present Subscription" />
 
         <CardContent>
           {subscriptions.map((s, index) => (
