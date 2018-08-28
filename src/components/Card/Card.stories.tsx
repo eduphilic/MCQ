@@ -5,6 +5,7 @@ import React from "react";
 import CardContent from "@material-ui/core/CardContent";
 import { Typography } from "components/Typography";
 
+import { CardActionArea } from "components/CardActionArea";
 import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
 import { Card } from "./Card";
 
@@ -17,9 +18,11 @@ storiesOf("Components", module)
 
     return (
       <Card hoverable={boolean("Hoverable", false)}>
-        <CardContent>
-          <Typography color="textSecondary">Word of the Day</Typography>
-        </CardContent>
+        <CardActionArea>
+          <CardContent>
+            <Typography color="textSecondary">Word of the Day</Typography>
+          </CardContent>
+        </CardActionArea>
       </Card>
     );
   });

@@ -1,7 +1,7 @@
 import React, { SFC } from "react";
-import styled from "styled";
 
 import { Card } from "components/Card";
+import { CardActionArea } from "components/CardActionArea";
 import { CardHeader, CardHeaderProps } from "components/CardHeader";
 import {
   SubscriptionCardActions,
@@ -27,15 +27,11 @@ export const SubscriptionCard: SFC<SubscriptionCardProps> = props => {
 
   return (
     <Card hoverable={!!onClick}>
-      <ActionArea onClick={onClick}>
+      <CardActionArea onClick={onClick}>
         <CardHeader {...rest} />
         <SubscriptionCardContent {...rest} />
-      </ActionArea>
+      </CardActionArea>
       <SubscriptionCardActions {...rest} />
     </Card>
   );
 };
-
-const ActionArea = styled.div`
-  ${({ onClick }) => onClick && "cursor: pointer"};
-`;
