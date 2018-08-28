@@ -1,3 +1,4 @@
+import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
@@ -15,7 +16,7 @@ storiesOf("Components", module)
     //
 
     return (
-      <Card>
+      <Card hoverable={boolean("Hoverable", false)}>
         <CardContent>
           <Typography color="textSecondary">Word of the Day</Typography>
         </CardContent>
