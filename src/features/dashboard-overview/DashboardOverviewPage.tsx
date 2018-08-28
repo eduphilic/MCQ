@@ -4,6 +4,7 @@ import { Card } from "components/Card";
 import { SelectedEntries } from "features/subscription-management";
 import React, { Component, createRef } from "react";
 import { ExamOverviewDialog } from "./components/ExamOverviewDialog";
+import { FreeExamCard } from "./components/FreeExamCard";
 import { OverviewCard, OverviewCardStat } from "./components/OverviewCard";
 
 import { createEntryCategoryPlaceholders } from "../subscription-management/placeholders/createEntryCategoryPlaceholders";
@@ -20,6 +21,8 @@ export class DashboardOverviewPage extends Component {
   render() {
     return (
       <>
+        <FreeExamCard />
+
         <OverviewCard title="Rank" stats={createPlaceholderStats()} />
 
         <Card>
