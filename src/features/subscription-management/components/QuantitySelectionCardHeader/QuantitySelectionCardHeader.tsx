@@ -2,7 +2,7 @@ import { strings } from "features/localization";
 import React, { SFC } from "react";
 
 import { CardHeader } from "components/CardHeader";
-import { RupeeFontSpan } from "componentsV0/RupeeFontSpan";
+import { RupeeFontSpan } from "components/RupeeFontSpan";
 
 export type QuantitySelectionCardHeaderProps = {
   /** Card title. */

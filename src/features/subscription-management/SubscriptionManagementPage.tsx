@@ -11,7 +11,7 @@ import Hidden from "@material-ui/core/Hidden";
 
 import { Card } from "components/Card";
 import { CardHeader } from "components/CardHeader";
-import { RupeeFontSpan } from "componentsV0/RupeeFontSpan";
+import { RupeeFontSpan } from "components/RupeeFontSpan";
 import { Typography } from "componentsV0/Typography";
 import { TypographyButton } from "componentsV0/TypographyButton";
 import {
