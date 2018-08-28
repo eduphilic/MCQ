@@ -1,9 +1,9 @@
 import Button from "@material-ui/core/Button";
-import CardContent from "@material-ui/core/CardContent";
-import Divider from "@material-ui/core/Divider";
-import Grid from "@material-ui/core/Grid";
-import Hidden from "@material-ui/core/Hidden";
 import { Card } from "components/Card";
+import {
+  CardDualColumnsTextContent,
+  CardDualColumnsTextContentRow,
+} from "components/CardDualColumnsTextContent";
 import { CardHeader } from "components/CardHeader";
 import { Typography } from "components/Typography";
 import React, { SFC } from "react";
@@ -28,84 +28,34 @@ export type OverviewCardProps = {
 };
 
 export const OverviewCard: SFC<OverviewCardProps> = props => {
-  const { title, stats } = props;
+  const { title, stats, onStatValueClick } = props;
+
+  const rows = stats.map(
+    (stat): CardDualColumnsTextContentRow => ({
+      id: stat.id,
+      leftNode: <Typography variant="Subtitle2">{stat.title}</Typography>,
+      rightNode: onStatValueClick ? (
+        <ValueButton
+          size="small"
+          classes={{ label: "label" }}
+          onClick={() => onStatValueClick(stat.id)}
+        >
+          <Typography variant="Subtitle2">{stat.value}</Typography>
+        </ValueButton>
+      ) : (
+        <Typography variant="Subtitle2">{stat.value}</Typography>
+      ),
+    }),
+  );
 
   return (
     <Card>
       <CardHeader title={title} />
 
-      <CardContent>
-        <Grid container spacing={16}>
-          <Grid item xs={12}>
-            {stats.map((stat, index) => (
-              <Grid key={`${stat.id}-${index}`} container spacing={16}>
-                <Grid item xs={12} md={6}>
-                  {renderStatKey(props, stat.id)}
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  {renderStatValue(props, stat.id)}
-                </Grid>
-
-                {index < stats.length - 1 && (
-                  <Hidden mdUp>
-                    <Grid item xs={12} style={{ marginBottom: 8 }}>
-                      <Divider />
-                    </Grid>
-                  </Hidden>
-                )}
-              </Grid>
-            ))}
-          </Grid>
-        </Grid>
-      </CardContent>
+      <CardDualColumnsTextContent rows={rows} />
     </Card>
   );
 };
-
-/**
- * Align the stat key with the stat value. The stat value button is 32px. If
- * the stat value is not-clickable, do nothing special.
- */
-const renderStatKey = (props: OverviewCardProps, id: string) => {
-  const stat = props.stats.find(s => s.id === id);
-  if (!stat) {
-    throw new Error("Could not find stat corresponding to supplied id.");
-  }
-
-  const keyNode = <Typography variant="Subtitle2">{stat.title}</Typography>;
-
-  return <RowWrapper>{keyNode}</RowWrapper>;
-};
-
-const renderStatValue = (props: OverviewCardProps, id: string) => {
-  const stat = props.stats.find(s => s.id === id);
-  if (!stat) {
-    throw new Error("Could not find stat corresponding to supplied id.");
-  }
-
-  const { onStatValueClick } = props;
-  const valueNode = <Typography variant="Subtitle2">{stat.value}</Typography>;
-  if (!onStatValueClick) {
-    return <RowWrapper>{valueNode}</RowWrapper>;
-  }
-
-  return (
-    <ValueButton
-      size="small"
-      classes={{ label: "label" }}
-      onClick={() => onStatValueClick(id)}
-    >
-      {valueNode}
-    </ValueButton>
-  );
-};
-
-const RowWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  min-height: 32px;
-`;
 
 const ValueButton = styled(Button)`
   & > .label {
