@@ -26,38 +26,15 @@ export const SubscriptionCard: SFC<SubscriptionCardProps> = props => {
   const { onClick, ...rest } = props;
 
   return (
-    <StyledCardMobileFlat hoverable={!!onClick}>
+    <Card hoverable={!!onClick}>
       <ActionArea onClick={onClick}>
         <CardHeader {...rest} />
         <SubscriptionCardContent {...rest} />
       </ActionArea>
       <SubscriptionCardActions {...rest} />
-    </StyledCardMobileFlat>
+    </Card>
   );
 };
-
-const StyledCardMobileFlat = styled<{ className?: string; hoverable: boolean }>(
-  ({ className, children }) => <Card className={className}>{children}</Card>,
-)`
-  transition: ${({ theme }) =>
-    theme.transitions.create("box-shadow", {
-      duration: theme.transitions.duration.short,
-    })};
-
-  ${({ hoverable, theme }) =>
-    hoverable &&
-    `
-      &:hover {
-        box-shadow: ${theme.shadows[2]};
-      }
-
-      ${theme.breakpoints.up("md")} {
-        &:hover {
-          box-shadow: ${theme.shadows[4]};
-        }
-      }
-    `};
-`;
 
 const ActionArea = styled.div`
   ${({ onClick }) => onClick && "cursor: pointer"};
