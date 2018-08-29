@@ -4,7 +4,8 @@ import lodashPick from "lodash.pick";
 import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 
-import { Typography } from "componentsV0/Typography";
+import { Typography } from "components/Typography";
+import { Typography as TypographyV0 } from "componentsV0/Typography";
 import { TypographyButton } from "componentsV0/TypographyButton";
 
 export interface ExamStats {
@@ -12,7 +13,7 @@ export interface ExamStats {
   notAnsweredCount: number;
   markedForReviewCount: number;
   notVisitedCount: number;
-  timeTakenMinutes: number;
+  // timeTakenMinutes: number;
   answeredCount: number;
 }
 
@@ -23,34 +24,38 @@ const examStatLabels: Record<keyof ExamStats, string> = {
   notAnsweredCount: "Not Answered",
   markedForReviewCount: "Marked for Review",
   notVisitedCount: "Not Visited",
-  timeTakenMinutes: "Time Taken",
+  // timeTakenMinutes: "Time Taken",
   answeredCount: "Answered",
 };
 
 export const ExamSubmissionSummary: SFC<ExamSubmissionSummaryProps> = props => {
-  const stats = statsFromProps(props);
+  const { totalQuestionsCount, ...stats } = statsFromProps(props);
   // const rest = propsWithoutStats(props);
 
   return (
     <Wrapper>
-      <Typography variant="examTitle">Submission</Typography>
+      <TypographyV0 variant="examTitle">Submission</TypographyV0>
+
+      <Typography variant="H5">
+        Total number of Questions: <strong>{totalQuestionsCount}</strong>
+      </Typography>
 
       {mapStats(stats, (key, value) => (
         <StatWrapper key={key}>
-          <Typography variant="examTitle">{examStatLabels[key]}</Typography>
+          <TypographyV0 variant="examTitle">{examStatLabels[key]}</TypographyV0>
 
-          <Typography variant="examTitle">{value}</Typography>
+          <TypographyV0 variant="examTitle">{value}</TypographyV0>
         </StatWrapper>
       ))}
 
       <QuestionAndButtonsWrapper
         questionNode={
-          <Typography
+          <TypographyV0
             variant="examTitle"
             muiTypographyProps={{ color: "error" }}
           >
             Are you sure you want to submit?
-          </Typography>
+          </TypographyV0>
         }
         buttonsNode={
           <>
@@ -153,7 +158,7 @@ const statsFromProps = (props: ExamSubmissionSummaryProps): ExamStats =>
 // } => lodashOmit(props, statKeys);
 
 const mapStats = (
-  stats: ExamStats,
+  stats: Omit<ExamStats, "totalQuestionsCount">,
   predicate: (key: keyof ExamStats, value: number) => ReactNode,
 ) =>
   Object.entries(stats).map(([key, value]) =>

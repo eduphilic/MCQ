@@ -5,6 +5,6 @@ export const examSubmissionSummaryPlaceholderProps: ExamSubmissionSummaryProps =
   notAnsweredCount: 50,
   markedForReviewCount: 20,
   notVisitedCount: 80,
-  timeTakenMinutes: 40,
+  // timeTakenMinutes: 40,
   answeredCount: 50,
 };
