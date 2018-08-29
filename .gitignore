@@ -13,3 +13,7 @@ dist/
 
 # Microsoft Office
 ~$*.*
+
+# Yalc
+.yalc/
+yalc.lock
