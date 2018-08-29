@@ -67,6 +67,9 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
           Remaining: "08 Tests",
         }}
         onClick={() => this.handleSubscriptionClick(index)}
+        onAttemptButtonClick={index < 2 ? () => alert("Attempt") : undefined}
+        onReviseButtonClick={index === 1 ? () => alert("Revise") : undefined}
+        showDisabledExpiredButton={index === 2}
       />
     ));
 
