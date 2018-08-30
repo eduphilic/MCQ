@@ -1,5 +1,5 @@
 import { entryImages } from "common/structures/entryImages";
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
 import styled from "styled";
@@ -8,6 +8,7 @@ import { actions } from "./actions";
 import { Dialog } from "components/Dialog";
 import { DialogAppBar } from "components/DialogAppBar";
 import { DialogContent } from "components/DialogContent";
+import { ExamReviewDialog } from "features/exam-review";
 import { SubscriptionCard } from "./components/SubscriptionCard";
 
 type StateProps = {
@@ -33,6 +34,8 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
     selectedSubscription: null,
     dialogOpen: false,
   };
+
+  private examReviewDialog = createRef<ExamReviewDialog>();
 
   componentDidMount() {
     const { /* loading, */ loaded, fetchExamReviewData } = this.props;
@@ -68,7 +71,12 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
         }}
         onClick={() => this.handleSubscriptionClick(index)}
         onAttemptButtonClick={index < 2 ? () => alert("Attempt") : undefined}
-        onReviseButtonClick={index === 1 ? () => alert("Revise") : undefined}
+        onReviseButtonClick={
+          index === 1
+            ? () =>
+                this.examReviewDialog.current!.openDialogForExam() /* () => alert("Revise") */
+            : undefined
+        }
         showDisabledExpiredButton={index === 2}
       />
     ));
@@ -94,7 +102,8 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
                 onReviseButtonClick={
                   index === 0
                     ? this.createDialogCloseHandlerWrapper(() =>
-                        alert(`Revise: ${title}`),
+                        // alert(`Revise: ${title}`),
+                        this.examReviewDialog.current!.openDialogForExam(),
                       )
                     : undefined
                 }
@@ -127,6 +136,8 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
             <DialogContent>{testCards}</DialogContent>
           </Dialog>
         )}
+
+        <ExamReviewDialog ref={this.examReviewDialog} />
       </>
     );
   }
