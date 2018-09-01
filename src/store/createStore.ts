@@ -1,8 +1,8 @@
 import { createStore as createReduxStore, Store } from "redux";
 import { createEnhancerDevTools } from "./createEnhancerDevTools";
-import { rootReducer, State } from "./rootReducer";
+import { rootReducer, State as BaseState } from "./rootReducer";
 
-export { State };
+export type State = BaseState;
 
 // Hold reference to store here to prevent error from react-hot-loader and Redux
 // about the store being replaced.

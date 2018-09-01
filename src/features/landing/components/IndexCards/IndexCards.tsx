@@ -22,7 +22,7 @@ type DispatchProps = {
 };
 
 type OwnProps = {};
-export { OwnProps as IndexCardsProps };
+export type IndexCardsProps = OwnProps;
 
 type Props = StateProps & DispatchProps & OwnProps;
 

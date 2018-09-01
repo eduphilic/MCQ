@@ -3,7 +3,7 @@ import { Component } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
 type Props = RouteComponentProps<{}>;
-export { Props as PersistentScrollPositionProps };
+export type PersistentScrollPositionProps = Props;
 
 type State = {
   previousLocation: Location | null;

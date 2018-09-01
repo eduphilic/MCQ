@@ -1,3 +1,6 @@
-import CardContent, { CardContentProps } from "@material-ui/core/CardContent";
+import CardContent, {
+  CardContentProps as MuiCardContentProps,
+} from "@material-ui/core/CardContent";
 
-export { CardContent, CardContentProps };
+export { CardContent };
+export type CardContentProps = MuiCardContentProps;

@@ -31,7 +31,7 @@ type DispatchProps = {
 };
 
 type OwnProps = {};
-export { OwnProps as ExamAppBarMobileProps };
+export type ExamAppBarMobileProps = OwnProps;
 
 type Props = StateProps & DispatchProps & OwnProps;
 

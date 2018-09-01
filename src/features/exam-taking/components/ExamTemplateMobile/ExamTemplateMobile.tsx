@@ -26,7 +26,7 @@ type OwnProps = {
    */
   paneKeyNodeMap: { key: string; node: ReactNode }[];
 };
-export { OwnProps as ExamTemplateMobileProps };
+export type ExamTemplateMobileProps = OwnProps;
 
 type Props = StateProps & DispatchProps & OwnProps;
 

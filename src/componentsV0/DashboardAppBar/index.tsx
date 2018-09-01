@@ -34,7 +34,7 @@ type OwnProps = {
    */
   actionButtonElements?: ReactElement<any>[];
 };
-export { OwnProps as DashboardAppBarProps };
+export type DashboardAppBarProps = OwnProps;
 
 type Props = StateProps & OwnProps;
 

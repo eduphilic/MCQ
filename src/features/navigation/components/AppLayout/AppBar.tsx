@@ -17,7 +17,7 @@ type StateProps = {
 };
 
 type OwnProps = {};
-export { OwnProps as AppBarProps };
+export type AppBarProps = OwnProps;
 
 type Props = StateProps & OwnProps;
 

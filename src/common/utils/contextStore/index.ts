@@ -1,3 +1,7 @@
 export { createStore } from "./createStore";
-export { ActionsType } from "./ActionsType";
-export { ContextValue } from "./ContextValue";
+
+import { ActionsType as BaseActionsType } from "./ActionsType";
+export type ActionsType<S> = BaseActionsType<S>;
+
+import { ContextValue as BaseContextValue } from "./ContextValue";
+export type ContextValue<S, A extends ActionsType<S>> = BaseContextValue<S, A>;

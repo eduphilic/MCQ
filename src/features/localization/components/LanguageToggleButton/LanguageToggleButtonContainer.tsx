@@ -19,7 +19,7 @@ type DispatchProps = {
 };
 
 type OwnProps = {};
-export { OwnProps as LanguageToggleButtonProps };
+export type LanguageToggleButtonProps = OwnProps;
 
 type LanguageToggleButtonContainerProps = StateProps & DispatchProps & OwnProps;
 

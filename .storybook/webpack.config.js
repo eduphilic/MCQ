@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @ts-ignore
 const path = require("path");
 
 const reactAppRewired = require("react-app-rewired");

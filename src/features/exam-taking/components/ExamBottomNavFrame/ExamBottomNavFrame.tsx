@@ -23,7 +23,7 @@ type DispatchProps = {
 };
 
 type OwnProps = {};
-export { OwnProps as ExamBottomNavFrameProps };
+export type ExamBottomNavFrameProps = OwnProps;
 
 type Props = StateProps & DispatchProps & OwnProps;
 

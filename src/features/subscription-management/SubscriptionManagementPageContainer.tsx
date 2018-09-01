@@ -9,7 +9,7 @@ import { DispatchProps, FormState, OwnProps, Props, StateProps } from "./types";
 
 import { SubscriptionManagementPage } from "./SubscriptionManagementPage";
 
-export { OwnProps as SubscriptionManagementPageProps };
+export type SubscriptionManagementPageProps = OwnProps;
 
 const initialFormState: FormState = {
   selectedEntryIDs: [],

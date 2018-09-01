@@ -7,7 +7,7 @@ import styled, { css } from "styled";
 type OwnProps = {
   children: ReactNode;
 };
-export { OwnProps as TourPortalContentsProps };
+export type TourPortalContentsProps = OwnProps;
 
 type Props = OwnProps & RouteComponentProps<{}>;
 

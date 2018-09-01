@@ -27,7 +27,7 @@ import { TextField, TextFieldProps } from "./TextField";
 type OwnProps = {
   type: FormType;
 };
-export { OwnProps as SessionFormProps };
+export type SessionFormProps = OwnProps;
 
 type DispatchProps = {
   onUserSigninSubmit: (phoneNumber: string, password: string) => any;

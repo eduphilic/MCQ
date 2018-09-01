@@ -1,6 +1,6 @@
 // tslint:disable-next-line:import-name
 import MuiDialogContent, {
-  DialogContentProps,
+  DialogContentProps as MuiDialogContentProps,
 } from "@material-ui/core/DialogContent";
 import styled from "styled";
 
@@ -12,4 +12,4 @@ export const DialogContent = styled(MuiDialogContent)`
   }
 `;
 
-export { DialogContentProps };
+export type DialogContentProps = MuiDialogContentProps;

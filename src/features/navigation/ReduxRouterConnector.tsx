@@ -15,7 +15,7 @@ type DispatchProps = {
 };
 
 type OwnProps = {};
-export { OwnProps as ReduxRouterConnectorProps };
+export type ReduxRouterConnectorProps = OwnProps;
 
 type Props = StateProps & DispatchProps & RouteComponentProps<{}> & OwnProps;
 

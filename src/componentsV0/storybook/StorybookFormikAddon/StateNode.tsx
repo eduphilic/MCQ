@@ -6,7 +6,7 @@ type Props = {
   name: string;
   depth?: number;
 };
-export { Props as StateNodeProps };
+export type StateNodeProps = Props;
 
 type State = {
   expanded: boolean;

@@ -6,7 +6,7 @@ import { Component, ConsumerProps } from "react";
 import { createPortal } from "react-dom";
 
 type OwnProps = ConsumerProps<{ closeModal: () => void }>;
-export { OwnProps as TourPortalProps };
+export type TourPortalProps = OwnProps;
 
 type State = {
   portalElement: HTMLDivElement | null;

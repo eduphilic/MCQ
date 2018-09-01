@@ -24,7 +24,7 @@ type StateProps = {
 };
 
 type OwnProps = ExamTemplateMobileProps;
-export { OwnProps as ExamTemplateProps };
+export type ExamTemplateProps = OwnProps;
 
 type Props = StateProps & WithWidthProps & OwnProps;
 

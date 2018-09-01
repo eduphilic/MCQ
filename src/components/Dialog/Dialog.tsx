@@ -23,7 +23,7 @@ type OwnProps = {
    */
   variant: keyof typeof DialogVariant;
 };
-export { OwnProps as DialogProps };
+export type DialogProps = OwnProps;
 
 type Props = WithWidthProps & OwnProps;
 

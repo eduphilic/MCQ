@@ -15,7 +15,7 @@ import { Typography } from "componentsV0/Typography";
 import { TypographyButton } from "componentsV0/TypographyButton";
 
 type OwnProps = {};
-export { OwnProps as PostSignupDialogsProps };
+export type PostSignupDialogsProps = OwnProps;
 
 type DispatchProps = {
   onSubmit: () => any;

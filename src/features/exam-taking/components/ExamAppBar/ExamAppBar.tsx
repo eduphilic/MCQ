@@ -22,7 +22,7 @@ type DispatchProps = {
 };
 
 type OwnProps = {};
-export { OwnProps as ExamAppBarProps };
+export type ExamAppBarProps = OwnProps;
 
 type Props = StateProps & DispatchProps & OwnProps;
 

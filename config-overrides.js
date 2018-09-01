@@ -29,17 +29,6 @@ module.exports = {
       rewiredConfig = rewireTSLint(rewiredConfig);
     }
 
-    // // Ignore Storybook stories to improve performance.
-    // const babelLoader = getLoader(
-    //   rewiredConfig.module.rules,
-    //   rule =>
-    //     rule.test &&
-    //     Array.isArray(rule.use) &&
-    //     rule.use.find(r => r.loader && /babel-loader/.test(r.loader)),
-    // );
-    // console.log(babelLoader);
-    // process.exit(0);
-
     // Add Styled Components Babel Plugin
     rewiredConfig = injectBabelPlugin(
       ["babel-plugin-styled-components", { ssr: true }],
@@ -57,11 +46,6 @@ module.exports = {
     rewiredConfig.resolve = rewiredConfig.resolve || {};
     rewiredConfig.resolve.modules = rewiredConfig.resolve.modules || [];
     rewiredConfig.resolve.modules.push(path.join(__dirname, "src"));
-
-    // TODO: Remove once issue with rewire and CRA is resolved.
-    // See: https://github.com/strothj/react-app-rewire-typescript-babel-preset/issues/15
-    // @ts-ignore
-    rewiredConfig.module.strictExportPresence = false;
 
     return rewiredConfig;
   },

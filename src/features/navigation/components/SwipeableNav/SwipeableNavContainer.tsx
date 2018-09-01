@@ -7,7 +7,7 @@ import { SwipeableNav } from "./SwipeableNav";
 type OwnProps = {
   links: INavigationLink[];
 };
-export { OwnProps as SwipeableNavProps };
+export type SwipeableNavProps = OwnProps;
 
 type Props = RouteComponentProps<{}> & OwnProps;
 

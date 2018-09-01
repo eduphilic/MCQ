@@ -1,3 +1,5 @@
 export { ThemeBaseline } from "./ThemeBaseline";
 export * from "./themeProviders";
-export { Theme } from "./themes";
+
+import { Theme as BaseTheme } from "./themes";
+export type Theme = BaseTheme;

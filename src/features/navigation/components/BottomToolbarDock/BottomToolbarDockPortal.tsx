@@ -15,7 +15,7 @@ type OwnProps = {
 
   NonPortalWrapperComponent: ComponentType<any>;
 };
-export { OwnProps as BottomToolbarDockPortalProps };
+export type BottomToolbarDockPortalProps = OwnProps;
 
 type Props = RouteComponentProps<{}> & OwnProps;
 
