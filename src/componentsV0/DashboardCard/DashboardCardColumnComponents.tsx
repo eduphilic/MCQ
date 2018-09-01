@@ -1,7 +1,7 @@
 import React, { cloneElement, SFC } from "react";
 import styled from "styled";
 
-import Switch from "@material-ui/core/Switch";
+import Switch, { SwitchProps } from "@material-ui/core/Switch";
 import Tooltip from "@material-ui/core/Tooltip";
 
 import { ResponsiveToolbarTypographyButton } from "componentsV0/ResponsiveToolbarTypographyButton";
@@ -55,14 +55,13 @@ export const ColumnItemSingleLine: ColumnItemComponent = ({ itemColumn }) => (
   <Typography>{itemColumn.primaryText}</Typography>
 );
 
-const StyledSwitch = styled(Switch).attrs({
-  classes: {
-    bar: "bar",
-    checked: "checked",
-    disabled: "disabled",
-  },
-  color: "primary",
-})`
+const StyledSwitch = styled<SwitchProps>(props => (
+  <Switch
+    color="primary"
+    classes={{ bar: "bar", checked: "checked", disabled: "disabled" }}
+    {...props}
+  />
+))`
   .disabled {
     color: ${({ theme }) => theme.palette.grey[50]};
   }

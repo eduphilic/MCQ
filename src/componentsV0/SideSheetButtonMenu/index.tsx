@@ -6,7 +6,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 
 import { Typography } from "componentsV0/Typography";
-import { TypographyButton } from "componentsV0/TypographyButton";
+import {
+  TypographyButton,
+  TypographyButtonProps,
+} from "componentsV0/TypographyButton";
 
 export interface SideSheetButtonMenuProps {
   /**
@@ -68,7 +71,8 @@ export class SideSheetButtonMenu extends Component<
 
     return (
       <>
-        <ButtonFullWidth variant="flat" onClick={this.handleButtonClick}>
+        {/* TODO: Fix this type definition: */}
+        <ButtonFullWidth {...{ onClick: this.handleButtonClick }}>
           {value}
           <PositionedDropDownArrow />
         </ButtonFullWidth>
@@ -92,7 +96,7 @@ export class SideSheetButtonMenu extends Component<
   }
 }
 
-const ButtonFullWidth = styled(TypographyButton).attrs({
+const ButtonFullWidth = styled<TypographyButtonProps>(TypographyButton).attrs({
   variant: "flat",
 })`
   width: 100%;

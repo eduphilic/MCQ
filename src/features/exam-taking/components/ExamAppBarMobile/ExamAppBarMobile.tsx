@@ -15,7 +15,10 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Language from "@material-ui/icons/Language";
 
 import { Typography } from "componentsV0/Typography";
-import { TypographyButton } from "componentsV0/TypographyButton";
+import {
+  TypographyButton,
+  TypographyButtonProps,
+} from "componentsV0/TypographyButton";
 
 import { ExamAppBarTimer } from "../ExamAppBarTimer";
 import { ExamQuestionPalettePopup } from "./ExamQuestionPalettePopup";
@@ -63,14 +66,15 @@ const ExamAppBarMobile: SFC<Props> = props => {
 
           <IconButtonGroup position="right">
             {showStartExamButton && (
-              <StartExamButton onClick={onStartExamButtonClick}>
+              // TODO: Fix this type definition:
+              <StartExamButton {...{ onClick: onStartExamButtonClick }}>
                 Start Exam
               </StartExamButton>
             )}
 
             {!showStartExamButton &&
               !showSubmissionSummaryScreen && (
-                <SubmitExamButton onClick={onSubmitButtonClick}>
+                <SubmitExamButton {...{ onClick: onSubmitButtonClick }}>
                   Submit Exam
                 </SubmitExamButton>
               )}
@@ -168,7 +172,10 @@ const StartExamButton = styled(TypographyButton).attrs({
   padding: 0;
 `;
 
-const SubmitExamButton = styled(StartExamButton).attrs({
+// TODO: Fix this type definition:
+const SubmitExamButton = styled<TypographyButtonProps>(
+  StartExamButton as any,
+).attrs({
   color: "orange",
   variant: "flat",
 })``;
