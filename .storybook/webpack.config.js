@@ -7,6 +7,9 @@ const reactScriptsConfig = require(path.join(
   reactAppRewired.paths.scriptVersion,
   "config/webpack.config.dev",
 ));
+const {
+  getLanguageServiceInstance,
+} = require("react-docgen-typescript-language-service");
 
 module.exports = (baseConfig, env, defaultConfig) => {
   // Retrieve the Webpack config from Create React App with the modifications
@@ -47,7 +50,12 @@ module.exports = (baseConfig, env, defaultConfig) => {
       test: /components.*\.tsx?$/,
       use: [
         ...scriptLoaderLoaders,
-        require.resolve("react-docgen-typescript-loader"),
+        {
+          loader: require.resolve("react-docgen-typescript-loader"),
+          options: {
+            experimentalLanguageServiceProvider: getLanguageServiceInstance,
+          },
+        },
       ],
     },
     {
