@@ -1,10 +1,7 @@
 import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 
-import withWidth, {
-  isWidthUp,
-  WithWidthProps,
-} from "@material-ui/core/withWidth";
+import withWidth, { isWidthUp, WithWidth } from "@material-ui/core/withWidth";
 
 import { BlockImage } from "componentsV0/BlockImage";
 
@@ -31,7 +28,7 @@ export interface ExamContentsProps {
   questionImageUrl?: string;
 }
 
-const ExamContents: SFC<ExamContentsProps & WithWidthProps> = props => {
+const ExamContents: SFC<ExamContentsProps & WithWidth> = props => {
   const {
     orientation = "horizontal",
     width,

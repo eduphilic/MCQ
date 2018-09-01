@@ -604,7 +604,7 @@
     "@babel/helper-plugin-utils" "7.0.0-beta.55"
     "@babel/plugin-transform-typescript" "7.0.0-beta.55"
 
-"@babel/runtime@7.0.0-beta.42", "@babel/runtime@7.0.0-beta.46", "@babel/runtime@7.0.0-beta.55", "@babel/runtime@^7.0.0-beta.42", "@babel/runtime@^7.0.0-beta.47", "@babel/runtime@^7.0.0-beta.55", "@babel/runtime@^7.0.0-rc.1", "@babel/runtime@^7.0.0-rc.2":
+"@babel/runtime@7.0.0", "@babel/runtime@7.0.0-beta.42", "@babel/runtime@7.0.0-beta.46", "@babel/runtime@7.0.0-beta.55", "@babel/runtime@^7.0.0", "@babel/runtime@^7.0.0-beta.42", "@babel/runtime@^7.0.0-beta.47", "@babel/runtime@^7.0.0-rc.1", "@babel/runtime@^7.0.0-rc.2":
   version "7.0.0-beta.55"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-beta.55.tgz#0bc33aa5a6ac0b012f37e25b9e6aaa2e489a916b"
   dependencies:
@@ -705,11 +705,11 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@material-ui/core@^1.4.2":
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-1.4.3.tgz#e6bc29b441c07932cc64fffb02670792b119fb8e"
+"@material-ui/core@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-3.0.1.tgz#e8476394a42d89ae404355ddbc093db4d044b225"
   dependencies:
-    "@babel/runtime" "7.0.0-beta.42"
+    "@babel/runtime" "7.0.0"
     "@types/jss" "^9.5.3"
     "@types/react-transition-group" "^2.0.8"
     brcast "^3.0.1"
@@ -734,15 +734,15 @@
     react-event-listener "^0.6.2"
     react-jss "^8.1.0"
     react-transition-group "^2.2.1"
-    recompose "^0.28.0"
+    recompose "^0.29.0"
     warning "^4.0.1"
 
-"@material-ui/icons@^2.0.0":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-2.0.1.tgz#1151cc66a3d41099de3ddaac33488e399d3425f0"
+"@material-ui/icons@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-3.0.1.tgz#671fb3d04dcaf9351dbbd2bf82ae2ae72e3d93cd"
   dependencies:
-    "@babel/runtime" "7.0.0-beta.42"
-    recompose "^0.28.0"
+    "@babel/runtime" "7.0.0"
+    recompose "^0.29.0"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -9980,11 +9980,11 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
-recompose@^0.28.0:
-  version "0.28.1"
-  resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.28.1.tgz#a70aa017f9421df59539b9e6033135b10eb09e4c"
+recompose@^0.29.0:
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.29.0.tgz#f1a4e20d5f24d6ef1440f83924e821de0b1bccef"
   dependencies:
-    "@babel/runtime" "^7.0.0-beta.55"
+    "@babel/runtime" "^7.0.0"
     change-emitter "^0.1.2"
     fbjs "^0.8.1"
     hoist-non-react-statics "^2.3.1"

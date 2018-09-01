@@ -1,7 +1,4 @@
-import withWidth, {
-  isWidthDown,
-  WithWidthProps,
-} from "@material-ui/core/withWidth";
+import withWidth, { isWidthDown, WithWidth } from "@material-ui/core/withWidth";
 import { Component, ConsumerProps } from "react";
 import { createPortal } from "react-dom";
 
@@ -13,7 +10,7 @@ type State = {
   open: boolean;
 };
 
-type Props = OwnProps & WithWidthProps;
+type Props = OwnProps & WithWidth;
 
 /**
  * Handles creating a React portal to house the interface tour overlay. It only

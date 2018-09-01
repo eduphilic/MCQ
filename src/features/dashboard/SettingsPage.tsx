@@ -6,10 +6,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import Divider from "@material-ui/core/Divider";
-import withWidth, {
-  isWidthUp,
-  WithWidthProps,
-} from "@material-ui/core/withWidth";
+import withWidth, { isWidthUp, WithWidth } from "@material-ui/core/withWidth";
 
 import { DashboardColumnContainer } from "componentsV0/DashboardColumnContainer";
 import { FormikTextField } from "componentsV0/FormikTextField";
@@ -43,7 +40,7 @@ type PasswordValues = typeof initialPasswordValues;
 // tslint:disable-next-line:max-classes-per-file
 const FormikPasswords = class extends Formik<{}, PasswordValues> {};
 
-const SettingsPage: SFC<WithWidthProps> = props => {
+const SettingsPage: SFC<WithWidth> = props => {
   const { width } = props;
 
   const isTabletOrAbove = isWidthUp("md", width);

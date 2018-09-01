@@ -4,10 +4,7 @@ import { Prompt } from "react-router-dom";
 import { State } from "store";
 import { UserAppDrawerTheme } from "theme";
 
-import withWidth, {
-  isWidthDown,
-  WithWidthProps,
-} from "@material-ui/core/withWidth";
+import withWidth, { isWidthDown, WithWidth } from "@material-ui/core/withWidth";
 
 import { DashboardTemplate } from "componentsV0/DashboardTemplate";
 
@@ -26,7 +23,7 @@ type StateProps = {
 type OwnProps = ExamTemplateMobileProps;
 export type ExamTemplateProps = OwnProps;
 
-type Props = StateProps & WithWidthProps & OwnProps;
+type Props = StateProps & WithWidth & OwnProps;
 
 const ExamTemplate: SFC<Props> = props => {
   const { children, showBottomNav, width, staticView, paneKeyNodeMap } = props;

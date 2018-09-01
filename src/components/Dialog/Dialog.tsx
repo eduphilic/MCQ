@@ -1,10 +1,7 @@
 // tslint:disable-next-line:import-name
 import MuiDialog from "@material-ui/core/Dialog";
 import Slide from "@material-ui/core/Slide";
-import withWidth, {
-  isWidthDown,
-  WithWidthProps,
-} from "@material-ui/core/withWidth";
+import withWidth, { isWidthDown, WithWidth } from "@material-ui/core/withWidth";
 import React, { SFC } from "react";
 
 export enum DialogVariant {
@@ -25,7 +22,7 @@ type OwnProps = {
 };
 export type DialogProps = OwnProps;
 
-type Props = WithWidthProps & OwnProps;
+type Props = WithWidth & OwnProps;
 
 const Dialog: SFC<Props> = props => {
   const { children, open, variant, width } = props;

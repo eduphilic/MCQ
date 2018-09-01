@@ -59,8 +59,8 @@
     "lint": "tslint -p ./"
   },
   "dependencies": {
-    "@material-ui/core": "^1.4.2",
-    "@material-ui/icons": "^2.0.0",
+    "@material-ui/core": "^3.0.1",
+    "@material-ui/icons": "^3.0.1",
     "downshift": "^2.0.20",
     "formik": "^1.0.2",
     "immer": "^1.5.0",

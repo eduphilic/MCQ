@@ -8,7 +8,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
-import { WithWidthProps } from "@material-ui/core/withWidth";
+import { WithWidth } from "@material-ui/core/withWidth";
 
 import { DashboardFormDialogFieldConfig } from "./DashboardFormDialogFieldConfig";
 import { DashboardFormDialogFormInput } from "./DashboardFormDialogFormInput";
@@ -18,7 +18,7 @@ export type DashboardFormDialogFieldConfigs<Values extends object> = {
 };
 
 export interface DashboardFormDialogProps<Values extends object>
-  extends Partial<WithWidthProps>,
+  extends Partial<WithWidth>,
     FormikConfig<Values> {
   /**
    * Child element that accepts an "onClick" handler.

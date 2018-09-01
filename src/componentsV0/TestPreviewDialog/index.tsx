@@ -15,7 +15,7 @@ import Divider from "@material-ui/core/Divider";
 import withMobileDialog, {
   InjectedProps,
 } from "@material-ui/core/withMobileDialog";
-import { WithWidthProps } from "@material-ui/core/withWidth";
+import { WithWidth } from "@material-ui/core/withWidth";
 
 import { Typography } from "componentsV0/Typography";
 import { TypographyButton } from "componentsV0/TypographyButton";
@@ -75,7 +75,7 @@ interface TestPreviewDialogState {
  * being developed.
  */
 class TestPreviewDialog extends Component<
-  TestPreviewDialogProps & InjectedProps & Partial<WithWidthProps>,
+  TestPreviewDialogProps & InjectedProps & Partial<WithWidth>,
   TestPreviewDialogState
 > {
   state: TestPreviewDialogState = {
