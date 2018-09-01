@@ -119,7 +119,7 @@ const Label = styled(Typography).attrs({
   ${truncate};
 `;
 
-const AdditionalDescriptionText = Label.extend`
+const AdditionalDescriptionText = styled(Label)`
   font-weight: 500;
   font-size: 14px;
   color: #4db7f1;

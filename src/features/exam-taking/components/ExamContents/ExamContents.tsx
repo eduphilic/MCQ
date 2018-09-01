@@ -71,7 +71,7 @@ const ContainerHorizontal = styled.div`
   }
 `;
 
-const ContainerVertical = ContainerHorizontal.extend`
+const ContainerVertical = styled(ContainerHorizontal)`
   flex-direction: column;
 
   > *:first-child {
