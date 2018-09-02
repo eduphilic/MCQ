@@ -60,13 +60,8 @@ export class AdminTestManagerNewTemplate extends Component<
       ],
     };
 
-    type Values = typeof initialValues;
-
-    // tslint:disable-next-line:max-classes-per-file
-    const FormikTyped = class extends Formik<{}, Values> {};
-
     return (
-      <FormikTyped
+      <Formik
         initialValues={initialValues}
         onSubmit={() => alert("Form submission")}
       >
@@ -524,7 +519,7 @@ export class AdminTestManagerNewTemplate extends Component<
             </AdminDashboardTemplateContainer>
           );
         }}
-      </FormikTyped>
+      </Formik>
     );
   }
 }

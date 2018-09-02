@@ -19,7 +19,7 @@ storiesOf("Components V0", module)
         key: "0",
         columns: [
           { primaryText: "Soldier GD", secondaryText: "10th" },
-          { imgUrl: process.env.PUBLIC_URL + "/images/entry/airforce.svg" },
+          { imgUrl: `${process.env.PUBLIC_URL}/images/entry/airforce.svg` },
           { primaryText: "Rs 10 pp" },
           { switchChecked: false },
         ],
@@ -28,7 +28,7 @@ storiesOf("Components V0", module)
         key: "1",
         columns: [
           { primaryText: "Soldier Tradesman", secondaryText: "10th" },
-          { imgUrl: process.env.PUBLIC_URL + "/images/entry/army.svg" },
+          { imgUrl: `${process.env.PUBLIC_URL}/images/entry/army.svg` },
           { primaryText: "Rs 10 pp" },
           { switchChecked: true },
         ],
@@ -41,7 +41,7 @@ storiesOf("Components V0", module)
             secondaryText: "8th",
           },
           {
-            imgUrl: process.env.PUBLIC_URL + "/images/entry/assamrifles.svg",
+            imgUrl: `${process.env.PUBLIC_URL}/images/entry/assamrifles.svg`,
           },
           { primaryText: "Rs 10 pp" },
           { switchChecked: true },
@@ -51,7 +51,7 @@ storiesOf("Components V0", module)
         key: "3",
         columns: [
           { primaryText: "Soldier GD", secondaryText: "12th" },
-          { imgUrl: process.env.PUBLIC_URL + "/images/entry/bsf.svg" },
+          { imgUrl: `${process.env.PUBLIC_URL}/images/entry/bsf.svg` },
           { primaryText: "Rs 10 pp" },
           { switchChecked: false },
         ],

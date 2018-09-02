@@ -103,7 +103,7 @@ export const AdminEntryManager: SFC<{}> = () => {
               columns: [
                 { primaryText: "Soldier GD", secondaryText: "10th" },
                 {
-                  imgUrl: process.env.PUBLIC_URL + "/images/entry/airforce.svg",
+                  imgUrl: `${process.env.PUBLIC_URL}/images/entry/airforce.svg`,
                 },
                 { primaryText: "10" },
                 {
@@ -116,7 +116,7 @@ export const AdminEntryManager: SFC<{}> = () => {
               key: "1",
               columns: [
                 { primaryText: "Soldier Tradesman", secondaryText: "10th" },
-                { imgUrl: process.env.PUBLIC_URL + "/images/entry/army.svg" },
+                { imgUrl: `${process.env.PUBLIC_URL}/images/entry/army.svg` },
                 { primaryText: "10" },
                 {
                   switchChecked: true,
@@ -132,8 +132,9 @@ export const AdminEntryManager: SFC<{}> = () => {
                   secondaryText: "8th",
                 },
                 {
-                  imgUrl:
-                    process.env.PUBLIC_URL + "/images/entry/assamrifles.svg",
+                  imgUrl: `${
+                    process.env.PUBLIC_URL
+                  }/images/entry/assamrifles.svg`,
                 },
                 { primaryText: "10" },
                 {
@@ -146,7 +147,7 @@ export const AdminEntryManager: SFC<{}> = () => {
               key: "3",
               columns: [
                 { primaryText: "Soldier GD", secondaryText: "12th" },
-                { imgUrl: process.env.PUBLIC_URL + "/images/entry/bsf.svg" },
+                { imgUrl: `${process.env.PUBLIC_URL}/images/entry/bsf.svg` },
                 { primaryText: "10" },
                 {
                   switchChecked: false,

@@ -24,21 +24,11 @@ const initialBasicInformationValues = {
   email: "apareek@gmail.com",
 };
 
-type BasicInformationValues = typeof initialBasicInformationValues;
-const FormikBasicInformation = class extends Formik<
-  {},
-  BasicInformationValues
-> {};
-
 const initialPasswordValues = {
   currentPassword: "********",
   newPassword: "********",
   newPasswordConfirm: "********",
 };
-
-type PasswordValues = typeof initialPasswordValues;
-// tslint:disable-next-line:max-classes-per-file
-const FormikPasswords = class extends Formik<{}, PasswordValues> {};
 
 const SettingsPage: SFC<WithWidth> = props => {
   const { width } = props;
@@ -49,7 +39,7 @@ const SettingsPage: SFC<WithWidth> = props => {
 
   return (
     <>
-      <FormikBasicInformation
+      <Formik
         initialValues={initialBasicInformationValues}
         onSubmit={() => alert("Form submission")}
       >
@@ -108,11 +98,11 @@ const SettingsPage: SFC<WithWidth> = props => {
             </CardContent>
           </FormWrapper>
         )}
-      </FormikBasicInformation>
+      </Formik>
 
       {!isTabletOrAbove && <Divider />}
 
-      <FormikPasswords
+      <Formik
         initialValues={initialPasswordValues}
         onSubmit={() => alert("Form submission")}
       >
@@ -153,7 +143,7 @@ const SettingsPage: SFC<WithWidth> = props => {
             </CardContent>
           </FormWrapper>
         )}
-      </FormikPasswords>
+      </Formik>
     </>
   );
 };

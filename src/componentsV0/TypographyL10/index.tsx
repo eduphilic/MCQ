@@ -39,7 +39,7 @@ export class TypographyL10 extends Component<TypographyL10Props> {
 
     if (replaceValues) {
       replaceValues.forEach((r, index) => {
-        // tslint:disable-next-line:no-invalid-template-strings
+        // tslint:disable-next-line:no-invalid-template-strings prefer-template
         text = text.replace("${" + (index + 1) + "}", r);
       });
     }

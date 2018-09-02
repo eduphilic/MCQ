@@ -23,11 +23,9 @@ export const AdminQuestionManager: SFC<{}> = () => {
   const initialValues = {
     questionsFile: null as File | null,
   };
-  type Values = typeof initialValues;
-  class TypedFormik extends Formik<{}, Values> {}
 
   return (
-    <TypedFormik initialValues={initialValues} onSubmit={noop}>
+    <Formik initialValues={initialValues} onSubmit={noop}>
       {api => (
         <AdminDashboardTemplateContainer
           actionButtonElements={[
@@ -117,7 +115,7 @@ export const AdminQuestionManager: SFC<{}> = () => {
           />
         </AdminDashboardTemplateContainer>
       )}
-    </TypedFormik>
+    </Formik>
   );
 };
 

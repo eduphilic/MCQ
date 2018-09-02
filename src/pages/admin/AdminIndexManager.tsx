@@ -16,11 +16,8 @@ export const AdminIndexManager: SFC<{}> = () => {
     entryCardBackgroundImage: null as File | null,
   };
 
-  type Values = typeof initialValues;
-  class TypedFormik extends Formik<{}, Values> {}
-
   return (
-    <TypedFormik initialValues={initialValues} onSubmit={noop}>
+    <Formik initialValues={initialValues} onSubmit={noop}>
       {api => (
         <AdminDashboardTemplateContainer>
           {/* Hero Background Image Upload Field*/}
@@ -122,6 +119,6 @@ export const AdminIndexManager: SFC<{}> = () => {
           ))}
         </AdminDashboardTemplateContainer>
       )}
-    </TypedFormik>
+    </Formik>
   );
 };
