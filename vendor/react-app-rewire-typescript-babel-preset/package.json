@@ -1,0 +1,29 @@
+{
+  "name": "react-app-rewire-typescript-babel-preset",
+  "homepage": "https://github.com/strothj/react-app-rewire-typescript-babel-preset",
+  "version": "2.4.0",
+  "keywords": [
+    "react",
+    "react-scripts",
+    "react-app-rewired",
+    "typescript",
+    "babel"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/*",
+    "README.md"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^10.3.2",
+    "@types/webpack": "^4.4.0"
+  },
+  "peerDependencies": {
+    "react-app-rewired": "^2.0.0"
+  },
+  "dependencies": {
+    "tslint-loader": "^3.6.0"
+  }
+}

@@ -17,7 +17,7 @@ export const AdminIndexManager: SFC<{}> = () => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={noop}>
+    <Formik<typeof initialValues> initialValues={initialValues} onSubmit={noop}>
       {api => (
         <AdminDashboardTemplateContainer>
           {/* Hero Background Image Upload Field*/}

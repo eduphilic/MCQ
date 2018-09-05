@@ -99,7 +99,7 @@ class DashboardFormDialogBase<Values extends object> extends Component<
       <>
         {buttonWithOnClickHandler}
 
-        <Formik
+        <Formik<Values>
           {...rest}
           onSubmit={this.handleSubmit}
           render={api => (

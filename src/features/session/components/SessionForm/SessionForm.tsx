@@ -131,7 +131,7 @@ const SessionForm: SFC<Props> = props => {
   const validationSchema = () => getValidationSchema(type);
 
   return (
-    <Formik
+    <Formik<typeof initialValues>
       initialValues={initialValues}
       onSubmit={values => handleFormSubmit(props, values)}
       validationSchema={validationSchema}

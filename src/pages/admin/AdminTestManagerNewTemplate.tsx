@@ -61,7 +61,7 @@ export class AdminTestManagerNewTemplate extends Component<
     };
 
     return (
-      <Formik
+      <Formik<typeof initialValues>
         initialValues={initialValues}
         onSubmit={() => alert("Form submission")}
       >

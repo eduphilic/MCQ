@@ -25,7 +25,7 @@ export const AdminQuestionManager: SFC<{}> = () => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={noop}>
+    <Formik<typeof initialValues> initialValues={initialValues} onSubmit={noop}>
       {api => (
         <AdminDashboardTemplateContainer
           actionButtonElements={[

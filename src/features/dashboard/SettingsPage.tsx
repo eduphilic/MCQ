@@ -39,7 +39,7 @@ const SettingsPage: SFC<WithWidth> = props => {
 
   return (
     <>
-      <Formik
+      <Formik<typeof initialBasicInformationValues>
         initialValues={initialBasicInformationValues}
         onSubmit={() => alert("Form submission")}
       >
@@ -102,7 +102,7 @@ const SettingsPage: SFC<WithWidth> = props => {
 
       {!isTabletOrAbove && <Divider />}
 
-      <Formik
+      <Formik<typeof initialPasswordValues>
         initialValues={initialPasswordValues}
         onSubmit={() => alert("Form submission")}
       >

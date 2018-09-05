@@ -1,0 +1,281 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/5567535/
+AnonymousFunction40ec5dd50100	lib/ArcherElement.js	/^var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < /;"	f	function:_createClass
+AnonymousFunction40ec5dd50200	lib/ArcherElement.js	/^      relations.forEach(function (relation) {$/;"	f
+AnonymousFunction736dd58e0100	lib/ArcherContainer.js	/^var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < /;"	f	function:_createClass
+AnonymousFunction736dd58e0200	lib/ArcherContainer.js	/^      _this.setState(function (currentState) {$/;"	f
+AnonymousFunction736dd58e0300	lib/ArcherContainer.js	/^      _this.setState(function (currentState) {$/;"	f
+AnonymousFunction736dd58e0400	lib/ArcherContainer.js	/^      return function (ref) {$/;"	f	function:_this.registerChild
+AnonymousFunction736dd58e0500	lib/ArcherContainer.js	/^          _this.setState(function (currentState) {$/;"	f
+AnonymousFunction736dd58e0600	lib/ArcherContainer.js	/^      return _this.state.fromTo.map(function (sd) {$/;"	f
+AnonymousFunction736dd58e0700	lib/ArcherContainer.js	/^    var observer = new _resizeObserverPolyfill2.default(function () {$/;"	f	function:ArcherContainer
+AnonymousFunction736dd58e0800	lib/ArcherContainer.js	/^      Object.keys(this.state.refs).map(function (elementKey) {$/;"	f
+App	example/App.js	/^const App = () => {$/;"	C
+ArcherContainer	lib/ArcherContainer.js	/^  function ArcherContainer(props) {$/;"	f
+ArcherContainer	lib/ArcherContainer.js	/^var ArcherContainer = exports.ArcherContainer = function (_React$Component) {$/;"	v
+ArcherContainer	src/ArcherContainer.js	/^export class ArcherContainer extends React.Component {$/;"	c
+ArcherElement	lib/ArcherElement.js	/^  function ArcherElement() {$/;"	f
+ArcherElement	lib/ArcherElement.js	/^var ArcherElement = exports.ArcherElement = function (_React$Component) {$/;"	v
+ArcherElement	src/ArcherElement.js	/^export class ArcherElement extends React.Component {$/;"	c
+HtmlWebpackPlugin	webpack.config.js	/^const HtmlWebpackPlugin = require('html-webpack-plugin');$/;"	C
+Point	lib/Point.js	/^function Point(x, y) {$/;"	c
+Point	src/Point.js	/^function Point(x, y) {$/;"	c
+SvgArrow	lib/SvgArrow.js	/^var SvgArrow = function SvgArrow(_ref) {$/;"	f
+SvgArrow	src/SvgArrow.js	/^const SvgArrow = ({$/;"	C
+_ArcherContainer	lib/react-archer.js	/^var _ArcherContainer = require('.\/ArcherContainer.js');$/;"	v
+_ArcherElement	lib/react-archer.js	/^var _ArcherElement = require('.\/ArcherElement.js');$/;"	v
+_Point	lib/ArcherContainer.js	/^var _Point = require('.\/Point');$/;"	v
+_Point2	lib/ArcherContainer.js	/^var _Point2 = _interopRequireDefault(_Point);$/;"	v
+_SvgArrow	lib/ArcherContainer.js	/^var _SvgArrow = require('.\/SvgArrow');$/;"	v
+_SvgArrow2	lib/ArcherContainer.js	/^var _SvgArrow2 = _interopRequireDefault(_SvgArrow);$/;"	v
+_classCallCheck	lib/ArcherContainer.js	/^function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { thro/;"	f
+_classCallCheck	lib/ArcherElement.js	/^function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { thro/;"	f
+_createClass	lib/ArcherContainer.js	/^var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < /;"	f
+_createClass	lib/ArcherElement.js	/^var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < /;"	f
+_defineProperty	lib/ArcherContainer.js	/^function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { /;"	f
+_inherits	lib/ArcherContainer.js	/^function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !=/;"	f
+_inherits	lib/ArcherElement.js	/^function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !=/;"	f
+_interopRequireDefault	lib/ArcherContainer.js	/^function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }$/;"	f
+_interopRequireDefault	lib/ArcherElement.js	/^function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }$/;"	f
+_interopRequireDefault	lib/SvgArrow.js	/^function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }$/;"	f
+_interopRequireDefault	lib/react-archer.js	/^function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }/;"	f
+_possibleConstructorReturn	lib/ArcherContainer.js	/^function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this ha/;"	f
+_possibleConstructorReturn	lib/ArcherElement.js	/^function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this ha/;"	f
+_propTypes	lib/ArcherContainer.js	/^var _propTypes = require('prop-types');$/;"	v
+_propTypes	lib/ArcherElement.js	/^var _propTypes = require('prop-types');$/;"	v
+_propTypes	lib/SvgArrow.js	/^var _propTypes = require('prop-types');$/;"	v
+_propTypes2	lib/ArcherContainer.js	/^var _propTypes2 = _interopRequireDefault(_propTypes);$/;"	v
+_propTypes2	lib/ArcherElement.js	/^var _propTypes2 = _interopRequireDefault(_propTypes);$/;"	v
+_propTypes2	lib/SvgArrow.js	/^var _propTypes2 = _interopRequireDefault(_propTypes);$/;"	v
+_react	lib/ArcherContainer.js	/^var _react = require('react');$/;"	v
+_react	lib/ArcherElement.js	/^var _react = require('react');$/;"	v
+_react	lib/SvgArrow.js	/^var _react = require('react');$/;"	v
+_react2	lib/ArcherContainer.js	/^var _react2 = _interopRequireDefault(_react);$/;"	v
+_react2	lib/ArcherElement.js	/^var _react2 = _interopRequireDefault(_react);$/;"	v
+_react2	lib/SvgArrow.js	/^var _react2 = _interopRequireDefault(_react);$/;"	v
+_resizeObserverPolyfill	lib/ArcherContainer.js	/^var _resizeObserverPolyfill = require('resize-observer-polyfill');$/;"	v
+_resizeObserverPolyfill2	lib/ArcherContainer.js	/^var _resizeObserverPolyfill2 = _interopRequireDefault(_resizeObserverPolyfill);$/;"	v
+_toConsumableArray	lib/ArcherContainer.js	/^function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.le/;"	f
+add	lib/Point.js	/^Point.prototype.add = function (point) {$/;"	m	class:Point
+add	src/Point.js	/^Point.prototype.add = function(point) {$/;"	m	class:Point
+amd	webpack.prod.config.js	/^    amd: 'prop-types',$/;"	p	class:externals.prop-types
+amd	webpack.prod.config.js	/^    amd: 'react',$/;"	p	class:externals.react
+amd	webpack.prod.config.js	/^    amd: 'react-dom',$/;"	p	class:externals.react-dom
+anchorType	lib/ArcherElement.js	/^var anchorType = _propTypes2.default.oneOf(['top', 'bottom', 'left', 'right']);$/;"	v
+anchorType	lib/SvgArrow.js	/^var anchorType = _propTypes2.default.oneOf(['top', 'bottom', 'left', 'right']);$/;"	v
+anchorType	src/ArcherElement.js	/^const anchorType = PropTypes.oneOf(['top', 'bottom', 'left', 'right']);$/;"	C
+anchorType	src/SvgArrow.js	/^const anchorType = PropTypes.oneOf(['top', 'bottom', 'left', 'right']);$/;"	C
+arrowLabel	src/SvgArrow.js	/^  arrowLabel: PropTypes.node,$/;"	p	class:SvgArrow.propTypes
+arrowLength	lib/ArcherContainer.js	/^  arrowLength: 10,$/;"	p	class:ArcherContainer.defaultProps
+arrowLength	lib/ArcherContainer.js	/^  arrowLength: _propTypes2.default.number,$/;"	p	class:ArcherContainer.propTypes
+arrowLength	lib/SvgArrow.js	/^  arrowLength: _propTypes2.default.number,$/;"	p	class:SvgArrow.propTypes
+arrowLength	src/ArcherContainer.js	/^  arrowLength: 10,$/;"	p	class:ArcherContainer.defaultProps
+arrowLength	src/ArcherContainer.js	/^  arrowLength: PropTypes.number,$/;"	p	class:ArcherContainer.propTypes
+arrowLength	src/SvgArrow.js	/^  arrowLength: PropTypes.number,$/;"	p	class:SvgArrow.propTypes
+arrowThickness	lib/ArcherContainer.js	/^  arrowThickness: 6,$/;"	p	class:ArcherContainer.defaultProps
+arrowThickness	lib/ArcherContainer.js	/^  arrowThickness: _propTypes2.default.number,$/;"	p	class:ArcherContainer.propTypes
+arrowThickness	src/ArcherContainer.js	/^  arrowThickness: 6,$/;"	p	class:ArcherContainer.defaultProps
+arrowThickness	src/ArcherContainer.js	/^  arrowThickness: PropTypes.number,$/;"	p	class:ArcherContainer.propTypes
+beforeEach	.eslintrc.js	/^exports.globals = { 'jest': true, 'expect': true, 'it': true, 'describe': true, 'beforeEach': tr/;"	p	class:exports.globals
+body	example/index.css	/^body {$/;"	s
+border	example/App.js	/^const boxStyle = { padding: '10px', border: '1px solid black' };$/;"	p	class:boxStyle
+boxStyle	example/App.js	/^const boxStyle = { padding: '10px', border: '1px solid black' };$/;"	c
+bracketSpacing	.prettierrc.js	/^  bracketSpacing: true,$/;"	p	class:module.exports
+browser	.eslintrc.js	/^  browser: true,$/;"	p	class:exports.env
+childContextTypes	lib/ArcherContainer.js	/^ArcherContainer.childContextTypes = {$/;"	c	class:ArcherContainer
+childContextTypes	src/ArcherContainer.js	/^ArcherContainer.childContextTypes = {$/;"	c	class:ArcherContainer
+children	lib/ArcherContainer.js	/^  children: _propTypes2.default.node,$/;"	p	class:ArcherContainer.propTypes
+children	lib/ArcherElement.js	/^  children: _propTypes2.default.node$/;"	p	class:ArcherElement.propTypes
+children	src/ArcherContainer.js	/^  children: PropTypes.node,$/;"	p	class:ArcherContainer.propTypes
+children	src/ArcherElement.js	/^  children: PropTypes.node,$/;"	p	class:ArcherElement.propTypes
+className	lib/ArcherContainer.js	/^  className: _propTypes2.default.string$/;"	p	class:ArcherContainer.propTypes
+className	lib/ArcherElement.js	/^  className: _propTypes2.default.string,$/;"	p	class:ArcherElement.propTypes
+className	src/ArcherContainer.js	/^  className: PropTypes.string,$/;"	p	class:ArcherContainer.propTypes
+className	src/ArcherElement.js	/^  className: PropTypes.string,$/;"	p	class:ArcherElement.propTypes
+commonjs	webpack.prod.config.js	/^    commonjs: 'prop-types',$/;"	p	class:externals.prop-types
+commonjs	webpack.prod.config.js	/^    commonjs: 'react',$/;"	p	class:externals.react
+commonjs	webpack.prod.config.js	/^    commonjs: 'react-dom',$/;"	p	class:externals.react-dom
+commonjs2	webpack.prod.config.js	/^    commonjs2: 'prop-types',$/;"	p	class:externals.prop-types
+commonjs2	webpack.prod.config.js	/^    commonjs2: 'react',$/;"	p	class:externals.react
+commonjs2	webpack.prod.config.js	/^    commonjs2: 'react-dom',$/;"	p	class:externals.react-dom
+componentDidMount	lib/ArcherContainer.js	/^    value: function componentDidMount() {$/;"	f
+componentDidMount	lib/ArcherElement.js	/^    value: function componentDidMount() {$/;"	c
+componentDidMount	src/ArcherContainer.js	/^  componentDidMount() {$/;"	m	class:ArcherContainer
+componentDidMount	src/ArcherElement.js	/^  componentDidMount() {$/;"	m	class:ArcherElement
+componentWillReceiveProps	lib/ArcherElement.js	/^    value: function componentWillReceiveProps(nextProps) {$/;"	c
+componentWillReceiveProps	src/ArcherElement.js	/^  componentWillReceiveProps(nextProps) {$/;"	m	class:ArcherElement
+componentWillUnmount	lib/ArcherContainer.js	/^    value: function componentWillUnmount() {$/;"	f
+componentWillUnmount	src/ArcherContainer.js	/^  componentWillUnmount() {$/;"	m	class:ArcherContainer
+computeArrows	lib/ArcherContainer.js	/^    _this.computeArrows = function () {$/;"	f	function:_this
+computeCoordinatesFromAnchorPosition	lib/ArcherContainer.js	/^function computeCoordinatesFromAnchorPosition(anchorPosition, rect) {$/;"	f
+computeCoordinatesFromAnchorPosition	src/ArcherContainer.js	/^function computeCoordinatesFromAnchorPosition(anchorPosition, rect) {$/;"	f
+computeEndingAnchorPosition	lib/SvgArrow.js	/^function computeEndingAnchorPosition(xs, ys, xe, ye, endingAnchor) {$/;"	f
+computeEndingAnchorPosition	src/SvgArrow.js	/^export function computeEndingAnchorPosition(xs, ys, xe, ye, endingAnchor) {$/;"	f
+computeEndingArrowDirectionVector	lib/SvgArrow.js	/^function computeEndingArrowDirectionVector(endingAnchor) {$/;"	f
+computeEndingArrowDirectionVector	src/SvgArrow.js	/^function computeEndingArrowDirectionVector(endingAnchor) {$/;"	f
+computeEndingPointAccordingToArrow	lib/SvgArrow.js	/^function computeEndingPointAccordingToArrow(xEnd, yEnd, arrowLength, strokeWidth, endingAnchor) /;"	f
+computeEndingPointAccordingToArrow	src/SvgArrow.js	/^export function computeEndingPointAccordingToArrow($/;"	f
+computeLabelDimensions	src/SvgArrow.js	/^export function computeLabelDimensions(xs, ys, xe, ye) {$/;"	f
+computeStartingAnchorPosition	lib/SvgArrow.js	/^function computeStartingAnchorPosition(xs, ys, xe, ye, startingAnchor) {$/;"	f
+computeStartingAnchorPosition	src/SvgArrow.js	/^export function computeStartingAnchorPosition(xs, ys, xe, ye, startingAnchor) {$/;"	f
+config	webpack.prod.config.js	/^var config = {$/;"	c
+constructor	src/ArcherContainer.js	/^  constructor(props) {$/;"	m	class:ArcherContainer
+contentBase	webpack.config.js	/^    contentBase: examplePath,$/;"	p	class:module.exports.devServer
+contextTypes	lib/ArcherElement.js	/^ArcherElement.contextTypes = {$/;"	c	class:ArcherElement
+contextTypes	src/ArcherElement.js	/^ArcherElement.contextTypes = {$/;"	c	class:ArcherElement
+defaultProps	lib/ArcherContainer.js	/^ArcherContainer.defaultProps = {$/;"	c	class:ArcherContainer
+defaultProps	src/ArcherContainer.js	/^ArcherContainer.defaultProps = {$/;"	c	class:ArcherContainer
+defineProperties	lib/ArcherContainer.js	/^var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < /;"	f	function:_createClass
+defineProperties	lib/ArcherElement.js	/^var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < /;"	f	function:_createClass
+describe	.eslintrc.js	/^exports.globals = { 'jest': true, 'expect': true, 'it': true, 'describe': true, 'beforeEach': tr/;"	p	class:exports.globals
+devServer	webpack.config.js	/^  devServer: {$/;"	c	class:module.exports
+display	example/App.js	/^  display: 'flex',$/;"	p	class:rowStyle
+display	example/App.js	/^const rootStyle = { display: 'flex', justifyContent: 'center' };$/;"	p	class:rootStyle
+endingAnchor	lib/SvgArrow.js	/^  endingAnchor: anchorType,$/;"	p	class:SvgArrow.propTypes
+endingAnchor	src/SvgArrow.js	/^  endingAnchor: anchorType,$/;"	p	class:SvgArrow.propTypes
+endingPoint	lib/SvgArrow.js	/^  endingPoint: pointPropType,$/;"	p	class:SvgArrow.propTypes
+endingPoint	src/SvgArrow.js	/^  endingPoint: pointPropType,$/;"	p	class:SvgArrow.propTypes
+entry	webpack.config.js	/^  entry: path.resolve(examplePath, 'index.js'),$/;"	p	class:module.exports
+entry	webpack.prod.config.js	/^  entry: '.\/src\/react-archer.js',$/;"	p	class:config
+env	.eslintrc.js	/^exports.env = {$/;"	c	class:exports
+examplePath	webpack.config.js	/^const examplePath = path.resolve(__dirname, 'example')$/;"	C
+expect	.eslintrc.js	/^exports.globals = { 'jest': true, 'expect': true, 'it': true, 'describe': true, 'beforeEach': tr/;"	p	class:exports.globals
+exports	.prettierrc.js	/^module.exports = {$/;"	c	class:module
+exports	webpack.config.js	/^module.exports = {$/;"	c	class:module
+extensions	webpack.config.js	/^    extensions: ['.js', '.jsx'],$/;"	p	class:module.exports.resolve
+extensions	webpack.prod.config.js	/^    extensions: ['.js', '.jsx'],$/;"	p	class:config.resolve
+externals	webpack.prod.config.js	/^  externals: externals,$/;"	p	class:config
+externals	webpack.prod.config.js	/^const externals = {$/;"	c
+filename	webpack.config.js	/^    filename: 'bundle.js',$/;"	p	class:module.exports.output
+filename	webpack.prod.config.js	/^    filename: 'react-archer.js',$/;"	p	class:config.output
+fromTo	lib/ArcherContainer.js	/^      fromTo: [],$/;"	p	class:_this.state
+fromTo	src/ArcherContainer.js	/^      fromTo: [],$/;"	p	class:constructor.state
+get	lib/react-archer.js	/^  get: function get() {$/;"	f
+getChildContext	lib/ArcherContainer.js	/^    _this.getChildContext = function () {$/;"	f	function:_this
+getParentCoordinates	lib/ArcherContainer.js	/^    _this.getParentCoordinates = function () {$/;"	f	function:_this
+getPointCoordinatesFromAnchorPosition	lib/ArcherContainer.js	/^    _this.getPointCoordinatesFromAnchorPosition = function (position, index, parentCoordinates) /;"	f	function:_this
+getRectFromRef	lib/ArcherContainer.js	/^    _this.getRectFromRef = function (ref) {$/;"	f	function:_this
+globals	.eslintrc.js	/^exports.globals = { 'jest': true, 'expect': true, 'it': true, 'describe': true, 'beforeEach': tr/;"	c	class:exports
+height	lib/ArcherContainer.js	/^  height: '100%',$/;"	p	class:svgContainerStyle
+height	src/ArcherContainer.js	/^  height: '100%',$/;"	p	class:svgContainerStyle
+id	lib/ArcherElement.js	/^  id: _propTypes2.default.string,$/;"	p	class:ArcherElement.propTypes
+id	src/ArcherElement.js	/^  id: PropTypes.string,$/;"	p	class:ArcherElement.propTypes
+isProd	webpack.prod.config.js	/^var isProd = process.env.NODE_ENV === 'production' || null$/;"	v
+it	.eslintrc.js	/^exports.globals = { 'jest': true, 'expect': true, 'it': true, 'describe': true, 'beforeEach': tr/;"	p	class:exports.globals
+jest	.eslintrc.js	/^exports.globals = { 'jest': true, 'expect': true, 'it': true, 'describe': true, 'beforeEach': tr/;"	p	class:exports.globals
+justifyContent	example/App.js	/^  justifyContent: 'space-between',$/;"	p	class:rowStyle
+justifyContent	example/App.js	/^const rootStyle = { display: 'flex', justifyContent: 'center' };$/;"	p	class:rootStyle
+left	lib/ArcherContainer.js	/^  left: 0$/;"	p	class:svgContainerStyle
+left	src/ArcherContainer.js	/^  left: 0,$/;"	p	class:svgContainerStyle
+library	webpack.config.js	/^    library: 'reactArcher',$/;"	p	class:module.exports.output
+library	webpack.prod.config.js	/^    library: 'ReactArcher',$/;"	p	class:config.output
+libraryTarget	webpack.prod.config.js	/^    libraryTarget: 'umd',$/;"	p	class:config.output
+loaders	webpack.config.js	/^    loaders: [$/;"	p	class:module.exports.module
+loaders	webpack.prod.config.js	/^    loaders: [$/;"	p	class:config.module
+margin	example/App.js	/^  margin: '200px 0',$/;"	p	class:rowStyle
+module	webpack.config.js	/^  module: {$/;"	c	class:module.exports
+module	webpack.prod.config.js	/^  module: {$/;"	c	class:config
+observer	lib/ArcherContainer.js	/^      observer: observer$/;"	p	class:_this.state
+output	webpack.config.js	/^  output: {$/;"	c	class:module.exports
+output	webpack.prod.config.js	/^  output: {$/;"	c	class:config
+padding	example/App.js	/^const boxStyle = { padding: '10px', border: '1px solid black' };$/;"	p	class:boxStyle
+path	webpack.config.js	/^    path: examplePath,$/;"	p	class:module.exports.output
+path	webpack.config.js	/^const path = require('path')$/;"	C
+path	webpack.prod.config.js	/^    path: path.join(__dirname, 'dist'),$/;"	p	class:config.output
+path	webpack.prod.config.js	/^var path = require('path')$/;"	v
+plugins	webpack.config.js	/^  plugins: [$/;"	p	class:module.exports
+pointPropType	lib/SvgArrow.js	/^var pointPropType = _propTypes2.default.shape({$/;"	v
+pointPropType	src/SvgArrow.js	/^const pointPropType = PropTypes.shape({$/;"	C
+position	lib/ArcherContainer.js	/^  position: 'absolute',$/;"	p	class:svgContainerStyle
+position	src/ArcherContainer.js	/^  position: 'absolute',$/;"	p	class:svgContainerStyle
+prettier/prettier	.eslintrc.js	/^  'prettier\/prettier': [$/;"	p	class:exports.rules
+prop-types	webpack.prod.config.js	/^  'prop-types': {$/;"	c	class:externals
+propTypes	lib/ArcherContainer.js	/^ArcherContainer.propTypes = {$/;"	c	class:ArcherContainer
+propTypes	lib/ArcherElement.js	/^ArcherElement.propTypes = {$/;"	c	class:ArcherElement
+propTypes	lib/SvgArrow.js	/^SvgArrow.propTypes = {$/;"	c	class:SvgArrow
+propTypes	src/ArcherContainer.js	/^ArcherContainer.propTypes = {$/;"	c	class:ArcherContainer
+propTypes	src/ArcherElement.js	/^ArcherElement.propTypes = {$/;"	c	class:ArcherElement
+propTypes	src/SvgArrow.js	/^SvgArrow.propTypes = {$/;"	c	class:SvgArrow
+publicPath	webpack.prod.config.js	/^    publicPath: 'dist\/',$/;"	p	class:config.output
+react	.eslintrc.js	/^  react: {$/;"	c	class:exports.settings
+react	webpack.prod.config.js	/^  react: {$/;"	c	class:externals
+react-dom	webpack.prod.config.js	/^  'react-dom': {$/;"	c	class:externals
+rectToPoint	lib/ArcherContainer.js	/^function rectToPoint(rect) {$/;"	f
+rectToPoint	src/ArcherContainer.js	/^function rectToPoint(rect) {$/;"	f
+refresh	lib/ArcherElement.js	/^  refresh: _propTypes2.default.func$/;"	p	class:ArcherElement.contextTypes
+refresh	src/ArcherElement.js	/^  refresh: PropTypes.func,$/;"	p	class:ArcherElement.contextTypes
+refreshScreen	lib/ArcherContainer.js	/^    _this.refreshScreen = function () {$/;"	f	function:_this
+refs	lib/ArcherContainer.js	/^      refs: {},$/;"	p	class:_this.state
+refs	src/ArcherContainer.js	/^      refs: {},$/;"	p	class:constructor.state
+registerAllTransitions	lib/ArcherElement.js	/^    value: function registerAllTransitions(relations) {$/;"	f
+registerAllTransitions	src/ArcherElement.js	/^  registerAllTransitions(relations) {$/;"	m	class:ArcherElement
+registerChild	lib/ArcherContainer.js	/^    _this.registerChild = function (id) {$/;"	f	function:_this
+registerChild	lib/ArcherContainer.js	/^  registerChild: _propTypes2.default.func,$/;"	p	class:ArcherContainer.childContextTypes
+registerChild	lib/ArcherElement.js	/^  registerChild: _propTypes2.default.func,$/;"	p	class:ArcherElement.contextTypes
+registerChild	src/ArcherContainer.js	/^  registerChild: PropTypes.func,$/;"	p	class:ArcherContainer.childContextTypes
+registerChild	src/ArcherElement.js	/^  registerChild: PropTypes.func,$/;"	p	class:ArcherElement.contextTypes
+registerTransition	lib/ArcherContainer.js	/^    _this.registerTransition = function (fromElement, relation) {$/;"	f	function:_this
+registerTransition	lib/ArcherContainer.js	/^  registerTransition: _propTypes2.default.func$/;"	p	class:ArcherContainer.childContextTypes
+registerTransition	lib/ArcherElement.js	/^  registerTransition: _propTypes2.default.func,$/;"	p	class:ArcherElement.contextTypes
+registerTransition	src/ArcherContainer.js	/^  registerTransition: PropTypes.func,$/;"	p	class:ArcherContainer.childContextTypes
+registerTransition	src/ArcherElement.js	/^  registerTransition: PropTypes.func,$/;"	p	class:ArcherElement.contextTypes
+relations	lib/ArcherElement.js	/^  relations: _propTypes2.default.arrayOf(_propTypes2.default.shape({$/;"	p	class:ArcherElement.propTypes
+relations	src/ArcherElement.js	/^  relations: PropTypes.arrayOf($/;"	p	class:ArcherElement.propTypes
+render	lib/ArcherContainer.js	/^    value: function render() {$/;"	f
+render	lib/ArcherElement.js	/^    value: function render() {$/;"	f
+render	src/ArcherElement.js	/^  render() {$/;"	m	class:ArcherElement
+resolve	webpack.config.js	/^  resolve: {$/;"	c	class:module.exports
+resolve	webpack.prod.config.js	/^  resolve: {$/;"	c	class:config
+root	webpack.prod.config.js	/^    root: 'PropTypes',$/;"	p	class:externals.prop-types
+root	webpack.prod.config.js	/^    root: 'React',$/;"	p	class:externals.react
+root	webpack.prod.config.js	/^    root: 'ReactDOM',$/;"	p	class:externals.react-dom
+rootStyle	example/App.js	/^const rootStyle = { display: 'flex', justifyContent: 'center' };$/;"	c
+rowStyle	example/App.js	/^const rowStyle = {$/;"	c
+rules	.eslintrc.js	/^exports.rules = {$/;"	c	class:exports
+semi	.prettierrc.js	/^  semi: true,$/;"	p	class:module.exports
+settings	.eslintrc.js	/^exports.settings = {$/;"	c	class:exports
+singleQuote	.prettierrc.js	/^  singleQuote: true,$/;"	p	class:module.exports
+sourceMapFilename	webpack.prod.config.js	/^    sourceMapFilename: 'react-archer.sourcemap.js',$/;"	p	class:config.output
+startingAnchor	lib/SvgArrow.js	/^  startingAnchor: anchorType,$/;"	p	class:SvgArrow.propTypes
+startingAnchor	src/SvgArrow.js	/^  startingAnchor: anchorType,$/;"	p	class:SvgArrow.propTypes
+startingPoint	lib/SvgArrow.js	/^  startingPoint: pointPropType,$/;"	p	class:SvgArrow.propTypes
+startingPoint	src/SvgArrow.js	/^  startingPoint: pointPropType,$/;"	p	class:SvgArrow.propTypes
+state	lib/ArcherContainer.js	/^    _this.state = {$/;"	c	class:_this
+state	src/ArcherContainer.js	/^    this.state = {$/;"	c	class:constructor
+storeParent	lib/ArcherContainer.js	/^    _this.storeParent = function (ref) {$/;"	f	function:_this
+stringifyRelations	src/ArcherElement.js	/^const stringifyRelations = relations => {$/;"	C
+strokeColor	lib/ArcherContainer.js	/^  strokeColor: '#f00',$/;"	p	class:ArcherContainer.defaultProps
+strokeColor	lib/ArcherContainer.js	/^  strokeColor: _propTypes2.default.string,$/;"	p	class:ArcherContainer.propTypes
+strokeColor	lib/SvgArrow.js	/^  strokeColor: _propTypes2.default.string,$/;"	p	class:SvgArrow.propTypes
+strokeColor	src/ArcherContainer.js	/^  strokeColor: '#f00',$/;"	p	class:ArcherContainer.defaultProps
+strokeColor	src/ArcherContainer.js	/^  strokeColor: PropTypes.string,$/;"	p	class:ArcherContainer.propTypes
+strokeColor	src/SvgArrow.js	/^  strokeColor: PropTypes.string,$/;"	p	class:SvgArrow.propTypes
+strokeWidth	lib/ArcherContainer.js	/^  strokeWidth: 2$/;"	p	class:ArcherContainer.defaultProps
+strokeWidth	lib/ArcherContainer.js	/^  strokeWidth: _propTypes2.default.number,$/;"	p	class:ArcherContainer.propTypes
+strokeWidth	lib/SvgArrow.js	/^  strokeWidth: _propTypes2.default.number$/;"	p	class:SvgArrow.propTypes
+strokeWidth	src/ArcherContainer.js	/^  strokeWidth: 2,$/;"	p	class:ArcherContainer.defaultProps
+strokeWidth	src/ArcherContainer.js	/^  strokeWidth: PropTypes.number,$/;"	p	class:ArcherContainer.propTypes
+strokeWidth	src/SvgArrow.js	/^  strokeWidth: PropTypes.number,$/;"	p	class:SvgArrow.propTypes
+style	lib/ArcherContainer.js	/^  style: _propTypes2.default.object,$/;"	p	class:ArcherContainer.propTypes
+style	lib/ArcherElement.js	/^  style: _propTypes2.default.object,$/;"	p	class:ArcherElement.propTypes
+style	src/ArcherContainer.js	/^  style: PropTypes.object,$/;"	p	class:ArcherContainer.propTypes
+style	src/ArcherElement.js	/^  style: PropTypes.object,$/;"	p	class:ArcherElement.propTypes
+subClass	lib/ArcherContainer.js	/^function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !=/;"	c
+subClass	lib/ArcherElement.js	/^function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !=/;"	c
+substract	lib/Point.js	/^Point.prototype.substract = function (point) {$/;"	m	class:Point
+substract	src/Point.js	/^Point.prototype.substract = function(point) {$/;"	m	class:Point
+svgContainerStyle	lib/ArcherContainer.js	/^var svgContainerStyle = {$/;"	c
+svgContainerStyle	src/ArcherContainer.js	/^const svgContainerStyle = {$/;"	c
+top	lib/ArcherContainer.js	/^  top: 0,$/;"	p	class:svgContainerStyle
+top	src/ArcherContainer.js	/^  top: 0,$/;"	p	class:svgContainerStyle
+trailingComma	.prettierrc.js	/^  trailingComma: 'all',$/;"	p	class:module.exports
+version	.eslintrc.js	/^    version: '16.2',$/;"	p	class:exports.settings.react
+webpack	webpack.config.js	/^const webpack = require('webpack');$/;"	C
+webpack	webpack.prod.config.js	/^var webpack = require('webpack')$/;"	v
+width	lib/ArcherContainer.js	/^  width: '100%',$/;"	p	class:svgContainerStyle
+width	src/ArcherContainer.js	/^  width: '100%',$/;"	p	class:svgContainerStyle

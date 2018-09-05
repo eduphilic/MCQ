@@ -21,7 +21,11 @@ class FormikInstance extends Component<FormikInstanceProps> {
     const { children, initialValues, validate } = this.props;
 
     return (
-      <Formik initialValues={initialValues} onSubmit={noop} validate={validate}>
+      <Formik<typeof initialValues>
+        initialValues={initialValues}
+        onSubmit={noop}
+        validate={validate}
+      >
         {nextFormikProps => {
           formikProps = nextFormikProps;
 
