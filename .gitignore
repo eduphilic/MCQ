@@ -6,14 +6,10 @@ node_modules/
 
 # Build assets
 build/
-dist/
+/dist/
 
 # Logs
 *error.log
 
 # Microsoft Office
 ~$*.*
-
-# Yalc
-.yalc/
-yalc.lock

@@ -26,5 +26,6 @@
     "src/**/*",
     "typings/**/*",
     "config-overrides.js"
-  ]
+  ],
+  "exclude": ["./vendor/**/*"]
 }

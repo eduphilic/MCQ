@@ -6,3 +6,7 @@
 # react-archer
 
 - Removed dependencies on react, react-dom, react-scripts (should be peer dependencies)
+
+# react-docgen-typescript-language-service / react-docgen-typescript-loader
+
+- In progress build with language service optimization, awaiting official publish

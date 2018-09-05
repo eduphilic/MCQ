@@ -2,7 +2,12 @@
 // @ts-ignore
 const path = require("path");
 
+// TODO: Remove this hack after react-scripts gains official Babel 7 release.
+const oldArgs = [...process.argv];
+process.argv = [...oldArgs, "--scripts-version", "@strothj/react-scripts"];
 const reactAppRewired = require("react-app-rewired");
+process.argv = oldArgs;
+
 const overrides = require("react-app-rewired/config-overrides");
 const reactScriptsConfig = require(path.join(
   reactAppRewired.paths.scriptVersion,

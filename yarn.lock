@@ -9054,17 +9054,21 @@ react-dev-utils@6.0.0-next.3e165448:
     strip-ansi "4.0.0"
     text-table "0.2.0"
 
-react-docgen-typescript-loader@^3.0.0-rc.0:
+"react-docgen-typescript-language-service@file:./vendor/react-docgen-typescript-language-service":
+  version "1.0.0"
+  dependencies:
+    ts-loader "^4.5.0"
+
+"react-docgen-typescript-loader@file:./vendor/react-docgen-typescript-loader":
   version "3.0.0-rc.0"
-  resolved "https://registry.yarnpkg.com/react-docgen-typescript-loader/-/react-docgen-typescript-loader-3.0.0-rc.0.tgz#f945a4672094f484d0cc5d8412d353fd7223c173"
   dependencies:
     "@webpack-contrib/schema-utils" "^1.0.0-beta.0"
     loader-utils "^1.1.0"
-    react-docgen-typescript "^1.6.0"
+    react-docgen-typescript "^1.8.0"
 
-react-docgen-typescript@^1.6.0:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-1.6.2.tgz#0874da36bef2d47af5155642c627bac30342a90b"
+react-docgen-typescript@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-1.8.0.tgz#4c522f44bcd6d823f41711e4f01be55ef261ece2"
 
 react-docgen@^3.0.0-rc.0:
   version "3.0.0-rc.0"
