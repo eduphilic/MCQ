@@ -116,9 +116,7 @@ export const ExamTakingTourModal: SFC = () => {
                   },
                 ]}
               >
-                Exit Exam <br />
-                <br />
-                Question Palette
+                Exit Exam / Question Palette
               </Description>
             </div>
 
