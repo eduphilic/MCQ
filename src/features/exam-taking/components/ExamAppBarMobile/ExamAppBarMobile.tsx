@@ -12,13 +12,13 @@ import IconButton from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
 import Apps from "@material-ui/icons/Apps";
 import Dashboard from "@material-ui/icons/Dashboard";
-import Language from "@material-ui/icons/Language";
 
 import { Typography } from "componentsV0/Typography";
 import {
   TypographyButton,
   TypographyButtonProps,
 } from "componentsV0/TypographyButton";
+import { LanguageToggleButton } from "features/localization";
 
 import { ExamAppBarTimer } from "../ExamAppBarTimer";
 import { ExamQuestionPalettePopup } from "./ExamQuestionPalettePopup";
@@ -55,9 +55,7 @@ const ExamAppBarMobile: SFC<Props> = props => {
               <Dashboard />
             </IconButton>
 
-            <IconButton>
-              <Language />
-            </IconButton>
+            <LanguageToggleButton />
           </IconButtonGroup>
 
           <AppBarCenterContentWrapper>
