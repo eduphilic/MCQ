@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
+import { LightTheme } from "theme";
 import { actions as localizationActions } from "../../actions";
 
 import Hidden from "@material-ui/core/Hidden";
@@ -66,7 +67,9 @@ class LanguageToggleButtonContainer extends Component<
               horizontal: "right",
             }}
           >
-            <LanguageToggleButton {...this.props} popup />
+            <LightTheme>
+              <LanguageToggleButton {...this.props} popup />
+            </LightTheme>
           </Popover>
         </Hidden>
       </>

@@ -35,6 +35,7 @@ export const LanguageToggleButton = styled<LanguageToggleButtonProps>(
           display: flex;
           flex-direction: column;
           padding: 4px;
+          background-color: #fff;
 
           & > *:not(:last-child) {
             margin-bottom: 4px;
