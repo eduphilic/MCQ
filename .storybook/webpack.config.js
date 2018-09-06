@@ -26,6 +26,11 @@ module.exports = (baseConfig, env, defaultConfig) => {
   );
   const config = defaultConfig;
 
+  // Remove Babel 6 loader.
+  config.module.rules = config.module.rules.filter(
+    r => /\.jsx?$/.toString() !== r.test.toString(),
+  );
+
   // Locate the Babel 7 loader configuration from the rewired configuration.
   // Create React App's Babel 7 loader was adjusted to add TypeScript support
   // using react-app-rewired. We're using this in place of Storybook's Babel 6
@@ -34,6 +39,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
     rewiredReactScriptsConfig.module.rules,
     scriptLoaderMatcher,
   );
+  scriptLoader.include.push(__dirname); // Transpile Storybook config directory.
 
   // Use a different cache directory than that of Create React App so they don't
   // overwrite each other's caches.
@@ -46,7 +52,9 @@ module.exports = (baseConfig, env, defaultConfig) => {
   );
 
   // Remove thread-loader to fix issue with continuos integration server.
-  scriptLoader.use = scriptLoader.use.filter(l => !/thread\-loader/.test(l));
+  scriptLoader.use = scriptLoader.use.filter(
+    l => !/thread\-loader/.test(l.loader),
+  );
 
   // Add loader to add documentation for component props.
   const scriptLoaderLoaders = scriptLoader.use;
