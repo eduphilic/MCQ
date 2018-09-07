@@ -175,5 +175,9 @@ const SubmitExamButton = styled<TypographyButtonProps>(
   StartExamButton as any,
 ).attrs({
   color: "orange",
-  variant: "flat",
-})``;
+  variant: "outlined",
+})`
+  width: 120px;
+  min-height: 26px;
+  padding: 0;
+`;
