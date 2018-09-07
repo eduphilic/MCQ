@@ -75,7 +75,7 @@ const TextGroupWrapper = styled.div`
   ${({ theme }) => theme.breakpoints.down("xs")} {
     flex-wrap: wrap;
 
-    > * {
+    > *:not(button) {
       width: 100% !important;
     }
   }
@@ -100,7 +100,7 @@ const RenewButton = styled<{ className?: string; onClick?: () => void }>(
     </TypographyButton>
   ),
 )`
-  width: 100px;
+  width: initial;
   min-width: initial;
   padding: 4px 20px;
 
@@ -109,5 +109,11 @@ const RenewButton = styled<{ className?: string; onClick?: () => void }>(
   ${({ theme }) => theme.breakpoints.up("sm")} {
     margin-top: 0;
     margin-left: 16px;
+  }
+
+  ${({ theme }) => theme.breakpoints.down("xs")} {
+    margin-left: auto;
+    margin-top: 24px;
+    margin-right: 8px;
   }
 `;
