@@ -153,7 +153,12 @@ export { SettingsPageWithWidth as SettingsPage };
 
 const FormButton = styled<TypographyButtonProps>(({ className, ...rest }) => (
   <div className={className}>
-    <TypographyButton className="form-button" {...rest} />
+    <TypographyButton
+      className="form-button"
+      color="primary"
+      filled
+      {...rest}
+    />
   </div>
 ))`
   display: flex;
@@ -162,7 +167,6 @@ const FormButton = styled<TypographyButtonProps>(({ className, ...rest }) => (
   margin-bottom: 12px;
 
   .form-button {
-    width: 100%;
   }
 
   ${({ theme }) => theme.breakpoints.up("md")} {
