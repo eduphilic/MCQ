@@ -12,6 +12,7 @@ import Remove from "@material-ui/icons/Remove";
 
 import { BlockImage } from "componentsV0/BlockImage";
 import { Typography } from "componentsV0/Typography";
+import { TypographyButton } from "componentsV0/TypographyButton";
 
 export type SelectedEntriesProps = {
   entries: IEntry[];
@@ -53,11 +54,35 @@ export const SelectedEntries: SFC<SelectedEntriesProps> = props => {
           ))}
 
           {isAddMoreEnabled && (
-            <StyledChip
-              label="Add More"
-              onClick={onAddMoreButtonClick}
-              style={{ justifyContent: "center" }}
-            />
+            // <StyledChip
+            //   label="Add More"
+            //   onClick={onAddMoreButtonClick}
+            //   style={{ justifyContent: "center" }}
+            // />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                margin: 0,
+                marginRight: 8,
+                marginTop: 32,
+                marginBottom: -8,
+              }}
+            >
+              <TypographyButton
+                color="primary"
+                variant="raised"
+                filled
+                onClick={onAddMoreButtonClick}
+                style={{
+                  height: 16,
+                  paddingTop: 4,
+                  paddingBottom: 4,
+                }}
+              >
+                Add More
+              </TypographyButton>
+            </div>
           )}
         </MobileWrapper>
       </Hidden>
