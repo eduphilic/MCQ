@@ -4,7 +4,7 @@ export const landingEn = {
   landing_LanguageSelect_English: "English",
   landing_LanguageSelect_Hindi: "हिंदी",
 
-  landing_Hero_PrimaryText: "Free Weekly Mock Test",
+  landing_Hero_PrimaryText: "Prepare for Indian Defense Examinations",
   landing_Hero_SecondaryText: "Instant result with detail analysis report",
 
   landing_HeroFooter_TextPrimary: "Free Weekly Mock Test",

@@ -57,7 +57,14 @@ export const Hero: SFC<HeroProps> = props => {
                       {strings.landing_Hero_PrimaryText}
                     </HeroPrimaryText>
                     <HeroSecondaryText>
-                      {strings.landing_Hero_SecondaryText}
+                      {[
+                        "Mock test as asked in Armed Forces exams.",
+                        "Full length Weekly Mock Test",
+                        "Instant result with detail analysis",
+                        "All in rank",
+                      ].map(line => (
+                        <li key={line}>{line}</li>
+                      ))}
                     </HeroSecondaryText>
                   </HeroTextWrapper>
                 </Hidden>
@@ -149,13 +156,15 @@ const HeroPrimaryText = styled(Typography).attrs({
   }
 `;
 
-const HeroSecondaryText = styled(Typography).attrs({
-  variant: "headline",
-})`
+const HeroSecondaryText = styled.ul`
   margin-top: ${props => props.theme.spacing.unit * 3}px;
   margin-bottom: ${props => props.theme.spacing.unit * 7}px;
   font-size: 24px;
   font-weight: 600;
   text-shadow: 2px 2px #000;
   color: #63b760;
+
+  > li {
+    margin-bottom: 8px;
+  }
 `;
