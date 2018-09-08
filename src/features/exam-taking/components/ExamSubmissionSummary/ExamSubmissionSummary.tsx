@@ -34,17 +34,17 @@ export const ExamSubmissionSummary: SFC<ExamSubmissionSummaryProps> = props => {
 
   return (
     <Wrapper>
-      <TypographyV0 variant="examTitle">Submission</TypographyV0>
+      <Typography variant="H6">Submission</Typography>
 
-      <Typography variant="H5">
+      <Typography variant="H6">
         Total number of Questions: <strong>{totalQuestionsCount}</strong>
       </Typography>
 
       {mapStats(stats, (key, value) => (
         <StatWrapper key={key}>
-          <TypographyV0 variant="examTitle">{examStatLabels[key]}</TypographyV0>
+          <Typography variant="Body1">{examStatLabels[key]}</Typography>
 
-          <TypographyV0 variant="examTitle">{value}</TypographyV0>
+          <Typography variant="Body1">{value}</Typography>
         </StatWrapper>
       ))}
 
@@ -59,8 +59,12 @@ export const ExamSubmissionSummary: SFC<ExamSubmissionSummaryProps> = props => {
         }
         buttonsNode={
           <>
-            <TypographyButton>Submit</TypographyButton>
-            <TypographyButton>Attempt Balance</TypographyButton>
+            <TypographyButton color="primary" filled>
+              Submit
+            </TypographyButton>
+            <TypographyButton color="primary" filled>
+              Attempt Balance
+            </TypographyButton>
           </>
         }
       />
@@ -127,7 +131,6 @@ const QuestionAndButtonsWrapper = styled<{
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 100%;
     }
 
     .buttons > *:not(:last-child) {
