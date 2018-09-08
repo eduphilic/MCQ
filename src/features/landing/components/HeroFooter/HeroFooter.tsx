@@ -15,7 +15,7 @@ export const HeroFooter: SFC<{}> = () => (
     {/* <Bar /> */}
     {/* <Text>{strings.landing_HeroFooter_Text}</Text> */}
     <Text>{strings.landing_Hero_PrimaryText}</Text>
-    <Text>{strings.landing_Hero_SecondaryText}</Text>
+    {/* <Text>{strings.landing_Hero_SecondaryText}</Text> */}
   </Wrapper>
 );
 
@@ -30,9 +30,11 @@ const Wrapper = styled.div`
     margin: ${props => props.theme.spacing.unit * 4}px;
   }
 
-  > *:first-child {
-    font-size: 26px;
-    margin-bottom: 0;
+  > * {
+    /* > *:first-child { */
+    font-size: 26px !important;
+    /* font-size: 26px; */
+    /* margin-bottom: 0; */
   }
 `;
 
@@ -55,8 +57,8 @@ const Text = styled(Typography).attrs({
   variant: "title",
 })`
   /* margin-top: 0 !important; */
-  font-size: 18px;
-  font-size: 18px;
+  /* font-size: 18px;
+  font-size: 18px; */
   font-weight: 600;
   letter-spacing: 0.01rem;
 `;
