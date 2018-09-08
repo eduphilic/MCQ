@@ -8,12 +8,12 @@ export type PageContentWrapperProps = {
 export const PageContentWrapper = withProps<PageContentWrapperProps>()(
   styled.div,
 )`
-  ${fromGutters(["padding"])};
   ${({ verticalGutters }) =>
     verticalGutters && fromGutters(["margin-bottom"], "> *:not(:last-child)")}
 
   width: 100%;
   max-width: 1280px;
+  padding: 8px;
   margin: 0 auto;
 `;
 
