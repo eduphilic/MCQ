@@ -6,42 +6,70 @@ import Add from "@material-ui/icons/Add";
 import { Typography } from "../Typography";
 import { Button, ButtonProps, colors } from "./Button";
 
-storiesOf("Components", module).add("Button", () => {
-  //
+storiesOf("Components", module)
+  .addParameters({ info: { source: false } })
+  .add("Button", () => {
+    //
 
-  return (
-    <div>
-      <Wrapper>
-        {(["text", "outlined", "contained", "fab"] as NonNullable<
-          ButtonProps["variant"]
-        >[]).map(variant => (
-          <Fragment key={variant}>
-            <Typography variant="H6" paragraph>
-              {capitalize(variant)} Buttons
-            </Typography>
+    return (
+      <div>
+        <Wrapper>
+          {(["text", "outlined", "contained", "fab"] as NonNullable<
+            ButtonProps["variant"]
+          >[]).map(variant => (
+            <Fragment key={variant}>
+              <Typography variant="H6" paragraph>
+                {capitalize(variant)} Buttons
+              </Typography>
 
-            {colors.map(color => (
-              <Button key={color} variant={variant} color={color}>
-                {variant !== "fab" ? capitalize(color) : <Add />}
+              {colors.map(color => (
+                <Button key={color} variant={variant} color={color}>
+                  {variant !== "fab" ? capitalize(color) : <Add />}
+                </Button>
+              ))}
+
+              {variant === "fab" && (
+                <Button key="fab" variant="extendedFab" color="red">
+                  <Add />
+                  Extended
+                </Button>
+              )}
+
+              <Button key="disabled" variant={variant} disabled>
+                {variant !== "fab" ? "Disabled" : <Add />}
               </Button>
-            ))}
+            </Fragment>
+          ))}
 
-            {variant === "fab" && (
-              <Button key="fab" variant="extendedFab" color="red">
-                <Add />
-                Extended
-              </Button>
-            )}
+          <Typography variant="H6" paragraph>
+            Sizes
+          </Typography>
 
-            <Button key="disabled" variant={variant} disabled>
-              {variant !== "fab" ? "Disabled" : <Add />}
-            </Button>
-          </Fragment>
-        ))}
-      </Wrapper>
-    </div>
-  );
-});
+          {(["text", "outlined", "contained"] as NonNullable<
+            ButtonProps["variant"]
+          >[]).map(variant =>
+            (["small", "medium", "large"] as NonNullable<
+              ButtonProps["size"]
+            >[]).map((size, index) => (
+              <Fragment key={`${variant}-${size}`}>
+                <Button variant={variant} color="primary" size={size}>
+                  {capitalize(size)}
+                </Button>
+                {index === 2 && <br />}
+              </Fragment>
+            )),
+          )}
+
+          <Button variant="fab" color="primary" mini>
+            <Add />
+          </Button>
+          <Button variant="fab" color="primary">
+            <Add />
+          </Button>
+        </Wrapper>
+      </div>
+    );
+  });
 
 const Wrapper = styled.div`
   padding: 3rem;
