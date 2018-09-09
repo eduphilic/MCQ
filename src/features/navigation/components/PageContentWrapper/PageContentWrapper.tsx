@@ -13,8 +13,12 @@ export const PageContentWrapper = withProps<PageContentWrapperProps>()(
 
   width: 100%;
   max-width: 1280px;
-  padding: 8px;
+  padding: 16px 8px;
   margin: 0 auto;
+
+  ${({ theme }) => theme.breakpoints.up("sm")} {
+    padding: 16px;
+  }
 `;
 
 PageContentWrapper.displayName = "PageContentWrapper";
