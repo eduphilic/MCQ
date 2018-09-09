@@ -7,10 +7,13 @@ import React from "react";
 import styled, { css } from "styled";
 import { styleTable } from "../Typography";
 
-const createCustomColorCss = (className: string, color: string) => css`
-  /* Styles applied to the root element if variant="text". */
-  &.variant-text.color-${className} {
+const createCustomColorCss = (colorName: string, color: string) => css`
+  &.color-${colorName} {
     color: ${color};
+  }
+
+  /* Styles applied to the root element if variant="text". */
+  &.variant-text.color-${colorName} {
     &:hover {
       background-color: ${({ theme }) =>
         fade(color, theme.palette.action.hoverOpacity)};
@@ -21,11 +24,17 @@ const createCustomColorCss = (className: string, color: string) => css`
       }
     }
   }
+
+  /* Styles applied to the root element if variant="outlined" */
+  &.variant-outlined.color-${colorName} {
+    border: 1px solid ${fade(color, 0.5)};
+    &:hover {
+      border: 1px solid ${color};
+    }
+  }
 `;
 
 const buttonColors = {
-  default: createCustomColorCss("primary", "#2f8d2b"),
-  inherit: createCustomColorCss("primary", "#2f8d2b"),
   primary: createCustomColorCss("primary", "#2f8d2b"),
   orange: createCustomColorCss("orange", "#f2994a"),
   red: createCustomColorCss("red", "#910f0f"),
@@ -34,9 +43,11 @@ const buttonColors = {
   lightGreen: createCustomColorCss("lightGreen", "#4fef48"),
 };
 
-export const colors = Object.keys(
-  buttonColors,
-) as (keyof typeof buttonColors)[];
+export const colors: NonNullable<ButtonProps["color"]>[] = [
+  "default",
+  "inherit",
+  ...(Object.keys(buttonColors) as NonNullable<ButtonProps["color"]>[]),
+];
 
 const buttonColorsCss = Object.values(buttonColors).reduce(
   (accumulator, color) => {
@@ -59,7 +70,7 @@ const typographyCss = css`
 `;
 
 export type ButtonProps = Omit<MuiButtonProps, "color" | "variant"> & {
-  color?: keyof typeof buttonColors;
+  color?: keyof typeof buttonColors | "default" | "inherit";
   variant?: "text" | "outlined" | "contained" | "fab" | "extendedFab";
 };
 
@@ -69,12 +80,15 @@ export const Button = styled<ButtonProps>(props => {
   const classes: string[] = [];
   if (className) classes.push(className);
   classes.push(`variant-${variant}`);
-  classes.push(`color-${color}`);
+
+  if (color !== "default" && color !== "inherit") {
+    classes.push(`color-${color}`);
+  }
 
   return (
     <MuiButton
       className={classes.join(" ")}
-      color="default"
+      color={color === "inherit" ? "inherit" : "default"}
       variant={variant}
       {...rest}
     />

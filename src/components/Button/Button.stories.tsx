@@ -1,8 +1,9 @@
 import { storiesOf } from "@storybook/react";
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled";
 
-import { Button, colors } from "./Button";
+import { Typography } from "../Typography";
+import { Button, ButtonProps, colors } from "./Button";
 
 storiesOf("Components", module).add("Button", () => {
   //
@@ -10,11 +11,21 @@ storiesOf("Components", module).add("Button", () => {
   return (
     <div>
       <Wrapper>
-        {colors.map(color => (
-          <Button key={color} color={color}>
-            {capitalize(color)}
-          </Button>
-        ))}
+        {(["text", "outlined"] as NonNullable<ButtonProps["variant"]>[]).map(
+          variant => (
+            <Fragment key={variant}>
+              <Typography variant="H6" paragraph>
+                {capitalize(variant)} Buttons
+              </Typography>
+
+              {colors.map(color => (
+                <Button key={color} variant={variant} color={color}>
+                  {capitalize(color)}
+                </Button>
+              ))}
+            </Fragment>
+          ),
+        )}
       </Wrapper>
     </div>
   );
@@ -24,12 +35,9 @@ const Wrapper = styled.div`
   padding: 7rem;
   background-color: #eee;
 
-  &:not(:last-child) {
-    margin-bottom: 24px;
-  }
-
-  button:not(:last-child) {
+  button {
     margin-right: 16px;
+    margin-bottom: 24px;
   }
 `;
 
