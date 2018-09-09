@@ -47,7 +47,9 @@ const createCustomColorCss = (colorName: string, color: string) => {
     }
 
     /* Styles applied to the root element if variant="[contained | fab]". */
-    &.variant-contained.color-${colorName} {
+    &.variant-contained.color-${colorName},
+      &.variant-fab.color-${colorName},
+      &.variant-extendedFab.color-${colorName} {
       ${({ theme }) => `
       color: ${theme.palette.getContrastText(color)};
       background-color: ${color};

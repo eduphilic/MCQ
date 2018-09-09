@@ -2,6 +2,7 @@ import { storiesOf } from "@storybook/react";
 import React, { Fragment } from "react";
 import styled from "styled";
 
+import Add from "@material-ui/icons/Add";
 import { Typography } from "../Typography";
 import { Button, ButtonProps, colors } from "./Button";
 
@@ -11,7 +12,7 @@ storiesOf("Components", module).add("Button", () => {
   return (
     <div>
       <Wrapper>
-        {(["text", "outlined", "contained"] as NonNullable<
+        {(["text", "outlined", "contained", "fab"] as NonNullable<
           ButtonProps["variant"]
         >[]).map(variant => (
           <Fragment key={variant}>
@@ -21,12 +22,19 @@ storiesOf("Components", module).add("Button", () => {
 
             {colors.map(color => (
               <Button key={color} variant={variant} color={color}>
-                {capitalize(color)}
+                {variant !== "fab" ? capitalize(color) : <Add />}
               </Button>
             ))}
 
+            {variant === "fab" && (
+              <Button key="fab" variant="extendedFab" color="red">
+                <Add />
+                Extended
+              </Button>
+            )}
+
             <Button key="disabled" variant={variant} disabled>
-              Disabled
+              {variant !== "fab" ? "Disabled" : <Add />}
             </Button>
           </Fragment>
         ))}
