@@ -1,13 +1,19 @@
 import { entryImages } from "common/structures/entryImages";
-import React, { Component, createRef } from "react";
+import React, { Component, createRef, ReactNode } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
-import styled from "styled";
 import { actions } from "./actions";
 
+import Grid from "@material-ui/core/Grid";
+import Hidden from "@material-ui/core/Hidden";
+import { Button } from "components/Button";
+import { Card } from "components/Card";
+import { CardContent } from "components/CardContent";
+import { CardHeader } from "components/CardHeader";
 import { Dialog } from "components/Dialog";
 import { DialogAppBar } from "components/DialogAppBar";
 import { DialogContent } from "components/DialogContent";
+import { Typography } from "components/Typography";
 import { ExamReviewDialog } from "features/exam-review";
 import { SubscriptionCard } from "./components/SubscriptionCard";
 
@@ -59,26 +65,49 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
     ];
 
     const subscriptionCards = subscriptions.map((subscription, index) => (
-      <SubscriptionCard
-        key={subscription[0]}
-        imageUrl={entryImages[subscription[0]]}
-        title={subscription[1]}
-        subheader="Validity 31st Jan 2019"
-        overline={subscription[2] ? "1 Free Test" : "10 Mock Tests Set"}
-        stats={{
-          Attempted: "02 Tests",
-          Remaining: "08 Tests",
-        }}
-        onClick={() => this.handleSubscriptionClick(index)}
-        onAttemptButtonClick={index < 2 ? () => alert("Attempt") : undefined}
-        onReviseButtonClick={
-          index === 1
-            ? () =>
-                this.examReviewDialog.current!.openDialogForExam() /* () => alert("Revise") */
-            : undefined
-        }
-        showDisabledExpiredButton={index === 2}
-      />
+      <Card key={subscription[0]}>
+        <CardHeader
+          imageUrl={entryImages[subscription[0]]}
+          title={subscription[1]}
+          subheader="Validity 31st Jan 2019"
+          overline={subscription[2] ? "1 Free Test" : "10 Mock Tests Set"}
+        />
+        <CardContent>
+          <Grid container spacing={8}>
+            <SubscriptionCardRow
+              leftNode={<Typography variant="Subtitle2">Attempted</Typography>}
+              rightNode={
+                <Button
+                  variant="contained"
+                  size="small"
+                  fullWidth
+                  disabled={index > 1}
+                  onClick={() =>
+                    this.examReviewDialog.current!.openDialogForExam()
+                  }
+                >
+                  02 Tests (Revise)
+                </Button>
+              }
+            />
+            <SubscriptionCardRow
+              leftNode={<Typography variant="Subtitle2">Remaining</Typography>}
+              rightNode={
+                <Button
+                  variant="contained"
+                  size="small"
+                  color="primary"
+                  fullWidth
+                  disabled={index !== 1}
+                  onClick={() => this.handleSubscriptionClick(index)}
+                >
+                  08 Tests (Attempt)
+                </Button>
+              }
+            />
+          </Grid>
+        </CardContent>
+      </Card>
     ));
 
     const testCards =
@@ -121,10 +150,29 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
 
     return (
       <>
-        <TwoColumnWrapper>
-          <div>{subscriptionCards}</div>
-          <div>{testCards}</div>
-        </TwoColumnWrapper>
+        <Grid container spacing={16}>
+          <Grid item xs md={6}>
+            <Grid container spacing={16}>
+              {subscriptionCards.map((subscriptionCard, index) => (
+                <Grid key={index} item>
+                  {subscriptionCard}
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+          <Hidden smDown>
+            <Grid item md={6}>
+              <Grid container spacing={16}>
+                {testCards &&
+                  testCards.map((testCard, index) => (
+                    <Grid key={index} item xs={12}>
+                      {testCard}
+                    </Grid>
+                  ))}
+              </Grid>
+            </Grid>
+          </Hidden>
+        </Grid>
 
         {selectedSubscription !== null && (
           <Dialog variant="fullScreenMobileHidden" open={dialogOpen}>
@@ -176,33 +224,22 @@ const ExamBoardPageContainer = connect<
 )(ExamBoardPage);
 export { ExamBoardPageContainer as ExamBoardPage };
 
-const TwoColumnWrapper = styled.div`
-  display: flex;
-
-  > * {
-    width: 100%;
-  }
-
-  > *:last-child {
-    display: none;
-  }
-
-  > div > *:not(:last-child) {
-    margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
-  }
-
-  ${({ theme }) => theme.breakpoints.up("md")} {
-    > * {
-      width: 50%;
-    }
-
-    > *:first-child {
-      padding-right: ${({ theme }) => (theme.spacing.unit * 3) / 2}px;
-    }
-
-    > *:last-child {
-      display: block;
-      padding-left: ${({ theme }) => (theme.spacing.unit * 3) / 2}px;
-    }
-  }
-`;
+const SubscriptionCardRow = (props: {
+  leftNode: ReactNode;
+  rightNode: ReactNode;
+}) => (
+  <Grid item xs={12}>
+    <Grid container alignItems="center">
+      <Grid item xs={6}>
+        {props.leftNode}
+      </Grid>
+      <Grid item xs={6}>
+        <Grid container justify="flex-end">
+          <Grid item style={{ minWidth: 184 }}>
+            {props.rightNode}
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
+  </Grid>
+);
