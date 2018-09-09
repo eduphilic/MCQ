@@ -2,37 +2,83 @@
 import MuiButton, {
   ButtonProps as MuiButtonProps,
 } from "@material-ui/core/Button";
-import { fade } from "@material-ui/core/styles/colorManipulator";
+import {
+  darken,
+  fade,
+  // lighten,
+} from "@material-ui/core/styles/colorManipulator";
 import React from "react";
 import styled, { css } from "styled";
 import { styleTable } from "../Typography";
 
-const createCustomColorCss = (colorName: string, color: string) => css`
-  &.color-${colorName} {
-    color: ${color};
-  }
+const createCustomColorCss = (colorName: string, color: string) => {
+  // From:
+  // https://github.com/mui-org/material-ui/blob/master/packages/material-ui/src/styles/createPalette.js
+  // function addLightOrDark(..)
+  const tonalOffset = 0.2;
+  // const colorLight = lighten(color, tonalOffset);
+  const colorDark = darken(color, tonalOffset * 1.5);
 
-  /* Styles applied to the root element if variant="text". */
-  &.variant-text.color-${colorName} {
-    &:hover {
-      background-color: ${({ theme }) =>
-        fade(color, theme.palette.action.hoverOpacity)};
+  return css`
+    &.color-${colorName} {
+      color: ${color};
+    }
 
-      /* Reset on touch devices, it doesn't add specificity */
-      @media (hover: none) {
-        background-color: transparent;
+    /* Styles applied to the root element if variant="text". */
+    &.variant-text.color-${colorName} {
+      &:hover {
+        background-color: ${({ theme }) =>
+          fade(color, theme.palette.action.hoverOpacity)};
+
+        /* Reset on touch devices, it doesn't add specificity */
+        @media (hover: none) {
+          background-color: transparent;
+        }
       }
     }
-  }
 
-  /* Styles applied to the root element if variant="outlined" */
-  &.variant-outlined.color-${colorName} {
-    border: 1px solid ${fade(color, 0.5)};
-    &:hover {
-      border: 1px solid ${color};
+    /* Styles applied to the root element if variant="outlined" */
+    &.variant-outlined.color-${colorName} {
+      border: 1px solid ${fade(color, 0.5)};
+
+      &:hover {
+        border: 1px solid ${color};
+      }
     }
-  }
-`;
+
+    /* Styles applied to the root element if variant="[contained | fab]". */
+    &.variant-contained.color-${colorName} {
+      ${({ theme }) => `
+      color: ${theme.palette.getContrastText(color)};
+      background-color: ${color};
+      box-shadow: ${theme.shadows[2]};
+
+      &.focusVisible {
+        box-shadow: ${theme.shadows[6]};
+      }
+
+      &:active {
+        box-shadow: ${theme.shadows[8]};
+      }
+
+      &.disabled {
+        color: ${theme.palette.action.disabled};
+        background-color: ${theme.palette.action.disabledBackground};
+        box-shadow: ${theme.shadows[0]};
+      }
+
+      &:hover {
+        background-color: ${colorDark};
+
+        /* Reset on touch devices, it doesn't add specificity */
+        @media (hover: none) {
+          background-color: ${color};
+        }
+      }
+    `};
+    }
+  `;
+};
 
 const buttonColors = {
   primary: createCustomColorCss("primary", "#2f8d2b"),
@@ -69,25 +115,45 @@ const typographyCss = css`
   text-transform: none;
 `;
 
-export type ButtonProps = Omit<MuiButtonProps, "color" | "variant"> & {
+export type ButtonProps = Omit<
+  MuiButtonProps,
+  "classes" | "color" | "variant"
+> & {
+  classes?: Omit<
+    NonNullable<MuiButtonProps["classes"]>,
+    "disabled" | "focusVisible"
+  >;
   color?: keyof typeof buttonColors | "default" | "inherit";
   variant?: "text" | "outlined" | "contained" | "fab" | "extendedFab";
 };
 
 export const Button = styled<ButtonProps>(props => {
-  const { className, color = "default", variant = "text", ...rest } = props;
+  const {
+    className,
+    classes: parentClasses = {},
+    color = "default",
+    variant = "text",
+    ...rest
+  } = props;
 
-  const classes: string[] = [];
-  if (className) classes.push(className);
-  classes.push(`variant-${variant}`);
+  const classNames: string[] = [];
+  if (className) classNames.push(className);
+  classNames.push(`variant-${variant}`);
 
   if (color !== "default" && color !== "inherit") {
-    classes.push(`color-${color}`);
+    classNames.push(`color-${color}`);
   }
+
+  const classes: MuiButtonProps["classes"] = {
+    ...parentClasses,
+    disabled: "disabled",
+    focusVisible: "focusVisible",
+  };
 
   return (
     <MuiButton
-      className={classes.join(" ")}
+      className={classNames.join(" ")}
+      classes={classes}
       color={color === "inherit" ? "inherit" : "default"}
       variant={variant}
       {...rest}

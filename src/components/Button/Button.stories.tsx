@@ -11,28 +11,32 @@ storiesOf("Components", module).add("Button", () => {
   return (
     <div>
       <Wrapper>
-        {(["text", "outlined"] as NonNullable<ButtonProps["variant"]>[]).map(
-          variant => (
-            <Fragment key={variant}>
-              <Typography variant="H6" paragraph>
-                {capitalize(variant)} Buttons
-              </Typography>
+        {(["text", "outlined", "contained"] as NonNullable<
+          ButtonProps["variant"]
+        >[]).map(variant => (
+          <Fragment key={variant}>
+            <Typography variant="H6" paragraph>
+              {capitalize(variant)} Buttons
+            </Typography>
 
-              {colors.map(color => (
-                <Button key={color} variant={variant} color={color}>
-                  {capitalize(color)}
-                </Button>
-              ))}
-            </Fragment>
-          ),
-        )}
+            {colors.map(color => (
+              <Button key={color} variant={variant} color={color}>
+                {capitalize(color)}
+              </Button>
+            ))}
+
+            <Button key="disabled" variant={variant} disabled>
+              Disabled
+            </Button>
+          </Fragment>
+        ))}
       </Wrapper>
     </div>
   );
 });
 
 const Wrapper = styled.div`
-  padding: 7rem;
+  padding: 3rem;
   background-color: #eee;
 
   button {
