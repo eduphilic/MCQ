@@ -1,6 +1,8 @@
 import { entryImages } from "common/structures/entryImages";
+import { routePathFromLocalizationKey } from "features/navigation";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { State } from "store";
 import { actions } from "./actions";
 
@@ -75,11 +77,18 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
               leftNode={<Typography variant="Subtitle2">Attempted</Typography>}
               rightNode={
                 <Button
+                  component={(props: any) => (
+                    <Link
+                      to={routePathFromLocalizationKey(
+                        "routes_ExamReview_ExamReviewPage",
+                      )}
+                      {...props}
+                    />
+                  )}
                   variant="contained"
                   size="small"
                   fullWidth
                   disabled={index > 1}
-                  onClick={() => alert("Open review page")}
                 >
                   02 Tests (Revise)
                 </Button>
@@ -123,10 +132,15 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
                   Score: "75/200",
                   Rank: "733/ Out 2345",
                 }}
-                onReviseButtonClick={
+                reviewButtonLinkComponent={
                   index === 0
-                    ? this.createDialogCloseHandlerWrapper(() =>
-                        alert("Open review page"),
+                    ? (props: any) => (
+                        <Link
+                          to={routePathFromLocalizationKey(
+                            "routes_ExamReview_ExamReviewPage",
+                          )}
+                          {...props}
+                        />
                       )
                     : undefined
                 }

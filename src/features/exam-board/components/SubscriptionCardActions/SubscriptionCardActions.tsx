@@ -1,5 +1,5 @@
 import { strings } from "features/localization";
-import React, { SFC } from "react";
+import React, { ComponentType, SFC } from "react";
 import styled from "styled";
 
 import CardActions from "@material-ui/core/CardActions";
@@ -10,7 +10,7 @@ import {
 
 export type SubscriptionCardActionsProps = {
   showDisabledExpiredButton?: boolean;
-  onReviseButtonClick?: () => void;
+  reviewButtonLinkComponent?: ComponentType<any>;
   onAttemptButtonClick?: () => void;
 };
 
@@ -19,16 +19,16 @@ export const SubscriptionCardActions: SFC<
 > = props => {
   const {
     showDisabledExpiredButton,
-    onReviseButtonClick,
+    reviewButtonLinkComponent,
     onAttemptButtonClick,
   } = props;
 
   const buttons: (TypographyButtonProps | null)[] = [
-    onReviseButtonClick
+    reviewButtonLinkComponent
       ? {
           color: "primary",
           children: strings.examBoard_SubscriptionCardActions_ReviseButtonTitle,
-          onClick: onReviseButtonClick,
+          component: reviewButtonLinkComponent,
         }
       : null,
     onAttemptButtonClick

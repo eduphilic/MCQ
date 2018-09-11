@@ -1,3 +1,3 @@
 import React from "react";
 
-export const ExamReviewPage = () => <div>Exam Review Page</div>;
+export const ExamReviewPage = () => <div>Exam Revise Page</div>;

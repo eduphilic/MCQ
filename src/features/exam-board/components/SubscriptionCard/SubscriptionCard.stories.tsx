@@ -14,7 +14,9 @@ storiesOf("Exam Board", module).add("SubscriptionCard", () => {
     overline: "10 Mock Tests Set",
     imageUrl: entryImages.AirForce,
     onAttemptButtonClick: action("onAttemptButtonClick"),
-    onReviseButtonClick: action("onReviseButtonClick"),
+    reviewButtonLinkComponent: (p: any) => (
+      <div onClick={action("onReviseButtonClick")} {...p} />
+    ),
     stats: {
       Attempted: "02 Tests",
       Remaining: "08 Tests",

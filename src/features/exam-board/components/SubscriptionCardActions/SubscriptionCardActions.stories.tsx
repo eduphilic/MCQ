@@ -8,8 +8,8 @@ import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookC
 import { SubscriptionCardActions } from "./SubscriptionCardActions";
 
 storiesOf("Exam Board", module).add("SubscriptionCardActions", () => {
-  const onReviseButtonClick = boolean("With Revise Button", true)
-    ? action("onReviseButtonClick")
+  const reviewButtonLinkComponent = boolean("With Revise Button", true)
+    ? (props: any) => <div onClick={action("onReviseButtonClick")} {...props} />
     : undefined;
 
   const onAttemptButtonClick = boolean("With Attempt Button", true)
@@ -21,7 +21,7 @@ storiesOf("Exam Board", module).add("SubscriptionCardActions", () => {
   const cardActions = (
     <SubscriptionCardActions
       showDisabledExpiredButton={showDisabledExpiredButton}
-      onReviseButtonClick={onReviseButtonClick}
+      reviewButtonLinkComponent={reviewButtonLinkComponent}
       onAttemptButtonClick={onAttemptButtonClick}
     />
   );
