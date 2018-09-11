@@ -8,6 +8,7 @@ import withWidth, { isWidthDown, WithWidth } from "@material-ui/core/withWidth";
 
 import { DashboardTemplate } from "componentsV0/DashboardTemplate";
 
+import { FeatureKey } from "../../types/FeatureKey";
 import { ExamAppBar } from "../ExamAppBar";
 import { ExamBottomNavFrame } from "../ExamBottomNavFrame";
 import { ExamDrawerContents } from "../ExamDrawerContents";
@@ -20,15 +21,22 @@ type StateProps = {
   showBottomNav: boolean;
 };
 
-type OwnProps = ExamTemplateMobileProps;
+type OwnProps = ExamTemplateMobileProps & FeatureKey;
 export type ExamTemplateProps = OwnProps;
 
 type Props = StateProps & WithWidth & OwnProps;
 
 const ExamTemplate: SFC<Props> = props => {
-  const { children, showBottomNav, width, staticView, paneKeyNodeMap } = props;
+  const {
+    children,
+    showBottomNav,
+    width,
+    staticView,
+    paneKeyNodeMap,
+    featureKey,
+  } = props;
 
-  const drawerContentsNode = <ExamDrawerContents />;
+  const drawerContentsNode = <ExamDrawerContents featureKey={featureKey} />;
   const showMobileTemplate = isWidthDown("sm", width);
 
   const pageContentsWrapperComponent = !showBottomNav
@@ -62,9 +70,10 @@ const ExamTemplate: SFC<Props> = props => {
 const ExamTemplateWithWidth = withWidth()(ExamTemplate);
 
 const ExamTemplateContainer = connect<StateProps, {}, OwnProps, State>(
-  ({ examTaking }): StateProps => ({
+  (store, { featureKey = "examTaking" }): StateProps => ({
     showBottomNav:
-      !examTaking.showOverviewScreen && !examTaking.showSubmissionSummaryScreen,
+      !store[featureKey].showOverviewScreen &&
+      !store[featureKey].showSubmissionSummaryScreen,
   }),
 )(ExamTemplateWithWidth);
 export { ExamTemplateContainer as ExamTemplate };

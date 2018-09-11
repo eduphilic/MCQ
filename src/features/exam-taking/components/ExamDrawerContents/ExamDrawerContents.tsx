@@ -3,15 +3,15 @@ import styled from "styled";
 
 import { DrawerLogo } from "componentsV0/DrawerLogo";
 
+import { FeatureKey } from "../../types/FeatureKey";
 import { ExamDrawerQuestionPalette } from "../ExamDrawerQuestionPalette";
 import { ExamDrawerQuestionSelect } from "../ExamDrawerQuestionSelect";
 import { ExamDrawerTimerInfoCard } from "../ExamDrawerTimerInfoCard";
 
-// tslint:disable-next-line:no-empty-interface
-export interface ExamDrawerContentsProps {}
+export type ExamDrawerContentsProps = FeatureKey;
 
 export const ExamDrawerContents: SFC<ExamDrawerContentsProps> = props => {
-  const {} = props;
+  const { featureKey } = props;
 
   return (
     <Wrapper>
@@ -21,7 +21,7 @@ export const ExamDrawerContents: SFC<ExamDrawerContentsProps> = props => {
 
       <ExamDrawerQuestionPalette />
 
-      <ExamDrawerQuestionSelect />
+      <ExamDrawerQuestionSelect featureKey={featureKey} />
     </Wrapper>
   );
 };

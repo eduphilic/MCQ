@@ -2,6 +2,7 @@ import React, { ReactNode, SFC } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
 import { actions } from "../../actions";
+import { FeatureKey } from "../../types/FeatureKey";
 
 import { BaseSwippableTemplate } from "../BaseSwippableTemplate";
 
@@ -15,7 +16,7 @@ type DispatchProps = {
   onPaneChange: (questionIndex: number) => any;
 };
 
-type OwnProps = {
+type OwnProps = FeatureKey & {
   /**
    * Render a static view instead of a swipeable pane.
    */

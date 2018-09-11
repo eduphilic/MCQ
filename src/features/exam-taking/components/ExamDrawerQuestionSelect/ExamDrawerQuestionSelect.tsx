@@ -5,11 +5,12 @@ import styled from "styled";
 import { actions } from "../../actions";
 import { IExamQuestion } from "../../models/IExamQuestion";
 import { IExamQuestionCategory } from "../../models/IExamQuestionCategory";
+import { FeatureKey } from "../../types/FeatureKey";
 
 import { Typography } from "componentsV0/Typography";
 import { QuestionButton } from "./QuestionButton";
 
-interface StateProps {
+type StateProps = {
   questions: IExamQuestion[];
   questionCategories: IExamQuestionCategory[];
 
@@ -20,25 +21,23 @@ interface StateProps {
   showSelectedQuestionHighlight: boolean;
 
   currentQuestion: number;
-}
+};
 
-interface DispatchProps {
+type DispatchProps = {
   navigateToQuestion: (questionIndex: number) => any;
-}
+};
 
-// tslint:disable-next-line:no-empty-interface
-interface OwnProps {}
+type OwnProps = FeatureKey & {};
+export type ExamDrawerQuestionSelectProps = OwnProps;
 
-export type ExamDrawerQuestionSelectProps = StateProps &
-  DispatchProps &
-  OwnProps;
+type Props = StateProps & DispatchProps & OwnProps;
 
 /**
  * Provides buttons for navigating among the exam questions. It separates the
  * buttons into groups by category. It displays the current status of the
  * question (visited/answered/etc...).
  */
-const ExamDrawerQuestionSelect: SFC<ExamDrawerQuestionSelectProps> = props => {
+const ExamDrawerQuestionSelect: SFC<Props> = props => {
   const {
     questions,
     questionCategories,
@@ -91,13 +90,13 @@ const ExamDrawerQuestionSelectContainer = connect<
   OwnProps,
   State
 >(
-  state => ({
-    questions: state.examTaking.questions!,
-    questionCategories: state.examTaking.questionCategories!,
+  (state, { featureKey = "examTaking" }) => ({
+    questions: state[featureKey].questions!,
+    questionCategories: state[featureKey].questionCategories!,
     showSelectedQuestionHighlight:
-      !state.examTaking.showOverviewScreen &&
-      !state.examTaking.showSubmissionSummaryScreen,
-    currentQuestion: state.examTaking.currentQuestion,
+      !state[featureKey].showOverviewScreen &&
+      !state[featureKey].showSubmissionSummaryScreen,
+    currentQuestion: state[featureKey].currentQuestion,
   }),
   {
     navigateToQuestion: actions.navigateToQuestion,
