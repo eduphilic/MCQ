@@ -14,6 +14,7 @@ import { navigationLinksExam } from "common/structures/navigationLinksExam";
 import { AdminRoute } from "./AdminRoute";
 
 import { DashboardPages } from "features/dashboard";
+import { pages as examReviewPages } from "features/exam-review";
 import { pages as landingPages } from "features/landing";
 
 export const SiteMap: SFC<{}> = () => {
@@ -49,6 +50,8 @@ export const SiteMap: SFC<{}> = () => {
           {adminLoginPageNode}
           {adminPagesNode}
           {examPageNode}
+
+          {examReviewPages}
 
           <MultipathRoute
             paths={[

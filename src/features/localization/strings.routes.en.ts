@@ -9,6 +9,8 @@ export const routesEn = {
 
   routes_ExamTaking_ExamQuizPage: "",
 
+  routes_ExamReview_ExamReviewPage: "Revise",
+
   routes_pages_Admin_AdminDashboard: "Dashboard",
   routes_pages_Admin_AdminEntryManager: "Entry Manager",
   routes_pages_Admin_AdminIndexManager: "Index Manager",

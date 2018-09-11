@@ -37,6 +37,10 @@ export const routes: {
     pageTitleLocalizationKey: "routes_ExamTaking_ExamQuizPage",
   },
   {
+    path: "/exam-review",
+    pageTitleLocalizationKey: "routes_ExamReview_ExamReviewPage",
+  },
+  {
     path: "/settings",
     pageTitleLocalizationKey: "routes_Dashboard_SettingsPage",
   },

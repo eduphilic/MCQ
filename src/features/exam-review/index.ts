@@ -1,1 +1,1 @@
-export * from "./ExamReviewDialog";
+export * from "./pages";
