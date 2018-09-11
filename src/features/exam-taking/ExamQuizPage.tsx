@@ -1,4 +1,3 @@
-import { examPaneKeyNodeMap } from "common/structures/examPaneKeyNodeMap";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
@@ -54,8 +53,8 @@ class ExamQuizPage extends Component<ExamQuizPageProps> {
       currentQuestion,
     } = this.props;
 
-    const paneKeyNodeMap = examPaneKeyNodeMap.map((pane, index) => ({
-      key: pane.key,
+    const paneKeyNodeMap = Array.from({ length: 15 }, (_, index) => ({
+      key: `pane-${index}`,
       node: (
         <ExamLayout
           headerNode={
