@@ -1,5 +1,5 @@
 import { entryImages } from "common/structures/entryImages";
-import React, { Component, createRef, ReactNode } from "react";
+import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
 import { actions } from "./actions";
@@ -14,7 +14,6 @@ import { Dialog } from "components/Dialog";
 import { DialogAppBar } from "components/DialogAppBar";
 import { DialogContent } from "components/DialogContent";
 import { Typography } from "components/Typography";
-import { ExamReviewDialog } from "features/exam-review";
 import { SubscriptionCard } from "./components/SubscriptionCard";
 
 type StateProps = {
@@ -40,8 +39,6 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
     selectedSubscription: null,
     dialogOpen: false,
   };
-
-  private examReviewDialog = createRef<ExamReviewDialog>();
 
   componentDidMount() {
     const { /* loading, */ loaded, fetchExamReviewData } = this.props;
@@ -82,9 +79,7 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
                   size="small"
                   fullWidth
                   disabled={index > 1}
-                  onClick={() =>
-                    this.examReviewDialog.current!.openDialogForExam()
-                  }
+                  onClick={() => alert("Open review page")}
                 >
                   02 Tests (Revise)
                 </Button>
@@ -131,8 +126,7 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
                 onReviseButtonClick={
                   index === 0
                     ? this.createDialogCloseHandlerWrapper(() =>
-                        // alert(`Revise: ${title}`),
-                        this.examReviewDialog.current!.openDialogForExam(),
+                        alert("Open review page"),
                       )
                     : undefined
                 }
@@ -184,8 +178,6 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
             <DialogContent>{testCards}</DialogContent>
           </Dialog>
         )}
-
-        <ExamReviewDialog ref={this.examReviewDialog} />
       </>
     );
   }
