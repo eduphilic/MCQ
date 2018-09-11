@@ -114,7 +114,7 @@ const ExamAppBarMobileContainer = connect<
   OwnProps,
   State
 >(
-  (state, { featureKey = "examTaking" }) => ({
+  (state, { featureKey }) => ({
     showSubmissionSummaryScreen: state[featureKey].showSubmissionSummaryScreen,
     showStartExamButton: buttonSelector(state[featureKey])
       .startExamButtonVisible,

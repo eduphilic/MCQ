@@ -59,7 +59,7 @@ const ExamTemplateMobileContainer = connect<
   OwnProps,
   State
 >(
-  (state, { featureKey = "examTaking" }): StateProps => ({
+  (state, { featureKey }): StateProps => ({
     currentQuestion: state[featureKey].currentQuestion,
   }),
   {

@@ -9,5 +9,5 @@ storiesOf("Exam Taking", module)
   .add("ExamAppBar", () => {
     //
 
-    return <ExamAppBar />;
+    return <ExamAppBar featureKey="examTaking" />;
   });

@@ -90,7 +90,7 @@ const ExamDrawerQuestionSelectContainer = connect<
   OwnProps,
   State
 >(
-  (state, { featureKey = "examTaking" }) => ({
+  (state, { featureKey }) => ({
     questions: state[featureKey].questions!,
     questionCategories: state[featureKey].questionCategories!,
     showSelectedQuestionHighlight:

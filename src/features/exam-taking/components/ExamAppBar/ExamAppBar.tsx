@@ -4,6 +4,7 @@ import { State } from "store";
 import styled from "styled";
 import { actions } from "../../actions";
 import { buttonSelector } from "../../selectors";
+import { FeatureKey } from "../../types/FeatureKey";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -21,7 +22,7 @@ type DispatchProps = {
   onSubmitExamButtonClick: () => any;
 };
 
-type OwnProps = {};
+type OwnProps = FeatureKey;
 export type ExamAppBarProps = OwnProps;
 
 type Props = StateProps & DispatchProps & OwnProps;
@@ -60,12 +61,13 @@ const ExamAppBar: SFC<Props> = props => {
 };
 
 const ExamAppBarContainer = connect<StateProps, DispatchProps, OwnProps, State>(
-  ({ examTaking }): StateProps => ({
-    showStartExamButton: buttonSelector(examTaking).startExamButtonVisible,
+  (store, { featureKey }): StateProps => ({
+    showStartExamButton: buttonSelector(store[featureKey])
+      .startExamButtonVisible,
     showSubmitButton:
-      !examTaking.showOverviewScreen &&
-      !examTaking.showSubmissionSummaryScreen &&
-      !buttonSelector(examTaking).submitButtonVisible,
+      !store[featureKey].showOverviewScreen &&
+      !store[featureKey].showSubmissionSummaryScreen &&
+      !buttonSelector(store[featureKey]).submitButtonVisible,
   }),
   {
     onStartExamButtonClick: () => actions.navigateToQuestion(0),

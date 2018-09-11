@@ -41,7 +41,9 @@ const ExamTemplate: SFC<Props> = props => {
 
   const pageContentsWrapperComponent = !showBottomNav
     ? undefined
-    : ExamBottomNavFrame;
+    : (wrapperProps: any) => (
+        <ExamBottomNavFrame {...wrapperProps} featureKey={featureKey} />
+      );
 
   return (
     <>
@@ -49,7 +51,7 @@ const ExamTemplate: SFC<Props> = props => {
 
       {!showMobileTemplate ? (
         <DashboardTemplate
-          appBarNode={<ExamAppBar />}
+          appBarNode={<ExamAppBar featureKey={featureKey} />}
           drawerContentsNode={drawerContentsNode}
           drawerThemeElement={<UserAppDrawerTheme />}
           pageContentsWrapperComponent={pageContentsWrapperComponent}
@@ -71,7 +73,7 @@ const ExamTemplate: SFC<Props> = props => {
 const ExamTemplateWithWidth = withWidth()(ExamTemplate);
 
 const ExamTemplateContainer = connect<StateProps, {}, OwnProps, State>(
-  (store, { featureKey = "examTaking" }): StateProps => ({
+  (store, { featureKey }): StateProps => ({
     showBottomNav:
       !store[featureKey].showOverviewScreen &&
       !store[featureKey].showSubmissionSummaryScreen,

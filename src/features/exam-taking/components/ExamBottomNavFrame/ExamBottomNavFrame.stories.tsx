@@ -12,7 +12,7 @@ storiesOf("Exam Taking", module)
 
     return (
       <ContentCenterWrapper>
-        <ExamBottomNavFrame>
+        <ExamBottomNavFrame featureKey="examTaking">
           <div>Page Contents</div>
         </ExamBottomNavFrame>
       </ContentCenterWrapper>

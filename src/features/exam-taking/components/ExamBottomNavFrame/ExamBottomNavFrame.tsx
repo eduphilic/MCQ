@@ -5,6 +5,7 @@ import { State } from "store";
 import styled from "styled";
 import { actions } from "../../actions";
 import { buttonSelector } from "../../selectors";
+import { FeatureKey } from "../../types/FeatureKey";
 
 import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -22,7 +23,7 @@ type DispatchProps = {
   onSubmitExamButtonClick: () => any;
 };
 
-type OwnProps = {};
+type OwnProps = FeatureKey;
 export type ExamBottomNavFrameProps = OwnProps;
 
 type Props = StateProps & DispatchProps & OwnProps;
@@ -80,9 +81,10 @@ const ExamBottomNavFrameContainer = connect<
   OwnProps,
   State
 >(
-  ({ examTaking }): StateProps => ({
-    previousButtonEnabled: buttonSelector(examTaking).previousButtonEnabled,
-    showSubmitExamButton: buttonSelector(examTaking).submitButtonVisible,
+  (store, { featureKey }): StateProps => ({
+    previousButtonEnabled: buttonSelector(store[featureKey])
+      .previousButtonEnabled,
+    showSubmitExamButton: buttonSelector(store[featureKey]).submitButtonVisible,
   }),
   {
     onPreviousButtonClick: actions.navigateToPreviousQuestion,
