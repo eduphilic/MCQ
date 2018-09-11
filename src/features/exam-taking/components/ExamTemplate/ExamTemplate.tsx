@@ -61,6 +61,7 @@ const ExamTemplate: SFC<Props> = props => {
         <ExamTemplateMobile
           staticView={staticView}
           paneKeyNodeMap={paneKeyNodeMap}
+          featureKey={featureKey}
         />
       )}
     </>

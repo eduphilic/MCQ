@@ -10,21 +10,22 @@ import styled from "styled";
 
 import Popover from "@material-ui/core/Popover";
 
+import { FeatureKey } from "../../types/FeatureKey";
 import { ExamDrawerQuestionPalette } from "../ExamDrawerQuestionPalette";
 import { ExamDrawerQuestionSelect } from "../ExamDrawerQuestionSelect";
 
-export interface ExamQuestionPalettePopupProps {
+export type ExamQuestionPalettePopupProps = FeatureKey & {
   /**
    * Requires a child React Element which accepts an onClick handler.
    */
   children: ReactElement<{
     onClick?: EventHandler<MouseEvent<HTMLElement>>;
   }>;
-}
+};
 
-interface ExamQuestionPalettePopupState {
+type ExamQuestionPalettePopupState = {
   anchorEl: HTMLElement | null;
-}
+};
 
 /**
  * Provides a popup for the QuestionsPalette.
@@ -47,7 +48,7 @@ export class ExamQuestionPalettePopup extends Component<
   };
 
   render() {
-    const { children } = this.props;
+    const { children, featureKey } = this.props;
     const { anchorEl } = this.state;
 
     const childWithOnClick = cloneElement(children, {
@@ -74,7 +75,7 @@ export class ExamQuestionPalettePopup extends Component<
         >
           <ExamPaletteWrapper>
             <ExamDrawerQuestionPalette />
-            <ExamDrawerQuestionSelect />
+            <ExamDrawerQuestionSelect featureKey={featureKey} />
           </ExamPaletteWrapper>
         </Popover>
       </>

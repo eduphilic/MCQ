@@ -32,9 +32,15 @@ export type ExamTemplateMobileProps = OwnProps;
 type Props = StateProps & DispatchProps & OwnProps;
 
 const ExamTemplateMobile: SFC<Props> = props => {
-  const { staticView, paneKeyNodeMap, currentQuestion, onPaneChange } = props;
+  const {
+    staticView,
+    paneKeyNodeMap,
+    currentQuestion,
+    onPaneChange,
+    featureKey,
+  } = props;
 
-  const headerNode = <ExamAppBarMobile />;
+  const headerNode = <ExamAppBarMobile featureKey={featureKey} />;
 
   return (
     <BaseSwippableTemplate
@@ -53,8 +59,8 @@ const ExamTemplateMobileContainer = connect<
   OwnProps,
   State
 >(
-  ({ examTaking }): StateProps => ({
-    currentQuestion: examTaking.currentQuestion,
+  (state, { featureKey = "examTaking" }): StateProps => ({
+    currentQuestion: state[featureKey].currentQuestion,
   }),
   {
     onPaneChange: actions.navigateToQuestion,

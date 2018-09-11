@@ -20,6 +20,7 @@ import {
 } from "componentsV0/TypographyButton";
 import { LanguageToggleButton } from "features/localization";
 
+import { FeatureKey } from "../../types/FeatureKey";
 import { ExamAppBarTimer } from "../ExamAppBarTimer";
 import { ExamQuestionPalettePopup } from "./ExamQuestionPalettePopup";
 
@@ -33,7 +34,7 @@ type DispatchProps = {
   onSubmitButtonClick: () => void;
 };
 
-type OwnProps = {};
+type OwnProps = FeatureKey;
 export type ExamAppBarMobileProps = OwnProps;
 
 type Props = StateProps & DispatchProps & OwnProps;
@@ -44,6 +45,7 @@ const ExamAppBarMobile: SFC<Props> = props => {
     showStartExamButton,
     onStartExamButtonClick,
     onSubmitButtonClick,
+    featureKey,
   } = props;
 
   return (
@@ -88,7 +90,7 @@ const ExamAppBarMobile: SFC<Props> = props => {
 
         <ToolbarHalfHeightLightBlueBackground>
           <IconButtonGroup position="left">
-            <ExamQuestionPalettePopup>
+            <ExamQuestionPalettePopup featureKey={featureKey}>
               <IconButton>
                 <Apps />
               </IconButton>
@@ -112,9 +114,9 @@ const ExamAppBarMobileContainer = connect<
   OwnProps,
   State
 >(
-  state => ({
-    showSubmissionSummaryScreen: state.examTaking.showSubmissionSummaryScreen,
-    showStartExamButton: buttonSelector(state.examTaking)
+  (state, { featureKey = "examTaking" }) => ({
+    showSubmissionSummaryScreen: state[featureKey].showSubmissionSummaryScreen,
+    showStartExamButton: buttonSelector(state[featureKey])
       .startExamButtonVisible,
   }),
   {
