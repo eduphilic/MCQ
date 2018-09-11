@@ -14,7 +14,9 @@ storiesOf("Exam Taking", module)
 
     return (
       <BrowserRouter>
-        <ExamTemplate paneKeyNodeMap={paneKeyNodeMap}>Placeholder</ExamTemplate>
+        <ExamTemplate paneKeyNodeMap={paneKeyNodeMap} featureKey="examTaking">
+          Placeholder
+        </ExamTemplate>
       </BrowserRouter>
     );
   });

@@ -9,7 +9,7 @@ storiesOf("Exam Taking", module).add("ExamAppBarMobile", () => {
 
   return (
     <PlaceholderProvider>
-      <ExamAppBarMobile />
+      <ExamAppBarMobile featureKey="examTaking" />
     </PlaceholderProvider>
   );
 });

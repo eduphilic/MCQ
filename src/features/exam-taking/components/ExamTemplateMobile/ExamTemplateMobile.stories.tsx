@@ -11,7 +11,10 @@ storiesOf("Exam Taking", module)
     const paneKeyNodeMap = createExamPaneKeyNodeMapPlaceholder();
 
     return (
-      <ExamTemplateMobile paneKeyNodeMap={paneKeyNodeMap}>
+      <ExamTemplateMobile
+        paneKeyNodeMap={paneKeyNodeMap}
+        featureKey="examTaking"
+      >
         Placeholder
       </ExamTemplateMobile>
     );

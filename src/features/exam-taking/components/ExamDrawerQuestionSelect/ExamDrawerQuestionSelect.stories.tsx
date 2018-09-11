@@ -14,7 +14,7 @@ storiesOf("Exam Taking", module)
         <div
           style={{ margin: 24, width: drawerWidth, backgroundColor: "#03285b" }}
         >
-          <ExamDrawerQuestionSelect />
+          <ExamDrawerQuestionSelect featureKey="examTaking" />
         </div>
       </UserAppDrawerTheme>
     );

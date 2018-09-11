@@ -93,6 +93,7 @@ class ExamQuizPage extends Component<ExamQuizPageProps> {
             )
           }
           paneKeyNodeMap={paneKeyNodeMap}
+          featureKey="examTaking"
         >
           {showOverviewScreen && (
             <DashboardColumnContainer>
