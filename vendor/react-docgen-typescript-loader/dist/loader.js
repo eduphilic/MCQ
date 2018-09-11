@@ -45,13 +45,7 @@ var parser_js_1 = require("react-docgen-typescript/lib/parser.js");
 var validateOptions_1 = __importDefault(require("./validateOptions"));
 var generateDocgenCodeBlock_1 = __importDefault(require("./generateDocgenCodeBlock"));
 var loader_utils_1 = require("loader-utils");
-var path_1 = __importDefault(require("path"));
-var updateFileInCache_1 = require("./updateFileInCache");
-// * webpackIndex = webpackInstances.push(loader._compiler) - 1;
-//      *
-//      * const instanceName = webpackIndex + '_' + (loaderOptions.instance || 'default');
-//      *
-var webpackInstances = [];
+var language_service_1 = require("./language-service");
 function loader(source) {
     var callback = this.async();
     if (!callback) {
@@ -62,8 +56,8 @@ function loader(source) {
 exports.default = loader;
 function processResource(context, source) {
     return __awaiter(this, void 0, void 0, function () {
-        var options, parserOptions, parser, componentDocs, languageServiceProvider, webpackIndex, instanceName, _a, instance_1, error;
-        return __generator(this, function (_b) {
+        var options, parserOptions, parser, componentDocs, programProvider;
+        return __generator(this, function (_a) {
             // Mark the loader as being cacheable since the result should be
             // deterministic.
             context.cacheable(true);
@@ -89,35 +83,10 @@ function processResource(context, source) {
             else if (options.compilerOptions) {
                 parser = parser_js_1.withCompilerOptions(options.compilerOptions, parserOptions);
             }
-            componentDocs = null;
             if (options.experimentalLanguageServiceProvider) {
-                languageServiceProvider = options.experimentalLanguageServiceProvider;
-                webpackIndex = webpackInstances.indexOf(context._compiler);
-                if (webpackIndex === -1) {
-                    webpackIndex = webpackInstances.push(context._compiler) - 1;
-                }
-                instanceName = webpackIndex + "_docgen";
-                _a = languageServiceProvider({
-                    instance: instanceName,
-                    configFile: options.tsconfigPath
-                        ? path_1.default.basename(options.tsconfigPath)
-                        : undefined,
-                    compilerOptions: options.compilerOptions
-                        ? options.compilerOptions
-                        : undefined,
-                }, context.context, context.resourcePath), instance_1 = _a.instance, error = _a.error;
-                if (error) {
-                    throw new Error(error.message);
-                }
-                if (!instance_1) {
-                    throw new Error("Could not retrieve language service instance");
-                }
-                updateFileInCache_1.updateFileInCache(context.resourcePath, source, instance_1);
-                componentDocs = parser.parse(context.resourcePath, function () { return instance_1.program; });
+                programProvider = language_service_1.getProgramProvider(context, options, source, options.experimentalLanguageServiceProvider);
             }
-            if (componentDocs === null) {
-                componentDocs = parser.parse(context.resourcePath);
-            }
+            componentDocs = parser.parse(context.resourcePath, programProvider);
             // Return amended source code if there is docgen information available.
             if (componentDocs.length) {
                 return [2 /*return*/, generateDocgenCodeBlock_1.default({
