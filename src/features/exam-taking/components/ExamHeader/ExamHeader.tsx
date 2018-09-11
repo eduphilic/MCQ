@@ -32,6 +32,11 @@ export interface ExamHeaderProps {
   question: string;
 
   /**
+   * Question number (1 based).
+   */
+  questionNumber: number;
+
+  /**
    * Exam name, shown under the question text in grey text.
    */
   examName: string;
@@ -43,6 +48,7 @@ export const ExamHeader: SFC<ExamHeaderProps> = props => {
     sectionMarkingsCaption,
     sectionInstructions,
     question,
+    questionNumber,
     examName,
   } = props;
 
@@ -58,7 +64,9 @@ export const ExamHeader: SFC<ExamHeaderProps> = props => {
         <Typography>{sectionInstructions}</Typography>
       </Well>
 
-      <Typography variant="examQuestion">{question}</Typography>
+      <Typography variant="examQuestion">
+        Q{questionNumber}. {question}
+      </Typography>
 
       <ExamName>{examName}</ExamName>
     </Wrapper>

@@ -10,7 +10,7 @@ storiesOf("Exam Taking", module).add("ExamHeader", () => {
 
   return (
     <StorybookContentCenterWrapper>
-      <ExamHeader {...examHeaderPlaceholderProps} />
+      <ExamHeader {...examHeaderPlaceholderProps} questionNumber={1} />
     </StorybookContentCenterWrapper>
   );
 });

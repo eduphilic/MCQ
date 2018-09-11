@@ -59,11 +59,8 @@ class ExamQuizPage extends Component<ExamQuizPageProps> {
         <ExamLayout
           headerNode={
             <ExamHeader
-              {...{
-                ...examHeaderPlaceholderProps,
-                question: `Q${index +
-                  1}. ${examHeaderPlaceholderProps.question.slice(4)}`,
-              }}
+              questionNumber={index + 1}
+              {...examHeaderPlaceholderProps}
             />
           }
           contentsNode={

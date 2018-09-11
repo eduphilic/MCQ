@@ -7,7 +7,7 @@ const paneKeyNodeMap = Array.from({ length: 15 }, (_, index) => ({
 }));
 
 export const ExamReviewPage = () => (
-  <ExamTemplate featureKey="examReview" paneKeyNodeMap={paneKeyNodeMap}>
+  <ExamTemplate paneKeyNodeMap={paneKeyNodeMap} featureKey="examReview">
     {paneKeyNodeMap[0].node}
   </ExamTemplate>
 );
