@@ -1,10 +1,12 @@
 import {
   Actions as ExamTakingActions,
   createExamQuestionCategoryPlaceholder,
-  createExamQuestionPlaceholder,
-  reducer as examTakingReducer,
+  ExamTakingAction as ExamTakingActionTypes,
+  // reducer as examTakingReducer,
   State as ExamTakingState,
 } from "features/exam-taking";
+import produce from "immer";
+import { createQuestionsPlaceholder } from "./placeholders/createQuestionsPlaceholder";
 
 type State = ExamTakingState;
 
@@ -12,7 +14,7 @@ type Actions = ExamTakingActions;
 
 const initialState: State = {
   // #region Inherited from exam-taking module.
-  questions: createExamQuestionPlaceholder(),
+  questions: createQuestionsPlaceholder(),
   questionCategories: createExamQuestionCategoryPlaceholder(),
 
   showOverviewScreen: false,
@@ -21,9 +23,23 @@ const initialState: State = {
   // #endregion
 };
 
-export const reducer = (state = initialState, action: Actions): State => {
-  switch (action.type) {
-    default:
-      return examTakingReducer(state, action);
-  }
-};
+export const reducer = (state = initialState, action: Actions): State =>
+  produce(state, draft => {
+    switch (action.type) {
+      case ExamTakingActionTypes.NavigateToNextQuestion:
+        if (state.currentQuestion - 1 !== state.questions!.length) {
+          draft.currentQuestion = state.currentQuestion + 1;
+        }
+        break;
+
+      case ExamTakingActionTypes.NavigateToPreviousQuestion:
+        if (state.currentQuestion !== 0) {
+          draft.currentQuestion = state.currentQuestion - 1;
+        }
+        break;
+
+      case ExamTakingActionTypes.NavigateToQuestion:
+        draft.currentQuestion = action.payload;
+        break;
+    }
+  });
