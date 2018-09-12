@@ -47,7 +47,9 @@ const ExamTemplate: SFC<Props> = props => {
 
   return (
     <>
-      <Prompt message="You have an exam in progress, are you sure you want to leave?" />
+      {featureKey === "examTaking" && (
+        <Prompt message="You have an exam in progress, are you sure you want to leave?" />
+      )}
 
       {!showMobileTemplate ? (
         <DashboardTemplate
