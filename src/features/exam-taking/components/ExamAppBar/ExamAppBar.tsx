@@ -1,4 +1,4 @@
-import React, { SFC } from "react";
+import React, { Fragment, SFC } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
 import styled from "styled";
@@ -7,8 +7,10 @@ import { buttonSelector } from "../../selectors";
 import { FeatureKey } from "../../types/FeatureKey";
 
 import AppBar from "@material-ui/core/AppBar";
+import Divider from "@material-ui/core/Divider";
 import Toolbar from "@material-ui/core/Toolbar";
 
+import { Typography } from "components/Typography";
 import { TypographyButton } from "componentsV0/TypographyButton";
 import { LanguageToggleButton } from "features/localization";
 
@@ -33,6 +35,7 @@ const ExamAppBar: SFC<Props> = props => {
     showSubmitButton,
     onStartExamButtonClick,
     onSubmitExamButtonClick,
+    featureKey,
   } = props;
 
   return (
@@ -40,19 +43,44 @@ const ExamAppBar: SFC<Props> = props => {
       <ToolbarWithButtonMargins>
         <TypographyButton>{"<"} Dashboard</TypographyButton>
 
-        {showStartExamButton && (
-          <TypographyButton color="primary" onClick={onStartExamButtonClick}>
-            Start Exam
-          </TypographyButton>
+        {featureKey === "examTaking" && (
+          <>
+            {showStartExamButton && (
+              <TypographyButton
+                color="primary"
+                onClick={onStartExamButtonClick}
+              >
+                Start Exam
+              </TypographyButton>
+            )}
+
+            {showSubmitButton && (
+              <TypographyButton
+                color="orange"
+                onClick={onSubmitExamButtonClick}
+              >
+                Submit Exam
+              </TypographyButton>
+            )}
+          </>
         )}
 
-        {showSubmitButton && (
-          <TypographyButton color="orange" onClick={onSubmitExamButtonClick}>
-            Submit Exam
-          </TypographyButton>
-        )}
+        {featureKey === "examReview" &&
+          ["Success - 80%", "Wrong - 14%", "Left - 6%"].map(stat => (
+            <Fragment key={stat}>
+              <VerticalDivider />
+
+              <Typography color="primary">{stat}</Typography>
+            </Fragment>
+          ))}
 
         <FlexSpacer />
+
+        {featureKey === "examReview" && (
+          <>
+            <Typography>Difficulty - Easy</Typography>
+          </>
+        )}
 
         <LanguageToggleButton />
       </ToolbarWithButtonMargins>
@@ -84,4 +112,9 @@ const ToolbarWithButtonMargins = styled(Toolbar)`
 
 const FlexSpacer = styled.div`
   flex: 1;
+`;
+
+const VerticalDivider = styled(Divider)`
+  width: 1px;
+  height: 40px;
 `;
