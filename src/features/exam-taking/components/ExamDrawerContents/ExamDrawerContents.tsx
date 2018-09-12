@@ -4,6 +4,7 @@ import styled from "styled";
 import { DrawerLogo } from "componentsV0/DrawerLogo";
 
 import { FeatureKey } from "../../types/FeatureKey";
+import { ExamDrawerPerformanceAnalysis } from "../ExamDrawerPerformanceAnalysis";
 import { ExamDrawerQuestionPalette } from "../ExamDrawerQuestionPalette";
 import { ExamDrawerQuestionSelect } from "../ExamDrawerQuestionSelect";
 import { ExamDrawerTimerInfoCard } from "../ExamDrawerTimerInfoCard";
@@ -17,7 +18,9 @@ export const ExamDrawerContents: SFC<ExamDrawerContentsProps> = props => {
     <Wrapper>
       <DrawerLogo />
 
-      <ExamDrawerTimerInfoCard />
+      {featureKey === "examReview" && <ExamDrawerPerformanceAnalysis />}
+
+      {featureKey === "examTaking" && <ExamDrawerTimerInfoCard />}
 
       <ExamDrawerQuestionPalette />
 
