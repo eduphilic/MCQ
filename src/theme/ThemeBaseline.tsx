@@ -2,7 +2,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import React, { SFC } from "react";
 import { Helmet } from "react-helmet";
 import { CompatibilityFix } from "./CompatibilityFix";
-import { injectGlobal } from "./styledComponents";
+import { createGlobalStyle } from "./styledComponents";
 
 const stylesheets = [
   // Material UI fonts.
@@ -17,6 +17,7 @@ export const ThemeBaseline: SFC<{}> = ({ children }) => (
   <CompatibilityFix>
     <>
       <CssBaseline />
+      <RootGlobalStyle />
 
       <Helmet>
         {stylesheets.map((href, key) => (
@@ -29,9 +30,7 @@ export const ThemeBaseline: SFC<{}> = ({ children }) => (
   </CompatibilityFix>
 );
 
-try {
-  // tslint:disable-next-line:no-unused-expression
-  injectGlobal`
+const RootGlobalStyle = createGlobalStyle`
 html {
   box-sizing: border-box;
 }
@@ -58,6 +57,3 @@ html, body, #root {
   height: 100%;
 }
 `;
-} catch (e) {
-  //
-}

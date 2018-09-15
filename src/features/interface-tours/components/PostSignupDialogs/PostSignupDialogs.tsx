@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
-import styled, { injectGlobal } from "styled";
+import styled, { createGlobalStyle } from "styled";
 import { actions } from "../../actions";
 
 import Dialog from "@material-ui/core/Dialog";
@@ -65,40 +65,46 @@ class PostSignupDialogs extends Component<Props, PostSignupDialogsState> {
       },
     ];
 
-    return dialogs.map(d => (
-      <Dialog
-        key={d.title}
-        open={d.open}
-        onClose={d.onDecline}
-        maxWidth="md"
-        fullScreen={fullScreen}
-      >
-        <DialogContent
-          classes={{
-            root: "post-signup-dialogs--dialog-content--root",
-          }}
-        >
-          <Wrapper>
-            <Logo />
-            <TextContentWrapper>
-              <DialogTitleText>{d.title}</DialogTitleText>
+    return (
+      <>
+        <PostSignupDialogsGlobalStyleOverride />
 
-              <DialogTextContent>{d.text}</DialogTextContent>
+        {dialogs.map(d => (
+          <Dialog
+            key={d.title}
+            open={d.open}
+            onClose={d.onDecline}
+            maxWidth="md"
+            fullScreen={fullScreen}
+          >
+            <DialogContent
+              classes={{
+                root: "post-signup-dialogs--dialog-content--root",
+              }}
+            >
+              <Wrapper>
+                <Logo />
+                <TextContentWrapper>
+                  <DialogTitleText>{d.title}</DialogTitleText>
 
-              <DialogButtonsWrapper>
-                <TypographyButton variant="outlined" onClick={d.onDecline}>
-                  {d.buttonDeclineText}
-                </TypographyButton>
-                <TypographyButton variant="outlined" onClick={d.onAccept}>
-                  {d.buttonAcceptText}
-                </TypographyButton>
-              </DialogButtonsWrapper>
-            </TextContentWrapper>
-            <LogoSpacer />
-          </Wrapper>
-        </DialogContent>
-      </Dialog>
-    ));
+                  <DialogTextContent>{d.text}</DialogTextContent>
+
+                  <DialogButtonsWrapper>
+                    <TypographyButton variant="outlined" onClick={d.onDecline}>
+                      {d.buttonDeclineText}
+                    </TypographyButton>
+                    <TypographyButton variant="outlined" onClick={d.onAccept}>
+                      {d.buttonAcceptText}
+                    </TypographyButton>
+                  </DialogButtonsWrapper>
+                </TextContentWrapper>
+                <LogoSpacer />
+              </Wrapper>
+            </DialogContent>
+          </Dialog>
+        ))}
+      </>
+    );
   }
 
   private handleGetAlertsDialogClose = (_response: "accept" | "decline") => {
@@ -232,17 +238,9 @@ const DialogButtonsWrapper = styled.div`
   }
 `;
 
-// Wrapping in try/catch to prevent parsing error in
-// react-docgen-typescript-loader package (used by Storybook).
-try {
-  // tslint:disable-next-line:no-unused-expression
-  injectGlobal`
+const PostSignupDialogsGlobalStyleOverride = createGlobalStyle`
   .post-signup-dialogs--dialog-content--root {
     display: flex;
     align-items: center;
   }
 `;
-} catch (e) {
-  /* tslint:disable-next-line:no-console */
-  console.log("e", e);
-}
