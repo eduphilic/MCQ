@@ -90,7 +90,9 @@ export class FormikFileUploadBase<Values extends object> extends Component<
     return (
       <>
         <NativeInputHidden
-          innerRef={this.fileInput}
+          // TODO: Fix this type definition. Needs updated styled-components @types package for "ref" prop to accept React.createRef.
+          // @ts-ignore
+          ref={this.fileInput}
           accept={acceptedFileTypes}
           type="file"
           onChange={this.handleChange}
