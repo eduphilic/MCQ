@@ -14,12 +14,12 @@ import { Theme } from "./themes";
 const {
   default: styled,
   css,
-  injectGlobal,
   keyframes,
   ThemeProvider,
+  createGlobalStyle,
 } = styledComponents as ThemedStyledComponentsModule<Theme>;
 
-export { css, injectGlobal, keyframes, ThemeProvider, withProps };
+export { css, keyframes, ThemeProvider, withProps, createGlobalStyle };
 export default styled;
 
 // https://github.com/styled-components/styled-components/issues/630
