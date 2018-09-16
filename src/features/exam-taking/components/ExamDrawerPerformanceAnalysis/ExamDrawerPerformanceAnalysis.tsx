@@ -40,6 +40,12 @@ export const ExamDrawerPerformanceAnalysis: SFC<
           Your Result - Pass
         </SectionText>
       </SectionWrapper>
+
+      <SectionWrapper>
+        <SectionText>Total Marks - 200</SectionText>
+        <SectionText>Topper Score - 180/200</SectionText>
+        <SectionText bold>Your Score - 120/120</SectionText>
+      </SectionWrapper>
     </div>
   );
 };
