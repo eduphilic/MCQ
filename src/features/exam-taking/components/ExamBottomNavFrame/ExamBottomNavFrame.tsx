@@ -114,6 +114,7 @@ const PageContentsWrapper = styled.div`
 `;
 
 const PaperWithBoxShadowUpperDirection = styled(Paper)`
+  border-radius: 0;
   ${bottomNavBoxShadow};
   z-index: 1;
 `;
