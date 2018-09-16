@@ -15,9 +15,7 @@ export const ExamDrawerPerformanceAnalysis: SFC<
   return (
     <div>
       <TitleWrapper>
-        <SectionText bold bottomMargin>
-          Army Soldier GD Test 1
-        </SectionText>
+        <SectionText bold>Army Soldier GD Test 1</SectionText>
       </TitleWrapper>
 
       <SectionWrapper>
@@ -53,7 +51,6 @@ const TitleWrapper = styled.div`
 
   > *:first-child {
     margin: 8px 0;
-    margin-bottom: 16px;
   }
 `;
 
