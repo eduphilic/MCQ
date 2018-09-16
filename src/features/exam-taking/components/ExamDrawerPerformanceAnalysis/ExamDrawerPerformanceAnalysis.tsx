@@ -3,12 +3,14 @@ import { examDrawerInfoCardBackground } from "css";
 import React, { Fragment, ReactNode, SFC } from "react";
 import styled from "styled";
 
-export type ExamDrawerPerformanceAnalysisProps = {};
+export type ExamDrawerPerformanceAnalysisProps = {
+  examResult: "pass" | "fail";
+};
 
 export const ExamDrawerPerformanceAnalysis: SFC<
   ExamDrawerPerformanceAnalysisProps
 > = props => {
-  const {} = props;
+  const { examResult } = props;
 
   return (
     <div>
@@ -36,7 +38,7 @@ export const ExamDrawerPerformanceAnalysis: SFC<
       <SectionWrapper>
         <SectionText>Total Attempts - 2345</SectionText>
         <SectionText>Total Passed - 1234</SectionText>
-        <SectionText bold statColor="green">
+        <SectionText bold statColor={examResult === "pass" ? "green" : "red"}>
           Your Result - Pass
         </SectionText>
       </SectionWrapper>

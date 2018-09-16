@@ -1,3 +1,4 @@
+import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { drawerWidth } from "css";
 import React from "react";
@@ -14,7 +15,7 @@ stories.addDecorator(story => (
 ));
 
 stories.add("ExamDrawerPerformanceAnalysis", () => {
-  //
+  const examResult = boolean("Exam Result (Passed)", true) ? "pass" : "fail";
 
-  return <ExamDrawerPerformanceAnalysis />;
+  return <ExamDrawerPerformanceAnalysis examResult={examResult} />;
 });

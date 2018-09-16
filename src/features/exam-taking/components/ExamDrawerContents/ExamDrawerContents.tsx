@@ -18,7 +18,9 @@ export const ExamDrawerContents: SFC<ExamDrawerContentsProps> = props => {
     <Wrapper>
       <DrawerLogo />
 
-      {featureKey === "examReview" && <ExamDrawerPerformanceAnalysis />}
+      {featureKey === "examReview" && (
+        <ExamDrawerPerformanceAnalysis examResult="pass" />
+      )}
 
       {featureKey === "examTaking" && <ExamDrawerTimerInfoCard />}
 
