@@ -46,6 +46,12 @@ export const ExamDrawerPerformanceAnalysis: SFC<
         <SectionText>Topper Score - 180/200</SectionText>
         <SectionText bold>Your Score - 120/120</SectionText>
       </SectionWrapper>
+
+      <SectionWrapper>
+        <SectionText bold userRankColor>
+          Your Rank - 123/2345
+        </SectionText>
+      </SectionWrapper>
     </div>
   );
 };
@@ -68,11 +74,23 @@ type SectionTextProps = {
   className?: string;
   bold?: boolean;
   bottomMargin?: boolean;
+  userRankColor?: boolean;
   statColor?: "none" | "green" | "red";
 };
 
 const SectionText = styled<SectionTextProps>(props => {
-  const { children, className, bold, bottomMargin, statColor = "none" } = props;
+  const {
+    children,
+    className,
+    bold,
+    bottomMargin,
+    userRankColor,
+    statColor = "none",
+  } = props;
+
+  const classNames: string[] = [];
+  if (className) classNames.push(className);
+  if (userRankColor) classNames.push("user-rank-color");
 
   if (typeof children !== "string") {
     throw new Error('Expected string for field "children".');
@@ -97,7 +115,7 @@ const SectionText = styled<SectionTextProps>(props => {
 
   return (
     <Typography
-      className={className}
+      className={classNames.join(" ")}
       variant={bold ? "examDrawerTitle" : "examDrawerSubtitle"}
       muiTypographyProps={{ paragraph: bottomMargin }}
     >
@@ -105,6 +123,10 @@ const SectionText = styled<SectionTextProps>(props => {
     </Typography>
   );
 })`
+  &.user-rank-color {
+    color: #ffc000;
+  }
+
   .green {
     color: #00b050;
   }
