@@ -3,6 +3,7 @@ import styled, { css } from "styled";
 
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import Check from "@material-ui/icons/Check";
+import Close from "@material-ui/icons/Close";
 
 import { Button } from "componentsV0/Button";
 import { Typography } from "componentsV0/Typography";
@@ -59,10 +60,9 @@ const ExamAnswerSelectItemBase: SFC<ExamAnswerSelectItemProps> = props => {
   if (selected) classNames.push("selected");
   classNames.push(selectionStyle);
 
-  /* tslint:disable-next-line:no-console */
-  console.log("classNames", classNames);
-
   const answerLetter = getAnswerLetterFromIndex(answerIndex);
+
+  const Icon = selectionStyle === "user-incorrect" ? Close : Check;
 
   return (
     <Button
@@ -76,7 +76,7 @@ const ExamAnswerSelectItemBase: SFC<ExamAnswerSelectItemProps> = props => {
         </div>
 
         <div className="selection-mask" />
-        <Check className="check-mark" />
+        <Icon className="check-mark" />
       </div>
 
       <Typography className="answer-label">{answerLabel}</Typography>
@@ -126,7 +126,12 @@ const StyledExamAnswerSelectItem = styled(ExamAnswerSelectItemBase)`
     }
 
     &.user-incorrect .selection-mask {
-      background-color: ${({ theme }) => fade(theme.palette.error.main, 0.45)};
+      background-color: ${({ theme }) => fade(theme.palette.error.main, 0.65)};
+    }
+
+    &.exam-correct .selection-mask {
+      background-color: ${({ theme }) =>
+        fade(theme.palette.secondary.main, 0.65)};
     }
   }
 
@@ -148,6 +153,14 @@ const StyledExamAnswerSelectItem = styled(ExamAnswerSelectItemBase)`
     width: 28px;
     height: 28px;
     transform: translate(-50%, -50%);
+  }
+
+  &.user-incorrect .check-mark {
+    color: #fff;
+  }
+
+  &.exam-correct .check-mark {
+    color: ${({ theme }) => theme.palette.primary.main};
   }
 
   &.selected .check-mark {
