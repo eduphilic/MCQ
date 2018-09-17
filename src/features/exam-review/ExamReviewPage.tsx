@@ -1,6 +1,7 @@
 import {
   ExamAnswerSelect,
   examAnswerSelectPlaceholderProps,
+  ExamAnswerSelectProps,
   ExamContents,
   examContentsPlaceholderProps,
   ExamHeader,
@@ -11,6 +12,12 @@ import {
 import React, { SFC } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
+
+const examAnswerSelectProps: ExamAnswerSelectProps = {
+  ...examAnswerSelectPlaceholderProps,
+  areClickable: false,
+  correctAnswerIndex: 2,
+};
 
 const paneKeyNodeMap = Array.from({ length: 15 }, (_, index) => ({
   key: `pane-${index}`,
@@ -25,9 +32,7 @@ const paneKeyNodeMap = Array.from({ length: 15 }, (_, index) => ({
       contentsNode={
         <ExamContents
           {...examContentsPlaceholderProps}
-          answerNode={
-            <ExamAnswerSelect {...examAnswerSelectPlaceholderProps} />
-          }
+          answerNode={<ExamAnswerSelect {...examAnswerSelectProps} />}
         />
       }
     />
