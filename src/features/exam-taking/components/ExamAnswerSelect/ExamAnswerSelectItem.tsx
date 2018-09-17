@@ -37,6 +37,14 @@ export interface ExamAnswerSelectItemProps {
   selectionStyle?: "user-correct" | "user-incorrect" | "exam-correct";
 
   /**
+   * Enables item selection. This is set to false in exam review mode to remove
+   * the button styling.
+   *
+   * @default true
+   */
+  isButton?: boolean;
+
+  /**
    * Called when the answer is clicked.
    */
   onClick: (answerIndex: number) => any;
@@ -52,6 +60,7 @@ const ExamAnswerSelectItemBase: SFC<ExamAnswerSelectItemProps> = props => {
     answerIndex,
     selected,
     selectionStyle = "user-correct",
+    isButton = true,
     onClick,
   } = props;
 
@@ -69,6 +78,9 @@ const ExamAnswerSelectItemBase: SFC<ExamAnswerSelectItemProps> = props => {
       className={classNames.join(" ")}
       variant="flat"
       onClick={() => onClick(answerIndex)}
+      component={isButton ? "button" : "div"}
+      disableRipple={!isButton}
+      disableFocusRipple={!isButton}
     >
       <div className="selection-circle">
         <div className="letter-circle">
@@ -100,6 +112,19 @@ const StyledExamAnswerSelectItem = styled(ExamAnswerSelectItemBase)`
   padding-left: 8px;
   padding-top: 4px;
   padding-bottom: 4px;
+
+  ${props =>
+    !props.isButton &&
+    `
+    &:hover {
+      background-color: transparent !important;
+      cursor: inherit !important;
+
+      * {
+        cursor: inherit !important;
+      }
+    }
+  `};
 
   .selection-circle {
     ${selectionCircleBase};

@@ -1,3 +1,4 @@
+import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
@@ -21,6 +22,8 @@ stories.add("ExamAnswerSelect", () => {
   const onChangeAnswerIndex = (answerIndex: number | null) =>
     formikBag.setFieldValue("selectedAnswerIndex", answerIndex);
 
+  const areClickable = boolean("Are Clickable", true);
+
   return (
     <StorybookContentCenterWrapper maxWidthPercent={50}>
       <ExamAnswerSelect
@@ -28,6 +31,7 @@ stories.add("ExamAnswerSelect", () => {
         selectedAnswerIndex={selectedAnswerIndex}
         correctAnswerIndex={0}
         onChangeAnswerIndex={onChangeAnswerIndex}
+        areClickable={areClickable}
       />
 
       <TypographyButton

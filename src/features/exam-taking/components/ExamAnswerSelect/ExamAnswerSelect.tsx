@@ -25,6 +25,14 @@ export type ExamAnswerSelectProps = {
   correctAnswerIndex: number | null;
 
   /**
+   * Whether or not the selections are clickable. This is set to false in exam
+   * review mode to prevent the item selections from being clickable.
+   *
+   * @default true
+   */
+  areClickable?: boolean;
+
+  /**
    * Called when the user clicks an answer.
    */
   onChangeAnswerIndex: (selectedAnswerIndex: number) => void;
@@ -35,6 +43,7 @@ export const ExamAnswerSelect: SFC<ExamAnswerSelectProps> = props => {
     answerLabels,
     selectedAnswerIndex,
     correctAnswerIndex,
+    areClickable = true,
     onChangeAnswerIndex,
   } = props;
 
@@ -54,6 +63,7 @@ export const ExamAnswerSelect: SFC<ExamAnswerSelectProps> = props => {
         answerIndex={index}
         selected={selected}
         selectionStyle={selectionStyle}
+        isButton={areClickable}
         onClick={onChangeAnswerIndex}
       />
     );
