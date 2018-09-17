@@ -8,7 +8,9 @@ import {
   ExamLayout,
   ExamTemplate,
 } from "features/exam-taking";
-import React from "react";
+import React, { SFC } from "react";
+import { connect } from "react-redux";
+import { State } from "store";
 
 const paneKeyNodeMap = Array.from({ length: 15 }, (_, index) => ({
   key: `pane-${index}`,
@@ -32,8 +34,21 @@ const paneKeyNodeMap = Array.from({ length: 15 }, (_, index) => ({
   ),
 }));
 
-export const ExamReviewPage = () => (
-  <ExamTemplate paneKeyNodeMap={paneKeyNodeMap} featureKey="examReview">
-    {paneKeyNodeMap[0].node}
-  </ExamTemplate>
-);
+export type ExamReviewPageProps = {
+  currentQuestion: number;
+};
+
+const ExamReviewPage: SFC<ExamReviewPageProps> = props => {
+  const { currentQuestion } = props;
+
+  return (
+    <ExamTemplate paneKeyNodeMap={paneKeyNodeMap} featureKey="examReview">
+      {paneKeyNodeMap[currentQuestion].node}
+    </ExamTemplate>
+  );
+};
+
+const ExamReviewPageContainer = connect((state: State) => ({
+  currentQuestion: state.examReview.currentQuestion,
+}))(ExamReviewPage);
+export { ExamReviewPageContainer as ExamReviewPage };
