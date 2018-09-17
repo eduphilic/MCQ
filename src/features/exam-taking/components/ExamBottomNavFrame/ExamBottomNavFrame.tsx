@@ -1,5 +1,5 @@
 import { bottomNavBoxShadow, fromToolbarHeight } from "css";
-import React, { SFC } from "react";
+import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
 import { State } from "store";
 import styled from "styled";
@@ -11,6 +11,7 @@ import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
 
 import { TypographyButton } from "componentsV0/TypographyButton";
+import { ExamQuestionReportModal } from "../ExamQuestionReportModal";
 
 type StateProps = {
   previousButtonEnabled: boolean;
@@ -28,59 +29,75 @@ export type ExamBottomNavFrameProps = OwnProps;
 
 type Props = StateProps & DispatchProps & OwnProps;
 
-const ExamBottomNavFrame: SFC<Props> = props => {
-  const {
-    children,
-    previousButtonEnabled,
-    showSubmitExamButton,
-    onPreviousButtonClick,
-    onNextButtonClick,
-    onSubmitExamButtonClick,
-    featureKey,
-  } = props;
+class ExamBottomNavFrame extends Component<Props> {
+  private questionReportModal = createRef<ExamQuestionReportModal>();
 
-  return (
-    <Wrapper>
-      <PageContentsWrapper>{children}</PageContentsWrapper>
+  render() {
+    const {
+      children,
+      previousButtonEnabled,
+      showSubmitExamButton,
+      onPreviousButtonClick,
+      onNextButtonClick,
+      onSubmitExamButtonClick,
+      featureKey,
+    } = this.props;
 
-      <PaperWithBoxShadowUpperDirection>
-        <ToolbarWithButtonMargins>
-          {featureKey === "examTaking" && (
-            <>
-              <TypographyButton>Mark for Review</TypographyButton>
-              <TypographyButton>Clear</TypographyButton>
-            </>
-          )}
+    return (
+      <Wrapper>
+        <ExamQuestionReportModal ref={this.questionReportModal} />
 
-          <ToolbarSpacer />
+        <PageContentsWrapper>{children}</PageContentsWrapper>
 
-          <TypographyButton
-            disabled={!previousButtonEnabled}
-            onClick={onPreviousButtonClick}
-          >
-            Previous
-          </TypographyButton>
-
-          {!showSubmitExamButton ? (
-            <TypographyButton onClick={onNextButtonClick}>
-              Next
-            </TypographyButton>
-          ) : (
-            featureKey === "examTaking" && (
-              <TypographyButton
-                color="yellow"
-                filled
-                onClick={onSubmitExamButtonClick}
-              >
-                Submit Exam
+        <PaperWithBoxShadowUpperDirection>
+          <ToolbarWithButtonMargins>
+            {featureKey === "examTaking" && (
+              <>
+                <TypographyButton>Mark for Review</TypographyButton>
+                <TypographyButton>Clear</TypographyButton>
+              </>
+            )}
+            {featureKey === "examReview" && (
+              <TypographyButton onClick={this.handleReportErrorButtonClick}>
+                Report Error
               </TypographyButton>
-            )
-          )}
-        </ToolbarWithButtonMargins>
-      </PaperWithBoxShadowUpperDirection>
-    </Wrapper>
-  );
-};
+            )}
+
+            <ToolbarSpacer />
+
+            <TypographyButton
+              disabled={!previousButtonEnabled}
+              onClick={onPreviousButtonClick}
+            >
+              Previous
+            </TypographyButton>
+
+            {!showSubmitExamButton ? (
+              <TypographyButton onClick={onNextButtonClick}>
+                Next
+              </TypographyButton>
+            ) : (
+              featureKey === "examTaking" && (
+                <TypographyButton
+                  color="yellow"
+                  filled
+                  onClick={onSubmitExamButtonClick}
+                >
+                  Submit Exam
+                </TypographyButton>
+              )
+            )}
+          </ToolbarWithButtonMargins>
+        </PaperWithBoxShadowUpperDirection>
+      </Wrapper>
+    );
+  }
+
+  private handleReportErrorButtonClick = () => {
+    if (!this.questionReportModal.current) return;
+    this.questionReportModal.current.openModal();
+  };
+}
 
 const ExamBottomNavFrameContainer = connect<
   StateProps,
