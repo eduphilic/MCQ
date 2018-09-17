@@ -26,6 +26,7 @@ stories.add("ExamAnswerSelect", () => {
       <ExamAnswerSelect
         answerLabels={answerLabels}
         selectedAnswerIndex={selectedAnswerIndex}
+        correctAnswerIndex={0}
         onChangeAnswerIndex={onChangeAnswerIndex}
       />
 
