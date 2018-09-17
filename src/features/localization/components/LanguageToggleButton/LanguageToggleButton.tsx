@@ -29,10 +29,11 @@ export const LanguageToggleButton = styled<LanguageToggleButtonProps>(
     </div>
   ),
 )`
+  display: flex;
+
   ${({ popup }) =>
     popup
       ? `
-          display: flex;
           flex-direction: column;
           padding: 4px;
           background-color: #fff;
