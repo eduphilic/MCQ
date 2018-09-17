@@ -36,6 +36,7 @@ const ExamBottomNavFrame: SFC<Props> = props => {
     onPreviousButtonClick,
     onNextButtonClick,
     onSubmitExamButtonClick,
+    featureKey,
   } = props;
 
   return (
@@ -44,8 +45,12 @@ const ExamBottomNavFrame: SFC<Props> = props => {
 
       <PaperWithBoxShadowUpperDirection>
         <ToolbarWithButtonMargins>
-          <TypographyButton>Mark for Review</TypographyButton>
-          <TypographyButton>Clear</TypographyButton>
+          {featureKey === "examTaking" && (
+            <>
+              <TypographyButton>Mark for Review</TypographyButton>
+              <TypographyButton>Clear</TypographyButton>
+            </>
+          )}
 
           <ToolbarSpacer />
 
@@ -61,13 +66,15 @@ const ExamBottomNavFrame: SFC<Props> = props => {
               Next
             </TypographyButton>
           ) : (
-            <TypographyButton
-              color="yellow"
-              filled
-              onClick={onSubmitExamButtonClick}
-            >
-              Submit Exam
-            </TypographyButton>
+            featureKey === "examTaking" && (
+              <TypographyButton
+                color="yellow"
+                filled
+                onClick={onSubmitExamButtonClick}
+              >
+                Submit Exam
+              </TypographyButton>
+            )
           )}
         </ToolbarWithButtonMargins>
       </PaperWithBoxShadowUpperDirection>
