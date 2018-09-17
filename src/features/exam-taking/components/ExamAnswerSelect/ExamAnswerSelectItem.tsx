@@ -27,6 +27,15 @@ export interface ExamAnswerSelectItemProps {
   selected: boolean;
 
   /**
+   * Checkmark style. During exam taking, always uses the style "user-correct".
+   * During exam review, the styles indicate whether the user's exam answer
+   * selection was correct or not and provides the correct answer if not.
+   *
+   * @default user-correct
+   */
+  selectionStyle?: "user-correct" | "user-incorrect" | "exam-correct";
+
+  /**
    * Called when the answer is clicked.
    */
   onClick: (answerIndex: number) => any;
@@ -35,15 +44,29 @@ export interface ExamAnswerSelectItemProps {
 /**
  * A button for an exam answer.
  */
-const ExamAnswerSelectItem: SFC<ExamAnswerSelectItemProps> = props => {
-  const { className, answerLabel, answerIndex, selected, onClick } = props;
+const ExamAnswerSelectItemBase: SFC<ExamAnswerSelectItemProps> = props => {
+  const {
+    className,
+    answerLabel,
+    answerIndex,
+    selected,
+    selectionStyle = "user-correct",
+    onClick,
+  } = props;
 
-  const classnames = `${className} ${selected ? "selected" : ""}`;
+  const classNames: string[] = [];
+  if (className) classNames.push(className);
+  if (selected) classNames.push("selected");
+  classNames.push(selectionStyle);
+
+  /* tslint:disable-next-line:no-console */
+  console.log("classNames", classNames);
+
   const answerLetter = getAnswerLetterFromIndex(answerIndex);
 
   return (
     <Button
-      className={classnames}
+      className={classNames.join(" ")}
       variant="flat"
       onClick={() => onClick(answerIndex)}
     >
@@ -70,7 +93,7 @@ const selectionCircleBase = css`
   height: 32px;
 `;
 
-const StyledExamAnswerSelectItem = styled(ExamAnswerSelectItem)`
+const StyledExamAnswerSelectItem = styled(ExamAnswerSelectItemBase)`
   display: flex;
   justify-content: flex-start;
   width: 100%;
@@ -91,9 +114,20 @@ const StyledExamAnswerSelectItem = styled(ExamAnswerSelectItem)`
     left: 0;
   }
 
-  &.selected .selection-mask {
-    display: flex;
-    background-color: ${({ theme }) => fade(theme.palette.primary.light, 0.45)};
+  /* Selection Mask */
+  &.selected {
+    & .selection-mask {
+      display: flex;
+    }
+
+    &.user-correct .selection-mask {
+      background-color: ${({ theme }) =>
+        fade(theme.palette.primary.light, 0.45)};
+    }
+
+    &.user-incorrect .selection-mask {
+      background-color: ${({ theme }) => fade(theme.palette.error.main, 0.45)};
+    }
   }
 
   .letter-circle {
@@ -129,7 +163,9 @@ const StyledExamAnswerSelectItem = styled(ExamAnswerSelectItem)`
   }
 `;
 
-export { StyledExamAnswerSelectItem as ExamAnswerSelectItem };
+export const ExamAnswerSelectItem: SFC<ExamAnswerSelectItemProps> = props => (
+  <StyledExamAnswerSelectItem {...props} />
+);
 
 const getAnswerLetterFromIndex = (index: number): string =>
   String.fromCharCode(65 /* Beginning of alphabet */ + index);
