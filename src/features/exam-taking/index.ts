@@ -1,3 +1,4 @@
+export * from "./components/ExamAnswerExplanation";
 export * from "./components/ExamTemplate";
 export * from "./components/ExamLayout";
 export * from "./components/ExamContents";

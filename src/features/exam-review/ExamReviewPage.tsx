@@ -1,4 +1,5 @@
 import {
+  ExamAnswerExplanation,
   ExamAnswerSelect,
   examAnswerSelectPlaceholderProps,
   ExamAnswerSelectProps,
@@ -34,6 +35,9 @@ const paneKeyNodeMap = Array.from({ length: 15 }, (_, index) => ({
           {...examContentsPlaceholderProps}
           answerNode={<ExamAnswerSelect {...examAnswerSelectProps} />}
         />
+      }
+      answerExplanationNode={
+        <ExamAnswerExplanation explanation="The explanation to the answer can come here in any length so that the look of the site donot get distorted and it can scroll down. The only issue is where to position the analysis of this question." />
       }
     />
   ),

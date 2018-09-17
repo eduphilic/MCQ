@@ -99,7 +99,7 @@ const ExamName = styled(Typography)`
   }
 `;
 
-const Well = styled.div`
+export const Well = styled.div`
   padding: 16px 8px;
   background-color: ${whiteDark};
 

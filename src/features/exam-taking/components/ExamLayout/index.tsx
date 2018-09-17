@@ -1,19 +1,22 @@
 import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 
-export interface ExamLayoutProps {
+export type ExamLayoutProps = {
   headerNode: ReactNode;
 
   contentsNode: ReactNode;
-}
+
+  answerExplanationNode?: ReactNode;
+};
 
 export const ExamLayout: SFC<ExamLayoutProps> = props => {
-  const { headerNode, contentsNode } = props;
+  const { headerNode, contentsNode, answerExplanationNode } = props;
 
   return (
     <Wrapper>
       {headerNode}
       {contentsNode}
+      {answerExplanationNode}
     </Wrapper>
   );
 };
