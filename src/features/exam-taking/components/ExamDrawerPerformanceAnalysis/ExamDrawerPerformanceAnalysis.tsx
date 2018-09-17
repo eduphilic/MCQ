@@ -15,11 +15,13 @@ export const ExamDrawerPerformanceAnalysis: SFC<
   return (
     <div>
       <TitleWrapper>
-        <SectionText bold>Army Soldier GD Test 1</SectionText>
+        <SectionText large bold>
+          Army Soldier GD Test 1
+        </SectionText>
       </TitleWrapper>
 
       <SectionWrapper>
-        <SectionText bold bottomMargin>
+        <SectionText large bold bottomMargin>
           Performance Analysis
         </SectionText>
 
@@ -73,6 +75,7 @@ const SectionWrapper = styled.div`
 type SectionTextProps = {
   className?: string;
   bold?: boolean;
+  large?: boolean;
   bottomMargin?: boolean;
   userRankColor?: boolean;
   statColor?: "none" | "green" | "red";
@@ -82,6 +85,7 @@ const SectionText = styled<SectionTextProps>(props => {
   const {
     children,
     className,
+    large,
     bold,
     bottomMargin,
     userRankColor,
@@ -90,6 +94,7 @@ const SectionText = styled<SectionTextProps>(props => {
 
   const classNames: string[] = [];
   if (className) classNames.push(className);
+  if (!large) classNames.push("font-small");
   if (userRankColor) classNames.push("user-rank-color");
 
   if (typeof children !== "string") {
@@ -123,6 +128,10 @@ const SectionText = styled<SectionTextProps>(props => {
     </Typography>
   );
 })`
+  &.font-small {
+    font-size: 14px;
+  }
+
   &.user-rank-color {
     color: #ffc000;
   }
