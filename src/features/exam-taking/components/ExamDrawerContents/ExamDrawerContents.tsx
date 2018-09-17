@@ -38,5 +38,6 @@ const Wrapper = styled.div`
 
   > *:not(:first-child) {
     margin-bottom: 16px;
+    padding-right: 4px; /* Prevent vertical scroll bar from persisting when window size is heightened */
   }
 `;
