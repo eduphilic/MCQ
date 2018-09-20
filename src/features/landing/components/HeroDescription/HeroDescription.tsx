@@ -1,4 +1,5 @@
 /* tslint:disable:import-name */
+import { LocalizationStateConsumer } from "features/localization";
 import React from "react";
 import styled from "styled";
 
@@ -15,26 +16,34 @@ export const HeroDescription = () => (
     <ContentCenterWrapper style={{ textAlign: "center" }}>
       <Title>What is &nbsp;Join Uniform?</Title>
 
-      <Text>
-        JoinUniform is created to help and prepare those aspirants(both Officer
-        and Jawan entry) who are keen to serve India, in uniform(Army, Airforce,
-        Navy, Assam Rifles, Coast Guard, TA, BSF, ITBP, CRPF, SSB, CISF &
-        RPF.etc.). The platform is bilingual(Hindi & English),user can use it
-        from anywhere, using mobile, laptop or TV. JoinUniform will benefit it's
-        user in terms of quality content, proper attention, actual exam like
-        tests, with explanation and performance analysis.
-      </Text>
-
-      <Text>
-        JoinUniform उन उम्मीदवारों (अधिकारी और जवान दोनों एंट्री) की मदद और
-        तैयारी करने के लिए बनाया गया है जो वर्दी (सेना, वायु सेना, नौसेना, असम
-        राइफल्स, कोस्ट गार्ड, टीए, बीएसएफ, आईटीबीपी, सीआरपीएफ, एसएसबी, सीआईएसएफ
-        और आरपीऍफ़ आदि )में देशसेवा के इच्छुक हैं । मंच द्विभाषी (हिंदी और
-        अंग्रेजी) है, उपयोगकर्ता इसे मोबाइल, लैपटॉप या टीवी का उपयोग करके कहीं
-        भी इस्तेमाल कर सकते हैं। JoinUniform गुणवत्ता सामग्री, उचित ध्यान,
-        परीक्षण जैसे वास्तविक परीक्षा, स्पष्टीकरण और प्रदर्शन विश्लेषण के संदर्भ
-        में इसके उपयोगकर्ता को लाभान्वित करेगा।
-      </Text>
+      <LocalizationStateConsumer>
+        {state =>
+          state.localizationLanguage === "en" ? (
+            <Text>
+              JoinUniform is created to help and prepare those aspirants(both
+              Officer and Jawan entry) who are keen to serve India, in
+              uniform(Army, Airforce, Navy, Assam Rifles, Coast Guard, TA, BSF,
+              ITBP, CRPF, SSB, CISF & RPF.etc.). The platform is bilingual(Hindi
+              & English),user can use it from anywhere, using mobile, laptop or
+              TV. JoinUniform will benefit it's user in terms of quality
+              content, proper attention, actual exam like tests, with
+              explanation and performance analysis.
+            </Text>
+          ) : (
+            <Text>
+              JoinUniform उन उम्मीदवारों (अधिकारी और जवान दोनों एंट्री) की मदद
+              और तैयारी करने के लिए बनाया गया है जो वर्दी (सेना, वायु सेना,
+              नौसेना, असम राइफल्स, कोस्ट गार्ड, टीए, बीएसएफ, आईटीबीपी, सीआरपीएफ,
+              एसएसबी, सीआईएसएफ और आरपीऍफ़ आदि )में देशसेवा के इच्छुक हैं । मंच
+              द्विभाषी (हिंदी और अंग्रेजी) है, उपयोगकर्ता इसे मोबाइल, लैपटॉप या
+              टीवी का उपयोग करके कहीं भी इस्तेमाल कर सकते हैं। JoinUniform
+              गुणवत्ता सामग्री, उचित ध्यान, परीक्षण जैसे वास्तविक परीक्षा,
+              स्पष्टीकरण और प्रदर्शन विश्लेषण के संदर्भ में इसके उपयोगकर्ता को
+              लाभान्वित करेगा।
+            </Text>
+          )
+        }
+      </LocalizationStateConsumer>
 
       <Grid container spacing={16}>
         {[
