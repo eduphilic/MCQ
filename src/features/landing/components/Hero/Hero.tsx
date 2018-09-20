@@ -62,7 +62,7 @@ export const Hero: SFC<HeroProps> = props => {
                         "Mock test as asked in Armed Forces exams.",
                         "Full length Weekly Mock Test",
                         "Instant result with detail analysis",
-                        "All in rank",
+                        "All India rank",
                       ].map(line => (
                         <li key={line}>{line}</li>
                       ))}
