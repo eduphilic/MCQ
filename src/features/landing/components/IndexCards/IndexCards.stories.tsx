@@ -8,9 +8,9 @@ import { IndexCards } from "./IndexCards";
 storiesOf("Landing", module)
   .addDecorator(story => <PlaceholderProvider>{story()}</PlaceholderProvider>)
   .addDecorator(story => (
-    <StorybookContentCenterWrapper style={{ backgroundColor: "#f2f2f2" }}>
-      {story()}
-    </StorybookContentCenterWrapper>
+    <div style={{ backgroundColor: "#f2f2f2" }}>
+      <StorybookContentCenterWrapper>{story()}</StorybookContentCenterWrapper>
+    </div>
   ))
   .add("IndexCards", () => {
     //

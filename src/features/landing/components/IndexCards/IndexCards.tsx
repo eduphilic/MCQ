@@ -5,6 +5,7 @@ import { State } from "store";
 import styled from "styled";
 import { actions } from "../../actions";
 
+import { lighten } from "@material-ui/core/styles/colorManipulator";
 import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 
 import { BlockImage } from "componentsV0/BlockImage";
@@ -52,43 +53,47 @@ class IndexCards extends Component<Props> {
     return (
       <Wrapper>
         {indexCardEntries.map((entry, index) => (
-          <CardWrapper
+          <CardBackgroundColorWrapper
             key={entry.id}
             backgroundColor={indexCardColors[index].blockColor}
           >
-            <EntryLogo
-              src={entry.logoUrlByWidth["128"]}
-              backgroundColor={indexCardColors[index].logoBackgroundColor}
-            />
+            <CardWrapper backgroundColor={indexCardColors[index].blockColor}>
+              <EntryLogo
+                src={entry.logoUrlByWidth["128"]}
+                backgroundColor={indexCardColors[index].logoBackgroundColor}
+              />
 
-            <LocalizationStateConsumer>
-              {({ localizationLanguage }) => (
-                <TextSectionWrapper>
-                  <TitleWrapper>
-                    <Typography variant="cardTitle">
-                      {entry.title[localizationLanguage] || entry.title.en}
-                    </Typography>
-                    <Typography>mock test for:</Typography>
-                  </TitleWrapper>
+              <LocalizationStateConsumer>
+                {({ localizationLanguage }) => (
+                  <TextSectionWrapper>
+                    <TitleWrapper>
+                      <Typography variant="cardTitle">
+                        {entry.title[localizationLanguage] || entry.title.en}
+                      </Typography>
+                      <Typography>mock test for:</Typography>
+                    </TitleWrapper>
 
-                  <CategoryPillWrapper>
-                    {indexCardEntryCategories
-                      .filter(c => c.entryID === entry.id)
-                      .map(c => (
-                        <CategoryPill
-                          key={c.id}
-                          backgroundColor={
-                            indexCardColors[index].categoryBackgroundColor
-                          }
-                          textColor={indexCardColors[index].categoryTitleColor}
-                          title={c.title[localizationLanguage] || c.title.en}
-                        />
-                      ))}
-                  </CategoryPillWrapper>
-                </TextSectionWrapper>
-              )}
-            </LocalizationStateConsumer>
-          </CardWrapper>
+                    <CategoryPillWrapper>
+                      {indexCardEntryCategories
+                        .filter(c => c.entryID === entry.id)
+                        .map(c => (
+                          <CategoryPill
+                            key={c.id}
+                            backgroundColor={
+                              indexCardColors[index].categoryBackgroundColor
+                            }
+                            textColor={
+                              indexCardColors[index].categoryTitleColor
+                            }
+                            title={c.title[localizationLanguage] || c.title.en}
+                          />
+                        ))}
+                    </CategoryPillWrapper>
+                  </TextSectionWrapper>
+                )}
+              </LocalizationStateConsumer>
+            </CardWrapper>
+          </CardBackgroundColorWrapper>
         ))}
       </Wrapper>
     );
@@ -123,7 +128,19 @@ const mobileBreakpoint: Breakpoint = "sm";
 
 const Wrapper = styled.div`
   & > * {
-    margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+    /* margin: ${({ theme }) => theme.spacing.unit}px 0; */
+  }
+`;
+
+const getLightBg = (color: string) => lighten(color, 0.4);
+
+const CardBackgroundColorWrapper = styled.div<{ backgroundColor: string }>`
+  padding: ${props => props.theme.spacing.unit * 2}px;
+  background-color: ${props => getLightBg(props.backgroundColor)};
+
+  > * {
+    max-width: 1280px;
+    margin: 0 auto;
   }
 `;
 
@@ -138,8 +155,8 @@ const CardWrapper = styled<{ className?: string; backgroundColor: string }>(
       to right,
       ${backgroundColor},
       ${backgroundColor} ${blockWidthPixels}px,
-      transparent ${blockWidthPixels}px,
-      transparent
+      ${getLightBg(backgroundColor)} ${blockWidthPixels}px,
+      ${getLightBg(backgroundColor)}
     );
 
     ${theme.breakpoints.down(mobileBreakpoint)} {
@@ -151,8 +168,8 @@ const CardWrapper = styled<{ className?: string; backgroundColor: string }>(
         to bottom,
         ${backgroundColor},
         ${backgroundColor} ${verticalMargin + logoSizePixels / 2}px,
-        transparent ${verticalMargin + logoSizePixels / 2}px,
-        transparent
+        ${getLightBg(backgroundColor)} ${verticalMargin + logoSizePixels / 2}px,
+        ${getLightBg(backgroundColor)}
       );
     }
   `};

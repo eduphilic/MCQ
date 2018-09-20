@@ -1,7 +1,6 @@
 import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 // TODO: Remove Development Snackbar Link
 import { DevelopmentAdminDashboardSnackbar } from "./DevelopmentAdminDashboardSnackbar";
 
@@ -28,9 +27,7 @@ export const LandingTemplate: SFC<LandingTemplateProps> = props => {
 
       <HeaderHeroWrapper>{heroNode}</HeaderHeroWrapper>
 
-      <MainContentBackground>
-        <ContentCenterWrapper>{testCardNode}</ContentCenterWrapper>
-      </MainContentBackground>
+      <MainContentBackground>{testCardNode}</MainContentBackground>
 
       <FooterWrapper>{footerNode}</FooterWrapper>
     </>
