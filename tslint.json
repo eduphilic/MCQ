@@ -21,6 +21,7 @@
         "react": "React",
         "reactDom": "ReactDOM",
         "reactLocalization": "LocalizedStrings",
+        "reactLoadable": "Loadable",
         "reactSwipe": "ReactSwipe",
         "reactSwipeableViews": "SwipeableViews",
         "v1": "uuid"
