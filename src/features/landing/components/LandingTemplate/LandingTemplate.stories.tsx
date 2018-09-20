@@ -15,6 +15,7 @@ storiesOf("Landing", module).add("LandingTemplate", () => (
     <LandingTemplate
       heroNode={<StorybookPlaceholderImage />}
       testCardNode={<div>{testCardNodes}</div>}
+      youTubeVideosNode={<StorybookPlaceholderImage />}
       footerNode={<StorybookPlaceholderImage />}
     />
   </Router>

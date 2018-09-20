@@ -11,6 +11,9 @@ export interface LandingTemplateProps {
   /** Product offering cards, main content. */
   testCardNode: ReactNode;
 
+  /** YouTube videos.  */
+  youTubeVideosNode: ReactNode;
+
   /** Page footer. */
   footerNode: ReactNode;
 }
@@ -19,7 +22,7 @@ export interface LandingTemplateProps {
  * Page template for main landing page.
  */
 export const LandingTemplate: SFC<LandingTemplateProps> = props => {
-  const { heroNode, testCardNode, footerNode } = props;
+  const { heroNode, testCardNode, youTubeVideosNode, footerNode } = props;
 
   return (
     <>
@@ -28,6 +31,8 @@ export const LandingTemplate: SFC<LandingTemplateProps> = props => {
       <HeaderHeroWrapper>{heroNode}</HeaderHeroWrapper>
 
       <MainContentBackground>{testCardNode}</MainContentBackground>
+
+      {youTubeVideosNode}
 
       <FooterWrapper>{footerNode}</FooterWrapper>
     </>
