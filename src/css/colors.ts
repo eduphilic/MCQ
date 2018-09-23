@@ -29,3 +29,8 @@ export const examQuestionStatusSelected = "#f9cb4d";
 
 export const whiteDark = "#f2f2f2";
 export const textGrey = "#a6a6a6";
+
+/**
+ * Yellow background color for free exam cards.
+ */
+export const freeExamCardBackgroundColor = "#ecd100";

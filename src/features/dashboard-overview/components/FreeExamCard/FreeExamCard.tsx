@@ -10,6 +10,7 @@ import { CardActionArea } from "components/CardActionArea";
 //   CardDualColumnsTextContentRow,
 // } from "components/CardDualColumnsTextContent";
 import { CardHeader } from "components/CardHeader";
+import { freeExamCardBackgroundColor } from "css";
 import React from "react";
 import styled, { css } from "styled";
 
@@ -50,7 +51,7 @@ export const FreeExamCard = () => {
 };
 
 const StyledCard = styled(Card)`
-  background-color: #ecd100;
+  background-color: ${freeExamCardBackgroundColor};
 `;
 
 const AttemptButton = styled<{
