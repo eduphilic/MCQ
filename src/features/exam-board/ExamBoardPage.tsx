@@ -4,8 +4,10 @@ import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { State } from "store";
+import styled from "styled";
 import { actions } from "./actions";
 
+import CardActions from "@material-ui/core/CardActions";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import { Button } from "components/Button";
@@ -17,7 +19,6 @@ import { DialogAppBar } from "components/DialogAppBar";
 import { DialogContent } from "components/DialogContent";
 import { Typography } from "components/Typography";
 import { freeExamCardBackgroundColor } from "css";
-import { SubscriptionCard } from "./components/SubscriptionCard";
 
 type StateProps = {
   loading: boolean;
@@ -128,7 +129,7 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
                       size="small"
                       color="primary"
                       fullWidth
-                      disabled={index !== 1}
+                      disabled={index === 1}
                       onClick={() => this.handleSubscriptionClick(index)}
                     >
                       08 Tests (Attempt)
@@ -160,6 +161,12 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
       </Card>
     ));
 
+    const cardStats = {
+      Attempts: "2345 Users",
+      Score: "75/200",
+      Rank: "733/ Out 2345",
+    };
+
     const testCards =
       selectedSubscription === null
         ? null
@@ -168,37 +175,67 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
             const title = `${subscription.title} Test ${index + 1}`;
 
             return (
-              <SubscriptionCard
-                key={`${subscription.placeholderImagesKey}-${index}`}
-                imageUrl={entryImages[subscription.placeholderImagesKey]}
-                title={title}
-                subheader="Validity 31st Jan 2019"
-                stats={{
-                  Attempts: "2345 Users",
-                  Score: "75/200",
-                  Rank: "733/ Out 2345",
-                }}
-                reviewButtonLinkComponent={
-                  index === 0
-                    ? (props: any) => (
-                        <Link
-                          to={routePathFromLocalizationKey(
-                            "routes_ExamReview_ExamReviewPage",
-                          )}
-                          {...props}
-                        />
-                      )
-                    : undefined
-                }
-                onAttemptButtonClick={
-                  index === 1
-                    ? this.createDialogCloseHandlerWrapper(() =>
+              <Card key={`${subscription.placeholderImagesKey}-${index}`}>
+                <CardHeader
+                  title={title}
+                  subheader="Validity 31st Jan 2019"
+                  imageUrl={entryImages[subscription.placeholderImagesKey]}
+                />
+                <CardContent>
+                  {Object.entries(cardStats).map(([key, value]) => (
+                    <StatRow key={key}>
+                      <Typography variant="Subtitle2">{key}</Typography>
+                      <Typography variant="Subtitle2">{value}</Typography>
+                    </StatRow>
+                  ))}
+                </CardContent>
+                <CardActions>
+                  <div style={{ flex: 1 }} />
+                  {index === 0 && (
+                    <>
+                      <Button
+                        variant="outlined"
+                        color="blue"
+                        style={{ marginRight: 8 }}
+                        onClick={this.createDialogCloseHandlerWrapper(() =>
+                          alert(`Reattempt: ${title}`),
+                        )}
+                      >
+                        Reattempt Now
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="blue"
+                        component={(props: any) => (
+                          <Link
+                            to={routePathFromLocalizationKey(
+                              "routes_ExamReview_ExamReviewPage",
+                            )}
+                            {...props}
+                          />
+                        )}
+                      >
+                        View Answer Key
+                      </Button>
+                    </>
+                  )}
+                  {index === 1 && (
+                    <Button
+                      variant="outlined"
+                      onClick={this.createDialogCloseHandlerWrapper(() =>
                         alert(`Attempt: ${title}`),
-                      )
-                    : undefined
-                }
-                showDisabledExpiredButton={index > 1}
-              />
+                      )}
+                    >
+                      Attempt Now
+                    </Button>
+                  )}
+                  {index > 1 && (
+                    <Button variant="outlined" disabled>
+                      Expired
+                    </Button>
+                  )}
+                </CardActions>
+              </Card>
             );
           });
 
@@ -295,3 +332,15 @@ const SubscriptionCardRow = (props: {
     </Grid>
   </Grid>
 );
+
+const StatRow = styled.div`
+  display: flex;
+
+  > *:first-child {
+    width: 50%;
+  }
+
+  > *:not(:last-child) {
+    margin-bottom: ${({ theme }) => theme.spacing.unit}px;
+  }
+`;
