@@ -73,6 +73,7 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
       <Card
         key={subscription.placeholderImagesKey}
         style={{
+          width: "100%",
           backgroundColor: subscription.isFreeExam
             ? freeExamCardBackgroundColor
             : undefined,
@@ -88,42 +89,68 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
         />
         <CardContent>
           <Grid container spacing={8}>
-            <SubscriptionCardRow
-              leftNode={<Typography variant="Subtitle2">Attempted</Typography>}
-              rightNode={
-                <Button
-                  component={(props: any) => (
-                    <Link
-                      to={routePathFromLocalizationKey(
-                        "routes_ExamReview_ExamReviewPage",
+            {!subscription.isFreeExam && (
+              <>
+                <SubscriptionCardRow
+                  leftNode={
+                    <Typography variant="Subtitle2">Attempted</Typography>
+                  }
+                  rightNode={
+                    <Button
+                      component={(props: any) => (
+                        <Link
+                          to={routePathFromLocalizationKey(
+                            "routes_ExamReview_ExamReviewPage",
+                          )}
+                          {...props}
+                        />
                       )}
-                      {...props}
-                    />
-                  )}
-                  variant="contained"
-                  size="small"
-                  fullWidth
-                  disabled={index > 1}
-                >
-                  02 Tests (Revise)
-                </Button>
-              }
-            />
-            <SubscriptionCardRow
-              leftNode={<Typography variant="Subtitle2">Remaining</Typography>}
-              rightNode={
-                <Button
-                  variant="contained"
-                  size="small"
-                  color="primary"
-                  fullWidth
-                  disabled={index !== 1}
-                  onClick={() => this.handleSubscriptionClick(index)}
-                >
-                  08 Tests (Attempt)
-                </Button>
-              }
-            />
+                      variant="contained"
+                      size="small"
+                      fullWidth
+                      disabled={index > 1}
+                    >
+                      02 Tests (Revise)
+                    </Button>
+                  }
+                />
+                <SubscriptionCardRow
+                  leftNode={
+                    <Typography variant="Subtitle2">Remaining</Typography>
+                  }
+                  rightNode={
+                    <Button
+                      variant="contained"
+                      size="small"
+                      color="primary"
+                      fullWidth
+                      disabled={index !== 1}
+                      onClick={() => this.handleSubscriptionClick(index)}
+                    >
+                      08 Tests (Attempt)
+                    </Button>
+                  }
+                />
+              </>
+            )}
+
+            {subscription.isFreeExam && (
+              <SubscriptionCardRow
+                leftNode={null}
+                rightNode={
+                  <Button
+                    variant="contained"
+                    size="small"
+                    color="primary"
+                    fullWidth
+                    disabled={index !== 1}
+                    onClick={() => this.handleSubscriptionClick(index)}
+                  >
+                    Attempt
+                  </Button>
+                }
+              />
+            )}
           </Grid>
         </CardContent>
       </Card>
@@ -177,7 +204,7 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
           <Grid item xs md={6}>
             <Grid container spacing={16}>
               {subscriptionCards.map((subscriptionCard, index) => (
-                <Grid key={index} item>
+                <Grid key={index} item xs={12}>
                   {subscriptionCard}
                 </Grid>
               ))}
