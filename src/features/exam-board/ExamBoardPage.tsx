@@ -16,6 +16,7 @@ import { Dialog } from "components/Dialog";
 import { DialogAppBar } from "components/DialogAppBar";
 import { DialogContent } from "components/DialogContent";
 import { Typography } from "components/Typography";
+import { freeExamCardBackgroundColor } from "css";
 import { SubscriptionCard } from "./components/SubscriptionCard";
 
 type StateProps = {
@@ -69,7 +70,14 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
     ];
 
     const subscriptionCards = subscriptions.map((subscription, index) => (
-      <Card key={subscription.placeholderImagesKey}>
+      <Card
+        key={subscription.placeholderImagesKey}
+        style={{
+          backgroundColor: subscription.isFreeExam
+            ? freeExamCardBackgroundColor
+            : undefined,
+        }}
+      >
         <CardHeader
           imageUrl={entryImages[subscription.placeholderImagesKey]}
           title={subscription.title}
