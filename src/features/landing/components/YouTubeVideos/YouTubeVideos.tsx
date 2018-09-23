@@ -2,7 +2,7 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import { Button } from "components/Button";
 import { Typography } from "components/Typography";
 import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
-import React, { SFC } from "react";
+import React, { Fragment, SFC } from "react";
 import Loadable from "react-loadable";
 import styled, { css } from "styled";
 
@@ -50,25 +50,19 @@ const YouTubeVideos: SFC<YouTubeVideosProps> = props => {
 
         <ContentCenterWrapper>
           {categories.map(category => (
-            <div key={category.title}>
-              <p>{category.title}</p>
+            <Fragment key={category.title}>
+              <Typography variant="H6">{category.title}</Typography>
 
-              <div style={{ display: "flex" }}>
+              <VideoRow>
                 {category.videos.map(({ contentDetails: { videoId } }) => (
                   <YouTubeVideoIframe key={videoId} videoId={videoId} />
                 ))}
                 <div style={{ flex: 1 }} />
                 <ViewMoreVideosButton />
-              </div>
-            </div>
+              </VideoRow>
+            </Fragment>
           ))}
         </ContentCenterWrapper>
-
-        {/* {videos.map(video => (
-          <p key={video.contentDetails.videoId}>
-            {video.snippet.position + 1}. {video.snippet.title}
-          </p>
-        ))} */}
       </Wrapper>
     </>
   );
@@ -92,6 +86,7 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
+  margin-bottom: 16px;
   padding: 32px;
   background-color: #5cb4d0;
 `;
@@ -134,6 +129,15 @@ const YouTubeSubscriptionButton = styled<{ className?: string }>(
     background-image: url(${YouTubeSubscribeOptimizedPng});
     background-size: cover;
     background-position: center;
+  }
+`;
+
+const VideoRow = styled.div`
+  display: flex;
+  margin-bottom: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
   }
 `;
 
