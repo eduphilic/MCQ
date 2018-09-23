@@ -4724,8 +4724,8 @@ es-to-primitive@^1.1.1:
     is-symbol "^1.0.1"
 
 es5-ext@^0.10.35, es5-ext@^0.10.9, es5-ext@~0.10.14:
-  version "0.10.45"
-  resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.45.tgz#0bfdf7b473da5919d5adf3bd25ceb754fccc3653"
+  version "0.10.46"
+  resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.46.tgz#efd99f67c5a7ec789baa3daa7f79870388f7f572"
   dependencies:
     es6-iterator "~2.0.3"
     es6-symbol "~3.1.1"
@@ -9158,21 +9158,17 @@ react-dev-utils@6.0.0-next.3e165448:
     strip-ansi "4.0.0"
     text-table "0.2.0"
 
-"react-docgen-typescript-language-service@file:./vendor/react-docgen-typescript-language-service":
-  version "1.0.0"
-  dependencies:
-    ts-loader "^4.5.0"
-
-"react-docgen-typescript-loader@file:./vendor/react-docgen-typescript-loader":
-  version "3.0.0-rc.0"
+react-docgen-typescript-loader@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-docgen-typescript-loader/-/react-docgen-typescript-loader-3.0.0.tgz#4042e2854d29380e4d01e479d438c03ec00de8e8"
   dependencies:
     "@webpack-contrib/schema-utils" "^1.0.0-beta.0"
     loader-utils "^1.1.0"
-    react-docgen-typescript "^1.8.0"
+    react-docgen-typescript "^1.9.0"
 
-react-docgen-typescript@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-1.8.0.tgz#4c522f44bcd6d823f41711e4f01be55ef261ece2"
+react-docgen-typescript@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-1.9.0.tgz#29b3b66dba2fea663e29e3f1d162bbba5d0c2770"
 
 react-docgen@^3.0.0-rc.0:
   version "3.0.0-rc.0"
@@ -10887,16 +10883,6 @@ trim-right@^1.0.1:
 tryer@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
-
-ts-loader@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-4.5.0.tgz#a1ce70b2dc799941fb2197605f0d67874097859b"
-  dependencies:
-    chalk "^2.3.0"
-    enhanced-resolve "^4.0.0"
-    loader-utils "^1.0.2"
-    micromatch "^3.1.4"
-    semver "^5.0.1"
 
 ts-loader@^5.1.1:
   version "5.1.1"
