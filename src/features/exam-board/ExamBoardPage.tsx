@@ -63,10 +63,11 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
       placeholderImagesKey: keyof typeof entryImages;
       title: string;
       isFreeExam: boolean;
+      isExpired: boolean;
     }[] = [
-      { placeholderImagesKey: "Officer", title: "NDA/ ACC", isFreeExam: false },
-      { placeholderImagesKey: "Army", title: "Soldier Tradesman", isFreeExam: true },
-      { placeholderImagesKey: "AirForce", title: "Group 'X' & 'Y': Med Asst Trade", isFreeExam: false },
+      { placeholderImagesKey: "Officer", title: "NDA/ ACC", isFreeExam: false, isExpired: false },
+      { placeholderImagesKey: "Army", title: "Soldier Tradesman", isFreeExam: true, isExpired: false },
+      { placeholderImagesKey: "AirForce", title: "Group 'X' & 'Y': Med Asst Trade", isFreeExam: false, isExpired: true },
     ];
 
     const subscriptionCards = subscriptions.map((subscription, index) => (
@@ -82,7 +83,10 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
         <CardHeader
           imageUrl={entryImages[subscription.placeholderImagesKey]}
           title={subscription.title}
-          subheader="Validity 31st Jan 2019"
+          subheader={
+            subscription.isExpired ? "Expired" : "Validity 31st Jan 2019"
+          }
+          subheaderColor={subscription.isExpired ? "error" : undefined}
           overline={
             subscription.isFreeExam ? "1 Free Test" : "10 Mock Tests Set"
           }
@@ -108,7 +112,7 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
                       variant="contained"
                       size="small"
                       fullWidth
-                      disabled={index > 1}
+                      // disabled={index > 1}
                     >
                       02 Tests (Revise)
                     </Button>
