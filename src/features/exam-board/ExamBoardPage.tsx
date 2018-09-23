@@ -57,19 +57,26 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
 
     if (!loaded) return <div>Loading...</div>;
 
-    const subscriptions: [keyof typeof entryImages, string, boolean][] = [
-      ["Officer", "NDA/ ACC", false],
-      ["Army", "Soldier Tradesman", true],
-      ["AirForce", "Group 'X' & 'Y': Med Asst Trade", false],
+    // prettier-ignore
+    const subscriptions: {
+      placeholderImagesKey: keyof typeof entryImages;
+      title: string;
+      isFreeExam: boolean;
+    }[] = [
+      { placeholderImagesKey: "Officer", title: "NDA/ ACC", isFreeExam: false },
+      { placeholderImagesKey: "Army", title: "Soldier Tradesman", isFreeExam: true },
+      { placeholderImagesKey: "AirForce", title: "Group 'X' & 'Y': Med Asst Trade", isFreeExam: false },
     ];
 
     const subscriptionCards = subscriptions.map((subscription, index) => (
-      <Card key={subscription[0]}>
+      <Card key={subscription.placeholderImagesKey}>
         <CardHeader
-          imageUrl={entryImages[subscription[0]]}
-          title={subscription[1]}
+          imageUrl={entryImages[subscription.placeholderImagesKey]}
+          title={subscription.title}
           subheader="Validity 31st Jan 2019"
-          overline={subscription[2] ? "1 Free Test" : "10 Mock Tests Set"}
+          overline={
+            subscription.isFreeExam ? "1 Free Test" : "10 Mock Tests Set"
+          }
         />
         <CardContent>
           <Grid container spacing={8}>
@@ -119,12 +126,12 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
         ? null
         : Array.from({ length: 10 }, (_, index) => {
             const subscription = subscriptions[selectedSubscription];
-            const title = `${subscription[1]} Test ${index + 1}`;
+            const title = `${subscription.title} Test ${index + 1}`;
 
             return (
               <SubscriptionCard
-                key={`${subscription[0]}-${index}`}
-                imageUrl={entryImages[subscription[0]]}
+                key={`${subscription.placeholderImagesKey}-${index}`}
+                imageUrl={entryImages[subscription.placeholderImagesKey]}
                 title={title}
                 subheader="Validity 31st Jan 2019"
                 stats={{
@@ -185,7 +192,7 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
         {selectedSubscription !== null && (
           <Dialog variant="fullScreenMobileHidden" open={dialogOpen}>
             <DialogAppBar
-              title={subscriptions[selectedSubscription][1]}
+              title={subscriptions[selectedSubscription].title}
               onCloseButtonClick={this.handleDialogClose}
             />
 
