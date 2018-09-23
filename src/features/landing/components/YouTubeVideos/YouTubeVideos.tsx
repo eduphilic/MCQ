@@ -29,7 +29,7 @@ const YouTubeVideos: SFC<YouTubeVideosProps> = props => {
   }[] = [
     { title: "Army", videos: [] },
     { title: "Air Force", videos: [] },
-    // { title: "Navy", videos: [] },
+    { title: "Navy", videos: [] },
   ];
 
   // Distribute 4 videos per category.
