@@ -1,7 +1,7 @@
 import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 
-import { Typography } from "components/Typography";
+import { Typography, TypographyProps } from "components/Typography";
 import { BlockImage } from "componentsV0/BlockImage";
 
 export type CardHeaderProps = {
@@ -10,6 +10,13 @@ export type CardHeaderProps = {
 
   /** Subheader contents. */
   subheader?: ReactNode;
+
+  /**
+   * Subheader color.
+   *
+   * @default textSecondary
+   */
+  subheaderColor?: NonNullable<TypographyProps["color"]>;
 
   /** Image url. */
   imageUrl?: string;
@@ -26,7 +33,14 @@ export type CardHeaderProps = {
 };
 
 export const CardHeader: SFC<CardHeaderProps> = props => {
-  const { title, subheader, imageUrl, imageSize = 80, overline } = props;
+  const {
+    title,
+    subheader,
+    imageUrl,
+    imageSize = 80,
+    overline,
+    subheaderColor = "textSecondary",
+  } = props;
 
   return (
     <Wrapper>
@@ -37,7 +51,7 @@ export const CardHeader: SFC<CardHeaderProps> = props => {
 
         <Title>{title}</Title>
 
-        <Subheader>{subheader}</Subheader>
+        <Subheader color={subheaderColor}>{subheader}</Subheader>
       </div>
     </Wrapper>
   );
@@ -62,7 +76,9 @@ const Image = styled<{ className?: string; src: string; size: number }>(
   margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const Overline = styled<{ className?: string }>(({ children, className }) => (
+const Overline = styled<{
+  className?: string;
+}>(({ className, children }) => (
   <Typography className={className} variant="Overline" gutterBottom>
     {children}
   </Typography>
@@ -78,12 +94,15 @@ const Title = styled<{ className?: string }>(({ children, className }) => (
   margin-bottom: 8px;
 `;
 
-const Subheader = styled<{ className?: string }>(({ children, className }) => (
+const Subheader = styled<{
+  className?: string;
+  color: NonNullable<CardHeaderProps["subheaderColor"]>;
+}>(({ children, className, color }) => (
   <Typography
     className={className}
     variant="Subtitle2"
     gutterBottom
-    color="textSecondary"
+    color={color}
   >
     {children}
   </Typography>
