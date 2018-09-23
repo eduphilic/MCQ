@@ -48,6 +48,8 @@ const LoadableYouTubeVideos = Loadable({
 export { LoadableYouTubeVideos as YouTubeVideos };
 
 const HeaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   position: relative;
   padding: 32px;
   background-color: #5cb4d0;
@@ -57,7 +59,6 @@ const Header = styled(Typography)`
   font-size: 26px;
   font-weight: 600;
   color: #fff;
-  text-align: center;
 `;
 
 const YouTubeSubscriptionButton = styled<{ className?: string }>(
