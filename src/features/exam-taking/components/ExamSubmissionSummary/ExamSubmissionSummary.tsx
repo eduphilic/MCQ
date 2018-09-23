@@ -59,7 +59,7 @@ export const ExamSubmissionSummary: SFC<ExamSubmissionSummaryProps> = props => {
         }
         buttonsNode={
           <>
-            <TypographyButton color="primary" filled>
+            <TypographyButton color="blue" filled>
               Submit
             </TypographyButton>
             <TypographyButton color="primary" filled>
