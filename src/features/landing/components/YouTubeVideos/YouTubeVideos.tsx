@@ -1,4 +1,5 @@
 import ButtonBase from "@material-ui/core/ButtonBase";
+import Hidden from "@material-ui/core/Hidden";
 import { Button } from "components/Button";
 import { Typography } from "components/Typography";
 import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
@@ -28,7 +29,7 @@ const YouTubeVideos: SFC<YouTubeVideosProps> = props => {
   }[] = [
     { title: "Army", videos: [] },
     { title: "Air Force", videos: [] },
-    { title: "Navy", videos: [] },
+    // { title: "Navy", videos: [] },
   ];
 
   // Distribute 4 videos per category.
@@ -53,10 +54,21 @@ const YouTubeVideos: SFC<YouTubeVideosProps> = props => {
             <Fragment key={category.title}>
               <Typography variant="H6">{category.title}</Typography>
 
+              <Hidden smUp>
+                <YouTubeVideoIframe
+                  large
+                  videoId={category.videos[0].contentDetails.videoId}
+                />
+              </Hidden>
+
               <VideoRow>
-                {category.videos.map(({ contentDetails: { videoId } }) => (
-                  <YouTubeVideoIframe key={videoId} videoId={videoId} />
-                ))}
+                {category.videos.map(
+                  ({ contentDetails: { videoId } }, index) => (
+                    <Hidden key={videoId} xsDown={index === 0 || index === 3}>
+                      <YouTubeVideoIframe videoId={videoId} />
+                    </Hidden>
+                  ),
+                )}
                 <div style={{ flex: 1 }} />
                 <ViewMoreVideosButton />
               </VideoRow>
@@ -134,6 +146,7 @@ const YouTubeSubscriptionButton = styled<{ className?: string }>(
 
 const VideoRow = styled.div`
   display: flex;
+  align-items: center;
   margin-bottom: 16px;
 
   &:last-child {
@@ -150,19 +163,29 @@ const videoDimensions = css`
   max-height: calc(1280px / ${videoRowSplitCount} - 32px);
 `;
 
-const YouTubeVideoIframe = styled<{ className?: string; videoId: string }>(
-  ({ className, videoId }) => (
-    <iframe
-      className={className}
-      src={`https://www.youtube.com/embed/${videoId}`}
-      frameBorder={0}
-      allowFullScreen
-    />
-  ),
-)`
-  ${videoDimensions};
-
-  margin: 16px;
+const YouTubeVideoIframe = styled<{
+  className?: string;
+  videoId: string;
+  large?: boolean;
+}>(({ className, videoId }) => (
+  <iframe
+    className={className}
+    src={`https://www.youtube.com/embed/${videoId}`}
+    frameBorder={0}
+    allowFullScreen
+  />
+))`
+  ${({ large }) =>
+    !large
+      ? css`
+          ${videoDimensions};
+          margin: 16px;
+        `
+      : `
+          width: calc(100vmin - 32px);
+          height: calc(100vmin - 32px);
+          margin: 16px 0;
+        `};
 
   &:first-child {
     margin-left: 0;
@@ -187,6 +210,10 @@ const ViewMoreVideosButton = styled<{ className?: string }>(({ className }) => (
 ))`
   ${videoDimensions};
 
-  margin: 16px;
-  margin-right: 0;
+  margin: 16px 0;
+
+  ${({ theme }) => theme.breakpoints.down("xs")} {
+    width: inherit;
+    height: inherit;
+  }
 `;
