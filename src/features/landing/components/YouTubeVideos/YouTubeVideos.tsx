@@ -1,4 +1,5 @@
 import ButtonBase from "@material-ui/core/ButtonBase";
+import { Button } from "components/Button";
 import { Typography } from "components/Typography";
 import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 import React, { SFC } from "react";
@@ -27,7 +28,7 @@ const YouTubeVideos: SFC<YouTubeVideosProps> = props => {
   }[] = [
     { title: "Army", videos: [] },
     { title: "Air Force", videos: [] },
-    // { title: "Navy", videos: [] },
+    { title: "Navy", videos: [] },
   ];
 
   // Distribute 4 videos per category.
@@ -56,6 +57,8 @@ const YouTubeVideos: SFC<YouTubeVideosProps> = props => {
                 {category.videos.map(({ contentDetails: { videoId } }) => (
                   <YouTubeVideoIframe key={videoId} videoId={videoId} />
                 ))}
+                <div style={{ flex: 1 }} />
+                <ViewMoreVideosButton />
               </div>
             </div>
           ))}
@@ -164,4 +167,22 @@ const YouTubeVideoIframe = styled<{ className?: string; videoId: string }>(
   &:last-child {
     margin-right: 0;
   }
+`;
+
+const ViewMoreVideosButton = styled<{ className?: string }>(({ className }) => (
+  <Button
+    className={className}
+    component="a"
+    href={youtubeChannelUrl}
+    target="_blank"
+    color="blue"
+    variant="contained"
+  >
+    View more videos...
+  </Button>
+))`
+  ${videoDimensions};
+
+  margin: 16px;
+  margin-right: 0;
 `;
