@@ -1,5 +1,5 @@
+import { ArcherElement } from "@strothj/react-archer";
 import React, { forwardRef, SFC } from "react";
-import { ArcherElement } from "react-archer";
 import styled from "styled";
 
 export type ArrowTargetRowItemProps = ArrowTargetRowItemWrapperProps &

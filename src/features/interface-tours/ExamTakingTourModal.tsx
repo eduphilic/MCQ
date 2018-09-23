@@ -1,5 +1,5 @@
+import { ArcherElement, ArcherElementProps } from "@strothj/react-archer";
 import React, { SFC } from "react";
-import { ArcherElement, ArcherElementProps } from "react-archer";
 import styled from "styled";
 
 import { Typography } from "componentsV0/Typography";

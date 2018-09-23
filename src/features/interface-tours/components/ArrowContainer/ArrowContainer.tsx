@@ -1,5 +1,5 @@
+import { ArcherContainer } from "@strothj/react-archer";
 import React, { ReactNode, SFC } from "react";
-import { ArcherContainer } from "react-archer";
 import { colors } from "../../colors";
 
 export type ArrowContainerProps = {

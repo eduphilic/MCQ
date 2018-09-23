@@ -1,4 +1,4 @@
-declare module "react-archer" {
+declare module "@strothj/react-archer" {
   import React from "react";
 
   export type ArcherAnchorPosition = "top" | "bottom" | "left" | "right";

@@ -1742,6 +1742,12 @@
     babel-plugin-transform-dynamic-import "2.0.0"
     babel-plugin-transform-react-remove-prop-types "0.4.15"
 
+"@strothj/react-archer@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@strothj/react-archer/-/react-archer-0.2.0.tgz#325de27dbb8aa3955669d0b9fd91479208025d85"
+  dependencies:
+    resize-observer-polyfill "1.5.0"
+
 "@strothj/react-dev-utils@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@strothj/react-dev-utils/-/react-dev-utils-5.0.0.tgz#3c31868c9dd7d084ee183053e1462dcab67ec54c"
@@ -9106,11 +9112,6 @@ react-app-rewired@^2.0.0:
   dependencies:
     cross-spawn "^5.1.0"
     dotenv "^4.0.0"
-
-"react-archer@file:./vendor/react-archer":
-  version "0.2.0"
-  dependencies:
-    resize-observer-polyfill "1.5.0"
 
 react-color@^2.14.1:
   version "2.14.1"
