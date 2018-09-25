@@ -74,13 +74,14 @@ const ExamAppBar: SFC<Props> = props => {
             </Fragment>
           ))}
 
-        <FlexSpacer />
-
         {featureKey === "examReview" && (
           <>
+            <VerticalDivider />
             <Typography>Difficulty - Easy</Typography>
           </>
         )}
+
+        <FlexSpacer />
 
         <LanguageToggleButton />
       </ToolbarWithButtonMargins>
