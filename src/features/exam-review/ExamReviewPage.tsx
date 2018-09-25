@@ -1,4 +1,5 @@
 import {
+  ExamAnalysisPanelMobile,
   ExamAnswerExplanation,
   ExamAnswerSelect,
   examAnswerSelectPlaceholderProps,
@@ -23,23 +24,26 @@ const examAnswerSelectProps: ExamAnswerSelectProps = {
 const paneKeyNodeMap = Array.from({ length: 15 }, (_, index) => ({
   key: `pane-${index}`,
   node: (
-    <ExamLayout
-      headerNode={
-        <ExamHeader
-          questionNumber={index + 1}
-          {...examHeaderPlaceholderProps}
-        />
-      }
-      contentsNode={
-        <ExamContents
-          {...examContentsPlaceholderProps}
-          answerNode={<ExamAnswerSelect {...examAnswerSelectProps} />}
-        />
-      }
-      answerExplanationNode={
-        <ExamAnswerExplanation explanation="The explanation to the answer can come here in any length so that the look of the site donot get distorted and it can scroll down. The only issue is where to position the analysis of this question." />
-      }
-    />
+    <>
+      <ExamAnalysisPanelMobile />
+      <ExamLayout
+        headerNode={
+          <ExamHeader
+            questionNumber={index + 1}
+            {...examHeaderPlaceholderProps}
+          />
+        }
+        contentsNode={
+          <ExamContents
+            {...examContentsPlaceholderProps}
+            answerNode={<ExamAnswerSelect {...examAnswerSelectProps} />}
+          />
+        }
+        answerExplanationNode={
+          <ExamAnswerExplanation explanation="The explanation to the answer can come here in any length so that the look of the site donot get distorted and it can scroll down. The only issue is where to position the analysis of this question." />
+        }
+      />
+    </>
   ),
 }));
 

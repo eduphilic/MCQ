@@ -1,3 +1,4 @@
+export * from "./components/ExamAnalysisPanelMobile";
 export * from "./components/ExamAnswerExplanation";
 export * from "./components/ExamTemplate";
 export * from "./components/ExamLayout";
