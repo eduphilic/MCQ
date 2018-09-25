@@ -24,6 +24,7 @@ export const DashboardTemplate: SFC<DashboardTemplateProps> = props => {
     drawerContentsNode,
     pageContentsWrapperComponent: PageContentsWrapperComponent,
     backgroundColor,
+    pageContentsTopPadding,
   } = props;
 
   let wrappedPageContents = (
@@ -45,6 +46,7 @@ export const DashboardTemplate: SFC<DashboardTemplateProps> = props => {
       drawerContentsNode={drawerContentsNode}
       drawerThemeElement={drawerThemeElement}
       backgroundColor={backgroundColor}
+      pageContentsTopPadding={pageContentsTopPadding}
     >
       {wrappedPageContents}
     </ResponsiveDrawerFrame>
