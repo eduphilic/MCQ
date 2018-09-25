@@ -75,7 +75,7 @@ export const ExamHeader: SFC<ExamHeaderProps> = props => {
 
 const Wrapper = styled.div`
   & > * {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
   }
 `;
 
