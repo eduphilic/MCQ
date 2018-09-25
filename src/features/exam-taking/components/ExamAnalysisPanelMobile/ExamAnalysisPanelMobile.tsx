@@ -1,10 +1,12 @@
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Hidden from "@material-ui/core/Hidden";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { Typography, TypographyProps } from "components/Typography";
 import React, { SFC } from "react";
 import styled from "styled";
+import { ExamDrawerPerformanceAnalysis } from "../ExamDrawerPerformanceAnalysis";
 
 export type ExamAnalysisPanelMobileProps = {};
 
@@ -21,6 +23,9 @@ export const ExamAnalysisPanelMobile: SFC = props => {
           <div style={{ flex: 1 }} />
           <StyledTypography color="textSecondary">Easy</StyledTypography>
         </StyledExpansionPanelSummary>
+        <StyledExpansionPanelDetails>
+          <ExamDrawerPerformanceAnalysis examResult="pass" />
+        </StyledExpansionPanelDetails>
       </StyledExpansionPanel>
     </Hidden>
   );
@@ -41,11 +46,16 @@ const StyledExpansionPanel = styled<{ className?: string }>(props => (
 const StyledExpansionPanelSummary = styled<{ className?: string }>(props => (
   <ExpansionPanelSummary
     expandIcon={<ExpandMore />}
-    classes={{ expandIcon: "expand-icon" }}
+    classes={{ content: "content", expandIcon: "expand-icon" }}
     {...props}
   />
 ))`
   padding: 0 8px;
+  min-height: inherit !important;
+
+  .content {
+    margin: 12px 0 !important;
+  }
 
   .expand-icon {
     right: 0;
@@ -53,6 +63,14 @@ const StyledExpansionPanelSummary = styled<{ className?: string }>(props => (
 `;
 // @ts-ignore
 StyledExpansionPanelSummary.muiName = "ExpansionPanelSummary";
+
+const StyledExpansionPanelDetails = styled<{ className?: string }>(props => (
+  <ExpansionPanelDetails {...props} />
+))`
+  padding: 0 8px;
+`;
+// @ts-ignore
+StyledExpansionPanelDetails.muiName = "ExpansionPanelDetails";
 
 const StyledTypography = styled<{
   className?: string;
