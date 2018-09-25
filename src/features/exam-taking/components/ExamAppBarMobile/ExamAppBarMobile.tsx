@@ -60,32 +60,36 @@ const ExamAppBarMobile: SFC<Props> = props => {
             <LanguageToggleButton />
           </IconButtonGroup>
 
-          <AppBarCenterContentWrapper>
-            {!showStartExamButton && <ExamAppBarTimer />}
-          </AppBarCenterContentWrapper>
+          {featureKey === "examTaking" && (
+            <AppBarCenterContentWrapper>
+              {!showStartExamButton && <ExamAppBarTimer />}
+            </AppBarCenterContentWrapper>
+          )}
 
-          <IconButtonGroup position="right">
-            {showStartExamButton && (
-              // TODO: Fix this type definition:
-              <StartExamButton {...{ onClick: onStartExamButtonClick }}>
-                Start Exam
-              </StartExamButton>
-            )}
-
-            {!showStartExamButton &&
-              !showSubmissionSummaryScreen && (
-                <SubmitExamButton {...{ onClick: onSubmitButtonClick }}>
-                  Submit Exam
-                </SubmitExamButton>
+          {featureKey === "examTaking" && (
+            <IconButtonGroup position="right">
+              {showStartExamButton && (
+                // TODO: Fix this type definition:
+                <StartExamButton {...{ onClick: onStartExamButtonClick }}>
+                  Start Exam
+                </StartExamButton>
               )}
 
-            {showSubmissionSummaryScreen && (
-              <>
-                <ButtonSpacer />
-                <ButtonSpacer />
-              </>
-            )}
-          </IconButtonGroup>
+              {!showStartExamButton &&
+                !showSubmissionSummaryScreen && (
+                  <SubmitExamButton {...{ onClick: onSubmitButtonClick }}>
+                    Submit Exam
+                  </SubmitExamButton>
+                )}
+
+              {showSubmissionSummaryScreen && (
+                <>
+                  <ButtonSpacer />
+                  <ButtonSpacer />
+                </>
+              )}
+            </IconButtonGroup>
+          )}
         </ToolbarHalfHeightDarkBlueBackground>
 
         <ToolbarHalfHeightLightBlueBackground>
