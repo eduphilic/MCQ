@@ -1,3 +1,4 @@
+import Hidden from "@material-ui/core/Hidden";
 import { Typography } from "componentsV0/Typography";
 import { examDrawerInfoCardBackground } from "css";
 import React, { Fragment, ReactNode, SFC } from "react";
@@ -14,11 +15,13 @@ export const ExamDrawerPerformanceAnalysis: SFC<
 
   return (
     <div>
-      <TitleWrapper>
-        <SectionText large bold>
-          Army Soldier GD Test 1
-        </SectionText>
-      </TitleWrapper>
+      <Hidden smDown>
+        <TitleWrapper>
+          <SectionText large bold>
+            Army Soldier GD Test 1
+          </SectionText>
+        </TitleWrapper>
+      </Hidden>
 
       <SectionWrapper>
         <SectionText large bold bottomMargin>
@@ -70,6 +73,10 @@ const TitleWrapper = styled.div`
 
 const SectionWrapper = styled.div`
   padding: 16px;
+
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    padding: 16px 0;
+  }
 `;
 
 type SectionTextProps = {

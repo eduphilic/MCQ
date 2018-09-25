@@ -68,6 +68,7 @@ const StyledExpansionPanelDetails = styled<{ className?: string }>(props => (
   <ExpansionPanelDetails {...props} />
 ))`
   padding: 0 8px;
+  background-color: #deebf7;
 `;
 // @ts-ignore
 StyledExpansionPanelDetails.muiName = "ExpansionPanelDetails";
