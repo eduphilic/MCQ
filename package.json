@@ -47,7 +47,7 @@
     "react-localization": "^1.0.10",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "2.0.0-next.fb6e6f70",
+    "react-scripts": "2.0.0",
     "react-swipeable-views": "^0.12.16",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
