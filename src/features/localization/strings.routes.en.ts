@@ -11,6 +11,8 @@ export const routesEn = {
 
   routes_ExamReview_ExamReviewPage: "Revise",
 
+  routes_SubscriptionManagement_PaymentPage: "Membership > Payment",
+
   routes_pages_Admin_AdminDashboard: "Dashboard",
   routes_pages_Admin_AdminEntryManager: "Entry Manager",
   routes_pages_Admin_AdminIndexManager: "Index Manager",

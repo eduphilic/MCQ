@@ -12,6 +12,7 @@ import {
 } from "features/navigation";
 import {
   isOnboardingSelector,
+  PaymentPage,
   PlaceholderSubscriptionLoader,
   SubscriptionManagementPage,
 } from "features/subscription-management";
@@ -45,6 +46,12 @@ class DashboardPages extends Component<Props> {
         <AppLayout links={links} enableSwipeNavigation={!isOnboarding}>
           <PageContentWrapper verticalGutters>
             <Switch>
+              <Route
+                path={routePathFromLocalizationKey(
+                  "routes_SubscriptionManagement_PaymentPage",
+                )}
+                component={PaymentPage}
+              />
               {dashboardRoutes}
               {onboardingRoutes}
             </Switch>

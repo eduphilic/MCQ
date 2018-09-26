@@ -29,6 +29,10 @@ export const routes: {
     pageTitleLocalizationKey: "routes_Dashboard_MembershipEntriesPage",
   },
   {
+    path: "/membership/subscriptions/payment",
+    pageTitleLocalizationKey: "routes_SubscriptionManagement_PaymentPage",
+  },
+  {
     path: "/exam-pack",
     pageTitleLocalizationKey: "routes_ExamBoard_ExamBoardPage",
   },

@@ -61,6 +61,7 @@ export const SiteMap: SFC<{}> = () => {
               "/settings",
               "/welcome/entries",
               "/welcome/plans",
+              "/payment",
             ]}
             component={DashboardPages}
           />
