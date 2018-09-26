@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "npm-run-all clean build:* storybook:build",
+    "build": "npm-run-all clean build:*",
     "build:cra": "react-app-rewired build",
     "build:mv": "shx mv build dist",
     "clean": "rimraf build dist",
