@@ -26,7 +26,7 @@ export const MultipathRoute: SFC<MultipathRouteProps> = ({
   ...rest
 }) => <Route {...rest} path={paths as any} />;
 
-(Route as ComponentType).propTypes = {
-  ...(Route as ComponentType).propTypes,
-  path: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-};
+Object.defineProperty((Route as ComponentType).propTypes, "path", {
+  value: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  writable: false,
+});
