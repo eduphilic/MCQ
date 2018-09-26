@@ -24,6 +24,7 @@ import { CategorySubscription } from "./components/CategorySubscription";
 import { EntrySelect } from "./components/EntrySelect";
 import { QuantitySelectionCardHeader } from "./components/QuantitySelectionCardHeader";
 import { SelectedEntries } from "./components/SelectedEntries";
+import { HackCategorySubscriptionRenewalVisibilityToggle } from "./HackCategorySubscriptionRenewalVisibilityToggle";
 
 export class SubscriptionManagementPage extends Component<PropsWithFormState> {
   componentDidMount() {
@@ -261,18 +262,32 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
         <CardContent>
           {subscriptions.map((s, index) => (
             <Fragment key={`${s.subscriptionID}-${s.categoryID}`}>
-              <CategorySubscription
-                categoryLabel={getCategoryLabel(s)}
-                categoryQuantitySelectionSettings={
-                  categoryQuantitySelectionSettings!
-                }
-                selectedQuantityIndex={s.quantityIndex}
-                onRenewButtonClick={
-                  index < 2
-                    ? () => alert("Subscription renewal flow")
-                    : undefined
-                }
-              />
+              <HackCategorySubscriptionRenewalVisibilityToggle>
+                {({ revealed, toggleReveal }) => (
+                  <>
+                    <CategorySubscription
+                      categoryLabel={getCategoryLabel(s)}
+                      categoryQuantitySelectionSettings={
+                        categoryQuantitySelectionSettings!
+                      }
+                      selectedQuantityIndex={s.quantityIndex}
+                      onRenewButtonClick={toggleReveal}
+                    />
+                    {revealed && (
+                      <CategoryQuantitySelector
+                        categoryLabel={null}
+                        categoryQuantitySelectionSettings={
+                          categoryQuantitySelectionSettings!
+                        }
+                        selectedQuantityIndex={0}
+                        onChange={() => {
+                          alert("Update subscription totals");
+                        }}
+                      />
+                    )}
+                  </>
+                )}
+              </HackCategorySubscriptionRenewalVisibilityToggle>
               {index < subscriptions.length - 1 && (
                 <Divider style={{ marginBottom: 16 }} />
               )}

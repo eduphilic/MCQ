@@ -14,8 +14,10 @@ export type CategoryQuantitySelectorItemProps = {
 
   /**
    * Name of the entry category.
+   *
+   * No label is rendered if passed null.
    */
-  categoryLabel: LocalizedString;
+  categoryLabel: LocalizedString | null;
 
   /**
    * Education label.
@@ -39,13 +41,15 @@ export const CategoryQuantitySelectorItem: SFC<
         <LocalizationStateConsumer>
           {({ localizationLanguage }) => (
             <>
-              <Typography
-                variant="subheading"
-                component="span"
-                style={{ fontSize: 14, fontWeight: 500 }}
-              >
-                {categoryLabel[localizationLanguage] || categoryLabel.en}
-              </Typography>
+              {categoryLabel && (
+                <Typography
+                  variant="subheading"
+                  component="span"
+                  style={{ fontSize: 14, fontWeight: 500 }}
+                >
+                  {categoryLabel[localizationLanguage] || categoryLabel.en}
+                </Typography>
+              )}
 
               {education && (
                 <EducationRequirements>
