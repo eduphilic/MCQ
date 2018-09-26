@@ -90,10 +90,12 @@ export const SelectedEntries: SFC<SelectedEntriesProps> = props => {
         <TabletWrapper>
           <StyledCarousel>
             {selectedEntries.map(entry => (
+              // TODO: Using onMouseDown due to:
+              // https://github.com/FormidableLabs/nuka-carousel/issues/399
               <EntryButton
                 key={entry.id}
                 disabled={!isDeleteEnabled}
-                onClick={() => onEntryRemoveButtonClick(entry.id)}
+                onMouseDown={() => onEntryRemoveButtonClick(entry.id)}
               >
                 <StyledBlockImage src={entry.logoUrlByWidth["48"]} />
 
@@ -109,7 +111,9 @@ export const SelectedEntries: SFC<SelectedEntriesProps> = props => {
             ))}
 
             {isAddMoreEnabled && (
-              <EntryButton onClick={onAddMoreButtonClick}>
+              // TODO: Using onMouseDown due to:
+              // https://github.com/FormidableLabs/nuka-carousel/issues/399
+              <EntryButton onMouseDown={onAddMoreButtonClick}>
                 <AddMoreBlock>
                   <Add />
                 </AddMoreBlock>
