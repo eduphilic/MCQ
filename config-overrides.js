@@ -4,7 +4,7 @@ const {
   rewireJest: rewireTypescriptJest,
   rewireTSLint,
 } = require("react-app-rewire-typescript-babel-preset");
-const { injectBabelPlugin } = require("react-app-rewired");
+const { injectBabelPlugin, getLoader } = require("react-app-rewired");
 
 module.exports = {
   /**
@@ -29,11 +29,39 @@ module.exports = {
       rewiredConfig = rewireTSLint(rewiredConfig);
     }
 
-    // Add Styled Components Babel Plugin
-    rewiredConfig = injectBabelPlugin(
-      ["babel-plugin-styled-components", { ssr: true }],
-      rewiredConfig,
+    // @ts-ignore
+    const scriptsLoader = getLoader(rewiredConfig.module.rules, rule =>
+      Boolean(
+        rule.test && rule.test.toString() === /\.(ts|tsx|js|jsx)$/.toString(),
+      ),
     );
+
+    // console.log("scriptsLoader", scriptsLoader);
+
+    // @ts-ignore
+    const babelLoader = getLoader(scriptsLoader.use, rule =>
+      Boolean(
+        rule.loader &&
+          (/babel-loader/.test(rule.loader) ||
+            /babel-preset-react-app.loader/.test(rule.loader)),
+      ),
+    );
+
+    // console.log("babelLoader", babelLoader);
+
+    // @ts-ignore
+    babelLoader.options.plugins.push([
+      "babel-plugin-styled-components",
+      { ssr: true },
+    ]);
+
+    // process.exit(0);
+
+    // Add Styled Components Babel Plugin
+    // rewiredConfig = injectBabelPlugin(
+    //   ["babel-plugin-styled-components", { ssr: true }],
+    //   rewiredConfig,
+    // );
 
     // Add React Hot Reload
     if (env === "development") {

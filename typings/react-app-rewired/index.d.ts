@@ -9,8 +9,8 @@ declare module "react-app-rewired" {
   export const paths: { scriptVersion: string };
 
   export function getLoader(
-    rules: RuleSetRule[],
-    matcher: (args: any[]) => any,
+    rules: RuleSetRule | RuleSetRule[],
+    matcher: (args: any) => any,
   ): RuleSetRule;
 }
 
