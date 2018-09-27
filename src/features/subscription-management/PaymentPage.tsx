@@ -7,6 +7,7 @@ import { Card } from "components/Card";
 import { CardContent } from "components/CardContent";
 import { CardHeader } from "components/CardHeader";
 import { Typography } from "components/Typography";
+import { ContentCut } from "icons";
 import React from "react";
 import styled from "styled";
 
@@ -38,7 +39,7 @@ export const PaymentPage = () => (
           Offers &amp; Discount
         </Typography>
 
-        <Grid container>
+        <Grid container spacing={16}>
           <Grid item xs={12} md={4}>
             <TextField
               variant="outlined"
@@ -54,6 +55,9 @@ export const PaymentPage = () => (
                 ),
               }}
             />
+          </Grid>
+          <Grid item xs={12} md={5}>
+            <CouponBox>Apply WEB10 to instantly get 10% discount</CouponBox>
           </Grid>
         </Grid>
       </CardContent>
@@ -84,5 +88,39 @@ const CategoryButton = styled<
     display: inline-flex;
     justify-content: flex-end;
     color: ${({ theme }) => theme.palette.error.main};
+  }
+`;
+
+const CouponBox = styled<{ className?: string; children: string }>(props => (
+  <div className={props.className}>
+    <span className="icon">
+      <ContentCut />
+    </span>
+    <div className="box">
+      <Typography variant="Subtitle2">{props.children}</Typography>
+      <Button color="blue">USE</Button>
+    </div>
+  </div>
+))`
+  position: relative;
+  width: 100%;
+  height: 56px;
+
+  .box {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: ${({ theme }) => theme.spacing.unit}px;
+    padding-left: ${({ theme }) => theme.spacing.unit * 2}px;
+    border: 2px dashed #eee;
+    background-color: #fff;
+  }
+
+  .icon {
+    position: absolute;
+    top: -12px;
+    left: -12px;
   }
 `;
