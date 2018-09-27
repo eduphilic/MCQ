@@ -1,3 +1,6 @@
+import Grid from "@material-ui/core/Grid";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import TextField from "@material-ui/core/TextField";
 import RemoveCircle from "@material-ui/icons/RemoveCircle";
 import { Button, ButtonProps } from "components/Button";
 import { Card } from "components/Card";
@@ -21,17 +24,38 @@ export const PaymentPage = () => (
           "Soldier Tech 30 Mock Tests",
           "Soldier RT 30 Mock Tests",
         ].map(categoryTitle => (
-          <div key={categoryTitle}>
-            <CategoryButton onClick={() => alert("Update basket")}>
-              {categoryTitle}
-            </CategoryButton>
-          </div>
+          <Grid key={categoryTitle} container>
+            <Grid item xs={12} md={4}>
+              <CategoryButton fullWidth onClick={() => alert("Update basket")}>
+                {categoryTitle}
+              </CategoryButton>
+            </Grid>
+          </Grid>
         ))}
       </CardContent>
       <CardContent>
         <Typography variant="H6" paragraph>
           Offers &amp; Discount
         </Typography>
+
+        <Grid container>
+          <Grid item xs={12} md={4}>
+            <TextField
+              variant="outlined"
+              label="Coupon Code"
+              fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Button color="blue" style={{ textTransform: "uppercase" }}>
+                      Apply
+                    </Button>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
 
@@ -54,7 +78,6 @@ const CategoryButton = styled<
   </Button>
 ))`
   justify-content: flex-start;
-  width: 300px;
 
   .icon-wrapper {
     flex: 1;

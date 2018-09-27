@@ -67,6 +67,8 @@ export class ResponsiveToolbarTypographyButton extends Component<
       ...rest
     } = this.props;
 
+    // TODO: Fix this typing
+    // @ts-ignore
     const WidthResponsiveButton = withWidth()(({ width }) => {
       const isMobile = dense || isWidthDown("xs", width);
       const className = `${outerClassName} ${isMobile ? "is-mobile" : ""}`;
@@ -91,6 +93,7 @@ export class ResponsiveToolbarTypographyButton extends Component<
       );
     });
 
+    // @ts-ignore
     return <WidthResponsiveButton />;
   }
 }
