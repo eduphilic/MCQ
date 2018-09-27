@@ -1,3 +1,4 @@
+import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
@@ -6,9 +7,10 @@ import { Button, ButtonProps } from "components/Button";
 import { Card } from "components/Card";
 import { CardContent } from "components/CardContent";
 import { CardHeader } from "components/CardHeader";
+import { RupeeFontSpan } from "components/RupeeFontSpan";
 import { Typography } from "components/Typography";
 import { ContentCut } from "icons";
-import React from "react";
+import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 
 export const PaymentPage = () => (
@@ -58,6 +60,31 @@ export const PaymentPage = () => (
           </Grid>
           <Grid item xs={12} md={5}>
             <CouponBox>Apply WEB10 to instantly get 10% discount</CouponBox>
+          </Grid>
+        </Grid>
+
+        <LineSummary
+          topMargin
+          leftNode="Sub Total"
+          rightNode={
+            <span>
+              <RupeeFontSpan>A</RupeeFontSpan>
+              399
+            </span>
+          }
+        />
+        <LineSummary
+          leftNode="Coupon Discount"
+          rightNode={
+            <span>
+              <RupeeFontSpan>A</RupeeFontSpan>0
+            </span>
+          }
+        />
+
+        <Grid container style={{ margin: "16px 0" }}>
+          <Grid item xs={12} md={4}>
+            <Divider />
           </Grid>
         </Grid>
       </CardContent>
@@ -124,3 +151,22 @@ const CouponBox = styled<{ className?: string; children: string }>(props => (
     left: -12px;
   }
 `;
+
+const LineSummary: SFC<{
+  topMargin?: boolean;
+  leftNode: ReactNode;
+  rightNode: ReactNode;
+}> = props => (
+  <Grid container style={{ marginTop: props.topMargin ? 32 : 16 }}>
+    <Grid item xs={12} md={4}>
+      <Grid container>
+        <Grid item xs>
+          <Typography>{props.leftNode}</Typography>
+        </Grid>
+        <Grid item>
+          <Typography>{props.rightNode}</Typography>
+        </Grid>
+      </Grid>
+    </Grid>
+  </Grid>
+);
