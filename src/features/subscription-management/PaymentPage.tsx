@@ -28,7 +28,7 @@ export const PaymentPage = () => (
           "Soldier RT 30 Mock Tests",
         ].map(categoryTitle => (
           <Grid key={categoryTitle} container>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={6}>
               <CategoryButton fullWidth onClick={() => alert("Update basket")}>
                 {categoryTitle}
               </CategoryButton>
@@ -42,7 +42,7 @@ export const PaymentPage = () => (
         </Typography>
 
         <Grid container spacing={16}>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={6}>
             <TextField
               variant="outlined"
               label="Coupon Code"
@@ -58,7 +58,7 @@ export const PaymentPage = () => (
               }}
             />
           </Grid>
-          <Grid item xs={12} md={5}>
+          <Grid item xs={12} md={6}>
             <CouponBox>Apply WEB10 to instantly get 10% discount</CouponBox>
           </Grid>
         </Grid>
@@ -87,6 +87,17 @@ export const PaymentPage = () => (
             <Divider />
           </Grid>
         </Grid>
+
+        <LineSummary
+          bold
+          leftNode="Total Amount"
+          rightNode={
+            <span>
+              <RupeeFontSpan>A</RupeeFontSpan>
+              399
+            </span>
+          }
+        />
       </CardContent>
     </Card>
 
@@ -159,17 +170,22 @@ const CouponBox = styled<{ className?: string; children: string }>(props => (
 
 const LineSummary: SFC<{
   topMargin?: boolean;
+  bold?: boolean;
   leftNode: ReactNode;
   rightNode: ReactNode;
 }> = props => (
   <Grid container style={{ marginTop: props.topMargin ? 32 : 16 }}>
-    <Grid item xs={12} md={4}>
+    <Grid item xs={12} md={6}>
       <Grid container>
         <Grid item xs>
-          <Typography>{props.leftNode}</Typography>
+          <Typography style={{ fontWeight: props.bold ? 500 : undefined }}>
+            {props.leftNode}
+          </Typography>
         </Grid>
         <Grid item>
-          <Typography>{props.rightNode}</Typography>
+          <Typography style={{ fontWeight: props.bold ? 500 : undefined }}>
+            {props.rightNode}
+          </Typography>
         </Grid>
       </Grid>
     </Grid>
