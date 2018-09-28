@@ -110,6 +110,10 @@ const CategoryButton = styled<
 ))`
   justify-content: flex-start;
 
+  /* Line up with left side card content */
+  width: calc(100% + 16px);
+  margin-left: -16px;
+
   .icon-wrapper {
     flex: 1;
     display: inline-flex;
