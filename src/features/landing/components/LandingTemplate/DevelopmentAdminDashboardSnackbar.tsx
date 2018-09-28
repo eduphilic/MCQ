@@ -47,6 +47,7 @@ class DevelopmentAdminDashboardSnackbar extends Component<
           <>
             {[
               { to: "/membership/subscriptions/payment", title: "Payment" },
+              { to: "/loading", title: "Loading" },
               { to: "/welcome/entries", title: "Onboarding" },
               { to: "/dashboard", title: "User" },
               { to: "/admin/dashboard", title: "Admin" },

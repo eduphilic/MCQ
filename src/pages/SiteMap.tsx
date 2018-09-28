@@ -17,6 +17,8 @@ import { DashboardPages } from "features/dashboard";
 import { pages as examReviewPages } from "features/exam-review";
 import { pages as landingPages } from "features/landing";
 
+import { TestLoadingPage } from "../TestLoadingPage";
+
 export const SiteMap: SFC<{}> = () => {
   const adminLoginPageNode = navigationLinksAdminLogin.map(l => (
     <Route
@@ -45,6 +47,8 @@ export const SiteMap: SFC<{}> = () => {
         <PersistentScrollPosition />
 
         <Switch>
+          <Route path="/loading" component={TestLoadingPage} />
+
           {landingPages}
 
           {adminLoginPageNode}
