@@ -138,6 +138,7 @@ const CouponBox = styled<{ className?: string; children: string }>(props => (
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     height: 100%;
     padding: ${({ theme }) => theme.spacing.unit}px;
     padding-left: ${({ theme }) => theme.spacing.unit * 2}px;
