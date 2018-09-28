@@ -1,7 +1,12 @@
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import List from "@material-ui/core/List";
+import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 import TextField from "@material-ui/core/TextField";
+import AttachMoney from "@material-ui/icons/AttachMoney";
 import RemoveCircle from "@material-ui/icons/RemoveCircle";
 import { Button, ButtonProps } from "components/Button";
 import { Card } from "components/Card";
@@ -102,7 +107,41 @@ export const PaymentPage = () => (
     </Card>
 
     <Card>
-      <CardHeader title="Payment Processor" />
+      <CardHeader title="Select Payment Method" />
+      <CardContent>
+        <Grid container spacing={16}>
+          <Grid item xs={12} md={5} lg={4}>
+            <StyledList>
+              {[
+                "Debit/Credit Card",
+                "NetBanking",
+                "Wallets",
+                "Pay with UPI",
+              ].map((title, index) => (
+                <StyledListItem key={title} button selected={index === 0}>
+                  <ListItemIcon>
+                    <AttachMoney />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      <Typography
+                        style={{ color: index === 0 ? "#2d9cdb" : undefined }}
+                      >
+                        {title}
+                      </Typography>
+                    }
+                    disableTypography
+                  />
+                </StyledListItem>
+              ))}
+            </StyledList>
+          </Grid>
+
+          <Grid item xs={12} md={7} lg={8} style={{ minHeight: 500 }}>
+            <Typography>Payment Processor Iframe</Typography>
+          </Grid>
+        </Grid>
+      </CardContent>
     </Card>
   </>
 );
@@ -191,3 +230,16 @@ const LineSummary: SFC<{
     </Grid>
   </Grid>
 );
+
+const StyledList = styled(List)`
+  height: 100%;
+  background-color: #f9f9f9;
+`;
+
+const StyledListItem = styled<ListItemProps>(props => (
+  <ListItem {...props} classes={{ selected: "selected" }} />
+))`
+  &.selected {
+    background-color: #fff;
+  }
+`;
