@@ -3,12 +3,11 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Hidden from "@material-ui/core/Hidden";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import { Divider } from "components/Divider";
 import { Typography, TypographyProps } from "components/Typography";
 import React, { SFC } from "react";
 import styled from "styled";
 import { ExamDrawerPerformanceAnalysis } from "../ExamDrawerPerformanceAnalysis";
-
-export type ExamAnalysisPanelMobileProps = {};
 
 export const ExamAnalysisPanelMobile: SFC = props => {
   const {} = props;
@@ -18,10 +17,13 @@ export const ExamAnalysisPanelMobile: SFC = props => {
       <StyledExpansionPanel>
         <StyledExpansionPanelSummary>
           <StyledTypography>Success -80%</StyledTypography>
+          <VerticalDivider />
           <StyledTypography>Wrong -14%</StyledTypography>
+          <VerticalDivider />
           <StyledTypography>Left -6%</StyledTypography>
-          <div style={{ flex: 1 }} />
+          <VerticalDivider />
           <StyledTypography color="textSecondary">Easy</StyledTypography>
+          <div style={{ flex: 1 }} />
         </StyledExpansionPanelSummary>
         <StyledExpansionPanelDetails>
           <ExamDrawerPerformanceAnalysis examResult="pass" />
@@ -30,6 +32,17 @@ export const ExamAnalysisPanelMobile: SFC = props => {
     </Hidden>
   );
 };
+
+const VerticalDivider = styled<{ className?: string }>(props => (
+  <Divider
+    className={props.className}
+    variant="vertical"
+    verticalVariantHeight="16px"
+  />
+))`
+  width: 2px;
+  margin-right: 4px;
+`;
 
 const StyledExpansionPanel = styled<{ className?: string }>(props => (
   <ExpansionPanel className={props.className} elevation={0}>
