@@ -102,17 +102,18 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
                   }
                   rightNode={
                     <Button
-                      component={(props: any) => (
-                        <Link
-                          to={routePathFromLocalizationKey(
-                            "routes_ExamReview_ExamReviewPage",
-                          )}
-                          {...props}
-                        />
-                      )}
+                      // component={(props: any) => (
+                      //   <Link
+                      //     to={routePathFromLocalizationKey(
+                      //       "routes_ExamReview_ExamReviewPage",
+                      //     )}
+                      //     {...props}
+                      //   />
+                      // )}
                       variant="contained"
                       size="small"
                       fullWidth
+                      onClick={() => this.handleSubscriptionClick(index)}
                       // disabled={index > 1}
                     >
                       02 Tests (Revise)
