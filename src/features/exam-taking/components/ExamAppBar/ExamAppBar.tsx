@@ -7,9 +7,9 @@ import { buttonSelector } from "../../selectors";
 import { FeatureKey } from "../../types/FeatureKey";
 
 import AppBar from "@material-ui/core/AppBar";
-import Divider from "@material-ui/core/Divider";
 import Toolbar from "@material-ui/core/Toolbar";
 
+import { Divider } from "components/Divider";
 import { Typography } from "components/Typography";
 import { TypographyButton } from "componentsV0/TypographyButton";
 import { LanguageToggleButton } from "features/localization";
@@ -68,7 +68,7 @@ const ExamAppBar: SFC<Props> = props => {
         {featureKey === "examReview" &&
           ["Success - 80%", "Wrong - 14%", "Left - 6%"].map(stat => (
             <Fragment key={stat}>
-              <VerticalDivider />
+              <Divider variant="vertical" verticalVariantHeight="40px" />
 
               <Typography color="primary">{stat}</Typography>
             </Fragment>
@@ -76,7 +76,7 @@ const ExamAppBar: SFC<Props> = props => {
 
         {featureKey === "examReview" && (
           <>
-            <VerticalDivider />
+            <Divider variant="vertical" verticalVariantHeight="40px" />
             <Typography>Difficulty - Easy</Typography>
           </>
         )}
@@ -113,9 +113,4 @@ const ToolbarWithButtonMargins = styled(Toolbar)`
 
 const FlexSpacer = styled.div`
   flex: 1;
-`;
-
-const VerticalDivider = styled(Divider)`
-  width: 1px;
-  height: 40px;
 `;
