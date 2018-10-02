@@ -44,7 +44,7 @@ class DashboardPages extends Component<Props> {
       // onboarding process during development.
       <PlaceholderSubscriptionLoader>
         <AppLayout links={links} enableSwipeNavigation={!isOnboarding}>
-          <PageContentWrapper verticalGutters>
+          <PageContentWrapper>
             <Switch>
               <Route
                 path={routePathFromLocalizationKey(

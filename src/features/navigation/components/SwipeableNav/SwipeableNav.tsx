@@ -66,7 +66,7 @@ export const SwipeableNav: SFC<SwipeableNavProps> = props => {
         onChangeIndex={onSwipeableViewsChangeIndex}
       >
         {links.map(({ component: PaneComponent, titleLocalizationKey }) => (
-          <PageContentWrapper key={titleLocalizationKey} verticalGutters>
+          <PageContentWrapper key={titleLocalizationKey}>
             <PaneComponent />
           </PageContentWrapper>
         ))}

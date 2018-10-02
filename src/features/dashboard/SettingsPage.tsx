@@ -1,16 +1,15 @@
 import { Formik } from "formik";
-import React, { Fragment, SFC } from "react";
+import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-import Divider from "@material-ui/core/Divider";
+import Grid from "@material-ui/core/Grid";
 import withWidth, { isWidthUp, WithWidth } from "@material-ui/core/withWidth";
+import { Card } from "components/Card";
+import { CardContent } from "components/CardContent";
+import { CardHeader } from "components/CardHeader";
 
 import { DashboardColumnContainer } from "componentsV0/DashboardColumnContainer";
 import { FormikTextField } from "componentsV0/FormikTextField";
-import { Typography } from "componentsV0/Typography";
 import {
   TypographyButton,
   TypographyButtonProps,
@@ -35,21 +34,16 @@ const SettingsPage: SFC<WithWidth> = props => {
 
   const isTabletOrAbove = isWidthUp("md", width);
   const interlaceFields = isTabletOrAbove;
-  const FormWrapper = isTabletOrAbove ? Card : Fragment;
 
   return (
-    <>
+    <Grid container spacing={16}>
       <Formik<typeof initialBasicInformationValues>
         initialValues={initialBasicInformationValues}
         onSubmit={() => alert("Form submission")}
       >
         {api => (
           <FormWrapper>
-            <CardHeader
-              title={
-                <Typography variant="cardTitle">Basic Information</Typography>
-              }
-            />
+            <CardHeader title="Basic Information" />
             <CardContent>
               <DashboardColumnContainer interlaced={interlaceFields}>
                 {[
@@ -100,17 +94,13 @@ const SettingsPage: SFC<WithWidth> = props => {
         )}
       </Formik>
 
-      {!isTabletOrAbove && <Divider />}
-
       <Formik<typeof initialPasswordValues>
         initialValues={initialPasswordValues}
         onSubmit={() => alert("Form submission")}
       >
         {api => (
           <FormWrapper>
-            <CardHeader
-              title={<Typography variant="cardTitle">Password</Typography>}
-            />
+            <CardHeader title="Password" />
             <CardContent>
               <DashboardColumnContainer interlaced={interlaceFields}>
                 {[
@@ -144,12 +134,18 @@ const SettingsPage: SFC<WithWidth> = props => {
           </FormWrapper>
         )}
       </Formik>
-    </>
+    </Grid>
   );
 };
 
 const SettingsPageWithWidth = withWidth()(SettingsPage);
 export { SettingsPageWithWidth as SettingsPage };
+
+const FormWrapper = (props: { children: ReactNode }) => (
+  <Grid item xs={12}>
+    <Card>{props.children}</Card>
+  </Grid>
+);
 
 const FormButton = styled<TypographyButtonProps>(({ className, ...rest }) => (
   <div className={className}>

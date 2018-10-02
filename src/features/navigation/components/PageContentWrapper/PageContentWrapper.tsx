@@ -1,16 +1,6 @@
-import { fromGutters } from "css";
-import styled, { withProps } from "styled";
+import styled from "styled";
 
-export type PageContentWrapperProps = {
-  verticalGutters?: boolean;
-};
-
-export const PageContentWrapper = withProps<PageContentWrapperProps>()(
-  styled.div,
-)`
-  ${({ verticalGutters }) =>
-    verticalGutters && fromGutters(["margin-bottom"], "> *:not(:last-child)")}
-
+export const PageContentWrapper = styled.div`
   width: 100%;
   max-width: 1280px;
   padding: 16px 8px;

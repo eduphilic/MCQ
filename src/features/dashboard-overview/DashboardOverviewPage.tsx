@@ -1,5 +1,6 @@
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
+import Grid from "@material-ui/core/Grid";
 import { Card } from "components/Card";
 import { SelectedEntries } from "features/subscription-management";
 import React, { Component, createRef } from "react";
@@ -20,33 +21,39 @@ export class DashboardOverviewPage extends Component {
 
   render() {
     return (
-      <>
-        <FreeExamCard />
+      <Grid container spacing={16}>
+        {[
+          <FreeExamCard />,
 
-        <OverviewCard title="Rank" stats={createPlaceholderStats()} />
+          <OverviewCard title="Rank" stats={createPlaceholderStats()} />,
 
-        <Card>
-          <CardHeader title="Your Selected Entries" />
-          <CardContent>
-            <SelectedEntries
-              entries={entries}
-              minEntriesCount={2}
-              maxEntriesCount={2}
-              selectedEntryIDs={entries.map(entry => entry.id)}
-              onEntryRemoveButtonClick={noop}
-              onAddMoreButtonClick={noop}
-            />
-          </CardContent>
-        </Card>
+          <Card>
+            <CardHeader title="Your Selected Entries" />
+            <CardContent>
+              <SelectedEntries
+                entries={entries}
+                minEntriesCount={2}
+                maxEntriesCount={2}
+                selectedEntryIDs={entries.map(entry => entry.id)}
+                onEntryRemoveButtonClick={noop}
+                onAddMoreButtonClick={noop}
+              />
+            </CardContent>
+          </Card>,
 
-        <OverviewCard
-          title="Exam Pattern"
-          stats={createPlaceholderExamPatternStats()}
-          onStatValueClick={this.handleStatClick}
-        />
+          <OverviewCard
+            title="Exam Pattern"
+            stats={createPlaceholderExamPatternStats()}
+            onStatValueClick={this.handleStatClick}
+          />,
 
-        <ExamOverviewDialog ref={this.dialogRef} />
-      </>
+          <ExamOverviewDialog ref={this.dialogRef} />,
+        ].map((node, index) => (
+          <Grid key={index} item xs={12}>
+            {node}
+          </Grid>
+        ))}
+      </Grid>
     );
   }
 
