@@ -7,6 +7,7 @@ import { FormState, Page, PropsWithFormState } from "./types";
 
 import CardContent from "@material-ui/core/CardContent";
 import Divider from "@material-ui/core/Divider";
+import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 
 import { Card } from "components/Card";
@@ -204,42 +205,52 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
       return entryCategories.length !== entrySubscriptions.length;
     });
 
-    return currentPage === "entry-select" ? (
-      <EntrySelect
-        entries={entries}
-        initialSelectedEntries={selectedEntryIDs}
-        minSelectedCount={minEntriesRequired}
-        maxSelectedCount={entries.length}
-        onSelectionChange={this.handleEntrySelectionChange}
-      />
-    ) : (
-      <>
-        {entries.length > 0 && (
-          <Card>
-            <CardHeader
-              title={
-                isOnboarding
-                  ? "Your Selected Entries"
-                  : "Subscribe New Categories"
-              }
+    return (
+      <Grid container spacing={16}>
+        {currentPage === "entry-select" ? (
+          <Grid item xs={12}>
+            <EntrySelect
+              entries={entries}
+              initialSelectedEntries={selectedEntryIDs}
+              minSelectedCount={minEntriesRequired}
+              maxSelectedCount={entries.length}
+              onSelectionChange={this.handleEntrySelectionChange}
             />
-            <CardContent>
-              <SelectedEntries
-                entries={entries}
-                minEntriesCount={minEntriesRequired}
-                maxEntriesCount={entries.length}
-                selectedEntryIDs={selectedEntryIDs}
-                onEntryRemoveButtonClick={this.handleEntryRemoveButtonClick}
-                onAddMoreButtonClick={this.handleAddMoreButtonClick}
-              />
-            </CardContent>
-          </Card>
+          </Grid>
+        ) : (
+          <>
+            {entries.length > 0 && (
+              <Grid item xs={12}>
+                <Card>
+                  <CardHeader
+                    title={
+                      isOnboarding
+                        ? "Your Selected Entries"
+                        : "Subscribe New Categories"
+                    }
+                  />
+                  <CardContent>
+                    <SelectedEntries
+                      entries={entries}
+                      minEntriesCount={minEntriesRequired}
+                      maxEntriesCount={entries.length}
+                      selectedEntryIDs={selectedEntryIDs}
+                      onEntryRemoveButtonClick={
+                        this.handleEntryRemoveButtonClick
+                      }
+                      onAddMoreButtonClick={this.handleAddMoreButtonClick}
+                    />
+                  </CardContent>
+                </Card>
+              </Grid>
+            )}
+
+            {this.renderQuantitySelectionCards()}
+
+            {this.renderCurrentSubscriptions()}
+          </>
         )}
-
-        {this.renderQuantitySelectionCards()}
-
-        {this.renderCurrentSubscriptions()}
-      </>
+      </Grid>
     );
   };
 
@@ -256,45 +267,47 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
       categories.find(c => c.id === subscription.categoryID)!.title;
 
     return (
-      <Card>
-        <CardHeader title="Present Subscription" />
+      <Grid item xs={12}>
+        <Card>
+          <CardHeader title="Present Subscription" />
 
-        <CardContent>
-          {subscriptions.map((s, index) => (
-            <Fragment key={`${s.subscriptionID}-${s.categoryID}`}>
-              <HackCategorySubscriptionRenewalVisibilityToggle>
-                {({ revealed, toggleReveal }) => (
-                  <>
-                    <CategorySubscription
-                      categoryLabel={getCategoryLabel(s)}
-                      categoryQuantitySelectionSettings={
-                        categoryQuantitySelectionSettings!
-                      }
-                      selectedQuantityIndex={s.quantityIndex}
-                      onRenewButtonClick={toggleReveal}
-                    />
-                    {revealed && (
-                      <CategoryQuantitySelector
-                        categoryLabel={null}
+          <CardContent>
+            {subscriptions.map((s, index) => (
+              <Fragment key={`${s.subscriptionID}-${s.categoryID}`}>
+                <HackCategorySubscriptionRenewalVisibilityToggle>
+                  {({ revealed, toggleReveal }) => (
+                    <>
+                      <CategorySubscription
+                        categoryLabel={getCategoryLabel(s)}
                         categoryQuantitySelectionSettings={
                           categoryQuantitySelectionSettings!
                         }
-                        selectedQuantityIndex={0}
-                        onChange={() => {
-                          alert("Update subscription totals");
-                        }}
+                        selectedQuantityIndex={s.quantityIndex}
+                        onRenewButtonClick={toggleReveal}
                       />
-                    )}
-                  </>
+                      {revealed && (
+                        <CategoryQuantitySelector
+                          categoryLabel={null}
+                          categoryQuantitySelectionSettings={
+                            categoryQuantitySelectionSettings!
+                          }
+                          selectedQuantityIndex={0}
+                          onChange={() => {
+                            alert("Update subscription totals");
+                          }}
+                        />
+                      )}
+                    </>
+                  )}
+                </HackCategorySubscriptionRenewalVisibilityToggle>
+                {index < subscriptions.length - 1 && (
+                  <Divider style={{ marginBottom: 16 }} />
                 )}
-              </HackCategorySubscriptionRenewalVisibilityToggle>
-              {index < subscriptions.length - 1 && (
-                <Divider style={{ marginBottom: 16 }} />
-              )}
-            </Fragment>
-          ))}
-        </CardContent>
-      </Card>
+              </Fragment>
+            ))}
+          </CardContent>
+        </Card>
+      </Grid>
     );
   };
 
@@ -310,17 +323,21 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
       <LocalizationStateConsumer>
         {({ localizationLanguage }) =>
           selectedEntries.map(e => (
-            <Card key={e.id}>
-              <QuantitySelectionCardHeader
-                // Entry title.
-                title={e.title[localizationLanguage] || e.title.en}
-                pricePerExamRs={categoryQuantitySelectionSettings!.examPriceRs}
-                // Entry logo image.
-                imageUrl={e.logoUrlByWidth["48"]}
-              />
+            <Grid key={e.id} item xs={12}>
+              <Card>
+                <QuantitySelectionCardHeader
+                  // Entry title.
+                  title={e.title[localizationLanguage] || e.title.en}
+                  pricePerExamRs={
+                    categoryQuantitySelectionSettings!.examPriceRs
+                  }
+                  // Entry logo image.
+                  imageUrl={e.logoUrlByWidth["48"]}
+                />
 
-              {this.renderQuantitySelectionCardContents(e)}
-            </Card>
+                {this.renderQuantitySelectionCardContents(e)}
+              </Card>
+            </Grid>
           ))
         }
       </LocalizationStateConsumer>

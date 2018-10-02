@@ -2,7 +2,6 @@ import { drawerWidth, fromToolbarHeight } from "css";
 import React, { ReactNode } from "react";
 import styled from "styled";
 
-import { PageContentWrapper } from "../PageContentWrapper";
 import {
   BottomToolbarDockPortal,
   BottomToolbarDockPortalProps,
@@ -33,18 +32,19 @@ export const BottomToolbarDock = styled<BottomToolbarDockProps>(props => {
         {toolbarNode}
       </BottomToolbarDockPortal>
 
-      <StyledPageContentsWrapper verticalGutters>
-        {children}
-      </StyledPageContentsWrapper>
+      {children}
 
       <ToolbarSpacer />
     </div>
   );
 })`
-  width: 100%;
   height: 100%;
-  padding: 4px;
   overflow-y: auto;
+
+  /* Remove padding from ContentCenterWrapper */
+  width: calc(100% + 32px);
+  padding: 16px;
+  margin: -16px;
 `;
 
 const ToolbarSpacer = styled.div`
@@ -63,8 +63,4 @@ const ToolbarWrapper = styled.div`
   ${({ theme }) => theme.breakpoints.up("md")} {
     padding-left: ${drawerWidth}px;
   }
-`;
-
-const StyledPageContentsWrapper = styled(PageContentWrapper)`
-  padding: 0;
 `;
