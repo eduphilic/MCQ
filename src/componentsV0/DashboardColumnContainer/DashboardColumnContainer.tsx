@@ -1,4 +1,3 @@
-import { fromGutters } from "css";
 import React, { ReactNode, SFC } from "react";
 import styled from "styled";
 
@@ -62,13 +61,15 @@ const FlexColumn = styled.div`
     width: 50%;
 
     &:first-child {
-      margin-right: 12px;
+      margin-right: 8px;
     }
 
     &:last-child {
-      margin-left: 12px;
+      margin-left: 8px;
     }
   }
 
-  ${fromGutters(["margin-bottom"], "& > *")};
+  & > * {
+    margin-bottom: 16px;
+  }
 `;
