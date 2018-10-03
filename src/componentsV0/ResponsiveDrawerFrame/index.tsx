@@ -35,14 +35,6 @@ export type ResponsiveDrawerFrameProps = DrawerProps & {
   drawerThemeElement?: ReactElement<any>;
 
   backgroundColor?: string;
-
-  /**
-   * The top padding of the page contents.
-   *
-   * The compact option is used in exam taking and exam review screens to
-   * present a compact vertical spacing.
-   */
-  pageContentsTopPadding?: "default" | "compact";
 };
 
 /**
@@ -57,7 +49,6 @@ export const ResponsiveDrawerFrame: SFC<ResponsiveDrawerFrameProps> = props => {
     drawerContentsNode,
     drawerThemeElement,
     backgroundColor,
-    pageContentsTopPadding = "default",
   } = props;
 
   const withTheme = (node: ReactNode) =>
@@ -100,9 +91,7 @@ export const ResponsiveDrawerFrame: SFC<ResponsiveDrawerFrameProps> = props => {
             </Hidden>
 
             <PageContentsContainer style={{ backgroundColor }}>
-              <PageContentsAppBarSpacer
-                compact={pageContentsTopPadding === "compact"}
-              />
+              <PageContentsAppBarSpacer />
 
               {children}
             </PageContentsContainer>
@@ -147,18 +136,12 @@ const StyledDrawer = styled(Drawer)`
 
 const PageContentsContainer = styled.div`
   height: 100%;
-  padding: ${({ theme }) => theme.spacing.unit * 3}px 0;
 
   ${({ theme }) => theme.breakpoints.up("md")} {
     margin-left: ${drawerWidth}px;
   }
 `;
 
-const compactToolbarHeight = fromToolbarHeight(
-  "height",
-  height => `${(height / 4) * 3}px`,
-);
-
-const PageContentsAppBarSpacer = styled.div<{ compact?: boolean }>`
-  ${({ compact }) => (compact ? compactToolbarHeight : toolBarHeight)};
+const PageContentsAppBarSpacer = styled.div`
+  ${toolBarHeight};
 `;

@@ -1,11 +1,13 @@
 import React, { ComponentType, SFC } from "react";
-import styled from "styled";
 
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 import {
   ResponsiveDrawerFrame,
   ResponsiveDrawerFrameProps,
 } from "componentsV0/ResponsiveDrawerFrame";
+
+// TODO: Reorganize this file so that it doesn't have to depend on a component
+// from a feature folder.
+import { PageContentWrapper } from "../../features/navigation/components/PageContentWrapper";
 
 export interface DashboardTemplateProps extends ResponsiveDrawerFrameProps {
   /**
@@ -24,14 +26,9 @@ export const DashboardTemplate: SFC<DashboardTemplateProps> = props => {
     drawerContentsNode,
     pageContentsWrapperComponent: PageContentsWrapperComponent,
     backgroundColor,
-    pageContentsTopPadding,
   } = props;
 
-  let wrappedPageContents = (
-    <ContentCenterWrapperWithVerticalMargins>
-      {children}
-    </ContentCenterWrapperWithVerticalMargins>
-  );
+  let wrappedPageContents = <PageContentWrapper>{children}</PageContentWrapper>;
   if (PageContentsWrapperComponent) {
     wrappedPageContents = (
       <PageContentsWrapperComponent>
@@ -46,16 +43,8 @@ export const DashboardTemplate: SFC<DashboardTemplateProps> = props => {
       drawerContentsNode={drawerContentsNode}
       drawerThemeElement={drawerThemeElement}
       backgroundColor={backgroundColor}
-      pageContentsTopPadding={pageContentsTopPadding}
     >
       {wrappedPageContents}
     </ResponsiveDrawerFrame>
   );
 };
-
-/** Center page contents and add vertical margins between child components. */
-const ContentCenterWrapperWithVerticalMargins = styled(ContentCenterWrapper)`
-  > * {
-    margin-bottom: ${({ theme }) => theme.spacing.unit * 3}px;
-  }
-`;

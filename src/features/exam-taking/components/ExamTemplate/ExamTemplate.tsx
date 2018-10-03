@@ -58,7 +58,6 @@ const ExamTemplate: SFC<Props> = props => {
           drawerThemeElement={<UserAppDrawerTheme />}
           pageContentsWrapperComponent={pageContentsWrapperComponent}
           backgroundColor={"#fff"}
-          pageContentsTopPadding="compact"
         >
           {children}
         </DashboardTemplate>
