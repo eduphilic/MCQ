@@ -62,9 +62,12 @@ export const AdminDashboardTemplate: SFC<
   const drawerContentsNode = (
     <DrawerContents
       links={navigationLinksAdmin.filter(
+        // Filter sub paths so they don't show up in the side bar links.
         navigationLink =>
           navigationLink.titleLocalizationKey !==
-          "routes_pages_Admin_AdminQuestionManagerReportedQuestions",
+            "routes_pages_Admin_AdminQuestionManagerReportedQuestions" &&
+          navigationLink.titleLocalizationKey !==
+            "routes_pages_Admin_AdminTestManagerNewTemplate",
       )}
     />
   );

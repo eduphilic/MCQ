@@ -8,7 +8,6 @@ import {
 } from "features/navigation";
 
 import { navigationLinksAdmin } from "common/structures/navigationLinksAdmin";
-import { navigationLinksAdminForms } from "common/structures/navigationLinksAdminForms";
 import { navigationLinksAdminLogin } from "common/structures/navigationLinksAdminLogin";
 import { navigationLinksExam } from "common/structures/navigationLinksExam";
 import { AdminRoute } from "./AdminRoute";
@@ -29,12 +28,9 @@ export const SiteMap: SFC<{}> = () => {
     />
   ));
 
-  // Admin form pages need to come before the other admin page links because
-  // they are one directory deeper. If it is the other way around, React Router
-  // will never render them.
-  const adminPagesNode = navigationLinksAdminForms
-    .concat(navigationLinksAdmin)
-    .map(l => <AdminRoute key={l.to} path={l.to} component={l.component} />);
+  const adminPagesNode = navigationLinksAdmin.map(l => (
+    <AdminRoute key={l.to} path={l.to} component={l.component} />
+  ));
 
   const examPageNode = navigationLinksExam.map(l => (
     <Route key={l.titleLocalizationKey} path={l.to} component={l.component} />

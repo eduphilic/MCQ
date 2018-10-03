@@ -16,6 +16,11 @@ export const navigationLinksAdmin: NavigationLinks = [
     component: adminPages.AdminEntryManager,
   },
   {
+    titleLocalizationKey: "routes_pages_Admin_AdminTestManagerNewTemplate",
+    to: "/admin/test-manager/new",
+    component: adminPages.AdminTestManagerNewTemplate,
+  },
+  {
     titleLocalizationKey: "routes_pages_Admin_AdminTestManager",
     to: "/admin/test-manager",
     component: adminPages.AdminTestManager,
