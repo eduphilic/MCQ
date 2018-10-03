@@ -19,6 +19,8 @@ export const routesEn = {
   routes_pages_Admin_AdminLogin: "Login",
   routes_pages_Admin_AdminPlanManager: "Plan Manager",
   routes_pages_Admin_AdminQuestionManager: "Question Manager",
+  routes_pages_Admin_AdminQuestionManagerReportedQuestions:
+    "Question Manager > Reported Questions",
   routes_pages_Admin_AdminRevenueManager: "Revenue Manager",
   routes_pages_Admin_AdminTestManager: "Test Manager",
   routes_pages_Admin_AdminTestManagerNewTemplate: "",

@@ -31,6 +31,12 @@ export const navigationLinksAdmin: NavigationLinks = [
     component: adminPages.AdminPlanManager,
   },
   {
+    titleLocalizationKey:
+      "routes_pages_Admin_AdminQuestionManagerReportedQuestions",
+    to: "/admin/question-manager/reported",
+    component: adminPages.AdminQuestionManagerReportedQuestions,
+  },
+  {
     titleLocalizationKey: "routes_pages_Admin_AdminQuestionManager",
     to: "/admin/question-manager",
     component: adminPages.AdminQuestionManager,
