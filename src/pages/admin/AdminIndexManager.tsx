@@ -1,6 +1,8 @@
 import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
+import Add from "@material-ui/icons/Add";
 import { CardContent } from "components/CardContent";
 import { CardHeader, CardHeaderProps } from "components/CardHeader";
 import { DashboardSecondaryToolbar } from "componentsV0/DashboardSecondaryToolbar";
@@ -13,16 +15,33 @@ import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboard
 
 type IndexPageSettings = {
   logoImage: File | null;
+
   heroBackgroundImage: File | null;
   heroBackgroundImageAlpha: number;
   heroTextPrimaryEnglish: string;
   heroTextPrimaryHindi: string;
   heroFeaturesEnglish: string;
   heroFeaturesHindi: string;
+
+  heroAboutTitleEnglish: string;
+  heroAboutTitleHindi: string;
+  heroAboutTextEnglish: string;
+  heroAboutTextHindi: string;
+
+  images: {
+    image: File | null;
+    titleEnglish: string;
+    titleHindi: string;
+    textEnglish: string;
+    textHindi: string;
+  }[];
+
+  // videos: { entryTitle: string; youtubeUrls: string[] }[];
 };
 
 const initialValues: IndexPageSettings = {
   logoImage: null,
+
   heroBackgroundImage: null,
   heroBackgroundImageAlpha: 0.25,
   heroTextPrimaryEnglish: "What we are offering mock test",
@@ -35,7 +54,31 @@ All India rank`,
 Full length Weekly Mock Test
 Instant result with detail analysis
 All India rank`,
+
+  heroAboutTitleEnglish: "What is Join Uniform?",
+  heroAboutTitleHindi: "What is Join Uniform?",
+  heroAboutTextEnglish:
+    "JoinUniform is created to help and prepare those aspirants(both Officer and Jawan entry) who are keen to serve India, in uniform(Army, Airforce, Navy, Assam Rifles, Coast Guard, TA, BSF, ITBP, CRPF, SSB, CISF & RPF.etc.). The platform is bilingual(Hindi & English),user can use it from anywhere, using mobile, laptop or TV. JoinUniform will benefit it's user in terms of quality content, proper attention, actual exam like tests, with explanation and performance analysis.",
+  heroAboutTextHindi:
+    "JoinUniform is created to help and prepare those aspirants(both Officer and Jawan entry) who are keen to serve India, in uniform(Army, Airforce, Navy, Assam Rifles, Coast Guard, TA, BSF, ITBP, CRPF, SSB, CISF & RPF.etc.). The platform is bilingual(Hindi & English),user can use it from anywhere, using mobile, laptop or TV. JoinUniform will benefit it's user in terms of quality content, proper attention, actual exam like tests, with explanation and performance analysis.",
+
+  images: [
+    {
+      image: null,
+      titleEnglish: "Jawan Entry Mock Tests",
+      titleHindi: "Jawan Entry Mock Tests",
+      textEnglish:
+        "हम जवान, JCO और समकक्ष पद के लिए Army, Airforce, Navy, Assam Rifles, Coast Guard, TA, BSF, ITBP, CRPF, SSB, CISF & RPF में आवेदन करने वाले 8वीं, 10वीं और 12वीं उत्तीर्ण उम्मीदवारों के लिए online Mock(नकली) परीक्षण करवाते हैं।",
+      textHindi:
+        "हम जवान, JCO और समकक्ष पद के लिए Army, Airforce, Navy, Assam Rifles, Coast Guard, TA, BSF, ITBP, CRPF, SSB, CISF & RPF में आवेदन करने वाले 8वीं, 10वीं और 12वीं उत्तीर्ण उम्मीदवारों के लिए online Mock(नकली) परीक्षण करवाते हैं।",
+    },
+  ],
 };
+
+initialValues.images = Array.from({ length: 2 }, (_, index) => ({
+  ...initialValues.images[0],
+  titleEnglish: `${initialValues.images[0].titleEnglish} (${index})`,
+}));
 
 export const AdminIndexManager: SFC = () => (
   <AdminDashboardTemplateContainer>
@@ -144,6 +187,54 @@ export const AdminIndexManager: SFC = () => (
               </CardContent>
             </Card>
           </Grid>
+
+          <Grid item xs={12}>
+            <Card>
+              <AdminCardHeader title="About JoinUniform" />
+              <CardContent>
+                <SectionTitle>Title</SectionTitle>
+                <Grid container spacing={16}>
+                  <Grid item xs={12} md={6}>
+                    <FormikTextField
+                      formikApi={formikProps}
+                      name="heroAboutTitleEnglish"
+                      label="Title (English)"
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <FormikTextField
+                      formikApi={formikProps}
+                      name="heroAboutTitleHindi"
+                      label="Title (Hindi)"
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <FormikTextField
+                      formikApi={formikProps}
+                      name="heroAboutTextEnglish"
+                      label="Text (English)"
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <FormikTextField
+                      formikApi={formikProps}
+                      name="heroAboutTextHindi"
+                      label="Text (Hindi)"
+                    />
+                  </Grid>
+                </Grid>
+              </CardContent>
+
+              <CardContent>
+                <SectionTitle>
+                  Images{" "}
+                  <IconButton>
+                    <Add />
+                  </IconButton>
+                </SectionTitle>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
       )}
     </Formik>
@@ -154,7 +245,7 @@ const AdminCardHeader: SFC<CardHeaderProps> = props => (
   <CardHeader {...props} titleStyle={{ fontSize: 18, fontWeight: 500 }} />
 );
 
-const SectionTitle: SFC<{ children: string }> = props => (
+const SectionTitle: SFC = props => (
   <Typography variant="tableHeadCell" style={{ marginBottom: 16 }}>
     {props.children}
   </Typography>
