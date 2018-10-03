@@ -1,5 +1,6 @@
 import React, { SFC } from "react";
 
+import Grid from "@material-ui/core/Grid";
 import Add from "@material-ui/icons/Add";
 
 import { DashboardCard } from "componentsV0/DashboardCard";
@@ -56,48 +57,51 @@ export const AdminPlanManager: SFC<{}> = () => {
 
   return (
     <AdminDashboardTemplateContainer actionButtonElements={appBarActionButtons}>
-      {["Plans"].map(title => (
-        <DashboardCard
-          key={title}
-          title={title}
-          columnLabels={["Plan", "Availability"]}
-          columnTypes={["single-line", "switch"]}
-          onItemEditClick={noop}
-          onRequestDeleteClick={noop}
-          items={[
-            {
-              key: "0",
-              columns: [
-                { primaryText: "5 Exam Plan" },
+      <Grid container spacing={16}>
+        {["Plans"].map(title => (
+          <Grid key={title} item xs={12}>
+            <DashboardCard
+              title={title}
+              columnLabels={["Plan", "Availability"]}
+              columnTypes={["single-line", "switch"]}
+              onItemEditClick={noop}
+              onRequestDeleteClick={noop}
+              items={[
                 {
-                  switchChecked: false,
-                  switchTooltipTitle: "Toggle Availability",
+                  key: "0",
+                  columns: [
+                    { primaryText: "5 Exam Plan" },
+                    {
+                      switchChecked: false,
+                      switchTooltipTitle: "Toggle Availability",
+                    },
+                  ],
                 },
-              ],
-            },
-            {
-              key: "1",
-              columns: [
-                { primaryText: "10 Exam Plan" },
                 {
-                  switchChecked: true,
-                  switchTooltipTitle: "Toggle Availability",
+                  key: "1",
+                  columns: [
+                    { primaryText: "10 Exam Plan" },
+                    {
+                      switchChecked: true,
+                      switchTooltipTitle: "Toggle Availability",
+                    },
+                  ],
                 },
-              ],
-            },
-            {
-              key: "2",
-              columns: [
-                { primaryText: "15 Exam Plan" },
                 {
-                  switchChecked: false,
-                  switchTooltipTitle: "Toggle Availability",
+                  key: "2",
+                  columns: [
+                    { primaryText: "15 Exam Plan" },
+                    {
+                      switchChecked: false,
+                      switchTooltipTitle: "Toggle Availability",
+                    },
+                  ],
                 },
-              ],
-            },
-          ]}
-        />
-      ))}
+              ]}
+            />
+          </Grid>
+        ))}
+      </Grid>
     </AdminDashboardTemplateContainer>
   );
 };

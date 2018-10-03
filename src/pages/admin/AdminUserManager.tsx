@@ -2,6 +2,7 @@ import React, { SFC } from "react";
 import styled from "styled";
 
 import Badge from "@material-ui/core/Badge";
+import Grid from "@material-ui/core/Grid";
 import Accessibility from "@material-ui/icons/Accessibility";
 import Add from "@material-ui/icons/Add";
 import Email from "@material-ui/icons/Email";
@@ -118,22 +119,26 @@ export const AdminUserManager: SFC<{}> = () => {
         </BadgeLeftPositioned>,
       ]}
     >
-      <DashboardCard
-        title="Users"
-        additionalActionNode={
-          <ResponsiveToolbarTypographyButton
-            style={{ color: "#757575" }}
-            dense
-            iconNode={<Email />}
-            tooltipTitle="Enter Email Selection Mode"
+      <Grid container spacing={16}>
+        <Grid item xs={12}>
+          <DashboardCard
+            title="Users"
+            additionalActionNode={
+              <ResponsiveToolbarTypographyButton
+                style={{ color: "#757575" }}
+                dense
+                iconNode={<Email />}
+                tooltipTitle="Enter Email Selection Mode"
+              />
+            }
+            items={cardItems}
+            columnLabels={cardColumnLabels}
+            columnTypes={cardColumnTypes}
+            // onItemEditClick={noop}
+            onRequestDeleteClick={noop}
           />
-        }
-        items={cardItems}
-        columnLabels={cardColumnLabels}
-        columnTypes={cardColumnTypes}
-        // onItemEditClick={noop}
-        onRequestDeleteClick={noop}
-      />
+        </Grid>
+      </Grid>
     </AdminDashboardTemplateContainer>
   );
 };

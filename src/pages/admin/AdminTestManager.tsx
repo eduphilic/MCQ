@@ -1,6 +1,7 @@
 import React, { cloneElement, ReactElement, SFC } from "react";
 import { withRouter } from "react-router-dom";
 
+import Grid from "@material-ui/core/Grid";
 import Add from "@material-ui/icons/Add";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 
@@ -18,104 +19,110 @@ export const AdminTestManager: SFC<{}> = () => {
 
   return (
     <AdminDashboardTemplateContainer>
-      {["AirForce", "Army", "Navy"].map(title => (
-        <DashboardCard
-          key={title}
-          title={`${title} Entry`}
-          columnLabels={["Category", "Availability", "Actions"]}
-          columnTypes={["dual-line", "switch", "button"]}
-          onItemEditClick={item => alert(`Open edit page for item: ${item}`)}
-          items={[
-            {
-              key: "0",
-              columns: [
-                { primaryText: "Soldier GD", secondaryText: "10th" },
+      <Grid container spacing={16}>
+        {["AirForce", "Army", "Navy"].map(title => (
+          <Grid key={title} item xs={12}>
+            <DashboardCard
+              title={`${title} Entry`}
+              columnLabels={["Category", "Availability", "Actions"]}
+              columnTypes={["dual-line", "switch", "button"]}
+              onItemEditClick={item =>
+                alert(`Open edit page for item: ${item}`)
+              }
+              items={[
                 {
-                  switchChecked: false,
-                  switchTooltipTitle: "Toggle Test Availability",
+                  key: "0",
+                  columns: [
+                    { primaryText: "Soldier GD", secondaryText: "10th" },
+                    {
+                      switchChecked: false,
+                      switchTooltipTitle: "Toggle Test Availability",
+                    },
+                    {
+                      primaryText: "Template",
+                      buttonIconNode: <Add />,
+                      buttonTooltipTitle: "Add New Template",
+                    },
+                  ],
                 },
                 {
-                  primaryText: "Template",
-                  buttonIconNode: <Add />,
-                  buttonTooltipTitle: "Add New Template",
-                },
-              ],
-            },
-            {
-              key: "1",
-              columns: [
-                { primaryText: "Soldier Tradesman", secondaryText: "10th" },
-                {
-                  switchChecked: true,
-                  switchTooltipTitle: "Toggle Test Availability",
-                },
-                {
-                  primaryText: "View",
-                  buttonIconNode: <RemoveRedEye />,
-                  buttonTooltipTitle: "Preview Template",
-                },
-              ],
-            },
-            {
-              key: "2",
-              columns: [
-                {
-                  primaryText: "Soldier Tradesman",
-                  secondaryText: "8th",
+                  key: "1",
+                  columns: [
+                    { primaryText: "Soldier Tradesman", secondaryText: "10th" },
+                    {
+                      switchChecked: true,
+                      switchTooltipTitle: "Toggle Test Availability",
+                    },
+                    {
+                      primaryText: "View",
+                      buttonIconNode: <RemoveRedEye />,
+                      buttonTooltipTitle: "Preview Template",
+                    },
+                  ],
                 },
                 {
-                  switchChecked: true,
-                  switchTooltipTitle: "Toggle Test Availability",
+                  key: "2",
+                  columns: [
+                    {
+                      primaryText: "Soldier Tradesman",
+                      secondaryText: "8th",
+                    },
+                    {
+                      switchChecked: true,
+                      switchTooltipTitle: "Toggle Test Availability",
+                    },
+                    {
+                      primaryText: "View",
+                      buttonIconNode: <RemoveRedEye />,
+                      buttonTooltipTitle: "Preview Template",
+                    },
+                  ],
                 },
                 {
-                  primaryText: "View",
-                  buttonIconNode: <RemoveRedEye />,
-                  buttonTooltipTitle: "Preview Template",
+                  key: "3",
+                  columns: [
+                    { primaryText: "Soldier GD", secondaryText: "12th" },
+                    {
+                      switchChecked: false,
+                      switchTooltipTitle: "Toggle Test Availability",
+                    },
+                    {
+                      primaryText: "View",
+                      buttonIconNode: <RemoveRedEye />,
+                      buttonTooltipTitle: "Preview Template",
+                    },
+                  ],
                 },
-              ],
-            },
-            {
-              key: "3",
-              columns: [
-                { primaryText: "Soldier GD", secondaryText: "12th" },
-                {
-                  switchChecked: false,
-                  switchTooltipTitle: "Toggle Test Availability",
-                },
-                {
-                  primaryText: "View",
-                  buttonIconNode: <RemoveRedEye />,
-                  buttonTooltipTitle: "Preview Template",
-                },
-              ],
-            },
-          ].map(i => {
-            const itemColumn: DashboardCardItemColumn = i.columns[2];
+              ].map(i => {
+                const itemColumn: DashboardCardItemColumn = i.columns[2];
 
-            // Redirect to new template page for Add Template Button
-            const AddTemplateRedirectButton = withRouter(props => {
-              const wrappedChildren = cloneElement(
-                props.children as ReactElement<any>,
-                {
-                  onClick: () => props.history.push("/admin/test-manager/new"),
-                },
-              );
+                // Redirect to new template page for Add Template Button
+                const AddTemplateRedirectButton = withRouter(props => {
+                  const wrappedChildren = cloneElement(
+                    props.children as ReactElement<any>,
+                    {
+                      onClick: () =>
+                        props.history.push("/admin/test-manager/new"),
+                    },
+                  );
 
-              return <>{wrappedChildren}</>;
-            });
+                  return <>{wrappedChildren}</>;
+                });
 
-            if (itemColumn.primaryText === "View") {
-              itemColumn.wrapper = (
-                <TestPreviewDialog fields={testPreviewDialogFields} />
-              );
-            } else {
-              itemColumn.wrapper = <AddTemplateRedirectButton />;
-            }
+                if (itemColumn.primaryText === "View") {
+                  itemColumn.wrapper = (
+                    <TestPreviewDialog fields={testPreviewDialogFields} />
+                  );
+                } else {
+                  itemColumn.wrapper = <AddTemplateRedirectButton />;
+                }
 
-            return i;
-          })}
-        />
-      ))}
+                return i;
+              })}
+            />
+          </Grid>
+        ))}
+      </Grid>
     </AdminDashboardTemplateContainer>
   );
 };

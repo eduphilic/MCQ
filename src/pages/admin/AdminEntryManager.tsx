@@ -1,5 +1,6 @@
 import React, { SFC } from "react";
 
+import Grid from "@material-ui/core/Grid";
 import Add from "@material-ui/icons/Add";
 
 import { DashboardCard } from "componentsV0/DashboardCard";
@@ -79,85 +80,94 @@ export const AdminEntryManager: SFC<{}> = () => {
 
   return (
     <AdminDashboardTemplateContainer actionButtonElements={appBarActionButtons}>
-      {["AirForce", "Army", "Navy"].map(title => (
-        <DashboardCard
-          key={title}
-          title={`${title} Entry`}
-          columnLabels={[
-            "Category",
-            "Icons",
-            "Cost Per Paper (Rs)",
-            "Activated",
-          ]}
-          columnTypes={["dual-line", "image", "single-line", "switch"]}
-          editCaptionText="Click to Edit Entry"
-          onItemEditClick={_item => {
-            // alert(`Open edit dialog for item: ${item}`);
-          }}
-          onRequestDeleteClick={_items => {
-            // alert(`Open verification dialog for items: ${items}`)
-          }}
-          items={[
-            {
-              key: "0",
-              columns: [
-                { primaryText: "Soldier GD", secondaryText: "10th" },
+      <Grid container spacing={16}>
+        {["AirForce", "Army", "Navy"].map(title => (
+          <Grid key={title} item xs={12}>
+            <DashboardCard
+              title={`${title} Entry`}
+              columnLabels={[
+                "Category",
+                "Icons",
+                "Cost Per Paper (Rs)",
+                "Activated",
+              ]}
+              columnTypes={["dual-line", "image", "single-line", "switch"]}
+              editCaptionText="Click to Edit Entry"
+              onItemEditClick={_item => {
+                // alert(`Open edit dialog for item: ${item}`);
+              }}
+              onRequestDeleteClick={_items => {
+                // alert(`Open verification dialog for items: ${items}`)
+              }}
+              items={[
                 {
-                  imgUrl: `${process.env.PUBLIC_URL}/images/entry/airforce.svg`,
-                },
-                { primaryText: "10" },
-                {
-                  switchChecked: false,
-                  switchTooltipTitle: "Toggle Activation",
-                },
-              ],
-            },
-            {
-              key: "1",
-              columns: [
-                { primaryText: "Soldier Tradesman", secondaryText: "10th" },
-                { imgUrl: `${process.env.PUBLIC_URL}/images/entry/army.svg` },
-                { primaryText: "10" },
-                {
-                  switchChecked: true,
-                  switchTooltipTitle: "Toggle Activation",
-                },
-              ],
-            },
-            {
-              key: "2",
-              columns: [
-                {
-                  primaryText: "Soldier Tradesman",
-                  secondaryText: "8th",
+                  key: "0",
+                  columns: [
+                    { primaryText: "Soldier GD", secondaryText: "10th" },
+                    {
+                      imgUrl: `${
+                        process.env.PUBLIC_URL
+                      }/images/entry/airforce.svg`,
+                    },
+                    { primaryText: "10" },
+                    {
+                      switchChecked: false,
+                      switchTooltipTitle: "Toggle Activation",
+                    },
+                  ],
                 },
                 {
-                  imgUrl: `${
-                    process.env.PUBLIC_URL
-                  }/images/entry/assamrifles.svg`,
+                  key: "1",
+                  columns: [
+                    { primaryText: "Soldier Tradesman", secondaryText: "10th" },
+                    {
+                      imgUrl: `${process.env.PUBLIC_URL}/images/entry/army.svg`,
+                    },
+                    { primaryText: "10" },
+                    {
+                      switchChecked: true,
+                      switchTooltipTitle: "Toggle Activation",
+                    },
+                  ],
                 },
-                { primaryText: "10" },
                 {
-                  switchChecked: true,
-                  switchTooltipTitle: "Toggle Activation",
+                  key: "2",
+                  columns: [
+                    {
+                      primaryText: "Soldier Tradesman",
+                      secondaryText: "8th",
+                    },
+                    {
+                      imgUrl: `${
+                        process.env.PUBLIC_URL
+                      }/images/entry/assamrifles.svg`,
+                    },
+                    { primaryText: "10" },
+                    {
+                      switchChecked: true,
+                      switchTooltipTitle: "Toggle Activation",
+                    },
+                  ],
                 },
-              ],
-            },
-            {
-              key: "3",
-              columns: [
-                { primaryText: "Soldier GD", secondaryText: "12th" },
-                { imgUrl: `${process.env.PUBLIC_URL}/images/entry/bsf.svg` },
-                { primaryText: "10" },
                 {
-                  switchChecked: false,
-                  switchTooltipTitle: "Toggle Activation",
+                  key: "3",
+                  columns: [
+                    { primaryText: "Soldier GD", secondaryText: "12th" },
+                    {
+                      imgUrl: `${process.env.PUBLIC_URL}/images/entry/bsf.svg`,
+                    },
+                    { primaryText: "10" },
+                    {
+                      switchChecked: false,
+                      switchTooltipTitle: "Toggle Activation",
+                    },
+                  ],
                 },
-              ],
-            },
-          ]}
-        />
-      ))}
+              ]}
+            />
+          </Grid>
+        ))}
+      </Grid>
     </AdminDashboardTemplateContainer>
   );
 };
