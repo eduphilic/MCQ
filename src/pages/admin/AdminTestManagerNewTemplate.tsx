@@ -35,6 +35,7 @@ export class AdminTestManagerNewTemplate extends Component<
       category: "Soldier GD",
 
       paperName: "",
+      validity: "",
 
       questionsTotal: 100,
       durationMinutes: 30,
@@ -129,6 +130,14 @@ export class AdminTestManagerNewTemplate extends Component<
                             name="paperName"
                             label="Paper Name"
                             placeholder="Enter paper name here..."
+                          />
+                        }
+                        right={
+                          <FormikTextField
+                            formikApi={api}
+                            name="validity"
+                            label="Validity"
+                            placeholder="Enter paper validity here..."
                           />
                         }
                       />
