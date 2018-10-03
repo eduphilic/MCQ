@@ -59,7 +59,15 @@ export const AdminDashboardTemplate: SFC<
     </AppBar>
   );
 
-  const drawerContentsNode = <DrawerContents links={navigationLinksAdmin} />;
+  const drawerContentsNode = (
+    <DrawerContents
+      links={navigationLinksAdmin.filter(
+        navigationLink =>
+          navigationLink.titleLocalizationKey !==
+          "routes_pages_Admin_AdminQuestionManagerReportedQuestions",
+      )}
+    />
+  );
 
   const PageContentsWrapper: SFC<{}> = ({ children: wrapperChildren }) => (
     <SideSheet
