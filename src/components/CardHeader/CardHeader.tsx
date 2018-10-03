@@ -1,4 +1,4 @@
-import React, { ReactNode, SFC } from "react";
+import React, { CSSProperties, ReactNode, SFC } from "react";
 import styled from "styled";
 
 import { Typography, TypographyProps } from "components/Typography";
@@ -7,6 +7,8 @@ import { BlockImage } from "componentsV0/BlockImage";
 export type CardHeaderProps = {
   /** Card title. */
   title: ReactNode;
+
+  titleStyle?: CSSProperties;
 
   /** Subheader contents. */
   subheader?: ReactNode;
@@ -35,6 +37,7 @@ export type CardHeaderProps = {
 export const CardHeader: SFC<CardHeaderProps> = props => {
   const {
     title,
+    titleStyle,
     subheader,
     imageUrl,
     imageSize = 80,
@@ -49,7 +52,7 @@ export const CardHeader: SFC<CardHeaderProps> = props => {
       <div>
         {overline && <Overline>{overline}</Overline>}
 
-        <Title>{title}</Title>
+        <Title style={titleStyle}>{title}</Title>
 
         <Subheader color={subheaderColor}>{subheader}</Subheader>
       </div>
@@ -86,11 +89,13 @@ const Overline = styled<{
   font-weight: 500;
 `;
 
-const Title = styled<{ className?: string }>(({ children, className }) => (
-  <Typography className={className} variant="H5" paragraph>
-    {children}
-  </Typography>
-))`
+const Title = styled<{ className?: string; style?: CSSProperties }>(
+  ({ children, className, style }) => (
+    <Typography className={className} variant="H5" paragraph style={style}>
+      {children}
+    </Typography>
+  ),
+)`
   margin-bottom: 8px;
 `;
 

@@ -21,6 +21,10 @@ const Content = styled.div`
     padding: ${({ theme }) =>
       `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`};
   }
+
+  &:last-child {
+    padding-right: 0 !important;
+  }
 `;
 
 export class DashboardSecondaryToolbar extends Component<
