@@ -23,7 +23,8 @@ export const routesEn = {
     "Question Manager > Reported Questions",
   routes_pages_Admin_AdminRevenueManager: "Revenue Manager",
   routes_pages_Admin_AdminTestManager: "Test Manager",
-  routes_pages_Admin_AdminTestManagerNewTemplate: "Test Manager > New Template",
+  routes_pages_Admin_AdminTestManagerNewTemplate:
+    "Test Manager > Add New Template",
   routes_pages_Admin_AdminUserManager: "User Manager",
 
   routes_Landing_LandingPage: "",
