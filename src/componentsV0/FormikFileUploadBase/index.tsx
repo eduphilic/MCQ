@@ -32,6 +32,8 @@ export interface FormikFileUploadBaseProps<Values extends object> {
    * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept
    */
   acceptedFileTypes?: string;
+
+  rawValue?: any;
 }
 
 export interface FormikFileUploadBaseChildrenProps {
@@ -82,9 +84,15 @@ export class FormikFileUploadBase<Values extends object> extends Component<
       acceptedFileTypes,
       placeholder,
       children,
+      rawValue,
     } = this.props;
 
-    const valueAsFile = (api.values as { [P: string]: File | null })[name];
+    const value =
+      rawValue === undefined
+        ? (api.values as { [P: string]: File | null })[name]
+        : rawValue;
+
+    const valueAsFile = value;
     const filename = valueAsFile ? valueAsFile.name : placeholder || "";
 
     return (

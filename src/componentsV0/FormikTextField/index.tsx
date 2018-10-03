@@ -16,6 +16,8 @@ export interface FormikTextFieldProps<Values extends object>
     > {
   name: Extract<keyof Values, string>;
 
+  rawValue?: any;
+
   formikApi: FormikProps<Values>;
 }
 
@@ -28,15 +30,21 @@ export class FormikTextField<Values extends object> extends Component<
       name,
       label,
       fullWidth = true,
+      rawValue,
       ...rest
     } = this.props;
+
+    const value =
+      rawValue === undefined
+        ? (api.values as { [P: string]: string })[name]
+        : rawValue;
 
     return (
       <TextField
         {...rest}
         name={name}
         label={api.errors[name] || label}
-        value={(api.values as { [P: string]: string })[name]}
+        value={value}
         fullWidth={fullWidth}
         error={Boolean(api.errors[name])}
         onChange={api.handleChange}

@@ -47,6 +47,7 @@ export class FormikFileUploadField<Values extends object> extends Component<
       margin,
       placeholder,
       iconOnly,
+      rawValue,
       ...rest
     } = this.props;
 
@@ -59,6 +60,7 @@ export class FormikFileUploadField<Values extends object> extends Component<
         name={name}
         acceptedFileTypes={acceptedFileTypes}
         placeholder={placeholder}
+        rawValue={rawValue}
       >
         {fileUploadApi =>
           !iconOnly ? (

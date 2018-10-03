@@ -3,14 +3,23 @@ import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Add from "@material-ui/icons/Add";
+// tslint:disable-next-line:import-name
+import DragHandleIcon from "@material-ui/icons/DragHandle";
+import Remove from "@material-ui/icons/Remove";
 import { CardContent } from "components/CardContent";
 import { CardHeader, CardHeaderProps } from "components/CardHeader";
 import { DashboardSecondaryToolbar } from "componentsV0/DashboardSecondaryToolbar";
 import { FormikFileUploadField } from "componentsV0/FormikFileUploadField";
 import { FormikTextField } from "componentsV0/FormikTextField";
 import { Typography } from "componentsV0/Typography";
-import { Formik } from "formik";
+import { Formik, FormikProps } from "formik";
 import React, { SFC } from "react";
+import {
+  arrayMove,
+  SortableContainer,
+  SortableElement,
+  SortableHandle,
+} from "react-sortable-hoc";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 type IndexPageSettings = {
@@ -85,6 +94,10 @@ export const AdminIndexManager: SFC = () => (
     <Formik<IndexPageSettings>
       initialValues={initialValues}
       onSubmit={values => alert(JSON.stringify(values, null, 2))}
+      validate={values => {
+        /* tslint:disable-next-line:no-console */
+        console.log("values", values.images);
+      }}
     >
       {formikProps => (
         <Grid container spacing={16}>
@@ -188,6 +201,7 @@ export const AdminIndexManager: SFC = () => (
             </Card>
           </Grid>
 
+          {/* About JoinUniform */}
           <Grid item xs={12}>
             <Card>
               <AdminCardHeader title="About JoinUniform" />
@@ -232,6 +246,16 @@ export const AdminIndexManager: SFC = () => (
                     <Add />
                   </IconButton>
                 </SectionTitle>
+                <Images
+                  formikApi={formikProps}
+                  useDragHandle
+                  onSortEnd={({ oldIndex, newIndex }) =>
+                    formikProps.setFieldValue(
+                      "images",
+                      arrayMove(formikProps.values.images, oldIndex, newIndex),
+                    )
+                  }
+                />
               </CardContent>
             </Card>
           </Grid>
@@ -250,3 +274,90 @@ const SectionTitle: SFC = props => (
     {props.children}
   </Typography>
 );
+
+const DragHandle = SortableHandle(() => (
+  <IconButton>
+    <DragHandleIcon />
+  </IconButton>
+));
+
+const Images = SortableContainer<{
+  formikApi: FormikProps<IndexPageSettings>;
+}>(props => (
+  <div>
+    {props.formikApi.values.images.map((_image, index) => (
+      <Image
+        key={index}
+        formikApi={props.formikApi}
+        index={index}
+        imageIndex={index}
+      />
+    ))}
+  </div>
+));
+
+const Image = SortableElement<{
+  formikApi: FormikProps<IndexPageSettings>;
+  imageIndex: number;
+}>(props => (
+  <Grid container spacing={16}>
+    <Grid item>
+      <Grid container direction="column">
+        <DragHandle />
+        <IconButton>
+          <Remove />
+        </IconButton>
+      </Grid>
+    </Grid>
+    <Grid item xs>
+      <Grid container spacing={16}>
+        <Grid item xs={12}>
+          <FormikFileUploadField
+            formikApi={props.formikApi}
+            name={`images[${props.imageIndex}].image` as any}
+            label="Image"
+            rawValue={props.formikApi.values.images[props.imageIndex].image}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <FormikTextField
+            formikApi={props.formikApi}
+            name={`images[${props.imageIndex}].titleEnglish` as any}
+            rawValue={
+              props.formikApi.values.images[props.imageIndex].titleEnglish
+            }
+            label="Title (English)"
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <FormikTextField
+            formikApi={props.formikApi}
+            name={`images[${props.imageIndex}].titleHindi` as any}
+            rawValue={
+              props.formikApi.values.images[props.imageIndex].titleHindi
+            }
+            label="Title (Hindi)"
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <FormikTextField
+            formikApi={props.formikApi}
+            name={`images[${props.imageIndex}].textEnglish` as any}
+            rawValue={
+              props.formikApi.values.images[props.imageIndex].textEnglish
+            }
+            label="Text (English)"
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <FormikTextField
+            formikApi={props.formikApi}
+            name={`images[${props.imageIndex}].textHindi` as any}
+            rawValue={props.formikApi.values.images[props.imageIndex].textHindi}
+            label="Text (Hindi)"
+          />
+        </Grid>
+      </Grid>
+    </Grid>
+  </Grid>
+));
