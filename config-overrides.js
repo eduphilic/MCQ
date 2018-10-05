@@ -4,7 +4,7 @@ const {
   rewireJest: rewireTypescriptJest,
   rewireTSLint,
 } = require("react-app-rewire-typescript-babel-preset");
-const { injectBabelPlugin, getLoader } = require("react-app-rewired");
+const { getLoader } = require("react-app-rewired");
 
 module.exports = {
   /**
@@ -32,20 +32,24 @@ module.exports = {
     // @ts-ignore
     const scriptsLoader = getLoader(rewiredConfig.module.rules, rule =>
       Boolean(
-        rule.test && rule.test.toString() === /\.(ts|tsx|js|jsx)$/.toString(),
+        rule.test &&
+          rule.test.toString() === /\.(ts|tsx|js|mjs|jsx)$/.toString(),
       ),
     );
 
     // console.log("scriptsLoader", scriptsLoader);
+    // process.exit(0);
+
+    const babelLoader = scriptsLoader;
 
     // @ts-ignore
-    const babelLoader = getLoader(scriptsLoader.use, rule =>
-      Boolean(
-        rule.loader &&
-          (/babel-loader/.test(rule.loader) ||
-            /babel-preset-react-app.loader/.test(rule.loader)),
-      ),
-    );
+    // const babelLoader = getLoader(scriptsLoader.use, rule =>
+    //   Boolean(
+    //     rule.loader &&
+    //       (/babel-loader/.test(rule.loader) ||
+    //         /babel-preset-react-app.loader/.test(rule.loader)),
+    //   ),
+    // );
 
     // console.log("babelLoader", babelLoader);
 
@@ -65,9 +69,13 @@ module.exports = {
 
     // Add React Hot Reload
     if (env === "development") {
-      rewiredConfig = injectBabelPlugin(
-        ["react-hot-loader/babel"],
-        rewiredConfig,
+      // rewiredConfig = injectBabelPlugin(
+      //   ["react-hot-loader/babel"],
+      //   rewiredConfig,
+      // );
+      // @ts-ignore
+      babelLoader.options.plugins.push(
+        require.resolve("react-hot-loader/babel"),
       );
     }
 
