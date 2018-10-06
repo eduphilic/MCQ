@@ -13,6 +13,7 @@ import DragHandleIcon from "@material-ui/icons/DragHandle";
 import Remove from "@material-ui/icons/Remove";
 import { CardContent } from "components/CardContent";
 import { CardHeader, CardHeaderProps } from "components/CardHeader";
+import { DashboardCard } from "componentsV0/DashboardCard";
 import { DashboardSecondaryToolbar } from "componentsV0/DashboardSecondaryToolbar";
 import { FormikFileUploadField } from "componentsV0/FormikFileUploadField";
 import { FormikTextField } from "componentsV0/FormikTextField";
@@ -42,6 +43,9 @@ type IndexPageSettings = {
   heroAboutTitleHindi: string;
   heroAboutTextEnglish: string;
   heroAboutTextHindi: string;
+
+  // TODO: Make this unique for each entry
+  entryCardBackgroundImage: File | null;
 
   images: {
     image: File | null;
@@ -81,6 +85,9 @@ All India rank`,
     "JoinUniform is created to help and prepare those aspirants(both Officer and Jawan entry) who are keen to serve India, in uniform(Army, Airforce, Navy, Assam Rifles, Coast Guard, TA, BSF, ITBP, CRPF, SSB, CISF & RPF.etc.). The platform is bilingual(Hindi & English),user can use it from anywhere, using mobile, laptop or TV. JoinUniform will benefit it's user in terms of quality content, proper attention, actual exam like tests, with explanation and performance analysis.",
   heroAboutTextHindi:
     "JoinUniform is created to help and prepare those aspirants(both Officer and Jawan entry) who are keen to serve India, in uniform(Army, Airforce, Navy, Assam Rifles, Coast Guard, TA, BSF, ITBP, CRPF, SSB, CISF & RPF.etc.). The platform is bilingual(Hindi & English),user can use it from anywhere, using mobile, laptop or TV. JoinUniform will benefit it's user in terms of quality content, proper attention, actual exam like tests, with explanation and performance analysis.",
+
+  // TODO: Make this unique for each entry
+  entryCardBackgroundImage: null,
 
   images: [
     {
@@ -281,6 +288,76 @@ export const AdminIndexManager: SFC = () => (
               </CardContent>
             </Card>
           </Grid>
+
+          {["AirForce", "Army", "Navy"].map(title => (
+            <Grid key={title} item xs={12}>
+              <DashboardCard
+                title={`${title} Entry`}
+                columnLabels={["Category", "Visibility"]}
+                columnTypes={["dual-line", "switch"]}
+                onItemEditClick={() => {
+                  //
+                }}
+                items={[
+                  {
+                    key: "0",
+                    columns: [
+                      { primaryText: "Soldier GD", secondaryText: "10th" },
+                      {
+                        switchChecked: false,
+                        switchTooltipTitle: "Toggle Visibility",
+                      },
+                    ],
+                  },
+                  {
+                    key: "1",
+                    columns: [
+                      {
+                        primaryText: "Soldier Tradesman",
+                        secondaryText: "10th",
+                      },
+                      {
+                        switchChecked: true,
+                        switchTooltipTitle: "Toggle Visibility",
+                      },
+                    ],
+                  },
+                  {
+                    key: "2",
+                    columns: [
+                      {
+                        primaryText: "Soldier Tradesman",
+                        secondaryText: "8th",
+                      },
+                      {
+                        switchChecked: true,
+                        switchTooltipTitle: "Toggle Visibility",
+                      },
+                    ],
+                  },
+                  {
+                    key: "3",
+                    columns: [
+                      { primaryText: "Soldier GD", secondaryText: "12th" },
+                      {
+                        switchChecked: true,
+                        switchTooltipTitle: "Toggle Visibility",
+                      },
+                    ],
+                  },
+                ]}
+                additionalActionNode={
+                  <FormikFileUploadField
+                    formikApi={formikApi}
+                    // TODO: Make this unique for each entry
+                    name="entryCardBackgroundImage"
+                    label="Click to upload background image"
+                    iconOnly
+                  />
+                }
+              />
+            </Grid>
+          ))}
 
           {/* Our Videos */}
           <Grid item xs={12}>
