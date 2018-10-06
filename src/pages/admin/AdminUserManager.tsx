@@ -9,9 +9,6 @@ import Email from "@material-ui/icons/Email";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
-// tslint:disable-next-line:import-name
-import profileImage from "./admin-user-manager-placeholder-profile-image.png";
-
 import {
   DashboardCard,
   DashboardCardColumnType,
@@ -33,7 +30,6 @@ export const AdminUserManager: SFC<{}> = () => {
         key: index.toString(),
         columns: [
           {
-            imgUrl: profileImage,
             primaryText: "User Name",
             secondaryText: "emailed@gmail.com",
             isNewUser: index < 5,
