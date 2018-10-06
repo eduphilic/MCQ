@@ -1,6 +1,11 @@
 import Card from "@material-ui/core/Card";
+import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
 import Add from "@material-ui/icons/Add";
 // tslint:disable-next-line:import-name
@@ -20,6 +25,7 @@ import {
   SortableElement,
   SortableHandle,
 } from "react-sortable-hoc";
+import styled from "styled";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 type IndexPageSettings = {
@@ -45,7 +51,12 @@ type IndexPageSettings = {
     textHindi: string;
   }[];
 
-  // videos: { entryTitle: string; youtubeUrls: string[] }[];
+  videos: {
+    entryId: string;
+    youTubeVideoUrl: string;
+    titleEnglish: string;
+    titleHindi: string;
+  }[];
 };
 
 const initialValues: IndexPageSettings = {
@@ -82,11 +93,20 @@ All India rank`,
         "हम जवान, JCO और समकक्ष पद के लिए Army, Airforce, Navy, Assam Rifles, Coast Guard, TA, BSF, ITBP, CRPF, SSB, CISF & RPF में आवेदन करने वाले 8वीं, 10वीं और 12वीं उत्तीर्ण उम्मीदवारों के लिए online Mock(नकली) परीक्षण करवाते हैं।",
     },
   ],
+
+  videos: [],
 };
 
 initialValues.images = Array.from({ length: 2 }, (_, index) => ({
   ...initialValues.images[0],
   titleEnglish: `${initialValues.images[0].titleEnglish} (${index})`,
+}));
+
+initialValues.videos = Array.from({ length: 7 }, (_, index) => ({
+  entryId: index < 3 ? "army" : index < 5 ? "airforce" : "navy",
+  youTubeVideoUrl: "https://www.youtube.com/watch?v=Y2tfg2huqGg",
+  titleEnglish: `Video ${index + 1} (English)`,
+  titleHindi: `Video ${index + 1} (Hindi)`,
 }));
 
 export const AdminIndexManager: SFC = () => (
@@ -99,7 +119,7 @@ export const AdminIndexManager: SFC = () => (
         console.log("values", values.images);
       }}
     >
-      {formikProps => (
+      {formikApi => (
         <Grid container spacing={16}>
           {/* Logo Image */}
           <Grid item xs={12}>
@@ -111,7 +131,7 @@ export const AdminIndexManager: SFC = () => (
                 style={{ flex: 1, paddingBottom: 12 }}
               >
                 <FormikFileUploadField
-                  formikApi={formikProps}
+                  formikApi={formikApi}
                   name="logoImage"
                   acceptedFileTypes="image/*"
                   placeholder="Browse"
@@ -128,7 +148,7 @@ export const AdminIndexManager: SFC = () => (
                 <SectionTitle>Hero Background</SectionTitle>
                 <div style={{ marginTop: -16 }}>
                   <FormikFileUploadField
-                    formikApi={formikProps}
+                    formikApi={formikApi}
                     name="heroBackgroundImage"
                     acceptedFileTypes="image/*"
                     placeholder="Browse"
@@ -141,9 +161,9 @@ export const AdminIndexManager: SFC = () => (
                     label="Background Image Alpha (0.05 - 0.95)"
                     helperText="Controls the transparency of the background image."
                     inputProps={{ step: "0.05", min: "0.05", max: ".95" }}
-                    value={formikProps.values.heroBackgroundImageAlpha}
-                    onBlur={formikProps.handleBlur}
-                    onChange={formikProps.handleChange}
+                    value={formikApi.values.heroBackgroundImageAlpha}
+                    onBlur={formikApi.handleBlur}
+                    onChange={formikApi.handleChange}
                   />
                 </div>
               </CardContent>
@@ -158,14 +178,14 @@ export const AdminIndexManager: SFC = () => (
                 <Grid container spacing={16}>
                   <Grid item xs={12} md={6}>
                     <FormikTextField
-                      formikApi={formikProps}
+                      formikApi={formikApi}
                       name="heroTextPrimaryEnglish"
                       label="Hero Primary Text (English)"
                     />
                   </Grid>
                   <Grid item xs={12} md={6}>
                     <FormikTextField
-                      formikApi={formikProps}
+                      formikApi={formikApi}
                       name="heroTextPrimaryHindi"
                       label="Hero Primary Text (Hindi)"
                     />
@@ -182,8 +202,8 @@ export const AdminIndexManager: SFC = () => (
                       multiline
                       fullWidth
                       label="Hero Features (English)"
-                      value={formikProps.values.heroFeaturesEnglish}
-                      onChange={formikProps.handleChange}
+                      value={formikApi.values.heroFeaturesEnglish}
+                      onChange={formikApi.handleChange}
                     />
                   </Grid>
                   <Grid item xs={12} md={6}>
@@ -192,8 +212,8 @@ export const AdminIndexManager: SFC = () => (
                       multiline
                       fullWidth
                       label="Hero Features (Hindi)"
-                      value={formikProps.values.heroFeaturesHindi}
-                      onChange={formikProps.handleChange}
+                      value={formikApi.values.heroFeaturesHindi}
+                      onChange={formikApi.handleChange}
                     />
                   </Grid>
                 </Grid>
@@ -210,28 +230,28 @@ export const AdminIndexManager: SFC = () => (
                 <Grid container spacing={16}>
                   <Grid item xs={12} md={6}>
                     <FormikTextField
-                      formikApi={formikProps}
+                      formikApi={formikApi}
                       name="heroAboutTitleEnglish"
                       label="Title (English)"
                     />
                   </Grid>
                   <Grid item xs={12} md={6}>
                     <FormikTextField
-                      formikApi={formikProps}
+                      formikApi={formikApi}
                       name="heroAboutTitleHindi"
                       label="Title (Hindi)"
                     />
                   </Grid>
                   <Grid item xs={12} md={6}>
                     <FormikTextField
-                      formikApi={formikProps}
+                      formikApi={formikApi}
                       name="heroAboutTextEnglish"
                       label="Text (English)"
                     />
                   </Grid>
                   <Grid item xs={12} md={6}>
                     <FormikTextField
-                      formikApi={formikProps}
+                      formikApi={formikApi}
                       name="heroAboutTextHindi"
                       label="Text (Hindi)"
                     />
@@ -246,13 +266,40 @@ export const AdminIndexManager: SFC = () => (
                     <Add />
                   </IconButton>
                 </SectionTitle>
-                <Images
-                  formikApi={formikProps}
+                <div style={{ marginTop: -16 }}>
+                  <Images
+                    formikApi={formikApi}
+                    useDragHandle
+                    onSortEnd={({ oldIndex, newIndex }) =>
+                      formikApi.setFieldValue(
+                        "images",
+                        arrayMove(formikApi.values.images, oldIndex, newIndex),
+                      )
+                    }
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          {/* Our Videos */}
+          <Grid item xs={12}>
+            <Card>
+              <AdminCardHeader title="Our Videos" />
+              <CardContent>
+                <SectionTitle>
+                  Entries{" "}
+                  <IconButton>
+                    <Add />
+                  </IconButton>
+                </SectionTitle>
+                <Videos
+                  formikApi={formikApi}
                   useDragHandle
                   onSortEnd={({ oldIndex, newIndex }) =>
-                    formikProps.setFieldValue(
-                      "images",
-                      arrayMove(formikProps.values.images, oldIndex, newIndex),
+                    formikApi.setFieldValue(
+                      "videos",
+                      arrayMove(formikApi.values.videos, oldIndex, newIndex),
                     )
                   }
                 />
@@ -275,26 +322,43 @@ const SectionTitle: SFC = props => (
   </Typography>
 );
 
-const DragHandle = SortableHandle(() => (
-  <IconButton>
+const DragHandleBase = styled<{ className?: string }>(({ className }) => (
+  <IconButton className={className}>
     <DragHandleIcon />
   </IconButton>
-));
+))`
+  cursor: grab;
+`;
 
-const Images = SortableContainer<{
-  formikApi: FormikProps<IndexPageSettings>;
-}>(props => (
+const DragHandle = SortableHandle(() => (
   <div>
-    {props.formikApi.values.images.map((_image, index) => (
-      <Image
-        key={index}
-        formikApi={props.formikApi}
-        index={index}
-        imageIndex={index}
-      />
-    ))}
+    <DragHandleBase />
   </div>
 ));
+
+const ListControls = () => (
+  <Grid container direction="column">
+    <DragHandle />
+    <IconButton>
+      <Remove />
+    </IconButton>
+  </Grid>
+);
+
+const Images = SortableContainer<{ formikApi: FormikProps<IndexPageSettings> }>(
+  props => (
+    <div>
+      {props.formikApi.values.images.map((_image, index) => (
+        <Image
+          key={index}
+          formikApi={props.formikApi}
+          index={index}
+          imageIndex={index}
+        />
+      ))}
+    </div>
+  ),
+);
 
 const Image = SortableElement<{
   formikApi: FormikProps<IndexPageSettings>;
@@ -302,12 +366,7 @@ const Image = SortableElement<{
 }>(props => (
   <Grid container spacing={16}>
     <Grid item>
-      <Grid container direction="column">
-        <DragHandle />
-        <IconButton>
-          <Remove />
-        </IconButton>
-      </Grid>
+      <ListControls />
     </Grid>
     <Grid item xs>
       <Grid container spacing={16}>
@@ -355,6 +414,89 @@ const Image = SortableElement<{
             name={`images[${props.imageIndex}].textHindi` as any}
             rawValue={props.formikApi.values.images[props.imageIndex].textHindi}
             label="Text (Hindi)"
+          />
+        </Grid>
+      </Grid>
+    </Grid>
+  </Grid>
+));
+
+const Videos = SortableContainer<{ formikApi: FormikProps<IndexPageSettings> }>(
+  props => (
+    <div>
+      {props.formikApi.values.videos.map((_video, index) => (
+        <Video
+          key={index}
+          formikApi={props.formikApi}
+          index={index}
+          videoIndex={index}
+        />
+      ))}
+    </div>
+  ),
+);
+
+const entries = ["army", "airforce", "navy"];
+
+const Video = SortableElement<{
+  formikApi: FormikProps<IndexPageSettings>;
+  videoIndex: number;
+}>(props => (
+  <Grid container spacing={16} style={{ paddingBottom: 16 }}>
+    <Grid item>
+      <ListControls />
+    </Grid>
+    <Grid item xs>
+      <Grid container spacing={16}>
+        <Grid item xs={12}>
+          <FormControl fullWidth>
+            <InputLabel>Category</InputLabel>
+            <Select
+              value={props.formikApi.values.videos[props.videoIndex].entryId}
+              onChange={props.formikApi.handleChange}
+              inputProps={{
+                name: `videos[${props.videoIndex}].entryId`,
+              }}
+            >
+              {entries.map(entry => (
+                <MenuItem key={entry} value={entry}>
+                  {entry.slice(0, 1).toUpperCase()}
+                  {entry.slice(1)}
+                </MenuItem>
+              ))}
+              <MenuItem value="test">Test</MenuItem>
+            </Select>
+            <FormHelperText>Select Entry</FormHelperText>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12}>
+          <FormikTextField
+            formikApi={props.formikApi}
+            name={`videos[${props.videoIndex}].youTubeVideoUrl` as any}
+            rawValue={
+              props.formikApi.values.videos[props.videoIndex].youTubeVideoUrl
+            }
+            label="Insert YouTube Url"
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <FormikTextField
+            formikApi={props.formikApi}
+            name={`videos[${props.videoIndex}].titleEnglish` as any}
+            rawValue={
+              props.formikApi.values.videos[props.videoIndex].titleEnglish
+            }
+            label="Title (English)"
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <FormikTextField
+            formikApi={props.formikApi}
+            name={`videos[${props.videoIndex}].titleHindi` as any}
+            rawValue={
+              props.formikApi.values.videos[props.videoIndex].titleHindi
+            }
+            label="Title (Hindi)"
           />
         </Grid>
       </Grid>
