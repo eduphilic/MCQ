@@ -1,31 +1,4 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "lib": ["dom", "esnext"],
-    "jsx": "react",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "noEmit": true,
-    "baseUrl": "src",
-    "allowJs": true,
-    "checkJs": true,
-    "maxNodeModuleJsDepth": 0,
-    "typeRoots": ["./typings", "node_modules/@types"],
-    "isolatedModules": true
-  },
-  "include": [
-    ".storybook/**/*",
-    "src/**/*",
-    "typings/**/*",
-    "config-overrides.js"
-  ],
-  "exclude": ["./vendor/**/*"]
+  "files": [],
+  "references": [{ "path": "./apps/user" }]
 }
