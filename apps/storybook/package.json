@@ -1,0 +1,32 @@
+{
+  "private": true,
+  "name": "@join-uniform/app-storybook",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "cross-env TS_NODE_TRANSPILE_ONLY=true start-storybook -c src -s ../user/public -p 9001",
+    "build": "cross-env TS_NODE_TRANSPILE_ONLY=true build-storybook -c src -s ../user/public -o dist"
+  },
+  "dependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-typescript": "^7.1.0",
+    "@join-uniform/lib-build-tools": "*",
+    "@storybook/addon-actions": "4.0.0-alpha.24",
+    "@storybook/addon-info": "4.0.0-alpha.24",
+    "@storybook/addon-knobs": "4.0.0-alpha.24",
+    "@storybook/addon-links": "4.0.0-alpha.24",
+    "@storybook/addon-options": "4.0.0-alpha.24",
+    "@storybook/addon-viewport": "4.0.0-alpha.24",
+    "@storybook/addons": "4.0.0-alpha.24",
+    "@storybook/react": "4.0.0-alpha.24",
+    "@svgr/webpack": "^3.1.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-named-asset-import": "^0.2.2",
+    "cross-env": "^5.2.0",
+    "moment": "^2.22.2",
+    "react": "^16.5.2",
+    "react-docgen-typescript-loader": "^3.0.0",
+    "react-dom": "^16.5.2",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.2"
+  }
+}

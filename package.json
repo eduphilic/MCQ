@@ -7,8 +7,8 @@
     ]
   },
   "scripts": {
-    "start": "wsrun start",
-    "build": "yarn clean && wsrun build --serial",
+    "start": "yarn clean && tsc -b && wsrun start --exclude-missing",
+    "build": "yarn clean && tsc -b && wsrun build --serial --exclude-missing",
     "clean": "rimraf apps/*/build lib/*/dist",
     "lint": "tslint -p ./tsconfig-lint.json"
   },
@@ -41,6 +41,7 @@
     "wsrun": "^2.2.1"
   },
   "devDependencies": {
+    "@types/globby": "^8.0.0",
     "prettier": "^1.14.3",
     "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.11.0",
