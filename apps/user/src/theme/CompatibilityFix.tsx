@@ -54,7 +54,7 @@ function createInsertionPointIfMissing() {
   const commentNodeType = 8;
 
   // Determine if insertion point has already been added to <head>.
-  const childNodes = document.head.childNodes;
+  const childNodes = document.head!.childNodes;
   for (let i = 0; i < childNodes.length; i += 1) {
     const node = childNodes.item(i);
     if (
@@ -66,5 +66,5 @@ function createInsertionPointIfMissing() {
   }
 
   const commentNode = document.createComment(insertionPoint);
-  document.head.insertBefore(commentNode, document.head.firstChild);
+  document.head!.insertBefore(commentNode, document.head!.firstChild);
 }
