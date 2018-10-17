@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   plugins: [
     {
@@ -14,4 +16,16 @@ module.exports = {
       },
     },
   ],
+  modify(config, { target, dev }) {
+    if (target === "node") {
+      console.log(config);
+
+      config.output.filename = "index.js";
+      config.output.path = path.resolve(__dirname, "../../dist/functions");
+
+      // process.exit(0);
+    }
+
+    return config;
+  },
 };
