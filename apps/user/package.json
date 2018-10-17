@@ -3,15 +3,8 @@
   "name": "@join-uniform/app-user",
   "version": "1.0.0",
   "resolutions": {
-    "react-scripts/babel-preset-react-app": "file:../../vendor/babel-preset-react-app"
+    "react-scripts/babel-preset-react-app": "file:./vendor/babel-preset-react-app"
   },
-  "engines": {
-    "node": ">= 8.10",
-    "yarn": ">= 1.5.1"
-  },
-  "precommit": [
-    "type-check"
-  ],
   "browserslist": [
     ">0.25%",
     "not op_mini all",
@@ -25,7 +18,7 @@
     "storybook:build": "build-storybook -c .storybook -s public -o dist/storybook"
   },
   "dependencies": {
-    "@material-ui/core": "^3.1.1",
+    "@material-ui/core": "^3.2.2",
     "@material-ui/icons": "^3.0.1",
     "@strothj/react-archer": "^0.2.0",
     "babel-preset-react-app": "file:../../vendor/babel-preset-react-app",
