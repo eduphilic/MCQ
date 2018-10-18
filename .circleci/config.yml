@@ -42,15 +42,14 @@ jobs:
       # - run: yarn test
       - run: yarn lint
       - run: yarn build
-
-      # Deploy to staging
-      - add_ssh_keys
-      - run:
-          name: Deploy
-          command: |
-            if [ $CIRCLE_BRANCH = 'master' ]
-            then
-              echo 'dev.bhartitest.com,45.77.116.238 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNZ6XoTAtmf2P3fcxYqHpt1U5JQrPdURnaMU4XXkifUj0m7pCiQad4ltk8DpaO/0/zVHGMrcquUZJ7mUJFBrkXc=' >> ~/.ssh/known_hosts
-              scp -r apps/user/build/* deploy@dev.bhartitest.com:/var/www/
-              scp -r apps/storybook/dist/* deploy@dev.bhartitest.com:/var/www/storybook/
-            fi
+      # # Deploy to staging
+      # - add_ssh_keys
+      # - run:
+      #     name: Deploy
+      #     command: |
+      #       if [ $CIRCLE_BRANCH = 'master' ]
+      #       then
+      #         echo 'dev.bhartitest.com,45.77.116.238 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNZ6XoTAtmf2P3fcxYqHpt1U5JQrPdURnaMU4XXkifUj0m7pCiQad4ltk8DpaO/0/zVHGMrcquUZJ7mUJFBrkXc=' >> ~/.ssh/known_hosts
+      #         scp -r apps/user/build/* deploy@dev.bhartitest.com:/var/www/
+      #         scp -r apps/storybook/dist/* deploy@dev.bhartitest.com:/var/www/storybook/
+      #       fi

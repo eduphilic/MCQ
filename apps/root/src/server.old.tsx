@@ -7,7 +7,8 @@ import App from "./App";
 
 // @ts-ignore
 // tslint:disable-next-line:no-var-requires
-const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
+// const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
+const assets = {} as any;
 
 const server = express();
 server
