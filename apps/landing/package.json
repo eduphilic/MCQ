@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@join-uniform/app-root",
+  "name": "@join-uniform/app-landing",
   "version": "2.0.0-alpha.8",
   "workspaces": {
     "nohoist": ["razzle", "razzle-plugin-typescript"]

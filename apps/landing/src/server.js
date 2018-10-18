@@ -1,25 +1,21 @@
-// @ts-ignore
-import express from "express";
-import React from "react";
-import { renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router-dom";
-import App from "./App";
+import App from './App';
+import React from 'react';
+import { StaticRouter } from 'react-router-dom';
+import express from 'express';
+import { renderToString } from 'react-dom/server';
 
-// @ts-ignore
-// tslint:disable-next-line:no-var-requires
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
 const server = express();
 server
-  .disable("x-powered-by")
+  .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
-  // @ts-ignore
-  .get("/*", (req, res) => {
-    const context: any = {};
+  .get('/*', (req, res) => {
+    const context = {};
     const markup = renderToString(
       <StaticRouter context={context} location={req.url}>
         <App />
-      </StaticRouter>,
+      </StaticRouter>
     );
 
     if (context.url) {
@@ -36,10 +32,10 @@ server
         ${
           assets.client.css
             ? `<link rel="stylesheet" href="${assets.client.css}">`
-            : ""
+            : ''
         }
         ${
-          process.env.NODE_ENV === "production"
+          process.env.NODE_ENV === 'production'
             ? `<script src="${assets.client.js}" defer></script>`
             : `<script src="${assets.client.js}" defer crossorigin></script>`
         }
@@ -47,7 +43,7 @@ server
     <body>
         <div id="root">${markup}</div>
     </body>
-</html>`,
+</html>`
       );
     }
   });
