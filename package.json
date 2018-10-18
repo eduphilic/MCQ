@@ -13,8 +13,7 @@
     "start": "yarn clean && tsc -b && wsrun start --exclude-missing",
     "build": "yarn clean && tsc -b && wsrun build --serial --exclude-missing",
     "clean": "rimraf apps/*/build lib/*/dist",
-    "lint": "tslint -p ./tsconfig-lint.json",
-    "firebase:login": "firebase login"
+    "lint": "tslint -p ./tsconfig-lint.json"
   },
   "dependencies": {
     "@types/async": "^2.0.49",
@@ -40,7 +39,6 @@
     "@types/uuid": "^3.4.4",
     "@types/webpack": "^4.4.17",
     "@types/yup": "^0.26.0",
-    "firebase-tools": "^5.1.1",
     "rimraf": "^2.6.2",
     "typescript": "^3.1.3",
     "wsrun": "^3.3.3"
