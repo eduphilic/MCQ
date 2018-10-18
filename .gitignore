@@ -6,12 +6,10 @@ node_modules/
 
 # Build assets
 build/
-build-server/
 dist/
 
 # Logs
 *error.log
-*-debug.log
 
 # Microsoft Office
 ~$*.*

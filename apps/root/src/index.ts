@@ -1,5 +1,4 @@
 import http from "http";
-// @ts-ignore
 // tslint:disable-next-line:import-name
 import app from "./server";
 

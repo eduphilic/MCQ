@@ -1,5 +1,4 @@
 const path = require("path");
-const rimraf = require("rimraf");
 
 module.exports = {
   plugins: [
@@ -19,25 +18,14 @@ module.exports = {
   ],
   modify(config, { target, dev }) {
     if (target === "node") {
-      config.entry = path.resolve(__dirname, "./src/server");
-      config.output.filename = "[name].js";
-      config.output.path = path.resolve(__dirname, "./build-server");
-      config.output.libraryTarget = "commonjs2";
-      config.plugins.push(new CustomPostBuildPlugin());
+      console.log(config);
 
-      config.plugins = config.plugins.filter(
-        c => !/StartServerPlugin/.test(c.constructor),
-      );
+      config.output.filename = "index.js";
+      config.output.path = path.resolve(__dirname, "../../dist/functions");
+
+      // process.exit(0);
     }
 
     return config;
   },
 };
-
-class CustomPostBuildPlugin {
-  apply(compiler) {
-    compiler.hooks.afterEmit.tap("CustomPostBuildPlugin", () => {
-      rimraf.sync(path.resolve(__dirname, "build-server/static"));
-    });
-  }
-}
