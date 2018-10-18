@@ -1,5 +1,5 @@
 import React from "react";
-// import { hot } from "react-hot-loader";
+import { hot } from "react-hot-loader";
 import { Provider } from "react-redux";
 import { createStore } from "store";
 import { LightTheme, ThemeBaseline } from "theme";
@@ -18,5 +18,4 @@ const App = () => (
   </Provider>
 );
 
-// export default hot(module)(App);
-export default App;
+export default hot(module)(App);

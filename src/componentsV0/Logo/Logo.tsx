@@ -1,7 +1,7 @@
-import Typography from "@material-ui/core/Typography";
 import { LogoImage } from "componentsV0/LogoImage";
 import React, { SFC } from "react";
 import styled from "styled";
+import { Typography } from "../../../node_modules/@material-ui/core";
 
 const logoHeight = 64;
 
