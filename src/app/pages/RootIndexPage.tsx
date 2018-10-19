@@ -1,3 +1,6 @@
-import React from "react";
+import React, { SFC } from "react";
+import { RouteComponentProps } from "@reach/router";
 
-export const RootIndexPage = () => <p>Root Index Page</p>;
+export const RootIndexPage: SFC<RouteComponentProps> = () => (
+  <p>Root Index Page</p>
+);

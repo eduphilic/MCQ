@@ -1,9 +1,11 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { StrictMode } from "react";
+import { Router } from "@reach/router";
 import { RootIndexPage } from "./pages";
 
 export const App = () => (
-  <Switch>
-    <Route exact path="/" component={RootIndexPage} />
-  </Switch>
+  <StrictMode>
+    <Router>
+      <RootIndexPage path="/" />
+    </Router>
+  </StrictMode>
 );

@@ -1,5 +1,5 @@
 import { Context } from "koa";
-import { StaticRouterContext, StaticRouter } from "react-router";
+import { ServerLocation, isRedirect } from "@reach/router";
 import { renderToString } from "react-dom/server";
 import { App } from "../app";
 import React from "react";
@@ -8,16 +8,20 @@ const assets: { client: { js: string; css?: string } } = require(process.env
   .RAZZLE_ASSETS_MANIFEST!);
 
 export const renderApp = async (ctx: Context) => {
-  const context: StaticRouterContext = {};
-  const markup = renderToString(
-    <StaticRouter context={context} location={ctx.url}>
-      <App />
-    </StaticRouter>,
-  );
+  let markup: string;
 
-  if (context.url) {
-    ctx.redirect(context.url);
-    return;
+  try {
+    markup = renderToString(
+      <ServerLocation url={ctx.url}>
+        <App />
+      </ServerLocation>,
+    );
+  } catch (e) {
+    if (isRedirect(e)) {
+      ctx.redirect(e.uri);
+      return;
+    }
+    throw e;
   }
 
   ctx.status = 200;
