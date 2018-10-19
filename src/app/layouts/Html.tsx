@@ -26,6 +26,10 @@ export const Html = <Cache extends ApolloCache<any>>({
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700"
+      />
 
       {/* https://material-ui.com/customization/css-in-js/#css-injection-order */}
       <noscript id="jss-insertion-point" />

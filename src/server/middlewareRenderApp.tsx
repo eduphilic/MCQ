@@ -11,8 +11,8 @@ import { create, SheetsRegistry } from "jss";
 import { Context } from "koa";
 import fetch from "node-fetch";
 import React from "react";
-import { ApolloProvider, renderToStringWithData } from "react-apollo";
-import { renderToStaticMarkup } from "react-dom/server";
+import { ApolloProvider, getDataFromTree } from "react-apollo";
+import { renderToStaticMarkup, renderToString } from "react-dom/server";
 import JssProvider from "react-jss/lib/JssProvider";
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 import { App } from "../app";
@@ -33,6 +33,15 @@ export const middlewareRenderApp = async (ctx: Context) => {
     cache: new InMemoryCache(),
   });
 
+  const dataOnlyComponent = (
+    <ApolloProvider client={client}>
+      <ServerLocation url={ctx.url}>
+        <App />
+      </ServerLocation>
+    </ApolloProvider>
+  );
+  await getDataFromTree(dataOnlyComponent);
+
   // https://material-ui.com/guides/server-rendering/#handling-the-request
   const sheetsRegistry = new SheetsRegistry();
   const sheetsManager = new Map();
@@ -44,23 +53,18 @@ export const middlewareRenderApp = async (ctx: Context) => {
 
   const component = (
     <StyleSheetManager sheet={sheet.instance}>
-      <ApolloProvider client={client}>
-        <JssProvider
-          jss={jss}
-          registry={sheetsRegistry}
-          generateClassName={generateClassName}
-        >
-          <MuiThemeProvider theme={lightTheme} sheetsManager={sheetsManager}>
-            <ServerLocation url={ctx.url}>
-              <App />
-            </ServerLocation>
-          </MuiThemeProvider>
-        </JssProvider>
-      </ApolloProvider>
+      <JssProvider
+        jss={jss}
+        registry={sheetsRegistry}
+        generateClassName={generateClassName}
+      >
+        <MuiThemeProvider theme={lightTheme} sheetsManager={sheetsManager}>
+          {dataOnlyComponent}
+        </MuiThemeProvider>
+      </JssProvider>
     </StyleSheetManager>
   );
-
-  const content = await renderToStringWithData(component);
+  const content = renderToString(component);
 
   // https://www.styled-components.com/docs/advanced#example
   const styleElements = sheet.getStyleElement();

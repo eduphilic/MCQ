@@ -1,14 +1,14 @@
 import { Router } from "@reach/router";
-import React, { StrictMode } from "react";
+import React from "react";
 import { RootIndexPage } from "./pages";
-import { ThemeBaseline } from "./styled";
+import { LightTheme, ThemeBaseline } from "./styled";
 
 export const App = () => (
-  <StrictMode>
-    <ThemeBaseline>
+  <ThemeBaseline>
+    <LightTheme>
       <Router>
         <RootIndexPage path="/" />
       </Router>
-    </ThemeBaseline>
-  </StrictMode>
+    </LightTheme>
+  </ThemeBaseline>
 );
