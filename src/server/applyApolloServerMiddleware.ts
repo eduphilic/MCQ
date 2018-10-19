@@ -1,4 +1,5 @@
 import { ApolloServer, gql } from "apollo-server-koa";
+import { makeExecutableSchema } from "graphql-tools";
 
 const typeDefs = gql`
   type Query {
@@ -11,6 +12,8 @@ const resolvers = {
     hello: () => "Hello world!",
   },
 };
+
+export const schema = makeExecutableSchema({ typeDefs });
 
 const server = new ApolloServer({ typeDefs, resolvers });
 

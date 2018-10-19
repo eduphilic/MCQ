@@ -1,4 +1,4 @@
-import { Button } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import { RouteComponentProps } from "@reach/router";
 import gql from "graphql-tag";
 import React, { SFC } from "react";
