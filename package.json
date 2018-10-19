@@ -13,17 +13,23 @@
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
+    "apollo-boost": "^0.1.16",
+    "apollo-server-koa": "^2.1.0",
     "babel-runtime": "^6.26.0",
     "firebase-admin": "^6.0.0",
     "firebase-functions": "^2.0.5",
+    "graphql": "^14.0.2",
     "koa": "^2.5.3",
+    "node-fetch": "^2.2.0",
     "razzle": "^2.4.0",
     "react": "^16.5.2",
+    "react-apollo": "^2.2.4",
     "react-dom": "^16.5.2"
   },
   "devDependencies": {
     "@google-cloud/functions-emulator": "^1.0.0-beta.5",
     "@types/koa": "^2.0.46",
+    "@types/node-fetch": "^2.1.2",
     "@types/reach__router": "^1.2.0",
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",

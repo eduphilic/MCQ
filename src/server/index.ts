@@ -1,9 +1,11 @@
 import * as functions from "firebase-functions";
 import Koa from "koa";
-import { renderApp } from "./renderApp";
+import { middlewareRenderApp } from "./middlewareRenderApp";
+import { applyApolloServerMiddleware } from "./applyApolloServerMiddleware";
 
 const app = new Koa();
 
-app.use(renderApp);
+applyApolloServerMiddleware(app);
+app.use(middlewareRenderApp);
 
 export const main = functions.https.onRequest(app.callback());
