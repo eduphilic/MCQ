@@ -14,6 +14,8 @@ export type HtmlProps<Cache extends ApolloCache<any>> = {
   styledComponentsStyleElements: ReactElement<any>[];
 };
 
+const publicPath = "";
+
 export const Html = <Cache extends ApolloCache<any>>({
   content,
   cache,
@@ -44,6 +46,59 @@ export const Html = <Cache extends ApolloCache<any>>({
       {styledComponentsStyleElements}
 
       {assets.client.css && <link rel="stylesheet" href={assets.client.css} />}
+
+      {/* Google Analytics */}
+      {process.env.NODE_ENV === "production" && (
+        <>
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-117268366-1"
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+
+                gtag('config', 'UA-117268366-1');
+              `,
+            }}
+          />
+        </>
+      )}
+
+      {/* Manifest and Favicon */}
+      {/* prettier-ignore */}
+      <>
+        <link rel="apple-touch-icon" sizes="57x57" href={`${publicPath}/favicons/apple-icon-57x57.png`} />
+        <link rel="apple-touch-icon" sizes="60x60" href={`${publicPath}/favicons/apple-icon-60x60.png`} />
+        <link rel="apple-touch-icon" sizes="72x72" href={`${publicPath}/favicons/apple-icon-72x72.png`} />
+        <link rel="apple-touch-icon" sizes="76x76" href={`${publicPath}/favicons/apple-icon-76x76.png`} />
+        <link rel="apple-touch-icon" sizes="114x114" href={`${publicPath}/favicons/apple-icon-114x114.png`} />
+        <link rel="apple-touch-icon" sizes="120x120" href={`${publicPath}/favicons/apple-icon-120x120.png`} />
+        <link rel="apple-touch-icon" sizes="144x144" href={`${publicPath}/favicons/apple-icon-144x144.png`} />
+        <link rel="apple-touch-icon" sizes="152x152" href={`${publicPath}/favicons/apple-icon-152x152.png`} />
+        <link rel="apple-touch-icon" sizes="180x180" href={`${publicPath}/favicons/apple-icon-180x180.png`} />
+        <link rel="icon" type="image/png" sizes="192x192" href={`${publicPath}/favicons/android-icon-192x192.png`} />
+        <link rel="icon" type="image/png" sizes="32x32" href={`${publicPath}/favicons/favicon-32x32.png`} />
+        <link rel="icon" type="image/png" sizes="96x96" href={`${publicPath}/favicons/favicon-96x96.png`} />
+        <link rel="icon" type="image/png" sizes="16x16" href={`${publicPath}/favicons/favicon-16x16.png`} />
+        <link rel="shortcut icon" href={`${publicPath}/favicon.ico`} />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="msapplication-TileImage" content={`${publicPath}/favicons/ms-icon-144x144.png`} />
+        <meta name="theme-color" content="#ffffff" />
+        <link rel="manifest" href={`${publicPath}/manifest.json`} />
+      </>
+
+      {/* Keywords and Meta Tags */}
+      {/* prettier-ignore */}
+      <>
+        <meta name="description" content="Online mock tests for AFCAT, CDSE, NDA, Army, Airforce, Navy, Assam Rifles, Coast Guard, TA, BSF, ITBP, CRPF, SSB, CISF & RPF." />
+        <meta name="abstract" content="JoinUniform provides online mock-test for candidates preparing for Indian Defence Services." />
+        <meta name="Author" content="JoinUniform" />
+        <meta name="copyright" content="Eduphilic Consultancy Pvt Ltd." />
+      </>
     </head>
 
     <body>
