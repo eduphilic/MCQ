@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "build/public",
+    "rewrites": [{ "source": "**/**", "function": "main" }]
+  },
+  "functions": {
+    "source": "build-server",
+    "predeploy": "yarn build"
+  }
+}

@@ -6,10 +6,12 @@ node_modules/
 
 # Build assets
 build/
-/dist/
+build-server/
+/.firebase
 
 # Logs
 *error.log
+*debug.log
 
 # Microsoft Office
 ~$*.*
