@@ -12,6 +12,8 @@
     "firebase:login": "firebase login"
   },
   "dependencies": {
+    "@material-ui/core": "^3.2.2",
+    "@material-ui/icons": "^3.0.1",
     "@reach/router": "^1.2.1",
     "apollo-boost": "^0.1.16",
     "apollo-server-koa": "^2.1.0",
@@ -24,16 +26,22 @@
     "razzle": "^2.4.0",
     "react": "^16.5.2",
     "react-apollo": "^2.2.4",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "react-jss": "^8.6.1",
+    "styled-components": "^4.0.2"
   },
   "devDependencies": {
     "@google-cloud/functions-emulator": "^1.0.0-beta.5",
+    "@types/graphql": "^14.0.3",
     "@types/koa": "^2.0.46",
     "@types/node-fetch": "^2.1.2",
     "@types/reach__router": "^1.2.0",
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
+    "@types/react-jss": "^8.6.0",
+    "@types/styled-components": "^4.0.1",
     "@types/webpack-env": "^1.13.6",
+    "babel-plugin-styled-components": "^1.8.0",
     "firebase-tools": "^5.1.1",
     "prettier": "^1.14.3",
     "razzle-plugin-typescript": "^2.4.0",

@@ -1,7 +1,7 @@
 import * as functions from "firebase-functions";
 import Koa from "koa";
-import { middlewareRenderApp } from "./middlewareRenderApp";
 import { applyApolloServerMiddleware } from "./applyApolloServerMiddleware";
+import { middlewareRenderApp } from "./middlewareRenderApp";
 
 const app = new Koa();
 

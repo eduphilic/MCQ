@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import { RouteComponentProps } from "@reach/router";
 import gql from "graphql-tag";
 import React, { SFC } from "react";
@@ -6,6 +7,8 @@ import { Query } from "react-apollo";
 export const RootIndexPage: SFC<RouteComponentProps> = () => (
   <>
     <p>Root Index Page</p>
+    <Button>Test</Button>
+    <Button>Test</Button>
     <Hello />
   </>
 );

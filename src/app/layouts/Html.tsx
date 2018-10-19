@@ -1,5 +1,5 @@
 import { ApolloCache } from "apollo-cache";
-import React from "react";
+import React, { ReactElement } from "react";
 
 export type HtmlProps<Cache extends ApolloCache<any>> = {
   content: string;
@@ -10,18 +10,35 @@ export type HtmlProps<Cache extends ApolloCache<any>> = {
       css?: string;
     };
   };
+  materialUiCss: string;
+  styledComponentsStyleElements: ReactElement<any>[];
 };
 
 export const Html = <Cache extends ApolloCache<any>>({
   content,
   cache,
   assets,
+  materialUiCss,
+  styledComponentsStyleElements,
 }: HtmlProps<Cache>) => (
   <html lang="en">
     <head>
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      {/* https://material-ui.com/customization/css-in-js/#css-injection-order */}
+      <noscript id="jss-insertion-point" />
+
+      {/* https://material-ui.com/guides/server-rendering/#inject-initial-component-html-and-css */}
+      <style
+        id="jss-server-side"
+        dangerouslySetInnerHTML={{ __html: materialUiCss }}
+      />
+
+      {/* https://www.styled-components.com/docs/advanced#example */}
+      {styledComponentsStyleElements}
+
       {assets.client.css && <link rel="stylesheet" href={assets.client.css} />}
     </head>
 
