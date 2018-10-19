@@ -13,10 +13,10 @@ module.exports = {
           tsconfig: "./tsconfig.json",
           tslint: "./tslint.json",
           watch: "./src",
-          typeCheck: true
-        }
-      }
-    }
+          typeCheck: true,
+        },
+      },
+    },
   ],
   modify(config, { target, dev }) {
     if (target === "node") {
@@ -27,12 +27,12 @@ module.exports = {
       config.plugins.push(new CustomPostBuildPlugin());
 
       config.plugins = config.plugins.filter(
-        c => !/StartServerPlugin/.test(c.constructor)
+        c => !/StartServerPlugin/.test(c.constructor),
       );
     }
 
     return config;
-  }
+  },
 };
 
 class CustomPostBuildPlugin {
@@ -49,12 +49,12 @@ class CustomPostBuildPlugin {
             private: true,
             name: "functions",
             version: "1.0.0",
-            dependencies: pkg.dependencies
+            dependencies: pkg.dependencies,
           },
           null,
-          2
+          2,
         ),
-        "utf8"
+        "utf8",
       );
     });
   }
