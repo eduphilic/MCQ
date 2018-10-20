@@ -78,7 +78,11 @@ export const middlewareRenderApp = async (ctx: Context) => {
       content={content}
       assets={assets}
       cache={client.cache}
-      materialUiCss={sheetsRegistry.toString()}
+      materialUiCss={sheetsRegistry
+        .toString()
+        .split("\n")
+        .map(l => l.trim())
+        .join("")}
       styledComponentsStyleElements={styleElements}
     />
   );

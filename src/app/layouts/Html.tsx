@@ -16,6 +16,15 @@ export type HtmlProps<Cache extends ApolloCache<any>> = {
 
 const publicPath = "";
 
+const googleAnalyticsScriptContents = `
+window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
+gtag('js', new Date());
+gtag('config', 'UA-117268366-1');
+`
+  .split("\n")
+  .join("");
+
 export const Html = <Cache extends ApolloCache<any>>({
   content,
   cache,
@@ -56,13 +65,7 @@ export const Html = <Cache extends ApolloCache<any>>({
           />
           <script
             dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag() { dataLayer.push(arguments); }
-                gtag('js', new Date());
-
-                gtag('config', 'UA-117268366-1');
-              `,
+              __html: googleAnalyticsScriptContents,
             }}
           />
         </>
