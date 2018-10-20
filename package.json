@@ -1,6 +1,23 @@
 {
   "private": true,
   "name": "join-uniform",
+  "jest": {
+    "transform": {
+      "^.+\\.[tj]sx?$": "ts-jest"
+    },
+    "testMatch": [
+      "**/__tests__/**/*.ts?(x)",
+      "**/?(*.)+(spec|test).ts?(x)"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx",
+      "node",
+      "ts",
+      "tsx"
+    ]
+  },
   "scripts": {
     "start": "rimraf build build-server && razzle start",
     "build": "rimraf build build-server && razzle build",
@@ -41,6 +58,7 @@
   "devDependencies": {
     "@google-cloud/functions-emulator": "^1.0.0-beta.5",
     "@types/graphql": "^14.0.3",
+    "@types/jest": "^23.3.5",
     "@types/koa": "^2.0.46",
     "@types/koa-static": "^4.0.0",
     "@types/node-fetch": "^2.1.2",
@@ -58,6 +76,7 @@
     "prettier": "^1.14.3",
     "razzle-plugin-typescript": "^2.4.0",
     "rimraf": "^2.6.2",
+    "ts-jest": "^23.10.4",
     "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
