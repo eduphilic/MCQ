@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const rimraf = require("rimraf");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 
 module.exports = {
   plugins: [
@@ -30,6 +32,13 @@ module.exports = {
         c => !/StartServerPlugin/.test(c.constructor),
       );
     }
+
+    if (target === "web" && process.env.ANALYZE) {
+      config.plugins.push(new BundleAnalyzerPlugin());
+    }
+
+    config.performance = config.performance || {};
+    config.performance.hints = false;
 
     return config;
   },
