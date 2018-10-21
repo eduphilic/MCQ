@@ -14,6 +14,7 @@ export type HtmlProps<Cache extends ApolloCache<any>> = {
   styledComponentsStyleElements: ReactElement<any>[];
 
   googleAnalyticsId?: string;
+  metaKeywords?: string;
   metaDescription?: string;
   metaAuthor?: string;
   metaAbstract?: string;
@@ -38,6 +39,7 @@ export const Html = <Cache extends ApolloCache<any>>({
   styledComponentsStyleElements,
 
   googleAnalyticsId,
+  metaKeywords,
   metaDescription,
   metaAuthor,
   metaAbstract,
@@ -107,6 +109,7 @@ export const Html = <Cache extends ApolloCache<any>>({
       </>
 
       {/* Keywords and Meta Tags */}
+      {metaKeywords && <meta name="keywords" content={metaKeywords} />}
       {metaDescription && <meta name="description" content={metaDescription} />}
       {metaAuthor && <meta name="author" content={metaAuthor} />}
       {metaAbstract && <meta name="abstract" content={metaAbstract} />}

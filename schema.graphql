@@ -5,6 +5,7 @@ type Query {
 
 type HtmlConfig {
   googleAnalyticsId: String
+  metaKeywords: String
   metaDescription: String
   metaAuthor: String
   metaAbstract: String

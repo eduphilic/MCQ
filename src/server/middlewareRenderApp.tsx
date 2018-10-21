@@ -16,7 +16,6 @@ import { lightTheme } from "../app/styled/themes";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient } from "apollo-client";
 import { SchemaLink } from "apollo-link-schema";
-import gql from "graphql-tag";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { getContext, getSchema } from "../graphql";
 
@@ -27,27 +26,17 @@ const assets: { client: { js: string; css?: string } } = require(process.env
   .RAZZLE_ASSETS_MANIFEST!);
 
 export const middlewareRenderApp = async (ctx: Context) => {
+  const schema = getSchema();
+  const context = getContext();
   const client = new ApolloClient({
     ssrMode: true,
-    link: new SchemaLink({ schema: getSchema(), context: getContext() }),
+    link: new SchemaLink({ schema, context }),
     cache: new InMemoryCache(),
   });
 
-  const {
-    data: { htmlConfig },
-  } = await client.query<{ htmlConfig: HtmlConfig }>({
-    query: gql`
-      {
-        htmlConfig {
-          googleAnalyticsId
-          metaDescription
-          metaAuthor
-          metaAbstract
-          metaCopyright
-        }
-      }
-    `,
-  });
+  const htmlConfig = await context.firebaseRemoteConfigClient.getFieldsByPrefix<
+    HtmlConfig
+  >("html");
 
   const dataOnlyComponent = (
     <ApolloProvider client={client}>
@@ -97,6 +86,7 @@ export const middlewareRenderApp = async (ctx: Context) => {
         .join("")}
       styledComponentsStyleElements={styleElements}
       googleAnalyticsId={htmlConfig.googleAnalyticsId}
+      metaKeywords={htmlConfig.metaKeywords}
       metaDescription={htmlConfig.metaDescription}
       metaAuthor={htmlConfig.metaAuthor}
       metaAbstract={htmlConfig.metaAbstract}

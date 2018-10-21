@@ -43,6 +43,8 @@ export namespace HtmlConfigResolvers {
   export const defaultResolvers = {
     googleAnalyticsId: (parent: HtmlConfig) =>
       parent.googleAnalyticsId === undefined ? null : parent.googleAnalyticsId,
+    metaKeywords: (parent: HtmlConfig) =>
+      parent.metaKeywords === undefined ? null : parent.metaKeywords,
     metaDescription: (parent: HtmlConfig) =>
       parent.metaDescription === undefined ? null : parent.metaDescription,
     metaAuthor: (parent: HtmlConfig) =>
@@ -54,6 +56,13 @@ export namespace HtmlConfigResolvers {
   };
 
   export type GoogleanalyticsidResolver = (
+    parent: HtmlConfig,
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo,
+  ) => string | null | Promise<string | null>;
+
+  export type MetakeywordsResolver = (
     parent: HtmlConfig,
     args: {},
     ctx: Context,
@@ -90,6 +99,13 @@ export namespace HtmlConfigResolvers {
 
   export interface Type {
     googleAnalyticsId: (
+      parent: HtmlConfig,
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo,
+    ) => string | null | Promise<string | null>;
+
+    metaKeywords: (
       parent: HtmlConfig,
       args: {},
       ctx: Context,
