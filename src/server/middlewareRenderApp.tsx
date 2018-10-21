@@ -10,8 +10,8 @@ import { renderToStaticMarkup, renderToString } from "react-dom/server";
 import JssProvider from "react-jss/lib/JssProvider";
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 import { App } from "../app";
-import { Html } from "../app/layouts";
-import { lightTheme } from "../app/styled/themes";
+import { Html } from "../layouts";
+import { lightTheme } from "../styled/themes";
 
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient } from "apollo-client";
