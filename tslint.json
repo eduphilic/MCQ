@@ -10,6 +10,6 @@
     "prettier": true
   },
   "linterOptions": {
-    "exclude": ["src/graphql/generated/**/*"]
+    "exclude": ["src/store-*/generated/**/*"]
   }
 }

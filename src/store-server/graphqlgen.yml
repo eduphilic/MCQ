@@ -1,0 +1,13 @@
+language: typescript
+
+schema: ../../schema-server.graphql
+context: ./Context.ts:Context
+models:
+  HtmlConfig: ../models/HtmlConfig.ts:HtmlConfig
+  LocalizedString: ../models/LocalizedString.ts:LocalizedString
+
+output: ./generated/index.ts
+
+resolver-scaffolding:
+  output: ./generated/tmp-resolvers/
+  layout: file-per-type

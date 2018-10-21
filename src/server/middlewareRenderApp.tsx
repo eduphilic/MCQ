@@ -17,7 +17,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient } from "apollo-client";
 import { SchemaLink } from "apollo-link-schema";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
-import { getContext, getSchema } from "../graphql";
+import { getContext, getSchema } from "../store-server";
 
 import { Context } from "koa";
 import { HtmlConfig } from "../models";

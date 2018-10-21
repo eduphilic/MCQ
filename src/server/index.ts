@@ -1,7 +1,7 @@
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 import Koa from "koa";
-import { createServer } from "../graphql";
+import { createServer } from "../store-server";
 import { middlewareRenderApp } from "./middlewareRenderApp";
 
 const firebaseApp = admin.initializeApp();

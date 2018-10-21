@@ -73,8 +73,8 @@ class CustomPostBuildPlugin {
       );
 
       fs.copyFileSync(
-        path.resolve(__dirname, "schema.graphql"),
-        path.resolve(__dirname, "build-server/schema.graphql"),
+        path.resolve(__dirname, "schema-server.graphql"),
+        path.resolve(__dirname, "build-server/schema-server.graphql"),
       );
     });
   }
