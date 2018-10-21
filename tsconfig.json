@@ -13,7 +13,10 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "tools/**/*"],
+  "exclude": ["node_modules", "src/graphql/generated/tmp-resolvers/**/*"]
 }

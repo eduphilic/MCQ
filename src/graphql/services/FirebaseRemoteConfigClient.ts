@@ -1,6 +1,6 @@
 import { google } from "googleapis";
 import fetch from "node-fetch";
-import { IFirebaseRemoteConfigTemplate } from "../models/IFirebaseRemoteConfigTemplate";
+import { FirebaseRemoteConfigTemplate } from "../../models";
 
 // Firebase Admin SDK Service Account
 const key = {
@@ -23,7 +23,7 @@ const key = {
  * Returns the Firebase Remote Config template.
  */
 export class FirebaseRemoteConfigClient {
-  private configTemplate: IFirebaseRemoteConfigTemplate | null = null;
+  private configTemplate: FirebaseRemoteConfigTemplate | null = null;
   private expireTime = 0;
 
   constructor(private projectId: string) {
@@ -54,27 +54,25 @@ export class FirebaseRemoteConfigClient {
     );
 
     const responseJson: {
-      parameters: {
-        [key in keyof IFirebaseRemoteConfigTemplate]?: {
-          defaultValue?: { value?: IFirebaseRemoteConfigTemplate[key] };
-        }
-      };
+      parameters: Record<string, { defaultValue?: { value?: any } }>;
     } = await response.json();
 
     this.configTemplate = Object.keys(responseJson.parameters).reduce(
       (accumulator, key) => {
-        // prettier-ignore
         if (
-          responseJson.parameters[key as keyof IFirebaseRemoteConfigTemplate] &&
-          responseJson.parameters[key as keyof IFirebaseRemoteConfigTemplate]!.defaultValue &&
-          responseJson.parameters[key as keyof IFirebaseRemoteConfigTemplate]!.defaultValue!.value !== undefined
+          responseJson.parameters[key] &&
+          responseJson.parameters[key].defaultValue &&
+          responseJson.parameters[key].defaultValue!.value !== undefined
         ) {
-          accumulator[key as keyof IFirebaseRemoteConfigTemplate] = responseJson.parameters[key as keyof IFirebaseRemoteConfigTemplate]!.defaultValue!.value!;
+          accumulator[snakeToCamel(key)] = responseJson.parameters[
+            key
+          ].defaultValue!.value;
         }
         return accumulator;
       },
-      {} as IFirebaseRemoteConfigTemplate,
+      {} as { [k: string]: any },
     );
+
     this.expireTime = currentTime + 3600 * 1000;
 
     return this.configTemplate;
@@ -99,4 +97,13 @@ export class FirebaseRemoteConfigClient {
       });
     });
   }
+}
+
+function snakeToCamel(snakeCaseString: string) {
+  const find = /(\_\w)/g;
+  const convert = function(matches: string) {
+    return matches[1].toUpperCase();
+  };
+  const camelCaseString = snakeCaseString.replace(find, convert);
+  return camelCaseString;
 }

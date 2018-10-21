@@ -21,6 +21,12 @@ module.exports = {
     },
   ],
   modify(config, { target, dev }) {
+    config.module.rules.push({
+      test: /\.(graphql|gql)$/,
+      exclude: /node_modules/,
+      loader: "graphql-tag/loader",
+    });
+
     if (target === "node") {
       config.entry = path.resolve(__dirname, "./src/server");
       config.output.filename = "index.js";
@@ -64,6 +70,11 @@ class CustomPostBuildPlugin {
           2,
         ),
         "utf8",
+      );
+
+      fs.copyFileSync(
+        path.resolve(__dirname, "schema.graphql"),
+        path.resolve(__dirname, "build-server/schema.graphql"),
       );
     });
   }

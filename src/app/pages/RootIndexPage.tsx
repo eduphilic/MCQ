@@ -17,7 +17,9 @@ const Hello = () => (
   <Query<{ hello: string }>
     query={gql`
       {
-        hello
+        firebaseRemoteConfigTemplate {
+          htmlGoogleAnalyticsId
+        }
       }
     `}
   >

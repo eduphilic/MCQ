@@ -1,0 +1,7 @@
+type Query {
+  firebaseRemoteConfigTemplate: FirebaseRemoteConfigTemplate!
+}
+
+type FirebaseRemoteConfigTemplate {
+  htmlGoogleAnalyticsId: String
+}

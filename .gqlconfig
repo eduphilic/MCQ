@@ -1,0 +1,13 @@
+{
+  schema: {
+    files: "*.graphql"
+  },
+  query: {
+    files: [
+      {
+        match: { include: 'src/**/*.t*' },
+        parser: [ 'EmbeddedQueryParser', { startTag: 'gql`', endTag: '`' } ]
+      }
+    ]
+  }
+}

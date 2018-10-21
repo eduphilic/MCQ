@@ -8,6 +8,7 @@ node_modules/
 build/
 build-server/
 /.firebase
+src/graphql/generated/tmp-resolvers
 
 # Logs
 *error.log

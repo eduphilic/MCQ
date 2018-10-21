@@ -27,7 +27,8 @@
     "analyze": "cross-env ANALYZE=1 yarn build",
     "firebase:start": "firebase serve",
     "firebase:deploy": "firebase deploy",
-    "firebase:login": "firebase login"
+    "firebase:login": "firebase login",
+    "graphql:generate": "ts-node --project tools/tsconfig.json tools/graphqlgen.ts"
   },
   "dependencies": {
     "@material-ui/core": "^3.2.2",
@@ -58,6 +59,7 @@
   },
   "devDependencies": {
     "@google-cloud/functions-emulator": "^1.0.0-beta.5",
+    "@playlyfe/gql": "^2.6.0",
     "@types/graphql": "^14.0.3",
     "@types/jest": "^23.3.5",
     "@types/koa": "^2.0.46",
@@ -73,11 +75,13 @@
     "babel-plugin-styled-components": "^1.8.0",
     "cross-env": "^5.2.0",
     "firebase-tools": "^5.1.1",
+    "graphqlgen": "^0.2.2",
     "koa-static": "^5.0.0",
     "prettier": "^1.14.3",
     "razzle-plugin-typescript": "^2.4.0",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.10.4",
+    "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",

@@ -4,23 +4,22 @@ import {
   MuiThemeProvider,
 } from "@material-ui/core/styles";
 import { isRedirect, ServerLocation } from "@reach/router";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { ApolloClient } from "apollo-client";
-import { SchemaLink } from "apollo-link-schema";
 import { create, SheetsRegistry } from "jss";
-import { Context } from "koa";
 import React from "react";
-import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { renderToStaticMarkup, renderToString } from "react-dom/server";
 import JssProvider from "react-jss/lib/JssProvider";
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 import { App } from "../app";
 import { Html } from "../app/layouts";
 import { lightTheme } from "../app/styled/themes";
-import { schema } from "./applyApolloServerMiddleware";
 
-// import { createHttpLink } from "apollo-link-http";
-// import fetch from "node-fetch";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloClient } from "apollo-client";
+import { SchemaLink } from "apollo-link-schema";
+import { ApolloProvider, getDataFromTree } from "react-apollo";
+import { getContext, getSchema } from "../graphql";
+
+import { Context } from "koa";
 
 const assets: { client: { js: string; css?: string } } = require(process.env
   .RAZZLE_ASSETS_MANIFEST!);
@@ -28,12 +27,7 @@ const assets: { client: { js: string; css?: string } } = require(process.env
 export const middlewareRenderApp = async (ctx: Context) => {
   const client = new ApolloClient({
     ssrMode: true,
-    // link: createHttpLink({
-    //   uri: "http://localhost:5000/graphql",
-    //   credentials: "same-origin",
-    //   fetch: fetch as any,
-    // }),
-    link: new SchemaLink({ schema }),
+    link: new SchemaLink({ schema: getSchema(), context: getContext() }),
     cache: new InMemoryCache(),
   });
 

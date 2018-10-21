@@ -1,0 +1,12 @@
+language: typescript
+
+schema: ./schema.graphql
+context: ./src/graphql/Context.ts:Context
+models:
+  FirebaseRemoteConfigTemplate: ./src/models/FirebaseRemoteConfigTemplate.ts:FirebaseRemoteConfigTemplate
+
+output: ./src/graphql/generated/index.ts
+
+resolver-scaffolding:
+  output: ./src/graphql/generated/tmp-resolvers/
+  layout: file-per-type
