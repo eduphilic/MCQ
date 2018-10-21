@@ -3,7 +3,8 @@ language: typescript
 schema: ./schema.graphql
 context: ./src/graphql/Context.ts:Context
 models:
-  FirebaseRemoteConfigTemplate: ./src/models/FirebaseRemoteConfigTemplate.ts:FirebaseRemoteConfigTemplate
+  HtmlConfig: ./src/models/HtmlConfig.ts:HtmlConfig
+  LocalizedString: ./src/models/LocalizedString.ts:LocalizedString
 
 output: ./src/graphql/generated/index.ts
 

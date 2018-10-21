@@ -2,112 +2,176 @@
 
 import { GraphQLResolveInfo } from "graphql";
 import { Context } from "../Context";
-import { FirebaseRemoteConfigTemplate } from "../../models/FirebaseRemoteConfigTemplate";
+import { HtmlConfig } from "../../models/HtmlConfig";
+import { LocalizedString } from "../../models/LocalizedString";
 
 export namespace QueryResolvers {
   export const defaultResolvers = {};
 
-  export type FirebaseremoteconfigtemplateResolver = (
+  export type HtmlconfigResolver = (
     parent: {},
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
-  ) => FirebaseRemoteConfigTemplate | Promise<FirebaseRemoteConfigTemplate>;
+  ) => HtmlConfig | Promise<HtmlConfig>;
+
+  export type LanguageResolver = (
+    parent: {},
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo,
+  ) => LocalizedString[] | Promise<LocalizedString[]>;
 
   export interface Type {
-    firebaseRemoteConfigTemplate: (
+    htmlConfig: (
       parent: {},
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
-    ) => FirebaseRemoteConfigTemplate | Promise<FirebaseRemoteConfigTemplate>;
+    ) => HtmlConfig | Promise<HtmlConfig>;
+
+    language: (
+      parent: {},
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo,
+    ) => LocalizedString[] | Promise<LocalizedString[]>;
   }
 }
 
-export namespace FirebaseRemoteConfigTemplateResolvers {
+export namespace HtmlConfigResolvers {
   export const defaultResolvers = {
-    htmlGoogleAnalyticsId: (parent: FirebaseRemoteConfigTemplate) =>
-      parent.htmlGoogleAnalyticsId === undefined
-        ? null
-        : parent.htmlGoogleAnalyticsId,
-    htmlMetaDescription: (parent: FirebaseRemoteConfigTemplate) =>
-      parent.htmlMetaDescription === undefined
-        ? null
-        : parent.htmlMetaDescription,
-    htmlMetaAuthor: (parent: FirebaseRemoteConfigTemplate) =>
-      parent.htmlMetaAuthor === undefined ? null : parent.htmlMetaAuthor,
-    htmlMetaAbstract: (parent: FirebaseRemoteConfigTemplate) =>
-      parent.htmlMetaAbstract === undefined ? null : parent.htmlMetaAbstract,
-    htmlMetaCopyright: (parent: FirebaseRemoteConfigTemplate) =>
-      parent.htmlMetaCopyright === undefined ? null : parent.htmlMetaCopyright,
+    googleAnalyticsId: (parent: HtmlConfig) =>
+      parent.googleAnalyticsId === undefined ? null : parent.googleAnalyticsId,
+    metaDescription: (parent: HtmlConfig) =>
+      parent.metaDescription === undefined ? null : parent.metaDescription,
+    metaAuthor: (parent: HtmlConfig) =>
+      parent.metaAuthor === undefined ? null : parent.metaAuthor,
+    metaAbstract: (parent: HtmlConfig) =>
+      parent.metaAbstract === undefined ? null : parent.metaAbstract,
+    metaCopyright: (parent: HtmlConfig) =>
+      parent.metaCopyright === undefined ? null : parent.metaCopyright,
   };
 
-  export type HtmlgoogleanalyticsidResolver = (
-    parent: FirebaseRemoteConfigTemplate,
+  export type GoogleanalyticsidResolver = (
+    parent: HtmlConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
   ) => string | null | Promise<string | null>;
 
-  export type HtmlmetadescriptionResolver = (
-    parent: FirebaseRemoteConfigTemplate,
+  export type MetadescriptionResolver = (
+    parent: HtmlConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
   ) => string | null | Promise<string | null>;
 
-  export type HtmlmetaauthorResolver = (
-    parent: FirebaseRemoteConfigTemplate,
+  export type MetaauthorResolver = (
+    parent: HtmlConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
   ) => string | null | Promise<string | null>;
 
-  export type HtmlmetaabstractResolver = (
-    parent: FirebaseRemoteConfigTemplate,
+  export type MetaabstractResolver = (
+    parent: HtmlConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
   ) => string | null | Promise<string | null>;
 
-  export type HtmlmetacopyrightResolver = (
-    parent: FirebaseRemoteConfigTemplate,
+  export type MetacopyrightResolver = (
+    parent: HtmlConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
   ) => string | null | Promise<string | null>;
 
   export interface Type {
-    htmlGoogleAnalyticsId: (
-      parent: FirebaseRemoteConfigTemplate,
+    googleAnalyticsId: (
+      parent: HtmlConfig,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => string | null | Promise<string | null>;
 
-    htmlMetaDescription: (
-      parent: FirebaseRemoteConfigTemplate,
+    metaDescription: (
+      parent: HtmlConfig,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => string | null | Promise<string | null>;
 
-    htmlMetaAuthor: (
-      parent: FirebaseRemoteConfigTemplate,
+    metaAuthor: (
+      parent: HtmlConfig,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => string | null | Promise<string | null>;
 
-    htmlMetaAbstract: (
-      parent: FirebaseRemoteConfigTemplate,
+    metaAbstract: (
+      parent: HtmlConfig,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => string | null | Promise<string | null>;
 
-    htmlMetaCopyright: (
-      parent: FirebaseRemoteConfigTemplate,
+    metaCopyright: (
+      parent: HtmlConfig,
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo,
+    ) => string | null | Promise<string | null>;
+  }
+}
+
+export namespace LocalizedStringResolvers {
+  export const defaultResolvers = {
+    key: (parent: LocalizedString) => parent.key,
+    en: (parent: LocalizedString) => parent.en,
+    hi: (parent: LocalizedString) =>
+      parent.hi === undefined ? null : parent.hi,
+  };
+
+  export type KeyResolver = (
+    parent: LocalizedString,
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo,
+  ) => string | Promise<string>;
+
+  export type EnResolver = (
+    parent: LocalizedString,
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo,
+  ) => string | Promise<string>;
+
+  export type HiResolver = (
+    parent: LocalizedString,
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo,
+  ) => string | null | Promise<string | null>;
+
+  export interface Type {
+    key: (
+      parent: LocalizedString,
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo,
+    ) => string | Promise<string>;
+
+    en: (
+      parent: LocalizedString,
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo,
+    ) => string | Promise<string>;
+
+    hi: (
+      parent: LocalizedString,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
@@ -117,5 +181,6 @@ export namespace FirebaseRemoteConfigTemplateResolvers {
 
 export interface Resolvers {
   Query: QueryResolvers.Type;
-  FirebaseRemoteConfigTemplate: FirebaseRemoteConfigTemplateResolvers.Type;
+  HtmlConfig: HtmlConfigResolvers.Type;
+  LocalizedString: LocalizedStringResolvers.Type;
 }

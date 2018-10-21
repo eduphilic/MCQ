@@ -1,6 +1,5 @@
 import { google } from "googleapis";
 import fetch from "node-fetch";
-import { FirebaseRemoteConfigTemplate } from "../../models";
 
 // Firebase Admin SDK Service Account
 const key = {
@@ -23,14 +22,30 @@ const key = {
  * Returns the Firebase Remote Config template.
  */
 export class FirebaseRemoteConfigClient {
-  private configTemplate: FirebaseRemoteConfigTemplate | null = null;
+  private configTemplate: Record<string, any> | null = null;
   private expireTime = 0;
 
   constructor(private projectId: string) {
-    this.getConfigTemplate = this.getConfigTemplate.bind(this);
+    this.getFieldsByPrefix = this.getFieldsByPrefix.bind(this);
   }
 
-  async getConfigTemplate() {
+  async getFieldsByPrefix<T>(prefix: string): Promise<T> {
+    const template = await this.getConfigTemplate();
+    const filteredTemplate: Record<string, any> = {};
+
+    Object.keys(template)
+      .filter(key => key.startsWith(prefix))
+      .forEach(key => {
+        let keyWithoutPrefix = key.replace(new RegExp(`^${prefix}`), "");
+        // prettier-ignore
+        keyWithoutPrefix = `${keyWithoutPrefix.charAt(0).toLowerCase()}${keyWithoutPrefix.slice(1)}`;
+        filteredTemplate[keyWithoutPrefix] = template[key];
+      });
+
+    return filteredTemplate as T;
+  }
+
+  private async getConfigTemplate() {
     const currentTime = new Date().getTime();
 
     if (currentTime > this.expireTime) {

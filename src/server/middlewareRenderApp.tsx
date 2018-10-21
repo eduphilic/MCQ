@@ -21,7 +21,7 @@ import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { getContext, getSchema } from "../graphql";
 
 import { Context } from "koa";
-import { FirebaseRemoteConfigTemplate } from "../models";
+import { HtmlConfig } from "../models";
 
 const assets: { client: { js: string; css?: string } } = require(process.env
   .RAZZLE_ASSETS_MANIFEST!);
@@ -34,25 +34,16 @@ export const middlewareRenderApp = async (ctx: Context) => {
   });
 
   const {
-    data: { firebaseRemoteConfigTemplate: pageConfig },
-  } = await client.query<{
-    firebaseRemoteConfigTemplate: Pick<
-      FirebaseRemoteConfigTemplate,
-      | "htmlGoogleAnalyticsId"
-      | "htmlMetaDescription"
-      | "htmlMetaAuthor"
-      | "htmlMetaAbstract"
-      | "htmlMetaCopyright"
-    >;
-  }>({
+    data: { htmlConfig },
+  } = await client.query<{ htmlConfig: HtmlConfig }>({
     query: gql`
       {
-        firebaseRemoteConfigTemplate {
-          htmlGoogleAnalyticsId
-          htmlMetaDescription
-          htmlMetaAuthor
-          htmlMetaAbstract
-          htmlMetaCopyright
+        htmlConfig {
+          googleAnalyticsId
+          metaDescription
+          metaAuthor
+          metaAbstract
+          metaCopyright
         }
       }
     `,
@@ -105,11 +96,11 @@ export const middlewareRenderApp = async (ctx: Context) => {
         .map(l => l.trim())
         .join("")}
       styledComponentsStyleElements={styleElements}
-      googleAnalyticsId={pageConfig.htmlGoogleAnalyticsId}
-      metaDescription={pageConfig.htmlMetaDescription}
-      metaAuthor={pageConfig.htmlMetaAuthor}
-      metaAbstract={pageConfig.htmlMetaAbstract}
-      metaCopyright={pageConfig.htmlMetaCopyright}
+      googleAnalyticsId={htmlConfig.googleAnalyticsId}
+      metaDescription={htmlConfig.metaDescription}
+      metaAuthor={htmlConfig.metaAuthor}
+      metaAbstract={htmlConfig.metaAbstract}
+      metaCopyright={htmlConfig.metaCopyright}
     />
   );
 

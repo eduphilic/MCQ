@@ -1,11 +1,18 @@
 type Query {
-  firebaseRemoteConfigTemplate: FirebaseRemoteConfigTemplate!
+  htmlConfig: HtmlConfig!
+  language: [LocalizedString!]!
 }
 
-type FirebaseRemoteConfigTemplate {
-  htmlGoogleAnalyticsId: String
-  htmlMetaDescription: String
-  htmlMetaAuthor: String
-  htmlMetaAbstract: String
-  htmlMetaCopyright: String
+type HtmlConfig {
+  googleAnalyticsId: String
+  metaDescription: String
+  metaAuthor: String
+  metaAbstract: String
+  metaCopyright: String
+}
+
+type LocalizedString {
+  key: String!
+  en: String!
+  hi: String
 }
