@@ -1,4 +1,5 @@
 import { ApolloCache } from "apollo-cache";
+import lzString from "lz-string";
 import React, { ReactElement } from "react";
 
 export type HtmlProps<Cache extends ApolloCache<any>> = {
@@ -121,7 +122,9 @@ export const Html = <Cache extends ApolloCache<any>>({
       <script
         charSet="UTF-8"
         dangerouslySetInnerHTML={{
-          __html: `window.__APOLLO_STATE__=${JSON.stringify(cache.extract())}`,
+          __html: `window.__STATE__=${JSON.stringify(
+            lzString.compressToUTF16(JSON.stringify(cache.extract())),
+          )}`,
         }}
       />
       <script

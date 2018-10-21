@@ -1,15 +1,18 @@
 import { createGenerateClassName, jssPreset } from "@material-ui/core/styles";
 import ApolloClient, { InMemoryCache } from "apollo-boost";
 import { create } from "jss";
+import lzString from "lz-string";
 import React, { Component } from "react";
 import { ApolloProvider } from "react-apollo";
 import { hydrate } from "react-dom";
 import JssProvider from "react-jss/lib/JssProvider";
 import { App } from "../app";
 
+const initialState = JSON.parse(lzString.decompressFromUTF16(window.__STATE__));
+
 const client = new ApolloClient({
   uri: "/graphql",
-  cache: new InMemoryCache().restore(window.__APOLLO_STATE__),
+  cache: new InMemoryCache().restore(initialState),
 });
 
 // https://material-ui.com/customization/css-in-js/#other-html-element
@@ -48,6 +51,6 @@ if (module.hot) {
 
 declare global {
   interface Window {
-    __APOLLO_STATE__: any;
+    __STATE__: string;
   }
 }
