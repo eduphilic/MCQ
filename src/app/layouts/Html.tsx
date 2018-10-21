@@ -12,18 +12,23 @@ export type HtmlProps<Cache extends ApolloCache<any>> = {
   };
   materialUiCss: string;
   styledComponentsStyleElements: ReactElement<any>[];
+
+  googleAnalyticsId?: string;
+  metaDescription?: string;
+  metaAuthor?: string;
+  metaAbstract?: string;
+  metaCopyright?: string;
 };
 
 const publicPath = "";
 
-const googleAnalyticsScriptContents = `
-window.dataLayer = window.dataLayer || [];
+const googleAnalyticsScriptContents = (googleAnalyticsId: string) =>
+  `window.dataLayer = window.dataLayer || [];
 function gtag() { dataLayer.push(arguments); }
 gtag('js', new Date());
-gtag('config', 'UA-117268366-1');
-`
-  .split("\n")
-  .join("");
+gtag('config', '${googleAnalyticsId}');`
+    .split("\n")
+    .join("");
 
 export const Html = <Cache extends ApolloCache<any>>({
   content,
@@ -31,6 +36,12 @@ export const Html = <Cache extends ApolloCache<any>>({
   assets,
   materialUiCss,
   styledComponentsStyleElements,
+
+  googleAnalyticsId,
+  metaDescription,
+  metaAuthor,
+  metaAbstract,
+  metaCopyright,
 }: HtmlProps<Cache>) => (
   <html lang="en">
     <head>
@@ -57,19 +68,20 @@ export const Html = <Cache extends ApolloCache<any>>({
       {assets.client.css && <link rel="stylesheet" href={assets.client.css} />}
 
       {/* Google Analytics */}
-      {process.env.NODE_ENV === "production" && (
-        <>
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-117268366-1"
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: googleAnalyticsScriptContents,
-            }}
-          />
-        </>
-      )}
+      {process.env.NODE_ENV === "production" &&
+        googleAnalyticsId && (
+          <>
+            <script
+              async
+              src="https://www.googletagmanager.com/gtag/js?id=UA-117268366-1"
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: googleAnalyticsScriptContents(googleAnalyticsId),
+              }}
+            />
+          </>
+        )}
 
       {/* Manifest and Favicon */}
       {/* prettier-ignore */}
@@ -95,13 +107,10 @@ export const Html = <Cache extends ApolloCache<any>>({
       </>
 
       {/* Keywords and Meta Tags */}
-      {/* prettier-ignore */}
-      <>
-        <meta name="description" content="Online mock tests for AFCAT, CDSE, NDA, Army, Airforce, Navy, Assam Rifles, Coast Guard, TA, BSF, ITBP, CRPF, SSB, CISF & RPF." />
-        <meta name="abstract" content="JoinUniform provides online mock-test for candidates preparing for Indian Defence Services." />
-        <meta name="Author" content="JoinUniform" />
-        <meta name="copyright" content="Eduphilic Consultancy Pvt Ltd." />
-      </>
+      {metaDescription && <meta name="description" content={metaDescription} />}
+      {metaAuthor && <meta name="author" content={metaAuthor} />}
+      {metaAbstract && <meta name="abstract" content={metaAbstract} />}
+      {metaCopyright && <meta name="copyright" content={metaCopyright} />}
     </head>
 
     <body>

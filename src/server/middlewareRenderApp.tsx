@@ -16,10 +16,12 @@ import { lightTheme } from "../app/styled/themes";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient } from "apollo-client";
 import { SchemaLink } from "apollo-link-schema";
+import gql from "graphql-tag";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { getContext, getSchema } from "../graphql";
 
 import { Context } from "koa";
+import { FirebaseRemoteConfigTemplate } from "../models";
 
 const assets: { client: { js: string; css?: string } } = require(process.env
   .RAZZLE_ASSETS_MANIFEST!);
@@ -29,6 +31,31 @@ export const middlewareRenderApp = async (ctx: Context) => {
     ssrMode: true,
     link: new SchemaLink({ schema: getSchema(), context: getContext() }),
     cache: new InMemoryCache(),
+  });
+
+  const {
+    data: { firebaseRemoteConfigTemplate: pageConfig },
+  } = await client.query<{
+    firebaseRemoteConfigTemplate: Pick<
+      FirebaseRemoteConfigTemplate,
+      | "htmlGoogleAnalyticsId"
+      | "htmlMetaDescription"
+      | "htmlMetaAuthor"
+      | "htmlMetaAbstract"
+      | "htmlMetaCopyright"
+    >;
+  }>({
+    query: gql`
+      {
+        firebaseRemoteConfigTemplate {
+          htmlGoogleAnalyticsId
+          htmlMetaDescription
+          htmlMetaAuthor
+          htmlMetaAbstract
+          htmlMetaCopyright
+        }
+      }
+    `,
   });
 
   const dataOnlyComponent = (
@@ -78,6 +105,11 @@ export const middlewareRenderApp = async (ctx: Context) => {
         .map(l => l.trim())
         .join("")}
       styledComponentsStyleElements={styleElements}
+      googleAnalyticsId={pageConfig.htmlGoogleAnalyticsId}
+      metaDescription={pageConfig.htmlMetaDescription}
+      metaAuthor={pageConfig.htmlMetaAuthor}
+      metaAbstract={pageConfig.htmlMetaAbstract}
+      metaCopyright={pageConfig.htmlMetaCopyright}
     />
   );
 

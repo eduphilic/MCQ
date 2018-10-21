@@ -30,6 +30,16 @@ export namespace FirebaseRemoteConfigTemplateResolvers {
       parent.htmlGoogleAnalyticsId === undefined
         ? null
         : parent.htmlGoogleAnalyticsId,
+    htmlMetaDescription: (parent: FirebaseRemoteConfigTemplate) =>
+      parent.htmlMetaDescription === undefined
+        ? null
+        : parent.htmlMetaDescription,
+    htmlMetaAuthor: (parent: FirebaseRemoteConfigTemplate) =>
+      parent.htmlMetaAuthor === undefined ? null : parent.htmlMetaAuthor,
+    htmlMetaAbstract: (parent: FirebaseRemoteConfigTemplate) =>
+      parent.htmlMetaAbstract === undefined ? null : parent.htmlMetaAbstract,
+    htmlMetaCopyright: (parent: FirebaseRemoteConfigTemplate) =>
+      parent.htmlMetaCopyright === undefined ? null : parent.htmlMetaCopyright,
   };
 
   export type HtmlgoogleanalyticsidResolver = (
@@ -39,8 +49,64 @@ export namespace FirebaseRemoteConfigTemplateResolvers {
     info: GraphQLResolveInfo,
   ) => string | null | Promise<string | null>;
 
+  export type HtmlmetadescriptionResolver = (
+    parent: FirebaseRemoteConfigTemplate,
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo,
+  ) => string | null | Promise<string | null>;
+
+  export type HtmlmetaauthorResolver = (
+    parent: FirebaseRemoteConfigTemplate,
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo,
+  ) => string | null | Promise<string | null>;
+
+  export type HtmlmetaabstractResolver = (
+    parent: FirebaseRemoteConfigTemplate,
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo,
+  ) => string | null | Promise<string | null>;
+
+  export type HtmlmetacopyrightResolver = (
+    parent: FirebaseRemoteConfigTemplate,
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo,
+  ) => string | null | Promise<string | null>;
+
   export interface Type {
     htmlGoogleAnalyticsId: (
+      parent: FirebaseRemoteConfigTemplate,
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo,
+    ) => string | null | Promise<string | null>;
+
+    htmlMetaDescription: (
+      parent: FirebaseRemoteConfigTemplate,
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo,
+    ) => string | null | Promise<string | null>;
+
+    htmlMetaAuthor: (
+      parent: FirebaseRemoteConfigTemplate,
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo,
+    ) => string | null | Promise<string | null>;
+
+    htmlMetaAbstract: (
+      parent: FirebaseRemoteConfigTemplate,
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo,
+    ) => string | null | Promise<string | null>;
+
+    htmlMetaCopyright: (
       parent: FirebaseRemoteConfigTemplate,
       args: {},
       ctx: Context,

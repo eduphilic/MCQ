@@ -4,4 +4,8 @@ type Query {
 
 type FirebaseRemoteConfigTemplate {
   htmlGoogleAnalyticsId: String
+  htmlMetaDescription: String
+  htmlMetaAuthor: String
+  htmlMetaAbstract: String
+  htmlMetaCopyright: String
 }
