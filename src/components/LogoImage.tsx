@@ -13,7 +13,7 @@ export const LogoImage = styled<{ className?: string }>(({ className }) => (
     width="438.58459"
     height="416.87265"
     viewBox="0 0 438.58459 416.87265"
-    enable-background="new 0 0 1000 1000"
+    enableBackground="new 0 0 1000 1000"
     xmlSpace="preserve"
   >
     <defs id="defs4027" />
