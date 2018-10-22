@@ -3,6 +3,7 @@ const path = require("path");
 const rimraf = require("rimraf");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
+const WebpackShellPlugin = require("webpack-shell-plugin");
 
 module.exports = {
   plugins: [
@@ -37,6 +38,15 @@ module.exports = {
       config.plugins = config.plugins.filter(
         c => !/StartServerPlugin/.test(c.constructor),
       );
+
+      if (dev) {
+        config.plugins.push(
+          new WebpackShellPlugin({
+            onBuildEnd: ["yarn firebase:start"],
+            dev: true,
+          }),
+        );
+      }
     }
 
     if (target === "web" && process.env.ANALYZE) {
@@ -56,19 +66,16 @@ class CustomPostBuildPlugin {
       rimraf.sync(path.resolve(__dirname, "build-server/static"));
 
       const pkg = require("./package.json");
+      const packageJsonContents = {
+        private: true,
+        name: "functions",
+        version: "1.0.0",
+        dependencies: pkg.dependencies,
+      };
 
       fs.writeFileSync(
         path.resolve(__dirname, "build-server/package.json"),
-        JSON.stringify(
-          {
-            private: true,
-            name: "functions",
-            version: "1.0.0",
-            dependencies: pkg.dependencies,
-          },
-          null,
-          2,
-        ),
+        JSON.stringify(packageJsonContents, null, 2),
         "utf8",
       );
 
