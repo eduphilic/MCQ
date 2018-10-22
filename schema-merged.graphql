@@ -1,0 +1,33 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  htmlConfig: HtmlConfig!
+  language: [LocalizedString!]!
+  localization: Localization!
+}
+
+type Mutation {
+  setLocalizationLanguage(language: String!): String!
+}
+
+type HtmlConfig {
+  googleAnalyticsId: String
+  metaKeywords: String
+  metaDescription: String
+  metaAuthor: String
+  metaAbstract: String
+  metaCopyright: String
+}
+
+type LocalizedString {
+  key: String!
+  en: String!
+  hi: String
+}
+
+type Localization {
+  localizationLanguage: String
+}

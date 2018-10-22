@@ -1,12 +1,18 @@
 {
   schema: {
-    files: "*.graphql"
+    files: "schema-merged.graphql"
   },
   query: {
     files: [
       {
         match: { include: 'src/**/*.t*' },
-        parser: [ 'EmbeddedQueryParser', { startTag: 'gql`', endTag: '`' } ]
+        parser: [ 'EmbeddedQueryParser', { startTag: 'gql`', endTag: '`' } ],
+        validate: {
+          extends: 'gql-rules-query',
+          rules: {
+            KnownDirectives: 'off'
+          }
+        }
       }
     ]
   }

@@ -1,8 +1,7 @@
 import Button from "@material-ui/core/Button";
 import { RouteComponentProps } from "@reach/router";
-import gql from "graphql-tag";
 import React, { SFC } from "react";
-import { Query } from "react-apollo";
+import { strings } from "../features/localization";
 
 export const RootIndexPage: SFC<RouteComponentProps> = () => (
   <>
@@ -13,21 +12,4 @@ export const RootIndexPage: SFC<RouteComponentProps> = () => (
   </>
 );
 
-const Hello = () => (
-  <Query<{ hello: string }>
-    query={gql`
-      {
-        htmlConfig {
-          googleAnalyticsId
-        }
-      }
-    `}
-  >
-    {({ loading, error, data }) => {
-      if (loading) return <p>Loading</p>;
-      if (error) return <p>Error :(</p>;
-
-      return <p>{data!.hello}</p>;
-    }}
-  </Query>
-);
+const Hello = () => <p>{strings.landingFooter}</p>;

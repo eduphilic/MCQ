@@ -7,12 +7,19 @@ import { ApolloProvider } from "react-apollo";
 import { hydrate } from "react-dom";
 import JssProvider from "react-jss/lib/JssProvider";
 import { App } from "../app";
+import { initialState, resolvers } from "../store-client";
 
-const initialState = JSON.parse(lzString.decompressFromUTF16(window.__STATE__));
+const initialCacheState = JSON.parse(
+  lzString.decompressFromUTF16(window.__STATE__),
+);
 
 const client = new ApolloClient({
   uri: "/graphql",
-  cache: new InMemoryCache().restore(initialState),
+  cache: new InMemoryCache().restore(initialCacheState),
+  clientState: {
+    defaults: initialState,
+    resolvers,
+  },
 });
 
 // https://material-ui.com/customization/css-in-js/#other-html-element

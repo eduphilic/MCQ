@@ -1,0 +1,11 @@
+type Query {
+  localization: Localization!
+}
+
+type Mutation {
+  setLocalizationLanguage(language: String!): String!
+}
+
+type Localization {
+  localizationLanguage: String
+}
