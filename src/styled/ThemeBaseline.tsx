@@ -25,7 +25,7 @@ body {
   }
 }
 
-html, body, #root {
+html, body, #root, #root > div:first-child {
   height: 100%;
 }
 `;
