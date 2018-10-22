@@ -76,6 +76,7 @@
     "@types/webpack-env": "^1.13.6",
     "babel-plugin-graphql-tag": "^1.6.0",
     "babel-plugin-styled-components": "^1.8.0",
+    "babel-plugin-transform-imports": "^1.5.1",
     "cross-env": "^5.2.0",
     "firebase-tools": "^5.1.1",
     "graphqlgen": "^0.2.2",

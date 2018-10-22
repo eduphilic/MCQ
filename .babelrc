@@ -1,4 +1,16 @@
 {
   "presets": ["razzle/babel"],
-  "plugins": ["babel-plugin-styled-components", "babel-plugin-graphql-tag"]
+  "plugins": [
+    "babel-plugin-styled-components",
+    "babel-plugin-graphql-tag",
+    [
+      "babel-plugin-transform-imports",
+      {
+        "@material-ui/core": {
+          "transform": "@material-ui/core/${member}",
+          "preventFullImport": true
+        }
+      }
+    ]
+  ]
 }
