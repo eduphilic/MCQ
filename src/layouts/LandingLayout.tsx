@@ -8,7 +8,13 @@ export const LandingLayout: SFC = ({ children }) => (
     <Grid item xs>
       {children}
     </Grid>
-    <FooterWrapper item container justify="center" alignItems="center">
+    <FooterWrapper
+      component="footer"
+      item
+      container
+      justify="center"
+      alignItems="center"
+    >
       <DarkTheme>
         <Typography variant="caption">{strings.landingFooter}</Typography>
       </DarkTheme>

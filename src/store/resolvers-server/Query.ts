@@ -15,6 +15,9 @@ export const Query: QueryResolvers = {
 
     return JSON.parse(template.language);
   },
+  indexConfig: (_parent, _args, ctx) => {
+    return ctx.firebaseRemoteConfigClient.getFieldsByPrefix("index");
+  },
 
   // Client side state.
   localization: () => initialState.localization,

@@ -4,13 +4,38 @@ schema {
 }
 
 type Query {
-  htmlConfig: HtmlConfig!
   language: [LocalizedString!]!
+  htmlConfig: HtmlConfig!
+  indexConfig: IndexConfig!
+
+  # Client side state.
   localization: Localization!
 }
 
 type Mutation {
   setLocalizationLanguage(language: String!): String!
+}
+
+type IndexConfig {
+  heroBackgroundImageUrl: String!
+  heroBackgroundAlpha: Float!
+  heroPrimaryTextEn: String!
+  heroPrimaryTextHi: String!
+  heroFeaturesEn: [String!]!
+  heroFeaturesHi: [String!]!
+  aboutTitleEn: String!
+  aboutTitleHi: String!
+  aboutTextEn: String!
+  aboutTextHi: String!
+  aboutImages: [IndexAboutImage!]!
+}
+
+type IndexAboutImage {
+  imageUrl: String!
+  titleEn: String!
+  titleHi: String!
+  textEn: String!
+  textHi: String!
 }
 
 type HtmlConfig {

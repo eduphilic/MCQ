@@ -4,8 +4,10 @@ schema: ./schema.graphql
 context: ./src/store/Context.ts:Context
 models:
   HtmlConfig: ./src/models/HtmlConfig.ts:HtmlConfig
-  LocalizedString: ./src/models/LocalizedString.ts:LocalizedString
+  IndexAboutImage: ./src/models/IndexAboutImage.ts:IndexAboutImage
+  IndexConfig: ./src/models/IndexConfig.ts:IndexConfig
   Localization: ./src/models/Localization.ts:Localization
+  LocalizedString: ./src/models/LocalizedString.ts:LocalizedString
 
 output: ./src/store/generated/index.ts
 
