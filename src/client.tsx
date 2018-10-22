@@ -7,7 +7,7 @@ import { ApolloProvider } from "react-apollo";
 import { hydrate } from "react-dom";
 import JssProvider from "react-jss/lib/JssProvider";
 import { App } from "./app";
-import { initialState, resolvers } from "./store-client";
+import { resolvers } from "./store/resolvers-client";
 
 const initialCacheState = JSON.parse(
   lzString.decompressFromUTF16(window.__STATE__),
@@ -17,7 +17,6 @@ const client = new ApolloClient({
   uri: "/graphql",
   cache: new InMemoryCache().restore(initialCacheState),
   clientState: {
-    defaults: initialState,
     resolvers,
   },
 });

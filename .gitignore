@@ -8,8 +8,7 @@ node_modules/
 build/
 build-server/
 /.firebase
-src/store-client/generated/tmp-resolvers
-src/store-server/generated/tmp-resolvers
+src/store/generated/tmp-resolvers
 
 # Logs
 *error.log

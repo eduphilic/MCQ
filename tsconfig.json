@@ -18,5 +18,5 @@
     "experimentalDecorators": true
   },
   "include": ["src/**/*", "tools/**/*"],
-  "exclude": ["node_modules", "src/store-*/generated/tmp-resolvers/**/*"]
+  "exclude": ["node_modules", "src/store/generated/tmp-resolvers/**/*"]
 }

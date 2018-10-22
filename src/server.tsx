@@ -21,7 +21,7 @@ import * as functions from "firebase-functions";
 import Koa, { Context } from "koa";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { HtmlConfig } from "./models";
-import { createServer, getContext, getSchema } from "./store-server";
+import { createServer, getContext, getSchema } from "./store";
 
 const firebaseApp = admin.initializeApp();
 const app = new Koa();

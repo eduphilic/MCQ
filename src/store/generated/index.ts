@@ -4,6 +4,7 @@ import { GraphQLResolveInfo } from "graphql";
 import { Context } from "../Context";
 import { HtmlConfig } from "../../models/HtmlConfig";
 import { LocalizedString } from "../../models/LocalizedString";
+import { Localization } from "../../models/Localization";
 
 export namespace QueryResolvers {
   export const defaultResolvers = {};
@@ -22,6 +23,13 @@ export namespace QueryResolvers {
     info: GraphQLResolveInfo,
   ) => LocalizedString[] | Promise<LocalizedString[]>;
 
+  export type LocalizationResolver = (
+    parent: {},
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo,
+  ) => Localization | Promise<Localization>;
+
   export interface Type {
     htmlConfig: (
       parent: {},
@@ -36,6 +44,37 @@ export namespace QueryResolvers {
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => LocalizedString[] | Promise<LocalizedString[]>;
+
+    localization: (
+      parent: {},
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo,
+    ) => Localization | Promise<Localization>;
+  }
+}
+
+export namespace MutationResolvers {
+  export const defaultResolvers = {};
+
+  export interface ArgsSetlocalizationlanguage {
+    language: string;
+  }
+
+  export type SetlocalizationlanguageResolver = (
+    parent: {},
+    args: ArgsSetlocalizationlanguage,
+    ctx: Context,
+    info: GraphQLResolveInfo,
+  ) => string | Promise<string>;
+
+  export interface Type {
+    setLocalizationLanguage: (
+      parent: {},
+      args: ArgsSetlocalizationlanguage,
+      ctx: Context,
+      info: GraphQLResolveInfo,
+    ) => string | Promise<string>;
   }
 }
 
@@ -195,8 +234,32 @@ export namespace LocalizedStringResolvers {
   }
 }
 
+export namespace LocalizationResolvers {
+  export const defaultResolvers = {
+    localizationLanguage: (parent: Localization) => parent.localizationLanguage,
+  };
+
+  export type LocalizationlanguageResolver = (
+    parent: Localization,
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo,
+  ) => string | null | Promise<string | null>;
+
+  export interface Type {
+    localizationLanguage: (
+      parent: Localization,
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo,
+    ) => string | null | Promise<string | null>;
+  }
+}
+
 export interface Resolvers {
   Query: QueryResolvers.Type;
+  Mutation: MutationResolvers.Type;
   HtmlConfig: HtmlConfigResolvers.Type;
   LocalizedString: LocalizedStringResolvers.Type;
+  Localization: LocalizationResolvers.Type;
 }

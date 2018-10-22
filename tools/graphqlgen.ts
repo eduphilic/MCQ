@@ -1,6 +1,5 @@
 import { ChildProcess, exec, ExecException } from "child_process";
 import fs from "fs";
-import { mergeTypes } from "merge-graphql-schemas";
 import path from "path";
 
 const bin = path.resolve(
@@ -12,18 +11,9 @@ const bin = path.resolve(
 
 async function bootstrap() {
   try {
-    await Promise.all([
-      performGeneration("server"),
-      performGeneration("client"),
-    ]);
-    // prettier-ignore
-    const types = [
-    fs.readFileSync(path.resolve(__dirname, "../schema-server.graphql"), "utf8"),
-    fs.readFileSync(path.resolve(__dirname, "../schema-client.graphql"), "utf8"),
-  ];
-    const merged = mergeTypes(types);
-    // prettier-ignore
-    fs.writeFileSync(path.resolve(__dirname, "../schema-merged.graphql"), merged, "utf8");
+    await performGeneration();
+    /* tslint:disable-next-line:no-console */
+    console.log("Operation complete.");
   } catch (e) {
     /* tslint:disable-next-line:no-console */
     console.log("error:", e.message);
@@ -32,24 +22,22 @@ async function bootstrap() {
 // tslint:disable-next-line:no-floating-promises
 bootstrap();
 
-function performGeneration(store: "client" | "server") {
+function performGeneration() {
   return new Promise((resolve, reject) => {
     forwardChildProcessConsole(
       exec(
         bin,
         {
-          cwd: path.resolve(__dirname, `../src/store-${store}`),
+          cwd: path.resolve(__dirname, ".."),
           env: process.env,
         },
-        createPostProcessor(store, resolve, reject),
+        createPostProcessor(resolve, reject),
       ),
-      store,
     );
   });
 }
 
 function createPostProcessor(
-  store: "client" | "server",
   resolve: () => void,
   reject: (error: ExecException) => void,
 ) {
@@ -60,9 +48,7 @@ function createPostProcessor(
     }
     if (process.platform !== "win32") return;
 
-    const files = walkSync(
-      path.resolve(__dirname, `../src/store-${store}/generated`),
-    );
+    const files = walkSync(path.resolve(__dirname, `../src/store/generated`));
     Array.from(files).forEach(file => {
       const originalContents = fs.readFileSync(file, "utf8");
       const revisedContents = originalContents.replace(/\\/g, "/");
@@ -88,21 +74,18 @@ function* walkSync(dir: string): IterableIterator<string> {
   }
 }
 
-function forwardChildProcessConsole(
-  childProcess: ChildProcess,
-  store: "client" | "server",
-) {
+function forwardChildProcessConsole(childProcess: ChildProcess) {
   const trimEndingNewline = (data: string) => data.replace(/\n$/, "");
   childProcess.stdout.on("data", data => {
     /* tslint:disable-next-line:no-console */
-    console.log(`${store}: stdout: ${trimEndingNewline(data)}`);
+    console.log(`stdout: ${trimEndingNewline(data)}`);
   });
   childProcess.stderr.on("data", data => {
     /* tslint:disable-next-line:no-console */
-    console.log(`${store}: stderr: ${data}`);
+    console.log(`stderr: ${data}`);
   });
   childProcess.on("close", code => {
     /* tslint:disable-next-line:no-console */
-    console.log(`${store}: exit code: ${code}`);
+    console.log(`exit code: ${code}`);
   });
 }

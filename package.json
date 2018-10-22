@@ -80,7 +80,6 @@
     "firebase-tools": "^5.1.1",
     "graphqlgen": "^0.2.2",
     "koa-static": "^5.0.0",
-    "merge-graphql-schemas": "^1.5.7",
     "prettier": "^1.14.3",
     "razzle-plugin-typescript": "^2.4.0",
     "rimraf": "^2.6.2",

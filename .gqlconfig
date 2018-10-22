@@ -1,6 +1,6 @@
 {
   schema: {
-    files: "schema-merged.graphql"
+    files: "schema.graphql"
   },
   query: {
     files: [

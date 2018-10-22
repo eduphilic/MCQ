@@ -1,6 +1,6 @@
 import { ApolloServer, gql, makeExecutableSchema } from "apollo-server-koa";
 import { Context } from "./Context";
-import { resolvers } from "./resolvers";
+import { resolvers } from "./resolvers-server";
 import { schemaString } from "./schemaString";
 import { FirebaseRemoteConfigClient } from "./services";
 
@@ -22,6 +22,7 @@ export function createServer(options: { projectId: string }) {
     firebaseRemoteConfigClient: new FirebaseRemoteConfigClient(
       options.projectId,
     ),
+    cache: null as any,
   };
 
   return new ApolloServer({
