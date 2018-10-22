@@ -6,8 +6,8 @@ import React, { Component } from "react";
 import { ApolloProvider } from "react-apollo";
 import { hydrate } from "react-dom";
 import JssProvider from "react-jss/lib/JssProvider";
-import { App } from "../app";
-import { initialState, resolvers } from "../store-client";
+import { App } from "./app";
+import { initialState, resolvers } from "./store-client";
 
 const initialCacheState = JSON.parse(
   lzString.decompressFromUTF16(window.__STATE__),

@@ -9,23 +9,42 @@ import React from "react";
 import { renderToStaticMarkup, renderToString } from "react-dom/server";
 import JssProvider from "react-jss/lib/JssProvider";
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
-import { App } from "../app";
-import { Html } from "../layouts";
-import { lightTheme } from "../styled/themes";
+import { App } from "./app";
+import { Html } from "./layouts";
+import { lightTheme } from "./styled/themes";
 
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient } from "apollo-client";
 import { SchemaLink } from "apollo-link-schema";
+import * as admin from "firebase-admin";
+import * as functions from "firebase-functions";
+import Koa, { Context } from "koa";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
-import { getContext, getSchema } from "../store-server";
+import { HtmlConfig } from "./models";
+import { createServer, getContext, getSchema } from "./store-server";
 
-import { Context } from "koa";
-import { HtmlConfig } from "../models";
+const firebaseApp = admin.initializeApp();
+const app = new Koa();
+
+if (process.env.NODE_ENV === "development") {
+  const serve: typeof import("koa-static") = require("koa-static");
+  app.use(serve(process.env.RAZZLE_PUBLIC_DIR!));
+}
+
+const server = createServer({
+  projectId: firebaseApp.options.projectId!,
+});
+
+server.applyMiddleware({
+  app: app as any,
+  bodyParserConfig: false,
+  cors: false,
+});
 
 const assets: { client: { js: string; css?: string } } = require(process.env
   .RAZZLE_ASSETS_MANIFEST!);
 
-export const middlewareRenderApp = async (ctx: Context) => {
+const middlewareRenderApp = async (ctx: Context) => {
   const schema = getSchema();
   const context = getContext();
   const client = new ApolloClient({
@@ -105,3 +124,7 @@ export const middlewareRenderApp = async (ctx: Context) => {
     throw e;
   }
 };
+
+app.use(middlewareRenderApp);
+
+export const main = functions.https.onRequest(app.callback());
