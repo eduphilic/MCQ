@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 import { Component } from "react";
 import { ChildProps, graphql } from "react-apollo";
 import LocalizedStrings, { LocalizedStringsMethods } from "react-localization";
-import { Language, LocalizedString } from "../../models";
+import { Language, Localization, LocalizedString } from "../../models";
 
 const GET_TRANSLATIONS = gql`
   query GetTranslations {
@@ -11,61 +11,57 @@ const GET_TRANSLATIONS = gql`
       en
       hi
     }
+    localization @client {
+      localizationLanguage
+    }
   }
 `;
 
 type Response = {
   language: LocalizedString[];
+  localization: Localization;
 };
 
 export let strings: LocalizedStringsMethods &
   { [k in keyof Language]: string } = null as any;
 
-let stringsInitialized = false;
+type Props = ChildProps<{}, Response>;
+type State = { initialized: boolean };
 
 export const LocalizationProvider = graphql<{}, Response>(GET_TRANSLATIONS, {})(
-  class extends Component<ChildProps<{}, Response>> {
-    state = {
-      initialized: false,
-    };
+  class extends Component<Props, State> {
+    state = { initialized: false };
 
-    static getDerivedStateFromProps(
-      props: ChildProps<{}, Response>,
-      state: { initialized: boolean },
-    ) {
+    static getDerivedStateFromProps(props: Props, state: State) {
       if (state.initialized) return null;
-      if (stringsInitialized) return { initialized: true };
 
-      const { loading, language } = props.data!;
-      if (loading) return null;
+      const data = props.data!;
+      if (data.loading) return null;
 
-      const localizedStrings: {
-        en: Record<string, string>;
-        hi: Record<string, string>;
-      } = { en: {}, hi: {} };
+      const language = data.language!;
+      const localizationLanguage = data.localization!.localizationLanguage;
+      const localizedStrings = language.reduce(
+        (accumulator, s) => {
+          accumulator.en[s.key] = s.en;
+          if (s.hi) accumulator.hi[s.key] = s.hi;
+          return accumulator;
+        },
+        { en: {}, hi: {} } as {
+          en: Record<string, string>;
+          hi: Record<string, string>;
+        },
+      );
+      strings = new LocalizedStrings(localizedStrings as any);
+      strings.setLanguage(localizationLanguage);
 
-      language!.forEach(s => {
-        localizedStrings.en[s.key] = s.en;
-        if (s.hi) localizedStrings.hi[s.key] = s.hi;
-      });
-
-      if (typeof window === "undefined") {
-        strings = localizedStrings.en as any;
-      } else {
-        strings = new LocalizedStrings(localizedStrings as any);
-      }
-
-      stringsInitialized = true;
       return { initialized: true };
     }
 
     render() {
-      const { children, data } = this.props;
       const { initialized } = this.state;
-      const { loading } = data!;
+      if (!initialized) return null;
 
-      if (loading || !initialized) return null;
-      return children;
+      return this.props.children;
     }
   },
 );
