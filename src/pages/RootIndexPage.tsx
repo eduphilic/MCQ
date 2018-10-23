@@ -18,6 +18,8 @@ const GET_HERO_CONFIG = gql`
       heroBackgroundAlpha
       heroPrimaryTextEn
       heroPrimaryTextHi
+      heroFeaturesEn
+      heroFeaturesHi
     }
     localization @client {
       localizationLanguage
@@ -52,21 +54,40 @@ export const RootIndexPage = graphql<RouteComponentProps, Response>(
       localizationLanguage === "en"
         ? indexConfig.heroPrimaryTextEn
         : indexConfig.heroPrimaryTextHi;
+    const heroFeatures =
+      localizationLanguage === "en"
+        ? indexConfig.heroFeaturesEn
+        : indexConfig.heroFeaturesHi;
 
     return (
       <LandingLayout>
-        {/* Hero section */}
+        {/* Hero section. */}
         <DarkTheme>
           <HeroBackgroundImage background={background}>
             <ContentCenterWrapper>
               <HeroGridContainer container>
                 {/* Left text content. */}
-                <HeroGridTextSectionItem item xs={12} md={8}>
-                  <LogoWithBottomMargin alternateSecondWordColoring />
+                <HeroGridTextSectionItem
+                  container
+                  direction="column"
+                  item
+                  xs={12}
+                  md={8}
+                >
+                  <Grid item>
+                    <LogoWithBottomMargin alternateSecondWordColoring />
+                  </Grid>
                   <Hidden smDown>
-                    <Grid container direction="column" justify="center">
+                    <Grid container direction="column" justify="center" item xs>
                       <Grid item>
                         <HeroPrimaryText>{heroPrimaryText}</HeroPrimaryText>
+                      </Grid>
+                      <Grid item>
+                        <HeroFeatureList>
+                          {heroFeatures.map((text, key) => (
+                            <HeroFeatureItem key={key}>{text}</HeroFeatureItem>
+                          ))}
+                        </HeroFeatureList>
                       </Grid>
                     </Grid>
                   </Hidden>
@@ -79,6 +100,8 @@ export const RootIndexPage = graphql<RouteComponentProps, Response>(
             </ContentCenterWrapper>
           </HeroBackgroundImage>
         </DarkTheme>
+
+        {/* About section.*/}
       </LandingLayout>
     );
   }),
@@ -137,4 +160,20 @@ const HeroPrimaryText = styled(Typography).attrs({
     line-height: 44px;
     letter-spacing: 1px;
   }
+`;
+
+const HeroFeatureList = styled.ul`
+  margin-top: 24px;
+  margin-bottom: 56px;
+`;
+
+const HeroFeatureItem = styled(Typography).attrs({
+  component: "li",
+  variant: "h6",
+})`
+  display: list-item;
+  font-size: 24px;
+  font-weight: 600;
+  text-shadow: 2px 2px #000;
+  color: #63b760;
 `;
