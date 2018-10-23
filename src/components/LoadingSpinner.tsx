@@ -23,8 +23,8 @@ const Wrapper = styled.div`
 
 const SpinnerWrapper = styled.div`
   position: relative;
-  width: 100px;
-  height: 100%;
+  width: 120px;
+  height: 120px;
 `;
 
 const StyledLogoImage = styled(LogoImage)`
@@ -39,7 +39,6 @@ const StyledLogoImage = styled(LogoImage)`
 const StyledCircularProgress = styled<CircularProgressProps>(props => (
   <CircularProgress {...props} size={120} thickness={1.2} />
 ))`
-  position: absolute;
-  left: -10px;
-  top: -10px;
+  width: 120px;
+  height: 120px;
 `;
