@@ -61,7 +61,6 @@ export const AboutSection = () => (
           >
             {({ data }) => (
               <>
-                {(() => console.log(data!.indexConfig))()}
                 <Title>
                   {data!.indexConfig.aboutTitleEn ||
                     data!.indexConfig.aboutTitleHi}
