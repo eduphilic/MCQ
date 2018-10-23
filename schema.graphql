@@ -26,6 +26,8 @@ type IndexConfig {
   heroPrimaryTextHi: String!
   heroFeaturesEn: [String!]!
   heroFeaturesHi: [String!]!
+  heroFooterTextEn: String!
+  heroFooterTextHi: String!
   aboutTitleEn: String!
   aboutTitleHi: String!
   aboutTextEn: String!

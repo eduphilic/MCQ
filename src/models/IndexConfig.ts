@@ -7,6 +7,8 @@ export interface IndexConfig {
   heroPrimaryTextHi: string;
   heroFeaturesEn: string[];
   heroFeaturesHi: string[];
+  heroFooterTextEn: string;
+  heroFooterTextHi: string;
   aboutTitleEn: string;
   aboutTitleHi: string;
   aboutTextEn: string;
