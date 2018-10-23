@@ -3,7 +3,7 @@ import React, { Component, ComponentType } from "react";
 import { ChildProps } from "react-apollo";
 import { LoadingSpinner } from "./LoadingSpinner";
 
-export const withLoading = <P extends ChildProps>(C: ComponentType<P>) =>
+export const withLoading = <P extends ChildProps<any>>(C: ComponentType<P>) =>
   class WithLoading extends Component<P> {
     render() {
       const loading = this.props.data!.loading;
