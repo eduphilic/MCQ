@@ -19,7 +19,7 @@ const GET_HERO_CONFIG = gql`
       heroPrimaryTextEn
       heroPrimaryTextHi
     }
-    localization {
+    localization @client {
       localizationLanguage
     }
   }
@@ -28,7 +28,12 @@ const GET_HERO_CONFIG = gql`
 type Response = {
   indexConfig: Pick<
     IndexConfig,
-    "heroBackgroundImageUrl" | "heroBackgroundAlpha"
+    | "heroBackgroundImageUrl"
+    | "heroBackgroundAlpha"
+    | "heroPrimaryTextEn"
+    | "heroPrimaryTextHi"
+    | "heroFeaturesEn"
+    | "heroFeaturesHi"
   >;
   localization: Localization;
 };
@@ -42,6 +47,11 @@ export const RootIndexPage = graphql<RouteComponentProps, Response>(
       heroBackgroundImageUrl: indexConfig.heroBackgroundImageUrl,
       heroBackgroundAlpha: indexConfig.heroBackgroundAlpha,
     };
+    const localizationLanguage = data!.localization!.localizationLanguage;
+    const heroPrimaryText =
+      localizationLanguage === "en"
+        ? indexConfig.heroPrimaryTextEn
+        : indexConfig.heroPrimaryTextHi;
 
     return (
       <LandingLayout>
@@ -56,14 +66,14 @@ export const RootIndexPage = graphql<RouteComponentProps, Response>(
                   <Hidden smDown>
                     <Grid container direction="column" justify="center">
                       <Grid item>
-                        <HeroPrimaryText> </HeroPrimaryText>
+                        <HeroPrimaryText>{heroPrimaryText}</HeroPrimaryText>
                       </Grid>
                     </Grid>
                   </Hidden>
                 </HeroGridTextSectionItem>
                 {/* Right login/sign-up forms. */}
                 <Grid item xs={12} md={4}>
-                  <p>Form Section</p>
+                  <p style={{ height: 747 }}>Form Section</p>
                 </Grid>
               </HeroGridContainer>
             </ContentCenterWrapper>

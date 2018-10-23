@@ -4,21 +4,23 @@ import { strings } from "../features/localization";
 import { DarkTheme, styled } from "../styled";
 
 export const LandingLayout: SFC = ({ children }) => (
-  <Wrapper container direction="column">
+  <Wrapper container direction="column" wrap="nowrap">
     <Grid item xs>
       {children}
     </Grid>
-    <FooterWrapper
-      component="footer"
-      item
-      container
-      justify="center"
-      alignItems="center"
-    >
-      <DarkTheme>
-        <Typography variant="caption">{strings.landingFooter}</Typography>
-      </DarkTheme>
-    </FooterWrapper>
+    <Grid item>
+      <FooterWrapper
+        component="footer"
+        item
+        container
+        justify="center"
+        alignItems="center"
+      >
+        <DarkTheme>
+          <Typography variant="caption">{strings.landingFooter}</Typography>
+        </DarkTheme>
+      </FooterWrapper>
+    </Grid>
   </Wrapper>
 );
 

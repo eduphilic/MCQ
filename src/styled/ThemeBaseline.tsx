@@ -25,7 +25,16 @@ body {
   }
 }
 
-html, body, #root, #root > div:first-child {
+html, body {
   height: 100%;
+}
+
+body, #root, #root > div:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+#root, #root > div:first-child {
+  flex: 1;
 }
 `;
