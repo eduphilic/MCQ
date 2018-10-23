@@ -6,7 +6,7 @@ import { ContentCenterWrapper } from "../../components/ContentCenterWrapper";
 import { Logo } from "../../components/Logo";
 import { withLoading } from "../../components/withLoading";
 import { IndexConfig, Localization } from "../../models";
-import { DarkTheme, styled } from "../../styled";
+import { styled } from "../../styled";
 import { LanguageSelect } from "./LanguageSelect";
 
 const GET_HERO_CONFIG = gql`
@@ -56,46 +56,44 @@ export const HeroSection = graphql<{}, Response>(GET_HERO_CONFIG)(
         : indexConfig.heroFeaturesHi;
 
     return (
-      <DarkTheme>
-        <HeroBackgroundImage background={background}>
-          <ContentCenterWrapper>
-            <HeroGridContainer container>
-              {/* Left text content. */}
-              <HeroGridTextSectionItem
-                container
-                direction="column"
-                item
-                xs={12}
-                md={8}
-              >
-                <Grid item>
-                  <LogoWithBottomMargin alternateSecondWordColoring />
-                </Grid>
-                <Hidden smDown>
-                  <Grid container direction="column" justify="center" item xs>
-                    <Grid item>
-                      <HeroPrimaryText>{heroPrimaryText}</HeroPrimaryText>
-                    </Grid>
-                    <Grid item>
-                      <HeroFeatureList>
-                        {heroFeatures.map((text, key) => (
-                          <HeroFeatureItem key={key}>{text}</HeroFeatureItem>
-                        ))}
-                      </HeroFeatureList>
-                    </Grid>
-                  </Grid>
-                </Hidden>
-              </HeroGridTextSectionItem>
-
-              {/* Right login/sign-up forms. */}
-              <Grid item xs={12} md={4}>
-                <LanguageSelect />
-                <p style={{ height: 747 }}>Form Section</p>
+      <HeroBackgroundImage background={background}>
+        <ContentCenterWrapper>
+          <HeroGridContainer container>
+            {/* Left text content. */}
+            <HeroGridTextSectionItem
+              container
+              direction="column"
+              item
+              xs={12}
+              md={8}
+            >
+              <Grid item>
+                <LogoWithBottomMargin alternateSecondWordColoring />
               </Grid>
-            </HeroGridContainer>
-          </ContentCenterWrapper>
-        </HeroBackgroundImage>
-      </DarkTheme>
+              <Hidden smDown>
+                <Grid container direction="column" justify="center" item xs>
+                  <Grid item>
+                    <HeroPrimaryText>{heroPrimaryText}</HeroPrimaryText>
+                  </Grid>
+                  <Grid item>
+                    <HeroFeatureList>
+                      {heroFeatures.map((text, key) => (
+                        <HeroFeatureItem key={key}>{text}</HeroFeatureItem>
+                      ))}
+                    </HeroFeatureList>
+                  </Grid>
+                </Grid>
+              </Hidden>
+            </HeroGridTextSectionItem>
+
+            {/* Right login/sign-up forms. */}
+            <Grid item xs={12} md={4}>
+              <LanguageSelect />
+              <p style={{ height: 747 }}>Form Section</p>
+            </Grid>
+          </HeroGridContainer>
+        </ContentCenterWrapper>
+      </HeroBackgroundImage>
     );
   }),
 );

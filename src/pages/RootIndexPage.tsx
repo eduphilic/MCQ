@@ -1,13 +1,19 @@
 import { RouteComponentProps } from "@reach/router";
 import React, { SFC } from "react";
-import { HeroSection } from "../features/landing";
+import { AboutSection, HeroSection } from "../features/landing";
 import { LandingLayout } from "../layouts";
+import { DarkTheme } from "../styled";
 
 export const RootIndexPage: SFC<RouteComponentProps> = () => (
   <LandingLayout>
-    {/* Hero section. */}
-    <HeroSection />
+    <DarkTheme>
+      <>
+        {/* Hero section. */}
+        <HeroSection />
 
-    {/* About section.*/}
+        {/* About section.*/}
+        <AboutSection />
+      </>
+    </DarkTheme>
   </LandingLayout>
 );
