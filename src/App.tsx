@@ -1,7 +1,7 @@
 import { Router } from "@reach/router";
 import React from "react";
 import { LocalizationProvider } from "./features/localization";
-import { RootIndexPage } from "./pages";
+import { AdminLoginPage, RootIndexPage } from "./pages";
 import { LightTheme, ThemeBaseline } from "./styled";
 
 export const App = () => (
@@ -10,6 +10,7 @@ export const App = () => (
       <LocalizationProvider>
         <Router>
           <RootIndexPage path="/" />
+          <AdminLoginPage path="/admin/login" />
         </Router>
       </LocalizationProvider>
     </LightTheme>
