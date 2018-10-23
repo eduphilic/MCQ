@@ -5,6 +5,7 @@ import React, { CSSProperties } from "react";
 import { graphql } from "react-apollo";
 import { ContentCenterWrapper } from "../components/ContentCenterWrapper";
 import { Logo } from "../components/Logo";
+import { withLoading } from "../components/withLoading";
 import { LandingLayout } from "../layouts";
 import { Localization } from "../models";
 import { IndexConfig } from "../models/IndexConfig";
@@ -34,44 +35,44 @@ type Response = {
 
 export const RootIndexPage = graphql<RouteComponentProps, Response>(
   GET_HERO_CONFIG,
-)(({ data }) => {
-  const { loading, indexConfig } = data!;
-  const background = loading
-    ? undefined
-    : {
-        heroBackgroundImageUrl: indexConfig!.heroBackgroundImageUrl,
-        heroBackgroundAlpha: indexConfig!.heroBackgroundAlpha,
-      };
+)(
+  withLoading(({ data }) => {
+    const indexConfig = data!.indexConfig!;
+    const background = {
+      heroBackgroundImageUrl: indexConfig.heroBackgroundImageUrl,
+      heroBackgroundAlpha: indexConfig.heroBackgroundAlpha,
+    };
 
-  return (
-    <LandingLayout>
-      {/* Hero section */}
-      <DarkTheme>
-        <HeroBackgroundImage background={background}>
-          <ContentCenterWrapper>
-            <HeroGridContainer container>
-              {/* Left text content. */}
-              <HeroGridTextSectionItem item xs={12} md={8}>
-                <LogoWithBottomMargin alternateSecondWordColoring />
-                <Hidden smDown>
-                  <Grid container direction="column" justify="center">
-                    <Grid item>
-                      <HeroPrimaryText> </HeroPrimaryText>
+    return (
+      <LandingLayout>
+        {/* Hero section */}
+        <DarkTheme>
+          <HeroBackgroundImage background={background}>
+            <ContentCenterWrapper>
+              <HeroGridContainer container>
+                {/* Left text content. */}
+                <HeroGridTextSectionItem item xs={12} md={8}>
+                  <LogoWithBottomMargin alternateSecondWordColoring />
+                  <Hidden smDown>
+                    <Grid container direction="column" justify="center">
+                      <Grid item>
+                        <HeroPrimaryText> </HeroPrimaryText>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                </Hidden>
-              </HeroGridTextSectionItem>
-              {/* Right login/sign-up forms. */}
-              <Grid item xs={12} md={4}>
-                <p>Form Section</p>
-              </Grid>
-            </HeroGridContainer>
-          </ContentCenterWrapper>
-        </HeroBackgroundImage>
-      </DarkTheme>
-    </LandingLayout>
-  );
-});
+                  </Hidden>
+                </HeroGridTextSectionItem>
+                {/* Right login/sign-up forms. */}
+                <Grid item xs={12} md={4}>
+                  <p>Form Section</p>
+                </Grid>
+              </HeroGridContainer>
+            </ContentCenterWrapper>
+          </HeroBackgroundImage>
+        </DarkTheme>
+      </LandingLayout>
+    );
+  }),
+);
 
 type HeroBackgroundImageProps = {
   className?: string;
