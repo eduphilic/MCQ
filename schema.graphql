@@ -3,6 +3,8 @@ schema {
   mutation: Mutation
 }
 
+directive @client on FIELD
+
 type Query {
   language: [LocalizedString!]!
   htmlConfig: HtmlConfig!

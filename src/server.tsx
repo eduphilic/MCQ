@@ -113,6 +113,7 @@ const middlewareRenderApp = async (ctx: Context) => {
     />
   );
 
+  // Reach Router throws on redirect
   try {
     ctx.body = `<!doctype html>\n${renderToStaticMarkup(html)}`;
   } catch (e) {
