@@ -89,7 +89,7 @@ export const HeroSection = graphql<{}, Response>(GET_HERO_CONFIG)(
             {/* Right login/sign-up forms. */}
             <Grid item xs={12} md={4}>
               <LanguageSelect />
-              <p style={{ height: 747 }}>Form Section</p>
+              <p style={{ height: 747, color: "#fff" }}>Form Section</p>
             </Grid>
           </HeroGridContainer>
         </ContentCenterWrapper>
