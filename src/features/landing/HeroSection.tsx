@@ -7,6 +7,7 @@ import { Logo } from "../../components/Logo";
 import { withLoading } from "../../components/withLoading";
 import { IndexConfig, Localization } from "../../models";
 import { DarkTheme, styled } from "../../styled";
+import { LanguageSelect } from "./LanguageSelect";
 
 const GET_HERO_CONFIG = gql`
   query GetHeroConfig {
@@ -88,6 +89,7 @@ export const HeroSection = graphql<{}, Response>(GET_HERO_CONFIG)(
 
               {/* Right login/sign-up forms. */}
               <Grid item xs={12} md={4}>
+                <LanguageSelect />
                 <p style={{ height: 747 }}>Form Section</p>
               </Grid>
             </HeroGridContainer>

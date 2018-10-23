@@ -1,3 +1,5 @@
+import { strings } from "../../features/localization";
+import { ClientSideState } from "../clientSideState";
 import { MutationResolvers } from "../generated";
 
 export const Mutation: MutationResolvers.Type = {
@@ -7,10 +9,14 @@ export const Mutation: MutationResolvers.Type = {
     if (language !== "en" && language !== "hi") {
       throw new Error('Expected localization language to be "en" or "hi".');
     }
-    const data = { localizationLanguage: language, __typename: "Localization" };
-    ctx.cache.writeData({ data });
-    /* tslint:disable-next-line:no-console */
-    console.log({ language });
+    const data = {
+      localization: {
+        localizationLanguage: language,
+        __typename: "Localization",
+      },
+    };
+    ctx.cache.writeData<ClientSideState>({ data });
+    strings.setLanguage(language);
     return language;
   },
 };
