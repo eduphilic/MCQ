@@ -15,6 +15,7 @@ type Query {
 }
 
 type Mutation {
+  # Client side state.
   setLocalizationLanguage(language: String!): String!
 }
 
