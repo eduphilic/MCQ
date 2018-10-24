@@ -4,9 +4,10 @@ import { GraphQLResolveInfo } from "graphql";
 import { Context } from "../Context";
 import { HtmlConfig } from "../../models/HtmlConfig";
 import { IndexAboutImage } from "../../models/IndexAboutImage";
-import { IndexConfig } from "../../models/IndexConfig";
-import { Localization } from "../../models/Localization";
-import { LocalizedString } from "../../models/LocalizedString";
+import { IndexPageConfig } from "../../models/IndexPageConfig";
+import { LocalizationSupportedLanguages } from "../../models";
+
+type LocalizedString = { en: string; hi?: string };
 
 export namespace QueryResolvers {
   export const defaultResolvers = {};
@@ -30,14 +31,14 @@ export namespace QueryResolvers {
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
-  ) => IndexConfig | Promise<IndexConfig>;
+  ) => IndexPageConfig | Promise<IndexPageConfig>;
 
   export type LocalizationResolver = (
     parent: {},
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
-  ) => Localization | Promise<Localization>;
+  ) => LocalizationSupportedLanguages | Promise<LocalizationSupportedLanguages>;
 
   export interface Type {
     language: (
@@ -59,14 +60,16 @@ export namespace QueryResolvers {
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
-    ) => IndexConfig | Promise<IndexConfig>;
+    ) => IndexPageConfig | Promise<IndexPageConfig>;
 
     localization: (
       parent: {},
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
-    ) => Localization | Promise<Localization>;
+    ) =>
+      | LocalizationSupportedLanguages
+      | Promise<LocalizationSupportedLanguages>;
   }
 }
 
@@ -96,92 +99,89 @@ export namespace MutationResolvers {
 
 export namespace IndexConfigResolvers {
   export const defaultResolvers = {
-    heroBackgroundImageUrl: (parent: IndexConfig) =>
+    heroBackgroundImageUrl: (parent: IndexPageConfig) =>
       parent.heroBackgroundImageUrl,
-    heroBackgroundAlpha: (parent: IndexConfig) => parent.heroBackgroundAlpha,
-    heroPrimaryTextEn: (parent: IndexConfig) => parent.heroPrimaryTextEn,
-    heroPrimaryTextHi: (parent: IndexConfig) => parent.heroPrimaryTextHi,
-    heroFeaturesEn: (parent: IndexConfig) => parent.heroFeaturesEn,
-    heroFeaturesHi: (parent: IndexConfig) => parent.heroFeaturesHi,
-    aboutTitleEn: (parent: IndexConfig) => parent.aboutTitleEn,
-    aboutTitleHi: (parent: IndexConfig) => parent.aboutTitleHi,
-    aboutTextEn: (parent: IndexConfig) => parent.aboutTextEn,
-    aboutTextHi: (parent: IndexConfig) => parent.aboutTextHi,
-    aboutImages: (parent: IndexConfig) => parent.aboutImages,
+    heroBackgroundAlpha: (parent: IndexPageConfig) =>
+      parent.heroBackgroundAlpha,
+    heroPrimaryText: (parent: IndexPageConfig) => parent.heroPrimaryText,
+    heroFeatures: (parent: IndexPageConfig) => parent.heroFeatures,
+    aboutTitle: (parent: IndexPageConfig) => parent.aboutTitle,
+    aboutText: (parent: IndexPageConfig) => parent.aboutText,
+    aboutImages: (parent: IndexPageConfig) => parent.aboutImages,
   };
 
   export type HerobackgroundimageurlResolver = (
-    parent: IndexConfig,
+    parent: IndexPageConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
   ) => string | Promise<string>;
 
   export type HerobackgroundalphaResolver = (
-    parent: IndexConfig,
+    parent: IndexPageConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
   ) => number | Promise<number>;
 
   export type HeroprimarytextenResolver = (
-    parent: IndexConfig,
+    parent: IndexPageConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
   ) => string | Promise<string>;
 
   export type HeroprimarytexthiResolver = (
-    parent: IndexConfig,
+    parent: IndexPageConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
   ) => string | Promise<string>;
 
   export type HerofeaturesenResolver = (
-    parent: IndexConfig,
+    parent: IndexPageConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
   ) => string[] | Promise<string[]>;
 
   export type HerofeatureshiResolver = (
-    parent: IndexConfig,
+    parent: IndexPageConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
   ) => string[] | Promise<string[]>;
 
   export type AbouttitleenResolver = (
-    parent: IndexConfig,
+    parent: IndexPageConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
   ) => string | Promise<string>;
 
   export type AbouttitlehiResolver = (
-    parent: IndexConfig,
+    parent: IndexPageConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
   ) => string | Promise<string>;
 
   export type AbouttextenResolver = (
-    parent: IndexConfig,
+    parent: IndexPageConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
   ) => string | Promise<string>;
 
   export type AbouttexthiResolver = (
-    parent: IndexConfig,
+    parent: IndexPageConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
   ) => string | Promise<string>;
 
   export type AboutimagesResolver = (
-    parent: IndexConfig,
+    parent: IndexPageConfig,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
@@ -189,77 +189,77 @@ export namespace IndexConfigResolvers {
 
   export interface Type {
     heroBackgroundImageUrl: (
-      parent: IndexConfig,
+      parent: IndexPageConfig,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => string | Promise<string>;
 
     heroBackgroundAlpha: (
-      parent: IndexConfig,
+      parent: IndexPageConfig,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => number | Promise<number>;
 
     heroPrimaryTextEn: (
-      parent: IndexConfig,
+      parent: IndexPageConfig,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => string | Promise<string>;
 
     heroPrimaryTextHi: (
-      parent: IndexConfig,
+      parent: IndexPageConfig,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => string | Promise<string>;
 
     heroFeaturesEn: (
-      parent: IndexConfig,
+      parent: IndexPageConfig,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => string[] | Promise<string[]>;
 
     heroFeaturesHi: (
-      parent: IndexConfig,
+      parent: IndexPageConfig,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => string[] | Promise<string[]>;
 
     aboutTitleEn: (
-      parent: IndexConfig,
+      parent: IndexPageConfig,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => string | Promise<string>;
 
     aboutTitleHi: (
-      parent: IndexConfig,
+      parent: IndexPageConfig,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => string | Promise<string>;
 
     aboutTextEn: (
-      parent: IndexConfig,
+      parent: IndexPageConfig,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => string | Promise<string>;
 
     aboutTextHi: (
-      parent: IndexConfig,
+      parent: IndexPageConfig,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => string | Promise<string>;
 
     aboutImages: (
-      parent: IndexConfig,
+      parent: IndexPageConfig,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
@@ -270,10 +270,8 @@ export namespace IndexConfigResolvers {
 export namespace IndexAboutImageResolvers {
   export const defaultResolvers = {
     imageUrl: (parent: IndexAboutImage) => parent.imageUrl,
-    titleEn: (parent: IndexAboutImage) => parent.titleEn,
-    titleHi: (parent: IndexAboutImage) => parent.titleHi,
-    textEn: (parent: IndexAboutImage) => parent.textEn,
-    textHi: (parent: IndexAboutImage) => parent.textHi,
+    titleEn: (parent: IndexAboutImage) => parent.title,
+    textEn: (parent: IndexAboutImage) => parent.text,
   };
 
   export type ImageurlResolver = (
@@ -454,6 +452,7 @@ export namespace HtmlConfigResolvers {
 
 export namespace LocalizedStringResolvers {
   export const defaultResolvers = {
+    // @ts-ignore
     key: (parent: LocalizedString) => parent.key,
     en: (parent: LocalizedString) => parent.en,
     hi: (parent: LocalizedString) =>
@@ -506,12 +505,10 @@ export namespace LocalizedStringResolvers {
 }
 
 export namespace LocalizationResolvers {
-  export const defaultResolvers = {
-    localizationLanguage: (parent: Localization) => parent.localizationLanguage,
-  };
+  export const defaultResolvers = {};
 
   export type LocalizationlanguageResolver = (
-    parent: Localization,
+    parent: LocalizationSupportedLanguages,
     args: {},
     ctx: Context,
     info: GraphQLResolveInfo,
@@ -519,7 +516,7 @@ export namespace LocalizationResolvers {
 
   export interface Type {
     localizationLanguage: (
-      parent: Localization,
+      parent: LocalizationSupportedLanguages,
       args: {},
       ctx: Context,
       info: GraphQLResolveInfo,
