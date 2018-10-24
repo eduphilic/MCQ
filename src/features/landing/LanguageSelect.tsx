@@ -12,7 +12,6 @@ import { styled } from "../../styled";
 import {
   LocalizationLanguageMutation,
   LocalizationLanguageQuery,
-  strings,
 } from "../localization";
 
 /**
@@ -23,10 +22,10 @@ export const LanguageSelect = () => (
     <SideWrapper>
       <FormLabel component="legend">
         <Hidden smUp>
-          <Heading>{strings.landingPreferredLanguageShort}</Heading>
+          <Heading>Language :</Heading>
         </Hidden>
         <Hidden xsDown>
-          <Heading>{strings.landingPreferredLanguage}</Heading>
+          <Heading>Preferred Language :</Heading>
         </Hidden>
       </FormLabel>
     </SideWrapper>
@@ -37,7 +36,7 @@ export const LanguageSelect = () => (
           <LocalizationLanguageMutation>
             {setLocalization => (
               <RadioGroup
-                aria-label={strings.landingPreferredLanguage}
+                aria-label={"Preferred Language"}
                 row
                 value={localizationLanguage}
                 onChange={e => {

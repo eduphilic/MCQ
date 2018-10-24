@@ -5,4 +5,5 @@ export interface HtmlConfig {
   metaAuthor?: string;
   metaAbstract?: string;
   metaCopyright?: string;
+  landingFooter?: string;
 }

@@ -2,23 +2,22 @@ import { Typography } from "@material-ui/core";
 import gql from "graphql-tag";
 import React from "react";
 import { Query } from "react-apollo";
-import { IndexConfig } from "../../models";
+import { IndexPageConfig, LocalizationSupportedLanguages } from "../../models";
 import { styled } from "../../styled";
 import { LocalizationLanguageQuery } from "../localization";
 
 const GET_HERO_FOOTER_TEXT = gql`
-  query GetHeroFooterText($english: Boolean!) {
-    indexConfig {
-      heroFooterTextEn @include(if: $english)
-      heroFooterTextHi @skip(if: $english)
+  query GetHeroFooterText($language: LocalizationLanguage!) {
+    indexPageConfig {
+      heroFooterText @l10n(language: $language)
     }
   }
 `;
 
 type Response = {
-  indexConfig: Pick<IndexConfig, "heroFooterTextEn" | "heroFooterTextHi">;
+  indexConfig: Pick<IndexPageConfig, "heroFooterText">;
 };
-type Variables = { english: boolean };
+type Variables = { language: LocalizationSupportedLanguages };
 
 /**
  * Footer of hero image section of landing page.
@@ -31,14 +30,9 @@ export const HeroFooter = () => (
       {localizationLanguage => (
         <Query<Response, Variables>
           query={GET_HERO_FOOTER_TEXT}
-          variables={{ english: localizationLanguage === "en" }}
+          variables={{ language: localizationLanguage }}
         >
-          {({ data }) => (
-            <Text>
-              {data!.indexConfig.heroFooterTextEn ||
-                data!.indexConfig.heroFooterTextHi}
-            </Text>
-          )}
+          {({ data }) => <Text>{data!.indexConfig.heroFooterText}</Text>}
         </Query>
       )}
     </LocalizationLanguageQuery>

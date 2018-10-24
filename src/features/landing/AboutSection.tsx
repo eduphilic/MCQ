@@ -3,52 +3,31 @@ import gql from "graphql-tag";
 import React from "react";
 import { Query } from "react-apollo";
 import { ContentCenterWrapper } from "../../components/ContentCenterWrapper";
-import { IndexConfig } from "../../models";
+import { IndexPageConfig, LocalizationSupportedLanguages } from "../../models";
 import { styled } from "../../styled";
 import { LocalizationLanguageQuery } from "../localization";
 
 const GET_ABOUT_SECTION_CONFIG = gql`
-  query GetAboutSectionConfig($english: Boolean!) {
-    indexConfig {
-      ...english @include(if: $english)
-      ...hindi @skip(if: $english)
-
+  query GetAboutSectionConfig($language: LocalizationLanguage!) {
+    indexPageConfig {
+      aboutTitle @l10n(language: $language)
+      aboutText @l10n(language: $language)
       aboutImages {
         imageUrl
+        title @l10n(language: $language)
+        text @l10n(language: $language)
       }
-    }
-  }
-
-  fragment english on IndexConfig {
-    aboutTitleEn
-    aboutTextEn
-    aboutImages {
-      titleEn
-      textEn
-    }
-  }
-
-  fragment hindi on IndexConfig {
-    aboutTitleHi
-    aboutTextHi
-    aboutImages {
-      titleHi
-      textHi
     }
   }
 `;
 
 type Response = {
   indexConfig: Pick<
-    IndexConfig,
-    | "aboutTitleEn"
-    | "aboutTitleHi"
-    | "aboutTextEn"
-    | "aboutTextHi"
-    | "aboutImages"
+    IndexPageConfig,
+    "aboutTitle" | "aboutText" | "aboutImages"
   >;
 };
-type Variables = { english: boolean };
+type Variables = { language: LocalizationSupportedLanguages };
 
 export const AboutSection = () => (
   <Wrapper>
@@ -57,18 +36,12 @@ export const AboutSection = () => (
         {localizationLanguage => (
           <Query<Response, Variables>
             query={GET_ABOUT_SECTION_CONFIG}
-            variables={{ english: localizationLanguage === "en" }}
+            variables={{ language: localizationLanguage }}
           >
             {({ data }) => (
               <>
-                <Title>
-                  {data!.indexConfig.aboutTitleEn ||
-                    data!.indexConfig.aboutTitleHi}
-                </Title>
-                <Text>
-                  {data!.indexConfig.aboutTextEn ||
-                    data!.indexConfig.aboutTextHi}
-                </Text>
+                <Title>{data!.indexConfig.aboutTitle}</Title>
+                <Text>{data!.indexConfig.aboutText}</Text>
                 <Grid container spacing={16}>
                   {data!.indexConfig.aboutImages.map((aboutImage, index) => (
                     <Grid
@@ -82,8 +55,8 @@ export const AboutSection = () => (
                         src={aboutImage.imageUrl}
                         style={{ marginBottom: 24 }}
                       />
-                      <Title>{aboutImage.titleEn || aboutImage.titleHi}</Title>
-                      <Text>{aboutImage.textEn || aboutImage.textHi}</Text>
+                      <Title>{aboutImage.title}</Title>
+                      <Text>{aboutImage.text}</Text>
                     </Grid>
                   ))}
                 </Grid>
