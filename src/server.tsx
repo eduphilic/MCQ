@@ -1,3 +1,6 @@
+import fs from "fs";
+import path from "path";
+
 import {
   createGenerateClassName,
   jssPreset,
@@ -16,12 +19,16 @@ import { lightTheme } from "./styled/themes";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient } from "apollo-client";
 import { SchemaLink } from "apollo-link-schema";
+import { ApolloServer, gql, makeExecutableSchema } from "apollo-server-koa";
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 import Koa, { Context } from "koa";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
+import { LocalizationDirective } from "./features/localization/LocalizationGraphQLDirective";
 import { HtmlConfig } from "./models";
-import { createServer, getContext, getSchema } from "./store";
+import { ServerContext } from "./ServerContext";
+import { resolvers } from "./serverResolvers";
+import { getFirebaseRemoteConfigClient } from "./services";
 
 const firebaseApp = admin.initializeApp();
 const app = new Koa();
@@ -31,8 +38,44 @@ if (process.env.NODE_ENV === "development") {
   app.use(serve(process.env.RAZZLE_PUBLIC_DIR!));
 }
 
-const server = createServer({
-  projectId: firebaseApp.options.projectId!,
+// In production the schema file will be colocated with the server bundle.
+const schemaString = fs.readFileSync(
+  path.resolve(
+    __dirname,
+    process.env.NODE_ENV === "production"
+      ? "schema.graphql"
+      : "../schema.graphql",
+  ),
+  "utf8",
+);
+
+// Used by ApolloServer in server.
+const typeDefs = gql`
+  ${schemaString}
+`;
+
+// Used by ApolloClient in server rendered app.
+const schema = makeExecutableSchema({
+  typeDefs: gql`
+    ${schemaString}
+  `,
+  resolvers,
+});
+
+const contextFactory = ({ ctx }: { ctx: Context }): ServerContext => ({
+  ctx,
+  firebaseRemoteConfigClient: getFirebaseRemoteConfigClient(
+    firebaseApp.options.projectId!,
+  ),
+});
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: contextFactory,
+  schemaDirectives: {
+    localized: LocalizationDirective,
+  },
 });
 
 server.applyMiddleware({
@@ -45,17 +88,16 @@ const assets: { client: { js: string; css?: string } } = require(process.env
   .RAZZLE_ASSETS_MANIFEST!);
 
 const middlewareRenderApp = async (ctx: Context) => {
-  const schema = getSchema();
-  const context = getContext();
+  const context = contextFactory({ ctx });
   const client = new ApolloClient({
     ssrMode: true,
-    link: new SchemaLink({ schema, context }),
+    link: new SchemaLink({ schema }),
     cache: new InMemoryCache(),
   });
 
-  const htmlConfig = await context.firebaseRemoteConfigClient.getFieldsByPrefix<
-    HtmlConfig
-  >("html");
+  const htmlConfig = (await context.firebaseRemoteConfigClient.getParameterByKey(
+    "htmlConfig",
+  )) as HtmlConfig;
 
   const dataOnlyComponent = (
     <ApolloProvider client={client}>
