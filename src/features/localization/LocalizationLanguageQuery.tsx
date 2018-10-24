@@ -1,26 +1,22 @@
 import gql from "graphql-tag";
 import React, { ConsumerProps } from "react";
 import { Query } from "react-apollo";
-import { Localization } from "../../models";
+import { LocalizationSupportedLanguages } from "../../models";
 
 const GET_LOCALIZATION_LANGUAGE = gql`
   query GetLocalizationLanguage {
-    localization @client {
-      localizationLanguage
-    }
+    localizationLanguage @client
   }
 `;
 
 type Response = {
-  localization: Localization;
+  localizationLanguage: LocalizationSupportedLanguages;
 };
 
 export const LocalizationLanguageQuery = ({
   children,
-}: ConsumerProps<"en" | "hi">) => (
+}: ConsumerProps<LocalizationSupportedLanguages>) => (
   <Query<Response> query={GET_LOCALIZATION_LANGUAGE}>
-    {({ data }) =>
-      children(data!.localization.localizationLanguage as "en" | "hi")
-    }
+    {({ data }) => children(data!.localizationLanguage)}
   </Query>
 );

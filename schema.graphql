@@ -3,44 +3,44 @@ schema {
   mutation: Mutation
 }
 
-directive @client on FIELD
+directive @client on FIELD | FIELD_DEFINITION
+
+# Marks a field as being localized.
+directive @localized on FIELD_DEFINITION
+# Client must supply this directive when a field is localized.
+directive @l10n(language: LocalizationLanguage!) on FIELD
 
 type Query {
-  language: [LocalizedString!]!
   htmlConfig: HtmlConfig!
-  indexConfig: IndexConfig!
+  indexPageConfig: IndexPageConfig!
 
-  # Client side state.
-  localization: Localization!
+  # Language to use for localized strings.
+  localizationLanguage: LocalizationLanguage! @client
 }
 
 type Mutation {
-  # Client side state.
-  setLocalizationLanguage(language: String!): String!
+  setLocalizationLanguage(
+    language: LocalizationLanguage!
+  ): LocalizationLanguage! @client
 }
 
-type IndexConfig {
+# Configuration for index page.
+type IndexPageConfig {
   heroBackgroundImageUrl: String!
   heroBackgroundAlpha: Float!
-  heroPrimaryTextEn: String!
-  heroPrimaryTextHi: String!
-  heroFeaturesEn: [String!]!
-  heroFeaturesHi: [String!]!
-  heroFooterTextEn: String!
-  heroFooterTextHi: String!
-  aboutTitleEn: String!
-  aboutTitleHi: String!
-  aboutTextEn: String!
-  aboutTextHi: String!
-  aboutImages: [IndexAboutImage!]!
+  heroPrimaryText: String! @localized
+  heroFeatures: [String!]! @localized
+  heroFooterText: String! @localized
+  aboutTitle: String! @localized
+  aboutText: String! @localized
+  aboutImages: [IndexPageAboutImage!]!
 }
 
-type IndexAboutImage {
+# Image and supporting text in index about section.
+type IndexPageAboutImage {
   imageUrl: String!
-  titleEn: String!
-  titleHi: String!
-  textEn: String!
-  textHi: String!
+  title: String! @localized
+  text: String! @localized
 }
 
 type HtmlConfig {
@@ -50,14 +50,10 @@ type HtmlConfig {
   metaAuthor: String
   metaAbstract: String
   metaCopyright: String
+  landingFooter: String
 }
 
-type LocalizedString {
-  key: String!
-  en: String!
-  hi: String
-}
-
-type Localization {
-  localizationLanguage: String
+enum LocalizationLanguage {
+  ENGLISH
+  HINDI
 }
