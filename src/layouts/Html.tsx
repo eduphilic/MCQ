@@ -130,7 +130,7 @@ export const Html = <Cache extends ApolloCache<any>>({
       <script
         src={assets.client.js}
         defer
-        crossOrigin={process.env.NODE_ENV === "production" ? "true" : undefined}
+        crossOrigin={process.env.NODE_ENV !== "production" ? "true" : undefined}
       />
     </body>
   </html>
