@@ -23,6 +23,8 @@ import { ApolloServer, gql, makeExecutableSchema } from "apollo-server-koa";
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 import Koa, { Context } from "koa";
+import csrf from "koa-csrf";
+import session from "koa-session";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { HtmlConfig } from "./models";
 import { ServerContext } from "./ServerContext";
@@ -31,6 +33,20 @@ import { getFirebaseRemoteConfigClient } from "./services";
 
 const firebaseApp = admin.initializeApp();
 const app = new Koa();
+app.keys = ["g233RT^icesV7TUV8ldD", "t#00NkE2yzD88fj7x8x@"];
+app.use(
+  session(
+    {
+      key: "csrf",
+    },
+    app,
+  ),
+);
+app.use(
+  new csrf({
+    disableQuery: true,
+  }),
+);
 
 if (process.env.NODE_ENV === "development") {
   const serve: typeof import("koa-static") = require("koa-static");
@@ -84,6 +100,11 @@ const assets: { client: { js: string; css?: string } } = require(process.env
   .RAZZLE_ASSETS_MANIFEST!);
 
 const middlewareRenderApp = async (ctx: Context) => {
+  // Firebase Functions emulator won't send cookies otherwise...
+  if (process.env.NODE_ENV === "development") {
+    ctx.set("Cache-Control", "private");
+  }
+
   const context = contextFactory({ ctx });
   const client = new ApolloClient({
     ssrMode: true,
@@ -144,6 +165,7 @@ const middlewareRenderApp = async (ctx: Context) => {
       cache={client.cache}
       materialUiCss={sheetsRegistry.toString().split("\n").map(l => l.trim()).join("")} // prettier-ignore
       styledComponentsStyleElements={styleElements}
+      csrfToken={ctx.csrf}
       googleAnalyticsId={htmlConfig.googleAnalyticsId}
       metaKeywords={htmlConfig.metaKeywords}
       metaDescription={htmlConfig.metaDescription}

@@ -13,6 +13,7 @@ export type HtmlProps<Cache extends ApolloCache<any>> = {
   };
   materialUiCss: string;
   styledComponentsStyleElements: ReactElement<any>[];
+  csrfToken: string;
 
   googleAnalyticsId?: string;
   metaKeywords?: string;
@@ -38,6 +39,7 @@ export const Html = <Cache extends ApolloCache<any>>({
   assets,
   materialUiCss,
   styledComponentsStyleElements,
+  csrfToken,
 
   googleAnalyticsId,
   metaKeywords,
@@ -125,6 +127,12 @@ export const Html = <Cache extends ApolloCache<any>>({
           __html: `window.__STATE__=${JSON.stringify(
             lzString.compressToUTF16(JSON.stringify(cache.extract())),
           )}`,
+        }}
+      />
+      <script
+        charSet="UTF-8"
+        dangerouslySetInnerHTML={{
+          __html: `window.__CSRF__=${JSON.stringify(csrfToken)}`,
         }}
       />
       <script

@@ -9,6 +9,7 @@ import { App } from "./app";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import ApolloClient from "apollo-client";
 import { ApolloLink } from "apollo-link";
+import { setContext } from "apollo-link-context";
 import { onError } from "apollo-link-error";
 import { HttpLink } from "apollo-link-http";
 import { withClientState } from "apollo-link-state";
@@ -37,10 +38,21 @@ const stateLink = withClientState({
   resolvers,
 });
 
-const httpLink = new HttpLink({ uri: "/graphql" });
+const setCsrfLink = setContext((_request, previousContext) => {
+  /* tslint:disable-next-line:no-console */
+  console.log({ previousContext });
+  return {
+    headers: {
+      // ...previousContext.headers,
+      "X-XSRF-TOKEN": window.__CSRF__,
+    },
+  };
+});
+
+const httpLink = new HttpLink({ uri: "/graphql", credentials: "include" });
 
 const client = new ApolloClient({
-  link: ApolloLink.from([errorLink, stateLink, httpLink]),
+  link: ApolloLink.from([errorLink, setCsrfLink, stateLink, httpLink]),
   cache,
 });
 
@@ -81,5 +93,6 @@ if (module.hot) {
 declare global {
   interface Window {
     __STATE__: string;
+    __CSRF__: string;
   }
 }
