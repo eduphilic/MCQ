@@ -1,7 +1,7 @@
 import { Typography } from "@material-ui/core";
 import gql from "graphql-tag";
 import React from "react";
-import { Query } from "react-apollo";
+import { QueryWithLoading } from "../../components/QueryWithLoading";
 import { IndexPageConfig } from "../../models";
 import { styled } from "../../styled";
 import { l } from "../localization";
@@ -25,9 +25,9 @@ type Response = {
  */
 export const HeroFooter = () => (
   <Wrapper>
-    <Query<Response> query={GET_HERO_FOOTER_TEXT}>
+    <QueryWithLoading<Response> query={GET_HERO_FOOTER_TEXT}>
       {({ data }) => <Text>{l(data!.indexPageConfig.heroFooterText)}</Text>}
-    </Query>
+    </QueryWithLoading>
   </Wrapper>
 );
 

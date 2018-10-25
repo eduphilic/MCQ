@@ -1,9 +1,9 @@
 import { Grid, Hidden, Typography } from "@material-ui/core";
 import gql from "graphql-tag";
 import React, { CSSProperties } from "react";
-import { Query } from "react-apollo";
 import { ContentCenterWrapper } from "../../components/ContentCenterWrapper";
 import { Logo } from "../../components/Logo";
+import { QueryWithLoading } from "../../components/QueryWithLoading";
 import { IndexPageConfig } from "../../models";
 import { styled } from "../../styled";
 import { l } from "../localization";
@@ -31,7 +31,7 @@ type Response = {
 };
 
 export const HeroSection = () => (
-  <Query<Response> query={GET_HERO_CONFIG}>
+  <QueryWithLoading<Response> query={GET_HERO_CONFIG}>
     {({ data }) => (
       <HeroBackgroundImage
         background={{
@@ -79,7 +79,7 @@ export const HeroSection = () => (
         </ContentCenterWrapper>
       </HeroBackgroundImage>
     )}
-  </Query>
+  </QueryWithLoading>
 );
 
 type HeroBackgroundImageProps = {

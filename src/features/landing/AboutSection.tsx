@@ -1,8 +1,8 @@
 import { Grid, Typography } from "@material-ui/core";
 import gql from "graphql-tag";
 import React from "react";
-import { Query } from "react-apollo";
 import { ContentCenterWrapper } from "../../components/ContentCenterWrapper";
+import { QueryWithLoading } from "../../components/QueryWithLoading";
 import { IndexPageConfig } from "../../models";
 import { styled } from "../../styled";
 import { l } from "../localization";
@@ -31,7 +31,7 @@ type Response = {
 export const AboutSection = () => (
   <Wrapper>
     <ContentCenterWrapper style={{ textAlign: "center" }}>
-      <Query<Response> query={GET_ABOUT_SECTION_CONFIG}>
+      <QueryWithLoading<Response> query={GET_ABOUT_SECTION_CONFIG}>
         {({ data }) => (
           <>
             <Title>{l(data!.indexPageConfig.aboutTitle)}</Title>
@@ -47,7 +47,7 @@ export const AboutSection = () => (
             </Grid>
           </>
         )}
-      </Query>
+      </QueryWithLoading>
       )}
     </ContentCenterWrapper>
   </Wrapper>
