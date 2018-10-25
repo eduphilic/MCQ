@@ -10,11 +10,17 @@ type Query {
   indexPageConfig: IndexPageConfig!
   currentUser: User
 
+  # Client State
+
   # Language to use for localized strings.
   localization: Localization! @client
 }
 
 type Mutation {
+  login(phoneNumber: String!, password: String!): LOGIN_REQUEST_RESULT!
+
+  # Client State
+
   setLocalizationLanguage(
     language: LocalizationLanguage!
   ): LocalizationLanguage! @client
@@ -68,6 +74,11 @@ type User {
 enum USER_ROLE {
   USER
   ADMIN
+}
+
+enum LOGIN_REQUEST_RESULT {
+  VALID
+  INVALID
 }
 
 scalar LocalizedString
