@@ -14,7 +14,7 @@ export const resolvers: IResolvers<{}, ClientContext> = {
       };
 
       ctx.cache.writeData({ data });
-      setLanguage(args.language);
+      return args.language;
     },
   },
 };
