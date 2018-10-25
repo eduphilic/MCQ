@@ -2,7 +2,9 @@ import LocalizedStrings from "react-localization";
 import { LocalizationSupportedLanguages, LocalizedString } from "../../models";
 
 const stringTranslations = new Map<string, LocalizedString>();
-const strings = new LocalizedStrings({ en: {} });
+// The constructor is missing the optional options field.
+// @ts-ignore
+const strings = new LocalizedStrings({ en: {} }, { logsEnabled: false });
 
 // tslint:disable-next-line:function-name
 export function l(localizedString: LocalizedString) {
