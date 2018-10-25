@@ -8,6 +8,7 @@ directive @client on FIELD | FIELD_DEFINITION
 type Query {
   htmlConfig: HtmlConfig!
   indexPageConfig: IndexPageConfig!
+  currentUser: User
 
   # Language to use for localized strings.
   localization: Localization! @client
@@ -54,6 +55,19 @@ type HtmlConfig {
   metaAbstract: String
   metaCopyright: String
   landingFooter: String
+}
+
+type User {
+  phoneNumber: String!
+  fullName: String!
+  emailAddress: String!
+  language: LocalizationLanguage!
+  role: USER_ROLE!
+}
+
+enum USER_ROLE {
+  USER
+  ADMIN
 }
 
 scalar LocalizedString
