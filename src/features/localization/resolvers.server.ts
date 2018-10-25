@@ -10,7 +10,7 @@ export const resolvers: IResolvers<{}, ServerContext> = {
     // TODO: Set default localization
     localization: (_parent, _args, _ctx): LocalizationState => {
       return {
-        __typename: "localization",
+        __typename: "Localization",
         language: LocalizationSupportedLanguages.English,
       };
     },
