@@ -5,17 +5,12 @@ schema {
 
 directive @client on FIELD | FIELD_DEFINITION
 
-# Marks a field as being localized.
-directive @localized on FIELD_DEFINITION
-# Client must supply this directive when a field is localized.
-directive @l10n(language: LocalizationLanguage!) on FIELD
-
 type Query {
   htmlConfig: HtmlConfig!
   indexPageConfig: IndexPageConfig!
 
   # Language to use for localized strings.
-  localizationLanguage: LocalizationLanguage! @client
+  localization: Localization! @client
 }
 
 type Mutation {
@@ -24,23 +19,31 @@ type Mutation {
   ): LocalizationLanguage! @client
 }
 
+# Client State
+
+type Localization {
+  language: LocalizationLanguage!
+}
+
+# Server State
+
 # Configuration for index page.
 type IndexPageConfig {
   heroBackgroundImageUrl: String!
   heroBackgroundAlpha: Float!
-  heroPrimaryText: String! @localized
-  heroFeatures: [String!]! @localized
-  heroFooterText: String! @localized
-  aboutTitle: String! @localized
-  aboutText: String! @localized
+  heroPrimaryText: LocalizedString!
+  heroFeatures: [LocalizedString!]!
+  heroFooterText: LocalizedString!
+  aboutTitle: LocalizedString!
+  aboutText: LocalizedString!
   aboutImages: [IndexPageAboutImage!]!
 }
 
 # Image and supporting text in index about section.
 type IndexPageAboutImage {
   imageUrl: String!
-  title: String! @localized
-  text: String! @localized
+  title: LocalizedString!
+  text: LocalizedString!
 }
 
 type HtmlConfig {
@@ -52,6 +55,8 @@ type HtmlConfig {
   metaCopyright: String
   landingFooter: String
 }
+
+scalar LocalizedString
 
 enum LocalizationLanguage {
   ENGLISH

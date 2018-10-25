@@ -1,12 +1,13 @@
 import { IndexAboutImage } from "./IndexAboutImage";
+import { LocalizedString } from "./LocalizedString";
 
 export interface IndexPageConfig {
   heroBackgroundImageUrl: string;
   heroBackgroundAlpha: number;
-  heroPrimaryText: string;
-  heroFeatures: string[];
-  heroFooterText: string;
-  aboutTitle: string;
-  aboutText: string;
+  heroPrimaryText: LocalizedString;
+  heroFeatures: LocalizedString[];
+  heroFooterText: LocalizedString;
+  aboutTitle: LocalizedString;
+  aboutText: LocalizedString;
   aboutImages: IndexAboutImage[];
 }

@@ -1,5 +1,7 @@
+import { LocalizedString } from "./LocalizedString";
+
 export interface IndexAboutImage {
   imageUrl: string;
-  title: string;
-  text: string;
+  title: LocalizedString;
+  text: LocalizedString;
 }

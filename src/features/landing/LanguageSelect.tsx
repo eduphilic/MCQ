@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { SFC } from "react";
+import { LocalizationSupportedLanguages } from "../../models";
 import { styled } from "../../styled";
 import {
   LocalizationLanguageMutation,
@@ -44,13 +45,13 @@ export const LanguageSelect = () => (
                 }}
               >
                 <StyledFormControlLabel
-                  value="en"
+                  value={LocalizationSupportedLanguages.English}
                   control={<StyledRadio />}
                   label="English"
                 />
 
                 <StyledFormControlLabel
-                  value="hi"
+                  value={LocalizationSupportedLanguages.Hindi}
                   control={<StyledRadio />}
                   label="हिंदी"
                 />

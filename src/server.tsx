@@ -24,7 +24,6 @@ import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 import Koa, { Context } from "koa";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
-import { LocalizationDirective } from "./features/localization/LocalizationGraphQLDirective";
 import { HtmlConfig } from "./models";
 import { ServerContext } from "./ServerContext";
 import { resolvers } from "./serverResolvers";
@@ -73,9 +72,6 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: contextFactory,
-  schemaDirectives: {
-    localized: LocalizationDirective,
-  },
 });
 
 server.applyMiddleware({
@@ -91,7 +87,7 @@ const middlewareRenderApp = async (ctx: Context) => {
   const context = contextFactory({ ctx });
   const client = new ApolloClient({
     ssrMode: true,
-    link: new SchemaLink({ schema }),
+    link: new SchemaLink({ schema, context }),
     cache: new InMemoryCache(),
   });
 
@@ -106,7 +102,13 @@ const middlewareRenderApp = async (ctx: Context) => {
       </ServerLocation>
     </ApolloProvider>
   );
-  await getDataFromTree(dataOnlyComponent);
+  try {
+    await getDataFromTree(dataOnlyComponent);
+  } catch (e) {
+    /* tslint:disable-next-line:no-console */
+    console.log("Server rendering error: ", e);
+    throw e;
+  }
 
   // https://material-ui.com/guides/server-rendering/#handling-the-request
   const sheetsRegistry = new SheetsRegistry();
@@ -140,11 +142,7 @@ const middlewareRenderApp = async (ctx: Context) => {
       content={content}
       assets={assets}
       cache={client.cache}
-      materialUiCss={sheetsRegistry
-        .toString()
-        .split("\n")
-        .map(l => l.trim())
-        .join("")}
+      materialUiCss={sheetsRegistry.toString().split("\n").map(l => l.trim()).join("")} // prettier-ignore
       styledComponentsStyleElements={styleElements}
       googleAnalyticsId={htmlConfig.googleAnalyticsId}
       metaKeywords={htmlConfig.metaKeywords}

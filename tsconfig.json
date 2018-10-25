@@ -17,6 +17,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },
-  "include": ["src/**/*", "tools/**/*"],
-  "exclude": ["node_modules", "src/store/generated/tmp-resolvers/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

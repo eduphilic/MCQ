@@ -8,8 +8,5 @@
     "import-name": false,
     "no-floating-promises": true,
     "prettier": true
-  },
-  "linterOptions": {
-    "exclude": ["src/store/generated/**/*"]
   }
 }

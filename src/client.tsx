@@ -13,8 +13,7 @@ import { onError } from "apollo-link-error";
 import { HttpLink } from "apollo-link-http";
 import { withClientState } from "apollo-link-state";
 import { ApolloProvider } from "react-apollo";
-import { LocalizationGraphQLLink } from "./features/localization/LocalizationGraphQLLink";
-import { resolvers } from "./store/resolvers-client";
+import { resolvers } from "./clientResolvers";
 
 const initialCacheState = JSON.parse(
   lzString.decompressFromUTF16(window.__STATE__),
@@ -41,12 +40,7 @@ const stateLink = withClientState({
 const httpLink = new HttpLink({ uri: "/graphql" });
 
 const client = new ApolloClient({
-  link: ApolloLink.from([
-    errorLink,
-    stateLink,
-    new LocalizationGraphQLLink(),
-    httpLink,
-  ]),
+  link: ApolloLink.from([errorLink, stateLink, httpLink]),
   cache,
 });
 

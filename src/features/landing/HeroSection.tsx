@@ -4,24 +4,24 @@ import React, { CSSProperties } from "react";
 import { Query } from "react-apollo";
 import { ContentCenterWrapper } from "../../components/ContentCenterWrapper";
 import { Logo } from "../../components/Logo";
-import { IndexPageConfig, LocalizationSupportedLanguages } from "../../models";
+import { IndexPageConfig } from "../../models";
 import { styled } from "../../styled";
-import { LocalizationLanguageQuery } from "../localization";
+import { l } from "../localization";
 import { LanguageSelect } from "./LanguageSelect";
 
 const GET_HERO_CONFIG = gql`
-  query GetHeroConfig($language: LocalizationLanguage!) {
+  query GetHeroConfig {
     indexPageConfig {
-      heroBackgroundImageUrl @l10n(language: $language)
-      heroBackgroundAlpha @l10n(language: $language)
-      heroPrimaryText @l10n(language: $language)
-      heroFeatures @l10n(language: $language)
+      heroBackgroundImageUrl
+      heroBackgroundAlpha
+      heroPrimaryText
+      heroFeatures
     }
   }
 `;
 
 type Response = {
-  indexConfig: Pick<
+  indexPageConfig: Pick<
     IndexPageConfig,
     | "heroBackgroundImageUrl"
     | "heroBackgroundAlpha"
@@ -29,65 +29,57 @@ type Response = {
     | "heroFeatures"
   >;
 };
-type Variables = { language: LocalizationSupportedLanguages };
 
 export const HeroSection = () => (
-  <LocalizationLanguageQuery>
-    {localizationLanguage => (
-      <Query<Response, Variables>
-        query={GET_HERO_CONFIG}
-        variables={{ language: localizationLanguage }}
+  <Query<Response> query={GET_HERO_CONFIG}>
+    {({ data }) => (
+      <HeroBackgroundImage
+        background={{
+          heroBackgroundImageUrl: data!.indexPageConfig.heroBackgroundImageUrl,
+          heroBackgroundAlpha: data!.indexPageConfig.heroBackgroundAlpha,
+        }}
       >
-        {({ data }) => (
-          <HeroBackgroundImage
-            background={{
-              heroBackgroundImageUrl: data!.indexConfig.heroBackgroundImageUrl,
-              heroBackgroundAlpha: data!.indexConfig.heroBackgroundAlpha,
-            }}
-          >
-            <ContentCenterWrapper>
-              <HeroGridContainer container>
-                {/* Left text content. */}
-                <HeroGridTextSectionItem
-                  container
-                  direction="column"
-                  item
-                  xs={12}
-                  md={8}
-                >
+        <ContentCenterWrapper>
+          <HeroGridContainer container>
+            {/* Left text content. */}
+            <HeroGridTextSectionItem
+              container
+              direction="column"
+              item
+              xs={12}
+              md={8}
+            >
+              <Grid item>
+                <LogoWithBottomMargin alternateSecondWordColoring />
+              </Grid>
+              <Hidden smDown>
+                <Grid container direction="column" justify="center" item xs>
                   <Grid item>
-                    <LogoWithBottomMargin alternateSecondWordColoring />
+                    <HeroPrimaryText>
+                      {l(data!.indexPageConfig.heroPrimaryText)}
+                    </HeroPrimaryText>
                   </Grid>
-                  <Hidden smDown>
-                    <Grid container direction="column" justify="center" item xs>
-                      <Grid item>
-                        <HeroPrimaryText>
-                          {data!.indexConfig.heroPrimaryText}
-                        </HeroPrimaryText>
-                      </Grid>
-                      <Grid item>
-                        <HeroFeatureList>
-                          {data!.indexConfig.heroFeatures.map((text, key) => (
-                            <HeroFeatureItem key={key}>{text}</HeroFeatureItem>
-                          ))}
-                        </HeroFeatureList>
-                      </Grid>
-                    </Grid>
-                  </Hidden>
-                </HeroGridTextSectionItem>
-
-                {/* Right login/sign-up forms. */}
-                <Grid item xs={12} md={4}>
-                  <LanguageSelect />
-                  <p style={{ height: 747, color: "#fff" }}>Form Section</p>
+                  <Grid item>
+                    <HeroFeatureList>
+                      {data!.indexPageConfig.heroFeatures.map((text, key) => (
+                        <HeroFeatureItem key={key}>{l(text)}</HeroFeatureItem>
+                      ))}
+                    </HeroFeatureList>
+                  </Grid>
                 </Grid>
-              </HeroGridContainer>
-            </ContentCenterWrapper>
-          </HeroBackgroundImage>
-        )}
-      </Query>
+              </Hidden>
+            </HeroGridTextSectionItem>
+
+            {/* Right login/sign-up forms. */}
+            <Grid item xs={12} md={4}>
+              <LanguageSelect />
+              <p style={{ height: 747, color: "#fff" }}>Form Section</p>
+            </Grid>
+          </HeroGridContainer>
+        </ContentCenterWrapper>
+      </HeroBackgroundImage>
     )}
-  </LocalizationLanguageQuery>
+  </Query>
 );
 
 type HeroBackgroundImageProps = {
