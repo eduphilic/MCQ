@@ -9,7 +9,6 @@ import { App } from "./app";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import ApolloClient from "apollo-client";
 import { ApolloLink } from "apollo-link";
-import { setContext } from "apollo-link-context";
 import { onError } from "apollo-link-error";
 import { HttpLink } from "apollo-link-http";
 import { withClientState } from "apollo-link-state";
@@ -38,21 +37,41 @@ const stateLink = withClientState({
   resolvers,
 });
 
-const setCsrfLink = setContext((_request, previousContext) => {
-  /* tslint:disable-next-line:no-console */
-  console.log({ previousContext });
-  return {
+/**
+ * Attaches cross site request forgery (CSRF) tokens to outgoing requests. It
+ * uses the initial token attached by the static site render and then updates it
+ * as new tokens are provided in server responses.
+ */
+const csrfLink = new ApolloLink((operation, forward) => {
+  operation.setContext({
     headers: {
-      // ...previousContext.headers,
-      "X-XSRF-TOKEN": window.__CSRF__,
+      ...operation.getContext().headers,
+      "x-xsrf-token": window.__CSRF__,
     },
-  };
+  });
+
+  return forward!(operation).map(data => {
+    const context = operation.getContext();
+    if (!context.response || !context.response.headers) {
+      throw new Error("[csrfLink] Unable to retrieve response headers.");
+    }
+    const csrfToken = (context.response as Response).headers.get(
+      "x-xsrf-token",
+    );
+    if (!csrfToken) {
+      throw new Error(
+        "[csrfLink] Expected CSRF header was not attached to response.",
+      );
+    }
+    window.__CSRF__ = csrfToken;
+    return data;
+  });
 });
 
-const httpLink = new HttpLink({ uri: "/graphql", credentials: "include" });
+const httpLink = new HttpLink({ uri: "/graphql", credentials: "same-origin" });
 
 const client = new ApolloClient({
-  link: ApolloLink.from([errorLink, setCsrfLink, stateLink, httpLink]),
+  link: ApolloLink.from([errorLink, csrfLink, stateLink, httpLink]),
   cache,
 });
 

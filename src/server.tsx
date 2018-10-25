@@ -77,12 +77,18 @@ const schema = makeExecutableSchema({
   resolvers,
 });
 
-const contextFactory = ({ ctx }: { ctx: Context }): ServerContext => ({
-  ctx,
-  firebaseRemoteConfigClient: getFirebaseRemoteConfigClient(
-    firebaseApp.options.projectId!,
-  ),
-});
+const contextFactory = ({ ctx }: { ctx: Context }): ServerContext => {
+  // Send a current CSRF token so the client's connection is not rejected should
+  // its token become stale before its next refresh.
+  ctx.set("X-XSRF-TOKEN", ctx.csrf);
+
+  return {
+    ctx,
+    firebaseRemoteConfigClient: getFirebaseRemoteConfigClient(
+      firebaseApp.options.projectId!,
+    ),
+  };
+};
 
 const server = new ApolloServer({
   typeDefs,
