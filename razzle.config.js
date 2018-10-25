@@ -33,8 +33,8 @@ module.exports = {
       config.output.filename = "index.js";
       config.output.path = path.resolve(__dirname, "./build-server");
       config.output.libraryTarget = "commonjs2";
-      config.plugins.push(new CustomPostBuildPlugin());
 
+      config.plugins.push(new CustomPostBuildPlugin());
       config.plugins = config.plugins.filter(
         c => !/StartServerPlugin/.test(c.constructor),
       );
@@ -70,6 +70,9 @@ class CustomPostBuildPlugin {
         private: true,
         name: "functions",
         version: "1.0.0",
+        engines: {
+          node: "8",
+        },
         dependencies: pkg.dependencies,
       };
 

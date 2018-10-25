@@ -1,6 +1,9 @@
 {
   "private": true,
   "name": "join-uniform",
+  "engines": {
+    "node": "8"
+  },
   "jest": {
     "transform": {
       "^.+\\.[tj]sx?$": "ts-jest"
