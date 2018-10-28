@@ -20,6 +20,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient } from "apollo-client";
 import { SchemaLink } from "apollo-link-schema";
 import { ApolloServer, gql, makeExecutableSchema } from "apollo-server-koa";
+import { SetOption as CookieSetOption } from "cookies";
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 import Koa, { Context } from "koa";
@@ -29,7 +30,19 @@ import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { HtmlConfig } from "./models";
 import { ServerContext } from "./ServerContext";
 import { resolvers } from "./serverResolvers";
-import { getFirebaseRemoteConfigClient } from "./services";
+import {
+  getFirebaseRemoteConfigClient,
+  getSessionCookieService,
+} from "./services";
+
+const jwtSecret = "^aoqJQ5onoOzay0wmFoW";
+const cookieOptions: CookieSetOption = {
+  maxAge: 60 * 60 * 24 * 14 /* 14 days */ * 1000,
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  domain:
+    process.env.NODE_ENV === "production" ? "www.joinuniform.com" : "localhost",
+};
 
 // Firebase Service Account
 const firebaseCredentials = {
@@ -62,13 +75,40 @@ firebaseDatabase.settings({
 
 const app = new Koa();
 app.keys = ["g233RT^icesV7TUV8ldD", "t#00NkE2yzD88fj7x8x@"];
-app.use(session({ key: "csrf" }, app));
+app.use(
+  session(
+    {
+      key: "__session",
+      signed: false,
+      maxAge: cookieOptions.maxAge,
+    },
+    app,
+  ),
+);
 app.use(new csrf({ disableQuery: true }));
 
 if (process.env.NODE_ENV === "development") {
   const serve: typeof import("koa-static") = require("koa-static");
   app.use(serve(process.env.RAZZLE_PUBLIC_DIR!));
 }
+
+// Load user from session cookie.
+app.use((ctx, next) => {
+  const sessionCookie = ctx.session!.user;
+  if (!sessionCookie) {
+    ctx.session!.user = null;
+    ctx.state.user = null;
+    return next();
+  }
+  const user = getSessionCookieService(
+    jwtSecret,
+    cookieOptions.maxAge! / 1000,
+  ).validateSessionCookie(sessionCookie);
+  ctx.state.user = user;
+  /* tslint:disable-next-line:no-console */
+  console.log({ user });
+  return next();
+});
 
 // In production the schema file will be colocated with the server bundle.
 const schemaString = fs.readFileSync(
@@ -107,6 +147,10 @@ const contextFactory = ({ ctx }: { ctx: Context }): ServerContext => {
       clientEmail: firebaseCredentials.client_email,
       privateKey: firebaseCredentials.private_key,
     }),
+    sessionCookieService: getSessionCookieService(
+      jwtSecret,
+      cookieOptions.maxAge! / 1000,
+    ),
   };
 };
 
