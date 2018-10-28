@@ -1,65 +1,73 @@
-import { Link, RouteComponentProps } from "@reach/router";
-import gql from "graphql-tag";
-import React, { createRef, SFC } from "react";
-import { Mutation } from "react-apollo";
+import { Grid, Hidden, Typography } from "@material-ui/core";
+import { RouteComponentProps } from "@reach/router";
+import React, { SFC } from "react";
+import { ContentCenterWrapper } from "../components/ContentCenterWrapper";
+import { Logo } from "../components/Logo";
 import { LandingLayout } from "../layouts";
-import { SessionLoginRequestResult } from "../models/SessionLoginRequestResult";
-
-const LOGIN = gql`
-  mutation Login($phoneNumber: String!, $password: String!) {
-    login(phoneNumber: $phoneNumber, password: $password)
-  }
-`;
-
-type Result = SessionLoginRequestResult;
-type Variables = {
-  phoneNumber: string;
-  password: string;
-};
+import { DarkTheme, styled } from "../styled";
 
 export const AdminLoginPage: SFC<RouteComponentProps> = () => {
-  const phoneNumberInput = createRef<HTMLInputElement>();
-  const passwordInput = createRef<HTMLInputElement>();
+  //
 
   return (
     <LandingLayout>
-      <div>Admin Login Page</div>
-      <Link to="/">Home</Link>
+      <DarkTheme>
+        <Wrapper>
+          <LogoBarWrapper>
+            <ContentCenterWrapper>
+              <Logo />
+            </ContentCenterWrapper>
+          </LogoBarWrapper>
 
-      <Mutation<Result, Variables> mutation={LOGIN}>
-        {(mutate, result) => (
-          <>
-            {!result.called && (
-              <form
-                onSubmit={event => {
-                  event.preventDefault();
+          <ContentWrapper>
+            <ContentCenterWrapper>
+              <Grid container spacing={16}>
+                <Hidden xsDown>
+                  <Grid item sm={8}>
+                    <TypographyWrapper>
+                      <Typography variant="h2" gutterBottom>
+                        Prepare for INDIAN Defence Examinations
+                      </Typography>
+                      <Typography variant="h4">
+                        Some message can be written here to explain about this
+                        website
+                      </Typography>
+                    </TypographyWrapper>
+                  </Grid>
+                </Hidden>
 
-                  // tslint:disable-next-line:no-floating-promises
-                  mutate({
-                    variables: {
-                      phoneNumber: phoneNumberInput.current!.value,
-                      password: passwordInput.current!.value,
-                    },
-                  });
-                  passwordInput.current!.value = "";
-                }}
-              >
-                <p>Phone Number: (0000)</p>
-                <p>
-                  <input ref={phoneNumberInput} />
-                </p>
-                <p>Password: (00000000)</p>
-                <p>
-                  <input ref={passwordInput} type="password" />
-                </p>
-                <button type="submit">Login</button>
-              </form>
-            )}
-            {result.loading && <p>Loading...</p>}
-            {result.data && <p>Result: {JSON.stringify(result.data)}</p>}
-          </>
-        )}
-      </Mutation>
+                <Grid item xs={12} sm={4}>
+                  <p>Login Forms</p>
+                </Grid>
+              </Grid>
+            </ContentCenterWrapper>
+          </ContentWrapper>
+        </Wrapper>
+      </DarkTheme>
     </LandingLayout>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #404040;
+`;
+
+const LogoBarWrapper = styled.div`
+  padding: 16px 0;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.8) 3%,
+    rgba(0, 0, 0, 0)
+  );
+`;
+
+const ContentWrapper = styled.div`
+  flex: 1;
+`;
+
+const TypographyWrapper = styled.div`
+  margin-top: 10%;
+`;
