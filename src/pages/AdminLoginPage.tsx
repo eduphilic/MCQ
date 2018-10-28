@@ -1,50 +1,73 @@
 import { Grid, Hidden, Typography } from "@material-ui/core";
 import { RouteComponentProps } from "@reach/router";
+import gql from "graphql-tag";
 import React, { SFC } from "react";
 import { ContentCenterWrapper } from "../components/ContentCenterWrapper";
 import { Logo } from "../components/Logo";
+import { QueryWithLoading } from "../components/QueryWithLoading";
+import { l } from "../features/localization";
 import { LandingLayout } from "../layouts";
+import { LocalizedString } from "../models";
 import { DarkTheme, styled } from "../styled";
+
+const GET_ADMIN_LOGIN_PAGE_CONFIG = gql`
+  query GetAdminLoginPageConfig {
+    adminLoginPageConfig {
+      heroPrimaryText
+      heroSecondaryText
+    }
+  }
+`;
 
 export const AdminLoginPage: SFC<RouteComponentProps> = () => {
   //
 
   return (
-    <LandingLayout>
-      <DarkTheme>
-        <Wrapper>
-          <LogoBarWrapper>
-            <ContentCenterWrapper>
-              <Logo />
-            </ContentCenterWrapper>
-          </LogoBarWrapper>
+    <QueryWithLoading<{
+      adminLoginPageConfig: {
+        heroPrimaryText: LocalizedString;
+        heroSecondaryText: LocalizedString;
+      };
+    }>
+      query={GET_ADMIN_LOGIN_PAGE_CONFIG}
+    >
+      {({ data }) => (
+        <LandingLayout>
+          <DarkTheme>
+            <Wrapper>
+              <LogoBarWrapper>
+                <ContentCenterWrapper>
+                  <Logo />
+                </ContentCenterWrapper>
+              </LogoBarWrapper>
 
-          <ContentWrapper>
-            <ContentCenterWrapper>
-              <Grid container spacing={16}>
-                <Hidden xsDown>
-                  <Grid item sm={8}>
-                    <TypographyWrapper>
-                      <Typography variant="h2" gutterBottom>
-                        Prepare for INDIAN Defence Examinations
-                      </Typography>
-                      <Typography variant="h4">
-                        Some message can be written here to explain about this
-                        website
-                      </Typography>
-                    </TypographyWrapper>
+              <ContentWrapper>
+                <ContentCenterWrapper>
+                  <Grid container spacing={16}>
+                    <Hidden xsDown>
+                      <Grid item sm={8}>
+                        <TypographyWrapper>
+                          <Typography variant="h2" gutterBottom>
+                            {l(data!.adminLoginPageConfig.heroPrimaryText)}
+                          </Typography>
+                          <Typography variant="h4">
+                            {l(data!.adminLoginPageConfig.heroSecondaryText)}
+                          </Typography>
+                        </TypographyWrapper>
+                      </Grid>
+                    </Hidden>
+
+                    <Grid item xs={12} sm={4}>
+                      <p>Login Forms</p>
+                    </Grid>
                   </Grid>
-                </Hidden>
-
-                <Grid item xs={12} sm={4}>
-                  <p>Login Forms</p>
-                </Grid>
-              </Grid>
-            </ContentCenterWrapper>
-          </ContentWrapper>
-        </Wrapper>
-      </DarkTheme>
-    </LandingLayout>
+                </ContentCenterWrapper>
+              </ContentWrapper>
+            </Wrapper>
+          </DarkTheme>
+        </LandingLayout>
+      )}
+    </QueryWithLoading>
   );
 };
 

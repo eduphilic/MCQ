@@ -8,6 +8,7 @@ directive @client on FIELD | FIELD_DEFINITION
 type Query {
   htmlConfig: HtmlConfig!
   indexPageConfig: IndexPageConfig!
+  adminLoginPageConfig: AdminLoginPageConfig!
   currentUser: User
 
   # Client State
@@ -44,6 +45,11 @@ type IndexPageConfig {
   aboutTitle: LocalizedString!
   aboutText: LocalizedString!
   aboutImages: [IndexPageAboutImage!]!
+}
+
+type AdminLoginPageConfig {
+  heroPrimaryText: LocalizedString!
+  heroSecondaryText: LocalizedString!
 }
 
 # Image and supporting text in index about section.
