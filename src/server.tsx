@@ -35,7 +35,7 @@ import {
   getSessionCookieService,
 } from "./services";
 
-const jwtSecret = "^aoqJQ5onoOzay0wmFoW";
+const jwtSecret = "n#3Tni$X%adp@DE4knaZ";
 const cookieOptions: CookieSetOption = {
   maxAge: 60 * 60 * 24 * 14 /* 14 days */ * 1000,
   httpOnly: true,
@@ -74,7 +74,7 @@ firebaseDatabase.settings({
 });
 
 const app = new Koa();
-app.keys = ["g233RT^icesV7TUV8ldD", "t#00NkE2yzD88fj7x8x@"];
+app.keys = ["n#3Tni$X%adp@DE4knaZ", "t#00NkE2yzD88fj7x8x@"];
 app.use(
   session(
     {

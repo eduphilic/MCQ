@@ -1,19 +1,18 @@
-// import { strings } from "features/localization";
 import { CardActions, CardContent, CardHeader } from "@material-ui/core";
-// import { Button } from "componentsV0/Button";
 import { Formik } from "formik";
 import gql from "graphql-tag";
 import React, { cloneElement, ReactElement, SFC } from "react";
 import { Button } from "../../../components/Button";
 import { Card } from "../../../components/Card";
 import { QueryWithLoading } from "../../../components/QueryWithLoading";
+import { SessionLoginRequestResult } from "../../../models";
 import { styled } from "../../../styled";
 import { l } from "../../localization";
-// import { IUser } from "../../models/IUser";
 import { FormHeader } from "./FormHeader";
 import { FormType } from "./FormType";
 import { getLocalizedTextFieldProps } from "./getLocalizedTextFieldProps";
 import { getValidationSchema } from "./getValidationSchema";
+import { LoginMutation, LoginMutationFn } from "./LoginMutation";
 import { PasswordResetLink } from "./PasswordResetLink";
 import { SessionFormConfig } from "./SessionFormConfig";
 import { TermsConditionsCheckbox } from "./TermsConditionsCheckbox";
@@ -42,27 +41,6 @@ type Response = {
   sessionFormConfig: SessionFormConfig;
 };
 
-// type OwnProps = {
-//   type: FormType;
-// };
-// export type SessionFormProps = OwnProps;
-
-// type DispatchProps = {
-//   onUserSigninSubmit: (phoneNumber: string, password: string) => any;
-//   onUserSignupSubmit: (
-//     fullName: string,
-//     phoneNumber: string,
-//     password: string,
-//     emailAddress: string,
-//   ) => any;
-//   onAdminSigninSubmit: (phoneNumber: string, password: string) => any;
-// };
-
-// type StateProps = {
-//   isSubmitting: boolean;
-// };
-
-// type Props = OwnProps & DispatchProps & StateProps & RouteComponentProps<{}>;
 type Props = { type: FormType };
 
 type TextFields = {
@@ -79,45 +57,55 @@ const initialValues: Values = {
   termsAgreed: false,
 };
 
-const handleFormSubmit = (props: Props, values: Values) => {
-  const {
-    type,
-    // onUserSigninSubmit,
-    // onUserSignupSubmit,
-    // onAdminSigninSubmit,
-  } = props;
+const handleFormSubmit = async (
+  formType: FormType,
+  values: Values,
+  setSubmitting: (isSubmitting: boolean) => any,
+  loginMutation: LoginMutationFn,
+) => {
+  let wasSuccessful: boolean = false;
+  try {
+    switch (formType) {
+      case "user-sign-up": {
+        break;
+      }
 
-  alert(`Session form submission: ${JSON.stringify(values, null, 2)}`);
-
-  switch (type) {
-    case "user-sign-in": {
-      // onUserSigninSubmit(values.phoneNumber, values.password);
-      return;
+      case "user-sign-in":
+      case "admin-sign-in": {
+        const result = await loginMutation({
+          variables: {
+            phoneNumber: values.phoneNumber,
+            password: values.password,
+          },
+        });
+        wasSuccessful =
+          !!result &&
+          result.data!.userLogin === SessionLoginRequestResult.VALID;
+        /* tslint:disable-next-line:no-console */
+        console.log({ result });
+        break;
+      }
     }
-
-    case "user-sign-up": {
-      // onUserSignupSubmit(
-      //   values.fullName,
-      //   values.phoneNumber,
-      //   values.password,
-      //   values.emailAddress,
-      // );
-      return;
-    }
-
-    case "admin-sign-in": {
-      // onAdminSigninSubmit(values.phoneNumber, values.password);
-      return;
-    }
+  } catch (e) {
+    //
   }
+  setSubmitting(false);
+  return wasSuccessful;
+};
+
+const handleRedirect = (formType: FormType, wasSuccessful: boolean) => {
+  if (!wasSuccessful) return;
+  const baseUrl =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:5000"
+      : "https://www.joinuniform.com";
+  const pageUrl =
+    formType === "admin-sign-in" ? "/admin/dashboard" : "/dashboard";
+  document.location!.assign(`${baseUrl}${pageUrl}`);
 };
 
 export const SessionForm: SFC<Props> = props => {
-  const { type /*, isSubmitting */ } = props;
-  const isSubmitting = false; // TODO: Wire this up.
-  // const [] = useFunctionAsChild<Query<Response>>(Query, {
-  //   query: GET_SESSION_FORM_CONFIG,
-  // });
+  const { type } = props;
 
   const validationSchema = () => getValidationSchema(type);
 
@@ -166,115 +154,98 @@ export const SessionForm: SFC<Props> = props => {
           .filter(f => f !== null) as TextFields;
 
         return (
-          <Formik<typeof initialValues>
-            initialValues={initialValues}
-            onSubmit={values => handleFormSubmit(props, values)}
-            validationSchema={validationSchema}
-          >
-            {({
-              handleSubmit,
-              handleChange,
-              handleBlur,
-              values,
-              errors,
-              touched,
-            }) => (
-              <form onSubmit={handleSubmit}>
-                <Card>
-                  <CardHeader title={<FormHeader>{formTitle}</FormHeader>} />
+          <LoginMutation>
+            {loginMutationFn => (
+              <Formik<typeof initialValues>
+                initialValues={initialValues}
+                onSubmit={async (
+                  values,
+                  { setSubmitting, setFieldValue, setTouched },
+                ) => {
+                  const wasSuccessful = await handleFormSubmit(
+                    props.type,
+                    values,
+                    setSubmitting,
+                    loginMutationFn,
+                  );
+                  setFieldValue("password", "");
+                  setFieldValue("passwordVerify", "");
+                  setTouched({ password: false, passwordVerify: false });
+                  handleRedirect(type, wasSuccessful);
+                }}
+                validationSchema={validationSchema}
+              >
+                {({
+                  handleSubmit,
+                  handleChange,
+                  handleBlur,
+                  values,
+                  errors,
+                  touched,
+                  isSubmitting,
+                }) => (
+                  <form onSubmit={handleSubmit}>
+                    <Card>
+                      <CardHeader
+                        title={<FormHeader>{formTitle}</FormHeader>}
+                      />
 
-                  <CardContent>
-                    {textFields.map(({ name, element }) =>
-                      cloneElement(element, {
-                        value: values[name],
-                        error: touched[name] && !!errors[name],
-                        label: errors[name],
-                        onChange: handleChange,
-                        onBlur: handleBlur,
-                      }),
-                    )}
-                  </CardContent>
+                      <CardContent>
+                        {textFields.map(({ name, element }) =>
+                          cloneElement(element, {
+                            value: values[name],
+                            error: touched[name] && !!errors[name],
+                            label: errors[name],
+                            onChange: handleChange,
+                            onBlur: handleBlur,
+                            disabled: isSubmitting,
+                          }),
+                        )}
+                      </CardContent>
 
-                  <CardActionsMarginBottom>
-                    <Button type="submit" disabled={isSubmitting}>
-                      {l(data!.sessionFormConfig.submitButtonLabel)}
-                    </Button>
+                      <CardActionsMarginBottom>
+                        <Button type="submit" disabled={isSubmitting}>
+                          {l(data!.sessionFormConfig.submitButtonLabel)}
+                        </Button>
 
-                    <SecondaryActionWrapper>
-                      {type === "user-sign-in" && (
-                        <PasswordResetLink
-                          disabled={isSubmitting}
-                          label={l(
-                            data!.sessionFormConfig.passwordResetLinkLabel,
+                        <SecondaryActionWrapper>
+                          {type === "user-sign-in" && (
+                            <PasswordResetLink
+                              disabled={isSubmitting}
+                              label={l(
+                                data!.sessionFormConfig.passwordResetLinkLabel,
+                              )}
+                            />
                           )}
-                        />
-                      )}
 
-                      {type === "user-sign-up" && (
-                        <TermsConditionsCheckbox
-                          name="termsAgreed"
-                          label={l(
-                            data!.sessionFormConfig
-                              .termsConditionsCheckboxLabel,
+                          {type === "user-sign-up" && (
+                            <TermsConditionsCheckbox
+                              name="termsAgreed"
+                              label={l(
+                                data!.sessionFormConfig
+                                  .termsConditionsCheckboxLabel,
+                              )}
+                              checked={values.termsAgreed}
+                              onChange={handleChange}
+                              disabled={isSubmitting}
+                              error={
+                                !!touched.termsAgreed && !!errors.termsAgreed
+                              }
+                            />
                           )}
-                          checked={values.termsAgreed}
-                          onChange={handleChange}
-                          disabled={isSubmitting}
-                          error={!!touched.termsAgreed && !!errors.termsAgreed}
-                        />
-                      )}
-                    </SecondaryActionWrapper>
-                  </CardActionsMarginBottom>
-                </Card>
-              </form>
+                        </SecondaryActionWrapper>
+                      </CardActionsMarginBottom>
+                    </Card>
+                  </form>
+                )}
+              </Formik>
             )}
-          </Formik>
+          </LoginMutation>
         );
       }}
     </QueryWithLoading>
   );
 };
-
-// const dummyUser: IUser = {
-//   id: "abc",
-//   displayName: "John Doe",
-//   email: "john@doe.com",
-//   fullName: "John Doe",
-//   isAdmin: false,
-//   phoneNumber: "123",
-// };
-
-// const SessionFormContainer = connect<
-//   StateProps,
-//   DispatchProps,
-//   OwnProps,
-//   State
-// >(
-//   ({ session }) => ({ isSubmitting: session.isSubmitting }),
-//   {
-//     onUserSigninSubmit: (phoneNumber: string) =>
-//       actions.loginSuccess({ ...dummyUser, phoneNumber }),
-//     onUserSignupSubmit: (
-//       fullName: string,
-//       phoneNumber: string,
-//       emailAddress: string,
-//     ) =>
-//       actions.signupSuccess({
-//         ...dummyUser,
-//         fullName,
-//         phoneNumber,
-//         email: emailAddress,
-//       }),
-//     onAdminSigninSubmit: (phoneNumber: string) =>
-//       actions.loginSuccess({
-//         ...dummyUser,
-//         phoneNumber,
-//       }),
-//   },
-// )(SessionForm);
-
-// const SessionFormContainerWithRouter = withRouter(SessionFormContainer);
-// export { SessionFormContainerWithRouter as SessionForm };
 
 const CardActionsMarginBottom = styled(CardActions)`
   padding-left: ${props => props.theme.spacing.unit * 2}px;
