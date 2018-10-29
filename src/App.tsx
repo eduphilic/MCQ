@@ -1,5 +1,6 @@
 import { Router } from "@reach/router";
 import React from "react";
+import { SnackbarsProvider } from "./features/display";
 import { LocalizationProvider } from "./features/localization";
 import { AdminDashboardPage, AdminLoginPage, RootIndexPage } from "./pages";
 import { LightTheme, ThemeBaseline } from "./styled";
@@ -8,11 +9,13 @@ export const App = () => (
   <LocalizationProvider>
     <ThemeBaseline>
       <LightTheme>
-        <Router>
-          <RootIndexPage path="/" />
-          <AdminLoginPage path="/admin/login" />
-          <AdminDashboardPage path="/admin/dashboard" />
-        </Router>
+        <SnackbarsProvider>
+          <Router>
+            <RootIndexPage path="/" />
+            <AdminLoginPage path="/admin/login" />
+            <AdminDashboardPage path="/admin/dashboard" />
+          </Router>
+        </SnackbarsProvider>
       </LightTheme>
     </ThemeBaseline>
   </LocalizationProvider>

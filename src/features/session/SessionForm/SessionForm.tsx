@@ -7,6 +7,7 @@ import { Card } from "../../../components/Card";
 import { QueryWithLoading } from "../../../components/QueryWithLoading";
 import { SessionLoginRequestResult } from "../../../models";
 import { styled } from "../../../styled";
+import { useSnackbars } from "../../display";
 import { l } from "../../localization";
 import { FormHeader } from "./FormHeader";
 import { FormType } from "./FormType";
@@ -105,6 +106,7 @@ const handleRedirect = (formType: FormType, wasSuccessful: boolean) => {
 };
 
 export const SessionForm: SFC<Props> = props => {
+  const addSnackbarMessage = useSnackbars();
   const { type } = props;
 
   const validationSchema = () => getValidationSchema(type);
@@ -163,7 +165,7 @@ export const SessionForm: SFC<Props> = props => {
                   { setSubmitting, setFieldValue, setTouched },
                 ) => {
                   const wasSuccessful = await handleFormSubmit(
-                    props.type,
+                    type,
                     values,
                     setSubmitting,
                     loginMutationFn,
@@ -172,6 +174,9 @@ export const SessionForm: SFC<Props> = props => {
                   setFieldValue("passwordVerify", "");
                   setTouched({ password: false, passwordVerify: false });
                   handleRedirect(type, wasSuccessful);
+                  if (type !== "user-sign-up" && !wasSuccessful) {
+                    addSnackbarMessage("Invalid account or password.");
+                  }
                 }}
                 validationSchema={validationSchema}
               >
