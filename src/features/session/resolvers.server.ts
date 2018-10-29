@@ -2,6 +2,7 @@ import { IResolvers } from "apollo-server-koa";
 import { compareSync } from "bcryptjs";
 import { SessionLoginRequestResult } from "../../models/SessionLoginRequestResult";
 import { SessionUserServer } from "../../models/SessionUserServer";
+import { SessionUserServerResumed } from "../../models/SessionUserServerResumed";
 import { ServerContext } from "../../ServerContext";
 
 export const resolvers: IResolvers<{}, ServerContext> = {
@@ -10,6 +11,15 @@ export const resolvers: IResolvers<{}, ServerContext> = {
       return ctx.firebaseRemoteConfigClient.getParameterByKey(
         "sessionFormConfig",
       );
+    },
+    currentAuthenticationStatus: (_parent, _args, ctx) => {
+      const user = ctx.ctx.state.user as SessionUserServerResumed | null;
+      return user
+        ? {
+            role: user.role,
+            language: user.language,
+          }
+        : null;
     },
   },
   Mutation: {
@@ -40,10 +50,17 @@ export const resolvers: IResolvers<{}, ServerContext> = {
       const valid = compareSync(loginArgs.password, user.passwordHash);
       if (!valid) return SessionLoginRequestResult.INVALID;
 
-      const sessionCookie = ctx.sessionCookieService.createSessionCookie(user);
+      const userResumed: SessionUserServerResumed = {
+        accountId: user.accountId,
+        language: user.language,
+        role: user.role,
+      };
+
+      const sessionCookie = ctx.sessionCookieService.createSessionCookie(
+        userResumed,
+      );
 
       ctx.ctx.set("Cache-Control", "private");
-      // ctx.ctx.cookies.set("session", sessionCookie, cookieOptions);
       ctx.ctx.session!.user = sessionCookie;
 
       return SessionLoginRequestResult.VALID;

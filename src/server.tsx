@@ -105,8 +105,6 @@ app.use((ctx, next) => {
     cookieOptions.maxAge! / 1000,
   ).validateSessionCookie(sessionCookie);
   ctx.state.user = user;
-  /* tslint:disable-next-line:no-console */
-  console.log({ user });
   return next();
 });
 

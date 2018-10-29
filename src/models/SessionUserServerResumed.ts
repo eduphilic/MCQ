@@ -6,5 +6,5 @@ import { SessionUserServer } from "./SessionUserServer";
  */
 export type SessionUserServerResumed = Pick<
   SessionUserServer,
-  "accountId" | "role"
+  "accountId" | "role" | "language"
 >;

@@ -10,6 +10,8 @@ type Query {
   indexPageConfig: IndexPageConfig!
   adminLoginPageConfig: AdminLoginPageConfig!
   sessionFormConfig: SessionFormConfig!
+
+  currentAuthenticationStatus: AuthenticationStatus
   currentUser: User
 
   # Client State
@@ -90,6 +92,11 @@ type HtmlConfig {
   metaAbstract: String
   metaCopyright: String
   landingFooter: String
+}
+
+type AuthenticationStatus {
+  role: USER_ROLE!
+  language: LocalizationLanguage!
 }
 
 type User {

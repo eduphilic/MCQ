@@ -1,3 +1,4 @@
+export * from "./AuthenticationStatus";
 export * from "./HtmlConfig";
 export * from "./IndexAboutImage";
 export * from "./IndexPageConfig";

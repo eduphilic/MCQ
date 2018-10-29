@@ -15,6 +15,7 @@ class SessionCookieService {
     const jwtContents: SessionUserServerResumed = {
       accountId: user.accountId,
       role: user.role,
+      language: user.language,
     };
     const sessionCookie = sign(jwtContents, this.jwtSecret, {
       expiresIn: this.jwtExpiresInSeconds,
@@ -39,6 +40,7 @@ class SessionCookieService {
     return {
       accountId: sessionUserResumed.accountId,
       role: sessionUserResumed.role,
+      language: sessionUserResumed.language,
     };
   }
 }
