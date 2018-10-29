@@ -6,9 +6,10 @@ import { ContentCenterWrapper } from "../components/ContentCenterWrapper";
 import { Logo } from "../components/Logo";
 import { QueryWithLoading } from "../components/QueryWithLoading";
 import { l } from "../features/localization";
+import { SessionForm } from "../features/session";
 import { LandingLayout } from "../layouts";
 import { LocalizedString } from "../models";
-import { DarkTheme, styled } from "../styled";
+import { DarkTheme, LightTheme, styled } from "../styled";
 
 const GET_ADMIN_LOGIN_PAGE_CONFIG = gql`
   query GetAdminLoginPageConfig {
@@ -58,7 +59,9 @@ export const AdminLoginPage: SFC<RouteComponentProps> = () => {
                     </Hidden>
 
                     <Grid item xs={12} sm={4}>
-                      <p>Login Forms</p>
+                      <LightTheme>
+                        <SessionForm type="admin-sign-in" />
+                      </LightTheme>
                     </Grid>
                   </Grid>
                 </ContentCenterWrapper>

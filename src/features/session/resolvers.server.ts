@@ -5,8 +5,19 @@ import { SessionUserServer } from "../../models/SessionUserServer";
 import { ServerContext } from "../../ServerContext";
 
 export const resolvers: IResolvers<{}, ServerContext> = {
+  Query: {
+    sessionFormConfig: (_parent, _args, ctx) => {
+      return ctx.firebaseRemoteConfigClient.getParameterByKey(
+        "sessionFormConfig",
+      );
+    },
+  },
   Mutation: {
-    login: async (_parent, args, ctx): Promise<SessionLoginRequestResult> => {
+    userLogin: async (
+      _parent,
+      args,
+      ctx,
+    ): Promise<SessionLoginRequestResult> => {
       const loginArgs: {
         phoneNumber: string;
         password: string;

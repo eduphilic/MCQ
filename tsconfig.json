@@ -16,7 +16,7 @@
     "skipLibCheck": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "typeRoots": ["node_modules/@types", "./typings"]
+    "typeRoots": ["./typings", "node_modules/@types"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
