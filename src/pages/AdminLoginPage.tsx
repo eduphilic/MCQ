@@ -20,7 +20,7 @@ const GET_ADMIN_LOGIN_PAGE_CONFIG = gql`
   }
 `;
 
-export const AdminLoginPage: SFC<RouteComponentProps> = () => {
+const AdminLoginPage: SFC<RouteComponentProps> = () => {
   const authenticationStatus = useAuthenticationStatus();
 
   return (
@@ -84,6 +84,8 @@ export const AdminLoginPage: SFC<RouteComponentProps> = () => {
     </QueryWithLoading>
   );
 };
+
+export default AdminLoginPage;
 
 const Wrapper = styled.div`
   display: flex;

@@ -1,4 +1,3 @@
-import { Fade } from "@material-ui/core";
 import React, { Component } from "react";
 import { OperationVariables, Query, QueryProps } from "react-apollo";
 import { LoadingSpinner } from "./LoadingSpinner";
@@ -12,11 +11,7 @@ export class QueryWithLoading<
       <Query<TData, TVariables> {...this.props}>
         {queryResult => {
           if (queryResult.loading) {
-            return (
-              <Fade in style={{ transitionDelay: "800ms" }}>
-                <LoadingSpinner />
-              </Fade>
-            );
+            return <LoadingSpinner fadeIn />;
           }
 
           return this.props.children(queryResult);

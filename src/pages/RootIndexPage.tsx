@@ -4,7 +4,7 @@ import { AboutSection, HeroFooter, HeroSection } from "../features/landing";
 import { LandingLayout } from "../layouts";
 import { DarkTheme } from "../styled";
 
-export const RootIndexPage: SFC<RouteComponentProps> = () => (
+const RootIndexPage: SFC<RouteComponentProps> = () => (
   <LandingLayout>
     <DarkTheme>
       <>
@@ -17,3 +17,5 @@ export const RootIndexPage: SFC<RouteComponentProps> = () => (
     </DarkTheme>
   </LandingLayout>
 );
+
+export default RootIndexPage;

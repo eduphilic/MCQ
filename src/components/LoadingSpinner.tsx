@@ -1,17 +1,32 @@
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, Fade } from "@material-ui/core";
 import { CircularProgressProps } from "@material-ui/core/CircularProgress";
-import React from "react";
+import React, { cloneElement, Fragment } from "react";
+import { LoadingComponentProps } from "react-loadable";
 import { styled } from "../styled";
 import { LogoImage } from "./LogoImage";
 
-export const LoadingSpinner = () => (
-  <Wrapper>
-    <SpinnerWrapper>
-      <StyledLogoImage />
-      <StyledCircularProgress />
-    </SpinnerWrapper>
-  </Wrapper>
-);
+type Props = Partial<LoadingComponentProps> & {
+  fadeIn: boolean;
+};
+
+export const LoadingSpinner = (props: Props) => {
+  const fadeInWrapper = props.fadeIn ? (
+    <Fade in style={{ transitionDelay: "800ms" }} />
+  ) : (
+    <Fragment />
+  );
+
+  return cloneElement(
+    fadeInWrapper,
+    undefined,
+    <Wrapper>
+      <SpinnerWrapper>
+        <StyledLogoImage />
+        <StyledCircularProgress />
+      </SpinnerWrapper>
+    </Wrapper>,
+  );
+};
 
 const Wrapper = styled.div`
   display: flex;

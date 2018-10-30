@@ -4,6 +4,7 @@ const rimraf = require("rimraf");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 const WebpackShellPlugin = require("webpack-shell-plugin");
+const { ReactLoadablePlugin } = require("react-loadable/webpack");
 
 module.exports = {
   plugins: [
@@ -51,6 +52,14 @@ module.exports = {
 
     if (target === "web" && process.env.ANALYZE) {
       config.plugins.push(new BundleAnalyzerPlugin());
+    }
+
+    if (target === "web") {
+      config.plugins.push(
+        new ReactLoadablePlugin({
+          filename: path.resolve(__dirname, "build/react-loadable.json"),
+        }),
+      );
     }
 
     config.performance = config.performance || {};

@@ -19,6 +19,7 @@
           "preventFullImport": true
         }
       }
-    ]
+    ],
+    "react-loadable/babel"
   ]
 }

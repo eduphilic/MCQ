@@ -1,6 +1,7 @@
 import { ApolloCache } from "apollo-cache";
 import lzString from "lz-string";
 import React, { ReactElement } from "react";
+import { getBundles } from "react-loadable/webpack";
 
 export type HtmlProps<Cache extends ApolloCache<any>> = {
   content: string;
@@ -11,6 +12,7 @@ export type HtmlProps<Cache extends ApolloCache<any>> = {
       css?: string;
     };
   };
+  reactLoadableBundles: ReturnType<typeof getBundles>;
   materialUiCss: string;
   styledComponentsStyleElements: ReactElement<any>[];
   csrfToken: string;
@@ -37,6 +39,7 @@ export const Html = <Cache extends ApolloCache<any>>({
   content,
   cache,
   assets,
+  reactLoadableBundles,
   materialUiCss,
   styledComponentsStyleElements,
   csrfToken,
@@ -135,6 +138,21 @@ export const Html = <Cache extends ApolloCache<any>>({
           __html: `window.__CSRF__=${JSON.stringify(csrfToken)}`,
         }}
       />
+      {/* https://github.com/jamiebuilds/react-loadable#mapping-loaded-modules-to-bundles */}
+      {reactLoadableBundles.map(bundle => (
+        <script
+          key={bundle.file}
+          src={`${
+            process.env.NODE_ENV === "development"
+              ? "http://localhost:3001"
+              : ""
+          }/${bundle.file}`}
+          defer
+          crossOrigin={
+            process.env.NODE_ENV !== "production" ? "true" : undefined
+          }
+        />
+      ))}
       <script
         src={assets.client.js}
         defer

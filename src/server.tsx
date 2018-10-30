@@ -28,6 +28,8 @@ import Koa, { Context } from "koa";
 import csrf from "koa-csrf";
 import session from "koa-session";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
+import { Capture, preloadAll } from "react-loadable";
+import { getBundles } from "react-loadable/webpack";
 import { HtmlConfig } from "./models";
 import { ServerContext } from "./ServerContext";
 import { resolvers } from "./serverResolvers";
@@ -168,7 +170,36 @@ server.applyMiddleware({
 const assets: { client: { js: string; css?: string } } = require(process.env
   .RAZZLE_ASSETS_MANIFEST!);
 
-// Reach Router throws on redirect
+// Code splitting setup.
+// https://github.com/jamiebuilds/react-loadable#preloading-all-your-loadable-components-on-the-server
+const componentPreloadPromise = preloadAll();
+// https://github.com/jamiebuilds/react-loadable#mapping-loaded-modules-to-bundles
+type LoadableExportManifest = {
+  [moduleId: string]: ReturnType<typeof getBundles>;
+};
+let getReactLoadableBundleStats: () => Promise<LoadableExportManifest> = () => {
+  return new Promise((resolve, reject) => {
+    const statsPath = path.join(
+      path.dirname(process.env.RAZZLE_ASSETS_MANIFEST!),
+      "react-loadable.json",
+    );
+
+    let statsFileContents: string;
+    try {
+      statsFileContents = fs.readFileSync(statsPath, "utf8");
+    } catch (e) {
+      reject(e);
+      return;
+    }
+    const statsContent = JSON.parse(statsFileContents);
+    resolve(statsContent);
+    if (process.env.NODE_ENV === "production") {
+      getReactLoadableBundleStats = () => Promise.resolve(statsContent);
+    }
+  });
+};
+
+// Reach Router throws on redirect.
 const routerDirectMiddleware = async (ctx: Context, next: NextFunction) => {
   try {
     await next();
@@ -198,14 +229,21 @@ const middlewareRenderApp = async (ctx: Context) => {
     "htmlConfig",
   )) as HtmlConfig;
 
-  const dataOnlyComponent = (
+  // Code Splitting Setup
+  await componentPreloadPromise;
+  const modules: string[] = [];
+
+  const nonCssComponent = (
     <ApolloProvider client={client}>
       <ServerLocation url={ctx.url}>
-        <App />
+        <Capture report={moduleName => modules.push(moduleName)}>
+          <App />
+        </Capture>
       </ServerLocation>
     </ApolloProvider>
   );
-  await getDataFromTree(dataOnlyComponent);
+  await getDataFromTree(nonCssComponent);
+  const bundles = getBundles(await getReactLoadableBundleStats(), modules);
 
   // https://material-ui.com/guides/server-rendering/#handling-the-request
   const sheetsRegistry = new SheetsRegistry();
@@ -224,7 +262,7 @@ const middlewareRenderApp = async (ctx: Context) => {
         generateClassName={generateClassName}
       >
         <MuiThemeProvider theme={lightTheme} sheetsManager={sheetsManager}>
-          {dataOnlyComponent}
+          {nonCssComponent}
         </MuiThemeProvider>
       </JssProvider>
     </StyleSheetManager>
@@ -239,6 +277,7 @@ const middlewareRenderApp = async (ctx: Context) => {
       content={content}
       assets={assets}
       cache={client.cache}
+      reactLoadableBundles={bundles}
       materialUiCss={sheetsRegistry.toString().split("\n").map(l => l.trim()).join("")} // prettier-ignore
       styledComponentsStyleElements={styleElements}
       csrfToken={ctx.csrf}

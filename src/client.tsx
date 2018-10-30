@@ -13,6 +13,7 @@ import { onError } from "apollo-link-error";
 import { HttpLink } from "apollo-link-http";
 import { withClientState } from "apollo-link-state";
 import { ApolloProvider } from "react-apollo";
+import { preloadReady } from "react-loadable";
 import { resolvers } from "./clientResolvers";
 
 const initialCacheState = JSON.parse(
@@ -96,14 +97,17 @@ class Main extends Component {
   }
 }
 
-hydrate(
-  <ApolloProvider client={client}>
-    <JssProvider jss={jss} generateClassName={generateClassName}>
-      <Main />
-    </JssProvider>
-  </ApolloProvider>,
-  document.getElementById("root"),
-);
+// tslint:disable-next-line:no-floating-promises
+preloadReady().then(() => {
+  hydrate(
+    <ApolloProvider client={client}>
+      <JssProvider jss={jss} generateClassName={generateClassName}>
+        <Main />
+      </JssProvider>
+    </ApolloProvider>,
+    document.getElementById("root"),
+  );
+});
 
 if (module.hot) {
   module.hot.accept();
