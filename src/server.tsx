@@ -20,6 +20,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient } from "apollo-client";
 import { SchemaLink } from "apollo-link-schema";
 import { ApolloServer, gql, makeExecutableSchema } from "apollo-server-koa";
+import { NextFunction } from "connect";
 import { SetOption as CookieSetOption } from "cookies";
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
@@ -167,6 +168,19 @@ server.applyMiddleware({
 const assets: { client: { js: string; css?: string } } = require(process.env
   .RAZZLE_ASSETS_MANIFEST!);
 
+// Reach Router throws on redirect
+const routerDirectMiddleware = async (ctx: Context, next: NextFunction) => {
+  try {
+    await next();
+  } catch (e) {
+    if (isRedirect(e)) {
+      ctx.redirect(e.uri);
+      return;
+    }
+    throw e;
+  }
+};
+
 const middlewareRenderApp = async (ctx: Context) => {
   // Firebase Functions emulator won't send cookies otherwise...
   if (process.env.NODE_ENV === "development") {
@@ -191,13 +205,7 @@ const middlewareRenderApp = async (ctx: Context) => {
       </ServerLocation>
     </ApolloProvider>
   );
-  try {
-    await getDataFromTree(dataOnlyComponent);
-  } catch (e) {
-    /* tslint:disable-next-line:no-console */
-    console.log("Server rendering error: ", e);
-    throw e;
-  }
+  await getDataFromTree(dataOnlyComponent);
 
   // https://material-ui.com/guides/server-rendering/#handling-the-request
   const sheetsRegistry = new SheetsRegistry();
@@ -243,19 +251,10 @@ const middlewareRenderApp = async (ctx: Context) => {
     />
   );
 
-  // Reach Router throws on redirect
-  try {
-    ctx.body = `<!doctype html>\n${renderToStaticMarkup(html)}`;
-  } catch (e) {
-    if (isRedirect(e)) {
-      ctx.redirect(e.uri);
-      return;
-    }
-
-    throw e;
-  }
+  ctx.body = `<!doctype html>\n${renderToStaticMarkup(html)}`;
 };
 
+app.use(routerDirectMiddleware);
 app.use(middlewareRenderApp);
 
 export const main = functions.https.onRequest(app.callback());
