@@ -1,25 +1,28 @@
 {
   "presets": ["razzle/babel"],
   "plugins": [
+    [
+      "babel-plugin-import",
+      [
+        {
+          "libraryName": "@material-ui/core",
+          "libraryDirectory": "",
+          "camel2DashComponentName": false
+        },
+        {
+          "libraryName": "@material-ui/icons",
+          "libraryDirectory": "",
+          "camel2DashComponentName": false
+        },
+        {
+          "libraryName": "lodash",
+          "libraryDirectory": "",
+          "camel2DashComponentName": false
+        }
+      ]
+    ],
     "babel-plugin-styled-components",
     "babel-plugin-graphql-tag",
-    [
-      "babel-plugin-transform-imports",
-      {
-        "@material-ui/core": {
-          "transform": "@material-ui/core/${member}",
-          "preventFullImport": true
-        },
-        "@material-ui/icons": {
-          "transform": "@material-ui/icons/${member}",
-          "preventFullImport": true
-        },
-        "lodash": {
-          "transform": "lodash/${member}",
-          "preventFullImport": true
-        }
-      }
-    ],
     "react-loadable/babel"
   ]
 }
