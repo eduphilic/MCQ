@@ -7,7 +7,7 @@ import { Logo } from "../components/Logo";
 import { QueryWithLoading } from "../components/QueryWithLoading";
 import { l } from "../features/localization";
 import { SessionForm, useAuthenticationStatus } from "../features/session";
-import { LandingLayout } from "../layouts";
+import { LandingLayout } from "../layouts/LandingLayout";
 import { LocalizedString, SessionUserRole } from "../models";
 import { DarkTheme, LightTheme, styled } from "../styled";
 

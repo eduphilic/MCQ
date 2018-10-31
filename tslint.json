@@ -5,6 +5,7 @@
     "object-shorthand-properties-first": false,
     "ordered-imports": true,
     "variable-name": false,
+    "function-name": false,
     "import-name": false,
     "no-floating-promises": true,
     "prettier": true

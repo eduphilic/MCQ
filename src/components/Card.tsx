@@ -1,8 +1,5 @@
-import React, { Children, Component, ReactNode } from "react";
-
-// tslint:disable-next-line:import-name
 import MuiCard, { CardProps as MuiCardProps } from "@material-ui/core/Card";
-import { fromMobileFlatBorder } from "../css";
+import React, { Children, Component, ReactNode } from "react";
 import { styled } from "../styled";
 import { CardActionArea } from "./CardActionArea";
 
@@ -58,7 +55,11 @@ const hasChildCardActionAreaComponent = (children: ReactNode): boolean => {
 };
 
 export const Card = styled(CardBase)`
-  ${fromMobileFlatBorder()};
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    box-shadow: none;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+  }
 
   transition: ${({ theme }) =>
     theme.transitions.create("box-shadow", {

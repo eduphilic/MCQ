@@ -13,7 +13,7 @@ import { renderToStaticMarkup, renderToString } from "react-dom/server";
 import JssProvider from "react-jss/lib/JssProvider";
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 import { App } from "./app";
-import { Html } from "./layouts";
+import { Html } from "./layouts/Html";
 import { lightTheme } from "./styled/themes";
 
 import { InMemoryCache } from "apollo-cache-inmemory";
@@ -243,7 +243,10 @@ const middlewareRenderApp = async (ctx: Context) => {
     </ApolloProvider>
   );
   await getDataFromTree(nonCssComponent);
-  const bundles = getBundles(await getReactLoadableBundleStats(), modules);
+  const bundles = getBundles(
+    await getReactLoadableBundleStats(),
+    modules,
+  ).filter(b => !/\.map$/.test(b.file));
 
   // https://material-ui.com/guides/server-rendering/#handling-the-request
   const sheetsRegistry = new SheetsRegistry();
