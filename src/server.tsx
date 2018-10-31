@@ -30,7 +30,8 @@ import session from "koa-session";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { Capture, preloadAll } from "react-loadable";
 import { getBundles } from "react-loadable/webpack";
-import { HtmlConfig } from "./models";
+import { HtmlConfig, SessionUserRole } from "./models";
+import { SessionUserServerResumed } from "./models/SessionUserServerResumed";
 import { ServerContext } from "./ServerContext";
 import { resolvers } from "./serverResolvers";
 import {
@@ -199,6 +200,25 @@ let getReactLoadableBundleStats: () => Promise<LoadableExportManifest> = () => {
   });
 };
 
+const logoutRouteMiddleware = async (ctx: Context, next: NextFunction) => {
+  if (ctx.url === "/logout") {
+    let redirectDestination = "/login";
+    const user = ctx.state.user as SessionUserServerResumed | null;
+    if (user && user.role === SessionUserRole.ADMIN) {
+      redirectDestination = "/admin/login";
+    }
+    ctx.state.user = null;
+    if (process.env.NODE_ENV === "development") {
+      ctx.set("Cache-Control", "private");
+    }
+    ctx.session = null;
+    ctx.redirect(redirectDestination);
+    return;
+  }
+
+  await next();
+};
+
 // Reach Router throws on redirect.
 const routerDirectMiddleware = async (ctx: Context, next: NextFunction) => {
   try {
@@ -296,6 +316,7 @@ const middlewareRenderApp = async (ctx: Context) => {
   ctx.body = `<!doctype html>\n${renderToStaticMarkup(html)}`;
 };
 
+app.use(logoutRouteMiddleware);
 app.use(routerDirectMiddleware);
 app.use(middlewareRenderApp);
 
