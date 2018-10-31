@@ -5,14 +5,16 @@ import {
   IconButton,
   List,
   ListItem,
+  ListItemText,
   Toolbar,
   Typography,
   withWidth,
 } from "@material-ui/core";
 import { DrawerProps } from "@material-ui/core/Drawer";
+import { ListItemTextProps } from "@material-ui/core/ListItemText";
 import { isWidthDown, WithWidth } from "@material-ui/core/withWidth";
 import { Menu, PowerSettingsNew } from "@material-ui/icons";
-import { Location, navigate } from "@reach/router";
+import { Location, Match, navigate } from "@reach/router";
 import React, {
   createContext,
   ReactNode,
@@ -43,6 +45,9 @@ export function DashboardLayout(props: { children?: ReactNode }) {
           <StyledResponsiveDrawer>
             <StyledList>
               <StyledLogoLinkListItem />
+
+              <LinkListItem title="Dashboard" to="/admin/dashboard" />
+              <LinkListItem title="Index Manager" to="/admin/index-manager" />
             </StyledList>
           </StyledResponsiveDrawer>
         </AdminAppDrawerTheme>
@@ -55,6 +60,27 @@ export function DashboardLayout(props: { children?: ReactNode }) {
 }
 
 const drawerWidth = 240;
+
+// DrawerLink.tsx
+function LinkListItem(props: { title: string; to: string }) {
+  function getProps(match: boolean): ListItemTextProps {
+    return {
+      children: props.title,
+      primaryTypographyProps: match ? undefined : { color: "textSecondary" },
+      onClick: () => navigate(props.to),
+    };
+  }
+
+  return (
+    <Match path={props.to}>
+      {({ match }) => (
+        <ListItem button>
+          <ListItemText {...getProps(!!match)} />
+        </ListItem>
+      )}
+    </Match>
+  );
+}
 
 const ContentWrapper = styled.main`
   padding: 16px;
