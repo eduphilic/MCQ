@@ -1,10 +1,14 @@
-import { Router } from "@reach/router";
-import React from "react";
+import { Redirect, RouteComponentProps, Router } from "@reach/router";
+import React, { ComponentType, ReactElement } from "react";
 import Loadable from "react-loadable";
 import { LoadingSpinner } from "./components/LoadingSpinner";
 import { SnackbarsProvider } from "./features/display";
 import { LocalizationProvider } from "./features/localization";
-import { AuthenticationStatusProvider } from "./features/session";
+import {
+  AuthenticationStatusProvider,
+  useAuthenticationStatus,
+} from "./features/session";
+import { SessionUserRole } from "./models";
 import { LightTheme, ThemeBaseline } from "./styled";
 
 const LoadableRootIndexPage = Loadable({
@@ -22,6 +26,11 @@ const LoadableAdminDashboardPage = Loadable({
   loading: LoadingSpinner as any,
 });
 
+const ProtectedAdminDashboardPage = createProtectedRoute(
+  SessionUserRole.ADMIN,
+  LoadableAdminDashboardPage,
+);
+
 export const App = () => (
   <AuthenticationStatusProvider>
     <LocalizationProvider>
@@ -31,7 +40,8 @@ export const App = () => (
             <Router>
               <LoadableRootIndexPage path="/" />
               <LoadableAdminLoginPage path="/admin/login" />
-              <LoadableAdminDashboardPage path="/admin/dashboard" />
+
+              <ProtectedAdminDashboardPage path="/admin/dashboard" />
             </Router>
           </SnackbarsProvider>
         </LightTheme>
@@ -39,3 +49,20 @@ export const App = () => (
     </LocalizationProvider>
   </AuthenticationStatusProvider>
 );
+
+function createProtectedRoute(role: SessionUserRole, Component: ComponentType) {
+  let redirect: ReactElement<any> | null = null;
+  if (role === SessionUserRole.ADMIN) {
+    redirect = <Redirect to="/admin/login" noThrow />;
+  } else {
+    redirect = <Redirect to="/login" noThrow />;
+  }
+
+  function ProtectedRoute(_props: RouteComponentProps) {
+    const authenticationStatus = useAuthenticationStatus();
+    if (!authenticationStatus) return redirect;
+    return <Component />;
+  }
+
+  return ProtectedRoute;
+}
