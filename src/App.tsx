@@ -20,15 +20,22 @@ const LoadableAdminLoginPage = Loadable({
   loader: () => import("./pages/AdminLoginPage"),
   loading: LoadingSpinner as any,
 });
-
 const LoadableAdminDashboardPage = Loadable({
   loader: () => import("./pages/AdminDashboardPage"),
+  loading: LoadingSpinner as any,
+});
+const LoadableAdminIndexManagerPage = Loadable({
+  loader: () => import("./pages/AdminIndexManagerPage"),
   loading: LoadingSpinner as any,
 });
 
 const ProtectedAdminDashboardPage = createProtectedRoute(
   SessionUserRole.ADMIN,
   LoadableAdminDashboardPage,
+);
+const ProtectedAdminIndexManagerPage = createProtectedRoute(
+  SessionUserRole.ADMIN,
+  LoadableAdminIndexManagerPage,
 );
 
 export const App = () => (
@@ -42,6 +49,7 @@ export const App = () => (
               <LoadableAdminLoginPage path="/admin/login" />
 
               <ProtectedAdminDashboardPage path="/admin/dashboard" />
+              <ProtectedAdminIndexManagerPage path="/admin/index-manager" />
             </Router>
           </SnackbarsProvider>
         </LightTheme>
