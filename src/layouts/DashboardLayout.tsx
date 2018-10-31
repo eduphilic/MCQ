@@ -1,23 +1,45 @@
 import {
   AppBar as MuiAppBar,
+  Drawer,
   Grid,
   IconButton,
   Toolbar,
   Typography,
+  withWidth,
 } from "@material-ui/core";
-import { PowerSettingsNew } from "@material-ui/icons";
-import React, { ReactNode, useEffect, useState } from "react";
+import { DrawerProps } from "@material-ui/core/Drawer";
+import { isWidthDown, WithWidth } from "@material-ui/core/withWidth";
+import { Menu, PowerSettingsNew } from "@material-ui/icons";
+import React, {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { styled } from "../styled";
+
+const DrawerIsOpenContext = createContext(false);
+const DrawerToggleContext = createContext(() => {});
 
 export function DashboardLayout(props: { children?: ReactNode }) {
   if (typeof document !== "undefined") document.title = "Dashboard";
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const toggleDrawer = useCallback(() => {
+    setDrawerOpen(state => !state);
+  }, []);
 
   return (
-    <>
-      <StyledAppBar />
+    <DrawerIsOpenContext.Provider value={drawerOpen}>
+      <DrawerToggleContext.Provider value={toggleDrawer}>
+        <StyledAppBar />
 
-      {props.children}
-    </>
+        <StyledResponsiveDrawer />
+
+        {props.children}
+      </DrawerToggleContext.Provider>
+    </DrawerIsOpenContext.Provider>
   );
 }
 
@@ -33,6 +55,9 @@ function AppBar(props: { className?: string }) {
       <Toolbar>
         <Grid container justify="space-between" alignItems="center">
           {/* Left side of app bar. */}
+          <Grid item>
+            <StyledDrawerToggleButton />
+          </Grid>
           <Grid item xs>
             <Typography
               className="app-bar-title"
@@ -58,9 +83,65 @@ function AppBar(props: { className?: string }) {
   );
 }
 
+const drawerWidth = 240;
+
 const StyledAppBar = styled(AppBar)`
   .app-bar-title {
     font-weight: 400;
+  }
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    width: calc(100% - ${drawerWidth}px);
+    margin-left: ${drawerWidth}px;
+  }
+`;
+
+function DrawerToggleButton(props: { className?: string }) {
+  const onClick = useContext(DrawerToggleContext);
+
+  return (
+    <IconButton
+      className={props.className}
+      color="inherit"
+      aria-label="Menu"
+      onClick={onClick}
+    >
+      <Menu />
+    </IconButton>
+  );
+}
+
+const StyledDrawerToggleButton = styled(DrawerToggleButton)`
+  margin-left: -12px;
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    display: none;
+  }
+`;
+
+function ResponsiveDrawer({ width, ...rest }: WithWidth & DrawerProps) {
+  const open = useContext(DrawerIsOpenContext);
+  const onClose = useContext(DrawerToggleContext);
+  const isMobile = isWidthDown("sm", width);
+
+  return (
+    <Drawer
+      {...rest}
+      variant={isMobile ? "temporary" : "permanent"}
+      anchor={isMobile ? "left" : undefined}
+      open={!isMobile || open}
+      onClose={onClose}
+      ModalProps={isMobile ? { keepMounted: true } : undefined}
+    />
+  );
+}
+
+const StyledResponsiveDrawer = styled(withWidth()(ResponsiveDrawer)).attrs({
+  classes: { paper: "drawer-paper" },
+})`
+  .drawer-paper {
+    width: ${drawerWidth}px;
+    background-color: ${({ theme }) => theme.palette.background.default};
   }
 `;
 
