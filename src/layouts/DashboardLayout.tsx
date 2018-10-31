@@ -3,6 +3,8 @@ import {
   Drawer,
   Grid,
   IconButton,
+  List,
+  ListItem,
   Toolbar,
   Typography,
   withWidth,
@@ -10,6 +12,7 @@ import {
 import { DrawerProps } from "@material-ui/core/Drawer";
 import { isWidthDown, WithWidth } from "@material-ui/core/withWidth";
 import { Menu, PowerSettingsNew } from "@material-ui/icons";
+import { Location, navigate } from "@reach/router";
 import React, {
   createContext,
   ReactNode,
@@ -18,7 +21,8 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { styled } from "../styled";
+import { Logo } from "../components/Logo";
+import { AdminAppDrawerTheme, styled } from "../styled";
 
 const DrawerIsOpenContext = createContext(false);
 const DrawerToggleContext = createContext(() => {});
@@ -35,13 +39,51 @@ export function DashboardLayout(props: { children?: ReactNode }) {
       <DrawerToggleContext.Provider value={toggleDrawer}>
         <StyledAppBar />
 
-        <StyledResponsiveDrawer />
+        <AdminAppDrawerTheme>
+          <StyledResponsiveDrawer>
+            <StyledList>
+              <StyledLogoLinkListItem />
+            </StyledList>
+          </StyledResponsiveDrawer>
+        </AdminAppDrawerTheme>
 
         {props.children}
       </DrawerToggleContext.Provider>
     </DrawerIsOpenContext.Provider>
   );
 }
+
+function LogoLinkListItem(props: { className?: string }) {
+  function handleClick(pathname: string) {
+    navigate(/^\/admin/.test(pathname) ? "/admin/dashboard" : "/dashboard");
+  }
+
+  return (
+    <Location>
+      {({ location }) => (
+        <ListItem
+          className={props.className}
+          button
+          onClick={() => handleClick(location.pathname)}
+        >
+          <Logo className="logo-link-list-item-logo" />
+        </ListItem>
+      )}
+    </Location>
+  );
+}
+
+const StyledLogoLinkListItem = styled(LogoLinkListItem)`
+  padding: 8px 4px 8px 16px;
+
+  .logo-link-list-item-logo {
+    width: 100%;
+  }
+`;
+
+const StyledList = styled(List)`
+  padding-top: 0;
+`;
 
 function AppBar(props: { className?: string }) {
   const title = useAppBarTitle();
