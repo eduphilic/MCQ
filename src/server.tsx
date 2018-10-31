@@ -180,10 +180,7 @@ type LoadableExportManifest = {
 };
 let getReactLoadableBundleStats: () => Promise<LoadableExportManifest> = () => {
   return new Promise((resolve, reject) => {
-    const statsPath = path.join(
-      path.dirname(process.env.RAZZLE_ASSETS_MANIFEST!),
-      "react-loadable.json",
-    );
+    const statsPath = path.resolve(__dirname, "react-loadable.json");
 
     let statsFileContents: string;
     try {

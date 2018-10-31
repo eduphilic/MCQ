@@ -57,7 +57,7 @@ module.exports = {
     if (target === "web") {
       config.plugins.push(
         new ReactLoadablePlugin({
-          filename: path.resolve(__dirname, "build/react-loadable.json"),
+          filename: path.resolve(__dirname, "build-server/react-loadable.json"),
         }),
       );
     }
