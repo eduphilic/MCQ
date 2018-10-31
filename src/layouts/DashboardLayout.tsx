@@ -22,7 +22,7 @@ import React, {
   useState,
 } from "react";
 import { Logo } from "../components/Logo";
-import { AdminAppDrawerTheme, styled } from "../styled";
+import { AdminAppDrawerTheme, mixins, styled } from "../styled";
 
 const DrawerIsOpenContext = createContext(false);
 const DrawerToggleContext = createContext(() => {});
@@ -47,11 +47,25 @@ export function DashboardLayout(props: { children?: ReactNode }) {
           </StyledResponsiveDrawer>
         </AdminAppDrawerTheme>
 
-        {props.children}
+        <AppBarSpacer />
+        <ContentWrapper>{props.children}</ContentWrapper>
       </DrawerToggleContext.Provider>
     </DrawerIsOpenContext.Provider>
   );
 }
+
+const drawerWidth = 240;
+
+const ContentWrapper = styled.main`
+  padding: 16px;
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    margin-left: ${drawerWidth}px;
+  }
+`;
+
+const AppBarSpacer = styled.div`
+  ${mixins.toolbar};
+`;
 
 function LogoLinkListItem(props: { className?: string }) {
   function handleClick(pathname: string) {
@@ -124,8 +138,6 @@ function AppBar(props: { className?: string }) {
     </MuiAppBar>
   );
 }
-
-const drawerWidth = 240;
 
 const StyledAppBar = styled(AppBar)`
   .app-bar-title {
