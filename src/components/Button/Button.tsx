@@ -20,7 +20,7 @@ const createCustomColorCss = (colorName: string, color: string) => {
   const colorDark = darken(color, tonalOffset * 1.5);
 
   return css`
-    &.color-${colorName} {
+    &.color-${colorName}:not([disabled]) {
       color: ${color};
     }
 
