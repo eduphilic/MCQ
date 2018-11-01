@@ -50,9 +50,14 @@ function HeroCard() {
       <AdminCardHeader title="Hero" />
       <QueryWithLoading<HeroConfig> query={GET_HERO_CONFIG}>
         {({ data }) => (
-          <Formik<HeroConfig> initialValues={data!} onSubmit={() => {}}>
+          <Formik<HeroConfig>
+            initialValues={data!}
+            onSubmit={() => {
+              alert("submit");
+            }}
+          >
             {form => (
-              <>
+              <form onSubmit={form.handleSubmit}>
                 <CardContent>
                   <Typography variant="subtitle2" paragraph>
                     Hero Text
@@ -75,18 +80,20 @@ function HeroCard() {
                     size="small"
                     color="primary"
                     disabled={!form.touched.indexPageConfig}
+                    onClick={() => form.resetForm(data!)}
                   >
                     Reset
                   </Button>
                   <Button
                     size="small"
                     color="primary"
+                    type="submit"
                     disabled={!form.touched.indexPageConfig}
                   >
                     Submit
                   </Button>
                 </CardActions>
-              </>
+              </form>
             )}
           </Formik>
         )}
