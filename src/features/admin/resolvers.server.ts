@@ -9,4 +9,14 @@ export const resolvers: IResolvers<any, ServerContext> = {
       );
     },
   },
+  Mutation: {
+    updateIndexPageHeroConfig: (_parent, args, ctx) => {
+      /* tslint:disable-next-line:no-console */
+      console.log({ args });
+
+      return ctx.firebaseRemoteConfigClient.getParameterByKey(
+        "indexPageConfig",
+      );
+    },
+  },
 };

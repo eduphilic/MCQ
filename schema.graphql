@@ -22,19 +22,28 @@ type Query {
 
 type Mutation {
   userLogin(phoneNumber: String!, password: String!): LOGIN_REQUEST_RESULT!
-  userSignUp(
-    phoneNumber: String!
-    password: String!
-    fullName: String!
-    emailAddress: String!
-    language: LocalizationLanguage!
-  ): SignUpRequestResult!
+  # userSignUp(
+  #   phoneNumber: String!
+  #   password: String!
+  #   fullName: String!
+  #   emailAddress: String!
+  #   language: LocalizationLanguage!
+  # ): SignUpRequestResult!
+
+  updateIndexPageHeroConfig(
+    indexPageConfig: IndexPageHeroConfigInput!
+  ): IndexPageConfig!
 
   # Client State
 
   setLocalizationLanguage(
     language: LocalizationLanguage!
   ): LocalizationLanguage! @client
+}
+
+# Mutation Inputs
+input IndexPageHeroConfigInput {
+  heroPrimaryText: LocalizedString!
 }
 
 # Client State
@@ -107,10 +116,10 @@ type User {
   role: USER_ROLE!
 }
 
-type SignUpRequestResult {
-  validity: SIGNUP_REQUEST_RESULT!
-  errorMessage: String
-}
+# type SignUpRequestResult {
+#   validity: SIGNUP_REQUEST_RESULT!
+#   errorMessage: String
+# }
 
 enum USER_ROLE {
   USER
