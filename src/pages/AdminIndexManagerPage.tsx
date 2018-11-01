@@ -15,7 +15,7 @@ import { ContentCenterWrapper } from "../components/ContentCenterWrapper";
 import { QueryWithLoading } from "../components/QueryWithLoading";
 import { AdminCardHeader } from "../features/admin";
 import { DashboardLayout } from "../layouts/DashboardLayout";
-import { IndexPageConfig, LocalizedString } from "../models";
+import { IndexPageConfig } from "../models";
 
 function AdminIndexManagerPage() {
   return (
@@ -56,15 +56,16 @@ function HeroCard() {
     <Card>
       <AdminCardHeader title="Hero" />
       <QueryWithLoading<HeroConfig> query={GET_HERO_CONFIG}>
-        {({ data }) => (
+        {({ data, refetch }) => (
           <Mutation<{}, HeroConfig> mutation={UPDATE_HERO_CONFIG}>
             {(updateIndexPageHeroConfig, mutationData) =>
               mutationData.loading ? (
                 "Loading"
               ) : (
                 <Formik<HeroConfig>
+                  enableReinitialize
                   initialValues={data!}
-                  onSubmit={async (values, _form) => {
+                  onSubmit={async (values, form) => {
                     await updateIndexPageHeroConfig({
                       variables: {
                         indexPageConfig: {
@@ -73,7 +74,8 @@ function HeroCard() {
                         },
                       },
                     });
-                    // form.resetForm(newValues);
+                    form.resetForm();
+                    await refetch();
                   }}
                 >
                   {form => (

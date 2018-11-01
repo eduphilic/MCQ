@@ -10,6 +10,7 @@ export const resolvers: IResolvers<any, ServerContext> = {
       );
     },
   },
+
   Mutation: {
     updateIndexPageHeroConfig: async (_parent, args, ctx) => {
       const indexPageConfig: IndexPageConfig = {
@@ -19,7 +20,7 @@ export const resolvers: IResolvers<any, ServerContext> = {
         ...args.indexPageConfig,
       };
 
-      await ctx.firebaseRemoteConfigClient.updateParameterByKey(
+      ctx.firebaseRemoteConfigClient.updateParameterByKey(
         "indexPageConfig",
         indexPageConfig,
       );

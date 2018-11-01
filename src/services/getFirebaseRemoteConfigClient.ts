@@ -91,9 +91,9 @@ class FirebaseRemoteConfigClient {
       parameters,
     };
 
-    Object.keys(bodyObject.parameters).forEach(key => {
-      bodyObject.parameters[key] = {
-        defaultValue: { value: bodyObject.parameters[key] },
+    Object.keys(bodyObject.parameters).forEach(p => {
+      bodyObject.parameters[p] = {
+        defaultValue: { value: bodyObject.parameters[p] },
       };
     });
 
@@ -125,7 +125,8 @@ class FirebaseRemoteConfigClient {
       console.log(await response.text());
       throw new Error(response.statusText);
     }
-    await this.updateTemplateCache();
+
+    this.cacheExpireTime = 0;
   }
 
   private async updateTemplateCache() {
