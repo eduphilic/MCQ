@@ -27,6 +27,7 @@ export function getFirebaseRemoteConfigClient(credentials: Credentials) {
 class FirebaseRemoteConfigClient {
   private cacheExpireTime: number = 0;
   private cachedTemplate: Record<string, unknown> | null = null;
+  private lastJsonResponse: any = null;
   private jwtClient: InstanceType<typeof google.auth.JWT>;
 
   constructor(private credentials: Credentials) {
@@ -78,6 +79,55 @@ class FirebaseRemoteConfigClient {
     return parameter;
   }
 
+  async updateParameterByKey(key: string, data: any, stringify = true) {
+    await this.updateTemplateCache();
+    const accessToken = await this.getAccessToken();
+
+    const parameters: Record<string, unknown> = { ...this.cachedTemplate };
+    parameters[key] = stringify ? JSON.stringify(data) : data;
+
+    const bodyObject = {
+      ...this.lastJsonResponse,
+      parameters,
+    };
+
+    Object.keys(bodyObject.parameters).forEach(key => {
+      bodyObject.parameters[key] = {
+        defaultValue: { value: bodyObject.parameters[key] },
+      };
+    });
+
+    const body = JSON.stringify(bodyObject);
+
+    /* tslint:disable-next-line:no-console */
+    // console.log(body);
+
+    const response = await fetch(
+      `https://firebaseremoteconfig.googleapis.com/v1/projects/${
+        this.credentials.projectId
+      }/remoteConfig`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          // "Accept-Encoding": "gzip",
+          "Content-Type": "application/json",
+          "If-Match": "*",
+        },
+        body,
+      },
+    );
+
+    if (!response.ok) {
+      /* tslint:disable-next-line:no-console */
+      console.log("code:", response.status, "status:", response.statusText);
+      /* tslint:disable-next-line:no-console */
+      console.log(await response.text());
+      throw new Error(response.statusText);
+    }
+    await this.updateTemplateCache();
+  }
+
   private async updateTemplateCache() {
     const currentTime = new Date().getTime();
 
@@ -97,9 +147,15 @@ class FirebaseRemoteConfigClient {
         },
       },
     );
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    this.lastJsonResponse = await response.json();
     const responseJson: {
       parameters: Record<string, { defaultValue?: { value?: any } }>;
-    } = await response.json();
+    } = this.lastJsonResponse;
 
     this.cachedTemplate = {};
     Object.keys(responseJson.parameters).forEach(key => {

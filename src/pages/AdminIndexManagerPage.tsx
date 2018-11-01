@@ -15,7 +15,7 @@ import { ContentCenterWrapper } from "../components/ContentCenterWrapper";
 import { QueryWithLoading } from "../components/QueryWithLoading";
 import { AdminCardHeader } from "../features/admin";
 import { DashboardLayout } from "../layouts/DashboardLayout";
-import { LocalizedString } from "../models";
+import { IndexPageConfig, LocalizedString } from "../models";
 
 function AdminIndexManagerPage() {
   return (
@@ -40,9 +40,7 @@ const GET_HERO_CONFIG = gql`
 `;
 
 type HeroConfig = {
-  indexPageConfig: {
-    heroPrimaryText: LocalizedString;
-  };
+  indexPageConfig: Pick<IndexPageConfig, "heroPrimaryText">;
 };
 
 const UPDATE_HERO_CONFIG = gql`
@@ -67,9 +65,14 @@ function HeroCard() {
                 <Formik<HeroConfig>
                   initialValues={data!}
                   onSubmit={async (values, _form) => {
-                    // @ts-ignore
-                    delete values.indexPageConfig.__typename;
-                    await updateIndexPageHeroConfig({ variables: values });
+                    await updateIndexPageHeroConfig({
+                      variables: {
+                        indexPageConfig: {
+                          heroPrimaryText:
+                            values.indexPageConfig.heroPrimaryText,
+                        },
+                      },
+                    });
                     // form.resetForm(newValues);
                   }}
                 >
