@@ -20,7 +20,7 @@ export const resolvers: IResolvers<any, ServerContext> = {
         ...args.indexPageConfig,
       };
 
-      ctx.firebaseRemoteConfigClient.updateParameterByKey(
+      await ctx.firebaseRemoteConfigClient.updateParameterByKey(
         "indexPageConfig",
         indexPageConfig,
       );
