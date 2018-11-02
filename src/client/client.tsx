@@ -4,7 +4,7 @@ import lzString from "lz-string";
 import React, { Component } from "react";
 import { hydrate } from "react-dom";
 import JssProvider from "react-jss/lib/JssProvider";
-import { App } from "./app";
+import { App } from "../app";
 
 import { InMemoryCache } from "apollo-cache-inmemory";
 import ApolloClient from "apollo-client";
@@ -14,7 +14,7 @@ import { HttpLink } from "apollo-link-http";
 import { withClientState } from "apollo-link-state";
 import { ApolloProvider } from "react-apollo";
 import { preloadReady } from "react-loadable";
-import { resolvers } from "./clientResolvers";
+import { resolvers } from "../clientResolvers";
 
 const initialCacheState = JSON.parse(
   lzString.decompressFromUTF16(window.__STATE__),

@@ -1,6 +1,9 @@
 {
   "private": true,
   "name": "join-uniform",
+  "sideEffects": [
+    "*.css"
+  ],
   "engines": {
     "node": "8"
   },
