@@ -1,4 +1,6 @@
-import { CardActions, CardContent, CardHeader } from "@material-ui/core";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardHeader from "@material-ui/core/CardHeader";
 import { Formik } from "formik";
 import gql from "graphql-tag";
 import React, { cloneElement, ReactElement, SFC } from "react";

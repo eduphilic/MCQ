@@ -2,11 +2,7 @@
 import MuiButton, {
   ButtonProps as MuiButtonProps,
 } from "@material-ui/core/Button";
-import {
-  darken,
-  fade,
-  // lighten,
-} from "@material-ui/core/styles/colorManipulator";
+import { darken, fade } from "@material-ui/core/styles/colorManipulator";
 import React from "react";
 import { css, styled } from "../../styled";
 import { styleTable } from "./Typography";

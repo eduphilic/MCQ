@@ -1,10 +1,8 @@
-import {
-  CardActions,
-  CardContent,
-  Grid,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 import { Formik } from "formik";
 import gql from "graphql-tag";
 import React from "react";

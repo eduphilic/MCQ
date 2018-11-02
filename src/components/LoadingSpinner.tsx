@@ -1,5 +1,7 @@
-import { CircularProgress, Fade } from "@material-ui/core";
-import { CircularProgressProps } from "@material-ui/core/CircularProgress";
+import CircularProgress, {
+  CircularProgressProps,
+} from "@material-ui/core/CircularProgress";
+import Fade from "@material-ui/core/Fade";
 import React, { cloneElement, Fragment } from "react";
 import { styled } from "../styled";
 import { LogoImage } from "./LogoImage";

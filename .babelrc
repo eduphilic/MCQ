@@ -1,26 +1,6 @@
 {
   "presets": ["razzle/babel"],
   "plugins": [
-    [
-      "babel-plugin-import",
-      [
-        {
-          "libraryName": "@material-ui/core",
-          "libraryDirectory": "",
-          "camel2DashComponentName": false
-        },
-        {
-          "libraryName": "@material-ui/icons",
-          "libraryDirectory": "",
-          "camel2DashComponentName": false
-        },
-        {
-          "libraryName": "lodash",
-          "libraryDirectory": "",
-          "camel2DashComponentName": false
-        }
-      ]
-    ],
     "babel-plugin-styled-components",
     "babel-plugin-graphql-tag",
     "react-loadable/babel"

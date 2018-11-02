@@ -1,4 +1,6 @@
-import { Grid, Hidden, Typography } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Hidden from "@material-ui/core/Hidden";
+import Typography from "@material-ui/core/Typography";
 import { Redirect, RouteComponentProps } from "@reach/router";
 import gql from "graphql-tag";
 import React, { SFC } from "react";

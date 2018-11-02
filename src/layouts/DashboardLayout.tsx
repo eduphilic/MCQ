@@ -1,19 +1,17 @@
-import {
-  AppBar as MuiAppBar,
-  Drawer,
-  Grid,
-  IconButton,
-  List,
-  ListItem,
-  ListItemText,
-  Toolbar,
-  Typography,
-  withWidth,
-} from "@material-ui/core";
-import { DrawerProps } from "@material-ui/core/Drawer";
-import { ListItemTextProps } from "@material-ui/core/ListItemText";
-import { isWidthDown, WithWidth } from "@material-ui/core/withWidth";
-import { Menu, PowerSettingsNew } from "@material-ui/icons";
+import MuiAppBar from "@material-ui/core/AppBar";
+import Drawer, { DrawerProps } from "@material-ui/core/Drawer";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText, {
+  ListItemTextProps,
+} from "@material-ui/core/ListItemText";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import withWidth, { isWidthDown, WithWidth } from "@material-ui/core/withWidth";
+import Menu from "@material-ui/icons/Menu";
+import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
 import { Location, Match, navigate } from "@reach/router";
 import React, {
   createContext,

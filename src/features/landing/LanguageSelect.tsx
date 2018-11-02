@@ -1,12 +1,10 @@
-import {
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Hidden,
-  Radio,
-  RadioGroup,
-  Typography,
-} from "@material-ui/core";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormLabel from "@material-ui/core/FormLabel";
+import Hidden from "@material-ui/core/Hidden";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import Typography from "@material-ui/core/Typography";
 import React, { SFC } from "react";
 import { LocalizationSupportedLanguages } from "../../models";
 import { styled } from "../../styled";

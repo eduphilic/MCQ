@@ -1,4 +1,4 @@
-import { merge } from "lodash";
+import merge from "lodash.merge";
 import { resolvers as adminResolvers } from "./features/admin/resolvers.server";
 import { resolvers as landingResolvers } from "./features/landing/resolvers.server";
 import { resolvers as localizationResolvers } from "./features/localization/resolvers.server";

@@ -1,4 +1,5 @@
-import { ArrowDropDown, ArrowDropUp } from "@material-ui/icons";
+import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
+import ArrowDropUp from "@material-ui/icons/ArrowDropUp";
 import React, { SFC } from "react";
 import { styled } from "../../../styled";
 

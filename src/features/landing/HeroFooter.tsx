@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 import gql from "graphql-tag";
 import React from "react";
 import { QueryWithLoading } from "../../components/QueryWithLoading";

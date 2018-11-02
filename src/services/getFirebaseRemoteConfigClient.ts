@@ -1,4 +1,4 @@
-import { google } from "googleapis";
+import { JWT } from "google-auth-library";
 import fetch from "node-fetch";
 
 const CACHE_EXPIRE_SECONDS = 300; // 5 minutes.
@@ -28,10 +28,10 @@ class FirebaseRemoteConfigClient {
   private cacheExpireTime: number = 0;
   private cachedTemplate: Record<string, unknown> | null = null;
   private lastJsonResponse: any = null;
-  private jwtClient: InstanceType<typeof google.auth.JWT>;
+  private jwtClient: InstanceType<typeof JWT>;
 
   constructor(private credentials: Credentials) {
-    this.jwtClient = new google.auth.JWT(
+    this.jwtClient = new JWT(
       this.credentials.clientEmail,
       undefined,
       this.credentials.privateKey,

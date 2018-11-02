@@ -1,4 +1,4 @@
-import { Tooltip } from "@material-ui/core";
+import Tooltip from "@material-ui/core/Tooltip";
 import React, { ReactElement, ReactNode, SFC } from "react";
 import { styled } from "../../../styled";
 import "./TextFieldTooltip.css";

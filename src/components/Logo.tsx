@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 import React, { SFC } from "react";
 import { styled } from "../styled";
 import { LogoImage } from "./LogoImage";
