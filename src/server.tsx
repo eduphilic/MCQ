@@ -260,10 +260,13 @@ const middlewareRenderApp = async (ctx: Context) => {
     </ApolloProvider>
   );
   await getDataFromTree(nonCssComponent);
-  const bundles = getBundles(
-    await getReactLoadableBundleStats(),
-    modules,
-  ).filter(b => !/\.map$/.test(b.file));
+  /* tslint:disable-next-line:no-console */
+  console.log("modules", modules);
+  let bundles = getBundles(await getReactLoadableBundleStats(), modules);
+  /* tslint:disable-next-line:no-console */
+  console.log({ bundles });
+
+  bundles = bundles.filter(b => !/\.map$/.test(b.file));
 
   // https://material-ui.com/guides/server-rendering/#handling-the-request
   const sheetsRegistry = new SheetsRegistry();
