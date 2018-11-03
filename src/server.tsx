@@ -189,7 +189,20 @@ let getReactLoadableBundleStats: () => Promise<LoadableExportManifest> = () => {
       reject(e);
       return;
     }
+
+    // For some reason, on initial load, the route pages have the file extension
+    // attached on the keys. On hot reload, the extension is removed. Hack to
+    // remove them:
     const statsContent = JSON.parse(statsFileContents);
+    Object.keys(statsContent).forEach(key => {
+      const oldKey = key;
+      const newKey = key.replace(/\.tsx?$/, "");
+      if (oldKey !== newKey) {
+        statsContent[newKey] = statsContent[oldKey];
+        delete statsContent[oldKey];
+      }
+    });
+
     resolve(statsContent);
     if (process.env.NODE_ENV === "production") {
       getReactLoadableBundleStats = () => Promise.resolve(statsContent);
@@ -260,12 +273,8 @@ const middlewareRenderApp = async (ctx: Context) => {
     </ApolloProvider>
   );
   await getDataFromTree(nonCssComponent);
-  /* tslint:disable-next-line:no-console */
-  console.log("modules", modules);
-  let bundles = getBundles(await getReactLoadableBundleStats(), modules);
-  /* tslint:disable-next-line:no-console */
-  console.log({ bundles });
 
+  let bundles = getBundles(await getReactLoadableBundleStats(), modules);
   bundles = bundles.filter(b => !/\.map$/.test(b.file));
 
   // https://material-ui.com/guides/server-rendering/#handling-the-request
