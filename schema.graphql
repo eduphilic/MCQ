@@ -131,10 +131,10 @@ enum LOGIN_REQUEST_RESULT {
   INVALID
 }
 
-enum SIGNUP_REQUEST_RESULT {
-  VALID
-  INVALID
-}
+# enum SIGNUP_REQUEST_RESULT {
+#   VALID
+#   INVALID
+# }
 
 scalar LocalizedString
 
