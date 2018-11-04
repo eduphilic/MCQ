@@ -25,7 +25,7 @@ import { SetOption as CookieSetOption } from "cookies";
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 import Koa, { Context } from "koa";
-import csrf from "koa-csrf";
+// import csrf from "koa-csrf";
 import session from "koa-session";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { Capture, preloadAll } from "react-loadable";
@@ -89,7 +89,7 @@ app.use(
     app,
   ),
 );
-app.use(new csrf({ disableQuery: true }));
+// app.use(new csrf({ disableQuery: true }));
 
 if (process.env.NODE_ENV === "development") {
   const serve: typeof import("koa-static") = require("koa-static");
@@ -121,10 +121,13 @@ if (process.env.NODE_ENV === "production") {
   );
 } else {
   schemaString = fs
-    .readdirSync(path.resolve(__dirname, "../src/api"))
+    .readdirSync(path.resolve(__dirname, "../src/api/schema"))
     .filter(filename => /\.graphql$/.test(filename))
     .map(filename =>
-      fs.readFileSync(path.resolve(__dirname, "../src/api", filename), "utf8"),
+      fs.readFileSync(
+        path.resolve(__dirname, "../src/api/schema", filename),
+        "utf8",
+      ),
     )
     .reduce((accumulator, fileContents) => {
       return accumulator + fileContents;

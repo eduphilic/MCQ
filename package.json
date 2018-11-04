@@ -34,7 +34,7 @@
     "firebase:start": "firebase serve",
     "firebase:deploy": "firebase deploy",
     "firebase:login": "firebase login",
-    "graphql": "gql-gen --schema src/api/**/*.graphql --template graphql-codegen-typescript-resolvers-template --out src/api/generated.ts",
+    "graphql": "gql-gen --schema src/api/schema/**/*.graphql --template graphql-codegen-typescript-resolvers-template --out src/api/generated.ts",
     "graphql:watch": "yarn graphql --watch"
   },
   "dependencies": {

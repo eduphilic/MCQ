@@ -122,10 +122,13 @@ class CustomPostBuildPlugin {
       );
 
       const schema = fs
-        .readdirSync(path.resolve(__dirname, "src/api"))
+        .readdirSync(path.resolve(__dirname, "src/api/schema"))
         .filter(filename => /\.graphql$/.test(filename))
         .map(filename =>
-          fs.readFileSync(path.resolve(__dirname, "src/api", filename), "utf8"),
+          fs.readFileSync(
+            path.resolve(__dirname, "src/api/schema", filename),
+            "utf8",
+          ),
         )
         .reduce((accumulator, fileContents) => {
           return accumulator + fileContents;
