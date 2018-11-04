@@ -1,0 +1,8 @@
+# Represents a localized string.
+# The Hindi field is optional.
+#
+# Fields:
+# - key: String!
+# - en: String!
+# - hi: String
+scalar LocalizedString

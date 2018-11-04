@@ -113,15 +113,23 @@ app.use((ctx, next) => {
 });
 
 // In production the schema file will be colocated with the server bundle.
-const schemaString = fs.readFileSync(
-  path.resolve(
-    __dirname,
-    process.env.NODE_ENV === "production"
-      ? "schema.graphql"
-      : "../schema.graphql",
-  ),
-  "utf8",
-);
+let schemaString: string;
+if (process.env.NODE_ENV === "production") {
+  schemaString = fs.readFileSync(
+    path.resolve(__dirname, "schema.graphql"),
+    "utf8",
+  );
+} else {
+  schemaString = fs
+    .readdirSync(path.resolve(__dirname, "../src/api"))
+    .filter(filename => /\.graphql$/.test(filename))
+    .map(filename =>
+      fs.readFileSync(path.resolve(__dirname, "../src/api", filename), "utf8"),
+    )
+    .reduce((accumulator, fileContents) => {
+      return accumulator + fileContents;
+    }, "");
+}
 
 // Used by ApolloServer in server.
 const typeDefs = gql`

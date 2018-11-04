@@ -121,9 +121,20 @@ class CustomPostBuildPlugin {
         "utf8",
       );
 
-      fs.copyFileSync(
-        path.resolve(__dirname, "schema.graphql"),
+      const schema = fs
+        .readdirSync(path.resolve(__dirname, "src/api"))
+        .filter(filename => /\.graphql$/.test(filename))
+        .map(filename =>
+          fs.readFileSync(path.resolve(__dirname, "src/api", filename), "utf8"),
+        )
+        .reduce((accumulator, fileContents) => {
+          return accumulator + fileContents;
+        }, "");
+
+      fs.writeFileSync(
         path.resolve(__dirname, "build-server/schema.graphql"),
+        schema,
+        "utf8",
       );
     });
   }

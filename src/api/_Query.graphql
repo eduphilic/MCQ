@@ -1,0 +1,13 @@
+type Query {
+  htmlConfig: HtmlConfig!
+
+  indexPageConfig: IndexPageConfig!
+  adminLoginPageConfig: AdminLoginPageConfig!
+
+  session: USER_ROLE
+  sessionFormConfig: SessionFormConfig!
+
+  language: LOCALIZATION_LANGUAGE!
+}
+
+directive @client on FIELD | FIELD_DEFINITION

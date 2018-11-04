@@ -34,7 +34,8 @@
     "firebase:start": "firebase serve",
     "firebase:deploy": "firebase deploy",
     "firebase:login": "firebase login",
-    "graphql:generate": "ts-node --project tools/tsconfig.json tools/graphqlgen.ts"
+    "graphql": "gql-gen --schema src/api/**/*.graphql --template graphql-codegen-typescript-resolvers-template --out src/api/generated.ts",
+    "graphql:watch": "yarn graphql --watch"
   },
   "dependencies": {
     "@firebase/app-types": "^0.3.2",
@@ -55,7 +56,7 @@
     "firebase-functions": "^2.1.0",
     "formik": "^1.3.1",
     "google-auth-library": "^2.0.1",
-    "graphql": "^0.13.2",
+    "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",
     "graphql-tools": "^4.0.3",
     "jsonwebtoken": "^8.3.0",
@@ -102,6 +103,8 @@
     "babel-plugin-styled-components": "^1.8.0",
     "cross-env": "^5.2.0",
     "firebase-tools": "^6.0.1",
+    "graphql-code-generator": "^0.13.0",
+    "graphql-codegen-typescript-resolvers-template": "^0.13.0",
     "koa-static": "^5.0.0",
     "prettier": "^1.14.3",
     "razzle-plugin-typescript": "^2.4.0",

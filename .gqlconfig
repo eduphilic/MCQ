@@ -1,6 +1,6 @@
 {
   schema: {
-    files: "schema.graphql"
+    files: "src/**/*.graphql"
   },
   query: {
     files: [
