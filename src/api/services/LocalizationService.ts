@@ -1,11 +1,11 @@
 import { LocalizationLanguage } from "../generated";
 import { SessionCookie } from "../persistence";
-import { SessionService } from "./SessionService";
+import { UserService } from "./UserService";
 
 export class LocalizationService {
   constructor(
     private sessionCookie: SessionCookie,
-    private sessionService: SessionService,
+    private sessionService: UserService,
   ) {}
 
   /**

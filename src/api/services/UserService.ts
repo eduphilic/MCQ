@@ -3,7 +3,7 @@ import { LoginRequestResult, UserRole } from "../generated";
 import { UserAccount } from "../models";
 import { SessionCookie, UserAccountRepository } from "../persistence";
 
-export class SessionService {
+export class UserService {
   constructor(
     private sessionCookie: SessionCookie,
     private userAccountRepository: UserAccountRepository,
