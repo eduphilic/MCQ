@@ -5,7 +5,7 @@ import { UserService } from "./UserService";
 export class LocalizationService {
   constructor(
     private sessionCookie: SessionCookie,
-    private sessionService: UserService,
+    private userService: UserService,
   ) {}
 
   /**
@@ -29,10 +29,10 @@ export class LocalizationService {
   async setLanguagePreference(language: LocalizationLanguage) {
     this.sessionCookie.setSessionValueByKey("language", language);
 
-    const user = await this.sessionService.getCurrentUserAccount();
+    const user = await this.userService.getCurrentUserAccount();
     if (!user) return;
 
-    await this.sessionService.updateUserAccount(user.id, { language });
+    await this.userService.updateUserAccount(user.id, { language });
   }
 
   /**
@@ -43,7 +43,7 @@ export class LocalizationService {
    * prevent further database lookups.
    */
   private async getLanguagePreferenceFromUserAccount() {
-    const user = await this.sessionService.getCurrentUserAccount();
+    const user = await this.userService.getCurrentUserAccount();
 
     const language: LocalizationLanguage = user
       ? user.language

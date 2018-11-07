@@ -1,7 +1,7 @@
 import { sign, verify } from "jsonwebtoken";
 import { Context } from "koa";
 
-type SessionCookieOptions = {
+export type SessionCookieOptions = {
   jwtSecret: string;
   jwtExpirationSeconds: number;
   koaContext: Context;
