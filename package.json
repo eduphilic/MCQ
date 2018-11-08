@@ -29,7 +29,7 @@
     "build": "rimraf build build-server && razzle build",
     "clean": "rimraf build build-server",
     "test": "razzle test --env=jsdom",
-    "lint": "tslint -p ./",
+    "lint": "tslint -p ./ \"src/**/*.ts\" \"src/**/*.tsx\"",
     "analyze": "cross-env ANALYZE=1 yarn build",
     "firebase:start": "firebase serve",
     "firebase:deploy": "firebase deploy",
