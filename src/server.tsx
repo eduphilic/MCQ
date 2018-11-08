@@ -30,12 +30,17 @@ import session from "koa-session";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { Capture, preloadAll } from "react-loadable";
 import { getBundles } from "react-loadable/webpack";
+// import { ServerContext } from "./ServerContext";
+import {
+  Context as ApolloServerContext,
+  createContext,
+  resolvers,
+} from "./api";
 import { HtmlConfig, SessionUserRole } from "./models";
 import { SessionUserServerResumed } from "./models/SessionUserServerResumed";
-import { ServerContext } from "./ServerContext";
-import { resolvers } from "./serverResolvers";
+// import { resolvers } from "./serverResolvers";
 import {
-  getFirebaseRemoteConfigClient,
+  // getFirebaseRemoteConfigClient,
   getSessionCookieService,
 } from "./services";
 
@@ -147,24 +152,18 @@ const schema = makeExecutableSchema({
   resolvers,
 });
 
-const contextFactory = ({ ctx }: { ctx: Context }): ServerContext => {
-  // Send a current CSRF token so the client's connection is not rejected should
-  // its token become stale before its next refresh.
-  ctx.set("X-XSRF-TOKEN", ctx.csrf);
-
-  return {
-    ctx,
-    firebaseDatabase,
-    firebaseRemoteConfigClient: getFirebaseRemoteConfigClient({
+const contextFactory = ({ ctx }: { ctx: Context }): ApolloServerContext => {
+  return createContext({
+    db: firebaseDatabase,
+    jwtExpirationSeconds: cookieOptions.maxAge! / 1000,
+    jwtSecret,
+    koaContext: ctx,
+    remoteConfigCredentials: {
       projectId: firebaseCredentials.project_id,
       clientEmail: firebaseCredentials.client_email,
       privateKey: firebaseCredentials.private_key,
-    }),
-    sessionCookieService: getSessionCookieService(
-      jwtSecret,
-      cookieOptions.maxAge! / 1000,
-    ),
-  };
+    },
+  });
 };
 
 const server = new ApolloServer({
@@ -266,7 +265,7 @@ const middlewareRenderApp = async (ctx: Context) => {
     cache: new InMemoryCache(),
   });
 
-  const htmlConfig = (await context.firebaseRemoteConfigClient.getParameterByKey(
+  const htmlConfig = (await context.configurationRepository.getParameterByKey(
     "htmlConfig",
   )) as HtmlConfig;
 

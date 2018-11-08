@@ -1,6 +1,8 @@
 import { Firestore } from "@google-cloud/firestore";
 import { Context } from "./models";
 import {
+  ConfigurationRepository,
+  FirebaseCredentials,
   SessionCookie,
   SessionCookieOptions,
   UserAccountRepository,
@@ -9,6 +11,7 @@ import { LocalizationService, UserService } from "./services";
 
 type Options = SessionCookieOptions & {
   db: Firestore;
+  remoteConfigCredentials: FirebaseCredentials;
 };
 
 export function createContext(options: Options) {
@@ -19,9 +22,13 @@ export function createContext(options: Options) {
     sessionCookie,
     userService,
   );
+  const configurationRepository = new ConfigurationRepository(
+    options.remoteConfigCredentials,
+  );
 
   const context: Context = {
     sessionCookie,
+    configurationRepository,
     localizationService,
     userService,
   };
