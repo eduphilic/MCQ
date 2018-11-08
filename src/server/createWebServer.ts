@@ -3,6 +3,10 @@ import assert from "assert";
 import Koa from "koa";
 import { createApolloServer, createContext } from "../api";
 import { getInitializedFirebaseEnvironment } from "./getInitializedFirebaseEnvironment";
+import {
+  createAllowCachingMiddleware,
+  createSessionMiddleware,
+} from "./middleware";
 
 const {
   functions,
@@ -43,6 +47,13 @@ export function createWebServer() {
 
   const app = new Koa();
   app.keys = [koaKey0, koaKey1];
+  app.use(createAllowCachingMiddleware());
+  app.use(
+    createSessionMiddleware(
+      { cookieExpireSeconds: koaCookieExpireSeconds },
+      app,
+    ),
+  );
 
   const contextFunction: ContextFunction = async ({ ctx }) => {
     const context = createContext({
