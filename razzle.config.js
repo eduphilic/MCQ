@@ -139,6 +139,14 @@ class CustomPostBuildPlugin {
         schema,
         "utf8",
       );
+
+      fs.copyFileSync(
+        path.resolve(__dirname, "firebase-admin-service-account.json"),
+        path.resolve(
+          __dirname,
+          "build-server/firebase-admin-service-account.json",
+        ),
+      );
     });
   }
 }
