@@ -19,3 +19,4 @@ src/store/generated/tmp-resolvers
 
 # Firebase Runtime Environmental Variables
 .runtimeconfig.json
+firebase-admin-service-account.json
