@@ -16,3 +16,6 @@ src/store/generated/tmp-resolvers
 
 # Microsoft Office
 ~$*.*
+
+# Firebase Runtime Environmental Variables
+.runtimeconfig.json
