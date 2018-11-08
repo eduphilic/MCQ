@@ -53,7 +53,7 @@ export class UserAccountRepository {
     this.assertNoIdField("updateUser", update);
 
     const documentReference = await this.getUserDocumentReferenceById(id);
-    documentReference.update(update);
+    await documentReference.update(update);
   }
 
   private async getUserDocumentReferenceById(id: string) {
