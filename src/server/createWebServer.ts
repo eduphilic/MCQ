@@ -1,12 +1,19 @@
 import { ContextFunction } from "apollo-server-core";
 import assert from "assert";
 import Koa from "koa";
-import { createApolloServer, createContext } from "../api";
+import {
+  createApolloServer,
+  createApolloTypeDefs,
+  createContext,
+  resolvers,
+} from "../api";
 import { getInitializedFirebaseEnvironment } from "./getInitializedFirebaseEnvironment";
 import {
   createAllowCachingMiddleware,
   createSessionMiddleware,
+  createStaticMiddleware,
 } from "./middleware";
+import { createRenderMiddleware } from "./middleware/createRenderMiddleware";
 
 const {
   functions,
@@ -45,17 +52,8 @@ export function createWebServer() {
     `Cookie expiration set to ${koaCookieExpireSeconds / 60 / 60 / 24} days.`,
   );
 
-  const app = new Koa();
-  app.keys = [koaKey0, koaKey1];
-  app.use(createAllowCachingMiddleware());
-  app.use(
-    createSessionMiddleware(
-      { cookieExpireSeconds: koaCookieExpireSeconds },
-      app,
-    ),
-  );
-
-  const contextFunction: ContextFunction = async ({ ctx }) => {
+  // Create context factory for Apollo Server and server side Apollo Client.
+  const contextFactory: ContextFunction = async ({ ctx }) => {
     const context = createContext({
       db: firestore,
       jwtExpirationSeconds: koaCookieExpireSeconds,
@@ -71,7 +69,25 @@ export function createWebServer() {
     return context;
   };
 
-  const apolloServer = createApolloServer(contextFunction);
+  const app = new Koa();
+  app.keys = [koaKey0, koaKey1];
+  app.use(createAllowCachingMiddleware());
+  app.use(
+    createSessionMiddleware(
+      { cookieExpireSeconds: koaCookieExpireSeconds },
+      app,
+    ),
+  );
+  app.use(createStaticMiddleware());
+  app.use(
+    createRenderMiddleware({
+      contextFactory,
+      typeDefs: createApolloTypeDefs(),
+      resolvers,
+    }),
+  );
+
+  const apolloServer = createApolloServer(contextFactory);
   apolloServer.applyMiddleware({
     app,
     bodyParserConfig: false,

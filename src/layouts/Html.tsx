@@ -2,8 +2,9 @@ import { ApolloCache } from "apollo-cache";
 import lzString from "lz-string";
 import React, { ReactElement } from "react";
 import { getBundles } from "react-loadable/webpack";
+import { HtmlConfig } from "../api";
 
-export type HtmlProps<Cache extends ApolloCache<any>> = {
+export type HtmlProps<Cache extends ApolloCache<any>> = HtmlConfig & {
   content: string;
   cache: Cache;
   assets: {
@@ -16,13 +17,6 @@ export type HtmlProps<Cache extends ApolloCache<any>> = {
   materialUiCss: string;
   styledComponentsStyleElements: ReactElement<any>[];
   csrfToken: string;
-
-  googleAnalyticsId?: string;
-  metaKeywords?: string;
-  metaDescription?: string;
-  metaAuthor?: string;
-  metaAbstract?: string;
-  metaCopyright?: string;
 };
 
 const publicPath = "";

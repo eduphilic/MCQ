@@ -1,42 +1,13 @@
-import fs from "fs";
-import path from "path";
+import { isRedirect } from "@reach/router";
 
-import {
-  createGenerateClassName,
-  jssPreset,
-  MuiThemeProvider,
-} from "@material-ui/core/styles";
-import { isRedirect, ServerLocation } from "@reach/router";
-import { create, SheetsRegistry } from "jss";
-import React from "react";
-import { renderToStaticMarkup, renderToString } from "react-dom/server";
-import JssProvider from "react-jss/lib/JssProvider";
-import { ServerStyleSheet, StyleSheetManager } from "styled-components";
-import { App } from "./app";
-import { Html } from "./layouts/Html";
-import { lightTheme } from "./styled/themes";
-
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { ApolloClient } from "apollo-client";
-import { SchemaLink } from "apollo-link-schema";
-import { ApolloServer, gql, makeExecutableSchema } from "apollo-server-koa";
 import { NextFunction } from "connect";
 import { SetOption as CookieSetOption } from "cookies";
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 import Koa, { Context } from "koa";
 // import csrf from "koa-csrf";
-import session from "koa-session";
-import { ApolloProvider, getDataFromTree } from "react-apollo";
-import { Capture, preloadAll } from "react-loadable";
-import { getBundles } from "react-loadable/webpack";
 // import { ServerContext } from "./ServerContext";
-import {
-  Context as ApolloServerContext,
-  createContext,
-  resolvers,
-} from "./api";
-import { HtmlConfig, SessionUserRole } from "./models";
+import { SessionUserRole } from "./models";
 import { SessionUserServerResumed } from "./models/SessionUserServerResumed";
 // import { resolvers } from "./serverResolvers";
 import {
@@ -83,23 +54,7 @@ firebaseDatabase.settings({
 });
 
 const app = new Koa();
-app.keys = ["n#3Tni$X%adp@DE4knaZ", "t#00NkE2yzD88fj7x8x@"];
-app.use(
-  session(
-    {
-      key: "__session",
-      signed: false,
-      maxAge: cookieOptions.maxAge,
-    },
-    app,
-  ),
-);
 // app.use(new csrf({ disableQuery: true }));
-
-if (process.env.NODE_ENV === "development") {
-  const serve: typeof import("koa-static") = require("koa-static");
-  app.use(serve(process.env.RAZZLE_PUBLIC_DIR!));
-}
 
 // Load user from session cookie.
 app.use((ctx, next) => {
@@ -116,109 +71,6 @@ app.use((ctx, next) => {
   ctx.state.user = user;
   return next();
 });
-
-// In production the schema file will be colocated with the server bundle.
-let schemaString: string;
-if (process.env.NODE_ENV === "production") {
-  schemaString = fs.readFileSync(
-    path.resolve(__dirname, "schema.graphql"),
-    "utf8",
-  );
-} else {
-  schemaString = fs
-    .readdirSync(path.resolve(__dirname, "../src/api/schema"))
-    .filter(filename => /\.graphql$/.test(filename))
-    .map(filename =>
-      fs.readFileSync(
-        path.resolve(__dirname, "../src/api/schema", filename),
-        "utf8",
-      ),
-    )
-    .reduce((accumulator, fileContents) => {
-      return accumulator + fileContents;
-    }, "");
-}
-
-// Used by ApolloServer in server.
-const typeDefs = gql`
-  ${schemaString}
-`;
-
-// Used by ApolloClient in server rendered app.
-const schema = makeExecutableSchema({
-  typeDefs: gql`
-    ${schemaString}
-  `,
-  resolvers,
-});
-
-const contextFactory = ({ ctx }: { ctx: Context }): ApolloServerContext => {
-  return createContext({
-    db: firebaseDatabase,
-    jwtExpirationSeconds: cookieOptions.maxAge! / 1000,
-    jwtSecret,
-    koaContext: ctx,
-    remoteConfigCredentials: {
-      projectId: firebaseCredentials.project_id,
-      clientEmail: firebaseCredentials.client_email,
-      privateKey: firebaseCredentials.private_key,
-    },
-  });
-};
-
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: contextFactory,
-});
-
-server.applyMiddleware({
-  app: app as any,
-  bodyParserConfig: false,
-  cors: false,
-});
-
-const assets: { client: { js: string; css?: string } } = require(process.env
-  .RAZZLE_ASSETS_MANIFEST!);
-
-// Code splitting setup.
-// https://github.com/jamiebuilds/react-loadable#preloading-all-your-loadable-components-on-the-server
-const componentPreloadPromise = preloadAll();
-// https://github.com/jamiebuilds/react-loadable#mapping-loaded-modules-to-bundles
-type LoadableExportManifest = {
-  [moduleId: string]: ReturnType<typeof getBundles>;
-};
-let getReactLoadableBundleStats: () => Promise<LoadableExportManifest> = () => {
-  return new Promise((resolve, reject) => {
-    const statsPath = path.resolve(__dirname, "react-loadable.json");
-
-    let statsFileContents: string;
-    try {
-      statsFileContents = fs.readFileSync(statsPath, "utf8");
-    } catch (e) {
-      reject(e);
-      return;
-    }
-
-    // For some reason, on initial load, the route pages have the file extension
-    // attached on the keys. On hot reload, the extension is removed. Hack to
-    // remove them:
-    const statsContent = JSON.parse(statsFileContents);
-    Object.keys(statsContent).forEach(key => {
-      const oldKey = key;
-      const newKey = key.replace(/\.tsx?$/, "");
-      if (oldKey !== newKey) {
-        statsContent[newKey] = statsContent[oldKey];
-        delete statsContent[oldKey];
-      }
-    });
-
-    resolve(statsContent);
-    if (process.env.NODE_ENV === "production") {
-      getReactLoadableBundleStats = () => Promise.resolve(statsContent);
-    }
-  });
-};
 
 const logoutRouteMiddleware = async (ctx: Context, next: NextFunction) => {
   if (ctx.url === "/logout") {
@@ -252,91 +104,7 @@ const routerDirectMiddleware = async (ctx: Context, next: NextFunction) => {
   }
 };
 
-const middlewareRenderApp = async (ctx: Context) => {
-  // Firebase Functions emulator won't send cookies otherwise...
-  if (process.env.NODE_ENV === "development") {
-    ctx.set("Cache-Control", "private");
-  }
-
-  const context = contextFactory({ ctx });
-  const client = new ApolloClient({
-    ssrMode: true,
-    link: new SchemaLink({ schema, context }),
-    cache: new InMemoryCache(),
-  });
-
-  const htmlConfig = (await context.configurationRepository.getParameterByKey(
-    "htmlConfig",
-  )) as HtmlConfig;
-
-  // Code Splitting Setup
-  await componentPreloadPromise;
-  const modules: string[] = [];
-
-  const nonCssComponent = (
-    <ApolloProvider client={client}>
-      <ServerLocation url={ctx.url}>
-        <Capture report={moduleName => modules.push(moduleName)}>
-          <App />
-        </Capture>
-      </ServerLocation>
-    </ApolloProvider>
-  );
-  await getDataFromTree(nonCssComponent);
-
-  let bundles = getBundles(await getReactLoadableBundleStats(), modules);
-  bundles = bundles.filter(b => !/\.map$/.test(b.file));
-
-  // https://material-ui.com/guides/server-rendering/#handling-the-request
-  const sheetsRegistry = new SheetsRegistry();
-  const sheetsManager = new Map();
-  const generateClassName = createGenerateClassName();
-  const jss = create({ ...jssPreset() });
-
-  // https://www.styled-components.com/docs/advanced#example
-  const sheet = new ServerStyleSheet();
-
-  const component = (
-    <StyleSheetManager sheet={sheet.instance}>
-      <JssProvider
-        jss={jss}
-        registry={sheetsRegistry}
-        generateClassName={generateClassName}
-      >
-        <MuiThemeProvider theme={lightTheme} sheetsManager={sheetsManager}>
-          {nonCssComponent}
-        </MuiThemeProvider>
-      </JssProvider>
-    </StyleSheetManager>
-  );
-  const content = renderToString(component);
-
-  // https://www.styled-components.com/docs/advanced#example
-  const styleElements = sheet.getStyleElement();
-
-  const html = (
-    <Html
-      content={content}
-      assets={assets}
-      cache={client.cache}
-      reactLoadableBundles={bundles}
-      materialUiCss={sheetsRegistry.toString().split("\n").map(l => l.trim()).join("")} // prettier-ignore
-      styledComponentsStyleElements={styleElements}
-      csrfToken={ctx.csrf}
-      googleAnalyticsId={htmlConfig.googleAnalyticsId}
-      metaKeywords={htmlConfig.metaKeywords}
-      metaDescription={htmlConfig.metaDescription}
-      metaAuthor={htmlConfig.metaAuthor}
-      metaAbstract={htmlConfig.metaAbstract}
-      metaCopyright={htmlConfig.metaCopyright}
-    />
-  );
-
-  ctx.body = `<!doctype html>\n${renderToStaticMarkup(html)}`;
-};
-
 app.use(logoutRouteMiddleware);
 app.use(routerDirectMiddleware);
-app.use(middlewareRenderApp);
 
 export const main = functions.https.onRequest(app.callback());

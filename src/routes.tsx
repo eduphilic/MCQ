@@ -15,20 +15,20 @@ const routeConfigurations: RouteConfiguration[] = [
     pageFileName: "RootIndexPage",
     routerPath: "/",
   },
-  {
-    pageFileName: "AdminLoginPage",
-    routerPath: "/admin/login",
-  },
-  {
-    pageFileName: "AdminDashboardPage",
-    routerPath: "/admin/dashboard",
-    requiredUserRole: SessionUserRole.ADMIN,
-  },
-  {
-    pageFileName: "AdminIndexManagerPage",
-    routerPath: "/admin/index-manager",
-    requiredUserRole: SessionUserRole.ADMIN,
-  },
+  // {
+  //   pageFileName: "AdminLoginPage",
+  //   routerPath: "/admin/login",
+  // },
+  // {
+  //   pageFileName: "AdminDashboardPage",
+  //   routerPath: "/admin/dashboard",
+  //   requiredUserRole: SessionUserRole.ADMIN,
+  // },
+  // {
+  //   pageFileName: "AdminIndexManagerPage",
+  //   routerPath: "/admin/index-manager",
+  //   requiredUserRole: SessionUserRole.ADMIN,
+  // },
 ];
 
 export const routes = routeConfigurations.map(route => {
