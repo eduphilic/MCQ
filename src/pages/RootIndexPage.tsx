@@ -8,9 +8,9 @@ const RootIndexPage: SFC<RouteComponentProps> = () => (
   <LandingLayout>
     <DarkTheme>
       <>
-        <HeroSection />
+        {/* <HeroSection /> */}
 
-        <AboutSection />
+        {/* <AboutSection /> */}
 
         <HeroFooter />
       </>

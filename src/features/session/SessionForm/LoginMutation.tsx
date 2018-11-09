@@ -1,20 +1,17 @@
 import gql from "graphql-tag";
 import React, { ConsumerProps, SFC } from "react";
 import { Mutation, MutationFn } from "react-apollo";
-import { SessionLoginRequestResult } from "../../../models";
+import { LoginMutationArgs, Mutation as MutationResolver } from "../../../api";
 
 const LOGIN = gql`
-  mutation Login($phoneNumber: String!, $password: String!) {
-    userLogin(phoneNumber: $phoneNumber, password: $password)
+  mutation Login($username: String!, $password: String!) {
+    login(username: $username, password: $password)
   }
 `;
-type Response = {
-  userLogin: SessionLoginRequestResult;
-};
-type Variables = {
-  phoneNumber: string;
-  password: string;
-};
+
+type Response = Pick<MutationResolver, "login">;
+
+type Variables = LoginMutationArgs;
 
 export const LoginMutation: SFC<
   ConsumerProps<MutationFn<Response, Variables>>

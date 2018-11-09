@@ -1,5 +1,5 @@
 import LocalizedStrings from "react-localization";
-import { LocalizationSupportedLanguages, LocalizedString } from "../../models";
+import { LocalizationLanguage, LocalizedString } from "../../api";
 
 const stringTranslations = new Map<string, LocalizedString>();
 // The constructor is missing the optional options field.
@@ -27,8 +27,6 @@ export function l(localizedString: LocalizedString) {
   return (strings as any)[localizedString.key];
 }
 
-export function setLanguage(language: LocalizationSupportedLanguages) {
-  strings.setLanguage(
-    language === LocalizationSupportedLanguages.English ? "en" : "hi",
-  );
+export function setLanguage(language: LocalizationLanguage) {
+  strings.setLanguage(language === LocalizationLanguage.ENGLISH ? "en" : "hi");
 }

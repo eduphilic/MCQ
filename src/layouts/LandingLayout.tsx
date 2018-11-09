@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import gql from "graphql-tag";
 import React, { SFC } from "react";
 import { Query } from "react-apollo";
-import { HtmlConfig } from "../models";
+import { HtmlConfig } from "../api";
 import { DarkTheme, styled } from "../styled";
 
 const GET_LANDING_FOOTER_TEXT = gql`

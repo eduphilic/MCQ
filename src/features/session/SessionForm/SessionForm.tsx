@@ -4,10 +4,10 @@ import CardHeader from "@material-ui/core/CardHeader";
 import { Formik } from "formik";
 import gql from "graphql-tag";
 import React, { cloneElement, ReactElement, SFC } from "react";
+import { LoginRequestResult } from "../../../api";
 import { Button } from "../../../components/Button";
 import { Card } from "../../../components/Card";
 import { QueryWithLoading } from "../../../components/QueryWithLoading";
-import { SessionLoginRequestResult } from "../../../models";
 import { styled } from "../../../styled";
 import { useSnackbars } from "../../display";
 import { l } from "../../localization";
@@ -77,13 +77,12 @@ const handleFormSubmit = async (
       case "admin-sign-in": {
         const result = await loginMutation({
           variables: {
-            phoneNumber: values.phoneNumber,
+            username: values.phoneNumber,
             password: values.password,
           },
         });
         wasSuccessful =
-          !!result &&
-          result.data!.userLogin === SessionLoginRequestResult.VALID;
+          !!result && result.data!.login === LoginRequestResult.VALID;
         /* tslint:disable-next-line:no-console */
         console.log({ result });
         break;

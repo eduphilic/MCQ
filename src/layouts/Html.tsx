@@ -4,7 +4,10 @@ import React, { ReactElement } from "react";
 import { getBundles } from "react-loadable/webpack";
 import { HtmlConfig } from "../api";
 
-export type HtmlProps<Cache extends ApolloCache<any>> = HtmlConfig & {
+export type HtmlProps<Cache extends ApolloCache<any>> = Omit<
+  HtmlConfig,
+  "landingFooter"
+> & {
   content: string;
   cache: Cache;
   assets: {

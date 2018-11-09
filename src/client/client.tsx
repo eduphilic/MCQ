@@ -11,10 +11,8 @@ import ApolloClient from "apollo-client";
 import { ApolloLink } from "apollo-link";
 import { onError } from "apollo-link-error";
 import { HttpLink } from "apollo-link-http";
-import { withClientState } from "apollo-link-state";
 import { ApolloProvider } from "react-apollo";
 import { preloadReady } from "react-loadable";
-import { resolvers } from "../clientResolvers";
 
 const initialCacheState = JSON.parse(
   lzString.decompressFromUTF16(window.__STATE__),
@@ -31,11 +29,6 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     );
   }
   if (networkError) console.log(`[Network error]: ${networkError}`);
-});
-
-const stateLink = withClientState({
-  cache,
-  resolvers,
 });
 
 /**
@@ -72,7 +65,7 @@ const csrfLink = new ApolloLink((operation, forward) => {
 const httpLink = new HttpLink({ uri: "/graphql", credentials: "same-origin" });
 
 const client = new ApolloClient({
-  link: ApolloLink.from([errorLink, stateLink, csrfLink, httpLink]),
+  link: ApolloLink.from([errorLink, csrfLink, httpLink]),
   cache,
 });
 

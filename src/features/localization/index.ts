@@ -1,4 +1,4 @@
-export * from "./LocalizationLanguageMutation";
-export * from "./LocalizationLanguageQuery";
-export * from "./LocalizationProvider";
+export * from "./LanguageMutation";
+export * from "./LanguageQuery";
+export * from "./LanguageProvider";
 export * from "./strings";

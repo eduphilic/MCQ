@@ -1,19 +1,19 @@
 import React, { Component, Fragment, SFC } from "react";
-import { LocalizationSupportedLanguages } from "../../models";
-import { LocalizationLanguageQuery } from "./LocalizationLanguageQuery";
+import { LocalizationLanguage } from "../../api";
+import { LanguageQuery } from "./LanguageQuery";
 import { setLanguage } from "./strings";
 
 type Props = {
-  language: LocalizationSupportedLanguages;
+  language: LocalizationLanguage;
 };
 
 type State = {
-  lastLanguage: LocalizationSupportedLanguages | null;
+  lastLanguage: LocalizationLanguage | null;
 };
 
 let nextKey = 0;
 
-class LocalizationProviderForceRender extends Component<Props, State> {
+class LanguageChangeRemount extends Component<Props, State> {
   state: State = { lastLanguage: null };
 
   static getDerivedStateFromProps(props: Props, state: State) {
@@ -22,7 +22,7 @@ class LocalizationProviderForceRender extends Component<Props, State> {
       nextKey += 1;
       return { lastLanguage: props.language };
     }
-    return name;
+    return null;
   }
 
   render() {
@@ -37,11 +37,11 @@ class LocalizationProviderForceRender extends Component<Props, State> {
  * strings.
  */
 export const LocalizationProvider: SFC = ({ children }) => (
-  <LocalizationLanguageQuery>
-    {localizationLanguage => (
-      <LocalizationProviderForceRender language={localizationLanguage}>
+  <LanguageQuery>
+    {language => (
+      <LanguageChangeRemount language={language}>
         {children}
-      </LocalizationProviderForceRender>
+      </LanguageChangeRemount>
     )}
-  </LocalizationLanguageQuery>
+  </LanguageQuery>
 );

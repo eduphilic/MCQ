@@ -4,13 +4,13 @@ import Typography from "@material-ui/core/Typography";
 import { Redirect, RouteComponentProps } from "@reach/router";
 import gql from "graphql-tag";
 import React, { SFC } from "react";
+import { LocalizedString, UserRole } from "../api";
 import { ContentCenterWrapper } from "../components/ContentCenterWrapper";
 import { Logo } from "../components/Logo";
 import { QueryWithLoading } from "../components/QueryWithLoading";
 import { l } from "../features/localization";
-import { SessionForm, useAuthenticationStatus } from "../features/session";
+import { SessionForm, useSession } from "../features/session";
 import { LandingLayout } from "../layouts/LandingLayout";
-import { LocalizedString, SessionUserRole } from "../models";
 import { DarkTheme, LightTheme, styled } from "../styled";
 
 const GET_ADMIN_LOGIN_PAGE_CONFIG = gql`
@@ -23,7 +23,7 @@ const GET_ADMIN_LOGIN_PAGE_CONFIG = gql`
 `;
 
 const AdminLoginPage: SFC<RouteComponentProps> = () => {
-  const authenticationStatus = useAuthenticationStatus();
+  const session = useSession();
 
   return (
     <QueryWithLoading<{
@@ -38,11 +38,11 @@ const AdminLoginPage: SFC<RouteComponentProps> = () => {
         <LandingLayout>
           {(() => {
             // TODO: Fix this. Replace with imperative redirect.
-            if (!authenticationStatus) return null;
-            if (authenticationStatus.role === SessionUserRole.ADMIN) {
+            if (!session) return null;
+            if (session === UserRole.ADMIN) {
               return <Redirect to="/admin/dashboard" noThrow />;
             }
-            if (authenticationStatus.role === SessionUserRole.USER) {
+            if (session === UserRole.USER) {
               return <Redirect to="/dashboard" noThrow />;
             }
             return null;

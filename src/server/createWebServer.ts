@@ -6,7 +6,7 @@ import {
   createApolloTypeDefs,
   createContext,
   resolvers,
-} from "../api";
+} from "../api/serverSideExports";
 import { getInitializedFirebaseEnvironment } from "./getInitializedFirebaseEnvironment";
 import {
   createAllowCachingMiddleware,

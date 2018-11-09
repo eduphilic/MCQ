@@ -6,12 +6,9 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Typography from "@material-ui/core/Typography";
 import React, { SFC } from "react";
-import { LocalizationSupportedLanguages } from "../../models";
+import { LocalizationLanguage } from "../../api";
 import { styled } from "../../styled";
-import {
-  LocalizationLanguageMutation,
-  LocalizationLanguageQuery,
-} from "../localization";
+import { LanguageMutation, LanguageQuery } from "../localization";
 
 /**
  * Provides language selection to visitors of the landing page.
@@ -30,34 +27,34 @@ export const LanguageSelect = () => (
     </SideWrapper>
 
     <SideWrapper>
-      <LocalizationLanguageQuery>
-        {localizationLanguage => (
-          <LocalizationLanguageMutation>
+      <LanguageQuery>
+        {language => (
+          <LanguageMutation>
             {setLocalization => (
               <RadioGroup
                 aria-label={"Preferred Language"}
                 row
-                value={localizationLanguage}
+                value={language}
                 onChange={e => {
                   setLocalization((e.target as any).value);
                 }}
               >
                 <StyledFormControlLabel
-                  value={LocalizationSupportedLanguages.English}
+                  value={LocalizationLanguage.ENGLISH}
                   control={<StyledRadio />}
                   label="English"
                 />
 
                 <StyledFormControlLabel
-                  value={LocalizationSupportedLanguages.Hindi}
+                  value={LocalizationLanguage.HINDI}
                   control={<StyledRadio />}
                   label="हिंदी"
                 />
               </RadioGroup>
             )}
-          </LocalizationLanguageMutation>
+          </LanguageMutation>
         )}
-      </LocalizationLanguageQuery>
+      </LanguageQuery>
     </SideWrapper>
   </Wrapper>
 );

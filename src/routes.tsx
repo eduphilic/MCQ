@@ -1,13 +1,13 @@
 import { Redirect, RouteComponentProps } from "@reach/router";
 import React, { ComponentType, ReactElement } from "react";
 import Loadable from "react-loadable";
-import { useAuthenticationStatus } from "./features/session";
-import { SessionUserRole } from "./models";
+import { UserRole } from "./api";
+import { useSession } from "./features/session";
 
 type RouteConfiguration = {
   pageFileName: string;
   routerPath: string;
-  requiredUserRole?: SessionUserRole;
+  requiredUserRole?: UserRole;
 };
 
 const routeConfigurations: RouteConfiguration[] = [
@@ -15,20 +15,20 @@ const routeConfigurations: RouteConfiguration[] = [
     pageFileName: "RootIndexPage",
     routerPath: "/",
   },
-  // {
-  //   pageFileName: "AdminLoginPage",
-  //   routerPath: "/admin/login",
-  // },
-  // {
-  //   pageFileName: "AdminDashboardPage",
-  //   routerPath: "/admin/dashboard",
-  //   requiredUserRole: SessionUserRole.ADMIN,
-  // },
-  // {
-  //   pageFileName: "AdminIndexManagerPage",
-  //   routerPath: "/admin/index-manager",
-  //   requiredUserRole: SessionUserRole.ADMIN,
-  // },
+  {
+    pageFileName: "AdminLoginPage",
+    routerPath: "/admin/login",
+  },
+  {
+    pageFileName: "AdminDashboardPage",
+    routerPath: "/admin/dashboard",
+    requiredUserRole: UserRole.ADMIN,
+  },
+  {
+    pageFileName: "AdminIndexManagerPage",
+    routerPath: "/admin/index-manager",
+    requiredUserRole: UserRole.ADMIN,
+  },
 ];
 
 export const routes = routeConfigurations.map(route => {
@@ -54,17 +54,19 @@ export const routes = routeConfigurations.map(route => {
   return <RouteComponent key={route.routerPath} path={route.routerPath} />;
 });
 
-function createProtectedRoute(role: SessionUserRole, Component: ComponentType) {
+function createProtectedRoute(role: UserRole, Component: ComponentType) {
   let redirect: ReactElement<any> | null = null;
-  if (role === SessionUserRole.ADMIN) {
+
+  if (role === UserRole.ADMIN) {
     redirect = <Redirect to="/admin/login" noThrow />;
   } else {
     redirect = <Redirect to="/login" noThrow />;
   }
 
   function ProtectedRoute(_props: RouteComponentProps) {
-    const authenticationStatus = useAuthenticationStatus();
-    if (!authenticationStatus) return redirect;
+    const session = useSession();
+    if (!session || session !== role) return redirect;
+
     return <Component />;
   }
 

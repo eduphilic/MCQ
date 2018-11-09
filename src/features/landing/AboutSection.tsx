@@ -2,9 +2,9 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import gql from "graphql-tag";
 import React from "react";
+import { IndexPageConfig } from "../../api";
 import { ContentCenterWrapper } from "../../components/ContentCenterWrapper";
 import { QueryWithLoading } from "../../components/QueryWithLoading";
-import { IndexPageConfig } from "../../models";
 import { styled } from "../../styled";
 import { l } from "../localization";
 

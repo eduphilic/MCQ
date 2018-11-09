@@ -1,4 +1,4 @@
-import { LocalizedString } from "../../../models";
+import { LocalizedString } from "../../../api";
 
 export type SessionFormConfig = {
   formTitleUserSignIn: LocalizedString;
