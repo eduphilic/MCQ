@@ -6,6 +6,7 @@ import { htmlConfig } from "./HtmlConfigQuery";
 import { indexPageConfig } from "./IndexPageConfigQuery";
 import { language } from "./LanguageQuery";
 import { sessionFormConfig } from "./SessionFormConfigQuery";
+import { session } from "./SessionQuery";
 
 import { login } from "./LoginMutation";
 
@@ -15,6 +16,7 @@ const Query: QueryResolvers.Resolvers = {
   indexPageConfig,
   language,
   sessionFormConfig,
+  session,
 };
 
 const Mutation: MutationResolvers.Resolvers = {
