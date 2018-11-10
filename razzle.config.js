@@ -5,7 +5,6 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 const WebpackShellPlugin = require("webpack-shell-plugin");
 const { ReactLoadablePlugin } = require("react-loadable/webpack");
-const webpack = require("webpack");
 
 module.exports = {
   plugins: [
