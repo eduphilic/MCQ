@@ -3,7 +3,7 @@ import Hidden from "@material-ui/core/Hidden";
 import Typography from "@material-ui/core/Typography";
 import gql from "graphql-tag";
 import React, { CSSProperties } from "react";
-import { IndexPageConfig } from "../../api";
+import { Query } from "../../api";
 import { ContentCenterWrapper } from "../../components/ContentCenterWrapper";
 import { Logo } from "../../components/Logo";
 import { QueryWithLoading } from "../../components/QueryWithLoading";
@@ -22,23 +22,13 @@ const GET_HERO_CONFIG = gql`
   }
 `;
 
-type Response = {
-  indexPageConfig: Pick<
-    IndexPageConfig,
-    | "heroBackgroundImageUrl"
-    | "heroBackgroundAlpha"
-    | "heroPrimaryText"
-    | "heroFeatures"
-  >;
-};
-
 export const HeroSection = () => (
-  <QueryWithLoading<Response> query={GET_HERO_CONFIG}>
+  <QueryWithLoading<Pick<Query, "indexPageConfig">> query={GET_HERO_CONFIG}>
     {({ data }) => (
       <HeroBackgroundImage
         background={{
-          heroBackgroundImageUrl: data!.indexPageConfig.heroBackgroundImageUrl,
-          heroBackgroundAlpha: data!.indexPageConfig.heroBackgroundAlpha,
+          heroBackgroundImageUrl: data.indexPageConfig.heroBackgroundImageUrl,
+          heroBackgroundAlpha: data.indexPageConfig.heroBackgroundAlpha,
         }}
       >
         <ContentCenterWrapper>
@@ -58,12 +48,12 @@ export const HeroSection = () => (
                 <Grid container direction="column" justify="center" item xs>
                   <Grid item>
                     <HeroPrimaryText>
-                      {l(data!.indexPageConfig.heroPrimaryText)}
+                      {l(data.indexPageConfig.heroPrimaryText)}
                     </HeroPrimaryText>
                   </Grid>
                   <Grid item>
                     <HeroFeatureList>
-                      {data!.indexPageConfig.heroFeatures.map((text, key) => (
+                      {data.indexPageConfig.heroFeatures.map((text, key) => (
                         <HeroFeatureItem key={key}>{l(text)}</HeroFeatureItem>
                       ))}
                     </HeroFeatureList>

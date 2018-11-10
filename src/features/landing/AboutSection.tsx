@@ -2,7 +2,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import gql from "graphql-tag";
 import React from "react";
-import { IndexPageConfig } from "../../api";
+import { Query } from "../../api";
 import { ContentCenterWrapper } from "../../components/ContentCenterWrapper";
 import { QueryWithLoading } from "../../components/QueryWithLoading";
 import { styled } from "../../styled";
@@ -22,23 +22,18 @@ const GET_ABOUT_SECTION_CONFIG = gql`
   }
 `;
 
-type Response = {
-  indexPageConfig: Pick<
-    IndexPageConfig,
-    "aboutTitle" | "aboutText" | "aboutImages"
-  >;
-};
-
 export const AboutSection = () => (
   <Wrapper>
     <ContentCenterWrapper style={{ textAlign: "center" }}>
-      <QueryWithLoading<Response> query={GET_ABOUT_SECTION_CONFIG}>
+      <QueryWithLoading<Pick<Query, "indexPageConfig">>
+        query={GET_ABOUT_SECTION_CONFIG}
+      >
         {({ data }) => (
           <>
-            <Title>{l(data!.indexPageConfig.aboutTitle)}</Title>
-            <Text>{l(data!.indexPageConfig.aboutText)}</Text>
+            <Title>{l(data.indexPageConfig.aboutTitle)}</Title>
+            <Text>{l(data.indexPageConfig.aboutText)}</Text>
             <Grid container spacing={16}>
-              {data!.indexPageConfig.aboutImages.map((aboutImage, index) => (
+              {data.indexPageConfig.aboutImages.map((aboutImage, index) => (
                 <Grid key={index} item xs={12} md={6} style={{ marginTop: 24 }}>
                   <img src={aboutImage.imageUrl} style={{ marginBottom: 24 }} />
                   <Title>{l(aboutImage.title)}</Title>

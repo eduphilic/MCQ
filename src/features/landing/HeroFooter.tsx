@@ -1,7 +1,7 @@
 import Typography from "@material-ui/core/Typography";
 import gql from "graphql-tag";
 import React from "react";
-import { IndexPageConfig } from "../../api";
+import { Query } from "../../api";
 import { QueryWithLoading } from "../../components/QueryWithLoading";
 import { styled } from "../../styled";
 import { l } from "../localization";
@@ -14,10 +14,6 @@ const GET_HERO_FOOTER_TEXT = gql`
   }
 `;
 
-type Response = {
-  indexPageConfig: Pick<IndexPageConfig, "heroFooterText">;
-};
-
 /**
  * Footer of hero image section of landing page.
  *
@@ -25,12 +21,13 @@ type Response = {
  */
 export const HeroFooter = () => (
   <Wrapper>
-    {/* <QueryWithLoading<Response> query={GET_HERO_FOOTER_TEXT}>
+    <QueryWithLoading<Pick<Query, "indexPageConfig">>
+      query={GET_HERO_FOOTER_TEXT}
+    >
       {({ data }) => {
-        return <Text>{l(data!.indexPageConfig.heroFooterText)}</Text>;
+        return <Text>{l(data.indexPageConfig.heroFooterText)}</Text>;
       }}
-    </QueryWithLoading> */}
-    <p>Placeholder</p>
+    </QueryWithLoading>
   </Wrapper>
 );
 
