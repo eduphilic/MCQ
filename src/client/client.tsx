@@ -4,7 +4,7 @@ import lzString from "lz-string";
 import React, { Component } from "react";
 import { hydrate } from "react-dom";
 import JssProvider from "react-jss/lib/JssProvider";
-import { App } from "../app";
+import { App } from "../App";
 
 import { InMemoryCache } from "apollo-cache-inmemory";
 import ApolloClient from "apollo-client";
