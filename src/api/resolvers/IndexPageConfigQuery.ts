@@ -9,8 +9,5 @@ export const indexPageConfig: QueryResolvers.IndexPageConfigResolver = async (
     "indexPageConfig",
   )) as IndexPageConfig;
 
-  /* tslint:disable-next-line:no-console */
-  console.log({ indexPageConfig });
-
   return indexPageConfig;
 };
