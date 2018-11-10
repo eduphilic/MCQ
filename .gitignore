@@ -9,6 +9,7 @@ build/
 build-server/
 /.firebase
 src/store/generated/tmp-resolvers
+.cache
 
 # Logs
 *error.log
