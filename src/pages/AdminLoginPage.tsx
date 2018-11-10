@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import { Redirect, RouteComponentProps } from "@reach/router";
 import gql from "graphql-tag";
 import React, { SFC } from "react";
-import { LocalizedString, UserRole } from "../api";
+import { Query, UserRole } from "../api";
 import { ContentCenterWrapper } from "../components/ContentCenterWrapper";
 import { Logo } from "../components/Logo";
 import { QueryWithLoading } from "../components/QueryWithLoading";
@@ -26,12 +26,7 @@ const AdminLoginPage: SFC<RouteComponentProps> = () => {
   const session = useSession();
 
   return (
-    <QueryWithLoading<{
-      adminLoginPageConfig: {
-        heroPrimaryText: LocalizedString;
-        heroSecondaryText: LocalizedString;
-      };
-    }>
+    <QueryWithLoading<Pick<Query, "adminLoginPageConfig">>
       query={GET_ADMIN_LOGIN_PAGE_CONFIG}
     >
       {({ data }) => (
@@ -62,10 +57,10 @@ const AdminLoginPage: SFC<RouteComponentProps> = () => {
                       <Grid item sm={8}>
                         <TypographyWrapper>
                           <Typography variant="h2" gutterBottom>
-                            {l(data!.adminLoginPageConfig.heroPrimaryText)}
+                            {l(data.adminLoginPageConfig.heroPrimaryText)}
                           </Typography>
                           <Typography variant="h4">
-                            {l(data!.adminLoginPageConfig.heroSecondaryText)}
+                            {l(data.adminLoginPageConfig.heroSecondaryText)}
                           </Typography>
                         </TypographyWrapper>
                       </Grid>

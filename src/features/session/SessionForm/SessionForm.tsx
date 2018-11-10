@@ -4,7 +4,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import { Formik } from "formik";
 import gql from "graphql-tag";
 import React, { cloneElement, ReactElement, SFC } from "react";
-import { LoginRequestResult } from "../../../api";
+import { LoginRequestResult, Query } from "../../../api";
 import { Button } from "../../../components/Button";
 import { Card } from "../../../components/Card";
 import { QueryWithLoading } from "../../../components/QueryWithLoading";
@@ -17,7 +17,6 @@ import { getLocalizedTextFieldProps } from "./getLocalizedTextFieldProps";
 import { getValidationSchema } from "./getValidationSchema";
 import { LoginMutation, LoginMutationFn } from "./LoginMutation";
 import { PasswordResetLink } from "./PasswordResetLink";
-import { SessionFormConfig } from "./SessionFormConfig";
 import { TermsConditionsCheckbox } from "./TermsConditionsCheckbox";
 import { TextField, TextFieldProps } from "./TextField";
 import { TextFieldValues } from "./TextFieldValues";
@@ -39,10 +38,6 @@ const GET_SESSION_FORM_CONFIG = gql`
     }
   }
 `;
-
-type Response = {
-  sessionFormConfig: SessionFormConfig;
-};
 
 type Props = { type: FormType };
 
@@ -113,27 +108,29 @@ export const SessionForm: SFC<Props> = props => {
   const validationSchema = () => getValidationSchema(type);
 
   return (
-    <QueryWithLoading<Response> query={GET_SESSION_FORM_CONFIG}>
+    <QueryWithLoading<Pick<Query, "sessionFormConfig">>
+      query={GET_SESSION_FORM_CONFIG}
+    >
       {({ data }) => {
         let formTitle: string;
         switch (type) {
           case "user-sign-in": {
-            formTitle = l(data!.sessionFormConfig.formTitleUserSignIn);
+            formTitle = l(data.sessionFormConfig.formTitleUserSignIn);
             break;
           }
           case "user-sign-up": {
-            formTitle = l(data!.sessionFormConfig.formTitleUserSignUp);
+            formTitle = l(data.sessionFormConfig.formTitleUserSignUp);
             break;
           }
           case "admin-sign-in": {
-            formTitle = l(data!.sessionFormConfig.formTitleAdminSignIn);
+            formTitle = l(data.sessionFormConfig.formTitleAdminSignIn);
             break;
           }
         }
 
         const textFieldProps = getLocalizedTextFieldProps(
           type,
-          data!.sessionFormConfig,
+          data.sessionFormConfig,
         );
 
         const textFields = (Object.keys(
@@ -211,7 +208,7 @@ export const SessionForm: SFC<Props> = props => {
 
                       <CardActionsMarginBottom>
                         <Button type="submit" disabled={isSubmitting}>
-                          {l(data!.sessionFormConfig.submitButtonLabel)}
+                          {l(data.sessionFormConfig.submitButtonLabel)}
                         </Button>
 
                         <SecondaryActionWrapper>
@@ -219,7 +216,7 @@ export const SessionForm: SFC<Props> = props => {
                             <PasswordResetLink
                               disabled={isSubmitting}
                               label={l(
-                                data!.sessionFormConfig.passwordResetLinkLabel,
+                                data.sessionFormConfig.passwordResetLinkLabel,
                               )}
                             />
                           )}
@@ -228,7 +225,7 @@ export const SessionForm: SFC<Props> = props => {
                             <TermsConditionsCheckbox
                               name="termsAgreed"
                               label={l(
-                                data!.sessionFormConfig
+                                data.sessionFormConfig
                                   .termsConditionsCheckboxLabel,
                               )}
                               checked={values.termsAgreed}
