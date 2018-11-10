@@ -30,12 +30,6 @@ module.exports = {
       loader: "graphql-tag/loader",
     });
 
-    // Enable tree shaking even in development so that server side dependencies
-    // are dropped from the client bundle.
-    if (dev) {
-      config.plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
-    }
-
     if (target === "node") {
       config.entry = path.resolve(__dirname, "./src/server");
       config.output.filename = "index.js";
