@@ -11,6 +11,7 @@ import { getInitializedFirebaseEnvironment } from "./getInitializedFirebaseEnvir
 import {
   createAllowCachingMiddleware,
   createCSRFMiddleware,
+  createGraphQLPlaygroundMiddleware,
   createSessionMiddleware,
   createStaticMiddleware,
 } from "./middleware";
@@ -88,6 +89,7 @@ export function createWebServer() {
       resolvers,
     }),
   );
+  app.use(createGraphQLPlaygroundMiddleware(contextFactory));
 
   const apolloServer = createApolloServer(contextFactory);
   apolloServer.applyMiddleware({
