@@ -18,6 +18,10 @@
     "experimentalDecorators": true,
     "typeRoots": ["./typings", "node_modules/@types"]
   },
-  "include": ["./src/**/*", "./storybook/.storybook/**/*"],
+  "include": [
+    "./src/**/*",
+    "./storybook/.storybook/**/*",
+    "./storybook/stories/**/*"
+  ],
   "exclude": ["node_modules", "**/node_modules/*"]
 }
