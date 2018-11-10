@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import {
   OperationVariables,
   Query,
@@ -7,25 +7,20 @@ import {
 } from "react-apollo";
 import { LoadingSpinner } from "./LoadingSpinner";
 
-export class QueryWithLoading<
-  TData = any,
-  TVariables = OperationVariables
-> extends Component<QueryWithLoadingProps<TData, TVariables>> {
-  render() {
-    const { children, ...queryProps } = this.props;
+export function QueryWithLoading<TData = any, TVariables = OperationVariables>(
+  props: QueryWithLoadingProps<TData, TVariables>,
+) {
+  const { children, ...queryProps } = props;
 
-    return (
-      <Query<TData, TVariables> {...queryProps}>
-        {({ loading, data, ...rest }) => {
-          if (loading || !data) {
-            return <LoadingSpinner fadeIn />;
-          }
+  return (
+    <Query<TData, TVariables> {...queryProps}>
+      {({ loading, data, ...rest }) => {
+        if (loading) return <LoadingSpinner fadeIn />;
 
-          return this.props.children({ data: data!, ...rest });
-        }}
-      </Query>
-    );
-  }
+        return children({ data: data!, ...rest });
+      }}
+    </Query>
+  );
 }
 
 /**
