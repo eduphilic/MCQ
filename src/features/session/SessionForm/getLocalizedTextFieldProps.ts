@@ -1,6 +1,6 @@
+import { SessionFormConfig } from "../../../api";
 import { l } from "../../localization";
 import { FormType } from "./FormType";
-import { SessionFormConfig } from "./SessionFormConfig";
 import { TextFieldValues } from "./TextFieldValues";
 
 type TextFieldProps = Record<
