@@ -65,7 +65,7 @@ const csrfLink = new ApolloLink((operation, forward) => {
 const httpLink = new HttpLink({ uri: "/graphql", credentials: "same-origin" });
 
 const client = new ApolloClient({
-  link: ApolloLink.from([errorLink /*csrfLink, */, httpLink]),
+  link: ApolloLink.from([errorLink, csrfLink, httpLink]),
   cache,
 });
 

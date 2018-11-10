@@ -1,4 +1,3 @@
-import { ISettings } from "@apollographql/graphql-playground-html/dist/render-playground-page";
 import { ContextFunction } from "apollo-server-core";
 import { ApolloServer, makeExecutableSchema } from "apollo-server-koa";
 import { createApolloTypeDefs } from "./createApolloTypeDefs";
@@ -11,11 +10,9 @@ export function createApolloServer(contextFactory: ContextFunction<Context>) {
   return new ApolloServer({
     schema: makeExecutableSchema({ typeDefs, resolvers }),
     context: contextFactory,
-    playground:
-      process.env.NODE_ENV === "development"
-        ? {
-            settings: { "request.credentials": "same-origin" } as ISettings,
-          }
-        : false,
+
+    // Disable built in GraphQL Playground middleware because we'll be
+    // implementing this as a custom page route due to CSRF token requirements.
+    playground: false,
   });
 }

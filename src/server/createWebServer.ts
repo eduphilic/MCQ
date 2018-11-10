@@ -10,6 +10,7 @@ import {
 import { getInitializedFirebaseEnvironment } from "./getInitializedFirebaseEnvironment";
 import {
   createAllowCachingMiddleware,
+  createCSRFMiddleware,
   createSessionMiddleware,
   createStaticMiddleware,
 } from "./middleware";
@@ -72,6 +73,7 @@ export function createWebServer() {
   const app = new Koa();
   app.keys = [koaKey0, koaKey1];
   app.use(createAllowCachingMiddleware());
+  app.use(createCSRFMiddleware());
   app.use(
     createSessionMiddleware(
       { cookieExpireSeconds: koaCookieExpireSeconds },
