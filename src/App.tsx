@@ -1,14 +1,14 @@
 import { Router } from "@reach/router";
 import React from "react";
 import { SnackbarsProvider } from "./features/display";
-import { LocalizationProvider } from "./features/localization";
+import { LanguageProvider } from "./features/localization";
 import { AuthenticationStatusProvider } from "./features/session";
 import { routes } from "./routes";
 import { LightTheme, ThemeBaseline } from "./styled";
 
 export const App = () => (
   <AuthenticationStatusProvider>
-    <LocalizationProvider>
+    <LanguageProvider>
       <ThemeBaseline>
         <LightTheme>
           <SnackbarsProvider>
@@ -16,6 +16,6 @@ export const App = () => (
           </SnackbarsProvider>
         </LightTheme>
       </ThemeBaseline>
-    </LocalizationProvider>
+    </LanguageProvider>
   </AuthenticationStatusProvider>
 );

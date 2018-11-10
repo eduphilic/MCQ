@@ -36,7 +36,7 @@ class LanguageChangeRemount extends Component<Props, State> {
  * changes. This is done to force components to re-render their localized
  * strings.
  */
-export const LocalizationProvider: SFC = ({ children }) => (
+export const LanguageProvider: SFC = ({ children }) => (
   <LanguageQuery>
     {language => (
       <LanguageChangeRemount language={language}>
