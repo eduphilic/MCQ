@@ -57,25 +57,16 @@ export function createRenderMiddleware(options: {
       "htmlConfig",
     )) as HtmlConfig;
 
-    // Code splitting setup.
-    await componentPreloadPromise;
-    const modules: string[] = [];
-
     // TODO: Find a way to perform the data rendering and CSS rendering at the
     // same time to prevent a double render.
     const nonCssComponent = (
       <ApolloProvider client={client}>
         <ServerLocation url={ctx.url}>
-          <Capture report={moduleName => modules.push(moduleName)}>
-            <App />
-          </Capture>
+          <App />
         </ServerLocation>
       </ApolloProvider>
     );
     await getDataFromTree(nonCssComponent);
-
-    let bundles = getBundles(getReactLoadableBundleStats(), modules);
-    bundles = bundles.filter(b => !/\.map$/.test(b.file));
 
     // https://material-ui.com/guides/server-rendering/#handling-the-request
     const sheetsRegistry = new SheetsRegistry();
@@ -86,20 +77,29 @@ export function createRenderMiddleware(options: {
     // https://www.styled-components.com/docs/advanced#example
     const sheet = new ServerStyleSheet();
 
+    // Code splitting setup.
+    await componentPreloadPromise;
+    const modules: string[] = [];
+
     const component = (
-      <StyleSheetManager sheet={sheet.instance}>
-        <JssProvider
-          jss={jss}
-          registry={sheetsRegistry}
-          generateClassName={generateClassName}
-        >
-          <MuiThemeProvider theme={lightTheme} sheetsManager={sheetsManager}>
-            {nonCssComponent}
-          </MuiThemeProvider>
-        </JssProvider>
-      </StyleSheetManager>
+      <Capture report={moduleName => modules.push(moduleName)}>
+        <StyleSheetManager sheet={sheet.instance}>
+          <JssProvider
+            jss={jss}
+            registry={sheetsRegistry}
+            generateClassName={generateClassName}
+          >
+            <MuiThemeProvider theme={lightTheme} sheetsManager={sheetsManager}>
+              {nonCssComponent}
+            </MuiThemeProvider>
+          </JssProvider>
+        </StyleSheetManager>
+      </Capture>
     );
     const content = renderToString(component);
+
+    let bundles = getBundles(getReactLoadableBundleStats(), modules);
+    bundles = bundles.filter(b => !/\.map$/.test(b.file));
 
     // https://www.styled-components.com/docs/advanced#example
     const styleElements = sheet.getStyleElement();
