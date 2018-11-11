@@ -1,7 +1,6 @@
 import Tooltip from "@material-ui/core/Tooltip";
 import React, { ReactElement, ReactNode, SFC } from "react";
-import { styled } from "../../../styled";
-import "./TextFieldTooltip.css";
+import { createGlobalStyle, styled } from "../../../styled";
 import { TooltipArrow } from "./TooltipArrow";
 
 export type TextFieldTooltipProps = {
@@ -34,9 +33,17 @@ export const TextFieldTooltip: SFC<TextFieldTooltipProps> = props => {
   };
 
   return (
-    <Tooltip classes={classes} open={open} title={title} placement="bottom-end">
-      {children}
-    </Tooltip>
+    <>
+      <TextFieldTooltipGlobalStyles />
+      <Tooltip
+        classes={classes}
+        open={open}
+        title={title}
+        placement="bottom-end"
+      >
+        {children}
+      </Tooltip>
+    </>
   );
 };
 
@@ -44,4 +51,16 @@ const PositionedErrorArrow = styled(TooltipArrow)`
   position: absolute;
   right: -5px;
   top: -13px;
+`;
+
+const TextFieldTooltipGlobalStyles = createGlobalStyle`
+  .TextFieldTooltip {
+    color: #000;
+    background-color: #fff;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16);
+  }
+
+  .TextFieldTooltip-bottom-override {
+    margin-top: 8px;
+  }
 `;
