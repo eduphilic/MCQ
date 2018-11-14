@@ -187,430 +187,454 @@ export enum LoginRequestResult {
 // Resolvers
 // ====================================================
 
-export namespace QueryResolvers {
-  export interface Resolvers<Context = ServerContext, TypeParent = never> {
-    htmlConfig?: HtmlConfigResolver<HtmlConfig, TypeParent, Context>;
+export interface QueryResolvers<Context = ServerContext, TypeParent = never> {
+  htmlConfig?: QueryHtmlConfigResolver<HtmlConfig, TypeParent, Context>;
 
-    indexPageConfig?: IndexPageConfigResolver<
-      IndexPageConfig,
-      TypeParent,
-      Context
-    >;
+  indexPageConfig?: QueryIndexPageConfigResolver<
+    IndexPageConfig,
+    TypeParent,
+    Context
+  >;
 
-    adminLoginPageConfig?: AdminLoginPageConfigResolver<
-      AdminLoginPageConfig,
-      TypeParent,
-      Context
-    >;
+  adminLoginPageConfig?: QueryAdminLoginPageConfigResolver<
+    AdminLoginPageConfig,
+    TypeParent,
+    Context
+  >;
 
-    session?: SessionResolver<UserRole | null, TypeParent, Context>;
+  session?: QuerySessionResolver<UserRole | null, TypeParent, Context>;
 
-    sessionFormConfig?: SessionFormConfigResolver<
-      SessionFormConfig,
-      TypeParent,
-      Context
-    >;
+  sessionFormConfig?: QuerySessionFormConfigResolver<
+    SessionFormConfig,
+    TypeParent,
+    Context
+  >;
 
-    language?: LanguageResolver<LocalizationLanguage, TypeParent, Context>;
-  }
-
-  export type HtmlConfigResolver<
-    R = HtmlConfig,
-    Parent = never,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type IndexPageConfigResolver<
-    R = IndexPageConfig,
-    Parent = never,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type AdminLoginPageConfigResolver<
-    R = AdminLoginPageConfig,
-    Parent = never,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type SessionResolver<
-    R = UserRole | null,
-    Parent = never,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type SessionFormConfigResolver<
-    R = SessionFormConfig,
-    Parent = never,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type LanguageResolver<
-    R = LocalizationLanguage,
-    Parent = never,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
+  language?: QueryLanguageResolver<LocalizationLanguage, TypeParent, Context>;
 }
+
+export type QueryHtmlConfigResolver<
+  R = HtmlConfig,
+  Parent = never,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type QueryIndexPageConfigResolver<
+  R = IndexPageConfig,
+  Parent = never,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type QueryAdminLoginPageConfigResolver<
+  R = AdminLoginPageConfig,
+  Parent = never,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type QuerySessionResolver<
+  R = UserRole | null,
+  Parent = never,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type QuerySessionFormConfigResolver<
+  R = SessionFormConfig,
+  Parent = never,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type QueryLanguageResolver<
+  R = LocalizationLanguage,
+  Parent = never,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
 /** Configuration for the html document sent in response to all requests. */
-export namespace HtmlConfigResolvers {
-  export interface Resolvers<Context = ServerContext, TypeParent = HtmlConfig> {
-    /** Google Analytics ID. */
-    googleAnalyticsId?: GoogleAnalyticsIdResolver<
-      string | null,
-      TypeParent,
-      Context
-    >;
-    /** Meta "keywords" tag. */
-    metaKeywords?: MetaKeywordsResolver<string | null, TypeParent, Context>;
-    /** Meta "description" tag. */
-    metaDescription?: MetaDescriptionResolver<
-      string | null,
-      TypeParent,
-      Context
-    >;
-    /** Meta "author" tag. */
-    metaAuthor?: MetaAuthorResolver<string | null, TypeParent, Context>;
-    /** Meta "abstract" tag. */
-    metaAbstract?: MetaAbstractResolver<string | null, TypeParent, Context>;
-    /** Meta "copyright" tag. */
-    metaCopyright?: MetaCopyrightResolver<string | null, TypeParent, Context>;
-    /** Landing footer text. */
-    landingFooter?: LandingFooterResolver<string | null, TypeParent, Context>;
-  }
-
-  export type GoogleAnalyticsIdResolver<
-    R = string | null,
-    Parent = HtmlConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type MetaKeywordsResolver<
-    R = string | null,
-    Parent = HtmlConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type MetaDescriptionResolver<
-    R = string | null,
-    Parent = HtmlConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type MetaAuthorResolver<
-    R = string | null,
-    Parent = HtmlConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type MetaAbstractResolver<
-    R = string | null,
-    Parent = HtmlConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type MetaCopyrightResolver<
-    R = string | null,
-    Parent = HtmlConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type LandingFooterResolver<
-    R = string | null,
-    Parent = HtmlConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
+export interface HtmlConfigResolvers<
+  Context = ServerContext,
+  TypeParent = HtmlConfig
+> {
+  /** Google Analytics ID. */
+  googleAnalyticsId?: HtmlConfigGoogleAnalyticsIdResolver<
+    string | null,
+    TypeParent,
+    Context
+  >;
+  /** Meta "keywords" tag. */
+  metaKeywords?: HtmlConfigMetaKeywordsResolver<
+    string | null,
+    TypeParent,
+    Context
+  >;
+  /** Meta "description" tag. */
+  metaDescription?: HtmlConfigMetaDescriptionResolver<
+    string | null,
+    TypeParent,
+    Context
+  >;
+  /** Meta "author" tag. */
+  metaAuthor?: HtmlConfigMetaAuthorResolver<string | null, TypeParent, Context>;
+  /** Meta "abstract" tag. */
+  metaAbstract?: HtmlConfigMetaAbstractResolver<
+    string | null,
+    TypeParent,
+    Context
+  >;
+  /** Meta "copyright" tag. */
+  metaCopyright?: HtmlConfigMetaCopyrightResolver<
+    string | null,
+    TypeParent,
+    Context
+  >;
+  /** Landing footer text. */
+  landingFooter?: HtmlConfigLandingFooterResolver<
+    string | null,
+    TypeParent,
+    Context
+  >;
 }
+
+export type HtmlConfigGoogleAnalyticsIdResolver<
+  R = string | null,
+  Parent = HtmlConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type HtmlConfigMetaKeywordsResolver<
+  R = string | null,
+  Parent = HtmlConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type HtmlConfigMetaDescriptionResolver<
+  R = string | null,
+  Parent = HtmlConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type HtmlConfigMetaAuthorResolver<
+  R = string | null,
+  Parent = HtmlConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type HtmlConfigMetaAbstractResolver<
+  R = string | null,
+  Parent = HtmlConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type HtmlConfigMetaCopyrightResolver<
+  R = string | null,
+  Parent = HtmlConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type HtmlConfigLandingFooterResolver<
+  R = string | null,
+  Parent = HtmlConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
 /** Configuration for the landing page / index page. */
-export namespace IndexPageConfigResolvers {
-  export interface Resolvers<
-    Context = ServerContext,
-    TypeParent = IndexPageConfig
-  > {
-    /** The url to the hero image. */
-    heroBackgroundImageUrl?: HeroBackgroundImageUrlResolver<
-      string,
-      TypeParent,
-      Context
-    >;
-    /** The transparency of the hero image. */
-    heroBackgroundAlpha?: HeroBackgroundAlphaResolver<
-      number,
-      TypeParent,
-      Context
-    >;
-    /** The primary hero text (large top text). */
-    heroPrimaryText?: HeroPrimaryTextResolver<
-      LocalizedString,
-      TypeParent,
-      Context
-    >;
-    /** List of features below the primary hero text. */
-    heroFeatures?: HeroFeaturesResolver<LocalizedString[], TypeParent, Context>;
-    /** Text in the green section below the hero section. */
-    heroFooterText?: HeroFooterTextResolver<
-      LocalizedString,
-      TypeParent,
-      Context
-    >;
-    /** About section title. */
-    aboutTitle?: AboutTitleResolver<LocalizedString, TypeParent, Context>;
-    /** Text below the about title. */
-    aboutText?: AboutTextResolver<LocalizedString, TypeParent, Context>;
-    /** Images in the about section. */
-    aboutImages?: AboutImagesResolver<
-      IndexPageAboutImage[],
-      TypeParent,
-      Context
-    >;
-  }
-
-  export type HeroBackgroundImageUrlResolver<
-    R = string,
-    Parent = IndexPageConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type HeroBackgroundAlphaResolver<
-    R = number,
-    Parent = IndexPageConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type HeroPrimaryTextResolver<
-    R = LocalizedString,
-    Parent = IndexPageConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type HeroFeaturesResolver<
-    R = LocalizedString[],
-    Parent = IndexPageConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type HeroFooterTextResolver<
-    R = LocalizedString,
-    Parent = IndexPageConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type AboutTitleResolver<
-    R = LocalizedString,
-    Parent = IndexPageConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type AboutTextResolver<
-    R = LocalizedString,
-    Parent = IndexPageConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type AboutImagesResolver<
-    R = IndexPageAboutImage[],
-    Parent = IndexPageConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
+export interface IndexPageConfigResolvers<
+  Context = ServerContext,
+  TypeParent = IndexPageConfig
+> {
+  /** The url to the hero image. */
+  heroBackgroundImageUrl?: IndexPageConfigHeroBackgroundImageUrlResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+  /** The transparency of the hero image. */
+  heroBackgroundAlpha?: IndexPageConfigHeroBackgroundAlphaResolver<
+    number,
+    TypeParent,
+    Context
+  >;
+  /** The primary hero text (large top text). */
+  heroPrimaryText?: IndexPageConfigHeroPrimaryTextResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
+  /** List of features below the primary hero text. */
+  heroFeatures?: IndexPageConfigHeroFeaturesResolver<
+    LocalizedString[],
+    TypeParent,
+    Context
+  >;
+  /** Text in the green section below the hero section. */
+  heroFooterText?: IndexPageConfigHeroFooterTextResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
+  /** About section title. */
+  aboutTitle?: IndexPageConfigAboutTitleResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
+  /** Text below the about title. */
+  aboutText?: IndexPageConfigAboutTextResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
+  /** Images in the about section. */
+  aboutImages?: IndexPageConfigAboutImagesResolver<
+    IndexPageAboutImage[],
+    TypeParent,
+    Context
+  >;
 }
+
+export type IndexPageConfigHeroBackgroundImageUrlResolver<
+  R = string,
+  Parent = IndexPageConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageConfigHeroBackgroundAlphaResolver<
+  R = number,
+  Parent = IndexPageConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageConfigHeroPrimaryTextResolver<
+  R = LocalizedString,
+  Parent = IndexPageConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageConfigHeroFeaturesResolver<
+  R = LocalizedString[],
+  Parent = IndexPageConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageConfigHeroFooterTextResolver<
+  R = LocalizedString,
+  Parent = IndexPageConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageConfigAboutTitleResolver<
+  R = LocalizedString,
+  Parent = IndexPageConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageConfigAboutTextResolver<
+  R = LocalizedString,
+  Parent = IndexPageConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageConfigAboutImagesResolver<
+  R = IndexPageAboutImage[],
+  Parent = IndexPageConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
 /** Image and supporting text in index about section. */
-export namespace IndexPageAboutImageResolvers {
-  export interface Resolvers<
-    Context = ServerContext,
-    TypeParent = IndexPageAboutImage
-  > {
-    /** Image URL. */
-    imageUrl?: ImageUrlResolver<string, TypeParent, Context>;
-    /** Large text below image. */
-    title?: TitleResolver<LocalizedString, TypeParent, Context>;
-    /** Small text below image. */
-    text?: TextResolver<LocalizedString, TypeParent, Context>;
-  }
-
-  export type ImageUrlResolver<
-    R = string,
-    Parent = IndexPageAboutImage,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type TitleResolver<
-    R = LocalizedString,
-    Parent = IndexPageAboutImage,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type TextResolver<
-    R = LocalizedString,
-    Parent = IndexPageAboutImage,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
+export interface IndexPageAboutImageResolvers<
+  Context = ServerContext,
+  TypeParent = IndexPageAboutImage
+> {
+  /** Image URL. */
+  imageUrl?: IndexPageAboutImageImageUrlResolver<string, TypeParent, Context>;
+  /** Large text below image. */
+  title?: IndexPageAboutImageTitleResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
+  /** Small text below image. */
+  text?: IndexPageAboutImageTextResolver<LocalizedString, TypeParent, Context>;
 }
+
+export type IndexPageAboutImageImageUrlResolver<
+  R = string,
+  Parent = IndexPageAboutImage,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageAboutImageTitleResolver<
+  R = LocalizedString,
+  Parent = IndexPageAboutImage,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageAboutImageTextResolver<
+  R = LocalizedString,
+  Parent = IndexPageAboutImage,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
 /** Hero text for the admin login page. */
-export namespace AdminLoginPageConfigResolvers {
-  export interface Resolvers<
-    Context = ServerContext,
-    TypeParent = AdminLoginPageConfig
-  > {
-    heroPrimaryText?: HeroPrimaryTextResolver<
-      LocalizedString,
-      TypeParent,
-      Context
-    >;
+export interface AdminLoginPageConfigResolvers<
+  Context = ServerContext,
+  TypeParent = AdminLoginPageConfig
+> {
+  heroPrimaryText?: AdminLoginPageConfigHeroPrimaryTextResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
 
-    heroSecondaryText?: HeroSecondaryTextResolver<
-      LocalizedString,
-      TypeParent,
-      Context
-    >;
-  }
-
-  export type HeroPrimaryTextResolver<
-    R = LocalizedString,
-    Parent = AdminLoginPageConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type HeroSecondaryTextResolver<
-    R = LocalizedString,
-    Parent = AdminLoginPageConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
+  heroSecondaryText?: AdminLoginPageConfigHeroSecondaryTextResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
 }
+
+export type AdminLoginPageConfigHeroPrimaryTextResolver<
+  R = LocalizedString,
+  Parent = AdminLoginPageConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type AdminLoginPageConfigHeroSecondaryTextResolver<
+  R = LocalizedString,
+  Parent = AdminLoginPageConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
 /** Configuration for login/signup forms. */
-export namespace SessionFormConfigResolvers {
-  export interface Resolvers<
-    Context = ServerContext,
-    TypeParent = SessionFormConfig
-  > {
-    formTitleUserSignIn?: FormTitleUserSignInResolver<
-      LocalizedString,
-      TypeParent,
-      Context
-    >;
+export interface SessionFormConfigResolvers<
+  Context = ServerContext,
+  TypeParent = SessionFormConfig
+> {
+  formTitleUserSignIn?: SessionFormConfigFormTitleUserSignInResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
 
-    formTitleUserSignUp?: FormTitleUserSignUpResolver<
-      LocalizedString,
-      TypeParent,
-      Context
-    >;
+  formTitleUserSignUp?: SessionFormConfigFormTitleUserSignUpResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
 
-    formTitleAdminSignIn?: FormTitleAdminSignInResolver<
-      LocalizedString,
-      TypeParent,
-      Context
-    >;
+  formTitleAdminSignIn?: SessionFormConfigFormTitleAdminSignInResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
 
-    fullNameFieldPlaceholder?: FullNameFieldPlaceholderResolver<
-      LocalizedString,
-      TypeParent,
-      Context
-    >;
+  fullNameFieldPlaceholder?: SessionFormConfigFullNameFieldPlaceholderResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
 
-    phoneNumberFieldPlaceholder?: PhoneNumberFieldPlaceholderResolver<
-      LocalizedString,
-      TypeParent,
-      Context
-    >;
+  phoneNumberFieldPlaceholder?: SessionFormConfigPhoneNumberFieldPlaceholderResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
 
-    passwordFieldPlaceholder?: PasswordFieldPlaceholderResolver<
-      LocalizedString,
-      TypeParent,
-      Context
-    >;
+  passwordFieldPlaceholder?: SessionFormConfigPasswordFieldPlaceholderResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
 
-    passwordVerifyFieldPlaceholder?: PasswordVerifyFieldPlaceholderResolver<
-      LocalizedString,
-      TypeParent,
-      Context
-    >;
+  passwordVerifyFieldPlaceholder?: SessionFormConfigPasswordVerifyFieldPlaceholderResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
 
-    emailAddressFieldPlaceholder?: EmailAddressFieldPlaceholderResolver<
-      LocalizedString,
-      TypeParent,
-      Context
-    >;
+  emailAddressFieldPlaceholder?: SessionFormConfigEmailAddressFieldPlaceholderResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
 
-    submitButtonLabel?: SubmitButtonLabelResolver<
-      LocalizedString,
-      TypeParent,
-      Context
-    >;
+  submitButtonLabel?: SessionFormConfigSubmitButtonLabelResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
 
-    termsConditionsCheckboxLabel?: TermsConditionsCheckboxLabelResolver<
-      LocalizedString,
-      TypeParent,
-      Context
-    >;
+  termsConditionsCheckboxLabel?: SessionFormConfigTermsConditionsCheckboxLabelResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
 
-    passwordResetLinkLabel?: PasswordResetLinkLabelResolver<
-      LocalizedString,
-      TypeParent,
-      Context
-    >;
-  }
-
-  export type FormTitleUserSignInResolver<
-    R = LocalizedString,
-    Parent = SessionFormConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type FormTitleUserSignUpResolver<
-    R = LocalizedString,
-    Parent = SessionFormConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type FormTitleAdminSignInResolver<
-    R = LocalizedString,
-    Parent = SessionFormConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type FullNameFieldPlaceholderResolver<
-    R = LocalizedString,
-    Parent = SessionFormConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type PhoneNumberFieldPlaceholderResolver<
-    R = LocalizedString,
-    Parent = SessionFormConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type PasswordFieldPlaceholderResolver<
-    R = LocalizedString,
-    Parent = SessionFormConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type PasswordVerifyFieldPlaceholderResolver<
-    R = LocalizedString,
-    Parent = SessionFormConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type EmailAddressFieldPlaceholderResolver<
-    R = LocalizedString,
-    Parent = SessionFormConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type SubmitButtonLabelResolver<
-    R = LocalizedString,
-    Parent = SessionFormConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type TermsConditionsCheckboxLabelResolver<
-    R = LocalizedString,
-    Parent = SessionFormConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
-  export type PasswordResetLinkLabelResolver<
-    R = LocalizedString,
-    Parent = SessionFormConfig,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context>;
+  passwordResetLinkLabel?: SessionFormConfigPasswordResetLinkLabelResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
 }
 
-export namespace MutationResolvers {
-  export interface Resolvers<Context = ServerContext, TypeParent = never> {
-    login?: LoginResolver<LoginRequestResult, TypeParent, Context>;
+export type SessionFormConfigFormTitleUserSignInResolver<
+  R = LocalizedString,
+  Parent = SessionFormConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type SessionFormConfigFormTitleUserSignUpResolver<
+  R = LocalizedString,
+  Parent = SessionFormConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type SessionFormConfigFormTitleAdminSignInResolver<
+  R = LocalizedString,
+  Parent = SessionFormConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type SessionFormConfigFullNameFieldPlaceholderResolver<
+  R = LocalizedString,
+  Parent = SessionFormConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type SessionFormConfigPhoneNumberFieldPlaceholderResolver<
+  R = LocalizedString,
+  Parent = SessionFormConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type SessionFormConfigPasswordFieldPlaceholderResolver<
+  R = LocalizedString,
+  Parent = SessionFormConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type SessionFormConfigPasswordVerifyFieldPlaceholderResolver<
+  R = LocalizedString,
+  Parent = SessionFormConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type SessionFormConfigEmailAddressFieldPlaceholderResolver<
+  R = LocalizedString,
+  Parent = SessionFormConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type SessionFormConfigSubmitButtonLabelResolver<
+  R = LocalizedString,
+  Parent = SessionFormConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type SessionFormConfigTermsConditionsCheckboxLabelResolver<
+  R = LocalizedString,
+  Parent = SessionFormConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type SessionFormConfigPasswordResetLinkLabelResolver<
+  R = LocalizedString,
+  Parent = SessionFormConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
 
-    setLanguage?: SetLanguageResolver<
-      LocalizationLanguage,
-      TypeParent,
-      Context
-    >;
-  }
+export interface MutationResolvers<
+  Context = ServerContext,
+  TypeParent = never
+> {
+  login?: MutationLoginResolver<LoginRequestResult, TypeParent, Context>;
 
-  export type LoginResolver<
-    R = LoginRequestResult,
-    Parent = never,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context, LoginArgs>;
-  export interface LoginArgs {
-    username: string;
+  setLanguage?: MutationSetLanguageResolver<
+    LocalizationLanguage,
+    TypeParent,
+    Context
+  >;
+}
 
-    password: string;
-  }
+export type MutationLoginResolver<
+  R = LoginRequestResult,
+  Parent = never,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export interface MutationLoginArgs {
+  username: string;
 
-  export type SetLanguageResolver<
-    R = LocalizationLanguage,
-    Parent = never,
-    Context = ServerContext
-  > = Resolver<R, Parent, Context, SetLanguageArgs>;
-  export interface SetLanguageArgs {
-    language: LocalizationLanguage;
-  }
+  password: string;
+}
+
+export type MutationSetLanguageResolver<
+  R = LocalizationLanguage,
+  Parent = never,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export interface MutationSetLanguageArgs {
+  language: LocalizationLanguage;
 }

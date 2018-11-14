@@ -1,6 +1,6 @@
-import { LocalizationLanguage, QueryResolvers } from "../generated";
+import { LocalizationLanguage, QueryLanguageResolver } from "../generated";
 
-export const language: QueryResolvers.LanguageResolver = () => {
+export const language: QueryLanguageResolver = () => {
   // TODO: Read from user.
   return LocalizationLanguage.ENGLISH;
 };

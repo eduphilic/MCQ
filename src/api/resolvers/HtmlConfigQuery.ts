@@ -1,6 +1,6 @@
-import { HtmlConfig, QueryResolvers } from "../generated";
+import { HtmlConfig, QueryHtmlConfigResolver } from "../generated";
 
-export const htmlConfig: QueryResolvers.HtmlConfigResolver = async (
+export const htmlConfig: QueryHtmlConfigResolver = async (
   _parent,
   _args,
   ctx,

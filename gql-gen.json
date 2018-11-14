@@ -10,6 +10,7 @@
     "scalars": {
       "LocalizedString": "LocalizedString"
     },
-    "avoidOptionals": true
+    "avoidOptionals": true,
+    "noNamespaces": true
   }
 }

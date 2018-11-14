@@ -1,6 +1,9 @@
-import { AdminLoginPageConfig, QueryResolvers } from "../generated";
+import {
+  AdminLoginPageConfig,
+  QueryAdminLoginPageConfigResolver,
+} from "../generated";
 
-export const adminLoginPageConfig: QueryResolvers.AdminLoginPageConfigResolver = async (
+export const adminLoginPageConfig: QueryAdminLoginPageConfigResolver = async (
   _parent,
   _args,
   ctx,

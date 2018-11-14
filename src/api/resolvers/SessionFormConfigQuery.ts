@@ -1,6 +1,9 @@
-import { QueryResolvers, SessionFormConfig } from "../generated";
+import {
+  QuerySessionFormConfigResolver,
+  SessionFormConfig,
+} from "../generated";
 
-export const sessionFormConfig: QueryResolvers.SessionFormConfigResolver = async (
+export const sessionFormConfig: QuerySessionFormConfigResolver = async (
   _parent,
   _args,
   ctx,

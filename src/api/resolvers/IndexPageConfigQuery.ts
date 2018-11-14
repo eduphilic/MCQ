@@ -1,6 +1,6 @@
-import { IndexPageConfig, QueryResolvers } from "../generated";
+import { IndexPageConfig, QueryIndexPageConfigResolver } from "../generated";
 
-export const indexPageConfig: QueryResolvers.IndexPageConfigResolver = async (
+export const indexPageConfig: QueryIndexPageConfigResolver = async (
   _parent,
   _args,
   ctx,

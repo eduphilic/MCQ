@@ -10,7 +10,7 @@ import { session } from "./SessionQuery";
 
 import { login } from "./LoginMutation";
 
-const Query: QueryResolvers.Resolvers = {
+const Query: QueryResolvers = {
   adminLoginPageConfig,
   htmlConfig,
   indexPageConfig,
@@ -19,7 +19,7 @@ const Query: QueryResolvers.Resolvers = {
   session,
 };
 
-const Mutation: MutationResolvers.Resolvers = {
+const Mutation: MutationResolvers = {
   login,
 };
 
