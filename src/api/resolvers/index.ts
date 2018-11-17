@@ -8,6 +8,7 @@ import { language } from "./LanguageQuery";
 import { sessionFormConfig } from "./SessionFormConfigQuery";
 import { session } from "./SessionQuery";
 
+import { JSON } from "./JSONScalar";
 import { login } from "./LoginMutation";
 
 const Query: QueryResolvers = {
@@ -27,4 +28,6 @@ export const resolvers: IResolvers = {
   Query: Query as any,
 
   Mutation: Mutation as any,
+
+  JSON,
 };

@@ -1,0 +1,3 @@
+# JSON scalar type.
+# https://github.com/taion/graphql-type-json
+scalar JSON

@@ -48,6 +48,9 @@ export type SubscriptionResolver<
 
 /** Represents a localized string.The Hindi field is optional.Fields:- key: String!- en: String!- hi: String */
 
+/** JSON scalar type.https://github.com/taion/graphql-type-json */
+export type Json = any;
+
 // ====================================================
 // Types
 // ====================================================
