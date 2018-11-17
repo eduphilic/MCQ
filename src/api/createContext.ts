@@ -7,11 +7,17 @@ import {
   SessionCookieOptions,
   UserAccountRepository,
 } from "./persistence";
-import { LocalizationService, UserService } from "./services";
+import {
+  CloudinaryCredentials,
+  CloudinaryService,
+  LocalizationService,
+  UserService,
+} from "./services";
 
 type Options = SessionCookieOptions & {
   db: Firestore;
   remoteConfigCredentials: FirebaseCredentials;
+  cloudinaryCredentials: CloudinaryCredentials;
 };
 
 export function createContext(options: Options) {
@@ -25,12 +31,16 @@ export function createContext(options: Options) {
   const configurationRepository = new ConfigurationRepository(
     options.remoteConfigCredentials,
   );
+  const cloudinaryService = new CloudinaryService(
+    options.cloudinaryCredentials,
+  );
 
   const context: Context = {
     sessionCookie,
     configurationRepository,
     localizationService,
     userService,
+    cloudinaryService,
   };
 
   return context;

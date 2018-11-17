@@ -1,10 +1,12 @@
 // tslint:disable:no-duplicate-imports
+import assert from "assert";
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 import "firebase-functions";
 
 import fs from "fs";
 import path from "path";
+import { CloudinaryCredentials, CloudinaryService } from "../api/services";
 
 let initialized = false;
 let firestore: FirebaseFirestore.Firestore | null = null;
@@ -13,6 +15,7 @@ let serviceAccountCredentials: {
   client_email: string;
   private_key: string;
 };
+let cloudinaryCredentials: CloudinaryCredentials;
 
 /**
  * Ensures the Firebase environment has been initialized and is ready for
@@ -45,8 +48,42 @@ export function getInitializedFirebaseEnvironment() {
       timestampsInSnapshots: true,
     });
 
+    let cloudinaryCloudName: string;
+    let cloudinaryApiKey: string;
+    let cloudinaryApiSecret: string;
+
+    // Load secrets from Functions config and verify values were set.
+    try {
+      cloudinaryCloudName = functions.config().cloudinary.cloud_name;
+      assert(cloudinaryCloudName, "cloudinaryCloudName");
+      cloudinaryApiKey = functions.config().cloudinary.api_key;
+      assert(cloudinaryApiKey, "cloudinaryApiKey");
+      cloudinaryApiSecret = functions.config().cloudinary.api_secret;
+      assert(cloudinaryApiSecret, "cloudinaryApiSecret");
+    } catch (e) {
+      throw new Error(`Could not load environmental variables: ${e}`);
+    }
+
+    cloudinaryCredentials = {
+      cloudName: cloudinaryCloudName,
+      apiKey: cloudinaryApiKey,
+      apiSecret: cloudinaryApiSecret,
+    };
+
+    /* tslint:disable-next-line:no-console */
+    console.log(`Cloudinary "cloud_name" set to: ${cloudinaryCloudName}`);
+    CloudinaryService.setConfig(cloudinaryCredentials);
+    /* tslint:disable-next-line:no-console */
+    console.log("Cloudinary SDK initialized.");
+
     initialized = true;
   }
 
-  return { admin, functions, firestore: firestore!, serviceAccountCredentials };
+  return {
+    admin,
+    functions,
+    firestore: firestore!,
+    serviceAccountCredentials,
+    cloudinaryCredentials,
+  };
 }
