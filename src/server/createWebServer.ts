@@ -1,5 +1,6 @@
 import { ContextFunction } from "apollo-server-core";
 import assert from "assert";
+import cloudinary from "cloudinary";
 import Koa from "koa";
 import {
   createApolloServer,
@@ -31,6 +32,9 @@ export function createWebServer() {
   let koaKey1: string;
   let koaCookieExpireSeconds: number;
   let koaCookieSecret: string;
+  let cloudinaryCloudName: string;
+  let cloudinaryApiKey: string;
+  let cloudinaryApiSecret: string;
 
   // Load secrets from Functions config and verify values were set.
   try {
@@ -45,6 +49,13 @@ export function createWebServer() {
     assert(koaCookieExpireSeconds, "koaCookieExpireSeconds");
     koaCookieSecret = functions.config().koa.cookie_secret;
     assert(koaCookieSecret, "koaCookieSecret");
+
+    cloudinaryCloudName = functions.config().cloudinary.cloud_name;
+    assert(cloudinaryCloudName, "cloudinaryCloudName");
+    cloudinaryApiKey = functions.config().cloudinary.api_key;
+    assert(cloudinaryApiKey, "cloudinaryApiKey");
+    cloudinaryApiSecret = functions.config().cloudinary.api_secret;
+    assert(cloudinaryApiSecret, "cloudinaryApiSecret");
   } catch (e) {
     throw new Error(`Could not load environmental variables: ${e}`);
   }
@@ -53,6 +64,16 @@ export function createWebServer() {
   console.log(
     `Cookie expiration set to ${koaCookieExpireSeconds / 60 / 60 / 24} days.`,
   );
+
+  /* tslint:disable-next-line:no-console */
+  console.log(`Cloudinary "cloud_name" set to: ${cloudinaryCloudName}`);
+  cloudinary.config({
+    cloud_name: cloudinaryCloudName,
+    api_key: cloudinaryApiKey,
+    api_secret: cloudinaryApiSecret,
+  });
+  /* tslint:disable-next-line:no-console */
+  console.log("Cloudinary SDK initialized.");
 
   // Create context factory for Apollo Server and server side Apollo Client.
   const contextFactory: ContextFunction = async ({ ctx }) => {
