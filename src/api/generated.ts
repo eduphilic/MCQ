@@ -148,6 +148,8 @@ export interface Mutation {
   login: LoginRequestResult;
 
   setLanguage: LocalizationLanguage;
+
+  generateCloudinarySignature: string;
 }
 
 // ====================================================
@@ -161,6 +163,9 @@ export interface LoginMutationArgs {
 }
 export interface SetLanguageMutationArgs {
   language: LocalizationLanguage;
+}
+export interface GenerateCloudinarySignatureMutationArgs {
+  paramsToSign: Json;
 }
 
 // ====================================================
@@ -620,6 +625,12 @@ export interface MutationResolvers<
     TypeParent,
     Context
   >;
+
+  generateCloudinarySignature?: MutationGenerateCloudinarySignatureResolver<
+    string,
+    TypeParent,
+    Context
+  >;
 }
 
 export type MutationLoginResolver<
@@ -640,4 +651,13 @@ export type MutationSetLanguageResolver<
 > = Resolver<R, Parent, Context>;
 export interface MutationSetLanguageArgs {
   language: LocalizationLanguage;
+}
+
+export type MutationGenerateCloudinarySignatureResolver<
+  R = string,
+  Parent = never,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export interface MutationGenerateCloudinarySignatureArgs {
+  paramsToSign: Json;
 }

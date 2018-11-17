@@ -9,13 +9,26 @@ export type CloudinaryCredentials = {
 };
 
 export class CloudinaryService {
-  // @ts-ignore
   constructor(private credentials: CloudinaryCredentials) {
     if (!cloudinaryConfigured) {
       throw new Error(
         `Cloudinary SDK was not initialized. The static method "setConfig" needs to be called.`,
       );
     }
+  }
+
+  /**
+   * Signs the parameters passed by the Cloudinary Upload Widget using the api
+   * secret.
+   *
+   * @param paramsToSign Parameters passed by the Cloudinary Upload Widget.
+   * @see https://cloudinary.com/documentation/upload_widget#signed_uploads
+   */
+  generateSignature(paramsToSign: any) {
+    return cloudinary.utils.api_sign_request(
+      paramsToSign,
+      this.credentials.apiSecret,
+    );
   }
 
   static setConfig(credentials: CloudinaryCredentials) {

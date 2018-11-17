@@ -8,6 +8,7 @@ import { language } from "./LanguageQuery";
 import { sessionFormConfig } from "./SessionFormConfigQuery";
 import { session } from "./SessionQuery";
 
+import { generateCloudinarySignature } from "./GenerateCloudinarySignatureMutation";
 import { JSON } from "./JSONScalar";
 import { login } from "./LoginMutation";
 
@@ -22,6 +23,7 @@ const Query: QueryResolvers = {
 
 const Mutation: MutationResolvers = {
   login,
+  generateCloudinarySignature,
 };
 
 export const resolvers: IResolvers = {

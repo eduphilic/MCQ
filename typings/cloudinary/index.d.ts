@@ -6,4 +6,8 @@ declare module "cloudinary" {
   }
 
   export function config(options: CloudinaryConfig);
+
+  export const utils: {
+    api_sign_request(paramsToSign: any, apiSecret: string): string;
+  };
 }
