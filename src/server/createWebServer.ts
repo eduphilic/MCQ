@@ -7,7 +7,7 @@ import {
   createContext,
   resolvers,
 } from "../api/serverSideExports";
-import { getInitializedFirebaseEnvironment } from "./getInitializedFirebaseEnvironment";
+import { getInitializedEnvironment } from "./getInitializedEnvironment";
 import {
   createAllowCachingMiddleware,
   createCSRFMiddleware,
@@ -22,7 +22,7 @@ const {
   firestore,
   serviceAccountCredentials,
   cloudinaryCredentials,
-} = getInitializedFirebaseEnvironment();
+} = getInitializedEnvironment();
 
 /**
  * Return a configured Koa webserver instance.

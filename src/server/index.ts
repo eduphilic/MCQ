@@ -1,7 +1,7 @@
 import { createWebServer } from "./createWebServer";
-import { getInitializedFirebaseEnvironment } from "./getInitializedFirebaseEnvironment";
+import { getInitializedEnvironment } from "./getInitializedEnvironment";
 
-const { functions } = getInitializedFirebaseEnvironment();
+const { functions } = getInitializedEnvironment();
 
 const webServer = createWebServer();
 

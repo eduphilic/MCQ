@@ -3,6 +3,7 @@ import { MutationResolvers, QueryResolvers } from "../generated";
 
 import { adminLoginPageConfig } from "./AdminLoginPageConfigQuery";
 import { cloudinaryApiKey } from "./CloudinaryApiKeyQuery";
+import { cloudinaryAuthenticationSignature } from "./CloudinaryAuthenticationSignatureQuery";
 import { cloudinaryCloudName } from "./CloudinaryCloudNameQuery";
 import { htmlConfig } from "./HtmlConfigQuery";
 import { indexPageConfig } from "./IndexPageConfigQuery";
@@ -24,6 +25,7 @@ const Query: QueryResolvers = {
   session,
   cloudinaryCloudName,
   cloudinaryApiKey,
+  cloudinaryAuthenticationSignature,
 };
 
 const Mutation: MutationResolvers = {

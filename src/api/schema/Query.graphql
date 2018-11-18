@@ -11,6 +11,8 @@ type Query {
 
   cloudinaryCloudName: String!
   cloudinaryApiKey: String!
+  # Generated authentication signature for use with Cloudinary Media Library Widget.
+  cloudinaryAuthenticationSignature: String!
 }
 
 directive @client on FIELD | FIELD_DEFINITION

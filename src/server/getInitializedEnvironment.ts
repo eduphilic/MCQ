@@ -18,10 +18,10 @@ let serviceAccountCredentials: {
 let cloudinaryCredentials: CloudinaryCredentials;
 
 /**
- * Ensures the Firebase environment has been initialized and is ready for
+ * Ensures the server environment has been initialized and is ready for
  * consumption.
  */
-export function getInitializedFirebaseEnvironment() {
+export function getInitializedEnvironment() {
   if (!initialized) {
     // Load service account credentials to allow use of RemoteConfig API.
     try {
@@ -51,6 +51,7 @@ export function getInitializedFirebaseEnvironment() {
     let cloudinaryCloudName: string;
     let cloudinaryApiKey: string;
     let cloudinaryApiSecret: string;
+    let cloudinaryUsername: string;
 
     // Load secrets from Functions config and verify values were set.
     try {
@@ -60,6 +61,8 @@ export function getInitializedFirebaseEnvironment() {
       assert(cloudinaryApiKey, "cloudinaryApiKey");
       cloudinaryApiSecret = functions.config().cloudinary.api_secret;
       assert(cloudinaryApiSecret, "cloudinaryApiSecret");
+      cloudinaryUsername = functions.config().cloudinary.username;
+      assert(cloudinaryUsername, "cloudinaryUsername");
     } catch (e) {
       throw new Error(`Could not load environmental variables: ${e}`);
     }
@@ -68,6 +71,7 @@ export function getInitializedFirebaseEnvironment() {
       cloudName: cloudinaryCloudName,
       apiKey: cloudinaryApiKey,
       apiSecret: cloudinaryApiSecret,
+      username: cloudinaryUsername,
     };
 
     /* tslint:disable-next-line:no-console */

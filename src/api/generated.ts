@@ -71,6 +71,8 @@ export interface Query {
   cloudinaryCloudName: string;
 
   cloudinaryApiKey: string;
+  /** Generated authentication signature for use with Cloudinary Media Library Widget. */
+  cloudinaryAuthenticationSignature: string;
 }
 /** Configuration for the html document sent in response to all requests. */
 export interface HtmlConfig {
@@ -231,6 +233,12 @@ export interface QueryResolvers<Context = ServerContext, TypeParent = never> {
   >;
 
   cloudinaryApiKey?: QueryCloudinaryApiKeyResolver<string, TypeParent, Context>;
+  /** Generated authentication signature for use with Cloudinary Media Library Widget. */
+  cloudinaryAuthenticationSignature?: QueryCloudinaryAuthenticationSignatureResolver<
+    string,
+    TypeParent,
+    Context
+  >;
 }
 
 export type QueryHtmlConfigResolver<
@@ -269,6 +277,11 @@ export type QueryCloudinaryCloudNameResolver<
   Context = ServerContext
 > = Resolver<R, Parent, Context>;
 export type QueryCloudinaryApiKeyResolver<
+  R = string,
+  Parent = never,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type QueryCloudinaryAuthenticationSignatureResolver<
   R = string,
   Parent = never,
   Context = ServerContext
