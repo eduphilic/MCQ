@@ -12,20 +12,22 @@ import { IndexPageConfig } from "../api";
 import { Card } from "../components/Card";
 import { ContentCenterWrapper } from "../components/ContentCenterWrapper";
 import { QueryWithLoading } from "../components/QueryWithLoading";
-import { AdminCardHeader } from "../features/admin";
+import { AdminCardHeader, CloudinaryProvider } from "../features/admin";
 import { DashboardLayout } from "../layouts/DashboardLayout";
 
 function AdminIndexManagerPage() {
   return (
-    <DashboardLayout>
-      <ContentCenterWrapper>
-        <Grid container spacing={16}>
-          <Grid item xs={12}>
-            <HeroCard />
+    <CloudinaryProvider>
+      <DashboardLayout>
+        <ContentCenterWrapper>
+          <Grid container spacing={16}>
+            <Grid item xs={12}>
+              <HeroCard />
+            </Grid>
           </Grid>
-        </Grid>
-      </ContentCenterWrapper>
-    </DashboardLayout>
+        </ContentCenterWrapper>
+      </DashboardLayout>
+    </CloudinaryProvider>
   );
 }
 
