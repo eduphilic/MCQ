@@ -1,16 +1,34 @@
 import gql from "graphql-tag";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { Query } from "../../api";
 import { QueryWithLoading } from "../../components/QueryWithLoading";
 import { isBrowser } from "../../utils";
 
 let initializationStatus: Promise<{ success: boolean }>;
 
-const GET_CLOUD_NAME = gql`
-  query GetCloudName {
+type CloudinaryContextValue = {
+  client: Cloudinary;
+  cloudName: string;
+  apiKey: string;
+} | null;
+const CloudinaryContext = createContext<CloudinaryContextValue>(null);
+
+const GET_CLOUDINARY_CONFIG = gql`
+  query GetCloudinaryConfig {
     cloudinaryCloudName
+    cloudinaryApiKey
   }
 `;
+
+export function useCloudinary() {
+  return useContext(CloudinaryContext);
+}
 
 /**
  * Initializes the Cloudinary client library if it has not already been
@@ -20,6 +38,8 @@ const GET_CLOUD_NAME = gql`
 export function CloudinaryProvider(props: {
   children?: ReactNode;
 }): React.ReactElement<any> {
+  const [cloudinary, setCloudinary] = useState<CloudinaryContextValue>(null);
+
   // Load the Cloudinary client library if it hasn't already been loaded.
   if (isBrowser() && !initializationStatus) {
     const script = document.createElement("script");
@@ -56,15 +76,27 @@ export function CloudinaryProvider(props: {
 
   // Get the Cloudinary "cloudName" and render the provider.
   return (
-    <QueryWithLoading<Pick<Query, "cloudinaryCloudName">>
-      query={GET_CLOUD_NAME}
+    <QueryWithLoading<Pick<Query, "cloudinaryCloudName" | "cloudinaryApiKey">>
+      query={GET_CLOUDINARY_CONFIG}
     >
       {({ data }) => {
         if (cloudinaryClient) {
           cloudinaryClient.setCloudName(data.cloudinaryCloudName);
+
+          if (!cloudinary) {
+            setCloudinary({
+              client: cloudinaryClient,
+              apiKey: data.cloudinaryApiKey,
+              cloudName: data.cloudinaryCloudName,
+            });
+          }
         }
 
-        return <>{props.children}</>;
+        return (
+          <CloudinaryContext.Provider value={cloudinary}>
+            {props.children}
+          </CloudinaryContext.Provider>
+        );
       }}
     </QueryWithLoading>
   );

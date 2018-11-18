@@ -12,35 +12,41 @@ import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { ContentCenterWrapper } from "../components/ContentCenterWrapper";
 import { QueryWithLoading } from "../components/QueryWithLoading";
-import { AdminCardHeader, CloudinaryProvider } from "../features/admin";
+import {
+  AdminCardHeader,
+  CloudinaryProvider,
+  useCloudinary,
+} from "../features/admin";
 import { DashboardLayout } from "../layouts/DashboardLayout";
 
 function AdminIndexManagerPage() {
-  return (
-    <CloudinaryProvider>
-      <DashboardLayout>
-        <ContentCenterWrapper>
-          <Grid container spacing={16}>
-            <Grid item xs={12}>
-              <Button
-                onClick={() => {
-                  /* tslint:disable-next-line:no-console */
-                  console.log("cloudinary: ", window.cloudinary);
-                  if (!window.cloudinary) return;
+  const cloudinary = useCloudinary();
 
-                  window.cloudinary.openUploadWidget({});
-                }}
-              >
-                Upload
-              </Button>
-            </Grid>
-            <Grid item xs={12}>
-              <HeroCard />
-            </Grid>
+  return (
+    <DashboardLayout>
+      <ContentCenterWrapper>
+        <Grid container spacing={16}>
+          <Grid item xs={12}>
+            <Button
+              onClick={() => {
+                /* tslint:disable-next-line:no-console */
+                console.log("cloudinary: ", cloudinary);
+                if (!cloudinary) return;
+
+                cloudinary.client.openUploadWidget({
+                  //
+                });
+              }}
+            >
+              Upload
+            </Button>
           </Grid>
-        </ContentCenterWrapper>
-      </DashboardLayout>
-    </CloudinaryProvider>
+          <Grid item xs={12}>
+            <HeroCard />
+          </Grid>
+        </Grid>
+      </ContentCenterWrapper>
+    </DashboardLayout>
   );
 }
 
@@ -142,4 +148,8 @@ function HeroCard() {
   );
 }
 
-export default AdminIndexManagerPage;
+export default () => (
+  <CloudinaryProvider>
+    <AdminIndexManagerPage />
+  </CloudinaryProvider>
+);
