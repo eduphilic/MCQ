@@ -69,6 +69,8 @@ export interface Query {
   language: LocalizationLanguage;
 
   cloudinaryCloudName: string;
+
+  cloudinaryApiKey: string;
 }
 /** Configuration for the html document sent in response to all requests. */
 export interface HtmlConfig {
@@ -227,6 +229,8 @@ export interface QueryResolvers<Context = ServerContext, TypeParent = never> {
     TypeParent,
     Context
   >;
+
+  cloudinaryApiKey?: QueryCloudinaryApiKeyResolver<string, TypeParent, Context>;
 }
 
 export type QueryHtmlConfigResolver<
@@ -260,6 +264,11 @@ export type QueryLanguageResolver<
   Context = ServerContext
 > = Resolver<R, Parent, Context>;
 export type QueryCloudinaryCloudNameResolver<
+  R = string,
+  Parent = never,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type QueryCloudinaryApiKeyResolver<
   R = string,
   Parent = never,
   Context = ServerContext

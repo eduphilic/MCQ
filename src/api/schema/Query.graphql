@@ -10,6 +10,7 @@ type Query {
   language: LOCALIZATION_LANGUAGE!
 
   cloudinaryCloudName: String!
+  cloudinaryApiKey: String!
 }
 
 directive @client on FIELD | FIELD_DEFINITION

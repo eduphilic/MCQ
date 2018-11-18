@@ -2,6 +2,7 @@ import { IResolvers } from "graphql-tools";
 import { MutationResolvers, QueryResolvers } from "../generated";
 
 import { adminLoginPageConfig } from "./AdminLoginPageConfigQuery";
+import { cloudinaryApiKey } from "./CloudinaryApiKeyQuery";
 import { cloudinaryCloudName } from "./CloudinaryCloudNameQuery";
 import { htmlConfig } from "./HtmlConfigQuery";
 import { indexPageConfig } from "./IndexPageConfigQuery";
@@ -22,6 +23,7 @@ const Query: QueryResolvers = {
   sessionFormConfig,
   session,
   cloudinaryCloudName,
+  cloudinaryApiKey,
 };
 
 const Mutation: MutationResolvers = {

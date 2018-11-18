@@ -38,6 +38,13 @@ export class CloudinaryService {
     return this.credentials.cloudName;
   }
 
+  /**
+   * Returns the Cloudinary "apiKey".
+   */
+  getApiKey() {
+    return this.credentials.apiKey;
+  }
+
   static setConfig(credentials: CloudinaryCredentials) {
     cloudinary.config({
       cloud_name: credentials.cloudName,
