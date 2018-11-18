@@ -33,9 +33,10 @@ function AdminIndexManagerPage() {
                 console.log("cloudinary: ", cloudinary);
                 if (!cloudinary) return;
 
-                cloudinary.client.openUploadWidget(
-                  cloudinary.getDefaultUploadWidgetOptions(),
-                );
+                cloudinary.client.openUploadWidget({
+                  ...cloudinary.getDefaultUploadWidgetOptions(),
+                  folder: "Logos",
+                });
               }}
             >
               Upload
