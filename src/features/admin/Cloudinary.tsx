@@ -6,7 +6,12 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { Query } from "../../api";
+import { Mutation as ApolloMutation } from "react-apollo";
+import {
+  GenerateCloudinarySignatureMutationArgs,
+  Mutation,
+  Query,
+} from "../../api";
 import { QueryWithLoading } from "../../components/QueryWithLoading";
 import { isBrowser } from "../../utils";
 
@@ -16,6 +21,10 @@ type CloudinaryContextValue = {
   client: Cloudinary;
   cloudName: string;
   apiKey: string;
+  generateSignature: (
+    cb: (signature: string) => void,
+    paramsToSign: any,
+  ) => void;
 } | null;
 const CloudinaryContext = createContext<CloudinaryContextValue>(null);
 
@@ -23,6 +32,12 @@ const GET_CLOUDINARY_CONFIG = gql`
   query GetCloudinaryConfig {
     cloudinaryCloudName
     cloudinaryApiKey
+  }
+`;
+
+const GENERATE_CLOUDINARY_SIGNATURE = gql`
+  mutation GenerateCloudinarySignature($paramsToSign: JSON!) {
+    generateCloudinarySignature(paramsToSign: $paramsToSign)
   }
 `;
 
@@ -76,29 +91,47 @@ export function CloudinaryProvider(props: {
 
   // Get the Cloudinary "cloudName" and render the provider.
   return (
-    <QueryWithLoading<Pick<Query, "cloudinaryCloudName" | "cloudinaryApiKey">>
-      query={GET_CLOUDINARY_CONFIG}
+    <ApolloMutation<
+      Pick<Mutation, "generateCloudinarySignature">,
+      GenerateCloudinarySignatureMutationArgs
     >
-      {({ data }) => {
-        if (cloudinaryClient) {
-          cloudinaryClient.setCloudName(data.cloudinaryCloudName);
+      mutation={GENERATE_CLOUDINARY_SIGNATURE}
+    >
+      {generateCloudinarySignature => (
+        <QueryWithLoading<
+          Pick<Query, "cloudinaryCloudName" | "cloudinaryApiKey">
+        >
+          query={GET_CLOUDINARY_CONFIG}
+        >
+          {({ data }) => {
+            if (cloudinaryClient) {
+              cloudinaryClient.setCloudName(data.cloudinaryCloudName);
 
-          if (!cloudinary) {
-            setCloudinary({
-              client: cloudinaryClient,
-              apiKey: data.cloudinaryApiKey,
-              cloudName: data.cloudinaryCloudName,
-            });
-          }
-        }
+              if (!cloudinary) {
+                setCloudinary({
+                  client: cloudinaryClient,
+                  apiKey: data.cloudinaryApiKey,
+                  cloudName: data.cloudinaryCloudName,
+                  generateSignature: async (cb, paramsToSign) => {
+                    const fetchResult = await generateCloudinarySignature({
+                      variables: { paramsToSign },
+                    });
+                    if (!fetchResult || fetchResult.errors) return;
+                    cb(fetchResult.data!.generateCloudinarySignature);
+                  },
+                });
+              }
+            }
 
-        return (
-          <CloudinaryContext.Provider value={cloudinary}>
-            {props.children}
-          </CloudinaryContext.Provider>
-        );
-      }}
-    </QueryWithLoading>
+            return (
+              <CloudinaryContext.Provider value={cloudinary}>
+                {props.children}
+              </CloudinaryContext.Provider>
+            );
+          }}
+        </QueryWithLoading>
+      )}
+    </ApolloMutation>
   );
 }
 
@@ -110,6 +143,10 @@ export type CloudinaryOpenUploadWidgetOptions = {
    * Example: `demo`
    */
   cloudName?: string;
+
+  apiKey: string;
+
+  uploadSignature: (cb: (signature: string) => any, paramsToSign: any) => any;
 };
 
 /**

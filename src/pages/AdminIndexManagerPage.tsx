@@ -34,7 +34,8 @@ function AdminIndexManagerPage() {
                 if (!cloudinary) return;
 
                 cloudinary.client.openUploadWidget({
-                  //
+                  apiKey: cloudinary.apiKey,
+                  uploadSignature: cloudinary.generateSignature,
                 });
               }}
             >
