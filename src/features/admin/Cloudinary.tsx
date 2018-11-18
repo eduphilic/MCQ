@@ -1,28 +1,10 @@
 import gql from "graphql-tag";
-import React, {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { Query } from "../../api";
 import { QueryWithLoading } from "../../components/QueryWithLoading";
 import { isBrowser } from "../../utils";
 
-type CloudinaryContextValue = Cloudinary | null;
-
-const CloudinaryContext = createContext<CloudinaryContextValue>(null);
 let initializationStatus: Promise<{ success: boolean }>;
-
-/**
- * Returns the initialized instance of the Cloudinary client library. If called
- * outside of a CloudinaryProvider or during server rendering, the return value
- * is `null`.
- */
-export function useCloudinary() {
-  return useContext(CloudinaryContext);
-}
 
 const GET_CLOUD_NAME = gql`
   query GetCloudName {
@@ -32,8 +14,7 @@ const GET_CLOUD_NAME = gql`
 
 /**
  * Initializes the Cloudinary client library if it has not already been
- * initialized. It passes the initialized instance through a context for use
- * with `useCloudinary`. If rendered on the server, the client library is not
+ * initialized. If rendered on the server, the client library is not
  * initialized.
  */
 export function CloudinaryProvider(props: {
@@ -78,23 +59,15 @@ export function CloudinaryProvider(props: {
     <QueryWithLoading<Pick<Query, "cloudinaryCloudName">>
       query={GET_CLOUD_NAME}
     >
-      {({ data }) => getProvider(data.cloudinaryCloudName)}
+      {({ data }) => {
+        if (cloudinaryClient) {
+          cloudinaryClient.setCloudName(data.cloudinaryCloudName);
+        }
+
+        return <>{props.children}</>;
+      }}
     </QueryWithLoading>
   );
-
-  function getProvider(cloudName: string) {
-    if (!isBrowser() || !cloudinaryClient) return <>{props.children}</>;
-
-    if (cloudinaryClient) {
-      cloudinaryClient.setCloudName(cloudName);
-    }
-
-    return (
-      <CloudinaryContext.Provider value={cloudinaryClient}>
-        {props.children}
-      </CloudinaryContext.Provider>
-    );
-  }
 }
 
 export type CloudinaryOpenUploadWidgetOptions = {

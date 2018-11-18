@@ -8,7 +8,7 @@ import gql from "graphql-tag";
 import React from "react";
 // import { Mutation } from "react-apollo";
 import { IndexPageConfig } from "../api";
-// import { Button } from "../components/Button";
+import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { ContentCenterWrapper } from "../components/ContentCenterWrapper";
 import { QueryWithLoading } from "../components/QueryWithLoading";
@@ -21,6 +21,19 @@ function AdminIndexManagerPage() {
       <DashboardLayout>
         <ContentCenterWrapper>
           <Grid container spacing={16}>
+            <Grid item xs={12}>
+              <Button
+                onClick={() => {
+                  /* tslint:disable-next-line:no-console */
+                  console.log("cloudinary: ", window.cloudinary);
+                  if (!window.cloudinary) return;
+
+                  window.cloudinary.openUploadWidget({});
+                }}
+              >
+                Upload
+              </Button>
+            </Grid>
             <Grid item xs={12}>
               <HeroCard />
             </Grid>
