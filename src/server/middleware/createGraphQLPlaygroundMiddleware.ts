@@ -6,9 +6,6 @@ export function createGraphQLPlaygroundMiddleware(
   contextFactory: ContextFunction,
 ) {
   return async (ctx: Context, next: () => Promise<any>) => {
-    /* tslint:disable-next-line:no-console */
-    console.log("### URL", ctx.url);
-
     if (ctx.url === "/graphql" && ctx.method === "GET") {
       const apolloContext: ApolloContext = await contextFactory({ ctx });
 
