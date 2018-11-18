@@ -31,6 +31,13 @@ export class CloudinaryService {
     );
   }
 
+  /**
+   * Returns the Cloudinary "cloudName".
+   */
+  getCloudName() {
+    return this.credentials.cloudName;
+  }
+
   static setConfig(credentials: CloudinaryCredentials) {
     cloudinary.config({
       cloud_name: credentials.cloudName,

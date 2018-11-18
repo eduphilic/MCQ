@@ -67,6 +67,8 @@ export interface Query {
   sessionFormConfig: SessionFormConfig;
 
   language: LocalizationLanguage;
+
+  cloudinaryCloudName: string;
 }
 /** Configuration for the html document sent in response to all requests. */
 export interface HtmlConfig {
@@ -148,7 +150,7 @@ export interface Mutation {
   login: LoginRequestResult;
 
   setLanguage: LocalizationLanguage;
-
+  /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
   generateCloudinarySignature: string;
 }
 
@@ -219,6 +221,12 @@ export interface QueryResolvers<Context = ServerContext, TypeParent = never> {
   >;
 
   language?: QueryLanguageResolver<LocalizationLanguage, TypeParent, Context>;
+
+  cloudinaryCloudName?: QueryCloudinaryCloudNameResolver<
+    string,
+    TypeParent,
+    Context
+  >;
 }
 
 export type QueryHtmlConfigResolver<
@@ -248,6 +256,11 @@ export type QuerySessionFormConfigResolver<
 > = Resolver<R, Parent, Context>;
 export type QueryLanguageResolver<
   R = LocalizationLanguage,
+  Parent = never,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type QueryCloudinaryCloudNameResolver<
+  R = string,
   Parent = never,
   Context = ServerContext
 > = Resolver<R, Parent, Context>;
@@ -625,7 +638,7 @@ export interface MutationResolvers<
     TypeParent,
     Context
   >;
-
+  /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
   generateCloudinarySignature?: MutationGenerateCloudinarySignatureResolver<
     string,
     TypeParent,

@@ -8,6 +8,8 @@ type Query {
   sessionFormConfig: SessionFormConfig!
 
   language: LOCALIZATION_LANGUAGE!
+
+  cloudinaryCloudName: String!
 }
 
 directive @client on FIELD | FIELD_DEFINITION

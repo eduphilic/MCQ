@@ -2,6 +2,7 @@ import { IResolvers } from "graphql-tools";
 import { MutationResolvers, QueryResolvers } from "../generated";
 
 import { adminLoginPageConfig } from "./AdminLoginPageConfigQuery";
+import { cloudinaryCloudName } from "./CloudinaryCloudNameQuery";
 import { htmlConfig } from "./HtmlConfigQuery";
 import { indexPageConfig } from "./IndexPageConfigQuery";
 import { language } from "./LanguageQuery";
@@ -9,8 +10,9 @@ import { sessionFormConfig } from "./SessionFormConfigQuery";
 import { session } from "./SessionQuery";
 
 import { generateCloudinarySignature } from "./GenerateCloudinarySignatureMutation";
-import { JSON } from "./JSONScalar";
 import { login } from "./LoginMutation";
+
+import { JSON } from "./JSONScalar";
 
 const Query: QueryResolvers = {
   adminLoginPageConfig,
@@ -19,6 +21,7 @@ const Query: QueryResolvers = {
   language,
   sessionFormConfig,
   session,
+  cloudinaryCloudName,
 };
 
 const Mutation: MutationResolvers = {
