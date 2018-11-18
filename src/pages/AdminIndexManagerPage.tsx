@@ -33,10 +33,9 @@ function AdminIndexManagerPage() {
                 console.log("cloudinary: ", cloudinary);
                 if (!cloudinary) return;
 
-                cloudinary.client.openUploadWidget({
-                  apiKey: cloudinary.apiKey,
-                  uploadSignature: cloudinary.generateSignature,
-                });
+                cloudinary.client.openUploadWidget(
+                  cloudinary.getDefaultUploadWidgetOptions(),
+                );
               }}
             >
               Upload
