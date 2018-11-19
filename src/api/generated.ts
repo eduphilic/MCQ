@@ -68,6 +68,8 @@ export interface Query {
 
   language: LocalizationLanguage;
 
+  logoImageConfig: LogoImageConfig;
+
   cloudinaryCloudName: string;
 
   cloudinaryApiKey: string;
@@ -146,6 +148,10 @@ export interface SessionFormConfig {
   termsConditionsCheckboxLabel: LocalizedString;
 
   passwordResetLinkLabel: LocalizedString;
+}
+
+export interface LogoImageConfig {
+  url: string | null;
 }
 
 export interface Mutation {
@@ -238,6 +244,12 @@ export interface QueryResolvers<Context = ServerContext, TypeParent = never> {
 
   language?: QueryLanguageResolver<LocalizationLanguage, TypeParent, Context>;
 
+  logoImageConfig?: QueryLogoImageConfigResolver<
+    LogoImageConfig,
+    TypeParent,
+    Context
+  >;
+
   cloudinaryCloudName?: QueryCloudinaryCloudNameResolver<
     string,
     TypeParent,
@@ -274,6 +286,11 @@ export type QuerySessionFormConfigResolver<
 > = Resolver<R, Parent, Context>;
 export type QueryLanguageResolver<
   R = LocalizationLanguage,
+  Parent = never,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type QueryLogoImageConfigResolver<
+  R = LogoImageConfig,
   Parent = never,
   Context = ServerContext
 > = Resolver<R, Parent, Context>;
@@ -647,6 +664,19 @@ export type SessionFormConfigTermsConditionsCheckboxLabelResolver<
 export type SessionFormConfigPasswordResetLinkLabelResolver<
   R = LocalizedString,
   Parent = SessionFormConfig,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+
+export interface LogoImageConfigResolvers<
+  Context = ServerContext,
+  TypeParent = LogoImageConfig
+> {
+  url?: LogoImageConfigUrlResolver<string | null, TypeParent, Context>;
+}
+
+export type LogoImageConfigUrlResolver<
+  R = string | null,
+  Parent = LogoImageConfig,
   Context = ServerContext
 > = Resolver<R, Parent, Context>;
 

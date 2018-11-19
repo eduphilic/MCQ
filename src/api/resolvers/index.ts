@@ -7,6 +7,7 @@ import { cloudinaryCloudName } from "./CloudinaryCloudNameQuery";
 import { htmlConfig } from "./HtmlConfigQuery";
 import { indexPageConfig } from "./IndexPageConfigQuery";
 import { language } from "./LanguageQuery";
+import { logoImageConfig } from "./LogoImageConfigQuery";
 import { sessionFormConfig } from "./SessionFormConfigQuery";
 import { session } from "./SessionQuery";
 
@@ -25,6 +26,7 @@ const Query: QueryResolvers = {
   session,
   cloudinaryCloudName,
   cloudinaryApiKey,
+  logoImageConfig,
 };
 
 const Mutation: MutationResolvers = {

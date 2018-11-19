@@ -9,6 +9,8 @@ type Query {
 
   language: LOCALIZATION_LANGUAGE!
 
+  logoImageConfig: LogoImageConfig!
+
   cloudinaryCloudName: String!
   cloudinaryApiKey: String!
 }
