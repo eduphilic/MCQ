@@ -19,7 +19,7 @@ import { ServerLocation } from "@reach/router";
 import { create, SheetsRegistry } from "jss";
 import React from "react";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
-import { renderToStaticMarkup, renderToString } from "react-dom/server";
+import { renderToStaticMarkup } from "react-dom/server";
 import { JssProvider } from "react-jss";
 import { Capture, preloadAll } from "react-loadable";
 import { getBundles } from "react-loadable/webpack";
@@ -57,16 +57,12 @@ export function createRenderMiddleware(options: {
       "htmlConfig",
     )) as HtmlConfig;
 
-    // TODO: Find a way to perform the data rendering and CSS rendering at the
-    // same time to prevent a double render.
-    const nonCssComponent = (
-      <ApolloProvider client={client}>
-        <ServerLocation url={ctx.url}>
-          <App />
-        </ServerLocation>
-      </ApolloProvider>
-    );
-    await getDataFromTree(nonCssComponent);
+    // Code splitting setup.
+    await componentPreloadPromise;
+    const modules: string[] = [];
+
+    let bundles = getBundles(getReactLoadableBundleStats(), modules);
+    bundles = bundles.filter(b => !/\.map$/.test(b.file));
 
     // https://material-ui.com/guides/server-rendering/#handling-the-request
     const sheetsRegistry = new SheetsRegistry();
@@ -77,10 +73,6 @@ export function createRenderMiddleware(options: {
     // https://www.styled-components.com/docs/advanced#example
     const sheet = new ServerStyleSheet();
 
-    // Code splitting setup.
-    await componentPreloadPromise;
-    const modules: string[] = [];
-
     const component = (
       <Capture report={moduleName => modules.push(moduleName)}>
         <StyleSheetManager sheet={sheet.instance}>
@@ -90,16 +82,17 @@ export function createRenderMiddleware(options: {
             generateClassName={generateClassName}
           >
             <MuiThemeProvider theme={lightTheme} sheetsManager={sheetsManager}>
-              {nonCssComponent}
+              <ApolloProvider client={client}>
+                <ServerLocation url={ctx.url}>
+                  <App />
+                </ServerLocation>
+              </ApolloProvider>
             </MuiThemeProvider>
           </JssProvider>
         </StyleSheetManager>
       </Capture>
     );
-    const content = renderToString(component);
-
-    let bundles = getBundles(getReactLoadableBundleStats(), modules);
-    bundles = bundles.filter(b => !/\.map$/.test(b.file));
+    const content = await getDataFromTree(component);
 
     // https://www.styled-components.com/docs/advanced#example
     const styleElements = sheet.getStyleElement();
