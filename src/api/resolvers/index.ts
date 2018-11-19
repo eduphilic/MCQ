@@ -3,7 +3,6 @@ import { MutationResolvers, QueryResolvers } from "../generated";
 
 import { adminLoginPageConfig } from "./AdminLoginPageConfigQuery";
 import { cloudinaryApiKey } from "./CloudinaryApiKeyQuery";
-import { cloudinaryAuthenticationSignature } from "./CloudinaryAuthenticationSignatureQuery";
 import { cloudinaryCloudName } from "./CloudinaryCloudNameQuery";
 import { htmlConfig } from "./HtmlConfigQuery";
 import { indexPageConfig } from "./IndexPageConfigQuery";
@@ -11,6 +10,7 @@ import { language } from "./LanguageQuery";
 import { sessionFormConfig } from "./SessionFormConfigQuery";
 import { session } from "./SessionQuery";
 
+import { generateCloudinaryMediaLibraryAuthenticationToken } from "./GenerateCloudinaryMediaLibraryAuthenticationTokenMutation";
 import { generateCloudinarySignature } from "./GenerateCloudinarySignatureMutation";
 import { login } from "./LoginMutation";
 
@@ -25,12 +25,12 @@ const Query: QueryResolvers = {
   session,
   cloudinaryCloudName,
   cloudinaryApiKey,
-  cloudinaryAuthenticationSignature,
 };
 
 const Mutation: MutationResolvers = {
   login,
   generateCloudinarySignature,
+  generateCloudinaryMediaLibraryAuthenticationToken,
 };
 
 export const resolvers: IResolvers = {

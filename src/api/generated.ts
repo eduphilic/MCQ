@@ -71,8 +71,6 @@ export interface Query {
   cloudinaryCloudName: string;
 
   cloudinaryApiKey: string;
-  /** Generated authentication signature for use with Cloudinary Media Library Widget. */
-  cloudinaryAuthenticationSignature: string;
 }
 /** Configuration for the html document sent in response to all requests. */
 export interface HtmlConfig {
@@ -156,6 +154,20 @@ export interface Mutation {
   setLanguage: LocalizationLanguage;
   /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
   generateCloudinarySignature: string;
+  /** Generates the authentication parameters required for creating a session foruse with the Cloudinary Media Library widget. */
+  generateCloudinaryMediaLibraryAuthenticationToken: CloudinaryMediaWidgetAuthenticationToken;
+}
+/** Authentication parameters for Cloudinary Media Library widget. */
+export interface CloudinaryMediaWidgetAuthenticationToken {
+  cloud_name: string;
+
+  api_key: string;
+
+  username: string;
+
+  timestamp: string;
+
+  signature: string;
 }
 
 // ====================================================
@@ -233,12 +245,6 @@ export interface QueryResolvers<Context = ServerContext, TypeParent = never> {
   >;
 
   cloudinaryApiKey?: QueryCloudinaryApiKeyResolver<string, TypeParent, Context>;
-  /** Generated authentication signature for use with Cloudinary Media Library Widget. */
-  cloudinaryAuthenticationSignature?: QueryCloudinaryAuthenticationSignatureResolver<
-    string,
-    TypeParent,
-    Context
-  >;
 }
 
 export type QueryHtmlConfigResolver<
@@ -277,11 +283,6 @@ export type QueryCloudinaryCloudNameResolver<
   Context = ServerContext
 > = Resolver<R, Parent, Context>;
 export type QueryCloudinaryApiKeyResolver<
-  R = string,
-  Parent = never,
-  Context = ServerContext
-> = Resolver<R, Parent, Context>;
-export type QueryCloudinaryAuthenticationSignatureResolver<
   R = string,
   Parent = never,
   Context = ServerContext
@@ -666,6 +667,12 @@ export interface MutationResolvers<
     TypeParent,
     Context
   >;
+  /** Generates the authentication parameters required for creating a session foruse with the Cloudinary Media Library widget. */
+  generateCloudinaryMediaLibraryAuthenticationToken?: MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver<
+    CloudinaryMediaWidgetAuthenticationToken,
+    TypeParent,
+    Context
+  >;
 }
 
 export type MutationLoginResolver<
@@ -696,3 +703,70 @@ export type MutationGenerateCloudinarySignatureResolver<
 export interface MutationGenerateCloudinarySignatureArgs {
   paramsToSign: Json;
 }
+
+export type MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver<
+  R = CloudinaryMediaWidgetAuthenticationToken,
+  Parent = never,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+/** Authentication parameters for Cloudinary Media Library widget. */
+export interface CloudinaryMediaWidgetAuthenticationTokenResolvers<
+  Context = ServerContext,
+  TypeParent = CloudinaryMediaWidgetAuthenticationToken
+> {
+  cloud_name?: CloudinaryMediaWidgetAuthenticationTokenCloudNameResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+
+  api_key?: CloudinaryMediaWidgetAuthenticationTokenApiKeyResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+
+  username?: CloudinaryMediaWidgetAuthenticationTokenUsernameResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+
+  timestamp?: CloudinaryMediaWidgetAuthenticationTokenTimestampResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+
+  signature?: CloudinaryMediaWidgetAuthenticationTokenSignatureResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+}
+
+export type CloudinaryMediaWidgetAuthenticationTokenCloudNameResolver<
+  R = string,
+  Parent = CloudinaryMediaWidgetAuthenticationToken,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type CloudinaryMediaWidgetAuthenticationTokenApiKeyResolver<
+  R = string,
+  Parent = CloudinaryMediaWidgetAuthenticationToken,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type CloudinaryMediaWidgetAuthenticationTokenUsernameResolver<
+  R = string,
+  Parent = CloudinaryMediaWidgetAuthenticationToken,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type CloudinaryMediaWidgetAuthenticationTokenTimestampResolver<
+  R = string,
+  Parent = CloudinaryMediaWidgetAuthenticationToken,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;
+export type CloudinaryMediaWidgetAuthenticationTokenSignatureResolver<
+  R = string,
+  Parent = CloudinaryMediaWidgetAuthenticationToken,
+  Context = ServerContext
+> = Resolver<R, Parent, Context>;

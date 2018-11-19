@@ -1,5 +1,6 @@
 import cloudinary from "cloudinary";
 import crypto from "crypto";
+import { CloudinaryMediaWidgetAuthenticationToken } from "../generated";
 
 let cloudinaryConfigured = false;
 
@@ -48,15 +49,16 @@ export class CloudinaryService {
   }
 
   /**
-   * Returns an authentication signature for use in authenticating the
+   * Returns an authentication token for use in authenticating the
    * Cloudinary session for use with the Cloudinary Media Library Widget.
    *
    * @see https://cloudinary.com/documentation/media_library_widget#2_optional_generate_the_authentication_signature
    */
-  generateAuthenticationSignature() {
+  generateMediaUploadWidgetAuthenticationToken(): CloudinaryMediaWidgetAuthenticationToken {
+    const timestamp = Date.now().toString();
     const fragments = [
       ["cloud_name", this.credentials.cloudName],
-      ["timestamp", Date.now().toString()],
+      ["timestamp", timestamp],
       ["username", this.credentials.username],
     ];
     const authenticationSignature = fragments
@@ -65,7 +67,14 @@ export class CloudinaryService {
       .concat(this.credentials.apiSecret);
     const hash = crypto.createHash("SHA256");
     hash.update(authenticationSignature);
-    return hash.digest("hex").toUpperCase();
+
+    return {
+      api_key: this.credentials.apiKey,
+      cloud_name: this.credentials.cloudName,
+      signature: hash.digest("hex").toUpperCase(),
+      timestamp,
+      username: this.credentials.username,
+    };
   }
 
   static setConfig(credentials: CloudinaryCredentials) {
