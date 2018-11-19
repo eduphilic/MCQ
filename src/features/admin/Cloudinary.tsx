@@ -26,6 +26,9 @@ type CloudinaryContextValue = {
     paramsToSign: any,
   ) => void;
   getDefaultUploadWidgetOptions: () => CloudinaryOpenUploadWidgetOptions;
+  getDefaultMediaLibraryWidgetOptions: () => Promise<
+    CloudinaryOpenMediaLibraryOptions
+  >;
 } | null;
 const CloudinaryContext = createContext<CloudinaryContextValue>(null);
 
@@ -39,6 +42,18 @@ const GET_CLOUDINARY_CONFIG = gql`
 const GENERATE_CLOUDINARY_SIGNATURE = gql`
   mutation GenerateCloudinarySignature($paramsToSign: JSON!) {
     generateCloudinarySignature(paramsToSign: $paramsToSign)
+  }
+`;
+
+const GENERATE_CLOUDINARY_MEDIA_LIBRARY_AUTHENTICATION_TOKEN = gql`
+  mutation GenerateCloudinaryMediaLibraryAuthenticationToken {
+    generateCloudinaryMediaLibraryAuthenticationToken {
+      api_key
+      cloud_name
+      signature
+      timestamp
+      username
+    }
   }
 `;
 
@@ -56,19 +71,37 @@ export function CloudinaryProvider(props: {
 }): React.ReactElement<any> {
   const [cloudinary, setCloudinary] = useState<CloudinaryContextValue>(null);
 
-  // Load the Cloudinary client library if it hasn't already been loaded.
+  // Load the Cloudinary client libraries if it hasn't already been loaded.
   if (isBrowser() && !initializationStatus) {
-    const script = document.createElement("script");
+    const uploadWidgetScript = document.createElement("script");
+    const mediaLibraryWidgetScript = document.createElement("script");
 
-    initializationStatus = new Promise(resolve => {
-      script.onload = () => resolve({ success: true });
-      script.onerror = () => resolve({ success: false });
-    });
+    initializationStatus = Promise.all<{ success: boolean }>([
+      new Promise(resolve => {
+        uploadWidgetScript.onload = () => resolve({ success: true });
+        uploadWidgetScript.onerror = () => resolve({ success: false });
+      }),
+      new Promise(resolve => {
+        mediaLibraryWidgetScript.onload = () => resolve({ success: true });
+        mediaLibraryWidgetScript.onerror = () => resolve({ success: false });
+      }),
+    ]).then(results =>
+      results.reduce(
+        (accumulator, r) => {
+          if (!r.success) accumulator.success = false;
+          return accumulator;
+        },
+        { success: true },
+      ),
+    );
 
-    script.src = "https://widget.cloudinary.com/v2.0/global/all.js";
+    uploadWidgetScript.src = "https://widget.cloudinary.com/v2.0/global/all.js";
+    mediaLibraryWidgetScript.src =
+      "https://media-library.cloudinary.com/global/all.js";
 
     if (!document.head) throw new Error('Could not retrieve "head" element.');
-    document.head.insertBefore(script, null);
+    document.head.insertBefore(uploadWidgetScript, null);
+    document.head.insertBefore(mediaLibraryWidgetScript, null);
   }
 
   // Initialize state to the currently loaded Cloudinary client instance if it
@@ -99,58 +132,86 @@ export function CloudinaryProvider(props: {
       mutation={GENERATE_CLOUDINARY_SIGNATURE}
     >
       {generateCloudinarySignature => (
-        <QueryWithLoading<
-          Pick<Query, "cloudinaryCloudName" | "cloudinaryApiKey">
+        <ApolloMutation<
+          Pick<Mutation, "generateCloudinaryMediaLibraryAuthenticationToken">
         >
-          query={GET_CLOUDINARY_CONFIG}
+          mutation={GENERATE_CLOUDINARY_MEDIA_LIBRARY_AUTHENTICATION_TOKEN}
         >
-          {({ data }) => {
-            if (cloudinaryClient) {
-              cloudinaryClient.setCloudName(data.cloudinaryCloudName);
+          {generateCloudinaryMediaLibraryAuthenticationToken => (
+            <QueryWithLoading<
+              Pick<Query, "cloudinaryCloudName" | "cloudinaryApiKey">
+            >
+              query={GET_CLOUDINARY_CONFIG}
+            >
+              {({ data }) => {
+                if (cloudinaryClient) {
+                  cloudinaryClient.setCloudName(data.cloudinaryCloudName);
 
-              if (!cloudinary) {
-                const generateSignature: NonNullable<
-                  CloudinaryContextValue
-                >["generateSignature"] = async (cb, paramsToSign) => {
-                  const fetchResult = await generateCloudinarySignature({
-                    variables: { paramsToSign },
-                  });
-                  if (!fetchResult || fetchResult.errors) return;
-                  cb(fetchResult.data!.generateCloudinarySignature);
-                };
+                  if (!cloudinary) {
+                    const generateSignature: NonNullable<
+                      CloudinaryContextValue
+                    >["generateSignature"] = async (cb, paramsToSign) => {
+                      const fetchResult = await generateCloudinarySignature({
+                        variables: { paramsToSign },
+                      });
+                      if (!fetchResult || fetchResult.errors) return;
+                      cb(fetchResult.data!.generateCloudinarySignature);
+                    };
 
-                setCloudinary({
-                  client: cloudinaryClient,
-                  apiKey: data.cloudinaryApiKey,
-                  cloudName: data.cloudinaryCloudName,
-                  generateSignature,
-                  getDefaultUploadWidgetOptions: () => ({
-                    // Required:
-                    cloudName: data.cloudinaryCloudName,
+                    setCloudinary({
+                      client: cloudinaryClient,
+                      apiKey: data.cloudinaryApiKey,
+                      cloudName: data.cloudinaryCloudName,
+                      generateSignature,
+                      getDefaultUploadWidgetOptions: () => ({
+                        // Required:
+                        cloudName: data.cloudinaryCloudName,
 
-                    // Widget behavior:
-                    sources: ["local", "url", "camera"],
-                    multiple: false,
-                    cropping: true,
-                    croppingAspectRatio: 1, // square
+                        // Widget behavior:
+                        sources: ["local", "url", "camera"],
+                        multiple: false,
+                        cropping: true,
+                        croppingAspectRatio: 1, // square
 
-                    // Upload parameters:
-                    folder: "Assets",
-                    resourceType: "image",
-                    uploadSignature: generateSignature,
-                    apiKey: data.cloudinaryApiKey,
-                  }),
-                });
-              }
-            }
+                        // Upload parameters:
+                        folder: "Assets",
+                        resourceType: "image",
+                        uploadSignature: generateSignature,
+                        apiKey: data.cloudinaryApiKey,
+                      }),
 
-            return (
-              <CloudinaryContext.Provider value={cloudinary}>
-                {props.children}
-              </CloudinaryContext.Provider>
-            );
-          }}
-        </QueryWithLoading>
+                      getDefaultMediaLibraryWidgetOptions: async () => {
+                        const fetchResult = await generateCloudinaryMediaLibraryAuthenticationToken();
+
+                        if (!fetchResult || fetchResult.errors) {
+                          throw new Error(
+                            "Failed to retrieve Cloudinary Media Widget authentication token.",
+                          );
+                        }
+
+                        return {
+                          // Authentication:
+                          ...fetchResult.data!
+                            .generateCloudinaryMediaLibraryAuthenticationToken,
+
+                          // Media library behavior:
+                          max_files: 1,
+                          multiple: false,
+                        };
+                      },
+                    });
+                  }
+                }
+
+                return (
+                  <CloudinaryContext.Provider value={cloudinary}>
+                    {props.children}
+                  </CloudinaryContext.Provider>
+                );
+              }}
+            </QueryWithLoading>
+          )}
+        </ApolloMutation>
       )}
     </ApolloMutation>
   );
@@ -503,6 +564,44 @@ export type CloudinaryOpenUploadWidgetOptions = {
   thumbnailTransformation?: any;
 };
 
+export type CloudinaryOpenMediaLibraryOptions = {
+  // Authentication:
+  cloud_name: string;
+  api_key: string;
+  username: string;
+  timestamp: string;
+  signature: string;
+
+  // Client-side:
+  button_caption?: string;
+  button_class?: string;
+  inline_container?: string;
+  z_index?: string;
+
+  // Media library behavior (show method):
+  default_transformations?: any;
+  max_files?: number;
+  multiple?: boolean;
+};
+
+export type CloudinaryMediaLibrarySelectedItem = {
+  bytes: number;
+  context: Record<string, string>[];
+  created_at: string;
+  derived: { url: string; secure_url: string }[];
+  format: string;
+  height: number;
+  public_id: string;
+  resource_type: string;
+  secure_url: string;
+  tags: string[];
+  type: "upload";
+  url: string;
+  version: number;
+  width: number;
+  duration?: number;
+};
+
 /**
  * Cloudinary client library.
  */
@@ -513,6 +612,17 @@ export type Cloudinary = {
   setCloudName: (name: string) => void;
 
   openUploadWidget: (options: CloudinaryOpenUploadWidgetOptions) => void;
+
+  openMediaLibrary: (
+    options: CloudinaryOpenMediaLibraryOptions,
+    cb: {
+      insertHandler: (
+        data: {
+          assets: CloudinaryMediaLibrarySelectedItem[];
+        },
+      ) => void;
+    },
+  ) => void;
 };
 
 declare global {

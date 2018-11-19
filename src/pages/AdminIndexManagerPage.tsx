@@ -28,9 +28,26 @@ function AdminIndexManagerPage() {
         <Grid container spacing={16}>
           <Grid item xs={12}>
             <Button
+              onClick={async () => {
+                if (!cloudinary) return;
+
+                cloudinary.client.openMediaLibrary(
+                  await cloudinary.getDefaultMediaLibraryWidgetOptions(),
+                  {
+                    insertHandler: data => {
+                      /* tslint:disable-next-line:no-console */
+                      console.log({ data });
+                      alert(JSON.stringify(data, null, 2));
+                    },
+                  },
+                );
+              }}
+            >
+              Select Image
+            </Button>
+
+            <Button
               onClick={() => {
-                /* tslint:disable-next-line:no-console */
-                console.log("cloudinary: ", cloudinary);
                 if (!cloudinary) return;
 
                 cloudinary.client.openUploadWidget({
