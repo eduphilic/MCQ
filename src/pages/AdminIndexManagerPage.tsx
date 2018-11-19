@@ -1,5 +1,6 @@
 // import CardActions from "@material-ui/core/CardActions";
 // import CardContent from "@material-ui/core/CardContent";
+import { CardContent } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 // import TextField from "@material-ui/core/TextField";
 // import Typography from "@material-ui/core/Typography";
@@ -11,6 +12,7 @@ import { IndexPageConfig } from "../api";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { ContentCenterWrapper } from "../components/ContentCenterWrapper";
+import { ImagePicker } from "../components/ImagePicker";
 import { QueryWithLoading } from "../components/QueryWithLoading";
 import {
   AdminCardHeader,
@@ -27,9 +29,23 @@ function AdminIndexManagerPage() {
       <ContentCenterWrapper>
         <Grid container spacing={16}>
           <Grid item xs={12}>
+            <Card>
+              <CardContent>
+                <ImagePicker
+                  title="Logo"
+                  src="https://res.cloudinary.com/strothj/image/upload/v1542562427/Logos/jp5luiyghhchjzsoe1zx.svg"
+                />
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12}>
             <Button
               onClick={async () => {
                 if (!cloudinary) return;
+
+                /* tslint:disable-next-line:no-console */
+                console.log("client", cloudinary.client);
 
                 cloudinary.client.openMediaLibrary(
                   await cloudinary.getDefaultMediaLibraryWidgetOptions(),

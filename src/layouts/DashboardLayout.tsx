@@ -81,7 +81,8 @@ function LinkListItem(props: { title: string; to: string }) {
 }
 
 const ContentWrapper = styled.main`
-  padding: 16px;
+  padding: 16px 0;
+
   ${({ theme }) => theme.breakpoints.up("md")} {
     margin-left: ${drawerWidth}px;
   }
