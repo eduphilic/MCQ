@@ -1,185 +1,114 @@
-// import CardActions from "@material-ui/core/CardActions";
-// import CardContent from "@material-ui/core/CardContent";
 import { CardContent } from "@material-ui/core";
+import CardActions from "@material-ui/core/CardActions";
 import Grid from "@material-ui/core/Grid";
-// import TextField from "@material-ui/core/TextField";
-// import Typography from "@material-ui/core/Typography";
-// import { Formik } from "formik";
+import { Formik, FormikProps, FormikValues } from "formik";
 import gql from "graphql-tag";
 import React from "react";
-// import { Mutation } from "react-apollo";
-import { IndexPageConfig } from "../api";
+import { Query } from "../api";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { ContentCenterWrapper } from "../components/ContentCenterWrapper";
 import { ImagePicker } from "../components/ImagePicker";
 import { QueryWithLoading } from "../components/QueryWithLoading";
-import {
-  AdminCardHeader,
-  CloudinaryProvider,
-  useCloudinary,
-} from "../features/admin";
+import { CloudinaryProvider, useCloudinary } from "../features/admin";
 import { DashboardLayout } from "../layouts/DashboardLayout";
+
+const GET_INDEX_MANAGER_CONFIG = gql`
+  query GetIndexManagerConfig {
+    logoImageConfig {
+      url
+    }
+  }
+`;
+
+type QueryValue = Pick<Query, "logoImageConfig">;
+
+type FormValue = {
+  logoImageUrl: QueryValue["logoImageConfig"]["url"];
+};
 
 function AdminIndexManagerPage() {
   const cloudinary = useCloudinary();
 
   return (
-    <DashboardLayout>
-      <ContentCenterWrapper>
-        <Grid container spacing={16}>
-          <Grid item xs={12}>
-            <Card>
-              <CardContent>
-                <ImagePicker
-                  title="Logo"
-                  src="https://res.cloudinary.com/strothj/image/upload/v1542562427/Logos/jp5luiyghhchjzsoe1zx.svg"
-                />
-              </CardContent>
-            </Card>
-          </Grid>
+    <QueryWithLoading<QueryValue> query={GET_INDEX_MANAGER_CONFIG}>
+      {({ data }) => (
+        <Formik<FormValue>
+          initialValues={{ logoImageUrl: data.logoImageConfig.url }}
+          onSubmit={() => {}}
+        >
+          {form => (
+            <DashboardLayout>
+              <ContentCenterWrapper>
+                <Grid container spacing={16}>
+                  <Grid item xs={12}>
+                    <Card>
+                      <CardContent>
+                        <ImagePicker
+                          title="Logo"
+                          src={form.values.logoImageUrl}
+                          onSelectButtonClick={createImageSelectorHandler(
+                            form,
+                            "logoImageUrl",
+                          )}
+                          onUploadButtonClick={createImageUploadHandler(
+                            "Logos",
+                          )}
+                        />
+                      </CardContent>
+                    </Card>
+                  </Grid>
 
-          <Grid item xs={12}>
-            <Button
-              onClick={async () => {
-                if (!cloudinary) return;
-
-                /* tslint:disable-next-line:no-console */
-                console.log("client", cloudinary.client);
-
-                cloudinary.client.openMediaLibrary(
-                  await cloudinary.getDefaultMediaLibraryWidgetOptions(),
-                  {
-                    insertHandler: data => {
-                      /* tslint:disable-next-line:no-console */
-                      console.log({ data });
-                      alert(JSON.stringify(data, null, 2));
-                    },
-                  },
-                );
-              }}
-            >
-              Select Image
-            </Button>
-
-            <Button
-              onClick={() => {
-                if (!cloudinary) return;
-
-                cloudinary.client.openUploadWidget({
-                  ...cloudinary.getDefaultUploadWidgetOptions(),
-                  folder: "Logos",
-                });
-              }}
-            >
-              Upload
-            </Button>
-          </Grid>
-          <Grid item xs={12}>
-            <HeroCard />
-          </Grid>
-        </Grid>
-      </ContentCenterWrapper>
-    </DashboardLayout>
+                  <Grid item xs={12}>
+                    <Card>
+                      <CardActions>
+                        <Button
+                          disabled={!form.dirty}
+                          onClick={() => form.resetForm()}
+                        >
+                          Reset
+                        </Button>
+                        <Button disabled={!form.dirty}>Submit</Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                </Grid>
+              </ContentCenterWrapper>
+            </DashboardLayout>
+          )}
+        </Formik>
+      )}
+    </QueryWithLoading>
   );
-}
 
-const GET_HERO_CONFIG = gql`
-  query GetHeroConfig {
-    indexPageConfig {
-      heroPrimaryText
-    }
+  function createImageSelectorHandler(
+    formikProps: FormikProps<FormikValues>,
+    formField: keyof FormValue,
+  ) {
+    if (!cloudinary) return undefined;
+
+    return async () => {
+      cloudinary.client.openMediaLibrary(
+        await cloudinary.getDefaultMediaLibraryWidgetOptions(),
+        {
+          insertHandler: data => {
+            formikProps.setFieldValue(formField, data.assets[0].secure_url);
+          },
+        },
+      );
+    };
   }
-`;
 
-type HeroConfig = {
-  indexPageConfig: Pick<IndexPageConfig, "heroPrimaryText">;
-};
+  function createImageUploadHandler(folder: string) {
+    if (!cloudinary) return undefined;
 
-// const UPDATE_HERO_CONFIG = g.ql`
-//   mutation UpdateHeroConfig($indexPageConfig: IndexPageHeroConfigInput!) {
-//     updateIndexPageHeroConfig(indexPageConfig: $indexPageConfig) {
-//       heroPrimaryText
-//     }
-//   }
-// `;
-
-function HeroCard() {
-  return (
-    <Card>
-      <AdminCardHeader title="Hero" />
-      <QueryWithLoading<HeroConfig> query={GET_HERO_CONFIG}>
-        {(/*{ data, refetch }*/) => null
-        // <Mutation<{}, HeroConfig> mutation={UPDATE_HERO_CONFIG}>
-        //   {(updateIndexPageHeroConfig, mutationData) =>
-        //     mutationData.loading ? (
-        //       "Loading"
-        //     ) : (
-        //       <Formik<HeroConfig>
-        //         enableReinitialize
-        //         initialValues={data!}
-        //         onSubmit={async (values, form) => {
-        //           await updateIndexPageHeroConfig({
-        //             variables: {
-        //               indexPageConfig: {
-        //                 heroPrimaryText:
-        //                   values.indexPageConfig.heroPrimaryText,
-        //               },
-        //             },
-        //           });
-        //           form.resetForm();
-        //           await refetch();
-        //         }}
-        //       >
-        //         {form => (
-        //           <form onSubmit={form.handleSubmit}>
-        //             <CardContent>
-        //               <Typography variant="subtitle2" paragraph>
-        //                 Hero Text
-        //               </Typography>
-        //               <Grid container spacing={16}>
-        //                 <Grid item xs={12} md={6}>
-        //                   <TextField
-        //                     name="indexPageConfig.heroPrimaryText.en"
-        //                     label="Hero Primary Text (English)"
-        //                     fullWidth
-        //                     onChange={form.handleChange}
-        //                     onBlur={form.handleBlur}
-        //                     value={
-        //                       form.values.indexPageConfig.heroPrimaryText.en
-        //                     }
-        //                   />
-        //                 </Grid>
-        //               </Grid>
-        //             </CardContent>
-        //             <CardActions>
-        //               <Button
-        //                 size="small"
-        //                 color="primary"
-        //                 disabled={!form.touched.indexPageConfig}
-        //                 onClick={() => form.resetForm(data!)}
-        //               >
-        //                 Reset
-        //               </Button>
-        //               <Button
-        //                 size="small"
-        //                 color="primary"
-        //                 type="submit"
-        //                 disabled={!form.touched.indexPageConfig}
-        //               >
-        //                 Submit
-        //               </Button>
-        //             </CardActions>
-        //           </form>
-        //         )}
-        //       </Formik>
-        //     )
-        //   }
-        // </Mutation>
-        }
-      </QueryWithLoading>
-    </Card>
-  );
+    return () => {
+      cloudinary.client.openUploadWidget({
+        ...cloudinary.getDefaultUploadWidgetOptions(),
+        folder,
+      });
+    };
+  }
 }
 
 export default () => (
