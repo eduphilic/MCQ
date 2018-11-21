@@ -3,7 +3,8 @@
     "source": "dist/functions",
     "predeploy": [
       "yarn workspace @join-uniform/server clean",
-      "yarn workspace @join-uniform/server build"
+      "yarn workspace @join-uniform/server build",
+      "yarn generate:firebaseFunctionsPackageJson"
     ]
   },
   "hosting": {

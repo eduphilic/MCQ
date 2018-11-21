@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "@join-uniform/app",
+  "version": "1.0.0",
+  "sideEffects": false,
+  "scripts": {
+    "start": "next",
+    "build": "next build",
+    "clean": "echo Clean noop."
+  },
+  "dependencies": {
+    "@zeit/next-typescript": "^1.1.1",
+    "next": "^7.0.2",
+    "react": "^16.7.0-alpha.2",
+    "react-dom": "^16.7.0-alpha.2"
+  }
+}
