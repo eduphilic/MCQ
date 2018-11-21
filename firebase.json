@@ -1,0 +1,22 @@
+{
+  "functions": {
+    "source": "dist/functions",
+    "predeploy": [
+      "yarn workspace @join-uniform/server clean",
+      "yarn workspace @join-uniform/server build"
+    ]
+  },
+  "hosting": {
+    "public": "dist/public",
+    "rewrites": [
+      {
+        "source": "**/**",
+        "function": "main"
+      }
+    ],
+    "predeploy": [
+      "yarn workspace @join-uniform/public clean",
+      "yarn workspace @join-uniform/public build"
+    ]
+  }
+}

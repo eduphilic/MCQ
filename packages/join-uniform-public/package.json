@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "name": "@join-uniform/public",
+  "version": "1.0.0",
+  "sideEffects": false,
+  "scripts": {
+    "start": "yarn build",
+    "build": "cpx dummy.html ../../dist/public",
+    "clean": "rimraf ../../dist/public"
+  },
+  "devDependencies": {
+    "cpx": "^1.5.0",
+    "rimraf": "^2.6.2"
+  }
+}
