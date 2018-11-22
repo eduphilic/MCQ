@@ -1,8 +1,8 @@
-import Koa from "koa";
-import Router from "koa-router";
 import * as functions from "firebase-functions";
-import next from "next";
+import Koa from "koa";
 import proxy from "koa-better-http-proxy";
+import Router from "koa-router";
+import next from "next";
 
 const dev = process.env.NODE_ENV !== "production";
 const nextApp = next({ dev, conf: { distDir: "next" } });

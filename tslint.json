@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-eslint-rules",
+    "tslint-config-airbnb",
+    "tslint-config-prettier"
+  ],
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "rules": {
+    "import-name": false,
+    "object-shorthand-properties-first": false,
+    "object-literal-sort-keys": false,
+    "array-type": false,
+    "interface-name": [true, "never-prefix"],
+    "prettier": true
+  }
+}
