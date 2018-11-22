@@ -26,28 +26,31 @@ const dependencies = packageDirectories.reduce(
 
     return accumulator;
   },
+  // tslint:disable-next-line:no-object-literal-type-assertion
   {} as Record<string, string>,
 );
 
-if (!fs.existsSync(path.resolve(__dirname, "../dist"))) {
-  fs.mkdirSync(path.resolve(__dirname, "../dist"));
-}
+export function generateFirebaseFunctionsPackageJson() {
+  if (!fs.existsSync(path.resolve(__dirname, "../dist"))) {
+    fs.mkdirSync(path.resolve(__dirname, "../dist"));
+  }
 
-if (!fs.existsSync(path.resolve(__dirname, "../dist/functions"))) {
-  fs.mkdirSync(path.resolve(__dirname, "../dist/functions"));
-}
+  if (!fs.existsSync(path.resolve(__dirname, "../dist/functions"))) {
+    fs.mkdirSync(path.resolve(__dirname, "../dist/functions"));
+  }
 
-fs.writeFileSync(
-  path.resolve(__dirname, "../dist/functions/package.json"),
-  `${JSON.stringify(
-    {
-      private: true,
-      name: "@join-uniform/firebase-functions",
-      version: "1.0.0",
-      dependencies,
-    },
-    null,
-    2,
-  )}\n`,
-  "utf8",
-);
+  fs.writeFileSync(
+    path.resolve(__dirname, "../dist/functions/package.json"),
+    `${JSON.stringify(
+      {
+        private: true,
+        name: "@join-uniform/firebase-functions",
+        version: "1.0.0",
+        dependencies,
+      },
+      null,
+      2,
+    )}\n`,
+    "utf8",
+  );
+}
