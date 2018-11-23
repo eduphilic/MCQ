@@ -14,5 +14,3 @@ type Query {
   cloudinaryCloudName: String!
   cloudinaryApiKey: String!
 }
-
-directive @client on FIELD | FIELD_DEFINITION

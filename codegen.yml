@@ -1,0 +1,16 @@
+schema: ./graphql/schema/**/*.graphql
+documents: ./graphql/queries/**/*.graphql
+overwrite: true
+generates:
+  ./packages/join-uniform-graphql/src/generated.tsx:
+    - add:
+        - import * as models from "./models";
+    - typescript-common:
+        scalars:
+          LocalizedString: models.LocalizedString
+        avoidOptionals: true
+        immutableTypes: true
+    - typescript-client:
+        noNamespaces: true
+    - typescript-react-apollo:
+        noNamespaces: true
