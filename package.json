@@ -15,10 +15,13 @@
     "serve": "yarn tools serve",
     "serve:production": "yarn tools serve:production",
     "clean": "yarn tools clean",
+    "lint": "yarn workspaces run lint",
+    "graphql": "yarn gql-gen",
     "tools": "ts-node --project ./tools/tsconfig.json ./tools"
   },
   "dependencies": {
     "@types/cross-spawn": "^6.0.0",
+    "@types/graphql": "^14.0.3",
     "@types/koa": "^2.0.47",
     "@types/koa-mount": "^3.0.1",
     "@types/koa-router": "^7.0.35",
@@ -39,6 +42,8 @@
     "graphql-codegen-typescript-client": "^0.14.1",
     "graphql-codegen-typescript-common": "^0.14.1",
     "graphql-codegen-typescript-react-apollo": "^0.14.1",
+    "graphql-codegen-typescript-resolvers": "^0.14.1",
+    "graphql-codegen-typescript-server": "^0.14.1",
     "prettier": "^1.15.2",
     "rimraf": "^2.6.2",
     "ts-node": "^7.0.1",

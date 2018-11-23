@@ -4,7 +4,10 @@ overwrite: true
 generates:
   ./packages/join-uniform-graphql/src/generated.tsx:
     - add:
+        - // AUTO-GENERATED - DO NOT EDIT
+        - // SCRIPT-> yarn graphql
         - import * as models from "./models";
+        - export { models };
     - typescript-common:
         scalars:
           LocalizedString: models.LocalizedString
@@ -13,4 +16,17 @@ generates:
     - typescript-client:
         noNamespaces: true
     - typescript-react-apollo:
+        noNamespaces: true
+  ./packages/join-uniform-graphql-resolvers/src/generated.ts:
+    - add:
+        - // AUTO-GENERATED - DO NOT EDIT
+        - // SCRIPT-> yarn graphql
+        - import { models } from "@join-uniform/graphql";
+    - typescript-common:
+        scalars:
+          LocalizedString: models.LocalizedString
+        avoidOptionals: true
+        immutableTypes: true
+    - typescript-server:
+    - typescript-resolvers:
         noNamespaces: true

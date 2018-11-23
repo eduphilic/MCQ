@@ -6,12 +6,17 @@
   "scripts": {
     "start": "next",
     "build": "next build",
-    "clean": "echo Clean noop."
+    "clean": "echo Clean noop.",
+    "lint": "tslint -p ./tsconfig.json src/**/*"
   },
   "dependencies": {
     "@zeit/next-typescript": "^1.1.1",
     "next": "^7.0.2",
     "react": "^16.7.0-alpha.2",
-    "react-dom": "^16.7.0-alpha.2"
+    "react-dom": "^16.7.0-alpha.2",
+    "tslint": "^5.11.0"
+  },
+  "devDependencies": {
+    "tslint": "^5.11.0"
   }
 }

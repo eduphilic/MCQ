@@ -1,4 +1,7 @@
+// AUTO-GENERATED - DO NOT EDIT
+// SCRIPT-> yarn graphql
 import * as models from "./models";
+export { models };
 
 export enum UserRole {
   USER = "USER",
