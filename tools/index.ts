@@ -2,6 +2,7 @@
 // runner.
 
 import spawn from "cross-spawn";
+import fs from "fs";
 import path from "path";
 import { generateFirebaseFunctionsPackageJson } from "./generateFirebaseFunctionsPackageJson";
 
@@ -27,6 +28,7 @@ Join Uniform Tools
 
   start            - Start development servers.
   build            - Build for production.
+  build:public     - Add dummy contents to Firebase Hosting directory.
   serve            - Start Firebase server emulator.
   serve:production - Start Firebase server emulator in production mode (NODE_ENV).
   clean            - Remove build assets.
@@ -37,6 +39,7 @@ Join Uniform Tools
 const commands: Record<string, (string | Function)[]> = {
   start: ["wsrun clean", generateFirebaseFunctionsPackageJson, "wsrun start"],
   build: ["wsrun clean", generateFirebaseFunctionsPackageJson, "wsrun build"],
+  "build:public": [generateFirebaseHostingDummyContents],
   serve: ["firebase serve --only functions,hosting"],
   "serve:production": ["cross-env NODE_ENV=production yarn serve"],
   clean: ["rimraf dist"],
@@ -89,3 +92,48 @@ steps.forEach(step => {
     step();
   }
 });
+
+/**
+ * Add a dummy file to Firebase Hosting directory to prevent an error about it
+ * being empty.
+ */
+function generateFirebaseHostingDummyContents() {
+  const publicPath = path.resolve(__dirname, "../dist/public");
+  mkDirByPathSync(publicPath);
+  fs.writeFileSync(path.join(publicPath, "dummy.html"), "", "utf8");
+}
+
+// https://stackoverflow.com/questions/31645738/how-to-create-full-path-with-nodes-fs-mkdirsync
+function mkDirByPathSync(
+  targetDir: string,
+  { isRelativeToScript = false } = {},
+) {
+  const sep = path.sep;
+  const initDir = path.isAbsolute(targetDir) ? sep : "";
+  const baseDir = isRelativeToScript ? __dirname : ".";
+
+  return targetDir.split(sep).reduce((parentDir, childDir) => {
+    const curDir = path.resolve(baseDir, parentDir, childDir);
+    try {
+      fs.mkdirSync(curDir);
+    } catch (err) {
+      if (err.code === "EEXIST") {
+        // curDir already exists!
+        return curDir;
+      }
+
+      // To avoid `EISDIR` error on Mac and `EACCES`-->`ENOENT` and `EPERM` on Windows.
+      if (err.code === "ENOENT") {
+        // Throw the original parentDir error on curDir `ENOENT` failure.
+        throw new Error(`EACCES: permission denied, mkdir '${parentDir}'`);
+      }
+
+      const caughtErr = ["EACCES", "EPERM", "EISDIR"].indexOf(err.code) > -1;
+      if (!caughtErr || (caughtErr && curDir === path.resolve(targetDir))) {
+        throw err; // Throw if it's just the last created dir.
+      }
+    }
+
+    return curDir;
+  }, initDir);
+}

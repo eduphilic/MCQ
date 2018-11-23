@@ -1,11 +1,7 @@
 {
   "functions": {
     "source": "dist/functions",
-    "predeploy": [
-      "yarn workspace @join-uniform/server clean",
-      "yarn workspace @join-uniform/server build",
-      "yarn generate:firebaseFunctionsPackageJson"
-    ]
+    "predeploy": ["yarn build"]
   },
   "hosting": {
     "public": "dist/public",
@@ -15,9 +11,6 @@
         "function": "main"
       }
     ],
-    "predeploy": [
-      "yarn workspace @join-uniform/public clean",
-      "yarn workspace @join-uniform/public build"
-    ]
+    "predeploy": ["yarn build:public"]
   }
 }
