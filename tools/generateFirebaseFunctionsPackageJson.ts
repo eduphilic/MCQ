@@ -46,6 +46,9 @@ export function generateFirebaseFunctionsPackageJson() {
         private: true,
         name: "@join-uniform/firebase-functions",
         version: "1.0.0",
+        engines: {
+          node: "8",
+        },
         dependencies,
       },
       null,
