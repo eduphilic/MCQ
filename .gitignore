@@ -6,3 +6,6 @@ dist/
 
 # Logs
 *.log
+
+# Firebase environmental variables
+.runtimeconfig.json

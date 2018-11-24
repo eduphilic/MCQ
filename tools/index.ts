@@ -5,6 +5,7 @@ import spawn from "cross-spawn";
 import fs from "fs";
 import path from "path";
 import { generateFirebaseFunctionsPackageJson } from "./generateFirebaseFunctionsPackageJson";
+import { getFirebaseEnvironmentalVariables } from "./getFirebaseEnvironmentalVariables";
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
@@ -22,6 +23,11 @@ if (!/^v?8\./.test(process.version)) {
   process.exit(1);
 }
 
+// Retrieve Firebase environmental variables. They are not available to the
+// emulator by default. Download them and create a file that the emulator will
+// recognize.
+getFirebaseEnvironmentalVariables();
+
 const usage = `
 Join Uniform Tools
 ------------------
@@ -38,10 +44,15 @@ Join Uniform Tools
 // tslint:disable-next-line:ban-types
 const commands: Record<string, (string | Function)[]> = {
   start: ["wsrun clean", generateFirebaseFunctionsPackageJson, "wsrun start"],
+
   build: ["wsrun clean", generateFirebaseFunctionsPackageJson, "wsrun build"],
+
   "build:public": [generateFirebaseHostingDummyContents],
+
   serve: ["firebase serve --only functions,hosting"],
+
   "serve:production": ["cross-env NODE_ENV=production yarn serve"],
+
   clean: ["rimraf dist"],
 };
 

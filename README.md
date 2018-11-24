@@ -15,6 +15,7 @@
   - [yarn lint](#yarn-lint)
   - [yarn graphql](#yarn-graphql)
 - [Development Process](#development-process)
+- [Firebase Functions Environmental Variables](#firebase-functions-environmental-variables)
 
 <!-- /TOC -->
 
@@ -88,3 +89,22 @@ https://github.com/dotansimha/graphql-code-generator
 - http://localhost:5000/ - Application
 - http://localhost:5000/graphql - GraphQL server
 - http://localhost:5000/storybook/ - Storybook
+
+## Firebase Functions Environmental Variables
+
+This project requires the following Firebase environmental variables be set:
+
+- `koa`
+  - `key0` - Koa encryption key #1.
+  - `key1` - Koa encryption key #2.
+  - `cookie_expire_seconds` - Seconds before session cookies expire (authentication duration).
+  - `cookie_secret` - Cookie JWT signing/encryption key.
+- `cloudinary` - Cloudinary credentials.
+  - `cloud_name`
+  - `api_key`
+  - `api_secret`
+  - `username`
+
+The environmental variables will be validated during execution of cloud functions.
+
+https://firebase.google.com/docs/functions/config-env#automatically_populated_environment_variables

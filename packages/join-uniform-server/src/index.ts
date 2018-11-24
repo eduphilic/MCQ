@@ -7,6 +7,7 @@ import KoaRouter from "koa-router";
 import koaStatic from "koa-static";
 import nextJs from "next";
 import { PassThrough } from "stream";
+import { getEnvironmentalVariables } from "./getEnvironmentalVariables";
 
 const dev = process.env.NODE_ENV !== "production";
 const nextApp = nextJs({ dev, conf: { distDir: "next" } });
@@ -14,7 +15,17 @@ const nextHandle = nextApp.getRequestHandler();
 const koaApp = new Koa();
 const koaRouter = new KoaRouter();
 
+// Makes the script crash on unhandled rejections instead of silently
+// ignoring them. In the future, promise rejections that are not handled will
+// terminate the Node.js process with a non-zero exit code.
+process.on("unhandledRejection", err => {
+  throw err;
+});
+
 async function bootstrap() {
+  /* tslint:disable-next-line:no-console */
+  console.log("variables:", await getEnvironmentalVariables());
+
   if (!dev) {
     // Storybook static build.
     koaRouter.all(
