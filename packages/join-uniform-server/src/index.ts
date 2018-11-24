@@ -43,6 +43,7 @@ async function bootstrap() {
     koaRouter.all("*", async (ctx, next) => {
       if (ctx.url !== "/__webpack_hmr") {
         await next();
+        return;
       }
 
       const stream = new PassThrough();
