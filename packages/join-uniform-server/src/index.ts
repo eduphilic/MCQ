@@ -1,18 +1,16 @@
 import * as functions from "firebase-functions";
-import http from "http";
 import Koa from "koa";
 import koaProxy from "koa-better-http-proxy";
-import koaMount from "koa-mount";
 import KoaRouter from "koa-router";
-import koaStatic from "koa-static";
 import nextJs from "next";
-import { PassThrough } from "stream";
+import path from "path";
 import { getEnvironmentalVariables } from "./getEnvironmentalVariables";
+import { createStorybookMiddleware } from "./middleware";
 
 const dev = process.env.NODE_ENV !== "production";
 const nextApp = nextJs({ dev, conf: { distDir: "next" } });
 const nextHandle = nextApp.getRequestHandler();
-const koaApp = new Koa();
+const app = new Koa();
 const koaRouter = new KoaRouter();
 
 // Makes the script crash on unhandled rejections instead of silently
@@ -23,16 +21,10 @@ process.on("unhandledRejection", err => {
 });
 
 async function bootstrap() {
-  /* tslint:disable-next-line:no-console */
-  console.log("variables:", await getEnvironmentalVariables());
+  const config = await getEnvironmentalVariables();
+  app.keys = [config.koa.key0, config.koa.key1];
 
   if (!dev) {
-    // Storybook static build.
-    koaRouter.all(
-      "/storybook/*",
-      koaMount("/storybook", koaStatic("storybook")),
-    );
-
     // Next.js.
     koaRouter.all("*", async ctx => {
       await nextApp.prepare();
@@ -42,57 +34,22 @@ async function bootstrap() {
   }
 
   if (dev) {
-    // Storybook development server. Stop middleware chain here to prevent
-    // hangup due to the Next.js proxy below.
-    koaRouter.all("/storybook/*", ctx =>
-      koaMount("/storybook", koaProxy("localhost", { port: 9001 }))(ctx, () =>
-        Promise.resolve(),
-      ),
-    );
-
-    // Storybook's Hot Module Replacement events.
-    koaRouter.all("*", async (ctx, next) => {
-      if (ctx.url !== "/__webpack_hmr") {
-        await next();
-        return;
-      }
-
-      const stream = new PassThrough();
-      const req = http.request(
-        {
-          agent: false,
-          hostname: "localhost",
-          port: 9001,
-          path: "/__webpack_hmr",
-          method: "GET",
-          headers: {
-            Accept: "text/event-stream",
-            Connection: "keep-alive",
-          },
-        },
-        res => {
-          res.on("data", chunk => stream.write(chunk));
-        },
-      );
-
-      ctx.type = "text/event-stream";
-      ctx.body = stream;
-
-      ["close", "error"].forEach(eventType =>
-        req.on(eventType, () => ctx.res.end()),
-      );
-
-      req.end();
-    });
-
     // Next.js development server.
     koaRouter.all("*", koaProxy("localhost", { port: 3000 }));
   }
 
-  koaApp.use(koaRouter.routes());
-  koaApp.use(koaRouter.allowedMethods());
+  app.use(
+    createStorybookMiddleware({
+      dev,
+      devPort: 9001,
+      staticPath: path.resolve(__dirname, "storybook"),
+    }),
+  );
+
+  app.use(koaRouter.routes());
+  app.use(koaRouter.allowedMethods());
 }
 
 bootstrap();
 
-export const main = functions.https.onRequest(koaApp.callback());
+export const main = functions.https.onRequest(app.callback());
