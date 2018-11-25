@@ -16,6 +16,7 @@
   - [yarn graphql](#yarn-graphql)
 - [Development Process](#development-process)
 - [Firebase Functions Environmental Variables](#firebase-functions-environmental-variables)
+- [Firebase Service Account Credentials](#firebase-service-account-credentials)
 
 <!-- /TOC -->
 
@@ -108,3 +109,7 @@ This project requires the following Firebase environmental variables be set:
 The environmental variables will be validated during execution of cloud functions.
 
 https://firebase.google.com/docs/functions/config-env#automatically_populated_environment_variables
+
+## Firebase Service Account Credentials
+
+This project requires that a file called `firebase-admin-service-account.json` be present in the root folder of the project. This file can be exported from the Firebase dashboard. It is required for accessing the Firebase Remote Config API.

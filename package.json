@@ -51,6 +51,7 @@
     "tslint-config-prettier": "^1.16.0",
     "tslint-plugin-prettier": "^2.0.1",
     "typescript": "^3.1.6",
-    "wsrun": "^3.4.0"
+    "wsrun": "^3.4.0",
+    "yup": "^0.26.6"
   }
 }

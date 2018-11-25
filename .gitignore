@@ -7,5 +7,6 @@ dist/
 # Logs
 *.log
 
-# Firebase environmental variables
+# Firebase configuration
 .runtimeconfig.json
+firebase-admin-service-account.json
