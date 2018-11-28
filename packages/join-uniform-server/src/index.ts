@@ -2,10 +2,12 @@ import * as functions from "firebase-functions";
 import Koa from "koa";
 import path from "path";
 import { getEnvironmentalVariables } from "./getEnvironmentalVariables";
+import { getFirebaseRemoteConfigClientCredentials } from "./getFirebaseRemoteConfigClientCredentials";
 import {
   createNextJsMiddleware,
   createStorybookMiddleware,
 } from "./middleware";
+import { createFirebaseRemoteConfigClient } from "./services";
 
 const dev = process.env.NODE_ENV !== "production";
 const app = new Koa();
@@ -20,6 +22,22 @@ process.on("unhandledRejection", err => {
 async function bootstrap() {
   const config = await getEnvironmentalVariables();
   app.keys = [config.koa.key0, config.koa.key1];
+
+  const firebaseServiceAccountCredentials = getFirebaseRemoteConfigClientCredentials();
+  const firebaseRemoteConfigClient = await createFirebaseRemoteConfigClient({
+    credentials: firebaseServiceAccountCredentials,
+    dev,
+    templatePath: path.resolve(
+      __dirname,
+      "../../config/firebase-remote-config-template.json",
+    ),
+  });
+  // @ts-ignore
+  const values = firebaseRemoteConfigClient.getValues();
+  // htmlConfig:
+  // googleAnalyticsId:
+  // values.htmlConfig.googleAnalyticsId = "UA-117268366-1";
+  // await firebaseRemoteConfigClient.setValues(values);
 
   app.use(
     createStorybookMiddleware({
