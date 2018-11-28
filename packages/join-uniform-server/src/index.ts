@@ -1,9 +1,12 @@
 import * as functions from "firebase-functions";
 import Koa from "koa";
 import path from "path";
+
+import { getApolloTypeDefs } from "./getApolloTypeDefs";
 import { getEnvironmentalVariables } from "./getEnvironmentalVariables";
 import { getFirebaseRemoteConfigClientCredentials } from "./getFirebaseRemoteConfigClientCredentials";
 import {
+  applyApolloServerMiddleware,
   createNextJsMiddleware,
   createStorybookMiddleware,
 } from "./middleware";
@@ -34,10 +37,14 @@ async function bootstrap() {
   });
   // @ts-ignore
   const values = firebaseRemoteConfigClient.getValues();
-  // htmlConfig:
-  // googleAnalyticsId:
-  // values.htmlConfig.googleAnalyticsId = "UA-117268366-1";
-  // await firebaseRemoteConfigClient.setValues(values);
+
+  // This should be placed here above the Storybook and Next.js middlewares due
+  // to needing to respond to urls before they are proxied.
+  applyApolloServerMiddleware({
+    koaApp: app,
+    contextFactory: () => Promise.resolve({}),
+    typeDefs: getApolloTypeDefs(),
+  });
 
   app.use(
     createStorybookMiddleware({
@@ -46,6 +53,7 @@ async function bootstrap() {
       staticPath: path.resolve(__dirname, "storybook"),
     }),
   );
+
   app.use(
     createNextJsMiddleware({
       dev,

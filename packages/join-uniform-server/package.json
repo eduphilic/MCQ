@@ -10,8 +10,12 @@
     "lint": "tslint -p ./tsconfig.json src/**/*"
   },
   "dependencies": {
+    "apollo-server-core": "^2.2.3",
+    "apollo-server-koa": "^2.2.3",
     "firebase-functions": "^2.1.0",
     "google-auth-library": "^2.0.1",
+    "graphql": "^14.0.2",
+    "graphql-tag": "^2.10.0",
     "koa": "^2.6.2",
     "koa-better-http-proxy": "^0.2.4",
     "koa-static": "^5.0.0",

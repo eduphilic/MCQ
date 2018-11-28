@@ -6,6 +6,7 @@ import spawn from "cross-spawn";
 import fs from "fs";
 import path from "path";
 import * as yup from "yup";
+import { generateApolloSchema } from "./generateApolloSchema";
 import { generateFirebaseFunctionsPackageJson } from "./generateFirebaseFunctionsPackageJson";
 import { getFirebaseEnvironmentalVariables } from "./getFirebaseEnvironmentalVariables";
 
@@ -48,9 +49,19 @@ Join Uniform Tools
 
 // tslint:disable-next-line:ban-types
 const commands: Record<string, (string | Function)[]> = {
-  start: ["wsrun clean", generateFirebaseFunctionsPackageJson, "wsrun start"],
+  start: [
+    "wsrun clean",
+    generateFirebaseFunctionsPackageJson,
+    generateApolloSchema,
+    "wsrun start",
+  ],
 
-  build: ["wsrun clean", generateFirebaseFunctionsPackageJson, "wsrun build"],
+  build: [
+    "wsrun clean",
+    generateFirebaseFunctionsPackageJson,
+    generateApolloSchema,
+    "wsrun build",
+  ],
 
   "build:public": [generateFirebaseHostingDummyContents],
 
