@@ -1,4 +1,4 @@
 {
   "extends": "../../tsconfig-base.json",
-  "include": ["./pages/**/*", "./lib/**/*"]
+  "include": ["./layouts/**/*", "./lib/**/*", "./pages/**/*"]
 }
