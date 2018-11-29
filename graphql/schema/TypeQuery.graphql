@@ -1,16 +1,3 @@
 type Query {
   htmlConfig: HtmlConfig!
-
-  indexPageConfig: IndexPageConfig!
-  adminLoginPageConfig: AdminLoginPageConfig!
-
-  session: USER_ROLE
-  sessionFormConfig: SessionFormConfig!
-
-  language: LOCALIZATION_LANGUAGE!
-
-  logoImageConfig: LogoImageConfig!
-
-  cloudinaryCloudName: String!
-  cloudinaryApiKey: String!
 }

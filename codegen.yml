@@ -2,11 +2,11 @@ schema: ./graphql/schema/**/*.graphql
 documents: ./graphql/queries/**/*.graphql
 overwrite: true
 generates:
-  ./packages/join-uniform-graphql/src/generated.tsx:
+  ./packages/join-uniform-app/graphql/generated.tsx:
     - add:
         - // AUTO-GENERATED - DO NOT EDIT
         - // SCRIPT-> yarn graphql
-        - import * as models from "./models";
+        - import * as models from "../models";
         - export { models };
     - typescript-common:
         scalars:
@@ -17,11 +17,12 @@ generates:
         noNamespaces: true
     - typescript-react-apollo:
         noNamespaces: true
-  ./packages/join-uniform-graphql-resolvers/src/generated.ts:
+  ./packages/join-uniform-server/src/resolvers/generated.ts:
     - add:
         - // AUTO-GENERATED - DO NOT EDIT
         - // SCRIPT-> yarn graphql
-        - import { models } from "@join-uniform/graphql";
+        - import { models } from "@join-uniform/app";
+        - export { models };
     - typescript-common:
         scalars:
           LocalizedString: models.LocalizedString

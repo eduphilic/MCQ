@@ -20,6 +20,7 @@
     "tools": "ts-node --project ./tools/tsconfig.json ./tools"
   },
   "dependencies": {
+    "@playlyfe/gql": "^2.6.0",
     "@types/cross-spawn": "^6.0.0",
     "@types/graphql": "^14.0.3",
     "@types/koa": "^2.0.47",

@@ -1,0 +1,10 @@
+query GetHtmlConfig {
+  htmlConfig {
+    googleAnalyticsId
+    metaKeywords
+    metaDescription
+    metaAuthor
+    metaAbstract
+    metaCopyright
+  }
+}
