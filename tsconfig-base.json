@@ -17,6 +17,8 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "typeRoots": ["./typings", "./node_modules/@types"],
+    "skipLibCheck": true,
     "paths": {
       "@join-uniform/*": ["./join-uniform-*/src"]
     }
