@@ -2,6 +2,7 @@ import { ContextFunction } from "apollo-server-core";
 import { ApolloServer, makeExecutableSchema } from "apollo-server-koa";
 import { DocumentNode } from "graphql";
 import Koa from "koa";
+import { resolvers } from "../resolvers";
 
 type Options = {
   koaApp: Koa;
@@ -13,7 +14,7 @@ export function applyApolloServerMiddleware(options: Options) {
   const apolloServer = new ApolloServer({
     schema: makeExecutableSchema({
       typeDefs: options.typeDefs,
-      resolvers: {},
+      resolvers: resolvers as any,
     }),
     context: options.contextFactory,
 

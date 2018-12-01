@@ -5,12 +5,13 @@ import React, { Component, ComponentType } from "react";
 import { getDataFromTree } from "react-apollo";
 import { initializeApollo } from "./initializeApollo";
 
-type WithApolloClient = {
-  apolloClient: ApolloClient<any>;
-};
+// type WithApolloClient = {
+//   apolloClient: ApolloClient<any>;
+//   Component: ComponentType<any>;
+// };
 
 export function withApolloClient<Props>(
-  WrappedComponent: ComponentType<Props & WithApolloClient>,
+  WrappedComponent: any, // ComponentType<Props & WithApolloClient>,
 ) {
   type ApolloHocProps = Props & { apolloState?: any };
 
@@ -33,7 +34,7 @@ export function withApolloClient<Props>(
         try {
           // Run all GraphQL queries.
           await getDataFromTree(
-            <TargetComponent
+            <WrappedComponent
               {...appProps}
               Component={TargetComponent}
               router={router}

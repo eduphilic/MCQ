@@ -2,6 +2,7 @@ import * as functions from "firebase-functions";
 import Koa from "koa";
 import path from "path";
 
+import { ApolloContext } from "./ApolloContext";
 import { getApolloTypeDefs } from "./getApolloTypeDefs";
 import { getEnvironmentalVariables } from "./getEnvironmentalVariables";
 import { getFirebaseRemoteConfigClientCredentials } from "./getFirebaseRemoteConfigClientCredentials";
@@ -35,14 +36,16 @@ async function bootstrap() {
       "../../config/firebase-remote-config-template.json",
     ),
   });
-  // @ts-ignore
-  const values = firebaseRemoteConfigClient.getValues();
 
   // This should be placed here above the Storybook and Next.js middlewares due
   // to needing to respond to urls before they are proxied.
   applyApolloServerMiddleware({
     koaApp: app,
-    contextFactory: () => Promise.resolve({}),
+    contextFactory: async (): Promise<ApolloContext> => {
+      return {
+        firebaseRemoteConfigClient,
+      };
+    },
     typeDefs: getApolloTypeDefs(),
   });
 

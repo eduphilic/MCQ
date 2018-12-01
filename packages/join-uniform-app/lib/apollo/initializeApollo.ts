@@ -11,15 +11,13 @@ export function initializeApollo(initialState?: any) {
     return apolloClient;
   }
 
-  if (!apolloClient) {
-    apolloClient = new ApolloClient({
-      connectToDevTools:
-        process.browser && process.env.NODE_ENV === "development",
-      ssrMode: !process.browser,
-      link,
-      cache: new InMemoryCache().restore(initialState || {}),
-    });
-  }
+  apolloClient = new ApolloClient({
+    connectToDevTools:
+      process.browser && process.env.NODE_ENV === "development",
+    ssrMode: !process.browser,
+    link,
+    cache: new InMemoryCache().restore(initialState || {}),
+  });
 
   return apolloClient;
 }

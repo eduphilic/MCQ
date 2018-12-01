@@ -29,6 +29,8 @@ type Options = {
   templatePath: string;
 };
 
+type Values = ReturnType<ReturnType<typeof createSchema>["validateSync"]>;
+
 export async function createFirebaseRemoteConfigClient(options: Options) {
   const client = new FirebaseRemoteConfigClient(options);
 
@@ -37,7 +39,7 @@ export async function createFirebaseRemoteConfigClient(options: Options) {
   return client;
 }
 
-class FirebaseRemoteConfigClient {
+export class FirebaseRemoteConfigClient {
   private readonly jwtClient: InstanceType<typeof JWT>;
   private readonly schema: ReturnType<typeof createSchema>;
   private wasInitialized = false;
@@ -171,8 +173,12 @@ Validation error: ${e.message}
    *
    * @param template Firebase Remote Config template.
    */
-  private decodeTemplateValues(template: FirebaseRemoteConfigTemplate) {
-    if (!template.parameters) return {};
+  private decodeTemplateValues(template: FirebaseRemoteConfigTemplate): Values {
+    if (!template.parameters) {
+      throw new Error(`
+Firebase Remote Config template is missing "parameters" field.
+`);
+    }
     const parameters: any = {};
 
     try {

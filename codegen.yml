@@ -6,8 +6,8 @@ generates:
     - add:
         - // AUTO-GENERATED - DO NOT EDIT
         - // SCRIPT-> yarn graphql
-        - import * as models from "../models";
-        - export { models };
+        # - import * as models from "../../join-uniform-server/src/models";
+        # - export { models };
     - typescript-common:
         scalars:
           LocalizedString: models.LocalizedString
@@ -21,7 +21,7 @@ generates:
     - add:
         - // AUTO-GENERATED - DO NOT EDIT
         - // SCRIPT-> yarn graphql
-        - import { models } from "@join-uniform/app";
+        - import * as models from "../models";
         - export { models };
     - typescript-common:
         scalars:
@@ -30,4 +30,5 @@ generates:
         immutableTypes: true
     - typescript-server:
     - typescript-resolvers:
+        contextType: ../ApolloContext#ApolloContext
         noNamespaces: true

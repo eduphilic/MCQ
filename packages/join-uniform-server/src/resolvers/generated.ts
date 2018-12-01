@@ -1,6 +1,6 @@
 // AUTO-GENERATED - DO NOT EDIT
 // SCRIPT-> yarn graphql
-import { models } from "@join-uniform/app";
+import * as models from "../models";
 export { models };
 
 
@@ -49,7 +49,7 @@ export interface HtmlConfig {
 import { GraphQLResolveInfo } from 'graphql';
 
 
-
+import { ApolloContext } from '../ApolloContext';
 
 export type Resolver<Result, Parent = {}, Context = {}, Args = {}> = (
   parent: Parent,
@@ -78,15 +78,15 @@ export type SubscriptionResolver<Result, Parent = {}, Context = {}, Args = {}> =
   | ISubscriptionResolverObject<Result, Parent, Context, Args>;
 
 
-  export interface QueryResolvers<Context = {}, TypeParent = {}> {
+  export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
     
     htmlConfig?: QueryHtmlConfigResolver<HtmlConfig, TypeParent, Context>;
   }
 
 
-  export type QueryHtmlConfigResolver<R = HtmlConfig, Parent = {}, Context = {}> = Resolver<R, Parent, Context>;  
+  export type QueryHtmlConfigResolver<R = HtmlConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;  
 /** Configuration for the html document sent in response to all requests. */
-  export interface HtmlConfigResolvers<Context = {}, TypeParent = HtmlConfig> {
+  export interface HtmlConfigResolvers<Context = ApolloContext, TypeParent = HtmlConfig> {
     /** Google Analytics ID. */
     googleAnalyticsId?: HtmlConfigGoogleAnalyticsIdResolver<string | null, TypeParent, Context>;
     /** Meta "keywords" tag. */
@@ -104,10 +104,10 @@ export type SubscriptionResolver<Result, Parent = {}, Context = {}, Args = {}> =
   }
 
 
-  export type HtmlConfigGoogleAnalyticsIdResolver<R = string | null, Parent = HtmlConfig, Context = {}> = Resolver<R, Parent, Context>;
-  export type HtmlConfigMetaKeywordsResolver<R = string | null, Parent = HtmlConfig, Context = {}> = Resolver<R, Parent, Context>;
-  export type HtmlConfigMetaDescriptionResolver<R = string | null, Parent = HtmlConfig, Context = {}> = Resolver<R, Parent, Context>;
-  export type HtmlConfigMetaAuthorResolver<R = string | null, Parent = HtmlConfig, Context = {}> = Resolver<R, Parent, Context>;
-  export type HtmlConfigMetaAbstractResolver<R = string | null, Parent = HtmlConfig, Context = {}> = Resolver<R, Parent, Context>;
-  export type HtmlConfigMetaCopyrightResolver<R = string | null, Parent = HtmlConfig, Context = {}> = Resolver<R, Parent, Context>;
-  export type HtmlConfigLandingFooterResolver<R = string | null, Parent = HtmlConfig, Context = {}> = Resolver<R, Parent, Context>;  
+  export type HtmlConfigGoogleAnalyticsIdResolver<R = string | null, Parent = HtmlConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type HtmlConfigMetaKeywordsResolver<R = string | null, Parent = HtmlConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type HtmlConfigMetaDescriptionResolver<R = string | null, Parent = HtmlConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type HtmlConfigMetaAuthorResolver<R = string | null, Parent = HtmlConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type HtmlConfigMetaAbstractResolver<R = string | null, Parent = HtmlConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type HtmlConfigMetaCopyrightResolver<R = string | null, Parent = HtmlConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type HtmlConfigLandingFooterResolver<R = string | null, Parent = HtmlConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;  

@@ -3,15 +3,21 @@
   "name": "@join-uniform/components",
   "version": "1.0.0",
   "sideEffects": false,
+  "module": "./dist/index",
   "scripts": {
-    "start": "start-storybook -c .storybook -p 9001 --ci",
-    "build": "build-storybook -c .storybook -o ../../dist/functions/storybook",
-    "clean": "rimraf ../../dist/functions/storybook",
+    "start": "tsc --watch",
+    "build": "tsc",
+    "storybook": "start-storybook -c .storybook -p 9001 --ci",
+    "storybook:build": "build-storybook -c .storybook -o ../../dist/functions/storybook",
+    "clean": "rimraf ../../dist/functions/storybook ./dist",
     "lint": "tslint -p ./tsconfig.json src/**/*"
   },
   "dependencies": {
+    "@material-ui/core": "^3.6.0",
     "react": "^16.7.0-alpha.2",
-    "react-dom": "^16.7.0-alpha.2"
+    "react-dom": "^16.7.0-alpha.2",
+    "styled-components": "^4.1.2",
+    "ts-lib": "^0.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",

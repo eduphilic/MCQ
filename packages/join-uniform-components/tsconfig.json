@@ -1,4 +1,12 @@
 {
   "extends": "../../tsconfig-base.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es5",
+    "noEmit": false,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "importHelpers": true
+  },
   "include": ["./src/**/*"]
 }
