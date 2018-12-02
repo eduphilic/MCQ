@@ -38,7 +38,7 @@ export const Html = GetHtmlConfigHOC<Props, {}>({})(props => {
         />
 
         {/* Google Analytics */}
-        {process.env.NODE_ENV !== "production" && googleAnalyticsId && (
+        {process.env.NODE_ENV === "production" && googleAnalyticsId && (
           <>
             <script
               key="googleTagManager"

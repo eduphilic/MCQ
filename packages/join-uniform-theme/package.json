@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "@join-uniform/theme",
+  "version": "1.0.0",
+  "sideEffects": false,
+  "scripts": {
+    "start": "echo Noop.",
+    "build": "echo Noop.",
+    "clean": "echo Noop.",
+    "lint": "tslint -p ./tsconfig.json src/**/*"
+  },
+  "dependencies": {
+    "@material-ui/core": "^3.6.1",
+    "react": "^16.6.3",
+    "styled-components": "^4.1.2"
+  }
+}

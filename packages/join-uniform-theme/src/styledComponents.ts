@@ -19,13 +19,4 @@ const {
   createGlobalStyle,
 } = styledComponents as ThemedStyledComponentsModule<Theme>;
 
-export { styled, css, keyframes, ThemeProvider, withProps, createGlobalStyle };
-
-// https://github.com/styled-components/styled-components/issues/630
-export type ThemedStyledFunction<T> = styledComponents.ThemedStyledFunction<
-  T,
-  Theme
->;
-
-const withProps = <U>() => <P>(fn: ThemedStyledFunction<P>) =>
-  fn as ThemedStyledFunction<P & U>;
+export { styled, css, keyframes, ThemeProvider, createGlobalStyle };

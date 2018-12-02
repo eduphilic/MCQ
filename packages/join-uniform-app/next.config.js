@@ -6,16 +6,22 @@ const withTypescript = require("@zeit/next-typescript");
 const withTM = require("next-plugin-transpile-modules");
 const path = require("path");
 
+const transpileModules = ["@join-uniform/components", "@join-uniform/theme"];
+
 module.exports = withTypescript(
   withTM({
-    transpileModules: ["@join-uniform/components"],
+    transpileModules,
 
     distDir: "../../dist/functions/next",
 
     webpack(config) {
       config.resolve.alias = {
         ...(config.resolve.alias || {}),
-        "@join-uniform/components": "@join-uniform/components/src",
+
+        ...transpileModules.reduce((accumulator, mod) => {
+          accumulator[mod] = `${mod}/src`;
+          return accumulator;
+        }, {}),
       };
 
       return config;

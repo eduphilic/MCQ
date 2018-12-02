@@ -3,7 +3,6 @@
   "name": "@join-uniform/components",
   "version": "1.0.0",
   "sideEffects": false,
-  "module": "./dist/index",
   "scripts": {
     "start": "start-storybook -c .storybook -p 9001 --ci --quiet",
     "build": "build-storybook -c .storybook -o ../../dist/functions/storybook",
@@ -11,15 +10,14 @@
     "lint": "tslint -p ./tsconfig.json src/**/*"
   },
   "dependencies": {
-    "@material-ui/core": "^3.6.0",
+    "@material-ui/core": "^3.6.1",
     "react": "^16.7.0-alpha.2",
-    "react-dom": "^16.7.0-alpha.2",
-    "styled-components": "^4.1.2"
+    "react-dom": "^16.7.0-alpha.2"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/preset-typescript": "^7.1.0",
-    "@storybook/react": "^4.0.8",
+    "@storybook/react": "^4.0.10",
     "babel-loader": "^8.0.4",
     "rimraf": "^2.6.2"
   }
