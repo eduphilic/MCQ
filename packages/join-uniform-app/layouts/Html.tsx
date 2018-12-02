@@ -10,7 +10,7 @@ type Props = {
  * Adds meta tags and page title to pages. It is used as a base by other
  * layouts.
  */
-export const Html = GetHtmlConfigHOC<{}, Props>({})(props => {
+export const Html = GetHtmlConfigHOC<Props, {}>({})(props => {
   const { children, data } = props;
   const { loading, error, htmlConfig } = data!;
   if (loading || error || !htmlConfig) return null;

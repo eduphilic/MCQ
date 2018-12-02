@@ -17,7 +17,6 @@
     "clean": "yarn tools clean",
     "lint": "yarn workspaces run lint",
     "graphql": "yarn gql-gen",
-    "storybook": "wsrun --exclude-missing storybook",
     "tools": "ts-node --project ./tools/tsconfig.json ./tools"
   },
   "dependencies": {
