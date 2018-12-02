@@ -1,7 +1,6 @@
 // Performs sanity checks on the environment and acts as the project script
 // runner.
 
-import assert from "assert";
 import spawn from "cross-spawn";
 import fs from "fs";
 import path from "path";
@@ -65,10 +64,7 @@ const commands: Record<string, (string | Function)[]> = {
 
   "build:public": [generateFirebaseHostingDummyContents],
 
-  serve: [
-    copyServiceAccountCredentialsToBuildFolder,
-    "firebase serve --only functions,hosting",
-  ],
+  serve: ["firebase serve --only functions,hosting"],
 
   "serve:production": ["cross-env NODE_ENV=production yarn serve"],
 
@@ -122,21 +118,6 @@ steps.forEach(step => {
     step();
   }
 });
-
-/**
- * Copies the Firebase Service Account credentials to the build folder. The
- * credentials are required to access the Firebase Remote Config API.
- */
-function copyServiceAccountCredentialsToBuildFolder() {
-  assert(fs.existsSync(path.resolve(__dirname, "../dist/functions")));
-  fs.copyFileSync(
-    path.resolve(__dirname, "../firebase-admin-service-account.json"),
-    path.resolve(
-      __dirname,
-      "../dist/functions/firebase-admin-service-account.json",
-    ),
-  );
-}
 
 /*
  * Ensures that the Firebase Admin Service Account credentials are available.

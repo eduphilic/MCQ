@@ -1,4 +1,3 @@
-import path from "path";
 import { FirebaseRemoteConfigClientCredentials } from "./services";
 
 export function getFirebaseRemoteConfigClientCredentials() {
@@ -7,7 +6,11 @@ export function getFirebaseRemoteConfigClientCredentials() {
       client_email: string;
       private_key: string;
       project_id: string;
-    } = require(path.resolve(__dirname, "firebase-admin-service-account.json"));
+    } = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_CREDENTIALS!);
+
+    if (typeof serviceAccount !== "object") {
+      throw new Error(`Invalid service account: ${serviceAccount}`);
+    }
 
     const credentials: FirebaseRemoteConfigClientCredentials = {
       clientEmail: serviceAccount.client_email,
