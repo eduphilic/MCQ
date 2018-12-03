@@ -1,6 +1,7 @@
 import { lightTheme, ThemeBaseline } from "@join-uniform/theme";
-import { MuiThemeProvider } from "@material-ui/core/styles";
+import { jssPreset, MuiThemeProvider } from "@material-ui/core/styles";
 import ApolloClient from "apollo-client";
+import { create, JSS } from "jss";
 import App, {
   AppProps,
   Container,
@@ -88,10 +89,19 @@ export default class MyApp extends App<MyAppProps> {
   render() {
     const { Component, pageProps } = this.props;
 
+    let jss: JSS | undefined;
+    if (process.browser) {
+      jss = create({
+        ...jssPreset(),
+        insertionPoint: document.getElementById("jss-insertion-point")!,
+      });
+    }
+
     return (
       <Container>
         <ApolloProvider client={this.apolloClient}>
           <JssProvider
+            jss={jss}
             registry={this.muiCssContext.sheetsRegistry}
             generateClassName={this.muiCssContext.generateClassName}
           >

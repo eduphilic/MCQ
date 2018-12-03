@@ -1,3 +1,4 @@
+import { ServerStyleSheet } from "@join-uniform/theme";
 import Document, {
   DefaultDocumentIProps,
   Head,
@@ -6,7 +7,6 @@ import Document, {
   NextScript,
 } from "next/document";
 import React from "react";
-import { ServerStyleSheet } from "styled-components";
 import { GetHtmlConfigDocument, GetHtmlConfigQuery } from "../graphql";
 import { initializeApollo, MUICssContext } from "../lib/rendering";
 
@@ -16,8 +16,6 @@ const publicPath = "/static";
 
 export default class MyDocument extends Document<MyDocumentProps> {
   static async getInitialProps(ctx: NextDocumentContext) {
-    const initialDocumentProps = await Document.getInitialProps(ctx);
-
     const apolloClient = initializeApollo();
     const htmlConfigQueryResult = await apolloClient.query<GetHtmlConfigQuery>({
       query: GetHtmlConfigDocument,
@@ -35,24 +33,26 @@ export default class MyDocument extends Document<MyDocumentProps> {
         return sheet.collectStyles(<App {...props} />);
       });
 
-    const page = ctx.renderPage();
+    const initialDocumentProps = await Document.getInitialProps(ctx);
+
     const styles = (
       <>
         {initialDocumentProps.styles}
-        {sheet.getStyleElement()}
         {
           <style
+            id="jss-server-side"
             dangerouslySetInnerHTML={{
               __html: muiCssContext.sheetsRegistry.toString(),
             }}
           />
         }
+        {sheet.getStyleElement()}
+        <noscript id="jss-insertion-point" />
       </>
     );
 
     const initialProps: DefaultDocumentIProps & MyDocumentProps = {
       ...initialDocumentProps,
-      ...page,
       styles,
       htmlConfig,
     };
