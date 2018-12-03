@@ -8,6 +8,7 @@ import {
   userAppDrawerTheme,
 } from "./themes";
 
+export { lightTheme };
 export const LightTheme = createTheme("light");
 export const DarkTheme = createTheme("dark");
 export const AdminAppDrawerTheme = createTheme("adminAppDrawer");

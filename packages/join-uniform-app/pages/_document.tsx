@@ -8,7 +8,7 @@ import Document, {
 import React from "react";
 import { ServerStyleSheet } from "styled-components";
 import { GetHtmlConfigDocument, GetHtmlConfigQuery } from "../graphql";
-import { initializeApollo } from "../lib/rendering";
+import { initializeApollo, MUICssContext } from "../lib/rendering";
 
 type MyDocumentProps = Omit<GetHtmlConfigQuery, "__typename">;
 
@@ -26,21 +26,33 @@ export default class MyDocument extends Document<MyDocumentProps> {
 
     const sheet = new ServerStyleSheet();
 
+    // Styled Components and Material UI css sheet collection
     const originalRenderPage = ctx.renderPage;
+    let muiCssContext!: MUICssContext;
     ctx.renderPage = () =>
-      originalRenderPage(App => props =>
-        sheet.collectStyles(<App {...props} />),
-      );
+      originalRenderPage(App => props => {
+        muiCssContext = props.muiCssContext;
+        return sheet.collectStyles(<App {...props} />);
+      });
 
+    const page = ctx.renderPage();
     const styles = (
       <>
         {initialDocumentProps.styles}
         {sheet.getStyleElement()}
+        {
+          <style
+            dangerouslySetInnerHTML={{
+              __html: muiCssContext.sheetsRegistry.toString(),
+            }}
+          />
+        }
       </>
     );
 
     const initialProps: DefaultDocumentIProps & MyDocumentProps = {
       ...initialDocumentProps,
+      ...page,
       styles,
       htmlConfig,
     };

@@ -1,4 +1,5 @@
-import { ThemeBaseline } from "@join-uniform/theme";
+import { lightTheme, ThemeBaseline } from "@join-uniform/theme";
+import { MuiThemeProvider } from "@material-ui/core/styles";
 import ApolloClient from "apollo-client";
 import App, {
   AppProps,
@@ -9,21 +10,26 @@ import App, {
 import Head from "next/head";
 import React from "react";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
-import { initializeApollo } from "../lib/rendering";
+import JssProvider from "react-jss/lib/JssProvider";
+import {
+  createMuiCssContext,
+  initializeApollo,
+  MUICssContext,
+} from "../lib/rendering";
 
-// prettier-ignore
-type MyAppProps = DefaultAppIProps & AppProps & {
-  apolloClient: ApolloClient<any>;
+type MyAppProps = {
+  apolloClient?: ApolloClient<any>;
   apolloState?: any;
 };
 
 export default class MyApp extends App<MyAppProps> {
   private readonly apolloClient: ApolloClient<any>;
+  private readonly muiCssContext: MUICssContext;
 
   static async getInitialProps(ctx: NextAppContext) {
     const { Component, router } = ctx;
 
-    const appProps = await App.getInitialProps(ctx);
+    const initialAppProps = await App.getInitialProps(ctx);
 
     // Run all GraphQL queries in the component tree and extract the resulting
     // data.
@@ -33,7 +39,7 @@ export default class MyApp extends App<MyAppProps> {
         // Run all GraphQL queries.
         await getDataFromTree(
           <MyApp
-            {...appProps}
+            {...initialAppProps}
             Component={Component}
             router={router}
             apolloClient={apolloClient}
@@ -55,14 +61,28 @@ export default class MyApp extends App<MyAppProps> {
     // Extract query data from Apollo store.
     const apolloState = apolloClient.cache.extract();
 
-    return { ...appProps, apolloState };
+    const initialProps: DefaultAppIProps & MyAppProps = {
+      ...initialAppProps,
+      apolloState,
+    };
+
+    return initialProps;
   }
 
-  constructor(props: MyAppProps) {
+  constructor(props: DefaultAppIProps & AppProps & MyAppProps) {
     super(props);
 
     this.apolloClient =
       props.apolloClient || initializeApollo(props.apolloState);
+    this.muiCssContext = createMuiCssContext();
+  }
+
+  componentDidMount() {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles && jssStyles.parentNode) {
+      jssStyles.parentNode.removeChild(jssStyles);
+    }
   }
 
   render() {
@@ -71,9 +91,19 @@ export default class MyApp extends App<MyAppProps> {
     return (
       <Container>
         <ApolloProvider client={this.apolloClient}>
-          <ThemeBaseline>
-            <Component {...pageProps} />
-          </ThemeBaseline>
+          <JssProvider
+            registry={this.muiCssContext.sheetsRegistry}
+            generateClassName={this.muiCssContext.generateClassName}
+          >
+            <MuiThemeProvider
+              theme={lightTheme}
+              sheetsManager={this.muiCssContext.sheetsManager}
+            >
+              <ThemeBaseline>
+                <Component muiCssContext={this.muiCssContext} {...pageProps} />
+              </ThemeBaseline>
+            </MuiThemeProvider>
+          </JssProvider>
         </ApolloProvider>
       </Container>
     );
