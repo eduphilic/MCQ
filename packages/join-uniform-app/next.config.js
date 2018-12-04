@@ -4,7 +4,6 @@
 // @ts-ignore
 const withTypescript = require("@zeit/next-typescript");
 const withTM = require("next-plugin-transpile-modules");
-const path = require("path");
 
 const transpileModules = ["@join-uniform/components", "@join-uniform/theme"];
 
@@ -13,6 +12,11 @@ module.exports = withTypescript(
     transpileModules,
 
     distDir: "../../dist/functions/next",
+
+    publicRuntimeConfig: {
+      graphQLUri:
+        process.env.GRAPHQL_URI || "https://www.joinuniform.com/graphql",
+    },
 
     webpack(config) {
       config.resolve.alias = {

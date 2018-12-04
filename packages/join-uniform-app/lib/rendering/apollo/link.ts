@@ -2,6 +2,7 @@ import { ApolloLink } from "apollo-link";
 import { onError } from "apollo-link-error";
 import { HttpLink } from "apollo-link-http";
 import fetch from "isomorphic-unfetch";
+import getConfig from "next/config";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
@@ -17,7 +18,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const httpLink = new HttpLink({
-  uri: "http://localhost:5000/graphql",
+  uri: getConfig().publicRuntimeConfig!.graphQLUri,
   credentials: "same-origin",
   fetch,
 });

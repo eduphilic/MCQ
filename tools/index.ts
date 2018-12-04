@@ -52,7 +52,7 @@ const commands: Record<string, (string | Function)[]> = {
     "wsrun clean",
     generateFirebaseFunctionsPackageJson,
     generateApolloSchema,
-    "wsrun start",
+    'cross-env GRAPHQL_URI="http://localhost:5000/graphql" wsrun start',
   ],
 
   build: [
