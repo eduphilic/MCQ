@@ -7,6 +7,8 @@ function IndexPage() {
     <GetLandingFooterComponent>
       {query => {
         if (query.loading) return null;
+        /* tslint:disable-next-line:no-console */
+        console.warn("Adding loading indicator component");
 
         return (
           <LayoutLanding
