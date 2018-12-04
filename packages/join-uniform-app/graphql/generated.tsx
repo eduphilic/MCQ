@@ -14,9 +14,8 @@
   export type GetHtmlConfigQuery = {
     __typename?: "Query";
     
-    htmlConfig:  GetHtmlConfigHtmlConfig;
+    htmlConfig: GetHtmlConfigHtmlConfig;
   }
-
 
   export type GetHtmlConfigHtmlConfig = {
     __typename?: "HtmlConfig";
@@ -34,6 +33,20 @@
     metaCopyright: string | null;
   } 
 
+  export type GetLandingFooterVariables = {
+  }
+
+  export type GetLandingFooterQuery = {
+    __typename?: "Query";
+    
+    htmlConfig: GetLandingFooterHtmlConfig;
+  }
+
+  export type GetLandingFooterHtmlConfig = {
+    __typename?: "HtmlConfig";
+    
+    landingFooter: string | null;
+  } 
 
 import * as ReactApollo from 'react-apollo';
 import * as React from 'react';
@@ -92,6 +105,46 @@ import gql from 'graphql-tag';
             > | undefined){
         return ReactApollo.graphql<TProps, GetHtmlConfigQuery, GetHtmlConfigVariables, GetHtmlConfigProps<TChildProps>>(
             GetHtmlConfigDocument,
+            operationOptions
+        );
+    };
+    export const GetLandingFooterDocument = gql`
+    query GetLandingFooter {
+  htmlConfig {
+    landingFooter
+  }
+}
+    
+      
+    
+  `;
+     export class GetLandingFooterComponent extends React.Component<Partial<ReactApollo.QueryProps<GetLandingFooterQuery, GetLandingFooterVariables>>> {
+        render(){
+            return (
+                <ReactApollo.Query<GetLandingFooterQuery, GetLandingFooterVariables>
+                query={ GetLandingFooterDocument }
+                {...(this as any)['props'] as any}
+                />
+            );
+        }
+    }
+    export type GetLandingFooterProps<TChildProps = any> = 
+            Partial<
+                ReactApollo.DataProps<
+                                        GetLandingFooterQuery, 
+                                        GetLandingFooterVariables
+                                    >
+                    >
+         & TChildProps;
+    export function GetLandingFooterHOC<TProps, TChildProps = any>(operationOptions: 
+            ReactApollo.OperationOption<
+                TProps, 
+                GetLandingFooterQuery,
+                GetLandingFooterVariables,
+                GetLandingFooterProps<TChildProps>
+            > | undefined){
+        return ReactApollo.graphql<TProps, GetLandingFooterQuery, GetLandingFooterVariables, GetLandingFooterProps<TChildProps>>(
+            GetLandingFooterDocument,
             operationOptions
         );
     };

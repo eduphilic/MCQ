@@ -1,23 +1,23 @@
-// import { Grid } from "@join-uniform/components";
-import { styled } from "@join-uniform/theme";
-import Button, { ButtonProps } from "@material-ui/core/Button";
-import Link from "next/link";
-import React, { FC } from "react";
-import { Html } from "../layouts";
+import { LayoutLanding } from "@join-uniform/components";
+import React from "react";
+import { GetLandingFooterComponent } from "../graphql";
 
-export default function() {
+function IndexPage() {
   return (
-    <Html title="Test">
-      {/* <Grid>Test</Grid> */}
-      <p>Index Page</p>
-      <StyledButton title="test">Test</StyledButton>
-      <Link href="/page2">
-        <a>Page 2</a>
-      </Link>
-    </Html>
+    <GetLandingFooterComponent>
+      {query => {
+        if (query.loading) return null;
+
+        return (
+          <LayoutLanding
+            footerText={query.data!.htmlConfig.landingFooter || "Join Uniform"}
+          >
+            Test
+          </LayoutLanding>
+        );
+      }}
+    </GetLandingFooterComponent>
   );
 }
 
-const StyledButton = styled(Button as FC<ButtonProps>)`
-  color: red;
-`;
+export default IndexPage;

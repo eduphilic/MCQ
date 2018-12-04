@@ -1,6 +1,6 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
 import React, { SFC } from "react";
-import { createGlobalStyle, css } from "./styledComponents";
+import { createGlobalStyle } from "./styledComponents";
 
 export const ThemeBaseline: SFC<{}> = ({ children }) => (
   <>
@@ -24,27 +24,21 @@ body {
     font-size: 16px !important;
   }
 }
-  ${
-    // Don't apply the flex styles inside of Storybook.
-    process.env.STORYBOOK
-      ? ""
-      : css`
-          html,
-          body {
-            height: 100%;
-          }
 
-          body,
-          #root,
-          #root > div:first-child {
-            display: flex;
-            flex-direction: column;
-          }
+  html,
+  body {
+    height: 100%;
+  }
 
-          #root,
-          #root > div:first-child {
-            flex: 1;
-          }
-        `
-  };
+  body,
+  #__next,
+  #root {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #__next,
+  #root {
+    flex: 1;
+  }
 `;
