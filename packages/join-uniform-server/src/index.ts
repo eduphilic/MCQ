@@ -66,7 +66,13 @@ async function bootstrap() {
   );
 }
 
-// tslint:disable:no-floating-promises
-bootstrap();
+const bootstrapStatus = bootstrap().then(() => app.callback());
 
-export const main = functions.https.onRequest(app.callback());
+function handleRequest(req: any, res: any) {
+  // tslint:disable-next-line:no-floating-promises
+  bootstrapStatus.then(appCallback => {
+    appCallback(req, res);
+  });
+}
+
+export const main = functions.https.onRequest(handleRequest);
