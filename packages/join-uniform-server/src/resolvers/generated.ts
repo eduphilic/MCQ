@@ -18,6 +18,8 @@ export { models };
 export interface Query {
   
   htmlConfig: HtmlConfig;
+  
+  logoConfig: LogoConfig;
 }
 
 /** Configuration for the html document sent in response to all requests. */
@@ -36,6 +38,12 @@ export interface HtmlConfig {
   metaCopyright?: string | null;
   /** Landing footer text. */
   landingFooter?: string | null;
+}
+
+/** Logo image configuration. */
+export interface LogoConfig {
+  /** Url of logo image. */
+  url: string;
 }
 
 
@@ -99,10 +107,13 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
     
     htmlConfig?: QueryHtmlConfigResolver<HtmlConfig, TypeParent, Context>;
+    
+    logoConfig?: QueryLogoConfigResolver<LogoConfig, TypeParent, Context>;
   }
 
 
-  export type QueryHtmlConfigResolver<R = HtmlConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;  
+  export type QueryHtmlConfigResolver<R = HtmlConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type QueryLogoConfigResolver<R = LogoConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;  
 /** Configuration for the html document sent in response to all requests. */
   export interface HtmlConfigResolvers<Context = ApolloContext, TypeParent = HtmlConfig> {
     /** Google Analytics ID. */
@@ -129,6 +140,14 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   export type HtmlConfigMetaAbstractResolver<R = string | null, Parent = HtmlConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type HtmlConfigMetaCopyrightResolver<R = string | null, Parent = HtmlConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type HtmlConfigLandingFooterResolver<R = string | null, Parent = HtmlConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;  
+/** Logo image configuration. */
+  export interface LogoConfigResolvers<Context = ApolloContext, TypeParent = LogoConfig> {
+    /** Url of logo image. */
+    url?: LogoConfigUrlResolver<string, TypeParent, Context>;
+  }
+
+
+  export type LogoConfigUrlResolver<R = string, Parent = LogoConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;  
 
 
 

@@ -2,7 +2,7 @@ import fs from "fs";
 import { JWT } from "google-auth-library";
 import fetch from "node-fetch";
 import * as yup from "yup";
-import { HtmlConfig } from "../resolvers";
+import { HtmlConfig, LogoConfig } from "../resolvers";
 
 export type FirebaseRemoteConfigClientCredentials = {
   projectId: string;
@@ -312,74 +312,79 @@ function createSchema() {
   //     })
   //     .required();
 
-  return yup.object<{ htmlConfig: HtmlConfig }>().shape({
-    htmlConfig: yup
-      .object<HtmlConfig>()
-      .shape({
-        googleAnalyticsId: yup.string(),
-        metaKeywords: yup.string(),
-        metaDescription: yup.string(),
-        metaAuthor: yup.string(),
-        metaAbstract: yup.string(),
-        metaCopyright: yup.string(),
-        landingFooter: yup.string(),
-      })
-      .required(),
+  return yup
+    .object<{ htmlConfig: HtmlConfig; logoConfig: LogoConfig }>()
+    .shape({
+      htmlConfig: yup
+        .object<HtmlConfig>()
+        .shape({
+          googleAnalyticsId: yup.string(),
+          metaKeywords: yup.string(),
+          metaDescription: yup.string(),
+          metaAuthor: yup.string(),
+          metaAbstract: yup.string(),
+          metaCopyright: yup.string(),
+          landingFooter: yup.string(),
+        })
+        .required(),
+      logoConfig: yup.object<LogoConfig>().shape({
+        url: yup.string().required(),
+      }),
 
-    // // Legacy configuration:
-    // logoImageConfig: yup
-    //   .object()
-    //   .shape({
-    //     url: yup.string().nullable(true),
-    //   })
-    //   .required(),
-    // sessionFormConfig: yup
-    //   .object()
-    //   .shape({
-    //     formTitleUserSignIn: localizedString(),
-    //     formTitleUserSignUp: localizedString(),
-    //     formTitleAdminSignIn: localizedString(),
-    //     fullNameFieldPlaceholder: localizedString(),
-    //     phoneNumberFieldPlaceholder: localizedString(),
-    //     passwordFieldPlaceholder: localizedString(),
-    //     passwordVerifyFieldPlaceholder: localizedString(),
-    //     emailAddressFieldPlaceholder: localizedString(),
-    //     submitButtonLabel: localizedString(),
-    //     termsConditionsCheckboxLabel: localizedString(),
-    //     passwordResetLinkLabel: localizedString(),
-    //   })
-    //   .required(),
-    // adminLoginPageConfig: yup
-    //   .object()
-    //   .shape({
-    //     heroPrimaryText: localizedString(),
-    //     heroSecondaryText: localizedString(),
-    //   })
-    //   .required(),
-    // indexPageConfig: yup
-    //   .object()
-    //   .shape({
-    //     heroBackgroundImageUrl: yup.string().required(),
-    //     heroBackgroundAlpha: yup.number().required(),
-    //     heroPrimaryText: localizedString(),
-    //     heroFeatures: yup
-    //       .array()
-    //       .of(localizedString())
-    //       .required(),
-    //     heroFooterText: localizedString(),
-    //     aboutTitle: localizedString(),
-    //     aboutText: localizedString(),
-    //     aboutImages: yup
-    //       .array()
-    //       .of(
-    //         yup.object().shape({
-    //           imageUrl: yup.string().required(),
-    //           title: localizedString(),
-    //           text: localizedString(),
-    //         }),
-    //       )
-    //       .required(),
-    //   })
-    //   .required(),
-  });
+      // // Legacy configuration:
+      // logoImageConfig: yup
+      //   .object()
+      //   .shape({
+      //     url: yup.string().nullable(true),
+      //   })
+      //   .required(),
+      // sessionFormConfig: yup
+      //   .object()
+      //   .shape({
+      //     formTitleUserSignIn: localizedString(),
+      //     formTitleUserSignUp: localizedString(),
+      //     formTitleAdminSignIn: localizedString(),
+      //     fullNameFieldPlaceholder: localizedString(),
+      //     phoneNumberFieldPlaceholder: localizedString(),
+      //     passwordFieldPlaceholder: localizedString(),
+      //     passwordVerifyFieldPlaceholder: localizedString(),
+      //     emailAddressFieldPlaceholder: localizedString(),
+      //     submitButtonLabel: localizedString(),
+      //     termsConditionsCheckboxLabel: localizedString(),
+      //     passwordResetLinkLabel: localizedString(),
+      //   })
+      //   .required(),
+      // adminLoginPageConfig: yup
+      //   .object()
+      //   .shape({
+      //     heroPrimaryText: localizedString(),
+      //     heroSecondaryText: localizedString(),
+      //   })
+      //   .required(),
+      // indexPageConfig: yup
+      //   .object()
+      //   .shape({
+      //     heroBackgroundImageUrl: yup.string().required(),
+      //     heroBackgroundAlpha: yup.number().required(),
+      //     heroPrimaryText: localizedString(),
+      //     heroFeatures: yup
+      //       .array()
+      //       .of(localizedString())
+      //       .required(),
+      //     heroFooterText: localizedString(),
+      //     aboutTitle: localizedString(),
+      //     aboutText: localizedString(),
+      //     aboutImages: yup
+      //       .array()
+      //       .of(
+      //         yup.object().shape({
+      //           imageUrl: yup.string().required(),
+      //           title: localizedString(),
+      //           text: localizedString(),
+      //         }),
+      //       )
+      //       .required(),
+      //   })
+      //   .required(),
+    });
 }

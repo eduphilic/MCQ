@@ -1,0 +1,5 @@
+# Logo image configuration.
+type LogoConfig {
+  # Url of logo image.
+  url: String!
+}

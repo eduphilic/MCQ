@@ -48,6 +48,21 @@
     landingFooter: string | null;
   } 
 
+  export type GetLogoConfigVariables = {
+  }
+
+  export type GetLogoConfigQuery = {
+    __typename?: "Query";
+    
+    logoConfig: GetLogoConfigLogoConfig;
+  }
+
+  export type GetLogoConfigLogoConfig = {
+    __typename?: "LogoConfig";
+    
+    url: string;
+  } 
+
 import * as ReactApollo from 'react-apollo';
 import * as React from 'react';
 
@@ -145,6 +160,46 @@ import gql from 'graphql-tag';
             > | undefined){
         return ReactApollo.graphql<TProps, GetLandingFooterQuery, GetLandingFooterVariables, GetLandingFooterProps<TChildProps>>(
             GetLandingFooterDocument,
+            operationOptions
+        );
+    };
+    export const GetLogoConfigDocument = gql`
+    query GetLogoConfig {
+  logoConfig {
+    url
+  }
+}
+    
+      
+    
+  `;
+     export class GetLogoConfigComponent extends React.Component<Partial<ReactApollo.QueryProps<GetLogoConfigQuery, GetLogoConfigVariables>>> {
+        render(){
+            return (
+                <ReactApollo.Query<GetLogoConfigQuery, GetLogoConfigVariables>
+                query={ GetLogoConfigDocument }
+                {...(this as any)['props'] as any}
+                />
+            );
+        }
+    }
+    export type GetLogoConfigProps<TChildProps = any> = 
+            Partial<
+                ReactApollo.DataProps<
+                                        GetLogoConfigQuery, 
+                                        GetLogoConfigVariables
+                                    >
+                    >
+         & TChildProps;
+    export function GetLogoConfigHOC<TProps, TChildProps = any>(operationOptions: 
+            ReactApollo.OperationOption<
+                TProps, 
+                GetLogoConfigQuery,
+                GetLogoConfigVariables,
+                GetLogoConfigProps<TChildProps>
+            > | undefined){
+        return ReactApollo.graphql<TProps, GetLogoConfigQuery, GetLogoConfigVariables, GetLogoConfigProps<TChildProps>>(
+            GetLogoConfigDocument,
             operationOptions
         );
     };
