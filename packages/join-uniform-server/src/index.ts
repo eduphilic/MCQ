@@ -66,6 +66,7 @@ async function bootstrap() {
   );
 }
 
+// tslint:disable:no-floating-promises
 bootstrap();
 
 export const main = functions.https.onRequest(app.callback());

@@ -7,7 +7,7 @@
     "start": "echo Noop.",
     "build": "echo Noop.",
     "clean": "echo Noop.",
-    "lint": "tslint -p ./tsconfig.json src/**/*"
+    "lint": "tslint -p ./tsconfig.json --format verbose"
   },
   "dependencies": {
     "@material-ui/core": "^3.6.1",

@@ -7,7 +7,7 @@
     "start": "start-storybook -c .storybook -p 9001 --ci --quiet",
     "build": "build-storybook -c .storybook -o ../../dist/functions/storybook",
     "clean": "rimraf ../../dist/functions/storybook",
-    "lint": "tslint -p ./tsconfig.json .storybook/**/* src/**/*"
+    "lint": "tslint -p ./tsconfig.json --format verbose"
   },
   "dependencies": {
     "@join-uniform/theme": "1.0.0",

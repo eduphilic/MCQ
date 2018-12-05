@@ -7,7 +7,7 @@
     "start": "yarn build --watch",
     "build": "rollup -c --silent",
     "clean": "rimraf ../../dist/functions",
-    "lint": "tslint -p ./tsconfig.json src/**/*"
+    "lint": "tslint -p ./tsconfig.json --format verbose"
   },
   "dependencies": {
     "apollo-server-core": "^2.2.5",
