@@ -66,7 +66,9 @@ const commands: Record<string, (string | Function)[]> = {
 
   serve: ["firebase serve --only functions,hosting"],
 
-  "serve:production": ["cross-env NODE_ENV=production yarn serve"],
+  "serve:production": [
+    'cross-env NODE_ENV=production GRAPHQL_URI="http://localhost:5000/graphql" yarn serve',
+  ],
 
   clean: ["rimraf dist"],
 };

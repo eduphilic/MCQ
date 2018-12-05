@@ -17,7 +17,16 @@ export function createNextJsMiddleware({
 
   // Serve the compiled production version.
   if (!dev) {
-    const app = nextJs({ dev, conf: { distDir: relativeStaticPath } });
+    const app = nextJs({
+      dev,
+      conf: {
+        distDir: relativeStaticPath,
+        publicRuntimeConfig: {
+          graphQLUri:
+            process.env.GRAPHQL_URI || "https://www.joinuniform.com/graphql",
+        },
+      },
+    });
     const handle = app.getRequestHandler();
 
     middleware = async ctx => {
