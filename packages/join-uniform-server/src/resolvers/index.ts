@@ -1,4 +1,4 @@
-import { QueryResolvers } from "@join-uniform/graphql";
+import { QueryResolvers } from "@join-uniform/graphql/server";
 
 import { htmlConfig } from "./htmlConfig";
 import { logoConfig } from "./logoConfig";

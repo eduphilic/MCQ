@@ -1,4 +1,4 @@
-import { typeDefs } from "@join-uniform/graphql";
+import { typeDefs } from "@join-uniform/graphql/server";
 
 /**
  * Loads the Apollo GraphQL type definitions.

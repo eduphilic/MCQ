@@ -1,4 +1,4 @@
-import { HtmlConfig, LogoConfig } from "@join-uniform/graphql";
+import { HtmlConfig, LogoConfig } from "@join-uniform/graphql/server";
 import fs from "fs";
 import { JWT } from "google-auth-library";
 import fetch from "node-fetch";

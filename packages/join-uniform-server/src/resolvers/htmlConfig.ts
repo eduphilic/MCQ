@@ -1,4 +1,4 @@
-import { QueryHtmlConfigResolver } from "@join-uniform/graphql";
+import { QueryHtmlConfigResolver } from "@join-uniform/graphql/server";
 
 export const htmlConfig: QueryHtmlConfigResolver = async (
   _parent,

@@ -20,7 +20,8 @@
     "typeRoots": ["./typings", "./node_modules/@types"],
     "skipLibCheck": true,
     "paths": {
-      "@join-uniform/*": ["./join-uniform-*/src"]
+      "@join-uniform/*": ["./join-uniform-*/src"],
+      "@join-uniform/graphql/*": ["./join-uniform-graphql/src/*"]
     }
   }
 }

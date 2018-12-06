@@ -95,7 +95,7 @@ const config: Configuration = {
     nodeExternals(),
     nodeExternals({
       modulesDir: path.resolve(__dirname, "../../node_modules"),
-      whitelist: monorepoPackages.names,
+      whitelist: monorepoPackages.names.concat("@join-uniform/graphql/server"),
     }),
   ],
 

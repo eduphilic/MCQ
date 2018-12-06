@@ -7,7 +7,13 @@
   ],
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
-    "no-submodule-imports": [true, "@material-ui/core", "next", "react-jss"],
+    "no-submodule-imports": [
+      true,
+      "@join-uniform/graphql/server",
+      "@material-ui/core",
+      "next",
+      "react-jss"
+    ],
     "import-name": false,
     "interface-over-type-literal": false,
     "function-name": false,
