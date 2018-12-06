@@ -44,7 +44,7 @@ const config: Configuration = {
           options: {
             babelrc: false,
             presets: [
-              [ "@babel/preset-env", { targets: { node: "8" } } ], // prettier-ignore
+              [ "@babel/preset-env", { modules: false, targets: { node: "8" } } ], // prettier-ignore
               "@babel/preset-react",
               "@babel/preset-typescript",
             ],
