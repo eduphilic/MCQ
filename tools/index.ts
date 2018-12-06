@@ -85,6 +85,7 @@ steps.forEach(step => {
       cwd: path.resolve(__dirname, ".."),
       env: process.env,
       stdio: "inherit",
+      shell: true,
     });
 
     if (result.signal) {
