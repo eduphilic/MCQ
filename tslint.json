@@ -23,6 +23,6 @@
     "prettier": true
   },
   "linterOptions": {
-    "exclude": ["**/generated.ts*"]
+    "exclude": ["**/generated*.ts*"]
   }
 }

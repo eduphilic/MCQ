@@ -1,11 +1,11 @@
 {
   schema: {
-    files: "graphql/schema/*.graphql"
+    files: "packages/join-uniform-graphql/src/typeDefs/**/*.graphql"
   },
   query: {
     files: [
       {
-        match: "graphql/queries/*.graphql",
+        match: "packages/join-uniform-graphql/src/queries/**/*.graphql",
         parser: "QueryParser"
       }
     ]

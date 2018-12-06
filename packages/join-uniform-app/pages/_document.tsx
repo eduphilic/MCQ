@@ -1,3 +1,7 @@
+import {
+  GetHtmlConfigDocument,
+  GetHtmlConfigQuery,
+} from "@join-uniform/graphql";
 import { ServerStyleSheet } from "@join-uniform/theme";
 import Document, {
   DefaultDocumentIProps,
@@ -7,7 +11,6 @@ import Document, {
   NextScript,
 } from "next/document";
 import React from "react";
-import { GetHtmlConfigDocument, GetHtmlConfigQuery } from "../graphql";
 import { initializeApollo, MUICssContext } from "../lib/rendering";
 
 type MyDocumentProps = Omit<GetHtmlConfigQuery, "__typename">;

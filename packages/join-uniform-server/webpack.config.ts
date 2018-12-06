@@ -4,6 +4,8 @@ import path from "path";
 import { BannerPlugin, Configuration, DefinePlugin, Plugin } from "webpack";
 import nodeExternals from "webpack-node-externals";
 
+const monorepoPackages = getMonorepoPackages();
+
 const firebaseServiceAccountCredentialsPath = path.resolve(__dirname, "../../firebase-admin-service-account.json"); // prettier-ignore
 let firebaseServiceAccountCredentials: string;
 try {
@@ -36,15 +38,31 @@ const config: Configuration = {
     rules: [
       {
         test: /\.tsx?$/,
-        include: path.resolve(__dirname, "src"),
-        exclude: /node_modules/,
-        loader: require.resolve("babel-loader"),
+        include: monorepoPackages.includes,
+        use: {
+          loader: require.resolve("babel-loader"),
+          options: {
+            babelrc: false,
+            presets: [
+              [ "@babel/preset-env", { targets: { node: "8" } } ], // prettier-ignore
+              "@babel/preset-react",
+              "@babel/preset-typescript",
+            ],
+            plugins: ["@babel/plugin-proposal-class-properties"],
+          },
+        },
+      },
+      {
+        test: /\.graphql$/,
+        include: monorepoPackages.includes,
+        loader: require.resolve("graphql-tag/loader"),
       },
     ],
   },
 
   resolve: {
     extensions: [".ts", ".tsx", ".wasm", ".mjs", ".js", ".json"],
+    alias: monorepoPackages.aliases,
   },
 
   optimization: {
@@ -77,6 +95,7 @@ const config: Configuration = {
     nodeExternals(),
     nodeExternals({
       modulesDir: path.resolve(__dirname, "../../node_modules"),
+      whitelist: monorepoPackages.names,
     }),
   ],
 
@@ -90,3 +109,36 @@ const config: Configuration = {
 };
 
 export default config;
+
+function getMonorepoPackages() {
+  const monorepoPackageDirectories = fs
+    .readdirSync(path.resolve(__dirname, ".."))
+    .map(dirname => path.resolve(__dirname, "..", dirname))
+    .filter(
+      directory =>
+        fs.existsSync(path.resolve(directory, "package.json")) &&
+        fs.existsSync(path.resolve(directory, "src")),
+    );
+
+  return monorepoPackageDirectories
+    .map(directory => {
+      const name = require(path.resolve(directory, "package.json")).name;
+      const include = path.resolve(directory, "src");
+
+      return { name, include };
+    })
+    .reduce(
+      (accumulator, pkg) => {
+        accumulator.names.push(pkg.name);
+        accumulator.includes.push(pkg.include);
+        accumulator.aliases[pkg.name] = `${pkg.name}/src`;
+        return accumulator;
+      },
+      {
+        names: [] as string[],
+        includes: [] as string[],
+        // tslint:disable-next-line:no-object-literal-type-assertion
+        aliases: {} as Record<string, string>,
+      },
+    );
+}

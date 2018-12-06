@@ -2,9 +2,12 @@ import {
   LoadingSpinnerContextValue,
   LoadingSpinnerProvider,
 } from "@join-uniform/components";
+import {
+  GetLogoConfigDocument,
+  GetLogoConfigQuery,
+} from "@join-uniform/graphql";
 import ApolloClient from "apollo-client";
 import React, { ReactNode, useEffect, useReducer } from "react";
-import { GetLogoConfigDocument, GetLogoConfigQuery } from "../graphql";
 import { createResponsiveImageUrl } from "../lib";
 
 type LoadingSpinnerConfigurationProps = {

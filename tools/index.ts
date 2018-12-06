@@ -5,7 +5,6 @@ import spawn from "cross-spawn";
 import fs from "fs";
 import path from "path";
 import * as yup from "yup";
-import { generateApolloSchema } from "./generateApolloSchema";
 import { generateFirebaseFunctionsPackageJson } from "./generateFirebaseFunctionsPackageJson";
 import { getFirebaseEnvironmentalVariables } from "./getFirebaseEnvironmentalVariables";
 
@@ -51,16 +50,10 @@ const commands: Record<string, (string | Function)[]> = {
   start: [
     "wsrun clean",
     generateFirebaseFunctionsPackageJson,
-    generateApolloSchema,
     'cross-env GRAPHQL_URI="http://localhost:5000/graphql" wsrun start',
   ],
 
-  build: [
-    "wsrun clean",
-    generateFirebaseFunctionsPackageJson,
-    generateApolloSchema,
-    "wsrun build",
-  ],
+  build: ["wsrun clean", generateFirebaseFunctionsPackageJson, "wsrun build"],
 
   "build:public": [generateFirebaseHostingDummyContents],
 

@@ -3,12 +3,18 @@
 // @ts-nocheck
 // @ts-ignore
 const withTypescript = require("@zeit/next-typescript");
-const withTM = require("next-plugin-transpile-modules");
+const withTranspileModules = require("next-plugin-transpile-modules");
+const webpack = require("webpack");
+const path = require("path");
 
-const transpileModules = ["@join-uniform/components", "@join-uniform/theme"];
+const transpileModules = [
+  "@join-uniform/components",
+  "@join-uniform/graphql",
+  "@join-uniform/theme",
+];
 
 module.exports = withTypescript(
-  withTM({
+  withTranspileModules({
     transpileModules,
 
     distDir: "../../dist/functions/next",
@@ -27,6 +33,16 @@ module.exports = withTypescript(
           return accumulator;
         }, {}),
       };
+
+      config.plugins.push(
+        new webpack.NormalModuleReplacementPlugin(
+          /(generated\.server)|(\/src\/typeDefs)/,
+          path.resolve(
+            __dirname,
+            "../join-uniform-graphql/src/generated.server.ignore.ts",
+          ),
+        ),
+      );
 
       return config;
     },

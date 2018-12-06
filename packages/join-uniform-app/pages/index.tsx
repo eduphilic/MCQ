@@ -1,6 +1,6 @@
 import { LayoutLanding } from "@join-uniform/components";
+import { GetLandingFooterComponent } from "@join-uniform/graphql";
 import React from "react";
-import { GetLandingFooterComponent } from "../graphql";
 
 function IndexPage() {
   return (
