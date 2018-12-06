@@ -1,8 +1,10 @@
-import { HtmlConfig, LogoConfig } from "@join-uniform/graphql/server";
+import {
+  firebaseRemoteConfigSchema,
+  FirebaseRemoteConfigSchema,
+} from "@join-uniform/graphql/server";
 import fs from "fs";
 import { JWT } from "google-auth-library";
 import fetch from "node-fetch";
-import * as yup from "yup";
 
 export type FirebaseRemoteConfigClientCredentials = {
   projectId: string;
@@ -29,8 +31,6 @@ type Options = {
   templatePath: string;
 };
 
-type Values = ReturnType<ReturnType<typeof createSchema>["validateSync"]>;
-
 export async function createFirebaseRemoteConfigClient(options: Options) {
   const client = new FirebaseRemoteConfigClient(options);
 
@@ -41,7 +41,6 @@ export async function createFirebaseRemoteConfigClient(options: Options) {
 
 export class FirebaseRemoteConfigClient {
   private readonly jwtClient: InstanceType<typeof JWT>;
-  private readonly schema: ReturnType<typeof createSchema>;
   private wasInitialized = false;
   private template!: FirebaseRemoteConfigTemplate;
 
@@ -53,7 +52,6 @@ export class FirebaseRemoteConfigClient {
       "https://www.googleapis.com/auth/firebase.remoteconfig",
       undefined,
     );
-    this.schema = createSchema();
   }
 
   /**
@@ -73,7 +71,7 @@ export class FirebaseRemoteConfigClient {
   async setValues(values: any) {
     this.assertInitialized(true);
     try {
-      this.schema.validateSync(values);
+      firebaseRemoteConfigSchema.validateSync(values);
     } catch (e) {
       throw new Error(`
 Firebase Remote Config values update failed validation.
@@ -116,7 +114,7 @@ Validation error: ${e.message}
     const remoteTemplate: FirebaseRemoteConfigTemplate = await this.fetchTemplate();
 
     const templateValues = this.decodeTemplateValues(remoteTemplate);
-    this.schema.validateSync(templateValues);
+    firebaseRemoteConfigSchema.validateSync(templateValues);
     this.template = remoteTemplate;
 
     if (this.options.dev) await synchronizeTemplate.call(this);
@@ -134,7 +132,7 @@ Validation error: ${e.message}
           fs.readFileSync(this.options.templatePath, "utf8"),
         );
         const localTemplateValues = this.decodeTemplateValues(localTemplate!);
-        this.schema.validateSync(localTemplateValues);
+        firebaseRemoteConfigSchema.validateSync(localTemplateValues);
       }
 
       // Store local copy of template if local version doesn't exist or has a
@@ -173,7 +171,9 @@ Validation error: ${e.message}
    *
    * @param template Firebase Remote Config template.
    */
-  private decodeTemplateValues(template: FirebaseRemoteConfigTemplate): Values {
+  private decodeTemplateValues(
+    template: FirebaseRemoteConfigTemplate,
+  ): FirebaseRemoteConfigSchema {
     if (!template.parameters) {
       throw new Error(`
 Firebase Remote Config template is missing "parameters" field.
@@ -299,92 +299,4 @@ FirebaseRemoteConfigClient was ${
 `);
     }
   }
-}
-
-function createSchema() {
-  // const localizedString = () =>
-  //   yup
-  //     .object()
-  //     .shape({
-  //       key: yup.string().required(),
-  //       en: yup.string().required(),
-  //       hi: yup.string(),
-  //     })
-  //     .required();
-
-  return yup
-    .object<{ htmlConfig: HtmlConfig; logoConfig: LogoConfig }>()
-    .shape({
-      htmlConfig: yup
-        .object<HtmlConfig>()
-        .shape({
-          googleAnalyticsId: yup.string(),
-          metaKeywords: yup.string(),
-          metaDescription: yup.string(),
-          metaAuthor: yup.string(),
-          metaAbstract: yup.string(),
-          metaCopyright: yup.string(),
-          landingFooter: yup.string(),
-        })
-        .required(),
-      logoConfig: yup.object<LogoConfig>().shape({
-        url: yup.string().required(),
-      }),
-
-      // // Legacy configuration:
-      // logoImageConfig: yup
-      //   .object()
-      //   .shape({
-      //     url: yup.string().nullable(true),
-      //   })
-      //   .required(),
-      // sessionFormConfig: yup
-      //   .object()
-      //   .shape({
-      //     formTitleUserSignIn: localizedString(),
-      //     formTitleUserSignUp: localizedString(),
-      //     formTitleAdminSignIn: localizedString(),
-      //     fullNameFieldPlaceholder: localizedString(),
-      //     phoneNumberFieldPlaceholder: localizedString(),
-      //     passwordFieldPlaceholder: localizedString(),
-      //     passwordVerifyFieldPlaceholder: localizedString(),
-      //     emailAddressFieldPlaceholder: localizedString(),
-      //     submitButtonLabel: localizedString(),
-      //     termsConditionsCheckboxLabel: localizedString(),
-      //     passwordResetLinkLabel: localizedString(),
-      //   })
-      //   .required(),
-      // adminLoginPageConfig: yup
-      //   .object()
-      //   .shape({
-      //     heroPrimaryText: localizedString(),
-      //     heroSecondaryText: localizedString(),
-      //   })
-      //   .required(),
-      // indexPageConfig: yup
-      //   .object()
-      //   .shape({
-      //     heroBackgroundImageUrl: yup.string().required(),
-      //     heroBackgroundAlpha: yup.number().required(),
-      //     heroPrimaryText: localizedString(),
-      //     heroFeatures: yup
-      //       .array()
-      //       .of(localizedString())
-      //       .required(),
-      //     heroFooterText: localizedString(),
-      //     aboutTitle: localizedString(),
-      //     aboutText: localizedString(),
-      //     aboutImages: yup
-      //       .array()
-      //       .of(
-      //         yup.object().shape({
-      //           imageUrl: yup.string().required(),
-      //           title: localizedString(),
-      //           text: localizedString(),
-      //         }),
-      //       )
-      //       .required(),
-      //   })
-      //   .required(),
-    });
 }
