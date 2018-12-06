@@ -1,5 +1,6 @@
-import { LayoutLanding } from "@join-uniform/components";
+import { LayoutLanding, LoadingSpinner } from "@join-uniform/components";
 import { GetLandingFooterComponent } from "@join-uniform/graphql";
+import Link from "next/link";
 import React from "react";
 
 function IndexPage() {
@@ -14,7 +15,10 @@ function IndexPage() {
           <LayoutLanding
             footerText={query.data!.htmlConfig.landingFooter || "Join Uniform"}
           >
-            Test
+            <Link href="/page2">
+              <a>Page 2</a>
+            </Link>
+            <LoadingSpinner />
           </LayoutLanding>
         );
       }}

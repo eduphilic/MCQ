@@ -1,3 +1,11 @@
+import {
+  LoadingSpinnerContextValue,
+  LoadingSpinnerProvider,
+} from "@join-uniform/components";
+import {
+  GetLogoConfigDocument,
+  GetLogoConfigQuery,
+} from "@join-uniform/graphql";
 import { lightTheme, ThemeBaseline } from "@join-uniform/theme";
 import { jssPreset, MuiThemeProvider } from "@material-ui/core/styles";
 import ApolloClient from "apollo-client";
@@ -17,10 +25,12 @@ import {
   initializeApollo,
   MUICssContext,
 } from "../lib/rendering";
+import { createResponsiveImageUrl } from "../lib/utils";
 
 type MyAppProps = {
   apolloClient?: ApolloClient<any>;
   apolloState?: any;
+  loadingSpinnerConfig?: LoadingSpinnerContextValue;
 };
 
 export default class MyApp extends App<MyAppProps> {
@@ -35,6 +45,7 @@ export default class MyApp extends App<MyAppProps> {
     // Run all GraphQL queries in the component tree and extract the resulting
     // data.
     const apolloClient = initializeApollo();
+    const loadingSpinnerConfig = await fetchLoadingSpinnerConfig(apolloClient);
     if (!process.browser) {
       try {
         // Run all GraphQL queries.
@@ -44,6 +55,7 @@ export default class MyApp extends App<MyAppProps> {
             Component={Component}
             router={router}
             apolloClient={apolloClient}
+            loadingSpinnerConfig={loadingSpinnerConfig}
           />,
         );
       } catch (e) {
@@ -65,6 +77,7 @@ export default class MyApp extends App<MyAppProps> {
     const initialProps: DefaultAppIProps & MyAppProps = {
       ...initialAppProps,
       apolloState,
+      loadingSpinnerConfig,
     };
 
     return initialProps;
@@ -87,7 +100,11 @@ export default class MyApp extends App<MyAppProps> {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, loadingSpinnerConfig } = this.props;
+
+    if (!loadingSpinnerConfig) {
+      throw new Error("Expected loading spinner configuration.");
+    }
 
     let jss: JSS | undefined;
     if (process.browser) {
@@ -110,7 +127,12 @@ export default class MyApp extends App<MyAppProps> {
               sheetsManager={this.muiCssContext.sheetsManager}
             >
               <ThemeBaseline>
-                <Component muiCssContext={this.muiCssContext} {...pageProps} />
+                <LoadingSpinnerProvider {...loadingSpinnerConfig}>
+                  <Component
+                    muiCssContext={this.muiCssContext}
+                    {...pageProps}
+                  />
+                </LoadingSpinnerProvider>
               </ThemeBaseline>
             </MuiThemeProvider>
           </JssProvider>
@@ -118,4 +140,28 @@ export default class MyApp extends App<MyAppProps> {
       </Container>
     );
   }
+}
+
+async function fetchLoadingSpinnerConfig(client: ApolloClient<any>) {
+  const logoUrl = (await client.query<GetLogoConfigQuery>({
+    query: GetLogoConfigDocument,
+  })).data.logoConfig.url;
+  const loadingSpinnerConfig: LoadingSpinnerContextValue = {
+    src1_0x: createResponsiveImageUrl(logoUrl, {
+      w: "72",
+      h: "72",
+      format: "png",
+    }),
+    src1_5x: createResponsiveImageUrl(logoUrl, {
+      w: "105",
+      h: "105",
+      format: "png",
+    }),
+    src2_0x: createResponsiveImageUrl(logoUrl, {
+      w: "144",
+      h: "144",
+      format: "png",
+    }),
+  };
+  return loadingSpinnerConfig;
 }

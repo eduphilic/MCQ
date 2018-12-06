@@ -1,4 +1,4 @@
 {
   "extends": "../../tsconfig-base.json",
-  "include": ["./graphql/**/*", "./lib/**/*", "./pages/**/*"]
+  "include": ["./lib/**/*", "./pages/**/*"]
 }
