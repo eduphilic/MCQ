@@ -1,5 +1,6 @@
 // AUTO-GENERATED - DO NOT EDIT
 // SCRIPT-> yarn build
+// @ts-ignore
 import * as models from "./models";
 
 // ====================================================

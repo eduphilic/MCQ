@@ -7,7 +7,8 @@
     "start": "yarn build",
     "build": "yarn gql-gen",
     "clean": "echo Noop.",
-    "lint": "tslint -p ./tsconfig.json --format verbose"
+    "lint": "tslint -p ./tsconfig.json --format verbose",
+    "type-check": "tsc"
   },
   "dependencies": {
     "graphql": "^14.0.2",

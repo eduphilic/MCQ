@@ -1,8 +1,8 @@
+import { HtmlConfig, LogoConfig } from "@join-uniform/graphql";
 import fs from "fs";
 import { JWT } from "google-auth-library";
 import fetch from "node-fetch";
 import * as yup from "yup";
-import { HtmlConfig, LogoConfig } from "../resolvers";
 
 export type FirebaseRemoteConfigClientCredentials = {
   projectId: string;

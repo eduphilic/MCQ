@@ -16,6 +16,7 @@
     "serve:production": "yarn tools serve:production",
     "clean": "yarn tools clean",
     "lint": "yarn workspaces run lint",
+    "type-check": "yarn workspaces run type-check",
     "tools": "ts-node --project ./tools/tsconfig.json ./tools"
   },
   "dependencies": {

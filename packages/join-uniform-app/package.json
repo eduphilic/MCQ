@@ -9,7 +9,8 @@
     "build:next": "next build",
     "build:static": "cpx \"static/**/*\" ../../dist/functions/static",
     "clean": "echo Clean noop.",
-    "lint": "tslint -p ./tsconfig.json --format verbose"
+    "lint": "tslint -p ./tsconfig.json --format verbose",
+    "type-check": "tsc"
   },
   "dependencies": {
     "@material-ui/core": "^3.6.1",

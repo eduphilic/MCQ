@@ -1,5 +1,5 @@
 import { MuiThemeProvider, Theme } from "@material-ui/core/styles";
-import React, { SFC } from "react";
+import React, { ReactChild } from "react";
 import { ThemeProvider as StyledComponentsThemeProvider } from "./styledComponents";
 import {
   adminAppDrawerTheme,
@@ -33,11 +33,11 @@ function createTheme(
       break;
   }
 
-  return (({ children }) => (
+  return ({ children }: { children?: ReactChild }) => (
     <MuiThemeProvider theme={theme}>
       <StyledComponentsThemeProvider theme={theme}>
         {children}
       </StyledComponentsThemeProvider>
     </MuiThemeProvider>
-  )) as SFC<{}>;
+  );
 }

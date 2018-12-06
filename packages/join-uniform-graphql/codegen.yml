@@ -6,6 +6,7 @@ generates:
     - add:
         - // AUTO-GENERATED - DO NOT EDIT
         - // SCRIPT-> yarn build
+        - // @ts-ignore
         - import * as models from "./models";
     - typescript-common:
         scalars:
@@ -20,6 +21,7 @@ generates:
     - add:
         - // AUTO-GENERATED - DO NOT EDIT
         - // SCRIPT-> yarn build
+        - // @ts-ignore
         - import * as models from "./models";
     - typescript-common:
         scalars:

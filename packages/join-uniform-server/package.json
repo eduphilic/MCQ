@@ -8,7 +8,8 @@
     "build": "cross-env NODE_ENV=production yarn webpack",
     "webpack": "cross-env TS_NODE_PROJECT=\"tsconfig-webpack.json\" webpack",
     "clean": "rimraf ../../dist/functions",
-    "lint": "tslint -p ./tsconfig.json --format verbose"
+    "lint": "tslint -p ./tsconfig.json --format verbose",
+    "type-check": "tsc"
   },
   "dependencies": {
     "apollo-server-core": "^2.2.6",
