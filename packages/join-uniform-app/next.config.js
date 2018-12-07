@@ -8,6 +8,7 @@ const withTranspileModules = require("next-plugin-transpile-modules");
 const transpileModules = [
   "@join-uniform/components",
   "@join-uniform/graphql",
+  "@join-uniform/localization",
   "@join-uniform/theme",
 ];
 
