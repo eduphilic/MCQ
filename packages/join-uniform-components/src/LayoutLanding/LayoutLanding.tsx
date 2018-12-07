@@ -1,12 +1,13 @@
+import { strings } from "@join-uniform/localization";
 import { DarkTheme, styled } from "@join-uniform/theme";
 import React, { FC, ReactNode } from "react";
 import { Grid, GridProps } from "../Grid";
 import { Typography } from "../Typography";
 
-type LayoutLandingProps = { children?: ReactNode; footerText: string };
+type LayoutLandingProps = { children?: ReactNode };
 
 export function LayoutLanding(props: LayoutLandingProps) {
-  const { children, footerText } = props;
+  const { children } = props;
 
   return (
     <Wrapper>
@@ -14,7 +15,7 @@ export function LayoutLanding(props: LayoutLandingProps) {
 
       <FooterWrapper>
         <DarkTheme>
-          <Typography variant="caption">{footerText}</Typography>
+          <Typography variant="caption">{strings.landingFooter}</Typography>
         </DarkTheme>
       </FooterWrapper>
     </Wrapper>

@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "name": "@join-uniform/localization",
+  "version": "1.0.0",
+  "sideEffects": false,
+  "scripts": {
+    "start": "echo Noop.",
+    "build": "echo Noop.",
+    "clean": "echo Noop.",
+    "lint": "tslint -p ./tsconfig.json --format verbose",
+    "type-check": "tsc"
+  },
+  "dependencies": {
+    "react": "^16.6.3",
+    "react-localization": "^1.0.13"
+  },
+  "devDependencies": {
+    "@join-uniform/graphql": "1.0.0"
+  }
+}

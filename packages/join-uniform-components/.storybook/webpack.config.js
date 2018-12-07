@@ -3,9 +3,11 @@
 // @ts-ignore
 const fs = require("fs");
 const path = require("path");
+const webpack = require("webpack");
 
 // prettier-ignore
 const monorepoPackages = {
+  "@join-uniform/localization": path.resolve(__dirname, "../../join-uniform-localization/src"),
   "@join-uniform/theme": path.resolve(__dirname, "../../join-uniform-theme/src"),
 };
 
@@ -34,5 +36,40 @@ module.exports = (baseConfig, env, defaultConfig) => {
     ...monorepoPackages,
   };
 
+  defaultConfig.plugins.push(
+    new webpack.DefinePlugin({
+      "process.env.TRANSLATIONS": JSON.stringify(loadLocalizationStrings()),
+    }),
+  );
+
   return defaultConfig;
 };
+
+function loadLocalizationStrings() {
+  try {
+    const firebaseTemplate = JSON.parse(
+      fs.readFileSync(
+        path.resolve(
+          __dirname,
+          "../../../config/firebase-remote-config-template.json",
+        ),
+        "utf8",
+      ),
+    );
+    const translations = JSON.parse(
+      firebaseTemplate.parameters.translations.defaultValue.value,
+    );
+    const localizationStrings = Object.keys(translations).reduce(
+      (accumulator, key) => {
+        accumulator.en[key] = translations[key].en;
+        return accumulator;
+      },
+      { en: {} },
+    );
+    return localizationStrings;
+  } catch (e) {
+    // tslint:disable-next-line
+    console.warn(e);
+    return { en: {} };
+  }
+}

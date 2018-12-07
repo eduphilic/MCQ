@@ -2,6 +2,18 @@
 // SCRIPT-> yarn build
 // @ts-ignore
 import * as models from "./models";
+/** Supported localization languages. */
+export enum Language {
+  English = "English",
+  Hindi = "Hindi",
+}
+
+/** A set of localized strings for a language. */
+export type Translation = any;
+
+// ====================================================
+// Scalars
+// ====================================================
 
 // ====================================================
 // Types
@@ -11,6 +23,8 @@ export interface Query {
   htmlConfig: HtmlConfig;
 
   logoConfig: LogoConfig;
+
+  translation: Translation;
 }
 
 /** Configuration for the html document sent in response to all requests. */
@@ -27,8 +41,6 @@ export interface HtmlConfig {
   metaAbstract?: string | null;
   /** Meta "copyright" tag. */
   metaCopyright?: string | null;
-  /** Landing footer text. */
-  landingFooter?: string | null;
 }
 
 /** Logo image configuration. */
@@ -40,6 +52,10 @@ export interface LogoConfig {
 // ====================================================
 // Arguments
 // ====================================================
+
+export interface TranslationQueryArgs {
+  language: Language;
+}
 
 import { GraphQLResolveInfo } from "graphql";
 
@@ -82,6 +98,8 @@ export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
   htmlConfig?: QueryHtmlConfigResolver<HtmlConfig, TypeParent, Context>;
 
   logoConfig?: QueryLogoConfigResolver<LogoConfig, TypeParent, Context>;
+
+  translation?: QueryTranslationResolver<Translation, TypeParent, Context>;
 }
 
 export type QueryHtmlConfigResolver<
@@ -94,6 +112,15 @@ export type QueryLogoConfigResolver<
   Parent = {},
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
+export type QueryTranslationResolver<
+  R = Translation,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context, QueryTranslationArgs>;
+export interface QueryTranslationArgs {
+  language: Language;
+}
+
 /** Configuration for the html document sent in response to all requests. */
 export interface HtmlConfigResolvers<
   Context = ApolloContext,
@@ -131,12 +158,6 @@ export interface HtmlConfigResolvers<
     TypeParent,
     Context
   >;
-  /** Landing footer text. */
-  landingFooter?: HtmlConfigLandingFooterResolver<
-    string | null,
-    TypeParent,
-    Context
-  >;
 }
 
 export type HtmlConfigGoogleAnalyticsIdResolver<
@@ -165,11 +186,6 @@ export type HtmlConfigMetaAbstractResolver<
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
 export type HtmlConfigMetaCopyrightResolver<
-  R = string | null,
-  Parent = HtmlConfig,
-  Context = ApolloContext
-> = Resolver<R, Parent, Context>;
-export type HtmlConfigLandingFooterResolver<
   R = string | null,
   Parent = HtmlConfig,
   Context = ApolloContext

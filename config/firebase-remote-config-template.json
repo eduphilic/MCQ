@@ -29,11 +29,16 @@
       "defaultValue": {
         "value": "{\"url\":null}"
       }
+    },
+    "translations": {
+      "defaultValue": {
+        "value": "{\"landingFooter\":{\"en\":\"Copyright : Eduphilic Consultancy Pvt Ltd 2018\"}}"
+      }
     }
   },
   "version": {
-    "versionNumber": "55",
-    "updateTime": "2018-11-28T05:07:07.616Z",
+    "versionNumber": "57",
+    "updateTime": "2018-12-07T05:13:40.283Z",
     "updateUser": {
       "email": "jason@jasons.io"
     },

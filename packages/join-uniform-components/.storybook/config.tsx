@@ -1,9 +1,12 @@
+import { strings } from "@join-uniform/localization";
 import { LightTheme, ThemeBaseline } from "@join-uniform/theme";
 import { createGenerateClassName, jssPreset } from "@material-ui/core/styles";
 import { addDecorator, configure } from "@storybook/react";
 import { create } from "jss";
 import React from "react";
 import JssProvider from "react-jss/lib/JssProvider";
+
+strings.setContent(process.env.TRANSLATIONS);
 
 const generateClassName = createGenerateClassName();
 const jss = create({

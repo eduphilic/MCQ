@@ -12,6 +12,4 @@ type HtmlConfig {
   metaAbstract: String
   # Meta "copyright" tag.
   metaCopyright: String
-  # Landing footer text.
-  landingFooter: String
 }

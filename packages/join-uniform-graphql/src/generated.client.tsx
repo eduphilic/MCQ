@@ -2,6 +2,14 @@
 // SCRIPT-> yarn build
 // @ts-ignore
 import * as models from "./models";
+/** Supported localization languages. */
+export enum Language {
+  English = "English",
+  Hindi = "Hindi",
+}
+
+/** A set of localized strings for a language. */
+export type Translation = any;
 
 // ====================================================
 // Documents
@@ -31,20 +39,6 @@ export type GetHtmlConfigHtmlConfig = {
   metaCopyright: string | null;
 };
 
-export type GetLandingFooterVariables = {};
-
-export type GetLandingFooterQuery = {
-  __typename?: "Query";
-
-  htmlConfig: GetLandingFooterHtmlConfig;
-};
-
-export type GetLandingFooterHtmlConfig = {
-  __typename?: "HtmlConfig";
-
-  landingFooter: string | null;
-};
-
 export type GetLogoConfigVariables = {};
 
 export type GetLogoConfigQuery = {
@@ -57,6 +51,16 @@ export type GetLogoConfigLogoConfig = {
   __typename?: "LogoConfig";
 
   url: string;
+};
+
+export type GetTranslationVariables = {
+  language: Language;
+};
+
+export type GetTranslationQuery = {
+  __typename?: "Query";
+
+  translation: Translation;
 };
 
 import * as ReactApollo from "react-apollo";
@@ -113,48 +117,6 @@ export function GetHtmlConfigHOC<TProps, TChildProps = any>(
     GetHtmlConfigProps<TChildProps>
   >(GetHtmlConfigDocument, operationOptions);
 }
-export const GetLandingFooterDocument = gql`
-  query GetLandingFooter {
-    htmlConfig {
-      landingFooter
-    }
-  }
-`;
-export class GetLandingFooterComponent extends React.Component<
-  Partial<
-    ReactApollo.QueryProps<GetLandingFooterQuery, GetLandingFooterVariables>
-  >
-> {
-  render() {
-    return (
-      <ReactApollo.Query<GetLandingFooterQuery, GetLandingFooterVariables>
-        query={GetLandingFooterDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type GetLandingFooterProps<TChildProps = any> = Partial<
-  ReactApollo.DataProps<GetLandingFooterQuery, GetLandingFooterVariables>
-> &
-  TChildProps;
-export function GetLandingFooterHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        GetLandingFooterQuery,
-        GetLandingFooterVariables,
-        GetLandingFooterProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    GetLandingFooterQuery,
-    GetLandingFooterVariables,
-    GetLandingFooterProps<TChildProps>
-  >(GetLandingFooterDocument, operationOptions);
-}
 export const GetLogoConfigDocument = gql`
   query GetLogoConfig {
     logoConfig {
@@ -194,4 +156,42 @@ export function GetLogoConfigHOC<TProps, TChildProps = any>(
     GetLogoConfigVariables,
     GetLogoConfigProps<TChildProps>
   >(GetLogoConfigDocument, operationOptions);
+}
+export const GetTranslationDocument = gql`
+  query GetTranslation($language: Language!) {
+    translation(language: $language)
+  }
+`;
+export class GetTranslationComponent extends React.Component<
+  Partial<ReactApollo.QueryProps<GetTranslationQuery, GetTranslationVariables>>
+> {
+  render() {
+    return (
+      <ReactApollo.Query<GetTranslationQuery, GetTranslationVariables>
+        query={GetTranslationDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type GetTranslationProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<GetTranslationQuery, GetTranslationVariables>
+> &
+  TChildProps;
+export function GetTranslationHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        GetTranslationQuery,
+        GetTranslationVariables,
+        GetTranslationProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    GetTranslationQuery,
+    GetTranslationVariables,
+    GetTranslationProps<TChildProps>
+  >(GetTranslationDocument, operationOptions);
 }

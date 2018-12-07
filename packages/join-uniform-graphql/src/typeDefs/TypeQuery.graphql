@@ -2,4 +2,6 @@ type Query {
   htmlConfig: HtmlConfig!
 
   logoConfig: LogoConfig!
+
+  translation(language: Language!): Translation!
 }

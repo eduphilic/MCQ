@@ -42,10 +42,13 @@ export default class MyApp extends App<MyAppProps> {
 
     const initialAppProps = await App.getInitialProps(ctx);
 
+    const apolloClient = initializeApollo();
+
+    // Run queries for context providers.
+    const loadingSpinnerConfig = await fetchLoadingSpinnerConfig(apolloClient);
+
     // Run all GraphQL queries in the component tree and extract the resulting
     // data.
-    const apolloClient = initializeApollo();
-    const loadingSpinnerConfig = await fetchLoadingSpinnerConfig(apolloClient);
     if (!process.browser) {
       try {
         // Run all GraphQL queries.

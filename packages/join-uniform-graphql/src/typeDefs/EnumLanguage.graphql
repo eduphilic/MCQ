@@ -1,0 +1,5 @@
+# Supported localization languages.
+enum Language {
+  English
+  Hindi
+}
