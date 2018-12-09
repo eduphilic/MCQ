@@ -16,9 +16,22 @@ export const drawerWidth = 240;
 type Links = Omit<AppDrawerLinkProps, "LinkComponent">[];
 
 export type AppDrawerProps = {
+  /** Drawer theme. Either admin dashboard theme or user dashboard theme. */
   theme: "admin" | "user";
+
+  /** Logo image url. Image should be 48px by 48px. */
   logoSrc: string;
+
+  /**
+   * Drawer links. The first also used as the home link for the logo image
+   * button.
+   */
   links: Links;
+
+  /**
+   * Link component to wrap drawer links in for navigation/routing purposes. The
+   * component should set the class "active" on the parent child.
+   */
   LinkComponent: AppDrawerLinkProps["LinkComponent"];
 };
 
