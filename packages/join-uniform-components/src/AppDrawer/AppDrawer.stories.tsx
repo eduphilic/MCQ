@@ -5,6 +5,7 @@ import {
   AppDrawerContextProvider,
   useAppDrawerContext,
 } from "./AppDrawerContext";
+import { storiesProps } from "./storiesProps";
 
 const stories = storiesOf("AppDrawer", module);
 
@@ -19,12 +20,7 @@ stories.addDecorator(story => (
   <AppDrawerContextProvider>{story()}</AppDrawerContextProvider>
 ));
 
-stories.add("default", () => (
-  <AppDrawer
-    theme="admin"
-    logoSrc="https://res.cloudinary.com/https-www-joinuniform-com/image/upload/w_48,h_48/v1543925170/logo/joinUniform.png"
-  />
-));
+stories.add("default", () => <AppDrawer {...storiesProps} />);
 
 function ToggleButton() {
   const { toggle } = useAppDrawerContext();

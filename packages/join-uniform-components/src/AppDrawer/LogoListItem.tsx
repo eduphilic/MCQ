@@ -1,4 +1,5 @@
 import { css, styled } from "@join-uniform/theme";
+import Divider from "@material-ui/core/Divider";
 import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
 import ListItemIcon, {
   ListItemIconProps,
@@ -8,19 +9,31 @@ import ListItemText, {
 } from "@material-ui/core/ListItemText";
 import React, { FC } from "react";
 import { LogoText } from "../LogoText";
+import { AppDrawerLinkProps } from "./AppDrawerLinkProps";
 
-export function LogoListItem(props: { src: string }) {
-  const { src } = props;
+type LogoListItemProps = Omit<AppDrawerLinkProps, "title"> & {
+  /** Logo image url. Requires a 48px by 48px image. */
+  src: string;
+};
+
+export function LogoListItem(props: LogoListItemProps) {
+  const { src, href, LinkComponent } = props;
 
   return (
-    <Wrapper>
-      <LogoListItemIcon>
-        <LogoListItemIconImage src={src} />
-      </LogoListItemIcon>
-      <LogoListItemText disableTypography>
-        <LogoText />
-      </LogoListItemText>
-    </Wrapper>
+    <>
+      <LinkComponent href={href}>
+        <Wrapper button>
+          <LogoListItemIcon>
+            <LogoListItemIconImage src={src} />
+          </LogoListItemIcon>
+          <LogoListItemText disableTypography>
+            <LogoText />
+          </LogoListItemText>
+        </Wrapper>
+      </LinkComponent>
+
+      <Divider />
+    </>
   );
 }
 
