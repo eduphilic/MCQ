@@ -11,6 +11,7 @@
       true,
       "@join-uniform/graphql/server",
       "@material-ui/core",
+      "@material-ui/icons",
       "next",
       "react-jss"
     ],

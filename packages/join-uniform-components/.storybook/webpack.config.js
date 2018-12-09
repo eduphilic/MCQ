@@ -7,6 +7,7 @@ const webpack = require("webpack");
 
 // prettier-ignore
 const monorepoPackages = {
+  "@join-uniform/icons": path.resolve(__dirname, "../../join-uniform-icons/src"),
   "@join-uniform/localization": path.resolve(__dirname, "../../join-uniform-localization/src"),
   "@join-uniform/theme": path.resolve(__dirname, "../../join-uniform-theme/src"),
 };

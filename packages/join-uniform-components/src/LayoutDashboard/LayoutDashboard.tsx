@@ -1,3 +1,4 @@
+import { MenuIcon, PowerSettingsNewIcon } from "@join-uniform/icons";
 import MuiAppBar from "@material-ui/core/AppBar";
 import Drawer, { DrawerProps } from "@material-ui/core/Drawer";
 import Grid from "@material-ui/core/Grid";
@@ -10,8 +11,6 @@ import ListItemText, {
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import withWidth, { isWidthDown, WithWidth } from "@material-ui/core/withWidth";
-import Menu from "@material-ui/icons/Menu";
-import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
 import { Location, Match, navigate } from "@reach/router";
 import React, {
   createContext,
@@ -185,7 +184,7 @@ function DrawerToggleButton(props: { className?: string }) {
       aria-label="Menu"
       onClick={onClick}
     >
-      <Menu />
+      <MenuIcon />
     </IconButton>
   );
 }
@@ -227,7 +226,7 @@ const StyledResponsiveDrawer = styled(withWidth()(ResponsiveDrawer)).attrs({
 function LogoutButton(props: { className?: string; onClick: () => any }) {
   return (
     <IconButton className={props.className} onClick={props.onClick}>
-      <PowerSettingsNew />
+      <PowerSettingsNewIcon />
     </IconButton>
   );
 }
