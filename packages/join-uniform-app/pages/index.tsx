@@ -6,7 +6,7 @@ export default function IndexPage() {
   return (
     <LayoutLanding>
       <Typography
-        variant="display1"
+        variant="h1"
         css={css`
           display: none;
         `}
