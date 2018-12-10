@@ -17,7 +17,7 @@ export type DashboardLayoutProps = ResponsiveAppBarProps & {
   DrawerLinkComponent: AppDrawerProps["LinkComponent"];
 };
 
-export function DashboardLayout(props: DashboardLayoutProps) {
+export function LayoutDashboard(props: DashboardLayoutProps) {
   const {
     title,
     onLogoutButtonClick,

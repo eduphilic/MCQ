@@ -6,7 +6,7 @@ import {
   GetLogoConfigDocument,
   GetLogoConfigQuery,
 } from "@join-uniform/graphql";
-import { lightTheme, ThemeBaseline } from "@join-uniform/theme";
+import { lightTheme, LightTheme, ThemeBaseline } from "@join-uniform/theme";
 import { jssPreset, MuiThemeProvider } from "@material-ui/core/styles";
 import ApolloClient from "apollo-client";
 import { create, JSS } from "jss";
@@ -129,14 +129,16 @@ export default class MyApp extends App<MyAppProps> {
               theme={lightTheme}
               sheetsManager={this.muiCssContext.sheetsManager}
             >
-              <ThemeBaseline>
-                <LoadingSpinnerProvider {...loadingSpinnerConfig}>
-                  <Component
-                    muiCssContext={this.muiCssContext}
-                    {...pageProps}
-                  />
-                </LoadingSpinnerProvider>
-              </ThemeBaseline>
+              <LightTheme>
+                <ThemeBaseline>
+                  <LoadingSpinnerProvider {...loadingSpinnerConfig}>
+                    <Component
+                      muiCssContext={this.muiCssContext}
+                      {...pageProps}
+                    />
+                  </LoadingSpinnerProvider>
+                </ThemeBaseline>
+              </LightTheme>
             </MuiThemeProvider>
           </JssProvider>
         </ApolloProvider>

@@ -2,12 +2,12 @@ import { css } from "@join-uniform/theme";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { storiesProps as appDrawerStoriesProps } from "../AppDrawer/storiesProps";
-import { DashboardLayout } from "./LayoutDashboard";
+import { LayoutDashboard } from "./LayoutDashboard";
 
 const stories = storiesOf("LayoutDashboard", module);
 
 stories.add("default", () => (
-  <DashboardLayout
+  <LayoutDashboard
     title="Dashboard"
     onLogoutButtonClick={noop}
     drawerTheme={appDrawerStoriesProps.theme}
@@ -24,7 +24,7 @@ stories.add("default", () => (
         `}
       />
     ))}
-  </DashboardLayout>
+  </LayoutDashboard>
 ));
 
 // tslint:disable-next-line:no-empty

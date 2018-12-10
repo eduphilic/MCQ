@@ -1,4 +1,4 @@
-import { ComponentType } from "react";
+import { ComponentType, ReactElement } from "react";
 
 export type AppDrawerLinkProps = {
   /** Url  */
@@ -13,5 +13,8 @@ export type AppDrawerLinkProps = {
    * The component should add a "active" class to its parent child when the page
    * matches the current viewed url.
    */
-  LinkComponent: ComponentType<{ href: string }>;
+  LinkComponent: ComponentType<{
+    children: ReactElement<{ className?: string }>;
+    href: string;
+  }>;
 };
