@@ -1,32 +1,44 @@
 import { mixins, styled } from "@join-uniform/theme";
-import React, { Fragment, ReactNode } from "react";
-import { AppDrawer, AppDrawerContextProvider, drawerWidth } from "../AppDrawer";
-import { ResponsiveAppBar } from "./ResponsiveAppBar";
+import React, { ReactNode } from "react";
+import {
+  AppDrawer,
+  AppDrawerContextProvider,
+  AppDrawerProps,
+  drawerWidth,
+} from "../AppDrawer";
+import { ResponsiveAppBar, ResponsiveAppBarProps } from "./ResponsiveAppBar";
 
-export function DashboardLayout(props: { children?: ReactNode }) {
-  if (typeof document !== "undefined") document.title = "Dashboard";
+export type DashboardLayoutProps = ResponsiveAppBarProps & {
+  children?: ReactNode;
+
+  drawerTheme: AppDrawerProps["theme"];
+  drawerLinks: AppDrawerProps["links"];
+  drawerLogoSrc: AppDrawerProps["logoSrc"];
+  DrawerLinkComponent: AppDrawerProps["LinkComponent"];
+};
+
+export function DashboardLayout(props: DashboardLayoutProps) {
+  const {
+    title,
+    onLogoutButtonClick,
+    drawerTheme,
+    drawerLinks,
+    drawerLogoSrc,
+    DrawerLinkComponent,
+  } = props;
 
   return (
     <AppDrawerContextProvider>
       <ResponsiveAppBar
-        title="Join Uniform"
-        // TODO: Wire this up correctly.
-        // tslint:disable-next-line:no-empty
-        onDrawerToggleButtonClick={() => {}}
-        // TODO: Wire this up correctly.
-        // tslint:disable-next-line:no-empty
-        onLogoutButtonClick={() => {}}
+        title={title}
+        onLogoutButtonClick={onLogoutButtonClick}
       />
 
       <AppDrawer
-        // TODO: Wire this up correctly.
-        theme="admin"
-        // TODO: Wire this up correctly.
-        links={[{ href: "/", title: "Home" }]}
-        // TODO: Wire this up correctly.
-        LinkComponent={Fragment}
-        // TODO: Wire this up correctly.
-        logoSrc="https://res.cloudinary.com/https-www-joinuniform-com/image/upload/w_48,h_48/v1543925170/logo/joinUniform.png"
+        theme={drawerTheme}
+        links={drawerLinks}
+        LinkComponent={DrawerLinkComponent}
+        logoSrc={drawerLogoSrc}
       />
 
       <AppBarSpacer />

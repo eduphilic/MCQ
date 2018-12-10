@@ -1,9 +1,27 @@
 import { styled } from "@join-uniform/theme";
-import { AppBar } from "../AppBar";
-import { drawerWidth } from "../AppDrawer";
+import React from "react";
+import { AppBar, AppBarProps } from "../AppBar";
+import { drawerWidth, useAppDrawerContext } from "../AppDrawer";
 
-export const ResponsiveAppBar = styled(AppBar)`
+export type ResponsiveAppBarProps = Omit<
+  AppBarProps,
+  "onDrawerToggleButtonClick"
+>;
+
+export const ResponsiveAppBar = styled(
+  (props: ResponsiveAppBarProps & { className?: string }) => {
+    const { toggle } = useAppDrawerContext();
+    const { className, ...rest } = props;
+
+    return (
+      <div className={className}>
+        <AppBar {...rest} onDrawerToggleButtonClick={toggle} />
+      </div>
+    );
+  },
+)`
   position: fixed;
+  width: 100%;
 
   ${({ theme }) => theme.breakpoints.up("md")} {
     width: calc(100% - ${drawerWidth}px);
