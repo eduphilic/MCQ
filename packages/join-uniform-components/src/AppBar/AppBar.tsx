@@ -3,7 +3,7 @@ import { css, styled } from "@join-uniform/theme";
 import MuiAppBar from "@material-ui/core/AppBar";
 import IconButton, { IconButtonProps } from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
-import React, { FC, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { Grid } from "../Grid";
 import { Typography } from "../Typography";
 
@@ -95,12 +95,26 @@ function LogoutButton(props: { onClick: () => void }) {
   );
 }
 
-const AppBarIconButton = styled(IconButton as FC<IconButtonProps>)<{
-  reducedLeftMargin?: boolean;
-  reducedRightMargin?: boolean;
-  mobileOnly?: boolean;
-  red?: boolean;
-}>`
+const AppBarIconButton = styled(
+  (
+    props: IconButtonProps & {
+      reducedLeftMargin?: boolean;
+      reducedRightMargin?: boolean;
+      mobileOnly?: boolean;
+      red?: boolean;
+    },
+  ) => {
+    const {
+      reducedLeftMargin,
+      mobileOnly,
+      reducedRightMargin,
+      red,
+      ...rest
+    } = props;
+
+    return <IconButton {...rest} />;
+  },
+)`
   ${props =>
     props.reducedLeftMargin &&
     css`
