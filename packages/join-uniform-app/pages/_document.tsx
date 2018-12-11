@@ -1,6 +1,9 @@
 import Document, { Main, NextScript } from "next/document";
 import React from "react";
-import { withStyledComponentsDocument } from "../lib/rendering";
+import {
+  withMaterialUIDocument,
+  withStyledComponentsDocument,
+} from "../lib/rendering";
 
 class MyDocument extends Document {
   render() {
@@ -18,4 +21,4 @@ class MyDocument extends Document {
   }
 }
 
-export default withStyledComponentsDocument(MyDocument);
+export default withMaterialUIDocument(withStyledComponentsDocument(MyDocument));

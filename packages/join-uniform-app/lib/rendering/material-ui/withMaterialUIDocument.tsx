@@ -1,4 +1,3 @@
-import { ServerStyleSheet as StyledComponentsServerStyleSheet } from "@join-uniform/theme";
 import {
   DefaultDocumentIProps,
   DocumentComponentType,
@@ -8,13 +7,14 @@ import {
 } from "next/document";
 import React, { Component } from "react";
 import { RenderingPageProps } from "../RenderingPageProps";
+import { MUICssContext } from "./createMUICssContext";
 
-export function withStyledComponentsDocument<
+export function withMaterialUIDocument<
   P extends DocumentProps,
   IP extends DefaultDocumentIProps,
   C extends NextDocumentContext
 >(Document: DocumentComponentType<P, IP, C>) {
-  const WithStyledComponentsDocument: DocumentComponentType<
+  const WithMaterialUIDocument: DocumentComponentType<
     P,
     IP,
     C
@@ -22,9 +22,9 @@ export function withStyledComponentsDocument<
     static displayName = "WithStyledComponentsDocument(Document)";
 
     static async getInitialProps(context: C) {
-      const sheet = new StyledComponentsServerStyleSheet();
-
       const originalRenderPage = context.renderPage;
+
+      let muiCssContext: MUICssContext | undefined;
 
       context.renderPage = enhancer => {
         const typedEnhancer:
@@ -34,8 +34,9 @@ export function withStyledComponentsDocument<
         const renderPageResponse = originalRenderPage<RenderingPageProps>(
           App => props => {
             const EnhancedApp = typedEnhancer ? typedEnhancer(App) : App;
+            muiCssContext = props.muiCssContext;
 
-            return sheet.collectStyles(<EnhancedApp {...props} />);
+            return <EnhancedApp {...props} />;
           },
         );
 
@@ -48,10 +49,20 @@ export function withStyledComponentsDocument<
         initialProps = await Document.getInitialProps(context);
       }
 
+      if (!muiCssContext) {
+        throw new Error("_app must be decorated with withMaterialUIApp.");
+      }
+
       initialProps.styles = (
         <>
+          <style
+            id="jss-server-side"
+            dangerouslySetInnerHTML={{
+              __html: muiCssContext.sheetsRegistry.toString(),
+            }}
+          />
+          <noscript id="jss-insertion-point" />
           {initialProps.styles}
-          {sheet.getStyleElement()}
         </>
       );
 
@@ -63,5 +74,5 @@ export function withStyledComponentsDocument<
     }
   };
 
-  return WithStyledComponentsDocument;
+  return WithMaterialUIDocument;
 }
