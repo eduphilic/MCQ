@@ -9,6 +9,7 @@ import {
   withApolloApp,
   withLoadingSpinnerApp,
   withMaterialUIApp,
+  withTranslationApp,
 } from "../lib/rendering";
 
 class MyApp extends App<RenderingAppProps> {
@@ -35,7 +36,9 @@ class MyApp extends App<RenderingAppProps> {
   }
 }
 
-export default withApolloApp(withMaterialUIApp(withLoadingSpinnerApp(MyApp)));
+export default withApolloApp(
+  withMaterialUIApp(withLoadingSpinnerApp(withTranslationApp(MyApp))),
+);
 
 function composeProviders(
   ...providers: ReactElement<{ children?: ReactNode }>[]
