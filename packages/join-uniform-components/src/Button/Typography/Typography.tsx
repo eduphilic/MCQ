@@ -1,12 +1,10 @@
-import React, { SFC } from "react";
-import { styleTable } from "./styleTable";
-import { Style, Variant } from "./types";
-
-// tslint:disable-next-line:import-name
+import { styled } from "@join-uniform/theme";
 import MuiTypography, {
   TypographyProps as MuiTypographyProps,
 } from "@material-ui/core/Typography";
-import { styled } from "../../../styled";
+import React, { SFC } from "react";
+import { styleTable } from "./styleTable";
+import { Style, Variant } from "./types";
 
 export { Variant as TypographyVariant };
 

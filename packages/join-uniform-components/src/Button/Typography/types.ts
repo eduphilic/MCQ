@@ -1,4 +1,4 @@
-import { styled } from "../../../styled";
+import { styled } from "@join-uniform/theme";
 
 export enum Variant {
   H1 = "H1",

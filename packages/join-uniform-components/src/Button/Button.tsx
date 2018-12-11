@@ -1,10 +1,9 @@
-// tslint:disable-next-line:import-name
+import { css, styled } from "@join-uniform/theme";
 import MuiButton, {
   ButtonProps as MuiButtonProps,
 } from "@material-ui/core/Button";
 import { darken, fade } from "@material-ui/core/styles/colorManipulator";
 import React from "react";
-import { css, styled } from "../../styled";
 import { styleTable } from "./Typography";
 
 const createCustomColorCss = (colorName: string, color: string) => {
@@ -125,7 +124,7 @@ export type ButtonProps = Omit<
   variant?: "text" | "outlined" | "contained" | "fab" | "extendedFab";
 };
 
-export const Button = styled<ButtonProps>(props => {
+export const Button = styled((props: ButtonProps) => {
   const {
     className,
     classes: parentClasses = {},
