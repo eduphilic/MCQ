@@ -50,7 +50,9 @@ export function withMaterialUIDocument<
       }
 
       if (!muiCssContext) {
-        throw new Error("_app must be decorated with withMaterialUIApp.");
+        throw new Error(
+          "_app must be decorated with withMaterialUIApp and use MaterialUIThemeProvider.",
+        );
       }
 
       initialProps.styles = (
