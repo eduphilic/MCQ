@@ -1,4 +1,9 @@
-export * from "./apollo";
-export * from "./material-ui";
-export * from "./seo";
-export * from "./styled-components";
+export { withApolloApp } from "./apollo";
+export {
+  withMaterialUIDocument,
+  MaterialUIThemeProvider,
+  withMaterialUIApp,
+} from "./material-ui";
+export { withHtmlSeoDocument } from "./seo";
+export { withStyledComponentsDocument } from "./styled-components";
+export * from "./RenderingAppProps";
