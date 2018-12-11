@@ -19,7 +19,7 @@ export function withMaterialUIDocument<
     IP,
     C
   > = class extends Component<P> {
-    static displayName = "WithStyledComponentsDocument(Document)";
+    static displayName = "WithMaterialUIDocumentDocument(Document)";
 
     static async getInitialProps(context: C) {
       const originalRenderPage = context.renderPage;
@@ -55,6 +55,10 @@ export function withMaterialUIDocument<
 
       initialProps.styles = (
         <>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700"
+          />
           <style
             id="jss-server-side"
             dangerouslySetInnerHTML={{
