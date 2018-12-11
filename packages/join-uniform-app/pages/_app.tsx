@@ -1,5 +1,6 @@
+import { LightTheme, ThemeBaseline } from "@join-uniform/theme";
 import App, { Container } from "next/app";
-import React from "react";
+import React, { cloneElement, ReactElement, ReactNode } from "react";
 import { ApolloProvider } from "react-apollo";
 import {
   MaterialUIThemeProvider,
@@ -12,16 +13,25 @@ class MyApp extends App<RenderingAppProps> {
   render() {
     const { Component, pageProps, apolloClient, muiCssContext } = this.props;
 
-    return (
-      <Container>
-        <ApolloProvider client={apolloClient!}>
-          <MaterialUIThemeProvider muiCssContext={muiCssContext!}>
-            <Component {...pageProps} muiCssContext={muiCssContext} />
-          </MaterialUIThemeProvider>
-        </ApolloProvider>
-      </Container>
+    const composedProviders = composeProviders(
+      <Container />,
+      <ApolloProvider client={apolloClient!}><></></ApolloProvider>, // prettier-ignore
+      <MaterialUIThemeProvider muiCssContext={muiCssContext!} />,
+      <LightTheme />,
+      <ThemeBaseline />,
+      <Component {...pageProps} muiCssContext={muiCssContext} />,
     );
+
+    return composedProviders;
   }
 }
 
 export default withApolloApp(withMaterialUIApp(MyApp));
+
+function composeProviders(
+  ...providers: ReactElement<{ children?: ReactNode }>[]
+) {
+  return providers.reduceRight((children, parent) => {
+    return cloneElement(parent, {}, children);
+  }, providers[0]);
+}
