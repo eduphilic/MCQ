@@ -1,17 +1,26 @@
-import { Grid, Typography } from "@material-ui/core";
-import CloudUpload from "@material-ui/icons/CloudUpload";
-import Collections from "@material-ui/icons/Collections";
-import Texture from "@material-ui/icons/Texture";
-import React, { Fragment, SFC, useMemo } from "react";
-import { createGlobalStyle, styled } from "../styled";
-import { createResponsiveImageUrl } from "../utils";
-import { Button } from "./Button";
+import {
+  CloudUploadIcon,
+  CollectionsIcon,
+  TextureIcon,
+} from "@join-uniform/icons";
+import { createGlobalStyle, styled } from "@join-uniform/theme";
+import { SvgIconProps } from "@material-ui/core/SvgIcon";
+import React, { FC, Fragment, SFC, useMemo } from "react";
+import { Button } from "../Button";
+import { Grid } from "../Grid";
+import { Typography } from "../Typography";
 
 type ImagePickerProps = {
   /**
-   * Image url.
+   * Url to the uploaded full size image. A browser tab is opened when the
+   * preview image is clicked to this url.
    */
-  src: string | null;
+  uploadedImageUrl: string | null;
+
+  /**
+   * A 128px by 128px preview image of the currently selected image.
+   */
+  previewImageUrl: string | null;
 
   /**
    * Component title.
@@ -27,21 +36,26 @@ type ImagePickerProps = {
  * Provides an image picker component for use in the admin dashboard.
  */
 export function ImagePicker(props: ImagePickerProps) {
+  const {
+    uploadedImageUrl,
+    previewImageUrl,
+    title,
+    onSelectButtonClick,
+    onUploadButtonClick,
+  } = props;
+
   const Wrapper = useMemo(
     () => {
-      const src = props.src
-        ? createResponsiveImageUrl(props.src, { format: "png" })
-        : null;
-      if (!src) return Fragment;
+      if (!uploadedImageUrl) return Fragment;
 
       const Link: SFC = ({ children }) => (
-        <a href={src} target="_blank">
+        <a href={uploadedImageUrl} target="_blank">
           {children}
         </a>
       );
       return Link;
     },
-    [props.src],
+    [uploadedImageUrl],
   );
 
   return (
@@ -52,14 +66,8 @@ export function ImagePicker(props: ImagePickerProps) {
       <Grid item>
         <Wrapper>
           <ImageWrapper>
-            {props.src ? (
-              <Image
-                src={createResponsiveImageUrl(props.src, {
-                  format: "png",
-                  w: "128",
-                  h: "128",
-                })}
-              />
+            {previewImageUrl ? (
+              <Image src={previewImageUrl} />
             ) : (
               <EmptyImageTexture />
             )}
@@ -70,17 +78,17 @@ export function ImagePicker(props: ImagePickerProps) {
       <Grid item xs container direction="column" justify="space-between">
         {/* Title */}
         <Grid item>
-          <Typography variant="h6">{props.title}</Typography>
+          <Typography variant="h6">{title}</Typography>
         </Grid>
 
         {/* Action buttons. */}
         <Grid item>
-          <Button onClick={props.onSelectButtonClick}>
-            <Collections className="left-icon" />
+          <Button onClick={onSelectButtonClick}>
+            <CollectionsIcon className="left-icon" />
             Select
           </Button>
-          <Button onClick={props.onUploadButtonClick}>
-            <CloudUpload className="left-icon" />
+          <Button onClick={onUploadButtonClick}>
+            <CloudUploadIcon className="left-icon" />
             Upload
           </Button>
         </Grid>
@@ -105,7 +113,7 @@ const ImageWrapper = styled.div`
         : "rgba(255, 255, 255, 0.23)"};
 `;
 
-const EmptyImageTexture = styled(Texture)`
+const EmptyImageTexture = styled(TextureIcon as FC<SvgIconProps>)`
   width: 100%;
   height: 100%;
   color: ${({ theme }) =>
