@@ -75,6 +75,8 @@ export interface Category {
   pricePerPaperRs: number;
 
   iconUrl: string;
+
+  activated: boolean;
 }
 
 // ====================================================
@@ -302,6 +304,8 @@ export interface CategoryResolvers<
   >;
 
   iconUrl?: CategoryIconUrlResolver<string, TypeParent, Context>;
+
+  activated?: CategoryActivatedResolver<boolean, TypeParent, Context>;
 }
 
 export type CategoryIdResolver<
@@ -326,6 +330,11 @@ export type CategoryPricePerPaperRsResolver<
 > = Resolver<R, Parent, Context>;
 export type CategoryIconUrlResolver<
   R = string,
+  Parent = Category,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type CategoryActivatedResolver<
+  R = boolean,
   Parent = Category,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;

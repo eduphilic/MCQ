@@ -5,4 +5,5 @@ type Category {
   education: String!
   pricePerPaperRs: Int!
   iconUrl: String!
+  activated: Boolean!
 }
