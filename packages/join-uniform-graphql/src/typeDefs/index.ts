@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 
 import language from "./EnumLanguage.graphql";
 import translation from "./ScalarTranslation.graphql";
+import category from "./TypeCategory.graphql";
 import htmlConfig from "./TypeHtmlConfig.graphql";
 import logoConfig from "./TypeLogoConfig.graphql";
 import query from "./TypeQuery.graphql";
@@ -15,4 +16,6 @@ export const typeDefs: DocumentNode = gql`
 
   ${language}
   ${translation}
+
+  ${category}
 `;

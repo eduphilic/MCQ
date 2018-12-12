@@ -1,0 +1,7 @@
+type Category {
+  id: ID!
+  name: String!
+  education: String!
+  pricePerPaperRs: Int!
+  iconUrl: String!
+}

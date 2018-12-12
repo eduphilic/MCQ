@@ -25,11 +25,6 @@
         "value": "{\"formTitleUserSignIn\":{\"key\":\"sessionFormFormTitleUserSignIn\",\"en\":\"Login\"},\"formTitleUserSignUp\":{\"key\":\"sessionFormFormTitleUserSignUp\",\"en\":\"Signup\"},\"formTitleAdminSignIn\":{\"key\":\"sessionFormFormTitleAdminSignIn\",\"en\":\"Login\"},\"fullNameFieldPlaceholder\":{\"key\":\"sessionFormFullNameFieldPlaceholder\",\"en\":\"Enter Your Name\"},\"phoneNumberFieldPlaceholder\":{\"key\":\"sessionFormPhoneNumberFieldPlaceholder\",\"en\":\"Enter Mobile Number\"},\"passwordFieldPlaceholder\":{\"key\":\"sessionFormPasswordFieldPlaceholder\",\"en\":\"Enter Password\"},\"passwordVerifyFieldPlaceholder\":{\"key\":\"sessionFormPasswordVerifyFieldPlaceholder\",\"en\":\"Enter Password Again\"},\"emailAddressFieldPlaceholder\":{\"key\":\"sessionFormEmailAddressFieldPlaceholder\",\"en\":\"Enter Email Address\"},\"submitButtonLabel\":{\"key\":\"sessionSubmitButtonLabel\",\"en\":\"Submit\"},\"termsConditionsCheckboxLabel\":{\"key\":\"sessionTermsConditionsCheckboxLabel\",\"en\":\"Terms & Conditions\"},\"passwordResetLinkLabel\":{\"key\":\"sessionPasswordResetLinkLabel\",\"en\":\"Forgot Password?\"}}"
       }
     },
-    "logoImageConfig": {
-      "defaultValue": {
-        "value": "{\"url\":null}"
-      }
-    },
     "translations": {
       "defaultValue": {
         "value": "{\"landingFooter\":{\"en\":\"Copyright : Eduphilic Consultancy Pvt Ltd 2018\"}}"
@@ -37,8 +32,8 @@
     }
   },
   "version": {
-    "versionNumber": "57",
-    "updateTime": "2018-12-07T05:13:40.283Z",
+    "versionNumber": "58",
+    "updateTime": "2018-12-12T02:30:17.772Z",
     "updateUser": {
       "email": "jason@jasons.io"
     },

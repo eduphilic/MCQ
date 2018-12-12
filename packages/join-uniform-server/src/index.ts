@@ -1,3 +1,4 @@
+import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 import Koa from "koa";
 import path from "path";
@@ -37,6 +38,9 @@ async function bootstrap() {
     ),
   });
 
+  admin.initializeApp(functions.config().firebase);
+  const firebaseDatabase = admin.firestore();
+
   // This should be placed here above the Storybook and Next.js middlewares due
   // to needing to respond to urls before they are proxied.
   applyApolloServerMiddleware({
@@ -44,6 +48,7 @@ async function bootstrap() {
     contextFactory: async (): Promise<ApolloContext> => {
       return {
         firebaseRemoteConfigClient,
+        firebaseDatabase,
       };
     },
     typeDefs: getApolloTypeDefs(),
