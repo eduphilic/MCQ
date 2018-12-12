@@ -1,6 +1,6 @@
 import { DrawerProps } from "@material-ui/core/Drawer";
-import withWidth, { isWidthDown, WithWidth } from "@material-ui/core/withWidth";
 import React, { ComponentType, ReactNode } from "react";
+import { Hidden } from "../Hidden";
 import { useAppDrawerContext } from "./AppDrawerContext";
 
 type ResponsiveDrawerProps = {
@@ -8,22 +8,28 @@ type ResponsiveDrawerProps = {
   Drawer: ComponentType<DrawerProps>;
 };
 
-export const ResponsiveDrawer = withWidth()(
-  (props: WithWidth & ResponsiveDrawerProps) => {
-    const { open, toggle } = useAppDrawerContext();
-    const { children, Drawer, width } = props;
-    const isMobile = isWidthDown("sm", width);
+export function ResponsiveDrawer(props: ResponsiveDrawerProps) {
+  const { open, toggle } = useAppDrawerContext();
+  const { children, Drawer } = props;
 
-    return (
-      <Drawer
-        variant={isMobile ? "temporary" : "permanent"}
-        anchor={isMobile ? "left" : undefined}
-        open={!isMobile || open}
-        onClose={toggle}
-        ModalProps={isMobile ? { keepMounted: true } : undefined}
-      >
-        {children}
-      </Drawer>
-    );
-  },
-);
+  return (
+    <>
+      <Hidden mdUp implementation="css">
+        <Drawer
+          variant="temporary"
+          anchor="left"
+          open={open}
+          onClose={toggle}
+          ModalProps={{ keepMounted: true }}
+        >
+          {children}
+        </Drawer>
+      </Hidden>
+      <Hidden smDown implementation="css">
+        <Drawer variant="permanent" open>
+          {children}
+        </Drawer>
+      </Hidden>
+    </>
+  );
+}
