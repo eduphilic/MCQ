@@ -67,5 +67,6 @@ function createLoadingSpinnerConfig(
       h: "144",
       format: "png",
     }),
+    transitionDelay: 2000,
   };
 }

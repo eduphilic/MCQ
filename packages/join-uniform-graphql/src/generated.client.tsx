@@ -15,6 +15,52 @@ export type Translation = any;
 // Documents
 // ====================================================
 
+export type GetCategoryVariables = {
+  id: string;
+};
+
+export type GetCategoryQuery = {
+  __typename?: "Query";
+
+  category: GetCategoryCategory | null;
+};
+
+export type GetCategoryCategory = {
+  __typename?: "Category";
+
+  id: string;
+
+  name: string;
+
+  education: string;
+
+  pricePerPaperRs: number;
+
+  iconUrl: string;
+
+  activated: boolean;
+};
+
+export type GetEntriesVariables = {};
+
+export type GetEntriesQuery = {
+  __typename?: "Query";
+
+  entries: GetEntriesEntries[];
+};
+
+export type GetEntriesEntries = {
+  __typename?: "Entry";
+
+  id: string;
+
+  name: string;
+
+  description: string;
+
+  categories: string[];
+};
+
 export type GetHtmlConfigVariables = {};
 
 export type GetHtmlConfigQuery = {
@@ -72,6 +118,94 @@ import gql from "graphql-tag";
 // Components
 // ====================================================
 
+export const GetCategoryDocument = gql`
+  query GetCategory($id: ID!) {
+    category(id: $id) {
+      id
+      name
+      education
+      pricePerPaperRs
+      iconUrl
+      activated
+    }
+  }
+`;
+export class GetCategoryComponent extends React.Component<
+  Partial<ReactApollo.QueryProps<GetCategoryQuery, GetCategoryVariables>>
+> {
+  render() {
+    return (
+      <ReactApollo.Query<GetCategoryQuery, GetCategoryVariables>
+        query={GetCategoryDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type GetCategoryProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<GetCategoryQuery, GetCategoryVariables>
+> &
+  TChildProps;
+export function GetCategoryHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        GetCategoryQuery,
+        GetCategoryVariables,
+        GetCategoryProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    GetCategoryQuery,
+    GetCategoryVariables,
+    GetCategoryProps<TChildProps>
+  >(GetCategoryDocument, operationOptions);
+}
+export const GetEntriesDocument = gql`
+  query GetEntries {
+    entries {
+      id
+      name
+      description
+      categories
+    }
+  }
+`;
+export class GetEntriesComponent extends React.Component<
+  Partial<ReactApollo.QueryProps<GetEntriesQuery, GetEntriesVariables>>
+> {
+  render() {
+    return (
+      <ReactApollo.Query<GetEntriesQuery, GetEntriesVariables>
+        query={GetEntriesDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type GetEntriesProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<GetEntriesQuery, GetEntriesVariables>
+> &
+  TChildProps;
+export function GetEntriesHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        GetEntriesQuery,
+        GetEntriesVariables,
+        GetEntriesProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    GetEntriesQuery,
+    GetEntriesVariables,
+    GetEntriesProps<TChildProps>
+  >(GetEntriesDocument, operationOptions);
+}
 export const GetHtmlConfigDocument = gql`
   query GetHtmlConfig {
     htmlConfig {
