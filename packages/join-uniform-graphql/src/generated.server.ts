@@ -26,6 +26,8 @@ export interface Query {
 
   translation: Translation;
 
+  entries: Entry[];
+
   category?: Category | null;
 }
 
@@ -51,6 +53,18 @@ export interface LogoConfig {
   url: string;
 }
 
+/** Represents a military service branch (Entry). */
+export interface Entry {
+  id: string;
+
+  name: string;
+
+  description: string;
+
+  categories: string[];
+}
+
+/** Represents an Entry Category. */
 export interface Category {
   id: string;
 
@@ -118,6 +132,8 @@ export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
 
   translation?: QueryTranslationResolver<Translation, TypeParent, Context>;
 
+  entries?: QueryEntriesResolver<Entry[], TypeParent, Context>;
+
   category?: QueryCategoryResolver<Category | null, TypeParent, Context>;
 }
 
@@ -140,6 +156,11 @@ export interface QueryTranslationArgs {
   language: Language;
 }
 
+export type QueryEntriesResolver<
+  R = Entry[],
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
 export type QueryCategoryResolver<
   R = Category | null,
   Parent = {},
@@ -232,7 +253,38 @@ export type LogoConfigUrlResolver<
   Parent = LogoConfig,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
+/** Represents a military service branch (Entry). */
+export interface EntryResolvers<Context = ApolloContext, TypeParent = Entry> {
+  id?: EntryIdResolver<string, TypeParent, Context>;
 
+  name?: EntryNameResolver<string, TypeParent, Context>;
+
+  description?: EntryDescriptionResolver<string, TypeParent, Context>;
+
+  categories?: EntryCategoriesResolver<string[], TypeParent, Context>;
+}
+
+export type EntryIdResolver<
+  R = string,
+  Parent = Entry,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type EntryNameResolver<
+  R = string,
+  Parent = Entry,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type EntryDescriptionResolver<
+  R = string,
+  Parent = Entry,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type EntryCategoriesResolver<
+  R = string[],
+  Parent = Entry,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+/** Represents an Entry Category. */
 export interface CategoryResolvers<
   Context = ApolloContext,
   TypeParent = Category

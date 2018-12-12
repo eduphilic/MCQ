@@ -1,0 +1,7 @@
+# Represents a military service branch (Entry).
+type Entry {
+  id: ID!
+  name: String!
+  description: String!
+  categories: [String!]!
+}

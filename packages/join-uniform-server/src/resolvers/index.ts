@@ -5,6 +5,7 @@ import { logoConfig } from "./logoConfig";
 import { translation } from "./translation";
 
 import { category } from "./category";
+import { entries } from "./entries";
 
 const Query: QueryResolvers = {
   htmlConfig,
@@ -13,6 +14,7 @@ const Query: QueryResolvers = {
   translation,
 
   category,
+  entries,
 };
 
 export const resolvers = {
