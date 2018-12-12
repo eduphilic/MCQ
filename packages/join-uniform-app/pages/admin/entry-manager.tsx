@@ -1,3 +1,4 @@
+import { PendingChangesButton } from "@join-uniform/components";
 import {
   GetCategoryComponent,
   GetEntriesComponent,
@@ -8,7 +9,17 @@ import { withQueryLoadingSpinner } from "../../lib/utils";
 
 export default function AdminIndexPage() {
   return (
-    <AdminLayoutDashboardContainer title="Entry Manager">
+    <AdminLayoutDashboardContainer
+      title="Entry Manager"
+      appBarButtons={[
+        <PendingChangesButton
+          hasDiscardableChanges
+          hasPublishableChanges
+          onDiscardButtonClick={() => {}} // tslint:disable-line:no-empty
+          onPublishButtonClick={() => {}} // tslint:disable-line:no-empty
+        />,
+      ]}
+    >
       {renderEntries()}
     </AdminLayoutDashboardContainer>
   );
