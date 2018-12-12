@@ -1,3 +1,4 @@
+/// <reference types="firebase-functions" />
 import { FirebaseRemoteConfigClient } from "./services";
 
 export type ApolloContext = {
