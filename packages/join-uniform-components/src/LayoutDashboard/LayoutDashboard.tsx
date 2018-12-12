@@ -20,6 +20,7 @@ export type DashboardLayoutProps = ResponsiveAppBarProps & {
 export function LayoutDashboard(props: DashboardLayoutProps) {
   const {
     title,
+    buttons,
     onLogoutButtonClick,
     drawerTheme,
     drawerLinks,
@@ -31,6 +32,7 @@ export function LayoutDashboard(props: DashboardLayoutProps) {
     <AppDrawerContextProvider>
       <ResponsiveAppBar
         title={title}
+        buttons={buttons}
         onLogoutButtonClick={onLogoutButtonClick}
       />
 

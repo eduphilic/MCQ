@@ -1,4 +1,7 @@
-import { LayoutDashboard } from "@join-uniform/components";
+import {
+  DashboardLayoutProps,
+  LayoutDashboard,
+} from "@join-uniform/components";
 import { GetLogoConfigComponent } from "@join-uniform/graphql";
 import Head from "next/head";
 import Link from "next/link";
@@ -12,12 +15,13 @@ import {
 type AdminLayoutDashboardContainerProps = {
   children?: ReactNode;
   title: string;
+  appBarButtons?: DashboardLayoutProps["buttons"];
 };
 
 export function AdminLayoutDashboardContainer(
   props: AdminLayoutDashboardContainerProps,
 ) {
-  const { children, title } = props;
+  const { children, title, appBarButtons } = props;
 
   return (
     <>
@@ -28,6 +32,7 @@ export function AdminLayoutDashboardContainer(
       {withQueryLoadingSpinner(GetLogoConfigComponent, result => (
         <LayoutDashboard
           title={title}
+          buttons={appBarButtons}
           drawerTheme="admin"
           drawerLinks={links}
           drawerLogoSrc={createResponsiveImageUrl(result.data.logoConfig.url, {

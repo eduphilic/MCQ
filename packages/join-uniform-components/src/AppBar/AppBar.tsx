@@ -3,13 +3,17 @@ import { css, styled } from "@join-uniform/theme";
 import MuiAppBar from "@material-ui/core/AppBar";
 import IconButton, { IconButtonProps } from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
-import React, { ReactNode } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import { Grid } from "../Grid";
+import { Hidden } from "../Hidden";
 import { Typography } from "../Typography";
 
 export type AppBarProps = {
   /** Title text. */
   title: string;
+
+  /** Buttons to render to the left of the logout button. */
+  buttons?: ReactElement<any>[];
 
   /** Called on hamburger button click. */
   onDrawerToggleButtonClick: () => void;
@@ -22,12 +26,18 @@ export type AppBarProps = {
  * Application app bar. Displays hamburger button on mobile.
  */
 export function AppBar(props: AppBarProps) {
-  const { title, onDrawerToggleButtonClick, onLogoutButtonClick } = props;
+  const {
+    title,
+    buttons,
+    onDrawerToggleButtonClick,
+    onLogoutButtonClick,
+  } = props;
 
   return (
     <Wrapper>
       <DrawerToggleButton onClick={onDrawerToggleButtonClick} />
       <Title title={title} />
+      {buttons && <ButtonsContainer buttons={buttons} />}
       <LogoutButton onClick={onLogoutButtonClick} />
     </Wrapper>
   );
@@ -70,16 +80,32 @@ function Title(props: { title: string }) {
 
   return (
     <Grid item xs>
-      <Typography
-        variant="h6"
-        color="inherit"
-        css={css`
-          font-weight: 400;
-        `}
-      >
-        {title}
-      </Typography>
+      <Hidden implementation="css" smDown>
+        <Typography
+          variant="h6"
+          color="inherit"
+          css={css`
+            font-weight: 400;
+          `}
+        >
+          {title}
+        </Typography>
+      </Hidden>
     </Grid>
+  );
+}
+
+function ButtonsContainer(props: { buttons: ReactElement<any>[] }) {
+  const { buttons } = props;
+
+  return (
+    <>
+      {buttons.map((button, index) => (
+        <Grid key={button.key || index} item>
+          {button}
+        </Grid>
+      ))}
+    </>
   );
 }
 
