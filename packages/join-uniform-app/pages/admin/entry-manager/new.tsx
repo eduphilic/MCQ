@@ -1,4 +1,10 @@
-import { Grid, PendingChangesButton } from "@join-uniform/components";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Grid,
+  PendingChangesButton,
+} from "@join-uniform/components";
 import React from "react";
 import { AdminLayoutDashboardContainer } from "../../../containers";
 
@@ -16,7 +22,12 @@ export default function EntryManagerNew() {
       ]}
     >
       <Grid container spacing={16} contentCenter>
-        New Entry Page
+        <Grid item xs>
+          <Card>
+            <CardHeader title="Entry Selection" />
+            <CardContent>Existing entry / create new entry</CardContent>
+          </Card>
+        </Grid>
       </Grid>
     </AdminLayoutDashboardContainer>
   );

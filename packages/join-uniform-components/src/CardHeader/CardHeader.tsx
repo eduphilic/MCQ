@@ -1,7 +1,6 @@
+import { styled } from "@join-uniform/theme";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
 import React, { CSSProperties, ReactNode, SFC } from "react";
-import { styled } from "../styled";
-import { BlockImage } from "./BlockImage";
 
 export type CardHeaderProps = {
   /** Card title. */
@@ -70,26 +69,37 @@ const Wrapper = styled.div`
   }
 `;
 
-const Image = styled<{ className?: string; src: string; size: number }>(
-  props => <BlockImage className={props.className} src={props.src} />,
+const Image = styled(
+  (props: { className?: string; src: string; size: number }) => (
+    <img className={props.className} src={props.src} />
+  ),
 )`
+  display: block;
   width: ${props => props.size}px;
   height: ${props => props.size}px;
   margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const Overline = styled<{
-  className?: string;
-}>(({ className, children }) => (
-  <Typography className={className} variant="overline" gutterBottom>
-    {children}
-  </Typography>
-))`
+const Overline = styled(
+  ({ className, children }: { children?: ReactNode; className?: string }) => (
+    <Typography className={className} variant="overline" gutterBottom>
+      {children}
+    </Typography>
+  ),
+)`
   font-weight: 500;
 `;
 
-const Title = styled<{ className?: string; style?: CSSProperties }>(
-  ({ children, className, style }) => (
+const Title = styled(
+  ({
+    children,
+    className,
+    style,
+  }: {
+    children?: ReactNode;
+    className?: string;
+    style?: CSSProperties;
+  }) => (
     <Typography className={className} variant="h5" paragraph style={style}>
       {children}
     </Typography>
@@ -98,16 +108,21 @@ const Title = styled<{ className?: string; style?: CSSProperties }>(
   margin-bottom: 8px;
 `;
 
-const Subheader = styled<{
-  className?: string;
-  color: NonNullable<CardHeaderProps["subheaderColor"]>;
-}>(({ children, className, color }) => (
-  <Typography
-    className={className}
-    variant="subtitle2"
-    gutterBottom
-    color={color}
-  >
-    {children}
-  </Typography>
-))``;
+const Subheader = styled(
+  ({
+    children,
+    className,
+    color,
+  }: TypographyProps & {
+    style?: CSSProperties;
+  }) => (
+    <Typography
+      className={className}
+      variant="subtitle2"
+      gutterBottom
+      color={color}
+    >
+      {children}
+    </Typography>
+  ),
+)``;
