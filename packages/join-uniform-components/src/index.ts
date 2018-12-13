@@ -1,4 +1,7 @@
+export * from "./Button";
 export * from "./Grid";
+export * from "./Icon";
+export * from "./IconButton";
 export * from "./LayoutDashboard";
 export * from "./LayoutLanding";
 export * from "./LoadingSpinner";

@@ -31,6 +31,7 @@
   "devDependencies": {
     "@join-uniform/components": "1.0.0",
     "@join-uniform/graphql": "1.0.0",
+    "@join-uniform/icons": "1.0.0",
     "@join-uniform/localization": "1.0.0",
     "@join-uniform/theme": "1.0.0",
     "@zeit/next-typescript": "^1.1.1",

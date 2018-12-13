@@ -1,8 +1,11 @@
-import { PendingChangesButton } from "@join-uniform/components";
+import { Button, Icon } from "@join-uniform/components";
 import {
   GetCategoryComponent,
   GetEntriesComponent,
 } from "@join-uniform/graphql";
+import { AddIcon } from "@join-uniform/icons";
+import { css } from "@join-uniform/theme";
+import Link from "next/link";
 import React, { Fragment } from "react";
 import { AdminLayoutDashboardContainer } from "../../containers";
 import { withQueryLoadingSpinner } from "../../lib/utils";
@@ -12,12 +15,13 @@ export default function AdminIndexPage() {
     <AdminLayoutDashboardContainer
       title="Entry Manager"
       appBarButtons={[
-        <PendingChangesButton
-          hasDiscardableChanges
-          hasPublishableChanges
-          onDiscardButtonClick={() => {}} // tslint:disable-line:no-empty
-          onPublishButtonClick={() => {}} // tslint:disable-line:no-empty
-        />,
+        <Link href="/admin/entry-manager/new">
+          <Button color="orange">
+            {/* prettier-ignore */}
+            <AddIcon css={css`margin-right: 8px;`} />
+            Entry
+          </Button>
+        </Link>,
       ]}
     >
       {renderEntries()}
