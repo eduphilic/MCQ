@@ -11,7 +11,7 @@ export function LinkListItem(props: AppDrawerLinkProps) {
 
   return (
     <LinkComponent href={href}>
-      <ListItem button>
+      <ListItem button component="a" href={href}>
         <ListItemTextWithActiveStyle>{title}</ListItemTextWithActiveStyle>
       </ListItem>
     </LinkComponent>

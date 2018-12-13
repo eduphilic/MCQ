@@ -74,7 +74,11 @@ const DrawerLink = withRouter<{
 
   children = cloneElement(children, { className: classes.join(" ") });
 
-  return <Link href={href}>{children}</Link>;
+  return (
+    <Link href={href} prefetch>
+      {children}
+    </Link>
+  );
 });
 
 const links = [

@@ -22,7 +22,7 @@ export function LogoListItem(props: LogoListItemProps) {
   return (
     <>
       <LinkComponent href={href}>
-        <Wrapper button>
+        <Wrapper button component="a" href={href}>
           <LogoListItemIcon>
             <LogoListItemIconImage src={src} />
           </LogoListItemIcon>
