@@ -8,7 +8,7 @@ import {
 } from "../AppDrawer";
 import { ResponsiveAppBar, ResponsiveAppBarProps } from "./ResponsiveAppBar";
 
-export type DashboardLayoutProps = ResponsiveAppBarProps & {
+export type LayoutDashboardProps = ResponsiveAppBarProps & {
   children?: ReactNode;
 
   drawerTheme: AppDrawerProps["theme"];
@@ -17,7 +17,7 @@ export type DashboardLayoutProps = ResponsiveAppBarProps & {
   DrawerLinkComponent: AppDrawerProps["LinkComponent"];
 };
 
-export function LayoutDashboard(props: DashboardLayoutProps) {
+export function LayoutDashboard(props: LayoutDashboardProps) {
   const {
     title,
     buttons,

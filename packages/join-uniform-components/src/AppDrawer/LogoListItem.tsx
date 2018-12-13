@@ -22,14 +22,16 @@ export function LogoListItem(props: LogoListItemProps) {
   return (
     <>
       <LinkComponent href={href}>
-        <Wrapper button component="a" href={href}>
-          <LogoListItemIcon>
-            <LogoListItemIconImage src={src} />
-          </LogoListItemIcon>
-          <LogoListItemText disableTypography>
-            <LogoText />
-          </LogoListItemText>
-        </Wrapper>
+        {() => (
+          <Wrapper button component="a" href={href}>
+            <LogoListItemIcon>
+              <LogoListItemIconImage src={src} />
+            </LogoListItemIcon>
+            <LogoListItemText disableTypography>
+              <LogoText />
+            </LogoListItemText>
+          </Wrapper>
+        )}
       </LinkComponent>
 
       <Divider />

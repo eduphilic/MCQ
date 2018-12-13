@@ -7,13 +7,30 @@ import React, { FC } from "react";
 import { AppDrawerLinkProps } from "./AppDrawerLinkProps";
 
 export function LinkListItem(props: AppDrawerLinkProps) {
-  const { LinkComponent, href, title } = props;
+  const { LinkComponent, href, title, hiddenSubPage } = props;
 
   return (
     <LinkComponent href={href}>
-      <ListItem button component="a" href={href}>
-        <ListItemTextWithActiveStyle>{title}</ListItemTextWithActiveStyle>
-      </ListItem>
+      {active => {
+        if (!active && hiddenSubPage) return <></>;
+
+        return (
+          <ListItem
+            button
+            component="a"
+            href={href}
+            selected={active}
+            classes={{ selected: "selected" }}
+          >
+            <ListItemTextWithActiveStyle
+              inset={hiddenSubPage}
+              classes={{ inset: "inset" }}
+            >
+              {title}
+            </ListItemTextWithActiveStyle>
+          </ListItem>
+        );
+      }}
     </LinkComponent>
   );
 }
@@ -24,8 +41,12 @@ const ListItemTextWithActiveStyle = styled(ListItemText as FC<
   span {
     color: ${({ theme }) => theme.palette.text.secondary};
 
-    .active & {
+    .selected & {
       color: ${({ theme }) => theme.palette.text.primary};
     }
+  }
+
+  &.inset {
+    padding-left: 24px;
   }
 `;

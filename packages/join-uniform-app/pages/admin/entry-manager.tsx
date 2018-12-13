@@ -1,4 +1,4 @@
-import { Button, Icon } from "@join-uniform/components";
+import { Button } from "@join-uniform/components";
 import {
   GetCategoryComponent,
   GetEntriesComponent,

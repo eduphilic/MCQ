@@ -1,12 +1,12 @@
 import {
-  DashboardLayoutProps,
   LayoutDashboard,
+  LayoutDashboardProps,
 } from "@join-uniform/components";
 import { GetLogoConfigComponent } from "@join-uniform/graphql";
 import Head from "next/head";
 import Link from "next/link";
 import { withRouter } from "next/router";
-import React, { cloneElement, ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import {
   createResponsiveImageUrl,
   withQueryLoadingSpinner,
@@ -15,7 +15,7 @@ import {
 type AdminLayoutDashboardContainerProps = {
   children?: ReactNode;
   title: string;
-  appBarButtons?: DashboardLayoutProps["buttons"];
+  appBarButtons?: LayoutDashboardProps["buttons"];
 };
 
 export function AdminLayoutDashboardContainer(
@@ -60,28 +60,19 @@ export function AdminLayoutDashboardContainer(
  * drawer uses the class.
  */
 const DrawerLink = withRouter<{
-  children: ReactElement<{ className?: string }>;
+  children: (active: boolean) => ReactNode;
   href: string;
 }>(props => {
-  let { children } = props;
-  const { router, href } = props;
-
-  const classes = (
-    (children.props.className as string | undefined) || ""
-  ).split(" ");
-
-  if (router!.pathname === href) classes.push("active");
-
-  children = cloneElement(children, { className: classes.join(" ") });
+  const { children, router, href } = props;
 
   return (
     <Link href={href} prefetch>
-      {children}
+      {children(router!.pathname === href) as ReactElement<any>}
     </Link>
   );
 });
 
-const links = [
+const links: LayoutDashboardProps["drawerLinks"] = [
   {
     href: "/admin",
     title: "Dashboard",
@@ -89,6 +80,11 @@ const links = [
   {
     href: "/admin/entry-manager",
     title: "Entry Manager",
+  },
+  {
+    href: "/admin/entry-manager/new",
+    title: "New Entry",
+    hiddenSubPage: true,
   },
   {
     href: "/admin/test-manager",

@@ -1,4 +1,4 @@
-import React, { cloneElement, Fragment, ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 import { AppDrawerProps } from "./AppDrawer";
 import logoImage from "./storiesPlaceholderLogo.png";
 
@@ -8,22 +8,16 @@ export const storiesProps: AppDrawerProps = {
   links: [
     { href: "/", title: "Dashboard" },
     { href: "/entry-manager", title: "Entry Manager" },
+    { href: "/entry-manager/new", title: "New", hiddenSubPage: true },
   ],
   LinkComponent: DummyLinkComponent,
 };
 
 function DummyLinkComponent(props: {
-  children?: ReactElement<{ className?: string }>;
+  children: (active: boolean) => ReactNode;
   href: string;
 }) {
-  const { href } = props;
-  let { children } = props;
+  const { children, href } = props;
 
-  if (children) {
-    children = cloneElement(children!, {
-      className: `${children.props.className || ""}${href === "/" ? " active" : ""}` // prettier-ignore
-    });
-  }
-
-  return <Fragment>{children}</Fragment>;
+  return children(href === "/") as ReactElement<any>;
 }

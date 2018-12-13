@@ -55,6 +55,7 @@ export function AppDrawer(props: AppDrawerProps) {
               key={link.href}
               href={link.href}
               title={link.title}
+              hiddenSubPage={link.hiddenSubPage}
               LinkComponent={LinkComponent}
             />
           ))}
