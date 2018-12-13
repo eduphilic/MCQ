@@ -1,4 +1,4 @@
-import { PendingChangesButton } from "@join-uniform/components";
+import { Grid, PendingChangesButton } from "@join-uniform/components";
 import React from "react";
 import { AdminLayoutDashboardContainer } from "../../../containers";
 
@@ -15,7 +15,9 @@ export default function EntryManagerNew() {
         />,
       ]}
     >
-      <div>New Entry Page</div>
+      <Grid container spacing={16} contentCenter>
+        New Entry Page
+      </Grid>
     </AdminLayoutDashboardContainer>
   );
 }
