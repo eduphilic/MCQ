@@ -22,6 +22,7 @@ export const ResponsiveAppBar = styled(
 )`
   position: fixed;
   width: 100%;
+  z-index: ${({ theme }) => theme.zIndex.appBar};
 
   ${({ theme }) => theme.breakpoints.up("md")} {
     width: calc(100% - ${drawerWidth}px);
