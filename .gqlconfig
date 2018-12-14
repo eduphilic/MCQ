@@ -7,6 +7,10 @@
       {
         match: "packages/join-uniform-graphql/src/queries/**/*.graphql",
         parser: "QueryParser"
+      },
+      {
+        match: "packages/join-uniform-graphql/src/mutations/**/*.graphql",
+        parser: "QueryParser"
       }
     ]
   }

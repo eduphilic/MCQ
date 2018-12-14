@@ -1,0 +1,9 @@
+mutation GenerateCloudinaryMediaLibraryAuthenticationToken {
+  generateCloudinaryMediaLibraryAuthenticationToken {
+    api_key
+    cloud_name
+    signature
+    timestamp
+    username
+  }
+}

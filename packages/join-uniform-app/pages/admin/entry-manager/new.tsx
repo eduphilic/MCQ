@@ -6,6 +6,7 @@ import {
   FormControl,
   FormControlLabel,
   Grid,
+  ImagePicker,
   InputLabel,
   MenuItem,
   PendingChangesButton,
@@ -64,6 +65,7 @@ export default function EntryManagerNew() {
             ]}
           >
             <Grid container spacing={16} contentCenter>
+              {/* Entry Selection card. */}
               <Grid item xs={12}>
                 <Card>
                   <CardHeader title="Entry Selection" variant="admin" />
@@ -132,6 +134,7 @@ export default function EntryManagerNew() {
                 </Card>
               </Grid>
 
+              {/* Category card. */}
               <Grid item xs={12}>
                 <Card>
                   <CardHeader title="Category" variant="admin" />
@@ -151,6 +154,19 @@ export default function EntryManagerNew() {
                       type="number"
                       label="Price per Paper"
                       form={form}
+                    />
+                  </CardContent>
+                </Card>
+              </Grid>
+
+              {/* Category Logo card. */}
+              <Grid item xs={12}>
+                <Card>
+                  <CardHeader title="Category Logo" variant="admin" />
+                  <CardContent>
+                    <ImagePicker
+                      uploadedImageUrl={null}
+                      previewImageUrl={null}
                     />
                   </CardContent>
                 </Card>

@@ -1,24 +1,32 @@
 import { DocumentNode } from "graphql";
 import gql from "graphql-tag";
 
-import language from "./EnumLanguage.graphql";
-import translation from "./ScalarTranslation.graphql";
-import htmlConfig from "./TypeHtmlConfig.graphql";
-import logoConfig from "./TypeLogoConfig.graphql";
-import query from "./TypeQuery.graphql";
+import TypeMutation from "./TypeMutation.graphql";
+import TypeQuery from "./TypeQuery.graphql";
 
-import category from "./TypeCategory.graphql";
-import entry from "./TypeEntry.graphql";
+import ScalarJson from "./ScalarJson.graphql";
+import ScalarTranslation from "./ScalarTranslation.graphql";
+
+import EnumLanguage from "./EnumLanguage.graphql";
+
+import TypeCategory from "./TypeCategory.graphql";
+import TypeCloudinaryMediaWidgetAuthenticationToken from "./TypeCloudinaryMediaWidgetAuthenticationToken.graphql";
+import TypeEntry from "./TypeEntry.graphql";
+import TypeHtmlConfig from "./TypeHtmlConfig.graphql";
+import TypeLogoConfig from "./TypeLogoConfig.graphql";
 
 export const typeDefs: DocumentNode = gql`
-  ${query}
+  ${TypeQuery}
+  ${TypeMutation}
 
-  ${htmlConfig}
-  ${logoConfig}
+  ${ScalarJson}
+  ${ScalarTranslation}
 
-  ${language}
-  ${translation}
+  ${EnumLanguage}
 
-  ${entry}
-  ${category}
+  ${TypeCategory}
+  ${TypeCloudinaryMediaWidgetAuthenticationToken}
+  ${TypeEntry}
+  ${TypeHtmlConfig}
+  ${TypeLogoConfig}
 `;

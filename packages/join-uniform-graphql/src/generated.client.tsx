@@ -11,9 +11,43 @@ export enum Language {
 /** A set of localized strings for a language. */
 export type Translation = any;
 
+export type Json = any;
+
 // ====================================================
 // Documents
 // ====================================================
+
+export type GenerateCloudinaryMediaLibraryAuthenticationTokenVariables = {};
+
+export type GenerateCloudinaryMediaLibraryAuthenticationTokenMutation = {
+  __typename?: "Mutation";
+
+  generateCloudinaryMediaLibraryAuthenticationToken: GenerateCloudinaryMediaLibraryAuthenticationTokenGenerateCloudinaryMediaLibraryAuthenticationToken;
+};
+
+export type GenerateCloudinaryMediaLibraryAuthenticationTokenGenerateCloudinaryMediaLibraryAuthenticationToken = {
+  __typename?: "CloudinaryMediaWidgetAuthenticationToken";
+
+  api_key: string;
+
+  cloud_name: string;
+
+  signature: string;
+
+  timestamp: string;
+
+  username: string;
+};
+
+export type GenerateCloudinarySignatureVariables = {
+  paramsToSign: Json;
+};
+
+export type GenerateCloudinarySignatureMutation = {
+  __typename?: "Mutation";
+
+  generateCloudinarySignature: string;
+};
 
 export type GetCategoryVariables = {
   id: string;
@@ -39,6 +73,16 @@ export type GetCategoryCategory = {
   iconUrl: string;
 
   activated: boolean;
+};
+
+export type GetCloudinaryConfigVariables = {};
+
+export type GetCloudinaryConfigQuery = {
+  __typename?: "Query";
+
+  cloudinaryCloudName: string;
+
+  cloudinaryApiKey: string;
 };
 
 export type GetEntriesVariables = {};
@@ -118,6 +162,126 @@ import gql from "graphql-tag";
 // Components
 // ====================================================
 
+export const GenerateCloudinaryMediaLibraryAuthenticationTokenDocument = gql`
+  mutation GenerateCloudinaryMediaLibraryAuthenticationToken {
+    generateCloudinaryMediaLibraryAuthenticationToken {
+      api_key
+      cloud_name
+      signature
+      timestamp
+      username
+    }
+  }
+`;
+export class GenerateCloudinaryMediaLibraryAuthenticationTokenComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<
+      GenerateCloudinaryMediaLibraryAuthenticationTokenMutation,
+      GenerateCloudinaryMediaLibraryAuthenticationTokenVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<
+        GenerateCloudinaryMediaLibraryAuthenticationTokenMutation,
+        GenerateCloudinaryMediaLibraryAuthenticationTokenVariables
+      >
+        mutation={GenerateCloudinaryMediaLibraryAuthenticationTokenDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type GenerateCloudinaryMediaLibraryAuthenticationTokenProps<
+  TChildProps = any
+> = Partial<
+  ReactApollo.MutateProps<
+    GenerateCloudinaryMediaLibraryAuthenticationTokenMutation,
+    GenerateCloudinaryMediaLibraryAuthenticationTokenVariables
+  >
+> &
+  TChildProps;
+export type GenerateCloudinaryMediaLibraryAuthenticationTokenMutationFn = ReactApollo.MutationFn<
+  GenerateCloudinaryMediaLibraryAuthenticationTokenMutation,
+  GenerateCloudinaryMediaLibraryAuthenticationTokenVariables
+>;
+export function GenerateCloudinaryMediaLibraryAuthenticationTokenHOC<
+  TProps,
+  TChildProps = any
+>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        GenerateCloudinaryMediaLibraryAuthenticationTokenMutation,
+        GenerateCloudinaryMediaLibraryAuthenticationTokenVariables,
+        GenerateCloudinaryMediaLibraryAuthenticationTokenProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    GenerateCloudinaryMediaLibraryAuthenticationTokenMutation,
+    GenerateCloudinaryMediaLibraryAuthenticationTokenVariables,
+    GenerateCloudinaryMediaLibraryAuthenticationTokenProps<TChildProps>
+  >(
+    GenerateCloudinaryMediaLibraryAuthenticationTokenDocument,
+    operationOptions,
+  );
+}
+export const GenerateCloudinarySignatureDocument = gql`
+  mutation GenerateCloudinarySignature($paramsToSign: Json!) {
+    generateCloudinarySignature(paramsToSign: $paramsToSign)
+  }
+`;
+export class GenerateCloudinarySignatureComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<
+      GenerateCloudinarySignatureMutation,
+      GenerateCloudinarySignatureVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<
+        GenerateCloudinarySignatureMutation,
+        GenerateCloudinarySignatureVariables
+      >
+        mutation={GenerateCloudinarySignatureDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type GenerateCloudinarySignatureProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<
+    GenerateCloudinarySignatureMutation,
+    GenerateCloudinarySignatureVariables
+  >
+> &
+  TChildProps;
+export type GenerateCloudinarySignatureMutationFn = ReactApollo.MutationFn<
+  GenerateCloudinarySignatureMutation,
+  GenerateCloudinarySignatureVariables
+>;
+export function GenerateCloudinarySignatureHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        GenerateCloudinarySignatureMutation,
+        GenerateCloudinarySignatureVariables,
+        GenerateCloudinarySignatureProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    GenerateCloudinarySignatureMutation,
+    GenerateCloudinarySignatureVariables,
+    GenerateCloudinarySignatureProps<TChildProps>
+  >(GenerateCloudinarySignatureDocument, operationOptions);
+}
 export const GetCategoryDocument = gql`
   query GetCategory($id: ID!) {
     category(id: $id) {
@@ -162,6 +326,50 @@ export function GetCategoryHOC<TProps, TChildProps = any>(
     GetCategoryVariables,
     GetCategoryProps<TChildProps>
   >(GetCategoryDocument, operationOptions);
+}
+export const GetCloudinaryConfigDocument = gql`
+  query GetCloudinaryConfig {
+    cloudinaryCloudName
+    cloudinaryApiKey
+  }
+`;
+export class GetCloudinaryConfigComponent extends React.Component<
+  Partial<
+    ReactApollo.QueryProps<
+      GetCloudinaryConfigQuery,
+      GetCloudinaryConfigVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Query<GetCloudinaryConfigQuery, GetCloudinaryConfigVariables>
+        query={GetCloudinaryConfigDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type GetCloudinaryConfigProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<GetCloudinaryConfigQuery, GetCloudinaryConfigVariables>
+> &
+  TChildProps;
+export function GetCloudinaryConfigHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        GetCloudinaryConfigQuery,
+        GetCloudinaryConfigVariables,
+        GetCloudinaryConfigProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    GetCloudinaryConfigQuery,
+    GetCloudinaryConfigVariables,
+    GetCloudinaryConfigProps<TChildProps>
+  >(GetCloudinaryConfigDocument, operationOptions);
 }
 export const GetEntriesDocument = gql`
   query GetEntries {

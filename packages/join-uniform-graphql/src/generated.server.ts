@@ -11,6 +11,8 @@ export enum Language {
 /** A set of localized strings for a language. */
 export type Translation = any;
 
+export type Json = any;
+
 // ====================================================
 // Scalars
 // ====================================================
@@ -29,6 +31,10 @@ export interface Query {
   entries: Entry[];
 
   category?: Category | null;
+
+  cloudinaryCloudName: string;
+
+  cloudinaryApiKey: string;
 }
 
 /** Configuration for the html document sent in response to all requests. */
@@ -79,6 +85,26 @@ export interface Category {
   activated: boolean;
 }
 
+export interface Mutation {
+  /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
+  generateCloudinarySignature: string;
+  /** Generates the authentication parameters required for creating a session foruse with the Cloudinary Media Library widget. */
+  generateCloudinaryMediaLibraryAuthenticationToken: CloudinaryMediaWidgetAuthenticationToken;
+}
+
+/** Authentication parameters for Cloudinary Media Library widget. */
+export interface CloudinaryMediaWidgetAuthenticationToken {
+  cloud_name: string;
+
+  api_key: string;
+
+  username: string;
+
+  timestamp: string;
+
+  signature: string;
+}
+
 // ====================================================
 // Arguments
 // ====================================================
@@ -88,6 +114,9 @@ export interface TranslationQueryArgs {
 }
 export interface CategoryQueryArgs {
   id: string;
+}
+export interface GenerateCloudinarySignatureMutationArgs {
+  paramsToSign: Json;
 }
 
 import { GraphQLResolveInfo } from "graphql";
@@ -137,6 +166,14 @@ export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
   entries?: QueryEntriesResolver<Entry[], TypeParent, Context>;
 
   category?: QueryCategoryResolver<Category | null, TypeParent, Context>;
+
+  cloudinaryCloudName?: QueryCloudinaryCloudNameResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+
+  cloudinaryApiKey?: QueryCloudinaryApiKeyResolver<string, TypeParent, Context>;
 }
 
 export type QueryHtmlConfigResolver<
@@ -172,6 +209,16 @@ export interface QueryCategoryArgs {
   id: string;
 }
 
+export type QueryCloudinaryCloudNameResolver<
+  R = string,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type QueryCloudinaryApiKeyResolver<
+  R = string,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
 /** Configuration for the html document sent in response to all requests. */
 export interface HtmlConfigResolvers<
   Context = ApolloContext,
@@ -336,5 +383,96 @@ export type CategoryIconUrlResolver<
 export type CategoryActivatedResolver<
   R = boolean,
   Parent = Category,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+
+export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
+  /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
+  generateCloudinarySignature?: MutationGenerateCloudinarySignatureResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+  /** Generates the authentication parameters required for creating a session foruse with the Cloudinary Media Library widget. */
+  generateCloudinaryMediaLibraryAuthenticationToken?: MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver<
+    CloudinaryMediaWidgetAuthenticationToken,
+    TypeParent,
+    Context
+  >;
+}
+
+export type MutationGenerateCloudinarySignatureResolver<
+  R = string,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context, MutationGenerateCloudinarySignatureArgs>;
+export interface MutationGenerateCloudinarySignatureArgs {
+  paramsToSign: Json;
+}
+
+export type MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver<
+  R = CloudinaryMediaWidgetAuthenticationToken,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+/** Authentication parameters for Cloudinary Media Library widget. */
+export interface CloudinaryMediaWidgetAuthenticationTokenResolvers<
+  Context = ApolloContext,
+  TypeParent = CloudinaryMediaWidgetAuthenticationToken
+> {
+  cloud_name?: CloudinaryMediaWidgetAuthenticationTokenCloudNameResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+
+  api_key?: CloudinaryMediaWidgetAuthenticationTokenApiKeyResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+
+  username?: CloudinaryMediaWidgetAuthenticationTokenUsernameResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+
+  timestamp?: CloudinaryMediaWidgetAuthenticationTokenTimestampResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+
+  signature?: CloudinaryMediaWidgetAuthenticationTokenSignatureResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+}
+
+export type CloudinaryMediaWidgetAuthenticationTokenCloudNameResolver<
+  R = string,
+  Parent = CloudinaryMediaWidgetAuthenticationToken,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type CloudinaryMediaWidgetAuthenticationTokenApiKeyResolver<
+  R = string,
+  Parent = CloudinaryMediaWidgetAuthenticationToken,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type CloudinaryMediaWidgetAuthenticationTokenUsernameResolver<
+  R = string,
+  Parent = CloudinaryMediaWidgetAuthenticationToken,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type CloudinaryMediaWidgetAuthenticationTokenTimestampResolver<
+  R = string,
+  Parent = CloudinaryMediaWidgetAuthenticationToken,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type CloudinaryMediaWidgetAuthenticationTokenSignatureResolver<
+  R = string,
+  Parent = CloudinaryMediaWidgetAuthenticationToken,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;

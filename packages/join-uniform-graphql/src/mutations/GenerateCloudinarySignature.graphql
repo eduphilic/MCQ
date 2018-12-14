@@ -1,0 +1,3 @@
+mutation GenerateCloudinarySignature($paramsToSign: Json!) {
+  generateCloudinarySignature(paramsToSign: $paramsToSign)
+}

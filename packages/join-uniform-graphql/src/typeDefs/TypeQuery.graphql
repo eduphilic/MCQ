@@ -7,4 +7,7 @@ type Query {
 
   entries: [Entry!]!
   category(id: ID!): Category
+
+  cloudinaryCloudName: String!
+  cloudinaryApiKey: String!
 }
