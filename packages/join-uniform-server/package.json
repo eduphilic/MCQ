@@ -12,6 +12,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@koa/cors": "^2.2.2",
     "apollo-server-core": "^2.2.6",
     "apollo-server-koa": "^2.2.6",
     "firebase-admin": "^6.3.0",

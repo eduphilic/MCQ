@@ -1,3 +1,4 @@
+import cors from "@koa/cors";
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 import Koa from "koa";
@@ -41,6 +42,8 @@ async function bootstrap() {
   admin.initializeApp(functions.config().firebase);
   const firebaseDatabase = admin.firestore();
   firebaseDatabase.settings({ timestampsInSnapshots: true });
+
+  if (process.env.NODE_ENV === "development") app.use(cors());
 
   // This should be placed here above the Storybook and Next.js middlewares due
   // to needing to respond to urls before they are proxied.
