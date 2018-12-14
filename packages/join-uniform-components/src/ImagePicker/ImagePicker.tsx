@@ -8,7 +8,7 @@ import { SvgIconProps } from "@material-ui/core/SvgIcon";
 import React, { FC, Fragment, SFC, useMemo } from "react";
 import { Button } from "../Button";
 import { Grid } from "../Grid";
-import { Typography } from "../Typography";
+import { Typography } from "../muiComponents";
 
 type ImagePickerProps = {
   /**

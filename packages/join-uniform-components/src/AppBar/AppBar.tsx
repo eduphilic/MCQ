@@ -5,8 +5,7 @@ import IconButton, { IconButtonProps } from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
 import React, { ReactElement, ReactNode } from "react";
 import { Grid } from "../Grid";
-import { Hidden } from "../Hidden";
-import { Typography } from "../Typography";
+import { Hidden, Typography } from "../muiComponents";
 
 export type AppBarProps = {
   /** Title text. */

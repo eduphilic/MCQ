@@ -2,7 +2,7 @@ import { css } from "@join-uniform/theme";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { Grid } from "../Grid";
-import { Typography } from "../Typography";
+import { Typography } from "../muiComponents";
 import { Button, ButtonProps, colors } from "./Button";
 
 const stories = storiesOf("Button", module);

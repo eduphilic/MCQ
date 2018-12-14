@@ -1,6 +1,6 @@
 import { css, styled } from "@join-uniform/theme";
 import React from "react";
-import { Typography } from "../Typography";
+import { Typography } from "../muiComponents";
 
 export type LogoTextProps = {
   className?: string;

@@ -1,6 +1,6 @@
 import { DrawerProps } from "@material-ui/core/Drawer";
 import React, { ComponentType, ReactNode } from "react";
-import { Hidden } from "../Hidden";
+import { Hidden } from "../muiComponents";
 import { useAppDrawerContext } from "./AppDrawerContext";
 
 type ResponsiveDrawerProps = {

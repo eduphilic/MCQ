@@ -2,7 +2,7 @@ import { strings } from "@join-uniform/localization";
 import { DarkTheme, styled } from "@join-uniform/theme";
 import React, { FC, ReactNode } from "react";
 import { Grid, GridProps } from "../Grid";
-import { Typography } from "../Typography";
+import { Typography } from "../muiComponents";
 
 type LayoutLandingProps = { children?: ReactNode };
 

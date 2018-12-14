@@ -1,13 +1,11 @@
 export * from "./Button";
 export * from "./Card";
 export * from "./CardActionArea";
-export * from "./CardContent";
 export * from "./CardHeader";
 export * from "./Grid";
-export * from "./Icon";
-export * from "./IconButton";
 export * from "./LayoutDashboard";
 export * from "./LayoutLanding";
 export * from "./LoadingSpinner";
 export * from "./PendingChangesButton";
-export * from "./Typography";
+
+export * from "./muiComponents";
