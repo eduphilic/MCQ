@@ -1,4 +1,4 @@
-import { css, styled } from "@join-uniform/theme";
+import { styled } from "@join-uniform/theme";
 import Divider from "@material-ui/core/Divider";
 import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
 import ListItemIcon, {
@@ -10,6 +10,7 @@ import ListItemText, {
 import React, { FC } from "react";
 import { LogoText } from "../LogoText";
 import { AppDrawerLinkProps } from "./AppDrawerLinkProps";
+import { generateToolbarHeightBasedCss } from "./generateToolbarHeightBasedCss";
 
 type LogoListItemProps = Omit<AppDrawerLinkProps, "title"> & {
   /** Logo image url. Requires a 48px by 48px image. */
@@ -65,20 +66,3 @@ const LogoListItemText = styled(ListItemText as FC<ListItemTextProps>)`
   padding-left: 0;
   padding-right: 0;
 `;
-
-function generateToolbarHeightBasedCss(
-  reduction: number,
-  field = "height" as "width" | "height",
-) {
-  return css`
-    ${field}: ${56 - reduction}px;
-
-    ${({ theme }) => theme.breakpoints.up("xs")} and (orientation: landscape) {
-      ${field}: ${48 - reduction}px;
-    }
-
-    ${({ theme }) => theme.breakpoints.up("sm")} {
-      ${field}: ${64 - reduction}px;
-    }
-  `;
-}
