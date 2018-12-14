@@ -13,6 +13,7 @@ import {
   RadioGroup,
   Select,
   TextField,
+  TextFieldProps,
 } from "@join-uniform/components";
 import { GetEntriesComponent } from "@join-uniform/graphql";
 import { Formik, FormikProps } from "formik";
@@ -25,6 +26,10 @@ type FormValues = {
   existingEntryId: string | null;
   entryName: string;
   entryExplanation: string;
+  categoryName: string;
+  categoryEducation: string;
+  pricePerPaper: string;
+  logoUrl: string | null;
 };
 
 export default function EntryManagerNew() {
@@ -37,6 +42,10 @@ export default function EntryManagerNew() {
           existingEntryId: entries.length > 0 ? entries[0].id : null,
           entryName: "",
           entryExplanation: "",
+          categoryName: "",
+          categoryEducation: "",
+          pricePerPaper: "10",
+          logoUrl: null,
         }}
         onSubmit={() => {
           //
@@ -55,7 +64,7 @@ export default function EntryManagerNew() {
             ]}
           >
             <Grid container spacing={16} contentCenter>
-              <Grid item xs>
+              <Grid item xs={12}>
                 <Card>
                   <CardHeader title="Entry Selection" variant="admin" />
                   <CardContent>
@@ -122,6 +131,30 @@ export default function EntryManagerNew() {
                   )}
                 </Card>
               </Grid>
+
+              <Grid item xs={12}>
+                <Card>
+                  <CardHeader title="Category" variant="admin" />
+                  <CardContent>
+                    <FormTextField
+                      name="categoryName"
+                      label="Category Name"
+                      form={form}
+                    />
+                    <FormTextField
+                      name="categoryEducation"
+                      label="Category Education"
+                      form={form}
+                    />
+                    <FormTextField
+                      name="pricePerPaper"
+                      type="number"
+                      label="Price per Paper"
+                      form={form}
+                    />
+                  </CardContent>
+                </Card>
+              </Grid>
             </Grid>
           </AdminLayoutDashboardContainer>
         )}
@@ -132,16 +165,18 @@ export default function EntryManagerNew() {
 
 function FormTextField(props: {
   name: keyof FormValues;
+  type?: TextFieldProps["type"];
   label: string;
   form: FormikProps<FormValues>;
 }) {
-  const { name, label, form } = props;
+  const { name, type, label, form } = props;
 
   return (
     <TextField
       fullWidth
       margin="normal"
       name={name}
+      type={type}
       label={form.errors[name] || label}
       error={!!form.errors[name]}
       value={form.values[name] as string}
