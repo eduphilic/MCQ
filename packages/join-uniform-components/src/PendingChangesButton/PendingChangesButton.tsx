@@ -42,10 +42,12 @@ export function PendingChangesButton(props: PendingChangesButtonProps) {
   if (!hasDiscardableChanges) return null;
 
   return (
-    <Grid container spacing={8} alignItems="center">
+    <Grid container spacing={8} alignItems="center" wrap="nowrap">
       <Hidden mdUp implementation="css">
         <Grid item>
-          <Typography variant="caption">Pending changes</Typography>
+          <Typography variant="caption" style={{ whiteSpace: "nowrap" }}>
+            Pending changes
+          </Typography>
         </Grid>
       </Hidden>
 
