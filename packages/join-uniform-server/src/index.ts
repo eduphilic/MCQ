@@ -40,6 +40,7 @@ async function bootstrap() {
 
   admin.initializeApp(functions.config().firebase);
   const firebaseDatabase = admin.firestore();
+  firebaseDatabase.settings({ timestampsInSnapshots: true });
 
   // This should be placed here above the Storybook and Next.js middlewares due
   // to needing to respond to urls before they are proxied.
