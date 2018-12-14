@@ -4,6 +4,12 @@ import CardContent, {
 export type CardContentProps = MuiCardContentProps;
 export { CardContent };
 
+import Divider, {
+  DividerProps as MuiDividerProps,
+} from "@material-ui/core/Divider";
+export type DividerProps = MuiDividerProps;
+export { Divider };
+
 import FormControl, {
   FormControlProps as MuiFormControlProps,
 } from "@material-ui/core/FormControl";
@@ -38,6 +44,18 @@ import IconButton, {
 export type IconButtonProps = MuiIconButtonProps;
 export { IconButton };
 
+import InputLabel, {
+  InputLabelProps as MuiInputLabelProps,
+} from "@material-ui/core/InputLabel";
+export type InputLabelProps = MuiInputLabelProps;
+export { InputLabel };
+
+import MenuItem, {
+  MenuItemProps as MuiMenuItemProps,
+} from "@material-ui/core/MenuItem";
+export type MenuItemProps = MuiMenuItemProps;
+export { MenuItem };
+
 import Radio, { RadioProps as MuiRadioProps } from "@material-ui/core/Radio";
 export type RadioProps = MuiRadioProps;
 export { Radio };
@@ -47,6 +65,18 @@ import RadioGroup, {
 } from "@material-ui/core/RadioGroup";
 export type RadioGroupProps = MuiRadioGroupProps;
 export { RadioGroup };
+
+import Select, {
+  SelectProps as MuiSelectProps,
+} from "@material-ui/core/Select";
+export type SelectProps = MuiSelectProps;
+export { Select };
+
+import TextField, {
+  TextFieldProps as MuiTextFieldProps,
+} from "@material-ui/core/TextField";
+export type TextFieldProps = MuiTextFieldProps;
+export { TextField };
 
 import Typography, {
   TypographyProps as MuiTypographyProps,

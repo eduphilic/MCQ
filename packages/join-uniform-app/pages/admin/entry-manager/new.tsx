@@ -2,22 +2,29 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Divider,
   FormControl,
   FormControlLabel,
   Grid,
+  InputLabel,
+  MenuItem,
   PendingChangesButton,
   Radio,
   RadioGroup,
+  Select,
+  TextField,
 } from "@join-uniform/components";
 import { GetEntriesComponent } from "@join-uniform/graphql";
-import { Divider } from "@material-ui/core";
-import { Formik } from "formik";
+import { Formik, FormikProps } from "formik";
 import React from "react";
 import { AdminLayoutDashboardContainer } from "../../../containers";
 import { withQueryLoadingSpinner } from "../../../lib/utils";
 
 type FormValues = {
   entrySource: "existing" | "new";
+  existingEntryId: string | null;
+  entryName: string;
+  entryExplanation: string;
 };
 
 export default function EntryManagerNew() {
@@ -27,8 +34,13 @@ export default function EntryManagerNew() {
       <Formik<FormValues>
         initialValues={{
           entrySource: entries.length > 0 ? "existing" : "new",
+          existingEntryId: entries.length > 0 ? entries[0].id : null,
+          entryName: "",
+          entryExplanation: "",
         }}
-        onSubmit={() => {}}
+        onSubmit={() => {
+          //
+        }}
       >
         {form => (
           <AdminLayoutDashboardContainer
@@ -67,9 +79,46 @@ export default function EntryManagerNew() {
                       </RadioGroup>
                     </FormControl>
                   </CardContent>
+
+                  {/* Start existing entry or new entry selections. */}
                   <Divider />
+
+                  {/* Existing entry selection. */}
                   {form.values.entrySource === "existing" && (
-                    <CardContent>Placeholder</CardContent>
+                    <CardContent>
+                      <FormControl fullWidth margin="normal">
+                        <InputLabel htmlFor="existingEntry">Entry</InputLabel>
+                        <Select
+                          value={form.values.existingEntryId || ""}
+                          onChange={form.handleChange}
+                          inputProps={{
+                            id: "existingEntry",
+                            name: "existingEntryId",
+                          }}
+                        >
+                          {entries.map(entry => (
+                            <MenuItem key={entry.id} value={entry.id}>
+                              {entry.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </CardContent>
+                  )}
+
+                  {form.values.entrySource === "new" && (
+                    <CardContent>
+                      <FormTextField
+                        name="entryName"
+                        label="Entry Name"
+                        form={form}
+                      />
+                      <FormTextField
+                        name="entryExplanation"
+                        label="Entry Explanation"
+                        form={form}
+                      />
+                    </CardContent>
                   )}
                 </Card>
               </Grid>
@@ -78,5 +127,26 @@ export default function EntryManagerNew() {
         )}
       </Formik>
     ),
+  );
+}
+
+function FormTextField(props: {
+  name: keyof FormValues;
+  label: string;
+  form: FormikProps<FormValues>;
+}) {
+  const { name, label, form } = props;
+
+  return (
+    <TextField
+      fullWidth
+      margin="normal"
+      name={name}
+      label={form.errors[name] || label}
+      error={!!form.errors[name]}
+      value={form.values[name] as string}
+      onChange={form.handleChange}
+      onBlur={form.handleBlur}
+    />
   );
 }
