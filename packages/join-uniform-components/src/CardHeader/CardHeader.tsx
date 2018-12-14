@@ -30,18 +30,31 @@ export type CardHeaderProps = {
 
   /** Overline contents. */
   overline?: string;
+
+  /**
+   * Variant of the font styles.
+   *
+   * @default "normal"
+   */
+  variant?: "normal" | "admin";
 };
 
 export const CardHeader: SFC<CardHeaderProps> = props => {
   const {
     title,
-    titleStyle,
+    titleStyle: titleStyleProp,
     subheader,
     imageUrl,
     imageSize = 80,
     overline,
     subheaderColor = "textSecondary",
+    variant,
   } = props;
+
+  const titleStyle =
+    titleStyleProp || variant === "admin"
+      ? { fontSize: 18, fontWeight: 500 }
+      : undefined;
 
   return (
     <Wrapper>

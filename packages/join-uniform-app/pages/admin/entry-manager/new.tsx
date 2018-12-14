@@ -57,7 +57,7 @@ export default function EntryManagerNew() {
             <Grid container spacing={16} contentCenter>
               <Grid item xs>
                 <Card>
-                  <CardHeader title="Entry Selection" />
+                  <CardHeader title="Entry Selection" variant="admin" />
                   <CardContent>
                     <FormControl>
                       <RadioGroup
@@ -69,7 +69,7 @@ export default function EntryManagerNew() {
                         <FormControlLabel
                           value="existing"
                           control={<Radio />}
-                          label="Existing entry"
+                          label="Add to existing entry"
                         />
                         <FormControlLabel
                           value="new"
