@@ -13,7 +13,10 @@ import {
   createNextJsMiddleware,
   createStorybookMiddleware,
 } from "./middleware";
-import { createFirebaseRemoteConfigClient } from "./services";
+import {
+  createCloudinaryService,
+  createFirebaseRemoteConfigClient,
+} from "./services";
 
 const dev = process.env.NODE_ENV !== "production";
 const app = new Koa();
@@ -43,6 +46,16 @@ async function bootstrap() {
   const firebaseDatabase = admin.firestore();
   firebaseDatabase.settings({ timestampsInSnapshots: true });
 
+  const cloudinaryService = createCloudinaryService({
+    cloudName: config.cloudinary.cloud_name,
+    username: config.cloudinary.username,
+    apiKey: config.cloudinary.api_key,
+    apiSecret: config.cloudinary.api_secret,
+  });
+
+  // Enable CORS during development so that the Next.js development server can
+  // access the GraphQL endpoint. When accessing the Next.js development server
+  // directly on port 3000, the origin will not match.
   if (process.env.NODE_ENV === "development") app.use(cors());
 
   // This should be placed here above the Storybook and Next.js middlewares due
@@ -53,6 +66,7 @@ async function bootstrap() {
       return {
         firebaseRemoteConfigClient,
         firebaseDatabase,
+        cloudinaryService,
       };
     },
     typeDefs: getApolloTypeDefs(),

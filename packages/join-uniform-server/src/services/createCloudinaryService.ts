@@ -1,6 +1,6 @@
+import { CloudinaryMediaWidgetAuthenticationToken } from "@join-uniform/graphql/server";
 import cloudinary from "cloudinary";
 import crypto from "crypto";
-import { CloudinaryMediaWidgetAuthenticationToken } from "../generated";
 
 let cloudinaryConfigured = false;
 
@@ -10,6 +10,11 @@ export type CloudinaryCredentials = {
   apiSecret: string;
   username: string;
 };
+
+export function createCloudinaryService(credentials: CloudinaryCredentials) {
+  CloudinaryService.setConfig(credentials);
+  return new CloudinaryService(credentials);
+}
 
 export class CloudinaryService {
   constructor(private credentials: CloudinaryCredentials) {
