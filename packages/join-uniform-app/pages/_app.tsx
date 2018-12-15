@@ -11,6 +11,7 @@ import {
   withMaterialUIApp,
   withTranslationApp,
 } from "../lib/rendering";
+import { CloudinaryProvider } from "../lib/utils";
 
 class MyApp extends App<RenderingAppProps> {
   render() {
@@ -20,6 +21,7 @@ class MyApp extends App<RenderingAppProps> {
       apolloClient,
       muiCssContext,
       loadingSpinnerConfig,
+      router,
     } = this.props;
 
     const composedProviders = composeProviders(
@@ -29,6 +31,7 @@ class MyApp extends App<RenderingAppProps> {
       <LightTheme />,
       <ThemeBaseline />,
       <LoadingSpinnerProvider {...loadingSpinnerConfig!} />,
+      /^\/admin/.test(router.pathname) && <CloudinaryProvider />,
       <Component {...pageProps} muiCssContext={muiCssContext} />,
     );
 
@@ -41,9 +44,12 @@ export default withApolloApp(
 );
 
 function composeProviders(
-  ...providers: ReactElement<{ children?: ReactNode }>[]
+  ...providers: (ReactElement<{ children?: ReactNode }> | false)[]
 ) {
-  return providers.reduceRight((children, parent) => {
+  const filteredProviders = providers.filter(
+    (p): p is Exclude<typeof providers[0], boolean> => typeof p !== "boolean",
+  );
+  return filteredProviders.reduceRight((children, parent) => {
     return cloneElement(parent, {}, children);
-  }, providers[0]);
+  }, filteredProviders[0]);
 }

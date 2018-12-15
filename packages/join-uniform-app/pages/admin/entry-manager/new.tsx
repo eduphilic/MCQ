@@ -20,7 +20,11 @@ import { GetEntriesComponent } from "@join-uniform/graphql";
 import { Formik, FormikProps } from "formik";
 import React from "react";
 import { AdminLayoutDashboardContainer } from "../../../containers";
-import { withQueryLoadingSpinner } from "../../../lib/utils";
+import {
+  createResponsiveImageUrl,
+  useCloudinary,
+  withQueryLoadingSpinner,
+} from "../../../lib/utils";
 
 type FormValues = {
   entrySource: "existing" | "new";
@@ -34,6 +38,8 @@ type FormValues = {
 };
 
 export default function EntryManagerNew() {
+  const cloudinary = useCloudinary();
+
   return withQueryLoadingSpinner(
     GetEntriesComponent,
     ({ data: { entries } }) => (
@@ -165,8 +171,21 @@ export default function EntryManagerNew() {
                   <CardHeader title="Category Logo" variant="admin" />
                   <CardContent>
                     <ImagePicker
-                      uploadedImageUrl={null}
-                      previewImageUrl={null}
+                      uploadedImageUrl={
+                        form.values.logoUrl &&
+                        createResponsiveImageUrl(form.values.logoUrl, {
+                          format: "png",
+                        })
+                      }
+                      previewImageUrl={
+                        form.values.logoUrl &&
+                        createResponsiveImageUrl(form.values.logoUrl, {
+                          w: "128",
+                          h: "128",
+                          format: "png",
+                        })
+                      }
+                      onUploadButtonClick={() => handleUploadButtonClick(form)}
                     />
                   </CardContent>
                 </Card>
@@ -177,6 +196,26 @@ export default function EntryManagerNew() {
       </Formik>
     ),
   );
+
+  function handleUploadButtonClick(form: FormikProps<FormValues>) {
+    if (!cloudinary) return;
+
+    cloudinary.client.openUploadWidget(
+      {
+        ...cloudinary.getDefaultUploadWidgetOptions(),
+        folder: "categories",
+      },
+      (err, result) => {
+        if (err) throw new Error(err);
+        if (result.event === "abort" || result.event === "close") {
+          return;
+        }
+        if (result.event === "success") {
+          form.setFieldValue("logoUrl", result.info.secure_url);
+        }
+      },
+    );
+  }
 }
 
 function FormTextField(props: {

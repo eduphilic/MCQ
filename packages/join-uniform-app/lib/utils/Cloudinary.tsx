@@ -562,6 +562,16 @@ export type CloudinaryMediaLibrarySelectedItem = {
   duration?: number;
 };
 
+type CloudinaryUploadWidgetEvent =
+  | {
+      event: "success";
+      info: {
+        secure_url: string;
+      };
+    }
+  | { event: "abort" }
+  | { event: "close" };
+
 /**
  * Cloudinary client library.
  */
@@ -571,7 +581,10 @@ export type Cloudinary = {
    */
   setCloudName: (name: string) => void;
 
-  openUploadWidget: (options: CloudinaryOpenUploadWidgetOptions) => void;
+  openUploadWidget: (
+    options: CloudinaryOpenUploadWidgetOptions,
+    result: (err: any, event: CloudinaryUploadWidgetEvent) => any,
+  ) => void;
 
   openMediaLibrary: (
     options: CloudinaryOpenMediaLibraryOptions,
