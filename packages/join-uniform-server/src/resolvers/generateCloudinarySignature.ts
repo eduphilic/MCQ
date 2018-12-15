@@ -1,7 +1,7 @@
 import {
   MutationGenerateCloudinarySignatureArgs,
   MutationGenerateCloudinarySignatureResolver,
-} from "../generated";
+} from "@join-uniform/graphql/server";
 
 export const generateCloudinarySignature: MutationGenerateCloudinarySignatureResolver = async (
   _parent,
