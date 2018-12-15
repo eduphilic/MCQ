@@ -1,4 +1,8 @@
-import gql from "graphql-tag";
+import {
+  GenerateCloudinaryMediaLibraryAuthenticationTokenComponent,
+  GenerateCloudinarySignatureComponent,
+  GetCloudinaryConfigComponent,
+} from "@join-uniform/graphql";
 import React, {
   createContext,
   ReactNode,
@@ -6,14 +10,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { Mutation as ApolloMutation } from "react-apollo";
-import {
-  GenerateCloudinarySignatureMutationArgs,
-  Mutation,
-  Query,
-} from "../../api";
-import { QueryWithLoading } from "../../components/QueryWithLoading";
-import { isBrowser } from "../../utils";
+import { withQueryLoadingSpinner } from "./withQueryLoadingSpinner";
 
 let initializationStatus: Promise<{ success: boolean }>;
 
@@ -32,31 +29,6 @@ type CloudinaryContextValue = {
 } | null;
 const CloudinaryContext = createContext<CloudinaryContextValue>(null);
 
-const GET_CLOUDINARY_CONFIG = gql`
-  query GetCloudinaryConfig {
-    cloudinaryCloudName
-    cloudinaryApiKey
-  }
-`;
-
-const GENERATE_CLOUDINARY_SIGNATURE = gql`
-  mutation GenerateCloudinarySignature($paramsToSign: JSON!) {
-    generateCloudinarySignature(paramsToSign: $paramsToSign)
-  }
-`;
-
-const GENERATE_CLOUDINARY_MEDIA_LIBRARY_AUTHENTICATION_TOKEN = gql`
-  mutation GenerateCloudinaryMediaLibraryAuthenticationToken {
-    generateCloudinaryMediaLibraryAuthenticationToken {
-      api_key
-      cloud_name
-      signature
-      timestamp
-      username
-    }
-  }
-`;
-
 export function useCloudinary() {
   return useContext(CloudinaryContext);
 }
@@ -72,7 +44,7 @@ export function CloudinaryProvider(props: {
   const [cloudinary, setCloudinary] = useState<CloudinaryContextValue>(null);
 
   // Load the Cloudinary client libraries if it hasn't already been loaded.
-  if (isBrowser() && !initializationStatus) {
+  if (process.browser && !initializationStatus) {
     const uploadWidgetScript = document.createElement("script");
     const mediaLibraryWidgetScript = document.createElement("script");
 
@@ -108,13 +80,13 @@ export function CloudinaryProvider(props: {
   // exists or undefined otherwise. The state will be updated by the effect
   // below to indicate that the client has been loaded.
   const [cloudinaryClient, setCloudinaryClient] = useState(
-    isBrowser() ? window.cloudinary : undefined,
+    process.browser ? window.cloudinary : undefined,
   );
 
   // Wait for the Cloudinary client script to load and then issue a state
   // update.
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!process.browser) return;
 
     // tslint:disable-next-line:no-floating-promises
     initializationStatus.then(({ success }) => {
@@ -125,25 +97,13 @@ export function CloudinaryProvider(props: {
 
   // Get the Cloudinary "cloudName" and render the provider.
   return (
-    <ApolloMutation<
-      Pick<Mutation, "generateCloudinarySignature">,
-      GenerateCloudinarySignatureMutationArgs
-    >
-      mutation={GENERATE_CLOUDINARY_SIGNATURE}
-    >
+    <GenerateCloudinarySignatureComponent>
       {generateCloudinarySignature => (
-        <ApolloMutation<
-          Pick<Mutation, "generateCloudinaryMediaLibraryAuthenticationToken">
-        >
-          mutation={GENERATE_CLOUDINARY_MEDIA_LIBRARY_AUTHENTICATION_TOKEN}
-        >
-          {generateCloudinaryMediaLibraryAuthenticationToken => (
-            <QueryWithLoading<
-              Pick<Query, "cloudinaryCloudName" | "cloudinaryApiKey">
-            >
-              query={GET_CLOUDINARY_CONFIG}
-            >
-              {({ data }) => {
+        <GenerateCloudinaryMediaLibraryAuthenticationTokenComponent>
+          {generateCloudinaryMediaLibraryAuthenticationToken =>
+            withQueryLoadingSpinner(
+              GetCloudinaryConfigComponent,
+              ({ data }) => {
                 if (cloudinaryClient) {
                   cloudinaryClient.setCloudName(data.cloudinaryCloudName);
 
@@ -208,12 +168,12 @@ export function CloudinaryProvider(props: {
                     {props.children}
                   </CloudinaryContext.Provider>
                 );
-              }}
-            </QueryWithLoading>
-          )}
-        </ApolloMutation>
+              },
+            )
+          }
+        </GenerateCloudinaryMediaLibraryAuthenticationTokenComponent>
       )}
-    </ApolloMutation>
+    </GenerateCloudinarySignatureComponent>
   );
 }
 

@@ -8,6 +8,7 @@ import Link from "next/link";
 import { withRouter } from "next/router";
 import React, { ReactElement, ReactNode } from "react";
 import {
+  CloudinaryProvider,
   createResponsiveImageUrl,
   withQueryLoadingSpinner,
 } from "../lib/utils";
@@ -42,7 +43,7 @@ export function AdminLayoutDashboardContainer(
           DrawerLinkComponent={DrawerLink}
           onLogoutButtonClick={handleLogoutButtonClick}
         >
-          {children}
+          <CloudinaryProvider>{children}</CloudinaryProvider>
         </LayoutDashboard>
       ))}
     </>
