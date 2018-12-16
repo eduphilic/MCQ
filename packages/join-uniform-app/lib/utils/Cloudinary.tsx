@@ -143,15 +143,25 @@ export function CloudinaryProvider(props: {
                       getDefaultMediaLibraryWidgetOptions: async () => {
                         const fetchResult = await generateCloudinaryMediaLibraryAuthenticationToken();
 
-                        if (!fetchResult || fetchResult.errors) {
+                        if (
+                          !fetchResult ||
+                          fetchResult.errors ||
+                          !fetchResult.data
+                        ) {
                           throw new Error(
                             "Failed to retrieve Cloudinary Media Widget authentication token.",
                           );
                         }
 
+                        // Remove Apollo specific fields.
+                        delete fetchResult.data.__typename;
+                        delete fetchResult.data
+                          .generateCloudinaryMediaLibraryAuthenticationToken
+                          .__typename;
+
                         return {
                           // Authentication:
-                          ...fetchResult.data!
+                          ...fetchResult.data
                             .generateCloudinaryMediaLibraryAuthenticationToken,
 
                           // Media library behavior:

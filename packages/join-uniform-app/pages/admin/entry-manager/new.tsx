@@ -185,7 +185,12 @@ export default function EntryManagerNew() {
                           format: "png",
                         })
                       }
-                      onUploadButtonClick={() => handleUploadButtonClick(form)}
+                      onSelectButtonClick={() =>
+                        handleLogoSelectButtonClick(form)
+                      }
+                      onUploadButtonClick={() =>
+                        handleLogoUploadButtonClick(form)
+                      }
                     />
                   </CardContent>
                 </Card>
@@ -197,7 +202,20 @@ export default function EntryManagerNew() {
     ),
   );
 
-  function handleUploadButtonClick(form: FormikProps<FormValues>) {
+  async function handleLogoSelectButtonClick(form: FormikProps<FormValues>) {
+    if (!cloudinary) return;
+
+    cloudinary.client.openMediaLibrary(
+      await cloudinary.getDefaultMediaLibraryWidgetOptions(),
+      {
+        insertHandler: data => {
+          form.setFieldValue("logoUrl", data.assets[0].secure_url);
+        },
+      },
+    );
+  }
+
+  function handleLogoUploadButtonClick(form: FormikProps<FormValues>) {
     if (!cloudinary) return;
 
     cloudinary.client.openUploadWidget(
