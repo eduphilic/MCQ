@@ -1,3 +1,6 @@
+import { Formik, FormikProps } from "formik";
+import React from "react";
+
 import {
   Card,
   CardContent,
@@ -17,14 +20,12 @@ import {
   TextFieldProps,
 } from "@join-uniform/components";
 import { GetEntriesComponent } from "@join-uniform/graphql";
-import { Formik, FormikProps } from "formik";
-import React from "react";
-import { AdminLayoutDashboardContainer } from "../../../containers";
+import { AdminLayoutDashboardContainer } from "~/containers";
 import {
   createResponsiveImageUrl,
   useCloudinary,
   withQueryLoadingSpinner,
-} from "../../../lib/utils";
+} from "~/lib/utils";
 
 type FormValues = {
   entrySource: "existing" | "new";

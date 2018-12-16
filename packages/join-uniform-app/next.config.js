@@ -32,6 +32,8 @@ module.exports = withTypescript(
           accumulator[mod] = `${mod}/src`;
           return accumulator;
         }, {}),
+
+        "~": __dirname,
       };
 
       return config;

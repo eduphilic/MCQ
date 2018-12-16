@@ -7,8 +7,10 @@
   ],
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
+    "no-implicit-dependencies": [true, "dev", ["~"]],
     "no-submodule-imports": [
       true,
+      "~",
       "@join-uniform/graphql/server",
       "@material-ui/core",
       "@material-ui/icons",
@@ -18,7 +20,6 @@
     "import-name": false,
     "interface-over-type-literal": false,
     "function-name": false,
-    "no-implicit-dependencies": [true, "dev"],
     "object-shorthand-properties-first": false,
     "object-literal-sort-keys": false,
     "array-type": false,

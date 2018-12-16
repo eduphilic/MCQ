@@ -3,7 +3,6 @@
     "target": "esnext",
     "module": "esnext",
     "lib": ["esnext", "dom"],
-    "baseUrl": "./packages",
     "allowJs": true,
     "checkJs": true,
     "jsx": "react",
@@ -18,10 +17,6 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "typeRoots": ["./typings", "./node_modules/@types"],
-    "skipLibCheck": true,
-    "paths": {
-      "@join-uniform/*": ["./join-uniform-*/src"],
-      "@join-uniform/graphql/*": ["./join-uniform-graphql/src/*"]
-    }
+    "skipLibCheck": true
   }
 }
