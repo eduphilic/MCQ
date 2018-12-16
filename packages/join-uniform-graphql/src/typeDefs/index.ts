@@ -15,6 +15,9 @@ import TypeEntry from "./TypeEntry.graphql";
 import TypeHtmlConfig from "./TypeHtmlConfig.graphql";
 import TypeLogoConfig from "./TypeLogoConfig.graphql";
 
+import InputCategoryCreationRequestExistingEntry from "./InputCategoryCreationRequestExistingEntry.graphql";
+import InputCategoryCreationRequestNewEntry from "./InputCategoryCreationRequestNewEntry.graphql";
+
 export const typeDefs: DocumentNode = gql`
   ${TypeQuery}
   ${TypeMutation}
@@ -29,4 +32,7 @@ export const typeDefs: DocumentNode = gql`
   ${TypeEntry}
   ${TypeHtmlConfig}
   ${TypeLogoConfig}
+
+  ${InputCategoryCreationRequestExistingEntry}
+  ${InputCategoryCreationRequestNewEntry}
 `;

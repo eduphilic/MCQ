@@ -1,0 +1,3 @@
+mutation CreateCategoryNewEntry($request: CategoryCreationRequestNewEntry!) {
+  createCategoryNewEntry(request: $request)
+}

@@ -1,0 +1,5 @@
+mutation CreateCategoryExistingEntry(
+  $request: CategoryCreationRequestExistingEntry!
+) {
+  createCategoryExistingEntry(request: $request)
+}

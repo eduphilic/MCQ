@@ -2,6 +2,32 @@
 // SCRIPT-> yarn build
 // @ts-ignore
 import * as models from "./models";
+
+export interface CategoryCreationRequestExistingEntry {
+  readonly categoryName: string;
+
+  readonly categoryEducation: string;
+
+  readonly pricePerPaper: number;
+
+  readonly logoUrl: string;
+
+  readonly existingEntryId: string;
+}
+
+export interface CategoryCreationRequestNewEntry {
+  readonly categoryName: string;
+
+  readonly categoryEducation: string;
+
+  readonly pricePerPaper: number;
+
+  readonly logoUrl: string;
+
+  readonly entryName: string;
+
+  readonly entryExplanation: string;
+}
 /** Supported localization languages. */
 export enum Language {
   English = "English",
@@ -16,6 +42,26 @@ export type Json = any;
 // ====================================================
 // Documents
 // ====================================================
+
+export type CreateCategoryExistingEntryVariables = {
+  request: CategoryCreationRequestExistingEntry;
+};
+
+export type CreateCategoryExistingEntryMutation = {
+  __typename?: "Mutation";
+
+  createCategoryExistingEntry: boolean | null;
+};
+
+export type CreateCategoryNewEntryVariables = {
+  request: CategoryCreationRequestNewEntry;
+};
+
+export type CreateCategoryNewEntryMutation = {
+  __typename?: "Mutation";
+
+  createCategoryNewEntry: boolean | null;
+};
 
 export type GenerateCloudinaryMediaLibraryAuthenticationTokenVariables = {};
 
@@ -162,6 +208,114 @@ import gql from "graphql-tag";
 // Components
 // ====================================================
 
+export const CreateCategoryExistingEntryDocument = gql`
+  mutation CreateCategoryExistingEntry(
+    $request: CategoryCreationRequestExistingEntry!
+  ) {
+    createCategoryExistingEntry(request: $request)
+  }
+`;
+export class CreateCategoryExistingEntryComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<
+      CreateCategoryExistingEntryMutation,
+      CreateCategoryExistingEntryVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<
+        CreateCategoryExistingEntryMutation,
+        CreateCategoryExistingEntryVariables
+      >
+        mutation={CreateCategoryExistingEntryDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type CreateCategoryExistingEntryProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<
+    CreateCategoryExistingEntryMutation,
+    CreateCategoryExistingEntryVariables
+  >
+> &
+  TChildProps;
+export type CreateCategoryExistingEntryMutationFn = ReactApollo.MutationFn<
+  CreateCategoryExistingEntryMutation,
+  CreateCategoryExistingEntryVariables
+>;
+export function CreateCategoryExistingEntryHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        CreateCategoryExistingEntryMutation,
+        CreateCategoryExistingEntryVariables,
+        CreateCategoryExistingEntryProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    CreateCategoryExistingEntryMutation,
+    CreateCategoryExistingEntryVariables,
+    CreateCategoryExistingEntryProps<TChildProps>
+  >(CreateCategoryExistingEntryDocument, operationOptions);
+}
+export const CreateCategoryNewEntryDocument = gql`
+  mutation CreateCategoryNewEntry($request: CategoryCreationRequestNewEntry!) {
+    createCategoryNewEntry(request: $request)
+  }
+`;
+export class CreateCategoryNewEntryComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<
+      CreateCategoryNewEntryMutation,
+      CreateCategoryNewEntryVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<
+        CreateCategoryNewEntryMutation,
+        CreateCategoryNewEntryVariables
+      >
+        mutation={CreateCategoryNewEntryDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type CreateCategoryNewEntryProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<
+    CreateCategoryNewEntryMutation,
+    CreateCategoryNewEntryVariables
+  >
+> &
+  TChildProps;
+export type CreateCategoryNewEntryMutationFn = ReactApollo.MutationFn<
+  CreateCategoryNewEntryMutation,
+  CreateCategoryNewEntryVariables
+>;
+export function CreateCategoryNewEntryHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        CreateCategoryNewEntryMutation,
+        CreateCategoryNewEntryVariables,
+        CreateCategoryNewEntryProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    CreateCategoryNewEntryMutation,
+    CreateCategoryNewEntryVariables,
+    CreateCategoryNewEntryProps<TChildProps>
+  >(CreateCategoryNewEntryDocument, operationOptions);
+}
 export const GenerateCloudinaryMediaLibraryAuthenticationTokenDocument = gql`
   mutation GenerateCloudinaryMediaLibraryAuthenticationToken {
     generateCloudinaryMediaLibraryAuthenticationToken {

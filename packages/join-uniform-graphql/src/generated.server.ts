@@ -2,6 +2,32 @@
 // SCRIPT-> yarn build
 // @ts-ignore
 import * as models from "./models";
+
+export interface CategoryCreationRequestExistingEntry {
+  readonly categoryName: string;
+
+  readonly categoryEducation: string;
+
+  readonly pricePerPaper: number;
+
+  readonly logoUrl: string;
+
+  readonly existingEntryId: string;
+}
+
+export interface CategoryCreationRequestNewEntry {
+  readonly categoryName: string;
+
+  readonly categoryEducation: string;
+
+  readonly pricePerPaper: number;
+
+  readonly logoUrl: string;
+
+  readonly entryName: string;
+
+  readonly entryExplanation: string;
+}
 /** Supported localization languages. */
 export enum Language {
   English = "English",
@@ -86,6 +112,9 @@ export interface Category {
 }
 
 export interface Mutation {
+  createCategoryExistingEntry?: boolean | null;
+
+  createCategoryNewEntry?: boolean | null;
   /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
   generateCloudinarySignature: string;
   /** Generates the authentication parameters required for creating a session foruse with the Cloudinary Media Library widget. */
@@ -114,6 +143,12 @@ export interface TranslationQueryArgs {
 }
 export interface CategoryQueryArgs {
   id: string;
+}
+export interface CreateCategoryExistingEntryMutationArgs {
+  request: CategoryCreationRequestExistingEntry;
+}
+export interface CreateCategoryNewEntryMutationArgs {
+  request: CategoryCreationRequestNewEntry;
 }
 export interface GenerateCloudinarySignatureMutationArgs {
   paramsToSign: Json;
@@ -387,6 +422,17 @@ export type CategoryActivatedResolver<
 > = Resolver<R, Parent, Context>;
 
 export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
+  createCategoryExistingEntry?: MutationCreateCategoryExistingEntryResolver<
+    boolean | null,
+    TypeParent,
+    Context
+  >;
+
+  createCategoryNewEntry?: MutationCreateCategoryNewEntryResolver<
+    boolean | null,
+    TypeParent,
+    Context
+  >;
   /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
   generateCloudinarySignature?: MutationGenerateCloudinarySignatureResolver<
     string,
@@ -399,6 +445,24 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
     TypeParent,
     Context
   >;
+}
+
+export type MutationCreateCategoryExistingEntryResolver<
+  R = boolean | null,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context, MutationCreateCategoryExistingEntryArgs>;
+export interface MutationCreateCategoryExistingEntryArgs {
+  request: CategoryCreationRequestExistingEntry;
+}
+
+export type MutationCreateCategoryNewEntryResolver<
+  R = boolean | null,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context, MutationCreateCategoryNewEntryArgs>;
+export interface MutationCreateCategoryNewEntryArgs {
+  request: CategoryCreationRequestNewEntry;
 }
 
 export type MutationGenerateCloudinarySignatureResolver<

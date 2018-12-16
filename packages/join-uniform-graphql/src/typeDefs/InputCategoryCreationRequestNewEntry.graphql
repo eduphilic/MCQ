@@ -1,0 +1,8 @@
+input CategoryCreationRequestNewEntry {
+  categoryName: String!
+  categoryEducation: String!
+  pricePerPaper: Int!
+  logoUrl: String!
+  entryName: String!
+  entryExplanation: String!
+}
