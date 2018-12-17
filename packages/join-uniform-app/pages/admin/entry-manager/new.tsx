@@ -9,6 +9,7 @@ import {
   FormControl,
   FormControlLabel,
   Grid,
+  Hidden,
   ImagePicker,
   InputLabel,
   MenuItem,
@@ -78,23 +79,33 @@ export default function EntryManagerNew() {
                   <CardHeader title="Entry Selection" variant="admin" />
                   <CardContent>
                     <FormControl>
-                      <RadioGroup
-                        name="entrySource"
-                        value={form.values.entrySource}
-                        onChange={form.handleChange}
-                        onBlur={form.handleBlur}
-                      >
-                        <FormControlLabel
-                          value="existing"
-                          control={<Radio />}
-                          label="Add to existing entry"
-                        />
-                        <FormControlLabel
-                          value="new"
-                          control={<Radio />}
-                          label="Create new entry"
-                        />
-                      </RadioGroup>
+                      {/* Display as row on tablet viewport. */}
+                      {Array.from({ length: 2 }).map((_item, index) => (
+                        <Hidden
+                          smDown={index === 1}
+                          mdUp={index === 0}
+                          implementation="css"
+                        >
+                          <RadioGroup
+                            name="entrySource"
+                            value={form.values.entrySource}
+                            onChange={form.handleChange}
+                            onBlur={form.handleBlur}
+                            row={index === 1}
+                          >
+                            <FormControlLabel
+                              value="existing"
+                              control={<Radio />}
+                              label="Add to existing entry"
+                            />
+                            <FormControlLabel
+                              value="new"
+                              control={<Radio />}
+                              label="Create new entry"
+                            />
+                          </RadioGroup>
+                        </Hidden>
+                      ))}
                     </FormControl>
                   </CardContent>
 
