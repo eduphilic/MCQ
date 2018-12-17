@@ -8,5 +8,6 @@ export * from "./LayoutDashboard";
 export * from "./LayoutLanding";
 export * from "./LoadingSpinner";
 export * from "./PendingChangesButton";
+export * from "./SubmissionProgressDialog";
 
 export * from "./muiComponents";
