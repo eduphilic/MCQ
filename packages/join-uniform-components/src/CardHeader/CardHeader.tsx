@@ -3,6 +3,8 @@ import Typography, { TypographyProps } from "@material-ui/core/Typography";
 import React, { CSSProperties, ReactNode, SFC } from "react";
 
 export type CardHeaderProps = {
+  className?: string;
+
   /** Card title. */
   title: ReactNode;
 
@@ -41,6 +43,7 @@ export type CardHeaderProps = {
 
 export const CardHeader: SFC<CardHeaderProps> = props => {
   const {
+    className,
     title,
     titleStyle: titleStyleProp,
     subheader,
@@ -57,7 +60,7 @@ export const CardHeader: SFC<CardHeaderProps> = props => {
       : undefined;
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       {imageUrl && <Image src={imageUrl} size={imageSize} />}
 
       <div>

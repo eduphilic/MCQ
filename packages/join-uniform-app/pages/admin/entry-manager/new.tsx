@@ -21,6 +21,7 @@ import {
   TextFieldProps,
 } from "@join-uniform/components";
 import { GetEntriesComponent } from "@join-uniform/graphql";
+import { css } from "@join-uniform/theme";
 import { AdminLayoutDashboardContainer } from "~/containers";
 import {
   createResponsiveImageUrl,
@@ -30,13 +31,15 @@ import {
 
 type FormValues = {
   entrySource: "existing" | "new";
-  existingEntryId: string | null;
-  entryName: string;
-  entryExplanation: string;
   categoryName: string;
   categoryEducation: string;
   pricePerPaper: string;
-  logoUrl: string | null;
+
+  existingEntryId: string | null;
+
+  entryName: string;
+  entryExplanation: string;
+  entryLogoUrl: string | null;
 };
 
 export default function EntryManagerNew() {
@@ -48,13 +51,15 @@ export default function EntryManagerNew() {
       <Formik<FormValues>
         initialValues={{
           entrySource: entries.length > 0 ? "existing" : "new",
-          existingEntryId: entries.length > 0 ? entries[0].id : null,
-          entryName: "",
-          entryExplanation: "",
           categoryName: "",
           categoryEducation: "",
           pricePerPaper: "10",
-          logoUrl: null,
+
+          existingEntryId: entries.length > 0 ? entries[0].id : null,
+
+          entryName: "",
+          entryExplanation: "",
+          entryLogoUrl: null,
         }}
         onSubmit={() => {
           //
@@ -62,7 +67,7 @@ export default function EntryManagerNew() {
       >
         {form => (
           <AdminLayoutDashboardContainer
-            title="New Entry"
+            title="New Category"
             appBarButtons={[
               <PendingChangesButton
                 hasDiscardableChanges
@@ -82,6 +87,7 @@ export default function EntryManagerNew() {
                       {/* Display as row on tablet viewport. */}
                       {Array.from({ length: 2 }).map((_item, index) => (
                         <Hidden
+                          key={index}
                           smDown={index === 1}
                           mdUp={index === 0}
                           implementation="css"
@@ -135,19 +141,53 @@ export default function EntryManagerNew() {
                     </CardContent>
                   )}
 
+                  {/* New entry selection. */}
                   {form.values.entrySource === "new" && (
-                    <CardContent>
-                      <FormTextField
-                        name="entryName"
-                        label="Entry Name"
-                        form={form}
+                    <>
+                      <CardContent>
+                        <FormTextField
+                          name="entryName"
+                          label="Entry Name"
+                          form={form}
+                        />
+                        <FormTextField
+                          name="entryExplanation"
+                          label="Entry Explanation"
+                          form={form}
+                        />
+                      </CardContent>
+                      <CardHeader
+                        title="Entry Logo"
+                        variant="admin"
+                        css={css`
+                          padding-bottom: 8px;
+                        `}
                       />
-                      <FormTextField
-                        name="entryExplanation"
-                        label="Entry Explanation"
-                        form={form}
-                      />
-                    </CardContent>
+                      <CardContent>
+                        <ImagePicker
+                          uploadedImageUrl={
+                            form.values.entryLogoUrl &&
+                            createResponsiveImageUrl(form.values.entryLogoUrl, {
+                              format: "png",
+                            })
+                          }
+                          previewImageUrl={
+                            form.values.entryLogoUrl &&
+                            createResponsiveImageUrl(form.values.entryLogoUrl, {
+                              w: "128",
+                              h: "128",
+                              format: "png",
+                            })
+                          }
+                          onSelectButtonClick={() =>
+                            handleLogoSelectButtonClick(form)
+                          }
+                          onUploadButtonClick={() =>
+                            handleLogoUploadButtonClick(form)
+                          }
+                        />
+                      </CardContent>
+                    </>
                   )}
                 </Card>
               </Grid>
@@ -176,37 +216,6 @@ export default function EntryManagerNew() {
                   </CardContent>
                 </Card>
               </Grid>
-
-              {/* Category Logo card. */}
-              <Grid item xs={12}>
-                <Card>
-                  <CardHeader title="Category Logo" variant="admin" />
-                  <CardContent>
-                    <ImagePicker
-                      uploadedImageUrl={
-                        form.values.logoUrl &&
-                        createResponsiveImageUrl(form.values.logoUrl, {
-                          format: "png",
-                        })
-                      }
-                      previewImageUrl={
-                        form.values.logoUrl &&
-                        createResponsiveImageUrl(form.values.logoUrl, {
-                          w: "128",
-                          h: "128",
-                          format: "png",
-                        })
-                      }
-                      onSelectButtonClick={() =>
-                        handleLogoSelectButtonClick(form)
-                      }
-                      onUploadButtonClick={() =>
-                        handleLogoUploadButtonClick(form)
-                      }
-                    />
-                  </CardContent>
-                </Card>
-              </Grid>
             </Grid>
           </AdminLayoutDashboardContainer>
         )}
@@ -221,7 +230,7 @@ export default function EntryManagerNew() {
       await cloudinary.getDefaultMediaLibraryWidgetOptions(),
       {
         insertHandler: data => {
-          form.setFieldValue("logoUrl", data.assets[0].secure_url);
+          form.setFieldValue("entryLogoUrl", data.assets[0].secure_url);
         },
       },
     );
@@ -241,7 +250,7 @@ export default function EntryManagerNew() {
           return;
         }
         if (result.event === "success") {
-          form.setFieldValue("logoUrl", result.info.secure_url);
+          form.setFieldValue("entryLogoUrl", result.info.secure_url);
         }
       },
     );

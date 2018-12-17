@@ -83,7 +83,7 @@ const links: LayoutDashboardProps["drawerLinks"] = [
   },
   {
     href: "/admin/entry-manager/new",
-    title: "New Entry",
+    title: "New Category",
     hiddenSubPage: true,
   },
   {
