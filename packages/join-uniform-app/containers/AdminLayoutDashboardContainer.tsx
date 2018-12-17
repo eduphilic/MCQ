@@ -91,6 +91,10 @@ const links: LayoutDashboardProps["drawerLinks"] = [
     title: "Test Manager",
   },
   {
+    href: "/admin/index-manager",
+    title: "Index Manager",
+  },
+  {
     href: "/admin/plan-manager",
     title: "Plan Manager",
   },
