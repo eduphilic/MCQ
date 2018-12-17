@@ -1,4 +1,5 @@
 import { Formik, FormikProps } from "formik";
+import Router from "next/router";
 import React, { useRef } from "react";
 
 import {
@@ -54,7 +55,7 @@ export default function EntryManagerNew() {
 
   return withQueryLoadingSpinner(
     GetEntriesComponent,
-    ({ data: { entries } }) => {
+    ({ data: { entries }, refetch }) => {
       entrySourceRef.current = entries.length > 0 ? "existing" : "new";
 
       return (
@@ -75,9 +76,9 @@ export default function EntryManagerNew() {
                     entryExplanation: "",
                     entryLogoUrl: null,
                   }}
-                  onSubmit={values => {
+                  onSubmit={async values => {
                     if (values.entrySource === "existing") {
-                      createCategoryExistingEntry({
+                      await createCategoryExistingEntry({
                         variables: {
                           request: {
                             categoryEducation: values.categoryEducation,
@@ -87,10 +88,12 @@ export default function EntryManagerNew() {
                           },
                         },
                       });
+                      await refetch();
+                      Router.replace("/admin/entry-manager");
                       return;
                     }
 
-                    createCategoryNewEntry({
+                    await createCategoryNewEntry({
                       variables: {
                         request: {
                           categoryEducation: values.categoryEducation,
@@ -102,6 +105,8 @@ export default function EntryManagerNew() {
                         },
                       },
                     });
+                    await refetch();
+                    Router.replace("/admin/entry-manager");
                   }}
                   validationSchema={() => {
                     return entrySourceRef.current === "new"
