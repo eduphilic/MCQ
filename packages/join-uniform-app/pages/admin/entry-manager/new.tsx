@@ -21,6 +21,8 @@ import {
   TextFieldProps,
 } from "@join-uniform/components";
 import {
+  CreateCategoryExistingEntryComponent,
+  CreateCategoryNewEntryComponent,
   GetEntriesComponent,
   ValidatorCategoryCreationRequestExistingEntry,
   ValidatorCategoryCreationRequestNewEntry,
@@ -56,195 +58,235 @@ export default function EntryManagerNew() {
       entrySourceRef.current = entries.length > 0 ? "existing" : "new";
 
       return (
-        <Formik<FormValues>
-          initialValues={{
-            entrySource: entrySourceRef.current!,
-            categoryName: "",
-            categoryEducation: "",
-            pricePerPaper: "10",
+        <CreateCategoryExistingEntryComponent>
+          {createCategoryExistingEntry => (
+            <CreateCategoryNewEntryComponent>
+              {createCategoryNewEntry => (
+                <Formik<FormValues>
+                  initialValues={{
+                    entrySource: entrySourceRef.current!,
+                    categoryName: "",
+                    categoryEducation: "",
+                    pricePerPaper: "10",
 
-            existingEntryId: entries.length > 0 ? entries[0].id : null,
+                    existingEntryId: entries.length > 0 ? entries[0].id : null,
 
-            entryName: "",
-            entryExplanation: "",
-            entryLogoUrl: null,
-          }}
-          onSubmit={() => {
-            //
-          }}
-          validationSchema={() => {
-            return entrySourceRef.current === "new"
-              ? ValidatorCategoryCreationRequestNewEntry
-              : ValidatorCategoryCreationRequestExistingEntry;
-          }}
-        >
-          {form => (
-            <AdminLayoutDashboardContainer
-              title="New Category"
-              appBarButtons={[
-                <PendingChangesButton
-                  hasDiscardableChanges={form.dirty}
-                  hasPublishableChanges={form.isValid}
-                  onDiscardButtonClick={() => form.resetForm()}
-                  onPublishButtonClick={() => {}} // tslint:disable-line:no-empty
-                />,
-              ]}
-            >
-              <Grid container spacing={16} contentCenter>
-                {/* Entry Selection card. */}
-                <Grid item xs={12}>
-                  <Card>
-                    <CardHeader title="Entry Selection" variant="admin" />
-                    <CardContent>
-                      <FormControl>
-                        {/* Display as row on tablet viewport. */}
-                        {Array.from({ length: 2 }).map((_item, index) => (
-                          <Hidden
-                            key={index}
-                            smDown={index === 1}
-                            mdUp={index === 0}
-                            implementation="css"
-                          >
-                            <RadioGroup
-                              name="entrySource"
-                              value={form.values.entrySource}
-                              onChange={(
-                                event: React.ChangeEvent<{}>,
-                                value: string,
-                              ) => {
-                                form.handleChange(event);
-                                entrySourceRef.current = value as FormValues["entrySource"];
-                              }}
-                              onBlur={form.handleBlur}
-                              row={index === 1}
-                            >
-                              <FormControlLabel
-                                value="existing"
-                                control={<Radio />}
-                                label="Add to existing entry"
+                    entryName: "",
+                    entryExplanation: "",
+                    entryLogoUrl: null,
+                  }}
+                  onSubmit={values => {
+                    if (values.entrySource === "existing") {
+                      createCategoryExistingEntry({
+                        variables: {
+                          request: {
+                            categoryEducation: values.categoryEducation,
+                            categoryName: values.categoryName,
+                            existingEntryId: values.existingEntryId!,
+                            pricePerPaper: parseInt(values.pricePerPaper, 10),
+                          },
+                        },
+                      });
+                      return;
+                    }
+
+                    createCategoryNewEntry({
+                      variables: {
+                        request: {
+                          categoryEducation: values.categoryEducation,
+                          categoryName: values.categoryName,
+                          entryExplanation: values.entryExplanation,
+                          entryLogoUrl: values.entryLogoUrl!,
+                          entryName: values.entryName,
+                          pricePerPaper: parseInt(values.pricePerPaper, 10),
+                        },
+                      },
+                    });
+                  }}
+                  validationSchema={() => {
+                    return entrySourceRef.current === "new"
+                      ? ValidatorCategoryCreationRequestNewEntry
+                      : ValidatorCategoryCreationRequestExistingEntry;
+                  }}
+                >
+                  {form => (
+                    <AdminLayoutDashboardContainer
+                      title="New Category"
+                      appBarButtons={[
+                        <PendingChangesButton
+                          hasDiscardableChanges={form.dirty}
+                          hasPublishableChanges={form.isValid}
+                          onDiscardButtonClick={() => form.resetForm()}
+                          onPublishButtonClick={() => form.submitForm()}
+                        />,
+                      ]}
+                    >
+                      <Grid container spacing={16} contentCenter>
+                        {/* Entry Selection card. */}
+                        <Grid item xs={12}>
+                          <Card>
+                            <CardHeader
+                              title="Entry Selection"
+                              variant="admin"
+                            />
+                            <CardContent>
+                              <FormControl>
+                                {/* Display as row on tablet viewport. */}
+                                {Array.from({ length: 2 }).map(
+                                  (_item, index) => (
+                                    <Hidden
+                                      key={index}
+                                      smDown={index === 1}
+                                      mdUp={index === 0}
+                                      implementation="css"
+                                    >
+                                      <RadioGroup
+                                        name="entrySource"
+                                        value={form.values.entrySource}
+                                        onChange={(
+                                          event: React.ChangeEvent<{}>,
+                                          value: string,
+                                        ) => {
+                                          form.handleChange(event);
+                                          entrySourceRef.current = value as FormValues["entrySource"];
+                                        }}
+                                        onBlur={form.handleBlur}
+                                        row={index === 1}
+                                      >
+                                        <FormControlLabel
+                                          value="existing"
+                                          control={<Radio />}
+                                          label="Add to existing entry"
+                                        />
+                                        <FormControlLabel
+                                          value="new"
+                                          control={<Radio />}
+                                          label="Create new entry"
+                                        />
+                                      </RadioGroup>
+                                    </Hidden>
+                                  ),
+                                )}
+                              </FormControl>
+                            </CardContent>
+
+                            {/* Start existing entry or new entry selections. */}
+                            <Divider />
+
+                            {/* Existing entry selection. */}
+                            {form.values.entrySource === "existing" && (
+                              <CardContent>
+                                <FormControl fullWidth margin="normal">
+                                  <InputLabel htmlFor="existingEntry">
+                                    Entry
+                                  </InputLabel>
+                                  <Select
+                                    value={form.values.existingEntryId || ""}
+                                    onChange={form.handleChange}
+                                    inputProps={{
+                                      id: "existingEntry",
+                                      name: "existingEntryId",
+                                    }}
+                                  >
+                                    {entries.map(entry => (
+                                      <MenuItem key={entry.id} value={entry.id}>
+                                        {entry.name}
+                                      </MenuItem>
+                                    ))}
+                                  </Select>
+                                </FormControl>
+                              </CardContent>
+                            )}
+
+                            {/* New entry selection. */}
+                            {form.values.entrySource === "new" && (
+                              <>
+                                <CardContent>
+                                  <FormTextField
+                                    name="entryName"
+                                    label="Entry Name"
+                                    form={form}
+                                  />
+                                  <FormTextField
+                                    name="entryExplanation"
+                                    label="Entry Explanation"
+                                    form={form}
+                                  />
+                                </CardContent>
+                                <CardHeader
+                                  title="Entry Logo"
+                                  variant="admin"
+                                  css={css`
+                                    padding-bottom: 8px;
+                                  `}
+                                />
+                                <CardContent>
+                                  <ImagePicker
+                                    uploadedImageUrl={
+                                      form.values.entryLogoUrl &&
+                                      createResponsiveImageUrl(
+                                        form.values.entryLogoUrl,
+                                        {
+                                          format: "png",
+                                        },
+                                      )
+                                    }
+                                    previewImageUrl={
+                                      form.values.entryLogoUrl &&
+                                      createResponsiveImageUrl(
+                                        form.values.entryLogoUrl,
+                                        {
+                                          w: "128",
+                                          h: "128",
+                                          format: "png",
+                                        },
+                                      )
+                                    }
+                                    onSelectButtonClick={() =>
+                                      handleLogoSelectButtonClick(form)
+                                    }
+                                    onUploadButtonClick={() =>
+                                      handleLogoUploadButtonClick(form)
+                                    }
+                                  />
+                                </CardContent>
+                              </>
+                            )}
+                          </Card>
+                        </Grid>
+
+                        {/* Category card. */}
+                        <Grid item xs={12}>
+                          <Card>
+                            <CardHeader title="Category" variant="admin" />
+                            <CardContent>
+                              <FormTextField
+                                name="categoryName"
+                                label="Category Name"
+                                form={form}
                               />
-                              <FormControlLabel
-                                value="new"
-                                control={<Radio />}
-                                label="Create new entry"
+                              <FormTextField
+                                name="categoryEducation"
+                                label="Category Education"
+                                form={form}
                               />
-                            </RadioGroup>
-                          </Hidden>
-                        ))}
-                      </FormControl>
-                    </CardContent>
-
-                    {/* Start existing entry or new entry selections. */}
-                    <Divider />
-
-                    {/* Existing entry selection. */}
-                    {form.values.entrySource === "existing" && (
-                      <CardContent>
-                        <FormControl fullWidth margin="normal">
-                          <InputLabel htmlFor="existingEntry">Entry</InputLabel>
-                          <Select
-                            value={form.values.existingEntryId || ""}
-                            onChange={form.handleChange}
-                            inputProps={{
-                              id: "existingEntry",
-                              name: "existingEntryId",
-                            }}
-                          >
-                            {entries.map(entry => (
-                              <MenuItem key={entry.id} value={entry.id}>
-                                {entry.name}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </CardContent>
-                    )}
-
-                    {/* New entry selection. */}
-                    {form.values.entrySource === "new" && (
-                      <>
-                        <CardContent>
-                          <FormTextField
-                            name="entryName"
-                            label="Entry Name"
-                            form={form}
-                          />
-                          <FormTextField
-                            name="entryExplanation"
-                            label="Entry Explanation"
-                            form={form}
-                          />
-                        </CardContent>
-                        <CardHeader
-                          title="Entry Logo"
-                          variant="admin"
-                          css={css`
-                            padding-bottom: 8px;
-                          `}
-                        />
-                        <CardContent>
-                          <ImagePicker
-                            uploadedImageUrl={
-                              form.values.entryLogoUrl &&
-                              createResponsiveImageUrl(
-                                form.values.entryLogoUrl,
-                                {
-                                  format: "png",
-                                },
-                              )
-                            }
-                            previewImageUrl={
-                              form.values.entryLogoUrl &&
-                              createResponsiveImageUrl(
-                                form.values.entryLogoUrl,
-                                {
-                                  w: "128",
-                                  h: "128",
-                                  format: "png",
-                                },
-                              )
-                            }
-                            onSelectButtonClick={() =>
-                              handleLogoSelectButtonClick(form)
-                            }
-                            onUploadButtonClick={() =>
-                              handleLogoUploadButtonClick(form)
-                            }
-                          />
-                        </CardContent>
-                      </>
-                    )}
-                  </Card>
-                </Grid>
-
-                {/* Category card. */}
-                <Grid item xs={12}>
-                  <Card>
-                    <CardHeader title="Category" variant="admin" />
-                    <CardContent>
-                      <FormTextField
-                        name="categoryName"
-                        label="Category Name"
-                        form={form}
-                      />
-                      <FormTextField
-                        name="categoryEducation"
-                        label="Category Education"
-                        form={form}
-                      />
-                      <FormTextField
-                        name="pricePerPaper"
-                        type="number"
-                        label="Price per Paper"
-                        form={form}
-                      />
-                    </CardContent>
-                  </Card>
-                </Grid>
-              </Grid>
-            </AdminLayoutDashboardContainer>
+                              <FormTextField
+                                name="pricePerPaper"
+                                type="number"
+                                label="Price per Paper"
+                                form={form}
+                              />
+                            </CardContent>
+                          </Card>
+                        </Grid>
+                      </Grid>
+                    </AdminLayoutDashboardContainer>
+                  )}
+                </Formik>
+              )}
+            </CreateCategoryNewEntryComponent>
           )}
-        </Formik>
+        </CreateCategoryExistingEntryComponent>
       );
     },
   );
@@ -268,7 +310,7 @@ export default function EntryManagerNew() {
     cloudinary.client.openUploadWidget(
       {
         ...cloudinary.getDefaultUploadWidgetOptions(),
-        folder: "categories",
+        folder: "entries",
       },
       (err, result) => {
         if (err) throw new Error(err);
