@@ -60,12 +60,22 @@ export function LoadingSpinnerProvider(props: LoadingSpinnerProviderProps) {
   );
 }
 
+type LoadingSpinnerProps = {
+  /**
+   * Forces the immediate display of the loading spinner. This overrides the
+   * value from the LoadingSpinnerProvider.
+   */
+  noTransitionDelay?: boolean;
+};
+
 /**
  * Displays a loading spinner with the configured image and animation delay. The
  * spinner must be configured through the use of a LoadingSpinnerProvider. The
  * configuration is passed through the tree using React Context.
  */
-export function LoadingSpinner() {
+export function LoadingSpinner(props: LoadingSpinnerProps) {
+  const { noTransitionDelay } = props;
+
   const context = useContext(LoadingSpinnerContext);
   if (!context) {
     throw new Error(
@@ -73,12 +83,18 @@ export function LoadingSpinner() {
     );
   }
 
-  const { transitionDelay, src1_0x, src1_5x, src2_0x } = context;
+  const {
+    transitionDelay: transitionDelayContext,
+    src1_0x,
+    src1_5x,
+    src2_0x,
+  } = context;
   const srcSet = useMemo(() => `${src1_0x}, ${src1_5x} 1.5x, ${src2_0x} 2.0x`, [
     src1_0x,
     src1_5x,
     src2_0x,
   ]);
+  const transitionDelay = noTransitionDelay ? 0 : transitionDelayContext;
 
   return (
     <Fade in unmountOnExit style={{ transitionDelay: `${transitionDelay}ms` }}>

@@ -6,6 +6,7 @@ import { ApolloProvider } from "react-apollo";
 import {
   MaterialUIThemeProvider,
   RenderingAppProps,
+  SubmissionProgressDialog,
   withApolloApp,
   withLoadingSpinnerApp,
   withMaterialUIApp,
@@ -32,6 +33,7 @@ class MyApp extends App<RenderingAppProps> {
       <ThemeBaseline />,
       <LoadingSpinnerProvider {...loadingSpinnerConfig!} />,
       /^\/admin/.test(router.pathname) && <CloudinaryProvider />,
+      <SubmissionProgressDialog />,
       <Component {...pageProps} muiCssContext={muiCssContext} />,
     );
 

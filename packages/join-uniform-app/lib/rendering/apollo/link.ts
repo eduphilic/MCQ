@@ -3,6 +3,7 @@ import { onError } from "apollo-link-error";
 import { HttpLink } from "apollo-link-http";
 import fetch from "isomorphic-unfetch";
 import getConfig from "next/config";
+import { mutationCounterLink } from "./mutationCounterLink";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
@@ -24,4 +25,8 @@ const httpLink = new HttpLink({
 });
 
 // TODO: Add CSRF Link
-export const link = ApolloLink.from([errorLink, /* csrfLink */ httpLink]);
+export const link = ApolloLink.from([
+  errorLink,
+  mutationCounterLink,
+  /* csrfLink */ httpLink,
+]);

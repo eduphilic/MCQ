@@ -28,7 +28,7 @@ export function SubmissionProgressDialog(props: SubmissionProgressDialogProps) {
           align-items: center;
         `}
       >
-        <LoadingSpinner />
+        <LoadingSpinner noTransitionDelay />
       </DialogContent>
     </Dialog>
   );
