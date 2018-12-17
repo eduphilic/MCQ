@@ -4,7 +4,6 @@ query GetCategory($id: ID!) {
     name
     education
     pricePerPaperRs
-    iconUrl
     activated
   }
 }

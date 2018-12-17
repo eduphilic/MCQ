@@ -2,6 +2,7 @@
 type Entry {
   id: ID!
   name: String!
+  logoUrl: String!
   description: String!
   categories: [String!]!
 }

@@ -8,4 +8,5 @@ export const ValidatorCategoryCreationRequestNewEntry = yup.object<
   ...base,
   entryName: yup.string().required(),
   entryExplanation: yup.string().required(),
+  entryLogoUrl: yup.string().required(),
 });

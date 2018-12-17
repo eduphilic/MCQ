@@ -10,8 +10,6 @@ export interface CategoryCreationRequestExistingEntry {
 
   readonly pricePerPaper: number;
 
-  readonly logoUrl: string;
-
   readonly existingEntryId: string;
 }
 
@@ -22,7 +20,7 @@ export interface CategoryCreationRequestNewEntry {
 
   readonly pricePerPaper: number;
 
-  readonly logoUrl: string;
+  readonly entryLogoUrl: string;
 
   readonly entryName: string;
 
@@ -116,8 +114,6 @@ export type GetCategoryCategory = {
 
   pricePerPaperRs: number;
 
-  iconUrl: string;
-
   activated: boolean;
 };
 
@@ -149,6 +145,8 @@ export type GetEntriesEntries = {
   description: string;
 
   categories: string[];
+
+  logoUrl: string;
 };
 
 export type GetHtmlConfigVariables = {};
@@ -443,7 +441,6 @@ export const GetCategoryDocument = gql`
       name
       education
       pricePerPaperRs
-      iconUrl
       activated
     }
   }
@@ -532,6 +529,7 @@ export const GetEntriesDocument = gql`
       name
       description
       categories
+      logoUrl
     }
   }
 `;

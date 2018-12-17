@@ -2,7 +2,7 @@ input CategoryCreationRequestNewEntry {
   categoryName: String!
   categoryEducation: String!
   pricePerPaper: Int!
-  logoUrl: String!
+  entryLogoUrl: String!
   entryName: String!
   entryExplanation: String!
 }

@@ -2,6 +2,5 @@ input CategoryCreationRequestExistingEntry {
   categoryName: String!
   categoryEducation: String!
   pricePerPaper: Int!
-  logoUrl: String!
   existingEntryId: String!
 }

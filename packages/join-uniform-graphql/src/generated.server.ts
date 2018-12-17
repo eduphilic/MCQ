@@ -10,8 +10,6 @@ export interface CategoryCreationRequestExistingEntry {
 
   readonly pricePerPaper: number;
 
-  readonly logoUrl: string;
-
   readonly existingEntryId: string;
 }
 
@@ -22,7 +20,7 @@ export interface CategoryCreationRequestNewEntry {
 
   readonly pricePerPaper: number;
 
-  readonly logoUrl: string;
+  readonly entryLogoUrl: string;
 
   readonly entryName: string;
 
@@ -91,6 +89,8 @@ export interface Entry {
 
   name: string;
 
+  logoUrl: string;
+
   description: string;
 
   categories: string[];
@@ -105,8 +105,6 @@ export interface Category {
   education: string;
 
   pricePerPaperRs: number;
-
-  iconUrl: string;
 
   activated: boolean;
 }
@@ -343,6 +341,8 @@ export interface EntryResolvers<Context = ApolloContext, TypeParent = Entry> {
 
   name?: EntryNameResolver<string, TypeParent, Context>;
 
+  logoUrl?: EntryLogoUrlResolver<string, TypeParent, Context>;
+
   description?: EntryDescriptionResolver<string, TypeParent, Context>;
 
   categories?: EntryCategoriesResolver<string[], TypeParent, Context>;
@@ -354,6 +354,11 @@ export type EntryIdResolver<
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
 export type EntryNameResolver<
+  R = string,
+  Parent = Entry,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type EntryLogoUrlResolver<
   R = string,
   Parent = Entry,
   Context = ApolloContext
@@ -385,8 +390,6 @@ export interface CategoryResolvers<
     Context
   >;
 
-  iconUrl?: CategoryIconUrlResolver<string, TypeParent, Context>;
-
   activated?: CategoryActivatedResolver<boolean, TypeParent, Context>;
 }
 
@@ -407,11 +410,6 @@ export type CategoryEducationResolver<
 > = Resolver<R, Parent, Context>;
 export type CategoryPricePerPaperRsResolver<
   R = number,
-  Parent = Category,
-  Context = ApolloContext
-> = Resolver<R, Parent, Context>;
-export type CategoryIconUrlResolver<
-  R = string,
   Parent = Category,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;

@@ -4,5 +4,6 @@ query GetEntries {
     name
     description
     categories
+    logoUrl
   }
 }

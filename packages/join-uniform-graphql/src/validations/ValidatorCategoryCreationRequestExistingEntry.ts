@@ -9,7 +9,6 @@ export const base = {
     .integer()
     .min(1)
     .required(),
-  logoUrl: yup.string().required(),
 };
 
 export const ValidatorCategoryCreationRequestExistingEntry = yup.object<
