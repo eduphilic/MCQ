@@ -1,17 +1,19 @@
+import { styled } from "@join-uniform/theme";
 import React, { Component, ReactElement, ReactNode } from "react";
-import styled, { withProps } from "styled";
 
 import Icon from "@material-ui/core/Icon";
 import IconButton from "@material-ui/core/IconButton";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
-import Toolbar from "@material-ui/core/Toolbar";
+import Toolbar, { ToolbarProps } from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 
-import { Typography } from "componentsV0/Typography";
+// import { Typography } from "componentsV0/Typography";
 import {
   DashboardCardModeApi,
   DashboardCardModeConsumer,
 } from "./DashboardCardModeContext";
+
+const Typography: any = () => <div>T</div>;
 
 export interface DashboardCardTitleToolbarProps {
   /**
@@ -165,7 +167,10 @@ export class DashboardCardTitleToolbar extends Component<
 
 type ModeProp = Pick<DashboardCardModeApi["state"], "mode">;
 
-const ColoredToolbar = withProps<ModeProp>()(styled(Toolbar))`
+const ColoredToolbar = styled((props: ToolbarProps & ModeProp) => {
+  const { mode, ...rest } = props;
+  return <Toolbar {...rest} />;
+})`
   ${({ mode, theme }) => {
     if (mode === "display") return;
 

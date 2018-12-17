@@ -89,7 +89,7 @@ export default function EntryManagerNew() {
                         },
                       });
                       await refetch();
-                      Router.replace("/admin/entry-manager");
+                      await Router.replace("/admin/entry-manager");
                       return;
                     }
 
@@ -106,7 +106,7 @@ export default function EntryManagerNew() {
                       },
                     });
                     await refetch();
-                    Router.replace("/admin/entry-manager");
+                    await Router.replace("/admin/entry-manager");
                   }}
                   validationSchema={() => {
                     return entrySourceRef.current === "new"

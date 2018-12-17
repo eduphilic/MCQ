@@ -1,13 +1,16 @@
+import { styled } from "@join-uniform/theme";
 import React, { cloneElement, SFC } from "react";
-import styled from "styled";
 
 import Switch, { SwitchProps } from "@material-ui/core/Switch";
 import Tooltip from "@material-ui/core/Tooltip";
 
-import { ResponsiveToolbarTypographyButton } from "componentsV0/ResponsiveToolbarTypographyButton";
-import { Typography } from "componentsV0/Typography";
+// import { ResponsiveToolbarTypographyButton } from "componentsV0/ResponsiveToolbarTypographyButton";
+// import { Typography } from "componentsV0/Typography";
 import { DashboardCardItemColumn } from "./DashboardCardItemColumn";
 import { DashboardCardModeApi } from "./DashboardCardModeContext";
+
+const ResponsiveToolbarTypographyButton: any = () => <div>RTTB</div>;
+const Typography: any = () => <div>T</div>;
 
 type ColumnItemComponent = SFC<{
   itemColumn: DashboardCardItemColumn;
@@ -55,7 +58,7 @@ export const ColumnItemSingleLine: ColumnItemComponent = ({ itemColumn }) => (
   <Typography>{itemColumn.primaryText}</Typography>
 );
 
-const StyledSwitch = styled<SwitchProps>(props => (
+const StyledSwitch = styled((props: SwitchProps) => (
   <Switch
     color="primary"
     classes={{ bar: "bar", checked: "checked", disabled: "disabled" }}

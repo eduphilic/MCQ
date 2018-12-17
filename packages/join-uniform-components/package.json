@@ -21,6 +21,8 @@
     "@join-uniform/icons": "1.0.0",
     "@join-uniform/localization": "1.0.0",
     "@join-uniform/theme": "1.0.0",
+    "@storybook/addon-actions": "^4.0.12",
+    "@storybook/addon-knobs": "^4.0.12",
     "@storybook/react": "^4.0.12",
     "babel-loader": "^8.0.4",
     "babel-plugin-styled-components": "^1.9.2",

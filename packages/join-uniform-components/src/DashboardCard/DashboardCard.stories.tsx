@@ -4,16 +4,19 @@ import React from "react";
 
 import TextField from "@material-ui/core/TextField";
 
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
-import { TypographyButton } from "componentsV0/TypographyButton";
-import { DashboardCard } from ".";
+// import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
+// import { TypographyButton } from "componentsV0/TypographyButton";
+import { DashboardCard } from "./DashboardCard";
 import { DashboardCardColumnType } from "./DashboardCardColumnType";
 import { DashboardCardItem } from "./DashboardCardItem";
 import { DashboardCardPaginationProps } from "./DashboardCardPagination";
 
-storiesOf("Components V0", module)
+const ContentCenterWrapper: any = () => <div>CCW</div>;
+const TypographyButton: any = () => <div>TB</div>;
+
+storiesOf("DashboardCard", module)
   .addParameters({ info: { propTablesExclude: [ContentCenterWrapper] } })
-  .add("DashboardCard", () => {
+  .add("default", () => {
     const items: DashboardCardItem[] = [
       {
         key: "0",

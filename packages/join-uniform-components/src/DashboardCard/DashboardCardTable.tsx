@@ -1,17 +1,17 @@
-import React, { Component, ReactNode } from "react";
-import styled, { withProps } from "styled";
+import { styled } from "@join-uniform/theme";
+import React, { Component, FC, ReactNode } from "react";
 
-import Checkbox from "@material-ui/core/Checkbox";
+import Checkbox, { CheckboxProps } from "@material-ui/core/Checkbox";
 import Hidden from "@material-ui/core/Hidden";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
+import TableCell, { TableCellProps } from "@material-ui/core/TableCell";
 import TableFooter from "@material-ui/core/TableFooter";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
-import { DashboardTableRow } from "componentsV0/DashboardTableRow";
-import { Typography } from "componentsV0/Typography";
+// import { DashboardTableRow } from "componentsV0/DashboardTableRow";
+// import { Typography } from "componentsV0/Typography";
 import {
   ColumnItemButton,
   ColumnItemDualLine,
@@ -23,9 +23,12 @@ import {
 import { DashboardCardColumnType } from "./DashboardCardColumnType";
 import { DashboardCardItem } from "./DashboardCardItem";
 import {
-  DashboardCardModeApi,
+  // DashboardCardModeApi,
   DashboardCardModeConsumer,
 } from "./DashboardCardModeContext";
+
+const DashboardTableRow: any = () => <div>DTR</div>;
+const Typography: any = () => <div>T</div>;
 
 export interface DashboardCardTableProps {
   /**
@@ -99,18 +102,17 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
             <TableHead>
               <TableRow>
                 {/* Optional checkbox (for cards which have delete option). */}
-                {showCheckboxes &&
-                  api.state.mode === "deletion" && (
-                    <CheckboxWidthTableCell>
-                      {api.state.mode === "deletion" && (
-                        <RedCheckbox
-                          indeterminate={api.actions.getIsIndeterminate()}
-                          checked={api.actions.getIsAllSelected()}
-                          onChange={api.actions.toggleSelectAll}
-                        />
-                      )}
-                    </CheckboxWidthTableCell>
-                  )}
+                {showCheckboxes && api.state.mode === "deletion" && (
+                  <CheckboxWidthTableCell>
+                    {api.state.mode === "deletion" && (
+                      <RedCheckbox
+                        indeterminate={api.actions.getIsIndeterminate()}
+                        checked={api.actions.getIsAllSelected()}
+                        onChange={api.actions.toggleSelectAll}
+                      />
+                    )}
+                  </CheckboxWidthTableCell>
+                )}
 
                 {/* Column Labels */}
                 {columnLabels.map((label, index) => (
@@ -137,14 +139,13 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
                   onClick={() => api.actions.clickItem(item.key)}
                   mode={api.state.mode}
                 >
-                  {showCheckboxes &&
-                    api.state.mode === "deletion" && (
-                      <UnpaddedTableCell padding="checkbox">
-                        {api.state.mode === "deletion" && (
-                          <RedCheckbox checked={api.state.selected[index]} />
-                        )}
-                      </UnpaddedTableCell>
-                    )}
+                  {showCheckboxes && api.state.mode === "deletion" && (
+                    <UnpaddedTableCell padding="checkbox">
+                      {api.state.mode === "deletion" && (
+                        <RedCheckbox checked={api.state.selected[index]} />
+                      )}
+                    </UnpaddedTableCell>
+                  )}
 
                   {/* Render column item using required component type. */}
                   {item.columns.map((itemColumn, columnIndex) => {
@@ -183,29 +184,34 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
   }
 }
 
-const CheckboxWidthTableCell = styled(TableCell).attrs({ padding: "checkbox" })`
+const CheckboxWidthTableCell = styled(TableCell as FC<TableCellProps>).attrs(
+  () => ({
+    padding: "checkbox",
+  }),
+)`
   width: 72px;
 `;
 
-const RedCheckbox = styled(Checkbox).attrs({
+const RedCheckbox = styled(Checkbox as FC<CheckboxProps>).attrs(() => ({
   classes: {
     checked: "checked",
   },
-})`
+}))`
   &.checked {
     color: #e10050;
   }
 `;
 
-const UnpaddedTableCell = styled(TableCell)`
+const UnpaddedTableCell = styled(TableCell as FC<TableCellProps>)`
   &:not(:first-child) {
     padding-left: 0;
     padding-right: 0;
   }
 `;
 
-type ModeProp = Pick<DashboardCardModeApi["state"], "mode">;
+// type ModeProp = Pick<DashboardCardModeApi["state"], "mode">;
 
-const ClickableTableRow = withProps<ModeProp>()(styled(DashboardTableRow))`
+// const ClickableTableRow = withProps<ModeProp>()(styled(DashboardTableRow))`
+const ClickableTableRow = styled(DashboardTableRow)`
   cursor: ${({ mode }) => (mode !== "display" ? "pointer" : "inherit")};
 `;

@@ -8,9 +8,9 @@ import {
   DashboardCardModeProvider,
 } from "./DashboardCardModeContext";
 
-storiesOf("Components V0", module)
+storiesOf("DashboardCardModeProvider", module)
   .addParameters({ info: { propTablesExclude: [DashboardCardModeConsumer] } })
-  .add("DashboardCardModeProvider", () => {
+  .add("default", () => {
     const itemKeys = array(
       "Items",
       Array.from({ length: 10 }, (_item, index) => `Item ${index + 1}`),
@@ -57,8 +57,8 @@ storiesOf("Components V0", module)
                           {api.actions.getIsIndeterminate()
                             ? "[-]"
                             : api.actions.getIsAllSelected()
-                              ? "[*]"
-                              : "[ ]"}
+                            ? "[*]"
+                            : "[ ]"}
                           &nbsp;
                         </strong>
                         Selected Count: {api.actions.getSelectedCount()}
