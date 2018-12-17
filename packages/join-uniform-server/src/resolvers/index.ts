@@ -10,6 +10,9 @@ import { translation } from "./translation";
 import { category } from "./category";
 import { entries } from "./entries";
 
+import { createCategoryExistingEntry } from "./createCategoryExistingEntry";
+import { createCategoryNewEntry } from "./createCategoryNewEntry";
+
 import { cloudinaryApiKey } from "./cloudinaryApiKey";
 import { cloudinaryCloudName } from "./cloudinaryCloudName";
 import { generateCloudinaryMediaLibraryAuthenticationToken } from "./generateCloudinaryMediaLibraryAuthenticationToken";
@@ -29,6 +32,9 @@ const Query: QueryResolvers = {
 };
 
 const Mutation: MutationResolvers = {
+  createCategoryExistingEntry,
+  createCategoryNewEntry,
+
   generateCloudinarySignature,
   generateCloudinaryMediaLibraryAuthenticationToken,
 };
