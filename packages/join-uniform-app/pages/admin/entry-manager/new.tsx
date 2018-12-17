@@ -111,7 +111,7 @@ export default function EntryManagerNew() {
                 >
                   {form => (
                     <AdminLayoutDashboardContainer
-                      title="New Category"
+                      title="New Entry"
                       appBarButtons={[
                         <PendingChangesButton
                           hasDiscardableChanges={form.dirty}
