@@ -1,19 +1,15 @@
 import React, { Component } from "react";
 
-import Toolbar from "@material-ui/core/Toolbar";
+import { Toolbar, Typography } from "../muiComponents";
 
-// import { Typography } from "componentsV0/Typography";
 import { DashboardCardPaginationProps } from "./DashboardCardPagination";
 
-const Typography: any = () => <div>T</div>;
-
-export interface DashboardCardPaginationHeaderToolbarProps
-  extends DashboardCardPaginationProps {
+export type DashboardCardPaginationHeaderToolbarProps = DashboardCardPaginationProps & {
   /**
    * Description text of an item, eg. "question".
    */
   listItemType: string;
-}
+};
 
 export class DashboardCardPaginationHeaderToolbar extends Component<
   DashboardCardPaginationHeaderToolbarProps
@@ -27,7 +23,7 @@ export class DashboardCardPaginationHeaderToolbar extends Component<
 
     return (
       <Toolbar>
-        <Typography muiTypographyProps={{ variant: "subheading" }}>
+        <Typography variant="subtitle1">
           Showing {rowsPerPage} of {count} {listItemType}.
         </Typography>
       </Toolbar>
