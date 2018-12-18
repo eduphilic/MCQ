@@ -61,6 +61,11 @@ export default function AdminIndexPage() {
           onItemEditClick={categoryId => {
             Router.push(`/admin/entry-manager/edit?categoryId=${categoryId}`);
           }}
+          onRequestDeleteClick={categoryIds => {
+            /* tslint:disable-next-line:no-console */
+            console.log({ categoryIds });
+            alert("Deletion placeholder");
+          }}
           items={categories.map(
             (category): DashboardCardItem => ({
               key: category.id,
@@ -75,6 +80,11 @@ export default function AdminIndexPage() {
                 {
                   switchChecked: category.activated,
                   switchTooltipTitle: "Toggle Activation",
+                  switchOnChange: checked => {
+                    /* tslint:disable-next-line:no-console */
+                    console.log({ checked });
+                    alert("Toggle placeholder.");
+                  },
                 },
               ],
             }),
