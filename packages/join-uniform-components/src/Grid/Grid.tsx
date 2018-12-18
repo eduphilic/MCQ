@@ -40,7 +40,7 @@ export const Grid = styled((props: GridProps) => {
     element = (
       <div
         css={css`
-          padding: ${storybookContainer ? "8px" : "0"} 0px;
+          padding: ${storybookContainer ? "8px 8px" : "0px 0px"};
         `}
       >
         {element}
