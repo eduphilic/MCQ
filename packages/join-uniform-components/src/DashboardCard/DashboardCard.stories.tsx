@@ -19,7 +19,7 @@ stories.add("default", () => {
       key: "0",
       columns: [
         { primaryText: "Soldier GD", secondaryText: "10th" },
-        { imgUrl: `${process.env.PUBLIC_URL}/images/entry/airforce.svg` },
+        { imgUrl: "https://placekitten.com/128/128" },
         { primaryText: "Rs 10 pp" },
         { switchChecked: false },
       ],
@@ -28,7 +28,7 @@ stories.add("default", () => {
       key: "1",
       columns: [
         { primaryText: "Soldier Tradesman", secondaryText: "10th" },
-        { imgUrl: `${process.env.PUBLIC_URL}/images/entry/army.svg` },
+        { imgUrl: "https://placekitten.com/128/128" },
         { primaryText: "Rs 10 pp" },
         { switchChecked: true },
       ],
@@ -41,7 +41,7 @@ stories.add("default", () => {
           secondaryText: "8th",
         },
         {
-          imgUrl: `${process.env.PUBLIC_URL}/images/entry/assamrifles.svg`,
+          imgUrl: "https://placekitten.com/128/128",
         },
         { primaryText: "Rs 10 pp" },
         { switchChecked: true },
@@ -51,7 +51,7 @@ stories.add("default", () => {
       key: "3",
       columns: [
         { primaryText: "Soldier GD", secondaryText: "12th" },
-        { imgUrl: `${process.env.PUBLIC_URL}/images/entry/bsf.svg` },
+        { imgUrl: "https://placekitten.com/128/128" },
         { primaryText: "Rs 10 pp" },
         { switchChecked: false },
       ],

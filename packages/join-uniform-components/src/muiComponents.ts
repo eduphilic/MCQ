@@ -76,6 +76,12 @@ import Select, {
 export type SelectProps = MuiSelectProps;
 export { Select };
 
+import Switch, {
+  SwitchProps as MuiSwitchProps,
+} from "@material-ui/core/Switch";
+export type SwitchProps = MuiSwitchProps;
+export { Switch };
+
 import Table, { TableProps as MuiTableProps } from "@material-ui/core/Table";
 export type TableProps = MuiTableProps;
 export { Table };

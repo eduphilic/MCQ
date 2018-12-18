@@ -1,16 +1,11 @@
 import { styled } from "@join-uniform/theme";
 import React, { cloneElement, SFC } from "react";
 
-import Switch, { SwitchProps } from "@material-ui/core/Switch";
-import Tooltip from "@material-ui/core/Tooltip";
+import { Switch, SwitchProps, Tooltip, Typography } from "../muiComponents";
+import { ResponsiveIconTextButton } from "../ResponsiveIconTextButton";
 
-// import { ResponsiveToolbarTypographyButton } from "componentsV0/ResponsiveToolbarTypographyButton";
-// import { Typography } from "componentsV0/Typography";
 import { DashboardCardItemColumn } from "./DashboardCardItemColumn";
 import { DashboardCardModeApi } from "./DashboardCardModeContext";
-
-const ResponsiveToolbarTypographyButton: any = () => <div>RTTB</div>;
-const Typography: any = () => <div>T</div>;
 
 type ColumnItemComponent = SFC<{
   itemColumn: DashboardCardItemColumn;
@@ -20,7 +15,7 @@ type ColumnItemComponent = SFC<{
 export const ColumnItemDualLine: ColumnItemComponent = ({ itemColumn }) => (
   <div style={{ display: "flex", flexDirection: "column" }}>
     <Typography>{itemColumn.primaryText}</Typography>
-    <Typography muiTypographyProps={{ variant: "caption" }}>
+    <Typography variant="caption" color="textSecondary">
       {itemColumn.secondaryText}
     </Typography>
   </div>
@@ -45,7 +40,7 @@ export const ColumnItemProfile: ColumnItemComponent = ({ itemColumn }) => (
     {/* Dual line text */}
     <div className="profile-text">
       <Typography>{itemColumn.primaryText}</Typography>
-      <Typography muiTypographyProps={{ variant: "caption" }}>
+      <Typography variant="caption" color="textSecondary">
         <a href={`mailto:${itemColumn.secondaryText}`}>
           {itemColumn.secondaryText}
         </a>
@@ -108,13 +103,13 @@ export const ColumnItemSwitch: ColumnItemComponent = ({ itemColumn, mode }) => {
 
 export const ColumnItemButton: ColumnItemComponent = ({ itemColumn }) => {
   const button = (
-    <ResponsiveToolbarTypographyButton
+    <ResponsiveIconTextButton
       onClick={itemColumn.onClick}
       iconNode={itemColumn.buttonIconNode}
       tooltipTitle={itemColumn.buttonTooltipTitle}
     >
       {itemColumn.primaryText}
-    </ResponsiveToolbarTypographyButton>
+    </ResponsiveIconTextButton>
   );
 
   return itemColumn.wrapper
