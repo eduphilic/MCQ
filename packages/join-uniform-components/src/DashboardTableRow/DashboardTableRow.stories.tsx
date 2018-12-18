@@ -6,9 +6,11 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { storiesOf } from "@storybook/react";
 import React, { ReactNode } from "react";
-import { DashboardTableRow } from ".";
+import { DashboardTableRow } from "./DashboardTableRow";
 
-storiesOf("Components V0", module).add("DashboardTableRow", () => {
+const stories = storiesOf("DashboardTableRow", module);
+
+stories.add("default", () => {
   const cells: ReactNode[] = [];
   for (let i = 0; i < 10; i += 1) {
     cells.push(
