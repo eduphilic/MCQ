@@ -101,7 +101,13 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
     return (
       <DashboardCardModeConsumer>
         {api => (
-          <Table>
+          <Table
+            // If there are multiple tables on one page, attempt to keep there
+            // column widths the same.
+            css={css`
+              table-layout: fixed;
+            `}
+          >
             {/* Table Header */}
             <TableHead>
               <TableRow suppressHydrationWarning>
@@ -125,7 +131,17 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
                     xsDown={columnTypes[index] === "image"}
                     implementation="js"
                   >
-                    <UnpaddedTableCell>
+                    <UnpaddedTableCell
+                      // Make first cell the largest. This is to make multiple
+                      // tables on one page have the same column sizings.
+                      css={
+                        index === 0
+                          ? css`
+                              width: 50%;
+                            `
+                          : undefined
+                      }
+                    >
                       <Typography
                         variant="subtitle2"
                         // Add left padding for alignment with Toolbar Button.
