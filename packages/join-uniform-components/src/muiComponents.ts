@@ -4,6 +4,12 @@ import CardContent, {
 export type CardContentProps = MuiCardContentProps;
 export { CardContent };
 
+import Checkbox, {
+  CheckboxProps as MuiCheckboxProps,
+} from "@material-ui/core/Checkbox";
+export type CheckboxProps = MuiCheckboxProps;
+export { Checkbox };
+
 import Divider, {
   DividerProps as MuiDividerProps,
 } from "@material-ui/core/Divider";
@@ -65,6 +71,40 @@ import Select, {
 } from "@material-ui/core/Select";
 export type SelectProps = MuiSelectProps;
 export { Select };
+
+import Table, { TableProps as MuiTableProps } from "@material-ui/core/Table";
+export type TableProps = MuiTableProps;
+export { Table };
+
+import TableBody, {
+  TableBodyProps as MuiTableBodyProps,
+} from "@material-ui/core/TableBody";
+export type TableBodyProps = MuiTableBodyProps;
+export { TableBody };
+
+import TableCell, {
+  TableCellProps as MuiTableCellProps,
+} from "@material-ui/core/TableCell";
+export type TableCellProps = MuiTableCellProps;
+export { TableCell };
+
+import TableFooter, {
+  TableFooterProps as MuiTableFooterProps,
+} from "@material-ui/core/TableFooter";
+export type TableFooterProps = MuiTableFooterProps;
+export { TableFooter };
+
+import TableHead, {
+  TableHeadProps as MuiTableHeadProps,
+} from "@material-ui/core/TableHead";
+export type TableHeadProps = MuiTableHeadProps;
+export { TableHead };
+
+import TableRow, {
+  TableRowProps as MuiTableRowProps,
+} from "@material-ui/core/TableRow";
+export type TableRowProps = MuiTableRowProps;
+export { TableRow };
 
 import TextField, {
   TextFieldProps as MuiTextFieldProps,

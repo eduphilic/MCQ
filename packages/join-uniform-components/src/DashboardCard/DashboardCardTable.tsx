@@ -1,20 +1,24 @@
-import { styled } from "@join-uniform/theme";
+import { css, styled } from "@join-uniform/theme";
 import React, { Component, FC, ReactNode } from "react";
-
-import Checkbox, { CheckboxProps } from "@material-ui/core/Checkbox";
-import Hidden from "@material-ui/core/Hidden";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell, { TableCellProps } from "@material-ui/core/TableCell";
-import TableFooter from "@material-ui/core/TableFooter";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 
 import {
   DashboardTableRow,
   DashboardTableRowProps,
 } from "../DashboardTableRow";
-// import { Typography } from "componentsV0/Typography";
+import { Hidden } from "../Hidden";
+import {
+  Checkbox,
+  CheckboxProps,
+  Table,
+  TableBody,
+  TableCell,
+  TableCellProps,
+  TableFooter,
+  TableHead,
+  TableRow,
+  Typography,
+} from "../muiComponents";
+
 import {
   ColumnItemButton,
   ColumnItemDualLine,
@@ -30,9 +34,7 @@ import {
   DashboardCardModeConsumer,
 } from "./DashboardCardModeContext";
 
-const Typography: any = () => <div>T</div>;
-
-export interface DashboardCardTableProps {
+export type DashboardCardTableProps = {
   /**
    * Render checkboxes and placeholder padding for checkboxes.
    */
@@ -57,7 +59,7 @@ export interface DashboardCardTableProps {
    * Optional bottom pagination node.
    */
   bottomPaginationNode?: ReactNode;
-}
+};
 
 export class DashboardCardTable extends Component<DashboardCardTableProps> {
   constructor(props: DashboardCardTableProps) {
@@ -102,7 +104,7 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
           <Table>
             {/* Table Header */}
             <TableHead>
-              <TableRow>
+              <TableRow suppressHydrationWarning>
                 {/* Optional checkbox (for cards which have delete option). */}
                 {showCheckboxes && api.state.mode === "deletion" && (
                   <CheckboxWidthTableCell>
@@ -118,11 +120,22 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
 
                 {/* Column Labels */}
                 {columnLabels.map((label, index) => (
-                  <Hidden key={index} xsDown={columnTypes[index] === "image"}>
+                  <Hidden
+                    key={index}
+                    xsDown={columnTypes[index] === "image"}
+                    implementation="js"
+                  >
                     <UnpaddedTableCell>
                       <Typography
-                        variant="tableHeadCell"
-                        padLeftToolbarButton={columnTypes[index] === "button"}
+                        variant="subtitle2"
+                        // Add left padding for alignment with Toolbar Button.
+                        css={
+                          columnTypes[index] === "button"
+                            ? css`
+                                padding-left: 32px;
+                              `
+                            : undefined
+                        }
                       >
                         {label}
                       </Typography>
@@ -140,6 +153,7 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
                   selected={api.state.selected[index]}
                   onClick={() => api.actions.clickItem(item.key)}
                   mode={api.state.mode}
+                  suppressHydrationWarning
                 >
                   {showCheckboxes && api.state.mode === "deletion" && (
                     <UnpaddedTableCell padding="checkbox">
@@ -159,6 +173,7 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
                       <Hidden
                         key={`${item.key}-${columnIndex}`}
                         xsDown={columnTypes[columnIndex] === "image"}
+                        implementation="js"
                       >
                         <UnpaddedTableCell>
                           <ItemColumnComponent
