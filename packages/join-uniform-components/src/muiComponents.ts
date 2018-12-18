@@ -56,6 +56,10 @@ import MenuItem, {
 export type MenuItemProps = MuiMenuItemProps;
 export { MenuItem };
 
+import Paper, { PaperProps as MuiPaperProps } from "@material-ui/core/Paper";
+export type PaperProps = MuiPaperProps;
+export { Paper };
+
 import Radio, { RadioProps as MuiRadioProps } from "@material-ui/core/Radio";
 export type RadioProps = MuiRadioProps;
 export { Radio };
