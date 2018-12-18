@@ -1,19 +1,26 @@
 import { styled } from "@join-uniform/theme";
+import { lighten } from "@material-ui/core/styles/colorManipulator";
 import React, { Component, ReactElement, ReactNode } from "react";
 
-import Icon from "@material-ui/core/Icon";
-import IconButton from "@material-ui/core/IconButton";
-import { lighten } from "@material-ui/core/styles/colorManipulator";
-import Toolbar, { ToolbarProps } from "@material-ui/core/Toolbar";
-import Tooltip from "@material-ui/core/Tooltip";
+import {
+  DashboardIcon,
+  DeleteIcon,
+  DoneIcon,
+  EditIcon,
+} from "@join-uniform/icons";
+import { cardTitleStyle } from "../adminTypography";
+import {
+  IconButton,
+  Toolbar,
+  ToolbarProps,
+  Tooltip,
+  Typography,
+} from "../muiComponents";
 
-// import { Typography } from "componentsV0/Typography";
 import {
   DashboardCardModeApi,
   DashboardCardModeConsumer,
 } from "./DashboardCardModeContext";
-
-const Typography: any = () => <div>T</div>;
 
 export interface DashboardCardTitleToolbarProps {
   /**
@@ -85,14 +92,14 @@ export class DashboardCardTitleToolbar extends Component<
         {showDeletionButton && (
           <Tooltip title="Deletion Mode">
             <IconButton onClick={enterDeletionMode}>
-              <Icon>delete</Icon>
+              <DeleteIcon />
             </IconButton>
           </Tooltip>
         )}
         {showEditButton && (
           <Tooltip title="Edit Mode">
             <IconButton onClick={enterEditMode}>
-              <Icon>edit</Icon>
+              <EditIcon />
             </IconButton>
           </Tooltip>
         )}
@@ -102,7 +109,7 @@ export class DashboardCardTitleToolbar extends Component<
         {mode === "deletion" &&
           maybeWithTooltip(
             <IconButton disabled={selectedCount === 0} onClick={requestDelete}>
-              <Icon>delete</Icon>
+              <DeleteIcon />
             </IconButton>,
             selectedCount !== 0
               ? `Delete ${selectedCount} Selected Item${
@@ -112,7 +119,7 @@ export class DashboardCardTitleToolbar extends Component<
           )}
         <Tooltip title={`Exit ${mode === "edit" ? "Edit" : "Deletion"} Mode`}>
           <IconButton onClick={exitMode}>
-            <Icon>done</Icon>
+            <DoneIcon />
           </IconButton>
         </Tooltip>
       </>
@@ -129,18 +136,15 @@ export class DashboardCardTitleToolbar extends Component<
         {/* Display mode caption. */}
         {mode === "display" && (
           <EntryTitleWrapper>
-            <Icon>dashboard</Icon>
-            <Typography variant="cardTitle">{title}</Typography>
+            <DashboardIcon />
+            <Typography css={cardTitleStyle}>{title}</Typography>
             {titleSiblingNode}
           </EntryTitleWrapper>
         )}
 
         {/* Edit/Deletion mode captions. */}
         {mode !== "display" && (
-          <Typography
-            variant="tableHeadCell"
-            muiTypographyProps={{ color: "inherit" }}
-          >
+          <Typography variant="subtitle2" color="inherit">
             {mode === "edit"
               ? `Edit Mode${editCaptionText ? " - " : ""}${editCaptionText ||
                   ""}`

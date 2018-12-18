@@ -112,6 +112,18 @@ import TextField, {
 export type TextFieldProps = MuiTextFieldProps;
 export { TextField };
 
+import Toolbar, {
+  ToolbarProps as MuiToolbarProps,
+} from "@material-ui/core/Toolbar";
+export type ToolbarProps = MuiToolbarProps;
+export { Toolbar };
+
+import Tooltip, {
+  TooltipProps as MuiTooltipProps,
+} from "@material-ui/core/Tooltip";
+export type TooltipProps = MuiTooltipProps;
+export { Tooltip };
+
 import Typography, {
   TypographyProps as MuiTypographyProps,
 } from "@material-ui/core/Typography";
