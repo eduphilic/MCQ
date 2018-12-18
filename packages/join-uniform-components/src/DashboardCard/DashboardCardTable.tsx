@@ -101,13 +101,7 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
     return (
       <DashboardCardModeConsumer>
         {api => (
-          <Table
-            // If there are multiple tables on one page, attempt to keep there
-            // column widths the same.
-            css={css`
-              table-layout: fixed;
-            `}
-          >
+          <Table>
             {/* Table Header */}
             <TableHead>
               <TableRow suppressHydrationWarning>
