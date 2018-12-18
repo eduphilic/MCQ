@@ -2,11 +2,11 @@ import { styled } from "@join-uniform/theme";
 import TableRow, { TableRowProps } from "@material-ui/core/TableRow";
 import React from "react";
 
-export const DashboardTableRow = styled(
-  (props: Omit<TableRowProps, "classes">) => {
-    return <TableRow {...props} classes={{ selected: "selected" }} />;
-  },
-)`
+export type DashboardTableRowProps = Omit<TableRowProps, "classes">;
+
+export const DashboardTableRow = styled((props: DashboardTableRowProps) => {
+  return <TableRow {...props} classes={{ selected: "selected" }} />;
+})`
   &:nth-of-type(odd) {
     background-color: ${({ theme }) => theme.palette.background.default};
   }

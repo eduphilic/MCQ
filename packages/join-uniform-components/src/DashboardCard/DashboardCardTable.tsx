@@ -10,7 +10,10 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
-// import { DashboardTableRow } from "componentsV0/DashboardTableRow";
+import {
+  DashboardTableRow,
+  DashboardTableRowProps,
+} from "../DashboardTableRow";
 // import { Typography } from "componentsV0/Typography";
 import {
   ColumnItemButton,
@@ -23,11 +26,10 @@ import {
 import { DashboardCardColumnType } from "./DashboardCardColumnType";
 import { DashboardCardItem } from "./DashboardCardItem";
 import {
-  // DashboardCardModeApi,
+  DashboardCardModeApi,
   DashboardCardModeConsumer,
 } from "./DashboardCardModeContext";
 
-const DashboardTableRow: any = () => <div>DTR</div>;
 const Typography: any = () => <div>T</div>;
 
 export interface DashboardCardTableProps {
@@ -209,9 +211,11 @@ const UnpaddedTableCell = styled(TableCell as FC<TableCellProps>)`
   }
 `;
 
-// type ModeProp = Pick<DashboardCardModeApi["state"], "mode">;
+type ModeProp = Pick<DashboardCardModeApi["state"], "mode">;
 
-// const ClickableTableRow = withProps<ModeProp>()(styled(DashboardTableRow))`
-const ClickableTableRow = styled(DashboardTableRow)`
+const ClickableTableRow = styled((props: DashboardTableRowProps & ModeProp) => {
+  const { mode, ...rest } = props;
+  return <DashboardTableRow {...rest} />;
+})`
   cursor: ${({ mode }) => (mode !== "display" ? "pointer" : "inherit")};
 `;
