@@ -1,6 +1,7 @@
 import { styled } from "@join-uniform/theme";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
 import React, { CSSProperties, ReactNode, SFC } from "react";
+import { cardTitleStyle } from "../adminTypography";
 
 export type CardHeaderProps = {
   className?: string;
@@ -45,7 +46,7 @@ export const CardHeader: SFC<CardHeaderProps> = props => {
   const {
     className,
     title,
-    titleStyle: titleStyleProp,
+    titleStyle,
     subheader,
     imageUrl,
     imageSize = 80,
@@ -54,11 +55,6 @@ export const CardHeader: SFC<CardHeaderProps> = props => {
     variant,
   } = props;
 
-  const titleStyle =
-    titleStyleProp || variant === "admin"
-      ? { fontSize: 18, fontWeight: 500 }
-      : undefined;
-
   return (
     <Wrapper className={className}>
       {imageUrl && <Image src={imageUrl} size={imageSize} />}
@@ -66,7 +62,12 @@ export const CardHeader: SFC<CardHeaderProps> = props => {
       <div>
         {overline && <Overline>{overline}</Overline>}
 
-        <Title style={titleStyle}>{title}</Title>
+        <Title
+          style={titleStyle}
+          css={variant === "admin" ? cardTitleStyle : undefined}
+        >
+          {title}
+        </Title>
 
         <Subheader color={subheaderColor}>{subheader}</Subheader>
       </div>
