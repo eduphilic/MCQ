@@ -8,10 +8,25 @@ export type GridProps = MuiGridProps & {
    * prop be set.
    */
   contentCenter?: boolean;
+
+  /**
+   * Applies the style from the `contentCenter` variant but with vertical
+   * padding in addition to the horizontal padding from the contentCenter
+   * setting.
+   */
+  storybookContainer?: boolean;
 };
 
 export const Grid = styled((props: GridProps) => {
-  const { contentCenter, container, ...rest } = props;
+  const {
+    contentCenter: contentCenterProp,
+    container: containerProp,
+    storybookContainer,
+    ...rest
+  } = props;
+
+  const contentCenter = !!contentCenterProp || !!storybookContainer;
+  const container = !!containerProp || !!storybookContainer;
 
   if (contentCenter && !container) {
     throw new Error(
@@ -25,7 +40,7 @@ export const Grid = styled((props: GridProps) => {
     element = (
       <div
         css={css`
-          padding: 0 8px;
+          padding: ${storybookContainer ? "8px" : "0"} 8px;
         `}
       >
         {element}
