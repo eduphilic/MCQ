@@ -6,6 +6,7 @@ type Query {
   translation(language: Language!): Translation!
 
   entries: [Entry!]!
+  entryCategories(entryId: ID!): [Category!]!
   category(id: ID!): Category
 
   cloudinaryCloudName: String!

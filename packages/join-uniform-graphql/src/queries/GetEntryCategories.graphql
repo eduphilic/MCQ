@@ -1,0 +1,9 @@
+query GetEntryCategories($entryId: ID!) {
+  entryCategories(entryId: $entryId) {
+    id
+    name
+    activated
+    education
+    pricePerPaperRs
+  }
+}

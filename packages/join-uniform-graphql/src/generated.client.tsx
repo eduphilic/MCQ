@@ -149,6 +149,30 @@ export type GetEntriesEntries = {
   logoUrl: string;
 };
 
+export type GetEntryCategoriesVariables = {
+  entryId: string;
+};
+
+export type GetEntryCategoriesQuery = {
+  __typename?: "Query";
+
+  entryCategories: GetEntryCategoriesEntryCategories[];
+};
+
+export type GetEntryCategoriesEntryCategories = {
+  __typename?: "Category";
+
+  id: string;
+
+  name: string;
+
+  activated: boolean;
+
+  education: string;
+
+  pricePerPaperRs: number;
+};
+
 export type GetHtmlConfigVariables = {};
 
 export type GetHtmlConfigQuery = {
@@ -565,6 +589,52 @@ export function GetEntriesHOC<TProps, TChildProps = any>(
     GetEntriesVariables,
     GetEntriesProps<TChildProps>
   >(GetEntriesDocument, operationOptions);
+}
+export const GetEntryCategoriesDocument = gql`
+  query GetEntryCategories($entryId: ID!) {
+    entryCategories(entryId: $entryId) {
+      id
+      name
+      activated
+      education
+      pricePerPaperRs
+    }
+  }
+`;
+export class GetEntryCategoriesComponent extends React.Component<
+  Partial<
+    ReactApollo.QueryProps<GetEntryCategoriesQuery, GetEntryCategoriesVariables>
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Query<GetEntryCategoriesQuery, GetEntryCategoriesVariables>
+        query={GetEntryCategoriesDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type GetEntryCategoriesProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<GetEntryCategoriesQuery, GetEntryCategoriesVariables>
+> &
+  TChildProps;
+export function GetEntryCategoriesHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        GetEntryCategoriesQuery,
+        GetEntryCategoriesVariables,
+        GetEntryCategoriesProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    GetEntryCategoriesQuery,
+    GetEntryCategoriesVariables,
+    GetEntryCategoriesProps<TChildProps>
+  >(GetEntryCategoriesDocument, operationOptions);
 }
 export const GetHtmlConfigDocument = gql`
   query GetHtmlConfig {

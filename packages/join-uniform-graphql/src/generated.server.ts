@@ -54,6 +54,8 @@ export interface Query {
 
   entries: Entry[];
 
+  entryCategories: Category[];
+
   category?: Category | null;
 
   cloudinaryCloudName: string;
@@ -139,6 +141,9 @@ export interface CloudinaryMediaWidgetAuthenticationToken {
 export interface TranslationQueryArgs {
   language: Language;
 }
+export interface EntryCategoriesQueryArgs {
+  entryId: string;
+}
 export interface CategoryQueryArgs {
   id: string;
 }
@@ -198,6 +203,12 @@ export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
 
   entries?: QueryEntriesResolver<Entry[], TypeParent, Context>;
 
+  entryCategories?: QueryEntryCategoriesResolver<
+    Category[],
+    TypeParent,
+    Context
+  >;
+
   category?: QueryCategoryResolver<Category | null, TypeParent, Context>;
 
   cloudinaryCloudName?: QueryCloudinaryCloudNameResolver<
@@ -233,6 +244,15 @@ export type QueryEntriesResolver<
   Parent = {},
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
+export type QueryEntryCategoriesResolver<
+  R = Category[],
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context, QueryEntryCategoriesArgs>;
+export interface QueryEntryCategoriesArgs {
+  entryId: string;
+}
+
 export type QueryCategoryResolver<
   R = Category | null,
   Parent = {},
