@@ -2,6 +2,7 @@ export * from "./Button";
 export * from "./Card";
 export * from "./CardActionArea";
 export * from "./CardHeader";
+export * from "./Hidden";
 export * from "./Grid";
 export * from "./ImagePicker";
 export * from "./LayoutDashboard";

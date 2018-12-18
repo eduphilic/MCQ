@@ -7,7 +7,8 @@ import IconButton from "@material-ui/core/IconButton";
 import React from "react";
 import { Button } from "../Button";
 import { Grid } from "../Grid";
-import { Hidden, Typography } from "../muiComponents";
+import { Hidden } from "../Hidden";
+import { Typography } from "../muiComponents";
 
 export type PendingChangesButtonProps = {
   /**

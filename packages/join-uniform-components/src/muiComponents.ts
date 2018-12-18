@@ -28,12 +28,6 @@ import FormLabel, {
 export type FormLabelProps = MuiFormLabelProps;
 export { FormLabel };
 
-import Hidden, {
-  HiddenProps as MuiHiddenProps,
-} from "@material-ui/core/Hidden";
-export type HiddenProps = MuiHiddenProps;
-export { Hidden };
-
 import Icon, { IconProps as MuiIconProps } from "@material-ui/core/Icon";
 export type IconProps = MuiIconProps;
 export { Icon };
