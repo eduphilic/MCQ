@@ -1,12 +1,19 @@
-import { Button } from "@join-uniform/components";
 import {
-  GetCategoryComponent,
+  Button,
+  DashboardCard,
+  DashboardCardItem,
+  Grid,
+} from "@join-uniform/components";
+import {
   GetEntriesComponent,
+  GetEntriesEntries,
+  GetEntryCategoriesComponent,
+  GetEntryCategoriesEntryCategories,
 } from "@join-uniform/graphql";
 import { AddIcon } from "@join-uniform/icons";
 import { css } from "@join-uniform/theme";
 import Link from "next/link";
-import React, { Fragment } from "react";
+import React from "react";
 import { AdminLayoutDashboardContainer } from "../../containers";
 import { withQueryLoadingSpinner } from "../../lib/utils";
 
@@ -24,29 +31,52 @@ export default function AdminIndexPage() {
         </Link>,
       ]}
     >
-      {renderEntries()}
+      <Grid container contentCenter spacing={16}>
+        {/* {renderEntryCard()} */}
+        {withQueryLoadingSpinner(GetEntriesComponent, entriesResult =>
+          entriesResult.data.entries.map(entry =>
+            withQueryLoadingSpinner(
+              GetEntryCategoriesComponent,
+              { key: entry.id, variables: { entryId: entry.id } },
+              categoriesResult =>
+                renderEntryCard(entry, categoriesResult.data.entryCategories),
+            ),
+          ),
+        )}
+      </Grid>
     </AdminLayoutDashboardContainer>
   );
 
-  function renderEntries() {
-    return withQueryLoadingSpinner(GetEntriesComponent, entriesResult =>
-      entriesResult.data.entries.map(entry => (
-        <Fragment key={entry.id}>
-          <div>{entry.name}</div>
-          {entry.categories.map(categoryId => renderCategory(categoryId))}
-          <br />
-        </Fragment>
-      )),
-    );
-  }
-
-  function renderCategory(categoryId: string) {
-    return withQueryLoadingSpinner(
-      GetCategoryComponent,
-      { key: categoryId, variables: { id: categoryId } },
-      categoryResult => (
-        <div>{JSON.stringify(categoryResult.data.category || "", null, 2)}</div>
-      ),
+  function renderEntryCard(
+    entry: GetEntriesEntries,
+    categories: GetEntryCategoriesEntryCategories[],
+  ) {
+    return (
+      <Grid key={entry.id} item xs={12}>
+        <DashboardCard
+          title={`${entry.name} Entry`}
+          columnLabels={["Category", "Cost Per Paper (Rs)", "Activated"]}
+          columnTypes={["dual-line", "single-line", "switch"]}
+          items={categories.map(
+            (category): DashboardCardItem => ({
+              key: category.id,
+              columns: [
+                {
+                  primaryText: category.name,
+                  secondaryText: category.education,
+                },
+                {
+                  primaryText: category.pricePerPaperRs.toString(),
+                },
+                {
+                  switchChecked: category.activated,
+                  switchTooltipTitle: "Toggle Activation",
+                },
+              ],
+            }),
+          )}
+        />
+      </Grid>
     );
   }
 }
