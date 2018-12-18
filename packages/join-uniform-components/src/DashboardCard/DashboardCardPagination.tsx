@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 
-import TablePagination, {
-  TablePaginationProps,
-} from "@material-ui/core/TablePagination";
+import { TablePagination, TablePaginationProps } from "../muiComponents";
 
 // tslint:disable-next-line:no-empty-interface
 export interface DashboardCardPaginationProps extends TablePaginationProps {}

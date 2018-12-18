@@ -110,6 +110,12 @@ import TableHead, {
 export type TableHeadProps = MuiTableHeadProps;
 export { TableHead };
 
+import TablePagination, {
+  TablePaginationProps as MuiTablePaginationProps,
+} from "@material-ui/core/TablePagination";
+export type TablePaginationProps = MuiTablePaginationProps;
+export { TablePagination };
+
 import TableRow, {
   TableRowProps as MuiTableRowProps,
 } from "@material-ui/core/TableRow";
