@@ -13,6 +13,7 @@ import {
 import { AddIcon, DashboardIcon } from "@join-uniform/icons";
 import { css } from "@join-uniform/theme";
 import Link from "next/link";
+import Router from "next/router";
 import React from "react";
 import { AdminLayoutDashboardContainer } from "~/containers";
 import { createResponsiveImageUrl, withQueryLoadingSpinner } from "~/lib/utils";
@@ -57,6 +58,9 @@ export default function AdminIndexPage() {
           iconNode={<EntryLogoImageIcon logoUrl={entry.logoUrl} />}
           columnLabels={["Category", "Cost Per Paper (Rs)", "Activated"]}
           columnTypes={["dual-line", "single-line", "switch"]}
+          onItemEditClick={categoryId => {
+            Router.push(`/admin/entry-manager/edit?categoryId=${categoryId}`);
+          }}
           items={categories.map(
             (category): DashboardCardItem => ({
               key: category.id,
