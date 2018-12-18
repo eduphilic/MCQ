@@ -29,6 +29,11 @@ export interface DashboardCardTitleToolbarProps {
   title: string;
 
   /**
+   * Optional icon node. Replaces the default Material Design "dashboard" icon.
+   */
+  iconNode?: ReactNode;
+
+  /**
    * A node to render to the right of the card title.
    */
   titleSiblingNode?: ReactNode;
@@ -127,7 +132,7 @@ export class DashboardCardTitleToolbar extends Component<
   };
 
   generateCaptionNode = (api: DashboardCardModeApi) => {
-    const { title, titleSiblingNode, editCaptionText } = this.props;
+    const { title, titleSiblingNode, editCaptionText, iconNode } = this.props;
     const { mode } = api.state;
     const selectedCount = api.actions.getSelectedCount();
 
@@ -136,7 +141,7 @@ export class DashboardCardTitleToolbar extends Component<
         {/* Display mode caption. */}
         {mode === "display" && (
           <EntryTitleWrapper>
-            <DashboardIcon />
+            {iconNode || <DashboardIcon />}
             <Typography css={cardTitleStyle}>{title}</Typography>
             {titleSiblingNode}
           </EntryTitleWrapper>

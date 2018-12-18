@@ -10,12 +10,12 @@ import {
   GetEntryCategoriesComponent,
   GetEntryCategoriesEntryCategories,
 } from "@join-uniform/graphql";
-import { AddIcon } from "@join-uniform/icons";
+import { AddIcon, DashboardIcon } from "@join-uniform/icons";
 import { css } from "@join-uniform/theme";
 import Link from "next/link";
 import React from "react";
-import { AdminLayoutDashboardContainer } from "../../containers";
-import { withQueryLoadingSpinner } from "../../lib/utils";
+import { AdminLayoutDashboardContainer } from "~/containers";
+import { createResponsiveImageUrl, withQueryLoadingSpinner } from "~/lib/utils";
 
 export default function AdminIndexPage() {
   return (
@@ -32,7 +32,6 @@ export default function AdminIndexPage() {
       ]}
     >
       <Grid container contentCenter spacing={16}>
-        {/* {renderEntryCard()} */}
         {withQueryLoadingSpinner(GetEntriesComponent, entriesResult =>
           entriesResult.data.entries.map(entry =>
             withQueryLoadingSpinner(
@@ -55,6 +54,7 @@ export default function AdminIndexPage() {
       <Grid key={entry.id} item xs={12}>
         <DashboardCard
           title={`${entry.name} Entry`}
+          iconNode={<EntryLogoImageIcon logoUrl={entry.logoUrl} />}
           columnLabels={["Category", "Cost Per Paper (Rs)", "Activated"]}
           columnTypes={["dual-line", "single-line", "switch"]}
           items={categories.map(
@@ -79,4 +79,31 @@ export default function AdminIndexPage() {
       </Grid>
     );
   }
+}
+
+const cardLogoImageSize = 64;
+const cardLogoImgCss = css`
+  display: block;
+  width: ${cardLogoImageSize}px;
+  height: ${cardLogoImageSize}px;
+  margin-top: 8px;
+  margin-left: -16px;
+
+  ${({ theme }) => theme.breakpoints.down("xs")} {
+    margin-left: -8px;
+  }
+`;
+
+function EntryLogoImageIcon(props: { logoUrl: string }) {
+  const { logoUrl } = props;
+
+  if (!logoUrl) return <DashboardIcon css={cardLogoImgCss} />;
+
+  const src = createResponsiveImageUrl(logoUrl, {
+    w: "64",
+    h: "64",
+    format: "png",
+  });
+
+  return <img src={src} css={cardLogoImgCss} />;
 }

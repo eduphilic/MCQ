@@ -1,4 +1,5 @@
 import { action } from "@storybook/addon-actions";
+import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
@@ -73,6 +74,12 @@ stories.add("default", () => {
     rowsPerPage: 30,
   };
 
+  const iconNode = boolean("Custom Icon", false) ? (
+    <img src="https://placekitten.com/128/128" />
+  ) : (
+    undefined
+  );
+
   return (
     <Grid storybookContainer>
       <Grid item xs={12}>
@@ -80,6 +87,7 @@ stories.add("default", () => {
           items={items}
           title="Army Entry"
           titleSiblingNode={<Button>Some Sibling Component</Button>}
+          iconNode={iconNode}
           editCaptionText="Click to Edit Entry"
           columnLabels={columnLabels}
           columnTypes={columnTypes}

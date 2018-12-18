@@ -28,7 +28,7 @@ export interface DashboardCardProps
     >,
     Pick<
       DashboardCardTitleToolbarProps,
-      "editCaptionText" | "additionalActionNode"
+      "editCaptionText" | "additionalActionNode" | "iconNode"
     >,
     Pick<DashboardCardTableProps, "columnLabels" | "columnTypes"> {
   /**
@@ -64,6 +64,7 @@ export class DashboardCard extends Component<DashboardCardProps> {
     const {
       title,
       titleSiblingNode,
+      iconNode,
       items,
       onItemEditClick,
       onRequestDeleteClick,
@@ -93,6 +94,7 @@ export class DashboardCard extends Component<DashboardCardProps> {
             <DashboardCardTitleToolbar
               title={title}
               titleSiblingNode={titleSiblingNode}
+              iconNode={iconNode}
               editCaptionText={editCaptionText}
               showEditButton={Boolean(onItemEditClick)}
               showDeletionButton={Boolean(onRequestDeleteClick)}
