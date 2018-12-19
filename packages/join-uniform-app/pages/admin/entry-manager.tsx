@@ -11,10 +11,7 @@ import {
   GetEntriesComponent,
   GetEntriesEntries,
   GetEntryCategoriesComponent,
-  GetEntryCategoriesDocument,
   GetEntryCategoriesEntryCategories,
-  GetEntryCategoriesQuery,
-  GetEntryCategoriesVariables,
 } from "@join-uniform/graphql";
 import { AddIcon, DashboardIcon } from "@join-uniform/icons";
 import { css } from "@join-uniform/theme";
