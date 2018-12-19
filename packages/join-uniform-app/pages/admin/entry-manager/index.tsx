@@ -76,6 +76,18 @@ export default function AdminIndexPage() {
           iconNode={<EntryLogoImageIcon logoUrl={entry.logoUrl} />}
           columnLabels={["Category", "Cost Per Paper (Rs)", "Activated"]}
           columnTypes={["dual-line", "single-line", "switch"]}
+          bottomActionsNode={
+            <>
+              <Button
+                onClick={() => {
+                  Router.push(`/admin/entry-manager/edit?entryId=${entry.id}`);
+                }}
+              >
+                Edit Entry
+              </Button>
+              <Button disabled={categories.length > 0}>Delete Entry</Button>
+            </>
+          }
           onItemEditClick={categoryId => {
             Router.push(`/admin/entry-manager/edit?categoryId=${categoryId}`);
           }}
