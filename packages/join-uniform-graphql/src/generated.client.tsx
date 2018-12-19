@@ -72,6 +72,16 @@ export type DeleteCategoriesMutation = {
   deleteCategories: boolean | null;
 };
 
+export type DeleteEntryVariables = {
+  entryId: string;
+};
+
+export type DeleteEntryMutation = {
+  __typename?: "Mutation";
+
+  deleteEntry: boolean | null;
+};
+
 export type GenerateCloudinaryMediaLibraryAuthenticationTokenVariables = {};
 
 export type GenerateCloudinaryMediaLibraryAuthenticationTokenMutation = {
@@ -406,6 +416,48 @@ export function DeleteCategoriesHOC<TProps, TChildProps = any>(
     DeleteCategoriesVariables,
     DeleteCategoriesProps<TChildProps>
   >(DeleteCategoriesDocument, operationOptions);
+}
+export const DeleteEntryDocument = gql`
+  mutation DeleteEntry($entryId: ID!) {
+    deleteEntry(entryId: $entryId)
+  }
+`;
+export class DeleteEntryComponent extends React.Component<
+  Partial<ReactApollo.MutationProps<DeleteEntryMutation, DeleteEntryVariables>>
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<DeleteEntryMutation, DeleteEntryVariables>
+        mutation={DeleteEntryDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type DeleteEntryProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<DeleteEntryMutation, DeleteEntryVariables>
+> &
+  TChildProps;
+export type DeleteEntryMutationFn = ReactApollo.MutationFn<
+  DeleteEntryMutation,
+  DeleteEntryVariables
+>;
+export function DeleteEntryHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        DeleteEntryMutation,
+        DeleteEntryVariables,
+        DeleteEntryProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    DeleteEntryMutation,
+    DeleteEntryVariables,
+    DeleteEntryProps<TChildProps>
+  >(DeleteEntryDocument, operationOptions);
 }
 export const GenerateCloudinaryMediaLibraryAuthenticationTokenDocument = gql`
   mutation GenerateCloudinaryMediaLibraryAuthenticationToken {

@@ -116,6 +116,8 @@ export interface Mutation {
 
   createCategoryNewEntry?: boolean | null;
 
+  deleteEntry?: boolean | null;
+
   deleteCategories?: boolean | null;
 
   setCategoryActivationStatus?: boolean | null;
@@ -156,6 +158,9 @@ export interface CreateCategoryExistingEntryMutationArgs {
 }
 export interface CreateCategoryNewEntryMutationArgs {
   request: CategoryCreationRequestNewEntry;
+}
+export interface DeleteEntryMutationArgs {
+  entryId: string;
 }
 export interface DeleteCategoriesMutationArgs {
   entryId: string;
@@ -466,6 +471,12 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
     Context
   >;
 
+  deleteEntry?: MutationDeleteEntryResolver<
+    boolean | null,
+    TypeParent,
+    Context
+  >;
+
   deleteCategories?: MutationDeleteCategoriesResolver<
     boolean | null,
     TypeParent,
@@ -507,6 +518,15 @@ export type MutationCreateCategoryNewEntryResolver<
 > = Resolver<R, Parent, Context, MutationCreateCategoryNewEntryArgs>;
 export interface MutationCreateCategoryNewEntryArgs {
   request: CategoryCreationRequestNewEntry;
+}
+
+export type MutationDeleteEntryResolver<
+  R = boolean | null,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context, MutationDeleteEntryArgs>;
+export interface MutationDeleteEntryArgs {
+  entryId: string;
 }
 
 export type MutationDeleteCategoriesResolver<
