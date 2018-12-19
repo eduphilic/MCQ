@@ -102,6 +102,12 @@ stories.add("default", () => {
               placeholder="Custom action node's contents..."
             />
           }
+          bottomActionsNode={
+            <>
+              <Button>Edit Entry</Button>
+              <Button>Delete Entry</Button>
+            </>
+          }
         />
       </Grid>
     </Grid>

@@ -1,3 +1,9 @@
+import CardActions, {
+  CardActionsProps as MuiCardActionProps,
+} from "@material-ui/core/CardActions";
+export type CardActionsProps = MuiCardActionProps;
+export { CardActions };
+
 import CardContent, {
   CardContentProps as MuiCardContentProps,
 } from "@material-ui/core/CardContent";

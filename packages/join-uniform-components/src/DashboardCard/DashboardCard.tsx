@@ -2,6 +2,7 @@ import React, { Component, ReactNode } from "react";
 
 import Card from "@material-ui/core/Card";
 
+import { CardActions } from "../muiComponents";
 import { DashboardCardItem } from "./DashboardCardItem";
 import {
   DashboardCardModeContextProps,
@@ -57,6 +58,8 @@ export interface DashboardCardProps
    * items in the table, eg. "question". It will be pluralized automatically.
    */
   paginationListItemType?: string;
+
+  bottomActionsNode?: ReactNode;
 }
 
 export class DashboardCard extends Component<DashboardCardProps> {
@@ -74,6 +77,7 @@ export class DashboardCard extends Component<DashboardCardProps> {
       paginationProps,
       paginationListItemType,
       additionalActionNode,
+      bottomActionsNode,
     } = this.props;
     const itemKeys = items.map(item => item.key);
 
@@ -120,6 +124,8 @@ export class DashboardCard extends Component<DashboardCardProps> {
               bottomPaginationNode={paginationNode}
             />
           )}
+
+          {bottomActionsNode && <CardActions>{bottomActionsNode}</CardActions>}
         </Card>
       </DashboardCardModeProvider>
     );
