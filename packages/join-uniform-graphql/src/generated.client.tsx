@@ -104,6 +104,17 @@ export type GenerateCloudinarySignatureMutation = {
   generateCloudinarySignature: string;
 };
 
+export type SetCategoryActivationStatusVariables = {
+  categoryId: string;
+  activated: boolean;
+};
+
+export type SetCategoryActivationStatusMutation = {
+  __typename?: "Mutation";
+
+  setCategoryActivationStatus: boolean | null;
+};
+
 export type GetCategoryVariables = {
   id: string;
 };
@@ -515,6 +526,59 @@ export function GenerateCloudinarySignatureHOC<TProps, TChildProps = any>(
     GenerateCloudinarySignatureVariables,
     GenerateCloudinarySignatureProps<TChildProps>
   >(GenerateCloudinarySignatureDocument, operationOptions);
+}
+export const SetCategoryActivationStatusDocument = gql`
+  mutation SetCategoryActivationStatus($categoryId: ID!, $activated: Boolean!) {
+    setCategoryActivationStatus(categoryId: $categoryId, activated: $activated)
+  }
+`;
+export class SetCategoryActivationStatusComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<
+      SetCategoryActivationStatusMutation,
+      SetCategoryActivationStatusVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<
+        SetCategoryActivationStatusMutation,
+        SetCategoryActivationStatusVariables
+      >
+        mutation={SetCategoryActivationStatusDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type SetCategoryActivationStatusProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<
+    SetCategoryActivationStatusMutation,
+    SetCategoryActivationStatusVariables
+  >
+> &
+  TChildProps;
+export type SetCategoryActivationStatusMutationFn = ReactApollo.MutationFn<
+  SetCategoryActivationStatusMutation,
+  SetCategoryActivationStatusVariables
+>;
+export function SetCategoryActivationStatusHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        SetCategoryActivationStatusMutation,
+        SetCategoryActivationStatusVariables,
+        SetCategoryActivationStatusProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    SetCategoryActivationStatusMutation,
+    SetCategoryActivationStatusVariables,
+    SetCategoryActivationStatusProps<TChildProps>
+  >(SetCategoryActivationStatusDocument, operationOptions);
 }
 export const GetCategoryDocument = gql`
   query GetCategory($id: ID!) {

@@ -117,6 +117,8 @@ export interface Mutation {
   createCategoryNewEntry?: boolean | null;
 
   deleteCategories?: boolean | null;
+
+  setCategoryActivationStatus?: boolean | null;
   /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
   generateCloudinarySignature: string;
   /** Generates the authentication parameters required for creating a session foruse with the Cloudinary Media Library widget. */
@@ -159,6 +161,11 @@ export interface DeleteCategoriesMutationArgs {
   entryId: string;
 
   categoryIds: string[];
+}
+export interface SetCategoryActivationStatusMutationArgs {
+  categoryId: string;
+
+  activated: boolean;
 }
 export interface GenerateCloudinarySignatureMutationArgs {
   paramsToSign: Json;
@@ -464,6 +471,12 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
     TypeParent,
     Context
   >;
+
+  setCategoryActivationStatus?: MutationSetCategoryActivationStatusResolver<
+    boolean | null,
+    TypeParent,
+    Context
+  >;
   /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
   generateCloudinarySignature?: MutationGenerateCloudinarySignatureResolver<
     string,
@@ -505,6 +518,17 @@ export interface MutationDeleteCategoriesArgs {
   entryId: string;
 
   categoryIds: string[];
+}
+
+export type MutationSetCategoryActivationStatusResolver<
+  R = boolean | null,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context, MutationSetCategoryActivationStatusArgs>;
+export interface MutationSetCategoryActivationStatusArgs {
+  categoryId: string;
+
+  activated: boolean;
 }
 
 export type MutationGenerateCloudinarySignatureResolver<

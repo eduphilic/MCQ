@@ -12,6 +12,7 @@ import {
   GetEntriesEntries,
   GetEntryCategoriesComponent,
   GetEntryCategoriesEntryCategories,
+  SetCategoryActivationStatusComponent,
 } from "@join-uniform/graphql";
 import { AddIcon } from "@join-uniform/icons";
 import { css, styled } from "@join-uniform/theme";
@@ -70,59 +71,71 @@ export default function AdminIndexPage() {
     >,
   ) {
     return (
-      <Grid key={entry.id} item xs={12}>
-        <DashboardCard
-          title={`${entry.name} Entry`}
-          iconNode={<EntryLogoImageIcon logoUrl={entry.logoUrl} />}
-          columnLabels={["Category", "Cost Per Paper (Rs)", "Activated"]}
-          columnTypes={["dual-line", "single-line", "switch"]}
-          bottomActionsNode={
-            <>
-              <Button
-                onClick={() => {
-                  Router.push(`/admin/entry-manager/edit?entryId=${entry.id}`);
-                }}
-              >
-                Edit Entry
-              </Button>
-              <Button disabled={categories.length > 0}>Delete Entry</Button>
-            </>
-          }
-          onItemEditClick={categoryId => {
-            Router.push(`/admin/entry-manager/edit?categoryId=${categoryId}`);
-          }}
-          onRequestDeleteClick={async categoryIds => {
-            if (!confirm("Remove the selected categories?")) return;
-            await deleteCategories({
-              variables: { entryId: entry.id, categoryIds },
-            });
-            await categoriesRefetch();
-          }}
-          items={categories.map(
-            (category): DashboardCardItem => ({
-              key: category.id,
-              columns: [
-                {
-                  primaryText: category.name,
-                  secondaryText: category.education,
-                },
-                {
-                  primaryText: category.pricePerPaperRs.toString(),
-                },
-                {
-                  switchChecked: category.activated,
-                  switchTooltipTitle: "Toggle Activation",
-                  switchOnChange: checked => {
-                    /* tslint:disable-next-line:no-console */
-                    console.log({ checked });
-                    alert("Toggle placeholder.");
-                  },
-                },
-              ],
-            }),
-          )}
-        />
-      </Grid>
+      <SetCategoryActivationStatusComponent>
+        {setCategoryActivationStatus => (
+          <Grid key={entry.id} item xs={12}>
+            <DashboardCard
+              title={`${entry.name} Entry`}
+              iconNode={<EntryLogoImageIcon logoUrl={entry.logoUrl} />}
+              columnLabels={["Category", "Cost Per Paper (Rs)", "Activated"]}
+              columnTypes={["dual-line", "single-line", "switch"]}
+              bottomActionsNode={
+                <>
+                  <Button
+                    onClick={() => {
+                      Router.push(
+                        `/admin/entry-manager/edit?entryId=${entry.id}`,
+                      );
+                    }}
+                  >
+                    Edit Entry
+                  </Button>
+                  <Button disabled={categories.length > 0}>Delete Entry</Button>
+                </>
+              }
+              onItemEditClick={categoryId => {
+                Router.push(
+                  `/admin/entry-manager/edit?categoryId=${categoryId}`,
+                );
+              }}
+              onRequestDeleteClick={async categoryIds => {
+                if (!confirm("Remove the selected categories?")) return;
+                await deleteCategories({
+                  variables: { entryId: entry.id, categoryIds },
+                });
+                await categoriesRefetch();
+              }}
+              items={categories.map(
+                (category): DashboardCardItem => ({
+                  key: category.id,
+                  columns: [
+                    {
+                      primaryText: category.name,
+                      secondaryText: category.education,
+                    },
+                    {
+                      primaryText: category.pricePerPaperRs.toString(),
+                    },
+                    {
+                      switchChecked: category.activated,
+                      switchTooltipTitle: "Toggle Activation",
+                      switchOnChange: async checked => {
+                        await setCategoryActivationStatus({
+                          variables: {
+                            categoryId: category.id,
+                            activated: checked,
+                          },
+                        });
+                        await categoriesRefetch();
+                      },
+                    },
+                  ],
+                }),
+              )}
+            />
+          </Grid>
+        )}
+      </SetCategoryActivationStatusComponent>
     );
   }
 }

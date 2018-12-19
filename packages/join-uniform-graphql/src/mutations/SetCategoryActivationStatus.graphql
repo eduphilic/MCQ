@@ -1,0 +1,3 @@
+mutation SetCategoryActivationStatus($categoryId: ID!, $activated: Boolean!) {
+  setCategoryActivationStatus(categoryId: $categoryId, activated: $activated)
+}
