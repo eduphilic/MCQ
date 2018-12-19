@@ -5,16 +5,23 @@ import {
   Grid,
 } from "@join-uniform/components";
 import {
+  DeleteCategoriesComponent,
+  DeleteCategoriesMutation,
+  DeleteCategoriesVariables,
   GetEntriesComponent,
   GetEntriesEntries,
   GetEntryCategoriesComponent,
+  GetEntryCategoriesDocument,
   GetEntryCategoriesEntryCategories,
+  GetEntryCategoriesQuery,
+  GetEntryCategoriesVariables,
 } from "@join-uniform/graphql";
 import { AddIcon, DashboardIcon } from "@join-uniform/icons";
 import { css } from "@join-uniform/theme";
 import Link from "next/link";
 import Router from "next/router";
 import React from "react";
+import { MutationFn } from "react-apollo";
 import { AdminLayoutDashboardContainer } from "~/containers";
 import { createResponsiveImageUrl, withQueryLoadingSpinner } from "~/lib/utils";
 
@@ -33,16 +40,25 @@ export default function AdminIndexPage() {
       ]}
     >
       <Grid container contentCenter spacing={16}>
-        {withQueryLoadingSpinner(GetEntriesComponent, entriesResult =>
-          entriesResult.data.entries.map(entry =>
-            withQueryLoadingSpinner(
-              GetEntryCategoriesComponent,
-              { key: entry.id, variables: { entryId: entry.id } },
-              categoriesResult =>
-                renderEntryCard(entry, categoriesResult.data.entryCategories),
-            ),
-          ),
-        )}
+        <DeleteCategoriesComponent>
+          {deleteCategories =>
+            withQueryLoadingSpinner(GetEntriesComponent, entriesResult =>
+              entriesResult.data.entries.map(entry =>
+                withQueryLoadingSpinner(
+                  GetEntryCategoriesComponent,
+                  { key: entry.id, variables: { entryId: entry.id } },
+                  categoriesResult =>
+                    renderEntryCard(
+                      entry,
+                      categoriesResult.data.entryCategories,
+                      categoriesResult.refetch,
+                      deleteCategories,
+                    ),
+                ),
+              ),
+            )
+          }
+        </DeleteCategoriesComponent>
       </Grid>
     </AdminLayoutDashboardContainer>
   );
@@ -50,6 +66,11 @@ export default function AdminIndexPage() {
   function renderEntryCard(
     entry: GetEntriesEntries,
     categories: GetEntryCategoriesEntryCategories[],
+    categoriesRefetch: () => any,
+    deleteCategories: MutationFn<
+      DeleteCategoriesMutation,
+      DeleteCategoriesVariables
+    >,
   ) {
     return (
       <Grid key={entry.id} item xs={12}>
@@ -61,10 +82,12 @@ export default function AdminIndexPage() {
           onItemEditClick={categoryId => {
             Router.push(`/admin/entry-manager/edit?categoryId=${categoryId}`);
           }}
-          onRequestDeleteClick={categoryIds => {
-            /* tslint:disable-next-line:no-console */
-            console.log({ categoryIds });
-            alert("Deletion placeholder");
+          onRequestDeleteClick={async categoryIds => {
+            if (!confirm("Remove the selected categories?")) return;
+            await deleteCategories({
+              variables: { entryId: entry.id, categoryIds },
+            });
+            await categoriesRefetch();
           }}
           items={categories.map(
             (category): DashboardCardItem => ({

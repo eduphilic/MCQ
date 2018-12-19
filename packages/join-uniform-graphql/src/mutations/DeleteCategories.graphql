@@ -1,0 +1,3 @@
+mutation DeleteCategories($entryId: ID!, $categoryIds: [ID!]!) {
+  deleteCategories(entryId: $entryId, categoryIds: $categoryIds)
+}

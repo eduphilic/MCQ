@@ -115,6 +115,8 @@ export interface Mutation {
   createCategoryExistingEntry?: boolean | null;
 
   createCategoryNewEntry?: boolean | null;
+
+  deleteCategories?: boolean | null;
   /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
   generateCloudinarySignature: string;
   /** Generates the authentication parameters required for creating a session foruse with the Cloudinary Media Library widget. */
@@ -152,6 +154,11 @@ export interface CreateCategoryExistingEntryMutationArgs {
 }
 export interface CreateCategoryNewEntryMutationArgs {
   request: CategoryCreationRequestNewEntry;
+}
+export interface DeleteCategoriesMutationArgs {
+  entryId: string;
+
+  categoryIds: string[];
 }
 export interface GenerateCloudinarySignatureMutationArgs {
   paramsToSign: Json;
@@ -451,6 +458,12 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
     TypeParent,
     Context
   >;
+
+  deleteCategories?: MutationDeleteCategoriesResolver<
+    boolean | null,
+    TypeParent,
+    Context
+  >;
   /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
   generateCloudinarySignature?: MutationGenerateCloudinarySignatureResolver<
     string,
@@ -481,6 +494,17 @@ export type MutationCreateCategoryNewEntryResolver<
 > = Resolver<R, Parent, Context, MutationCreateCategoryNewEntryArgs>;
 export interface MutationCreateCategoryNewEntryArgs {
   request: CategoryCreationRequestNewEntry;
+}
+
+export type MutationDeleteCategoriesResolver<
+  R = boolean | null,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context, MutationDeleteCategoriesArgs>;
+export interface MutationDeleteCategoriesArgs {
+  entryId: string;
+
+  categoryIds: string[];
 }
 
 export type MutationGenerateCloudinarySignatureResolver<

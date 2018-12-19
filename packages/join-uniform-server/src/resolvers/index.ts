@@ -13,6 +13,7 @@ import { entryCategories } from "./entryCategories";
 
 import { createCategoryExistingEntry } from "./createCategoryExistingEntry";
 import { createCategoryNewEntry } from "./createCategoryNewEntry";
+import { deleteCategories } from "./deleteCategories";
 
 import { cloudinaryApiKey } from "./cloudinaryApiKey";
 import { cloudinaryCloudName } from "./cloudinaryCloudName";
@@ -36,6 +37,7 @@ const Query: QueryResolvers = {
 const Mutation: MutationResolvers = {
   createCategoryExistingEntry,
   createCategoryNewEntry,
+  deleteCategories,
 
   generateCloudinarySignature,
   generateCloudinaryMediaLibraryAuthenticationToken,

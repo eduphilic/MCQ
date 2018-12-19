@@ -61,6 +61,17 @@ export type CreateCategoryNewEntryMutation = {
   createCategoryNewEntry: boolean | null;
 };
 
+export type DeleteCategoriesVariables = {
+  entryId: string;
+  categoryIds: string[];
+};
+
+export type DeleteCategoriesMutation = {
+  __typename?: "Mutation";
+
+  deleteCategories: boolean | null;
+};
+
 export type GenerateCloudinaryMediaLibraryAuthenticationTokenVariables = {};
 
 export type GenerateCloudinaryMediaLibraryAuthenticationTokenMutation = {
@@ -337,6 +348,53 @@ export function CreateCategoryNewEntryHOC<TProps, TChildProps = any>(
     CreateCategoryNewEntryVariables,
     CreateCategoryNewEntryProps<TChildProps>
   >(CreateCategoryNewEntryDocument, operationOptions);
+}
+export const DeleteCategoriesDocument = gql`
+  mutation DeleteCategories($entryId: ID!, $categoryIds: [ID!]!) {
+    deleteCategories(entryId: $entryId, categoryIds: $categoryIds)
+  }
+`;
+export class DeleteCategoriesComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<
+      DeleteCategoriesMutation,
+      DeleteCategoriesVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<DeleteCategoriesMutation, DeleteCategoriesVariables>
+        mutation={DeleteCategoriesDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type DeleteCategoriesProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<DeleteCategoriesMutation, DeleteCategoriesVariables>
+> &
+  TChildProps;
+export type DeleteCategoriesMutationFn = ReactApollo.MutationFn<
+  DeleteCategoriesMutation,
+  DeleteCategoriesVariables
+>;
+export function DeleteCategoriesHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        DeleteCategoriesMutation,
+        DeleteCategoriesVariables,
+        DeleteCategoriesProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    DeleteCategoriesMutation,
+    DeleteCategoriesVariables,
+    DeleteCategoriesProps<TChildProps>
+  >(DeleteCategoriesDocument, operationOptions);
 }
 export const GenerateCloudinaryMediaLibraryAuthenticationTokenDocument = gql`
   mutation GenerateCloudinaryMediaLibraryAuthenticationToken {
