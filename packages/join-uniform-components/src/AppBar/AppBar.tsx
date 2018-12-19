@@ -3,10 +3,10 @@ import { css, styled } from "@join-uniform/theme";
 import MuiAppBar from "@material-ui/core/AppBar";
 import IconButton, { IconButtonProps } from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
-import React, { ReactElement, ReactNode } from "react";
+import React, { FC, ReactElement, ReactNode } from "react";
 import { Grid } from "../Grid";
 import { Hidden } from "../Hidden";
-import { Typography } from "../muiComponents";
+import { Typography, TypographyProps } from "../muiComponents";
 
 export type AppBarProps = {
   /** Title text. */
@@ -81,19 +81,17 @@ function Title(props: { title: string }) {
   return (
     <Grid item xs>
       <Hidden implementation="css" smDown>
-        <Typography
-          variant="h6"
-          color="inherit"
-          css={css`
-            font-weight: 400;
-          `}
-        >
+        <AppBarTypography variant="h6" color="inherit">
           {title}
-        </Typography>
+        </AppBarTypography>
       </Hidden>
     </Grid>
   );
 }
+
+const AppBarTypography = styled(Typography as FC<TypographyProps>)`
+  font-weight: 400;
+`;
 
 function ButtonsContainer(props: { buttons: ReactElement<any>[] }) {
   const { buttons } = props;

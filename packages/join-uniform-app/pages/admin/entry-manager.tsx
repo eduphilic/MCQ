@@ -13,8 +13,8 @@ import {
   GetEntryCategoriesComponent,
   GetEntryCategoriesEntryCategories,
 } from "@join-uniform/graphql";
-import { AddIcon, DashboardIcon } from "@join-uniform/icons";
-import { css } from "@join-uniform/theme";
+import { AddIcon } from "@join-uniform/icons";
+import { css, styled } from "@join-uniform/theme";
 import Link from "next/link";
 import Router from "next/router";
 import React from "react";
@@ -116,7 +116,8 @@ export default function AdminIndexPage() {
 }
 
 const cardLogoImageSize = 64;
-const cardLogoImgCss = css`
+
+const EntryLogoImageIconAsImg = styled.img`
   display: block;
   width: ${cardLogoImageSize}px;
   height: ${cardLogoImageSize}px;
@@ -131,13 +132,11 @@ const cardLogoImgCss = css`
 function EntryLogoImageIcon(props: { logoUrl: string }) {
   const { logoUrl } = props;
 
-  if (!logoUrl) return <DashboardIcon css={cardLogoImgCss} />;
-
   const src = createResponsiveImageUrl(logoUrl, {
     w: "64",
     h: "64",
     format: "png",
   });
 
-  return <img src={src} css={cardLogoImgCss} />;
+  return <EntryLogoImageIconAsImg src={src} />;
 }
