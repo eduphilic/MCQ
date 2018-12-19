@@ -96,8 +96,10 @@ export class DashboardCard extends Component<DashboardCardProps> {
               titleSiblingNode={titleSiblingNode}
               iconNode={iconNode}
               editCaptionText={editCaptionText}
-              showEditButton={Boolean(onItemEditClick)}
-              showDeletionButton={Boolean(onRequestDeleteClick)}
+              showEditButton={items.length > 0 && Boolean(onItemEditClick)}
+              showDeletionButton={
+                items.length > 0 && Boolean(onRequestDeleteClick)
+              }
               additionalActionNode={additionalActionNode}
             />
           )}
@@ -109,13 +111,15 @@ export class DashboardCard extends Component<DashboardCardProps> {
             />
           )}
 
-          <DashboardCardTable
-            showCheckboxes={Boolean(onRequestDeleteClick)}
-            columnLabels={columnLabels}
-            columnTypes={columnTypes}
-            items={items}
-            bottomPaginationNode={paginationNode}
-          />
+          {items.length > 0 && (
+            <DashboardCardTable
+              showCheckboxes={Boolean(onRequestDeleteClick)}
+              columnLabels={columnLabels}
+              columnTypes={columnTypes}
+              items={items}
+              bottomPaginationNode={paginationNode}
+            />
+          )}
         </Card>
       </DashboardCardModeProvider>
     );
