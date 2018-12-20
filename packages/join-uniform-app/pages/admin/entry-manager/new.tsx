@@ -18,8 +18,6 @@ import {
   Radio,
   RadioGroup,
   Select,
-  TextField,
-  TextFieldProps,
 } from "@join-uniform/components";
 import {
   CreateCategoryExistingEntryComponent,
@@ -30,6 +28,7 @@ import {
 } from "@join-uniform/graphql";
 import { css } from "@join-uniform/theme";
 import { AdminLayoutDashboardContainer } from "~/containers";
+import { FormikMuiTextField } from "~/lib/admin";
 import {
   createResponsiveImageUrl,
   useCloudinary,
@@ -207,12 +206,12 @@ export default function AdminEntryManagerNewEntryPage() {
                             {form.values.entrySource === "new" && (
                               <>
                                 <CardContent>
-                                  <FormTextField
+                                  <FormikMuiTextField
                                     name="entryName"
                                     label="Entry Name"
                                     form={form}
                                   />
-                                  <FormTextField
+                                  <FormikMuiTextField
                                     name="entryExplanation"
                                     label="Entry Explanation"
                                     form={form}
@@ -265,17 +264,17 @@ export default function AdminEntryManagerNewEntryPage() {
                           <Card>
                             <CardHeader title="Category" variant="admin" />
                             <CardContent>
-                              <FormTextField
+                              <FormikMuiTextField
                                 name="categoryName"
                                 label="Category Name"
                                 form={form}
                               />
-                              <FormTextField
+                              <FormikMuiTextField
                                 name="categoryEducation"
                                 label="Category Education"
                                 form={form}
                               />
-                              <FormTextField
+                              <FormikMuiTextField
                                 name="pricePerPaper"
                                 type="number"
                                 label="Price per Paper"
@@ -328,27 +327,4 @@ export default function AdminEntryManagerNewEntryPage() {
       },
     );
   }
-}
-
-function FormTextField(props: {
-  name: keyof FormValues;
-  type?: TextFieldProps["type"];
-  label: string;
-  form: FormikProps<FormValues>;
-}) {
-  const { name, type, label, form } = props;
-
-  return (
-    <TextField
-      fullWidth
-      margin="normal"
-      name={name}
-      type={type}
-      label={(form.touched[name] && form.errors[name]) || label}
-      error={form.touched[name] && !!form.errors[name]}
-      value={form.values[name] as string}
-      onChange={form.handleChange}
-      onBlur={form.handleBlur}
-    />
-  );
 }
