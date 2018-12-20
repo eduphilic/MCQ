@@ -6,7 +6,10 @@ import {
   PendingChangesButton,
   Typography,
 } from "@join-uniform/components";
-import { GetIndexPageConfigComponent } from "@join-uniform/graphql";
+import {
+  GetIndexPageConfigComponent,
+  LocalizedString,
+} from "@join-uniform/graphql";
 import { Formik } from "formik";
 import React from "react";
 import { AdminLayoutDashboardContainer } from "~/containers";
@@ -19,6 +22,7 @@ type FormValues = {
   heroBackgroundAlpha: number;
   heroPrimaryTextEnglish: string;
   heroPrimaryTextHindi: string;
+  heroFeatures: LocalizedString[];
 };
 
 export default function AdminIndexManagerPage() {
@@ -32,6 +36,7 @@ export default function AdminIndexManagerPage() {
           heroBackgroundAlpha: indexPageConfig.heroBackgroundAlpha,
           heroPrimaryTextEnglish: indexPageConfig.heroPrimaryText.en,
           heroPrimaryTextHindi: indexPageConfig.heroPrimaryText.hi!,
+          heroFeatures: indexPageConfig.heroFeatures,
         }}
         onSubmit={() => {
           //
@@ -64,10 +69,12 @@ export default function AdminIndexManagerPage() {
                 </Card>
               </Grid>
 
-              {/* Hero section. */}
+              {/* Hero card. */}
               <Grid item xs={12}>
                 <Card>
                   <CardHeader title="Hero" variant="admin" />
+
+                  {/* Hero Background section. */}
                   <CardContent>
                     <Typography variant="subtitle2" paragraph>
                       Hero Background
@@ -86,6 +93,8 @@ export default function AdminIndexManagerPage() {
                       form={form}
                     />
                   </CardContent>
+
+                  {/* Hero Text section. */}
                   <CardContent>
                     <Typography variant="subtitle2" paragraph>
                       Hero Text
@@ -104,6 +113,16 @@ export default function AdminIndexManagerPage() {
                           label="Hero Primary Text (Hindi)"
                           form={form}
                         />
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+
+                  {/* Hero Features section. */}
+                  <CardContent>
+                    <Typography variant="subtitle2">Hero Features</Typography>
+                    <Grid container spacing={16}>
+                      <Grid item xs={12} md={6}>
+                        temp
                       </Grid>
                     </Grid>
                   </CardContent>
