@@ -52,6 +52,8 @@ export interface Query {
 
   translation: Translation;
 
+  entry?: Entry | null;
+
   entries: Entry[];
 
   entryCategories: Category[];
@@ -147,6 +149,9 @@ export interface CloudinaryMediaWidgetAuthenticationToken {
 export interface TranslationQueryArgs {
   language: Language;
 }
+export interface EntryQueryArgs {
+  entryId: string;
+}
 export interface EntryCategoriesQueryArgs {
   entryId: string;
 }
@@ -220,6 +225,8 @@ export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
 
   translation?: QueryTranslationResolver<Translation, TypeParent, Context>;
 
+  entry?: QueryEntryResolver<Entry | null, TypeParent, Context>;
+
   entries?: QueryEntriesResolver<Entry[], TypeParent, Context>;
 
   entryCategories?: QueryEntryCategoriesResolver<
@@ -256,6 +263,15 @@ export type QueryTranslationResolver<
 > = Resolver<R, Parent, Context, QueryTranslationArgs>;
 export interface QueryTranslationArgs {
   language: Language;
+}
+
+export type QueryEntryResolver<
+  R = Entry | null,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context, QueryEntryArgs>;
+export interface QueryEntryArgs {
+  entryId: string;
 }
 
 export type QueryEntriesResolver<

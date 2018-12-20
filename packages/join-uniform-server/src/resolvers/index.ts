@@ -9,6 +9,7 @@ import { translation } from "./translation";
 
 import { category } from "./category";
 import { entries } from "./entries";
+import { entry } from "./entry";
 import { entryCategories } from "./entryCategories";
 
 import { createCategoryExistingEntry } from "./createCategoryExistingEntry";
@@ -33,6 +34,7 @@ const Query: QueryResolvers = {
 
   category,
   entries,
+  entry,
   entryCategories,
 };
 

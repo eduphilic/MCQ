@@ -5,6 +5,7 @@ type Query {
 
   translation(language: Language!): Translation!
 
+  entry(entryId: ID!): Entry
   entries: [Entry!]!
   entryCategories(entryId: ID!): [Category!]!
   category(id: ID!): Category

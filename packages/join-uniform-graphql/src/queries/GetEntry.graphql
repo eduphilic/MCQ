@@ -1,0 +1,9 @@
+query GetEntry($entryId: ID!) {
+  entry(entryId: $entryId) {
+    id
+    name
+    description
+    categories
+    logoUrl
+  }
+}

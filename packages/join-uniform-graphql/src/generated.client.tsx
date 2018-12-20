@@ -181,6 +181,30 @@ export type GetEntriesEntries = {
   logoUrl: string;
 };
 
+export type GetEntryVariables = {
+  entryId: string;
+};
+
+export type GetEntryQuery = {
+  __typename?: "Query";
+
+  entry: GetEntryEntry | null;
+};
+
+export type GetEntryEntry = {
+  __typename?: "Entry";
+
+  id: string;
+
+  name: string;
+
+  description: string;
+
+  categories: string[];
+
+  logoUrl: string;
+};
+
 export type GetEntryCategoriesVariables = {
   entryId: string;
 };
@@ -763,6 +787,50 @@ export function GetEntriesHOC<TProps, TChildProps = any>(
     GetEntriesVariables,
     GetEntriesProps<TChildProps>
   >(GetEntriesDocument, operationOptions);
+}
+export const GetEntryDocument = gql`
+  query GetEntry($entryId: ID!) {
+    entry(entryId: $entryId) {
+      id
+      name
+      description
+      categories
+      logoUrl
+    }
+  }
+`;
+export class GetEntryComponent extends React.Component<
+  Partial<ReactApollo.QueryProps<GetEntryQuery, GetEntryVariables>>
+> {
+  render() {
+    return (
+      <ReactApollo.Query<GetEntryQuery, GetEntryVariables>
+        query={GetEntryDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type GetEntryProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<GetEntryQuery, GetEntryVariables>
+> &
+  TChildProps;
+export function GetEntryHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        GetEntryQuery,
+        GetEntryVariables,
+        GetEntryProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    GetEntryQuery,
+    GetEntryVariables,
+    GetEntryProps<TChildProps>
+  >(GetEntryDocument, operationOptions);
 }
 export const GetEntryCategoriesDocument = gql`
   query GetEntryCategories($entryId: ID!) {
