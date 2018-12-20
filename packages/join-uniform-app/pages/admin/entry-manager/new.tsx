@@ -26,7 +26,6 @@ import {
   ValidatorCategoryCreationRequestExistingEntry,
   ValidatorCategoryCreationRequestNewEntry,
 } from "@join-uniform/graphql";
-import { css } from "@join-uniform/theme";
 import { AdminLayoutDashboardContainer } from "~/containers";
 import { FormikMuiTextField } from "~/lib/admin";
 import {
@@ -220,9 +219,6 @@ export default function AdminEntryManagerNewEntryPage() {
                                 <CardHeader
                                   title="Entry Logo"
                                   variant="admin"
-                                  css={css`
-                                    padding-bottom: 8px;
-                                  `}
                                 />
                                 <CardContent>
                                   <ImagePicker
