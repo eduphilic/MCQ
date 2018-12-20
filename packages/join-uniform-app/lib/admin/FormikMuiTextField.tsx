@@ -6,13 +6,15 @@ export type FormikMuiTextFieldProps<FormValues> = {
   name: keyof FormValues;
   type?: TextFieldProps["type"];
   label: string;
+  helperText?: string;
   form: FormikProps<FormValues>;
+  inputProps?: TextFieldProps["inputProps"];
 };
 
 export function FormikMuiTextField<FormValues>(
   props: FormikMuiTextFieldProps<FormValues>,
 ) {
-  const { name, type, label, form } = props;
+  const { name, type, label, helperText, form, inputProps } = props;
 
   return (
     <TextField
@@ -21,6 +23,8 @@ export function FormikMuiTextField<FormValues>(
       name={name as string}
       type={type}
       label={(form.touched[name] && form.errors[name]) || label}
+      helperText={helperText}
+      inputProps={inputProps}
       error={form.touched[name] && !!form.errors[name]}
       value={form.values[name].toString()}
       onChange={form.handleChange}
