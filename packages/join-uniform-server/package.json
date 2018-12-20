@@ -12,13 +12,13 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@koa/cors": "^2.2.2",
-    "apollo-server-core": "^2.2.6",
-    "apollo-server-koa": "^2.2.6",
+    "@koa/cors": "^2.2.3",
+    "apollo-server-core": "^2.3.1",
+    "apollo-server-koa": "^2.3.1",
     "cloudinary": "^1.13.2",
-    "firebase-admin": "^6.3.0",
+    "firebase-admin": "^6.4.0",
     "firebase-functions": "^2.1.0",
-    "google-auth-library": "^2.0.1",
+    "google-auth-library": "^2.0.2",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",
     "koa": "^2.6.2",
@@ -29,7 +29,7 @@
     "yup": "^0.26.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.0",
+    "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.2.1",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
@@ -40,8 +40,8 @@
     "rimraf": "^2.6.2",
     "source-map-support": "^0.5.9",
     "ts-node": "^7.0.1",
-    "tslint": "^5.11.0",
-    "webpack": "^4.27.1",
+    "tslint": "^5.12.0",
+    "webpack": "^4.28.0",
     "webpack-cli": "^3.1.2",
     "webpack-node-externals": "^1.7.2"
   }
