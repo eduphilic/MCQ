@@ -26,6 +26,14 @@ export interface CategoryCreationRequestNewEntry {
 
   readonly entryExplanation: string;
 }
+
+export interface EntryUpdate {
+  readonly name: string;
+
+  readonly logoUrl: string;
+
+  readonly description: string;
+}
 /** Supported localization languages. */
 export enum Language {
   English = "English",
@@ -118,6 +126,8 @@ export interface Mutation {
 
   createCategoryNewEntry?: boolean | null;
 
+  updateEntry?: boolean | null;
+
   deleteEntry?: boolean | null;
 
   deleteCategories?: boolean | null;
@@ -163,6 +173,11 @@ export interface CreateCategoryExistingEntryMutationArgs {
 }
 export interface CreateCategoryNewEntryMutationArgs {
   request: CategoryCreationRequestNewEntry;
+}
+export interface UpdateEntryMutationArgs {
+  entryId: string;
+
+  update: EntryUpdate;
 }
 export interface DeleteEntryMutationArgs {
   entryId: string;
@@ -487,6 +502,12 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
     Context
   >;
 
+  updateEntry?: MutationUpdateEntryResolver<
+    boolean | null,
+    TypeParent,
+    Context
+  >;
+
   deleteEntry?: MutationDeleteEntryResolver<
     boolean | null,
     TypeParent,
@@ -534,6 +555,17 @@ export type MutationCreateCategoryNewEntryResolver<
 > = Resolver<R, Parent, Context, MutationCreateCategoryNewEntryArgs>;
 export interface MutationCreateCategoryNewEntryArgs {
   request: CategoryCreationRequestNewEntry;
+}
+
+export type MutationUpdateEntryResolver<
+  R = boolean | null,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context, MutationUpdateEntryArgs>;
+export interface MutationUpdateEntryArgs {
+  entryId: string;
+
+  update: EntryUpdate;
 }
 
 export type MutationDeleteEntryResolver<

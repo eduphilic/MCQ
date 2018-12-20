@@ -26,6 +26,14 @@ export interface CategoryCreationRequestNewEntry {
 
   readonly entryExplanation: string;
 }
+
+export interface EntryUpdate {
+  readonly name: string;
+
+  readonly logoUrl: string;
+
+  readonly description: string;
+}
 /** Supported localization languages. */
 export enum Language {
   English = "English",
@@ -123,6 +131,17 @@ export type SetCategoryActivationStatusMutation = {
   __typename?: "Mutation";
 
   setCategoryActivationStatus: boolean | null;
+};
+
+export type UpdateEntryVariables = {
+  entryId: string;
+  update: EntryUpdate;
+};
+
+export type UpdateEntryMutation = {
+  __typename?: "Mutation";
+
+  updateEntry: boolean | null;
 };
 
 export type GetCategoryVariables = {
@@ -655,6 +674,48 @@ export function SetCategoryActivationStatusHOC<TProps, TChildProps = any>(
     SetCategoryActivationStatusVariables,
     SetCategoryActivationStatusProps<TChildProps>
   >(SetCategoryActivationStatusDocument, operationOptions);
+}
+export const UpdateEntryDocument = gql`
+  mutation UpdateEntry($entryId: ID!, $update: EntryUpdate!) {
+    updateEntry(entryId: $entryId, update: $update)
+  }
+`;
+export class UpdateEntryComponent extends React.Component<
+  Partial<ReactApollo.MutationProps<UpdateEntryMutation, UpdateEntryVariables>>
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<UpdateEntryMutation, UpdateEntryVariables>
+        mutation={UpdateEntryDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type UpdateEntryProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<UpdateEntryMutation, UpdateEntryVariables>
+> &
+  TChildProps;
+export type UpdateEntryMutationFn = ReactApollo.MutationFn<
+  UpdateEntryMutation,
+  UpdateEntryVariables
+>;
+export function UpdateEntryHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        UpdateEntryMutation,
+        UpdateEntryVariables,
+        UpdateEntryProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    UpdateEntryMutation,
+    UpdateEntryVariables,
+    UpdateEntryProps<TChildProps>
+  >(UpdateEntryDocument, operationOptions);
 }
 export const GetCategoryDocument = gql`
   query GetCategory($id: ID!) {

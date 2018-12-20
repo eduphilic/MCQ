@@ -7,9 +7,10 @@ import {
   PendingChangesButton,
   Typography,
 } from "@join-uniform/components";
-import { GetEntryComponent } from "@join-uniform/graphql";
+import { GetEntryComponent, UpdateEntryComponent } from "@join-uniform/graphql";
 import { Formik } from "formik";
 import { NextSFC } from "next";
+import Router from "next/router";
 import React from "react";
 import * as yup from "yup";
 import { AdminLayoutDashboardContainer } from "~/containers";
@@ -35,76 +36,87 @@ const AdminEntryManagerEditEntryPage: NextSFC<Props> = props => {
   }
 
   return (
-    <GetEntryComponent variables={{ entryId }}>
-      {getEntryResult => {
-        if (getEntryResult.loading || getEntryResult.error) {
-          return <LoadingSpinner />;
-        }
+    <UpdateEntryComponent>
+      {updateEntry => (
+        <GetEntryComponent variables={{ entryId }}>
+          {getEntryResult => {
+            if (getEntryResult.loading || getEntryResult.error) {
+              return <LoadingSpinner />;
+            }
 
-        const entry = getEntryResult.data!.entry;
-        if (!entry) return renderNotFoundNode();
+            const entry = getEntryResult.data!.entry;
+            if (!entry) return renderNotFoundNode();
 
-        return (
-          <Formik<FormValues>
-            initialValues={{
-              name: entry.name,
-              description: entry.description,
-              logoUrl: entry.logoUrl,
-            }}
-            onSubmit={() => {
-              //
-            }}
-            validationSchema={yup.object<FormValues>({
-              name: yup.string().required(),
-              description: yup.string().required(),
-              logoUrl: yup.string().required(),
-            })}
-          >
-            {form => (
-              <AdminLayoutDashboardContainer
-                title={pageTitle}
-                appBarButtons={[
-                  <PendingChangesButton
-                    hasDiscardableChanges={form.dirty}
-                    hasPublishableChanges={form.isValid}
-                    onDiscardButtonClick={() => form.resetForm()}
-                    onPublishButtonClick={() => form.submitForm()}
-                  />,
-                ]}
+            return (
+              <Formik<FormValues>
+                initialValues={{
+                  name: entry.name,
+                  description: entry.description,
+                  logoUrl: entry.logoUrl,
+                }}
+                onSubmit={async values => {
+                  await updateEntry({
+                    variables: {
+                      entryId: entry.id,
+                      update: values,
+                    },
+                  });
+                  await getEntryResult.refetch();
+                  await Router.push("/admin/entry-manager");
+                }}
+                validationSchema={yup.object<FormValues>({
+                  name: yup.string().required(),
+                  description: yup.string().required(),
+                  logoUrl: yup.string().required(),
+                })}
               >
-                <Grid container contentCenter spacing={16}>
-                  <Grid item xs={12}>
-                    <Card>
-                      <CardHeader title="Entry" variant="admin" />
-                      <CardContent>
-                        <FormikMuiTextField
-                          name="name"
-                          label="Name"
-                          form={form}
-                        />
-                        <FormikMuiTextField
-                          name="description"
-                          label="Description"
-                          form={form}
-                        />
-                      </CardContent>
-                      <CardHeader title="Entry Logo" variant="admin" />
-                      <CardContent>
-                        <FormikImagePicker
-                          name="logoUrl"
-                          folder="entries"
-                          form={form}
-                        />
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                </Grid>
-              </AdminLayoutDashboardContainer>
-            )}
-          </Formik>
-        );
-      }}
-    </GetEntryComponent>
+                {form => (
+                  <AdminLayoutDashboardContainer
+                    title={pageTitle}
+                    appBarButtons={[
+                      <PendingChangesButton
+                        hasDiscardableChanges={form.dirty}
+                        hasPublishableChanges={form.isValid}
+                        onDiscardButtonClick={() => form.resetForm()}
+                        onPublishButtonClick={() => form.submitForm()}
+                      />,
+                    ]}
+                  >
+                    <Grid container contentCenter spacing={16}>
+                      <Grid item xs={12}>
+                        <Card>
+                          <CardHeader title="Entry" variant="admin" />
+                          <CardContent>
+                            <FormikMuiTextField
+                              name="name"
+                              label="Name"
+                              form={form}
+                            />
+                            <FormikMuiTextField
+                              name="description"
+                              label="Description"
+                              form={form}
+                            />
+                          </CardContent>
+                          <CardHeader title="Entry Logo" variant="admin" />
+                          <CardContent>
+                            <FormikImagePicker
+                              name="logoUrl"
+                              folder="entries"
+                              form={form}
+                            />
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                    </Grid>
+                  </AdminLayoutDashboardContainer>
+                )}
+              </Formik>
+            );
+          }}
+        </GetEntryComponent>
+      )}
+    </UpdateEntryComponent>
   );
 
   function renderNotFoundNode() {

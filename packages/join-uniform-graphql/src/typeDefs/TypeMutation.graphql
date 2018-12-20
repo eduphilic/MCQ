@@ -3,6 +3,7 @@ type Mutation {
     request: CategoryCreationRequestExistingEntry!
   ): Boolean
   createCategoryNewEntry(request: CategoryCreationRequestNewEntry!): Boolean
+  updateEntry(entryId: ID!, update: EntryUpdate!): Boolean
   deleteEntry(entryId: ID!): Boolean
   deleteCategories(entryId: ID!, categoryIds: [ID!]!): Boolean
   setCategoryActivationStatus(categoryId: ID!, activated: Boolean!): Boolean

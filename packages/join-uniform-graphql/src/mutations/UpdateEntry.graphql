@@ -1,0 +1,3 @@
+mutation UpdateEntry($entryId: ID!, $update: EntryUpdate!) {
+  updateEntry(entryId: $entryId, update: $update)
+}
