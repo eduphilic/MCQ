@@ -92,6 +92,7 @@ export default function AdminEntryManagerIndexPage() {
                     <>
                       <Button
                         onClick={() => {
+                          // tslint:disable-next-line:no-floating-promises
                           Router.push(
                             `/admin/entry-manager/edit-entry?entryId=${
                               entry.id
@@ -125,6 +126,7 @@ export default function AdminEntryManagerIndexPage() {
                     </>
                   }
                   onItemEditClick={categoryId => {
+                    // tslint:disable-next-line:no-floating-promises
                     Router.push(
                       `/admin/entry-manager/edit-category?categoryId=${categoryId}`,
                     );
