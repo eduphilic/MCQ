@@ -1,3 +1,9 @@
+export type CreateResponsiveImageUrlOptions = {
+  w?: string;
+  h?: string;
+  format?: "jpg" | "png";
+};
+
 /**
  * Adds the requested transformations to the provided Cloudinary image url.
  *
@@ -5,11 +11,7 @@
  */
 export function createResponsiveImageUrl(
   imageUrl: string,
-  options: {
-    w?: string;
-    h?: string;
-    format?: "jpg" | "png";
-  },
+  options: CreateResponsiveImageUrlOptions,
 ) {
   let computedImageUrl = imageUrl;
   const params = Object.keys(options)

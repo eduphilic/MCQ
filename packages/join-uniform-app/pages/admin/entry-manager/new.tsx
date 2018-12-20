@@ -1,4 +1,4 @@
-import { Formik, FormikProps } from "formik";
+import { Formik } from "formik";
 import Router from "next/router";
 import React, { useRef } from "react";
 
@@ -11,7 +11,6 @@ import {
   FormControlLabel,
   Grid,
   Hidden,
-  ImagePicker,
   InputLabel,
   MenuItem,
   PendingChangesButton,
@@ -27,12 +26,8 @@ import {
   ValidatorCategoryCreationRequestNewEntry,
 } from "@join-uniform/graphql";
 import { AdminLayoutDashboardContainer } from "~/containers";
-import { FormikMuiTextField } from "~/lib/admin";
-import {
-  createResponsiveImageUrl,
-  useCloudinary,
-  withQueryLoadingSpinner,
-} from "~/lib/utils";
+import { FormikImagePicker, FormikMuiTextField } from "~/lib/admin";
+import { withQueryLoadingSpinner } from "~/lib/utils";
 
 type FormValues = {
   entrySource: "existing" | "new";
@@ -48,7 +43,6 @@ type FormValues = {
 };
 
 export default function AdminEntryManagerNewEntryPage() {
-  const cloudinary = useCloudinary();
   const entrySourceRef = useRef<FormValues["entrySource"] | null>(null);
 
   return withQueryLoadingSpinner(
@@ -221,33 +215,10 @@ export default function AdminEntryManagerNewEntryPage() {
                                   variant="admin"
                                 />
                                 <CardContent>
-                                  <ImagePicker
-                                    uploadedImageUrl={
-                                      form.values.entryLogoUrl &&
-                                      createResponsiveImageUrl(
-                                        form.values.entryLogoUrl,
-                                        {
-                                          format: "png",
-                                        },
-                                      )
-                                    }
-                                    previewImageUrl={
-                                      form.values.entryLogoUrl &&
-                                      createResponsiveImageUrl(
-                                        form.values.entryLogoUrl,
-                                        {
-                                          w: "128",
-                                          h: "128",
-                                          format: "png",
-                                        },
-                                      )
-                                    }
-                                    onSelectButtonClick={() =>
-                                      handleLogoSelectButtonClick(form)
-                                    }
-                                    onUploadButtonClick={() =>
-                                      handleLogoUploadButtonClick(form)
-                                    }
+                                  <FormikImagePicker
+                                    name="entryLogoUrl"
+                                    folder="entries"
+                                    form={form}
                                   />
                                 </CardContent>
                               </>
@@ -290,37 +261,4 @@ export default function AdminEntryManagerNewEntryPage() {
       );
     },
   );
-
-  async function handleLogoSelectButtonClick(form: FormikProps<FormValues>) {
-    if (!cloudinary) return;
-
-    cloudinary.client.openMediaLibrary(
-      await cloudinary.getDefaultMediaLibraryWidgetOptions(),
-      {
-        insertHandler: data => {
-          form.setFieldValue("entryLogoUrl", data.assets[0].secure_url);
-        },
-      },
-    );
-  }
-
-  function handleLogoUploadButtonClick(form: FormikProps<FormValues>) {
-    if (!cloudinary) return;
-
-    cloudinary.client.openUploadWidget(
-      {
-        ...cloudinary.getDefaultUploadWidgetOptions(),
-        folder: "entries",
-      },
-      (err, result) => {
-        if (err) throw new Error(err);
-        if (result.event === "abort" || result.event === "close") {
-          return;
-        }
-        if (result.event === "success") {
-          form.setFieldValue("entryLogoUrl", result.info.secure_url);
-        }
-      },
-    );
-  }
 }
