@@ -244,7 +244,7 @@ export default function AdminEntryManagerNewEntryPage() {
                               <FormikMuiTextField
                                 name="pricePerPaper"
                                 type="number"
-                                label="Price per Paper"
+                                label="Price Per Paper (Rs)"
                                 form={form}
                               />
                             </CardContent>

@@ -126,7 +126,7 @@ export default function AdminEntryManagerIndexPage() {
                   }
                   onItemEditClick={categoryId => {
                     Router.push(
-                      `/admin/entry-manager/edit?categoryId=${categoryId}`,
+                      `/admin/entry-manager/edit-category?categoryId=${categoryId}`,
                     );
                   }}
                   onRequestDeleteClick={async categoryIds => {
