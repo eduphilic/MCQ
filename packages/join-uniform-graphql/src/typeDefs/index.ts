@@ -17,6 +17,7 @@ import TypeLogoConfig from "./TypeLogoConfig.graphql";
 
 import InputCategoryCreationRequestExistingEntry from "./InputCategoryCreationRequestExistingEntry.graphql";
 import InputCategoryCreationRequestNewEntry from "./InputCategoryCreationRequestNewEntry.graphql";
+import InputCategoryUpdate from "./InputCategoryUpdate.graphql";
 import InputEntryUpdate from "./InputEntryUpdate.graphql";
 
 export const typeDefs: DocumentNode = gql`
@@ -36,5 +37,6 @@ export const typeDefs: DocumentNode = gql`
 
   ${InputCategoryCreationRequestExistingEntry}
   ${InputCategoryCreationRequestNewEntry}
+  ${InputCategoryUpdate}
   ${InputEntryUpdate}
 `;

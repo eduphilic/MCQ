@@ -1,0 +1,5 @@
+input CategoryUpdate {
+  name: String!
+  education: String!
+  pricePerPaperRs: Int!
+}

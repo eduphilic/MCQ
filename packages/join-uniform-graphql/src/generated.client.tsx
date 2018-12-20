@@ -34,6 +34,14 @@ export interface EntryUpdate {
 
   readonly description: string;
 }
+
+export interface CategoryUpdate {
+  readonly name: string;
+
+  readonly education: string;
+
+  readonly pricePerPaperRs: number;
+}
 /** Supported localization languages. */
 export enum Language {
   English = "English",
@@ -131,6 +139,17 @@ export type SetCategoryActivationStatusMutation = {
   __typename?: "Mutation";
 
   setCategoryActivationStatus: boolean | null;
+};
+
+export type UpdateCategoryVariables = {
+  categoryId: string;
+  update: CategoryUpdate;
+};
+
+export type UpdateCategoryMutation = {
+  __typename?: "Mutation";
+
+  updateCategory: boolean | null;
 };
 
 export type UpdateEntryVariables = {
@@ -674,6 +693,50 @@ export function SetCategoryActivationStatusHOC<TProps, TChildProps = any>(
     SetCategoryActivationStatusVariables,
     SetCategoryActivationStatusProps<TChildProps>
   >(SetCategoryActivationStatusDocument, operationOptions);
+}
+export const UpdateCategoryDocument = gql`
+  mutation UpdateCategory($categoryId: ID!, $update: CategoryUpdate!) {
+    updateCategory(categoryId: $categoryId, update: $update)
+  }
+`;
+export class UpdateCategoryComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<UpdateCategoryMutation, UpdateCategoryVariables>
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<UpdateCategoryMutation, UpdateCategoryVariables>
+        mutation={UpdateCategoryDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type UpdateCategoryProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<UpdateCategoryMutation, UpdateCategoryVariables>
+> &
+  TChildProps;
+export type UpdateCategoryMutationFn = ReactApollo.MutationFn<
+  UpdateCategoryMutation,
+  UpdateCategoryVariables
+>;
+export function UpdateCategoryHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        UpdateCategoryMutation,
+        UpdateCategoryVariables,
+        UpdateCategoryProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    UpdateCategoryMutation,
+    UpdateCategoryVariables,
+    UpdateCategoryProps<TChildProps>
+  >(UpdateCategoryDocument, operationOptions);
 }
 export const UpdateEntryDocument = gql`
   mutation UpdateEntry($entryId: ID!, $update: EntryUpdate!) {

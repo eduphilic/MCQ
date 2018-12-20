@@ -34,6 +34,14 @@ export interface EntryUpdate {
 
   readonly description: string;
 }
+
+export interface CategoryUpdate {
+  readonly name: string;
+
+  readonly education: string;
+
+  readonly pricePerPaperRs: number;
+}
 /** Supported localization languages. */
 export enum Language {
   English = "English",
@@ -130,6 +138,8 @@ export interface Mutation {
 
   deleteEntry?: boolean | null;
 
+  updateCategory?: boolean | null;
+
   deleteCategories?: boolean | null;
 
   setCategoryActivationStatus?: boolean | null;
@@ -181,6 +191,11 @@ export interface UpdateEntryMutationArgs {
 }
 export interface DeleteEntryMutationArgs {
   entryId: string;
+}
+export interface UpdateCategoryMutationArgs {
+  categoryId: string;
+
+  update: CategoryUpdate;
 }
 export interface DeleteCategoriesMutationArgs {
   entryId: string;
@@ -514,6 +529,12 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
     Context
   >;
 
+  updateCategory?: MutationUpdateCategoryResolver<
+    boolean | null,
+    TypeParent,
+    Context
+  >;
+
   deleteCategories?: MutationDeleteCategoriesResolver<
     boolean | null,
     TypeParent,
@@ -575,6 +596,17 @@ export type MutationDeleteEntryResolver<
 > = Resolver<R, Parent, Context, MutationDeleteEntryArgs>;
 export interface MutationDeleteEntryArgs {
   entryId: string;
+}
+
+export type MutationUpdateCategoryResolver<
+  R = boolean | null,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context, MutationUpdateCategoryArgs>;
+export interface MutationUpdateCategoryArgs {
+  categoryId: string;
+
+  update: CategoryUpdate;
 }
 
 export type MutationDeleteCategoriesResolver<
