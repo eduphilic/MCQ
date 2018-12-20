@@ -22,6 +22,8 @@ import {
   CreateCategoryExistingEntryComponent,
   CreateCategoryNewEntryComponent,
   GetEntriesComponent,
+  GetEntryCategoriesDocument,
+  GetEntryCategoriesVariables,
   ValidatorCategoryCreationRequestExistingEntry,
   ValidatorCategoryCreationRequestNewEntry,
 } from "@join-uniform/graphql";
@@ -70,6 +72,9 @@ export default function AdminEntryManagerNewEntryPage() {
                   }}
                   onSubmit={async values => {
                     if (values.entrySource === "existing") {
+                      const entryCategoriesVars: GetEntryCategoriesVariables = {
+                        entryId: values.existingEntryId!,
+                      };
                       await createCategoryExistingEntry({
                         variables: {
                           request: {
@@ -79,8 +84,13 @@ export default function AdminEntryManagerNewEntryPage() {
                             pricePerPaper: parseInt(values.pricePerPaper, 10),
                           },
                         },
+                        refetchQueries: [
+                          {
+                            query: GetEntryCategoriesDocument,
+                            variables: entryCategoriesVars,
+                          },
+                        ],
                       });
-                      await refetch();
                       await Router.replace("/admin/entry-manager");
                       return;
                     }
