@@ -1,0 +1,19 @@
+query GetIndexPageConfig {
+  indexPageConfig {
+    heroBackgroundImageUrl
+    heroBackgroundAlpha
+    heroPrimaryText
+    heroFeatures
+    heroFooterText
+    aboutTitle
+    aboutText
+    aboutImages {
+      imageUrl
+      title
+      text
+    }
+  }
+  logoConfig {
+    url
+  }
+}

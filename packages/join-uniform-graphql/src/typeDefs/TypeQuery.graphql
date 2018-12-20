@@ -2,6 +2,7 @@ type Query {
   htmlConfig: HtmlConfig!
 
   logoConfig: LogoConfig!
+  indexPageConfig: IndexPageConfig!
 
   translation(language: Language!): Translation!
 

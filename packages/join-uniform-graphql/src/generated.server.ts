@@ -48,6 +48,9 @@ export enum Language {
   Hindi = "Hindi",
 }
 
+/** Represents a localized string.The Hindi field is optional.Fields:- key: String!- en: String!- hi: String */
+export type LocalizedString = models.LocalizedString;
+
 /** A set of localized strings for a language. */
 export type Translation = any;
 
@@ -65,6 +68,8 @@ export interface Query {
   htmlConfig: HtmlConfig;
 
   logoConfig: LogoConfig;
+
+  indexPageConfig: IndexPageConfig;
 
   translation: Translation;
 
@@ -101,6 +106,36 @@ export interface HtmlConfig {
 export interface LogoConfig {
   /** Url of logo image. */
   url: string;
+}
+
+/** Configuration for the landing page / index page. */
+export interface IndexPageConfig {
+  /** The url to the hero image. */
+  heroBackgroundImageUrl: string;
+  /** The transparency of the hero image. */
+  heroBackgroundAlpha: number;
+  /** The primary hero text (large top text). */
+  heroPrimaryText: LocalizedString;
+  /** List of features below the primary hero text. */
+  heroFeatures: LocalizedString[];
+  /** Text in the green section below the hero section. */
+  heroFooterText: LocalizedString;
+  /** About section title. */
+  aboutTitle: LocalizedString;
+  /** Text below the about title. */
+  aboutText: LocalizedString;
+  /** Images in the about section. */
+  aboutImages: IndexPageAboutImage[];
+}
+
+/** Image and supporting text in index about section. */
+export interface IndexPageAboutImage {
+  /** Image URL. */
+  imageUrl: string;
+  /** Large text below image. */
+  title: LocalizedString;
+  /** Small text below image. */
+  text: LocalizedString;
 }
 
 /** Represents a military service branch (Entry). */
@@ -253,6 +288,12 @@ export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
 
   logoConfig?: QueryLogoConfigResolver<LogoConfig, TypeParent, Context>;
 
+  indexPageConfig?: QueryIndexPageConfigResolver<
+    IndexPageConfig,
+    TypeParent,
+    Context
+  >;
+
   translation?: QueryTranslationResolver<Translation, TypeParent, Context>;
 
   entry?: QueryEntryResolver<Entry | null, TypeParent, Context>;
@@ -283,6 +324,11 @@ export type QueryHtmlConfigResolver<
 > = Resolver<R, Parent, Context>;
 export type QueryLogoConfigResolver<
   R = LogoConfig,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type QueryIndexPageConfigResolver<
+  R = IndexPageConfig,
   Parent = {},
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
@@ -418,6 +464,133 @@ export interface LogoConfigResolvers<
 export type LogoConfigUrlResolver<
   R = string,
   Parent = LogoConfig,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+/** Configuration for the landing page / index page. */
+export interface IndexPageConfigResolvers<
+  Context = ApolloContext,
+  TypeParent = IndexPageConfig
+> {
+  /** The url to the hero image. */
+  heroBackgroundImageUrl?: IndexPageConfigHeroBackgroundImageUrlResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+  /** The transparency of the hero image. */
+  heroBackgroundAlpha?: IndexPageConfigHeroBackgroundAlphaResolver<
+    number,
+    TypeParent,
+    Context
+  >;
+  /** The primary hero text (large top text). */
+  heroPrimaryText?: IndexPageConfigHeroPrimaryTextResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
+  /** List of features below the primary hero text. */
+  heroFeatures?: IndexPageConfigHeroFeaturesResolver<
+    LocalizedString[],
+    TypeParent,
+    Context
+  >;
+  /** Text in the green section below the hero section. */
+  heroFooterText?: IndexPageConfigHeroFooterTextResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
+  /** About section title. */
+  aboutTitle?: IndexPageConfigAboutTitleResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
+  /** Text below the about title. */
+  aboutText?: IndexPageConfigAboutTextResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
+  /** Images in the about section. */
+  aboutImages?: IndexPageConfigAboutImagesResolver<
+    IndexPageAboutImage[],
+    TypeParent,
+    Context
+  >;
+}
+
+export type IndexPageConfigHeroBackgroundImageUrlResolver<
+  R = string,
+  Parent = IndexPageConfig,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageConfigHeroBackgroundAlphaResolver<
+  R = number,
+  Parent = IndexPageConfig,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageConfigHeroPrimaryTextResolver<
+  R = LocalizedString,
+  Parent = IndexPageConfig,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageConfigHeroFeaturesResolver<
+  R = LocalizedString[],
+  Parent = IndexPageConfig,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageConfigHeroFooterTextResolver<
+  R = LocalizedString,
+  Parent = IndexPageConfig,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageConfigAboutTitleResolver<
+  R = LocalizedString,
+  Parent = IndexPageConfig,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageConfigAboutTextResolver<
+  R = LocalizedString,
+  Parent = IndexPageConfig,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageConfigAboutImagesResolver<
+  R = IndexPageAboutImage[],
+  Parent = IndexPageConfig,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+/** Image and supporting text in index about section. */
+export interface IndexPageAboutImageResolvers<
+  Context = ApolloContext,
+  TypeParent = IndexPageAboutImage
+> {
+  /** Image URL. */
+  imageUrl?: IndexPageAboutImageImageUrlResolver<string, TypeParent, Context>;
+  /** Large text below image. */
+  title?: IndexPageAboutImageTitleResolver<
+    LocalizedString,
+    TypeParent,
+    Context
+  >;
+  /** Small text below image. */
+  text?: IndexPageAboutImageTextResolver<LocalizedString, TypeParent, Context>;
+}
+
+export type IndexPageAboutImageImageUrlResolver<
+  R = string,
+  Parent = IndexPageAboutImage,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageAboutImageTitleResolver<
+  R = LocalizedString,
+  Parent = IndexPageAboutImage,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexPageAboutImageTextResolver<
+  R = LocalizedString,
+  Parent = IndexPageAboutImage,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
 /** Represents a military service branch (Entry). */

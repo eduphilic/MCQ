@@ -5,6 +5,7 @@ import TypeMutation from "./TypeMutation.graphql";
 import TypeQuery from "./TypeQuery.graphql";
 
 import ScalarJson from "./ScalarJson.graphql";
+import ScalarLocalizedString from "./ScalarLocalizedString.graphql";
 import ScalarTranslation from "./ScalarTranslation.graphql";
 
 import EnumLanguage from "./EnumLanguage.graphql";
@@ -13,6 +14,8 @@ import TypeCategory from "./TypeCategory.graphql";
 import TypeCloudinaryMediaWidgetAuthenticationToken from "./TypeCloudinaryMediaWidgetAuthenticationToken.graphql";
 import TypeEntry from "./TypeEntry.graphql";
 import TypeHtmlConfig from "./TypeHtmlConfig.graphql";
+import TypeIndexPageAboutImage from "./TypeIndexPageAboutImage.graphql";
+import TypeIndexPageConfig from "./TypeIndexPageConfig.graphql";
 import TypeLogoConfig from "./TypeLogoConfig.graphql";
 
 import InputCategoryCreationRequestExistingEntry from "./InputCategoryCreationRequestExistingEntry.graphql";
@@ -25,6 +28,7 @@ export const typeDefs: DocumentNode = gql`
   ${TypeMutation}
 
   ${ScalarJson}
+  ${ScalarLocalizedString}
   ${ScalarTranslation}
 
   ${EnumLanguage}
@@ -33,6 +37,8 @@ export const typeDefs: DocumentNode = gql`
   ${TypeCloudinaryMediaWidgetAuthenticationToken}
   ${TypeEntry}
   ${TypeHtmlConfig}
+  ${TypeIndexPageAboutImage}
+  ${TypeIndexPageConfig}
   ${TypeLogoConfig}
 
   ${InputCategoryCreationRequestExistingEntry}

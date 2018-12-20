@@ -4,7 +4,9 @@ import {
 } from "@join-uniform/graphql/server";
 
 import { htmlConfig } from "./htmlConfig";
+import { indexPageConfig } from "./indexPageConfig";
 import { logoConfig } from "./logoConfig";
+
 import { translation } from "./translation";
 
 import { category } from "./category";
@@ -27,6 +29,7 @@ import { generateCloudinarySignature } from "./generateCloudinarySignature";
 
 const Query: QueryResolvers = {
   htmlConfig,
+  indexPageConfig,
   logoConfig,
 
   translation,

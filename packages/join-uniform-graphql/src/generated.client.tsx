@@ -48,6 +48,9 @@ export enum Language {
   Hindi = "Hindi",
 }
 
+/** Represents a localized string.The Hindi field is optional.Fields:- key: String!- en: String!- hi: String */
+export type LocalizedString = models.LocalizedString;
+
 /** A set of localized strings for a language. */
 export type Translation = any;
 
@@ -289,6 +292,52 @@ export type GetHtmlConfigHtmlConfig = {
   metaAbstract: string | null;
 
   metaCopyright: string | null;
+};
+
+export type GetIndexPageConfigVariables = {};
+
+export type GetIndexPageConfigQuery = {
+  __typename?: "Query";
+
+  indexPageConfig: GetIndexPageConfigIndexPageConfig;
+
+  logoConfig: GetIndexPageConfigLogoConfig;
+};
+
+export type GetIndexPageConfigIndexPageConfig = {
+  __typename?: "IndexPageConfig";
+
+  heroBackgroundImageUrl: string;
+
+  heroBackgroundAlpha: number;
+
+  heroPrimaryText: LocalizedString;
+
+  heroFeatures: LocalizedString[];
+
+  heroFooterText: LocalizedString;
+
+  aboutTitle: LocalizedString;
+
+  aboutText: LocalizedString;
+
+  aboutImages: GetIndexPageConfigAboutImages[];
+};
+
+export type GetIndexPageConfigAboutImages = {
+  __typename?: "IndexPageAboutImage";
+
+  imageUrl: string;
+
+  title: LocalizedString;
+
+  text: LocalizedString;
+};
+
+export type GetIndexPageConfigLogoConfig = {
+  __typename?: "LogoConfig";
+
+  url: string;
 };
 
 export type GetLogoConfigVariables = {};
@@ -1046,6 +1095,62 @@ export function GetHtmlConfigHOC<TProps, TChildProps = any>(
     GetHtmlConfigVariables,
     GetHtmlConfigProps<TChildProps>
   >(GetHtmlConfigDocument, operationOptions);
+}
+export const GetIndexPageConfigDocument = gql`
+  query GetIndexPageConfig {
+    indexPageConfig {
+      heroBackgroundImageUrl
+      heroBackgroundAlpha
+      heroPrimaryText
+      heroFeatures
+      heroFooterText
+      aboutTitle
+      aboutText
+      aboutImages {
+        imageUrl
+        title
+        text
+      }
+    }
+    logoConfig {
+      url
+    }
+  }
+`;
+export class GetIndexPageConfigComponent extends React.Component<
+  Partial<
+    ReactApollo.QueryProps<GetIndexPageConfigQuery, GetIndexPageConfigVariables>
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Query<GetIndexPageConfigQuery, GetIndexPageConfigVariables>
+        query={GetIndexPageConfigDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type GetIndexPageConfigProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<GetIndexPageConfigQuery, GetIndexPageConfigVariables>
+> &
+  TChildProps;
+export function GetIndexPageConfigHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        GetIndexPageConfigQuery,
+        GetIndexPageConfigVariables,
+        GetIndexPageConfigProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    GetIndexPageConfigQuery,
+    GetIndexPageConfigVariables,
+    GetIndexPageConfigProps<TChildProps>
+  >(GetIndexPageConfigDocument, operationOptions);
 }
 export const GetLogoConfigDocument = gql`
   query GetLogoConfig {

@@ -1,5 +1,10 @@
 import * as yup from "yup";
-import { HtmlConfig, LogoConfig } from "./generated.server";
+import {
+  HtmlConfig,
+  IndexPageAboutImage,
+  IndexPageConfig,
+  LogoConfig,
+} from "./generated.server";
 import { LocalizationStringKey, LocalizedString } from "./models";
 
 export type FirebaseRemoteConfigSchema = ReturnType<
@@ -28,6 +33,7 @@ export const firebaseRemoteConfigSchema = yup
   .object<{
     htmlConfig: Required<HtmlConfig>;
     logoConfig: Required<LogoConfig>;
+    indexPageConfig: IndexPageConfig;
 
     translations: Record<LocalizationStringKey, LocalizedString>;
   }>()
@@ -47,6 +53,27 @@ export const firebaseRemoteConfigSchema = yup
       .object<Required<LogoConfig>>()
       .shape({
         url: yup.string().required(),
+      })
+      .required(),
+
+    indexPageConfig: yup
+      .object<IndexPageConfig>({
+        heroBackgroundImageUrl: yup.string().required(),
+        heroBackgroundAlpha: yup.number().required(),
+        heroPrimaryText: localizedString.required(),
+        heroFeatures: yup.array(localizedString).required(),
+        heroFooterText: localizedString.required(),
+        aboutTitle: localizedString.required(),
+        aboutText: localizedString.required(),
+        aboutImages: yup
+          .array(
+            yup.object<IndexPageAboutImage>({
+              imageUrl: yup.string().required(),
+              title: localizedString.required(),
+              text: localizedString.required(),
+            }),
+          )
+          .required(),
       })
       .required(),
 
