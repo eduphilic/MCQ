@@ -33,7 +33,7 @@ export default function AdminIndexManagerPage() {
             title="Index Manager"
             appBarButtons={[
               <PendingChangesButton
-                hasDiscardableChanges={form.dirty}
+                hasDiscardableChanges={true} // form.dirty}
                 hasPublishableChanges={form.isValid}
                 onDiscardButtonClick={() => form.resetForm()}
                 onPublishButtonClick={() => form.submitForm()}
@@ -44,7 +44,7 @@ export default function AdminIndexManagerPage() {
               {/* Site logo config card. */}
               <Grid item xs={12}>
                 <Card>
-                  <CardHeader title="Logo" variant="admin" />
+                  <CardHeader title="Site Logo" variant="admin" />
                   <CardContent>
                     <FormikImagePicker
                       name="logoUrl"
@@ -57,6 +57,9 @@ export default function AdminIndexManagerPage() {
 
               <div>Page Contents</div>
               <div>{getIndexPageConfigResult.data!.logoConfig.url}</div>
+              <code>
+                {JSON.stringify(getIndexPageConfigResult.data, null, 2)}
+              </code>
             </Grid>
           </AdminLayoutDashboardContainer>
         )}
