@@ -49,7 +49,7 @@ type FormValues = {
   entryLogoUrl: string | null;
 };
 
-export default function EntryManagerNew() {
+export default function AdminEntryManagerNewEntryPage() {
   const cloudinary = useCloudinary();
   const entrySourceRef = useRef<FormValues["entrySource"] | null>(null);
 

@@ -24,7 +24,7 @@ import { MutationFn } from "react-apollo";
 import { AdminLayoutDashboardContainer } from "~/containers";
 import { createResponsiveImageUrl, withQueryLoadingSpinner } from "~/lib/utils";
 
-export default function AdminIndexPage() {
+export default function AdminEntryManagerIndexPage() {
   return (
     <AdminLayoutDashboardContainer
       title="Entry Manager"
@@ -93,7 +93,9 @@ export default function AdminIndexPage() {
                       <Button
                         onClick={() => {
                           Router.push(
-                            `/admin/entry-manager/edit?entryId=${entry.id}`,
+                            `/admin/entry-manager/edit-entry?entryId=${
+                              entry.id
+                            }`,
                           );
                         }}
                       >

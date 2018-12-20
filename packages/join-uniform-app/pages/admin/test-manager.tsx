@@ -2,7 +2,7 @@ import { css } from "@join-uniform/theme";
 import React from "react";
 import { AdminLayoutDashboardContainer } from "../../containers";
 
-export default function AdminIndexPage() {
+export default function AdminTestManagerPage() {
   return (
     <AdminLayoutDashboardContainer title="Test Manager">
       <div
