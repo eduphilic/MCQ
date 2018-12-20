@@ -4,25 +4,34 @@ import {
   CardHeader,
   Grid,
   PendingChangesButton,
+  Typography,
 } from "@join-uniform/components";
 import { GetIndexPageConfigComponent } from "@join-uniform/graphql";
 import { Formik } from "formik";
 import React from "react";
 import { AdminLayoutDashboardContainer } from "~/containers";
-import { FormikImagePicker } from "~/lib/admin";
+import { FormikImagePicker, FormikMuiTextField } from "~/lib/admin";
 import { withQueryLoadingSpinner } from "~/lib/utils";
 
 type FormValues = {
   logoUrl: string;
+  heroBackgroundImageUrl: string;
+  heroBackgroundAlpha: number;
+  heroPrimaryTextEnglish: string;
+  heroPrimaryTextHindi: string;
 };
 
 export default function AdminIndexManagerPage() {
   return withQueryLoadingSpinner(
     GetIndexPageConfigComponent,
-    getIndexPageConfigResult => (
+    ({ data: { logoConfig, indexPageConfig } }) => (
       <Formik<FormValues>
         initialValues={{
-          logoUrl: getIndexPageConfigResult.data.logoConfig.url,
+          logoUrl: logoConfig.url,
+          heroBackgroundImageUrl: indexPageConfig.heroBackgroundImageUrl,
+          heroBackgroundAlpha: indexPageConfig.heroBackgroundAlpha,
+          heroPrimaryTextEnglish: indexPageConfig.heroPrimaryText.en,
+          heroPrimaryTextHindi: indexPageConfig.heroPrimaryText.hi!,
         }}
         onSubmit={() => {
           //
@@ -55,11 +64,51 @@ export default function AdminIndexManagerPage() {
                 </Card>
               </Grid>
 
-              <div>Page Contents</div>
-              <div>{getIndexPageConfigResult.data!.logoConfig.url}</div>
-              <code>
-                {JSON.stringify(getIndexPageConfigResult.data, null, 2)}
-              </code>
+              {/* Hero section. */}
+              <Grid item xs={12}>
+                <Card>
+                  <CardHeader title="Hero" variant="admin" />
+                  <CardContent>
+                    <Typography variant="subtitle2" paragraph>
+                      Hero Background
+                    </Typography>
+                    <FormikImagePicker
+                      name="heroBackgroundImageUrl"
+                      folder="hero"
+                      form={form}
+                    />
+                    <FormikMuiTextField
+                      name="heroBackgroundAlpha"
+                      label="Background Image Alpha (0.05 - 0.95)"
+                      helperText="Controls the transparency of the background image."
+                      inputProps={{ step: "0.05", min: "0.05", max: ".95" }}
+                      type="number"
+                      form={form}
+                    />
+                  </CardContent>
+                  <CardContent>
+                    <Typography variant="subtitle2" paragraph>
+                      Hero Text
+                    </Typography>
+                    <Grid container spacing={16}>
+                      <Grid item xs={12} md={6}>
+                        <FormikMuiTextField
+                          name="heroPrimaryTextEnglish"
+                          label="Hero Primary Text (English)"
+                          form={form}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <FormikMuiTextField
+                          name="heroPrimaryTextHindi"
+                          label="Hero Primary Text (Hindi)"
+                          form={form}
+                        />
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+                </Card>
+              </Grid>
             </Grid>
           </AdminLayoutDashboardContainer>
         )}
