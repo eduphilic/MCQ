@@ -82,6 +82,11 @@ const links: LayoutDashboardProps["drawerLinks"] = [
     title: "Entry Manager",
   },
   {
+    href: "/admin/entry-manager/edit-entry",
+    title: "Edit Entry",
+    hiddenSubPage: true,
+  },
+  {
     href: "/admin/entry-manager/new",
     title: "New Entry",
     hiddenSubPage: true,
