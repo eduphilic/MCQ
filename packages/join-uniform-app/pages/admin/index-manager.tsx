@@ -2,6 +2,8 @@ import {
   Card,
   CardContent,
   CardHeader,
+  DashboardCard,
+  DashboardCardItem,
   DraggableList,
   Grid,
   IconButton,
@@ -42,7 +44,7 @@ type FormValues = {
 export default function AdminIndexManagerPage() {
   return withQueryLoadingSpinner(
     GetIndexPageConfigComponent,
-    ({ data: { logoConfig, indexPageConfig } }) => (
+    ({ data: { logoConfig, indexPageConfig, indexCards } }) => (
       <Formik<FormValues>
         initialValues={{
           logoUrl: logoConfig.url,
@@ -320,6 +322,31 @@ export default function AdminIndexManagerPage() {
                   </CardContent>
                 </Card>
               </Grid>
+
+              {/* Index Cards. */}
+              {indexCards.map(indexCard => (
+                <Grid key={indexCard.entryId} item xs={12}>
+                  <DashboardCard
+                    title={indexCard.title}
+                    columnLabels={["Category", "Visibility"]}
+                    columnTypes={["single-line", "switch"]}
+                    items={indexCard.categories.map(
+                      (category): DashboardCardItem => ({
+                        key: category.categoryId,
+                        columns: [
+                          {
+                            primaryText: category.title,
+                          },
+                          {
+                            switchChecked: category.visible,
+                            switchAlwaysClickable: true,
+                          },
+                        ],
+                      }),
+                    )}
+                  />
+                </Grid>
+              ))}
             </Grid>
           </AdminLayoutDashboardContainer>
         )}
