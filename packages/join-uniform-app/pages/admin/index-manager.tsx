@@ -1,4 +1,5 @@
 import {
+  Button,
   Card,
   CardContent,
   CardHeader,
@@ -9,6 +10,7 @@ import {
   IconButton,
   IndexCard,
   PendingChangesButton,
+  Popover,
   Typography,
 } from "@join-uniform/components";
 import {
@@ -17,8 +19,10 @@ import {
   LocalizedString,
 } from "@join-uniform/graphql";
 import { AddIcon } from "@join-uniform/icons";
+import { styled } from "@join-uniform/theme";
 import { FieldArray, Formik } from "formik";
-import React from "react";
+import React, { MouseEvent, useState } from "react";
+import { ChromePicker, ColorResult } from "react-color";
 import { AdminLayoutDashboardContainer } from "~/containers";
 import {
   FormikImagePicker,
@@ -346,22 +350,43 @@ export default function AdminIndexManagerPage() {
                       }),
                     )}
                     bottomActionsNode={
-                      <IndexCard
-                        title={indexCard.title}
-                        categories={indexCard.categories
-                          .filter(c => c.visible)
-                          .map(c => c.title)}
-                        entryLogoUrl={createResponsiveImageUrl(
-                          indexCard.entryLogoUrl,
-                          { w: "128", h: "128", format: "png" },
-                        )}
-                        colorBlock={indexCard.colorBlock}
-                        colorCategoryBackground={
-                          indexCard.colorCategoryBackground
-                        }
-                        colorLogoBackground={indexCard.colorLogoBackground}
-                        colorTitle={indexCard.colorTitle}
-                      />
+                      <Grid container spacing={16}>
+                        {[
+                          "colorBlock",
+                          "colorCategoryBackground",
+                          "colorLogoBackground",
+                          "colorTitle",
+                        ].map(field => (
+                          <Grid key={field} item xs={12} sm={6} md={3}>
+                            <ColorPickerButton
+                              title={field.slice(5)}
+                              // @ts-ignore
+                              color={indexCard[field]}
+                              onColorChange={() => {
+                                //
+                              }}
+                            />
+                          </Grid>
+                        ))}
+                        <Grid item xs={12}>
+                          <IndexCard
+                            title={indexCard.title}
+                            categories={indexCard.categories
+                              .filter(c => c.visible)
+                              .map(c => c.title)}
+                            entryLogoUrl={createResponsiveImageUrl(
+                              indexCard.entryLogoUrl,
+                              { w: "128", h: "128", format: "png" },
+                            )}
+                            colorBlock={indexCard.colorBlock}
+                            colorCategoryBackground={
+                              indexCard.colorCategoryBackground
+                            }
+                            colorLogoBackground={indexCard.colorLogoBackground}
+                            colorTitle={indexCard.colorTitle}
+                          />
+                        </Grid>
+                      </Grid>
                     }
                   />
                 </Grid>
@@ -373,3 +398,60 @@ export default function AdminIndexManagerPage() {
     ),
   );
 }
+
+type ColorPickerButtonProps = {
+  title: string;
+  color: string;
+  onColorChange: (color: string) => void;
+};
+
+function ColorPickerButton(props: ColorPickerButtonProps) {
+  const { title, color: initialColor, onColorChange } = props;
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [color, setColor] = useState(initialColor);
+
+  return (
+    <>
+      <Button fullWidth onClick={handleClick}>
+        {title}&nbsp;
+        <ColorPickerPreview color={color} />
+      </Button>
+      <Popover
+        open={!!anchorEl}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
+        transformOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <ChromePicker color={color} onChange={handleColorChange} />
+      </Popover>
+    </>
+  );
+
+  function handleClick(event: MouseEvent<HTMLElement>) {
+    setAnchorEl(event.currentTarget);
+  }
+
+  function handleClose() {
+    setAnchorEl(null);
+    if (initialColor !== color) onColorChange(color);
+  }
+
+  function handleColorChange(newColor: ColorResult) {
+    setColor(newColor.hex);
+  }
+}
+
+const ColorPickerPreview = styled(
+  (props: { className?: string; color: string }) => (
+    <span
+      className={props.className}
+      style={{ backgroundColor: props.color }}
+    />
+  ),
+)`
+  display: block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #000;
+`;

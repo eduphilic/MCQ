@@ -66,6 +66,12 @@ import Paper, { PaperProps as MuiPaperProps } from "@material-ui/core/Paper";
 export type PaperProps = MuiPaperProps;
 export { Paper };
 
+import Popover, {
+  PopoverProps as MuiPopoverProps,
+} from "@material-ui/core/Popover";
+export type PopoverProps = MuiPopoverProps;
+export { Popover };
+
 import Radio, { RadioProps as MuiRadioProps } from "@material-ui/core/Radio";
 export type RadioProps = MuiRadioProps;
 export { Radio };
