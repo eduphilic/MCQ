@@ -1,0 +1,11 @@
+# One of the Index Cards on main landing page.
+type IndexCard {
+  entryId: ID!
+  title: String!
+  categories: [TypeIndexCardCategory!]!
+  entryLogoUrl: String!
+  colorBlock: String!
+  colorCategoryBackground: String!
+  colorLogoBackground: String!
+  colorTitle: String!
+}

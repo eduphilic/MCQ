@@ -14,6 +14,8 @@ import TypeCategory from "./TypeCategory.graphql";
 import TypeCloudinaryMediaWidgetAuthenticationToken from "./TypeCloudinaryMediaWidgetAuthenticationToken.graphql";
 import TypeEntry from "./TypeEntry.graphql";
 import TypeHtmlConfig from "./TypeHtmlConfig.graphql";
+import TypeIndexCard from "./TypeIndexCard.graphql";
+import TypeIndexCardCategory from "./TypeIndexCardCategory.graphql";
 import TypeIndexPageAboutImage from "./TypeIndexPageAboutImage.graphql";
 import TypeIndexPageConfig from "./TypeIndexPageConfig.graphql";
 import TypeLogoConfig from "./TypeLogoConfig.graphql";
@@ -37,6 +39,8 @@ export const typeDefs: DocumentNode = gql`
   ${TypeCloudinaryMediaWidgetAuthenticationToken}
   ${TypeEntry}
   ${TypeHtmlConfig}
+  ${TypeIndexCard}
+  ${TypeIndexCardCategory}
   ${TypeIndexPageAboutImage}
   ${TypeIndexPageConfig}
   ${TypeLogoConfig}

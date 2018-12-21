@@ -81,6 +81,8 @@ export interface Query {
 
   category?: Category | null;
 
+  indexCards: IndexCard[];
+
   cloudinaryCloudName: string;
 
   cloudinaryApiKey: string;
@@ -162,6 +164,33 @@ export interface Category {
   pricePerPaperRs: number;
 
   activated: boolean;
+}
+
+/** One of the Index Cards on main landing page. */
+export interface IndexCard {
+  entryId: string;
+
+  title: string;
+
+  categories: TypeIndexCardCategory[];
+
+  entryLogoUrl: string;
+
+  colorBlock: string;
+
+  colorCategoryBackground: string;
+
+  colorLogoBackground: string;
+
+  colorTitle: string;
+}
+
+export interface TypeIndexCardCategory {
+  categoryId: string;
+
+  title: string;
+
+  visible: boolean;
 }
 
 export interface Mutation {
@@ -308,6 +337,8 @@ export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
 
   category?: QueryCategoryResolver<Category | null, TypeParent, Context>;
 
+  indexCards?: QueryIndexCardsResolver<IndexCard[], TypeParent, Context>;
+
   cloudinaryCloudName?: QueryCloudinaryCloudNameResolver<
     string,
     TypeParent,
@@ -373,6 +404,11 @@ export interface QueryCategoryArgs {
   id: string;
 }
 
+export type QueryIndexCardsResolver<
+  R = IndexCard[],
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
 export type QueryCloudinaryCloudNameResolver<
   R = string,
   Parent = {},
@@ -674,6 +710,111 @@ export type CategoryPricePerPaperRsResolver<
 export type CategoryActivatedResolver<
   R = boolean,
   Parent = Category,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+/** One of the Index Cards on main landing page. */
+export interface IndexCardResolvers<
+  Context = ApolloContext,
+  TypeParent = IndexCard
+> {
+  entryId?: IndexCardEntryIdResolver<string, TypeParent, Context>;
+
+  title?: IndexCardTitleResolver<string, TypeParent, Context>;
+
+  categories?: IndexCardCategoriesResolver<
+    TypeIndexCardCategory[],
+    TypeParent,
+    Context
+  >;
+
+  entryLogoUrl?: IndexCardEntryLogoUrlResolver<string, TypeParent, Context>;
+
+  colorBlock?: IndexCardColorBlockResolver<string, TypeParent, Context>;
+
+  colorCategoryBackground?: IndexCardColorCategoryBackgroundResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+
+  colorLogoBackground?: IndexCardColorLogoBackgroundResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+
+  colorTitle?: IndexCardColorTitleResolver<string, TypeParent, Context>;
+}
+
+export type IndexCardEntryIdResolver<
+  R = string,
+  Parent = IndexCard,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexCardTitleResolver<
+  R = string,
+  Parent = IndexCard,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexCardCategoriesResolver<
+  R = TypeIndexCardCategory[],
+  Parent = IndexCard,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexCardEntryLogoUrlResolver<
+  R = string,
+  Parent = IndexCard,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexCardColorBlockResolver<
+  R = string,
+  Parent = IndexCard,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexCardColorCategoryBackgroundResolver<
+  R = string,
+  Parent = IndexCard,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexCardColorLogoBackgroundResolver<
+  R = string,
+  Parent = IndexCard,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexCardColorTitleResolver<
+  R = string,
+  Parent = IndexCard,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+
+export interface TypeIndexCardCategoryResolvers<
+  Context = ApolloContext,
+  TypeParent = TypeIndexCardCategory
+> {
+  categoryId?: TypeIndexCardCategoryCategoryIdResolver<
+    string,
+    TypeParent,
+    Context
+  >;
+
+  title?: TypeIndexCardCategoryTitleResolver<string, TypeParent, Context>;
+
+  visible?: TypeIndexCardCategoryVisibleResolver<boolean, TypeParent, Context>;
+}
+
+export type TypeIndexCardCategoryCategoryIdResolver<
+  R = string,
+  Parent = TypeIndexCardCategory,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type TypeIndexCardCategoryTitleResolver<
+  R = string,
+  Parent = TypeIndexCardCategory,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type TypeIndexCardCategoryVisibleResolver<
+  R = boolean,
+  Parent = TypeIndexCardCategory,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
 

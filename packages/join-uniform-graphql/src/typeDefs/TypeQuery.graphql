@@ -10,6 +10,7 @@ type Query {
   entries: [Entry!]!
   entryCategories(entryId: ID!): [Category!]!
   category(id: ID!): Category
+  indexCards: [IndexCard!]!
 
   cloudinaryCloudName: String!
   cloudinaryApiKey: String!

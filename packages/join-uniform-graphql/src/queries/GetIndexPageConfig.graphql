@@ -16,4 +16,16 @@ query GetIndexPageConfig {
   logoConfig {
     url
   }
+  indexCards {
+    title
+    categories {
+      title
+      visible
+    }
+    entryLogoUrl
+    colorBlock
+    colorCategoryBackground
+    colorLogoBackground
+    colorTitle
+  }
 }

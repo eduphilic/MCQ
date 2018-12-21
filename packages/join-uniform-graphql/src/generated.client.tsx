@@ -302,6 +302,8 @@ export type GetIndexPageConfigQuery = {
   indexPageConfig: GetIndexPageConfigIndexPageConfig;
 
   logoConfig: GetIndexPageConfigLogoConfig;
+
+  indexCards: GetIndexPageConfigIndexCards[];
 };
 
 export type GetIndexPageConfigIndexPageConfig = {
@@ -338,6 +340,32 @@ export type GetIndexPageConfigLogoConfig = {
   __typename?: "LogoConfig";
 
   url: string;
+};
+
+export type GetIndexPageConfigIndexCards = {
+  __typename?: "IndexCard";
+
+  title: string;
+
+  categories: GetIndexPageConfigCategories[];
+
+  entryLogoUrl: string;
+
+  colorBlock: string;
+
+  colorCategoryBackground: string;
+
+  colorLogoBackground: string;
+
+  colorTitle: string;
+};
+
+export type GetIndexPageConfigCategories = {
+  __typename?: "TypeIndexCardCategory";
+
+  title: string;
+
+  visible: boolean;
 };
 
 export type GetLogoConfigVariables = {};
@@ -1114,6 +1142,18 @@ export const GetIndexPageConfigDocument = gql`
     }
     logoConfig {
       url
+    }
+    indexCards {
+      title
+      categories {
+        title
+        visible
+      }
+      entryLogoUrl
+      colorBlock
+      colorCategoryBackground
+      colorLogoBackground
+      colorTitle
     }
   }
 `;
