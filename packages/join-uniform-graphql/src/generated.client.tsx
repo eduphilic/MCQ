@@ -345,6 +345,8 @@ export type GetIndexPageConfigLogoConfig = {
 export type GetIndexPageConfigIndexCards = {
   __typename?: "IndexCard";
 
+  entryId: string;
+
   title: string;
 
   categories: GetIndexPageConfigCategories[];
@@ -362,6 +364,8 @@ export type GetIndexPageConfigIndexCards = {
 
 export type GetIndexPageConfigCategories = {
   __typename?: "TypeIndexCardCategory";
+
+  categoryId: string;
 
   title: string;
 
@@ -1144,8 +1148,10 @@ export const GetIndexPageConfigDocument = gql`
       url
     }
     indexCards {
+      entryId
       title
       categories {
+        categoryId
         title
         visible
       }

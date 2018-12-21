@@ -17,8 +17,10 @@ query GetIndexPageConfig {
     url
   }
   indexCards {
+    entryId
     title
     categories {
+      categoryId
       title
       visible
     }
