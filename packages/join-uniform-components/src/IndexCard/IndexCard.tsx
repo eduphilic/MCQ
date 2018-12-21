@@ -64,6 +64,7 @@ const verticalMargin = 50;
 const mobileBreakpoint: Breakpoint = "sm";
 
 const Wrapper = styled.div<{ backgroundColor: string }>`
+  width: 100%;
   padding: 16px;
   background-color: ${props => getLightBg(props.backgroundColor)};
 

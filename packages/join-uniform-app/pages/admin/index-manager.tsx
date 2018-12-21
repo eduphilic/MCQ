@@ -7,6 +7,7 @@ import {
   DraggableList,
   Grid,
   IconButton,
+  IndexCard,
   PendingChangesButton,
   Typography,
 } from "@join-uniform/components";
@@ -25,7 +26,7 @@ import {
   FormikMuiTextField,
   FormikMuiTextFieldArrayItem,
 } from "~/lib/admin";
-import { withQueryLoadingSpinner } from "~/lib/utils";
+import { createResponsiveImageUrl, withQueryLoadingSpinner } from "~/lib/utils";
 
 type FormValues = {
   logoUrl: string;
@@ -344,6 +345,24 @@ export default function AdminIndexManagerPage() {
                         ],
                       }),
                     )}
+                    bottomActionsNode={
+                      <IndexCard
+                        title={indexCard.title}
+                        categories={indexCard.categories
+                          .filter(c => c.visible)
+                          .map(c => c.title)}
+                        entryLogoUrl={createResponsiveImageUrl(
+                          indexCard.entryLogoUrl,
+                          { w: "128", h: "128", format: "png" },
+                        )}
+                        colorBlock={indexCard.colorBlock}
+                        colorCategoryBackground={
+                          indexCard.colorCategoryBackground
+                        }
+                        colorLogoBackground={indexCard.colorLogoBackground}
+                        colorTitle={indexCard.colorTitle}
+                      />
+                    }
                   />
                 </Grid>
               ))}
