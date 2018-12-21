@@ -26,7 +26,7 @@ export function FormikMuiTextField<FormValues>(
       helperText={helperText}
       inputProps={inputProps}
       error={form.touched[name] && !!form.errors[name]}
-      value={form.values[name].toString()}
+      value={(form.values[name] || "").toString()}
       onChange={form.handleChange}
       onBlur={form.handleBlur}
     />
