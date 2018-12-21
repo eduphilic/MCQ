@@ -138,7 +138,9 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
                         paddingRight:
                           columnTypes[index] === "switch" ? 24 : undefined,
                       }}
-                      numeric={columnTypes[index] === "switch"}
+                      align={
+                        columnTypes[index] === "switch" ? "right" : undefined
+                      }
                     >
                       <Typography
                         variant="subtitle2"
@@ -195,7 +197,11 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
                                 ? 24
                                 : undefined,
                           }}
-                          numeric={columnTypes[columnIndex] === "switch"}
+                          align={
+                            columnTypes[columnIndex] === "switch"
+                              ? "right"
+                              : undefined
+                          }
                         >
                           <ItemColumnComponent
                             itemColumn={itemColumn}
