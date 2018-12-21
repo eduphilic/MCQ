@@ -2,7 +2,9 @@ import {
   Card,
   CardContent,
   CardHeader,
+  DraggableList,
   Grid,
+  IconButton,
   PendingChangesButton,
   Typography,
 } from "@join-uniform/components";
@@ -10,10 +12,15 @@ import {
   GetIndexPageConfigComponent,
   LocalizedString,
 } from "@join-uniform/graphql";
-import { Formik } from "formik";
+import { AddIcon } from "@join-uniform/icons";
+import { FieldArray, Formik } from "formik";
 import React from "react";
 import { AdminLayoutDashboardContainer } from "~/containers";
-import { FormikImagePicker, FormikMuiTextField } from "~/lib/admin";
+import {
+  FormikImagePicker,
+  FormikMuiTextField,
+  FormikMuiTextFieldArrayItem,
+} from "~/lib/admin";
 import { withQueryLoadingSpinner } from "~/lib/utils";
 
 type FormValues = {
@@ -119,12 +126,57 @@ export default function AdminIndexManagerPage() {
 
                   {/* Hero Features section. */}
                   <CardContent>
-                    <Typography variant="subtitle2">Hero Features</Typography>
-                    <Grid container spacing={16}>
-                      <Grid item xs={12} md={6}>
-                        temp
-                      </Grid>
-                    </Grid>
+                    <FieldArray name="heroFeatures">
+                      {arrayHelpers => (
+                        <>
+                          <Typography variant="subtitle2">
+                            Hero Features
+                            <IconButton>
+                              <AddIcon
+                                onClick={() =>
+                                  // tslint:disable-next-line:no-object-literal-type-assertion
+                                  arrayHelpers.push({
+                                    en: "",
+                                  } as LocalizedString)
+                                }
+                              />
+                            </IconButton>
+                          </Typography>
+                          <DraggableList
+                            itemElements={form.values.heroFeatures.map(
+                              (_heroFeature, index) => (
+                                <Grid key={index} container spacing={16}>
+                                  <Grid item xs={12} md={6}>
+                                    <FormikMuiTextFieldArrayItem
+                                      arrayName="heroFeatures"
+                                      arrayIndex={index}
+                                      arrayItemSubpath=".en"
+                                      label="Hero Feature (English)"
+                                      form={form}
+                                    />
+                                  </Grid>
+                                  <Grid item xs={12} md={6}>
+                                    <FormikMuiTextFieldArrayItem
+                                      arrayName="heroFeatures"
+                                      arrayIndex={index}
+                                      arrayItemSubpath=".hi"
+                                      label="Hero Feature (Hindi)"
+                                      form={form}
+                                    />
+                                  </Grid>
+                                </Grid>
+                              ),
+                            )}
+                            onSortEnd={({ oldIndex, newIndex }) =>
+                              arrayHelpers.move(oldIndex, newIndex)
+                            }
+                            onRemoveButtonClick={index =>
+                              arrayHelpers.remove(index)
+                            }
+                          />
+                        </>
+                      )}
+                    </FieldArray>
                   </CardContent>
                 </Card>
               </Grid>

@@ -18,19 +18,27 @@ export type DraggableListProps = Omit<
   "useDragHandle"
 > & {
   itemElements: ReactElement<any>[];
+  onRemoveButtonClick: (index: number) => void;
 };
 
 type DraggableListItemProps = {
   children: ReactElement<any>;
+  itemIndex: number;
+  onRemoveButtonClick: (index: number) => void;
 };
 
 const DraggableListBase = SortableContainer<DraggableListProps>(props => {
-  const { itemElements } = props;
+  const { itemElements, onRemoveButtonClick } = props;
 
   const draggableItemElements = itemElements.map((itemElement, index) => {
     const key = itemElement.key || index;
     return (
-      <DraggableListItem key={key} index={index}>
+      <DraggableListItem
+        key={key}
+        index={index}
+        itemIndex={index}
+        onRemoveButtonClick={onRemoveButtonClick}
+      >
         {itemElement}
       </DraggableListItem>
     );
@@ -44,7 +52,7 @@ export function DraggableList(props: DraggableListProps) {
 }
 
 const DraggableListItem = SortableElement<DraggableListItemProps>(props => {
-  const { children } = props;
+  const { children, itemIndex, onRemoveButtonClick } = props;
 
   return (
     <Grid container spacing={16}>
@@ -55,7 +63,7 @@ const DraggableListItem = SortableElement<DraggableListItemProps>(props => {
           </Grid>
           <Grid item>
             <IconButton>
-              <RemoveIcon />
+              <RemoveIcon onClick={() => onRemoveButtonClick(itemIndex)} />
             </IconButton>
           </Grid>
         </Grid>
