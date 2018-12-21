@@ -1,4 +1,4 @@
-import { css, styled } from "@join-uniform/theme";
+import { styled } from "@join-uniform/theme";
 import React, { Component, FC, ReactNode } from "react";
 
 import {
@@ -126,26 +126,27 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
                     implementation="js"
                   >
                     <UnpaddedTableCell
-                      // Make first cell the largest. This is to make multiple
-                      // tables on one page have the same column sizings.
-                      css={
-                        index === 0
-                          ? css`
-                              width: 50%;
-                            `
-                          : undefined
-                      }
+                      style={{
+                        // Make first cell the largest. This is to make multiple
+                        // tables on one page have the same column sizings.
+                        width:
+                          index === 0 && columnLabels.length > 2
+                            ? "50%"
+                            : undefined,
+                        // Force right padding if Switch component because we're
+                        // using numeric padding style.
+                        paddingRight:
+                          columnTypes[index] === "switch" ? 24 : undefined,
+                      }}
+                      numeric={columnTypes[index] === "switch"}
                     >
                       <Typography
                         variant="subtitle2"
                         // Add left padding for alignment with Toolbar Button.
-                        css={
-                          columnTypes[index] === "button"
-                            ? css`
-                                padding-left: 32px;
-                              `
-                            : undefined
-                        }
+                        style={{
+                          paddingLeft:
+                            columnTypes[index] === "button" ? 32 : undefined,
+                        }}
                       >
                         {label}
                       </Typography>
@@ -185,7 +186,17 @@ export class DashboardCardTable extends Component<DashboardCardTableProps> {
                         xsDown={columnTypes[columnIndex] === "image"}
                         implementation="js"
                       >
-                        <UnpaddedTableCell>
+                        <UnpaddedTableCell
+                          style={{
+                            // Force right padding if Switch component because we're
+                            // using numeric padding style.
+                            paddingRight:
+                              columnTypes[columnIndex] === "switch"
+                                ? 24
+                                : undefined,
+                          }}
+                          numeric={columnTypes[columnIndex] === "switch"}
+                        >
                           <ItemColumnComponent
                             itemColumn={itemColumn}
                             mode={api.state.mode}
