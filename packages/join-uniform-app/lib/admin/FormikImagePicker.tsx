@@ -99,7 +99,7 @@ export function FormikImagePicker<FormValues>(
 
   return (
     <FormikImagePickerBase
-      value={form.values[name].toString()}
+      value={(form.values[name] || "").toString()}
       folder={folder}
       onValueChange={value => form.setFieldValue(name.toString(), value)}
     />
