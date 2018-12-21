@@ -16,12 +16,13 @@ import {
 import {
   GetIndexPageConfigAboutImages,
   GetIndexPageConfigComponent,
+  GetIndexPageConfigIndexCards,
   LocalizedString,
 } from "@join-uniform/graphql";
 import { AddIcon } from "@join-uniform/icons";
 import { styled } from "@join-uniform/theme";
 import { FieldArray, Formik } from "formik";
-import React, { MouseEvent, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import { ChromePicker, ColorResult } from "react-color";
 import { AdminLayoutDashboardContainer } from "~/containers";
 import {
@@ -44,6 +45,7 @@ type FormValues = {
   aboutTextEnglish: string;
   aboutTextHindi?: string;
   aboutImages: GetIndexPageConfigAboutImages[];
+  indexCards: GetIndexPageConfigIndexCards[];
 };
 
 export default function AdminIndexManagerPage() {
@@ -63,6 +65,7 @@ export default function AdminIndexManagerPage() {
           aboutTextEnglish: indexPageConfig.aboutText.en,
           aboutTextHindi: indexPageConfig.aboutText.hi,
           aboutImages: indexPageConfig.aboutImages,
+          indexCards,
         }}
         onSubmit={() => {
           //
@@ -329,14 +332,14 @@ export default function AdminIndexManagerPage() {
               </Grid>
 
               {/* Index Cards. */}
-              {indexCards.map(indexCard => (
+              {form.values.indexCards.map((indexCard, index) => (
                 <Grid key={indexCard.entryId} item xs={12}>
                   <DashboardCard
                     title={indexCard.title}
                     columnLabels={["Category", "Visibility"]}
                     columnTypes={["single-line", "switch"]}
                     items={indexCard.categories.map(
-                      (category): DashboardCardItem => ({
+                      (category, categoryIndex): DashboardCardItem => ({
                         key: category.categoryId,
                         columns: [
                           {
@@ -345,6 +348,12 @@ export default function AdminIndexManagerPage() {
                           {
                             switchChecked: category.visible,
                             switchAlwaysClickable: true,
+                            switchOnChange: checked => {
+                              form.setFieldValue(
+                                `indexCards[${index}].categories[${categoryIndex}].visible`,
+                                checked,
+                              );
+                            },
                           },
                         ],
                       }),
@@ -355,15 +364,18 @@ export default function AdminIndexManagerPage() {
                           "colorBlock",
                           "colorCategoryBackground",
                           "colorLogoBackground",
-                          "colorTitle",
+                          // "colorTitle",
                         ].map(field => (
-                          <Grid key={field} item xs={12} sm={6} md={3}>
+                          <Grid key={field} item xs={12} sm={6} md={4}>
                             <ColorPickerButton
                               title={field.slice(5)}
                               // @ts-ignore
                               color={indexCard[field]}
-                              onColorChange={() => {
-                                //
+                              onColorChange={color => {
+                                form.setFieldValue(
+                                  `indexCards[${index}].${field}`,
+                                  color,
+                                );
                               }}
                             />
                           </Grid>
@@ -391,6 +403,14 @@ export default function AdminIndexManagerPage() {
                   />
                 </Grid>
               ))}
+
+              {/* Our Videos card. */}
+              <Grid item xs={12}>
+                <Card>
+                  <CardHeader title="Our Videos" variant="admin" />
+                  <CardContent>temp</CardContent>
+                </Card>
+              </Grid>
             </Grid>
           </AdminLayoutDashboardContainer>
         )}
@@ -409,6 +429,13 @@ function ColorPickerButton(props: ColorPickerButtonProps) {
   const { title, color: initialColor, onColorChange } = props;
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [color, setColor] = useState(initialColor);
+
+  useEffect(
+    () => {
+      setColor(initialColor);
+    },
+    [initialColor],
+  );
 
   return (
     <>
