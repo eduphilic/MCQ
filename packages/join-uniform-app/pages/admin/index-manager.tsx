@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@join-uniform/components";
 import {
+  GetIndexPageConfigAboutImages,
   GetIndexPageConfigComponent,
   LocalizedString,
 } from "@join-uniform/graphql";
@@ -18,6 +19,7 @@ import React from "react";
 import { AdminLayoutDashboardContainer } from "~/containers";
 import {
   FormikImagePicker,
+  FormikImagePickerArrayItem,
   FormikMuiTextField,
   FormikMuiTextFieldArrayItem,
 } from "~/lib/admin";
@@ -28,8 +30,13 @@ type FormValues = {
   heroBackgroundImageUrl: string;
   heroBackgroundAlpha: number;
   heroPrimaryTextEnglish: string;
-  heroPrimaryTextHindi: string;
+  heroPrimaryTextHindi?: string;
   heroFeatures: LocalizedString[];
+  aboutTitleEnglish: string;
+  aboutTitleHindi?: string;
+  aboutTextEnglish: string;
+  aboutTextHindi?: string;
+  aboutImages: GetIndexPageConfigAboutImages[];
 };
 
 export default function AdminIndexManagerPage() {
@@ -42,8 +49,13 @@ export default function AdminIndexManagerPage() {
           heroBackgroundImageUrl: indexPageConfig.heroBackgroundImageUrl,
           heroBackgroundAlpha: indexPageConfig.heroBackgroundAlpha,
           heroPrimaryTextEnglish: indexPageConfig.heroPrimaryText.en,
-          heroPrimaryTextHindi: indexPageConfig.heroPrimaryText.hi!,
+          heroPrimaryTextHindi: indexPageConfig.heroPrimaryText.hi,
           heroFeatures: indexPageConfig.heroFeatures,
+          aboutTitleEnglish: indexPageConfig.aboutTitle.en,
+          aboutTitleHindi: indexPageConfig.aboutText.hi,
+          aboutTextEnglish: indexPageConfig.aboutText.en,
+          aboutTextHindi: indexPageConfig.aboutText.hi,
+          aboutImages: indexPageConfig.aboutImages,
         }}
         onSubmit={() => {
           //
@@ -161,6 +173,134 @@ export default function AdminIndexManagerPage() {
                                       arrayIndex={index}
                                       arrayItemSubpath=".hi"
                                       label="Hero Feature (Hindi)"
+                                      form={form}
+                                    />
+                                  </Grid>
+                                </Grid>
+                              ),
+                            )}
+                            onSortEnd={({ oldIndex, newIndex }) =>
+                              arrayHelpers.move(oldIndex, newIndex)
+                            }
+                            onRemoveButtonClick={index =>
+                              arrayHelpers.remove(index)
+                            }
+                          />
+                        </>
+                      )}
+                    </FieldArray>
+                  </CardContent>
+                </Card>
+              </Grid>
+
+              {/* About Join Uniform card. */}
+              <Grid item xs={12}>
+                <Card>
+                  <CardHeader title="About Join Uniform" variant="admin" />
+
+                  {/* Title section. */}
+                  <CardContent>
+                    <Typography variant="subtitle2">Title</Typography>
+                    <Grid container spacing={16}>
+                      <Grid item xs={12} md={6}>
+                        <FormikMuiTextField
+                          name="aboutTitleEnglish"
+                          label="Title (English)"
+                          form={form}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <FormikMuiTextField
+                          name="aboutTitleHindi"
+                          label="Title (Hindi)"
+                          form={form}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <FormikMuiTextField
+                          name="aboutTextEnglish"
+                          label="Text (English)"
+                          form={form}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <FormikMuiTextField
+                          name="aboutTextHindi"
+                          label="Text (Hindi)"
+                          form={form}
+                        />
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+
+                  {/* Images section. */}
+                  <CardContent>
+                    <FieldArray name="aboutImages">
+                      {arrayHelpers => (
+                        <>
+                          <Typography variant="subtitle2">
+                            Images
+                            <IconButton>
+                              <AddIcon
+                                onClick={() =>
+                                  arrayHelpers.push(
+                                    // tslint:disable-next-line:no-object-literal-type-assertion
+                                    {
+                                      imageUrl: "",
+                                      text: { en: "" },
+                                      title: { en: "" },
+                                    } as GetIndexPageConfigAboutImages,
+                                  )
+                                }
+                              />
+                            </IconButton>
+                          </Typography>
+                          <DraggableList
+                            itemElements={form.values.aboutImages.map(
+                              (_aboutImage, index) => (
+                                <Grid key={index} container spacing={16}>
+                                  <Grid item xs={12}>
+                                    <FormikImagePickerArrayItem
+                                      arrayName="aboutImages"
+                                      arrayIndex={index}
+                                      arrayItemSubpath=".imageUrl"
+                                      folder="about-images"
+                                      form={form}
+                                    />
+                                  </Grid>
+                                  <Grid item xs={12} md={6}>
+                                    <FormikMuiTextFieldArrayItem
+                                      arrayName="aboutImages"
+                                      arrayIndex={index}
+                                      arrayItemSubpath=".title.en"
+                                      label="Title (English)"
+                                      form={form}
+                                    />
+                                  </Grid>
+                                  <Grid item xs={12} md={6}>
+                                    <FormikMuiTextFieldArrayItem
+                                      arrayName="aboutImages"
+                                      arrayIndex={index}
+                                      arrayItemSubpath=".title.hi"
+                                      label="Title (Hindi)"
+                                      form={form}
+                                    />
+                                  </Grid>
+                                  <Grid item xs={12} md={6}>
+                                    <FormikMuiTextFieldArrayItem
+                                      arrayName="aboutImages"
+                                      arrayIndex={index}
+                                      arrayItemSubpath=".text.en"
+                                      label="Text (English)"
+                                      form={form}
+                                    />
+                                  </Grid>
+                                  <Grid item xs={12} md={6}>
+                                    <FormikMuiTextFieldArrayItem
+                                      arrayName="aboutImages"
+                                      arrayIndex={index}
+                                      arrayItemSubpath=".text.hi"
+                                      label="Text (Hindi)"
                                       form={form}
                                     />
                                   </Grid>
