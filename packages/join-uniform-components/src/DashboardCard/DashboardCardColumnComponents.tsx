@@ -89,7 +89,7 @@ export const ColumnItemSwitch: ColumnItemComponent = ({ itemColumn, mode }) => {
         if (!itemColumn.switchOnChange) return;
         itemColumn.switchOnChange(event.target.checked);
       }}
-      disabled={mode !== "edit"}
+      disabled={!itemColumn.switchAlwaysClickable && mode !== "edit"}
       color="primary"
     />
   );

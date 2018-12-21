@@ -23,6 +23,7 @@ export interface DashboardCardItemColumn {
   switchChecked?: boolean;
   switchOnChange?: (checked: boolean) => any;
   switchTooltipTitle?: string;
+  switchAlwaysClickable?: boolean;
 
   // Button
   buttonIconNode?: ReactNode;
