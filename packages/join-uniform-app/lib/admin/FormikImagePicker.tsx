@@ -1,5 +1,5 @@
 import { ImagePicker } from "@join-uniform/components";
-import { FormikProps } from "formik";
+import { FormikProps, getIn } from "formik";
 import React, { useMemo } from "react";
 import { createResponsiveImageUrl, useCloudinary } from "../utils";
 
@@ -9,14 +9,22 @@ export type FormikImagePickerProps<FormValues> = {
   form: FormikProps<FormValues>;
 };
 
-export function FormikImagePicker<FormValues>(
-  props: FormikImagePickerProps<FormValues>,
-) {
-  const {
-    name,
-    folder,
-    form: { values, setFieldValue },
-  } = props;
+export type FormikImagePickerArrayItemProps<FormValues> = {
+  arrayName: keyof FormValues;
+  arrayIndex: number;
+  arrayItemSubpath?: string;
+  folder: string;
+  form: FormikProps<FormValues>;
+};
+
+type FormikImagePickerBaseProps = {
+  value: string | null;
+  folder: string;
+  onValueChange: (value: string) => void;
+};
+
+function FormikImagePickerBase(props: FormikImagePickerBaseProps) {
+  const { value, folder, onValueChange } = props;
   const cloudinary = useCloudinary();
 
   const { uploadedImageUrl, previewImageUrl } = useMemo(
@@ -25,8 +33,8 @@ export function FormikImagePicker<FormValues>(
         uploadedImageUrl: null as string | null,
         previewImageUrl: null as string | null,
       };
-      if (values[name]) {
-        const url = values[name].toString();
+      if (value) {
+        const url = value.toString();
         urls.uploadedImageUrl = createResponsiveImageUrl(url, {
           format: "png",
         });
@@ -38,7 +46,7 @@ export function FormikImagePicker<FormValues>(
       }
       return urls;
     },
-    [values[name]],
+    [value],
   );
 
   return (
@@ -57,7 +65,7 @@ export function FormikImagePicker<FormValues>(
       await cloudinary.getDefaultMediaLibraryWidgetOptions(),
       {
         insertHandler: data => {
-          setFieldValue(name.toString(), data.assets[0].secure_url);
+          onValueChange(data.assets[0].secure_url);
         },
       },
     );
@@ -77,9 +85,47 @@ export function FormikImagePicker<FormValues>(
           return;
         }
         if (result.event === "success") {
-          setFieldValue(name.toString(), result.info.secure_url);
+          onValueChange(result.info.secure_url);
         }
       },
     );
+  }
+}
+
+export function FormikImagePicker<FormValues>(
+  props: FormikImagePickerProps<FormValues>,
+) {
+  const { name, folder, form } = props;
+
+  return (
+    <FormikImagePickerBase
+      value={form.values[name].toString()}
+      folder={folder}
+      onValueChange={value => form.setFieldValue(name.toString(), value)}
+    />
+  );
+}
+
+export function FormikImagePickerArrayItem<FormValues>(
+  props: FormikImagePickerArrayItemProps<FormValues>,
+) {
+  const { arrayName, arrayIndex, arrayItemSubpath, folder, form } = props;
+  if (!Array.isArray(form.values[arrayName])) {
+    throw new Error("Expected field to be an array.");
+  }
+
+  const name = `${arrayName}[${arrayIndex}]${arrayItemSubpath}`;
+  const value = getIn(form.values, name) as string | null;
+
+  return (
+    <FormikImagePickerBase
+      value={value}
+      folder={folder}
+      onValueChange={handleChange}
+    />
+  );
+
+  function handleChange(newValue: string) {
+    form.setFieldValue(name, newValue);
   }
 }
