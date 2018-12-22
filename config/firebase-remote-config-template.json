@@ -12,17 +12,7 @@
     },
     "indexPageConfig": {
       "defaultValue": {
-        "value": "{\"heroBackgroundImageUrl\":\"https://join-uniform.netlify.com/images/hero/soldier-optimized.png\",\"heroBackgroundAlpha\":0.25,\"heroPrimaryText\":{\"key\":\"heroPrimaryText\",\"en\":\"What we are offering mock test.\",\"hi\":\"What we are offering mock test (Hindi)\"},\"heroFeatures\":[{\"key\":\"heroFeatures0\",\"en\":\"Mock test as asked in Armed Forces exams.\"},{\"key\":\"heroFeatures1\",\"en\":\"Full length Weekly Mock Test\"},{\"key\":\"heroFeatures2\",\"en\":\"Instant result with detail analysis\"},{\"key\":\"heroFeatures3\",\"en\":\"All India rank\"}],\"heroFooterText\":{\"key\":\"heroFooterText\",\"en\":\"What we are offering mock test\"},\"aboutTitle\":{\"key\":\"aboutTitle\",\"en\":\"What is Join Uniform?\"},\"aboutText\":{\"key\":\"aboutText\",\"en\":\"JoinUniform is created to help and prepare those aspirants(both Officer and Jawan entry) who are keen to serve India, in uniform(Army, Airforce, Navy, Assam Rifles, Coast Guard, TA, BSF, ITBP, CRPF, SSB, CISF & RPF.etc.). The platform is bilingual(Hindi & English),user can use it from anywhere, using mobile, laptop or TV. JoinUniform will benefit it's user in terms of quality content, proper attention, actual exam like tests, with explanation and performance analysis.\"},\"aboutImages\":[{\"imageUrl\":\"https://join-uniform.netlify.com/static/media/1.c9c7c0eb.jpg\",\"title\":{\"key\":\"aboutImages0_title\",\"en\":\"Jawan Entry Mock Tests\",\"hi\":\"Jawan Entry Mock Tests (Hindi)\"},\"text\":{\"key\":\"aboutImages0_text\",\"en\":\"हम जवान, JCO और समकक्ष पद के लिए Army, Airforce, Navy, Assam Rifles, Coast Guard, TA, BSF, ITBP, CRPF, SSB, CISF & RPF में आवेदन करने वाले 8वीं, 10वीं और 12वीं उत्तीर्ण उम्मीदवारों के लिए online Mock(नकली) परीक्षण करवाते हैं।\"}},{\"imageUrl\":\"https://join-uniform.netlify.com/static/media/2.c40c07a0.jpg\",\"title\":{\"key\":\"aboutImages1_title\",\"en\":\"Officer Entry Mock Tests\"},\"text\":{\"key\":\"aboutImages1_text\",\"en\":\"We conduct online mock-tests for candidates, aspiring to be Officer in Indian Defence forces through AFCAT, CDSE, NDA, ACC, Military Nursing Service & CAPF (BSF, ITBP, CRPF, SSB, CISF).\"}}]}"
-      }
-    },
-    "adminLoginPageConfig": {
-      "defaultValue": {
-        "value": "{\"heroPrimaryText\":{\"key\":\"adminLoginPageHeroPrimaryText\",\"en\":\"Prepare for INDIAN Defence Examinations\"},\"heroSecondaryText\":{\"key\":\"adminLoginPageHeroSecondaryText\",\"en\":\"Some message can be written here to explain about this website\"}}"
-      }
-    },
-    "sessionFormConfig": {
-      "defaultValue": {
-        "value": "{\"formTitleUserSignIn\":{\"key\":\"sessionFormFormTitleUserSignIn\",\"en\":\"Login\"},\"formTitleUserSignUp\":{\"key\":\"sessionFormFormTitleUserSignUp\",\"en\":\"Signup\"},\"formTitleAdminSignIn\":{\"key\":\"sessionFormFormTitleAdminSignIn\",\"en\":\"Login\"},\"fullNameFieldPlaceholder\":{\"key\":\"sessionFormFullNameFieldPlaceholder\",\"en\":\"Enter Your Name\"},\"phoneNumberFieldPlaceholder\":{\"key\":\"sessionFormPhoneNumberFieldPlaceholder\",\"en\":\"Enter Mobile Number\"},\"passwordFieldPlaceholder\":{\"key\":\"sessionFormPasswordFieldPlaceholder\",\"en\":\"Enter Password\"},\"passwordVerifyFieldPlaceholder\":{\"key\":\"sessionFormPasswordVerifyFieldPlaceholder\",\"en\":\"Enter Password Again\"},\"emailAddressFieldPlaceholder\":{\"key\":\"sessionFormEmailAddressFieldPlaceholder\",\"en\":\"Enter Email Address\"},\"submitButtonLabel\":{\"key\":\"sessionSubmitButtonLabel\",\"en\":\"Submit\"},\"termsConditionsCheckboxLabel\":{\"key\":\"sessionTermsConditionsCheckboxLabel\",\"en\":\"Terms & Conditions\"},\"passwordResetLinkLabel\":{\"key\":\"sessionPasswordResetLinkLabel\",\"en\":\"Forgot Password?\"}}"
+        "value": "{\"heroBackgroundImageUrl\":\"https://join-uniform.netlify.com/images/hero/soldier-optimized.png\",\"heroBackgroundAlpha\":0.25,\"heroPrimaryText\":{\"en\":\"What we are offering mock test.\",\"hi\":\"What we are offering mock test. (Hindi)\"},\"heroFeatures\":[{\"en\":\"Mock test as asked in Armed Forces exams.\",\"hi\":\"Mock test as asked in Armed Forces exams. (Hindi)\"},{\"en\":\"Full length Weekly Mock Test\"},{\"en\":\"Instant result with detail analysis\"},{\"en\":\"All India rank\"}],\"heroFooterText\":{\"key\":\"heroFooterText\",\"en\":\"What we are offering mock test\"},\"aboutTitle\":{\"en\":\"What is Join Uniform?\"},\"aboutText\":{\"en\":\"JoinUniform is created to help and prepare those aspirants(both Officer and Jawan entry) who are keen to serve India, in uniform(Army, Airforce, Navy, Assam Rifles, Coast Guard, TA, BSF, ITBP, CRPF, SSB, CISF & RPF.etc.). The platform is bilingual(Hindi & English),user can use it from anywhere, using mobile, laptop or TV. JoinUniform will benefit it's user in terms of quality content, proper attention, actual exam like tests, with explanation and performance analysis.\"},\"aboutImages\":[{\"imageUrl\":\"https://join-uniform.netlify.com/static/media/1.c9c7c0eb.jpg\",\"text\":{\"en\":\"हम जवान, JCO और समकक्ष पद के लिए Army, Airforce, Navy, Assam Rifles, Coast Guard, TA, BSF, ITBP, CRPF, SSB, CISF & RPF में आवेदन करने वाले 8वीं, 10वीं और 12वीं उत्तीर्ण उम्मीदवारों के लिए online Mock(नकली) परीक्षण करवाते हैं।\"},\"title\":{\"en\":\"Jawan Entry Mock Tests\",\"hi\":\"Jawan Entry Mock Tests (Hindi)\"}},{\"imageUrl\":\"https://join-uniform.netlify.com/static/media/2.c40c07a0.jpg\",\"text\":{\"en\":\"We conduct online mock-tests for candidates, aspiring to be Officer in Indian Defence forces through AFCAT, CDSE, NDA, ACC, Military Nursing Service & CAPF (BSF, ITBP, CRPF, SSB, CISF).\"},\"title\":{\"en\":\"Officer Entry Mock Tests\"}}]}"
       }
     },
     "translations": {
@@ -32,12 +22,12 @@
     }
   },
   "version": {
-    "versionNumber": "58",
-    "updateTime": "2018-12-12T02:30:17.772Z",
+    "versionNumber": "63",
+    "updateTime": "2018-12-22T15:43:28.393Z",
     "updateUser": {
-      "email": "jason@jasons.io"
+      "email": "firebase-adminsdk-a5g58@joinuniformindia.iam.gserviceaccount.com"
     },
-    "updateOrigin": "CONSOLE",
-    "updateType": "INCREMENTAL_UPDATE"
+    "updateOrigin": "REST_API",
+    "updateType": "FORCED_UPDATE"
   }
 }

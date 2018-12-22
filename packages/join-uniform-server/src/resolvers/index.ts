@@ -23,6 +23,7 @@ import { deleteEntry } from "./deleteEntry";
 import { setCategoryActivationStatus } from "./setCategoryActivationStatus";
 import { updateCategory } from "./updateCategory";
 import { updateEntry } from "./updateEntry";
+import { updateIndexPage } from "./updateIndexPage";
 
 import { cloudinaryApiKey } from "./cloudinaryApiKey";
 import { cloudinaryCloudName } from "./cloudinaryCloudName";
@@ -55,6 +56,7 @@ const Mutation: MutationResolvers = {
   setCategoryActivationStatus,
   updateCategory,
   updateEntry,
+  updateIndexPage,
 
   generateCloudinarySignature,
   generateCloudinaryMediaLibraryAuthenticationToken,

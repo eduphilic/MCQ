@@ -1,5 +1,4 @@
 input IndexCardCategoryUpdate {
   categoryId: ID!
-  title: String!
   visible: Boolean!
 }

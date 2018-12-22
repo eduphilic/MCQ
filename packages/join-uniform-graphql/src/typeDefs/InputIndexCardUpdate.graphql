@@ -1,5 +1,8 @@
 input IndexCardUpdate {
   entryId: ID!
-  title: String!
+  colorBlock: String!
+  colorCategoryBackground: String!
+  colorLogoBackground: String!
+  colorTitle: String!
   categories: [IndexCardCategoryUpdate!]!
 }

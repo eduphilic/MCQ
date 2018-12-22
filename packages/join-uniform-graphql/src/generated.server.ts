@@ -80,15 +80,19 @@ export interface AboutImageUpdate {
 export interface IndexCardUpdate {
   readonly entryId: string;
 
-  readonly title: string;
+  readonly colorBlock: string;
+
+  readonly colorCategoryBackground: string;
+
+  readonly colorLogoBackground: string;
+
+  readonly colorTitle: string;
 
   readonly categories: ReadonlyArray<IndexCardCategoryUpdate>;
 }
 
 export interface IndexCardCategoryUpdate {
   readonly categoryId: string;
-
-  readonly title: string;
 
   readonly visible: boolean;
 }
