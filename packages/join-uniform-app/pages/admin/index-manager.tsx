@@ -28,9 +28,10 @@ import {
 } from "@join-uniform/graphql";
 import { AddIcon } from "@join-uniform/icons";
 import { styled } from "@join-uniform/theme";
-import { FieldArray, Formik } from "formik";
+import { FieldArray, Formik, FormikProps } from "formik";
 import React, { MouseEvent, useEffect, useState } from "react";
 import { ChromePicker, ColorResult } from "react-color";
+import * as yup from "yup";
 import { AdminLayoutDashboardContainer } from "~/containers";
 import {
   FormikImagePicker,
@@ -56,6 +57,11 @@ type FormValues = {
   youtubeVideos: GetIndexPageConfigYoutubeVideos[];
 };
 
+const localizedString = yup.object({
+  en: yup.string().required(),
+  hi: yup.string(),
+});
+
 export default function AdminIndexManagerPage() {
   return withQueryLoadingSpinner(
     GetIndexPageConfigComponent,
@@ -80,6 +86,62 @@ export default function AdminIndexManagerPage() {
           onSubmit={() => {
             //
           }}
+          validationSchema={yup.object<FormValues>({
+            logoUrl: yup.string().required(),
+            heroBackgroundImageUrl: yup.string().required(),
+            heroBackgroundAlpha: yup
+              .number()
+              .min(0.05)
+              .max(0.95)
+              .required(),
+            heroPrimaryTextEnglish: yup.string().required(),
+            heroPrimaryTextHindi: yup.string(),
+            heroFeatures: yup.array(localizedString).ensure(),
+            aboutTitleEnglish: yup.string().required(),
+            aboutTitleHindi: yup.string(),
+            aboutTextEnglish: yup.string().required(),
+            aboutTextHindi: yup.string(),
+            aboutImages: yup
+              .array(
+                yup.object({
+                  imageUrl: yup.string().required(),
+                  title: localizedString,
+                  text: localizedString,
+                }),
+              )
+              .ensure(),
+            indexCards: yup
+              .array(
+                yup.object({
+                  entryId: yup.string().required(),
+                  title: yup.string().required(),
+                  categories: yup
+                    .array(
+                      yup.object({
+                        categoryId: yup.string().required(),
+                        title: yup.string().required(),
+                        visible: yup.boolean().required(),
+                      }),
+                    )
+                    .required(),
+                  entryLogoUrl: yup.string().required(),
+                  colorBlock: yup.string().required(),
+                  colorCategoryBackground: yup.string().required(),
+                  colorLogoBackground: yup.string().required(),
+                  colorTitle: yup.string().required(),
+                }),
+              )
+              .required(),
+            youtubeVideos: yup
+              .array(
+                yup.object({
+                  entryId: yup.string().nullable(true),
+                  title: localizedString,
+                  youtubeUrl: yup.string().required(),
+                }),
+              )
+              .ensure(),
+          })}
         >
           {form => (
             <AdminLayoutDashboardContainer
@@ -93,6 +155,7 @@ export default function AdminIndexManagerPage() {
                 />,
               ]}
             >
+              <Logger form={form} />
               <Grid container contentCenter spacing={16}>
                 {/* Site logo config card. */}
                 <Grid item xs={12}>
@@ -596,3 +659,22 @@ const ColorPickerPreview = styled(
   height: 14px;
   border: 1px solid #000;
 `;
+
+function Logger(props: { form: FormikProps<FormValues> }) {
+  const { form } = props;
+  if (form.isValid || !form.dirty || form.isValidating) return null;
+
+  // tslint:disable-next-line:no-console
+  console.clear();
+
+  logObject("isValid", form.isValid);
+  logObject("Error:", form.error);
+  logObject("Errors:", form.errors);
+  logObject("Values:", form.values);
+  return null;
+
+  function logObject(label: string, obj: any) {
+    /* tslint:disable-next-line:no-console */
+    console.log(label, obj);
+  }
+}
