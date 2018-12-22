@@ -6,11 +6,13 @@ export * from "./DashboardCard";
 export * from "./DraggableList";
 export * from "./Hidden";
 export * from "./Grid";
+export * from "./GridHideable";
 export * from "./ImagePicker";
 export * from "./IndexCard";
 export * from "./LayoutDashboard";
 export * from "./LayoutLanding";
 export * from "./LoadingSpinner";
+export * from "./LogoText";
 export * from "./PendingChangesButton";
 export * from "./SubmissionProgressDialog";
 
