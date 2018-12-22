@@ -7,6 +7,7 @@ import { htmlConfig } from "./htmlConfig";
 import { indexCards } from "./indexCards";
 import { indexPageConfig } from "./indexPageConfig";
 import { logoConfig } from "./logoConfig";
+import { youtubeVideos } from "./youtubeVideos";
 
 import { translation } from "./translation";
 
@@ -33,6 +34,7 @@ const Query: QueryResolvers = {
   indexCards,
   indexPageConfig,
   logoConfig,
+  youtubeVideos,
 
   translation,
 

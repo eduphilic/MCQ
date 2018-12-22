@@ -83,6 +83,8 @@ export interface Query {
 
   indexCards: IndexCard[];
 
+  youtubeVideos: IndexYouTubeVideo[];
+
   cloudinaryCloudName: string;
 
   cloudinaryApiKey: string;
@@ -191,6 +193,15 @@ export interface TypeIndexCardCategory {
   title: string;
 
   visible: boolean;
+}
+
+export interface IndexYouTubeVideo {
+  /** Will contain the Entry ID that the video corresponds to assuming that theEntry has not been removed. */
+  entryId?: string | null;
+
+  youtubeUrl: string;
+
+  title: LocalizedString;
 }
 
 export interface Mutation {
@@ -339,6 +350,12 @@ export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
 
   indexCards?: QueryIndexCardsResolver<IndexCard[], TypeParent, Context>;
 
+  youtubeVideos?: QueryYoutubeVideosResolver<
+    IndexYouTubeVideo[],
+    TypeParent,
+    Context
+  >;
+
   cloudinaryCloudName?: QueryCloudinaryCloudNameResolver<
     string,
     TypeParent,
@@ -406,6 +423,11 @@ export interface QueryCategoryArgs {
 
 export type QueryIndexCardsResolver<
   R = IndexCard[],
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type QueryYoutubeVideosResolver<
+  R = IndexYouTubeVideo[],
   Parent = {},
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
@@ -815,6 +837,38 @@ export type TypeIndexCardCategoryTitleResolver<
 export type TypeIndexCardCategoryVisibleResolver<
   R = boolean,
   Parent = TypeIndexCardCategory,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+
+export interface IndexYouTubeVideoResolvers<
+  Context = ApolloContext,
+  TypeParent = IndexYouTubeVideo
+> {
+  /** Will contain the Entry ID that the video corresponds to assuming that theEntry has not been removed. */
+  entryId?: IndexYouTubeVideoEntryIdResolver<
+    string | null,
+    TypeParent,
+    Context
+  >;
+
+  youtubeUrl?: IndexYouTubeVideoYoutubeUrlResolver<string, TypeParent, Context>;
+
+  title?: IndexYouTubeVideoTitleResolver<LocalizedString, TypeParent, Context>;
+}
+
+export type IndexYouTubeVideoEntryIdResolver<
+  R = string | null,
+  Parent = IndexYouTubeVideo,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexYouTubeVideoYoutubeUrlResolver<
+  R = string,
+  Parent = IndexYouTubeVideo,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexYouTubeVideoTitleResolver<
+  R = LocalizedString,
+  Parent = IndexYouTubeVideo,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
 

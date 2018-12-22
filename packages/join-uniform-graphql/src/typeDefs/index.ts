@@ -18,6 +18,7 @@ import TypeIndexCard from "./TypeIndexCard.graphql";
 import TypeIndexCardCategory from "./TypeIndexCardCategory.graphql";
 import TypeIndexPageAboutImage from "./TypeIndexPageAboutImage.graphql";
 import TypeIndexPageConfig from "./TypeIndexPageConfig.graphql";
+import TypeIndexYouTubeVideo from "./TypeIndexYouTubeVideo.graphql";
 import TypeLogoConfig from "./TypeLogoConfig.graphql";
 
 import InputCategoryCreationRequestExistingEntry from "./InputCategoryCreationRequestExistingEntry.graphql";
@@ -43,6 +44,7 @@ export const typeDefs: DocumentNode = gql`
   ${TypeIndexCardCategory}
   ${TypeIndexPageAboutImage}
   ${TypeIndexPageConfig}
+  ${TypeIndexYouTubeVideo}
   ${TypeLogoConfig}
 
   ${InputCategoryCreationRequestExistingEntry}

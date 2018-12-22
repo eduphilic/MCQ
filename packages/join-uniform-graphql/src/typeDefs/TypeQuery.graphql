@@ -11,6 +11,7 @@ type Query {
   entryCategories(entryId: ID!): [Category!]!
   category(id: ID!): Category
   indexCards: [IndexCard!]!
+  youtubeVideos: [IndexYouTubeVideo!]!
 
   cloudinaryCloudName: String!
   cloudinaryApiKey: String!

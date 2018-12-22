@@ -30,4 +30,9 @@ query GetIndexPageConfig {
     colorLogoBackground
     colorTitle
   }
+  youtubeVideos {
+    entryId
+    title
+    youtubeUrl
+  }
 }
