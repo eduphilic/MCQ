@@ -1,6 +1,7 @@
 import {
   Grid,
   GridHideable,
+  IndexCard,
   LayoutLanding,
   LogoText,
   Typography,
@@ -9,7 +10,7 @@ import {
   GetIndexPageConfigComponent,
   GetIndexPageConfigQuery,
 } from "@join-uniform/graphql";
-import { DarkTheme, styled } from "@join-uniform/theme";
+import { DarkTheme, LightTheme, styled } from "@join-uniform/theme";
 import Head from "next/head";
 import React from "react";
 import { createResponsiveImageUrl, withQueryLoadingSpinner } from "~/lib/utils";
@@ -43,6 +44,8 @@ export default function IndexPage() {
               <HeroFooterSection
                 indexPageConfig={indexPageConfigs.indexPageConfig}
               />
+
+              <IndexCardsSection indexCards={indexPageConfigs.indexCards} />
             </>
           ),
         )}
@@ -291,7 +294,7 @@ const HeroFooterSection = styled(
     } = props;
 
     return (
-      <Grid className={className} container spacing={16}>
+      <Grid className={className} container>
         <Grid className="hero-footer-text-wrapper" item xs={12}>
           <Typography className="hero-footer-text" variant="h6" align="center">
             {heroFooterText.en}
@@ -313,3 +316,31 @@ const HeroFooterSection = styled(
     letter-spacing: 0.01rem;
   }
 `;
+
+const IndexCardsSection = styled(
+  (props: {
+    className?: string;
+    indexCards: IndexPageConfigs["indexCards"];
+  }) => {
+    const { indexCards } = props;
+
+    return (
+      <LightTheme>
+        <>
+          {indexCards.map((indexCard, index) => (
+            <IndexCard
+              key={index}
+              title={indexCard.title}
+              colorBlock={indexCard.colorBlock}
+              colorCategoryBackground={indexCard.colorCategoryBackground}
+              colorLogoBackground={indexCard.colorLogoBackground}
+              colorTitle={"#000"}
+              categories={indexCard.categories.map(category => category.title)}
+              entryLogoUrl={indexCard.entryLogoUrl}
+            />
+          ))}
+        </>
+      </LightTheme>
+    );
+  },
+)``;
