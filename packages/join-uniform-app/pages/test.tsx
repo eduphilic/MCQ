@@ -39,6 +39,10 @@ export default function IndexPage() {
               <AboutSection
                 indexPageConfig={indexPageConfigs.indexPageConfig}
               />
+
+              <HeroFooterSection
+                indexPageConfig={indexPageConfigs.indexPageConfig}
+              />
             </>
           ),
         )}
@@ -273,5 +277,39 @@ const AboutSection = styled(
     display: block;
     margin: 0 auto;
     margin-bottom: 24px;
+  }
+`;
+
+const HeroFooterSection = styled(
+  (props: {
+    className?: string;
+    indexPageConfig: IndexPageConfigs["indexPageConfig"];
+  }) => {
+    const {
+      className,
+      indexPageConfig: { heroFooterText },
+    } = props;
+
+    return (
+      <Grid className={className} container spacing={16}>
+        <Grid className="hero-footer-text-wrapper" item xs={12}>
+          <Typography className="hero-footer-text" variant="h6" align="center">
+            {heroFooterText.en}
+          </Typography>
+        </Grid>
+      </Grid>
+    );
+  },
+)`
+  background-color: #5ba87c;
+
+  .hero-footer-text-wrapper {
+    margin: 32px;
+  }
+
+  .hero-footer-text {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.01rem;
   }
 `;
