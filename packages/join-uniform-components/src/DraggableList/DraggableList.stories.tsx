@@ -42,5 +42,8 @@ stories.add("default", () => (
       items = arrayMove(items, oldIndex, newIndex);
       forceReRender();
     }}
+    onRemoveButtonClick={() => {
+      //
+    }}
   />
 ));
