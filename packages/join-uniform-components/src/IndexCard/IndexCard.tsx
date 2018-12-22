@@ -127,6 +127,7 @@ const TextSectionWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  width: 100%;
   padding: 24px 0;
   margin-left: 16px;
 
