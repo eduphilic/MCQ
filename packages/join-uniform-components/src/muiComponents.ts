@@ -50,6 +50,10 @@ import IconButton, {
 export type IconButtonProps = MuiIconButtonProps;
 export { IconButton };
 
+import Input, { InputProps as MuiInputProps } from "@material-ui/core/Input";
+export type InputProps = MuiInputProps;
+export { Input };
+
 import InputLabel, {
   InputLabelProps as MuiInputLabelProps,
 } from "@material-ui/core/InputLabel";
