@@ -34,9 +34,11 @@ export default function IndexPage() {
               <HeroSection
                 indexPageConfig={indexPageConfigs.indexPageConfig}
                 logoConfig={indexPageConfigs.logoConfig}
-              >
-                <div>Placeholder</div>
-              </HeroSection>
+              />
+
+              <AboutSection
+                indexPageConfig={indexPageConfigs.indexPageConfig}
+              />
             </>
           ),
         )}
@@ -186,5 +188,90 @@ const HeroSection = styled(
     font-weight: 600;
     text-shadow: 2px 2px #000;
     color: #63b760;
+  }
+`;
+
+const AboutSection = styled(
+  (props: {
+    className?: string;
+    indexPageConfig: IndexPageConfigs["indexPageConfig"];
+  }) => {
+    const {
+      className,
+      indexPageConfig: { aboutTitle, aboutText, aboutImages },
+    } = props;
+
+    return (
+      <div className={className}>
+        <Grid container contentCenter spacing={16}>
+          <Grid item xs={12}>
+            <Typography variant="h5" component="h3" paragraph align="center">
+              {aboutTitle.en}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography
+              className="about-text"
+              variant="h6"
+              paragraph
+              align="center"
+            >
+              {aboutText.en}
+            </Typography>
+          </Grid>
+          {aboutImages.length > 0 && (
+            <Grid item xs={12} container spacing={16}>
+              {aboutImages.map((aboutImage, index) => (
+                <Grid
+                  key={index}
+                  className="about-image-wrapper"
+                  item
+                  xs={12}
+                  md={6}
+                >
+                  <img className="about-image" src={aboutImage.imageUrl} />
+                  <Typography
+                    variant="h5"
+                    component="h3"
+                    paragraph
+                    align="center"
+                  >
+                    {aboutImage.title.en}
+                  </Typography>
+                  <Typography
+                    className="about-text"
+                    variant="h6"
+                    paragraph
+                    align="center"
+                  >
+                    {aboutImage.text.en}
+                  </Typography>
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </Grid>
+      </div>
+    );
+  },
+)`
+  width: 100%;
+  padding: 48px 0;
+  background-color: #161616;
+
+  .about-text {
+    font-size: 16px;
+    line-height: 1.6rem;
+    color: #a4a4a4;
+  }
+
+  .about-image-wrapper {
+    margin-top: 24px;
+  }
+
+  .about-image {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 24px;
   }
 `;
