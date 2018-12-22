@@ -48,6 +48,7 @@ const FooterWrapper = styled(Grid as FC<GridProps>).attrs(
     alignItems: "center",
   }),
 )`
+  flex-shrink: 0;
   height: 40px;
   background-color: #333333;
 `;
