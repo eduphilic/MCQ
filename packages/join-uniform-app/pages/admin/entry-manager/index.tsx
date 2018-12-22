@@ -3,6 +3,7 @@ import {
   DashboardCard,
   DashboardCardItem,
   Grid,
+  Typography,
 } from "@join-uniform/components";
 import {
   DeleteCategoriesComponent,
@@ -22,7 +23,11 @@ import Router from "next/router";
 import React from "react";
 import { MutationFn } from "react-apollo";
 import { AdminLayoutDashboardContainer } from "~/containers";
-import { createResponsiveImageUrl, withQueryLoadingSpinner } from "~/lib/utils";
+import {
+  createResponsiveImageUrl,
+  urlHashCodeEncode,
+  withQueryLoadingSpinner,
+} from "~/lib/utils";
 
 export default function AdminEntryManagerIndexPage() {
   return (
@@ -81,6 +86,11 @@ export default function AdminEntryManagerIndexPage() {
               <Grid key={entry.id} item xs={12}>
                 <DashboardCard
                   title={`${entry.name} Entry`}
+                  titleSiblingNode={
+                    <Typography variant="subtitle1">
+                      #{urlHashCodeEncode(entry.name)}
+                    </Typography>
+                  }
                   iconNode={<EntryLogoImageIcon logoUrl={entry.logoUrl} />}
                   columnLabels={[
                     "Category",
