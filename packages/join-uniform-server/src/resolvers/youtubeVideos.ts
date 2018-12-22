@@ -31,7 +31,8 @@ export const youtubeVideos: QueryYoutubeVideosResolver = async (
             : null
           : null,
       }),
-    );
+    )
+    .sort((a, b) => a.position - b.position);
 
   return youtubeVideosResult;
 };

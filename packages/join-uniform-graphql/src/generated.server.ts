@@ -198,6 +198,8 @@ export interface TypeIndexCardCategory {
 export interface IndexYouTubeVideo {
   /** Will contain the Entry ID that the video corresponds to assuming that theEntry has not been removed. */
   entryId?: string | null;
+  /** Order of appearance. */
+  position: number;
 
   youtubeUrl: string;
 
@@ -850,6 +852,8 @@ export interface IndexYouTubeVideoResolvers<
     TypeParent,
     Context
   >;
+  /** Order of appearance. */
+  position?: IndexYouTubeVideoPositionResolver<number, TypeParent, Context>;
 
   youtubeUrl?: IndexYouTubeVideoYoutubeUrlResolver<string, TypeParent, Context>;
 
@@ -858,6 +862,11 @@ export interface IndexYouTubeVideoResolvers<
 
 export type IndexYouTubeVideoEntryIdResolver<
   R = string | null,
+  Parent = IndexYouTubeVideo,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
+export type IndexYouTubeVideoPositionResolver<
+  R = number,
   Parent = IndexYouTubeVideo,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;

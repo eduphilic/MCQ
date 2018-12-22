@@ -3,6 +3,9 @@ type IndexYouTubeVideo {
   # Entry has not been removed.
   entryId: ID
 
+  # Order of appearance.
+  position: Int!
+
   youtubeUrl: String!
   title: LocalizedString!
 }
