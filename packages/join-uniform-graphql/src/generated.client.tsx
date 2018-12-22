@@ -78,7 +78,7 @@ export interface AboutImageUpdate {
 }
 
 export interface IndexCardUpdate {
-  readonly entryId: string | null;
+  readonly entryId: string;
 
   readonly title: string;
 
