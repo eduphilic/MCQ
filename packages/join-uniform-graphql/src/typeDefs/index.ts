@@ -21,10 +21,14 @@ import TypeIndexPageConfig from "./TypeIndexPageConfig.graphql";
 import TypeIndexYouTubeVideo from "./TypeIndexYouTubeVideo.graphql";
 import TypeLogoConfig from "./TypeLogoConfig.graphql";
 
+import InputAboutImageUpdate from "./InputAboutImageUpdate.graphql";
 import InputCategoryCreationRequestExistingEntry from "./InputCategoryCreationRequestExistingEntry.graphql";
 import InputCategoryCreationRequestNewEntry from "./InputCategoryCreationRequestNewEntry.graphql";
 import InputCategoryUpdate from "./InputCategoryUpdate.graphql";
 import InputEntryUpdate from "./InputEntryUpdate.graphql";
+import InputIndexCardCategoryUpdate from "./InputIndexCardCategoryUpdate.graphql";
+import InputIndexCardUpdate from "./InputIndexCardUpdate.graphql";
+import InputIndexPageConfigUpdate from "./InputIndexPageConfigUpdate.graphql";
 
 export const typeDefs: DocumentNode = gql`
   ${TypeQuery}
@@ -47,8 +51,12 @@ export const typeDefs: DocumentNode = gql`
   ${TypeIndexYouTubeVideo}
   ${TypeLogoConfig}
 
+  ${InputAboutImageUpdate}
   ${InputCategoryCreationRequestExistingEntry}
   ${InputCategoryCreationRequestNewEntry}
   ${InputCategoryUpdate}
   ${InputEntryUpdate}
+  ${InputIndexCardCategoryUpdate}
+  ${InputIndexCardUpdate}
+  ${InputIndexPageConfigUpdate}
 `;

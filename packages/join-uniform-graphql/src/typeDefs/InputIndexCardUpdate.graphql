@@ -1,0 +1,5 @@
+input IndexCardUpdate {
+  entryId: ID
+  title: String!
+  categories: [IndexCardCategoryUpdate!]!
+}

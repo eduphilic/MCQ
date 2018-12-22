@@ -8,6 +8,7 @@ type Mutation {
   updateCategory(categoryId: ID!, update: CategoryUpdate!): Boolean
   deleteCategories(entryId: ID!, categoryIds: [ID!]!): Boolean
   setCategoryActivationStatus(categoryId: ID!, activated: Boolean!): Boolean
+  updateIndexPage(request: InputIndexPageConfigUpdate!): Boolean
 
   # Signs the parameters passed by the Cloudinary Upload Widget.
   # See: https://cloudinary.com/documentation/upload_widget#signed_uploads

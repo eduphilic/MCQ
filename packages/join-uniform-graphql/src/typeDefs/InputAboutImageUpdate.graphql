@@ -1,0 +1,5 @@
+input AboutImageUpdate {
+  imageUrl: String!
+  title: LocalizedString!
+  text: LocalizedString!
+}

@@ -42,6 +42,56 @@ export interface CategoryUpdate {
 
   readonly pricePerPaperRs: number;
 }
+
+export interface InputIndexPageConfigUpdate {
+  readonly logoUrl: string;
+
+  readonly heroBackgroundImageUrl: string;
+
+  readonly heroBackgroundAlpha: number;
+
+  readonly heroPrimaryTextEnglish: string;
+
+  readonly heroPrimaryTextHindi: string | null;
+
+  readonly heroFeatures: ReadonlyArray<models.LocalizedString>;
+
+  readonly aboutTitleEnglish: string;
+
+  readonly aboutTitleHindi: string | null;
+
+  readonly aboutTextEnglish: string;
+
+  readonly aboutTextHindi: string | null;
+
+  readonly aboutImages: ReadonlyArray<AboutImageUpdate>;
+
+  readonly indexCards: ReadonlyArray<IndexCardUpdate>;
+}
+
+export interface AboutImageUpdate {
+  readonly imageUrl: string;
+
+  readonly title: models.LocalizedString;
+
+  readonly text: models.LocalizedString;
+}
+
+export interface IndexCardUpdate {
+  readonly entryId: string | null;
+
+  readonly title: string;
+
+  readonly categories: ReadonlyArray<IndexCardCategoryUpdate>;
+}
+
+export interface IndexCardCategoryUpdate {
+  readonly categoryId: string;
+
+  readonly title: string;
+
+  readonly visible: boolean;
+}
 /** Supported localization languages. */
 export enum Language {
   English = "English",

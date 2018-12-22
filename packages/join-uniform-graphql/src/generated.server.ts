@@ -42,6 +42,56 @@ export interface CategoryUpdate {
 
   readonly pricePerPaperRs: number;
 }
+
+export interface InputIndexPageConfigUpdate {
+  readonly logoUrl: string;
+
+  readonly heroBackgroundImageUrl: string;
+
+  readonly heroBackgroundAlpha: number;
+
+  readonly heroPrimaryTextEnglish: string;
+
+  readonly heroPrimaryTextHindi: string | null;
+
+  readonly heroFeatures: ReadonlyArray<models.LocalizedString>;
+
+  readonly aboutTitleEnglish: string;
+
+  readonly aboutTitleHindi: string | null;
+
+  readonly aboutTextEnglish: string;
+
+  readonly aboutTextHindi: string | null;
+
+  readonly aboutImages: ReadonlyArray<AboutImageUpdate>;
+
+  readonly indexCards: ReadonlyArray<IndexCardUpdate>;
+}
+
+export interface AboutImageUpdate {
+  readonly imageUrl: string;
+
+  readonly title: models.LocalizedString;
+
+  readonly text: models.LocalizedString;
+}
+
+export interface IndexCardUpdate {
+  readonly entryId: string | null;
+
+  readonly title: string;
+
+  readonly categories: ReadonlyArray<IndexCardCategoryUpdate>;
+}
+
+export interface IndexCardCategoryUpdate {
+  readonly categoryId: string;
+
+  readonly title: string;
+
+  readonly visible: boolean;
+}
 /** Supported localization languages. */
 export enum Language {
   English = "English",
@@ -220,6 +270,8 @@ export interface Mutation {
   deleteCategories?: boolean | null;
 
   setCategoryActivationStatus?: boolean | null;
+
+  updateIndexPage?: boolean | null;
   /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
   generateCloudinarySignature: string;
   /** Generates the authentication parameters required for creating a session foruse with the Cloudinary Media Library widget. */
@@ -283,6 +335,9 @@ export interface SetCategoryActivationStatusMutationArgs {
   categoryId: string;
 
   activated: boolean;
+}
+export interface UpdateIndexPageMutationArgs {
+  request: InputIndexPageConfigUpdate;
 }
 export interface GenerateCloudinarySignatureMutationArgs {
   paramsToSign: Json;
@@ -923,6 +978,12 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
     TypeParent,
     Context
   >;
+
+  updateIndexPage?: MutationUpdateIndexPageResolver<
+    boolean | null,
+    TypeParent,
+    Context
+  >;
   /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
   generateCloudinarySignature?: MutationGenerateCloudinarySignatureResolver<
     string,
@@ -1006,6 +1067,15 @@ export interface MutationSetCategoryActivationStatusArgs {
   categoryId: string;
 
   activated: boolean;
+}
+
+export type MutationUpdateIndexPageResolver<
+  R = boolean | null,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context, MutationUpdateIndexPageArgs>;
+export interface MutationUpdateIndexPageArgs {
+  request: InputIndexPageConfigUpdate;
 }
 
 export type MutationGenerateCloudinarySignatureResolver<

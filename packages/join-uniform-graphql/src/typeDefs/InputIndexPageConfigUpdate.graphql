@@ -1,0 +1,14 @@
+input InputIndexPageConfigUpdate {
+  logoUrl: String!
+  heroBackgroundImageUrl: String!
+  heroBackgroundAlpha: Float!
+  heroPrimaryTextEnglish: String!
+  heroPrimaryTextHindi: String
+  heroFeatures: [LocalizedString!]!
+  aboutTitleEnglish: String!
+  aboutTitleHindi: String
+  aboutTextEnglish: String!
+  aboutTextHindi: String
+  aboutImages: [AboutImageUpdate!]!
+  indexCards: [IndexCardUpdate!]!
+}
