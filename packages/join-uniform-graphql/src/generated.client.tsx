@@ -354,8 +354,6 @@ export type GetIndexPageConfigQuery = {
   logoConfig: GetIndexPageConfigLogoConfig;
 
   indexCards: GetIndexPageConfigIndexCards[];
-
-  youtubeVideos: GetIndexPageConfigYoutubeVideos[];
 };
 
 export type GetIndexPageConfigIndexPageConfig = {
@@ -422,16 +420,6 @@ export type GetIndexPageConfigCategories = {
   title: string;
 
   visible: boolean;
-};
-
-export type GetIndexPageConfigYoutubeVideos = {
-  __typename?: "IndexYouTubeVideo";
-
-  entryId: string | null;
-
-  title: LocalizedString;
-
-  youtubeUrl: string;
 };
 
 export type GetLogoConfigVariables = {};
@@ -1222,11 +1210,6 @@ export const GetIndexPageConfigDocument = gql`
       colorCategoryBackground
       colorLogoBackground
       colorTitle
-    }
-    youtubeVideos {
-      entryId
-      title
-      youtubeUrl
     }
   }
 `;
