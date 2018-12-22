@@ -220,6 +220,16 @@ export type UpdateEntryMutation = {
   updateEntry: boolean | null;
 };
 
+export type UpdateIndexPageVariables = {
+  request: InputIndexPageConfigUpdate;
+};
+
+export type UpdateIndexPageMutation = {
+  __typename?: "Mutation";
+
+  updateIndexPage: boolean | null;
+};
+
 export type GetCategoryVariables = {
   id: string;
 };
@@ -914,6 +924,50 @@ export function UpdateEntryHOC<TProps, TChildProps = any>(
     UpdateEntryVariables,
     UpdateEntryProps<TChildProps>
   >(UpdateEntryDocument, operationOptions);
+}
+export const UpdateIndexPageDocument = gql`
+  mutation UpdateIndexPage($request: InputIndexPageConfigUpdate!) {
+    updateIndexPage(request: $request)
+  }
+`;
+export class UpdateIndexPageComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<UpdateIndexPageMutation, UpdateIndexPageVariables>
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<UpdateIndexPageMutation, UpdateIndexPageVariables>
+        mutation={UpdateIndexPageDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type UpdateIndexPageProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<UpdateIndexPageMutation, UpdateIndexPageVariables>
+> &
+  TChildProps;
+export type UpdateIndexPageMutationFn = ReactApollo.MutationFn<
+  UpdateIndexPageMutation,
+  UpdateIndexPageVariables
+>;
+export function UpdateIndexPageHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        UpdateIndexPageMutation,
+        UpdateIndexPageVariables,
+        UpdateIndexPageProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    UpdateIndexPageMutation,
+    UpdateIndexPageVariables,
+    UpdateIndexPageProps<TChildProps>
+  >(UpdateIndexPageDocument, operationOptions);
 }
 export const GetCategoryDocument = gql`
   query GetCategory($id: ID!) {

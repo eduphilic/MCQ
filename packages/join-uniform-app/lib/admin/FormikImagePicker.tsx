@@ -1,12 +1,17 @@
 import { ImagePicker } from "@join-uniform/components";
 import { FormikProps, getIn } from "formik";
 import React, { useMemo } from "react";
-import { createResponsiveImageUrl, useCloudinary } from "../utils";
+import {
+  CloudinaryOpenUploadWidgetOptions,
+  createResponsiveImageUrl,
+  useCloudinary,
+} from "../utils";
 
 export type FormikImagePickerProps<FormValues> = {
   name: keyof FormValues;
   folder: string;
   form: FormikProps<FormValues>;
+  options?: Partial<CloudinaryOpenUploadWidgetOptions>;
 };
 
 export type FormikImagePickerArrayItemProps<FormValues> = {
@@ -15,16 +20,18 @@ export type FormikImagePickerArrayItemProps<FormValues> = {
   arrayItemSubpath?: string;
   folder: string;
   form: FormikProps<FormValues>;
+  options?: Partial<CloudinaryOpenUploadWidgetOptions>;
 };
 
 type FormikImagePickerBaseProps = {
   value: string | null;
   folder: string;
+  options?: Partial<CloudinaryOpenUploadWidgetOptions>;
   onValueChange: (value: string) => void;
 };
 
 function FormikImagePickerBase(props: FormikImagePickerBaseProps) {
-  const { value, folder, onValueChange } = props;
+  const { value, folder, options, onValueChange } = props;
   const cloudinary = useCloudinary();
 
   const { uploadedImageUrl, previewImageUrl } = useMemo(
@@ -77,6 +84,7 @@ function FormikImagePickerBase(props: FormikImagePickerBaseProps) {
     cloudinary.client.openUploadWidget(
       {
         ...cloudinary.getDefaultUploadWidgetOptions(),
+        ...options,
         folder,
       },
       (err, result) => {
@@ -95,13 +103,14 @@ function FormikImagePickerBase(props: FormikImagePickerBaseProps) {
 export function FormikImagePicker<FormValues>(
   props: FormikImagePickerProps<FormValues>,
 ) {
-  const { name, folder, form } = props;
+  const { name, folder, form, options } = props;
 
   return (
     <FormikImagePickerBase
       value={(form.values[name] || "").toString()}
       folder={folder}
       onValueChange={value => form.setFieldValue(name.toString(), value)}
+      options={options}
     />
   );
 }
@@ -109,7 +118,14 @@ export function FormikImagePicker<FormValues>(
 export function FormikImagePickerArrayItem<FormValues>(
   props: FormikImagePickerArrayItemProps<FormValues>,
 ) {
-  const { arrayName, arrayIndex, arrayItemSubpath, folder, form } = props;
+  const {
+    arrayName,
+    arrayIndex,
+    arrayItemSubpath,
+    folder,
+    form,
+    options,
+  } = props;
   if (!Array.isArray(form.values[arrayName])) {
     throw new Error("Expected field to be an array.");
   }
@@ -122,6 +138,7 @@ export function FormikImagePickerArrayItem<FormValues>(
       value={value}
       folder={folder}
       onValueChange={handleChange}
+      options={options}
     />
   );
 

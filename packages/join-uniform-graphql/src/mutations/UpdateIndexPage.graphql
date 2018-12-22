@@ -1,0 +1,3 @@
+mutation UpdateIndexPage($request: InputIndexPageConfigUpdate!) {
+  updateIndexPage(request: $request)
+}
