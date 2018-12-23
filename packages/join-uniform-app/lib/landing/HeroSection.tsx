@@ -11,7 +11,7 @@ import { createResponsiveImageUrl } from "../utils";
 
 const LOGO_SIZE = 64;
 
-type HeroSectionProps = {
+type Props = {
   className?: string;
   backgroundImageUrl: string;
   backgroundAlpha: number;
@@ -20,7 +20,7 @@ type HeroSectionProps = {
   features: LocalizedString[];
 };
 
-function HeroSection(props: HeroSectionProps) {
+function HeroSection(props: Props) {
   const {
     className,
     backgroundImageUrl: backgroundImageUrl,
