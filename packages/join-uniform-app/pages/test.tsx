@@ -11,7 +11,7 @@ import {
 import { DarkTheme, LightTheme, styled } from "@join-uniform/theme";
 import Head from "next/head";
 import React from "react";
-import { AboutSection, HeroSection } from "~/lib/landing";
+import { AboutSection, HeroFooterSection, HeroSection } from "~/lib/landing";
 import { withQueryLoadingSpinner } from "~/lib/utils";
 
 type IndexPageConfigs = GetIndexPageConfigQuery;
@@ -48,7 +48,7 @@ export default function IndexPage() {
               />
 
               <HeroFooterSection
-                indexPageConfig={indexPageConfigs.indexPageConfig}
+                footerText={indexPageConfigs.indexPageConfig.heroFooterText}
               />
 
               <IndexCardsSection indexCards={indexPageConfigs.indexCards} />
@@ -59,40 +59,6 @@ export default function IndexPage() {
     </LayoutLanding>
   );
 }
-
-const HeroFooterSection = styled(
-  (props: {
-    className?: string;
-    indexPageConfig: IndexPageConfigs["indexPageConfig"];
-  }) => {
-    const {
-      className,
-      indexPageConfig: { heroFooterText },
-    } = props;
-
-    return (
-      <Grid className={className} container>
-        <Grid className="hero-footer-text-wrapper" item xs={12}>
-          <Typography className="hero-footer-text" variant="h6" align="center">
-            {heroFooterText.en}
-          </Typography>
-        </Grid>
-      </Grid>
-    );
-  },
-)`
-  background-color: #5ba87c;
-
-  .hero-footer-text-wrapper {
-    margin: 32px;
-  }
-
-  .hero-footer-text {
-    font-size: 26px;
-    font-weight: 600;
-    letter-spacing: 0.01rem;
-  }
-`;
 
 const IndexCardsSection = styled(
   (props: {
