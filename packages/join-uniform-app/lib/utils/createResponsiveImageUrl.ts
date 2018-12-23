@@ -1,6 +1,7 @@
 export type CreateResponsiveImageUrlOptions = {
   w?: string;
   h?: string;
+  q?: string;
   format?: "jpg" | "png";
 };
 

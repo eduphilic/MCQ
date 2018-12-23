@@ -1,5 +1,10 @@
-import { LocalizationStringKey } from "@join-uniform/graphql";
+import {
+  LocalizationStringKey,
+  LocalizedString as GraphQLLocalizedString,
+} from "@join-uniform/graphql";
 import LocalizedStrings, { LocalizedStringsMethods } from "react-localization";
+
+export type LocalizedString = GraphQLLocalizedString;
 
 type Strings = LocalizedStringsMethods & Record<LocalizationStringKey, string>;
 
