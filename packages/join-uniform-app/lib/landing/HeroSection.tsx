@@ -4,7 +4,7 @@ import {
   LogoText,
   Typography,
 } from "@join-uniform/components";
-import { LocalizedString } from "@join-uniform/localization";
+import { L, LocalizedString } from "@join-uniform/localization";
 import { styled } from "@join-uniform/theme";
 import React, { CSSProperties, useMemo } from "react";
 import { createResponsiveImageUrl } from "../utils";
@@ -88,7 +88,7 @@ function HeroSection(props: HeroSectionProps) {
           >
             <Grid item>
               <Typography className="hero-primary-text" variant="h3">
-                {primaryText.en}
+                <L localizedString={primaryText} />
               </Typography>
             </Grid>
             <Grid item>
@@ -100,7 +100,7 @@ function HeroSection(props: HeroSectionProps) {
                     variant="h6"
                     component="li"
                   >
-                    {feature.en}
+                    <L localizedString={feature} />
                   </Typography>
                 ))}
               </ul>
