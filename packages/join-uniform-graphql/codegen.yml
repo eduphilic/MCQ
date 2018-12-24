@@ -1,5 +1,5 @@
 schema: ./src/typeDefs/**/*.graphql
-documents: ./src/@(queries|mutations)/**/*.graphql
+documents: ../join-uniform-app/**/*.graphql
 overwrite: true
 generates:
   ./src/generated.server.ts:
