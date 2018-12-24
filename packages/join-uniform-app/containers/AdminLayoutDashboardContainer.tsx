@@ -13,18 +13,18 @@ import { withRouter } from "next/router";
 import React, { ReactElement, ReactNode } from "react";
 import { createResponsiveImageUrl } from "../lib/utils";
 
-type AdminLayoutDashboardContainerProps = AdminLayoutDashboardContainerLogoUrlProps<{}> & {
+type Props = {
   children?: ReactNode;
   title: string;
   appBarButtons?: LayoutDashboardProps["buttons"];
 };
 
-export const AdminLayoutDashboardContainer = AdminLayoutDashboardContainerLogoUrlHOC(
-  undefined,
-)(AdminLayoutDashboardContainerBase);
+export const AdminLayoutDashboardContainer = AdminLayoutDashboardContainerLogoUrlHOC<
+  Props
+>(undefined)(AdminLayoutDashboardContainerBase);
 
 function AdminLayoutDashboardContainerBase(
-  props: AdminLayoutDashboardContainerProps,
+  props: AdminLayoutDashboardContainerLogoUrlProps & Props,
 ) {
   const { children, title, appBarButtons, data } = props;
 
