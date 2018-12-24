@@ -1,5 +1,5 @@
 import { LoadingSpinnerContextValue } from "@join-uniform/components";
-import { GetLogoConfigComponent } from "@join-uniform/graphql";
+import { WithLoadingSpinnerAppLogoConfigComponent } from "@join-uniform/graphql";
 import { AppComponentType, DefaultAppIProps, NextAppContext } from "next/app";
 import React, { Component } from "react";
 import { createResponsiveImageUrl } from "../utils";
@@ -26,7 +26,7 @@ export function withLoadingSpinnerApp(
         this.props.apolloClient || this.props.serverSideApolloClient;
 
       return (
-        <GetLogoConfigComponent client={client}>
+        <WithLoadingSpinnerAppLogoConfigComponent client={client}>
           {result => {
             const logoUrl =
               !result.loading && !result.error
@@ -40,7 +40,7 @@ export function withLoadingSpinnerApp(
               />
             );
           }}
-        </GetLogoConfigComponent>
+        </WithLoadingSpinnerAppLogoConfigComponent>
       );
     }
   };
