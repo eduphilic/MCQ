@@ -20,7 +20,10 @@ function EntryManagerPage(props: Props) {
       <Grid container contentCenter spacing={16}>
         {entries!.map(entry => (
           <Grid key={entry.id} item xs={12}>
-            <EntryManagementCard entryName={entry.name} />
+            <EntryManagementCard
+              entryName={entry.name}
+              entryLogoUrl={entry.logoUrl}
+            />
           </Grid>
         ))}
       </Grid>
@@ -215,30 +218,4 @@ export default EntryManagerGetEntriesHOC(undefined)(EntryManagerPage);
 //       </SetCategoryActivationStatusComponent>
 //     );
 //   }
-// }
-
-// const cardLogoImageSize = 64;
-
-// const EntryLogoImageIconAsImg = styled.img`
-//   display: block;
-//   width: ${cardLogoImageSize}px;
-//   height: ${cardLogoImageSize}px;
-//   margin-top: 8px;
-//   margin-left: -16px;
-
-//   ${({ theme }) => theme.breakpoints.down("xs")} {
-//     margin-left: -8px;
-//   }
-// `;
-
-// function EntryLogoImageIcon(props: { logoUrl: string }) {
-//   const { logoUrl } = props;
-
-//   const src = createResponsiveImageUrl(logoUrl, {
-//     w: "64",
-//     h: "64",
-//     format: "png",
-//   });
-
-//   return <EntryLogoImageIconAsImg src={src} />;
 // }
