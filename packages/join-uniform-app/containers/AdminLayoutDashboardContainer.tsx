@@ -1,27 +1,39 @@
 import {
   LayoutDashboard,
   LayoutDashboardProps,
+  LoadingSpinner,
 } from "@join-uniform/components";
-import { GetLogoConfigComponent } from "@join-uniform/graphql";
+import {
+  AdminLayoutDashboardContainerLogoUrlHOC,
+  AdminLayoutDashboardContainerLogoUrlProps,
+} from "@join-uniform/graphql";
 import Head from "next/head";
 import Link from "next/link";
 import { withRouter } from "next/router";
 import React, { ReactElement, ReactNode } from "react";
-import {
-  createResponsiveImageUrl,
-  withQueryLoadingSpinner,
-} from "../lib/utils";
+import { createResponsiveImageUrl } from "../lib/utils";
 
-type AdminLayoutDashboardContainerProps = {
+type AdminLayoutDashboardContainerProps = AdminLayoutDashboardContainerLogoUrlProps<{}> & {
   children?: ReactNode;
   title: string;
   appBarButtons?: LayoutDashboardProps["buttons"];
 };
 
-export function AdminLayoutDashboardContainer(
+export const AdminLayoutDashboardContainer = AdminLayoutDashboardContainerLogoUrlHOC(
+  undefined,
+)(AdminLayoutDashboardContainerBase);
+
+function AdminLayoutDashboardContainerBase(
   props: AdminLayoutDashboardContainerProps,
 ) {
-  const { children, title, appBarButtons } = props;
+  const { children, title, appBarButtons, data } = props;
+
+  if (!data || data.loading || data.error || !data.logoConfig) {
+    return <LoadingSpinner />;
+  }
+  const {
+    logoConfig: { url: logoUrl },
+  } = data;
 
   return (
     <>
@@ -29,22 +41,20 @@ export function AdminLayoutDashboardContainer(
         <title>Join Uniform - {title}</title>
       </Head>
 
-      {withQueryLoadingSpinner(GetLogoConfigComponent, result => (
-        <LayoutDashboard
-          title={title}
-          buttons={appBarButtons}
-          drawerTheme="admin"
-          drawerLinks={links}
-          drawerLogoSrc={createResponsiveImageUrl(result.data.logoConfig.url, {
-            w: "48",
-            h: "48",
-          })}
-          DrawerLinkComponent={DrawerLink}
-          onLogoutButtonClick={handleLogoutButtonClick}
-        >
-          {children}
-        </LayoutDashboard>
-      ))}
+      <LayoutDashboard
+        title={title}
+        buttons={appBarButtons}
+        drawerTheme="admin"
+        drawerLinks={links}
+        drawerLogoSrc={createResponsiveImageUrl(logoUrl, {
+          w: "48",
+          h: "48",
+        })}
+        DrawerLinkComponent={DrawerLink}
+        onLogoutButtonClick={handleLogoutButtonClick}
+      >
+        {children}
+      </LayoutDashboard>
     </>
   );
 
