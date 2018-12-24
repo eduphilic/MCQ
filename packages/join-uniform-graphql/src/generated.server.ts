@@ -206,7 +206,7 @@ export interface Entry {
 
   description: string;
 
-  categories: string[];
+  categories: (Category | null)[];
 }
 
 /** Represents an Entry Category. */
@@ -722,7 +722,7 @@ export interface EntryResolvers<Context = ApolloContext, TypeParent = Entry> {
 
   description?: EntryDescriptionResolver<string, TypeParent, Context>;
 
-  categories?: EntryCategoriesResolver<string[], TypeParent, Context>;
+  categories?: EntryCategoriesResolver<Category[], TypeParent, Context>;
 }
 
 export type EntryIdResolver<
@@ -746,7 +746,7 @@ export type EntryDescriptionResolver<
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
 export type EntryCategoriesResolver<
-  R = string[],
+  R = Category[],
   Parent = Entry,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;

@@ -114,235 +114,29 @@ export type Json = any;
 // Documents
 // ====================================================
 
-export type CreateCategoryExistingEntryVariables = {
-  request: CategoryCreationRequestExistingEntry;
-};
+export type AdminLayoutDashboardContainerLogoUrlVariables = {};
 
-export type CreateCategoryExistingEntryMutation = {
-  __typename?: "Mutation";
-
-  createCategoryExistingEntry: boolean | null;
-};
-
-export type CreateCategoryNewEntryVariables = {
-  request: CategoryCreationRequestNewEntry;
-};
-
-export type CreateCategoryNewEntryMutation = {
-  __typename?: "Mutation";
-
-  createCategoryNewEntry: boolean | null;
-};
-
-export type DeleteCategoriesVariables = {
-  entryId: string;
-  categoryIds: string[];
-};
-
-export type DeleteCategoriesMutation = {
-  __typename?: "Mutation";
-
-  deleteCategories: boolean | null;
-};
-
-export type DeleteEntryVariables = {
-  entryId: string;
-};
-
-export type DeleteEntryMutation = {
-  __typename?: "Mutation";
-
-  deleteEntry: boolean | null;
-};
-
-export type GenerateCloudinaryMediaLibraryAuthenticationTokenVariables = {};
-
-export type GenerateCloudinaryMediaLibraryAuthenticationTokenMutation = {
-  __typename?: "Mutation";
-
-  generateCloudinaryMediaLibraryAuthenticationToken: GenerateCloudinaryMediaLibraryAuthenticationTokenGenerateCloudinaryMediaLibraryAuthenticationToken;
-};
-
-export type GenerateCloudinaryMediaLibraryAuthenticationTokenGenerateCloudinaryMediaLibraryAuthenticationToken = {
-  __typename?: "CloudinaryMediaWidgetAuthenticationToken";
-
-  api_key: string;
-
-  cloud_name: string;
-
-  signature: string;
-
-  timestamp: string;
-
-  username: string;
-};
-
-export type GenerateCloudinarySignatureVariables = {
-  paramsToSign: Json;
-};
-
-export type GenerateCloudinarySignatureMutation = {
-  __typename?: "Mutation";
-
-  generateCloudinarySignature: string;
-};
-
-export type SetCategoryActivationStatusVariables = {
-  categoryId: string;
-  activated: boolean;
-};
-
-export type SetCategoryActivationStatusMutation = {
-  __typename?: "Mutation";
-
-  setCategoryActivationStatus: boolean | null;
-};
-
-export type UpdateCategoryVariables = {
-  categoryId: string;
-  update: CategoryUpdate;
-};
-
-export type UpdateCategoryMutation = {
-  __typename?: "Mutation";
-
-  updateCategory: boolean | null;
-};
-
-export type UpdateEntryVariables = {
-  entryId: string;
-  update: EntryUpdate;
-};
-
-export type UpdateEntryMutation = {
-  __typename?: "Mutation";
-
-  updateEntry: boolean | null;
-};
-
-export type UpdateIndexPageVariables = {
-  request: InputIndexPageConfigUpdate;
-};
-
-export type UpdateIndexPageMutation = {
-  __typename?: "Mutation";
-
-  updateIndexPage: boolean | null;
-};
-
-export type GetCategoryVariables = {
-  id: string;
-};
-
-export type GetCategoryQuery = {
+export type AdminLayoutDashboardContainerLogoUrlQuery = {
   __typename?: "Query";
 
-  category: GetCategoryCategory | null;
+  logoConfig: AdminLayoutDashboardContainerLogoUrlLogoConfig;
 };
 
-export type GetCategoryCategory = {
-  __typename?: "Category";
+export type AdminLayoutDashboardContainerLogoUrlLogoConfig = {
+  __typename?: "LogoConfig";
 
-  id: string;
-
-  name: string;
-
-  education: string;
-
-  pricePerPaperRs: number;
-
-  activated: boolean;
+  url: string;
 };
 
-export type GetCloudinaryConfigVariables = {};
+export type WithHtmlSeoDocumentHtmlConfigVariables = {};
 
-export type GetCloudinaryConfigQuery = {
+export type WithHtmlSeoDocumentHtmlConfigQuery = {
   __typename?: "Query";
 
-  cloudinaryCloudName: string;
-
-  cloudinaryApiKey: string;
+  htmlConfig: WithHtmlSeoDocumentHtmlConfigHtmlConfig;
 };
 
-export type GetEntriesVariables = {};
-
-export type GetEntriesQuery = {
-  __typename?: "Query";
-
-  entries: GetEntriesEntries[];
-};
-
-export type GetEntriesEntries = {
-  __typename?: "Entry";
-
-  id: string;
-
-  name: string;
-
-  description: string;
-
-  categories: string[];
-
-  logoUrl: string;
-};
-
-export type GetEntryVariables = {
-  entryId: string;
-};
-
-export type GetEntryQuery = {
-  __typename?: "Query";
-
-  entry: GetEntryEntry | null;
-};
-
-export type GetEntryEntry = {
-  __typename?: "Entry";
-
-  id: string;
-
-  name: string;
-
-  description: string;
-
-  categories: string[];
-
-  logoUrl: string;
-};
-
-export type GetEntryCategoriesVariables = {
-  entryId: string;
-};
-
-export type GetEntryCategoriesQuery = {
-  __typename?: "Query";
-
-  entryCategories: GetEntryCategoriesEntryCategories[];
-};
-
-export type GetEntryCategoriesEntryCategories = {
-  __typename?: "Category";
-
-  id: string;
-
-  name: string;
-
-  activated: boolean;
-
-  education: string;
-
-  pricePerPaperRs: number;
-};
-
-export type GetHtmlConfigVariables = {};
-
-export type GetHtmlConfigQuery = {
-  __typename?: "Query";
-
-  htmlConfig: GetHtmlConfigHtmlConfig;
-};
-
-export type GetHtmlConfigHtmlConfig = {
+export type WithHtmlSeoDocumentHtmlConfigHtmlConfig = {
   __typename?: "HtmlConfig";
 
   googleAnalyticsId: string | null;
@@ -358,106 +152,106 @@ export type GetHtmlConfigHtmlConfig = {
   metaCopyright: string | null;
 };
 
-export type GetIndexPageConfigVariables = {};
+export type WithLoadingSpinnerAppLogoConfigVariables = {};
 
-export type GetIndexPageConfigQuery = {
+export type WithLoadingSpinnerAppLogoConfigQuery = {
   __typename?: "Query";
 
-  indexPageConfig: GetIndexPageConfigIndexPageConfig;
-
-  logoConfig: GetIndexPageConfigLogoConfig;
-
-  indexCards: GetIndexPageConfigIndexCards[];
+  logoConfig: WithLoadingSpinnerAppLogoConfigLogoConfig;
 };
 
-export type GetIndexPageConfigIndexPageConfig = {
-  __typename?: "IndexPageConfig";
-
-  heroBackgroundImageUrl: string;
-
-  heroBackgroundAlpha: number;
-
-  heroPrimaryText: LocalizedString;
-
-  heroFeatures: LocalizedString[];
-
-  heroFooterText: LocalizedString;
-
-  aboutTitle: LocalizedString;
-
-  aboutText: LocalizedString;
-
-  aboutImages: GetIndexPageConfigAboutImages[];
-};
-
-export type GetIndexPageConfigAboutImages = {
-  __typename?: "IndexPageAboutImage";
-
-  imageUrl: string;
-
-  title: LocalizedString;
-
-  text: LocalizedString;
-};
-
-export type GetIndexPageConfigLogoConfig = {
+export type WithLoadingSpinnerAppLogoConfigLogoConfig = {
   __typename?: "LogoConfig";
 
   url: string;
 };
 
-export type GetIndexPageConfigIndexCards = {
-  __typename?: "IndexCard";
-
-  entryId: string;
-
-  title: string;
-
-  categories: GetIndexPageConfigCategories[];
-
-  entryLogoUrl: string;
-
-  colorBlock: string;
-
-  colorCategoryBackground: string;
-
-  colorLogoBackground: string;
-
-  colorTitle: string;
-};
-
-export type GetIndexPageConfigCategories = {
-  __typename?: "TypeIndexCardCategory";
-
-  categoryId: string;
-
-  title: string;
-
-  visible: boolean;
-};
-
-export type GetLogoConfigVariables = {};
-
-export type GetLogoConfigQuery = {
-  __typename?: "Query";
-
-  logoConfig: GetLogoConfigLogoConfig;
-};
-
-export type GetLogoConfigLogoConfig = {
-  __typename?: "LogoConfig";
-
-  url: string;
-};
-
-export type GetTranslationVariables = {
+export type WithTranslationAppTranslationVariables = {
   language: Language;
 };
 
-export type GetTranslationQuery = {
+export type WithTranslationAppTranslationQuery = {
   __typename?: "Query";
 
   translation: Translation;
+};
+
+export type CloudinaryConfigVariables = {};
+
+export type CloudinaryConfigQuery = {
+  __typename?: "Query";
+
+  cloudinaryCloudName: string;
+
+  cloudinaryApiKey: string;
+};
+
+export type CloudinaryGenerateMediaLibraryAuthenticationTokenVariables = {};
+
+export type CloudinaryGenerateMediaLibraryAuthenticationTokenMutation = {
+  __typename?: "Mutation";
+
+  generateCloudinaryMediaLibraryAuthenticationToken: CloudinaryGenerateMediaLibraryAuthenticationTokenGenerateCloudinaryMediaLibraryAuthenticationToken;
+};
+
+export type CloudinaryGenerateMediaLibraryAuthenticationTokenGenerateCloudinaryMediaLibraryAuthenticationToken = {
+  __typename?: "CloudinaryMediaWidgetAuthenticationToken";
+
+  api_key: string;
+
+  cloud_name: string;
+
+  signature: string;
+
+  timestamp: string;
+
+  username: string;
+};
+
+export type CloudinaryGenerateSignatureVariables = {
+  paramsToSign: Json;
+};
+
+export type CloudinaryGenerateSignatureMutation = {
+  __typename?: "Mutation";
+
+  generateCloudinarySignature: string;
+};
+
+export type EntryManagerGetEntriesVariables = {};
+
+export type EntryManagerGetEntriesQuery = {
+  __typename?: "Query";
+
+  entries: EntryManagerGetEntriesEntries[];
+};
+
+export type EntryManagerGetEntriesEntries = {
+  __typename?: "Entry";
+
+  id: string;
+
+  name: string;
+
+  description: string;
+
+  logoUrl: string;
+
+  categories: EntryManagerGetEntriesCategories[];
+};
+
+export type EntryManagerGetEntriesCategories = {
+  __typename?: "Category";
+
+  id: string;
+
+  name: string;
+
+  education: string;
+
+  pricePerPaperRs: number;
+
+  activated: boolean;
 };
 
 import * as ReactApollo from "react-apollo";
@@ -469,730 +263,64 @@ import gql from "graphql-tag";
 // Components
 // ====================================================
 
-export const CreateCategoryExistingEntryDocument = gql`
-  mutation CreateCategoryExistingEntry(
-    $request: CategoryCreationRequestExistingEntry!
-  ) {
-    createCategoryExistingEntry(request: $request)
-  }
-`;
-export class CreateCategoryExistingEntryComponent extends React.Component<
-  Partial<
-    ReactApollo.MutationProps<
-      CreateCategoryExistingEntryMutation,
-      CreateCategoryExistingEntryVariables
-    >
-  >
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<
-        CreateCategoryExistingEntryMutation,
-        CreateCategoryExistingEntryVariables
-      >
-        mutation={CreateCategoryExistingEntryDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type CreateCategoryExistingEntryProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<
-    CreateCategoryExistingEntryMutation,
-    CreateCategoryExistingEntryVariables
-  >
-> &
-  TChildProps;
-export type CreateCategoryExistingEntryMutationFn = ReactApollo.MutationFn<
-  CreateCategoryExistingEntryMutation,
-  CreateCategoryExistingEntryVariables
->;
-export function CreateCategoryExistingEntryHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        CreateCategoryExistingEntryMutation,
-        CreateCategoryExistingEntryVariables,
-        CreateCategoryExistingEntryProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    CreateCategoryExistingEntryMutation,
-    CreateCategoryExistingEntryVariables,
-    CreateCategoryExistingEntryProps<TChildProps>
-  >(CreateCategoryExistingEntryDocument, operationOptions);
-}
-export const CreateCategoryNewEntryDocument = gql`
-  mutation CreateCategoryNewEntry($request: CategoryCreationRequestNewEntry!) {
-    createCategoryNewEntry(request: $request)
-  }
-`;
-export class CreateCategoryNewEntryComponent extends React.Component<
-  Partial<
-    ReactApollo.MutationProps<
-      CreateCategoryNewEntryMutation,
-      CreateCategoryNewEntryVariables
-    >
-  >
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<
-        CreateCategoryNewEntryMutation,
-        CreateCategoryNewEntryVariables
-      >
-        mutation={CreateCategoryNewEntryDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type CreateCategoryNewEntryProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<
-    CreateCategoryNewEntryMutation,
-    CreateCategoryNewEntryVariables
-  >
-> &
-  TChildProps;
-export type CreateCategoryNewEntryMutationFn = ReactApollo.MutationFn<
-  CreateCategoryNewEntryMutation,
-  CreateCategoryNewEntryVariables
->;
-export function CreateCategoryNewEntryHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        CreateCategoryNewEntryMutation,
-        CreateCategoryNewEntryVariables,
-        CreateCategoryNewEntryProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    CreateCategoryNewEntryMutation,
-    CreateCategoryNewEntryVariables,
-    CreateCategoryNewEntryProps<TChildProps>
-  >(CreateCategoryNewEntryDocument, operationOptions);
-}
-export const DeleteCategoriesDocument = gql`
-  mutation DeleteCategories($entryId: ID!, $categoryIds: [ID!]!) {
-    deleteCategories(entryId: $entryId, categoryIds: $categoryIds)
-  }
-`;
-export class DeleteCategoriesComponent extends React.Component<
-  Partial<
-    ReactApollo.MutationProps<
-      DeleteCategoriesMutation,
-      DeleteCategoriesVariables
-    >
-  >
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<DeleteCategoriesMutation, DeleteCategoriesVariables>
-        mutation={DeleteCategoriesDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type DeleteCategoriesProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<DeleteCategoriesMutation, DeleteCategoriesVariables>
-> &
-  TChildProps;
-export type DeleteCategoriesMutationFn = ReactApollo.MutationFn<
-  DeleteCategoriesMutation,
-  DeleteCategoriesVariables
->;
-export function DeleteCategoriesHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        DeleteCategoriesMutation,
-        DeleteCategoriesVariables,
-        DeleteCategoriesProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    DeleteCategoriesMutation,
-    DeleteCategoriesVariables,
-    DeleteCategoriesProps<TChildProps>
-  >(DeleteCategoriesDocument, operationOptions);
-}
-export const DeleteEntryDocument = gql`
-  mutation DeleteEntry($entryId: ID!) {
-    deleteEntry(entryId: $entryId)
-  }
-`;
-export class DeleteEntryComponent extends React.Component<
-  Partial<ReactApollo.MutationProps<DeleteEntryMutation, DeleteEntryVariables>>
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<DeleteEntryMutation, DeleteEntryVariables>
-        mutation={DeleteEntryDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type DeleteEntryProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<DeleteEntryMutation, DeleteEntryVariables>
-> &
-  TChildProps;
-export type DeleteEntryMutationFn = ReactApollo.MutationFn<
-  DeleteEntryMutation,
-  DeleteEntryVariables
->;
-export function DeleteEntryHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        DeleteEntryMutation,
-        DeleteEntryVariables,
-        DeleteEntryProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    DeleteEntryMutation,
-    DeleteEntryVariables,
-    DeleteEntryProps<TChildProps>
-  >(DeleteEntryDocument, operationOptions);
-}
-export const GenerateCloudinaryMediaLibraryAuthenticationTokenDocument = gql`
-  mutation GenerateCloudinaryMediaLibraryAuthenticationToken {
-    generateCloudinaryMediaLibraryAuthenticationToken {
-      api_key
-      cloud_name
-      signature
-      timestamp
-      username
+export const AdminLayoutDashboardContainerLogoUrlDocument = gql`
+  query AdminLayoutDashboardContainerLogoUrl {
+    logoConfig {
+      url
     }
   }
 `;
-export class GenerateCloudinaryMediaLibraryAuthenticationTokenComponent extends React.Component<
+export class AdminLayoutDashboardContainerLogoUrlComponent extends React.Component<
   Partial<
-    ReactApollo.MutationProps<
-      GenerateCloudinaryMediaLibraryAuthenticationTokenMutation,
-      GenerateCloudinaryMediaLibraryAuthenticationTokenVariables
+    ReactApollo.QueryProps<
+      AdminLayoutDashboardContainerLogoUrlQuery,
+      AdminLayoutDashboardContainerLogoUrlVariables
     >
   >
 > {
   render() {
     return (
-      <ReactApollo.Mutation<
-        GenerateCloudinaryMediaLibraryAuthenticationTokenMutation,
-        GenerateCloudinaryMediaLibraryAuthenticationTokenVariables
+      <ReactApollo.Query<
+        AdminLayoutDashboardContainerLogoUrlQuery,
+        AdminLayoutDashboardContainerLogoUrlVariables
       >
-        mutation={GenerateCloudinaryMediaLibraryAuthenticationTokenDocument}
+        query={AdminLayoutDashboardContainerLogoUrlDocument}
         {...(this as any)["props"] as any}
       />
     );
   }
 }
-export type GenerateCloudinaryMediaLibraryAuthenticationTokenProps<
+export type AdminLayoutDashboardContainerLogoUrlProps<
   TChildProps = any
 > = Partial<
-  ReactApollo.MutateProps<
-    GenerateCloudinaryMediaLibraryAuthenticationTokenMutation,
-    GenerateCloudinaryMediaLibraryAuthenticationTokenVariables
+  ReactApollo.DataProps<
+    AdminLayoutDashboardContainerLogoUrlQuery,
+    AdminLayoutDashboardContainerLogoUrlVariables
   >
 > &
   TChildProps;
-export type GenerateCloudinaryMediaLibraryAuthenticationTokenMutationFn = ReactApollo.MutationFn<
-  GenerateCloudinaryMediaLibraryAuthenticationTokenMutation,
-  GenerateCloudinaryMediaLibraryAuthenticationTokenVariables
->;
-export function GenerateCloudinaryMediaLibraryAuthenticationTokenHOC<
+export function AdminLayoutDashboardContainerLogoUrlHOC<
   TProps,
   TChildProps = any
 >(
   operationOptions:
     | ReactApollo.OperationOption<
         TProps,
-        GenerateCloudinaryMediaLibraryAuthenticationTokenMutation,
-        GenerateCloudinaryMediaLibraryAuthenticationTokenVariables,
-        GenerateCloudinaryMediaLibraryAuthenticationTokenProps<TChildProps>
+        AdminLayoutDashboardContainerLogoUrlQuery,
+        AdminLayoutDashboardContainerLogoUrlVariables,
+        AdminLayoutDashboardContainerLogoUrlProps<TChildProps>
       >
     | undefined,
 ) {
   return ReactApollo.graphql<
     TProps,
-    GenerateCloudinaryMediaLibraryAuthenticationTokenMutation,
-    GenerateCloudinaryMediaLibraryAuthenticationTokenVariables,
-    GenerateCloudinaryMediaLibraryAuthenticationTokenProps<TChildProps>
-  >(
-    GenerateCloudinaryMediaLibraryAuthenticationTokenDocument,
-    operationOptions,
-  );
+    AdminLayoutDashboardContainerLogoUrlQuery,
+    AdminLayoutDashboardContainerLogoUrlVariables,
+    AdminLayoutDashboardContainerLogoUrlProps<TChildProps>
+  >(AdminLayoutDashboardContainerLogoUrlDocument, operationOptions);
 }
-export const GenerateCloudinarySignatureDocument = gql`
-  mutation GenerateCloudinarySignature($paramsToSign: Json!) {
-    generateCloudinarySignature(paramsToSign: $paramsToSign)
-  }
-`;
-export class GenerateCloudinarySignatureComponent extends React.Component<
-  Partial<
-    ReactApollo.MutationProps<
-      GenerateCloudinarySignatureMutation,
-      GenerateCloudinarySignatureVariables
-    >
-  >
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<
-        GenerateCloudinarySignatureMutation,
-        GenerateCloudinarySignatureVariables
-      >
-        mutation={GenerateCloudinarySignatureDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type GenerateCloudinarySignatureProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<
-    GenerateCloudinarySignatureMutation,
-    GenerateCloudinarySignatureVariables
-  >
-> &
-  TChildProps;
-export type GenerateCloudinarySignatureMutationFn = ReactApollo.MutationFn<
-  GenerateCloudinarySignatureMutation,
-  GenerateCloudinarySignatureVariables
->;
-export function GenerateCloudinarySignatureHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        GenerateCloudinarySignatureMutation,
-        GenerateCloudinarySignatureVariables,
-        GenerateCloudinarySignatureProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    GenerateCloudinarySignatureMutation,
-    GenerateCloudinarySignatureVariables,
-    GenerateCloudinarySignatureProps<TChildProps>
-  >(GenerateCloudinarySignatureDocument, operationOptions);
-}
-export const SetCategoryActivationStatusDocument = gql`
-  mutation SetCategoryActivationStatus($categoryId: ID!, $activated: Boolean!) {
-    setCategoryActivationStatus(categoryId: $categoryId, activated: $activated)
-  }
-`;
-export class SetCategoryActivationStatusComponent extends React.Component<
-  Partial<
-    ReactApollo.MutationProps<
-      SetCategoryActivationStatusMutation,
-      SetCategoryActivationStatusVariables
-    >
-  >
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<
-        SetCategoryActivationStatusMutation,
-        SetCategoryActivationStatusVariables
-      >
-        mutation={SetCategoryActivationStatusDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type SetCategoryActivationStatusProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<
-    SetCategoryActivationStatusMutation,
-    SetCategoryActivationStatusVariables
-  >
-> &
-  TChildProps;
-export type SetCategoryActivationStatusMutationFn = ReactApollo.MutationFn<
-  SetCategoryActivationStatusMutation,
-  SetCategoryActivationStatusVariables
->;
-export function SetCategoryActivationStatusHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        SetCategoryActivationStatusMutation,
-        SetCategoryActivationStatusVariables,
-        SetCategoryActivationStatusProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    SetCategoryActivationStatusMutation,
-    SetCategoryActivationStatusVariables,
-    SetCategoryActivationStatusProps<TChildProps>
-  >(SetCategoryActivationStatusDocument, operationOptions);
-}
-export const UpdateCategoryDocument = gql`
-  mutation UpdateCategory($categoryId: ID!, $update: CategoryUpdate!) {
-    updateCategory(categoryId: $categoryId, update: $update)
-  }
-`;
-export class UpdateCategoryComponent extends React.Component<
-  Partial<
-    ReactApollo.MutationProps<UpdateCategoryMutation, UpdateCategoryVariables>
-  >
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<UpdateCategoryMutation, UpdateCategoryVariables>
-        mutation={UpdateCategoryDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type UpdateCategoryProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<UpdateCategoryMutation, UpdateCategoryVariables>
-> &
-  TChildProps;
-export type UpdateCategoryMutationFn = ReactApollo.MutationFn<
-  UpdateCategoryMutation,
-  UpdateCategoryVariables
->;
-export function UpdateCategoryHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        UpdateCategoryMutation,
-        UpdateCategoryVariables,
-        UpdateCategoryProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    UpdateCategoryMutation,
-    UpdateCategoryVariables,
-    UpdateCategoryProps<TChildProps>
-  >(UpdateCategoryDocument, operationOptions);
-}
-export const UpdateEntryDocument = gql`
-  mutation UpdateEntry($entryId: ID!, $update: EntryUpdate!) {
-    updateEntry(entryId: $entryId, update: $update)
-  }
-`;
-export class UpdateEntryComponent extends React.Component<
-  Partial<ReactApollo.MutationProps<UpdateEntryMutation, UpdateEntryVariables>>
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<UpdateEntryMutation, UpdateEntryVariables>
-        mutation={UpdateEntryDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type UpdateEntryProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<UpdateEntryMutation, UpdateEntryVariables>
-> &
-  TChildProps;
-export type UpdateEntryMutationFn = ReactApollo.MutationFn<
-  UpdateEntryMutation,
-  UpdateEntryVariables
->;
-export function UpdateEntryHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        UpdateEntryMutation,
-        UpdateEntryVariables,
-        UpdateEntryProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    UpdateEntryMutation,
-    UpdateEntryVariables,
-    UpdateEntryProps<TChildProps>
-  >(UpdateEntryDocument, operationOptions);
-}
-export const UpdateIndexPageDocument = gql`
-  mutation UpdateIndexPage($request: InputIndexPageConfigUpdate!) {
-    updateIndexPage(request: $request)
-  }
-`;
-export class UpdateIndexPageComponent extends React.Component<
-  Partial<
-    ReactApollo.MutationProps<UpdateIndexPageMutation, UpdateIndexPageVariables>
-  >
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<UpdateIndexPageMutation, UpdateIndexPageVariables>
-        mutation={UpdateIndexPageDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type UpdateIndexPageProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<UpdateIndexPageMutation, UpdateIndexPageVariables>
-> &
-  TChildProps;
-export type UpdateIndexPageMutationFn = ReactApollo.MutationFn<
-  UpdateIndexPageMutation,
-  UpdateIndexPageVariables
->;
-export function UpdateIndexPageHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        UpdateIndexPageMutation,
-        UpdateIndexPageVariables,
-        UpdateIndexPageProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    UpdateIndexPageMutation,
-    UpdateIndexPageVariables,
-    UpdateIndexPageProps<TChildProps>
-  >(UpdateIndexPageDocument, operationOptions);
-}
-export const GetCategoryDocument = gql`
-  query GetCategory($id: ID!) {
-    category(id: $id) {
-      id
-      name
-      education
-      pricePerPaperRs
-      activated
-    }
-  }
-`;
-export class GetCategoryComponent extends React.Component<
-  Partial<ReactApollo.QueryProps<GetCategoryQuery, GetCategoryVariables>>
-> {
-  render() {
-    return (
-      <ReactApollo.Query<GetCategoryQuery, GetCategoryVariables>
-        query={GetCategoryDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type GetCategoryProps<TChildProps = any> = Partial<
-  ReactApollo.DataProps<GetCategoryQuery, GetCategoryVariables>
-> &
-  TChildProps;
-export function GetCategoryHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        GetCategoryQuery,
-        GetCategoryVariables,
-        GetCategoryProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    GetCategoryQuery,
-    GetCategoryVariables,
-    GetCategoryProps<TChildProps>
-  >(GetCategoryDocument, operationOptions);
-}
-export const GetCloudinaryConfigDocument = gql`
-  query GetCloudinaryConfig {
-    cloudinaryCloudName
-    cloudinaryApiKey
-  }
-`;
-export class GetCloudinaryConfigComponent extends React.Component<
-  Partial<
-    ReactApollo.QueryProps<
-      GetCloudinaryConfigQuery,
-      GetCloudinaryConfigVariables
-    >
-  >
-> {
-  render() {
-    return (
-      <ReactApollo.Query<GetCloudinaryConfigQuery, GetCloudinaryConfigVariables>
-        query={GetCloudinaryConfigDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type GetCloudinaryConfigProps<TChildProps = any> = Partial<
-  ReactApollo.DataProps<GetCloudinaryConfigQuery, GetCloudinaryConfigVariables>
-> &
-  TChildProps;
-export function GetCloudinaryConfigHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        GetCloudinaryConfigQuery,
-        GetCloudinaryConfigVariables,
-        GetCloudinaryConfigProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    GetCloudinaryConfigQuery,
-    GetCloudinaryConfigVariables,
-    GetCloudinaryConfigProps<TChildProps>
-  >(GetCloudinaryConfigDocument, operationOptions);
-}
-export const GetEntriesDocument = gql`
-  query GetEntries {
-    entries {
-      id
-      name
-      description
-      categories
-      logoUrl
-    }
-  }
-`;
-export class GetEntriesComponent extends React.Component<
-  Partial<ReactApollo.QueryProps<GetEntriesQuery, GetEntriesVariables>>
-> {
-  render() {
-    return (
-      <ReactApollo.Query<GetEntriesQuery, GetEntriesVariables>
-        query={GetEntriesDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type GetEntriesProps<TChildProps = any> = Partial<
-  ReactApollo.DataProps<GetEntriesQuery, GetEntriesVariables>
-> &
-  TChildProps;
-export function GetEntriesHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        GetEntriesQuery,
-        GetEntriesVariables,
-        GetEntriesProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    GetEntriesQuery,
-    GetEntriesVariables,
-    GetEntriesProps<TChildProps>
-  >(GetEntriesDocument, operationOptions);
-}
-export const GetEntryDocument = gql`
-  query GetEntry($entryId: ID!) {
-    entry(entryId: $entryId) {
-      id
-      name
-      description
-      categories
-      logoUrl
-    }
-  }
-`;
-export class GetEntryComponent extends React.Component<
-  Partial<ReactApollo.QueryProps<GetEntryQuery, GetEntryVariables>>
-> {
-  render() {
-    return (
-      <ReactApollo.Query<GetEntryQuery, GetEntryVariables>
-        query={GetEntryDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type GetEntryProps<TChildProps = any> = Partial<
-  ReactApollo.DataProps<GetEntryQuery, GetEntryVariables>
-> &
-  TChildProps;
-export function GetEntryHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        GetEntryQuery,
-        GetEntryVariables,
-        GetEntryProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    GetEntryQuery,
-    GetEntryVariables,
-    GetEntryProps<TChildProps>
-  >(GetEntryDocument, operationOptions);
-}
-export const GetEntryCategoriesDocument = gql`
-  query GetEntryCategories($entryId: ID!) {
-    entryCategories(entryId: $entryId) {
-      id
-      name
-      activated
-      education
-      pricePerPaperRs
-    }
-  }
-`;
-export class GetEntryCategoriesComponent extends React.Component<
-  Partial<
-    ReactApollo.QueryProps<GetEntryCategoriesQuery, GetEntryCategoriesVariables>
-  >
-> {
-  render() {
-    return (
-      <ReactApollo.Query<GetEntryCategoriesQuery, GetEntryCategoriesVariables>
-        query={GetEntryCategoriesDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type GetEntryCategoriesProps<TChildProps = any> = Partial<
-  ReactApollo.DataProps<GetEntryCategoriesQuery, GetEntryCategoriesVariables>
-> &
-  TChildProps;
-export function GetEntryCategoriesHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        GetEntryCategoriesQuery,
-        GetEntryCategoriesVariables,
-        GetEntryCategoriesProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    GetEntryCategoriesQuery,
-    GetEntryCategoriesVariables,
-    GetEntryCategoriesProps<TChildProps>
-  >(GetEntryCategoriesDocument, operationOptions);
-}
-export const GetHtmlConfigDocument = gql`
-  query GetHtmlConfig {
+export const WithHtmlSeoDocumentHtmlConfigDocument = gql`
+  query WithHtmlSeoDocumentHtmlConfig {
     htmlConfig {
       googleAnalyticsId
       metaKeywords
@@ -1203,184 +331,369 @@ export const GetHtmlConfigDocument = gql`
     }
   }
 `;
-export class GetHtmlConfigComponent extends React.Component<
-  Partial<ReactApollo.QueryProps<GetHtmlConfigQuery, GetHtmlConfigVariables>>
-> {
-  render() {
-    return (
-      <ReactApollo.Query<GetHtmlConfigQuery, GetHtmlConfigVariables>
-        query={GetHtmlConfigDocument}
-        {...(this as any)["props"] as any}
-      />
-    );
-  }
-}
-export type GetHtmlConfigProps<TChildProps = any> = Partial<
-  ReactApollo.DataProps<GetHtmlConfigQuery, GetHtmlConfigVariables>
-> &
-  TChildProps;
-export function GetHtmlConfigHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        GetHtmlConfigQuery,
-        GetHtmlConfigVariables,
-        GetHtmlConfigProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    GetHtmlConfigQuery,
-    GetHtmlConfigVariables,
-    GetHtmlConfigProps<TChildProps>
-  >(GetHtmlConfigDocument, operationOptions);
-}
-export const GetIndexPageConfigDocument = gql`
-  query GetIndexPageConfig {
-    indexPageConfig {
-      heroBackgroundImageUrl
-      heroBackgroundAlpha
-      heroPrimaryText
-      heroFeatures
-      heroFooterText
-      aboutTitle
-      aboutText
-      aboutImages {
-        imageUrl
-        title
-        text
-      }
-    }
-    logoConfig {
-      url
-    }
-    indexCards {
-      entryId
-      title
-      categories {
-        categoryId
-        title
-        visible
-      }
-      entryLogoUrl
-      colorBlock
-      colorCategoryBackground
-      colorLogoBackground
-      colorTitle
-    }
-  }
-`;
-export class GetIndexPageConfigComponent extends React.Component<
+export class WithHtmlSeoDocumentHtmlConfigComponent extends React.Component<
   Partial<
-    ReactApollo.QueryProps<GetIndexPageConfigQuery, GetIndexPageConfigVariables>
+    ReactApollo.QueryProps<
+      WithHtmlSeoDocumentHtmlConfigQuery,
+      WithHtmlSeoDocumentHtmlConfigVariables
+    >
   >
 > {
   render() {
     return (
-      <ReactApollo.Query<GetIndexPageConfigQuery, GetIndexPageConfigVariables>
-        query={GetIndexPageConfigDocument}
+      <ReactApollo.Query<
+        WithHtmlSeoDocumentHtmlConfigQuery,
+        WithHtmlSeoDocumentHtmlConfigVariables
+      >
+        query={WithHtmlSeoDocumentHtmlConfigDocument}
         {...(this as any)["props"] as any}
       />
     );
   }
 }
-export type GetIndexPageConfigProps<TChildProps = any> = Partial<
-  ReactApollo.DataProps<GetIndexPageConfigQuery, GetIndexPageConfigVariables>
+export type WithHtmlSeoDocumentHtmlConfigProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<
+    WithHtmlSeoDocumentHtmlConfigQuery,
+    WithHtmlSeoDocumentHtmlConfigVariables
+  >
 > &
   TChildProps;
-export function GetIndexPageConfigHOC<TProps, TChildProps = any>(
+export function WithHtmlSeoDocumentHtmlConfigHOC<TProps, TChildProps = any>(
   operationOptions:
     | ReactApollo.OperationOption<
         TProps,
-        GetIndexPageConfigQuery,
-        GetIndexPageConfigVariables,
-        GetIndexPageConfigProps<TChildProps>
+        WithHtmlSeoDocumentHtmlConfigQuery,
+        WithHtmlSeoDocumentHtmlConfigVariables,
+        WithHtmlSeoDocumentHtmlConfigProps<TChildProps>
       >
     | undefined,
 ) {
   return ReactApollo.graphql<
     TProps,
-    GetIndexPageConfigQuery,
-    GetIndexPageConfigVariables,
-    GetIndexPageConfigProps<TChildProps>
-  >(GetIndexPageConfigDocument, operationOptions);
+    WithHtmlSeoDocumentHtmlConfigQuery,
+    WithHtmlSeoDocumentHtmlConfigVariables,
+    WithHtmlSeoDocumentHtmlConfigProps<TChildProps>
+  >(WithHtmlSeoDocumentHtmlConfigDocument, operationOptions);
 }
-export const GetLogoConfigDocument = gql`
-  query GetLogoConfig {
+export const WithLoadingSpinnerAppLogoConfigDocument = gql`
+  query WithLoadingSpinnerAppLogoConfig {
     logoConfig {
       url
     }
   }
 `;
-export class GetLogoConfigComponent extends React.Component<
-  Partial<ReactApollo.QueryProps<GetLogoConfigQuery, GetLogoConfigVariables>>
+export class WithLoadingSpinnerAppLogoConfigComponent extends React.Component<
+  Partial<
+    ReactApollo.QueryProps<
+      WithLoadingSpinnerAppLogoConfigQuery,
+      WithLoadingSpinnerAppLogoConfigVariables
+    >
+  >
 > {
   render() {
     return (
-      <ReactApollo.Query<GetLogoConfigQuery, GetLogoConfigVariables>
-        query={GetLogoConfigDocument}
+      <ReactApollo.Query<
+        WithLoadingSpinnerAppLogoConfigQuery,
+        WithLoadingSpinnerAppLogoConfigVariables
+      >
+        query={WithLoadingSpinnerAppLogoConfigDocument}
         {...(this as any)["props"] as any}
       />
     );
   }
 }
-export type GetLogoConfigProps<TChildProps = any> = Partial<
-  ReactApollo.DataProps<GetLogoConfigQuery, GetLogoConfigVariables>
+export type WithLoadingSpinnerAppLogoConfigProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<
+    WithLoadingSpinnerAppLogoConfigQuery,
+    WithLoadingSpinnerAppLogoConfigVariables
+  >
 > &
   TChildProps;
-export function GetLogoConfigHOC<TProps, TChildProps = any>(
+export function WithLoadingSpinnerAppLogoConfigHOC<TProps, TChildProps = any>(
   operationOptions:
     | ReactApollo.OperationOption<
         TProps,
-        GetLogoConfigQuery,
-        GetLogoConfigVariables,
-        GetLogoConfigProps<TChildProps>
+        WithLoadingSpinnerAppLogoConfigQuery,
+        WithLoadingSpinnerAppLogoConfigVariables,
+        WithLoadingSpinnerAppLogoConfigProps<TChildProps>
       >
     | undefined,
 ) {
   return ReactApollo.graphql<
     TProps,
-    GetLogoConfigQuery,
-    GetLogoConfigVariables,
-    GetLogoConfigProps<TChildProps>
-  >(GetLogoConfigDocument, operationOptions);
+    WithLoadingSpinnerAppLogoConfigQuery,
+    WithLoadingSpinnerAppLogoConfigVariables,
+    WithLoadingSpinnerAppLogoConfigProps<TChildProps>
+  >(WithLoadingSpinnerAppLogoConfigDocument, operationOptions);
 }
-export const GetTranslationDocument = gql`
-  query GetTranslation($language: Language!) {
+export const WithTranslationAppTranslationDocument = gql`
+  query WithTranslationAppTranslation($language: Language!) {
     translation(language: $language)
   }
 `;
-export class GetTranslationComponent extends React.Component<
-  Partial<ReactApollo.QueryProps<GetTranslationQuery, GetTranslationVariables>>
+export class WithTranslationAppTranslationComponent extends React.Component<
+  Partial<
+    ReactApollo.QueryProps<
+      WithTranslationAppTranslationQuery,
+      WithTranslationAppTranslationVariables
+    >
+  >
 > {
   render() {
     return (
-      <ReactApollo.Query<GetTranslationQuery, GetTranslationVariables>
-        query={GetTranslationDocument}
+      <ReactApollo.Query<
+        WithTranslationAppTranslationQuery,
+        WithTranslationAppTranslationVariables
+      >
+        query={WithTranslationAppTranslationDocument}
         {...(this as any)["props"] as any}
       />
     );
   }
 }
-export type GetTranslationProps<TChildProps = any> = Partial<
-  ReactApollo.DataProps<GetTranslationQuery, GetTranslationVariables>
+export type WithTranslationAppTranslationProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<
+    WithTranslationAppTranslationQuery,
+    WithTranslationAppTranslationVariables
+  >
 > &
   TChildProps;
-export function GetTranslationHOC<TProps, TChildProps = any>(
+export function WithTranslationAppTranslationHOC<TProps, TChildProps = any>(
   operationOptions:
     | ReactApollo.OperationOption<
         TProps,
-        GetTranslationQuery,
-        GetTranslationVariables,
-        GetTranslationProps<TChildProps>
+        WithTranslationAppTranslationQuery,
+        WithTranslationAppTranslationVariables,
+        WithTranslationAppTranslationProps<TChildProps>
       >
     | undefined,
 ) {
   return ReactApollo.graphql<
     TProps,
-    GetTranslationQuery,
-    GetTranslationVariables,
-    GetTranslationProps<TChildProps>
-  >(GetTranslationDocument, operationOptions);
+    WithTranslationAppTranslationQuery,
+    WithTranslationAppTranslationVariables,
+    WithTranslationAppTranslationProps<TChildProps>
+  >(WithTranslationAppTranslationDocument, operationOptions);
+}
+export const CloudinaryConfigDocument = gql`
+  query CloudinaryConfig {
+    cloudinaryCloudName
+    cloudinaryApiKey
+  }
+`;
+export class CloudinaryConfigComponent extends React.Component<
+  Partial<
+    ReactApollo.QueryProps<CloudinaryConfigQuery, CloudinaryConfigVariables>
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Query<CloudinaryConfigQuery, CloudinaryConfigVariables>
+        query={CloudinaryConfigDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type CloudinaryConfigProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<CloudinaryConfigQuery, CloudinaryConfigVariables>
+> &
+  TChildProps;
+export function CloudinaryConfigHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        CloudinaryConfigQuery,
+        CloudinaryConfigVariables,
+        CloudinaryConfigProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    CloudinaryConfigQuery,
+    CloudinaryConfigVariables,
+    CloudinaryConfigProps<TChildProps>
+  >(CloudinaryConfigDocument, operationOptions);
+}
+export const CloudinaryGenerateMediaLibraryAuthenticationTokenDocument = gql`
+  mutation CloudinaryGenerateMediaLibraryAuthenticationToken {
+    generateCloudinaryMediaLibraryAuthenticationToken {
+      api_key
+      cloud_name
+      signature
+      timestamp
+      username
+    }
+  }
+`;
+export class CloudinaryGenerateMediaLibraryAuthenticationTokenComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<
+      CloudinaryGenerateMediaLibraryAuthenticationTokenMutation,
+      CloudinaryGenerateMediaLibraryAuthenticationTokenVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<
+        CloudinaryGenerateMediaLibraryAuthenticationTokenMutation,
+        CloudinaryGenerateMediaLibraryAuthenticationTokenVariables
+      >
+        mutation={CloudinaryGenerateMediaLibraryAuthenticationTokenDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type CloudinaryGenerateMediaLibraryAuthenticationTokenProps<
+  TChildProps = any
+> = Partial<
+  ReactApollo.MutateProps<
+    CloudinaryGenerateMediaLibraryAuthenticationTokenMutation,
+    CloudinaryGenerateMediaLibraryAuthenticationTokenVariables
+  >
+> &
+  TChildProps;
+export type CloudinaryGenerateMediaLibraryAuthenticationTokenMutationFn = ReactApollo.MutationFn<
+  CloudinaryGenerateMediaLibraryAuthenticationTokenMutation,
+  CloudinaryGenerateMediaLibraryAuthenticationTokenVariables
+>;
+export function CloudinaryGenerateMediaLibraryAuthenticationTokenHOC<
+  TProps,
+  TChildProps = any
+>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        CloudinaryGenerateMediaLibraryAuthenticationTokenMutation,
+        CloudinaryGenerateMediaLibraryAuthenticationTokenVariables,
+        CloudinaryGenerateMediaLibraryAuthenticationTokenProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    CloudinaryGenerateMediaLibraryAuthenticationTokenMutation,
+    CloudinaryGenerateMediaLibraryAuthenticationTokenVariables,
+    CloudinaryGenerateMediaLibraryAuthenticationTokenProps<TChildProps>
+  >(
+    CloudinaryGenerateMediaLibraryAuthenticationTokenDocument,
+    operationOptions,
+  );
+}
+export const CloudinaryGenerateSignatureDocument = gql`
+  mutation CloudinaryGenerateSignature($paramsToSign: Json!) {
+    generateCloudinarySignature(paramsToSign: $paramsToSign)
+  }
+`;
+export class CloudinaryGenerateSignatureComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<
+      CloudinaryGenerateSignatureMutation,
+      CloudinaryGenerateSignatureVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<
+        CloudinaryGenerateSignatureMutation,
+        CloudinaryGenerateSignatureVariables
+      >
+        mutation={CloudinaryGenerateSignatureDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type CloudinaryGenerateSignatureProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<
+    CloudinaryGenerateSignatureMutation,
+    CloudinaryGenerateSignatureVariables
+  >
+> &
+  TChildProps;
+export type CloudinaryGenerateSignatureMutationFn = ReactApollo.MutationFn<
+  CloudinaryGenerateSignatureMutation,
+  CloudinaryGenerateSignatureVariables
+>;
+export function CloudinaryGenerateSignatureHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        CloudinaryGenerateSignatureMutation,
+        CloudinaryGenerateSignatureVariables,
+        CloudinaryGenerateSignatureProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    CloudinaryGenerateSignatureMutation,
+    CloudinaryGenerateSignatureVariables,
+    CloudinaryGenerateSignatureProps<TChildProps>
+  >(CloudinaryGenerateSignatureDocument, operationOptions);
+}
+export const EntryManagerGetEntriesDocument = gql`
+  query EntryManagerGetEntries {
+    entries {
+      id
+      name
+      description
+      logoUrl
+      categories {
+        id
+        name
+        education
+        pricePerPaperRs
+        activated
+      }
+    }
+  }
+`;
+export class EntryManagerGetEntriesComponent extends React.Component<
+  Partial<
+    ReactApollo.QueryProps<
+      EntryManagerGetEntriesQuery,
+      EntryManagerGetEntriesVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Query<
+        EntryManagerGetEntriesQuery,
+        EntryManagerGetEntriesVariables
+      >
+        query={EntryManagerGetEntriesDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type EntryManagerGetEntriesProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<
+    EntryManagerGetEntriesQuery,
+    EntryManagerGetEntriesVariables
+  >
+> &
+  TChildProps;
+export function EntryManagerGetEntriesHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        EntryManagerGetEntriesQuery,
+        EntryManagerGetEntriesVariables,
+        EntryManagerGetEntriesProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    EntryManagerGetEntriesQuery,
+    EntryManagerGetEntriesVariables,
+    EntryManagerGetEntriesProps<TChildProps>
+  >(EntryManagerGetEntriesDocument, operationOptions);
 }

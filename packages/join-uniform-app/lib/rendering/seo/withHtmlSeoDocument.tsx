@@ -1,6 +1,6 @@
 import {
-  GetHtmlConfigDocument,
-  GetHtmlConfigQuery,
+  WithHtmlSeoDocumentHtmlConfigDocument,
+  WithHtmlSeoDocumentHtmlConfigQuery,
 } from "@join-uniform/graphql";
 import {
   DefaultDocumentIProps,
@@ -27,9 +27,9 @@ export function withHtmlSeoDocument<
     static async getInitialProps(context: C) {
       const apolloClient = initializeApollo();
       const htmlConfigQueryResult = await apolloClient.query<
-        GetHtmlConfigQuery
+        WithHtmlSeoDocumentHtmlConfigQuery
       >({
-        query: GetHtmlConfigDocument,
+        query: WithHtmlSeoDocumentHtmlConfigDocument,
       });
       const htmlConfig = htmlConfigQueryResult.data.htmlConfig;
 

@@ -4,5 +4,5 @@ type Entry {
   name: String!
   logoUrl: String!
   description: String!
-  categories: [String!]!
+  categories: [Category]!
 }

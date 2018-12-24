@@ -1,9 +1,0 @@
-query GetEntries {
-  entries {
-    id
-    name
-    description
-    categories
-    logoUrl
-  }
-}

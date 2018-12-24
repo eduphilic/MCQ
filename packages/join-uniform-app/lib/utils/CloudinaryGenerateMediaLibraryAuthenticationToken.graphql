@@ -1,4 +1,4 @@
-mutation GenerateCloudinaryMediaLibraryAuthenticationToken {
+mutation CloudinaryGenerateMediaLibraryAuthenticationToken {
   generateCloudinaryMediaLibraryAuthenticationToken {
     api_key
     cloud_name

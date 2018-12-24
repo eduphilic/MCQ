@@ -1,8 +1,8 @@
 import {
-  GetTranslationComponent,
-  GetTranslationQuery,
-  GetTranslationVariables,
   Language,
+  WithTranslationAppTranslationComponent,
+  WithTranslationAppTranslationQuery,
+  WithTranslationAppTranslationVariables,
 } from "@join-uniform/graphql";
 import { strings } from "@join-uniform/localization";
 import { AppComponentType, DefaultAppIProps, NextAppContext } from "next/app";
@@ -32,7 +32,7 @@ export function withTranslationApp(
         this.props.apolloClient || this.props.serverSideApolloClient;
 
       return (
-        <GetTranslationComponent
+        <WithTranslationAppTranslationComponent
           client={client}
           variables={{ language: Language.English }}
         >
@@ -41,12 +41,15 @@ export function withTranslationApp(
 
             return <App {...this.props} />;
           }}
-        </GetTranslationComponent>
+        </WithTranslationAppTranslationComponent>
       );
     }
 
     setTranslation(
-      result: QueryResult<GetTranslationQuery, GetTranslationVariables>,
+      result: QueryResult<
+        WithTranslationAppTranslationQuery,
+        WithTranslationAppTranslationVariables
+      >,
     ) {
       if (result.loading || result.error) return;
       if (this.loaded) return;

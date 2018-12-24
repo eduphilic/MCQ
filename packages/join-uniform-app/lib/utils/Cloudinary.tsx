@@ -1,7 +1,13 @@
+import { LoadingSpinner } from "@join-uniform/components";
 import {
-  GenerateCloudinaryMediaLibraryAuthenticationTokenComponent,
-  GenerateCloudinarySignatureComponent,
-  GetCloudinaryConfigComponent,
+  CloudinaryConfigHOC,
+  CloudinaryConfigProps,
+  CloudinaryGenerateMediaLibraryAuthenticationTokenHOC,
+  CloudinaryGenerateMediaLibraryAuthenticationTokenMutation,
+  CloudinaryGenerateMediaLibraryAuthenticationTokenVariables,
+  CloudinaryGenerateSignatureHOC,
+  CloudinaryGenerateSignatureMutation,
+  CloudinaryGenerateSignatureVariables,
 } from "@join-uniform/graphql";
 import React, {
   createContext,
@@ -10,7 +16,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { withQueryLoadingSpinner } from "./withQueryLoadingSpinner";
+import { MutationFn } from "react-apollo";
 
 let initializationStatus: Promise<{ success: boolean }>;
 
@@ -33,14 +39,34 @@ export function useCloudinary() {
   return useContext(CloudinaryContext);
 }
 
+type CloudinaryProviderProps = CloudinaryConfigProps<{}> & {
+  generateCloudinaryMediaLibraryAuthenticationToken: MutationFn<
+    CloudinaryGenerateMediaLibraryAuthenticationTokenMutation,
+    CloudinaryGenerateMediaLibraryAuthenticationTokenVariables
+  >;
+  generateCloudinarySignature: MutationFn<
+    CloudinaryGenerateSignatureMutation,
+    CloudinaryGenerateSignatureVariables
+  >;
+  children?: ReactNode;
+};
+
 /**
  * Initializes the Cloudinary client library if it has not already been
  * initialized. If rendered on the server, the client library is not
  * initialized.
  */
-export function CloudinaryProvider(props: {
-  children?: ReactNode;
-}): React.ReactElement<any> {
+export const CloudinaryProvider = CloudinaryGenerateMediaLibraryAuthenticationTokenHOC(
+  { name: "generateCloudinaryMediaLibraryAuthenticationToken" },
+)(
+  CloudinaryGenerateSignatureHOC({
+    name: "generateCloudinarySignature",
+  })(CloudinaryConfigHOC(undefined)(CloudinaryProviderBase)),
+);
+
+function CloudinaryProviderBase(
+  props: CloudinaryProviderProps,
+): React.ReactElement<any> {
   const [cloudinary, setCloudinary] = useState<CloudinaryContextValue>(null);
 
   // Load the Cloudinary client libraries if it hasn't already been loaded.
@@ -95,95 +121,92 @@ export function CloudinaryProvider(props: {
     });
   }, []);
 
+  const {
+    data,
+    generateCloudinarySignature,
+    generateCloudinaryMediaLibraryAuthenticationToken,
+  } = props;
+
+  if (
+    !data ||
+    data.loading ||
+    data.error ||
+    !data.cloudinaryCloudName ||
+    !data.cloudinaryApiKey
+  ) {
+    return <LoadingSpinner />;
+  }
+  const { cloudinaryCloudName, cloudinaryApiKey } = data;
+
   // Get the Cloudinary "cloudName" and render the provider.
-  return (
-    <GenerateCloudinarySignatureComponent>
-      {generateCloudinarySignature => (
-        <GenerateCloudinaryMediaLibraryAuthenticationTokenComponent>
-          {generateCloudinaryMediaLibraryAuthenticationToken =>
-            withQueryLoadingSpinner(
-              GetCloudinaryConfigComponent,
-              ({ data }) => {
-                if (cloudinaryClient) {
-                  cloudinaryClient.setCloudName(data.cloudinaryCloudName);
+  if (cloudinaryClient) {
+    cloudinaryClient.setCloudName(cloudinaryCloudName);
 
-                  if (!cloudinary) {
-                    const generateSignature: NonNullable<
-                      CloudinaryContextValue
-                    >["generateSignature"] = async (cb, paramsToSign) => {
-                      const fetchResult = await generateCloudinarySignature({
-                        variables: { paramsToSign },
-                      });
-                      if (!fetchResult || fetchResult.errors) return;
-                      cb(fetchResult.data!.generateCloudinarySignature);
-                    };
+    if (!cloudinary) {
+      const generateSignature: NonNullable<
+        CloudinaryContextValue
+      >["generateSignature"] = async (cb, paramsToSign) => {
+        const fetchResult = await generateCloudinarySignature({
+          variables: { paramsToSign },
+        });
+        if (!fetchResult || fetchResult.errors) return;
+        cb(fetchResult.data!.generateCloudinarySignature);
+      };
 
-                    setCloudinary({
-                      client: cloudinaryClient,
-                      apiKey: data.cloudinaryApiKey,
-                      cloudName: data.cloudinaryCloudName,
-                      generateSignature,
-                      getDefaultUploadWidgetOptions: () => ({
-                        // Required:
-                        cloudName: data.cloudinaryCloudName,
+      setCloudinary({
+        client: cloudinaryClient,
+        apiKey: cloudinaryApiKey,
+        cloudName: cloudinaryCloudName,
+        generateSignature,
+        getDefaultUploadWidgetOptions: () => ({
+          // Required:
+          cloudName: cloudinaryCloudName,
 
-                        // Widget behavior:
-                        sources: ["local", "url", "camera"],
-                        multiple: false,
-                        cropping: true,
-                        croppingAspectRatio: 1, // square
+          // Widget behavior:
+          sources: ["local", "url", "camera"],
+          multiple: false,
+          cropping: true,
+          croppingAspectRatio: 1, // square
 
-                        // Upload parameters:
-                        folder: "Assets",
-                        resourceType: "image",
-                        uploadSignature: generateSignature,
-                        apiKey: data.cloudinaryApiKey,
-                      }),
+          // Upload parameters:
+          folder: "Assets",
+          resourceType: "image",
+          uploadSignature: generateSignature,
+          apiKey: cloudinaryApiKey,
+        }),
 
-                      getDefaultMediaLibraryWidgetOptions: async () => {
-                        const fetchResult = await generateCloudinaryMediaLibraryAuthenticationToken();
+        getDefaultMediaLibraryWidgetOptions: async () => {
+          const fetchResult = await generateCloudinaryMediaLibraryAuthenticationToken();
 
-                        if (
-                          !fetchResult ||
-                          fetchResult.errors ||
-                          !fetchResult.data
-                        ) {
-                          throw new Error(
-                            "Failed to retrieve Cloudinary Media Widget authentication token.",
-                          );
-                        }
-
-                        // Remove Apollo specific fields.
-                        delete fetchResult.data.__typename;
-                        delete fetchResult.data
-                          .generateCloudinaryMediaLibraryAuthenticationToken
-                          .__typename;
-
-                        return {
-                          // Authentication:
-                          ...fetchResult.data
-                            .generateCloudinaryMediaLibraryAuthenticationToken,
-
-                          // Media library behavior:
-                          max_files: 1,
-                          multiple: false,
-                        };
-                      },
-                    });
-                  }
-                }
-
-                return (
-                  <CloudinaryContext.Provider value={cloudinary}>
-                    {props.children}
-                  </CloudinaryContext.Provider>
-                );
-              },
-            )
+          if (!fetchResult || fetchResult.errors || !fetchResult.data) {
+            throw new Error(
+              "Failed to retrieve Cloudinary Media Widget authentication token.",
+            );
           }
-        </GenerateCloudinaryMediaLibraryAuthenticationTokenComponent>
-      )}
-    </GenerateCloudinarySignatureComponent>
+
+          // Remove Apollo specific fields.
+          delete fetchResult.data.__typename;
+          delete fetchResult.data
+            .generateCloudinaryMediaLibraryAuthenticationToken.__typename;
+
+          return {
+            // Authentication:
+            ...fetchResult.data
+              .generateCloudinaryMediaLibraryAuthenticationToken,
+
+            // Media library behavior:
+            max_files: 1,
+            multiple: false,
+          };
+        },
+      });
+    }
+  }
+
+  return (
+    <CloudinaryContext.Provider value={cloudinary}>
+      {props.children}
+    </CloudinaryContext.Provider>
   );
 }
 

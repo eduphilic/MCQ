@@ -1,0 +1,3 @@
+query WithTranslationAppTranslation($language: Language!) {
+  translation(language: $language)
+}

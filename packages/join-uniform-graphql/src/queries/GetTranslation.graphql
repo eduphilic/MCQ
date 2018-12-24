@@ -1,3 +1,0 @@
-query GetTranslation($language: Language!) {
-  translation(language: $language)
-}
