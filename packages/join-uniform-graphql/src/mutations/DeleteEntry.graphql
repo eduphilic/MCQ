@@ -1,3 +1,0 @@
-mutation DeleteEntry($entryId: ID!) {
-  deleteEntry(entryId: $entryId)
-}

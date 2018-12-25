@@ -1,8 +1,14 @@
-import { Grid, LoadingSpinner } from "@join-uniform/components";
+import {
+  Grid,
+  LoadingSpinner,
+  PendingChangesButton,
+} from "@join-uniform/components";
 import {
   EntryManagerGetEntriesHOC,
   EntryManagerGetEntriesProps,
 } from "@join-uniform/graphql";
+import { useFormik } from "formik";
+import Router from "next/router";
 import React from "react";
 import { AdminLayoutDashboardContainer } from "~/containers";
 import { EntryManagementCard } from "~/lib/admin";
@@ -11,27 +17,57 @@ type Props = EntryManagerGetEntriesProps<{}>;
 
 function EntryManagerPage(props: Props) {
   const { data } = props;
-  if (!data || data.loading || data.error) return <LoadingSpinner />;
+  if (!data || data.loading || data.error || !data.entries) {
+    return <LoadingSpinner />;
+  }
 
   const { entries } = data;
+  // tslint:disable-next-line:no-empty
+  const form = useFormik({ initialValues: { entries }, onSubmit: () => {} });
 
   return (
-    <AdminLayoutDashboardContainer title="Entry Manager">
+    <AdminLayoutDashboardContainer
+      title="Entry Manager"
+      appBarButtons={[
+        <PendingChangesButton
+          hasDiscardableChanges={form.dirty}
+          hasPublishableChanges={form.isValid}
+          onDiscardButtonClick={() => form.resetForm()}
+          onPublishButtonClick={() => form.submitForm()}
+        />,
+      ]}
+    >
       <Grid container contentCenter spacing={16}>
-        {entries!.map(entry => (
+        {form.values.entries.map(entry => (
           <Grid key={entry.id} item xs={12}>
             <EntryManagementCard
+              entryId={entry.id}
               entryName={entry.name}
               entryLogoUrl={entry.logoUrl}
+              deleteEntryButtonDisabled={entry.categories.length > 0}
+              onEditEntryClick={handleEditEntryButtonClick}
+              onDeleteEntryClick={handleDeleteEntryButtonClick}
             />
           </Grid>
         ))}
       </Grid>
     </AdminLayoutDashboardContainer>
   );
+
+  function handleEditEntryButtonClick(entryId: string) {
+    // tslint:disable-next-line:no-floating-promises
+    Router.push(`/admin/entry-manager/edit-entry?entryId=${entryId}`);
+  }
+
+  function handleDeleteEntryButtonClick(entryId: string) {
+    form.setFieldValue(
+      "entries",
+      form.values.entries.filter(e => e.id !== entryId),
+    );
+  }
 }
 
-export default EntryManagerGetEntriesHOC(undefined)(EntryManagerPage);
+export default EntryManagerGetEntriesHOC({})(EntryManagerPage);
 
 // import {
 //   Button,
@@ -137,12 +173,7 @@ export default EntryManagerGetEntriesHOC(undefined)(EntryManagerPage);
 //                     <>
 //                       <Button
 //                         onClick={() => {
-//                           // tslint:disable-next-line:no-floating-promises
-//                           Router.push(
-//                             `/admin/entry-manager/edit-entry?entryId=${
-//                               entry.id
-//                             }`,
-//                           );
+
 //                         }}
 //                       >
 //                         Edit Entry

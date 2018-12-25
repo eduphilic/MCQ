@@ -1,16 +1,27 @@
-import { DashboardCard, Typography } from "@join-uniform/components";
+import { Button, DashboardCard, Typography } from "@join-uniform/components";
 import { styled } from "@join-uniform/theme";
 import React, { useMemo } from "react";
 import slugify from "slugify";
 import { createResponsiveImageUrl } from "../utils";
 
 export type EntryManagementCardProps = {
+  entryId: string;
   entryName: string;
   entryLogoUrl: string;
+  deleteEntryButtonDisabled: boolean;
+  onEditEntryClick: (entryId: string) => void;
+  onDeleteEntryClick: (entryId: string) => void;
 };
 
 export function EntryManagementCard(props: EntryManagementCardProps) {
-  const { entryName, entryLogoUrl } = props;
+  const {
+    entryId,
+    entryName,
+    entryLogoUrl,
+    deleteEntryButtonDisabled,
+    onEditEntryClick,
+    onDeleteEntryClick,
+  } = props;
 
   const sluggedEntry = useMemo(() => `#${slugify(entryName).toLowerCase()}`, [
     entryName,
@@ -27,7 +38,17 @@ export function EntryManagementCard(props: EntryManagementCardProps) {
       iconNode={<EntryLogoImage logoUrl={entryLogoUrl} />}
       columnLabels={["Category", "Cost Per Paper (Rs)", "Activated"]}
       columnTypes={["dual-line", "single-line", "switch"]}
-      // bottomActionsNode
+      bottomActionsNode={
+        <>
+          <Button onClick={() => onEditEntryClick(entryId)}>Edit Entry</Button>
+          <Button
+            disabled={deleteEntryButtonDisabled}
+            onClick={() => onDeleteEntryClick(entryId)}
+          >
+            Delete Entry
+          </Button>
+        </>
+      }
       items={[]}
     />
   );

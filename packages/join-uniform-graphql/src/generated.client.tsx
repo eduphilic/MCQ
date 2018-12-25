@@ -218,6 +218,16 @@ export type CloudinaryGenerateSignatureMutation = {
   generateCloudinarySignature: string;
 };
 
+export type EntryManagerDeleteEntryVariables = {
+  entryId: string;
+};
+
+export type EntryManagerDeleteEntryMutation = {
+  __typename?: "Mutation";
+
+  deleteEntry: boolean | null;
+};
+
 export type EntryManagerGetEntriesVariables = {};
 
 export type EntryManagerGetEntriesQuery = {
@@ -635,6 +645,59 @@ export function CloudinaryGenerateSignatureHOC<TProps, TChildProps = any>(
     CloudinaryGenerateSignatureVariables,
     CloudinaryGenerateSignatureProps<TChildProps>
   >(CloudinaryGenerateSignatureDocument, operationOptions);
+}
+export const EntryManagerDeleteEntryDocument = gql`
+  mutation EntryManagerDeleteEntry($entryId: ID!) {
+    deleteEntry(entryId: $entryId)
+  }
+`;
+export class EntryManagerDeleteEntryComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<
+      EntryManagerDeleteEntryMutation,
+      EntryManagerDeleteEntryVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<
+        EntryManagerDeleteEntryMutation,
+        EntryManagerDeleteEntryVariables
+      >
+        mutation={EntryManagerDeleteEntryDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type EntryManagerDeleteEntryProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<
+    EntryManagerDeleteEntryMutation,
+    EntryManagerDeleteEntryVariables
+  >
+> &
+  TChildProps;
+export type EntryManagerDeleteEntryMutationFn = ReactApollo.MutationFn<
+  EntryManagerDeleteEntryMutation,
+  EntryManagerDeleteEntryVariables
+>;
+export function EntryManagerDeleteEntryHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        EntryManagerDeleteEntryMutation,
+        EntryManagerDeleteEntryVariables,
+        EntryManagerDeleteEntryProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    EntryManagerDeleteEntryMutation,
+    EntryManagerDeleteEntryVariables,
+    EntryManagerDeleteEntryProps<TChildProps>
+  >(EntryManagerDeleteEntryDocument, operationOptions);
 }
 export const EntryManagerGetEntriesDocument = gql`
   query EntryManagerGetEntries {
