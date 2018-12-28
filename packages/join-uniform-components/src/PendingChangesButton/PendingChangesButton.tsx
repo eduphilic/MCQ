@@ -44,7 +44,7 @@ export function PendingChangesButton(props: PendingChangesButtonProps) {
 
   return (
     <Grid container spacing={8} alignItems="center" wrap="nowrap">
-      <Hidden mdUp implementation="css">
+      <Hidden xsDown mdUp implementation="css">
         <Grid item>
           <Typography variant="caption" style={{ whiteSpace: "nowrap" }}>
             Pending changes
