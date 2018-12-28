@@ -28,7 +28,7 @@ export const deleteEntries: MutationDeleteEntriesResolver = async (
     deletionBatch.delete(entrySnapshot.ref);
   });
 
-  // await deletionBatch.commit();
+  await deletionBatch.commit();
 
   return true;
 };
