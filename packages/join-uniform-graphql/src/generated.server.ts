@@ -267,7 +267,7 @@ export interface Mutation {
 
   updateEntry?: boolean | null;
 
-  deleteEntry?: boolean | null;
+  deleteEntries?: boolean | null;
 
   updateCategory?: boolean | null;
 
@@ -322,8 +322,8 @@ export interface UpdateEntryMutationArgs {
 
   update: EntryUpdate;
 }
-export interface DeleteEntryMutationArgs {
-  entryId: string;
+export interface DeleteEntriesMutationArgs {
+  entryIds: string[];
 }
 export interface UpdateCategoryMutationArgs {
   categoryId: string;
@@ -959,7 +959,7 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
     Context
   >;
 
-  deleteEntry?: MutationDeleteEntryResolver<
+  deleteEntries?: MutationDeleteEntriesResolver<
     boolean | null,
     TypeParent,
     Context
@@ -1031,13 +1031,13 @@ export interface MutationUpdateEntryArgs {
   update: EntryUpdate;
 }
 
-export type MutationDeleteEntryResolver<
+export type MutationDeleteEntriesResolver<
   R = boolean | null,
   Parent = {},
   Context = ApolloContext
-> = Resolver<R, Parent, Context, MutationDeleteEntryArgs>;
-export interface MutationDeleteEntryArgs {
-  entryId: string;
+> = Resolver<R, Parent, Context, MutationDeleteEntriesArgs>;
+export interface MutationDeleteEntriesArgs {
+  entryIds: string[];
 }
 
 export type MutationUpdateCategoryResolver<

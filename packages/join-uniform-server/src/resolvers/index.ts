@@ -19,7 +19,7 @@ import { entryCategories } from "./entryCategories";
 import { createCategoryExistingEntry } from "./createCategoryExistingEntry";
 import { createCategoryNewEntry } from "./createCategoryNewEntry";
 import { deleteCategories } from "./deleteCategories";
-import { deleteEntry } from "./deleteEntry";
+import { deleteEntries } from "./deleteEntries";
 import { setCategoryActivationStatus } from "./setCategoryActivationStatus";
 import { updateCategory } from "./updateCategory";
 import { updateEntry } from "./updateEntry";
@@ -52,7 +52,7 @@ const Mutation: MutationResolvers = {
   createCategoryExistingEntry,
   createCategoryNewEntry,
   deleteCategories,
-  deleteEntry,
+  deleteEntries,
   setCategoryActivationStatus,
   updateCategory,
   updateEntry,

@@ -4,26 +4,73 @@ import {
   PendingChangesButton,
 } from "@join-uniform/components";
 import {
+  EntryManagerDeleteEntriesHOC,
+  EntryManagerDeleteEntriesMutation,
+  EntryManagerDeleteEntriesVariables,
+  EntryManagerGetEntriesDocument,
   EntryManagerGetEntriesHOC,
   EntryManagerGetEntriesProps,
+  EntryManagerGetEntriesQuery,
+  EntryManagerGetEntriesVariables,
 } from "@join-uniform/graphql";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
+import { MutationFn } from "react-apollo";
 import { AdminLayoutDashboardContainer } from "~/containers";
 import { EntryManagementCard } from "~/lib/admin";
 
-type Props = EntryManagerGetEntriesProps<{}>;
+type Props = EntryManagerGetEntriesProps<{}> & {
+  deleteEntries: MutationFn<
+    EntryManagerDeleteEntriesMutation,
+    EntryManagerDeleteEntriesVariables
+  >;
+};
 
 function EntryManagerPage(props: Props) {
-  const { data } = props;
+  /* tslint:disable-next-line:no-console */
+  // console.log({ props });
+
+  const { data, deleteEntries } = props;
   if (!data || data.loading || data.error || !data.entries) {
     return <LoadingSpinner />;
   }
 
   const { entries } = data;
-  // tslint:disable-next-line:no-empty
-  const form = useFormik({ initialValues: { entries }, onSubmit: () => {} });
+  const form = useFormik({
+    enableReinitialize: true,
+    initialValues: { entries },
+    onSubmit: async (values, helpers) => {
+      // Handle entry deletions.
+      const initialEntryIds = entries.map(entry => entry.id);
+      const finalEntryIds = values.entries.map(entry => entry.id);
+      if (initialEntryIds.length !== finalEntryIds.length) {
+        const deletedEntryIds = initialEntryIds.filter(
+          id => !finalEntryIds.includes(id),
+        );
+        await deleteEntries({
+          variables: { entryIds: deletedEntryIds },
+          update: proxy => {
+            const dataUpdate = proxy.readQuery<
+              EntryManagerGetEntriesQuery,
+              EntryManagerGetEntriesVariables
+            >({ query: EntryManagerGetEntriesDocument })!;
+
+            dataUpdate.entries = dataUpdate.entries.filter(
+              e => !deletedEntryIds.includes(e.id),
+            );
+
+            proxy.writeQuery({
+              query: EntryManagerGetEntriesDocument,
+              data: dataUpdate,
+            });
+          },
+        });
+      }
+
+      helpers.setSubmitting(false);
+    },
+  });
 
   return (
     <AdminLayoutDashboardContainer
@@ -67,7 +114,9 @@ function EntryManagerPage(props: Props) {
   }
 }
 
-export default EntryManagerGetEntriesHOC({})(EntryManagerPage);
+export default EntryManagerDeleteEntriesHOC({
+  name: "deleteEntries",
+})(EntryManagerGetEntriesHOC({})(EntryManagerPage));
 
 // import {
 //   Button,

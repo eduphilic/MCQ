@@ -1,0 +1,3 @@
+mutation EntryManagerDeleteEntries($entryIds: [ID!]!) {
+  deleteEntries(entryIds: $entryIds)
+}

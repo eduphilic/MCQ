@@ -218,14 +218,14 @@ export type CloudinaryGenerateSignatureMutation = {
   generateCloudinarySignature: string;
 };
 
-export type EntryManagerDeleteEntryVariables = {
-  entryId: string;
+export type EntryManagerDeleteEntriesVariables = {
+  entryIds: string[];
 };
 
-export type EntryManagerDeleteEntryMutation = {
+export type EntryManagerDeleteEntriesMutation = {
   __typename?: "Mutation";
 
-  deleteEntry: boolean | null;
+  deleteEntries: boolean | null;
 };
 
 export type EntryManagerGetEntriesVariables = {};
@@ -646,58 +646,58 @@ export function CloudinaryGenerateSignatureHOC<TProps, TChildProps = any>(
     CloudinaryGenerateSignatureProps<TChildProps>
   >(CloudinaryGenerateSignatureDocument, operationOptions);
 }
-export const EntryManagerDeleteEntryDocument = gql`
-  mutation EntryManagerDeleteEntry($entryId: ID!) {
-    deleteEntry(entryId: $entryId)
+export const EntryManagerDeleteEntriesDocument = gql`
+  mutation EntryManagerDeleteEntries($entryIds: [ID!]!) {
+    deleteEntries(entryIds: $entryIds)
   }
 `;
-export class EntryManagerDeleteEntryComponent extends React.Component<
+export class EntryManagerDeleteEntriesComponent extends React.Component<
   Partial<
     ReactApollo.MutationProps<
-      EntryManagerDeleteEntryMutation,
-      EntryManagerDeleteEntryVariables
+      EntryManagerDeleteEntriesMutation,
+      EntryManagerDeleteEntriesVariables
     >
   >
 > {
   render() {
     return (
       <ReactApollo.Mutation<
-        EntryManagerDeleteEntryMutation,
-        EntryManagerDeleteEntryVariables
+        EntryManagerDeleteEntriesMutation,
+        EntryManagerDeleteEntriesVariables
       >
-        mutation={EntryManagerDeleteEntryDocument}
+        mutation={EntryManagerDeleteEntriesDocument}
         {...(this as any)["props"] as any}
       />
     );
   }
 }
-export type EntryManagerDeleteEntryProps<TChildProps = any> = Partial<
+export type EntryManagerDeleteEntriesProps<TChildProps = any> = Partial<
   ReactApollo.MutateProps<
-    EntryManagerDeleteEntryMutation,
-    EntryManagerDeleteEntryVariables
+    EntryManagerDeleteEntriesMutation,
+    EntryManagerDeleteEntriesVariables
   >
 > &
   TChildProps;
-export type EntryManagerDeleteEntryMutationFn = ReactApollo.MutationFn<
-  EntryManagerDeleteEntryMutation,
-  EntryManagerDeleteEntryVariables
+export type EntryManagerDeleteEntriesMutationFn = ReactApollo.MutationFn<
+  EntryManagerDeleteEntriesMutation,
+  EntryManagerDeleteEntriesVariables
 >;
-export function EntryManagerDeleteEntryHOC<TProps, TChildProps = any>(
+export function EntryManagerDeleteEntriesHOC<TProps, TChildProps = any>(
   operationOptions:
     | ReactApollo.OperationOption<
         TProps,
-        EntryManagerDeleteEntryMutation,
-        EntryManagerDeleteEntryVariables,
-        EntryManagerDeleteEntryProps<TChildProps>
+        EntryManagerDeleteEntriesMutation,
+        EntryManagerDeleteEntriesVariables,
+        EntryManagerDeleteEntriesProps<TChildProps>
       >
     | undefined,
 ) {
   return ReactApollo.graphql<
     TProps,
-    EntryManagerDeleteEntryMutation,
-    EntryManagerDeleteEntryVariables,
-    EntryManagerDeleteEntryProps<TChildProps>
-  >(EntryManagerDeleteEntryDocument, operationOptions);
+    EntryManagerDeleteEntriesMutation,
+    EntryManagerDeleteEntriesVariables,
+    EntryManagerDeleteEntriesProps<TChildProps>
+  >(EntryManagerDeleteEntriesDocument, operationOptions);
 }
 export const EntryManagerGetEntriesDocument = gql`
   query EntryManagerGetEntries {
