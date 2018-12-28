@@ -1,4 +1,4 @@
-mutation CreateCategoryExistingEntry(
+mutation EntryManagerCreateCategoryForExistingEntry(
   $request: CategoryCreationRequestExistingEntry!
 ) {
   createCategoryExistingEntry(request: $request)
