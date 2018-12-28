@@ -1,4 +1,5 @@
 import {
+  Button,
   Grid,
   LoadingSpinner,
   PendingChangesButton,
@@ -8,12 +9,15 @@ import {
   EntryManagerDeleteEntriesMutation,
   EntryManagerDeleteEntriesVariables,
   EntryManagerGetEntriesDocument,
+  EntryManagerGetEntriesEntries,
   EntryManagerGetEntriesHOC,
   EntryManagerGetEntriesProps,
   EntryManagerGetEntriesQuery,
   EntryManagerGetEntriesVariables,
 } from "@join-uniform/graphql";
-import { useFormik } from "formik";
+import { AddIcon } from "@join-uniform/icons";
+import { FormikHelpers, useFormik } from "formik";
+import Link from "next/link";
 import Router from "next/router";
 import React from "react";
 import { MutationFn } from "react-apollo";
@@ -27,49 +31,21 @@ type Props = EntryManagerGetEntriesProps<{}> & {
   >;
 };
 
-function EntryManagerPage(props: Props) {
-  /* tslint:disable-next-line:no-console */
-  // console.log({ props });
+type FormValues = {
+  entries: EntryManagerGetEntriesEntries[];
+};
 
+function EntryManagerPage(props: Props) {
   const { data, deleteEntries } = props;
   if (!data || data.loading || data.error || !data.entries) {
     return <LoadingSpinner />;
   }
 
   const { entries } = data;
-  const form = useFormik({
+  const form = useFormik<FormValues>({
     enableReinitialize: true,
     initialValues: { entries },
-    onSubmit: async (values, helpers) => {
-      // Handle entry deletions.
-      const initialEntryIds = entries.map(entry => entry.id);
-      const finalEntryIds = values.entries.map(entry => entry.id);
-      if (initialEntryIds.length !== finalEntryIds.length) {
-        const deletedEntryIds = initialEntryIds.filter(
-          id => !finalEntryIds.includes(id),
-        );
-        await deleteEntries({
-          variables: { entryIds: deletedEntryIds },
-          update: proxy => {
-            const dataUpdate = proxy.readQuery<
-              EntryManagerGetEntriesQuery,
-              EntryManagerGetEntriesVariables
-            >({ query: EntryManagerGetEntriesDocument })!;
-
-            dataUpdate.entries = dataUpdate.entries.filter(
-              e => !deletedEntryIds.includes(e.id),
-            );
-
-            proxy.writeQuery({
-              query: EntryManagerGetEntriesDocument,
-              data: dataUpdate,
-            });
-          },
-        });
-      }
-
-      helpers.setSubmitting(false);
-    },
+    onSubmit: handleSubmit,
   });
 
   return (
@@ -82,6 +58,12 @@ function EntryManagerPage(props: Props) {
           onDiscardButtonClick={() => form.resetForm()}
           onPublishButtonClick={() => form.submitForm()}
         />,
+        <Link href="/admin/entry-manager/new">
+          <Button color="orange">
+            <AddIcon />
+            Entry
+          </Button>
+        </Link>,
       ]}
     >
       <Grid container contentCenter spacing={16}>
@@ -111,6 +93,40 @@ function EntryManagerPage(props: Props) {
       "entries",
       form.values.entries.filter(e => e.id !== entryId),
     );
+  }
+
+  async function handleSubmit(
+    values: FormValues,
+    helpers: FormikHelpers<FormValues>,
+  ) {
+    // Handle entry deletions.
+    const initialEntryIds = entries.map(entry => entry.id);
+    const finalEntryIds = values.entries.map(entry => entry.id);
+    if (initialEntryIds.length !== finalEntryIds.length) {
+      const deletedEntryIds = initialEntryIds.filter(
+        id => !finalEntryIds.includes(id),
+      );
+      await deleteEntries({
+        variables: { entryIds: deletedEntryIds },
+        update: proxy => {
+          const dataUpdate = proxy.readQuery<
+            EntryManagerGetEntriesQuery,
+            EntryManagerGetEntriesVariables
+          >({ query: EntryManagerGetEntriesDocument })!;
+
+          dataUpdate.entries = dataUpdate.entries.filter(
+            e => !deletedEntryIds.includes(e.id),
+          );
+
+          proxy.writeQuery({
+            query: EntryManagerGetEntriesDocument,
+            data: dataUpdate,
+          });
+        },
+      });
+    }
+
+    helpers.setSubmitting(false);
   }
 }
 
