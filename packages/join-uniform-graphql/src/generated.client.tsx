@@ -225,7 +225,13 @@ export type EntryManagerCreateCategoryAndNewEntryVariables = {
 export type EntryManagerCreateCategoryAndNewEntryMutation = {
   __typename?: "Mutation";
 
-  createCategoryNewEntry: boolean | null;
+  createCategoryNewEntry: EntryManagerCreateCategoryAndNewEntryCreateCategoryNewEntry;
+};
+
+export type EntryManagerCreateCategoryAndNewEntryCreateCategoryNewEntry = {
+  __typename?: "Entry";
+
+  id: string;
 };
 
 export type EntryManagerCreateCategoryForExistingEntryVariables = {
@@ -235,8 +241,10 @@ export type EntryManagerCreateCategoryForExistingEntryVariables = {
 export type EntryManagerCreateCategoryForExistingEntryMutation = {
   __typename?: "Mutation";
 
-  createCategoryExistingEntry: boolean | null;
+  createCategoryExistingEntry: EntryManagerCreateCategoryForExistingEntryCreateCategoryExistingEntry;
 };
+
+export type EntryManagerCreateCategoryForExistingEntryCreateCategoryExistingEntry = CategoryPartsFragment;
 
 export type EntryManagerDeleteEntriesVariables = {
   entryIds: string[];
@@ -284,10 +292,38 @@ export type EntryManagerGetEntriesCategories = {
   activated: boolean;
 };
 
+export type CategoryPartsFragment = {
+  __typename?: "Category";
+
+  id: string;
+
+  name: string;
+
+  education: string;
+
+  pricePerPaperRs: number;
+
+  activated: boolean;
+};
+
 import * as ReactApollo from "react-apollo";
 import * as React from "react";
 
 import gql from "graphql-tag";
+
+// ====================================================
+// Fragments
+// ====================================================
+
+export const CategoryPartsFragmentDoc = gql`
+  fragment CategoryParts on Category {
+    id
+    name
+    education
+    pricePerPaperRs
+    activated
+  }
+`;
 
 // ====================================================
 // Components
@@ -670,7 +706,9 @@ export const EntryManagerCreateCategoryAndNewEntryDocument = gql`
   mutation EntryManagerCreateCategoryAndNewEntry(
     $request: CategoryCreationRequestNewEntry!
   ) {
-    createCategoryNewEntry(request: $request)
+    createCategoryNewEntry(request: $request) {
+      id
+    }
   }
 `;
 export class EntryManagerCreateCategoryAndNewEntryComponent extends React.Component<
@@ -730,8 +768,12 @@ export const EntryManagerCreateCategoryForExistingEntryDocument = gql`
   mutation EntryManagerCreateCategoryForExistingEntry(
     $request: CategoryCreationRequestExistingEntry!
   ) {
-    createCategoryExistingEntry(request: $request)
+    createCategoryExistingEntry(request: $request) {
+      ...CategoryParts
+    }
   }
+
+  ${CategoryPartsFragmentDoc}
 `;
 export class EntryManagerCreateCategoryForExistingEntryComponent extends React.Component<
   Partial<

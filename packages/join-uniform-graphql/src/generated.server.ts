@@ -261,9 +261,9 @@ export interface IndexYouTubeVideo {
 }
 
 export interface Mutation {
-  createCategoryExistingEntry?: boolean | null;
+  createCategoryExistingEntry: Category;
 
-  createCategoryNewEntry?: boolean | null;
+  createCategoryNewEntry: Entry;
 
   updateEntry?: boolean | null;
 
@@ -942,13 +942,13 @@ export type IndexYouTubeVideoTitleResolver<
 
 export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
   createCategoryExistingEntry?: MutationCreateCategoryExistingEntryResolver<
-    boolean | null,
+    Category,
     TypeParent,
     Context
   >;
 
   createCategoryNewEntry?: MutationCreateCategoryNewEntryResolver<
-    boolean | null,
+    Entry,
     TypeParent,
     Context
   >;
@@ -1003,7 +1003,7 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
 }
 
 export type MutationCreateCategoryExistingEntryResolver<
-  R = boolean | null,
+  R = Category,
   Parent = {},
   Context = ApolloContext
 > = Resolver<R, Parent, Context, MutationCreateCategoryExistingEntryArgs>;
@@ -1012,7 +1012,7 @@ export interface MutationCreateCategoryExistingEntryArgs {
 }
 
 export type MutationCreateCategoryNewEntryResolver<
-  R = boolean | null,
+  R = Entry,
   Parent = {},
   Context = ApolloContext
 > = Resolver<R, Parent, Context, MutationCreateCategoryNewEntryArgs>;

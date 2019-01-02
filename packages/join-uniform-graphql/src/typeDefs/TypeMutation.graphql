@@ -1,8 +1,8 @@
 type Mutation {
   createCategoryExistingEntry(
     request: CategoryCreationRequestExistingEntry!
-  ): Boolean
-  createCategoryNewEntry(request: CategoryCreationRequestNewEntry!): Boolean
+  ): Category!
+  createCategoryNewEntry(request: CategoryCreationRequestNewEntry!): Entry!
   updateEntry(entryId: ID!, update: EntryUpdate!): Boolean
   deleteEntries(entryIds: [ID!]!): Boolean
   updateCategory(categoryId: ID!, update: CategoryUpdate!): Boolean

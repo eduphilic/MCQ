@@ -1,5 +1,7 @@
 mutation EntryManagerCreateCategoryAndNewEntry(
   $request: CategoryCreationRequestNewEntry!
 ) {
-  createCategoryNewEntry(request: $request)
+  createCategoryNewEntry(request: $request) {
+    id
+  }
 }

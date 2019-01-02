@@ -6,7 +6,14 @@
     files: [
       {
         match: "packages/join-uniform-app/**/*.graphql",
-        parser: "QueryParser"
+        parser: "QueryParser",
+        validate: {
+          extends: "gql-rules-query",
+          rules: {
+            KnownFragmentNames: "off",
+            NoUnusedFragments: "off"
+          }
+        }
       }
     ]
   }

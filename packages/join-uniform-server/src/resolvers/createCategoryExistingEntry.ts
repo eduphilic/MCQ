@@ -1,9 +1,8 @@
 import {
-  Category,
-  Entry,
   MutationCreateCategoryExistingEntryResolver,
   ValidatorCategoryCreationRequestExistingEntry,
 } from "@join-uniform/graphql/server";
+import { DBCategory, DBEntry } from "../models";
 
 export const createCategoryExistingEntry: MutationCreateCategoryExistingEntryResolver = async (
   _parent,
@@ -26,7 +25,7 @@ export const createCategoryExistingEntry: MutationCreateCategoryExistingEntryRes
   }
 
   // Create Category entry.
-  const newCategory: Omit<Category, "id"> = {
+  const newCategory: Omit<DBCategory, "id"> = {
     activated: false,
     education: request.categoryEducation,
     name: request.categoryName,
@@ -36,8 +35,8 @@ export const createCategoryExistingEntry: MutationCreateCategoryExistingEntryRes
   batch.create(newCategoryRef, newCategory);
 
   // Update Entry to contain the id of the new Category.
-  const entry = entrySnapshot.data() as Omit<Entry, "id">;
-  const entryUpdate: Omit<Entry, "id"> = {
+  const entry = entrySnapshot.data() as Omit<DBEntry, "id">;
+  const entryUpdate: Omit<DBEntry, "id"> = {
     ...entry,
     categories: [...entry.categories, newCategoryRef.id],
   };
@@ -45,5 +44,9 @@ export const createCategoryExistingEntry: MutationCreateCategoryExistingEntryRes
 
   await batch.commit();
 
-  return true;
+  // Return new category.
+  return {
+    id: newCategoryRef.id,
+    ...newCategory,
+  };
 };
