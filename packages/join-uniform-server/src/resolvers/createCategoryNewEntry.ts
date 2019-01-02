@@ -1,9 +1,9 @@
 import {
-  Category,
   Entry,
   MutationCreateCategoryNewEntryResolver,
   ValidatorCategoryCreationRequestNewEntry,
 } from "@join-uniform/graphql/server";
+import { DBCategory, DBEntry } from "../models";
 
 export const createCategoryNewEntry: MutationCreateCategoryNewEntryResolver = async (
   _parent,
@@ -17,7 +17,7 @@ export const createCategoryNewEntry: MutationCreateCategoryNewEntryResolver = as
   const entriesRef = database.collection("entries");
   const categoriesRef = database.collection("categories");
 
-  const newCategory: Omit<Category, "id"> = {
+  const newCategory: Omit<DBCategory, "id"> = {
     activated: false,
     education: request.categoryEducation,
     name: request.categoryName,
@@ -29,15 +29,27 @@ export const createCategoryNewEntry: MutationCreateCategoryNewEntryResolver = as
   const newCategoryRef = categoriesRef.doc();
   batch.create(newCategoryRef, newCategory);
 
-  const newEntry: Omit<Entry, "id"> = {
+  const newEntry: Omit<DBEntry, "id"> = {
     categories: [newCategoryRef.id],
     description: request.entryExplanation,
     logoUrl: request.entryLogoUrl,
     name: request.entryName,
   };
-  batch.create(entriesRef.doc(), newEntry);
+  const newEntryRef = entriesRef.doc();
+  batch.create(newEntryRef, newEntry);
 
   await batch.commit();
 
-  return true;
+  const mutationResult: Entry = {
+    ...newEntry,
+    id: newEntryRef.id,
+    categories: [
+      {
+        ...newCategory,
+        id: newCategoryRef.id,
+      },
+    ],
+  };
+
+  return mutationResult;
 };
