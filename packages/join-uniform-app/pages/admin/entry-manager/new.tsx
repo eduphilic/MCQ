@@ -23,6 +23,7 @@ import {
   EntryManagerCreateCategoryForExistingEntryMutation,
   EntryManagerCreateCategoryForExistingEntryVariables,
   EntryManagerGetEntriesComponent,
+  EntryManagerGetEntriesDocument,
   EntryManagerGetEntriesEntries,
   EntryManagerGetEntriesQuery,
   EntryManagerGetEntriesVariables,
@@ -312,14 +313,34 @@ function Page(props: Props) {
   }
 
   async function handleSubmitUsingExistingEntry(values: FormValues) {
+    const entryId = values.existingEntryId!;
     await createCategoryExistingEntry({
       variables: {
         request: {
-          existingEntryId: values.existingEntryId!,
+          existingEntryId: entryId,
           categoryName: values.categoryName,
           categoryEducation: values.categoryEducation,
           pricePerPaper: parseInt(values.pricePerPaper, 10),
         },
+      },
+      update: (proxy, fetchResult) => {
+        const queryResult = proxy.readQuery<
+          EntryManagerGetEntriesQuery,
+          EntryManagerGetEntriesVariables
+        >({ query: EntryManagerGetEntriesDocument });
+        if (!queryResult) return;
+        queryResult.entries
+          .find(e => e.id === entryId)!
+          .categories.push(fetchResult.data!.createCategoryExistingEntry);
+        proxy.writeQuery<
+          EntryManagerGetEntriesQuery,
+          EntryManagerGetEntriesVariables
+        >({
+          query: EntryManagerGetEntriesDocument,
+          data: queryResult,
+        });
+        // tslint:disable-next-line:no-floating-promises
+        Router.replace("/admin/entry-manager");
       },
     });
   }
