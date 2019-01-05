@@ -41,6 +41,7 @@
     "@join-uniform/localization": "1.0.0",
     "@join-uniform/theme": "1.0.0",
     "@zeit/next-typescript": "^1.1.1",
+    "babel-plugin-graphql-tag": "^1.6.0",
     "babel-plugin-styled-components": "^1.10.0",
     "cpx": "^1.5.0",
     "next-plugin-transpile-modules": "^1.0.0",

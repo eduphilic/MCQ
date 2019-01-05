@@ -5,7 +5,7 @@
 module.exports = api => {
   api.cache(true);
   const presets = ["next/babel", "@zeit/next-typescript/babel"];
-  const plugins = ["styled-components"];
+  const plugins = ["styled-components", "graphql-tag"];
 
   return { presets, plugins };
 };
