@@ -1,0 +1,5 @@
+mutation EntryManagerDeleteCategories($categoryIds: [ID!]!) {
+  deleteCategories(categoryIds: $categoryIds) {
+    ...EntryManagerCategoryParts
+  }
+}

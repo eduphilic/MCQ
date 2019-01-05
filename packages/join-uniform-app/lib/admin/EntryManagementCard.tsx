@@ -17,6 +17,8 @@ export type EntryManagementCardProps = {
   categories: EntryManagerEntryPartsCategories[];
   deleteEntryButtonDisabled: boolean;
   onCategoryToggle: (categoryId: string) => void;
+  onCategoryEditClick: (categoryId: string) => void;
+  onCategoriesDelete: (entryId: string, categoryIds: string[]) => void;
   onEditEntryClick: (entryId: string) => void;
   onDeleteEntryClick: (entryId: string) => void;
 };
@@ -29,6 +31,8 @@ export function EntryManagementCard(props: EntryManagementCardProps) {
     categories,
     deleteEntryButtonDisabled,
     onCategoryToggle,
+    onCategoryEditClick,
+    onCategoriesDelete,
     onEditEntryClick,
     onDeleteEntryClick,
   } = props;
@@ -79,6 +83,10 @@ export function EntryManagementCard(props: EntryManagementCardProps) {
           ],
         }),
       )}
+      onItemEditClick={onCategoryEditClick}
+      onRequestDeleteClick={categoryIds =>
+        onCategoriesDelete(entryId, categoryIds)
+      }
     />
   );
 }

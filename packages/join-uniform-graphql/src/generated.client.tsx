@@ -152,6 +152,18 @@ export type EntryManagerCreateCategoryForExistingEntryMutation = {
 
 export type EntryManagerCreateCategoryForExistingEntryCreateCategoryExistingEntry = EntryManagerCategoryPartsFragment;
 
+export type EntryManagerDeleteCategoriesVariables = {
+  categoryIds: string[];
+};
+
+export type EntryManagerDeleteCategoriesMutation = {
+  __typename?: "Mutation";
+
+  deleteCategories: EntryManagerDeleteCategoriesDeleteCategories[];
+};
+
+export type EntryManagerDeleteCategoriesDeleteCategories = EntryManagerCategoryPartsFragment;
+
 export type EntryManagerDeleteEntriesVariables = {
   entryIds: string[];
 };
@@ -512,6 +524,63 @@ export function EntryManagerCreateCategoryForExistingEntryHOC<
     EntryManagerCreateCategoryForExistingEntryVariables,
     EntryManagerCreateCategoryForExistingEntryProps<TChildProps>
   >(EntryManagerCreateCategoryForExistingEntryDocument, operationOptions);
+}
+export const EntryManagerDeleteCategoriesDocument = gql`
+  mutation EntryManagerDeleteCategories($categoryIds: [ID!]!) {
+    deleteCategories(categoryIds: $categoryIds) {
+      ...EntryManagerCategoryParts
+    }
+  }
+
+  ${EntryManagerCategoryPartsFragmentDoc}
+`;
+export class EntryManagerDeleteCategoriesComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<
+      EntryManagerDeleteCategoriesMutation,
+      EntryManagerDeleteCategoriesVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<
+        EntryManagerDeleteCategoriesMutation,
+        EntryManagerDeleteCategoriesVariables
+      >
+        mutation={EntryManagerDeleteCategoriesDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type EntryManagerDeleteCategoriesProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<
+    EntryManagerDeleteCategoriesMutation,
+    EntryManagerDeleteCategoriesVariables
+  >
+> &
+  TChildProps;
+export type EntryManagerDeleteCategoriesMutationFn = ReactApollo.MutationFn<
+  EntryManagerDeleteCategoriesMutation,
+  EntryManagerDeleteCategoriesVariables
+>;
+export function EntryManagerDeleteCategoriesHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        EntryManagerDeleteCategoriesMutation,
+        EntryManagerDeleteCategoriesVariables,
+        EntryManagerDeleteCategoriesProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    EntryManagerDeleteCategoriesMutation,
+    EntryManagerDeleteCategoriesVariables,
+    EntryManagerDeleteCategoriesProps<TChildProps>
+  >(EntryManagerDeleteCategoriesDocument, operationOptions);
 }
 export const EntryManagerDeleteEntriesDocument = gql`
   mutation EntryManagerDeleteEntries($entryIds: [ID!]!) {

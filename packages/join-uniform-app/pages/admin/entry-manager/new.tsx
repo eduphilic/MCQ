@@ -23,7 +23,6 @@ import {
   EntryManagerCreateCategoryForExistingEntryMutation,
   EntryManagerCreateCategoryForExistingEntryVariables,
   EntryManagerGetEntriesComponent,
-  EntryManagerGetEntriesDocument,
   EntryManagerGetEntriesEntries,
   EntryManagerGetEntriesQuery,
   EntryManagerGetEntriesVariables,
@@ -36,9 +35,12 @@ import React, { useState } from "react";
 import { adopt } from "react-adopt";
 import { MutationFn, QueryResult } from "react-apollo";
 
-import { DataProxy } from "apollo-cache";
 import { AdminLayoutDashboardContainer } from "~/containers";
-import { FormikImagePicker, FormikMuiTextField } from "~/lib/admin";
+import {
+  FormikImagePicker,
+  FormikMuiTextField,
+  updateStoreEntries,
+} from "~/lib/admin";
 
 type FormValues = {
   categoryName: string;
@@ -321,33 +323,6 @@ function Page(props: Props) {
           queryResult.entries.push(fetchResult.data!.createCategoryNewEntry);
         });
       },
-    });
-  }
-
-  /**
-   * Updates the list of Entries in the Apollo cache.
-   *
-   * @param proxy Apollo Cache proxy object.
-   * @param updateFn Called with the GetEntries query result to allow mutation.
-   */
-  function updateStoreEntries(
-    proxy: DataProxy,
-    updateFn: (queryResult: EntryManagerGetEntriesQuery) => void,
-  ) {
-    const queryResult = proxy.readQuery<
-      EntryManagerGetEntriesQuery,
-      EntryManagerGetEntriesVariables
-    >({ query: EntryManagerGetEntriesDocument });
-    if (!queryResult) return;
-
-    updateFn(queryResult);
-
-    proxy.writeQuery<
-      EntryManagerGetEntriesQuery,
-      EntryManagerGetEntriesVariables
-    >({
-      query: EntryManagerGetEntriesDocument,
-      data: queryResult,
     });
   }
 }

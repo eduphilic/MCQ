@@ -5,11 +5,13 @@ import {
   PendingChangesButton,
 } from "@join-uniform/components";
 import {
+  EntryManagerDeleteCategoriesComponent,
+  EntryManagerDeleteCategoriesMutation,
+  EntryManagerDeleteCategoriesVariables,
   EntryManagerDeleteEntriesComponent,
   EntryManagerDeleteEntriesMutation,
   EntryManagerDeleteEntriesVariables,
   EntryManagerGetEntriesComponent,
-  EntryManagerGetEntriesDocument,
   EntryManagerGetEntriesEntries,
   EntryManagerGetEntriesQuery,
   EntryManagerGetEntriesVariables,
@@ -22,7 +24,7 @@ import React from "react";
 import { adopt } from "react-adopt";
 import { MutationFn, QueryResult } from "react-apollo";
 import { AdminLayoutDashboardContainer } from "~/containers";
-import { EntryManagementCard } from "~/lib/admin";
+import { EntryManagementCard, updateStoreEntries } from "~/lib/admin";
 
 type FormValues = {
   entries: EntryManagerGetEntriesEntries[];
@@ -37,6 +39,10 @@ type RenderProps = {
     EntryManagerDeleteEntriesMutation,
     EntryManagerDeleteEntriesVariables
   >;
+  deleteCategories: MutationFn<
+    EntryManagerDeleteCategoriesMutation,
+    EntryManagerDeleteCategoriesVariables
+  >;
 };
 
 type Props = Omit<RenderProps, "getEntriesResult"> & {
@@ -46,6 +52,7 @@ type Props = Omit<RenderProps, "getEntriesResult"> & {
 const Composed = adopt<RenderProps, {}>({
   getEntriesResult: <EntryManagerGetEntriesComponent />,
   deleteEntries: <EntryManagerDeleteEntriesComponent />,
+  deleteCategories: <EntryManagerDeleteCategoriesComponent />,
 });
 
 export default function PageContainer() {
@@ -66,7 +73,7 @@ export default function PageContainer() {
 }
 
 function Page(props: Props) {
-  const { entries, deleteEntries } = props;
+  const { entries, deleteEntries, deleteCategories } = props;
   const form = useFormik<FormValues>({
     enableReinitialize: true,
     initialValues: { entries },
@@ -103,6 +110,8 @@ function Page(props: Props) {
               onCategoryToggle={categoryId =>
                 handleCategoryToggle(entry.id, categoryId)
               }
+              onCategoryEditClick={handleCategoryEditClick}
+              onCategoriesDelete={handleCategoriesDelete}
               onEditEntryClick={handleEditEntryButtonClick}
               onDeleteEntryClick={handleDeleteEntryButtonClick}
             />
@@ -111,6 +120,19 @@ function Page(props: Props) {
       </Grid>
     </AdminLayoutDashboardContainer>
   );
+
+  function handleCategoriesDelete(entryId: string, categoryIds: string[]) {
+    const entryIndex = form.values.entries.findIndex(e => e.id === entryId);
+    const categories = form.values.entries[entryIndex].categories.filter(
+      c => !categoryIds.includes(c.id),
+    );
+    form.setFieldValue(`entries[${entryIndex}].categories`, categories);
+  }
+
+  function handleCategoryEditClick(categoryId: string) {
+    // tslint:disable-next-line:no-floating-promises
+    Router.push(`/admin/entry-manager/edit-category?categoryId=${categoryId}`);
+  }
 
   function handleCategoryToggle(entryId: string, categoryId: string) {
     const entryIndex = form.values.entries.findIndex(e => e.id === entryId);
@@ -141,7 +163,34 @@ function Page(props: Props) {
     values: FormValues,
     helpers: FormikHelpers<FormValues>,
   ) {
-    // Handle entry deletions.
+    // Handle Category deletions.
+    const initialCategoryIds = entries.flatMap(e =>
+      e.categories.map(c => c.id),
+    );
+    const finalCategoryIds = values.entries.flatMap(e =>
+      e.categories.map(c => c.id),
+    );
+    const deletedCategoryIds = initialCategoryIds.filter(
+      id => !finalCategoryIds.includes(id),
+    );
+    if (deletedCategoryIds.length > 0) {
+      await deleteCategories({
+        variables: {
+          categoryIds: deletedCategoryIds,
+        },
+        update: proxy => {
+          updateStoreEntries(proxy, queryResult => {
+            queryResult.entries.forEach(entry => {
+              entry.categories = entry.categories.filter(
+                c => !deletedCategoryIds.includes(c.id),
+              );
+            });
+          });
+        },
+      });
+    }
+
+    // Handle Entry deletions.
     const initialEntryIds = entries.map(entry => entry.id);
     const finalEntryIds = values.entries.map(entry => entry.id);
     if (initialEntryIds.length !== finalEntryIds.length) {
@@ -151,18 +200,10 @@ function Page(props: Props) {
       await deleteEntries({
         variables: { entryIds: deletedEntryIds },
         update: proxy => {
-          const dataUpdate = proxy.readQuery<
-            EntryManagerGetEntriesQuery,
-            EntryManagerGetEntriesVariables
-          >({ query: EntryManagerGetEntriesDocument })!;
-
-          dataUpdate.entries = dataUpdate.entries.filter(
-            e => !deletedEntryIds.includes(e.id),
-          );
-
-          proxy.writeQuery({
-            query: EntryManagerGetEntriesDocument,
-            data: dataUpdate,
+          updateStoreEntries(proxy, queryResult => {
+            queryResult.entries = queryResult.entries.filter(
+              e => !deletedEntryIds.includes(e.id),
+            );
           });
         },
       });
