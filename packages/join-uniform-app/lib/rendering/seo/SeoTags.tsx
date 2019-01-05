@@ -1,12 +1,13 @@
-import { GetHtmlConfigHtmlConfig } from "@join-uniform/graphql";
+import { WithHtmlSeoDocumentHtmlConfigHtmlConfig } from "@join-uniform/graphql";
 import React from "react";
 
 const publicPath = "/static";
 
-export function SeoTags(props: { htmlConfig: GetHtmlConfigHtmlConfig }) {
+export function SeoTags(props: {
+  htmlConfig: WithHtmlSeoDocumentHtmlConfigHtmlConfig;
+}) {
   const {
     htmlConfig: {
-      googleAnalyticsId,
       metaKeywords,
       metaDescription,
       metaAuthor,
@@ -17,23 +18,6 @@ export function SeoTags(props: { htmlConfig: GetHtmlConfigHtmlConfig }) {
 
   return (
     <>
-      {/* Google Analytics */}
-      {process.env.NODE_ENV === "production" && googleAnalyticsId && (
-        <>
-          <script
-            key="googleTagManager"
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
-          />
-          <script
-            key="googleAnalytics"
-            dangerouslySetInnerHTML={{
-              __html: generateGoogleAnalyticsScriptContents(googleAnalyticsId),
-            }}
-          />
-        </>
-      )}
-
       {/* Manifest and Favicon */}
       {/* prettier-ignore */}
       <>
@@ -65,13 +49,4 @@ export function SeoTags(props: { htmlConfig: GetHtmlConfigHtmlConfig }) {
       {metaCopyright && <meta name="copyright" content={metaCopyright} />}
     </>
   );
-}
-
-function generateGoogleAnalyticsScriptContents(googleAnalyticsId: string) {
-  return `window.dataLayer = window.dataLayer || [];
-function gtag() { dataLayer.push(arguments); }
-gtag('js', new Date());
-gtag('config', '${googleAnalyticsId}');`
-    .split("\n")
-    .join("");
 }

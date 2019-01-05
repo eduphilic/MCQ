@@ -10,6 +10,7 @@ import {
 } from "next/document";
 import React, { Component } from "react";
 import { initializeApollo } from "../apollo";
+import { GoogleAnalyticsTags } from "./GoogleAnalyticsTag";
 import { SeoTags } from "./SeoTags";
 
 export function withHtmlSeoDocument<
@@ -41,7 +42,13 @@ export function withHtmlSeoDocument<
 
       initialProps.styles = (
         <>
-          <SeoTags htmlConfig={htmlConfig} />
+          <GoogleAnalyticsTags
+            googleAnalyticsId={htmlConfig.googleAnalyticsId}
+          />
+          {/* Only render SEO elements on landing pages. */}
+          {!/^\/a(dmin)?/.test(context.pathname) && (
+            <SeoTags htmlConfig={htmlConfig} />
+          )}
           {initialProps.styles}
         </>
       );
