@@ -5,13 +5,12 @@ import {
   PendingChangesButton,
 } from "@join-uniform/components";
 import {
-  EntryManagerDeleteEntriesHOC,
+  EntryManagerDeleteEntriesComponent,
   EntryManagerDeleteEntriesMutation,
   EntryManagerDeleteEntriesVariables,
+  EntryManagerGetEntriesComponent,
   EntryManagerGetEntriesDocument,
   EntryManagerGetEntriesEntries,
-  EntryManagerGetEntriesHOC,
-  EntryManagerGetEntriesProps,
   EntryManagerGetEntriesQuery,
   EntryManagerGetEntriesVariables,
 } from "@join-uniform/graphql";
@@ -20,28 +19,54 @@ import { FormikHelpers, useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
 import React from "react";
-import { MutationFn } from "react-apollo";
+import { adopt } from "react-adopt";
+import { MutationFn, QueryResult } from "react-apollo";
 import { AdminLayoutDashboardContainer } from "~/containers";
 import { EntryManagementCard } from "~/lib/admin";
 
-type Props = EntryManagerGetEntriesProps<{}> & {
+type FormValues = {
+  entries: EntryManagerGetEntriesEntries[];
+};
+
+type RenderProps = {
+  getEntriesResult: QueryResult<
+    EntryManagerGetEntriesQuery,
+    EntryManagerGetEntriesVariables
+  >;
   deleteEntries: MutationFn<
     EntryManagerDeleteEntriesMutation,
     EntryManagerDeleteEntriesVariables
   >;
 };
 
-type FormValues = {
+type Props = Omit<RenderProps, "getEntriesResult"> & {
   entries: EntryManagerGetEntriesEntries[];
 };
 
-function EntryManagerPage(props: Props) {
-  const { data, deleteEntries } = props;
-  if (!data || data.loading || data.error || !data.entries) {
-    return <LoadingSpinner />;
-  }
+const Composed = adopt<RenderProps, {}>({
+  getEntriesResult: <EntryManagerGetEntriesComponent />,
+  deleteEntries: <EntryManagerDeleteEntriesComponent />,
+});
 
-  const { entries } = data;
+export default function PageContainer() {
+  return (
+    <Composed>
+      {props => {
+        const {
+          getEntriesResult: { data, loading, error },
+          ...rest
+        } = props;
+        if (loading || error || !data) return <LoadingSpinner />;
+        const { entries } = data;
+
+        return <Page {...rest} entries={entries} />;
+      }}
+    </Composed>
+  );
+}
+
+function Page(props: Props) {
+  const { entries, deleteEntries } = props;
   const form = useFormik<FormValues>({
     enableReinitialize: true,
     initialValues: { entries },
@@ -129,10 +154,6 @@ function EntryManagerPage(props: Props) {
     helpers.setSubmitting(false);
   }
 }
-
-export default EntryManagerDeleteEntriesHOC({
-  name: "deleteEntries",
-})(EntryManagerGetEntriesHOC({})(EntryManagerPage));
 
 // import {
 //   Button,
