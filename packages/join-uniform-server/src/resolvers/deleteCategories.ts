@@ -1,42 +1,88 @@
 import {
-  Entry,
+  Category,
   MutationDeleteCategoriesResolver,
 } from "@join-uniform/graphql/server";
+import { DBCategory, DBEntry } from "../models";
 
-export const deleteCategories: MutationDeleteCategoriesResolver = async (
-  _parent,
-  args,
-  context,
-) => {
-  const { entryId, categoryIds } = args;
+const r: MutationDeleteCategoriesResolver = async (_parent, args, context) => {
+  const { categoryIds } = args;
   const { firebaseDatabase: database } = context;
 
-  const entryRef = await database.collection("entries").doc(entryId);
-  const entrySnapshot = await entryRef.get();
-  if (!entrySnapshot.exists) {
-    throw new Error("The specified Entry does not exist.");
-  }
-  const entryCategoryIds = entrySnapshot.get(
-    "categories",
-  ) as Entry["categories"];
-  if (categoryIds.find(categoryId => !entryCategoryIds.includes(categoryId))) {
+  const entriesCategoriesQuery = database
+    .collection("entries")
+    .select("categories");
+  const entriesCategoriesQuerySnapshot = await entriesCategoriesQuery.get();
+
+  const entriesIdAndCategoryFieldsOnly: Pick<
+    DBEntry,
+    "id" | "categories"
+  >[] = entriesCategoriesQuerySnapshot.docs.map(doc => ({
+    id: doc.id,
+    categories: doc.data().categories,
+  }));
+
+  const batch = database.batch();
+
+  // Queue Category IDs for removal from Entries.
+  const categoryIdDeletionQueue = new Set(categoryIds);
+  entriesIdAndCategoryFieldsOnly.forEach(entry => {
+    const originalCategoryList = [...entry.categories];
+    entry.categories = entry.categories.filter(c => !categoryIds.includes(c));
+    if (entry.categories.length === originalCategoryList.length) return;
+
+    const entryRef = database.collection("entries").doc(entry.id);
+    batch.update(entryRef, { categories: entry.categories });
+
+    originalCategoryList
+      .filter(id => !entry.categories.includes(id))
+      .forEach(id => {
+        categoryIdDeletionQueue.delete(id);
+      });
+  });
+
+  // Verify that all requested Category ids have been removed from their
+  // associated Entries.
+  if (categoryIdDeletionQueue.size !== 0) {
     throw new Error(
-      "Supplied category is not contained in the specified Entry.",
+      `The following Categories did not exist in Entries: ${Array.from(
+        categoryIdDeletionQueue.values(),
+      ).join(", ")}`,
     );
   }
 
-  const batch = database.batch();
-  const entryUpdate = entrySnapshot.data() as Omit<Entry, "id">;
-  entryUpdate.categories = entryUpdate.categories.filter(
-    c => !categoryIds.includes(c),
+  // Generate list of Categories which are still associated with Entries.
+  const remainingCategoryIds = entriesIdAndCategoryFieldsOnly.flatMap(
+    e => e.categories,
   );
-  batch.update(entryRef, entryUpdate);
 
-  categoryIds.forEach(categoryId => {
-    batch.delete(database.collection("categories").doc(categoryId));
+  // Remove now orphaned Category records and generate list of remaining
+  // Categories.
+  const orphanedCategoriesRemoved: string[] = [];
+  const categoriesQuerySnapshot = await database.collection("categories").get();
+  const remainingCategories: Category[] = [];
+  categoriesQuerySnapshot.docs.forEach(doc => {
+    if (!remainingCategoryIds.includes(doc.id)) {
+      orphanedCategoriesRemoved.push(doc.id);
+      batch.delete(doc.ref);
+      return;
+    }
+
+    const dbCategory = doc.data() as Omit<DBCategory, "id">;
+    const category: Category = {
+      ...dbCategory,
+      id: doc.id,
+    };
+    remainingCategories.push(category);
   });
+
+  /* tslint:disable-next-line:no-console */
+  console.log(
+    `Removed orphaned Categories: ${orphanedCategoriesRemoved.join(", ")}.`,
+  );
 
   await batch.commit();
 
-  return true;
+  return remainingCategories;
 };
+
+export { r as deleteCategories };

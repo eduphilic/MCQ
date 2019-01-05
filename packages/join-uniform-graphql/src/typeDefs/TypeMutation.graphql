@@ -6,7 +6,12 @@ type Mutation {
   updateEntry(entryId: ID!, update: EntryUpdate!): Boolean
   deleteEntries(entryIds: [ID!]!): Boolean
   updateCategory(categoryId: ID!, update: CategoryUpdate!): Boolean
-  deleteCategories(entryId: ID!, categoryIds: [ID!]!): Boolean
+
+  # Deletes Categories. It removes both the Category database entry and the
+  # Category's id from the corresponding Entry objects in the database. It
+  # returns the list of remaining Categories.
+  deleteCategories(categoryIds: [ID!]!): [Category!]!
+
   setCategoryActivationStatus(categoryId: ID!, activated: Boolean!): Boolean
   updateIndexPage(request: InputIndexPageConfigUpdate!): Boolean
 
