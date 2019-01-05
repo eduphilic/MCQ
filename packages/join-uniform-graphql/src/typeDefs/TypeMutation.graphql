@@ -12,7 +12,14 @@ type Mutation {
   # returns the list of remaining Categories.
   deleteCategories(categoryIds: [ID!]!): [Category!]!
 
-  setCategoryActivationStatus(categoryId: ID!, activated: Boolean!): Boolean
+  # Sets the activation status for the specified categories. The number of ids
+  # needs to match the number of booleans.
+  # Returns the updated Categories.
+  setCategoryActivationStatuses(
+    categoryIds: [ID!]!
+    activatedStatuses: [Boolean!]!
+  ): [Category!]!
+
   updateIndexPage(request: InputIndexPageConfigUpdate!): Boolean
 
   # Signs the parameters passed by the Cloudinary Upload Widget.

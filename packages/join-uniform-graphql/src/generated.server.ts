@@ -272,8 +272,8 @@ export interface Mutation {
   updateCategory?: boolean | null;
   /** Deletes Categories. It removes both the Category database entry and theCategory's id from the corresponding Entry objects in the database. Itreturns the list of remaining Categories. */
   deleteCategories: Category[];
-
-  setCategoryActivationStatus?: boolean | null;
+  /** Sets the activation status for the specified categories. The number of idsneeds to match the number of booleans.Returns the updated Categories. */
+  setCategoryActivationStatuses: Category[];
 
   updateIndexPage?: boolean | null;
   /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
@@ -333,10 +333,10 @@ export interface UpdateCategoryMutationArgs {
 export interface DeleteCategoriesMutationArgs {
   categoryIds: string[];
 }
-export interface SetCategoryActivationStatusMutationArgs {
-  categoryId: string;
+export interface SetCategoryActivationStatusesMutationArgs {
+  categoryIds: string[];
 
-  activated: boolean;
+  activatedStatuses: boolean[];
 }
 export interface UpdateIndexPageMutationArgs {
   request: InputIndexPageConfigUpdate;
@@ -974,9 +974,9 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
     TypeParent,
     Context
   >;
-
-  setCategoryActivationStatus?: MutationSetCategoryActivationStatusResolver<
-    boolean | null,
+  /** Sets the activation status for the specified categories. The number of idsneeds to match the number of booleans.Returns the updated Categories. */
+  setCategoryActivationStatuses?: MutationSetCategoryActivationStatusesResolver<
+    Category[],
     TypeParent,
     Context
   >;
@@ -1058,15 +1058,15 @@ export interface MutationDeleteCategoriesArgs {
   categoryIds: string[];
 }
 
-export type MutationSetCategoryActivationStatusResolver<
-  R = boolean | null,
+export type MutationSetCategoryActivationStatusesResolver<
+  R = Category[],
   Parent = {},
   Context = ApolloContext
-> = Resolver<R, Parent, Context, MutationSetCategoryActivationStatusArgs>;
-export interface MutationSetCategoryActivationStatusArgs {
-  categoryId: string;
+> = Resolver<R, Parent, Context, MutationSetCategoryActivationStatusesArgs>;
+export interface MutationSetCategoryActivationStatusesArgs {
+  categoryIds: string[];
 
-  activated: boolean;
+  activatedStatuses: boolean[];
 }
 
 export type MutationUpdateIndexPageResolver<
