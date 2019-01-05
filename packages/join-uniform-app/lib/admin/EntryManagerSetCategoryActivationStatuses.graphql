@@ -1,0 +1,11 @@
+mutation EntryManagerSetCategoryActivationStatuses(
+  $categoryIds: [ID!]!
+  $activationStatuses: [Boolean!]!
+) {
+  setCategoryActivationStatuses(
+    categoryIds: $categoryIds
+    activatedStatuses: $activationStatuses
+  ) {
+    ...EntryManagerCategoryParts
+  }
+}
