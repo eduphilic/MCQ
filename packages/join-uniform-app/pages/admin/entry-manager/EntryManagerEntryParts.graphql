@@ -4,6 +4,6 @@ fragment EntryManagerEntryParts on Entry {
   logoUrl
   description
   categories {
-    ...CategoryParts
+    ...EntryManagerCategoryParts
   }
 }

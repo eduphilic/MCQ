@@ -228,11 +228,7 @@ export type EntryManagerCreateCategoryAndNewEntryMutation = {
   createCategoryNewEntry: EntryManagerCreateCategoryAndNewEntryCreateCategoryNewEntry;
 };
 
-export type EntryManagerCreateCategoryAndNewEntryCreateCategoryNewEntry = {
-  __typename?: "Entry";
-
-  id: string;
-};
+export type EntryManagerCreateCategoryAndNewEntryCreateCategoryNewEntry = EntryManagerEntryPartsFragment;
 
 export type EntryManagerCreateCategoryForExistingEntryVariables = {
   request: CategoryCreationRequestExistingEntry;
@@ -244,7 +240,7 @@ export type EntryManagerCreateCategoryForExistingEntryMutation = {
   createCategoryExistingEntry: EntryManagerCreateCategoryForExistingEntryCreateCategoryExistingEntry;
 };
 
-export type EntryManagerCreateCategoryForExistingEntryCreateCategoryExistingEntry = CategoryPartsFragment;
+export type EntryManagerCreateCategoryForExistingEntryCreateCategoryExistingEntry = EntryManagerCategoryPartsFragment;
 
 export type EntryManagerDeleteEntriesVariables = {
   entryIds: string[];
@@ -264,47 +260,37 @@ export type EntryManagerGetEntriesQuery = {
   entries: EntryManagerGetEntriesEntries[];
 };
 
-export type EntryManagerGetEntriesEntries = {
+export type EntryManagerGetEntriesEntries = EntryManagerEntryPartsFragment;
+
+export type EntryManagerCategoryPartsFragment = {
+  __typename?: "Category";
+
+  id: string;
+
+  name: string;
+
+  education: string;
+
+  pricePerPaperRs: number;
+
+  activated: boolean;
+};
+
+export type EntryManagerEntryPartsFragment = {
   __typename?: "Entry";
 
   id: string;
 
   name: string;
 
-  description: string;
-
   logoUrl: string;
 
-  categories: EntryManagerGetEntriesCategories[];
+  description: string;
+
+  categories: EntryManagerEntryPartsCategories[];
 };
 
-export type EntryManagerGetEntriesCategories = {
-  __typename?: "Category";
-
-  id: string;
-
-  name: string;
-
-  education: string;
-
-  pricePerPaperRs: number;
-
-  activated: boolean;
-};
-
-export type CategoryPartsFragment = {
-  __typename?: "Category";
-
-  id: string;
-
-  name: string;
-
-  education: string;
-
-  pricePerPaperRs: number;
-
-  activated: boolean;
-};
+export type EntryManagerEntryPartsCategories = EntryManagerCategoryPartsFragment;
 
 import * as ReactApollo from "react-apollo";
 import * as React from "react";
@@ -315,14 +301,28 @@ import gql from "graphql-tag";
 // Fragments
 // ====================================================
 
-export const CategoryPartsFragmentDoc = gql`
-  fragment CategoryParts on Category {
+export const EntryManagerCategoryPartsFragmentDoc = gql`
+  fragment EntryManagerCategoryParts on Category {
     id
     name
     education
     pricePerPaperRs
     activated
   }
+`;
+
+export const EntryManagerEntryPartsFragmentDoc = gql`
+  fragment EntryManagerEntryParts on Entry {
+    id
+    name
+    logoUrl
+    description
+    categories {
+      ...EntryManagerCategoryParts
+    }
+  }
+
+  ${EntryManagerCategoryPartsFragmentDoc}
 `;
 
 // ====================================================
@@ -707,9 +707,11 @@ export const EntryManagerCreateCategoryAndNewEntryDocument = gql`
     $request: CategoryCreationRequestNewEntry!
   ) {
     createCategoryNewEntry(request: $request) {
-      id
+      ...EntryManagerEntryParts
     }
   }
+
+  ${EntryManagerEntryPartsFragmentDoc}
 `;
 export class EntryManagerCreateCategoryAndNewEntryComponent extends React.Component<
   Partial<
@@ -769,11 +771,11 @@ export const EntryManagerCreateCategoryForExistingEntryDocument = gql`
     $request: CategoryCreationRequestExistingEntry!
   ) {
     createCategoryExistingEntry(request: $request) {
-      ...CategoryParts
+      ...EntryManagerCategoryParts
     }
   }
 
-  ${CategoryPartsFragmentDoc}
+  ${EntryManagerCategoryPartsFragmentDoc}
 `;
 export class EntryManagerCreateCategoryForExistingEntryComponent extends React.Component<
   Partial<
@@ -884,19 +886,11 @@ export function EntryManagerDeleteEntriesHOC<TProps, TChildProps = any>(
 export const EntryManagerGetEntriesDocument = gql`
   query EntryManagerGetEntries {
     entries {
-      id
-      name
-      description
-      logoUrl
-      categories {
-        id
-        name
-        education
-        pricePerPaperRs
-        activated
-      }
+      ...EntryManagerEntryParts
     }
   }
+
+  ${EntryManagerEntryPartsFragmentDoc}
 `;
 export class EntryManagerGetEntriesComponent extends React.Component<
   Partial<

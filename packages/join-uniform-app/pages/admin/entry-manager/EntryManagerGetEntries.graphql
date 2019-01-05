@@ -1,15 +1,5 @@
 query EntryManagerGetEntries {
   entries {
-    id
-    name
-    description
-    logoUrl
-    categories {
-      id
-      name
-      education
-      pricePerPaperRs
-      activated
-    }
+    ...EntryManagerEntryParts
   }
 }

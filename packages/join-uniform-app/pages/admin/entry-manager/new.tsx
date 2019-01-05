@@ -32,10 +32,11 @@ import {
 } from "@join-uniform/graphql";
 import { FormikHelpers, useFormik } from "formik";
 import Router from "next/router";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { adopt } from "react-adopt";
 import { MutationFn, QueryResult } from "react-apollo";
 
+import { DataProxy } from "apollo-cache";
 import { AdminLayoutDashboardContainer } from "~/containers";
 import { FormikImagePicker, FormikMuiTextField } from "~/lib/admin";
 
@@ -95,7 +96,11 @@ export default function PageContainer() {
 }
 
 function Page(props: Props) {
-  const { entries, createCategoryExistingEntry } = props;
+  const {
+    entries,
+    createCategoryExistingEntry,
+    createCategoryNewEntry,
+  } = props;
 
   const [entrySource, setEntrySource] = useState<"existing" | "new">(
     entries.length > 0 ? "existing" : "new",
@@ -124,45 +129,6 @@ function Page(props: Props) {
   });
 
   return (
-    // onSubmit={async values => {
-    // if (values.entrySource === "existing") {
-    //   const entryCategoriesVars: GetEntryCategoriesVariables = {
-    //     entryId: values.existingEntryId!,
-    //   };
-    //   await createCategoryExistingEntry({
-    //     variables: {
-    //       request: {
-    //         categoryEducation: values.categoryEducation,
-    //         categoryName: values.categoryName,
-    //         existingEntryId: values.existingEntryId!,
-    //         pricePerPaper: parseInt(values.pricePerPaper, 10),
-    //       },
-    //     },
-    //     refetchQueries: [
-    //       {
-    //         query: GetEntryCategoriesDocument,
-    //         variables: entryCategoriesVars,
-    //       },
-    //     ],
-    //   });
-    //   await Router.replace("/admin/entry-manager");
-    //   return;
-    // }
-    // await createCategoryNewEntry({
-    //   variables: {
-    //     request: {
-    //       categoryEducation: values.categoryEducation,
-    //       categoryName: values.categoryName,
-    //       entryExplanation: values.entryExplanation,
-    //       entryLogoUrl: values.entryLogoUrl!,
-    //       entryName: values.entryName,
-    //       pricePerPaper: parseInt(values.pricePerPaper, 10),
-    //     },
-    //   },
-    // });
-    // await refetch();
-    // await Router.replace("/admin/entry-manager");
-    // }}
     <AdminLayoutDashboardContainer
       title="New Entry"
       appBarButtons={[
@@ -309,7 +275,12 @@ function Page(props: Props) {
     if (entrySource === "existing") {
       await handleSubmitUsingExistingEntry(values);
     }
+    if (entrySource === "new") {
+      await handleSubmitUsingNewEntry(values);
+    }
     helpers.setSubmitting(false);
+
+    await Router.replace("/admin/entry-manager");
   }
 
   async function handleSubmitUsingExistingEntry(values: FormValues) {
@@ -324,24 +295,59 @@ function Page(props: Props) {
         },
       },
       update: (proxy, fetchResult) => {
-        const queryResult = proxy.readQuery<
-          EntryManagerGetEntriesQuery,
-          EntryManagerGetEntriesVariables
-        >({ query: EntryManagerGetEntriesDocument });
-        if (!queryResult) return;
-        queryResult.entries
-          .find(e => e.id === entryId)!
-          .categories.push(fetchResult.data!.createCategoryExistingEntry);
-        proxy.writeQuery<
-          EntryManagerGetEntriesQuery,
-          EntryManagerGetEntriesVariables
-        >({
-          query: EntryManagerGetEntriesDocument,
-          data: queryResult,
+        updateStoreEntries(proxy, queryResult => {
+          queryResult.entries
+            .find(e => e.id === entryId)!
+            .categories.push(fetchResult.data!.createCategoryExistingEntry);
         });
-        // tslint:disable-next-line:no-floating-promises
-        Router.replace("/admin/entry-manager");
       },
+    });
+  }
+
+  async function handleSubmitUsingNewEntry(values: FormValues) {
+    await createCategoryNewEntry({
+      variables: {
+        request: {
+          entryName: values.entryName,
+          entryExplanation: values.entryExplanation,
+          entryLogoUrl: values.entryLogoUrl!,
+          categoryName: values.categoryName,
+          categoryEducation: values.categoryEducation,
+          pricePerPaper: parseInt(values.pricePerPaper, 10),
+        },
+      },
+      update: (proxy, fetchResult) => {
+        updateStoreEntries(proxy, queryResult => {
+          queryResult.entries.push(fetchResult.data!.createCategoryNewEntry);
+        });
+      },
+    });
+  }
+
+  /**
+   * Updates the list of Entries in the Apollo cache.
+   *
+   * @param proxy Apollo Cache proxy object.
+   * @param updateFn Called with the GetEntries query result to allow mutation.
+   */
+  function updateStoreEntries(
+    proxy: DataProxy,
+    updateFn: (queryResult: EntryManagerGetEntriesQuery) => void,
+  ) {
+    const queryResult = proxy.readQuery<
+      EntryManagerGetEntriesQuery,
+      EntryManagerGetEntriesVariables
+    >({ query: EntryManagerGetEntriesDocument });
+    if (!queryResult) return;
+
+    updateFn(queryResult);
+
+    proxy.writeQuery<
+      EntryManagerGetEntriesQuery,
+      EntryManagerGetEntriesVariables
+    >({
+      query: EntryManagerGetEntriesDocument,
+      data: queryResult,
     });
   }
 }

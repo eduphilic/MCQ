@@ -2,6 +2,6 @@ mutation EntryManagerCreateCategoryForExistingEntry(
   $request: CategoryCreationRequestExistingEntry!
 ) {
   createCategoryExistingEntry(request: $request) {
-    ...CategoryParts
+    ...EntryManagerCategoryParts
   }
 }

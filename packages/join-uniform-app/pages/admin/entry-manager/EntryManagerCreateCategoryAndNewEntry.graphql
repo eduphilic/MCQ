@@ -2,6 +2,6 @@ mutation EntryManagerCreateCategoryAndNewEntry(
   $request: CategoryCreationRequestNewEntry!
 ) {
   createCategoryNewEntry(request: $request) {
-    id
+    ...EntryManagerEntryParts
   }
 }
