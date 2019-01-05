@@ -1,4 +1,10 @@
-import { Button, DashboardCard, Typography } from "@join-uniform/components";
+import {
+  Button,
+  DashboardCard,
+  DashboardCardItem,
+  Typography,
+} from "@join-uniform/components";
+import { EntryManagerEntryPartsCategories } from "@join-uniform/graphql";
 import { styled } from "@join-uniform/theme";
 import React, { useMemo } from "react";
 import slugify from "slugify";
@@ -8,7 +14,9 @@ export type EntryManagementCardProps = {
   entryId: string;
   entryName: string;
   entryLogoUrl: string;
+  categories: EntryManagerEntryPartsCategories[];
   deleteEntryButtonDisabled: boolean;
+  onCategoryToggle: (categoryId: string) => void;
   onEditEntryClick: (entryId: string) => void;
   onDeleteEntryClick: (entryId: string) => void;
 };
@@ -18,7 +26,9 @@ export function EntryManagementCard(props: EntryManagementCardProps) {
     entryId,
     entryName,
     entryLogoUrl,
+    categories,
     deleteEntryButtonDisabled,
+    onCategoryToggle,
     onEditEntryClick,
     onDeleteEntryClick,
   } = props;
@@ -49,7 +59,26 @@ export function EntryManagementCard(props: EntryManagementCardProps) {
           </Button>
         </>
       }
-      items={[]}
+      items={categories.map(
+        (category): DashboardCardItem => ({
+          key: category.id,
+          columns: [
+            {
+              primaryText: category.name,
+              secondaryText: category.education,
+            },
+            {
+              primaryText: category.pricePerPaperRs.toString(),
+            },
+            {
+              switchChecked: category.activated,
+              switchAlwaysClickable: true,
+              switchTooltipTitle: "Toggle Activation",
+              switchOnChange: () => onCategoryToggle(category.id),
+            },
+          ],
+        }),
+      )}
     />
   );
 }

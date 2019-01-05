@@ -98,7 +98,11 @@ function Page(props: Props) {
               entryId={entry.id}
               entryName={entry.name}
               entryLogoUrl={entry.logoUrl}
+              categories={entry.categories}
               deleteEntryButtonDisabled={entry.categories.length > 0}
+              onCategoryToggle={categoryId =>
+                handleCategoryToggle(entry.id, categoryId)
+              }
               onEditEntryClick={handleEditEntryButtonClick}
               onDeleteEntryClick={handleDeleteEntryButtonClick}
             />
@@ -107,6 +111,19 @@ function Page(props: Props) {
       </Grid>
     </AdminLayoutDashboardContainer>
   );
+
+  function handleCategoryToggle(entryId: string, categoryId: string) {
+    const entryIndex = form.values.entries.findIndex(e => e.id === entryId);
+    const categoryIndex = form.values.entries[entryIndex].categories.findIndex(
+      c => c.id === categoryId,
+    );
+    const activated =
+      form.values.entries[entryIndex].categories[categoryIndex].activated;
+    form.setFieldValue(
+      `entries[${entryIndex}].categories[${categoryIndex}].activated`,
+      !activated,
+    );
+  }
 
   function handleEditEntryButtonClick(entryId: string) {
     // tslint:disable-next-line:no-floating-promises
