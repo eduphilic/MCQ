@@ -8,7 +8,7 @@ import {
 } from "../utils";
 
 export type FormikImagePickerProps<FormValues> = {
-  name: keyof FormValues;
+  name: Exclude<keyof FormValues, number | symbol>;
   folder: string;
   form: FormikProps<FormValues>;
   options?: Partial<CloudinaryOpenUploadWidgetOptions>;
@@ -109,7 +109,7 @@ export function FormikImagePicker<FormValues>(
     <FormikImagePickerBase
       value={(form.values[name] || "").toString()}
       folder={folder}
-      onValueChange={value => form.setFieldValue(name.toString(), value)}
+      onValueChange={value => form.setFieldValue(name, value)}
       options={options}
     />
   );
@@ -143,6 +143,6 @@ export function FormikImagePickerArrayItem<FormValues>(
   );
 
   function handleChange(newValue: string) {
-    form.setFieldValue(name, newValue);
+    form.setFieldValue(name as any, newValue);
   }
 }
