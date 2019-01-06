@@ -196,6 +196,18 @@ export type EntryManagerGetEntriesQuery = {
 
 export type EntryManagerGetEntriesEntries = EntryManagerEntryPartsFragment;
 
+export type EntryManagerGetEntryVariables = {
+  entryId: string;
+};
+
+export type EntryManagerGetEntryQuery = {
+  __typename?: "Query";
+
+  entry: EntryManagerGetEntryEntry | null;
+};
+
+export type EntryManagerGetEntryEntry = EntryManagerEntryPartsFragment;
+
 export type EntryManagerSetCategoryActivationStatusesVariables = {
   categoryIds: string[];
   activationStatuses: boolean[];
@@ -221,6 +233,19 @@ export type EntryManagerUpdateCategoryMutation = {
 };
 
 export type EntryManagerUpdateCategoryUpdateCategory = EntryManagerCategoryPartsFragment;
+
+export type EntryManagerUpdateEntryVariables = {
+  entryId: string;
+  update: EntryUpdate;
+};
+
+export type EntryManagerUpdateEntryMutation = {
+  __typename?: "Mutation";
+
+  updateEntry: EntryManagerUpdateEntryUpdateEntry;
+};
+
+export type EntryManagerUpdateEntryUpdateEntry = EntryManagerEntryPartsFragment;
 
 export type WithHtmlSeoDocumentHtmlConfigVariables = {};
 
@@ -779,6 +804,59 @@ export function EntryManagerGetEntriesHOC<TProps, TChildProps = any>(
     EntryManagerGetEntriesProps<TChildProps>
   >(EntryManagerGetEntriesDocument, operationOptions);
 }
+export const EntryManagerGetEntryDocument = gql`
+  query EntryManagerGetEntry($entryId: ID!) {
+    entry(entryId: $entryId) {
+      ...EntryManagerEntryParts
+    }
+  }
+
+  ${EntryManagerEntryPartsFragmentDoc}
+`;
+export class EntryManagerGetEntryComponent extends React.Component<
+  Partial<
+    ReactApollo.QueryProps<
+      EntryManagerGetEntryQuery,
+      EntryManagerGetEntryVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Query<
+        EntryManagerGetEntryQuery,
+        EntryManagerGetEntryVariables
+      >
+        query={EntryManagerGetEntryDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type EntryManagerGetEntryProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<
+    EntryManagerGetEntryQuery,
+    EntryManagerGetEntryVariables
+  >
+> &
+  TChildProps;
+export function EntryManagerGetEntryHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        EntryManagerGetEntryQuery,
+        EntryManagerGetEntryVariables,
+        EntryManagerGetEntryProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    EntryManagerGetEntryQuery,
+    EntryManagerGetEntryVariables,
+    EntryManagerGetEntryProps<TChildProps>
+  >(EntryManagerGetEntryDocument, operationOptions);
+}
 export const EntryManagerSetCategoryActivationStatusesDocument = gql`
   mutation EntryManagerSetCategoryActivationStatuses(
     $categoryIds: [ID!]!
@@ -906,6 +984,63 @@ export function EntryManagerUpdateCategoryHOC<TProps, TChildProps = any>(
     EntryManagerUpdateCategoryVariables,
     EntryManagerUpdateCategoryProps<TChildProps>
   >(EntryManagerUpdateCategoryDocument, operationOptions);
+}
+export const EntryManagerUpdateEntryDocument = gql`
+  mutation EntryManagerUpdateEntry($entryId: ID!, $update: EntryUpdate!) {
+    updateEntry(entryId: $entryId, update: $update) {
+      ...EntryManagerEntryParts
+    }
+  }
+
+  ${EntryManagerEntryPartsFragmentDoc}
+`;
+export class EntryManagerUpdateEntryComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<
+      EntryManagerUpdateEntryMutation,
+      EntryManagerUpdateEntryVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<
+        EntryManagerUpdateEntryMutation,
+        EntryManagerUpdateEntryVariables
+      >
+        mutation={EntryManagerUpdateEntryDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type EntryManagerUpdateEntryProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<
+    EntryManagerUpdateEntryMutation,
+    EntryManagerUpdateEntryVariables
+  >
+> &
+  TChildProps;
+export type EntryManagerUpdateEntryMutationFn = ReactApollo.MutationFn<
+  EntryManagerUpdateEntryMutation,
+  EntryManagerUpdateEntryVariables
+>;
+export function EntryManagerUpdateEntryHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        EntryManagerUpdateEntryMutation,
+        EntryManagerUpdateEntryVariables,
+        EntryManagerUpdateEntryProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    EntryManagerUpdateEntryMutation,
+    EntryManagerUpdateEntryVariables,
+    EntryManagerUpdateEntryProps<TChildProps>
+  >(EntryManagerUpdateEntryDocument, operationOptions);
 }
 export const WithHtmlSeoDocumentHtmlConfigDocument = gql`
   query WithHtmlSeoDocumentHtmlConfig {

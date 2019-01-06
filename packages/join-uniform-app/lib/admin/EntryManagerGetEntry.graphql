@@ -1,0 +1,5 @@
+query EntryManagerGetEntry($entryId: ID!) {
+  entry(entryId: $entryId) {
+    ...EntryManagerEntryParts
+  }
+}

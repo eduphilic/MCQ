@@ -3,7 +3,7 @@ type Mutation {
     request: CategoryCreationRequestExistingEntry!
   ): Category!
   createCategoryNewEntry(request: CategoryCreationRequestNewEntry!): Entry!
-  updateEntry(entryId: ID!, update: EntryUpdate!): Boolean
+  updateEntry(entryId: ID!, update: EntryUpdate!): Entry!
   deleteEntries(entryIds: [ID!]!): Boolean
   updateCategory(categoryId: ID!, update: CategoryUpdate!): Category!
 

@@ -5,20 +5,29 @@ import {
   Grid,
   LoadingSpinner,
   PendingChangesButton,
-  Typography,
 } from "@join-uniform/components";
-import { GetEntryComponent, UpdateEntryComponent } from "@join-uniform/graphql";
-import { Formik } from "formik";
-import { NextSFC } from "next";
+import {
+  EntryManagerEntryPartsFragment,
+  EntryManagerGetEntryComponent,
+  EntryManagerGetEntryProps,
+  EntryManagerGetEntryQuery,
+  EntryManagerUpdateEntryComponent,
+  EntryManagerUpdateEntryMutation,
+  EntryManagerUpdateEntryProps,
+} from "@join-uniform/graphql";
+import { useFormik } from "formik";
+import { NextContext } from "next";
 import Router from "next/router";
 import React from "react";
+import { adopt } from "react-adopt";
+import { MutationFn, QueryResult } from "react-apollo";
 import * as yup from "yup";
 import { AdminLayoutDashboardContainer } from "~/containers";
-import { FormikImagePicker, FormikMuiTextField } from "~/lib/admin";
-
-type Props = {
-  entryId?: string;
-};
+import {
+  ErrorMessagePageContents,
+  FormikImagePicker,
+  FormikMuiTextField,
+} from "~/lib/admin";
 
 type FormValues = {
   name: string;
@@ -26,120 +35,140 @@ type FormValues = {
   logoUrl: string;
 };
 
+type InitialProps = {
+  entryId?: string;
+};
+
+type RenderProps = {
+  updateEntry: MutationFn<
+    EntryManagerUpdateEntryMutation,
+    EntryManagerUpdateEntryProps
+  >;
+  getEntryResult: QueryResult<
+    EntryManagerGetEntryQuery,
+    EntryManagerGetEntryProps
+  >;
+};
+
+type Props = Omit<RenderProps, "getEntryResult"> & {
+  entry: EntryManagerEntryPartsFragment;
+};
+
 const pageTitle = "Edit Entry";
 
-const AdminEntryManagerEditEntryPage: NextSFC<Props> = props => {
+const Composed = adopt<RenderProps, { entryId: string }>({
+  updateEntry: <EntryManagerUpdateEntryComponent />,
+  getEntryResult: props => (
+    <EntryManagerGetEntryComponent variables={{ entryId: props.entryId }}>
+      {props.render}
+    </EntryManagerGetEntryComponent>
+  ),
+});
+
+export default function PageContainer(props: InitialProps) {
   const { entryId } = props;
 
-  if (!entryId || entryId.length < 1) {
-    return renderNotFoundNode();
+  if (!entryId) {
+    return (
+      <ErrorMessagePageContents
+        pageTitle={pageTitle}
+        errorMessage="Expected an entry id."
+      />
+    );
   }
 
   return (
-    <UpdateEntryComponent>
-      {updateEntry => (
-        <GetEntryComponent variables={{ entryId }}>
-          {getEntryResult => {
-            if (getEntryResult.loading || getEntryResult.error) {
-              return <LoadingSpinner />;
-            }
+    <Composed entryId={entryId}>
+      {({ getEntryResult, updateEntry }) => {
+        const { loading, error, data } = getEntryResult;
+        if (loading || error || !data) return <LoadingSpinner />;
 
-            const entry = getEntryResult.data!.entry;
-            if (!entry) return renderNotFoundNode();
+        const { entry } = data;
+        if (!entry) {
+          return (
+            <ErrorMessagePageContents
+              pageTitle={pageTitle}
+              errorMessage="The specified entry was not found."
+            />
+          );
+        }
 
-            return (
-              <Formik<FormValues>
-                initialValues={{
-                  name: entry.name,
-                  description: entry.description,
-                  logoUrl: entry.logoUrl,
-                }}
-                onSubmit={async values => {
-                  await updateEntry({
-                    variables: {
-                      entryId: entry.id,
-                      update: values,
-                    },
-                  });
-                  await getEntryResult.refetch();
-                  await Router.push("/admin/entry-manager");
-                }}
-                validationSchema={yup.object<FormValues>({
-                  name: yup.string().required(),
-                  description: yup.string().required(),
-                  logoUrl: yup.string().required(),
-                })}
-              >
-                {form => (
-                  <AdminLayoutDashboardContainer
-                    title={pageTitle}
-                    appBarButtons={[
-                      <PendingChangesButton
-                        hasDiscardableChanges={form.dirty}
-                        hasPublishableChanges={form.isValid}
-                        onDiscardButtonClick={() => form.resetForm()}
-                        onPublishButtonClick={() => form.submitForm()}
-                      />,
-                    ]}
-                  >
-                    <Grid container contentCenter spacing={16}>
-                      <Grid item xs={12}>
-                        <Card>
-                          <CardHeader title="Entry" variant="admin" />
-                          <CardContent>
-                            <FormikMuiTextField
-                              name="name"
-                              label="Name"
-                              form={form}
-                            />
-                            <FormikMuiTextField
-                              name="description"
-                              label="Description"
-                              form={form}
-                            />
-                          </CardContent>
-                          <CardHeader title="Entry Logo" variant="admin" />
-                          <CardContent>
-                            <FormikImagePicker
-                              name="logoUrl"
-                              folder="entries"
-                              form={form}
-                            />
-                          </CardContent>
-                        </Card>
-                      </Grid>
-                    </Grid>
-                  </AdminLayoutDashboardContainer>
-                )}
-              </Formik>
-            );
-          }}
-        </GetEntryComponent>
-      )}
-    </UpdateEntryComponent>
+        return (
+          <AdminEntryManagerEditEntryPage
+            entry={entry}
+            updateEntry={updateEntry}
+          />
+        );
+      }}
+    </Composed>
   );
+}
 
-  function renderNotFoundNode() {
-    return (
-      <AdminLayoutDashboardContainer title={pageTitle}>
-        <Grid container contentCenter spacing={16}>
-          <Grid item xs={12}>
-            <Typography>Specified Entry does not exist.</Typography>
-          </Grid>
-        </Grid>
-      </AdminLayoutDashboardContainer>
-    );
-  }
-};
-
-AdminEntryManagerEditEntryPage.getInitialProps = async ctx => {
-  const entryIdQuery = ctx.query.entryId;
+PageContainer.getInitialProps = async (ctx: NextContext) => {
+  const entryId = ctx.query.entryId;
 
   return {
-    entryId: Array.isArray(entryIdQuery) ? entryIdQuery[0] : entryIdQuery,
+    entryId: Array.isArray(entryId) ? entryId[0] : entryId,
   };
 };
 
-export default AdminEntryManagerEditEntryPage;
+function AdminEntryManagerEditEntryPage(props: Props) {
+  const { entry, updateEntry } = props;
 
-export const test = <AdminEntryManagerEditEntryPage />;
+  const form = useFormik<FormValues>({
+    initialValues: {
+      name: entry.name,
+      description: entry.description,
+      logoUrl: entry.logoUrl,
+    },
+    onSubmit: async values => {
+      await updateEntry({
+        variables: {
+          entryId: entry.id,
+          update: values,
+        },
+      });
+      // await getEntryResult.refetch();
+      await Router.push("/admin/entry-manager");
+    },
+    validationSchema: yup.object<FormValues>({
+      name: yup.string().required(),
+      description: yup.string().required(),
+      logoUrl: yup.string().required(),
+    }),
+  });
+
+  return (
+    <AdminLayoutDashboardContainer
+      title={pageTitle}
+      appBarButtons={[
+        <PendingChangesButton
+          hasDiscardableChanges={form.dirty}
+          hasPublishableChanges={form.isValid}
+          onDiscardButtonClick={() => form.resetForm()}
+          onPublishButtonClick={() => form.submitForm()}
+        />,
+      ]}
+    >
+      <Grid container contentCenter spacing={16}>
+        <Grid item xs={12}>
+          <Card>
+            <CardHeader title="Entry" variant="admin" />
+            <CardContent>
+              <FormikMuiTextField name="name" label="Name" form={form} />
+              <FormikMuiTextField
+                name="description"
+                label="Description"
+                form={form}
+              />
+            </CardContent>
+            <CardHeader title="Entry Logo" variant="admin" />
+            <CardContent>
+              <FormikImagePicker name="logoUrl" folder="entries" form={form} />
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+    </AdminLayoutDashboardContainer>
+  );
+}

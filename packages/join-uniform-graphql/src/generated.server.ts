@@ -265,7 +265,7 @@ export interface Mutation {
 
   createCategoryNewEntry: Entry;
 
-  updateEntry?: boolean | null;
+  updateEntry: Entry;
 
   deleteEntries?: boolean | null;
 
@@ -951,11 +951,7 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
     Context
   >;
 
-  updateEntry?: MutationUpdateEntryResolver<
-    boolean | null,
-    TypeParent,
-    Context
-  >;
+  updateEntry?: MutationUpdateEntryResolver<Entry, TypeParent, Context>;
 
   deleteEntries?: MutationDeleteEntriesResolver<
     boolean | null,
@@ -1019,7 +1015,7 @@ export interface MutationCreateCategoryNewEntryArgs {
 }
 
 export type MutationUpdateEntryResolver<
-  R = boolean | null,
+  R = Entry,
   Parent = {},
   Context = ApolloContext
 > = Resolver<R, Parent, Context, MutationUpdateEntryArgs>;

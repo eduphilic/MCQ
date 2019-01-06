@@ -1,8 +1,8 @@
 import {
   Category,
-  Entry,
   QueryEntryCategoriesResolver,
 } from "@join-uniform/graphql/server";
+import { DBCategory, DBEntry } from "../models";
 
 export const entryCategories: QueryEntryCategoriesResolver = async (
   _parent,
@@ -19,7 +19,7 @@ export const entryCategories: QueryEntryCategoriesResolver = async (
   if (!entrySnapshot.exists) throw new Error("Specified Entry does not exist.");
 
   const categoryIds = entrySnapshot.get("categories") as Omit<
-    Entry,
+    DBEntry,
     "id"
   >["categories"];
 
@@ -35,7 +35,7 @@ export const entryCategories: QueryEntryCategoriesResolver = async (
 
   return categoriesSnapshots.map(
     (categorySnapshot): Category => {
-      const categoryPartial = categorySnapshot.data() as Omit<Category, "id">;
+      const categoryPartial = categorySnapshot.data() as Omit<DBCategory, "id">;
 
       return {
         ...categoryPartial,

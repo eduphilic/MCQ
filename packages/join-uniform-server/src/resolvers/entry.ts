@@ -1,6 +1,8 @@
 import { Entry, QueryEntryResolver } from "@join-uniform/graphql/server";
+import { DBEntry } from "../models";
+import { entryCategories } from "./entryCategories";
 
-export const entry: QueryEntryResolver = async (_parent, args, context) => {
+const r: QueryEntryResolver = async (parent, args, context, info) => {
   const { entryId } = args;
   const { firebaseDatabase: database } = context;
 
@@ -10,9 +12,12 @@ export const entry: QueryEntryResolver = async (_parent, args, context) => {
   if (!entrySnapshot.exists) return null;
 
   const entryResult: Entry = {
-    ...(entrySnapshot.data() as Omit<Entry, "id">),
+    ...(entrySnapshot.data() as Omit<DBEntry, "id">),
     id: entrySnapshot.id,
+    categories: await entryCategories(parent, { entryId }, context, info),
   };
 
   return entryResult;
 };
+
+export { r as entry };

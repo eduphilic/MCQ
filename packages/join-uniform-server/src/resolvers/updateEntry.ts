@@ -2,12 +2,10 @@ import {
   Entry,
   MutationUpdateEntryResolver,
 } from "@join-uniform/graphql/server";
+import { DBEntry } from "../models";
+import { entryCategories } from "./entryCategories";
 
-export const updateEntry: MutationUpdateEntryResolver = async (
-  _parent,
-  args,
-  context,
-) => {
+const r: MutationUpdateEntryResolver = async (parent, args, context, info) => {
   const { entryId, update } = args;
   const { firebaseDatabase: database } = context;
 
@@ -16,7 +14,7 @@ export const updateEntry: MutationUpdateEntryResolver = async (
 
   if (!entrySnapshot.exists) throw new Error("Specified Entry does not exist.");
 
-  const entryUpdate: Omit<Entry, "id" | "categories"> = {
+  const entryUpdate: Omit<DBEntry, "id" | "categories"> = {
     name: update.name,
     description: update.description,
     logoUrl: update.logoUrl,
@@ -24,5 +22,14 @@ export const updateEntry: MutationUpdateEntryResolver = async (
 
   await entryRef.update(entryUpdate);
 
-  return true;
+  const entry: Entry = {
+    ...(entrySnapshot.data() as Omit<DBEntry, "id">),
+    ...entryUpdate,
+    id: entryId,
+    categories: await entryCategories(parent, { entryId }, context, info),
+  };
+
+  return entry;
 };
+
+export { r as updateEntry };
