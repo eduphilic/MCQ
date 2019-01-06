@@ -1,3 +1,8 @@
+// This is imported here to ensure the new Material UI styling engine is
+// initialized first.
+// Ref: https://material-ui.com/css-in-js/basics/#migration-for-material-ui-core-users
+import "../lib/rendering/bootstrapMaterialUiStyles";
+
 import Document, { Head, Main, NextScript } from "next/document";
 import React from "react";
 import {

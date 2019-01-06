@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^3.7.0",
+    "@material-ui/styles": "^3.0.0-alpha.6",
     "react": "16.7.0-alpha.2",
     "react-dom": "16.7.0-alpha.2",
     "react-sortable-hoc": "^0.8.4"
