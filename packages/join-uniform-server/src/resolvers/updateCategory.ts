@@ -2,12 +2,9 @@ import {
   Category,
   MutationUpdateCategoryResolver,
 } from "@join-uniform/graphql/server";
+import { DBCategory } from "../models";
 
-export const updateCategory: MutationUpdateCategoryResolver = async (
-  _parent,
-  args,
-  context,
-) => {
+const r: MutationUpdateCategoryResolver = async (_parent, args, context) => {
   const { categoryId, update } = args;
   const { firebaseDatabase: database } = context;
 
@@ -18,7 +15,7 @@ export const updateCategory: MutationUpdateCategoryResolver = async (
     throw new Error("Specified Category does not exist.");
   }
 
-  const categoryUpdate: Omit<Category, "id" | "activated"> = {
+  const categoryUpdate: Omit<DBCategory, "id" | "activated"> = {
     name: update.name,
     education: update.education,
     pricePerPaperRs: update.pricePerPaperRs,
@@ -26,5 +23,13 @@ export const updateCategory: MutationUpdateCategoryResolver = async (
 
   await categoryRef.update(categoryUpdate);
 
-  return true;
+  const category: Category = {
+    ...(categorySnapshot.data() as Omit<DBCategory, "id">),
+    ...categoryUpdate,
+    id: categorySnapshot.id,
+  };
+
+  return category;
 };
+
+export { r as updateCategory };

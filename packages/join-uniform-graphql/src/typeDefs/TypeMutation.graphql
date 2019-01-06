@@ -5,7 +5,7 @@ type Mutation {
   createCategoryNewEntry(request: CategoryCreationRequestNewEntry!): Entry!
   updateEntry(entryId: ID!, update: EntryUpdate!): Boolean
   deleteEntries(entryIds: [ID!]!): Boolean
-  updateCategory(categoryId: ID!, update: CategoryUpdate!): Boolean
+  updateCategory(categoryId: ID!, update: CategoryUpdate!): Category!
 
   # Deletes Categories. It removes both the Category database entry and the
   # Category's id from the corresponding Entry objects in the database. It

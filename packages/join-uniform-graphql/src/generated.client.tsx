@@ -174,6 +174,18 @@ export type EntryManagerDeleteEntriesMutation = {
   deleteEntries: boolean | null;
 };
 
+export type EntryManagerGetCategoryVariables = {
+  id: string;
+};
+
+export type EntryManagerGetCategoryQuery = {
+  __typename?: "Query";
+
+  category: EntryManagerGetCategoryCategory | null;
+};
+
+export type EntryManagerGetCategoryCategory = EntryManagerCategoryPartsFragment;
+
 export type EntryManagerGetEntriesVariables = {};
 
 export type EntryManagerGetEntriesQuery = {
@@ -196,6 +208,19 @@ export type EntryManagerSetCategoryActivationStatusesMutation = {
 };
 
 export type EntryManagerSetCategoryActivationStatusesSetCategoryActivationStatuses = EntryManagerCategoryPartsFragment;
+
+export type EntryManagerUpdateCategoryVariables = {
+  categoryId: string;
+  update: CategoryUpdate;
+};
+
+export type EntryManagerUpdateCategoryMutation = {
+  __typename?: "Mutation";
+
+  updateCategory: EntryManagerUpdateCategoryUpdateCategory;
+};
+
+export type EntryManagerUpdateCategoryUpdateCategory = EntryManagerCategoryPartsFragment;
 
 export type WithHtmlSeoDocumentHtmlConfigVariables = {};
 
@@ -648,6 +673,59 @@ export function EntryManagerDeleteEntriesHOC<TProps, TChildProps = any>(
     EntryManagerDeleteEntriesProps<TChildProps>
   >(EntryManagerDeleteEntriesDocument, operationOptions);
 }
+export const EntryManagerGetCategoryDocument = gql`
+  query EntryManagerGetCategory($id: ID!) {
+    category(id: $id) {
+      ...EntryManagerCategoryParts
+    }
+  }
+
+  ${EntryManagerCategoryPartsFragmentDoc}
+`;
+export class EntryManagerGetCategoryComponent extends React.Component<
+  Partial<
+    ReactApollo.QueryProps<
+      EntryManagerGetCategoryQuery,
+      EntryManagerGetCategoryVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Query<
+        EntryManagerGetCategoryQuery,
+        EntryManagerGetCategoryVariables
+      >
+        query={EntryManagerGetCategoryDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type EntryManagerGetCategoryProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<
+    EntryManagerGetCategoryQuery,
+    EntryManagerGetCategoryVariables
+  >
+> &
+  TChildProps;
+export function EntryManagerGetCategoryHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        EntryManagerGetCategoryQuery,
+        EntryManagerGetCategoryVariables,
+        EntryManagerGetCategoryProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    EntryManagerGetCategoryQuery,
+    EntryManagerGetCategoryVariables,
+    EntryManagerGetCategoryProps<TChildProps>
+  >(EntryManagerGetCategoryDocument, operationOptions);
+}
 export const EntryManagerGetEntriesDocument = gql`
   query EntryManagerGetEntries {
     entries {
@@ -768,6 +846,66 @@ export function EntryManagerSetCategoryActivationStatusesHOC<
     EntryManagerSetCategoryActivationStatusesVariables,
     EntryManagerSetCategoryActivationStatusesProps<TChildProps>
   >(EntryManagerSetCategoryActivationStatusesDocument, operationOptions);
+}
+export const EntryManagerUpdateCategoryDocument = gql`
+  mutation EntryManagerUpdateCategory(
+    $categoryId: ID!
+    $update: CategoryUpdate!
+  ) {
+    updateCategory(categoryId: $categoryId, update: $update) {
+      ...EntryManagerCategoryParts
+    }
+  }
+
+  ${EntryManagerCategoryPartsFragmentDoc}
+`;
+export class EntryManagerUpdateCategoryComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<
+      EntryManagerUpdateCategoryMutation,
+      EntryManagerUpdateCategoryVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<
+        EntryManagerUpdateCategoryMutation,
+        EntryManagerUpdateCategoryVariables
+      >
+        mutation={EntryManagerUpdateCategoryDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type EntryManagerUpdateCategoryProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<
+    EntryManagerUpdateCategoryMutation,
+    EntryManagerUpdateCategoryVariables
+  >
+> &
+  TChildProps;
+export type EntryManagerUpdateCategoryMutationFn = ReactApollo.MutationFn<
+  EntryManagerUpdateCategoryMutation,
+  EntryManagerUpdateCategoryVariables
+>;
+export function EntryManagerUpdateCategoryHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        EntryManagerUpdateCategoryMutation,
+        EntryManagerUpdateCategoryVariables,
+        EntryManagerUpdateCategoryProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    EntryManagerUpdateCategoryMutation,
+    EntryManagerUpdateCategoryVariables,
+    EntryManagerUpdateCategoryProps<TChildProps>
+  >(EntryManagerUpdateCategoryDocument, operationOptions);
 }
 export const WithHtmlSeoDocumentHtmlConfigDocument = gql`
   query WithHtmlSeoDocumentHtmlConfig {

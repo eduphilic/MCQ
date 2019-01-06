@@ -1,0 +1,8 @@
+mutation EntryManagerUpdateCategory(
+  $categoryId: ID!
+  $update: CategoryUpdate!
+) {
+  updateCategory(categoryId: $categoryId, update: $update) {
+    ...EntryManagerCategoryParts
+  }
+}

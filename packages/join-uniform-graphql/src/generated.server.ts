@@ -269,7 +269,7 @@ export interface Mutation {
 
   deleteEntries?: boolean | null;
 
-  updateCategory?: boolean | null;
+  updateCategory: Category;
   /** Deletes Categories. It removes both the Category database entry and theCategory's id from the corresponding Entry objects in the database. Itreturns the list of remaining Categories. */
   deleteCategories: Category[];
   /** Sets the activation status for the specified categories. The number of idsneeds to match the number of booleans.Returns the updated Categories. */
@@ -964,7 +964,7 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
   >;
 
   updateCategory?: MutationUpdateCategoryResolver<
-    boolean | null,
+    Category,
     TypeParent,
     Context
   >;
@@ -1039,7 +1039,7 @@ export interface MutationDeleteEntriesArgs {
 }
 
 export type MutationUpdateCategoryResolver<
-  R = boolean | null,
+  R = Category,
   Parent = {},
   Context = ApolloContext
 > = Resolver<R, Parent, Context, MutationUpdateCategoryArgs>;
