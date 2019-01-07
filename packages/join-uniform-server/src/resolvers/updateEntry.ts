@@ -14,7 +14,7 @@ const r: MutationUpdateEntryResolver = async (parent, args, context, info) => {
 
   if (!entrySnapshot.exists) throw new Error("Specified Entry does not exist.");
 
-  const entryUpdate: Omit<DBEntry, "id" | "categories"> = {
+  const entryUpdate: Omit<DBEntry, "categories"> = {
     name: update.name,
     description: update.description,
     logoUrl: update.logoUrl,
@@ -23,7 +23,7 @@ const r: MutationUpdateEntryResolver = async (parent, args, context, info) => {
   await entryRef.update(entryUpdate);
 
   const entry: Entry = {
-    ...(entrySnapshot.data() as Omit<DBEntry, "id">),
+    ...(entrySnapshot.data() as DBEntry),
     ...entryUpdate,
     id: entryId,
     categories: await entryCategories(parent, { entryId }, context, info),

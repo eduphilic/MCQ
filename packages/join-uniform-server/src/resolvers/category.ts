@@ -1,4 +1,5 @@
-import { Category, QueryCategoryResolver } from "@join-uniform/graphql/server";
+import { QueryCategoryResolver } from "@join-uniform/graphql/server";
+import { DBCategory } from "../models";
 
 export const category: QueryCategoryResolver = async (_parent, args, ctx) => {
   const { id } = args;
@@ -10,7 +11,7 @@ export const category: QueryCategoryResolver = async (_parent, args, ctx) => {
     .get();
   if (!categoryDoc.exists) return null;
 
-  const partialCategory = categoryDoc.data() as Omit<Category, "id">;
+  const partialCategory = categoryDoc.data() as DBCategory;
 
   return {
     id,

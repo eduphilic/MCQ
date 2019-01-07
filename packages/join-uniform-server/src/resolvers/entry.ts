@@ -12,7 +12,7 @@ const r: QueryEntryResolver = async (parent, args, context, info) => {
   if (!entrySnapshot.exists) return null;
 
   const entryResult: Entry = {
-    ...(entrySnapshot.data() as Omit<DBEntry, "id">),
+    ...(entrySnapshot.data() as DBEntry),
     id: entrySnapshot.id,
     categories: await entryCategories(parent, { entryId }, context, info),
   };

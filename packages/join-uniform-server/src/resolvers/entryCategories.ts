@@ -18,10 +18,7 @@ export const entryCategories: QueryEntryCategoriesResolver = async (
 
   if (!entrySnapshot.exists) throw new Error("Specified Entry does not exist.");
 
-  const categoryIds = entrySnapshot.get("categories") as Omit<
-    DBEntry,
-    "id"
-  >["categories"];
+  const categoryIds = entrySnapshot.get("categories") as DBEntry["categories"];
 
   if (categoryIds.length === 0) return [];
 
@@ -35,7 +32,7 @@ export const entryCategories: QueryEntryCategoriesResolver = async (
 
   return categoriesSnapshots.map(
     (categorySnapshot): Category => {
-      const categoryPartial = categorySnapshot.data() as Omit<DBCategory, "id">;
+      const categoryPartial = categorySnapshot.data() as DBCategory;
 
       return {
         ...categoryPartial,

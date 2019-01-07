@@ -24,7 +24,7 @@ const r: Resolver = async (_parent, args, context) => {
 
   const categories: Category[] = categoryQueryDocumentSnapshots.map(
     (c): Category => {
-      const dbCategory = c.data() as Omit<DBCategory, "id">;
+      const dbCategory = c.data() as DBCategory;
 
       return {
         ...dbCategory,

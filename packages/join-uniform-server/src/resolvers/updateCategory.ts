@@ -15,7 +15,7 @@ const r: MutationUpdateCategoryResolver = async (_parent, args, context) => {
     throw new Error("Specified Category does not exist.");
   }
 
-  const categoryUpdate: Omit<DBCategory, "id" | "activated"> = {
+  const categoryUpdate: Omit<DBCategory, "activated"> = {
     name: update.name,
     education: update.education,
     pricePerPaperRs: update.pricePerPaperRs,
@@ -24,7 +24,7 @@ const r: MutationUpdateCategoryResolver = async (_parent, args, context) => {
   await categoryRef.update(categoryUpdate);
 
   const category: Category = {
-    ...(categorySnapshot.data() as Omit<DBCategory, "id">),
+    ...(categorySnapshot.data() as DBCategory),
     ...categoryUpdate,
     id: categorySnapshot.id,
   };

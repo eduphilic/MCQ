@@ -13,10 +13,9 @@ const r: MutationDeleteCategoriesResolver = async (_parent, args, context) => {
     .select("categories");
   const entriesCategoriesQuerySnapshot = await entriesCategoriesQuery.get();
 
-  const entriesIdAndCategoryFieldsOnly: Pick<
-    DBEntry,
-    "id" | "categories"
-  >[] = entriesCategoriesQuerySnapshot.docs.map(doc => ({
+  const entriesIdAndCategoryFieldsOnly: (Pick<DBEntry, "categories"> & {
+    id: string;
+  })[] = entriesCategoriesQuerySnapshot.docs.map(doc => ({
     id: doc.id,
     categories: doc.data().categories,
   }));
@@ -67,7 +66,7 @@ const r: MutationDeleteCategoriesResolver = async (_parent, args, context) => {
       return;
     }
 
-    const dbCategory = doc.data() as Omit<DBCategory, "id">;
+    const dbCategory = doc.data() as DBCategory;
     const category: Category = {
       ...dbCategory,
       id: doc.id,

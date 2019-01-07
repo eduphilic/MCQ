@@ -1,10 +1,9 @@
 import {
-  Category,
-  Entry,
   IndexCard,
   QueryIndexCardsResolver,
   TypeIndexCardCategory,
 } from "@join-uniform/graphql/server";
+import { DBCategory, DBEntry } from "../models";
 
 export const indexCards: QueryIndexCardsResolver = async (
   _parent,
@@ -27,15 +26,15 @@ export const indexCards: QueryIndexCardsResolver = async (
   ]);
 
   const entries = entriesSnapshot.docs.map(
-    (doc): Entry => ({
-      ...(doc.data() as Omit<Entry, "id">),
+    (doc): DBEntry & { id: string } => ({
+      ...(doc.data() as DBEntry),
       id: doc.id,
     }),
   );
 
   const categories = categoriesSnapshot.docs.map(
-    (doc): Category => ({
-      ...(doc.data() as Omit<Category, "id">),
+    (doc): DBCategory & { id: string } => ({
+      ...(doc.data() as DBCategory),
       id: doc.id,
     }),
   );

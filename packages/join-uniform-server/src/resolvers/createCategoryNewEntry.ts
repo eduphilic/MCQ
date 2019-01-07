@@ -17,7 +17,7 @@ export const createCategoryNewEntry: MutationCreateCategoryNewEntryResolver = as
   const entriesRef = database.collection("entries");
   const categoriesRef = database.collection("categories");
 
-  const newCategory: Omit<DBCategory, "id"> = {
+  const newCategory: DBCategory = {
     activated: false,
     education: request.categoryEducation,
     name: request.categoryName,
@@ -29,7 +29,7 @@ export const createCategoryNewEntry: MutationCreateCategoryNewEntryResolver = as
   const newCategoryRef = categoriesRef.doc();
   batch.create(newCategoryRef, newCategory);
 
-  const newEntry: Omit<DBEntry, "id"> = {
+  const newEntry: DBEntry = {
     categories: [newCategoryRef.id],
     description: request.entryExplanation,
     logoUrl: request.entryLogoUrl,

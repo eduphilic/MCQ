@@ -25,7 +25,7 @@ export const createCategoryExistingEntry: MutationCreateCategoryExistingEntryRes
   }
 
   // Create Category entry.
-  const newCategory: Omit<DBCategory, "id"> = {
+  const newCategory: DBCategory = {
     activated: false,
     education: request.categoryEducation,
     name: request.categoryName,
@@ -35,8 +35,8 @@ export const createCategoryExistingEntry: MutationCreateCategoryExistingEntryRes
   batch.create(newCategoryRef, newCategory);
 
   // Update Entry to contain the id of the new Category.
-  const entry = entrySnapshot.data() as Omit<DBEntry, "id">;
-  const entryUpdate: Omit<DBEntry, "id"> = {
+  const entry = entrySnapshot.data() as DBEntry;
+  const entryUpdate: DBEntry = {
     ...entry,
     categories: [...entry.categories, newCategoryRef.id],
   };
