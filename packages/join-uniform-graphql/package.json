@@ -12,13 +12,13 @@
   },
   "dependencies": {
     "graphql": "^14.0.2",
-    "graphql-code-generator": "0.15.0-alpha.7c1a7d2a",
-    "graphql-codegen-add": "0.15.0-alpha.7c1a7d2a",
-    "graphql-codegen-typescript-client": "0.15.0-alpha.7c1a7d2a",
-    "graphql-codegen-typescript-common": "0.15.0-alpha.7c1a7d2a",
-    "graphql-codegen-typescript-react-apollo": "0.15.0-alpha.7c1a7d2a",
-    "graphql-codegen-typescript-resolvers": "0.15.0-alpha.7c1a7d2a",
-    "graphql-codegen-typescript-server": "0.15.0-alpha.7c1a7d2a",
+    "graphql-code-generator": "0.15.2",
+    "graphql-codegen-add": "0.15.2",
+    "graphql-codegen-typescript-client": "0.15.2",
+    "graphql-codegen-typescript-common": "0.15.2",
+    "graphql-codegen-typescript-react-apollo": "0.15.2",
+    "graphql-codegen-typescript-resolvers": "0.15.2",
+    "graphql-codegen-typescript-server": "0.15.2",
     "graphql-tag": "^2.10.0",
     "yup": "^0.26.6"
   }
