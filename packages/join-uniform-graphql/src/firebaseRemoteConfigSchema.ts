@@ -32,7 +32,7 @@ const translations = yup
 export const firebaseRemoteConfigSchema = yup
   .object<{
     htmlConfig: Required<HtmlConfig>;
-    logoConfig: Required<LogoConfig>;
+    logoConfig: Required<Omit<LogoConfig, "id">>;
     indexPageConfig: IndexPageConfig;
 
     translations: Record<LocalizationStringKey, LocalizedString>;
@@ -50,7 +50,7 @@ export const firebaseRemoteConfigSchema = yup
       })
       .required(),
     logoConfig: yup
-      .object<Required<LogoConfig>>()
+      .object<Required<Omit<LogoConfig, "id">>>()
       .shape({
         url: yup.string().required(),
       })

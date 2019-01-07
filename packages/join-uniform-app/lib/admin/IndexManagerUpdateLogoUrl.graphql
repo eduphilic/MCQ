@@ -1,0 +1,6 @@
+mutation IndexManagerUpdateLogoUrl($logoUrl: String!) {
+  updateLogoUrl(logoUrl: $logoUrl) {
+    id
+    url
+  }
+}

@@ -247,14 +247,38 @@ export type EntryManagerUpdateEntryMutation = {
 
 export type EntryManagerUpdateEntryUpdateEntry = EntryManagerEntryPartsFragment;
 
-export type IndexManagerUpdateIndexPageVariables = {
-  request: InputIndexPageUpdate;
+export type IndexManagerGetIndexPageConfigVariables = {};
+
+export type IndexManagerGetIndexPageConfigQuery = {
+  __typename?: "Query";
+
+  logoConfig: IndexManagerGetIndexPageConfigLogoConfig;
 };
 
-export type IndexManagerUpdateIndexPageMutation = {
+export type IndexManagerGetIndexPageConfigLogoConfig = {
+  __typename?: "LogoConfig";
+
+  id: string;
+
+  url: string;
+};
+
+export type IndexManagerUpdateLogoUrlVariables = {
+  logoUrl: string;
+};
+
+export type IndexManagerUpdateLogoUrlMutation = {
   __typename?: "Mutation";
 
-  updateIndexPage: boolean | null;
+  updateLogoUrl: IndexManagerUpdateLogoUrlUpdateLogoUrl;
+};
+
+export type IndexManagerUpdateLogoUrlUpdateLogoUrl = {
+  __typename?: "LogoConfig";
+
+  id: string;
+
+  url: string;
 };
 
 export type WithHtmlSeoDocumentHtmlConfigVariables = {};
@@ -1052,58 +1076,113 @@ export function EntryManagerUpdateEntryHOC<TProps, TChildProps = any>(
     EntryManagerUpdateEntryProps<TChildProps>
   >(EntryManagerUpdateEntryDocument, operationOptions);
 }
-export const IndexManagerUpdateIndexPageDocument = gql`
-  mutation IndexManagerUpdateIndexPage($request: InputIndexPageUpdate!) {
-    updateIndexPage(request: $request)
+export const IndexManagerGetIndexPageConfigDocument = gql`
+  query IndexManagerGetIndexPageConfig {
+    logoConfig {
+      id
+      url
+    }
   }
 `;
-export class IndexManagerUpdateIndexPageComponent extends React.Component<
+export class IndexManagerGetIndexPageConfigComponent extends React.Component<
+  Partial<
+    ReactApollo.QueryProps<
+      IndexManagerGetIndexPageConfigQuery,
+      IndexManagerGetIndexPageConfigVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Query<
+        IndexManagerGetIndexPageConfigQuery,
+        IndexManagerGetIndexPageConfigVariables
+      >
+        query={IndexManagerGetIndexPageConfigDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type IndexManagerGetIndexPageConfigProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<
+    IndexManagerGetIndexPageConfigQuery,
+    IndexManagerGetIndexPageConfigVariables
+  >
+> &
+  TChildProps;
+export function IndexManagerGetIndexPageConfigHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        IndexManagerGetIndexPageConfigQuery,
+        IndexManagerGetIndexPageConfigVariables,
+        IndexManagerGetIndexPageConfigProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    IndexManagerGetIndexPageConfigQuery,
+    IndexManagerGetIndexPageConfigVariables,
+    IndexManagerGetIndexPageConfigProps<TChildProps>
+  >(IndexManagerGetIndexPageConfigDocument, operationOptions);
+}
+export const IndexManagerUpdateLogoUrlDocument = gql`
+  mutation IndexManagerUpdateLogoUrl($logoUrl: String!) {
+    updateLogoUrl(logoUrl: $logoUrl) {
+      id
+      url
+    }
+  }
+`;
+export class IndexManagerUpdateLogoUrlComponent extends React.Component<
   Partial<
     ReactApollo.MutationProps<
-      IndexManagerUpdateIndexPageMutation,
-      IndexManagerUpdateIndexPageVariables
+      IndexManagerUpdateLogoUrlMutation,
+      IndexManagerUpdateLogoUrlVariables
     >
   >
 > {
   render() {
     return (
       <ReactApollo.Mutation<
-        IndexManagerUpdateIndexPageMutation,
-        IndexManagerUpdateIndexPageVariables
+        IndexManagerUpdateLogoUrlMutation,
+        IndexManagerUpdateLogoUrlVariables
       >
-        mutation={IndexManagerUpdateIndexPageDocument}
+        mutation={IndexManagerUpdateLogoUrlDocument}
         {...(this as any)["props"] as any}
       />
     );
   }
 }
-export type IndexManagerUpdateIndexPageProps<TChildProps = any> = Partial<
+export type IndexManagerUpdateLogoUrlProps<TChildProps = any> = Partial<
   ReactApollo.MutateProps<
-    IndexManagerUpdateIndexPageMutation,
-    IndexManagerUpdateIndexPageVariables
+    IndexManagerUpdateLogoUrlMutation,
+    IndexManagerUpdateLogoUrlVariables
   >
 > &
   TChildProps;
-export type IndexManagerUpdateIndexPageMutationFn = ReactApollo.MutationFn<
-  IndexManagerUpdateIndexPageMutation,
-  IndexManagerUpdateIndexPageVariables
+export type IndexManagerUpdateLogoUrlMutationFn = ReactApollo.MutationFn<
+  IndexManagerUpdateLogoUrlMutation,
+  IndexManagerUpdateLogoUrlVariables
 >;
-export function IndexManagerUpdateIndexPageHOC<TProps, TChildProps = any>(
+export function IndexManagerUpdateLogoUrlHOC<TProps, TChildProps = any>(
   operationOptions:
     | ReactApollo.OperationOption<
         TProps,
-        IndexManagerUpdateIndexPageMutation,
-        IndexManagerUpdateIndexPageVariables,
-        IndexManagerUpdateIndexPageProps<TChildProps>
+        IndexManagerUpdateLogoUrlMutation,
+        IndexManagerUpdateLogoUrlVariables,
+        IndexManagerUpdateLogoUrlProps<TChildProps>
       >
     | undefined,
 ) {
   return ReactApollo.graphql<
     TProps,
-    IndexManagerUpdateIndexPageMutation,
-    IndexManagerUpdateIndexPageVariables,
-    IndexManagerUpdateIndexPageProps<TChildProps>
-  >(IndexManagerUpdateIndexPageDocument, operationOptions);
+    IndexManagerUpdateLogoUrlMutation,
+    IndexManagerUpdateLogoUrlVariables,
+    IndexManagerUpdateLogoUrlProps<TChildProps>
+  >(IndexManagerUpdateLogoUrlDocument, operationOptions);
 }
 export const WithHtmlSeoDocumentHtmlConfigDocument = gql`
   query WithHtmlSeoDocumentHtmlConfig {

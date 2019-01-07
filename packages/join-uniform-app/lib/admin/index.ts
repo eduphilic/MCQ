@@ -3,4 +3,5 @@ export * from "./ErrorMessagePageContents";
 export * from "./FormikImagePicker";
 export * from "./FormikMuiTextField";
 export * from "./FormikMuiTextFieldArrayItem";
+export * from "./IndexManagerPageContainer";
 export * from "./updateStoreEntries";

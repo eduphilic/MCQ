@@ -1,0 +1,6 @@
+query IndexManagerGetIndexPageConfig {
+  logoConfig {
+    id
+    url
+  }
+}

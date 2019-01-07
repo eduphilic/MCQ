@@ -6,8 +6,10 @@ import {
 import { htmlConfig } from "./htmlConfig";
 import { indexCards } from "./indexCards";
 import { indexPageConfig } from "./indexPageConfig";
-import { logoConfig } from "./logoConfig";
 import { youtubeVideos } from "./youtubeVideos";
+
+import { logoConfig } from "./logoConfig";
+import { updateLogoUrl } from "./updateLogoUrl";
 
 import { translation } from "./translation";
 
@@ -57,6 +59,7 @@ const Mutation: MutationResolvers = {
   updateCategory,
   updateEntry,
   updateIndexPage,
+  updateLogoUrl,
 
   generateCloudinarySignature,
   generateCloudinaryMediaLibraryAuthenticationToken,

@@ -7,6 +7,8 @@ type Mutation {
   deleteEntries(entryIds: [ID!]!): Boolean
   updateCategory(categoryId: ID!, update: CategoryUpdate!): Category!
 
+  updateLogoUrl(logoUrl: String!): LogoConfig!
+
   # Deletes Categories. It removes both the Category database entry and the
   # Category's id from the corresponding Entry objects in the database. It
   # returns the list of remaining Categories.
