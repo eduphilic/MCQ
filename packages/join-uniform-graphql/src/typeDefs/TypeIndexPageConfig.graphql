@@ -1,5 +1,7 @@
 # Configuration for the landing page / index page.
 type IndexPageConfig {
+  # Always "index-page-config".
+  id: ID!
   # The url to the hero image.
   heroBackgroundImageUrl: String!
   # The transparency of the hero image.

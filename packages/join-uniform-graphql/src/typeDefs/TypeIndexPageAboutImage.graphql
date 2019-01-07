@@ -1,5 +1,6 @@
 # Image and supporting text in index about section.
 type IndexPageAboutImage {
+  id: ID!
   # Image URL.
   imageUrl: String!
   # Large text below image.

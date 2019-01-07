@@ -2,6 +2,7 @@
 // SCRIPT-> yarn build
 // @ts-ignore
 import * as models from "./models";
+export type Maybe<T> = T | null;
 
 export interface CategoryCreationRequestExistingEntry {
   readonly categoryName: string;
@@ -44,25 +45,23 @@ export interface CategoryUpdate {
 }
 
 export interface InputIndexPageUpdate {
-  readonly logoUrl: string;
-
   readonly heroBackgroundImageUrl: string;
 
   readonly heroBackgroundAlpha: number;
 
   readonly heroPrimaryTextEnglish: string;
 
-  readonly heroPrimaryTextHindi: string | null;
+  readonly heroPrimaryTextHindi: Maybe<string>;
 
   readonly heroFeatures: ReadonlyArray<models.LocalizedString>;
 
   readonly aboutTitleEnglish: string;
 
-  readonly aboutTitleHindi: string | null;
+  readonly aboutTitleHindi: Maybe<string>;
 
   readonly aboutTextEnglish: string;
 
-  readonly aboutTextHindi: string | null;
+  readonly aboutTextHindi: Maybe<string>;
 
   readonly aboutImages: ReadonlyArray<AboutImageUpdate>;
 
@@ -102,7 +101,7 @@ export enum Language {
   Hindi = "Hindi",
 }
 
-/** Represents a localized string.The Hindi field is optional.Fields:- key: String!- en: String!- hi: String */
+/** Represents a localized string. The Hindi field is optional. Fields: - key: String! - en: String! - hi: String */
 export type LocalizedString = models.LocalizedString;
 
 /** A set of localized strings for a language. */
@@ -127,13 +126,13 @@ export interface Query {
 
   translation: Translation;
 
-  entry?: Entry | null;
+  entry?: Maybe<Entry>;
 
   entries: Entry[];
 
   entryCategories: Category[];
 
-  category?: Category | null;
+  category?: Maybe<Category>;
 
   indexCards: IndexCard[];
 
@@ -147,17 +146,17 @@ export interface Query {
 /** Configuration for the html document sent in response to all requests. */
 export interface HtmlConfig {
   /** Google Analytics ID. */
-  googleAnalyticsId?: string | null;
+  googleAnalyticsId?: Maybe<string>;
   /** Meta "keywords" tag. */
-  metaKeywords?: string | null;
+  metaKeywords?: Maybe<string>;
   /** Meta "description" tag. */
-  metaDescription?: string | null;
+  metaDescription?: Maybe<string>;
   /** Meta "author" tag. */
-  metaAuthor?: string | null;
+  metaAuthor?: Maybe<string>;
   /** Meta "abstract" tag. */
-  metaAbstract?: string | null;
+  metaAbstract?: Maybe<string>;
   /** Meta "copyright" tag. */
-  metaCopyright?: string | null;
+  metaCopyright?: Maybe<string>;
 }
 
 /** Logo image configuration. */
@@ -169,6 +168,8 @@ export interface LogoConfig {
 
 /** Configuration for the landing page / index page. */
 export interface IndexPageConfig {
+  /** Always "index-page-config". */
+  id: string;
   /** The url to the hero image. */
   heroBackgroundImageUrl: string;
   /** The transparency of the hero image. */
@@ -189,6 +190,7 @@ export interface IndexPageConfig {
 
 /** Image and supporting text in index about section. */
 export interface IndexPageAboutImage {
+  id: string;
   /** Image URL. */
   imageUrl: string;
   /** Large text below image. */
@@ -207,7 +209,7 @@ export interface Entry {
 
   description: string;
 
-  categories: (Category | null)[];
+  categories: (Maybe<Category>)[];
 }
 
 /** Represents an Entry Category. */
@@ -225,6 +227,8 @@ export interface Category {
 
 /** One of the Index Cards on main landing page. */
 export interface IndexCard {
+  id: string;
+
   entryId: string;
 
   title: string;
@@ -251,8 +255,8 @@ export interface TypeIndexCardCategory {
 }
 
 export interface IndexYouTubeVideo {
-  /** Will contain the Entry ID that the video corresponds to assuming that theEntry has not been removed. */
-  entryId?: string | null;
+  /** Will contain the Entry ID that the video corresponds to assuming that the Entry has not been removed. */
+  entryId?: Maybe<string>;
   /** Order of appearance. */
   position: number;
 
@@ -268,20 +272,20 @@ export interface Mutation {
 
   updateEntry: Entry;
 
-  deleteEntries?: boolean | null;
+  deleteEntries?: Maybe<boolean>;
 
   updateCategory: Category;
 
   updateLogoUrl: LogoConfig;
-  /** Deletes Categories. It removes both the Category database entry and theCategory's id from the corresponding Entry objects in the database. Itreturns the list of remaining Categories. */
+  /** Deletes Categories. It removes both the Category database entry and the Category's id from the corresponding Entry objects in the database. It returns the list of remaining Categories. */
   deleteCategories: Category[];
-  /** Sets the activation status for the specified categories. The number of idsneeds to match the number of booleans.Returns the updated Categories. */
+  /** Sets the activation status for the specified categories. The number of ids needs to match the number of booleans. Returns the updated Categories. */
   setCategoryActivationStatuses: Category[];
 
-  updateIndexPage?: boolean | null;
-  /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
+  updateIndexPage: IndexPageConfig;
+  /** Signs the parameters passed by the Cloudinary Upload Widget. See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
   generateCloudinarySignature: string;
-  /** Generates the authentication parameters required for creating a session foruse with the Cloudinary Media Library widget. */
+  /** Generates the authentication parameters required for creating a session for use with the Cloudinary Media Library widget. */
   generateCloudinaryMediaLibraryAuthenticationToken: CloudinaryMediaWidgetAuthenticationToken;
 }
 
@@ -351,7 +355,11 @@ export interface GenerateCloudinarySignatureMutationArgs {
   paramsToSign: Json;
 }
 
-import { GraphQLResolveInfo } from "graphql";
+import {
+  GraphQLResolveInfo,
+  GraphQLScalarType,
+  GraphQLScalarTypeConfig,
+} from "graphql";
 
 import { ApolloContext } from "../../join-uniform-server/src/ApolloContext";
 
@@ -388,6 +396,22 @@ export type SubscriptionResolver<
     ) => ISubscriptionResolverObject<Result, Parent, Context, Args>)
   | ISubscriptionResolverObject<Result, Parent, Context, Args>;
 
+export type TypeResolveFn<Types, Parent = {}, Context = {}> = (
+  parent: Parent,
+  context: Context,
+  info: GraphQLResolveInfo,
+) => Maybe<Types>;
+
+export type NextResolverFn<T> = () => Promise<T>;
+
+export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
+  next: NextResolverFn<TResult>,
+  source: any,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo,
+) => TResult | Promise<TResult>;
+
 export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
   htmlConfig?: QueryHtmlConfigResolver<HtmlConfig, TypeParent, Context>;
 
@@ -401,7 +425,7 @@ export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
 
   translation?: QueryTranslationResolver<Translation, TypeParent, Context>;
 
-  entry?: QueryEntryResolver<Entry | null, TypeParent, Context>;
+  entry?: QueryEntryResolver<Maybe<Entry>, TypeParent, Context>;
 
   entries?: QueryEntriesResolver<Entry[], TypeParent, Context>;
 
@@ -411,7 +435,7 @@ export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
     Context
   >;
 
-  category?: QueryCategoryResolver<Category | null, TypeParent, Context>;
+  category?: QueryCategoryResolver<Maybe<Category>, TypeParent, Context>;
 
   indexCards?: QueryIndexCardsResolver<IndexCard[], TypeParent, Context>;
 
@@ -455,7 +479,7 @@ export interface QueryTranslationArgs {
 }
 
 export type QueryEntryResolver<
-  R = Entry | null,
+  R = Maybe<Entry>,
   Parent = {},
   Context = ApolloContext
 > = Resolver<R, Parent, Context, QueryEntryArgs>;
@@ -478,7 +502,7 @@ export interface QueryEntryCategoriesArgs {
 }
 
 export type QueryCategoryResolver<
-  R = Category | null,
+  R = Maybe<Category>,
   Parent = {},
   Context = ApolloContext
 > = Resolver<R, Parent, Context, QueryCategoryArgs>;
@@ -513,65 +537,65 @@ export interface HtmlConfigResolvers<
 > {
   /** Google Analytics ID. */
   googleAnalyticsId?: HtmlConfigGoogleAnalyticsIdResolver<
-    string | null,
+    Maybe<string>,
     TypeParent,
     Context
   >;
   /** Meta "keywords" tag. */
   metaKeywords?: HtmlConfigMetaKeywordsResolver<
-    string | null,
+    Maybe<string>,
     TypeParent,
     Context
   >;
   /** Meta "description" tag. */
   metaDescription?: HtmlConfigMetaDescriptionResolver<
-    string | null,
+    Maybe<string>,
     TypeParent,
     Context
   >;
   /** Meta "author" tag. */
-  metaAuthor?: HtmlConfigMetaAuthorResolver<string | null, TypeParent, Context>;
+  metaAuthor?: HtmlConfigMetaAuthorResolver<Maybe<string>, TypeParent, Context>;
   /** Meta "abstract" tag. */
   metaAbstract?: HtmlConfigMetaAbstractResolver<
-    string | null,
+    Maybe<string>,
     TypeParent,
     Context
   >;
   /** Meta "copyright" tag. */
   metaCopyright?: HtmlConfigMetaCopyrightResolver<
-    string | null,
+    Maybe<string>,
     TypeParent,
     Context
   >;
 }
 
 export type HtmlConfigGoogleAnalyticsIdResolver<
-  R = string | null,
+  R = Maybe<string>,
   Parent = HtmlConfig,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
 export type HtmlConfigMetaKeywordsResolver<
-  R = string | null,
+  R = Maybe<string>,
   Parent = HtmlConfig,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
 export type HtmlConfigMetaDescriptionResolver<
-  R = string | null,
+  R = Maybe<string>,
   Parent = HtmlConfig,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
 export type HtmlConfigMetaAuthorResolver<
-  R = string | null,
+  R = Maybe<string>,
   Parent = HtmlConfig,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
 export type HtmlConfigMetaAbstractResolver<
-  R = string | null,
+  R = Maybe<string>,
   Parent = HtmlConfig,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
 export type HtmlConfigMetaCopyrightResolver<
-  R = string | null,
+  R = Maybe<string>,
   Parent = HtmlConfig,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
@@ -600,6 +624,8 @@ export interface IndexPageConfigResolvers<
   Context = ApolloContext,
   TypeParent = IndexPageConfig
 > {
+  /** Always "index-page-config". */
+  id?: IndexPageConfigIdResolver<string, TypeParent, Context>;
   /** The url to the hero image. */
   heroBackgroundImageUrl?: IndexPageConfigHeroBackgroundImageUrlResolver<
     string,
@@ -650,6 +676,11 @@ export interface IndexPageConfigResolvers<
   >;
 }
 
+export type IndexPageConfigIdResolver<
+  R = string,
+  Parent = IndexPageConfig,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
 export type IndexPageConfigHeroBackgroundImageUrlResolver<
   R = string,
   Parent = IndexPageConfig,
@@ -695,6 +726,7 @@ export interface IndexPageAboutImageResolvers<
   Context = ApolloContext,
   TypeParent = IndexPageAboutImage
 > {
+  id?: IndexPageAboutImageIdResolver<string, TypeParent, Context>;
   /** Image URL. */
   imageUrl?: IndexPageAboutImageImageUrlResolver<string, TypeParent, Context>;
   /** Large text below image. */
@@ -707,6 +739,11 @@ export interface IndexPageAboutImageResolvers<
   text?: IndexPageAboutImageTextResolver<LocalizedString, TypeParent, Context>;
 }
 
+export type IndexPageAboutImageIdResolver<
+  R = string,
+  Parent = IndexPageAboutImage,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
 export type IndexPageAboutImageImageUrlResolver<
   R = string,
   Parent = IndexPageAboutImage,
@@ -810,6 +847,8 @@ export interface IndexCardResolvers<
   Context = ApolloContext,
   TypeParent = IndexCard
 > {
+  id?: IndexCardIdResolver<string, TypeParent, Context>;
+
   entryId?: IndexCardEntryIdResolver<string, TypeParent, Context>;
 
   title?: IndexCardTitleResolver<string, TypeParent, Context>;
@@ -839,6 +878,11 @@ export interface IndexCardResolvers<
   colorTitle?: IndexCardColorTitleResolver<string, TypeParent, Context>;
 }
 
+export type IndexCardIdResolver<
+  R = string,
+  Parent = IndexCard,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
 export type IndexCardEntryIdResolver<
   R = string,
   Parent = IndexCard,
@@ -915,9 +959,9 @@ export interface IndexYouTubeVideoResolvers<
   Context = ApolloContext,
   TypeParent = IndexYouTubeVideo
 > {
-  /** Will contain the Entry ID that the video corresponds to assuming that theEntry has not been removed. */
+  /** Will contain the Entry ID that the video corresponds to assuming that the Entry has not been removed. */
   entryId?: IndexYouTubeVideoEntryIdResolver<
-    string | null,
+    Maybe<string>,
     TypeParent,
     Context
   >;
@@ -930,7 +974,7 @@ export interface IndexYouTubeVideoResolvers<
 }
 
 export type IndexYouTubeVideoEntryIdResolver<
-  R = string | null,
+  R = Maybe<string>,
   Parent = IndexYouTubeVideo,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
@@ -966,7 +1010,7 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
   updateEntry?: MutationUpdateEntryResolver<Entry, TypeParent, Context>;
 
   deleteEntries?: MutationDeleteEntriesResolver<
-    boolean | null,
+    Maybe<boolean>,
     TypeParent,
     Context
   >;
@@ -982,13 +1026,13 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
     TypeParent,
     Context
   >;
-  /** Deletes Categories. It removes both the Category database entry and theCategory's id from the corresponding Entry objects in the database. Itreturns the list of remaining Categories. */
+  /** Deletes Categories. It removes both the Category database entry and the Category's id from the corresponding Entry objects in the database. It returns the list of remaining Categories. */
   deleteCategories?: MutationDeleteCategoriesResolver<
     Category[],
     TypeParent,
     Context
   >;
-  /** Sets the activation status for the specified categories. The number of idsneeds to match the number of booleans.Returns the updated Categories. */
+  /** Sets the activation status for the specified categories. The number of ids needs to match the number of booleans. Returns the updated Categories. */
   setCategoryActivationStatuses?: MutationSetCategoryActivationStatusesResolver<
     Category[],
     TypeParent,
@@ -996,17 +1040,17 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
   >;
 
   updateIndexPage?: MutationUpdateIndexPageResolver<
-    boolean | null,
+    IndexPageConfig,
     TypeParent,
     Context
   >;
-  /** Signs the parameters passed by the Cloudinary Upload Widget.See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
+  /** Signs the parameters passed by the Cloudinary Upload Widget. See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
   generateCloudinarySignature?: MutationGenerateCloudinarySignatureResolver<
     string,
     TypeParent,
     Context
   >;
-  /** Generates the authentication parameters required for creating a session foruse with the Cloudinary Media Library widget. */
+  /** Generates the authentication parameters required for creating a session for use with the Cloudinary Media Library widget. */
   generateCloudinaryMediaLibraryAuthenticationToken?: MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver<
     CloudinaryMediaWidgetAuthenticationToken,
     TypeParent,
@@ -1044,7 +1088,7 @@ export interface MutationUpdateEntryArgs {
 }
 
 export type MutationDeleteEntriesResolver<
-  R = boolean | null,
+  R = Maybe<boolean>,
   Parent = {},
   Context = ApolloContext
 > = Resolver<R, Parent, Context, MutationDeleteEntriesArgs>;
@@ -1093,7 +1137,7 @@ export interface MutationSetCategoryActivationStatusesArgs {
 }
 
 export type MutationUpdateIndexPageResolver<
-  R = boolean | null,
+  R = IndexPageConfig,
   Parent = {},
   Context = ApolloContext
 > = Resolver<R, Parent, Context, MutationUpdateIndexPageArgs>;
@@ -1176,3 +1220,72 @@ export type CloudinaryMediaWidgetAuthenticationTokenSignatureResolver<
   Parent = CloudinaryMediaWidgetAuthenticationToken,
   Context = ApolloContext
 > = Resolver<R, Parent, Context>;
+
+/** Directs the executor to skip this field or fragment when the `if` argument is true. */
+export type SkipDirectiveResolver<Result> = DirectiveResolverFn<
+  Result,
+  SkipDirectiveArgs,
+  ApolloContext
+>;
+export interface SkipDirectiveArgs {
+  /** Skipped when true. */
+  if: boolean;
+}
+
+/** Directs the executor to include this field or fragment only when the `if` argument is true. */
+export type IncludeDirectiveResolver<Result> = DirectiveResolverFn<
+  Result,
+  IncludeDirectiveArgs,
+  ApolloContext
+>;
+export interface IncludeDirectiveArgs {
+  /** Included when true. */
+  if: boolean;
+}
+
+/** Marks an element of a GraphQL schema as no longer supported. */
+export type DeprecatedDirectiveResolver<Result> = DirectiveResolverFn<
+  Result,
+  DeprecatedDirectiveArgs,
+  ApolloContext
+>;
+export interface DeprecatedDirectiveArgs {
+  /** Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted using the Markdown syntax (as specified by [CommonMark](https://commonmark.org/). */
+  reason?: string;
+}
+
+export interface LocalizedStringScalarConfig
+  extends GraphQLScalarTypeConfig<LocalizedString, any> {
+  name: "LocalizedString";
+}
+export interface TranslationScalarConfig
+  extends GraphQLScalarTypeConfig<Translation, any> {
+  name: "Translation";
+}
+export interface JsonScalarConfig extends GraphQLScalarTypeConfig<Json, any> {
+  name: "Json";
+}
+
+export interface IResolvers {
+  Query?: QueryResolvers;
+  HtmlConfig?: HtmlConfigResolvers;
+  LogoConfig?: LogoConfigResolvers;
+  IndexPageConfig?: IndexPageConfigResolvers;
+  IndexPageAboutImage?: IndexPageAboutImageResolvers;
+  Entry?: EntryResolvers;
+  Category?: CategoryResolvers;
+  IndexCard?: IndexCardResolvers;
+  TypeIndexCardCategory?: TypeIndexCardCategoryResolvers;
+  IndexYouTubeVideo?: IndexYouTubeVideoResolvers;
+  Mutation?: MutationResolvers;
+  CloudinaryMediaWidgetAuthenticationToken?: CloudinaryMediaWidgetAuthenticationTokenResolvers;
+  LocalizedString?: GraphQLScalarType;
+  Translation?: GraphQLScalarType;
+  Json?: GraphQLScalarType;
+}
+
+export interface IDirectiveResolvers<Result> {
+  skip?: SkipDirectiveResolver<Result>;
+  include?: IncludeDirectiveResolver<Result>;
+  deprecated?: DeprecatedDirectiveResolver<Result>;
+}

@@ -1,13 +1,19 @@
-import { QueryIndexPageConfigResolver } from "@join-uniform/graphql/server";
+import {
+  IndexPageConfig,
+  QueryIndexPageConfigResolver,
+} from "@join-uniform/graphql/server";
 
-export const indexPageConfig: QueryIndexPageConfigResolver = async (
-  _parent,
-  _args,
-  context,
-) => {
-  const { firebaseRemoteConfigClient: config } = context;
+const r: QueryIndexPageConfigResolver = async (_parent, _args, context) => {
+  const { firebaseRemoteConfigClient: configClient } = context;
 
-  const value = config.getValues().indexPageConfig;
+  const config = configClient.getValues();
 
-  return value;
+  const indexPageConfig: IndexPageConfig = {
+    ...config.indexPageConfig,
+    id: "index-page-config",
+  };
+
+  return indexPageConfig;
 };
+
+export { r as indexPageConfig };

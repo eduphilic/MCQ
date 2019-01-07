@@ -1,5 +1,6 @@
 # One of the Index Cards on main landing page.
 type IndexCard {
+  id: ID!
   entryId: ID!
   title: String!
   categories: [TypeIndexCardCategory!]!

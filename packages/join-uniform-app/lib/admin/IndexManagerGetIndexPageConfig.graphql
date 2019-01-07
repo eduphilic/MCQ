@@ -3,4 +3,20 @@ query IndexManagerGetIndexPageConfig {
     id
     url
   }
+  indexPageConfig {
+    id
+    heroBackgroundImageUrl
+    heroBackgroundAlpha
+    heroPrimaryText
+    heroFeatures
+    heroFooterText
+    aboutTitle
+    aboutText
+    aboutImages {
+      id
+      imageUrl
+      title
+      text
+    }
+  }
 }

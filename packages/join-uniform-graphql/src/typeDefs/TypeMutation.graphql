@@ -22,7 +22,7 @@ type Mutation {
     activatedStatuses: [Boolean!]!
   ): [Category!]!
 
-  updateIndexPage(request: InputIndexPageUpdate!): Boolean
+  updateIndexPage(request: InputIndexPageUpdate!): IndexPageConfig!
 
   # Signs the parameters passed by the Cloudinary Upload Widget.
   # See: https://cloudinary.com/documentation/upload_widget#signed_uploads

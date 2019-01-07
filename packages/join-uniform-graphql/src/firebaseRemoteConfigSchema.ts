@@ -33,7 +33,7 @@ export const firebaseRemoteConfigSchema = yup
   .object<{
     htmlConfig: Required<HtmlConfig>;
     logoConfig: Required<Omit<LogoConfig, "id">>;
-    indexPageConfig: IndexPageConfig;
+    indexPageConfig: Omit<IndexPageConfig, "id">;
 
     translations: Record<LocalizationStringKey, LocalizedString>;
   }>()
@@ -57,7 +57,7 @@ export const firebaseRemoteConfigSchema = yup
       .required(),
 
     indexPageConfig: yup
-      .object<IndexPageConfig>({
+      .object<Omit<IndexPageConfig, "id">>({
         heroBackgroundImageUrl: yup.string().required(),
         heroBackgroundAlpha: yup.number().required(),
         heroPrimaryText: localizedString.required(),
@@ -68,6 +68,7 @@ export const firebaseRemoteConfigSchema = yup
         aboutImages: yup
           .array(
             yup.object<IndexPageAboutImage>({
+              id: yup.string().required(),
               imageUrl: yup.string().required(),
               title: localizedString.required(),
               text: localizedString.required(),

@@ -2,6 +2,7 @@
 // SCRIPT-> yarn build
 // @ts-ignore
 import * as models from "./models";
+export type Maybe<T> = T | null;
 
 export interface CategoryCreationRequestExistingEntry {
   readonly categoryName: string;
@@ -44,25 +45,23 @@ export interface CategoryUpdate {
 }
 
 export interface InputIndexPageUpdate {
-  readonly logoUrl: string;
-
   readonly heroBackgroundImageUrl: string;
 
   readonly heroBackgroundAlpha: number;
 
   readonly heroPrimaryTextEnglish: string;
 
-  readonly heroPrimaryTextHindi: string | null;
+  readonly heroPrimaryTextHindi: Maybe<string>;
 
   readonly heroFeatures: ReadonlyArray<models.LocalizedString>;
 
   readonly aboutTitleEnglish: string;
 
-  readonly aboutTitleHindi: string | null;
+  readonly aboutTitleHindi: Maybe<string>;
 
   readonly aboutTextEnglish: string;
 
-  readonly aboutTextHindi: string | null;
+  readonly aboutTextHindi: Maybe<string>;
 
   readonly aboutImages: ReadonlyArray<AboutImageUpdate>;
 
@@ -102,7 +101,7 @@ export enum Language {
   Hindi = "Hindi",
 }
 
-/** Represents a localized string.The Hindi field is optional.Fields:- key: String!- en: String!- hi: String */
+/** Represents a localized string. The Hindi field is optional. Fields: - key: String! - en: String! - hi: String */
 export type LocalizedString = models.LocalizedString;
 
 /** A set of localized strings for a language. */
@@ -171,7 +170,7 @@ export type EntryManagerDeleteEntriesVariables = {
 export type EntryManagerDeleteEntriesMutation = {
   __typename?: "Mutation";
 
-  deleteEntries: boolean | null;
+  deleteEntries: Maybe<boolean>;
 };
 
 export type EntryManagerGetCategoryVariables = {
@@ -181,7 +180,7 @@ export type EntryManagerGetCategoryVariables = {
 export type EntryManagerGetCategoryQuery = {
   __typename?: "Query";
 
-  category: EntryManagerGetCategoryCategory | null;
+  category: Maybe<EntryManagerGetCategoryCategory>;
 };
 
 export type EntryManagerGetCategoryCategory = EntryManagerCategoryPartsFragment;
@@ -203,7 +202,7 @@ export type EntryManagerGetEntryVariables = {
 export type EntryManagerGetEntryQuery = {
   __typename?: "Query";
 
-  entry: EntryManagerGetEntryEntry | null;
+  entry: Maybe<EntryManagerGetEntryEntry>;
 };
 
 export type EntryManagerGetEntryEntry = EntryManagerEntryPartsFragment;
@@ -253,6 +252,8 @@ export type IndexManagerGetIndexPageConfigQuery = {
   __typename?: "Query";
 
   logoConfig: IndexManagerGetIndexPageConfigLogoConfig;
+
+  indexPageConfig: IndexManagerGetIndexPageConfigIndexPageConfig;
 };
 
 export type IndexManagerGetIndexPageConfigLogoConfig = {
@@ -261,6 +262,40 @@ export type IndexManagerGetIndexPageConfigLogoConfig = {
   id: string;
 
   url: string;
+};
+
+export type IndexManagerGetIndexPageConfigIndexPageConfig = {
+  __typename?: "IndexPageConfig";
+
+  id: string;
+
+  heroBackgroundImageUrl: string;
+
+  heroBackgroundAlpha: number;
+
+  heroPrimaryText: LocalizedString;
+
+  heroFeatures: LocalizedString[];
+
+  heroFooterText: LocalizedString;
+
+  aboutTitle: LocalizedString;
+
+  aboutText: LocalizedString;
+
+  aboutImages: IndexManagerGetIndexPageConfigAboutImages[];
+};
+
+export type IndexManagerGetIndexPageConfigAboutImages = {
+  __typename?: "IndexPageAboutImage";
+
+  id: string;
+
+  imageUrl: string;
+
+  title: LocalizedString;
+
+  text: LocalizedString;
 };
 
 export type IndexManagerUpdateLogoUrlVariables = {
@@ -292,17 +327,17 @@ export type WithHtmlSeoDocumentHtmlConfigQuery = {
 export type WithHtmlSeoDocumentHtmlConfigHtmlConfig = {
   __typename?: "HtmlConfig";
 
-  googleAnalyticsId: string | null;
+  googleAnalyticsId: Maybe<string>;
 
-  metaKeywords: string | null;
+  metaKeywords: Maybe<string>;
 
-  metaDescription: string | null;
+  metaDescription: Maybe<string>;
 
-  metaAuthor: string | null;
+  metaAuthor: Maybe<string>;
 
-  metaAbstract: string | null;
+  metaAbstract: Maybe<string>;
 
-  metaCopyright: string | null;
+  metaCopyright: Maybe<string>;
 };
 
 export type WithLoadingSpinnerAppLogoConfigVariables = {};
@@ -1081,6 +1116,22 @@ export const IndexManagerGetIndexPageConfigDocument = gql`
     logoConfig {
       id
       url
+    }
+    indexPageConfig {
+      id
+      heroBackgroundImageUrl
+      heroBackgroundAlpha
+      heroPrimaryText
+      heroFeatures
+      heroFooterText
+      aboutTitle
+      aboutText
+      aboutImages {
+        id
+        imageUrl
+        title
+        text
+      }
     }
   }
 `;
