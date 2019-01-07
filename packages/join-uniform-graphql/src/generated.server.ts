@@ -43,7 +43,7 @@ export interface CategoryUpdate {
   readonly pricePerPaperRs: number;
 }
 
-export interface InputIndexPageConfigUpdate {
+export interface InputIndexPageUpdate {
   readonly logoUrl: string;
 
   readonly heroBackgroundImageUrl: string;
@@ -162,6 +162,7 @@ export interface HtmlConfig {
 
 /** Logo image configuration. */
 export interface LogoConfig {
+  id: string;
   /** Url of logo image. */
   url: string;
 }
@@ -270,6 +271,8 @@ export interface Mutation {
   deleteEntries?: boolean | null;
 
   updateCategory: Category;
+
+  updateLogoUrl: LogoConfig;
   /** Deletes Categories. It removes both the Category database entry and theCategory's id from the corresponding Entry objects in the database. Itreturns the list of remaining Categories. */
   deleteCategories: Category[];
   /** Sets the activation status for the specified categories. The number of idsneeds to match the number of booleans.Returns the updated Categories. */
@@ -330,6 +333,9 @@ export interface UpdateCategoryMutationArgs {
 
   update: CategoryUpdate;
 }
+export interface UpdateLogoUrlMutationArgs {
+  logoUrl: string;
+}
 export interface DeleteCategoriesMutationArgs {
   categoryIds: string[];
 }
@@ -339,7 +345,7 @@ export interface SetCategoryActivationStatusesMutationArgs {
   activatedStatuses: boolean[];
 }
 export interface UpdateIndexPageMutationArgs {
-  request: InputIndexPageConfigUpdate;
+  request: InputIndexPageUpdate;
 }
 export interface GenerateCloudinarySignatureMutationArgs {
   paramsToSign: Json;
@@ -574,10 +580,16 @@ export interface LogoConfigResolvers<
   Context = ApolloContext,
   TypeParent = LogoConfig
 > {
+  id?: LogoConfigIdResolver<string, TypeParent, Context>;
   /** Url of logo image. */
   url?: LogoConfigUrlResolver<string, TypeParent, Context>;
 }
 
+export type LogoConfigIdResolver<
+  R = string,
+  Parent = LogoConfig,
+  Context = ApolloContext
+> = Resolver<R, Parent, Context>;
 export type LogoConfigUrlResolver<
   R = string,
   Parent = LogoConfig,
@@ -964,6 +976,12 @@ export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
     TypeParent,
     Context
   >;
+
+  updateLogoUrl?: MutationUpdateLogoUrlResolver<
+    LogoConfig,
+    TypeParent,
+    Context
+  >;
   /** Deletes Categories. It removes both the Category database entry and theCategory's id from the corresponding Entry objects in the database. Itreturns the list of remaining Categories. */
   deleteCategories?: MutationDeleteCategoriesResolver<
     Category[],
@@ -1045,6 +1063,15 @@ export interface MutationUpdateCategoryArgs {
   update: CategoryUpdate;
 }
 
+export type MutationUpdateLogoUrlResolver<
+  R = LogoConfig,
+  Parent = {},
+  Context = ApolloContext
+> = Resolver<R, Parent, Context, MutationUpdateLogoUrlArgs>;
+export interface MutationUpdateLogoUrlArgs {
+  logoUrl: string;
+}
+
 export type MutationDeleteCategoriesResolver<
   R = Category[],
   Parent = {},
@@ -1071,7 +1098,7 @@ export type MutationUpdateIndexPageResolver<
   Context = ApolloContext
 > = Resolver<R, Parent, Context, MutationUpdateIndexPageArgs>;
 export interface MutationUpdateIndexPageArgs {
-  request: InputIndexPageConfigUpdate;
+  request: InputIndexPageUpdate;
 }
 
 export type MutationGenerateCloudinarySignatureResolver<

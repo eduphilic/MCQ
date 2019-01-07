@@ -1,4 +1,4 @@
-input InputIndexPageConfigUpdate {
+input InputIndexPageUpdate {
   logoUrl: String!
   heroBackgroundImageUrl: String!
   heroBackgroundAlpha: Float!

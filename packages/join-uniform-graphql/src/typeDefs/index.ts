@@ -28,7 +28,7 @@ import InputCategoryUpdate from "./InputCategoryUpdate.graphql";
 import InputEntryUpdate from "./InputEntryUpdate.graphql";
 import InputIndexCardCategoryUpdate from "./InputIndexCardCategoryUpdate.graphql";
 import InputIndexCardUpdate from "./InputIndexCardUpdate.graphql";
-import InputIndexPageConfigUpdate from "./InputIndexPageConfigUpdate.graphql";
+import InputIndexPageUpdate from "./InputIndexPageUpdate.graphql";
 
 export const typeDefs: DocumentNode = gql`
   ${TypeQuery}
@@ -58,5 +58,5 @@ export const typeDefs: DocumentNode = gql`
   ${InputEntryUpdate}
   ${InputIndexCardCategoryUpdate}
   ${InputIndexCardUpdate}
-  ${InputIndexPageConfigUpdate}
+  ${InputIndexPageUpdate}
 `;

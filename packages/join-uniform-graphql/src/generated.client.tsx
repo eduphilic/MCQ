@@ -43,7 +43,7 @@ export interface CategoryUpdate {
   readonly pricePerPaperRs: number;
 }
 
-export interface InputIndexPageConfigUpdate {
+export interface InputIndexPageUpdate {
   readonly logoUrl: string;
 
   readonly heroBackgroundImageUrl: string;
@@ -246,6 +246,16 @@ export type EntryManagerUpdateEntryMutation = {
 };
 
 export type EntryManagerUpdateEntryUpdateEntry = EntryManagerEntryPartsFragment;
+
+export type IndexManagerUpdateIndexPageVariables = {
+  request: InputIndexPageUpdate;
+};
+
+export type IndexManagerUpdateIndexPageMutation = {
+  __typename?: "Mutation";
+
+  updateIndexPage: boolean | null;
+};
 
 export type WithHtmlSeoDocumentHtmlConfigVariables = {};
 
@@ -1041,6 +1051,59 @@ export function EntryManagerUpdateEntryHOC<TProps, TChildProps = any>(
     EntryManagerUpdateEntryVariables,
     EntryManagerUpdateEntryProps<TChildProps>
   >(EntryManagerUpdateEntryDocument, operationOptions);
+}
+export const IndexManagerUpdateIndexPageDocument = gql`
+  mutation IndexManagerUpdateIndexPage($request: InputIndexPageUpdate!) {
+    updateIndexPage(request: $request)
+  }
+`;
+export class IndexManagerUpdateIndexPageComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<
+      IndexManagerUpdateIndexPageMutation,
+      IndexManagerUpdateIndexPageVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<
+        IndexManagerUpdateIndexPageMutation,
+        IndexManagerUpdateIndexPageVariables
+      >
+        mutation={IndexManagerUpdateIndexPageDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type IndexManagerUpdateIndexPageProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<
+    IndexManagerUpdateIndexPageMutation,
+    IndexManagerUpdateIndexPageVariables
+  >
+> &
+  TChildProps;
+export type IndexManagerUpdateIndexPageMutationFn = ReactApollo.MutationFn<
+  IndexManagerUpdateIndexPageMutation,
+  IndexManagerUpdateIndexPageVariables
+>;
+export function IndexManagerUpdateIndexPageHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        IndexManagerUpdateIndexPageMutation,
+        IndexManagerUpdateIndexPageVariables,
+        IndexManagerUpdateIndexPageProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    IndexManagerUpdateIndexPageMutation,
+    IndexManagerUpdateIndexPageVariables,
+    IndexManagerUpdateIndexPageProps<TChildProps>
+  >(IndexManagerUpdateIndexPageDocument, operationOptions);
 }
 export const WithHtmlSeoDocumentHtmlConfigDocument = gql`
   query WithHtmlSeoDocumentHtmlConfig {
