@@ -227,9 +227,8 @@ export interface Category {
 
 /** One of the Index Cards on main landing page. */
 export interface IndexCard {
+  /** Same as the id for the Entry the IndexCard represents. */
   id: string;
-
-  entryId: string;
 
   title: string;
 
@@ -247,7 +246,8 @@ export interface IndexCard {
 }
 
 export interface TypeIndexCardCategory {
-  categoryId: string;
+  /** Id of the category. */
+  id: string;
 
   title: string;
 
@@ -847,9 +847,8 @@ export interface IndexCardResolvers<
   Context = ApolloContext,
   TypeParent = IndexCard
 > {
+  /** Same as the id for the Entry the IndexCard represents. */
   id?: IndexCardIdResolver<string, TypeParent, Context>;
-
-  entryId?: IndexCardEntryIdResolver<string, TypeParent, Context>;
 
   title?: IndexCardTitleResolver<string, TypeParent, Context>;
 
@@ -879,11 +878,6 @@ export interface IndexCardResolvers<
 }
 
 export type IndexCardIdResolver<
-  R = string,
-  Parent = IndexCard,
-  Context = ApolloContext
-> = Resolver<R, Parent, Context>;
-export type IndexCardEntryIdResolver<
   R = string,
   Parent = IndexCard,
   Context = ApolloContext
@@ -928,18 +922,15 @@ export interface TypeIndexCardCategoryResolvers<
   Context = ApolloContext,
   TypeParent = TypeIndexCardCategory
 > {
-  categoryId?: TypeIndexCardCategoryCategoryIdResolver<
-    string,
-    TypeParent,
-    Context
-  >;
+  /** Id of the category. */
+  id?: TypeIndexCardCategoryIdResolver<string, TypeParent, Context>;
 
   title?: TypeIndexCardCategoryTitleResolver<string, TypeParent, Context>;
 
   visible?: TypeIndexCardCategoryVisibleResolver<boolean, TypeParent, Context>;
 }
 
-export type TypeIndexCardCategoryCategoryIdResolver<
+export type TypeIndexCardCategoryIdResolver<
   R = string,
   Parent = TypeIndexCardCategory,
   Context = ApolloContext

@@ -19,11 +19,16 @@
       "defaultValue": {
         "value": "{\"landingFooter\":{\"en\":\"Copyright : Eduphilic Consultancy Pvt Ltd 2018\"}}"
       }
+    },
+    "indexCards": {
+      "defaultValue": {
+        "value": "[{\"id\":\"U9t01IMct845JfK9oZre\",\"categories\":[{\"id\":\"GYDFVvwbiryhFmayDllo\",\"visible\":false}],\"colorBlock\":\"#e2f0d9\",\"colorCategoryBackground\":\"#c5e0b4\",\"colorLogoBackground\":\"#c5e0b4\",\"colorTitle\":\"#404040\"},{\"id\":\"3LrJYG4qfe5E5xDUKdDp\",\"categories\":[{\"id\":\"DBhQochQi1YV0W1CIp6l\",\"visible\":true}],\"colorBlock\":\"#d8d8d8\",\"colorCategoryBackground\":\"#ffffff\",\"colorLogoBackground\":\"#ffffff\",\"colorTitle\":\"#404040\"},{\"id\":\"JRQqGO057XxHZdlffThX\",\"categories\":[{\"id\":\"3AT8iEqCaNtBb1dAAtc1\",\"visible\":true},{\"id\":\"4Bza6xbxV5PPk8hY083k\",\"visible\":true},{\"id\":\"Cg0z8yAbO6wpnYZ9dY0B\",\"visible\":true},{\"id\":\"GxT43xRCiLCJDDmm4SGv\",\"visible\":true},{\"id\":\"MalfMYBdNd9cieThe76U\",\"visible\":true},{\"id\":\"ZnuaD73I4qnoU34TjzSm\",\"visible\":true},{\"id\":\"cLoTxzk9jafrCTfyxha5\",\"visible\":true},{\"id\":\"jIEiqLJZINCM4t21nmsx\",\"visible\":true},{\"id\":\"tdAv4EOFhHZVQGmG1P4G\",\"visible\":true}],\"colorBlock\":\"#e2f0d9\",\"colorCategoryBackground\":\"#c5e0b4\",\"colorLogoBackground\":\"#c5e0b4\",\"colorTitle\":\"#404040\"},{\"id\":\"3rhyhSgyKntx2Gx0gVDW\",\"categories\":[{\"id\":\"cTA6q2P7pzIIsxcIPzyJ\",\"visible\":true},{\"id\":\"sHu2HW4LI0nk9E1BPLU4\",\"visible\":true},{\"id\":\"tS0kfFDdqfLnl9rlr3fT\",\"visible\":true}],\"colorBlock\":\"#e2f0d9\",\"colorCategoryBackground\":\"#c5e0b4\",\"colorLogoBackground\":\"#c5e0b4\",\"colorTitle\":\"#404040\"}]"
+      }
     }
   },
   "version": {
-    "versionNumber": "88",
-    "updateTime": "2019-01-07T07:14:34.623Z",
+    "versionNumber": "91",
+    "updateTime": "2019-01-08T06:07:37.499Z",
     "updateUser": {
       "email": "jason@jasons.io"
     },

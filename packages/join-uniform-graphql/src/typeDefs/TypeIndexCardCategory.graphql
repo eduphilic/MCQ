@@ -1,5 +1,6 @@
 type TypeIndexCardCategory {
-  categoryId: ID!
+  # Id of the category.
+  id: ID!
   title: String!
   visible: Boolean!
 }

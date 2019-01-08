@@ -1,7 +1,7 @@
 # One of the Index Cards on main landing page.
 type IndexCard {
+  # Same as the id for the Entry the IndexCard represents.
   id: ID!
-  entryId: ID!
   title: String!
   categories: [TypeIndexCardCategory!]!
   entryLogoUrl: String!

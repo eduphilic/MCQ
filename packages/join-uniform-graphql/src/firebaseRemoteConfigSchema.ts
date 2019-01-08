@@ -1,9 +1,11 @@
 import * as yup from "yup";
 import {
   HtmlConfig,
+  IndexCard,
   IndexPageAboutImage,
   IndexPageConfig,
   LogoConfig,
+  TypeIndexCardCategory,
 } from "./generated.server";
 import { LocalizationStringKey, LocalizedString } from "./models";
 
@@ -34,6 +36,9 @@ export const firebaseRemoteConfigSchema = yup
     htmlConfig: Required<HtmlConfig>;
     logoConfig: Required<Omit<LogoConfig, "id">>;
     indexPageConfig: Omit<IndexPageConfig, "id">;
+    indexCards: (Omit<IndexCard, "title" | "entryLogoUrl" | "categories"> & {
+      categories: Omit<TypeIndexCardCategory, "title">[];
+    })[];
 
     translations: Record<LocalizationStringKey, LocalizedString>;
   }>()
@@ -76,6 +81,26 @@ export const firebaseRemoteConfigSchema = yup
           )
           .required(),
       })
+      .required(),
+
+    indexCards: yup
+      .array(
+        yup.object({
+          id: yup.string().required(),
+          categories: yup
+            .array(
+              yup.object({
+                id: yup.string().required(),
+                visible: yup.boolean().required(),
+              }),
+            )
+            .required(),
+          colorBlock: yup.string().required(),
+          colorCategoryBackground: yup.string().required(),
+          colorLogoBackground: yup.string().required(),
+          colorTitle: yup.string().required(),
+        }),
+      )
       .required(),
 
     translations,
