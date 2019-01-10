@@ -1,4 +1,4 @@
-schema: packages/join-uniform-server/src/resolvers/**/*.graphql
+schema: packages/join-uniform-server/src/schema/**/*.graphql
 overwrite: true
 config:
   scalars:

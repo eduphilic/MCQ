@@ -5,7 +5,6 @@ import Koa from "koa";
 import path from "path";
 
 import { ApolloContext } from "./ApolloContext";
-import { getApolloTypeDefs } from "./getApolloTypeDefs";
 import { getEnvironmentalVariables } from "./getEnvironmentalVariables";
 import { getFirebaseRemoteConfigClientCredentials } from "./getFirebaseRemoteConfigClientCredentials";
 import {
@@ -13,6 +12,7 @@ import {
   createNextJsMiddleware,
   createStorybookMiddleware,
 } from "./middleware";
+import { typeDefs } from "./schema";
 import {
   createCloudinaryService,
   createFirebaseRemoteConfigClient,
@@ -69,7 +69,7 @@ async function bootstrap() {
         cloudinaryService,
       };
     },
-    typeDefs: getApolloTypeDefs(),
+    typeDefs,
   });
 
   app.use(
