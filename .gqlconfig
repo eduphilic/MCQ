@@ -1,5 +1,5 @@
 {
   schema: {
-    files: "packages/join-uniform-graphql-server/schema/typeDefs.ts"
+    files: "packages/join-uniform-server/src/schema/typeDefs.ts"
   }
 }

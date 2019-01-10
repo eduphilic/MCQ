@@ -1,7 +1,7 @@
-import {
-  firebaseRemoteConfigSchema,
-  FirebaseRemoteConfigSchema,
-} from "@join-uniform/graphql/server";
+// import {
+//   firebaseRemoteConfigSchema,
+//   FirebaseRemoteConfigSchema,
+// } from "@join-uniform/graphql/server";
 import fs from "fs";
 import { JWT } from "google-auth-library";
 import fetch from "node-fetch";
@@ -71,7 +71,7 @@ export class FirebaseRemoteConfigClient {
   async setValues(values: any) {
     this.assertInitialized(true);
     try {
-      firebaseRemoteConfigSchema.validateSync(values);
+      // firebaseRemoteConfigSchema.validateSync(values);
     } catch (e) {
       throw new Error(`
 Firebase Remote Config values update failed validation.
@@ -113,8 +113,8 @@ Validation error: ${e.message}
     console.log("FirebaseRemoteConfigClient: Validating remote template.");
     const remoteTemplate: FirebaseRemoteConfigTemplate = await this.fetchTemplate();
 
-    const templateValues = this.decodeTemplateValues(remoteTemplate);
-    firebaseRemoteConfigSchema.validateSync(templateValues);
+    // const templateValues = this.decodeTemplateValues(remoteTemplate);
+    // firebaseRemoteConfigSchema.validateSync(templateValues);
     this.template = remoteTemplate;
 
     if (this.options.dev) await synchronizeTemplate.call(this);
@@ -131,8 +131,8 @@ Validation error: ${e.message}
         localTemplate = JSON.parse(
           fs.readFileSync(this.options.templatePath, "utf8"),
         );
-        const localTemplateValues = this.decodeTemplateValues(localTemplate!);
-        firebaseRemoteConfigSchema.validateSync(localTemplateValues);
+        // const localTemplateValues = this.decodeTemplateValues(localTemplate!);
+        // firebaseRemoteConfigSchema.validateSync(localTemplateValues);
       }
 
       // Store local copy of template if local version doesn't exist or has a
@@ -173,7 +173,7 @@ Validation error: ${e.message}
    */
   private decodeTemplateValues(
     template: FirebaseRemoteConfigTemplate,
-  ): FirebaseRemoteConfigSchema {
+  ): any /* FirebaseRemoteConfigSchema */ {
     if (!template.parameters) {
       throw new Error(`
 Firebase Remote Config template is missing "parameters" field.

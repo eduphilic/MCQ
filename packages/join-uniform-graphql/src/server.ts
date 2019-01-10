@@ -1,2 +1,2 @@
 export * from "./validations";
-export * from "./firebaseRemoteConfigSchema";
+// export * from "./firebaseRemoteConfigSchema";

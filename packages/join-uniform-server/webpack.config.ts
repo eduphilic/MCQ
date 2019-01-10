@@ -62,7 +62,10 @@ const config: Configuration = {
 
   resolve: {
     extensions: [".ts", ".tsx", ".wasm", ".mjs", ".js", ".json"],
-    alias: monorepoPackages.aliases,
+    alias: {
+      ...monorepoPackages.aliases,
+      "~": path.resolve(__dirname, "src"),
+    },
   },
 
   optimization: {
