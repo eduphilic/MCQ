@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "name": "@join-uniform/common",
+  "version": "1.0.0",
+  "sideEffects": false,
+  "scripts": {
+    "start": "echo Noop.",
+    "build": "echo Noop.",
+    "clean": "echo Noop.",
+    "lint": "tslint -p ./tsconfig.json --format verbose",
+    "type-check": "tsc"
+  }
+}

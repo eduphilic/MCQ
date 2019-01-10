@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "sideEffects": false,
   "scripts": {
-    "start": "yarn build",
-    "build": "yarn gql-gen",
+    "start": "echo Noop.",
+    "build": "echo Noop",
     "clean": "echo Noop.",
     "lint": "tslint -p ./tsconfig.json --format verbose",
     "type-check": "tsc"

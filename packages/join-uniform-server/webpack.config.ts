@@ -120,7 +120,7 @@ function getMonorepoPackages() {
         fs.existsSync(path.resolve(directory, "src")),
     );
 
-  return monorepoPackageDirectories
+  const packages = monorepoPackageDirectories
     .map(directory => {
       const name = require(path.resolve(directory, "package.json")).name;
       const include = path.resolve(directory, "src");
@@ -141,4 +141,7 @@ function getMonorepoPackages() {
         aliases: {} as Record<string, string>,
       },
     );
+
+  packages.aliases["@join-uniform/common"] = "@join-uniform/common";
+  return packages;
 }

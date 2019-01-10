@@ -17,7 +17,8 @@
     "clean": "yarn tools clean",
     "lint": "yarn workspaces run lint",
     "type-check": "yarn workspaces run type-check",
-    "tools": "ts-node --project ./tools/tsconfig.json ./tools"
+    "tools": "ts-node --project ./tools/tsconfig.json ./tools",
+    "graphql": "gql-gen"
   },
   "dependencies": {
     "@playlyfe/gql": "^2.6.1",
@@ -44,6 +45,11 @@
     "firebase-functions": "^2.1.0",
     "firebase-tools": "^6.1.2",
     "graphql": "^14.0.2",
+    "graphql-code-generator": "^0.15.2",
+    "graphql-codegen-add": "^0.15.2",
+    "graphql-codegen-typescript-common": "^0.15.2",
+    "graphql-codegen-typescript-resolvers": "^0.15.2",
+    "graphql-codegen-typescript-server": "^0.15.2",
     "prettier": "^1.15.3",
     "rimraf": "^2.6.2",
     "ts-node": "^7.0.1",

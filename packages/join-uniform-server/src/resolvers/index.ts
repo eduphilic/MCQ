@@ -32,6 +32,8 @@ import { cloudinaryCloudName } from "./cloudinaryCloudName";
 import { generateCloudinaryMediaLibraryAuthenticationToken } from "./generateCloudinaryMediaLibraryAuthenticationToken";
 import { generateCloudinarySignature } from "./generateCloudinarySignature";
 
+export { typeDefs } from "./typeDefs";
+
 const Query: QueryResolvers = {
   htmlConfig,
   indexCards,

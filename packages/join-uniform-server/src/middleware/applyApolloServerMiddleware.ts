@@ -7,7 +7,7 @@ import { resolvers } from "../resolvers";
 type Options = {
   koaApp: Koa;
   contextFactory: ContextFunction;
-  typeDefs: DocumentNode;
+  typeDefs: DocumentNode | DocumentNode[];
 };
 
 export function applyApolloServerMiddleware(options: Options) {
