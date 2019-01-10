@@ -1,4 +1,4 @@
-import { MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver } from "@join-uniform/graphql/server";
+import { MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver } from "~/generated";
 
 export const generateCloudinaryMediaLibraryAuthenticationToken: MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver = async (
   _parent,

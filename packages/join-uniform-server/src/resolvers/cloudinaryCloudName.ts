@@ -1,4 +1,4 @@
-import { QueryCloudinaryCloudNameResolver } from "@join-uniform/graphql/server";
+import { QueryCloudinaryCloudNameResolver } from "~/generated";
 
 export const cloudinaryCloudName: QueryCloudinaryCloudNameResolver = async (
   _parent,

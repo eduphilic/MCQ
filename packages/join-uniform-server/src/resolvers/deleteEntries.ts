@@ -1,7 +1,4 @@
-import {
-  Entry,
-  MutationDeleteEntriesResolver,
-} from "@join-uniform/graphql/server";
+import { Entry, MutationDeleteEntriesResolver } from "~/generated";
 
 export const deleteEntries: MutationDeleteEntriesResolver = async (
   _parent,

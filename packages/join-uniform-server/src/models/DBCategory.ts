@@ -1,3 +1,3 @@
-import { Category } from "@join-uniform/graphql/server";
+import { Category } from "~/generated";
 
 export type DBCategory = Omit<Category, "id">;

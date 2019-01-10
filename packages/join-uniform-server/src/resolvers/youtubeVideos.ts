@@ -1,7 +1,4 @@
-import {
-  IndexYouTubeVideo,
-  QueryYoutubeVideosResolver,
-} from "@join-uniform/graphql/server";
+import { IndexYouTubeVideo, QueryYoutubeVideosResolver } from "~/generated";
 
 export const youtubeVideos: QueryYoutubeVideosResolver = async (
   _parent,

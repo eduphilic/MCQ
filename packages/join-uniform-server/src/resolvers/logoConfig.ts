@@ -1,4 +1,4 @@
-import { QueryLogoConfigResolver } from "@join-uniform/graphql/server";
+import { QueryLogoConfigResolver } from "~/generated";
 
 const r: QueryLogoConfigResolver = async (_parent, _args, ctx) => {
   return {

@@ -1,7 +1,4 @@
-import {
-  Category,
-  QueryEntryCategoriesResolver,
-} from "@join-uniform/graphql/server";
+import { Category, QueryEntryCategoriesResolver } from "~/generated";
 import { DBCategory, DBEntry } from "../models";
 
 export const entryCategories: QueryEntryCategoriesResolver = async (

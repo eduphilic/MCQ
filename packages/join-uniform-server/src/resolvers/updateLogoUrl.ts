@@ -1,4 +1,4 @@
-import { MutationUpdateLogoUrlResolver } from "@join-uniform/graphql/server";
+import { MutationUpdateLogoUrlResolver } from "~/generated";
 import { logoConfig } from "./logoConfig";
 
 const r: MutationUpdateLogoUrlResolver = async (

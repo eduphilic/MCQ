@@ -2,7 +2,7 @@ import {
   IndexCard,
   QueryIndexCardsResolver,
   TypeIndexCardCategory,
-} from "@join-uniform/graphql/server";
+} from "~/generated";
 import { DBCategory, DBEntry } from "../models";
 
 export const indexCards: QueryIndexCardsResolver = async (

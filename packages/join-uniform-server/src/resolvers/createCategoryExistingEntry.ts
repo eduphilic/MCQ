@@ -1,7 +1,7 @@
 import {
   MutationCreateCategoryExistingEntryResolver,
-  ValidatorCategoryCreationRequestExistingEntry,
-} from "@join-uniform/graphql/server";
+  // ValidatorCategoryCreationRequestExistingEntry,
+} from "~/generated";
 import { DBCategory, DBEntry } from "../models";
 
 export const createCategoryExistingEntry: MutationCreateCategoryExistingEntryResolver = async (
@@ -13,7 +13,8 @@ export const createCategoryExistingEntry: MutationCreateCategoryExistingEntryRes
   const { firebaseDatabase: database } = context;
 
   // Validate request fields.
-  ValidatorCategoryCreationRequestExistingEntry.validateSync(request);
+  // ValidatorCategoryCreationRequestExistingEntry.validateSync(request);
+  // TODO: Do something about validation...
 
   const batch = database.batch();
 

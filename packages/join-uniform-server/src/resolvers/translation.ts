@@ -2,7 +2,7 @@ import {
   Language,
   LocalizationStringKey,
   QueryTranslationResolver,
-} from "@join-uniform/graphql/server";
+} from "~/generated";
 
 export const translation: QueryTranslationResolver = async (
   _parent,

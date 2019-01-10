@@ -1,4 +1,4 @@
-import { QueryCloudinaryApiKeyResolver } from "@join-uniform/graphql/server";
+import { QueryCloudinaryApiKeyResolver } from "~/generated";
 
 export const cloudinaryApiKey: QueryCloudinaryApiKeyResolver = async (
   _parent,

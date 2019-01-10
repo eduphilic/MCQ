@@ -1,7 +1,4 @@
-import {
-  Entry,
-  MutationUpdateEntryResolver,
-} from "@join-uniform/graphql/server";
+import { Entry, MutationUpdateEntryResolver } from "~/generated";
 import { DBEntry } from "../models";
 import { entryCategories } from "./entryCategories";
 

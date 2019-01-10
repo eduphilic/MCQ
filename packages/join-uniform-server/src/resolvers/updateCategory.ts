@@ -1,7 +1,4 @@
-import {
-  Category,
-  MutationUpdateCategoryResolver,
-} from "@join-uniform/graphql/server";
+import { Category, MutationUpdateCategoryResolver } from "~/generated";
 import { DBCategory } from "../models";
 
 const r: MutationUpdateCategoryResolver = async (_parent, args, context) => {

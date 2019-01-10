@@ -1,7 +1,7 @@
 import {
   Category,
   MutationSetCategoryActivationStatusesResolver as Resolver,
-} from "@join-uniform/graphql/server";
+} from "~/generated";
 import { DBCategory } from "../models";
 
 const r: Resolver = async (_parent, args, context) => {

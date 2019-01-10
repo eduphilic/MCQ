@@ -1,8 +1,4 @@
-import {
-  Category,
-  Entry,
-  QueryEntriesResolver,
-} from "@join-uniform/graphql/server";
+import { Category, Entry, QueryEntriesResolver } from "~/generated";
 
 export const entries: QueryEntriesResolver = async (_parent, _args, ctx) => {
   const { firebaseDatabase: database } = ctx;

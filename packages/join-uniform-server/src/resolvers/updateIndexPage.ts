@@ -2,7 +2,7 @@ import {
   IndexPageAboutImage,
   LocalizedString,
   MutationUpdateIndexPageResolver,
-} from "@join-uniform/graphql/server";
+} from "~/generated";
 
 export const updateIndexPage: MutationUpdateIndexPageResolver = async (
   _parent,

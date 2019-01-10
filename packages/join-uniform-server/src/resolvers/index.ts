@@ -1,7 +1,4 @@
-import {
-  MutationResolvers,
-  QueryResolvers,
-} from "@join-uniform/graphql/server";
+import { MutationResolvers, QueryResolvers } from "~/generated";
 
 import { htmlConfig } from "./htmlConfig";
 import { indexCards } from "./indexCards";

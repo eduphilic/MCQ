@@ -1,7 +1,4 @@
-import {
-  IndexPageConfig,
-  QueryIndexPageConfigResolver,
-} from "@join-uniform/graphql/server";
+import { IndexPageConfig, QueryIndexPageConfigResolver } from "~/generated";
 
 const r: QueryIndexPageConfigResolver = async (_parent, _args, context) => {
   const { firebaseRemoteConfigClient: configClient } = context;

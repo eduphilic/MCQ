@@ -1,8 +1,8 @@
 import {
   Entry,
   MutationCreateCategoryNewEntryResolver,
-  ValidatorCategoryCreationRequestNewEntry,
-} from "@join-uniform/graphql/server";
+  // ValidatorCategoryCreationRequestNewEntry,
+} from "~/generated";
 import { DBCategory, DBEntry } from "../models";
 
 export const createCategoryNewEntry: MutationCreateCategoryNewEntryResolver = async (
@@ -11,7 +11,8 @@ export const createCategoryNewEntry: MutationCreateCategoryNewEntryResolver = as
   context,
 ) => {
   const { request } = args;
-  ValidatorCategoryCreationRequestNewEntry.validateSync(request);
+  // TODO: Do something about the validation.
+  // ValidatorCategoryCreationRequestNewEntry.validateSync(request);
 
   const { firebaseDatabase: database } = context;
   const entriesRef = database.collection("entries");
