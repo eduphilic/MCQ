@@ -15,6 +15,7 @@
     "react-localization": "^1.0.13"
   },
   "devDependencies": {
+    "@join-uniform/common": "1.0.0",
     "@join-uniform/graphql": "1.0.0"
   }
 }

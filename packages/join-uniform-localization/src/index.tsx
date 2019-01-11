@@ -1,18 +1,14 @@
-import {
-  LocalizationStringKey,
-  LocalizedString as GraphQLLocalizedString,
-} from "@join-uniform/graphql";
+import { models } from "@join-uniform/common";
 import { createContext, ReactElement, useContext, useMemo } from "react";
 import LocalizedStrings, { LocalizedStringsMethods } from "react-localization";
+import { LocalizedStringKey, translations } from "./translations";
 
-export type LocalizedString = GraphQLLocalizedString;
+export type LocalizedString = models.LocalizedString;
+export type LocalizedStringKey = LocalizedStringKey;
 
-type Strings = LocalizedStringsMethods & Record<LocalizationStringKey, string>;
+type Strings = LocalizedStringsMethods & Record<LocalizedStringKey, string>;
 
-export const strings: Strings = new LocalizedStrings({
-  // tslint:disable-next-line:no-object-literal-type-assertion
-  en: {} as Record<LocalizationStringKey, string>,
-});
+export const strings: Strings = new LocalizedStrings(translations);
 
 export const LocalizationContext = createContext<"en" | "hi">("en");
 

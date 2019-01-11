@@ -10,7 +10,6 @@ import {
   withApolloApp,
   withLoadingSpinnerApp,
   withMaterialUIApp,
-  withTranslationApp,
 } from "../lib/rendering";
 import { CloudinaryProvider } from "../lib/utils";
 
@@ -41,9 +40,7 @@ class MyApp extends App<RenderingAppProps> {
   }
 }
 
-export default withApolloApp(
-  withMaterialUIApp(withLoadingSpinnerApp(withTranslationApp(MyApp))),
-);
+export default withApolloApp(withMaterialUIApp(withLoadingSpinnerApp(MyApp)));
 
 function composeProviders(
   ...providers: (ReactElement<{ children?: ReactNode }> | false)[]

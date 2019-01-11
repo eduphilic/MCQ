@@ -1,4 +1,4 @@
 export type LocalizedString = {
   en: string;
-  hi?: string;
+  hi: string | null;
 };

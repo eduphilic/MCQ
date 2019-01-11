@@ -104,17 +104,9 @@ export interface IndexCardCategoryUpdate {
   
   readonly visible: boolean;
 }
-/** Supported localization languages. */
-export enum Language {
-  English = "English",
-  Hindi = "Hindi",
-}
 
-/** Represents a localized string. The Hindi field is optional. Fields: - key: String! - en: String! - hi: String */
+/** Represents a localized string. The Hindi field is optional. Fields: - en: String! - hi: String */
 export type LocalizedString = models.LocalizedString;
-
-/** A set of localized strings for a language. */
-export type Translation = any;
 
 
 export type Json = any;
@@ -144,8 +136,6 @@ export interface Query {
   readonly logoConfig: LogoConfig;
   
   readonly indexPageConfig: IndexPageConfig;
-  
-  readonly translation: Translation;
   
   readonly entry: Maybe<Entry>;
   
@@ -338,10 +328,6 @@ export interface CloudinaryMediaWidgetAuthenticationToken {
 // Arguments
 // ====================================================
 
-export interface TranslationQueryArgs {
-  
-  language: Language;
-}
 export interface EntryQueryArgs {
   
   entryId: string;
@@ -459,8 +445,6 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     
     indexPageConfig?: QueryIndexPageConfigResolver<IndexPageConfig, TypeParent, Context>;
     
-    translation?: QueryTranslationResolver<Translation, TypeParent, Context>;
-    
     entry?: QueryEntryResolver<Maybe<Entry>, TypeParent, Context>;
     
     entries?: QueryEntriesResolver<ReadonlyArray<Entry>, TypeParent, Context>;
@@ -482,13 +466,6 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   export type QueryHtmlConfigResolver<R = HtmlConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryLogoConfigResolver<R = LogoConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryIndexPageConfigResolver<R = IndexPageConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type QueryTranslationResolver<R = Translation, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryTranslationArgs>;
-  export interface QueryTranslationArgs {
-    
-    language: Language;
-  }
-
-
   export type QueryEntryResolver<R = Maybe<Entry>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryEntryArgs>;
   export interface QueryEntryArgs {
     
@@ -850,9 +827,6 @@ export interface DeprecatedDirectiveArgs {
 export interface LocalizedStringScalarConfig extends GraphQLScalarTypeConfig<LocalizedString, any> {
   name: 'LocalizedString'
 }
-export interface TranslationScalarConfig extends GraphQLScalarTypeConfig<Translation, any> {
-  name: 'Translation'
-}
 export interface JsonScalarConfig extends GraphQLScalarTypeConfig<Json, any> {
   name: 'Json'
 }
@@ -871,7 +845,6 @@ export interface IResolvers {
     Mutation?: MutationResolvers;
     CloudinaryMediaWidgetAuthenticationToken?: CloudinaryMediaWidgetAuthenticationTokenResolvers;
     LocalizedString?: GraphQLScalarType;
-    Translation?: GraphQLScalarType;
     Json?: GraphQLScalarType;
 }
 

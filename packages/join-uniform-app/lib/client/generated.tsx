@@ -104,17 +104,9 @@ export interface IndexCardCategoryUpdate {
   
   readonly visible: boolean;
 }
-/** Supported localization languages. */
-export enum Language {
-  English = "English",
-  Hindi = "Hindi",
-}
 
-/** Represents a localized string. The Hindi field is optional. Fields: - key: String! - en: String! - hi: String */
+/** Represents a localized string. The Hindi field is optional. Fields: - en: String! - hi: String */
 export type LocalizedString = models.LocalizedString;
-
-/** A set of localized strings for a language. */
-export type Translation = any;
 
 
 export type Json = any;
@@ -371,16 +363,6 @@ export type Json = any;
     
     readonly url: string;
   } 
-
-  export type WithTranslationAppTranslationVariables = {
-    readonly language: Language;
-  }
-
-  export type WithTranslationAppTranslationQuery = {
-    readonly __typename?: "Query";
-    
-    readonly translation: Translation;
-  }
 
   export type CloudinaryConfigVariables = {
   }
@@ -1132,44 +1114,6 @@ import gql from 'graphql-tag';
             > | undefined){
         return ReactApollo.graphql<TProps, WithLoadingSpinnerAppLogoConfigQuery, WithLoadingSpinnerAppLogoConfigVariables, WithLoadingSpinnerAppLogoConfigProps<TChildProps>>(
             WithLoadingSpinnerAppLogoConfigDocument,
-            operationOptions
-        );
-    };
-    export const WithTranslationAppTranslationDocument = gql`
-    query WithTranslationAppTranslation($language: Language!) {
-  translation(language: $language)
-}
-    
-      
-    
-  `;
-     export class WithTranslationAppTranslationComponent extends React.Component<Partial<ReactApollo.QueryProps<WithTranslationAppTranslationQuery, WithTranslationAppTranslationVariables>>> {
-        render(){
-            return (
-                <ReactApollo.Query<WithTranslationAppTranslationQuery, WithTranslationAppTranslationVariables>
-                query={ WithTranslationAppTranslationDocument }
-                {...(this as any)['props'] as any}
-                />
-            );
-        }
-    }
-    export type WithTranslationAppTranslationProps<TChildProps = any> = 
-            Partial<
-                ReactApollo.DataProps<
-                                        WithTranslationAppTranslationQuery, 
-                                        WithTranslationAppTranslationVariables
-                                    >
-                    >
-         & TChildProps;
-    export function WithTranslationAppTranslationHOC<TProps, TChildProps = any>(operationOptions: 
-            ReactApollo.OperationOption<
-                TProps, 
-                WithTranslationAppTranslationQuery,
-                WithTranslationAppTranslationVariables,
-                WithTranslationAppTranslationProps<TChildProps>
-            > | undefined){
-        return ReactApollo.graphql<TProps, WithTranslationAppTranslationQuery, WithTranslationAppTranslationVariables, WithTranslationAppTranslationProps<TChildProps>>(
-            WithTranslationAppTranslationDocument,
             operationOptions
         );
     };

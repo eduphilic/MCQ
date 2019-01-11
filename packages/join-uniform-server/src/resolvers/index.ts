@@ -8,8 +8,6 @@ import { youtubeVideos } from "./youtubeVideos";
 import { logoConfig } from "./logoConfig";
 import { updateLogoUrl } from "./updateLogoUrl";
 
-import { translation } from "./translation";
-
 import { category } from "./category";
 import { entries } from "./entries";
 import { entry } from "./entry";
@@ -35,8 +33,6 @@ const Query: QueryResolvers = {
   indexPageConfig,
   logoConfig,
   youtubeVideos,
-
-  translation,
 
   cloudinaryApiKey,
   cloudinaryCloudName,

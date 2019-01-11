@@ -4,8 +4,6 @@ type Query {
   logoConfig: LogoConfig!
   indexPageConfig: IndexPageConfig!
 
-  translation(language: Language!): Translation!
-
   entry(entryId: ID!): Entry
   entries: [Entry!]!
   entryCategories(entryId: ID!): [Category!]!
