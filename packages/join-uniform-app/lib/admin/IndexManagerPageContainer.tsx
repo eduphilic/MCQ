@@ -1,4 +1,7 @@
 import { LoadingSpinner } from "@join-uniform/components";
+import React, { ReactType } from "react";
+import { adopt } from "react-adopt";
+import { MutationFn, QueryResult } from "react-apollo";
 import {
   IndexManagerGetIndexPageConfigComponent,
   IndexManagerGetIndexPageConfigProps,
@@ -6,10 +9,7 @@ import {
   IndexManagerUpdateLogoUrlComponent,
   IndexManagerUpdateLogoUrlMutation,
   IndexManagerUpdateLogoUrlProps,
-} from "@join-uniform/graphql";
-import React, { ReactType } from "react";
-import { adopt } from "react-adopt";
-import { MutationFn, QueryResult } from "react-apollo";
+} from "~/lib/client";
 
 type RenderProps = {
   getIndexPageConfig: QueryResult<

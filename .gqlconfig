@@ -1,5 +1,20 @@
 {
   schema: {
-    files: "packages/join-uniform-server/src/schema/typeDefs.ts"
+    files: "packages/join-uniform-server/src/schema/**/*.graphql"
+  },
+  query: {
+    files: [
+      {
+        match: "packages/join-uniform-app/**/*.graphql",
+        parser: "QueryParser",
+        validate: {
+          extends: "gql-rules-query",
+          rules: {
+            KnownFragmentNames: "off",
+            NoUnusedFragments: "off"
+          }
+        }
+      }
+    ]
   }
 }
