@@ -2,7 +2,7 @@ import {
   MutationCreateCategoryExistingEntryResolver,
   // ValidatorCategoryCreationRequestExistingEntry,
 } from "~/generated";
-import { DBCategory, DBEntry } from "../models";
+import { DBCategory, DBEntry } from "~/models";
 
 export const createCategoryExistingEntry: MutationCreateCategoryExistingEntryResolver = async (
   _parent,

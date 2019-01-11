@@ -1,10 +1,6 @@
-// import {
-//   firebaseRemoteConfigSchema,
-//   FirebaseRemoteConfigSchema,
-// } from "@join-uniform/graphql/server";
-import fs from "fs";
 import { JWT } from "google-auth-library";
 import fetch from "node-fetch";
+import { DBFirebaseRemoteConfigTemplate } from "~/models";
 
 export type FirebaseRemoteConfigClientCredentials = {
   projectId: string;
@@ -27,8 +23,6 @@ type FirebaseRemoteConfigTemplate = {
 type Options = {
   credentials: FirebaseRemoteConfigClientCredentials;
   dev: boolean;
-  /** File path to store/load local copy of Firebase Remote Config Template. */
-  templatePath: string;
 };
 
 export async function createFirebaseRemoteConfigClient(options: Options) {
@@ -68,17 +62,8 @@ export class FirebaseRemoteConfigClient {
    *
    * @param values Updated values to publish to Firebase Remote Config.
    */
-  async setValues(values: any) {
+  async setValues(values: DBFirebaseRemoteConfigTemplate) {
     this.assertInitialized(true);
-    try {
-      // firebaseRemoteConfigSchema.validateSync(values);
-    } catch (e) {
-      throw new Error(`
-Firebase Remote Config values update failed validation.
-
-Validation error: ${e.message}
-`);
-    }
 
     const parameters: FirebaseRemoteConfigTemplate["parameters"] = {};
 
@@ -101,69 +86,13 @@ Validation error: ${e.message}
   /**
    * Initialize the Firebase Remote Config client. Retrieves and caches the
    * template.
-   *
-   * In development mode: validate both the local and remote copies of the
-   * Firebase Remote Config template. It updates either the remote or local copy
-   * depending on which has a higher version number.
    */
   async initialize() {
     this.assertInitialized(false);
 
-    /* tslint:disable-next-line:no-console */
-    console.log("FirebaseRemoteConfigClient: Validating remote template.");
     const remoteTemplate: FirebaseRemoteConfigTemplate = await this.fetchTemplate();
-
-    // const templateValues = this.decodeTemplateValues(remoteTemplate);
-    // firebaseRemoteConfigSchema.validateSync(templateValues);
     this.template = remoteTemplate;
-
-    if (this.options.dev) await synchronizeTemplate.call(this);
     this.wasInitialized = true;
-    /* tslint:disable-next-line:no-console */
-    console.log("FirebaseRemoteConfigClient: Initialization complete.");
-    return;
-
-    async function synchronizeTemplate(this: FirebaseRemoteConfigClient) {
-      let localTemplate: FirebaseRemoteConfigTemplate | null = null;
-      if (fs.existsSync(this.options.templatePath)) {
-        /* tslint:disable-next-line:no-console */
-        console.log("FirebaseRemoteConfigClient: Validating local template.");
-        localTemplate = JSON.parse(
-          fs.readFileSync(this.options.templatePath, "utf8"),
-        );
-        // const localTemplateValues = this.decodeTemplateValues(localTemplate!);
-        // firebaseRemoteConfigSchema.validateSync(localTemplateValues);
-      }
-
-      // Store local copy of template if local version doesn't exist or has a
-      // lesser version number than the remote version.
-      if (
-        !localTemplate ||
-        parseInt(localTemplate.version.versionNumber, 10) <
-          parseInt(remoteTemplate.version.versionNumber, 10)
-      ) {
-        /* tslint:disable-next-line:no-console */
-        console.log("FirebaseRemoteConfigClient: Updating local template.");
-        fs.writeFileSync(
-          this.options.templatePath,
-          `${JSON.stringify(remoteTemplate, null, 2)}\n`,
-          "utf8",
-        );
-      }
-
-      // Update remote copy of template of local version has a higher version
-      // number.
-      if (
-        localTemplate &&
-        parseInt(localTemplate.version.versionNumber, 10) >
-          parseInt(remoteTemplate.version.versionNumber, 10)
-      ) {
-        /* tslint:disable-next-line:no-console */
-        console.log("FirebaseRemoteConfigClient: Updating remote template.");
-        await this.updateTemplate(localTemplate);
-        this.template = localTemplate;
-      }
-    }
   }
 
   /**
@@ -173,7 +102,7 @@ Validation error: ${e.message}
    */
   private decodeTemplateValues(
     template: FirebaseRemoteConfigTemplate,
-  ): any /* FirebaseRemoteConfigSchema */ {
+  ): DBFirebaseRemoteConfigTemplate {
     if (!template.parameters) {
       throw new Error(`
 Firebase Remote Config template is missing "parameters" field.

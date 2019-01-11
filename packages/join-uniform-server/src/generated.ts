@@ -306,6 +306,8 @@ export interface Mutation {
   readonly generateCloudinarySignature: string;
   /** Generates the authentication parameters required for creating a session for use with the Cloudinary Media Library widget. */
   readonly generateCloudinaryMediaLibraryAuthenticationToken: CloudinaryMediaWidgetAuthenticationToken;
+  
+  readonly test: string;
 }
 
 /** Authentication parameters for Cloudinary Media Library widget. */
@@ -699,6 +701,8 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     generateCloudinarySignature?: MutationGenerateCloudinarySignatureResolver<string, TypeParent, Context>;
     /** Generates the authentication parameters required for creating a session for use with the Cloudinary Media Library widget. */
     generateCloudinaryMediaLibraryAuthenticationToken?: MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver<CloudinaryMediaWidgetAuthenticationToken, TypeParent, Context>;
+    
+    test?: MutationTestResolver<string, TypeParent, Context>;
   }
 
 
@@ -778,7 +782,8 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   }
 
 
-  export type MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver<R = CloudinaryMediaWidgetAuthenticationToken, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;  
+  export type MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver<R = CloudinaryMediaWidgetAuthenticationToken, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type MutationTestResolver<R = string, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;  
 /** Authentication parameters for Cloudinary Media Library widget. */
   export interface CloudinaryMediaWidgetAuthenticationTokenResolvers<Context = ApolloContext, TypeParent = CloudinaryMediaWidgetAuthenticationToken> {
     
