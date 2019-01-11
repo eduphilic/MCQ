@@ -1,6 +1,5 @@
 import { Theme } from "@material-ui/core/styles";
-// tslint:disable-next-line:no-submodule-imports
-import MuiThemeProvider from "@material-ui/styles/ThemeProvider";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import React, { ReactChild } from "react";
 import { ThemeProvider as StyledComponentsThemeProvider } from "./styledComponents";
 import {

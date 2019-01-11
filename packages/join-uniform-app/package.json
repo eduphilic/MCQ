@@ -2,7 +2,9 @@
   "private": true,
   "name": "@join-uniform/app",
   "version": "1.0.0",
-  "sideEffects": false,
+  "sideEffects": [
+    "./lib/rendering/bootstrapMaterialUiStyles.ts"
+  ],
   "scripts": {
     "start": "next",
     "build": "yarn build:next && yarn build:static",
