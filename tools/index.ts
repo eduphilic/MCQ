@@ -15,15 +15,6 @@ process.on("unhandledRejection", err => {
   throw err;
 });
 
-// Make sure we're using a Node.js version compatible with Firebase.
-if (!/^v?8\./.test(process.version)) {
-  /* tslint:disable-next-line:no-console */
-  console.log(
-    `Firebase requires Node.js 8. Current version is: ${process.version}.`,
-  );
-  process.exit(1);
-}
-
 // Retrieve Firebase environmental variables. They are not available to the
 // emulator by default. Download them and create a file that the emulator will
 // recognize.
