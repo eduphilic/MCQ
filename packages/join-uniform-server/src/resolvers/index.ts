@@ -1,63 +1,28 @@
-import { MutationResolvers, QueryResolvers } from "~/generated";
+import TypeDefMutation from "./Mutation.graphql";
+import TypeDefQuery from "./Query.graphql";
 
-import { htmlConfig } from "./htmlConfig";
-import { indexCards } from "./indexCards";
-import { indexPageConfig } from "./indexPageConfig";
-import { youtubeVideos } from "./youtubeVideos";
+import { typeDefs as inputTypeDefs } from "./inputs";
+import { Mutation, typeDefs as mutationTypeDefs } from "./mutations";
+import { Query, typeDefs as queryTypeDefs } from "./queries";
+import { typeDefs as scalarTypeDefs } from "./scalars";
+import { typeDefs as typeTypeDefs } from "./types";
 
-import { logoConfig } from "./logoConfig";
-import { updateLogoUrl } from "./updateLogoUrl";
+/**
+ * GraphQL schema definition.
+ */
+export const typeDefs = [
+  TypeDefMutation,
+  TypeDefQuery,
+  ...inputTypeDefs,
+  ...mutationTypeDefs,
+  ...queryTypeDefs,
+  ...scalarTypeDefs,
+  ...typeTypeDefs,
+];
 
-import { category } from "./category";
-import { entries } from "./entries";
-import { entry } from "./entry";
-import { entryCategories } from "./entryCategories";
-
-import { createCategoryExistingEntry } from "./createCategoryExistingEntry";
-import { createCategoryNewEntry } from "./createCategoryNewEntry";
-import { deleteCategories } from "./deleteCategories";
-import { deleteEntries } from "./deleteEntries";
-import { setCategoryActivationStatuses } from "./setCategoryActivationStatuses";
-import { updateCategory } from "./updateCategory";
-import { updateEntry } from "./updateEntry";
-import { updateIndexPage } from "./updateIndexPage";
-
-import { cloudinaryApiKey } from "./cloudinaryApiKey";
-import { cloudinaryCloudName } from "./cloudinaryCloudName";
-import { generateCloudinaryMediaLibraryAuthenticationToken } from "./generateCloudinaryMediaLibraryAuthenticationToken";
-import { generateCloudinarySignature } from "./generateCloudinarySignature";
-
-const Query: QueryResolvers = {
-  htmlConfig,
-  indexCards,
-  indexPageConfig,
-  logoConfig,
-  youtubeVideos,
-
-  cloudinaryApiKey,
-  cloudinaryCloudName,
-
-  category,
-  entries,
-  entry,
-  entryCategories,
-};
-
-const Mutation: MutationResolvers = {
-  createCategoryExistingEntry,
-  createCategoryNewEntry,
-  deleteCategories,
-  deleteEntries,
-  setCategoryActivationStatuses,
-  updateCategory,
-  updateEntry,
-  updateIndexPage,
-  updateLogoUrl,
-
-  generateCloudinarySignature,
-  generateCloudinaryMediaLibraryAuthenticationToken,
-};
-
+/**
+ * GraphQL resolvers.
+ */
 export const resolvers = {
   Query,
   Mutation,

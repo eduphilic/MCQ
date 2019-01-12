@@ -12,7 +12,7 @@ import {
   createNextJsMiddleware,
   createStorybookMiddleware,
 } from "./middleware";
-import { typeDefs } from "./schema";
+import { typeDefs } from "./resolvers";
 import {
   createCloudinaryService,
   createFirebaseRemoteConfigClient,
@@ -36,10 +36,6 @@ async function bootstrap() {
   const firebaseRemoteConfigClient = await createFirebaseRemoteConfigClient({
     credentials: firebaseServiceAccountCredentials,
     dev,
-    templatePath: path.resolve(
-      __dirname,
-      "../../config/firebase-remote-config-template.json",
-    ),
   });
 
   admin.initializeApp(functions.config().firebase);

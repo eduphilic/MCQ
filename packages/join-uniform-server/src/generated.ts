@@ -5,18 +5,7 @@ import { models } from "@join-uniform/common";
 export type Maybe<T> = T | null;
 
 
-export interface CategoryCreationRequestExistingEntry {
-  
-  readonly categoryName: string;
-  
-  readonly categoryEducation: string;
-  
-  readonly pricePerPaper: number;
-  
-  readonly existingEntryId: string;
-}
-
-export interface CategoryCreationRequestNewEntry {
+export interface CreateCategoryAndNewEntryRequest {
   
   readonly categoryName: string;
   
@@ -31,16 +20,18 @@ export interface CategoryCreationRequestNewEntry {
   readonly entryExplanation: string;
 }
 
-export interface EntryUpdate {
+export interface CreateCategoryForExistingEntryRequest {
   
-  readonly name: string;
+  readonly categoryName: string;
   
-  readonly logoUrl: string;
+  readonly categoryEducation: string;
   
-  readonly description: string;
+  readonly pricePerPaper: number;
+  
+  readonly existingEntryId: string;
 }
 
-export interface CategoryUpdate {
+export interface CategoryUpdateRequest {
   
   readonly name: string;
   
@@ -49,7 +40,16 @@ export interface CategoryUpdate {
   readonly pricePerPaperRs: number;
 }
 
-export interface InputIndexPageUpdate {
+export interface EntryUpdateRequest {
+  
+  readonly name: string;
+  
+  readonly logoUrl: string;
+  
+  readonly description: string;
+}
+
+export interface IndexPageUpdateRequest {
   
   readonly heroBackgroundImageUrl: string;
   
@@ -69,12 +69,12 @@ export interface InputIndexPageUpdate {
   
   readonly aboutTextHindi: Maybe<string>;
   
-  readonly aboutImages: ReadonlyArray<AboutImageUpdate>;
+  readonly aboutImages: ReadonlyArray<IndexPageAboutImageUpdateRequest>;
   
-  readonly indexCards: ReadonlyArray<IndexCardUpdate>;
+  readonly indexCards: ReadonlyArray<IndexPageIndexCardUpdateRequest>;
 }
 
-export interface AboutImageUpdate {
+export interface IndexPageAboutImageUpdateRequest {
   
   readonly imageUrl: string;
   
@@ -83,7 +83,7 @@ export interface AboutImageUpdate {
   readonly text: models.LocalizedString;
 }
 
-export interface IndexCardUpdate {
+export interface IndexPageIndexCardUpdateRequest {
   
   readonly entryId: string;
   
@@ -95,10 +95,10 @@ export interface IndexCardUpdate {
   
   readonly colorTitle: string;
   
-  readonly categories: ReadonlyArray<IndexCardCategoryUpdate>;
+  readonly categories: ReadonlyArray<IndexCardCategoryUpdateRequest>;
 }
 
-export interface IndexCardCategoryUpdate {
+export interface IndexCardCategoryUpdateRequest {
   
   readonly categoryId: string;
   
@@ -131,27 +131,57 @@ export type Json = any;
 
 export interface Query {
   
-  readonly htmlConfig: HtmlConfig;
-  
-  readonly logoConfig: LogoConfig;
-  
-  readonly indexPageConfig: IndexPageConfig;
-  
-  readonly entry: Maybe<Entry>;
-  
-  readonly entries: ReadonlyArray<Entry>;
-  
-  readonly entryCategories: ReadonlyArray<Category>;
-  
   readonly category: Maybe<Category>;
-  
-  readonly indexCards: ReadonlyArray<IndexCard>;
-  
-  readonly youtubeVideos: ReadonlyArray<IndexYouTubeVideo>;
   
   readonly cloudinaryCloudName: string;
   
   readonly cloudinaryApiKey: string;
+  
+  readonly entries: ReadonlyArray<Entry>;
+  
+  readonly entry: Maybe<Entry>;
+  
+  readonly entryCategories: ReadonlyArray<Category>;
+  
+  readonly htmlConfig: HtmlConfig;
+  
+  readonly indexCards: ReadonlyArray<IndexCard>;
+  
+  readonly indexPageConfig: IndexPageConfig;
+  
+  readonly logoConfig: LogoConfig;
+  
+  readonly youtubeVideos: ReadonlyArray<IndexYouTubeVideo>;
+  
+  readonly _empty: Maybe<boolean>;
+}
+
+/** Represents an Entry Category. */
+export interface Category {
+  
+  readonly id: string;
+  
+  readonly name: string;
+  
+  readonly education: string;
+  
+  readonly pricePerPaperRs: number;
+  
+  readonly activated: boolean;
+}
+
+/** Represents a military service branch (Entry). */
+export interface Entry {
+  
+  readonly id: string;
+  
+  readonly name: string;
+  
+  readonly logoUrl: string;
+  
+  readonly description: string;
+  
+  readonly categories: ReadonlyArray<Category>;
 }
 
 /** Configuration for the html document sent in response to all requests. */
@@ -170,12 +200,34 @@ export interface HtmlConfig {
   readonly metaCopyright: Maybe<string>;
 }
 
-/** Logo image configuration. */
-export interface LogoConfig {
-  
+/** One of the Index Cards on main landing page. */
+export interface IndexCard {
+  /** Same as the id for the Entry the IndexCard represents. */
   readonly id: string;
-  /** Url of logo image. */
-  readonly url: string;
+  
+  readonly title: string;
+  
+  readonly categories: ReadonlyArray<TypeIndexCardCategory>;
+  
+  readonly entryLogoUrl: string;
+  
+  readonly colorBlock: string;
+  
+  readonly colorCategoryBackground: string;
+  
+  readonly colorLogoBackground: string;
+  
+  readonly colorTitle: string;
+}
+
+
+export interface TypeIndexCardCategory {
+  /** Id of the category. */
+  readonly id: string;
+  
+  readonly title: string;
+  
+  readonly visible: boolean;
 }
 
 /** Configuration for the landing page / index page. */
@@ -212,62 +264,12 @@ export interface IndexPageAboutImage {
   readonly text: models.LocalizedString;
 }
 
-/** Represents a military service branch (Entry). */
-export interface Entry {
+/** Logo image configuration. */
+export interface LogoConfig {
   
   readonly id: string;
-  
-  readonly name: string;
-  
-  readonly logoUrl: string;
-  
-  readonly description: string;
-  
-  readonly categories: ReadonlyArray<Category>;
-}
-
-/** Represents an Entry Category. */
-export interface Category {
-  
-  readonly id: string;
-  
-  readonly name: string;
-  
-  readonly education: string;
-  
-  readonly pricePerPaperRs: number;
-  
-  readonly activated: boolean;
-}
-
-/** One of the Index Cards on main landing page. */
-export interface IndexCard {
-  /** Same as the id for the Entry the IndexCard represents. */
-  readonly id: string;
-  
-  readonly title: string;
-  
-  readonly categories: ReadonlyArray<TypeIndexCardCategory>;
-  
-  readonly entryLogoUrl: string;
-  
-  readonly colorBlock: string;
-  
-  readonly colorCategoryBackground: string;
-  
-  readonly colorLogoBackground: string;
-  
-  readonly colorTitle: string;
-}
-
-
-export interface TypeIndexCardCategory {
-  /** Id of the category. */
-  readonly id: string;
-  
-  readonly title: string;
-  
-  readonly visible: boolean;
+  /** Url of logo image. */
+  readonly url: string;
 }
 
 
@@ -285,29 +287,29 @@ export interface IndexYouTubeVideo {
 
 export interface Mutation {
   
-  readonly createCategoryExistingEntry: Category;
+  readonly _empty: Maybe<boolean>;
   
-  readonly createCategoryNewEntry: Entry;
-  
-  readonly updateEntry: Entry;
-  
-  readonly deleteEntries: Maybe<boolean>;
-  
-  readonly updateCategory: Category;
-  
-  readonly updateLogoUrl: LogoConfig;
+  readonly createCategoryAndNewEntry: Entry;
+  /** Adds a new Category to an existing Entry. */
+  readonly createCategoryForExistingEntry: Category;
   /** Deletes Categories. It removes both the Category database entry and the Category's id from the corresponding Entry objects in the database. It returns the list of remaining Categories. */
   readonly deleteCategories: ReadonlyArray<Category>;
+  
+  readonly deleteEntries: Maybe<boolean>;
+  /** Generates the authentication parameters required for creating a session for use with the Cloudinary Media Library widget. */
+  readonly generateCloudinaryMediaLibraryAuthenticationToken: CloudinaryMediaWidgetAuthenticationToken;
+  /** Signs the parameters passed by the Cloudinary Upload Widget. See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
+  readonly generateCloudinarySignature: string;
   /** Sets the activation status for the specified categories. The number of ids needs to match the number of booleans. Returns the updated Categories. */
   readonly setCategoryActivationStatuses: ReadonlyArray<Category>;
   
-  readonly updateIndexPage: IndexPageConfig;
-  /** Signs the parameters passed by the Cloudinary Upload Widget. See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
-  readonly generateCloudinarySignature: string;
-  /** Generates the authentication parameters required for creating a session for use with the Cloudinary Media Library widget. */
-  readonly generateCloudinaryMediaLibraryAuthenticationToken: CloudinaryMediaWidgetAuthenticationToken;
+  readonly updateCategory: Category;
   
-  readonly test: string;
+  readonly updateEntry: Entry;
+  
+  readonly updateIndexPage: IndexPageConfig;
+  
+  readonly updateLogoUrl: LogoConfig;
 }
 
 /** Authentication parameters for Cloudinary Media Library widget. */
@@ -330,6 +332,10 @@ export interface CloudinaryMediaWidgetAuthenticationToken {
 // Arguments
 // ====================================================
 
+export interface CategoryQueryArgs {
+  
+  id: string;
+}
 export interface EntryQueryArgs {
   
   entryId: string;
@@ -338,41 +344,25 @@ export interface EntryCategoriesQueryArgs {
   
   entryId: string;
 }
-export interface CategoryQueryArgs {
+export interface CreateCategoryAndNewEntryMutationArgs {
   
-  id: string;
+  request: CreateCategoryAndNewEntryRequest;
 }
-export interface CreateCategoryExistingEntryMutationArgs {
+export interface CreateCategoryForExistingEntryMutationArgs {
   
-  request: CategoryCreationRequestExistingEntry;
+  request: CreateCategoryForExistingEntryRequest;
 }
-export interface CreateCategoryNewEntryMutationArgs {
+export interface DeleteCategoriesMutationArgs {
   
-  request: CategoryCreationRequestNewEntry;
-}
-export interface UpdateEntryMutationArgs {
-  
-  entryId: string;
-  
-  update: EntryUpdate;
+  categoryIds: ReadonlyArray<string>;
 }
 export interface DeleteEntriesMutationArgs {
   
   entryIds: ReadonlyArray<string>;
 }
-export interface UpdateCategoryMutationArgs {
+export interface GenerateCloudinarySignatureMutationArgs {
   
-  categoryId: string;
-  
-  update: CategoryUpdate;
-}
-export interface UpdateLogoUrlMutationArgs {
-  
-  logoUrl: string;
-}
-export interface DeleteCategoriesMutationArgs {
-  
-  categoryIds: ReadonlyArray<string>;
+  paramsToSign: Json;
 }
 export interface SetCategoryActivationStatusesMutationArgs {
   
@@ -380,13 +370,25 @@ export interface SetCategoryActivationStatusesMutationArgs {
   
   activatedStatuses: ReadonlyArray<boolean>;
 }
+export interface UpdateCategoryMutationArgs {
+  
+  categoryId: string;
+  
+  update: CategoryUpdateRequest;
+}
+export interface UpdateEntryMutationArgs {
+  
+  entryId: string;
+  
+  update: EntryUpdateRequest;
+}
 export interface UpdateIndexPageMutationArgs {
   
-  request: InputIndexPageUpdate;
+  request: IndexPageUpdateRequest;
 }
-export interface GenerateCloudinarySignatureMutationArgs {
+export interface UpdateLogoUrlMutationArgs {
   
-  paramsToSign: Json;
+  logoUrl: string;
 }
 
 
@@ -441,45 +443,29 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
 
   export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
     
-    htmlConfig?: QueryHtmlConfigResolver<HtmlConfig, TypeParent, Context>;
-    
-    logoConfig?: QueryLogoConfigResolver<LogoConfig, TypeParent, Context>;
-    
-    indexPageConfig?: QueryIndexPageConfigResolver<IndexPageConfig, TypeParent, Context>;
-    
-    entry?: QueryEntryResolver<Maybe<Entry>, TypeParent, Context>;
-    
-    entries?: QueryEntriesResolver<ReadonlyArray<Entry>, TypeParent, Context>;
-    
-    entryCategories?: QueryEntryCategoriesResolver<ReadonlyArray<Category>, TypeParent, Context>;
-    
     category?: QueryCategoryResolver<Maybe<Category>, TypeParent, Context>;
-    
-    indexCards?: QueryIndexCardsResolver<ReadonlyArray<IndexCard>, TypeParent, Context>;
-    
-    youtubeVideos?: QueryYoutubeVideosResolver<ReadonlyArray<IndexYouTubeVideo>, TypeParent, Context>;
     
     cloudinaryCloudName?: QueryCloudinaryCloudNameResolver<string, TypeParent, Context>;
     
     cloudinaryApiKey?: QueryCloudinaryApiKeyResolver<string, TypeParent, Context>;
-  }
-
-
-  export type QueryHtmlConfigResolver<R = HtmlConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type QueryLogoConfigResolver<R = LogoConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type QueryIndexPageConfigResolver<R = IndexPageConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type QueryEntryResolver<R = Maybe<Entry>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryEntryArgs>;
-  export interface QueryEntryArgs {
     
-    entryId: string;
-  }
-
-
-  export type QueryEntriesResolver<R = ReadonlyArray<Entry>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type QueryEntryCategoriesResolver<R = ReadonlyArray<Category>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryEntryCategoriesArgs>;
-  export interface QueryEntryCategoriesArgs {
+    entries?: QueryEntriesResolver<ReadonlyArray<Entry>, TypeParent, Context>;
     
-    entryId: string;
+    entry?: QueryEntryResolver<Maybe<Entry>, TypeParent, Context>;
+    
+    entryCategories?: QueryEntryCategoriesResolver<ReadonlyArray<Category>, TypeParent, Context>;
+    
+    htmlConfig?: QueryHtmlConfigResolver<HtmlConfig, TypeParent, Context>;
+    
+    indexCards?: QueryIndexCardsResolver<ReadonlyArray<IndexCard>, TypeParent, Context>;
+    
+    indexPageConfig?: QueryIndexPageConfigResolver<IndexPageConfig, TypeParent, Context>;
+    
+    logoConfig?: QueryLogoConfigResolver<LogoConfig, TypeParent, Context>;
+    
+    youtubeVideos?: QueryYoutubeVideosResolver<ReadonlyArray<IndexYouTubeVideo>, TypeParent, Context>;
+    
+    _empty?: Query_EmptyResolver<Maybe<boolean>, TypeParent, Context>;
   }
 
 
@@ -490,10 +476,69 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   }
 
 
-  export type QueryIndexCardsResolver<R = ReadonlyArray<IndexCard>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type QueryYoutubeVideosResolver<R = ReadonlyArray<IndexYouTubeVideo>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryCloudinaryCloudNameResolver<R = string, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type QueryCloudinaryApiKeyResolver<R = string, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;  
+  export type QueryCloudinaryApiKeyResolver<R = string, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type QueryEntriesResolver<R = ReadonlyArray<Entry>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type QueryEntryResolver<R = Maybe<Entry>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryEntryArgs>;
+  export interface QueryEntryArgs {
+    
+    entryId: string;
+  }
+
+
+  export type QueryEntryCategoriesResolver<R = ReadonlyArray<Category>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryEntryCategoriesArgs>;
+  export interface QueryEntryCategoriesArgs {
+    
+    entryId: string;
+  }
+
+
+  export type QueryHtmlConfigResolver<R = HtmlConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type QueryIndexCardsResolver<R = ReadonlyArray<IndexCard>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type QueryIndexPageConfigResolver<R = IndexPageConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type QueryLogoConfigResolver<R = LogoConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type QueryYoutubeVideosResolver<R = ReadonlyArray<IndexYouTubeVideo>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type Query_EmptyResolver<R = Maybe<boolean>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;  
+/** Represents an Entry Category. */
+  export interface CategoryResolvers<Context = ApolloContext, TypeParent = Category> {
+    
+    id?: CategoryIdResolver<string, TypeParent, Context>;
+    
+    name?: CategoryNameResolver<string, TypeParent, Context>;
+    
+    education?: CategoryEducationResolver<string, TypeParent, Context>;
+    
+    pricePerPaperRs?: CategoryPricePerPaperRsResolver<number, TypeParent, Context>;
+    
+    activated?: CategoryActivatedResolver<boolean, TypeParent, Context>;
+  }
+
+
+  export type CategoryIdResolver<R = string, Parent = Category, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type CategoryNameResolver<R = string, Parent = Category, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type CategoryEducationResolver<R = string, Parent = Category, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type CategoryPricePerPaperRsResolver<R = number, Parent = Category, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type CategoryActivatedResolver<R = boolean, Parent = Category, Context = ApolloContext> = Resolver<R, Parent, Context>;  
+/** Represents a military service branch (Entry). */
+  export interface EntryResolvers<Context = ApolloContext, TypeParent = Entry> {
+    
+    id?: EntryIdResolver<string, TypeParent, Context>;
+    
+    name?: EntryNameResolver<string, TypeParent, Context>;
+    
+    logoUrl?: EntryLogoUrlResolver<string, TypeParent, Context>;
+    
+    description?: EntryDescriptionResolver<string, TypeParent, Context>;
+    
+    categories?: EntryCategoriesResolver<ReadonlyArray<Category>, TypeParent, Context>;
+  }
+
+
+  export type EntryIdResolver<R = string, Parent = Entry, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type EntryNameResolver<R = string, Parent = Entry, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type EntryLogoUrlResolver<R = string, Parent = Entry, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type EntryDescriptionResolver<R = string, Parent = Entry, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type EntryCategoriesResolver<R = ReadonlyArray<Category>, Parent = Entry, Context = ApolloContext> = Resolver<R, Parent, Context>;  
 /** Configuration for the html document sent in response to all requests. */
   export interface HtmlConfigResolvers<Context = ApolloContext, TypeParent = HtmlConfig> {
     /** Google Analytics ID. */
@@ -517,17 +562,49 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   export type HtmlConfigMetaAuthorResolver<R = Maybe<string>, Parent = HtmlConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type HtmlConfigMetaAbstractResolver<R = Maybe<string>, Parent = HtmlConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type HtmlConfigMetaCopyrightResolver<R = Maybe<string>, Parent = HtmlConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;  
-/** Logo image configuration. */
-  export interface LogoConfigResolvers<Context = ApolloContext, TypeParent = LogoConfig> {
+/** One of the Index Cards on main landing page. */
+  export interface IndexCardResolvers<Context = ApolloContext, TypeParent = IndexCard> {
+    /** Same as the id for the Entry the IndexCard represents. */
+    id?: IndexCardIdResolver<string, TypeParent, Context>;
     
-    id?: LogoConfigIdResolver<string, TypeParent, Context>;
-    /** Url of logo image. */
-    url?: LogoConfigUrlResolver<string, TypeParent, Context>;
+    title?: IndexCardTitleResolver<string, TypeParent, Context>;
+    
+    categories?: IndexCardCategoriesResolver<ReadonlyArray<TypeIndexCardCategory>, TypeParent, Context>;
+    
+    entryLogoUrl?: IndexCardEntryLogoUrlResolver<string, TypeParent, Context>;
+    
+    colorBlock?: IndexCardColorBlockResolver<string, TypeParent, Context>;
+    
+    colorCategoryBackground?: IndexCardColorCategoryBackgroundResolver<string, TypeParent, Context>;
+    
+    colorLogoBackground?: IndexCardColorLogoBackgroundResolver<string, TypeParent, Context>;
+    
+    colorTitle?: IndexCardColorTitleResolver<string, TypeParent, Context>;
   }
 
 
-  export type LogoConfigIdResolver<R = string, Parent = LogoConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type LogoConfigUrlResolver<R = string, Parent = LogoConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;  
+  export type IndexCardIdResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type IndexCardTitleResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type IndexCardCategoriesResolver<R = ReadonlyArray<TypeIndexCardCategory>, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type IndexCardEntryLogoUrlResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type IndexCardColorBlockResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type IndexCardColorCategoryBackgroundResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type IndexCardColorLogoBackgroundResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type IndexCardColorTitleResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;  
+
+  export interface TypeIndexCardCategoryResolvers<Context = ApolloContext, TypeParent = TypeIndexCardCategory> {
+    /** Id of the category. */
+    id?: TypeIndexCardCategoryIdResolver<string, TypeParent, Context>;
+    
+    title?: TypeIndexCardCategoryTitleResolver<string, TypeParent, Context>;
+    
+    visible?: TypeIndexCardCategoryVisibleResolver<boolean, TypeParent, Context>;
+  }
+
+
+  export type TypeIndexCardCategoryIdResolver<R = string, Parent = TypeIndexCardCategory, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type TypeIndexCardCategoryTitleResolver<R = string, Parent = TypeIndexCardCategory, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type TypeIndexCardCategoryVisibleResolver<R = boolean, Parent = TypeIndexCardCategory, Context = ApolloContext> = Resolver<R, Parent, Context>;  
 /** Configuration for the landing page / index page. */
   export interface IndexPageConfigResolvers<Context = ApolloContext, TypeParent = IndexPageConfig> {
     /** Always "index-page-config". */
@@ -577,89 +654,17 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   export type IndexPageAboutImageImageUrlResolver<R = string, Parent = IndexPageAboutImage, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexPageAboutImageTitleResolver<R = models.LocalizedString, Parent = IndexPageAboutImage, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexPageAboutImageTextResolver<R = models.LocalizedString, Parent = IndexPageAboutImage, Context = ApolloContext> = Resolver<R, Parent, Context>;  
-/** Represents a military service branch (Entry). */
-  export interface EntryResolvers<Context = ApolloContext, TypeParent = Entry> {
+/** Logo image configuration. */
+  export interface LogoConfigResolvers<Context = ApolloContext, TypeParent = LogoConfig> {
     
-    id?: EntryIdResolver<string, TypeParent, Context>;
-    
-    name?: EntryNameResolver<string, TypeParent, Context>;
-    
-    logoUrl?: EntryLogoUrlResolver<string, TypeParent, Context>;
-    
-    description?: EntryDescriptionResolver<string, TypeParent, Context>;
-    
-    categories?: EntryCategoriesResolver<ReadonlyArray<Category>, TypeParent, Context>;
+    id?: LogoConfigIdResolver<string, TypeParent, Context>;
+    /** Url of logo image. */
+    url?: LogoConfigUrlResolver<string, TypeParent, Context>;
   }
 
 
-  export type EntryIdResolver<R = string, Parent = Entry, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type EntryNameResolver<R = string, Parent = Entry, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type EntryLogoUrlResolver<R = string, Parent = Entry, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type EntryDescriptionResolver<R = string, Parent = Entry, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type EntryCategoriesResolver<R = ReadonlyArray<Category>, Parent = Entry, Context = ApolloContext> = Resolver<R, Parent, Context>;  
-/** Represents an Entry Category. */
-  export interface CategoryResolvers<Context = ApolloContext, TypeParent = Category> {
-    
-    id?: CategoryIdResolver<string, TypeParent, Context>;
-    
-    name?: CategoryNameResolver<string, TypeParent, Context>;
-    
-    education?: CategoryEducationResolver<string, TypeParent, Context>;
-    
-    pricePerPaperRs?: CategoryPricePerPaperRsResolver<number, TypeParent, Context>;
-    
-    activated?: CategoryActivatedResolver<boolean, TypeParent, Context>;
-  }
-
-
-  export type CategoryIdResolver<R = string, Parent = Category, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type CategoryNameResolver<R = string, Parent = Category, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type CategoryEducationResolver<R = string, Parent = Category, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type CategoryPricePerPaperRsResolver<R = number, Parent = Category, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type CategoryActivatedResolver<R = boolean, Parent = Category, Context = ApolloContext> = Resolver<R, Parent, Context>;  
-/** One of the Index Cards on main landing page. */
-  export interface IndexCardResolvers<Context = ApolloContext, TypeParent = IndexCard> {
-    /** Same as the id for the Entry the IndexCard represents. */
-    id?: IndexCardIdResolver<string, TypeParent, Context>;
-    
-    title?: IndexCardTitleResolver<string, TypeParent, Context>;
-    
-    categories?: IndexCardCategoriesResolver<ReadonlyArray<TypeIndexCardCategory>, TypeParent, Context>;
-    
-    entryLogoUrl?: IndexCardEntryLogoUrlResolver<string, TypeParent, Context>;
-    
-    colorBlock?: IndexCardColorBlockResolver<string, TypeParent, Context>;
-    
-    colorCategoryBackground?: IndexCardColorCategoryBackgroundResolver<string, TypeParent, Context>;
-    
-    colorLogoBackground?: IndexCardColorLogoBackgroundResolver<string, TypeParent, Context>;
-    
-    colorTitle?: IndexCardColorTitleResolver<string, TypeParent, Context>;
-  }
-
-
-  export type IndexCardIdResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type IndexCardTitleResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type IndexCardCategoriesResolver<R = ReadonlyArray<TypeIndexCardCategory>, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type IndexCardEntryLogoUrlResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type IndexCardColorBlockResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type IndexCardColorCategoryBackgroundResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type IndexCardColorLogoBackgroundResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type IndexCardColorTitleResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;  
-
-  export interface TypeIndexCardCategoryResolvers<Context = ApolloContext, TypeParent = TypeIndexCardCategory> {
-    /** Id of the category. */
-    id?: TypeIndexCardCategoryIdResolver<string, TypeParent, Context>;
-    
-    title?: TypeIndexCardCategoryTitleResolver<string, TypeParent, Context>;
-    
-    visible?: TypeIndexCardCategoryVisibleResolver<boolean, TypeParent, Context>;
-  }
-
-
-  export type TypeIndexCardCategoryIdResolver<R = string, Parent = TypeIndexCardCategory, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type TypeIndexCardCategoryTitleResolver<R = string, Parent = TypeIndexCardCategory, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type TypeIndexCardCategoryVisibleResolver<R = boolean, Parent = TypeIndexCardCategory, Context = ApolloContext> = Resolver<R, Parent, Context>;  
+  export type LogoConfigIdResolver<R = string, Parent = LogoConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type LogoConfigUrlResolver<R = string, Parent = LogoConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;  
 
   export interface IndexYouTubeVideoResolvers<Context = ApolloContext, TypeParent = IndexYouTubeVideo> {
     /** Will contain the Entry ID that the video corresponds to assuming that the Entry has not been removed. */
@@ -680,52 +685,51 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
 
   export interface MutationResolvers<Context = ApolloContext, TypeParent = {}> {
     
-    createCategoryExistingEntry?: MutationCreateCategoryExistingEntryResolver<Category, TypeParent, Context>;
+    _empty?: Mutation_EmptyResolver<Maybe<boolean>, TypeParent, Context>;
     
-    createCategoryNewEntry?: MutationCreateCategoryNewEntryResolver<Entry, TypeParent, Context>;
-    
-    updateEntry?: MutationUpdateEntryResolver<Entry, TypeParent, Context>;
-    
-    deleteEntries?: MutationDeleteEntriesResolver<Maybe<boolean>, TypeParent, Context>;
-    
-    updateCategory?: MutationUpdateCategoryResolver<Category, TypeParent, Context>;
-    
-    updateLogoUrl?: MutationUpdateLogoUrlResolver<LogoConfig, TypeParent, Context>;
+    createCategoryAndNewEntry?: MutationCreateCategoryAndNewEntryResolver<Entry, TypeParent, Context>;
+    /** Adds a new Category to an existing Entry. */
+    createCategoryForExistingEntry?: MutationCreateCategoryForExistingEntryResolver<Category, TypeParent, Context>;
     /** Deletes Categories. It removes both the Category database entry and the Category's id from the corresponding Entry objects in the database. It returns the list of remaining Categories. */
     deleteCategories?: MutationDeleteCategoriesResolver<ReadonlyArray<Category>, TypeParent, Context>;
+    
+    deleteEntries?: MutationDeleteEntriesResolver<Maybe<boolean>, TypeParent, Context>;
+    /** Generates the authentication parameters required for creating a session for use with the Cloudinary Media Library widget. */
+    generateCloudinaryMediaLibraryAuthenticationToken?: MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver<CloudinaryMediaWidgetAuthenticationToken, TypeParent, Context>;
+    /** Signs the parameters passed by the Cloudinary Upload Widget. See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
+    generateCloudinarySignature?: MutationGenerateCloudinarySignatureResolver<string, TypeParent, Context>;
     /** Sets the activation status for the specified categories. The number of ids needs to match the number of booleans. Returns the updated Categories. */
     setCategoryActivationStatuses?: MutationSetCategoryActivationStatusesResolver<ReadonlyArray<Category>, TypeParent, Context>;
     
+    updateCategory?: MutationUpdateCategoryResolver<Category, TypeParent, Context>;
+    
+    updateEntry?: MutationUpdateEntryResolver<Entry, TypeParent, Context>;
+    
     updateIndexPage?: MutationUpdateIndexPageResolver<IndexPageConfig, TypeParent, Context>;
-    /** Signs the parameters passed by the Cloudinary Upload Widget. See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
-    generateCloudinarySignature?: MutationGenerateCloudinarySignatureResolver<string, TypeParent, Context>;
-    /** Generates the authentication parameters required for creating a session for use with the Cloudinary Media Library widget. */
-    generateCloudinaryMediaLibraryAuthenticationToken?: MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver<CloudinaryMediaWidgetAuthenticationToken, TypeParent, Context>;
     
-    test?: MutationTestResolver<string, TypeParent, Context>;
+    updateLogoUrl?: MutationUpdateLogoUrlResolver<LogoConfig, TypeParent, Context>;
   }
 
 
-  export type MutationCreateCategoryExistingEntryResolver<R = Category, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationCreateCategoryExistingEntryArgs>;
-  export interface MutationCreateCategoryExistingEntryArgs {
+  export type Mutation_EmptyResolver<R = Maybe<boolean>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type MutationCreateCategoryAndNewEntryResolver<R = Entry, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationCreateCategoryAndNewEntryArgs>;
+  export interface MutationCreateCategoryAndNewEntryArgs {
     
-    request: CategoryCreationRequestExistingEntry;
+    request: CreateCategoryAndNewEntryRequest;
   }
 
 
-  export type MutationCreateCategoryNewEntryResolver<R = Entry, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationCreateCategoryNewEntryArgs>;
-  export interface MutationCreateCategoryNewEntryArgs {
+  export type MutationCreateCategoryForExistingEntryResolver<R = Category, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationCreateCategoryForExistingEntryArgs>;
+  export interface MutationCreateCategoryForExistingEntryArgs {
     
-    request: CategoryCreationRequestNewEntry;
+    request: CreateCategoryForExistingEntryRequest;
   }
 
 
-  export type MutationUpdateEntryResolver<R = Entry, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationUpdateEntryArgs>;
-  export interface MutationUpdateEntryArgs {
+  export type MutationDeleteCategoriesResolver<R = ReadonlyArray<Category>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationDeleteCategoriesArgs>;
+  export interface MutationDeleteCategoriesArgs {
     
-    entryId: string;
-    
-    update: EntryUpdate;
+    categoryIds: ReadonlyArray<string>;
   }
 
 
@@ -736,26 +740,11 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   }
 
 
-  export type MutationUpdateCategoryResolver<R = Category, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationUpdateCategoryArgs>;
-  export interface MutationUpdateCategoryArgs {
+  export type MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver<R = CloudinaryMediaWidgetAuthenticationToken, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type MutationGenerateCloudinarySignatureResolver<R = string, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationGenerateCloudinarySignatureArgs>;
+  export interface MutationGenerateCloudinarySignatureArgs {
     
-    categoryId: string;
-    
-    update: CategoryUpdate;
-  }
-
-
-  export type MutationUpdateLogoUrlResolver<R = LogoConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationUpdateLogoUrlArgs>;
-  export interface MutationUpdateLogoUrlArgs {
-    
-    logoUrl: string;
-  }
-
-
-  export type MutationDeleteCategoriesResolver<R = ReadonlyArray<Category>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationDeleteCategoriesArgs>;
-  export interface MutationDeleteCategoriesArgs {
-    
-    categoryIds: ReadonlyArray<string>;
+    paramsToSign: Json;
   }
 
 
@@ -768,22 +757,38 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   }
 
 
+  export type MutationUpdateCategoryResolver<R = Category, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationUpdateCategoryArgs>;
+  export interface MutationUpdateCategoryArgs {
+    
+    categoryId: string;
+    
+    update: CategoryUpdateRequest;
+  }
+
+
+  export type MutationUpdateEntryResolver<R = Entry, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationUpdateEntryArgs>;
+  export interface MutationUpdateEntryArgs {
+    
+    entryId: string;
+    
+    update: EntryUpdateRequest;
+  }
+
+
   export type MutationUpdateIndexPageResolver<R = IndexPageConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationUpdateIndexPageArgs>;
   export interface MutationUpdateIndexPageArgs {
     
-    request: InputIndexPageUpdate;
+    request: IndexPageUpdateRequest;
   }
 
 
-  export type MutationGenerateCloudinarySignatureResolver<R = string, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationGenerateCloudinarySignatureArgs>;
-  export interface MutationGenerateCloudinarySignatureArgs {
+  export type MutationUpdateLogoUrlResolver<R = LogoConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationUpdateLogoUrlArgs>;
+  export interface MutationUpdateLogoUrlArgs {
     
-    paramsToSign: Json;
+    logoUrl: string;
   }
 
-
-  export type MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver<R = CloudinaryMediaWidgetAuthenticationToken, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type MutationTestResolver<R = string, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;  
+  
 /** Authentication parameters for Cloudinary Media Library widget. */
   export interface CloudinaryMediaWidgetAuthenticationTokenResolvers<Context = ApolloContext, TypeParent = CloudinaryMediaWidgetAuthenticationToken> {
     
@@ -838,14 +843,14 @@ export interface JsonScalarConfig extends GraphQLScalarTypeConfig<Json, any> {
 
 export interface IResolvers {
     Query?: QueryResolvers;
-    HtmlConfig?: HtmlConfigResolvers;
-    LogoConfig?: LogoConfigResolvers;
-    IndexPageConfig?: IndexPageConfigResolvers;
-    IndexPageAboutImage?: IndexPageAboutImageResolvers;
-    Entry?: EntryResolvers;
     Category?: CategoryResolvers;
+    Entry?: EntryResolvers;
+    HtmlConfig?: HtmlConfigResolvers;
     IndexCard?: IndexCardResolvers;
     TypeIndexCardCategory?: TypeIndexCardCategoryResolvers;
+    IndexPageConfig?: IndexPageConfigResolvers;
+    IndexPageAboutImage?: IndexPageAboutImageResolvers;
+    LogoConfig?: LogoConfigResolvers;
     IndexYouTubeVideo?: IndexYouTubeVideoResolvers;
     Mutation?: MutationResolvers;
     CloudinaryMediaWidgetAuthenticationToken?: CloudinaryMediaWidgetAuthenticationTokenResolvers;

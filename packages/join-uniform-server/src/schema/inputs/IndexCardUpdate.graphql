@@ -1,8 +1,0 @@
-input IndexCardUpdate {
-  entryId: ID!
-  colorBlock: String!
-  colorCategoryBackground: String!
-  colorLogoBackground: String!
-  colorTitle: String!
-  categories: [IndexCardCategoryUpdate!]!
-}

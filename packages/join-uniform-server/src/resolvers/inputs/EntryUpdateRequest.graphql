@@ -1,0 +1,5 @@
+input EntryUpdateRequest {
+  name: String!
+  logoUrl: String!
+  description: String!
+}

@@ -1,0 +1,4 @@
+input IndexCardCategoryUpdateRequest {
+  categoryId: ID!
+  visible: Boolean!
+}

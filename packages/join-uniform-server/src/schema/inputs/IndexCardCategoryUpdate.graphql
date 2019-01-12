@@ -1,4 +1,0 @@
-input IndexCardCategoryUpdate {
-  categoryId: ID!
-  visible: Boolean!
-}

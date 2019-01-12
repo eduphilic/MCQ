@@ -1,0 +1,3 @@
+extend type Mutation {
+  createCategoryAndNewEntry(request: CreateCategoryAndNewEntryRequest!): Entry!
+}
