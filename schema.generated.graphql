@@ -1,0 +1,252 @@
+# This is an automatically generated file.
+# DO NOT MODIFY
+# Use the command: "yarn graphql" to regenerate.
+
+# Represents an Entry Category.
+type Category {
+  id: ID!
+  name: String!
+  education: String!
+  pricePerPaperRs: Int!
+  activated: Boolean!
+}
+
+input CategoryUpdateRequest {
+  name: String!
+  education: String!
+  pricePerPaperRs: Int!
+}
+
+# Authentication parameters for Cloudinary Media Library widget.
+type CloudinaryMediaWidgetAuthenticationToken {
+  cloud_name: String!
+  api_key: String!
+  username: String!
+  timestamp: String!
+  signature: String!
+}
+
+input CreateCategoryAndNewEntryRequest {
+  categoryName: String!
+  categoryEducation: String!
+  pricePerPaper: Int!
+  entryLogoUrl: String!
+  entryName: String!
+  entryExplanation: String!
+}
+
+input CreateCategoryForExistingEntryRequest {
+  categoryName: String!
+  categoryEducation: String!
+  pricePerPaper: Int!
+  existingEntryId: String!
+}
+
+# Represents a military service branch (Entry).
+type Entry {
+  id: ID!
+  name: String!
+  logoUrl: String!
+  description: String!
+  categories: [Category]!
+}
+
+input EntryUpdateRequest {
+  name: String!
+  logoUrl: String!
+  description: String!
+}
+
+# Configuration for the html document sent in response to all requests.
+type HtmlConfig {
+  # Google Analytics ID.
+  googleAnalyticsId: String
+
+  # Meta "keywords" tag.
+  metaKeywords: String
+
+  # Meta "description" tag.
+  metaDescription: String
+
+  # Meta "author" tag.
+  metaAuthor: String
+
+  # Meta "abstract" tag.
+  metaAbstract: String
+
+  # Meta "copyright" tag.
+  metaCopyright: String
+}
+
+# One of the Index Cards on main landing page.
+type IndexCard {
+  # Same as the id for the Entry the IndexCard represents.
+  id: ID!
+  title: String!
+  categories: [TypeIndexCardCategory!]!
+  entryLogoUrl: String!
+  colorBlock: String!
+  colorCategoryBackground: String!
+  colorLogoBackground: String!
+  colorTitle: String!
+}
+
+input IndexCardCategoryUpdateRequest {
+  categoryId: ID!
+  visible: Boolean!
+}
+
+# Image and supporting text in index about section.
+type IndexPageAboutImage {
+  id: ID!
+
+  # Image URL.
+  imageUrl: String!
+
+  # Large text below image.
+  title: LocalizedString!
+
+  # Small text below image.
+  text: LocalizedString!
+}
+
+input IndexPageAboutImageUpdateRequest {
+  imageUrl: String!
+  title: LocalizedString!
+  text: LocalizedString!
+}
+
+# Configuration for the landing page / index page.
+type IndexPageConfig {
+  # Always "index-page-config".
+  id: ID!
+
+  # The url to the hero image.
+  heroBackgroundImageUrl: String!
+
+  # The transparency of the hero image.
+  heroBackgroundAlpha: Float!
+
+  # The primary hero text (large top text).
+  heroPrimaryText: LocalizedString!
+
+  # List of features below the primary hero text.
+  heroFeatures: [LocalizedString!]!
+
+  # Text in the green section below the hero section.
+  heroFooterText: LocalizedString!
+
+  # About section title.
+  aboutTitle: LocalizedString!
+
+  # Text below the about title.
+  aboutText: LocalizedString!
+
+  # Images in the about section.
+  aboutImages: [IndexPageAboutImage!]!
+}
+
+input IndexPageIndexCardUpdateRequest {
+  entryId: ID!
+  colorBlock: String!
+  colorCategoryBackground: String!
+  colorLogoBackground: String!
+  colorTitle: String!
+  categories: [IndexCardCategoryUpdateRequest!]!
+}
+
+input IndexPageUpdateRequest {
+  heroBackgroundImageUrl: String!
+  heroBackgroundAlpha: Float!
+  heroPrimaryTextEnglish: String!
+  heroPrimaryTextHindi: String
+  heroFeatures: [LocalizedString!]!
+  aboutTitleEnglish: String!
+  aboutTitleHindi: String
+  aboutTextEnglish: String!
+  aboutTextHindi: String
+  aboutImages: [IndexPageAboutImageUpdateRequest!]!
+  indexCards: [IndexPageIndexCardUpdateRequest!]!
+}
+
+type IndexYouTubeVideo {
+  # Will contain the Entry ID that the video corresponds to assuming that the
+  # Entry has not been removed.
+  entryId: ID
+
+  # Order of appearance.
+  position: Int!
+  youtubeUrl: String!
+  title: LocalizedString!
+}
+
+scalar Json
+
+# Represents a localized string.
+# The Hindi field is optional.
+#
+# Fields:
+# - en: String!
+# - hi: String
+scalar LocalizedString
+
+# Logo image configuration.
+type LogoConfig {
+  id: ID!
+
+  # Url of logo image.
+  url: String!
+}
+
+type Mutation {
+  _empty: Boolean
+  createCategoryAndNewEntry(request: CreateCategoryAndNewEntryRequest!): Entry!
+
+  # Adds a new Category to an existing Entry.
+  createCategoryForExistingEntry(request: CreateCategoryForExistingEntryRequest!): Category!
+
+  # Deletes Categories. It removes both the Category database entry and the
+  # Category's id from the corresponding Entry objects in the database. It
+  # returns the list of remaining Categories.
+  deleteCategories(categoryIds: [ID!]!): [Category!]!
+  deleteEntries(entryIds: [ID!]!): Boolean
+
+  # Generates the authentication parameters required for creating a session for
+  # use with the Cloudinary Media Library widget.
+  generateCloudinaryMediaLibraryAuthenticationToken: CloudinaryMediaWidgetAuthenticationToken!
+
+  # Signs the parameters passed by the Cloudinary Upload Widget.
+  # See: https://cloudinary.com/documentation/upload_widget#signed_uploads
+  generateCloudinarySignature(paramsToSign: Json!): String!
+
+  # Sets the activation status for the specified categories. The number of ids
+  # needs to match the number of booleans.
+  # Returns the updated Categories.
+  setCategoryActivationStatuses(categoryIds: [ID!]!, activatedStatuses: [Boolean!]!): [Category!]!
+  updateCategory(categoryId: ID!, update: CategoryUpdateRequest!): Category!
+  updateEntry(entryId: ID!, update: EntryUpdateRequest!): Entry!
+  updateIndexPage(request: IndexPageUpdateRequest!): IndexPageConfig!
+  updateLogoUrl(logoUrl: String!): LogoConfig!
+}
+
+type Query {
+  _empty: Boolean
+  category(id: ID!): Category
+  cloudinaryCloudName: String!
+  cloudinaryApiKey: String!
+  entries: [Entry!]!
+  entry(entryId: ID!): Entry
+  entryCategories(entryId: ID!): [Category!]!
+  htmlConfig: HtmlConfig!
+  indexCards: [IndexCard!]!
+  indexPageConfig: IndexPageConfig!
+  logoConfig: LogoConfig!
+  youtubeVideos: [IndexYouTubeVideo!]!
+}
+
+type TypeIndexCardCategory {
+  # Id of the category.
+  id: ID!
+  title: String!
+  visible: Boolean!
+}

@@ -1,6 +1,6 @@
 {
   schema: {
-    files: "packages/join-uniform-server/src/resolvers/**/*.graphql"
+    files: "schema.generated.graphql"
   },
   query: {
     files: [
