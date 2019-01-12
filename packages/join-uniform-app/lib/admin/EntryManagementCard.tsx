@@ -4,11 +4,11 @@ import {
   DashboardCardItem,
   Typography,
 } from "@join-uniform/components";
-import { EntryManagerEntryPartsCategories } from "@join-uniform/graphql";
 import { styled } from "@join-uniform/theme";
 import React, { useMemo } from "react";
 import slugify from "slugify";
-import { createResponsiveImageUrl } from "../utils";
+import { EntryManagerEntryPartsCategories } from "~/lib/client";
+import { createResponsiveImageUrl } from "~/lib/utils";
 
 export type EntryManagementCardProps = {
   entryId: string;

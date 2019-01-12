@@ -1,14 +1,14 @@
 import {
-  WithHtmlSeoDocumentHtmlConfigDocument,
-  WithHtmlSeoDocumentHtmlConfigQuery,
-} from "@join-uniform/graphql";
-import {
   DefaultDocumentIProps,
   DocumentComponentType,
   DocumentProps,
   NextDocumentContext,
 } from "next/document";
 import React, { Component } from "react";
+import {
+  WithHtmlSeoDocumentHtmlConfigDocument,
+  WithHtmlSeoDocumentHtmlConfigQuery,
+} from "~/lib/client";
 import { initializeApollo } from "../apollo";
 import { GoogleAnalyticsTags } from "./GoogleAnalyticsTag";
 import { SeoTags } from "./SeoTags";

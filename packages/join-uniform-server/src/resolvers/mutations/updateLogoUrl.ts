@@ -1,5 +1,7 @@
 import { MutationUpdateLogoUrlResolver } from "~/generated";
-import { logoConfig } from "./logoConfig";
+
+// TODO: Use "data loader".
+import { logoConfig } from "../queries/logoConfig";
 
 const r: MutationUpdateLogoUrlResolver = async (
   parent,

@@ -6,15 +6,6 @@ import {
   LoadingSpinner,
   PendingChangesButton,
 } from "@join-uniform/components";
-import {
-  EntryManagerEntryPartsFragment,
-  EntryManagerGetEntryComponent,
-  EntryManagerGetEntryProps,
-  EntryManagerGetEntryQuery,
-  EntryManagerUpdateEntryComponent,
-  EntryManagerUpdateEntryMutation,
-  EntryManagerUpdateEntryProps,
-} from "@join-uniform/graphql";
 import { useFormik } from "formik";
 import { NextContext } from "next";
 import Router from "next/router";
@@ -28,6 +19,15 @@ import {
   FormikImagePicker,
   FormikMuiTextField,
 } from "~/lib/admin";
+import {
+  EntryManagerEntryPartsFragment,
+  EntryManagerGetEntryComponent,
+  EntryManagerGetEntryProps,
+  EntryManagerGetEntryQuery,
+  EntryManagerUpdateEntryComponent,
+  EntryManagerUpdateEntryMutation,
+  EntryManagerUpdateEntryProps,
+} from "~/lib/client";
 
 type FormValues = {
   name: string;

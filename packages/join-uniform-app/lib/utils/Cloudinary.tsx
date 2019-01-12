@@ -1,4 +1,12 @@
 import { LoadingSpinner } from "@join-uniform/components";
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { MutationFn } from "react-apollo";
 import {
   CloudinaryConfigHOC,
   CloudinaryConfigProps,
@@ -8,15 +16,7 @@ import {
   CloudinaryGenerateSignatureHOC,
   CloudinaryGenerateSignatureMutation,
   CloudinaryGenerateSignatureVariables,
-} from "@join-uniform/graphql";
-import React, {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { MutationFn } from "react-apollo";
+} from "~/lib/client";
 
 let initializationStatus: Promise<{ success: boolean }>;
 
@@ -184,15 +184,17 @@ function CloudinaryProviderBase(
             );
           }
 
+          const credentials = {
+            ...fetchResult.data
+              .generateCloudinaryMediaLibraryAuthenticationToken,
+          };
+
           // Remove Apollo specific fields.
-          delete fetchResult.data.__typename;
-          delete fetchResult.data
-            .generateCloudinaryMediaLibraryAuthenticationToken.__typename;
+          delete credentials.__typename;
 
           return {
             // Authentication:
-            ...fetchResult.data
-              .generateCloudinaryMediaLibraryAuthenticationToken,
+            ...credentials,
 
             // Media library behavior:
             max_files: 1,

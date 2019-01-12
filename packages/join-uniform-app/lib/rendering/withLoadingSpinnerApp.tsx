@@ -1,7 +1,7 @@
 import { LoadingSpinnerContextValue } from "@join-uniform/components";
-import { WithLoadingSpinnerAppLogoConfigComponent } from "@join-uniform/graphql";
 import { AppComponentType, DefaultAppIProps, NextAppContext } from "next/app";
 import React, { Component } from "react";
+import { WithLoadingSpinnerAppLogoConfigComponent } from "~/lib/client";
 import { createResponsiveImageUrl } from "../utils";
 import { RenderingAppProps } from "./RenderingAppProps";
 

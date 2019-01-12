@@ -1,7 +1,7 @@
-import { Entry, MutationCreateCategoryNewEntryResolver } from "~/generated";
+import { Entry, MutationCreateCategoryAndNewEntryResolver } from "~/generated";
 import { DBCategory, DBEntry } from "~/models";
 
-export const createCategoryAndNewEntry: MutationCreateCategoryNewEntryResolver = async (
+export const createCategoryAndNewEntry: MutationCreateCategoryAndNewEntryResolver = async (
   _parent,
   args,
   context,

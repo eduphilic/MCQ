@@ -1,4 +1,0 @@
-enum LOGIN_REQUEST_RESULT {
-  VALID
-  INVALID
-}

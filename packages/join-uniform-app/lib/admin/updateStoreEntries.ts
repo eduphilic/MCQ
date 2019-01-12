@@ -1,9 +1,9 @@
+import { DataProxy } from "apollo-cache";
 import {
   EntryManagerGetEntriesDocument,
   EntryManagerGetEntriesQuery,
   EntryManagerGetEntriesVariables,
-} from "@join-uniform/graphql";
-import { DataProxy } from "apollo-cache";
+} from "~/lib/client";
 
 /**
  * Updates the list of Entries in the Apollo cache.

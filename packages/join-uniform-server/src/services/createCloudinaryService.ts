@@ -1,6 +1,6 @@
-import { CloudinaryMediaWidgetAuthenticationToken } from "@join-uniform/graphql/server";
 import cloudinary from "cloudinary";
 import crypto from "crypto";
+import { CloudinaryMediaWidgetAuthenticationToken } from "~/generated";
 
 let cloudinaryConfigured = false;
 

@@ -1,8 +1,5 @@
 {
   "private": true,
-  "engines": {
-    "node": "8"
-  },
   "workspaces": {
     "packages": [
       "packages/*"
@@ -18,7 +15,7 @@
     "lint": "yarn workspaces run lint",
     "type-check": "yarn workspaces run type-check",
     "tools": "ts-node --project ./tools/tsconfig.json ./tools",
-    "graphql": "yarn graphql:gen && yarn graphql:stich",
+    "graphql": "yarn graphql:gen && yarn graphql:stitch",
     "graphql:gen": "gql-gen",
     "graphql:stitch": "ts-node --project ./tools/tsconfig.json ./tools/stitchSchema.ts"
   },

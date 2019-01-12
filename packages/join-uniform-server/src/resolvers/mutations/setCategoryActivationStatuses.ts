@@ -2,7 +2,7 @@ import {
   Category,
   MutationSetCategoryActivationStatusesResolver as Resolver,
 } from "~/generated";
-import { DBCategory } from "../models";
+import { DBCategory } from "~/models";
 
 const r: Resolver = async (_parent, args, context) => {
   const { categoryIds, activatedStatuses } = args;

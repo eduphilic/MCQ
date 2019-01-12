@@ -1,6 +1,8 @@
 import { Entry, MutationUpdateEntryResolver } from "~/generated";
 import { DBEntry } from "~/models";
-import { entryCategories } from "./entryCategories";
+
+// TODO: Use "data fetcher" here.
+import { entryCategories } from "../queries/entryCategories";
 
 const r: MutationUpdateEntryResolver = async (parent, args, context, info) => {
   const { entryId, update } = args;

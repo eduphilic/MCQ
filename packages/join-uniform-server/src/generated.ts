@@ -7,102 +7,104 @@ export type Maybe<T> = T | null;
 
 export interface CreateCategoryAndNewEntryRequest {
   
-  readonly categoryName: string;
+  categoryName: string;
   
-  readonly categoryEducation: string;
+  categoryEducation: string;
   
-  readonly pricePerPaper: number;
+  pricePerPaper: number;
   
-  readonly entryLogoUrl: string;
+  entryLogoUrl: string;
   
-  readonly entryName: string;
+  entryName: string;
   
-  readonly entryExplanation: string;
+  entryExplanation: string;
 }
 
 export interface CreateCategoryForExistingEntryRequest {
   
-  readonly categoryName: string;
+  categoryName: string;
   
-  readonly categoryEducation: string;
+  categoryEducation: string;
   
-  readonly pricePerPaper: number;
+  pricePerPaper: number;
   
-  readonly existingEntryId: string;
+  existingEntryId: string;
 }
 
 export interface CategoryUpdateRequest {
   
-  readonly name: string;
+  name: string;
   
-  readonly education: string;
+  education: string;
   
-  readonly pricePerPaperRs: number;
+  pricePerPaperRs: number;
 }
 
 export interface EntryUpdateRequest {
   
-  readonly name: string;
+  name: string;
   
-  readonly logoUrl: string;
+  logoUrl: string;
   
-  readonly description: string;
+  description: string;
 }
 
 export interface IndexPageUpdateRequest {
   
-  readonly heroBackgroundImageUrl: string;
+  heroBackgroundImageUrl: string;
   
-  readonly heroBackgroundAlpha: number;
+  heroBackgroundAlpha: number;
   
-  readonly heroPrimaryTextEnglish: string;
+  heroPrimaryTextEnglish: string;
   
-  readonly heroPrimaryTextHindi: Maybe<string>;
+  heroPrimaryTextHindi: Maybe<string>;
   
-  readonly heroFeatures: ReadonlyArray<models.LocalizedString>;
+  heroFeatures: models.LocalizedString[];
   
-  readonly aboutTitleEnglish: string;
+  aboutTitleEnglish: string;
   
-  readonly aboutTitleHindi: Maybe<string>;
+  aboutTitleHindi: Maybe<string>;
   
-  readonly aboutTextEnglish: string;
+  aboutTextEnglish: string;
   
-  readonly aboutTextHindi: Maybe<string>;
+  aboutTextHindi: Maybe<string>;
   
-  readonly aboutImages: ReadonlyArray<IndexPageAboutImageUpdateRequest>;
+  aboutImages: IndexPageAboutImageUpdateRequest[];
   
-  readonly indexCards: ReadonlyArray<IndexPageIndexCardUpdateRequest>;
+  indexCards: IndexPageIndexCardUpdateRequest[];
 }
 
 export interface IndexPageAboutImageUpdateRequest {
   
-  readonly imageUrl: string;
+  id: string;
   
-  readonly title: models.LocalizedString;
+  imageUrl: string;
   
-  readonly text: models.LocalizedString;
+  title: models.LocalizedString;
+  
+  text: models.LocalizedString;
 }
 
 export interface IndexPageIndexCardUpdateRequest {
   
-  readonly entryId: string;
+  entryId: string;
   
-  readonly colorBlock: string;
+  colorBlock: string;
   
-  readonly colorCategoryBackground: string;
+  colorCategoryBackground: string;
   
-  readonly colorLogoBackground: string;
+  colorLogoBackground: string;
   
-  readonly colorTitle: string;
+  colorTitle: string;
   
-  readonly categories: ReadonlyArray<IndexCardCategoryUpdateRequest>;
+  categories: IndexCardCategoryUpdateRequest[];
 }
 
 export interface IndexCardCategoryUpdateRequest {
   
-  readonly categoryId: string;
+  categoryId: string;
   
-  readonly visible: boolean;
+  visible: boolean;
 }
 
 /** Represents a localized string. The Hindi field is optional. Fields: - en: String! - hi: String */
@@ -131,199 +133,199 @@ export type Json = any;
 
 export interface Query {
   
-  readonly category: Maybe<Category>;
+  category: Maybe<Category>;
   
-  readonly cloudinaryCloudName: string;
+  cloudinaryCloudName: string;
   
-  readonly cloudinaryApiKey: string;
+  cloudinaryApiKey: string;
   
-  readonly entries: ReadonlyArray<Entry>;
+  entries: Entry[];
   
-  readonly entry: Maybe<Entry>;
+  entry: Maybe<Entry>;
   
-  readonly entryCategories: ReadonlyArray<Category>;
+  entryCategories: Category[];
   
-  readonly htmlConfig: HtmlConfig;
+  htmlConfig: HtmlConfig;
   
-  readonly indexCards: ReadonlyArray<IndexCard>;
+  indexCards: IndexCard[];
   
-  readonly indexPageConfig: IndexPageConfig;
+  indexPageConfig: IndexPageConfig;
   
-  readonly logoConfig: LogoConfig;
+  logoConfig: LogoConfig;
   
-  readonly youtubeVideos: ReadonlyArray<IndexYouTubeVideo>;
+  youtubeVideos: IndexYouTubeVideo[];
   
-  readonly _empty: Maybe<boolean>;
+  _empty: Maybe<boolean>;
 }
 
 /** Represents an Entry Category. */
 export interface Category {
   
-  readonly id: string;
+  id: string;
   
-  readonly name: string;
+  name: string;
   
-  readonly education: string;
+  education: string;
   
-  readonly pricePerPaperRs: number;
+  pricePerPaperRs: number;
   
-  readonly activated: boolean;
+  activated: boolean;
 }
 
 /** Represents a military service branch (Entry). */
 export interface Entry {
   
-  readonly id: string;
+  id: string;
   
-  readonly name: string;
+  name: string;
   
-  readonly logoUrl: string;
+  logoUrl: string;
   
-  readonly description: string;
+  description: string;
   
-  readonly categories: ReadonlyArray<Category>;
+  categories: Category[];
 }
 
 /** Configuration for the html document sent in response to all requests. */
 export interface HtmlConfig {
   /** Google Analytics ID. */
-  readonly googleAnalyticsId: Maybe<string>;
+  googleAnalyticsId: Maybe<string>;
   /** Meta "keywords" tag. */
-  readonly metaKeywords: Maybe<string>;
+  metaKeywords: Maybe<string>;
   /** Meta "description" tag. */
-  readonly metaDescription: Maybe<string>;
+  metaDescription: Maybe<string>;
   /** Meta "author" tag. */
-  readonly metaAuthor: Maybe<string>;
+  metaAuthor: Maybe<string>;
   /** Meta "abstract" tag. */
-  readonly metaAbstract: Maybe<string>;
+  metaAbstract: Maybe<string>;
   /** Meta "copyright" tag. */
-  readonly metaCopyright: Maybe<string>;
+  metaCopyright: Maybe<string>;
 }
 
 /** One of the Index Cards on main landing page. */
 export interface IndexCard {
   /** Same as the id for the Entry the IndexCard represents. */
-  readonly id: string;
+  id: string;
   
-  readonly title: string;
+  title: string;
   
-  readonly categories: ReadonlyArray<TypeIndexCardCategory>;
+  categories: TypeIndexCardCategory[];
   
-  readonly entryLogoUrl: string;
+  entryLogoUrl: string;
   
-  readonly colorBlock: string;
+  colorBlock: string;
   
-  readonly colorCategoryBackground: string;
+  colorCategoryBackground: string;
   
-  readonly colorLogoBackground: string;
+  colorLogoBackground: string;
   
-  readonly colorTitle: string;
+  colorTitle: string;
 }
 
 
 export interface TypeIndexCardCategory {
   /** Id of the category. */
-  readonly id: string;
+  id: string;
   
-  readonly title: string;
+  title: string;
   
-  readonly visible: boolean;
+  visible: boolean;
 }
 
 /** Configuration for the landing page / index page. */
 export interface IndexPageConfig {
   /** Always "index-page-config". */
-  readonly id: string;
+  id: string;
   /** The url to the hero image. */
-  readonly heroBackgroundImageUrl: string;
+  heroBackgroundImageUrl: string;
   /** The transparency of the hero image. */
-  readonly heroBackgroundAlpha: number;
+  heroBackgroundAlpha: number;
   /** The primary hero text (large top text). */
-  readonly heroPrimaryText: models.LocalizedString;
+  heroPrimaryText: models.LocalizedString;
   /** List of features below the primary hero text. */
-  readonly heroFeatures: ReadonlyArray<models.LocalizedString>;
+  heroFeatures: models.LocalizedString[];
   /** Text in the green section below the hero section. */
-  readonly heroFooterText: models.LocalizedString;
+  heroFooterText: models.LocalizedString;
   /** About section title. */
-  readonly aboutTitle: models.LocalizedString;
+  aboutTitle: models.LocalizedString;
   /** Text below the about title. */
-  readonly aboutText: models.LocalizedString;
+  aboutText: models.LocalizedString;
   /** Images in the about section. */
-  readonly aboutImages: ReadonlyArray<IndexPageAboutImage>;
+  aboutImages: IndexPageAboutImage[];
 }
 
 /** Image and supporting text in index about section. */
 export interface IndexPageAboutImage {
   
-  readonly id: string;
+  id: string;
   /** Image URL. */
-  readonly imageUrl: string;
+  imageUrl: string;
   /** Large text below image. */
-  readonly title: models.LocalizedString;
+  title: models.LocalizedString;
   /** Small text below image. */
-  readonly text: models.LocalizedString;
+  text: models.LocalizedString;
 }
 
 /** Logo image configuration. */
 export interface LogoConfig {
   
-  readonly id: string;
+  id: string;
   /** Url of logo image. */
-  readonly url: string;
+  url: string;
 }
 
 
 export interface IndexYouTubeVideo {
   /** Will contain the Entry ID that the video corresponds to assuming that the Entry has not been removed. */
-  readonly entryId: Maybe<string>;
+  entryId: Maybe<string>;
   /** Order of appearance. */
-  readonly position: number;
+  position: number;
   
-  readonly youtubeUrl: string;
+  youtubeUrl: string;
   
-  readonly title: models.LocalizedString;
+  title: models.LocalizedString;
 }
 
 
 export interface Mutation {
   
-  readonly _empty: Maybe<boolean>;
+  _empty: Maybe<boolean>;
   
-  readonly createCategoryAndNewEntry: Entry;
+  createCategoryAndNewEntry: Entry;
   /** Adds a new Category to an existing Entry. */
-  readonly createCategoryForExistingEntry: Category;
+  createCategoryForExistingEntry: Category;
   /** Deletes Categories. It removes both the Category database entry and the Category's id from the corresponding Entry objects in the database. It returns the list of remaining Categories. */
-  readonly deleteCategories: ReadonlyArray<Category>;
+  deleteCategories: Category[];
   
-  readonly deleteEntries: Maybe<boolean>;
+  deleteEntries: Maybe<boolean>;
   /** Generates the authentication parameters required for creating a session for use with the Cloudinary Media Library widget. */
-  readonly generateCloudinaryMediaLibraryAuthenticationToken: CloudinaryMediaWidgetAuthenticationToken;
+  generateCloudinaryMediaLibraryAuthenticationToken: CloudinaryMediaWidgetAuthenticationToken;
   /** Signs the parameters passed by the Cloudinary Upload Widget. See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
-  readonly generateCloudinarySignature: string;
+  generateCloudinarySignature: string;
   /** Sets the activation status for the specified categories. The number of ids needs to match the number of booleans. Returns the updated Categories. */
-  readonly setCategoryActivationStatuses: ReadonlyArray<Category>;
+  setCategoryActivationStatuses: Category[];
   
-  readonly updateCategory: Category;
+  updateCategory: Category;
   
-  readonly updateEntry: Entry;
+  updateEntry: Entry;
   
-  readonly updateIndexPage: IndexPageConfig;
+  updateIndexPage: IndexPageConfig;
   
-  readonly updateLogoUrl: LogoConfig;
+  updateLogoUrl: LogoConfig;
 }
 
 /** Authentication parameters for Cloudinary Media Library widget. */
 export interface CloudinaryMediaWidgetAuthenticationToken {
   
-  readonly cloud_name: string;
+  cloud_name: string;
   
-  readonly api_key: string;
+  api_key: string;
   
-  readonly username: string;
+  username: string;
   
-  readonly timestamp: string;
+  timestamp: string;
   
-  readonly signature: string;
+  signature: string;
 }
 
 
@@ -354,11 +356,11 @@ export interface CreateCategoryForExistingEntryMutationArgs {
 }
 export interface DeleteCategoriesMutationArgs {
   
-  categoryIds: ReadonlyArray<string>;
+  categoryIds: string[];
 }
 export interface DeleteEntriesMutationArgs {
   
-  entryIds: ReadonlyArray<string>;
+  entryIds: string[];
 }
 export interface GenerateCloudinarySignatureMutationArgs {
   
@@ -366,9 +368,9 @@ export interface GenerateCloudinarySignatureMutationArgs {
 }
 export interface SetCategoryActivationStatusesMutationArgs {
   
-  categoryIds: ReadonlyArray<string>;
+  categoryIds: string[];
   
-  activatedStatuses: ReadonlyArray<boolean>;
+  activatedStatuses: boolean[];
 }
 export interface UpdateCategoryMutationArgs {
   
@@ -449,21 +451,21 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     
     cloudinaryApiKey?: QueryCloudinaryApiKeyResolver<string, TypeParent, Context>;
     
-    entries?: QueryEntriesResolver<ReadonlyArray<Entry>, TypeParent, Context>;
+    entries?: QueryEntriesResolver<Entry[], TypeParent, Context>;
     
     entry?: QueryEntryResolver<Maybe<Entry>, TypeParent, Context>;
     
-    entryCategories?: QueryEntryCategoriesResolver<ReadonlyArray<Category>, TypeParent, Context>;
+    entryCategories?: QueryEntryCategoriesResolver<Category[], TypeParent, Context>;
     
     htmlConfig?: QueryHtmlConfigResolver<HtmlConfig, TypeParent, Context>;
     
-    indexCards?: QueryIndexCardsResolver<ReadonlyArray<IndexCard>, TypeParent, Context>;
+    indexCards?: QueryIndexCardsResolver<IndexCard[], TypeParent, Context>;
     
     indexPageConfig?: QueryIndexPageConfigResolver<IndexPageConfig, TypeParent, Context>;
     
     logoConfig?: QueryLogoConfigResolver<LogoConfig, TypeParent, Context>;
     
-    youtubeVideos?: QueryYoutubeVideosResolver<ReadonlyArray<IndexYouTubeVideo>, TypeParent, Context>;
+    youtubeVideos?: QueryYoutubeVideosResolver<IndexYouTubeVideo[], TypeParent, Context>;
     
     _empty?: Query_EmptyResolver<Maybe<boolean>, TypeParent, Context>;
   }
@@ -478,7 +480,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
 
   export type QueryCloudinaryCloudNameResolver<R = string, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryCloudinaryApiKeyResolver<R = string, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type QueryEntriesResolver<R = ReadonlyArray<Entry>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type QueryEntriesResolver<R = Entry[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryEntryResolver<R = Maybe<Entry>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryEntryArgs>;
   export interface QueryEntryArgs {
     
@@ -486,7 +488,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   }
 
 
-  export type QueryEntryCategoriesResolver<R = ReadonlyArray<Category>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryEntryCategoriesArgs>;
+  export type QueryEntryCategoriesResolver<R = Category[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryEntryCategoriesArgs>;
   export interface QueryEntryCategoriesArgs {
     
     entryId: string;
@@ -494,10 +496,10 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
 
 
   export type QueryHtmlConfigResolver<R = HtmlConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type QueryIndexCardsResolver<R = ReadonlyArray<IndexCard>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type QueryIndexCardsResolver<R = IndexCard[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryIndexPageConfigResolver<R = IndexPageConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryLogoConfigResolver<R = LogoConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type QueryYoutubeVideosResolver<R = ReadonlyArray<IndexYouTubeVideo>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type QueryYoutubeVideosResolver<R = IndexYouTubeVideo[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type Query_EmptyResolver<R = Maybe<boolean>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;  
 /** Represents an Entry Category. */
   export interface CategoryResolvers<Context = ApolloContext, TypeParent = Category> {
@@ -530,7 +532,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     
     description?: EntryDescriptionResolver<string, TypeParent, Context>;
     
-    categories?: EntryCategoriesResolver<ReadonlyArray<Category>, TypeParent, Context>;
+    categories?: EntryCategoriesResolver<Category[], TypeParent, Context>;
   }
 
 
@@ -538,7 +540,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   export type EntryNameResolver<R = string, Parent = Entry, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type EntryLogoUrlResolver<R = string, Parent = Entry, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type EntryDescriptionResolver<R = string, Parent = Entry, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type EntryCategoriesResolver<R = ReadonlyArray<Category>, Parent = Entry, Context = ApolloContext> = Resolver<R, Parent, Context>;  
+  export type EntryCategoriesResolver<R = Category[], Parent = Entry, Context = ApolloContext> = Resolver<R, Parent, Context>;  
 /** Configuration for the html document sent in response to all requests. */
   export interface HtmlConfigResolvers<Context = ApolloContext, TypeParent = HtmlConfig> {
     /** Google Analytics ID. */
@@ -569,7 +571,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     
     title?: IndexCardTitleResolver<string, TypeParent, Context>;
     
-    categories?: IndexCardCategoriesResolver<ReadonlyArray<TypeIndexCardCategory>, TypeParent, Context>;
+    categories?: IndexCardCategoriesResolver<TypeIndexCardCategory[], TypeParent, Context>;
     
     entryLogoUrl?: IndexCardEntryLogoUrlResolver<string, TypeParent, Context>;
     
@@ -585,7 +587,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
 
   export type IndexCardIdResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexCardTitleResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type IndexCardCategoriesResolver<R = ReadonlyArray<TypeIndexCardCategory>, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type IndexCardCategoriesResolver<R = TypeIndexCardCategory[], Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexCardEntryLogoUrlResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexCardColorBlockResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexCardColorCategoryBackgroundResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
@@ -616,7 +618,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     /** The primary hero text (large top text). */
     heroPrimaryText?: IndexPageConfigHeroPrimaryTextResolver<models.LocalizedString, TypeParent, Context>;
     /** List of features below the primary hero text. */
-    heroFeatures?: IndexPageConfigHeroFeaturesResolver<ReadonlyArray<models.LocalizedString>, TypeParent, Context>;
+    heroFeatures?: IndexPageConfigHeroFeaturesResolver<models.LocalizedString[], TypeParent, Context>;
     /** Text in the green section below the hero section. */
     heroFooterText?: IndexPageConfigHeroFooterTextResolver<models.LocalizedString, TypeParent, Context>;
     /** About section title. */
@@ -624,7 +626,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     /** Text below the about title. */
     aboutText?: IndexPageConfigAboutTextResolver<models.LocalizedString, TypeParent, Context>;
     /** Images in the about section. */
-    aboutImages?: IndexPageConfigAboutImagesResolver<ReadonlyArray<IndexPageAboutImage>, TypeParent, Context>;
+    aboutImages?: IndexPageConfigAboutImagesResolver<IndexPageAboutImage[], TypeParent, Context>;
   }
 
 
@@ -632,11 +634,11 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   export type IndexPageConfigHeroBackgroundImageUrlResolver<R = string, Parent = IndexPageConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexPageConfigHeroBackgroundAlphaResolver<R = number, Parent = IndexPageConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexPageConfigHeroPrimaryTextResolver<R = models.LocalizedString, Parent = IndexPageConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type IndexPageConfigHeroFeaturesResolver<R = ReadonlyArray<models.LocalizedString>, Parent = IndexPageConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type IndexPageConfigHeroFeaturesResolver<R = models.LocalizedString[], Parent = IndexPageConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexPageConfigHeroFooterTextResolver<R = models.LocalizedString, Parent = IndexPageConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexPageConfigAboutTitleResolver<R = models.LocalizedString, Parent = IndexPageConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexPageConfigAboutTextResolver<R = models.LocalizedString, Parent = IndexPageConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type IndexPageConfigAboutImagesResolver<R = ReadonlyArray<IndexPageAboutImage>, Parent = IndexPageConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;  
+  export type IndexPageConfigAboutImagesResolver<R = IndexPageAboutImage[], Parent = IndexPageConfig, Context = ApolloContext> = Resolver<R, Parent, Context>;  
 /** Image and supporting text in index about section. */
   export interface IndexPageAboutImageResolvers<Context = ApolloContext, TypeParent = IndexPageAboutImage> {
     
@@ -691,7 +693,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     /** Adds a new Category to an existing Entry. */
     createCategoryForExistingEntry?: MutationCreateCategoryForExistingEntryResolver<Category, TypeParent, Context>;
     /** Deletes Categories. It removes both the Category database entry and the Category's id from the corresponding Entry objects in the database. It returns the list of remaining Categories. */
-    deleteCategories?: MutationDeleteCategoriesResolver<ReadonlyArray<Category>, TypeParent, Context>;
+    deleteCategories?: MutationDeleteCategoriesResolver<Category[], TypeParent, Context>;
     
     deleteEntries?: MutationDeleteEntriesResolver<Maybe<boolean>, TypeParent, Context>;
     /** Generates the authentication parameters required for creating a session for use with the Cloudinary Media Library widget. */
@@ -699,7 +701,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     /** Signs the parameters passed by the Cloudinary Upload Widget. See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
     generateCloudinarySignature?: MutationGenerateCloudinarySignatureResolver<string, TypeParent, Context>;
     /** Sets the activation status for the specified categories. The number of ids needs to match the number of booleans. Returns the updated Categories. */
-    setCategoryActivationStatuses?: MutationSetCategoryActivationStatusesResolver<ReadonlyArray<Category>, TypeParent, Context>;
+    setCategoryActivationStatuses?: MutationSetCategoryActivationStatusesResolver<Category[], TypeParent, Context>;
     
     updateCategory?: MutationUpdateCategoryResolver<Category, TypeParent, Context>;
     
@@ -726,17 +728,17 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   }
 
 
-  export type MutationDeleteCategoriesResolver<R = ReadonlyArray<Category>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationDeleteCategoriesArgs>;
+  export type MutationDeleteCategoriesResolver<R = Category[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationDeleteCategoriesArgs>;
   export interface MutationDeleteCategoriesArgs {
     
-    categoryIds: ReadonlyArray<string>;
+    categoryIds: string[];
   }
 
 
   export type MutationDeleteEntriesResolver<R = Maybe<boolean>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationDeleteEntriesArgs>;
   export interface MutationDeleteEntriesArgs {
     
-    entryIds: ReadonlyArray<string>;
+    entryIds: string[];
   }
 
 
@@ -748,12 +750,12 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   }
 
 
-  export type MutationSetCategoryActivationStatusesResolver<R = ReadonlyArray<Category>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationSetCategoryActivationStatusesArgs>;
+  export type MutationSetCategoryActivationStatusesResolver<R = Category[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationSetCategoryActivationStatusesArgs>;
   export interface MutationSetCategoryActivationStatusesArgs {
     
-    categoryIds: ReadonlyArray<string>;
+    categoryIds: string[];
     
-    activatedStatuses: ReadonlyArray<boolean>;
+    activatedStatuses: boolean[];
   }
 
 

@@ -1,0 +1,35 @@
+query LandingGetIndexPageConfig {
+  indexPageConfig {
+    id
+    heroBackgroundImageUrl
+    heroBackgroundAlpha
+    heroPrimaryText
+    heroFeatures
+    heroFooterText
+    aboutTitle
+    aboutText
+    aboutImages {
+      id
+      title
+      text
+      imageUrl
+    }
+  }
+  logoConfig {
+    id
+    url
+  }
+  indexCards {
+    id
+    title
+    entryLogoUrl
+    categories {
+      id
+      title
+    }
+    colorBlock
+    colorCategoryBackground
+    colorLogoBackground
+    colorTitle
+  }
+}

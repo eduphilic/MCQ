@@ -5,104 +5,106 @@ import { models } from "@join-uniform/common";
 export type Maybe<T> = T | null;
 
 
-export interface CategoryCreationRequestExistingEntry {
+export interface CreateCategoryAndNewEntryRequest {
   
-  readonly categoryName: string;
+  categoryName: string;
   
-  readonly categoryEducation: string;
+  categoryEducation: string;
   
-  readonly pricePerPaper: number;
+  pricePerPaper: number;
   
-  readonly existingEntryId: string;
+  entryLogoUrl: string;
+  
+  entryName: string;
+  
+  entryExplanation: string;
 }
 
-export interface CategoryCreationRequestNewEntry {
+export interface CreateCategoryForExistingEntryRequest {
   
-  readonly categoryName: string;
+  categoryName: string;
   
-  readonly categoryEducation: string;
+  categoryEducation: string;
   
-  readonly pricePerPaper: number;
+  pricePerPaper: number;
   
-  readonly entryLogoUrl: string;
-  
-  readonly entryName: string;
-  
-  readonly entryExplanation: string;
+  existingEntryId: string;
 }
 
-export interface EntryUpdate {
+export interface CategoryUpdateRequest {
   
-  readonly name: string;
+  name: string;
   
-  readonly logoUrl: string;
+  education: string;
   
-  readonly description: string;
+  pricePerPaperRs: number;
 }
 
-export interface CategoryUpdate {
+export interface EntryUpdateRequest {
   
-  readonly name: string;
+  name: string;
   
-  readonly education: string;
+  logoUrl: string;
   
-  readonly pricePerPaperRs: number;
+  description: string;
 }
 
-export interface InputIndexPageUpdate {
+export interface IndexPageUpdateRequest {
   
-  readonly heroBackgroundImageUrl: string;
+  heroBackgroundImageUrl: string;
   
-  readonly heroBackgroundAlpha: number;
+  heroBackgroundAlpha: number;
   
-  readonly heroPrimaryTextEnglish: string;
+  heroPrimaryTextEnglish: string;
   
-  readonly heroPrimaryTextHindi: Maybe<string>;
+  heroPrimaryTextHindi: Maybe<string>;
   
-  readonly heroFeatures: ReadonlyArray<models.LocalizedString>;
+  heroFeatures: models.LocalizedString[];
   
-  readonly aboutTitleEnglish: string;
+  aboutTitleEnglish: string;
   
-  readonly aboutTitleHindi: Maybe<string>;
+  aboutTitleHindi: Maybe<string>;
   
-  readonly aboutTextEnglish: string;
+  aboutTextEnglish: string;
   
-  readonly aboutTextHindi: Maybe<string>;
+  aboutTextHindi: Maybe<string>;
   
-  readonly aboutImages: ReadonlyArray<AboutImageUpdate>;
+  aboutImages: IndexPageAboutImageUpdateRequest[];
   
-  readonly indexCards: ReadonlyArray<IndexCardUpdate>;
+  indexCards: IndexPageIndexCardUpdateRequest[];
 }
 
-export interface AboutImageUpdate {
+export interface IndexPageAboutImageUpdateRequest {
   
-  readonly imageUrl: string;
+  id: string;
   
-  readonly title: models.LocalizedString;
+  imageUrl: string;
   
-  readonly text: models.LocalizedString;
+  title: models.LocalizedString;
+  
+  text: models.LocalizedString;
 }
 
-export interface IndexCardUpdate {
+export interface IndexPageIndexCardUpdateRequest {
   
-  readonly entryId: string;
+  entryId: string;
   
-  readonly colorBlock: string;
+  colorBlock: string;
   
-  readonly colorCategoryBackground: string;
+  colorCategoryBackground: string;
   
-  readonly colorLogoBackground: string;
+  colorLogoBackground: string;
   
-  readonly colorTitle: string;
+  colorTitle: string;
   
-  readonly categories: ReadonlyArray<IndexCardCategoryUpdate>;
+  categories: IndexCardCategoryUpdateRequest[];
 }
 
-export interface IndexCardCategoryUpdate {
+export interface IndexCardCategoryUpdateRequest {
   
-  readonly categoryId: string;
+  categoryId: string;
   
-  readonly visible: boolean;
+  visible: boolean;
 }
 
 /** Represents a localized string. The Hindi field is optional. Fields: - en: String! - hi: String */
@@ -122,71 +124,71 @@ export type Json = any;
   }
 
   export type AdminLayoutDashboardContainerLogoUrlQuery = {
-    readonly __typename?: "Query";
+    __typename?: "Query";
     
-    readonly logoConfig: AdminLayoutDashboardContainerLogoUrlLogoConfig;
+    logoConfig: AdminLayoutDashboardContainerLogoUrlLogoConfig;
   }
 
   export type AdminLayoutDashboardContainerLogoUrlLogoConfig = {
-    readonly __typename?: "LogoConfig";
+    __typename?: "LogoConfig";
     
-    readonly url: string;
+    url: string;
   } 
 
   export type EntryManagerCreateCategoryAndNewEntryVariables = {
-    readonly request: CategoryCreationRequestNewEntry;
+    request: CreateCategoryAndNewEntryRequest;
   }
 
   export type EntryManagerCreateCategoryAndNewEntryMutation = {
-    readonly __typename?: "Mutation";
+    __typename?: "Mutation";
     
-    readonly createCategoryNewEntry: EntryManagerCreateCategoryAndNewEntryCreateCategoryNewEntry;
+    createCategoryAndNewEntry: EntryManagerCreateCategoryAndNewEntryCreateCategoryAndNewEntry;
   }
 
-  export type EntryManagerCreateCategoryAndNewEntryCreateCategoryNewEntry = EntryManagerEntryPartsFragment
+  export type EntryManagerCreateCategoryAndNewEntryCreateCategoryAndNewEntry = EntryManagerEntryPartsFragment
 
   export type EntryManagerCreateCategoryForExistingEntryVariables = {
-    readonly request: CategoryCreationRequestExistingEntry;
+    request: CreateCategoryForExistingEntryRequest;
   }
 
   export type EntryManagerCreateCategoryForExistingEntryMutation = {
-    readonly __typename?: "Mutation";
+    __typename?: "Mutation";
     
-    readonly createCategoryExistingEntry: EntryManagerCreateCategoryForExistingEntryCreateCategoryExistingEntry;
+    createCategoryForExistingEntry: EntryManagerCreateCategoryForExistingEntryCreateCategoryForExistingEntry;
   }
 
-  export type EntryManagerCreateCategoryForExistingEntryCreateCategoryExistingEntry = EntryManagerCategoryPartsFragment
+  export type EntryManagerCreateCategoryForExistingEntryCreateCategoryForExistingEntry = EntryManagerCategoryPartsFragment
 
   export type EntryManagerDeleteCategoriesVariables = {
-    readonly categoryIds: ReadonlyArray<string>;
+    categoryIds: string[];
   }
 
   export type EntryManagerDeleteCategoriesMutation = {
-    readonly __typename?: "Mutation";
+    __typename?: "Mutation";
     
-    readonly deleteCategories: ReadonlyArray<EntryManagerDeleteCategoriesDeleteCategories>;
+    deleteCategories: EntryManagerDeleteCategoriesDeleteCategories[];
   }
 
   export type EntryManagerDeleteCategoriesDeleteCategories = EntryManagerCategoryPartsFragment
 
   export type EntryManagerDeleteEntriesVariables = {
-    readonly entryIds: ReadonlyArray<string>;
+    entryIds: string[];
   }
 
   export type EntryManagerDeleteEntriesMutation = {
-    readonly __typename?: "Mutation";
+    __typename?: "Mutation";
     
-    readonly deleteEntries: Maybe<boolean>;
+    deleteEntries: Maybe<boolean>;
   }
 
   export type EntryManagerGetCategoryVariables = {
-    readonly id: string;
+    id: string;
   }
 
   export type EntryManagerGetCategoryQuery = {
-    readonly __typename?: "Query";
+    __typename?: "Query";
     
-    readonly category: Maybe<EntryManagerGetCategoryCategory>;
+    category: Maybe<EntryManagerGetCategoryCategory>;
   }
 
   export type EntryManagerGetCategoryCategory = EntryManagerCategoryPartsFragment
@@ -195,60 +197,60 @@ export type Json = any;
   }
 
   export type EntryManagerGetEntriesQuery = {
-    readonly __typename?: "Query";
+    __typename?: "Query";
     
-    readonly entries: ReadonlyArray<EntryManagerGetEntriesEntries>;
+    entries: EntryManagerGetEntriesEntries[];
   }
 
   export type EntryManagerGetEntriesEntries = EntryManagerEntryPartsFragment
 
   export type EntryManagerGetEntryVariables = {
-    readonly entryId: string;
+    entryId: string;
   }
 
   export type EntryManagerGetEntryQuery = {
-    readonly __typename?: "Query";
+    __typename?: "Query";
     
-    readonly entry: Maybe<EntryManagerGetEntryEntry>;
+    entry: Maybe<EntryManagerGetEntryEntry>;
   }
 
   export type EntryManagerGetEntryEntry = EntryManagerEntryPartsFragment
 
   export type EntryManagerSetCategoryActivationStatusesVariables = {
-    readonly categoryIds: ReadonlyArray<string>;
-    readonly activationStatuses: ReadonlyArray<boolean>;
+    categoryIds: string[];
+    activationStatuses: boolean[];
   }
 
   export type EntryManagerSetCategoryActivationStatusesMutation = {
-    readonly __typename?: "Mutation";
+    __typename?: "Mutation";
     
-    readonly setCategoryActivationStatuses: ReadonlyArray<EntryManagerSetCategoryActivationStatusesSetCategoryActivationStatuses>;
+    setCategoryActivationStatuses: EntryManagerSetCategoryActivationStatusesSetCategoryActivationStatuses[];
   }
 
   export type EntryManagerSetCategoryActivationStatusesSetCategoryActivationStatuses = EntryManagerCategoryPartsFragment
 
   export type EntryManagerUpdateCategoryVariables = {
-    readonly categoryId: string;
-    readonly update: CategoryUpdate;
+    categoryId: string;
+    update: CategoryUpdateRequest;
   }
 
   export type EntryManagerUpdateCategoryMutation = {
-    readonly __typename?: "Mutation";
+    __typename?: "Mutation";
     
-    readonly updateCategory: EntryManagerUpdateCategoryUpdateCategory;
+    updateCategory: EntryManagerUpdateCategoryUpdateCategory;
   }
 
   export type EntryManagerUpdateCategoryUpdateCategory = EntryManagerCategoryPartsFragment
 
   export type EntryManagerUpdateEntryVariables = {
-    readonly entryId: string;
-    readonly update: EntryUpdate;
+    entryId: string;
+    update: EntryUpdateRequest;
   }
 
   export type EntryManagerUpdateEntryMutation = {
-    readonly __typename?: "Mutation";
+    __typename?: "Mutation";
     
-    readonly updateEntry: EntryManagerUpdateEntryUpdateEntry;
+    updateEntry: EntryManagerUpdateEntryUpdateEntry;
   }
 
   export type EntryManagerUpdateEntryUpdateEntry = EntryManagerEntryPartsFragment
@@ -257,183 +259,266 @@ export type Json = any;
   }
 
   export type IndexManagerGetIndexPageConfigQuery = {
-    readonly __typename?: "Query";
+    __typename?: "Query";
     
-    readonly logoConfig: IndexManagerGetIndexPageConfigLogoConfig;
+    logoConfig: IndexManagerGetIndexPageConfigLogoConfig;
     
-    readonly indexPageConfig: IndexManagerGetIndexPageConfigIndexPageConfig;
+    indexPageConfig: IndexManagerGetIndexPageConfigIndexPageConfig;
   }
 
   export type IndexManagerGetIndexPageConfigLogoConfig = {
-    readonly __typename?: "LogoConfig";
+    __typename?: "LogoConfig";
     
-    readonly id: string;
+    id: string;
     
-    readonly url: string;
+    url: string;
   } 
 
   export type IndexManagerGetIndexPageConfigIndexPageConfig = {
-    readonly __typename?: "IndexPageConfig";
+    __typename?: "IndexPageConfig";
     
-    readonly id: string;
+    id: string;
     
-    readonly heroBackgroundImageUrl: string;
+    heroBackgroundImageUrl: string;
     
-    readonly heroBackgroundAlpha: number;
+    heroBackgroundAlpha: number;
     
-    readonly heroPrimaryText: models.LocalizedString;
+    heroPrimaryText: models.LocalizedString;
     
-    readonly heroFeatures: ReadonlyArray<models.LocalizedString>;
+    heroFeatures: models.LocalizedString[];
     
-    readonly heroFooterText: models.LocalizedString;
+    heroFooterText: models.LocalizedString;
     
-    readonly aboutTitle: models.LocalizedString;
+    aboutTitle: models.LocalizedString;
     
-    readonly aboutText: models.LocalizedString;
+    aboutText: models.LocalizedString;
     
-    readonly aboutImages: ReadonlyArray<IndexManagerGetIndexPageConfigAboutImages>;
+    aboutImages: IndexManagerGetIndexPageConfigAboutImages[];
   } 
 
   export type IndexManagerGetIndexPageConfigAboutImages = {
-    readonly __typename?: "IndexPageAboutImage";
+    __typename?: "IndexPageAboutImage";
     
-    readonly id: string;
+    id: string;
     
-    readonly imageUrl: string;
+    imageUrl: string;
     
-    readonly title: models.LocalizedString;
+    title: models.LocalizedString;
     
-    readonly text: models.LocalizedString;
+    text: models.LocalizedString;
   } 
 
   export type IndexManagerUpdateLogoUrlVariables = {
-    readonly logoUrl: string;
+    logoUrl: string;
   }
 
   export type IndexManagerUpdateLogoUrlMutation = {
-    readonly __typename?: "Mutation";
+    __typename?: "Mutation";
     
-    readonly updateLogoUrl: IndexManagerUpdateLogoUrlUpdateLogoUrl;
+    updateLogoUrl: IndexManagerUpdateLogoUrlUpdateLogoUrl;
   }
 
   export type IndexManagerUpdateLogoUrlUpdateLogoUrl = {
-    readonly __typename?: "LogoConfig";
+    __typename?: "LogoConfig";
     
-    readonly id: string;
+    id: string;
     
-    readonly url: string;
+    url: string;
+  } 
+
+  export type LandingGetIndexPageConfigVariables = {
+  }
+
+  export type LandingGetIndexPageConfigQuery = {
+    __typename?: "Query";
+    
+    indexPageConfig: LandingGetIndexPageConfigIndexPageConfig;
+    
+    logoConfig: LandingGetIndexPageConfigLogoConfig;
+    
+    indexCards: LandingGetIndexPageConfigIndexCards[];
+  }
+
+  export type LandingGetIndexPageConfigIndexPageConfig = {
+    __typename?: "IndexPageConfig";
+    
+    id: string;
+    
+    heroBackgroundImageUrl: string;
+    
+    heroBackgroundAlpha: number;
+    
+    heroPrimaryText: models.LocalizedString;
+    
+    heroFeatures: models.LocalizedString[];
+    
+    heroFooterText: models.LocalizedString;
+    
+    aboutTitle: models.LocalizedString;
+    
+    aboutText: models.LocalizedString;
+    
+    aboutImages: LandingGetIndexPageConfigAboutImages[];
+  } 
+
+  export type LandingGetIndexPageConfigAboutImages = {
+    __typename?: "IndexPageAboutImage";
+    
+    id: string;
+    
+    title: models.LocalizedString;
+    
+    text: models.LocalizedString;
+    
+    imageUrl: string;
+  } 
+
+  export type LandingGetIndexPageConfigLogoConfig = {
+    __typename?: "LogoConfig";
+    
+    id: string;
+    
+    url: string;
+  } 
+
+  export type LandingGetIndexPageConfigIndexCards = {
+    __typename?: "IndexCard";
+    
+    id: string;
+    
+    title: string;
+    
+    entryLogoUrl: string;
+    
+    categories: LandingGetIndexPageConfigCategories[];
+    
+    colorBlock: string;
+    
+    colorCategoryBackground: string;
+    
+    colorLogoBackground: string;
+    
+    colorTitle: string;
+  } 
+
+  export type LandingGetIndexPageConfigCategories = {
+    __typename?: "TypeIndexCardCategory";
+    
+    id: string;
+    
+    title: string;
   } 
 
   export type WithHtmlSeoDocumentHtmlConfigVariables = {
   }
 
   export type WithHtmlSeoDocumentHtmlConfigQuery = {
-    readonly __typename?: "Query";
+    __typename?: "Query";
     
-    readonly htmlConfig: WithHtmlSeoDocumentHtmlConfigHtmlConfig;
+    htmlConfig: WithHtmlSeoDocumentHtmlConfigHtmlConfig;
   }
 
   export type WithHtmlSeoDocumentHtmlConfigHtmlConfig = {
-    readonly __typename?: "HtmlConfig";
+    __typename?: "HtmlConfig";
     
-    readonly googleAnalyticsId: Maybe<string>;
+    googleAnalyticsId: Maybe<string>;
     
-    readonly metaKeywords: Maybe<string>;
+    metaKeywords: Maybe<string>;
     
-    readonly metaDescription: Maybe<string>;
+    metaDescription: Maybe<string>;
     
-    readonly metaAuthor: Maybe<string>;
+    metaAuthor: Maybe<string>;
     
-    readonly metaAbstract: Maybe<string>;
+    metaAbstract: Maybe<string>;
     
-    readonly metaCopyright: Maybe<string>;
+    metaCopyright: Maybe<string>;
   } 
 
   export type WithLoadingSpinnerAppLogoConfigVariables = {
   }
 
   export type WithLoadingSpinnerAppLogoConfigQuery = {
-    readonly __typename?: "Query";
+    __typename?: "Query";
     
-    readonly logoConfig: WithLoadingSpinnerAppLogoConfigLogoConfig;
+    logoConfig: WithLoadingSpinnerAppLogoConfigLogoConfig;
   }
 
   export type WithLoadingSpinnerAppLogoConfigLogoConfig = {
-    readonly __typename?: "LogoConfig";
+    __typename?: "LogoConfig";
     
-    readonly url: string;
+    url: string;
   } 
 
   export type CloudinaryConfigVariables = {
   }
 
   export type CloudinaryConfigQuery = {
-    readonly __typename?: "Query";
+    __typename?: "Query";
     
-    readonly cloudinaryCloudName: string;
+    cloudinaryCloudName: string;
     
-    readonly cloudinaryApiKey: string;
+    cloudinaryApiKey: string;
   }
 
   export type CloudinaryGenerateMediaLibraryAuthenticationTokenVariables = {
   }
 
   export type CloudinaryGenerateMediaLibraryAuthenticationTokenMutation = {
-    readonly __typename?: "Mutation";
+    __typename?: "Mutation";
     
-    readonly generateCloudinaryMediaLibraryAuthenticationToken: CloudinaryGenerateMediaLibraryAuthenticationTokenGenerateCloudinaryMediaLibraryAuthenticationToken;
+    generateCloudinaryMediaLibraryAuthenticationToken: CloudinaryGenerateMediaLibraryAuthenticationTokenGenerateCloudinaryMediaLibraryAuthenticationToken;
   }
 
   export type CloudinaryGenerateMediaLibraryAuthenticationTokenGenerateCloudinaryMediaLibraryAuthenticationToken = {
-    readonly __typename?: "CloudinaryMediaWidgetAuthenticationToken";
+    __typename?: "CloudinaryMediaWidgetAuthenticationToken";
     
-    readonly api_key: string;
+    api_key: string;
     
-    readonly cloud_name: string;
+    cloud_name: string;
     
-    readonly signature: string;
+    signature: string;
     
-    readonly timestamp: string;
+    timestamp: string;
     
-    readonly username: string;
+    username: string;
   } 
 
   export type CloudinaryGenerateSignatureVariables = {
-    readonly paramsToSign: Json;
+    paramsToSign: Json;
   }
 
   export type CloudinaryGenerateSignatureMutation = {
-    readonly __typename?: "Mutation";
+    __typename?: "Mutation";
     
-    readonly generateCloudinarySignature: string;
+    generateCloudinarySignature: string;
   }
 
   export type EntryManagerCategoryPartsFragment = {
-    readonly __typename?: "Category";
+    __typename?: "Category";
     
-    readonly id: string;
+    id: string;
     
-    readonly name: string;
+    name: string;
     
-    readonly education: string;
+    education: string;
     
-    readonly pricePerPaperRs: number;
+    pricePerPaperRs: number;
     
-    readonly activated: boolean;
+    activated: boolean;
   }
 
   export type EntryManagerEntryPartsFragment = {
-    readonly __typename?: "Entry";
+    __typename?: "Entry";
     
-    readonly id: string;
+    id: string;
     
-    readonly name: string;
+    name: string;
     
-    readonly logoUrl: string;
+    logoUrl: string;
     
-    readonly description: string;
+    description: string;
     
-    readonly categories: ReadonlyArray<EntryManagerEntryPartsCategories>;
+    categories: EntryManagerEntryPartsCategories[];
   }
 
   export type EntryManagerEntryPartsCategories =EntryManagerCategoryPartsFragment
@@ -529,8 +614,8 @@ import gql from 'graphql-tag';
         );
     };
     export const EntryManagerCreateCategoryAndNewEntryDocument = gql`
-    mutation EntryManagerCreateCategoryAndNewEntry($request: CategoryCreationRequestNewEntry!) {
-  createCategoryNewEntry(request: $request) {
+    mutation EntryManagerCreateCategoryAndNewEntry($request: CreateCategoryAndNewEntryRequest!) {
+  createCategoryAndNewEntry(request: $request) {
     ...EntryManagerEntryParts
   }
 }
@@ -570,8 +655,8 @@ import gql from 'graphql-tag';
         );
     };
     export const EntryManagerCreateCategoryForExistingEntryDocument = gql`
-    mutation EntryManagerCreateCategoryForExistingEntry($request: CategoryCreationRequestExistingEntry!) {
-  createCategoryExistingEntry(request: $request) {
+    mutation EntryManagerCreateCategoryForExistingEntry($request: CreateCategoryForExistingEntryRequest!) {
+  createCategoryForExistingEntry(request: $request) {
     ...EntryManagerCategoryParts
   }
 }
@@ -852,7 +937,7 @@ import gql from 'graphql-tag';
         );
     };
     export const EntryManagerUpdateCategoryDocument = gql`
-    mutation EntryManagerUpdateCategory($categoryId: ID!, $update: CategoryUpdate!) {
+    mutation EntryManagerUpdateCategory($categoryId: ID!, $update: CategoryUpdateRequest!) {
   updateCategory(categoryId: $categoryId, update: $update) {
     ...EntryManagerCategoryParts
   }
@@ -893,7 +978,7 @@ import gql from 'graphql-tag';
         );
     };
     export const EntryManagerUpdateEntryDocument = gql`
-    mutation EntryManagerUpdateEntry($entryId: ID!, $update: EntryUpdate!) {
+    mutation EntryManagerUpdateEntry($entryId: ID!, $update: EntryUpdateRequest!) {
   updateEntry(entryId: $entryId, update: $update) {
     ...EntryManagerEntryParts
   }
@@ -1029,6 +1114,76 @@ import gql from 'graphql-tag';
             > | undefined){
         return ReactApollo.graphql<TProps, IndexManagerUpdateLogoUrlMutation, IndexManagerUpdateLogoUrlVariables, IndexManagerUpdateLogoUrlProps<TChildProps>>(
             IndexManagerUpdateLogoUrlDocument,
+            operationOptions
+        );
+    };
+    export const LandingGetIndexPageConfigDocument = gql`
+    query LandingGetIndexPageConfig {
+  indexPageConfig {
+    id
+    heroBackgroundImageUrl
+    heroBackgroundAlpha
+    heroPrimaryText
+    heroFeatures
+    heroFooterText
+    aboutTitle
+    aboutText
+    aboutImages {
+      id
+      title
+      text
+      imageUrl
+    }
+  }
+  logoConfig {
+    id
+    url
+  }
+  indexCards {
+    id
+    title
+    entryLogoUrl
+    categories {
+      id
+      title
+    }
+    colorBlock
+    colorCategoryBackground
+    colorLogoBackground
+    colorTitle
+  }
+}
+    
+      
+    
+  `;
+     export class LandingGetIndexPageConfigComponent extends React.Component<Partial<ReactApollo.QueryProps<LandingGetIndexPageConfigQuery, LandingGetIndexPageConfigVariables>>> {
+        render(){
+            return (
+                <ReactApollo.Query<LandingGetIndexPageConfigQuery, LandingGetIndexPageConfigVariables>
+                query={ LandingGetIndexPageConfigDocument }
+                {...(this as any)['props'] as any}
+                />
+            );
+        }
+    }
+    export type LandingGetIndexPageConfigProps<TChildProps = any> = 
+            Partial<
+                ReactApollo.DataProps<
+                                        LandingGetIndexPageConfigQuery, 
+                                        LandingGetIndexPageConfigVariables
+                                    >
+                    >
+         & TChildProps;
+    export function LandingGetIndexPageConfigHOC<TProps, TChildProps = any>(operationOptions: 
+            ReactApollo.OperationOption<
+                TProps, 
+                LandingGetIndexPageConfigQuery,
+                LandingGetIndexPageConfigVariables,
+                LandingGetIndexPageConfigProps<TChildProps>
+            > | undefined){
+        return ReactApollo.graphql<TProps, LandingGetIndexPageConfigQuery, LandingGetIndexPageConfigVariables, LandingGetIndexPageConfigProps<TChildProps>>(
+            LandingGetIndexPageConfigDocument,
             operationOptions
         );
     };

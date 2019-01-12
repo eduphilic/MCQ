@@ -15,6 +15,11 @@ import {
   RadioGroup,
   Select,
 } from "@join-uniform/components";
+import { FormikHelpers, useFormik } from "formik";
+import Router from "next/router";
+import React, { useState } from "react";
+import { adopt } from "react-adopt";
+import { MutationFn, QueryResult } from "react-apollo";
 import {
   EntryManagerCreateCategoryAndNewEntryComponent,
   EntryManagerCreateCategoryAndNewEntryMutation,
@@ -26,14 +31,9 @@ import {
   EntryManagerGetEntriesEntries,
   EntryManagerGetEntriesQuery,
   EntryManagerGetEntriesVariables,
-  ValidatorCategoryCreationRequestExistingEntry,
-  ValidatorCategoryCreationRequestNewEntry,
-} from "@join-uniform/graphql";
-import { FormikHelpers, useFormik } from "formik";
-import Router from "next/router";
-import React, { useState } from "react";
-import { adopt } from "react-adopt";
-import { MutationFn, QueryResult } from "react-apollo";
+  // ValidatorCategoryCreationRequestExistingEntry,
+  // ValidatorCategoryCreationRequestNewEntry,
+} from "~/lib/client";
 
 import { AdminLayoutDashboardContainer } from "~/containers";
 import {
@@ -123,11 +123,12 @@ function Page(props: Props) {
   const form = useFormik({
     initialValues,
     onSubmit: handleSubmit,
-    validationSchema: () => {
-      return entrySource === "new"
-        ? ValidatorCategoryCreationRequestNewEntry
-        : ValidatorCategoryCreationRequestExistingEntry;
-    },
+    // TODO: Add validation.
+    // validationSchema: () => {
+    //   return entrySource === "new"
+    //     ? ValidatorCategoryCreationRequestNewEntry
+    //     : ValidatorCategoryCreationRequestExistingEntry;
+    // },
   });
 
   return (
@@ -300,7 +301,7 @@ function Page(props: Props) {
         updateStoreEntries(proxy, queryResult => {
           queryResult.entries
             .find(e => e.id === entryId)!
-            .categories.push(fetchResult.data!.createCategoryExistingEntry);
+            .categories.push(fetchResult.data!.createCategoryForExistingEntry);
         });
       },
     });
@@ -320,7 +321,7 @@ function Page(props: Props) {
       },
       update: (proxy, fetchResult) => {
         updateStoreEntries(proxy, queryResult => {
-          queryResult.entries.push(fetchResult.data!.createCategoryNewEntry);
+          queryResult.entries.push(fetchResult.data!.createCategoryAndNewEntry);
         });
       },
     });

@@ -6,15 +6,6 @@ import {
   LoadingSpinner,
   PendingChangesButton,
 } from "@join-uniform/components";
-import {
-  EntryManagerCategoryPartsFragment,
-  EntryManagerGetCategoryComponent,
-  EntryManagerGetCategoryQuery,
-  EntryManagerGetCategoryVariables,
-  EntryManagerUpdateCategoryComponent,
-  EntryManagerUpdateCategoryMutation,
-  EntryManagerUpdateCategoryVariables,
-} from "@join-uniform/graphql";
 import { useFormik } from "formik";
 import { NextContext } from "next";
 import Router from "next/router";
@@ -24,6 +15,15 @@ import { MutationFn, QueryResult } from "react-apollo";
 import * as yup from "yup";
 import { AdminLayoutDashboardContainer } from "~/containers";
 import { ErrorMessagePageContents, FormikMuiTextField } from "~/lib/admin";
+import {
+  EntryManagerCategoryPartsFragment,
+  EntryManagerGetCategoryComponent,
+  EntryManagerGetCategoryQuery,
+  EntryManagerGetCategoryVariables,
+  EntryManagerUpdateCategoryComponent,
+  EntryManagerUpdateCategoryMutation,
+  EntryManagerUpdateCategoryVariables,
+} from "~/lib/client";
 
 type FormValues = {
   name: string;

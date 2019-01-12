@@ -1,5 +1,5 @@
 import { Category, QueryEntryCategoriesResolver } from "~/generated";
-import { DBCategory, DBEntry } from "../models";
+import { DBCategory, DBEntry } from "~/models";
 
 export const entryCategories: QueryEntryCategoriesResolver = async (
   _parent,

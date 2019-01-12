@@ -3,15 +3,15 @@ import {
   LayoutDashboardProps,
   LoadingSpinner,
 } from "@join-uniform/components";
-import {
-  AdminLayoutDashboardContainerLogoUrlHOC,
-  AdminLayoutDashboardContainerLogoUrlProps,
-} from "@join-uniform/graphql";
 import Head from "next/head";
 import Link from "next/link";
 import { withRouter } from "next/router";
 import React, { ReactElement, ReactNode } from "react";
-import { createResponsiveImageUrl } from "../lib/utils";
+import {
+  AdminLayoutDashboardContainerLogoUrlHOC,
+  AdminLayoutDashboardContainerLogoUrlProps,
+} from "~/lib/client";
+import { createResponsiveImageUrl } from "~/lib/utils";
 
 type Props = {
   children?: ReactNode;

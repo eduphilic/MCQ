@@ -3,7 +3,7 @@ import {
   QueryIndexCardsResolver,
   TypeIndexCardCategory,
 } from "~/generated";
-import { DBCategory, DBEntry } from "../models";
+import { DBCategory, DBEntry } from "~/models";
 
 export const indexCards: QueryIndexCardsResolver = async (
   _parent,
@@ -46,10 +46,10 @@ export const indexCards: QueryIndexCardsResolver = async (
   const indexCardsResult: IndexCard[] = entries
     .map(
       (entry): IndexCard => {
-        const indexCard = indexCardsRecords.find(i => i.entryId === entry.id);
+        const indexCard = indexCardsRecords.find(i => i.id === entry.id);
 
         return {
-          entryId: entry.id,
+          id: entry.id,
           title: `Indian ${entry.name} Recruitment`,
           categories: categories
             .filter(category => entry.categories.includes(category.id))
@@ -58,10 +58,10 @@ export const indexCards: QueryIndexCardsResolver = async (
               (category): TypeIndexCardCategory => {
                 const indexCardCategory =
                   indexCard &&
-                  indexCard.categories.find(c => c.categoryId === category.id);
+                  indexCard.categories.find(c => c.id === category.id);
 
                 return {
-                  categoryId: category.id,
+                  id: category.id,
                   title: category.name,
                   visible: indexCardCategory
                     ? indexCardCategory.visible

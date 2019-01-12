@@ -1,5 +1,0 @@
-# Hero text for the admin login page.
-type AdminLoginPageConfig {
-  heroPrimaryText: LocalizedString!
-  heroSecondaryText: LocalizedString!
-}

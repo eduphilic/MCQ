@@ -16,37 +16,38 @@ export const updateIndexPage: MutationUpdateIndexPageResolver = async (
   } = context;
 
   const configValues = config.getValues();
-  configValues.logoConfig.url = request.logoUrl;
+  // configValues.logoConfig.url = request.logoUrl;
   configValues.indexPageConfig.heroBackgroundImageUrl = request.heroBackgroundImageUrl; // prettier-ignore
   configValues.indexPageConfig.heroBackgroundAlpha = request.heroBackgroundAlpha; // prettier-ignore
   configValues.indexPageConfig.heroPrimaryText = {
     en: request.heroPrimaryTextEnglish,
-    hi: request.heroPrimaryTextHindi || undefined,
+    hi: request.heroPrimaryTextHindi,
   };
   configValues.indexPageConfig.heroFeatures = request.heroFeatures.map(
     (heroFeature): LocalizedString => ({
       en: heroFeature.en,
-      hi: heroFeature.hi || undefined,
+      hi: heroFeature.hi,
     }),
   );
   configValues.indexPageConfig.aboutTitle = {
     en: request.aboutTitleEnglish,
-    hi: request.aboutTitleHindi || undefined,
+    hi: request.aboutTitleHindi,
   };
   configValues.indexPageConfig.aboutText = {
     en: request.aboutTextEnglish,
-    hi: request.aboutTextHindi || undefined,
+    hi: request.aboutTextHindi,
   };
   configValues.indexPageConfig.aboutImages = request.aboutImages.map(
     (aboutImage): IndexPageAboutImage => ({
+      id: aboutImage.id,
       imageUrl: aboutImage.imageUrl,
       text: {
         en: aboutImage.text.en,
-        hi: aboutImage.text.hi || undefined,
+        hi: aboutImage.text.hi,
       },
       title: {
         en: aboutImage.title.en,
-        hi: aboutImage.title.hi || undefined,
+        hi: aboutImage.title.hi,
       },
     }),
   );
@@ -72,5 +73,8 @@ export const updateIndexPage: MutationUpdateIndexPageResolver = async (
 
   await batch.commit();
 
-  return true;
+  return {
+    id: "index-page-config",
+    ...configValues.indexPageConfig,
+  };
 };

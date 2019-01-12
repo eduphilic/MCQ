@@ -4,6 +4,15 @@ import {
   LoadingSpinner,
   PendingChangesButton,
 } from "@join-uniform/components";
+import { AddIcon } from "@join-uniform/icons";
+import { FormikHelpers, useFormik } from "formik";
+import Link from "next/link";
+import Router from "next/router";
+import React from "react";
+import { adopt } from "react-adopt";
+import { MutationFn, QueryResult } from "react-apollo";
+import { AdminLayoutDashboardContainer } from "~/containers";
+import { EntryManagementCard, updateStoreEntries } from "~/lib/admin";
 import {
   EntryManagerDeleteCategoriesComponent,
   EntryManagerDeleteCategoriesMutation,
@@ -18,16 +27,7 @@ import {
   EntryManagerSetCategoryActivationStatusesComponent,
   EntryManagerSetCategoryActivationStatusesMutation,
   EntryManagerSetCategoryActivationStatusesVariables,
-} from "@join-uniform/graphql";
-import { AddIcon } from "@join-uniform/icons";
-import { FormikHelpers, useFormik } from "formik";
-import Link from "next/link";
-import Router from "next/router";
-import React from "react";
-import { adopt } from "react-adopt";
-import { MutationFn, QueryResult } from "react-apollo";
-import { AdminLayoutDashboardContainer } from "~/containers";
-import { EntryManagementCard, updateStoreEntries } from "~/lib/admin";
+} from "~/lib/client";
 
 type FormValues = {
   entries: EntryManagerGetEntriesEntries[];

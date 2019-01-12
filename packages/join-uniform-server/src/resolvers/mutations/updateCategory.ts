@@ -1,5 +1,5 @@
 import { Category, MutationUpdateCategoryResolver } from "~/generated";
-import { DBCategory } from "../models";
+import { DBCategory } from "~/models";
 
 const r: MutationUpdateCategoryResolver = async (_parent, args, context) => {
   const { categoryId, update } = args;

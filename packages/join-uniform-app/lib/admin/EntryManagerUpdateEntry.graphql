@@ -1,4 +1,4 @@
-mutation EntryManagerUpdateEntry($entryId: ID!, $update: EntryUpdate!) {
+mutation EntryManagerUpdateEntry($entryId: ID!, $update: EntryUpdateRequest!) {
   updateEntry(entryId: $entryId, update: $update) {
     ...EntryManagerEntryParts
   }

@@ -1,5 +1,5 @@
-import { WithHtmlSeoDocumentHtmlConfigHtmlConfig } from "@join-uniform/graphql";
 import React from "react";
+import { WithHtmlSeoDocumentHtmlConfigHtmlConfig } from "~/lib/client";
 
 const publicPath = "/static";
 

@@ -1,5 +1,5 @@
 import { Entry, QueryEntryResolver } from "~/generated";
-import { DBEntry } from "../models";
+import { DBEntry } from "~/models";
 import { entryCategories } from "./entryCategories";
 
 const r: QueryEntryResolver = async (parent, args, context, info) => {

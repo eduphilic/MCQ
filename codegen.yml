@@ -5,7 +5,6 @@ config:
   scalars:
     LocalizedString: models.LocalizedString
   avoidOptionals: true
-  immutableTypes: true
   add:
     - // This is an automatically generated file.
     - // DO NOT MODIFY

@@ -1,11 +1,11 @@
 import { LayoutLanding, LoadingSpinner } from "@join-uniform/components";
-import {
-  GetIndexPageConfigHOC,
-  GetIndexPageConfigProps,
-} from "@join-uniform/graphql";
 import { DarkTheme } from "@join-uniform/theme";
 import Head from "next/head";
 import React, { useMemo } from "react";
+import {
+  LandingGetIndexPageConfigHOC,
+  LandingGetIndexPageConfigProps,
+} from "~/lib/client";
 import {
   AboutSection,
   HeroFooterSection,
@@ -14,7 +14,7 @@ import {
   IndexCardsSectionProps,
 } from "~/lib/landing";
 
-type Props = GetIndexPageConfigProps<{}>;
+type Props = LandingGetIndexPageConfigProps<{}>;
 
 function IndexPage(props: Props) {
   const { data } = props;
@@ -73,4 +73,4 @@ function IndexPage(props: Props) {
   );
 }
 
-export default GetIndexPageConfigHOC(undefined)(IndexPage);
+export default LandingGetIndexPageConfigHOC(undefined)(IndexPage);

@@ -1,4 +1,0 @@
-enum USER_ROLE {
-  USER
-  ADMIN
-}
