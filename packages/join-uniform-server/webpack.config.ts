@@ -8,15 +8,19 @@ const monorepoPackages = getMonorepoPackages();
 
 const firebaseServiceAccountCredentialsPath = path.resolve(__dirname, "../../firebase-admin-service-account.json"); // prettier-ignore
 let firebaseServiceAccountCredentials: string;
-try {
-  assert(fs.existsSync(firebaseServiceAccountCredentialsPath));
-  firebaseServiceAccountCredentials = fs.readFileSync(firebaseServiceAccountCredentialsPath, "utf8"); // prettier-ignore
-} catch (e) {
-  throw new Error(`
+if (!process.env.CI) {
+  try {
+    assert(fs.existsSync(firebaseServiceAccountCredentialsPath));
+    firebaseServiceAccountCredentials = fs.readFileSync(firebaseServiceAccountCredentialsPath, "utf8"); // prettier-ignore
+  } catch (e) {
+    throw new Error(`
 Failed to read Firebase Service Account Credentials.
 
 Error: ${e.message}
 `);
+  }
+} else {
+  firebaseServiceAccountCredentials = "";
 }
 
 const dev = process.env.NODE_ENV !== "production";

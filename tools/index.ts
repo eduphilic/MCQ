@@ -15,13 +15,15 @@ process.on("unhandledRejection", err => {
   throw err;
 });
 
-// Retrieve Firebase environmental variables. They are not available to the
-// emulator by default. Download them and create a file that the emulator will
-// recognize.
-getFirebaseEnvironmentalVariables();
+if (!process.env.CI) {
+  // Retrieve Firebase environmental variables. They are not available to the
+  // emulator by default. Download them and create a file that the emulator will
+  // recognize.
+  getFirebaseEnvironmentalVariables();
 
-// Make sure the Firebase Admin Service Account credentials are available.
-ensureServiceAccountCredentialsAvailable();
+  // Make sure the Firebase Admin Service Account credentials are available.
+  ensureServiceAccountCredentialsAvailable();
+}
 
 const usage = `
 Join Uniform Tools
