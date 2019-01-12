@@ -1,4 +1,3 @@
-// tslint:disable:no-implicit-dependencies
 import fs from "fs";
 import { printSchema } from "graphql";
 import { makeExecutableSchema } from "graphql-tools";
