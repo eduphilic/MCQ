@@ -91,6 +91,13 @@ type IndexCard {
   colorTitle: String!
 }
 
+type IndexCardCategory {
+  # Id of the category.
+  id: ID!
+  title: String!
+  visible: Boolean!
+}
+
 input IndexCardCategoryUpdateRequest {
   categoryId: ID!
   visible: Boolean!
@@ -226,6 +233,7 @@ type Mutation {
   setCategoryActivationStatuses(categoryIds: [ID!]!, activatedStatuses: [Boolean!]!): [Category!]!
   updateCategory(categoryId: ID!, update: CategoryUpdateRequest!): Category!
   updateEntry(entryId: ID!, update: EntryUpdateRequest!): Entry!
+  updateIndexCards(request: [UpdateIndexCardsRequest!]!): [IndexCard!]!
   updateIndexPage(request: IndexPageUpdateRequest!): IndexPageConfig!
   updateLogoUrl(logoUrl: String!): LogoConfig!
 }
@@ -249,4 +257,14 @@ input UpdateIndexCardsCategoriesRequest {
   # Id of the category.
   id: ID!
   visible: Boolean!
+}
+
+input UpdateIndexCardsRequest {
+  # Same as the id for the Entry the IndexCard represents.
+  id: ID!
+  categories: [UpdateIndexCardsCategoriesRequest!]!
+  colorBlock: String!
+  colorCategoryBackground: String!
+  colorLogoBackground: String!
+  colorTitle: String!
 }

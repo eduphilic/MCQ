@@ -6,6 +6,8 @@ import TypeDefIndexCardCategoryUpdateRequest from "./IndexCardCategoryUpdateRequ
 import TypeDefIndexPageAboutImageUpdateRequest from "./IndexPageAboutImageUpdateRequest.graphql";
 import TypeDefIndexPageIndexCardUpdateRequest from "./IndexPageIndexCardUpdateRequest.graphql";
 import TypeDefIndexPageUpdateRequest from "./IndexPageUpdateRequest.graphql";
+import TypeDefUpdateIndexCardsCategoriesRequest from "./UpdateIndexCardsCategoriesRequest.graphql";
+import TypeDefUpdateIndexCardsRequest from "./UpdateIndexCardsRequest.graphql";
 
 export const typeDefs = [
   TypeDefCategoryUpdateRequest,
@@ -16,4 +18,6 @@ export const typeDefs = [
   TypeDefIndexPageAboutImageUpdateRequest,
   TypeDefIndexPageIndexCardUpdateRequest,
   TypeDefIndexPageUpdateRequest,
+  TypeDefUpdateIndexCardsCategoriesRequest,
+  TypeDefUpdateIndexCardsRequest,
 ];

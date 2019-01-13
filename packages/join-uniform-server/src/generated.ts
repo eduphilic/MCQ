@@ -49,6 +49,28 @@ export interface EntryUpdateRequest {
   description: string;
 }
 
+export interface UpdateIndexCardsRequest {
+  /** Same as the id for the Entry the IndexCard represents. */
+  id: string;
+  
+  categories: UpdateIndexCardsCategoriesRequest[];
+  
+  colorBlock: string;
+  
+  colorCategoryBackground: string;
+  
+  colorLogoBackground: string;
+  
+  colorTitle: string;
+}
+
+export interface UpdateIndexCardsCategoriesRequest {
+  /** Id of the category. */
+  id: string;
+  
+  visible: boolean;
+}
+
 export interface IndexPageUpdateRequest {
   
   heroBackgroundImageUrl: string;
@@ -209,7 +231,7 @@ export interface IndexCard {
   
   title: string;
   
-  categories: TypeIndexCardCategory[];
+  categories: IndexCardCategory[];
   
   entryLogoUrl: string;
   
@@ -223,7 +245,7 @@ export interface IndexCard {
 }
 
 
-export interface TypeIndexCardCategory {
+export interface IndexCardCategory {
   /** Id of the category. */
   id: string;
   
@@ -309,6 +331,8 @@ export interface Mutation {
   
   updateEntry: Entry;
   
+  updateIndexCards: IndexCard[];
+  
   updateIndexPage: IndexPageConfig;
   
   updateLogoUrl: LogoConfig;
@@ -383,6 +407,10 @@ export interface UpdateEntryMutationArgs {
   entryId: string;
   
   update: EntryUpdateRequest;
+}
+export interface UpdateIndexCardsMutationArgs {
+  
+  request: UpdateIndexCardsRequest[];
 }
 export interface UpdateIndexPageMutationArgs {
   
@@ -571,7 +599,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     
     title?: IndexCardTitleResolver<string, TypeParent, Context>;
     
-    categories?: IndexCardCategoriesResolver<TypeIndexCardCategory[], TypeParent, Context>;
+    categories?: IndexCardCategoriesResolver<IndexCardCategory[], TypeParent, Context>;
     
     entryLogoUrl?: IndexCardEntryLogoUrlResolver<string, TypeParent, Context>;
     
@@ -587,26 +615,26 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
 
   export type IndexCardIdResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexCardTitleResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type IndexCardCategoriesResolver<R = TypeIndexCardCategory[], Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type IndexCardCategoriesResolver<R = IndexCardCategory[], Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexCardEntryLogoUrlResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexCardColorBlockResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexCardColorCategoryBackgroundResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexCardColorLogoBackgroundResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type IndexCardColorTitleResolver<R = string, Parent = IndexCard, Context = ApolloContext> = Resolver<R, Parent, Context>;  
 
-  export interface TypeIndexCardCategoryResolvers<Context = ApolloContext, TypeParent = TypeIndexCardCategory> {
+  export interface IndexCardCategoryResolvers<Context = ApolloContext, TypeParent = IndexCardCategory> {
     /** Id of the category. */
-    id?: TypeIndexCardCategoryIdResolver<string, TypeParent, Context>;
+    id?: IndexCardCategoryIdResolver<string, TypeParent, Context>;
     
-    title?: TypeIndexCardCategoryTitleResolver<string, TypeParent, Context>;
+    title?: IndexCardCategoryTitleResolver<string, TypeParent, Context>;
     
-    visible?: TypeIndexCardCategoryVisibleResolver<boolean, TypeParent, Context>;
+    visible?: IndexCardCategoryVisibleResolver<boolean, TypeParent, Context>;
   }
 
 
-  export type TypeIndexCardCategoryIdResolver<R = string, Parent = TypeIndexCardCategory, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type TypeIndexCardCategoryTitleResolver<R = string, Parent = TypeIndexCardCategory, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type TypeIndexCardCategoryVisibleResolver<R = boolean, Parent = TypeIndexCardCategory, Context = ApolloContext> = Resolver<R, Parent, Context>;  
+  export type IndexCardCategoryIdResolver<R = string, Parent = IndexCardCategory, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type IndexCardCategoryTitleResolver<R = string, Parent = IndexCardCategory, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type IndexCardCategoryVisibleResolver<R = boolean, Parent = IndexCardCategory, Context = ApolloContext> = Resolver<R, Parent, Context>;  
 /** Configuration for the landing page / index page. */
   export interface IndexPageConfigResolvers<Context = ApolloContext, TypeParent = IndexPageConfig> {
     /** Always "index-page-config". */
@@ -707,6 +735,8 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     
     updateEntry?: MutationUpdateEntryResolver<Entry, TypeParent, Context>;
     
+    updateIndexCards?: MutationUpdateIndexCardsResolver<IndexCard[], TypeParent, Context>;
+    
     updateIndexPage?: MutationUpdateIndexPageResolver<IndexPageConfig, TypeParent, Context>;
     
     updateLogoUrl?: MutationUpdateLogoUrlResolver<LogoConfig, TypeParent, Context>;
@@ -774,6 +804,13 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     entryId: string;
     
     update: EntryUpdateRequest;
+  }
+
+
+  export type MutationUpdateIndexCardsResolver<R = IndexCard[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationUpdateIndexCardsArgs>;
+  export interface MutationUpdateIndexCardsArgs {
+    
+    request: UpdateIndexCardsRequest[];
   }
 
 
@@ -849,7 +886,7 @@ export interface IResolvers {
     Entry?: EntryResolvers;
     HtmlConfig?: HtmlConfigResolvers;
     IndexCard?: IndexCardResolvers;
-    TypeIndexCardCategory?: TypeIndexCardCategoryResolvers;
+    IndexCardCategory?: IndexCardCategoryResolvers;
     IndexPageConfig?: IndexPageConfigResolvers;
     IndexPageAboutImage?: IndexPageAboutImageResolvers;
     LogoConfig?: LogoConfigResolvers;

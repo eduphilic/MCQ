@@ -9,6 +9,7 @@ import TypeDefGenerateCloudinarySignature from "./generateCloudinarySignature.gr
 import TypeDefSetCategoryActivationStatuses from "./setCategoryActivationStatuses.graphql";
 import TypeDefUpdateCategory from "./updateCategory.graphql";
 import TypeDefUpdateEntry from "./updateEntry.graphql";
+import TypeDefUpdateIndexCards from "./updateIndexCards.graphql";
 import TypeDefUpdateIndexPage from "./updateIndexPage.graphql";
 import TypeDefUpdateLogoUrl from "./updateLogoUrl.graphql";
 
@@ -21,6 +22,7 @@ import { generateCloudinarySignature } from "./generateCloudinarySignature";
 import { setCategoryActivationStatuses } from "./setCategoryActivationStatuses";
 import { updateCategory } from "./updateCategory";
 import { updateEntry } from "./updateEntry";
+import { updateIndexCards } from "./updateIndexCards";
 import { updateIndexPage } from "./updateIndexPage";
 import { updateLogoUrl } from "./updateLogoUrl";
 
@@ -34,6 +36,7 @@ export const typeDefs = [
   TypeDefSetCategoryActivationStatuses,
   TypeDefUpdateCategory,
   TypeDefUpdateEntry,
+  TypeDefUpdateIndexCards,
   TypeDefUpdateIndexPage,
   TypeDefUpdateLogoUrl,
 ];
@@ -48,6 +51,7 @@ export const Mutation: MutationResolvers = {
   setCategoryActivationStatuses,
   updateCategory,
   updateEntry,
+  updateIndexCards,
   updateIndexPage,
   updateLogoUrl,
 };

@@ -49,6 +49,28 @@ export interface EntryUpdateRequest {
   description: string;
 }
 
+export interface UpdateIndexCardsRequest {
+  /** Same as the id for the Entry the IndexCard represents. */
+  id: string;
+  
+  categories: UpdateIndexCardsCategoriesRequest[];
+  
+  colorBlock: string;
+  
+  colorCategoryBackground: string;
+  
+  colorLogoBackground: string;
+  
+  colorTitle: string;
+}
+
+export interface UpdateIndexCardsCategoriesRequest {
+  /** Id of the category. */
+  id: string;
+  
+  visible: boolean;
+}
+
 export interface IndexPageUpdateRequest {
   
   heroBackgroundImageUrl: string;
@@ -308,22 +330,88 @@ export type Json = any;
     text: models.LocalizedString;
   } 
 
-  export type IndexManagerUpdateLogoUrlVariables = {
+  export type IndexManagerUpdateIndexPageVariables = {
     logoUrl: string;
+    indexPageUpdate: IndexPageUpdateRequest;
+    indexCardsUpdate: UpdateIndexCardsRequest[];
   }
 
-  export type IndexManagerUpdateLogoUrlMutation = {
+  export type IndexManagerUpdateIndexPageMutation = {
     __typename?: "Mutation";
     
-    updateLogoUrl: IndexManagerUpdateLogoUrlUpdateLogoUrl;
+    updateLogoUrl: IndexManagerUpdateIndexPageUpdateLogoUrl;
+    
+    updateIndexPage: IndexManagerUpdateIndexPageUpdateIndexPage;
+    
+    updateIndexCards: IndexManagerUpdateIndexPageUpdateIndexCards[];
   }
 
-  export type IndexManagerUpdateLogoUrlUpdateLogoUrl = {
+  export type IndexManagerUpdateIndexPageUpdateLogoUrl = {
     __typename?: "LogoConfig";
     
     id: string;
     
     url: string;
+  } 
+
+  export type IndexManagerUpdateIndexPageUpdateIndexPage = {
+    __typename?: "IndexPageConfig";
+    
+    id: string;
+    
+    heroBackgroundImageUrl: string;
+    
+    heroBackgroundAlpha: number;
+    
+    heroPrimaryText: models.LocalizedString;
+    
+    heroFeatures: models.LocalizedString[];
+    
+    aboutTitle: models.LocalizedString;
+    
+    aboutText: models.LocalizedString;
+    
+    aboutImages: IndexManagerUpdateIndexPageAboutImages[];
+  } 
+
+  export type IndexManagerUpdateIndexPageAboutImages = {
+    __typename?: "IndexPageAboutImage";
+    
+    id: string;
+    
+    imageUrl: string;
+    
+    title: models.LocalizedString;
+    
+    text: models.LocalizedString;
+  } 
+
+  export type IndexManagerUpdateIndexPageUpdateIndexCards = {
+    __typename?: "IndexCard";
+    
+    id: string;
+    
+    categories: IndexManagerUpdateIndexPageCategories[];
+    
+    colorBlock: string;
+    
+    colorCategoryBackground: string;
+    
+    colorLogoBackground: string;
+    
+    colorTitle: string;
+    
+    entryLogoUrl: string;
+  } 
+
+  export type IndexManagerUpdateIndexPageCategories = {
+    __typename?: "IndexCardCategory";
+    
+    id: string;
+    
+    visible: boolean;
+    
+    title: string;
   } 
 
   export type LandingGetIndexPageConfigVariables = {
@@ -402,7 +490,7 @@ export type Json = any;
   } 
 
   export type LandingGetIndexPageConfigCategories = {
-    __typename?: "TypeIndexCardCategory";
+    __typename?: "IndexCardCategory";
     
     id: string;
     
@@ -1075,45 +1163,73 @@ import gql from 'graphql-tag';
             operationOptions
         );
     };
-    export const IndexManagerUpdateLogoUrlDocument = gql`
-    mutation IndexManagerUpdateLogoUrl($logoUrl: String!) {
+    export const IndexManagerUpdateIndexPageDocument = gql`
+    mutation IndexManagerUpdateIndexPage($logoUrl: String!, $indexPageUpdate: IndexPageUpdateRequest!, $indexCardsUpdate: [UpdateIndexCardsRequest!]!) {
   updateLogoUrl(logoUrl: $logoUrl) {
     id
     url
+  }
+  updateIndexPage(request: $indexPageUpdate) {
+    id
+    heroBackgroundImageUrl
+    heroBackgroundAlpha
+    heroPrimaryText
+    heroFeatures
+    aboutTitle
+    aboutText
+    aboutImages {
+      id
+      imageUrl
+      title
+      text
+    }
+  }
+  updateIndexCards(request: $indexCardsUpdate) {
+    id
+    categories {
+      id
+      visible
+      title
+    }
+    colorBlock
+    colorCategoryBackground
+    colorLogoBackground
+    colorTitle
+    entryLogoUrl
   }
 }
     
       
     
   `;
-     export class IndexManagerUpdateLogoUrlComponent extends React.Component<Partial<ReactApollo.MutationProps<IndexManagerUpdateLogoUrlMutation, IndexManagerUpdateLogoUrlVariables>>> {
+     export class IndexManagerUpdateIndexPageComponent extends React.Component<Partial<ReactApollo.MutationProps<IndexManagerUpdateIndexPageMutation, IndexManagerUpdateIndexPageVariables>>> {
         render(){
             return (
-                <ReactApollo.Mutation<IndexManagerUpdateLogoUrlMutation, IndexManagerUpdateLogoUrlVariables>
-                mutation={ IndexManagerUpdateLogoUrlDocument }
+                <ReactApollo.Mutation<IndexManagerUpdateIndexPageMutation, IndexManagerUpdateIndexPageVariables>
+                mutation={ IndexManagerUpdateIndexPageDocument }
                 {...(this as any)['props'] as any}
                 />
             );
         }
     }
-    export type IndexManagerUpdateLogoUrlProps<TChildProps = any> = 
+    export type IndexManagerUpdateIndexPageProps<TChildProps = any> = 
             Partial<
                 ReactApollo.MutateProps<
-                                        IndexManagerUpdateLogoUrlMutation, 
-                                        IndexManagerUpdateLogoUrlVariables
+                                        IndexManagerUpdateIndexPageMutation, 
+                                        IndexManagerUpdateIndexPageVariables
                                         >
                 >
          & TChildProps;
-    export type IndexManagerUpdateLogoUrlMutationFn = ReactApollo.MutationFn<IndexManagerUpdateLogoUrlMutation, IndexManagerUpdateLogoUrlVariables>;
-    export function IndexManagerUpdateLogoUrlHOC<TProps, TChildProps = any>(operationOptions: 
+    export type IndexManagerUpdateIndexPageMutationFn = ReactApollo.MutationFn<IndexManagerUpdateIndexPageMutation, IndexManagerUpdateIndexPageVariables>;
+    export function IndexManagerUpdateIndexPageHOC<TProps, TChildProps = any>(operationOptions: 
             ReactApollo.OperationOption<
                 TProps, 
-                IndexManagerUpdateLogoUrlMutation,
-                IndexManagerUpdateLogoUrlVariables,
-                IndexManagerUpdateLogoUrlProps<TChildProps>
+                IndexManagerUpdateIndexPageMutation,
+                IndexManagerUpdateIndexPageVariables,
+                IndexManagerUpdateIndexPageProps<TChildProps>
             > | undefined){
-        return ReactApollo.graphql<TProps, IndexManagerUpdateLogoUrlMutation, IndexManagerUpdateLogoUrlVariables, IndexManagerUpdateLogoUrlProps<TChildProps>>(
-            IndexManagerUpdateLogoUrlDocument,
+        return ReactApollo.graphql<TProps, IndexManagerUpdateIndexPageMutation, IndexManagerUpdateIndexPageVariables, IndexManagerUpdateIndexPageProps<TChildProps>>(
+            IndexManagerUpdateIndexPageDocument,
             operationOptions
         );
     };
