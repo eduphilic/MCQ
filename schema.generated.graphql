@@ -83,7 +83,7 @@ type IndexCard {
   # Same as the id for the Entry the IndexCard represents.
   id: ID!
   title: String!
-  categories: [TypeIndexCardCategory!]!
+  categories: [IndexCardCategory!]!
   entryLogoUrl: String!
   colorBlock: String!
   colorCategoryBackground: String!
@@ -245,9 +245,8 @@ type Query {
   youtubeVideos: [IndexYouTubeVideo!]!
 }
 
-type TypeIndexCardCategory {
+input UpdateIndexCardsCategoriesRequest {
   # Id of the category.
   id: ID!
-  title: String!
   visible: Boolean!
 }

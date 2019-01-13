@@ -1,4 +1,4 @@
-type TypeIndexCardCategory {
+type IndexCardCategory {
   # Id of the category.
   id: ID!
   title: String!
