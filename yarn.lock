@@ -5652,6 +5652,11 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
+dataloader@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/dataloader/-/dataloader-1.4.0.tgz#bca11d867f5d3f1b9ed9f737bd15970c65dff5c8"
+  integrity sha512-68s5jYdlvasItOJnCuI2Q9s4q98g0pCyL3HrcKJu8KNugUl8ahgmZYg38ysLTgQjjXX3H8CJLkAvWrclWfcalw==
+
 date-fns@^1.27.2:
   version "1.29.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
@@ -7594,6 +7599,15 @@ graphql-codegen-plugin-helpers@0.15.2:
     graphql-codegen-core "0.15.2"
     import-from "2.1.0"
 
+graphql-codegen-typescript-client@^0.15.2:
+  version "0.15.2"
+  resolved "https://registry.yarnpkg.com/graphql-codegen-typescript-client/-/graphql-codegen-typescript-client-0.15.2.tgz#37fab175306e37a2b814f84361f1ec4c3db06dc1"
+  integrity sha512-aPmIU4t6nYi9/rDgGm/WopHk7WHO5S93H7HS6WJwVb/VNbOaoz/Buvtb/jt4ljD+30kdaFMOoTFB3P8Zwg0i5g==
+  dependencies:
+    graphql-codegen-core "0.15.2"
+    graphql-codegen-plugin-helpers "0.15.2"
+    graphql-codegen-typescript-common "0.15.2"
+
 graphql-codegen-typescript-common@0.15.2, graphql-codegen-typescript-common@^0.15.2:
   version "0.15.2"
   resolved "https://registry.yarnpkg.com/graphql-codegen-typescript-common/-/graphql-codegen-typescript-common-0.15.2.tgz#9368ca0d9a4f2938823d3dc80b364cd337c686df"
@@ -7603,6 +7617,15 @@ graphql-codegen-typescript-common@0.15.2, graphql-codegen-typescript-common@^0.1
     common-tags "1.8.0"
     graphql-codegen-core "0.15.2"
     graphql-codegen-plugin-helpers "0.15.2"
+
+graphql-codegen-typescript-react-apollo@^0.15.2:
+  version "0.15.2"
+  resolved "https://registry.yarnpkg.com/graphql-codegen-typescript-react-apollo/-/graphql-codegen-typescript-react-apollo-0.15.2.tgz#ddf09d2e4580e5c0b3257e0cb8f31e1a2e0bcf2e"
+  integrity sha512-RAnJKYaYyPyPLLkBaI4LfDHcFJGNC3UarnSMWM8I0zwJFv7OlrQNHc8AHJR9LU5g0ZfK5wD57BqzBgPqNdobOA==
+  dependencies:
+    graphql-codegen-core "0.15.2"
+    graphql-codegen-plugin-helpers "0.15.2"
+    graphql-codegen-typescript-common "0.15.2"
 
 graphql-codegen-typescript-resolvers@^0.15.2:
   version "0.15.2"
