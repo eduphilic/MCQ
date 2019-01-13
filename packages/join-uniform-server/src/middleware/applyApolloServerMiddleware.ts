@@ -24,7 +24,7 @@ export function applyApolloServerMiddleware(options: Options) {
   });
 
   apolloServer.applyMiddleware({
-    app: options.koaApp,
+    app: options.koaApp as any, // TODO: Fix this type definition.
     bodyParserConfig: false,
     cors: false,
   });

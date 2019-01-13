@@ -15,8 +15,8 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@material-ui/core": "^3.7.0",
-    "@material-ui/styles": "^3.0.0-alpha.6",
+    "@material-ui/core": "^3.8.3",
+    "@material-ui/styles": "^3.0.0-alpha.7",
     "apollo-cache": "^1.1.22",
     "apollo-cache-inmemory": "^1.3.12",
     "apollo-client": "^2.4.8",
@@ -30,12 +30,12 @@
     "react": "16.7.0-alpha.2",
     "react-adopt": "^0.6.0",
     "react-apollo": "^2.3.3",
-    "react-color": "^2.14.1",
+    "react-color": "^2.17.0",
     "react-dom": "16.7.0-alpha.2",
     "react-jss": "^8.6.1",
     "slugify": "^1.3.4",
     "styled-components": "^4.1.3",
-    "yup": "^0.26.6"
+    "yup": "^0.26.7"
   },
   "devDependencies": {
     "@join-uniform/components": "1.0.0",
@@ -47,6 +47,6 @@
     "babel-plugin-styled-components": "^1.10.0",
     "cpx": "^1.5.0",
     "next-plugin-transpile-modules": "^1.0.0",
-    "tslint": "^5.12.0"
+    "tslint": "^5.12.1"
   }
 }

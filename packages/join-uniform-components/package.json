@@ -11,8 +11,8 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@material-ui/core": "^3.7.0",
-    "@material-ui/styles": "^3.0.0-alpha.6",
+    "@material-ui/core": "^3.8.3",
+    "@material-ui/styles": "^3.0.0-alpha.7",
     "react": "16.7.0-alpha.2",
     "react-dom": "16.7.0-alpha.2",
     "react-sortable-hoc": "^0.8.4"
@@ -23,13 +23,13 @@
     "@join-uniform/icons": "1.0.0",
     "@join-uniform/localization": "1.0.0",
     "@join-uniform/theme": "1.0.0",
-    "@storybook/addon-actions": "^4.0.12",
-    "@storybook/addon-knobs": "^4.0.12",
-    "@storybook/react": "^4.1.2",
-    "babel-loader": "^8.0.4",
+    "@storybook/addon-actions": "^4.1.6",
+    "@storybook/addon-knobs": "^4.1.6",
+    "@storybook/react": "^4.1.6",
+    "babel-loader": "^8.0.5",
     "babel-plugin-styled-components": "^1.10.0",
     "jss": "^9.8.7",
     "react-jss": "^8.6.1",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.3"
   }
 }
