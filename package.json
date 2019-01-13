@@ -16,7 +16,7 @@
     "type-check": "yarn workspaces run type-check",
     "tools": "ts-node --project ./tools/tsconfig.json ./tools",
     "graphql": "yarn graphql:stitch && yarn graphql:gen",
-    "graphql:stitch": "ts-node --project --files ./tools/tsconfig.json ./tools/stitchSchema.ts",
+    "graphql:stitch": "ts-node --project ./tools/tsconfig.json ./tools/stitchSchema.ts",
     "graphql:gen": "gql-gen"
   },
   "dependencies": {

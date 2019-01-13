@@ -248,6 +248,7 @@ type Query {
   entryCategories(entryId: ID!): [Category!]!
   htmlConfig: HtmlConfig!
   indexCards: [IndexCard!]!
+  indexCardsByEntryIds(ids: [ID!]!): [IndexCard!]!
   indexPageConfig: IndexPageConfig!
   logoConfig: LogoConfig!
   youtubeVideos: [IndexYouTubeVideo!]!
