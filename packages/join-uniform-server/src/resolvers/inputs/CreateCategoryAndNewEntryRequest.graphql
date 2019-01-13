@@ -1,8 +1,0 @@
-input CreateCategoryAndNewEntryRequest {
-  categoryName: String!
-  categoryEducation: String!
-  pricePerPaper: Int!
-  entryLogoUrl: String!
-  entryName: String!
-  entryExplanation: String!
-}

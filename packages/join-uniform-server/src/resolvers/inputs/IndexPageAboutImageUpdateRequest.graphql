@@ -1,6 +1,0 @@
-input IndexPageAboutImageUpdateRequest {
-  id: ID!
-  imageUrl: String!
-  title: LocalizedString!
-  text: LocalizedString!
-}

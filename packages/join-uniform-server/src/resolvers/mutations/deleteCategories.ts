@@ -1,5 +1,15 @@
+import gql from "graphql-tag";
 import { Category, MutationDeleteCategoriesResolver } from "~/generated";
 import { DBCategory, DBEntry } from "~/models";
+
+export const TypeDefDeleteCategories = gql`
+  extend type Mutation {
+    # Deletes Categories. It removes both the Category database entry and the
+    # Category's id from the corresponding Entry objects in the database. It
+    # returns the list of remaining Categories.
+    deleteCategories(categoryIds: [ID!]!): [Category!]!
+  }
+`;
 
 const r: MutationDeleteCategoriesResolver = async (_parent, args, context) => {
   const { categoryIds } = args;

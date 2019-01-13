@@ -155,6 +155,8 @@ export type Json = any;
 
 export interface Query {
   
+  _empty: Maybe<boolean>;
+  
   category: Maybe<Category>;
   
   cloudinaryCloudName: string;
@@ -176,8 +178,6 @@ export interface Query {
   logoConfig: LogoConfig;
   
   youtubeVideos: IndexYouTubeVideo[];
-  
-  _empty: Maybe<boolean>;
 }
 
 /** Represents an Entry Category. */
@@ -473,6 +473,8 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
 
   export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
     
+    _empty?: Query_EmptyResolver<Maybe<boolean>, TypeParent, Context>;
+    
     category?: QueryCategoryResolver<Maybe<Category>, TypeParent, Context>;
     
     cloudinaryCloudName?: QueryCloudinaryCloudNameResolver<string, TypeParent, Context>;
@@ -494,11 +496,10 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     logoConfig?: QueryLogoConfigResolver<LogoConfig, TypeParent, Context>;
     
     youtubeVideos?: QueryYoutubeVideosResolver<IndexYouTubeVideo[], TypeParent, Context>;
-    
-    _empty?: Query_EmptyResolver<Maybe<boolean>, TypeParent, Context>;
   }
 
 
+  export type Query_EmptyResolver<R = Maybe<boolean>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryCategoryResolver<R = Maybe<Category>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryCategoryArgs>;
   export interface QueryCategoryArgs {
     
@@ -527,8 +528,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   export type QueryIndexCardsResolver<R = IndexCard[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryIndexPageConfigResolver<R = IndexPageConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryLogoConfigResolver<R = LogoConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type QueryYoutubeVideosResolver<R = IndexYouTubeVideo[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type Query_EmptyResolver<R = Maybe<boolean>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;  
+  export type QueryYoutubeVideosResolver<R = IndexYouTubeVideo[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;  
 /** Represents an Entry Category. */
   export interface CategoryResolvers<Context = ApolloContext, TypeParent = Category> {
     

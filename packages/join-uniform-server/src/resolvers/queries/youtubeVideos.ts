@@ -1,4 +1,11 @@
+import gql from "graphql-tag";
 import { IndexYouTubeVideo, QueryYoutubeVideosResolver } from "~/generated";
+
+export const TypeDefYoutubeVideos = gql`
+  extend type Query {
+    youtubeVideos: [IndexYouTubeVideo!]!
+  }
+`;
 
 export const youtubeVideos: QueryYoutubeVideosResolver = async (
   _parent,

@@ -1,13 +1,13 @@
-import TypeDefCategory from "./Category.graphql";
-import TypeDefCloudinaryMediaWidgetAuthenticationToken from "./CloudinaryMediaWidgetAuthenticationToken.graphql";
-import TypeDefEntry from "./Entry.graphql";
-import TypeDefHtmlConfig from "./HtmlConfig.graphql";
-import TypeDefIndexCard from "./IndexCard.graphql";
-import TypeDefIndexCardCategory from "./IndexCardCategory.graphql";
-import TypeDefIndexPageAboutImage from "./IndexPageAboutImage.graphql";
-import TypeDefIndexPageConfig from "./IndexPageConfig.graphql";
-import TypeDefIndexYouTubeVideo from "./IndexYouTubeVideo.graphql";
-import TypeDefLogoConfig from "./LogoConfig.graphql";
+import { TypeDefCategory } from "./Category";
+import { TypeDefCloudinaryMediaWidgetAuthenticationToken } from "./CloudinaryMediaWidgetAuthenticationToken";
+import { TypeDefEntry } from "./Entry";
+import { TypeDefHtmlConfig } from "./HtmlConfig";
+import { TypeDefIndexCard } from "./IndexCard";
+import { TypeDefIndexCardCategory } from "./IndexCardCategory";
+import { TypeDefIndexPageAboutImage } from "./IndexPageAboutImage";
+import { TypeDefIndexPageConfig } from "./IndexPageConfig";
+import { TypeDefIndexYouTubeVideo } from "./IndexYouTubeVideo";
+import { TypeDefLogoConfig } from "./LogoConfig";
 
 export const typeDefs = [
   TypeDefCategory,

@@ -1,4 +1,11 @@
+import gql from "graphql-tag";
 import { Category, Entry, QueryEntriesResolver } from "~/generated";
+
+export const TypeDefEntries = gql`
+  extend type Query {
+    entries: [Entry!]!
+  }
+`;
 
 export const entries: QueryEntriesResolver = async (_parent, _args, ctx) => {
   const { firebaseDatabase: database } = ctx;

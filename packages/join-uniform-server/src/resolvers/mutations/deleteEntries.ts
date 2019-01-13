@@ -1,4 +1,11 @@
+import gql from "graphql-tag";
 import { Entry, MutationDeleteEntriesResolver } from "~/generated";
+
+export const TypeDefDeleteEntries = gql`
+  extend type Mutation {
+    deleteEntries(entryIds: [ID!]!): Boolean
+  }
+`;
 
 export const deleteEntries: MutationDeleteEntriesResolver = async (
   _parent,

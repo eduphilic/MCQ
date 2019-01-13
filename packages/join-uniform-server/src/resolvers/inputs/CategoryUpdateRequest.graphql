@@ -1,5 +1,0 @@
-input CategoryUpdateRequest {
-  name: String!
-  education: String!
-  pricePerPaperRs: Int!
-}

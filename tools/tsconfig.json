@@ -3,7 +3,11 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "isolatedModules": false
+    "isolatedModules": false,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["../packages/join-uniform-server/src/*"]
+    }
   },
   "include": ["./**/*"]
 }

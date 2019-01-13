@@ -1,8 +1,15 @@
+import gql from "graphql-tag";
 import { Entry, MutationUpdateEntryResolver } from "~/generated";
 import { DBEntry } from "~/models";
 
 // TODO: Use "data fetcher" here.
 import { entryCategories } from "../queries/entryCategories";
+
+export const TypeDefUpdateEntry = gql`
+  extend type Mutation {
+    updateEntry(entryId: ID!, update: EntryUpdateRequest!): Entry!
+  }
+`;
 
 const r: MutationUpdateEntryResolver = async (parent, args, context, info) => {
   const { entryId, update } = args;

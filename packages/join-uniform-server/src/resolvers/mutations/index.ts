@@ -1,30 +1,32 @@
 import { MutationResolvers } from "~/generated";
 
-import TypeDefCreateCategoryAndNewEntry from "./createCategoryAndNewEntry.graphql";
-import TypeDefCreateCategoryForExistingEntry from "./createCategoryForExistingEntry.graphql";
-import TypeDefDeleteCategories from "./deleteCategories.graphql";
-import TypeDefDeleteEntries from "./deleteEntries.graphql";
-import TypeDefGenerateCloudinaryMediaLibraryAuthenticationToken from "./generateCloudinaryMediaLibraryAuthenticationToken.graphql";
-import TypeDefGenerateCloudinarySignature from "./generateCloudinarySignature.graphql";
-import TypeDefSetCategoryActivationStatuses from "./setCategoryActivationStatuses.graphql";
-import TypeDefUpdateCategory from "./updateCategory.graphql";
-import TypeDefUpdateEntry from "./updateEntry.graphql";
-import TypeDefUpdateIndexCards from "./updateIndexCards.graphql";
-import TypeDefUpdateIndexPage from "./updateIndexPage.graphql";
-import TypeDefUpdateLogoUrl from "./updateLogoUrl.graphql";
-
-import { createCategoryAndNewEntry } from "./createCategoryAndNewEntry";
-import { createCategoryForExistingEntry } from "./createCategoryForExistingEntry";
-import { deleteCategories } from "./deleteCategories";
-import { deleteEntries } from "./deleteEntries";
-import { generateCloudinaryMediaLibraryAuthenticationToken } from "./generateCloudinaryMediaLibraryAuthenticationToken";
-import { generateCloudinarySignature } from "./generateCloudinarySignature";
-import { setCategoryActivationStatuses } from "./setCategoryActivationStatuses";
-import { updateCategory } from "./updateCategory";
-import { updateEntry } from "./updateEntry";
-import { updateIndexCards } from "./updateIndexCards";
-import { updateIndexPage } from "./updateIndexPage";
-import { updateLogoUrl } from "./updateLogoUrl";
+import {
+  createCategoryAndNewEntry,
+  TypeDefCreateCategoryAndNewEntry,
+} from "./createCategoryAndNewEntry";
+import {
+  createCategoryForExistingEntry,
+  TypeDefCreateCategoryForExistingEntry,
+} from "./createCategoryForExistingEntry";
+import { deleteCategories, TypeDefDeleteCategories } from "./deleteCategories";
+import { deleteEntries, TypeDefDeleteEntries } from "./deleteEntries";
+import {
+  generateCloudinaryMediaLibraryAuthenticationToken,
+  TypeDefGenerateCloudinaryMediaLibraryAuthenticationToken,
+} from "./generateCloudinaryMediaLibraryAuthenticationToken";
+import {
+  generateCloudinarySignature,
+  TypeDefGenerateCloudinarySignature,
+} from "./generateCloudinarySignature";
+import {
+  setCategoryActivationStatuses,
+  TypeDefSetCategoryActivationStatuses,
+} from "./setCategoryActivationStatuses";
+import { TypeDefUpdateCategory, updateCategory } from "./updateCategory";
+import { TypeDefUpdateEntry, updateEntry } from "./updateEntry";
+import { TypeDefUpdateIndexCards, updateIndexCards } from "./updateIndexCards";
+import { TypeDefUpdateIndexPage, updateIndexPage } from "./updateIndexPage";
+import { TypeDefUpdateLogoUrl, updateLogoUrl } from "./updateLogoUrl";
 
 export const typeDefs = [
   TypeDefCreateCategoryAndNewEntry,

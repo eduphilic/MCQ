@@ -1,5 +1,12 @@
+import gql from "graphql-tag";
 import { Category, MutationUpdateCategoryResolver } from "~/generated";
 import { DBCategory } from "~/models";
+
+export const TypeDefUpdateCategory = gql`
+  extend type Mutation {
+    updateCategory(categoryId: ID!, update: CategoryUpdateRequest!): Category!
+  }
+`;
 
 const r: MutationUpdateCategoryResolver = async (_parent, args, context) => {
   const { categoryId, update } = args;

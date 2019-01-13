@@ -1,8 +1,15 @@
+import gql from "graphql-tag";
 import {
   IndexPageAboutImage,
   LocalizedString,
   MutationUpdateIndexPageResolver,
 } from "~/generated";
+
+export const TypeDefUpdateIndexPage = gql`
+  extend type Mutation {
+    updateIndexPage(request: IndexPageUpdateRequest!): IndexPageConfig!
+  }
+`;
 
 export const updateIndexPage: MutationUpdateIndexPageResolver = async (
   _parent,

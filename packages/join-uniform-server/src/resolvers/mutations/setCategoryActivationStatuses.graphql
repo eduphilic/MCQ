@@ -1,9 +1,0 @@
-extend type Mutation {
-  # Sets the activation status for the specified categories. The number of ids
-  # needs to match the number of booleans.
-  # Returns the updated Categories.
-  setCategoryActivationStatuses(
-    categoryIds: [ID!]!
-    activatedStatuses: [Boolean!]!
-  ): [Category!]!
-}

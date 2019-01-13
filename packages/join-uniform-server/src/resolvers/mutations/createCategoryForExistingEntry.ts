@@ -1,5 +1,15 @@
+import gql from "graphql-tag";
 import { MutationCreateCategoryForExistingEntryResolver } from "~/generated";
 import { DBCategory, DBEntry } from "~/models";
+
+export const TypeDefCreateCategoryForExistingEntry = gql`
+  extend type Mutation {
+    # Adds a new Category to an existing Entry.
+    createCategoryForExistingEntry(
+      request: CreateCategoryForExistingEntryRequest!
+    ): Category!
+  }
+`;
 
 export const createCategoryForExistingEntry: MutationCreateCategoryForExistingEntryResolver = async (
   _parent,

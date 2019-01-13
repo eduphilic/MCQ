@@ -1,6 +1,0 @@
-extend type Mutation {
-  # Adds a new Category to an existing Entry.
-  createCategoryForExistingEntry(
-    request: CreateCategoryForExistingEntryRequest!
-  ): Category!
-}

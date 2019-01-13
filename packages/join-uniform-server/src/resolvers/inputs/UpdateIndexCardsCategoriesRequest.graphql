@@ -1,5 +1,0 @@
-input UpdateIndexCardsCategoriesRequest {
-  # Id of the category.
-  id: ID!
-  visible: Boolean!
-}

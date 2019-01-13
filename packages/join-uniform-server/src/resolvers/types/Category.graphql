@@ -1,8 +1,0 @@
-# Represents an Entry Category.
-type Category {
-  id: ID!
-  name: String!
-  education: String!
-  pricePerPaperRs: Int!
-  activated: Boolean!
-}

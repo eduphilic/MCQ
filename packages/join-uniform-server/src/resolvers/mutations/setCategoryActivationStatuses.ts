@@ -1,8 +1,21 @@
+import gql from "graphql-tag";
 import {
   Category,
   MutationSetCategoryActivationStatusesResolver as Resolver,
 } from "~/generated";
 import { DBCategory } from "~/models";
+
+export const TypeDefSetCategoryActivationStatuses = gql`
+  extend type Mutation {
+    # Sets the activation status for the specified categories. The number of ids
+    # needs to match the number of booleans.
+    # Returns the updated Categories.
+    setCategoryActivationStatuses(
+      categoryIds: [ID!]!
+      activatedStatuses: [Boolean!]!
+    ): [Category!]!
+  }
+`;
 
 const r: Resolver = async (_parent, args, context) => {
   const { categoryIds, activatedStatuses } = args;

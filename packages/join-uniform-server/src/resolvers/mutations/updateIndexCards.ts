@@ -1,9 +1,16 @@
+import gql from "graphql-tag";
 import {
   IndexCard,
   IndexCardCategory,
   MutationUpdateIndexCardsResolver,
 } from "~/generated";
 import { DBIndexCard } from "~/models";
+
+export const TypeDefUpdateIndexCards = gql`
+  extend type Mutation {
+    updateIndexCards(request: [UpdateIndexCardsRequest!]!): [IndexCard!]!
+  }
+`;
 
 const r: MutationUpdateIndexCardsResolver = async (_parent, args, context) => {
   const { request: indexCardUpdates } = args;

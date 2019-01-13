@@ -1,13 +1,13 @@
-import TypeDefCategoryUpdateRequest from "./CategoryUpdateRequest.graphql";
-import TypeDefCreateCategoryAndNewEntryRequest from "./CreateCategoryAndNewEntryRequest.graphql";
-import TypeDefCreateCategoryForExistingEntryRequest from "./CreateCategoryForExistingEntryRequest.graphql";
-import TypeDefEntryUpdateRequest from "./EntryUpdateRequest.graphql";
-import TypeDefIndexCardCategoryUpdateRequest from "./IndexCardCategoryUpdateRequest.graphql";
-import TypeDefIndexPageAboutImageUpdateRequest from "./IndexPageAboutImageUpdateRequest.graphql";
-import TypeDefIndexPageIndexCardUpdateRequest from "./IndexPageIndexCardUpdateRequest.graphql";
-import TypeDefIndexPageUpdateRequest from "./IndexPageUpdateRequest.graphql";
-import TypeDefUpdateIndexCardsCategoriesRequest from "./UpdateIndexCardsCategoriesRequest.graphql";
-import TypeDefUpdateIndexCardsRequest from "./UpdateIndexCardsRequest.graphql";
+import { TypeDefCategoryUpdateRequest } from "./CategoryUpdateRequest";
+import { TypeDefCreateCategoryAndNewEntryRequest } from "./CreateCategoryAndNewEntryRequest";
+import { TypeDefCreateCategoryForExistingEntryRequest } from "./CreateCategoryForExistingEntryRequest";
+import { TypeDefEntryUpdateRequest } from "./EntryUpdateRequest";
+import { TypeDefIndexCardCategoryUpdateRequest } from "./IndexCardCategoryUpdateRequest";
+import { TypeDefIndexPageAboutImageUpdateRequest } from "./IndexPageAboutImageUpdateRequest";
+import { TypeDefIndexPageIndexCardUpdateRequest } from "./IndexPageIndexCardUpdateRequest";
+import { TypeDefIndexPageUpdateRequest } from "./IndexPageUpdateRequest";
+import { TypeDefUpdateIndexCardsCategoriesRequest } from "./UpdateIndexCardsCategoriesRequest";
+import { TypeDefUpdateIndexCardsRequest } from "./UpdateIndexCardsRequest";
 
 export const typeDefs = [
   TypeDefCategoryUpdateRequest,

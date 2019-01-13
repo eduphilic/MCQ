@@ -1,9 +1,16 @@
+import gql from "graphql-tag";
 import {
   IndexCard,
+  IndexCardCategory,
   QueryIndexCardsResolver,
-  TypeIndexCardCategory,
 } from "~/generated";
 import { DBCategory, DBEntry } from "~/models";
+
+export const TypeDefIndexCards = gql`
+  extend type Query {
+    indexCards: [IndexCard!]!
+  }
+`;
 
 export const indexCards: QueryIndexCardsResolver = async (
   _parent,
@@ -55,7 +62,7 @@ export const indexCards: QueryIndexCardsResolver = async (
             .filter(category => entry.categories.includes(category.id))
             .filter(category => category.activated)
             .map(
-              (category): TypeIndexCardCategory => {
+              (category): IndexCardCategory => {
                 const indexCardCategory =
                   indexCard &&
                   indexCard.categories.find(c => c.id === category.id);

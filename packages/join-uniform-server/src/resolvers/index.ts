@@ -1,11 +1,22 @@
-import TypeDefMutation from "./Mutation.graphql";
-import TypeDefQuery from "./Query.graphql";
+import gql from "graphql-tag";
 
 import { typeDefs as inputTypeDefs } from "./inputs";
 import { Mutation, typeDefs as mutationTypeDefs } from "./mutations";
 import { Query, typeDefs as queryTypeDefs } from "./queries";
 import { typeDefs as scalarTypeDefs } from "./scalars";
 import { typeDefs as typeTypeDefs } from "./types";
+
+const TypeDefQuery = gql`
+  type Query {
+    _empty: Boolean
+  }
+`;
+
+const TypeDefMutation = gql`
+  type Mutation {
+    _empty: Boolean
+  }
+`;
 
 /**
  * GraphQL schema definition.

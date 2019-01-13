@@ -1,3 +1,0 @@
-extend type Mutation {
-  updateCategory(categoryId: ID!, update: CategoryUpdateRequest!): Category!
-}

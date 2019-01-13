@@ -1,6 +1,13 @@
+import gql from "graphql-tag";
 import { Entry, QueryEntryResolver } from "~/generated";
 import { DBEntry } from "~/models";
 import { entryCategories } from "./entryCategories";
+
+export const TypeDefEntry = gql`
+  extend type Query {
+    entry(entryId: ID!): Entry
+  }
+`;
 
 const r: QueryEntryResolver = async (parent, args, context, info) => {
   const { entryId } = args;

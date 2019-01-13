@@ -1,28 +1,19 @@
 import { QueryResolvers } from "~/generated";
 
-import TypeDefCategory from "./category.graphql";
-import TypeDefCloudinaryApiKey from "./cloudinaryApiKey.graphql";
-import TypeDefCloudinaryCloudName from "./cloudinaryCloudName.graphql";
-import TypeDefEntries from "./entries.graphql";
-import TypeDefEntry from "./entry.graphql";
-import TypeDefEntryCategories from "./entryCategories.graphql";
-import TypeDefHtmlConfig from "./htmlConfig.graphql";
-import TypeDefIndexCards from "./indexCards.graphql";
-import TypeDefIndexPageConfig from "./indexPageConfig.graphql";
-import TypeDefLogoConfig from "./logoConfig.graphql";
-import TypeDefYoutubeVideos from "./youtubeVideos.graphql";
-
-import { category } from "./category";
-import { cloudinaryApiKey } from "./cloudinaryApiKey";
-import { cloudinaryCloudName } from "./cloudinaryCloudName";
-import { entries } from "./entries";
-import { entry } from "./entry";
-import { entryCategories } from "./entryCategories";
-import { htmlConfig } from "./htmlConfig";
-import { indexCards } from "./indexCards";
-import { indexPageConfig } from "./indexPageConfig";
-import { logoConfig } from "./logoConfig";
-import { youtubeVideos } from "./youtubeVideos";
+import { category, TypeDefCategory } from "./category";
+import { cloudinaryApiKey, TypeDefCloudinaryApiKey } from "./cloudinaryApiKey";
+import {
+  cloudinaryCloudName,
+  TypeDefCloudinaryCloudName,
+} from "./cloudinaryCloudName";
+import { entries, TypeDefEntries } from "./entries";
+import { entry, TypeDefEntry } from "./entry";
+import { entryCategories, TypeDefEntryCategories } from "./entryCategories";
+import { htmlConfig, TypeDefHtmlConfig } from "./htmlConfig";
+import { indexCards, TypeDefIndexCards } from "./indexCards";
+import { indexPageConfig, TypeDefIndexPageConfig } from "./indexPageConfig";
+import { logoConfig, TypeDefLogoConfig } from "./logoConfig";
+import { TypeDefYoutubeVideos, youtubeVideos } from "./youtubeVideos";
 
 export const typeDefs = [
   TypeDefCategory,

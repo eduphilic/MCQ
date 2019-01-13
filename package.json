@@ -15,9 +15,9 @@
     "lint": "yarn workspaces run lint",
     "type-check": "yarn workspaces run type-check",
     "tools": "ts-node --project ./tools/tsconfig.json ./tools",
-    "graphql": "yarn graphql:gen && yarn graphql:stitch",
-    "graphql:gen": "gql-gen",
-    "graphql:stitch": "ts-node --project ./tools/tsconfig.json ./tools/stitchSchema.ts"
+    "graphql": "yarn graphql:stitch && yarn graphql:gen",
+    "graphql:stitch": "ts-node --project --files ./tools/tsconfig.json ./tools/stitchSchema.ts",
+    "graphql:gen": "gql-gen"
   },
   "dependencies": {
     "@playlyfe/gql": "^2.6.1",

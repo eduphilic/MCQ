@@ -1,8 +1,0 @@
-input IndexPageIndexCardUpdateRequest {
-  entryId: ID!
-  colorBlock: String!
-  colorCategoryBackground: String!
-  colorLogoBackground: String!
-  colorTitle: String!
-  categories: [IndexCardCategoryUpdateRequest!]!
-}

@@ -1,5 +1,12 @@
+import gql from "graphql-tag";
 import { QueryCategoryResolver } from "~/generated";
 import { DBCategory } from "~/models";
+
+export const TypeDefCategory = gql`
+  extend type Query {
+    category(id: ID!): Category
+  }
+`;
 
 export const category: QueryCategoryResolver = async (_parent, args, ctx) => {
   const { id } = args;
