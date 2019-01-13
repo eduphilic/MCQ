@@ -16,6 +16,7 @@
     "apollo-server-core": "^2.3.1",
     "apollo-server-koa": "^2.3.1",
     "cloudinary": "^1.13.2",
+    "dataloader": "^1.4.0",
     "firebase-admin": "^6.4.0",
     "firebase-functions": "^2.1.0",
     "google-auth-library": "^2.0.2",

@@ -7,6 +7,7 @@ import path from "path";
 import { ApolloContext } from "./ApolloContext";
 import { getEnvironmentalVariables } from "./getEnvironmentalVariables";
 import { getFirebaseRemoteConfigClientCredentials } from "./getFirebaseRemoteConfigClientCredentials";
+import { createLoaders } from "./loaders";
 import {
   applyApolloServerMiddleware,
   createNextJsMiddleware,
@@ -63,6 +64,10 @@ async function bootstrap() {
         firebaseRemoteConfigClient,
         firebaseDatabase,
         cloudinaryService,
+        loaders: createLoaders({
+          firebaseRemoteConfigClient,
+          firebaseDatabase,
+        }),
       };
     },
     typeDefs,
