@@ -6,9 +6,9 @@ import {
   IndexManagerGetIndexPageConfigComponent,
   IndexManagerGetIndexPageConfigProps,
   IndexManagerGetIndexPageConfigQuery,
-  IndexManagerUpdateLogoUrlComponent,
-  IndexManagerUpdateLogoUrlMutation,
-  IndexManagerUpdateLogoUrlProps,
+  IndexManagerUpdateIndexPageComponent,
+  IndexManagerUpdateIndexPageMutation,
+  IndexManagerUpdateIndexPageProps,
 } from "~/lib/client";
 
 type RenderProps = {
@@ -16,15 +16,15 @@ type RenderProps = {
     IndexManagerGetIndexPageConfigQuery,
     IndexManagerGetIndexPageConfigProps
   >;
-  updateLogoUrl: MutationFn<
-    IndexManagerUpdateLogoUrlMutation,
-    IndexManagerUpdateLogoUrlProps
+  updateIndexPage: MutationFn<
+    IndexManagerUpdateIndexPageMutation,
+    IndexManagerUpdateIndexPageProps
   >;
 };
 
 const Composed = adopt<RenderProps, {}>({
   getIndexPageConfig: <IndexManagerGetIndexPageConfigComponent />,
-  updateLogoUrl: <IndexManagerUpdateLogoUrlComponent />,
+  updateIndexPage: <IndexManagerUpdateIndexPageComponent />,
 });
 
 export type IndexManagerPageProps = Omit<RenderProps, "getIndexPageConfig"> & {
