@@ -7,7 +7,7 @@ import {
   TypeDefCloudinaryCloudName,
 } from "./cloudinaryCloudName";
 import { entries, TypeDefEntries } from "./entries";
-import { entry, TypeDefEntry } from "./entry";
+import { entriesByIds, TypeDefEntriesByIds } from "./entriesByIds";
 import { entryCategories, TypeDefEntryCategories } from "./entryCategories";
 import { htmlConfig, TypeDefHtmlConfig } from "./htmlConfig";
 import { indexCards, TypeDefIndexCards } from "./indexCards";
@@ -24,7 +24,7 @@ export const typeDefs = [
   TypeDefCloudinaryApiKey,
   TypeDefCloudinaryCloudName,
   TypeDefEntries,
-  TypeDefEntry,
+  TypeDefEntriesByIds,
   TypeDefEntryCategories,
   TypeDefHtmlConfig,
   TypeDefIndexCards,
@@ -40,7 +40,7 @@ export const Query: QueryResolvers = {
   cloudinaryApiKey,
   cloudinaryCloudName,
   entries,
-  entry,
+  entriesByIds,
   entryCategories,
   htmlConfig,
   indexCards,

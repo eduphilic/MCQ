@@ -83,8 +83,8 @@ export default function PageContainer(props: InitialProps) {
         const { loading, error, data } = getEntryResult;
         if (loading || error || !data) return <LoadingSpinner />;
 
-        const { entry } = data;
-        if (!entry) {
+        const { entriesByIds } = data;
+        if (!entriesByIds) {
           return (
             <ErrorMessagePageContents
               pageTitle={pageTitle}
@@ -95,7 +95,7 @@ export default function PageContainer(props: InitialProps) {
 
         return (
           <AdminEntryManagerEditEntryPage
-            entry={entry}
+            entry={entriesByIds[0]}
             updateEntry={updateEntry}
           />
         );

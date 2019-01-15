@@ -244,7 +244,7 @@ type Query {
   cloudinaryCloudName: String!
   cloudinaryApiKey: String!
   entries: [Entry!]!
-  entry(entryId: ID!): Entry
+  entriesByIds(ids: [ID!]!): [Entry!]!
   entryCategories(entryId: ID!): [Category!]!
   htmlConfig: HtmlConfig!
   indexCards: [IndexCard!]!

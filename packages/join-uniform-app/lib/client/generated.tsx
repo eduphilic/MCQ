@@ -233,10 +233,10 @@ export type Json = any;
   export type EntryManagerGetEntryQuery = {
     __typename?: "Query";
     
-    entry: Maybe<EntryManagerGetEntryEntry>;
+    entriesByIds: EntryManagerGetEntryEntriesByIds[];
   }
 
-  export type EntryManagerGetEntryEntry = EntryManagerEntryPartsFragment
+  export type EntryManagerGetEntryEntriesByIds = EntryManagerEntryPartsFragment
 
   export type EntryManagerSetCategoryActivationStatusesVariables = {
     categoryIds: string[];
@@ -945,7 +945,7 @@ import gql from 'graphql-tag';
     };
     export const EntryManagerGetEntryDocument = gql`
     query EntryManagerGetEntry($entryId: ID!) {
-  entry(entryId: $entryId) {
+  entriesByIds(ids: [$entryId]) {
     ...EntryManagerEntryParts
   }
 }

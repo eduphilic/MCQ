@@ -165,7 +165,7 @@ export interface Query {
   
   entries: Entry[];
   
-  entry: Maybe<Entry>;
+  entriesByIds: Entry[];
   
   entryCategories: Category[];
   
@@ -364,9 +364,9 @@ export interface CategoriesByIdsQueryArgs {
   
   ids: string[];
 }
-export interface EntryQueryArgs {
+export interface EntriesByIdsQueryArgs {
   
-  entryId: string;
+  ids: string[];
 }
 export interface EntryCategoriesQueryArgs {
   
@@ -489,7 +489,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     
     entries?: QueryEntriesResolver<Entry[], TypeParent, Context>;
     
-    entry?: QueryEntryResolver<Maybe<Entry>, TypeParent, Context>;
+    entriesByIds?: QueryEntriesByIdsResolver<Entry[], TypeParent, Context>;
     
     entryCategories?: QueryEntryCategoriesResolver<Category[], TypeParent, Context>;
     
@@ -518,10 +518,10 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   export type QueryCloudinaryCloudNameResolver<R = string, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryCloudinaryApiKeyResolver<R = string, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryEntriesResolver<R = Entry[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type QueryEntryResolver<R = Maybe<Entry>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryEntryArgs>;
-  export interface QueryEntryArgs {
+  export type QueryEntriesByIdsResolver<R = Entry[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryEntriesByIdsArgs>;
+  export interface QueryEntriesByIdsArgs {
     
-    entryId: string;
+    ids: string[];
   }
 
 

@@ -1,5 +1,6 @@
 import gql from "graphql-tag";
-import { Category, Entry, QueryEntriesResolver } from "~/generated";
+import { QueryEntriesResolver } from "~/generated";
+import { entriesByIds } from "./entriesByIds";
 
 export const TypeDefEntries = gql`
   extend type Query {
@@ -7,38 +8,15 @@ export const TypeDefEntries = gql`
   }
 `;
 
-export const entries: QueryEntriesResolver = async (_parent, _args, ctx) => {
-  const { firebaseDatabase: database } = ctx;
+const r: QueryEntriesResolver = async (parent, _args, context, info) => {
+  const { firebaseDatabase: database } = context;
 
-  const entriesRef = database.collection("entries");
-  const categoriesRef = database.collection("categories");
+  const entriesDocumentReferences = await database
+    .collection("entries")
+    .listDocuments();
+  const entryIds = entriesDocumentReferences.map(ref => ref.id);
 
-  const [entriesSnapshot, categoriesSnapshot] = await Promise.all([
-    entriesRef.get(),
-    categoriesRef.get(),
-  ]);
-
-  const categories: Category[] = categoriesSnapshot.docs.map(categoryDoc => {
-    const category: Category = {
-      ...(categoryDoc.data() as Omit<Category, "id">),
-      id: categoryDoc.id,
-    };
-    return category;
-  });
-
-  const result: Entry[] = entriesSnapshot.docs.map(entryDoc => {
-    const entryData = entryDoc.data() as Omit<Entry, "id" | "categories"> & {
-      categories: string[];
-    };
-
-    const entry: Entry = {
-      ...entryData,
-      id: entryDoc.id,
-      categories: categories.filter(c => entryData.categories.includes(c.id)),
-    };
-
-    return entry;
-  });
-
-  return result;
+  return entriesByIds(parent, { ids: entryIds }, context, info);
 };
+
+export { r as entries };
