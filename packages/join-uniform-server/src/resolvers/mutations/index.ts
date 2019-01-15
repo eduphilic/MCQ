@@ -8,6 +8,7 @@ import {
   createCategoryForExistingEntry,
   TypeDefCreateCategoryForExistingEntry,
 } from "./createCategoryForExistingEntry";
+import { createEntry, TypeDefCreateEntry } from "./createEntry";
 import { deleteCategories, TypeDefDeleteCategories } from "./deleteCategories";
 import { deleteEntries, TypeDefDeleteEntries } from "./deleteEntries";
 import {
@@ -31,6 +32,7 @@ import { TypeDefUpdateLogoUrl, updateLogoUrl } from "./updateLogoUrl";
 export const typeDefs = [
   TypeDefCreateCategoryAndNewEntry,
   TypeDefCreateCategoryForExistingEntry,
+  TypeDefCreateEntry,
   TypeDefDeleteCategories,
   TypeDefDeleteEntries,
   TypeDefGenerateCloudinaryMediaLibraryAuthenticationToken,
@@ -46,6 +48,7 @@ export const typeDefs = [
 export const Mutation: MutationResolvers = {
   createCategoryAndNewEntry,
   createCategoryForExistingEntry,
+  createEntry,
   deleteCategories,
   deleteEntries,
   generateCloudinaryMediaLibraryAuthenticationToken,

@@ -31,6 +31,15 @@ export interface CreateCategoryForExistingEntryRequest {
   existingEntryId: string;
 }
 
+export interface CreateEntryRequest {
+  
+  name: string;
+  
+  explanation: string;
+  
+  logoUrl: string;
+}
+
 export interface CategoryUpdateRequest {
   
   name: string;

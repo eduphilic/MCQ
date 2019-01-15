@@ -42,6 +42,12 @@ input CreateCategoryForExistingEntryRequest {
   existingEntryId: String!
 }
 
+input CreateEntryRequest {
+  name: String!
+  explanation: String!
+  logoUrl: String!
+}
+
 # Represents a military service branch (Entry).
 type Entry {
   id: ID!
@@ -212,6 +218,7 @@ type Mutation {
 
   # Adds a new Category to an existing Entry.
   createCategoryForExistingEntry(request: CreateCategoryForExistingEntryRequest!): Category!
+  createEntry(request: CreateEntryRequest!): Entry!
 
   # Deletes Categories. It removes both the Category database entry and the
   # Category's id from the corresponding Entry objects in the database. It

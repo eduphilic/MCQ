@@ -31,6 +31,15 @@ export interface CreateCategoryForExistingEntryRequest {
   existingEntryId: string;
 }
 
+export interface CreateEntryRequest {
+  
+  name: string;
+  
+  explanation: string;
+  
+  logoUrl: string;
+}
+
 export interface CategoryUpdateRequest {
   
   name: string;
@@ -318,6 +327,8 @@ export interface Mutation {
   createCategoryAndNewEntry: Entry;
   /** Adds a new Category to an existing Entry. */
   createCategoryForExistingEntry: Category;
+  
+  createEntry: Entry;
   /** Deletes Categories. It removes both the Category database entry and the Category's id from the corresponding Entry objects in the database. It returns the list of remaining Categories. */
   deleteCategories: Category[];
   
@@ -383,6 +394,10 @@ export interface CreateCategoryAndNewEntryMutationArgs {
 export interface CreateCategoryForExistingEntryMutationArgs {
   
   request: CreateCategoryForExistingEntryRequest;
+}
+export interface CreateEntryMutationArgs {
+  
+  request: CreateEntryRequest;
 }
 export interface DeleteCategoriesMutationArgs {
   
@@ -735,6 +750,8 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     createCategoryAndNewEntry?: MutationCreateCategoryAndNewEntryResolver<Entry, TypeParent, Context>;
     /** Adds a new Category to an existing Entry. */
     createCategoryForExistingEntry?: MutationCreateCategoryForExistingEntryResolver<Category, TypeParent, Context>;
+    
+    createEntry?: MutationCreateEntryResolver<Entry, TypeParent, Context>;
     /** Deletes Categories. It removes both the Category database entry and the Category's id from the corresponding Entry objects in the database. It returns the list of remaining Categories. */
     deleteCategories?: MutationDeleteCategoriesResolver<Category[], TypeParent, Context>;
     
@@ -770,6 +787,13 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   export interface MutationCreateCategoryForExistingEntryArgs {
     
     request: CreateCategoryForExistingEntryRequest;
+  }
+
+
+  export type MutationCreateEntryResolver<R = Entry, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationCreateEntryArgs>;
+  export interface MutationCreateEntryArgs {
+    
+    request: CreateEntryRequest;
   }
 
 
