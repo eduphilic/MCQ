@@ -5,6 +5,7 @@ import {
   MutationUpdateIndexCardsResolver,
 } from "~/generated";
 import { DBIndexCard } from "~/models";
+import { indexCardsByEntryIds } from "../queries/indexCardsByEntryIds";
 
 export const TypeDefUpdateIndexCards = gql`
   extend type Mutation {
@@ -14,7 +15,12 @@ export const TypeDefUpdateIndexCards = gql`
 
 type DBIndexCardCategory = DBIndexCard["categories"][0];
 
-const r: MutationUpdateIndexCardsResolver = async (_parent, args, context) => {
+const r: MutationUpdateIndexCardsResolver = async (
+  parent,
+  args,
+  context,
+  info,
+) => {
   const { request: indexCardUpdates } = args;
   const { loaders, firebaseRemoteConfigClient: config } = context;
 
@@ -28,7 +34,7 @@ const r: MutationUpdateIndexCardsResolver = async (_parent, args, context) => {
 
   const configValues = config.getValues();
 
-  const indexCards = await Promise.all(
+  await Promise.all(
     indexCardUpdates.map(
       async (indexCardUpdate): Promise<IndexCard> => {
         configValues.indexCards = configValues.indexCards.filter(
@@ -40,9 +46,6 @@ const r: MutationUpdateIndexCardsResolver = async (_parent, args, context) => {
         };
 
         configValues.indexCards.push(newIndexCard);
-
-        /* tslint:disable-next-line:no-console */
-        console.log({ newIndexCard });
 
         const entry = await loaders.entries.load(indexCardUpdate.id);
 
@@ -58,7 +61,14 @@ const r: MutationUpdateIndexCardsResolver = async (_parent, args, context) => {
     ),
   );
 
-  return indexCards;
+  await config.setValues(configValues);
+
+  return indexCardsByEntryIds(
+    parent,
+    { ids: indexCardUpdates.map(i => i.id) },
+    context,
+    info,
+  );
 
   /**
    * Return the Index Card Category with the Category's name field populated.

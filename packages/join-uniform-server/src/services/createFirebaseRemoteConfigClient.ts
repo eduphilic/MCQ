@@ -52,9 +52,9 @@ export class FirebaseRemoteConfigClient {
    * Returns the configuration values from the loaded Firebase Remote Config
    * template.
    */
-  getValues() {
+  getValues(): DBFirebaseRemoteConfigTemplate {
     this.assertInitialized(true);
-    return this.decodeTemplateValues(this.template);
+    return JSON.parse(JSON.stringify(this.decodeTemplateValues(this.template)));
   }
 
   /**
