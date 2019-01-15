@@ -1,5 +1,7 @@
 import gql from "graphql-tag";
 
+export * from "./domain-events";
+
 import { typeDefs as inputTypeDefs } from "./inputs";
 import { Mutation, typeDefs as mutationTypeDefs } from "./mutations";
 import { Query, typeDefs as queryTypeDefs } from "./queries";

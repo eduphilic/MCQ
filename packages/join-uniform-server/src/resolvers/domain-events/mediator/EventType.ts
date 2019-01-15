@@ -1,0 +1,7 @@
+import { DBEntry } from "~/models";
+
+export type EventType = {
+  type: "EntryCreated";
+  entry: DBEntry;
+  entryId: string;
+};

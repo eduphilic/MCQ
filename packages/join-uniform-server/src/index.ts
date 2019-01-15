@@ -13,7 +13,7 @@ import {
   createNextJsMiddleware,
   createStorybookMiddleware,
 } from "./middleware";
-import { typeDefs } from "./resolvers";
+import { mediator, typeDefs } from "./resolvers";
 import {
   createCloudinaryService,
   createFirebaseRemoteConfigClient,
@@ -64,6 +64,7 @@ async function bootstrap() {
         firebaseRemoteConfigClient,
         firebaseDatabase,
         cloudinaryService,
+        mediator,
         loaders: createLoaders({
           firebaseRemoteConfigClient,
           firebaseDatabase,
