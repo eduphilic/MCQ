@@ -4,7 +4,7 @@ import {
   IndexCardCategory,
   QueryIndexCardsByEntryIdsResolver,
 } from "~/generated";
-import { DBCategory, DBEntry } from "~/models";
+import { DBIndexCard } from "~/models";
 
 export const TypeDefIndexCardsByEntryIds = gql`
   extend type Query {
@@ -17,46 +17,48 @@ const r: QueryIndexCardsByEntryIdsResolver = async (_parent, args, context) => {
   const { ids } = args;
   const { firebaseRemoteConfigClient: configClient, loaders } = context;
 
-  const categoryIds: string[] = [];
-  const entriesById = (await loaders.entries.loadMany(ids)).reduce(
-    (accumulator, entry, index) => {
-      accumulator[ids[index]] = entry;
-      categoryIds.push(...entry.categories);
-      return accumulator;
+  const dbIndexCards = configClient.getValues().indexCards;
+
+  const indexCards: Promise<IndexCard>[] = ids.map(
+    async (id): Promise<IndexCard> => {
+      // Use existing index card entity or provide defaults.
+      const dbIndexCard = dbIndexCards.find(i => i.id === id) || {
+        id,
+        categories: [],
+        colorBlock: "#e2f0d9",
+        colorCategoryBackground: "#c5e0b4",
+        colorLogoBackground: "#c5e0b4",
+        colorTitle: "#404040",
+      };
+
+      // Ensure the categories array matches the current list of categories on
+      // the Entry entity.
+      const dbEntry = await loaders.entries.load(id);
+      dbIndexCard.categories = dbEntry.categories.map(
+        (categoryId): DBIndexCard["categories"][0] =>
+          dbIndexCard.categories.find(c => c.id === categoryId) || {
+            id: categoryId,
+            visible: false,
+          },
+      );
+
+      const promisedCategories = dbIndexCard.categories.map(
+        async (category): Promise<IndexCardCategory> => ({
+          ...category,
+          title: (await loaders.categories.load(category.id)).name,
+        }),
+      );
+
+      return {
+        ...dbIndexCard,
+        title: `Indian ${dbEntry.name} Recruitment`,
+        entryLogoUrl: dbEntry.logoUrl,
+        categories: await Promise.all(promisedCategories),
+      };
     },
-    // tslint:disable-next-line:no-object-literal-type-assertion
-    {} as Record<string, DBEntry>,
   );
 
-  const categoriesById = (await loaders.categories.loadMany(
-    categoryIds,
-  )).reduce(
-    (accumulator, category, index) => {
-      accumulator[categoryIds[index]] = category;
-      return accumulator;
-    },
-    // tslint:disable-next-line:no-object-literal-type-assertion
-    {} as Record<string, DBCategory>,
-  );
-
-  const indexCards: IndexCard[] = configClient
-    .getValues()
-    .indexCards.filter(indexCard => ids.includes(indexCard.id))
-    .map(
-      (indexCard): IndexCard => ({
-        ...indexCard,
-        title: entriesById[indexCard.id].name,
-        entryLogoUrl: entriesById[indexCard.id].logoUrl,
-        categories: indexCard.categories.map(
-          (category): IndexCardCategory => ({
-            ...category,
-            title: categoriesById[category.id].name,
-          }),
-        ),
-      }),
-    );
-
-  return indexCards;
+  return Promise.all(indexCards);
 };
 
 export { r as indexCardsByEntryIds };
