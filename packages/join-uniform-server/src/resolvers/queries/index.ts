@@ -1,5 +1,9 @@
 import { QueryResolvers } from "~/generated";
 
+import {
+  categoriesByEntryId,
+  TypeDefCategoriesByEntryId,
+} from "./categoriesByEntryId";
 import { categoriesByIds, TypeDefCategoriesByIds } from "./categoriesByIds";
 import { cloudinaryApiKey, TypeDefCloudinaryApiKey } from "./cloudinaryApiKey";
 import {
@@ -8,7 +12,6 @@ import {
 } from "./cloudinaryCloudName";
 import { entries, TypeDefEntries } from "./entries";
 import { entriesByIds, TypeDefEntriesByIds } from "./entriesByIds";
-import { entryCategories, TypeDefEntryCategories } from "./entryCategories";
 import { htmlConfig, TypeDefHtmlConfig } from "./htmlConfig";
 import { indexCards, TypeDefIndexCards } from "./indexCards";
 import {
@@ -20,12 +23,12 @@ import { logoConfig, TypeDefLogoConfig } from "./logoConfig";
 import { TypeDefYoutubeVideos, youtubeVideos } from "./youtubeVideos";
 
 export const typeDefs = [
+  TypeDefCategoriesByEntryId,
   TypeDefCategoriesByIds,
   TypeDefCloudinaryApiKey,
   TypeDefCloudinaryCloudName,
   TypeDefEntries,
   TypeDefEntriesByIds,
-  TypeDefEntryCategories,
   TypeDefHtmlConfig,
   TypeDefIndexCards,
   TypeDefIndexCardsByEntryIds,
@@ -36,12 +39,12 @@ export const typeDefs = [
 ];
 
 export const Query: QueryResolvers = {
+  categoriesByEntryId,
   categoriesByIds,
   cloudinaryApiKey,
   cloudinaryCloudName,
   entries,
   entriesByIds,
-  entryCategories,
   htmlConfig,
   indexCards,
   indexCardsByEntryIds,

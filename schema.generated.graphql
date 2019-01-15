@@ -240,12 +240,12 @@ type Mutation {
 
 type Query {
   _empty: Boolean
+  categoriesByEntryId(id: ID!): [Category!]!
   categoriesByIds(ids: [ID!]!): [Category!]!
   cloudinaryCloudName: String!
   cloudinaryApiKey: String!
   entries: [Entry!]!
   entriesByIds(ids: [ID!]!): [Entry!]!
-  entryCategories(entryId: ID!): [Category!]!
   htmlConfig: HtmlConfig!
   indexCards: [IndexCard!]!
 

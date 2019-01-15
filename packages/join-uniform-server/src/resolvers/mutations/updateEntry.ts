@@ -3,7 +3,7 @@ import { Entry, MutationUpdateEntryResolver } from "~/generated";
 import { DBEntry } from "~/models";
 
 // TODO: Use "data fetcher" here.
-import { entryCategories } from "../queries/entryCategories";
+import { categoriesByEntryId } from "../queries/categoriesByEntryId";
 
 export const TypeDefUpdateEntry = gql`
   extend type Mutation {
@@ -32,7 +32,12 @@ const r: MutationUpdateEntryResolver = async (parent, args, context, info) => {
     ...(entrySnapshot.data() as DBEntry),
     ...entryUpdate,
     id: entryId,
-    categories: await entryCategories(parent, { entryId }, context, info),
+    categories: await categoriesByEntryId(
+      parent,
+      { id: entryId },
+      context,
+      info,
+    ),
   };
 
   return entry;
