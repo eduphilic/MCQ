@@ -10,7 +10,7 @@ export const TypeDefCreateEntry = gql`
 
 const r: MutationCreateEntryResolver = async (_parent, args, context) => {
   const { request } = args;
-  const { firebaseDatabase: database, loaders } = context;
+  const { firebaseDatabase: database, loaders, mediator } = context;
   const batch = database.batch();
 
   const entriesCollectionReference = database.collection("entries");
@@ -23,6 +23,17 @@ const r: MutationCreateEntryResolver = async (_parent, args, context) => {
   };
 
   batch.create(dbNewEntryDocumentReference, dbNewEntry);
+  await mediator.dispatchEvents(
+    [
+      {
+        type: "EntryCreated",
+        entry: dbNewEntry,
+        entryId: dbNewEntryDocumentReference.id,
+      },
+    ],
+    context,
+    batch,
+  );
 
   await batch.commit();
   loaders.entries.prime(dbNewEntryDocumentReference.id, dbNewEntry);

@@ -4,7 +4,7 @@ import {
   IndexCardCategory,
   QueryIndexCardsByEntryIdsResolver,
 } from "~/generated";
-import { DBIndexCard } from "~/models";
+import { DBIndexCard, indexCardDefaults } from "~/models";
 
 export const TypeDefIndexCardsByEntryIds = gql`
   extend type Query {
@@ -23,12 +23,9 @@ const r: QueryIndexCardsByEntryIdsResolver = async (_parent, args, context) => {
     async (id): Promise<IndexCard> => {
       // Use existing index card entity or provide defaults.
       const dbIndexCard = dbIndexCards.find(i => i.id === id) || {
+        ...indexCardDefaults,
         id,
         categories: [],
-        colorBlock: "#e2f0d9",
-        colorCategoryBackground: "#c5e0b4",
-        colorLogoBackground: "#c5e0b4",
-        colorTitle: "#404040",
       };
 
       // Ensure the categories array matches the current list of categories on
