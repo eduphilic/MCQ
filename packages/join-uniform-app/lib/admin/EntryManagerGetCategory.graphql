@@ -1,5 +1,5 @@
 query EntryManagerGetCategory($id: ID!) {
-  category(id: $id) {
+  categoriesByIds(ids: [$id]) {
     ...EntryManagerCategoryParts
   }
 }

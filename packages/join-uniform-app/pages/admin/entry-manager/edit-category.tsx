@@ -82,7 +82,7 @@ export default function PageContainer(props: InitialProps) {
           return <LoadingSpinner />;
         }
 
-        if (!data.category) {
+        if (!data.categoriesByIds) {
           return (
             <ErrorMessagePageContents
               pageTitle={pageTitle}
@@ -92,7 +92,10 @@ export default function PageContainer(props: InitialProps) {
         }
 
         return (
-          <Page category={data.category} updateCategory={updateCategory} />
+          <Page
+            category={data.categoriesByIds[0]}
+            updateCategory={updateCategory}
+          />
         );
       }}
     </Composed>

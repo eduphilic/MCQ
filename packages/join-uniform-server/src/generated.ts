@@ -157,7 +157,7 @@ export interface Query {
   
   _empty: Maybe<boolean>;
   
-  category: Maybe<Category>;
+  categoriesByIds: Category[];
   
   cloudinaryCloudName: string;
   
@@ -172,7 +172,7 @@ export interface Query {
   htmlConfig: HtmlConfig;
   
   indexCards: IndexCard[];
-  
+  /** Return the Index Cards for the specified Entries. */
   indexCardsByEntryIds: IndexCard[];
   
   indexPageConfig: IndexPageConfig;
@@ -360,9 +360,9 @@ export interface CloudinaryMediaWidgetAuthenticationToken {
 // Arguments
 // ====================================================
 
-export interface CategoryQueryArgs {
+export interface CategoriesByIdsQueryArgs {
   
-  id: string;
+  ids: string[];
 }
 export interface EntryQueryArgs {
   
@@ -481,7 +481,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     
     _empty?: Query_EmptyResolver<Maybe<boolean>, TypeParent, Context>;
     
-    category?: QueryCategoryResolver<Maybe<Category>, TypeParent, Context>;
+    categoriesByIds?: QueryCategoriesByIdsResolver<Category[], TypeParent, Context>;
     
     cloudinaryCloudName?: QueryCloudinaryCloudNameResolver<string, TypeParent, Context>;
     
@@ -496,7 +496,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     htmlConfig?: QueryHtmlConfigResolver<HtmlConfig, TypeParent, Context>;
     
     indexCards?: QueryIndexCardsResolver<IndexCard[], TypeParent, Context>;
-    
+    /** Return the Index Cards for the specified Entries. */
     indexCardsByEntryIds?: QueryIndexCardsByEntryIdsResolver<IndexCard[], TypeParent, Context>;
     
     indexPageConfig?: QueryIndexPageConfigResolver<IndexPageConfig, TypeParent, Context>;
@@ -508,10 +508,10 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
 
 
   export type Query_EmptyResolver<R = Maybe<boolean>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
-  export type QueryCategoryResolver<R = Maybe<Category>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryCategoryArgs>;
-  export interface QueryCategoryArgs {
+  export type QueryCategoriesByIdsResolver<R = Category[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryCategoriesByIdsArgs>;
+  export interface QueryCategoriesByIdsArgs {
     
-    id: string;
+    ids: string[];
   }
 
 

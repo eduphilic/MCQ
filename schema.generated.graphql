@@ -240,7 +240,7 @@ type Mutation {
 
 type Query {
   _empty: Boolean
-  category(id: ID!): Category
+  categoriesByIds(ids: [ID!]!): [Category!]!
   cloudinaryCloudName: String!
   cloudinaryApiKey: String!
   entries: [Entry!]!
@@ -248,6 +248,8 @@ type Query {
   entryCategories(entryId: ID!): [Category!]!
   htmlConfig: HtmlConfig!
   indexCards: [IndexCard!]!
+
+  # Return the Index Cards for the specified Entries.
   indexCardsByEntryIds(ids: [ID!]!): [IndexCard!]!
   indexPageConfig: IndexPageConfig!
   logoConfig: LogoConfig!
