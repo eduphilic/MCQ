@@ -173,6 +173,8 @@ export interface Query {
   
   indexCards: IndexCard[];
   
+  indexCardsByEntryIds: IndexCard[];
+  
   indexPageConfig: IndexPageConfig;
   
   logoConfig: LogoConfig;
@@ -370,6 +372,10 @@ export interface EntryCategoriesQueryArgs {
   
   entryId: string;
 }
+export interface IndexCardsByEntryIdsQueryArgs {
+  
+  ids: string[];
+}
 export interface CreateCategoryAndNewEntryMutationArgs {
   
   request: CreateCategoryAndNewEntryRequest;
@@ -491,6 +497,8 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     
     indexCards?: QueryIndexCardsResolver<IndexCard[], TypeParent, Context>;
     
+    indexCardsByEntryIds?: QueryIndexCardsByEntryIdsResolver<IndexCard[], TypeParent, Context>;
+    
     indexPageConfig?: QueryIndexPageConfigResolver<IndexPageConfig, TypeParent, Context>;
     
     logoConfig?: QueryLogoConfigResolver<LogoConfig, TypeParent, Context>;
@@ -526,6 +534,13 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
 
   export type QueryHtmlConfigResolver<R = HtmlConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryIndexCardsResolver<R = IndexCard[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type QueryIndexCardsByEntryIdsResolver<R = IndexCard[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryIndexCardsByEntryIdsArgs>;
+  export interface QueryIndexCardsByEntryIdsArgs {
+    
+    ids: string[];
+  }
+
+
   export type QueryIndexPageConfigResolver<R = IndexPageConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryLogoConfigResolver<R = LogoConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryYoutubeVideosResolver<R = IndexYouTubeVideo[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;  

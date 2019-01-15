@@ -12,6 +12,8 @@ export const TypeDefUpdateIndexCards = gql`
   }
 `;
 
+type DBIndexCardCategory = DBIndexCard["categories"][0];
+
 const r: MutationUpdateIndexCardsResolver = async (_parent, args, context) => {
   const { request: indexCardUpdates } = args;
   const { loaders, firebaseRemoteConfigClient: config } = context;
@@ -48,12 +50,8 @@ const r: MutationUpdateIndexCardsResolver = async (_parent, args, context) => {
           ...newIndexCard,
           title: entry.name,
           entryLogoUrl: entry.logoUrl,
-          categories: newIndexCard.categories.map(
-            (category): IndexCardCategory => ({
-              id: category.id,
-              title: "",
-              visible: category.visible,
-            }),
+          categories: await Promise.all(
+            newIndexCard.categories.map(getIndexCardCategory),
           ),
         };
       },
@@ -61,6 +59,24 @@ const r: MutationUpdateIndexCardsResolver = async (_parent, args, context) => {
   );
 
   return indexCards;
+
+  /**
+   * Return the Index Card Category with the Category's name field populated.
+   *
+   * @param dbIndexCardCategory
+   * One of the Index Card's category entries in the Firebase entity.
+   */
+  async function getIndexCardCategory(
+    dbIndexCardCategory: DBIndexCardCategory,
+  ): Promise<IndexCardCategory> {
+    const dbCategory = await loaders.categories.load(dbIndexCardCategory.id);
+
+    return {
+      id: dbIndexCardCategory.id,
+      title: dbCategory.name,
+      visible: dbIndexCardCategory.visible,
+    };
+  }
 };
 
 export { r as updateIndexCards };

@@ -11,6 +11,10 @@ import { entry, TypeDefEntry } from "./entry";
 import { entryCategories, TypeDefEntryCategories } from "./entryCategories";
 import { htmlConfig, TypeDefHtmlConfig } from "./htmlConfig";
 import { indexCards, TypeDefIndexCards } from "./indexCards";
+import {
+  indexCardsByEntryIds,
+  TypeDefIndexCardsByEntryIds,
+} from "./indexCardsByEntryIds";
 import { indexPageConfig, TypeDefIndexPageConfig } from "./indexPageConfig";
 import { logoConfig, TypeDefLogoConfig } from "./logoConfig";
 import { TypeDefYoutubeVideos, youtubeVideos } from "./youtubeVideos";
@@ -24,6 +28,7 @@ export const typeDefs = [
   TypeDefEntryCategories,
   TypeDefHtmlConfig,
   TypeDefIndexCards,
+  TypeDefIndexCardsByEntryIds,
   TypeDefIndexPageConfig,
   TypeDefLogoConfig,
   TypeDefLogoConfig,
@@ -39,6 +44,7 @@ export const Query: QueryResolvers = {
   entryCategories,
   htmlConfig,
   indexCards,
+  indexCardsByEntryIds,
   indexPageConfig,
   logoConfig,
   youtubeVideos,
