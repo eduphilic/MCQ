@@ -1,7 +1,14 @@
-import { DBEntry } from "~/models";
+import { DBCategory, DBEntry } from "~/models";
 
-export type EventType = {
-  type: "EntryCreated";
-  entry: DBEntry;
-  entryId: string;
-};
+export type EventType =
+  | {
+      type: "EntryCreated";
+      entry: DBEntry;
+      entryId: string;
+    }
+  | {
+      type: "CategoryCreated";
+      category: DBCategory;
+      categoryId: string;
+      entryId: string;
+    };

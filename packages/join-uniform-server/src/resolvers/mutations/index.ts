@@ -1,5 +1,6 @@
 import { MutationResolvers } from "~/generated";
 
+import { createCategory, TypeDefCreateCategory } from "./createCategory";
 import {
   createCategoryAndNewEntry,
   TypeDefCreateCategoryAndNewEntry,
@@ -30,6 +31,7 @@ import { TypeDefUpdateIndexPage, updateIndexPage } from "./updateIndexPage";
 import { TypeDefUpdateLogoUrl, updateLogoUrl } from "./updateLogoUrl";
 
 export const typeDefs = [
+  TypeDefCreateCategory,
   TypeDefCreateCategoryAndNewEntry,
   TypeDefCreateCategoryForExistingEntry,
   TypeDefCreateEntry,
@@ -46,6 +48,7 @@ export const typeDefs = [
 ];
 
 export const Mutation: MutationResolvers = {
+  createCategory,
   createCategoryAndNewEntry,
   createCategoryForExistingEntry,
   createEntry,

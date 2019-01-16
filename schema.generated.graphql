@@ -42,6 +42,13 @@ input CreateCategoryForExistingEntryRequest {
   existingEntryId: String!
 }
 
+input CreateCategoryRequest {
+  name: String!
+  education: String!
+  pricePerPaperRs: Int!
+  entryId: ID!
+}
+
 input CreateEntryRequest {
   name: String!
   explanation: String!
@@ -214,6 +221,7 @@ type LogoConfig {
 
 type Mutation {
   _empty: Boolean
+  createCategory(request: CreateCategoryRequest!): Category!
   createCategoryAndNewEntry(request: CreateCategoryAndNewEntryRequest!): Entry!
 
   # Adds a new Category to an existing Entry.

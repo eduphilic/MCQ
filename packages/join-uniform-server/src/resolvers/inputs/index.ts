@@ -1,6 +1,7 @@
 import { TypeDefCategoryUpdateRequest } from "./CategoryUpdateRequest";
 import { TypeDefCreateCategoryAndNewEntryRequest } from "./CreateCategoryAndNewEntryRequest";
 import { TypeDefCreateCategoryForExistingEntryRequest } from "./CreateCategoryForExistingEntryRequest";
+import { TypeDefCreateCategoryRequest } from "./CreateCategoryRequest";
 import { TypeDefCreateEntryRequest } from "./CreateEntryRequest";
 import { TypeDefEntryUpdateRequest } from "./EntryUpdateRequest";
 import { TypeDefIndexCardCategoryUpdateRequest } from "./IndexCardCategoryUpdateRequest";
@@ -15,6 +16,7 @@ export const typeDefs = [
   TypeDefCreateCategoryAndNewEntryRequest,
   TypeDefCreateCategoryForExistingEntryRequest,
   TypeDefCreateEntryRequest,
+  TypeDefCreateCategoryRequest,
   TypeDefEntryUpdateRequest,
   TypeDefIndexCardCategoryUpdateRequest,
   TypeDefIndexPageAboutImageUpdateRequest,

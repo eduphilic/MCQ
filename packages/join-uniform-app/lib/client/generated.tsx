@@ -5,6 +5,17 @@ import { models } from "@join-uniform/common";
 export type Maybe<T> = T | null;
 
 
+export interface CreateCategoryRequest {
+  
+  name: string;
+  
+  education: string;
+  
+  pricePerPaperRs: number;
+  
+  entryId: string;
+}
+
 export interface CreateCategoryAndNewEntryRequest {
   
   categoryName: string;

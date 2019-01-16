@@ -5,6 +5,17 @@ import { models } from "@join-uniform/common";
 export type Maybe<T> = T | null;
 
 
+export interface CreateCategoryRequest {
+  
+  name: string;
+  
+  education: string;
+  
+  pricePerPaperRs: number;
+  
+  entryId: string;
+}
+
 export interface CreateCategoryAndNewEntryRequest {
   
   categoryName: string;
@@ -324,6 +335,8 @@ export interface Mutation {
   
   _empty: Maybe<boolean>;
   
+  createCategory: Category;
+  
   createCategoryAndNewEntry: Entry;
   /** Adds a new Category to an existing Entry. */
   createCategoryForExistingEntry: Category;
@@ -386,6 +399,10 @@ export interface EntriesByIdsQueryArgs {
 export interface IndexCardsByEntryIdsQueryArgs {
   
   ids: string[];
+}
+export interface CreateCategoryMutationArgs {
+  
+  request: CreateCategoryRequest;
 }
 export interface CreateCategoryAndNewEntryMutationArgs {
   
@@ -747,6 +764,8 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     
     _empty?: Mutation_EmptyResolver<Maybe<boolean>, TypeParent, Context>;
     
+    createCategory?: MutationCreateCategoryResolver<Category, TypeParent, Context>;
+    
     createCategoryAndNewEntry?: MutationCreateCategoryAndNewEntryResolver<Entry, TypeParent, Context>;
     /** Adds a new Category to an existing Entry. */
     createCategoryForExistingEntry?: MutationCreateCategoryForExistingEntryResolver<Category, TypeParent, Context>;
@@ -776,6 +795,13 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
 
 
   export type Mutation_EmptyResolver<R = Maybe<boolean>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type MutationCreateCategoryResolver<R = Category, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationCreateCategoryArgs>;
+  export interface MutationCreateCategoryArgs {
+    
+    request: CreateCategoryRequest;
+  }
+
+
   export type MutationCreateCategoryAndNewEntryResolver<R = Entry, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationCreateCategoryAndNewEntryArgs>;
   export interface MutationCreateCategoryAndNewEntryArgs {
     
