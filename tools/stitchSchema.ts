@@ -18,6 +18,7 @@ const stitchedSchemaOutputPath = path.resolve(
 const GQL_TAG_REGEX = / gql`([^`]*)`/g;
 
 async function main() {
+  const ensureNoChanges = process.argv.includes("--ensure");
   const schemaFilePaths = await getSchemaFilePaths(schemaDirectoryPath);
   const schemaFiles = await Promise.all(
     schemaFilePaths.map(schemaFilePath =>
@@ -44,7 +45,23 @@ async function main() {
 
 ${printSchema(schema, { commentDescriptions: true })}`;
 
+  const previousStitchedSchema = await fsPromises.readFile(
+    stitchedSchemaOutputPath,
+    { encoding: "utf8" },
+  );
+  if (stitchedSchema === previousStitchedSchema) {
+    /* tslint:disable-next-line:no-console */
+    console.log("Schema is unchanged.");
+    return;
+  }
+
+  if (ensureNoChanges && stitchedSchema !== previousStitchedSchema) {
+    throw new Error("An unexpected schema update occurred.");
+  }
+
   await fsPromises.writeFile(stitchedSchemaOutputPath, stitchedSchema, "utf8");
+  /* tslint:disable-next-line:no-console */
+  console.log("Schema stitched successfully.");
 }
 
 async function getSchemaFilePaths(directoryPath: string) {
