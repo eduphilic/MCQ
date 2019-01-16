@@ -16,32 +16,6 @@ export interface CreateCategoryRequest {
   entryId: string;
 }
 
-export interface CreateCategoryAndNewEntryRequest {
-  
-  categoryName: string;
-  
-  categoryEducation: string;
-  
-  pricePerPaper: number;
-  
-  entryLogoUrl: string;
-  
-  entryName: string;
-  
-  entryExplanation: string;
-}
-
-export interface CreateCategoryForExistingEntryRequest {
-  
-  categoryName: string;
-  
-  categoryEducation: string;
-  
-  pricePerPaper: number;
-  
-  existingEntryId: string;
-}
-
 export interface CreateEntryRequest {
   
   name: string;
@@ -337,10 +311,6 @@ export interface Mutation {
   
   createCategory: Category;
   
-  createCategoryAndNewEntry: Entry;
-  /** Adds a new Category to an existing Entry. */
-  createCategoryForExistingEntry: Category;
-  
   createEntry: Entry;
   /** Deletes Categories. It removes both the Category database entry and the Category's id from the corresponding Entry objects in the database. It returns the list of remaining Categories. */
   deleteCategories: Category[];
@@ -403,14 +373,6 @@ export interface IndexCardsByEntryIdsQueryArgs {
 export interface CreateCategoryMutationArgs {
   
   request: CreateCategoryRequest;
-}
-export interface CreateCategoryAndNewEntryMutationArgs {
-  
-  request: CreateCategoryAndNewEntryRequest;
-}
-export interface CreateCategoryForExistingEntryMutationArgs {
-  
-  request: CreateCategoryForExistingEntryRequest;
 }
 export interface CreateEntryMutationArgs {
   
@@ -766,10 +728,6 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     
     createCategory?: MutationCreateCategoryResolver<Category, TypeParent, Context>;
     
-    createCategoryAndNewEntry?: MutationCreateCategoryAndNewEntryResolver<Entry, TypeParent, Context>;
-    /** Adds a new Category to an existing Entry. */
-    createCategoryForExistingEntry?: MutationCreateCategoryForExistingEntryResolver<Category, TypeParent, Context>;
-    
     createEntry?: MutationCreateEntryResolver<Entry, TypeParent, Context>;
     /** Deletes Categories. It removes both the Category database entry and the Category's id from the corresponding Entry objects in the database. It returns the list of remaining Categories. */
     deleteCategories?: MutationDeleteCategoriesResolver<Category[], TypeParent, Context>;
@@ -799,20 +757,6 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   export interface MutationCreateCategoryArgs {
     
     request: CreateCategoryRequest;
-  }
-
-
-  export type MutationCreateCategoryAndNewEntryResolver<R = Entry, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationCreateCategoryAndNewEntryArgs>;
-  export interface MutationCreateCategoryAndNewEntryArgs {
-    
-    request: CreateCategoryAndNewEntryRequest;
-  }
-
-
-  export type MutationCreateCategoryForExistingEntryResolver<R = Category, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationCreateCategoryForExistingEntryArgs>;
-  export interface MutationCreateCategoryForExistingEntryArgs {
-    
-    request: CreateCategoryForExistingEntryRequest;
   }
 
 

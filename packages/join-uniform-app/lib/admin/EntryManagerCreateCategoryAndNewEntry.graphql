@@ -1,7 +1,0 @@
-mutation EntryManagerCreateCategoryAndNewEntry(
-  $request: CreateCategoryAndNewEntryRequest!
-) {
-  createCategoryAndNewEntry(request: $request) {
-    ...EntryManagerEntryParts
-  }
-}

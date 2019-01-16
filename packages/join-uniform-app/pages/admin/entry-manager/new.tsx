@@ -19,20 +19,16 @@ import { FormikHelpers, useFormik } from "formik";
 import Router from "next/router";
 import React, { useState } from "react";
 import { adopt } from "react-adopt";
-import { MutationFn, QueryResult } from "react-apollo";
+import { QueryResult } from "react-apollo";
 import {
-  EntryManagerCreateCategoryAndNewEntryComponent,
-  EntryManagerCreateCategoryAndNewEntryMutation,
-  EntryManagerCreateCategoryAndNewEntryVariables,
-  EntryManagerCreateCategoryForExistingEntryComponent,
-  EntryManagerCreateCategoryForExistingEntryMutation,
-  EntryManagerCreateCategoryForExistingEntryVariables,
+  EntryManagerCreateCategoryComponent,
+  EntryManagerCreateCategoryMutationFn,
+  EntryManagerCreateEntryComponent,
+  EntryManagerCreateEntryMutationFn,
   EntryManagerGetEntriesComponent,
   EntryManagerGetEntriesEntries,
   EntryManagerGetEntriesQuery,
   EntryManagerGetEntriesVariables,
-  // ValidatorCategoryCreationRequestExistingEntry,
-  // ValidatorCategoryCreationRequestNewEntry,
 } from "~/lib/client";
 
 import { AdminLayoutDashboardContainer } from "~/containers";
@@ -59,14 +55,8 @@ type RenderProps = {
     EntryManagerGetEntriesQuery,
     EntryManagerGetEntriesVariables
   >;
-  createCategoryExistingEntry: MutationFn<
-    EntryManagerCreateCategoryForExistingEntryMutation,
-    EntryManagerCreateCategoryForExistingEntryVariables
-  >;
-  createCategoryNewEntry: MutationFn<
-    EntryManagerCreateCategoryAndNewEntryMutation,
-    EntryManagerCreateCategoryAndNewEntryVariables
-  >;
+  createEntry: EntryManagerCreateEntryMutationFn;
+  createCategory: EntryManagerCreateCategoryMutationFn;
 };
 
 type Props = Omit<RenderProps, "getEntriesResult"> & {
@@ -75,10 +65,8 @@ type Props = Omit<RenderProps, "getEntriesResult"> & {
 
 const Composed = adopt<RenderProps, {}>({
   getEntriesResult: <EntryManagerGetEntriesComponent />,
-  createCategoryExistingEntry: (
-    <EntryManagerCreateCategoryForExistingEntryComponent />
-  ),
-  createCategoryNewEntry: <EntryManagerCreateCategoryAndNewEntryComponent />,
+  createEntry: <EntryManagerCreateEntryComponent />,
+  createCategory: <EntryManagerCreateCategoryComponent />,
 });
 
 export default function PageContainer() {
@@ -98,11 +86,7 @@ export default function PageContainer() {
 }
 
 function Page(props: Props) {
-  const {
-    entries,
-    createCategoryExistingEntry,
-    createCategoryNewEntry,
-  } = props;
+  const { entries, createEntry, createCategory } = props;
 
   const [entrySource, setEntrySource] = useState<"existing" | "new">(
     entries.length > 0 ? "existing" : "new",
@@ -275,55 +259,44 @@ function Page(props: Props) {
     values: FormValues,
     helpers: FormikHelpers<FormValues>,
   ) {
-    if (entrySource === "existing") {
-      await handleSubmitUsingExistingEntry(values);
-    }
+    let entryId: string = values.existingEntryId || "";
+
     if (entrySource === "new") {
-      await handleSubmitUsingNewEntry(values);
+      await createEntry({
+        variables: {
+          request: {
+            name: values.entryName,
+            explanation: values.entryExplanation,
+            logoUrl: values.entryLogoUrl!,
+          },
+        },
+        update: (proxy, fetchResult) => {
+          updateStoreEntries(proxy, queryResult => {
+            queryResult.entries.push(fetchResult.data!.createEntry);
+            entryId = fetchResult.data!.createEntry.id;
+          });
+        },
+      });
     }
+
+    await createCategory({
+      variables: {
+        request: {
+          entryId,
+          name: values.categoryName,
+          education: values.categoryEducation,
+          pricePerPaperRs: parseInt(values.pricePerPaper, 10),
+        },
+      },
+      update: (proxy, fetchResult) => {
+        updateStoreEntries(proxy, queryResult => {
+          const entry = queryResult.entries.find(e => e.id === entryId)!;
+          entry.categories.push(fetchResult.data!.createCategory);
+        });
+      },
+    });
+
     helpers.setSubmitting(false);
-
     await Router.replace("/admin/entry-manager");
-  }
-
-  async function handleSubmitUsingExistingEntry(values: FormValues) {
-    const entryId = values.existingEntryId!;
-    await createCategoryExistingEntry({
-      variables: {
-        request: {
-          existingEntryId: entryId,
-          categoryName: values.categoryName,
-          categoryEducation: values.categoryEducation,
-          pricePerPaper: parseInt(values.pricePerPaper, 10),
-        },
-      },
-      update: (proxy, fetchResult) => {
-        updateStoreEntries(proxy, queryResult => {
-          queryResult.entries
-            .find(e => e.id === entryId)!
-            .categories.push(fetchResult.data!.createCategoryForExistingEntry);
-        });
-      },
-    });
-  }
-
-  async function handleSubmitUsingNewEntry(values: FormValues) {
-    await createCategoryNewEntry({
-      variables: {
-        request: {
-          entryName: values.entryName,
-          entryExplanation: values.entryExplanation,
-          entryLogoUrl: values.entryLogoUrl!,
-          categoryName: values.categoryName,
-          categoryEducation: values.categoryEducation,
-          pricePerPaper: parseInt(values.pricePerPaper, 10),
-        },
-      },
-      update: (proxy, fetchResult) => {
-        updateStoreEntries(proxy, queryResult => {
-          queryResult.entries.push(fetchResult.data!.createCategoryAndNewEntry);
-        });
-      },
-    });
   }
 }

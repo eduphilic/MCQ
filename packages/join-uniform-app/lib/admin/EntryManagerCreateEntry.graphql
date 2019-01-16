@@ -1,0 +1,5 @@
+mutation EntryManagerCreateEntry($request: CreateEntryRequest!) {
+  createEntry(request: $request) {
+    ...EntryManagerEntryParts
+  }
+}

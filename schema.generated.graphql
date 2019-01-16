@@ -26,22 +26,6 @@ type CloudinaryMediaWidgetAuthenticationToken {
   signature: String!
 }
 
-input CreateCategoryAndNewEntryRequest {
-  categoryName: String!
-  categoryEducation: String!
-  pricePerPaper: Int!
-  entryLogoUrl: String!
-  entryName: String!
-  entryExplanation: String!
-}
-
-input CreateCategoryForExistingEntryRequest {
-  categoryName: String!
-  categoryEducation: String!
-  pricePerPaper: Int!
-  existingEntryId: String!
-}
-
 input CreateCategoryRequest {
   name: String!
   education: String!
@@ -222,10 +206,6 @@ type LogoConfig {
 type Mutation {
   _empty: Boolean
   createCategory(request: CreateCategoryRequest!): Category!
-  createCategoryAndNewEntry(request: CreateCategoryAndNewEntryRequest!): Entry!
-
-  # Adds a new Category to an existing Entry.
-  createCategoryForExistingEntry(request: CreateCategoryForExistingEntryRequest!): Category!
   createEntry(request: CreateEntryRequest!): Entry!
 
   # Deletes Categories. It removes both the Category database entry and the

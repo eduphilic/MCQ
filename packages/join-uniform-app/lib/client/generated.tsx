@@ -16,32 +16,6 @@ export interface CreateCategoryRequest {
   entryId: string;
 }
 
-export interface CreateCategoryAndNewEntryRequest {
-  
-  categoryName: string;
-  
-  categoryEducation: string;
-  
-  pricePerPaper: number;
-  
-  entryLogoUrl: string;
-  
-  entryName: string;
-  
-  entryExplanation: string;
-}
-
-export interface CreateCategoryForExistingEntryRequest {
-  
-  categoryName: string;
-  
-  categoryEducation: string;
-  
-  pricePerPaper: number;
-  
-  existingEntryId: string;
-}
-
 export interface CreateEntryRequest {
   
   name: string;
@@ -177,29 +151,29 @@ export type Json = any;
     url: string;
   } 
 
-  export type EntryManagerCreateCategoryAndNewEntryVariables = {
-    request: CreateCategoryAndNewEntryRequest;
+  export type EntryManagerCreateCategoryVariables = {
+    request: CreateCategoryRequest;
   }
 
-  export type EntryManagerCreateCategoryAndNewEntryMutation = {
+  export type EntryManagerCreateCategoryMutation = {
     __typename?: "Mutation";
     
-    createCategoryAndNewEntry: EntryManagerCreateCategoryAndNewEntryCreateCategoryAndNewEntry;
+    createCategory: EntryManagerCreateCategoryCreateCategory;
   }
 
-  export type EntryManagerCreateCategoryAndNewEntryCreateCategoryAndNewEntry = EntryManagerEntryPartsFragment
+  export type EntryManagerCreateCategoryCreateCategory = EntryManagerCategoryPartsFragment
 
-  export type EntryManagerCreateCategoryForExistingEntryVariables = {
-    request: CreateCategoryForExistingEntryRequest;
+  export type EntryManagerCreateEntryVariables = {
+    request: CreateEntryRequest;
   }
 
-  export type EntryManagerCreateCategoryForExistingEntryMutation = {
+  export type EntryManagerCreateEntryMutation = {
     __typename?: "Mutation";
     
-    createCategoryForExistingEntry: EntryManagerCreateCategoryForExistingEntryCreateCategoryForExistingEntry;
+    createEntry: EntryManagerCreateEntryCreateEntry;
   }
 
-  export type EntryManagerCreateCategoryForExistingEntryCreateCategoryForExistingEntry = EntryManagerCategoryPartsFragment
+  export type EntryManagerCreateEntryCreateEntry = EntryManagerEntryPartsFragment
 
   export type EntryManagerDeleteCategoriesVariables = {
     categoryIds: string[];
@@ -721,50 +695,9 @@ import gql from 'graphql-tag';
             operationOptions
         );
     };
-    export const EntryManagerCreateCategoryAndNewEntryDocument = gql`
-    mutation EntryManagerCreateCategoryAndNewEntry($request: CreateCategoryAndNewEntryRequest!) {
-  createCategoryAndNewEntry(request: $request) {
-    ...EntryManagerEntryParts
-  }
-}
-    
-      ${EntryManagerEntryPartsFragmentDoc}
-    
-  `;
-     export class EntryManagerCreateCategoryAndNewEntryComponent extends React.Component<Partial<ReactApollo.MutationProps<EntryManagerCreateCategoryAndNewEntryMutation, EntryManagerCreateCategoryAndNewEntryVariables>>> {
-        render(){
-            return (
-                <ReactApollo.Mutation<EntryManagerCreateCategoryAndNewEntryMutation, EntryManagerCreateCategoryAndNewEntryVariables>
-                mutation={ EntryManagerCreateCategoryAndNewEntryDocument }
-                {...(this as any)['props'] as any}
-                />
-            );
-        }
-    }
-    export type EntryManagerCreateCategoryAndNewEntryProps<TChildProps = any> = 
-            Partial<
-                ReactApollo.MutateProps<
-                                        EntryManagerCreateCategoryAndNewEntryMutation, 
-                                        EntryManagerCreateCategoryAndNewEntryVariables
-                                        >
-                >
-         & TChildProps;
-    export type EntryManagerCreateCategoryAndNewEntryMutationFn = ReactApollo.MutationFn<EntryManagerCreateCategoryAndNewEntryMutation, EntryManagerCreateCategoryAndNewEntryVariables>;
-    export function EntryManagerCreateCategoryAndNewEntryHOC<TProps, TChildProps = any>(operationOptions: 
-            ReactApollo.OperationOption<
-                TProps, 
-                EntryManagerCreateCategoryAndNewEntryMutation,
-                EntryManagerCreateCategoryAndNewEntryVariables,
-                EntryManagerCreateCategoryAndNewEntryProps<TChildProps>
-            > | undefined){
-        return ReactApollo.graphql<TProps, EntryManagerCreateCategoryAndNewEntryMutation, EntryManagerCreateCategoryAndNewEntryVariables, EntryManagerCreateCategoryAndNewEntryProps<TChildProps>>(
-            EntryManagerCreateCategoryAndNewEntryDocument,
-            operationOptions
-        );
-    };
-    export const EntryManagerCreateCategoryForExistingEntryDocument = gql`
-    mutation EntryManagerCreateCategoryForExistingEntry($request: CreateCategoryForExistingEntryRequest!) {
-  createCategoryForExistingEntry(request: $request) {
+    export const EntryManagerCreateCategoryDocument = gql`
+    mutation EntryManagerCreateCategory($request: CreateCategoryRequest!) {
+  createCategory(request: $request) {
     ...EntryManagerCategoryParts
   }
 }
@@ -772,34 +705,75 @@ import gql from 'graphql-tag';
       ${EntryManagerCategoryPartsFragmentDoc}
     
   `;
-     export class EntryManagerCreateCategoryForExistingEntryComponent extends React.Component<Partial<ReactApollo.MutationProps<EntryManagerCreateCategoryForExistingEntryMutation, EntryManagerCreateCategoryForExistingEntryVariables>>> {
+     export class EntryManagerCreateCategoryComponent extends React.Component<Partial<ReactApollo.MutationProps<EntryManagerCreateCategoryMutation, EntryManagerCreateCategoryVariables>>> {
         render(){
             return (
-                <ReactApollo.Mutation<EntryManagerCreateCategoryForExistingEntryMutation, EntryManagerCreateCategoryForExistingEntryVariables>
-                mutation={ EntryManagerCreateCategoryForExistingEntryDocument }
+                <ReactApollo.Mutation<EntryManagerCreateCategoryMutation, EntryManagerCreateCategoryVariables>
+                mutation={ EntryManagerCreateCategoryDocument }
                 {...(this as any)['props'] as any}
                 />
             );
         }
     }
-    export type EntryManagerCreateCategoryForExistingEntryProps<TChildProps = any> = 
+    export type EntryManagerCreateCategoryProps<TChildProps = any> = 
             Partial<
                 ReactApollo.MutateProps<
-                                        EntryManagerCreateCategoryForExistingEntryMutation, 
-                                        EntryManagerCreateCategoryForExistingEntryVariables
+                                        EntryManagerCreateCategoryMutation, 
+                                        EntryManagerCreateCategoryVariables
                                         >
                 >
          & TChildProps;
-    export type EntryManagerCreateCategoryForExistingEntryMutationFn = ReactApollo.MutationFn<EntryManagerCreateCategoryForExistingEntryMutation, EntryManagerCreateCategoryForExistingEntryVariables>;
-    export function EntryManagerCreateCategoryForExistingEntryHOC<TProps, TChildProps = any>(operationOptions: 
+    export type EntryManagerCreateCategoryMutationFn = ReactApollo.MutationFn<EntryManagerCreateCategoryMutation, EntryManagerCreateCategoryVariables>;
+    export function EntryManagerCreateCategoryHOC<TProps, TChildProps = any>(operationOptions: 
             ReactApollo.OperationOption<
                 TProps, 
-                EntryManagerCreateCategoryForExistingEntryMutation,
-                EntryManagerCreateCategoryForExistingEntryVariables,
-                EntryManagerCreateCategoryForExistingEntryProps<TChildProps>
+                EntryManagerCreateCategoryMutation,
+                EntryManagerCreateCategoryVariables,
+                EntryManagerCreateCategoryProps<TChildProps>
             > | undefined){
-        return ReactApollo.graphql<TProps, EntryManagerCreateCategoryForExistingEntryMutation, EntryManagerCreateCategoryForExistingEntryVariables, EntryManagerCreateCategoryForExistingEntryProps<TChildProps>>(
-            EntryManagerCreateCategoryForExistingEntryDocument,
+        return ReactApollo.graphql<TProps, EntryManagerCreateCategoryMutation, EntryManagerCreateCategoryVariables, EntryManagerCreateCategoryProps<TChildProps>>(
+            EntryManagerCreateCategoryDocument,
+            operationOptions
+        );
+    };
+    export const EntryManagerCreateEntryDocument = gql`
+    mutation EntryManagerCreateEntry($request: CreateEntryRequest!) {
+  createEntry(request: $request) {
+    ...EntryManagerEntryParts
+  }
+}
+    
+      ${EntryManagerEntryPartsFragmentDoc}
+    
+  `;
+     export class EntryManagerCreateEntryComponent extends React.Component<Partial<ReactApollo.MutationProps<EntryManagerCreateEntryMutation, EntryManagerCreateEntryVariables>>> {
+        render(){
+            return (
+                <ReactApollo.Mutation<EntryManagerCreateEntryMutation, EntryManagerCreateEntryVariables>
+                mutation={ EntryManagerCreateEntryDocument }
+                {...(this as any)['props'] as any}
+                />
+            );
+        }
+    }
+    export type EntryManagerCreateEntryProps<TChildProps = any> = 
+            Partial<
+                ReactApollo.MutateProps<
+                                        EntryManagerCreateEntryMutation, 
+                                        EntryManagerCreateEntryVariables
+                                        >
+                >
+         & TChildProps;
+    export type EntryManagerCreateEntryMutationFn = ReactApollo.MutationFn<EntryManagerCreateEntryMutation, EntryManagerCreateEntryVariables>;
+    export function EntryManagerCreateEntryHOC<TProps, TChildProps = any>(operationOptions: 
+            ReactApollo.OperationOption<
+                TProps, 
+                EntryManagerCreateEntryMutation,
+                EntryManagerCreateEntryVariables,
+                EntryManagerCreateEntryProps<TChildProps>
+            > | undefined){
+        return ReactApollo.graphql<TProps, EntryManagerCreateEntryMutation, EntryManagerCreateEntryVariables, EntryManagerCreateEntryProps<TChildProps>>(
+            EntryManagerCreateEntryDocument,
             operationOptions
         );
     };
