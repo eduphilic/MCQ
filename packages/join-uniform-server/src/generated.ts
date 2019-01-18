@@ -150,6 +150,8 @@ export type Json = any;
 export interface Query {
   
   _empty: Maybe<boolean>;
+  /** Returns all Categories. */
+  categories: Category[];
   
   categoriesByEntryId: Category[];
   
@@ -474,6 +476,8 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   export interface QueryResolvers<Context = ApolloContext, TypeParent = {}> {
     
     _empty?: Query_EmptyResolver<Maybe<boolean>, TypeParent, Context>;
+    /** Returns all Categories. */
+    categories?: QueryCategoriesResolver<Category[], TypeParent, Context>;
     
     categoriesByEntryId?: QueryCategoriesByEntryIdResolver<Category[], TypeParent, Context>;
     
@@ -502,6 +506,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
 
 
   export type Query_EmptyResolver<R = Maybe<boolean>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
+  export type QueryCategoriesResolver<R = Category[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context>;
   export type QueryCategoriesByEntryIdResolver<R = Category[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, QueryCategoriesByEntryIdArgs>;
   export interface QueryCategoriesByEntryIdArgs {
     

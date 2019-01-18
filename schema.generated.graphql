@@ -235,6 +235,9 @@ type Mutation {
 
 type Query {
   _empty: Boolean
+
+  # Returns all Categories.
+  categories: [Category!]!
   categoriesByEntryId(id: ID!): [Category!]!
   categoriesByIds(ids: [ID!]!): [Category!]!
   cloudinaryCloudName: String!

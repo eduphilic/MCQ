@@ -1,5 +1,6 @@
 import { QueryResolvers } from "~/generated";
 
+import { categories, TypeDefCategories } from "./categories";
 import {
   categoriesByEntryId,
   TypeDefCategoriesByEntryId,
@@ -23,6 +24,7 @@ import { logoConfig, TypeDefLogoConfig } from "./logoConfig";
 import { TypeDefYoutubeVideos, youtubeVideos } from "./youtubeVideos";
 
 export const typeDefs = [
+  TypeDefCategories,
   TypeDefCategoriesByEntryId,
   TypeDefCategoriesByIds,
   TypeDefCloudinaryApiKey,
@@ -39,6 +41,7 @@ export const typeDefs = [
 ];
 
 export const Query: QueryResolvers = {
+  categories,
   categoriesByEntryId,
   categoriesByIds,
   cloudinaryApiKey,
