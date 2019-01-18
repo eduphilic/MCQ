@@ -2,12 +2,12 @@ import { ApolloContext } from "~/ApolloContext";
 import { EventHandler } from "./EventHandler";
 import { EventType } from "./EventType";
 
+import { addCategoryToIndexCardOnCategoryCreation } from "../addCategoryToIndexCardOnCategoryCreation";
 import { createIndexCardWhenEntryCreated } from "../createIndexCardWhenEntryCreated";
-import { updateIndexCardOnCategoryListChange } from "../updateIndexCardOnCategoryListChange";
 
 const subscribedHandlers: Record<EventType["type"], EventHandler<any>[]> = {
   EntryCreated: [createIndexCardWhenEntryCreated],
-  CategoryCreated: [updateIndexCardOnCategoryListChange],
+  CategoryCreated: [addCategoryToIndexCardOnCategoryCreation],
 };
 
 export const mediator = {
