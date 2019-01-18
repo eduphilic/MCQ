@@ -1,9 +1,7 @@
 import gql from "graphql-tag";
-import {
-  Category,
-  MutationSetCategoryActivationStatusesResolver as Resolver,
-} from "~/generated";
+import { MutationSetCategoryActivationStatusesResolver } from "~/generated";
 import { DBCategory } from "~/models";
+import { categoriesByIds } from "../queries/categoriesByIds";
 
 export const TypeDefSetCategoryActivationStatuses = gql`
   extend type Mutation {
@@ -17,48 +15,46 @@ export const TypeDefSetCategoryActivationStatuses = gql`
   }
 `;
 
-const r: Resolver = async (_parent, args, context) => {
+const r: MutationSetCategoryActivationStatusesResolver = async (
+  parent,
+  args,
+  context,
+  info,
+) => {
   const { categoryIds, activatedStatuses } = args;
-  const { firebaseDatabase: database } = context;
+  const { firebaseDatabase: database, loaders } = context;
 
+  if (categoryIds.length === 0) return [];
   if (categoryIds.length !== activatedStatuses.length) {
     throw new Error(
       "Expected the same number of Category ids and activation statuses.",
     );
   }
 
-  const categoryQueryDocumentSnapshots = (await database
-    .collection("categories")
-    .get()).docs.filter(d => categoryIds.includes(d.id));
-
-  if (categoryQueryDocumentSnapshots.length === 0) return [];
-
+  const categories = await loaders.categories.loadMany(categoryIds);
   const batch = database.batch();
 
-  const categories: Category[] = categoryQueryDocumentSnapshots.map(
-    (c): Category => {
-      const dbCategory = c.data() as DBCategory;
+  categories.forEach((category, index) => {
+    const categoryId = categoryIds[index];
+    const categoryUpdate: Pick<DBCategory, "activated"> = {
+      activated: activatedStatuses[index],
+    };
 
-      return {
-        ...dbCategory,
-        id: c.id,
-      };
-    },
-  );
+    batch.update(
+      database.collection("categories").doc(categoryId),
+      categoryUpdate,
+    );
 
-  categoryIds.forEach((id, index) => {
-    const categoryIndex = categories.findIndex(c => c.id === id);
-    const activated = activatedStatuses[index];
-
-    categories[categoryIndex].activated = activated;
-    batch.update(database.collection("categories").doc(id), {
-      activated,
+    loaders.categories.clear(categoryId);
+    loaders.categories.prime(categoryId, {
+      ...category,
+      ...categoryUpdate,
     });
   });
 
   await batch.commit();
 
-  return categories;
+  return categoriesByIds(parent, { ids: categoryIds }, context, info);
 };
 
 export { r as setCategoryActivationStatuses };
