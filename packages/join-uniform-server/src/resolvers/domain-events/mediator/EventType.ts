@@ -11,4 +11,8 @@ export type EventType =
       category: DBCategory;
       categoryId: string;
       entryId: string;
+    }
+  | {
+      type: "CategoriesRemoved";
+      categoryIds: string[];
     };

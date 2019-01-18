@@ -4,10 +4,12 @@ import { EventType } from "./EventType";
 
 import { addCategoryToIndexCardOnCategoryCreation } from "../addCategoryToIndexCardOnCategoryCreation";
 import { createIndexCardWhenEntryCreated } from "../createIndexCardWhenEntryCreated";
+import { removeCategoriesFromIndexCardsOnCategoriesRemoval } from "../removeCategoriesFromIndexCardsOnCategoriesRemoval";
 
 const subscribedHandlers: Record<EventType["type"], EventHandler<any>[]> = {
   EntryCreated: [createIndexCardWhenEntryCreated],
   CategoryCreated: [addCategoryToIndexCardOnCategoryCreation],
+  CategoriesRemoved: [removeCategoriesFromIndexCardsOnCategoriesRemoval],
 };
 
 export const mediator = {
