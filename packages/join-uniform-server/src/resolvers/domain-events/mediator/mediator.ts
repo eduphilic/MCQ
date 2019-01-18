@@ -6,9 +6,11 @@ import { addCategoryToIndexCardOnCategoryCreation } from "../addCategoryToIndexC
 import { createIndexCardWhenEntryCreated } from "../createIndexCardWhenEntryCreated";
 import { removeCategoriesFromEntriesOnCategoriesRemoval } from "../removeCategoriesFromEntriesOnCategoriesRemoval";
 import { removeCategoriesFromIndexCardsOnCategoriesRemoval } from "../removeCategoriesFromIndexCardsOnCategoriesRemoval";
+import { removeIndexCardsOnEntriesRemoval } from "../removeIndexCardsOnEntriesRemoval";
 
 const subscribedHandlers: Record<EventType["type"], EventHandler<any>[]> = {
   EntryCreated: [createIndexCardWhenEntryCreated],
+  EntriesRemoved: [removeIndexCardsOnEntriesRemoval],
   CategoryCreated: [addCategoryToIndexCardOnCategoryCreation],
   CategoriesRemoved: [
     removeCategoriesFromEntriesOnCategoriesRemoval,

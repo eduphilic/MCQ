@@ -212,7 +212,11 @@ type Mutation {
   # Category's id from the corresponding Entry objects in the database. It
   # returns the list of remaining Categories.
   deleteCategories(categoryIds: [ID!]!): [Category!]!
-  deleteEntries(entryIds: [ID!]!): Boolean
+
+  # Deletes the specified Entries. They most not have any Categories
+  # associated with them.
+  # Returns the remaining Entries.
+  deleteEntries(entryIds: [ID!]!): [Entry!]!
 
   # Generates the authentication parameters required for creating a session for
   # use with the Cloudinary Media Library widget.

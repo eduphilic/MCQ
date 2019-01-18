@@ -194,8 +194,10 @@ export type Json = any;
   export type EntryManagerDeleteEntriesMutation = {
     __typename?: "Mutation";
     
-    deleteEntries: Maybe<boolean>;
+    deleteEntries: EntryManagerDeleteEntriesDeleteEntries[];
   }
+
+  export type EntryManagerDeleteEntriesDeleteEntries = EntryManagerEntryPartsFragment
 
   export type EntryManagerGetCategoryVariables = {
     id: string;
@@ -820,10 +822,12 @@ import gql from 'graphql-tag';
     };
     export const EntryManagerDeleteEntriesDocument = gql`
     mutation EntryManagerDeleteEntries($entryIds: [ID!]!) {
-  deleteEntries(entryIds: $entryIds)
+  deleteEntries(entryIds: $entryIds) {
+    ...EntryManagerEntryParts
+  }
 }
     
-      
+      ${EntryManagerEntryPartsFragmentDoc}
     
   `;
      export class EntryManagerDeleteEntriesComponent extends React.Component<Partial<ReactApollo.MutationProps<EntryManagerDeleteEntriesMutation, EntryManagerDeleteEntriesVariables>>> {

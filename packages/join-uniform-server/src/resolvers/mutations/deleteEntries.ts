@@ -1,38 +1,54 @@
 import gql from "graphql-tag";
-import { Entry, MutationDeleteEntriesResolver } from "~/generated";
+import { MutationDeleteEntriesResolver } from "~/generated";
+import { entries } from "../queries/entries";
 
 export const TypeDefDeleteEntries = gql`
   extend type Mutation {
-    deleteEntries(entryIds: [ID!]!): Boolean
+    # Deletes the specified Entries. They most not have any Categories
+    # associated with them.
+    # Returns the remaining Entries.
+    deleteEntries(entryIds: [ID!]!): [Entry!]!
   }
 `;
 
-export const deleteEntries: MutationDeleteEntriesResolver = async (
-  _parent,
+const r: MutationDeleteEntriesResolver = async (
+  parent,
   args,
   context,
+  info,
 ) => {
   const { entryIds } = args;
-  const { firebaseDatabase: database } = context;
+  const { firebaseDatabase: database, loaders, mediator } = context;
 
   const entriesCollectionRef = database.collection("entries");
-  const entrySnapshots = await Promise.all(
-    entryIds.map(entryId => entriesCollectionRef.doc(entryId).get()),
-  );
+  const dbEntries = await loaders.entries.loadMany(entryIds);
 
-  const deletionBatch = database.batch();
-  entrySnapshots.forEach(entrySnapshot => {
-    if (!entrySnapshot.exists) {
-      throw new Error(`Entry ${entrySnapshot.id} does not exist.`);
-    }
-    const entry = entrySnapshot.data() as Omit<Entry, "id">;
+  const batch = database.batch();
+
+  dbEntries.forEach((entry, index) => {
+    const entryId = entryIds[index];
+
     if (entry.categories.length > 0) {
-      throw new Error(`Entry ${entrySnapshot.id} still has categories.`);
+      throw new Error(`Entry ${entryId} still has categories.`);
     }
-    deletionBatch.delete(entrySnapshot.ref);
+
+    batch.delete(entriesCollectionRef.doc(entryId));
+    loaders.entries.clear(entryId);
   });
 
-  await deletionBatch.commit();
+  await mediator.dispatchEvents(
+    [
+      {
+        type: "EntriesRemoved",
+        entryIds,
+      },
+    ],
+    context,
+    batch,
+  );
+  await batch.commit();
 
-  return true;
+  return entries(parent, {}, context, info);
 };
+
+export { r as deleteEntries };

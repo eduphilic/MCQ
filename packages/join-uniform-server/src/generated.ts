@@ -316,8 +316,8 @@ export interface Mutation {
   createEntry: Entry;
   /** Deletes Categories. It removes both the Category database entry and the Category's id from the corresponding Entry objects in the database. It returns the list of remaining Categories. */
   deleteCategories: Category[];
-  
-  deleteEntries: Maybe<boolean>;
+  /** Deletes the specified Entries. They most not have any Categories associated with them. Returns the remaining Entries. */
+  deleteEntries: Entry[];
   /** Generates the authentication parameters required for creating a session for use with the Cloudinary Media Library widget. */
   generateCloudinaryMediaLibraryAuthenticationToken: CloudinaryMediaWidgetAuthenticationToken;
   /** Signs the parameters passed by the Cloudinary Upload Widget. See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
@@ -736,8 +736,8 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     createEntry?: MutationCreateEntryResolver<Entry, TypeParent, Context>;
     /** Deletes Categories. It removes both the Category database entry and the Category's id from the corresponding Entry objects in the database. It returns the list of remaining Categories. */
     deleteCategories?: MutationDeleteCategoriesResolver<Category[], TypeParent, Context>;
-    
-    deleteEntries?: MutationDeleteEntriesResolver<Maybe<boolean>, TypeParent, Context>;
+    /** Deletes the specified Entries. They most not have any Categories associated with them. Returns the remaining Entries. */
+    deleteEntries?: MutationDeleteEntriesResolver<Entry[], TypeParent, Context>;
     /** Generates the authentication parameters required for creating a session for use with the Cloudinary Media Library widget. */
     generateCloudinaryMediaLibraryAuthenticationToken?: MutationGenerateCloudinaryMediaLibraryAuthenticationTokenResolver<CloudinaryMediaWidgetAuthenticationToken, TypeParent, Context>;
     /** Signs the parameters passed by the Cloudinary Upload Widget. See: https://cloudinary.com/documentation/upload_widget#signed_uploads */
@@ -779,7 +779,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   }
 
 
-  export type MutationDeleteEntriesResolver<R = Maybe<boolean>, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationDeleteEntriesArgs>;
+  export type MutationDeleteEntriesResolver<R = Entry[], Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationDeleteEntriesArgs>;
   export interface MutationDeleteEntriesArgs {
     
     entryIds: string[];

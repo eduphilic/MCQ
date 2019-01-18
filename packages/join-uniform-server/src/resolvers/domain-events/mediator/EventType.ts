@@ -7,6 +7,10 @@ export type EventType =
       entryId: string;
     }
   | {
+      type: "EntriesRemoved";
+      entryIds: string[];
+    }
+  | {
       type: "CategoryCreated";
       category: DBCategory;
       categoryId: string;
