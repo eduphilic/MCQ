@@ -1,6 +1,7 @@
 import gql from "graphql-tag";
-import { Category, MutationUpdateCategoryResolver } from "~/generated";
+import { MutationUpdateCategoryResolver } from "~/generated";
 import { DBCategory } from "~/models";
+import { categoriesByIds } from "../queries/categoriesByIds";
 
 export const TypeDefUpdateCategory = gql`
   extend type Mutation {
@@ -8,32 +9,35 @@ export const TypeDefUpdateCategory = gql`
   }
 `;
 
-const r: MutationUpdateCategoryResolver = async (_parent, args, context) => {
+const r: MutationUpdateCategoryResolver = async (
+  parent,
+  args,
+  context,
+  info,
+) => {
   const { categoryId, update } = args;
-  const { firebaseDatabase: database } = context;
+  const { firebaseDatabase: database, loaders } = context;
 
-  const categoryRef = database.collection("categories").doc(categoryId);
-  const categorySnapshot = await categoryRef.get();
-
-  if (!categorySnapshot.exists) {
-    throw new Error("Specified Category does not exist.");
-  }
-
+  const category = await loaders.categories.load(categoryId);
   const categoryUpdate: Omit<DBCategory, "activated"> = {
     name: update.name,
     education: update.education,
     pricePerPaperRs: update.pricePerPaperRs,
   };
 
-  await categoryRef.update(categoryUpdate);
+  await database
+    .collection("categories")
+    .doc(categoryId)
+    .update(categoryUpdate);
 
-  const category: Category = {
-    ...(categorySnapshot.data() as DBCategory),
+  loaders.categories.clear(categoryId);
+  loaders.categories.prime(categoryId, {
+    ...category,
     ...categoryUpdate,
-    id: categorySnapshot.id,
-  };
+  });
 
-  return category;
+  const categories = await categoriesByIds(parent, { ids: [categoryId] }, context, info); // prettier-ignore
+  return categories[0];
 };
 
 export { r as updateCategory };
