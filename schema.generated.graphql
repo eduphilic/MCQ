@@ -83,11 +83,6 @@ type IndexCardCategory {
   visible: Boolean!
 }
 
-input IndexCardCategoryUpdateRequest {
-  categoryId: ID!
-  visible: Boolean!
-}
-
 # Image and supporting text in index about section.
 type IndexPageAboutImage {
   id: ID!

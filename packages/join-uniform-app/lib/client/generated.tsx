@@ -103,13 +103,6 @@ export interface UpdateIndexPageAboutImageRequest {
   text: models.LocalizedString;
 }
 
-export interface IndexCardCategoryUpdateRequest {
-  
-  categoryId: string;
-  
-  visible: boolean;
-}
-
 /** Represents a localized string. The Hindi field is optional. Fields: - en: String! - hi: String */
 export type LocalizedString = models.LocalizedString;
 
