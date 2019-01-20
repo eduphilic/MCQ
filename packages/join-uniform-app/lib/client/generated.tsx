@@ -110,21 +110,6 @@ export interface IndexCardCategoryUpdateRequest {
   visible: boolean;
 }
 
-export interface IndexPageIndexCardUpdateRequest {
-  
-  entryId: string;
-  
-  colorBlock: string;
-  
-  colorCategoryBackground: string;
-  
-  colorLogoBackground: string;
-  
-  colorTitle: string;
-  
-  categories: IndexCardCategoryUpdateRequest[];
-}
-
 /** Represents a localized string. The Hindi field is optional. Fields: - en: String! - hi: String */
 export type LocalizedString = models.LocalizedString;
 

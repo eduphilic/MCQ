@@ -1,7 +1,6 @@
 import { TypeDefCreateCategoryRequest } from "./CreateCategoryRequest";
 import { TypeDefCreateEntryRequest } from "./CreateEntryRequest";
 import { TypeDefIndexCardCategoryUpdateRequest } from "./IndexCardCategoryUpdateRequest";
-import { TypeDefIndexPageIndexCardUpdateRequest } from "./IndexPageIndexCardUpdateRequest";
 import { TypeDefUpdateCategoryRequest } from "./UpdateCategoryRequest";
 import { TypeDefUpdateEntryRequest } from "./UpdateEntryRequest";
 import { TypeDefUpdateIndexCardsCategoriesRequest } from "./UpdateIndexCardsCategoriesRequest";
@@ -12,7 +11,6 @@ export const typeDefs = [
   TypeDefCreateEntryRequest,
   TypeDefCreateCategoryRequest,
   TypeDefIndexCardCategoryUpdateRequest,
-  TypeDefIndexPageIndexCardUpdateRequest,
   TypeDefUpdateCategoryRequest,
   TypeDefUpdateEntryRequest,
   TypeDefUpdateIndexCardsCategoriesRequest,
