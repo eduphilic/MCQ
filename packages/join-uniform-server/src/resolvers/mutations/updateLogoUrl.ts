@@ -1,7 +1,5 @@
 import gql from "graphql-tag";
 import { MutationUpdateLogoUrlResolver } from "~/generated";
-
-// TODO: Use "data loader".
 import { logoConfig } from "../queries/logoConfig";
 
 export const TypeDefUpdateLogoUrl = gql`
