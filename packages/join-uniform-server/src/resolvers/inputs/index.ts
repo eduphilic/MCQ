@@ -3,11 +3,10 @@ import { TypeDefCreateCategoryRequest } from "./CreateCategoryRequest";
 import { TypeDefCreateEntryRequest } from "./CreateEntryRequest";
 import { TypeDefEntryUpdateRequest } from "./EntryUpdateRequest";
 import { TypeDefIndexCardCategoryUpdateRequest } from "./IndexCardCategoryUpdateRequest";
-import { TypeDefIndexPageAboutImageUpdateRequest } from "./IndexPageAboutImageUpdateRequest";
 import { TypeDefIndexPageIndexCardUpdateRequest } from "./IndexPageIndexCardUpdateRequest";
-import { TypeDefIndexPageUpdateRequest } from "./IndexPageUpdateRequest";
 import { TypeDefUpdateIndexCardsCategoriesRequest } from "./UpdateIndexCardsCategoriesRequest";
 import { TypeDefUpdateIndexCardsRequest } from "./UpdateIndexCardsRequest";
+import { TypeDefUpdateIndexPageRequest } from "./UpdateIndexPageRequest";
 
 export const typeDefs = [
   TypeDefCategoryUpdateRequest,
@@ -15,9 +14,8 @@ export const typeDefs = [
   TypeDefCreateCategoryRequest,
   TypeDefEntryUpdateRequest,
   TypeDefIndexCardCategoryUpdateRequest,
-  TypeDefIndexPageAboutImageUpdateRequest,
   TypeDefIndexPageIndexCardUpdateRequest,
-  TypeDefIndexPageUpdateRequest,
   TypeDefUpdateIndexCardsCategoriesRequest,
   TypeDefUpdateIndexCardsRequest,
+  TypeDefUpdateIndexPageRequest,
 ];

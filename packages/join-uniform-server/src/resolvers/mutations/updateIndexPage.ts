@@ -7,7 +7,9 @@ import {
 
 export const TypeDefUpdateIndexPage = gql`
   extend type Mutation {
-    updateIndexPage(request: IndexPageUpdateRequest!): IndexPageConfig!
+    # Updates the Index Page configuration. It returns the updated
+    # configuration.
+    updateIndexPage(request: UpdateIndexPageRequest!): IndexPageConfig!
   }
 `;
 
