@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
-export const TypeDefCategoryUpdateRequest = gql`
-  input CategoryUpdateRequest {
+export const TypeDefUpdateCategoryRequest = gql`
+  input UpdateCategoryRequest {
     name: String!
     education: String!
     pricePerPaperRs: Int!

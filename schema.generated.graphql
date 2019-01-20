@@ -11,12 +11,6 @@ type Category {
   activated: Boolean!
 }
 
-input CategoryUpdateRequest {
-  name: String!
-  education: String!
-  pricePerPaperRs: Int!
-}
-
 # Authentication parameters for Cloudinary Media Library widget.
 type CloudinaryMediaWidgetAuthenticationToken {
   cloud_name: String!
@@ -209,7 +203,7 @@ type Mutation {
   # needs to match the number of booleans.
   # Returns the updated Categories.
   setCategoryActivationStatuses(categoryIds: [ID!]!, activatedStatuses: [Boolean!]!): [Category!]!
-  updateCategory(categoryId: ID!, update: CategoryUpdateRequest!): Category!
+  updateCategory(categoryId: ID!, update: UpdateCategoryRequest!): Category!
   updateEntry(entryId: ID!, update: EntryUpdateRequest!): Entry!
   updateIndexCards(request: [UpdateIndexCardsRequest!]!): [IndexCard!]!
 
@@ -238,6 +232,12 @@ type Query {
   indexPageConfig: IndexPageConfig!
   logoConfig: LogoConfig!
   youtubeVideos: [IndexYouTubeVideo!]!
+}
+
+input UpdateCategoryRequest {
+  name: String!
+  education: String!
+  pricePerPaperRs: Int!
 }
 
 input UpdateIndexCardsCategoriesRequest {

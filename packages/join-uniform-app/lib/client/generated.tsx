@@ -25,7 +25,7 @@ export interface CreateEntryRequest {
   logoUrl: string;
 }
 
-export interface CategoryUpdateRequest {
+export interface UpdateCategoryRequest {
   
   name: string;
   
@@ -251,7 +251,7 @@ export type Json = any;
 
   export type EntryManagerUpdateCategoryVariables = {
     categoryId: string;
-    update: CategoryUpdateRequest;
+    update: UpdateCategoryRequest;
   }
 
   export type EntryManagerUpdateCategoryMutation = {
@@ -1025,7 +1025,7 @@ import gql from 'graphql-tag';
         );
     };
     export const EntryManagerUpdateCategoryDocument = gql`
-    mutation EntryManagerUpdateCategory($categoryId: ID!, $update: CategoryUpdateRequest!) {
+    mutation EntryManagerUpdateCategory($categoryId: ID!, $update: UpdateCategoryRequest!) {
   updateCategory(categoryId: $categoryId, update: $update) {
     ...EntryManagerCategoryParts
   }

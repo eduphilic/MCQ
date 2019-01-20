@@ -1,6 +1,6 @@
 mutation EntryManagerUpdateCategory(
   $categoryId: ID!
-  $update: CategoryUpdateRequest!
+  $update: UpdateCategoryRequest!
 ) {
   updateCategory(categoryId: $categoryId, update: $update) {
     ...EntryManagerCategoryParts

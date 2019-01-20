@@ -5,7 +5,7 @@ import { categoriesByIds } from "../queries/categoriesByIds";
 
 export const TypeDefUpdateCategory = gql`
   extend type Mutation {
-    updateCategory(categoryId: ID!, update: CategoryUpdateRequest!): Category!
+    updateCategory(categoryId: ID!, update: UpdateCategoryRequest!): Category!
   }
 `;
 

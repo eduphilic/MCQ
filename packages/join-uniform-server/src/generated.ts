@@ -25,7 +25,7 @@ export interface CreateEntryRequest {
   logoUrl: string;
 }
 
-export interface CategoryUpdateRequest {
+export interface UpdateCategoryRequest {
   
   name: string;
   
@@ -404,7 +404,7 @@ export interface UpdateCategoryMutationArgs {
   
   categoryId: string;
   
-  update: CategoryUpdateRequest;
+  update: UpdateCategoryRequest;
 }
 export interface UpdateEntryMutationArgs {
   
@@ -810,7 +810,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     
     categoryId: string;
     
-    update: CategoryUpdateRequest;
+    update: UpdateCategoryRequest;
   }
 
 
