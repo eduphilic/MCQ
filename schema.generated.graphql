@@ -42,12 +42,6 @@ type Entry {
   categories: [Category]!
 }
 
-input EntryUpdateRequest {
-  name: String!
-  logoUrl: String!
-  description: String!
-}
-
 # Configuration for the html document sent in response to all requests.
 type HtmlConfig {
   # Google Analytics ID.
@@ -204,7 +198,7 @@ type Mutation {
   # Returns the updated Categories.
   setCategoryActivationStatuses(categoryIds: [ID!]!, activatedStatuses: [Boolean!]!): [Category!]!
   updateCategory(categoryId: ID!, update: UpdateCategoryRequest!): Category!
-  updateEntry(entryId: ID!, update: EntryUpdateRequest!): Entry!
+  updateEntry(entryId: ID!, update: UpdateEntryRequest!): Entry!
   updateIndexCards(request: [UpdateIndexCardsRequest!]!): [IndexCard!]!
 
   # Updates the Index Page configuration. It returns the updated
@@ -238,6 +232,12 @@ input UpdateCategoryRequest {
   name: String!
   education: String!
   pricePerPaperRs: Int!
+}
+
+input UpdateEntryRequest {
+  name: String!
+  logoUrl: String!
+  description: String!
 }
 
 input UpdateIndexCardsCategoriesRequest {

@@ -5,7 +5,7 @@ import { entriesByIds } from "../queries/entriesByIds";
 
 export const TypeDefUpdateEntry = gql`
   extend type Mutation {
-    updateEntry(entryId: ID!, update: EntryUpdateRequest!): Entry!
+    updateEntry(entryId: ID!, update: UpdateEntryRequest!): Entry!
   }
 `;
 

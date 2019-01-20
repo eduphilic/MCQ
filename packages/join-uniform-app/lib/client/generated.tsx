@@ -34,7 +34,7 @@ export interface UpdateCategoryRequest {
   pricePerPaperRs: number;
 }
 
-export interface EntryUpdateRequest {
+export interface UpdateEntryRequest {
   
   name: string;
   
@@ -264,7 +264,7 @@ export type Json = any;
 
   export type EntryManagerUpdateEntryVariables = {
     entryId: string;
-    update: EntryUpdateRequest;
+    update: UpdateEntryRequest;
   }
 
   export type EntryManagerUpdateEntryMutation = {
@@ -1066,7 +1066,7 @@ import gql from 'graphql-tag';
         );
     };
     export const EntryManagerUpdateEntryDocument = gql`
-    mutation EntryManagerUpdateEntry($entryId: ID!, $update: EntryUpdateRequest!) {
+    mutation EntryManagerUpdateEntry($entryId: ID!, $update: UpdateEntryRequest!) {
   updateEntry(entryId: $entryId, update: $update) {
     ...EntryManagerEntryParts
   }

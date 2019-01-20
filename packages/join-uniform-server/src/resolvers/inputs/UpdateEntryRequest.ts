@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
-export const TypeDefEntryUpdateRequest = gql`
-  input EntryUpdateRequest {
+export const TypeDefUpdateEntryRequest = gql`
+  input UpdateEntryRequest {
     name: String!
     logoUrl: String!
     description: String!

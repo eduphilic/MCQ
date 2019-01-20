@@ -34,7 +34,7 @@ export interface UpdateCategoryRequest {
   pricePerPaperRs: number;
 }
 
-export interface EntryUpdateRequest {
+export interface UpdateEntryRequest {
   
   name: string;
   
@@ -410,7 +410,7 @@ export interface UpdateEntryMutationArgs {
   
   entryId: string;
   
-  update: EntryUpdateRequest;
+  update: UpdateEntryRequest;
 }
 export interface UpdateIndexCardsMutationArgs {
   
@@ -819,7 +819,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     
     entryId: string;
     
-    update: EntryUpdateRequest;
+    update: UpdateEntryRequest;
   }
 
 
