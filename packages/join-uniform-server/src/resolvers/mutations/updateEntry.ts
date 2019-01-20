@@ -1,9 +1,7 @@
 import gql from "graphql-tag";
-import { Entry, MutationUpdateEntryResolver } from "~/generated";
+import { MutationUpdateEntryResolver } from "~/generated";
 import { DBEntry } from "~/models";
-
-// TODO: Use "data fetcher" here.
-import { categoriesByEntryId } from "../queries/categoriesByEntryId";
+import { entriesByIds } from "../queries/entriesByIds";
 
 export const TypeDefUpdateEntry = gql`
   extend type Mutation {
@@ -13,34 +11,28 @@ export const TypeDefUpdateEntry = gql`
 
 const r: MutationUpdateEntryResolver = async (parent, args, context, info) => {
   const { entryId, update } = args;
-  const { firebaseDatabase: database } = context;
+  const { firebaseDatabase: database, loaders } = context;
 
-  const entryRef = database.collection("entries").doc(entryId);
-  const entrySnapshot = await entryRef.get();
-
-  if (!entrySnapshot.exists) throw new Error("Specified Entry does not exist.");
-
+  const entry = await loaders.entries.load(entryId);
   const entryUpdate: Omit<DBEntry, "categories"> = {
     name: update.name,
     description: update.description,
     logoUrl: update.logoUrl,
   };
 
-  await entryRef.update(entryUpdate);
+  await database
+    .collection("entries")
+    .doc(entryId)
+    .update(entryUpdate);
 
-  const entry: Entry = {
-    ...(entrySnapshot.data() as DBEntry),
+  loaders.entries.clear(entryId);
+  loaders.entries.prime(entryId, {
+    ...entry,
     ...entryUpdate,
-    id: entryId,
-    categories: await categoriesByEntryId(
-      parent,
-      { id: entryId },
-      context,
-      info,
-    ),
-  };
+  });
 
-  return entry;
+  const entries = await entriesByIds(parent, { ids: [entryId] }, context, info);
+  return entries[0];
 };
 
 export { r as updateEntry };
