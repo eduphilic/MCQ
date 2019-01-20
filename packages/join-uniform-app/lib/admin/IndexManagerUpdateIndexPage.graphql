@@ -1,6 +1,6 @@
 mutation IndexManagerUpdateIndexPage(
   $logoUrl: String!
-  $indexPageUpdate: IndexPageUpdateRequest!
+  $indexPageUpdate: UpdateIndexPageRequest!
   $indexCardsUpdate: [UpdateIndexCardsRequest!]!
 ) {
   updateLogoUrl(logoUrl: $logoUrl) {

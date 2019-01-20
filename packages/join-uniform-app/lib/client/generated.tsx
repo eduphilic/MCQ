@@ -65,7 +65,7 @@ export interface UpdateIndexCardsCategoriesRequest {
   visible: boolean;
 }
 
-export interface IndexPageUpdateRequest {
+export interface UpdateIndexPageRequest {
   
   heroBackgroundImageUrl: string;
   
@@ -77,6 +77,10 @@ export interface IndexPageUpdateRequest {
   
   heroFeatures: models.LocalizedString[];
   
+  heroFooterTextEnglish: string;
+  
+  heroFooterTextHindi: Maybe<string>;
+  
   aboutTitleEnglish: string;
   
   aboutTitleHindi: Maybe<string>;
@@ -85,12 +89,10 @@ export interface IndexPageUpdateRequest {
   
   aboutTextHindi: Maybe<string>;
   
-  aboutImages: IndexPageAboutImageUpdateRequest[];
-  
-  indexCards: IndexPageIndexCardUpdateRequest[];
+  aboutImages: UpdateIndexPageAboutImageRequest[];
 }
 
-export interface IndexPageAboutImageUpdateRequest {
+export interface UpdateIndexPageAboutImageRequest {
   
   id: string;
   
@@ -99,6 +101,13 @@ export interface IndexPageAboutImageUpdateRequest {
   title: models.LocalizedString;
   
   text: models.LocalizedString;
+}
+
+export interface IndexCardCategoryUpdateRequest {
+  
+  categoryId: string;
+  
+  visible: boolean;
 }
 
 export interface IndexPageIndexCardUpdateRequest {
@@ -114,13 +123,6 @@ export interface IndexPageIndexCardUpdateRequest {
   colorTitle: string;
   
   categories: IndexCardCategoryUpdateRequest[];
-}
-
-export interface IndexCardCategoryUpdateRequest {
-  
-  categoryId: string;
-  
-  visible: boolean;
 }
 
 /** Represents a localized string. The Hindi field is optional. Fields: - en: String! - hi: String */
@@ -328,7 +330,7 @@ export type Json = any;
 
   export type IndexManagerUpdateIndexPageVariables = {
     logoUrl: string;
-    indexPageUpdate: IndexPageUpdateRequest;
+    indexPageUpdate: UpdateIndexPageRequest;
     indexCardsUpdate: UpdateIndexCardsRequest[];
   }
 
@@ -1162,7 +1164,7 @@ import gql from 'graphql-tag';
         );
     };
     export const IndexManagerUpdateIndexPageDocument = gql`
-    mutation IndexManagerUpdateIndexPage($logoUrl: String!, $indexPageUpdate: IndexPageUpdateRequest!, $indexCardsUpdate: [UpdateIndexCardsRequest!]!) {
+    mutation IndexManagerUpdateIndexPage($logoUrl: String!, $indexPageUpdate: UpdateIndexPageRequest!, $indexCardsUpdate: [UpdateIndexCardsRequest!]!) {
   updateLogoUrl(logoUrl: $logoUrl) {
     id
     url

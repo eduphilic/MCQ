@@ -65,7 +65,7 @@ export interface UpdateIndexCardsCategoriesRequest {
   visible: boolean;
 }
 
-export interface IndexPageUpdateRequest {
+export interface UpdateIndexPageRequest {
   
   heroBackgroundImageUrl: string;
   
@@ -77,6 +77,10 @@ export interface IndexPageUpdateRequest {
   
   heroFeatures: models.LocalizedString[];
   
+  heroFooterTextEnglish: string;
+  
+  heroFooterTextHindi: Maybe<string>;
+  
   aboutTitleEnglish: string;
   
   aboutTitleHindi: Maybe<string>;
@@ -85,12 +89,10 @@ export interface IndexPageUpdateRequest {
   
   aboutTextHindi: Maybe<string>;
   
-  aboutImages: IndexPageAboutImageUpdateRequest[];
-  
-  indexCards: IndexPageIndexCardUpdateRequest[];
+  aboutImages: UpdateIndexPageAboutImageRequest[];
 }
 
-export interface IndexPageAboutImageUpdateRequest {
+export interface UpdateIndexPageAboutImageRequest {
   
   id: string;
   
@@ -99,6 +101,13 @@ export interface IndexPageAboutImageUpdateRequest {
   title: models.LocalizedString;
   
   text: models.LocalizedString;
+}
+
+export interface IndexCardCategoryUpdateRequest {
+  
+  categoryId: string;
+  
+  visible: boolean;
 }
 
 export interface IndexPageIndexCardUpdateRequest {
@@ -114,13 +123,6 @@ export interface IndexPageIndexCardUpdateRequest {
   colorTitle: string;
   
   categories: IndexCardCategoryUpdateRequest[];
-}
-
-export interface IndexCardCategoryUpdateRequest {
-  
-  categoryId: string;
-  
-  visible: boolean;
 }
 
 /** Represents a localized string. The Hindi field is optional. Fields: - en: String! - hi: String */
@@ -330,7 +332,7 @@ export interface Mutation {
   updateEntry: Entry;
   
   updateIndexCards: IndexCard[];
-  
+  /** Updates the Index Page configuration. It returns the updated configuration. */
   updateIndexPage: IndexPageConfig;
   
   updateLogoUrl: LogoConfig;
@@ -416,7 +418,7 @@ export interface UpdateIndexCardsMutationArgs {
 }
 export interface UpdateIndexPageMutationArgs {
   
-  request: IndexPageUpdateRequest;
+  request: UpdateIndexPageRequest;
 }
 export interface UpdateLogoUrlMutationArgs {
   
@@ -750,7 +752,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
     updateEntry?: MutationUpdateEntryResolver<Entry, TypeParent, Context>;
     
     updateIndexCards?: MutationUpdateIndexCardsResolver<IndexCard[], TypeParent, Context>;
-    
+    /** Updates the Index Page configuration. It returns the updated configuration. */
     updateIndexPage?: MutationUpdateIndexPageResolver<IndexPageConfig, TypeParent, Context>;
     
     updateLogoUrl?: MutationUpdateLogoUrlResolver<LogoConfig, TypeParent, Context>;
@@ -831,7 +833,7 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
   export type MutationUpdateIndexPageResolver<R = IndexPageConfig, Parent = {}, Context = ApolloContext> = Resolver<R, Parent, Context, MutationUpdateIndexPageArgs>;
   export interface MutationUpdateIndexPageArgs {
     
-    request: IndexPageUpdateRequest;
+    request: UpdateIndexPageRequest;
   }
 
 

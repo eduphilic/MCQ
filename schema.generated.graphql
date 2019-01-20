@@ -114,13 +114,6 @@ type IndexPageAboutImage {
   text: LocalizedString!
 }
 
-input IndexPageAboutImageUpdateRequest {
-  id: ID!
-  imageUrl: String!
-  title: LocalizedString!
-  text: LocalizedString!
-}
-
 # Configuration for the landing page / index page.
 type IndexPageConfig {
   # Always "index-page-config".
@@ -158,20 +151,6 @@ input IndexPageIndexCardUpdateRequest {
   colorLogoBackground: String!
   colorTitle: String!
   categories: [IndexCardCategoryUpdateRequest!]!
-}
-
-input IndexPageUpdateRequest {
-  heroBackgroundImageUrl: String!
-  heroBackgroundAlpha: Float!
-  heroPrimaryTextEnglish: String!
-  heroPrimaryTextHindi: String
-  heroFeatures: [LocalizedString!]!
-  aboutTitleEnglish: String!
-  aboutTitleHindi: String
-  aboutTextEnglish: String!
-  aboutTextHindi: String
-  aboutImages: [IndexPageAboutImageUpdateRequest!]!
-  indexCards: [IndexPageIndexCardUpdateRequest!]!
 }
 
 type IndexYouTubeVideo {
@@ -233,7 +212,10 @@ type Mutation {
   updateCategory(categoryId: ID!, update: CategoryUpdateRequest!): Category!
   updateEntry(entryId: ID!, update: EntryUpdateRequest!): Entry!
   updateIndexCards(request: [UpdateIndexCardsRequest!]!): [IndexCard!]!
-  updateIndexPage(request: IndexPageUpdateRequest!): IndexPageConfig!
+
+  # Updates the Index Page configuration. It returns the updated
+  # configuration.
+  updateIndexPage(request: UpdateIndexPageRequest!): IndexPageConfig!
   updateLogoUrl(logoUrl: String!): LogoConfig!
 }
 
@@ -272,4 +254,26 @@ input UpdateIndexCardsRequest {
   colorCategoryBackground: String!
   colorLogoBackground: String!
   colorTitle: String!
+}
+
+input UpdateIndexPageAboutImageRequest {
+  id: ID!
+  imageUrl: String!
+  title: LocalizedString!
+  text: LocalizedString!
+}
+
+input UpdateIndexPageRequest {
+  heroBackgroundImageUrl: String!
+  heroBackgroundAlpha: Float!
+  heroPrimaryTextEnglish: String!
+  heroPrimaryTextHindi: String
+  heroFeatures: [LocalizedString!]!
+  heroFooterTextEnglish: String!
+  heroFooterTextHindi: String
+  aboutTitleEnglish: String!
+  aboutTitleHindi: String
+  aboutTextEnglish: String!
+  aboutTextHindi: String
+  aboutImages: [UpdateIndexPageAboutImageRequest!]!
 }
