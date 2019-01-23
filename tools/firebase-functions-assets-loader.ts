@@ -6,10 +6,13 @@ import { PackageJson } from "package-json";
  * Emits a package.json file for use with Firebase Functions. It copies over the
  * the non-development dependencies so that Firebase can install them.
  *
+ * Emits an empty "next.config.js" so that the directory detection doesn't fail
+ * when running the emitted file in a subdirectory.
+ *
  * @param source Contents of the workspace package.json file as a string.
  */
 // eslint-disable-next-line func-names
-const firebasePackageJsonLoader: loader.Loader = function(source) {
+const firebaseFunctionsAssetsLoader: loader.Loader = function(source) {
   const packageJson: PackageJson = JSON.parse(source.toString());
 
   const firebasePackageJson: PackageJson = {
@@ -30,7 +33,9 @@ const firebasePackageJsonLoader: loader.Loader = function(source) {
 
   this.emitFile("package.json", firebasePackageJsonStringified, null);
 
+  this.emitFile("next.config.js", "module.export = {};\n", null);
+
   return firebasePackageJsonStringified;
 };
 
-export default firebasePackageJsonLoader;
+export default firebaseFunctionsAssetsLoader;

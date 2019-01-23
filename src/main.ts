@@ -3,6 +3,7 @@ import { INestExpressApplication, INestApplication } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import express from "express";
 import { ApplicationModule } from "./server";
+import { NextRendererMiddleware } from "./server/next-renderer";
 
 admin.initializeApp({
   credential: admin.credential.cert(
@@ -31,6 +32,9 @@ const bootstrap = (() => {
 
   async function initialize() {
     nestApp = await NestFactory.create(ApplicationModule, expressServer);
+    const nextRendererMiddleware = nestApp.get(NextRendererMiddleware);
+    nestApp.use(nextRendererMiddleware.resolve());
+
     // Don't listen for requests if the server is operating as a Firebase
     // Function.
     return isFirebaseFunction ? nestApp.init() : nestApp.listen(3000);

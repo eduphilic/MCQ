@@ -26,7 +26,7 @@ export default function(): Configuration {
       rules: [
         {
           test: path.join(__dirname, "package.json"),
-          loader: require.resolve("./tools/firebase-package-json-loader"),
+          loader: require.resolve("./tools/firebase-functions-assets-loader"),
         },
         {
           test: /\.tsx?$/,
@@ -90,7 +90,10 @@ const babelRc = {
     ],
     "@babel/preset-typescript",
   ],
-  plugins: [["@babel/plugin-proposal-decorators", { legacy: true }]],
+  plugins: [
+    ["@babel/plugin-proposal-decorators", { legacy: true }],
+    ["@babel/plugin-proposal-class-properties", { loose: true }],
+  ],
 };
 
 function getFirebaseAdminServiceAccountCredentials() {
