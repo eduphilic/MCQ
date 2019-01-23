@@ -24,5 +24,5 @@
     "skipLibCheck": true,
     "typeRoots": ["./node_modules/@types", "./typings"]
   },
-  "include": ["./src/**/*", "./webpack.config.ts"]
+  "include": ["./webpack.config.ts", "./src/**/*", "./tools/**/*"]
 }
