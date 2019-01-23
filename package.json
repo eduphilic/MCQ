@@ -5,16 +5,27 @@
   "main": "index.js",
   "repository": "git@github.com:strothj/bhartitest.git",
   "author": "strothj <jason@jasons.io>",
+  "sideEffects": false,
+  "pre-commit": [
+    "lint",
+    "type-check",
+    "test"
+  ],
   "scripts": {
     "start": "npm-run-all clean \"build:webpack --watch\"",
     "build": "cross-env NODE_ENV=production npm-run-all clean build:webpack",
     "build:webpack": "webpack",
     "clean": "rimraf dist",
-    "lint": "eslint src/**/*.{ts,tsx}"
+    "lint": "eslint webpack.config.ts src/**/*.{ts,tsx}",
+    "test": "jest --config",
+    "type-check": "tsc"
   },
   "dependencies": {
     "@nestjs/common": "^5.6.2",
     "@nestjs/core": "^5.6.2",
+    "next": "^7.0.2",
+    "react": "16.8.0-alpha.1",
+    "react-dom": "16.8.0-alpha.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.3.3"
   },
@@ -23,6 +34,8 @@
     "@babel/plugin-proposal-decorators": "^7.3.0",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-typescript": "^7.1.0",
+    "@nestjs/testing": "^5.6.2",
+    "@types/jest": "^23.3.13",
     "@types/webpack": "^4.4.23",
     "@types/webpack-env": "^1.13.6",
     "@types/webpack-node-externals": "^1.6.3",
@@ -38,10 +51,13 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.11.0",
+    "jest": "^23.6.0",
     "npm-run-all": "^4.1.5",
+    "pre-commit": "^1.2.2",
     "prettier": "^1.16.0",
     "rimraf": "^2.6.3",
     "start-server-webpack-plugin": "^2.2.5",
+    "ts-jest": "^23.10.5",
     "ts-node": "^8.0.1",
     "tslint": "^5.12.1",
     "typescript": "^3.2.4",

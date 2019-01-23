@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies, @typescript-eslint/no-use-before-define */
 import webpack, { Configuration } from "webpack";
 import path from "path";
 import nodeExternals from "webpack-node-externals";
@@ -14,7 +15,7 @@ export default function(): Configuration {
     },
 
     output: {
-      path: path.join(__dirname, "dist"),
+      path: path.join(__dirname, "dist/functions"),
       filename: "index.js",
     },
 
@@ -56,6 +57,7 @@ const mode: "production" | "development" =
   process.env.NODE_ENV === "production" ? "production" : "development";
 
 const babelRc = {
+  babelrc: false,
   presets: [
     [
       "@babel/preset-env",

@@ -21,6 +21,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
     "typeRoots": ["./node_modules/@types", "./typings"]
   },
   "include": ["./src/**/*", "./webpack.config.ts"]

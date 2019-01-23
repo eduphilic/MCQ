@@ -1,6 +1,6 @@
 import { INestExpressApplication, INestApplication } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
-import { ApplicationModule } from "./app.module";
+import { ApplicationModule } from "./server";
 
 let app: INestApplication & INestExpressApplication;
 
@@ -12,7 +12,7 @@ async function bootstrap() {
 bootstrap();
 
 if (module.hot) {
-  module.hot.accept("./app.module", () => {
+  module.hot.accept("./server", () => {
     // tslint:disable-next-line:no-floating-promises
     app.close().then(bootstrap);
   });
