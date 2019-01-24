@@ -33,11 +33,17 @@ const bootstrap = (() => {
   async function initialize() {
     nestApp = await NestFactory.create(ApplicationModule, expressServer);
     const nextRendererMiddleware = nestApp.get(NextRendererMiddleware);
-    nestApp.use(nextRendererMiddleware.resolve());
+    nestApp.use(nextRendererMiddleware.resolve([/^\/graphql/]));
 
     // Don't listen for requests if the server is operating as a Firebase
     // Function.
-    return isFirebaseFunction ? nestApp.init() : nestApp.listen(3000);
+    return (isFirebaseFunction ? nestApp.init() : nestApp.listen(3000)).catch(
+      e => {
+        // eslint-disable-next-line no-console
+        console.error(`Server initialization failure: ${e}`);
+        process.exit(1);
+      },
+    );
   }
 })();
 

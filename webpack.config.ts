@@ -4,6 +4,8 @@ import path from "path";
 import webpack, { Configuration } from "webpack";
 import nodeExternals from "webpack-node-externals";
 import StartServerPlugin from "start-server-webpack-plugin";
+import { FirebasePackageJsonWebpackPlugin } from "./tools/FirebasePackageJsonWebpackPlugin";
+import { FirebaseDummyNextConfigEmitterWebpackPlugin } from "./tools/FirebaseDummyNextConfigEmitterWebpackPlugin";
 
 export default function(): Configuration {
   return {
@@ -13,7 +15,6 @@ export default function(): Configuration {
       index: (mode === "development" ? ["webpack/hot/signal"] : []).concat([
         "./src/main.ts",
       ]),
-      package: "./package.json",
     },
 
     output: {
@@ -24,10 +25,6 @@ export default function(): Configuration {
 
     module: {
       rules: [
-        {
-          test: path.join(__dirname, "package.json"),
-          loader: require.resolve("./tools/firebase-functions-assets-loader"),
-        },
         {
           test: /\.tsx?$/,
           exclude: /node_modules/,
@@ -69,6 +66,10 @@ export default function(): Configuration {
           "https://joinuniformindia.firebaseio.com/",
         ),
       }),
+      new FirebasePackageJsonWebpackPlugin(
+        path.join(__dirname, "package.json"),
+      ),
+      new FirebaseDummyNextConfigEmitterWebpackPlugin(),
     ),
   };
 }
