@@ -29,8 +29,14 @@ export default function(): Configuration {
           test: /\.tsx?$/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader",
-            options: babelRc,
+            loader: "ts-loader",
+            options: {
+              compilerOptions: {
+                target: "es6",
+                module: "esnext",
+                noEmit: false,
+              },
+            },
           },
         },
       ],
@@ -40,9 +46,15 @@ export default function(): Configuration {
       extensions: [".ts", ".tsx", ".wasm", ".mjs", ".js", ".json"],
     },
 
+    optimization: {
+      minimize: false,
+    },
+
     target: "node",
 
     externals: [nodeExternals({ whitelist: ["webpack/hot/signal"] })],
+
+    devtool: false,
 
     node: {
       __filename: false,
@@ -76,26 +88,6 @@ export default function(): Configuration {
 
 const mode: "production" | "development" =
   process.env.NODE_ENV === "production" ? "production" : "development";
-
-const babelRc = {
-  babelrc: false,
-  presets: [
-    [
-      "@babel/preset-env",
-      {
-        targets: { node: 8 },
-        loose: true,
-        modules: false,
-        shippedProposals: true,
-      },
-    ],
-    "@babel/preset-typescript",
-  ],
-  plugins: [
-    ["@babel/plugin-proposal-decorators", { legacy: true }],
-    ["@babel/plugin-proposal-class-properties", { loose: true }],
-  ],
-};
 
 function getFirebaseAdminServiceAccountCredentials() {
   let credentials!: string;

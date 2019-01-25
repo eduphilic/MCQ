@@ -22,7 +22,14 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-    "typeRoots": ["./node_modules/@types", "./typings"]
+    "typeRoots": ["./node_modules/@types", "./typings"],
+    // The follow two settings (baseUrl, paths) are set to override the type
+    // definitions for the package "graphql-tag". See the comments in the type
+    // definitions file.
+    "baseUrl": ".",
+    "paths": {
+      "graphql-tag": ["./typings/graphql-tag/index.d.ts"]
+    }
   },
   "include": [
     "./webpack.config.ts",

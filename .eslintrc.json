@@ -27,6 +27,8 @@
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "no-empty-function": ["error", { "allow": ["constructors"] }],
     "no-useless-constructor": "off",
+    "no-dupe-class-members": "off",
+    "lines-between-class-members": "off",
     "@typescript-eslint/no-parameter-properties": "off",
     "@typescript-eslint/explicit-member-accessibility": "off",
     "@typescript-eslint/no-use-before-define": "off",
