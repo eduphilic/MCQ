@@ -1,11 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies, @typescript-eslint/no-use-before-define */
-import fs from "fs";
 import path from "path";
 import webpack, { Configuration } from "webpack";
 import nodeExternals from "webpack-node-externals";
 import StartServerPlugin from "start-server-webpack-plugin";
 import { FirebasePackageJsonWebpackPlugin } from "./tools/FirebasePackageJsonWebpackPlugin";
 import { FirebaseDummyNextConfigEmitterWebpackPlugin } from "./tools/FirebaseDummyNextConfigEmitterWebpackPlugin";
+import { createFirebaseAdminServiceAccountCredentialsWebpackDefinePlugin } from "./tools/createFirebaseAdminServiceAccountCredentialsWebpackDefinePlugin";
 
 export default function(): Configuration {
   return {
@@ -72,12 +72,9 @@ export default function(): Configuration {
         ]
       : []
     ).concat(
-      new webpack.DefinePlugin({
-        "process.env.FIREBASE_ADMIN_SERVICE_ACCOUNT_CREDENTIALS": getFirebaseAdminServiceAccountCredentials(),
-        "process.env.FIREBASE_DATABASE_URL": JSON.stringify(
-          "https://joinuniformindia.firebaseio.com/",
-        ),
-      }),
+      createFirebaseAdminServiceAccountCredentialsWebpackDefinePlugin(
+        __dirname,
+      ),
       new FirebasePackageJsonWebpackPlugin(
         path.join(__dirname, "package.json"),
       ),
@@ -88,20 +85,3 @@ export default function(): Configuration {
 
 const mode: "production" | "development" =
   process.env.NODE_ENV === "production" ? "production" : "development";
-
-function getFirebaseAdminServiceAccountCredentials() {
-  let credentials!: string;
-  try {
-    credentials = fs.readFileSync(
-      path.join(__dirname, "firebase-admin-service-account.json"),
-      "utf8",
-    );
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.error(
-      `Unable to read Firebase Admin Service Account credentials: ${e}`,
-    );
-    process.exit(1);
-  }
-  return credentials;
-}

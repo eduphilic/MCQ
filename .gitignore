@@ -10,4 +10,5 @@ dist/
 
 # Firebase configuration
 .runtimeconfig.json
-firebase-admin-service-account.json
+firebase-admin-service-account.default.json
+firebase-admin-service-account.staging.json
