@@ -1,22 +1,24 @@
 import { Injectable, OnModuleInit } from "@nestjs/common";
 import * as functions from "firebase-functions";
+import { ConfigLoader } from "./config.interfaces";
 
 @Injectable()
-export class FirebaseConfig<T extends object> implements OnModuleInit {
-  private loadedConfig!: T | null;
+export class FirebaseConfig<T extends object>
+  implements OnModuleInit, ConfigLoader<T> {
+  private config!: T | null;
 
   onModuleInit() {
     const config = functions.config();
 
     if (Object.keys(config).length === 0) {
-      this.loadedConfig = null;
+      this.config = null;
       return;
     }
 
-    this.loadedConfig = config as T;
+    this.config = config as T;
   }
 
-  getLoadedConfig() {
-    return this.loadedConfig;
+  getConfig() {
+    return this.config;
   }
 }

@@ -30,7 +30,7 @@ describe("FirebaseConfig", () => {
     functions.config.mockImplementationOnce(() => ({}));
     await module.init();
 
-    expect(provider.getLoadedConfig()).toBeNull();
+    expect(provider.getConfig()).toBeNull();
   });
 
   it("should return config in cloud environment", async () => {
@@ -39,6 +39,6 @@ describe("FirebaseConfig", () => {
     functions.config.mockImplementationOnce(() => expected);
     await module.init();
 
-    expect(provider.getLoadedConfig()).toEqual(expected);
+    expect(provider.getConfig()).toEqual(expected);
   });
 });
