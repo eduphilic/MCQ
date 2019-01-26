@@ -1,4 +1,5 @@
 import * as admin from "firebase-admin";
+import * as functions from "firebase-functions";
 import { INestExpressApplication, INestApplication } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import express from "express";
@@ -47,15 +48,14 @@ const bootstrap = (() => {
   }
 })();
 
-export const main = isFirebaseFunction
-  ? // eslint-disable-next-line global-require
-    (require("firebase-functions") as typeof import("firebase-functions")).https.onRequest(
-      async (req, res) => {
-        await bootstrap();
-        expressServer(req, res);
-      },
-    )
-  : null;
+// Using "functions.x" causes a warning about a missing environment variable
+// "FIREBASE_CONFIG". Consider using Webpack server start middleware to export
+// a compatible variable.
+// https://firebase.google.com/docs/functions/config-env
+export const main = functions.https.onRequest(async (req, res) => {
+  await bootstrap();
+  expressServer(req, res);
+});
 
 if (module.hot) {
   module.hot.accept("./server", () => {
