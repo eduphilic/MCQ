@@ -1,9 +1,12 @@
 import { Module } from "@nestjs/common";
 import { ConfigService } from "./config.service";
-import { FirebaseConfig } from "./firebase-config";
-import { FirebaseCliConfig } from "./firebase-cli-config";
+import { createProviders } from "./config.providers";
 
+/**
+ * Exposes the server configuration which was loaded from environment variables.
+ */
 @Module({
-  providers: [ConfigService, FirebaseConfig, FirebaseCliConfig],
+  providers: [ConfigService, ...createProviders()],
+  exports: [ConfigService],
 })
 export class ConfigModule {}
