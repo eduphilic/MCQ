@@ -1,14 +1,15 @@
 import { Injectable, MiddlewareFunction, NestMiddleware } from "@nestjs/common";
-import nextJs, { Server } from "next";
+import nextJs from "next";
 import { IncomingMessage, ServerResponse } from "http";
 
 const isProduction = process.env.NODE_ENV === "production";
 
 @Injectable()
 export class NextRendererMiddleware implements NestMiddleware {
-  private nextApp: Server | null = null;
+  private nextApp = nextJs({ dev: !isProduction });
+  private nextPreparationStatus: Promise<void> | null = null;
 
-  public resolve(
+  resolve(
     ignoredPaths?: RegExp[],
   ): MiddlewareFunction<IncomingMessage, ServerResponse> {
     return async (req, res, next) => {
@@ -25,11 +26,11 @@ export class NextRendererMiddleware implements NestMiddleware {
   }
 
   private async getNextApp() {
-    if (!this.nextApp) {
-      this.nextApp = nextJs({ dev: !isProduction });
-      await this.nextApp.prepare();
+    if (!this.nextPreparationStatus) {
+      this.nextPreparationStatus = this.nextApp.prepare();
     }
 
+    await this.nextPreparationStatus;
     return this.nextApp;
   }
 }
