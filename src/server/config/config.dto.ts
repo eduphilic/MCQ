@@ -7,5 +7,6 @@
 export type Config = {
   recaptcha: {
     site_key: string;
+    secret_key: string;
   };
 };

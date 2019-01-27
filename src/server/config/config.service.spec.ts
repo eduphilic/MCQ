@@ -1,19 +1,26 @@
+import * as yup from "yup";
 import { Test, TestingModule } from "@nestjs/testing";
 import { ConfigService } from "./config.service";
 import { ConfigProviders } from "./config.providers";
 
 const expectedConfig = { test: "test" };
+const configSchema = yup.object({ test: yup.string().required() });
 
 describe("ConfigService", () => {
+  let module: TestingModule;
   let service: ConfigService;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    module = await Test.createTestingModule({
       providers: [
         ConfigService,
         {
           provide: ConfigProviders.Combined,
           useValue: expectedConfig,
+        },
+        {
+          provide: ConfigProviders.Schema,
+          useValue: configSchema,
         },
       ],
     }).compile();
@@ -27,5 +34,14 @@ describe("ConfigService", () => {
 
   it("should return value from provider", () => {
     expect(service.getConfig()).toEqual(expectedConfig);
+  });
+
+  it("should validate the schema", async () => {
+    const spy = jest.spyOn(configSchema, "validateSync");
+    await module.init();
+
+    expect(spy).toHaveBeenCalled();
+
+    spy.mockRestore();
   });
 });

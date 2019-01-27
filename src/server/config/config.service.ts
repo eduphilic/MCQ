@@ -1,11 +1,19 @@
 import assert from "assert";
-import { Injectable, Inject } from "@nestjs/common";
+import * as yup from "yup";
+import { Injectable, Inject, OnModuleInit } from "@nestjs/common";
 import { Config } from "./config.dto";
 import { ConfigProviders } from "./config.providers";
 
 @Injectable()
-export class ConfigService {
-  constructor(@Inject(ConfigProviders.Combined) private config: Config) {}
+export class ConfigService implements OnModuleInit {
+  constructor(
+    @Inject(ConfigProviders.Combined) private config: Config,
+    @Inject(ConfigProviders.Schema) private configSchema: yup.Schema<Config>,
+  ) {}
+
+  onModuleInit() {
+    this.configSchema.validateSync(this.config);
+  }
 
   getConfig() {
     const config = this.config;

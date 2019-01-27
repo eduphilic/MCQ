@@ -40,7 +40,8 @@
     "react": "16.8.0-alpha.1",
     "react-dom": "16.8.0-alpha.1",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^6.3.3"
+    "rxjs": "^6.3.3",
+    "yup": "^0.26.10"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -53,6 +54,7 @@
     "@types/webpack": "^4.4.23",
     "@types/webpack-env": "^1.13.6",
     "@types/webpack-node-externals": "^1.6.3",
+    "@types/yup": "^0.26.6",
     "@typescript-eslint/eslint-plugin": "^1.0.0",
     "@typescript-eslint/eslint-plugin-tslint": "^1.0.0",
     "@typescript-eslint/parser": "^1.0.0",
