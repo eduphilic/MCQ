@@ -13,7 +13,7 @@ export default function(): Configuration {
 
     entry: {
       index: (mode === "development" ? ["webpack/hot/signal"] : []).concat([
-        "./src/main.ts",
+        "./src/index.ts",
       ]),
     },
 

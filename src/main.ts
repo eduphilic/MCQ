@@ -5,14 +5,12 @@ import { NestFactory } from "@nestjs/core";
 import express from "express";
 import { ApplicationModule } from "./server";
 
-admin.initializeApp({
-  credential: admin.credential.cert(
-    process.env.FIREBASE_ADMIN_SERVICE_ACCOUNT_CREDENTIALS,
-  ),
-  databaseURL: process.env.FIREBASE_DATABASE_URL,
-});
+const adminConfig: admin.AppOptions = JSON.parse(process.env.FIREBASE_CONFIG!);
+adminConfig.credential = admin.credential.cert(process.env
+  .FIREBASE_ADMIN_SERVICE_ACCOUNT_CREDENTIALS as any);
+admin.initializeApp(adminConfig);
 
-const isFirebaseFunction = !!process.env.FIREBASE_CONFIG;
+const isFirebaseFunction = JSON.parse(process.env.IS_FIREBASE_FUNCTION!);
 const expressServer = express();
 let nestApp: INestApplication & INestExpressApplication;
 
@@ -59,15 +57,4 @@ if (module.hot) {
     // tslint:disable-next-line:no-floating-promises
     nestApp.close().then(async () => bootstrap(true));
   });
-}
-
-// The following are injected by the Webpack build process.
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace NodeJS {
-    interface ProcessEnv {
-      FIREBASE_ADMIN_SERVICE_ACCOUNT_CREDENTIALS: string;
-      FIREBASE_DATABASE_URL: string;
-    }
-  }
 }
