@@ -1,9 +1,14 @@
-import { Module } from "@nestjs/common";
+import {
+  Module,
+  NestModule,
+  MiddlewareConsumer,
+  RequestMethod,
+} from "@nestjs/common";
 
 import { ConfigModule } from "./config";
 import { GraphQLModule } from "./graphql";
 import { GraphQLSchemaModule } from "./graphql-schema";
-import { NextRendererModule } from "./next-renderer";
+import { NextRendererModule, NextRendererMiddleware } from "./next-renderer";
 
 @Module({
   imports: [
@@ -13,4 +18,11 @@ import { NextRendererModule } from "./next-renderer";
     NextRendererModule,
   ],
 })
-export class ApplicationModule {}
+export class ApplicationModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(NextRendererMiddleware)
+      .with([/^\/graphql/])
+      .forRoutes({ path: "", method: RequestMethod.ALL });
+  }
+}
