@@ -5,12 +5,12 @@ import { NestFactory } from "@nestjs/core";
 import express from "express";
 import { ApplicationModule } from "./server";
 
-const adminConfig: admin.AppOptions = JSON.parse(process.env.FIREBASE_CONFIG!);
+const adminConfig: admin.AppOptions = JSON.parse(process.env.FIREBASE_CONFIG);
 adminConfig.credential = admin.credential.cert(process.env
-  .FIREBASE_ADMIN_SERVICE_ACCOUNT_CREDENTIALS as any);
+  .FIREBASE_ADMIN_SERVICE_ACCOUNT_CREDENTIALS as admin.ServiceAccount);
 admin.initializeApp(adminConfig);
 
-const isFirebaseFunction = JSON.parse(process.env.IS_FIREBASE_FUNCTION!);
+const isFirebaseFunction = JSON.parse(process.env.IS_FIREBASE_FUNCTION);
 const expressServer = express();
 let nestApp: INestApplication & INestExpressApplication;
 
@@ -43,10 +43,6 @@ const bootstrap = (() => {
   }
 })();
 
-// Using "functions.x" causes a warning about a missing environment variable
-// "FIREBASE_CONFIG". Consider using Webpack server start middleware to export
-// a compatible variable.
-// https://firebase.google.com/docs/functions/config-env
 export const main = functions.https.onRequest(async (req, res) => {
   await bootstrap();
   expressServer(req, res);
