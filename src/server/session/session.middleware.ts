@@ -37,8 +37,8 @@ export class SessionMiddleware implements NestMiddleware {
 
 // These are the cookie expiration ranges supported by Firebase.
 // https://firebase.google.com/docs/auth/admin/manage-cookies
-const MIN_FIREBASE_SESSION_MILLISECONDS = 300000;
-const MAX_FIREBASE_SESSION_MILLISECONDS = 1209600000;
+export const MIN_FIREBASE_SESSION_MILLISECONDS = 300000;
+export const MAX_FIREBASE_SESSION_MILLISECONDS = 1209600000;
 
 function parseAndVerifyCookieExpireMilliseconds(expirationString: string) {
   let expiration: number;
