@@ -9,4 +9,8 @@ export type Config = {
     site_key: string;
     secret_key: string;
   };
+  session: {
+    key: string;
+    expire_milliseconds: string;
+  };
 };

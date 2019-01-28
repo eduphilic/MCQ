@@ -34,6 +34,7 @@ export function createConfigSchemaProvider() {
     provide: ConfigProviders.Schema,
     useValue: yup.object<Config>({
       recaptcha: yupDict({ site_key: 0, secret_key: 0 }),
+      session: yupDict({ key: 0, expire_milliseconds: 0 }),
     }),
   };
 
