@@ -11,7 +11,7 @@ adminConfig.credential = admin.credential.cert(process.env
 admin.initializeApp(adminConfig);
 
 const isFirebaseFunction = JSON.parse(process.env.IS_FIREBASE_FUNCTION);
-const expressServer = express();
+let expressServer: ReturnType<typeof express>;
 let nestApp: INestApplication & INestExpressApplication;
 
 /**
@@ -29,6 +29,10 @@ const bootstrap = (() => {
   }
 
   async function initialize() {
+    if (nestApp) {
+      await nestApp.close();
+    }
+    expressServer = express();
     nestApp = await NestFactory.create(ApplicationModule, expressServer);
 
     // Don't listen for requests if the server is operating as a Firebase
@@ -36,7 +40,7 @@ const bootstrap = (() => {
     return (isFirebaseFunction ? nestApp.init() : nestApp.listen(3000)).catch(
       e => {
         // eslint-disable-next-line no-console
-        console.error(`Server initialization failure: ${e}`);
+        console.error("Server initialization failure:", e);
         process.exit(1);
       },
     );
