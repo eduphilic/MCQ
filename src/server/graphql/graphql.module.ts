@@ -5,6 +5,7 @@ import {
   GqlModuleOptions,
 } from "@nestjs/graphql";
 import { GraphQLSchemaModule, GraphQLSchemaService } from "../graphql-schema";
+import { GraphQLController } from "./graphql.controller";
 
 @Module({
   imports: [
@@ -24,9 +25,11 @@ import { GraphQLSchemaModule, GraphQLSchemaService } from "../graphql-schema";
                 ),
               }
             : undefined,
+        playground: false,
       }),
       inject: [GraphQLSchemaService],
     }),
   ],
+  controllers: [GraphQLController],
 })
 export class GraphQLModule {}

@@ -1,60 +1,55 @@
-import { Injectable, MiddlewareFunction, NestMiddleware } from "@nestjs/common";
-import { Request, Response, RequestHandler, NextFunction } from "express";
-import cookieSession from "cookie-session";
-import { ConfigService } from "../config";
+import {
+  NestMiddleware,
+  Injectable,
+  MiddlewareFunction,
+  HttpException,
+  HttpStatus,
+} from "@nestjs/common";
+import { Request, Response, RequestHandler } from "express";
+import csurf from "csurf";
+import { CookieSessionMiddleware } from "./cookie-session.middleware";
 
 @Injectable()
 export class SessionMiddleware implements NestMiddleware {
-  private cookieSessionMiddleware: RequestHandler;
+  private cookieSessionMiddleware: MiddlewareFunction<Request, Response>;
+  private csrfMiddleware: RequestHandler;
 
-  constructor(configService: ConfigService) {
-    const config = configService.getConfig();
-
-    const cookieExpireMilliseconds = parseAndVerifyCookieExpireMilliseconds(
-      config.session.expire_milliseconds,
-    );
-
-    this.cookieSessionMiddleware = cookieSession({
-      // This is the only cookie name supported by Firebase.
-      // https://stackoverflow.com/questions/44929653/firebase-cloud-function-wont-store-cookie-named-other-than-session
-      name: "__session",
-      maxAge: cookieExpireMilliseconds,
-      sameSite: "lax",
-      signed: false,
+  constructor(cookieSessionMiddlewareProvider: CookieSessionMiddleware) {
+    this.cookieSessionMiddleware = cookieSessionMiddlewareProvider.resolve();
+    this.csrfMiddleware = csurf({
+      cookie: false,
+      sessionKey: "session",
+      value: req => {
+        const header = req.headers["x-xsrf-token"];
+        if (!header) return "";
+        return Array.isArray(header) ? header[0] : header;
+      },
     });
   }
 
   resolve(): MiddlewareFunction<Request, Response> {
-    return (req, res, next) => {
-      // Set the cache header, otherwise the cookie is discarded.
-      // https://stackoverflow.com/questions/44929653/firebase-cloud-function-wont-store-cookie-named-other-than-session
-      res!.setHeader("Cache-Control", "private");
+    const cookieSessionMiddleware = this.cookieSessionMiddleware;
+    const csrfMiddleware = this.csrfMiddleware;
 
-      this.cookieSessionMiddleware(req!, res!, next as NextFunction);
+    return (req, res, next) => {
+      cookieSessionMiddleware(req!, res!, applyCsrfMiddleware);
+
+      function applyCsrfMiddleware(err?: any) {
+        if (err) {
+          next!(err);
+          return;
+        }
+
+        csrfMiddleware(req!, res!, handleCsrfError);
+      }
+
+      function handleCsrfError(err?: any) {
+        if (err && err.code === "EBADCSRFTOKEN") {
+          throw new HttpException("Invalid CSRF token", HttpStatus.FORBIDDEN);
+        }
+
+        next!(err);
+      }
     };
   }
-}
-
-// These are the cookie expiration ranges supported by Firebase.
-// https://firebase.google.com/docs/auth/admin/manage-cookies
-export const MIN_FIREBASE_SESSION_MILLISECONDS = 300000;
-export const MAX_FIREBASE_SESSION_MILLISECONDS = 1209600000;
-
-function parseAndVerifyCookieExpireMilliseconds(expirationString: string) {
-  let expiration: number;
-  try {
-    expiration = parseInt(expirationString, 10);
-    if (
-      expiration < MIN_FIREBASE_SESSION_MILLISECONDS ||
-      expiration > MAX_FIREBASE_SESSION_MILLISECONDS
-    )
-      throw new Error(
-        `Cookie expire milliseconds must be between ${MIN_FIREBASE_SESSION_MILLISECONDS} and ${MAX_FIREBASE_SESSION_MILLISECONDS}. Was: ${expiration}.`,
-      );
-  } catch (e) {
-    throw new Error(
-      `Cookie expiration milliseconds was set to an invalid value: ${e}`,
-    );
-  }
-  return expiration;
 }

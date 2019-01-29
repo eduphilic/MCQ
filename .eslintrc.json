@@ -4,6 +4,7 @@
     "project": "./tsconfig.json"
   },
   "env": {
+    "browser": true,
     "jest": true
   },
   "extends": ["airbnb", "plugin:@typescript-eslint/recommended", "prettier"],
@@ -31,6 +32,7 @@
     "lines-between-class-members": "off",
     "spaced-comment": "off",
     "prefer-destructuring": "off",
+    "arrow-body-style": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/camelcase": "off",

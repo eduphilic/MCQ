@@ -1,6 +1,6 @@
 import { Injectable, MiddlewareFunction, NestMiddleware } from "@nestjs/common";
 import nextJs from "next";
-import { IncomingMessage, ServerResponse } from "http";
+import { Request, Response } from "express";
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -9,19 +9,19 @@ export class NextRendererMiddleware implements NestMiddleware {
   private nextApp = nextJs({ dev: !isProduction });
   private nextPreparationStatus: Promise<void> | null = null;
 
-  resolve(
-    ignoredPaths?: RegExp[],
-  ): MiddlewareFunction<IncomingMessage, ServerResponse> {
+  resolve(): MiddlewareFunction<Request, Response> {
     return async (req, res, next) => {
-      if (!req || !res)
-        throw new Error("Expected Express request and response objects.");
-
-      if (ignoredPaths && ignoredPaths.find(i => i.test(req.url as string))) {
-        return next && next();
+      if (/^\/graphql/.test(req!.url)) {
+        next!();
+        return;
       }
 
-      const nextApp = await this.getNextApp();
-      return nextApp.handleRequest(req, res);
+      try {
+        const nextApp = await this.getNextApp();
+        await nextApp.handleRequest(req!, res!);
+      } catch (e) {
+        next!(e);
+      }
     };
   }
 

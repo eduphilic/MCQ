@@ -23,11 +23,7 @@ import { SessionModule, SessionMiddleware } from "./session";
 export class ApplicationModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(SessionMiddleware)
-      .forRoutes({ path: "", method: RequestMethod.ALL });
-    consumer
-      .apply(NextRendererMiddleware)
-      .with([/^\/graphql/])
+      .apply(SessionMiddleware, NextRendererMiddleware)
       .forRoutes({ path: "", method: RequestMethod.ALL });
   }
 }

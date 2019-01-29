@@ -1,21 +1,16 @@
-// import { INestApplication } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
-// import request from "supertest";
 import {
-  SessionMiddleware,
+  CookieSessionMiddleware,
   MAX_FIREBASE_SESSION_MILLISECONDS,
   MIN_FIREBASE_SESSION_MILLISECONDS,
-} from "./session.middleware";
+} from "./cookie-session.middleware";
 import { ConfigService, ConfigModule } from "../config";
-
-// TODO: Add test for Cache-Control header.
-// TODO: Add test to verify application of session cookie middleware.
 
 const getConfigMock = jest.fn(() => ({
   session: { expire_milliseconds: MAX_FIREBASE_SESSION_MILLISECONDS },
 }));
 
-describe("SessionMiddleware", () => {
+describe("CookieSessionMiddleware", () => {
   beforeEach(() => {
     getConfigMock.mockClear();
   });
@@ -43,31 +38,10 @@ describe("SessionMiddleware", () => {
     });
   });
 
-  // describe("middleware", () => {
-  //   let app: INestApplication;
-
-  //   beforeAll(async () => {
-  //     const module = await createModule();
-
-  //     app = module.createNestApplication();
-  //     await app.init();
-  //   });
-
-  //   it("should set cache header", async () => {
-  //     await request(app.getHttpServer())
-  //       .get("/")
-  //       .expect("Cache-Control", "private");
-  //   });
-
-  //   afterAll(async () => {
-  //     await app.close();
-  //   });
-  // });
-
   async function createModule() {
     const module = await Test.createTestingModule({
       imports: [ConfigModule],
-      providers: [SessionMiddleware],
+      providers: [CookieSessionMiddleware],
     })
       .overrideProvider(ConfigService)
       .useValue({ getConfig: getConfigMock })
@@ -77,6 +51,6 @@ describe("SessionMiddleware", () => {
 
   async function createMiddleware() {
     const module = await createModule();
-    return module.get<SessionMiddleware>(SessionMiddleware);
+    return module.get<CookieSessionMiddleware>(CookieSessionMiddleware);
   }
 });
