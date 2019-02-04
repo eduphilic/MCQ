@@ -1,10 +1,10 @@
 import { Test } from "@nestjs/testing";
+import { ConfigModule, ConfigService } from "../config";
 import {
   CookieSessionMiddleware,
   MAX_FIREBASE_SESSION_MILLISECONDS,
   MIN_FIREBASE_SESSION_MILLISECONDS,
 } from "./cookie-session.middleware";
-import { ConfigService, ConfigModule } from "../config";
 
 const getConfigMock = jest.fn(() => ({
   session: { expire_milliseconds: MAX_FIREBASE_SESSION_MILLISECONDS },

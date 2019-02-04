@@ -1,9 +1,9 @@
 import childProcessOriginal from "child_process";
 import * as functionsOriginal from "firebase-functions";
 import {
-  createEnvironmentConfigProvider,
   createCliConfigProvider,
   createConfigProvider,
+  createEnvironmentConfigProvider,
 } from "./config.providers";
 
 jest.mock("firebase-functions");

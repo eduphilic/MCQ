@@ -1,6 +1,6 @@
 import { Injectable, MiddlewareFunction, NestMiddleware } from "@nestjs/common";
-import { Request, Response, RequestHandler, NextFunction } from "express";
 import cookieSession from "cookie-session";
+import { NextFunction, Request, RequestHandler, Response } from "express";
 import { ConfigService } from "../config";
 
 @Injectable()
@@ -46,10 +46,11 @@ function parseAndVerifyCookieExpireMilliseconds(expirationString: string) {
     if (
       expiration < MIN_FIREBASE_SESSION_MILLISECONDS ||
       expiration > MAX_FIREBASE_SESSION_MILLISECONDS
-    )
+    ) {
       throw new Error(
         `Cookie expire milliseconds must be between ${MIN_FIREBASE_SESSION_MILLISECONDS} and ${MAX_FIREBASE_SESSION_MILLISECONDS}. Was: ${expiration}.`,
       );
+    }
   } catch (e) {
     throw new Error(
       `Cookie expiration milliseconds was set to an invalid value: ${e}`,

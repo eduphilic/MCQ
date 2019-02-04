@@ -1,8 +1,8 @@
-import * as admin from "firebase-admin";
-import * as functions from "firebase-functions";
-import { INestExpressApplication, INestApplication } from "@nestjs/common";
+import { INestApplication, INestExpressApplication } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import express from "express";
+import * as admin from "firebase-admin";
+import * as functions from "firebase-functions";
 import { ApplicationModule } from "./server";
 
 const adminConfig: admin.AppOptions = JSON.parse(process.env.FIREBASE_CONFIG);
@@ -39,7 +39,7 @@ const bootstrap = (() => {
     // Function.
     return (isFirebaseFunction ? nestApp.init() : nestApp.listen(3000)).catch(
       e => {
-        // eslint-disable-next-line no-console
+        // tslint:disable-next-line:no-console
         console.error("Server initialization failure:", e);
         process.exit(1);
       },

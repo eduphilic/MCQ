@@ -1,7 +1,7 @@
-import * as yup from "yup";
 import { Test, TestingModule } from "@nestjs/testing";
-import { ConfigService } from "./config.service";
+import * as yup from "yup";
 import { ConfigProviders } from "./config.providers";
+import { ConfigService } from "./config.service";
 
 const expectedConfig = { test: "test" };
 const configSchema = yup.object({ test: yup.string().required() });

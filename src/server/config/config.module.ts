@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
-import { ConfigService } from "./config.service";
 import { createProviders } from "./config.providers";
+import { ConfigService } from "./config.service";
 
 /**
  * Exposes the server configuration which was loaded from environment variables.

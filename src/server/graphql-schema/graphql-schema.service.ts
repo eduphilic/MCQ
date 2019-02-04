@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { printSchema, DocumentNode } from "graphql";
+import { DocumentNode, printSchema } from "graphql";
 import gql from "graphql-tag";
 import { makeExecutableSchema } from "graphql-tools";
 
@@ -18,16 +18,14 @@ export class GraphQLSchemaService {
     `,
   ];
 
-  registerGraphQLTypeDefinition(typeDef: DocumentNode): void;
-  registerGraphQLTypeDefinition(typeDefs: DocumentNode[]): void;
   registerGraphQLTypeDefinition(
-    typeDefOrTypeDefArray: DocumentNode | DocumentNode[],
+    typeDefOrTypeDefs: DocumentNode | DocumentNode[],
   ) {
     this.assertTypeDefsNotEmitted();
 
-    const definitions = !Array.isArray(typeDefOrTypeDefArray)
-      ? [typeDefOrTypeDefArray]
-      : typeDefOrTypeDefArray;
+    const definitions = !Array.isArray(typeDefOrTypeDefs)
+      ? [typeDefOrTypeDefs]
+      : typeDefOrTypeDefs;
 
     this.typeDefs.push(...definitions);
   }
@@ -45,7 +43,8 @@ export class GraphQLSchemaService {
    * server is initialized.
    */
   private assertTypeDefsNotEmitted() {
-    if (this.typeDefsEmitted)
+    if (this.typeDefsEmitted) {
       throw new Error("GraphQL TypeDefs were already emitted.");
+    }
   }
 }

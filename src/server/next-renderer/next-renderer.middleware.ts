@@ -1,6 +1,6 @@
 import { Injectable, MiddlewareFunction, NestMiddleware } from "@nestjs/common";
-import nextJs from "next";
 import { Request, Response } from "express";
+import nextJs from "next";
 
 const isProduction = process.env.NODE_ENV === "production";
 

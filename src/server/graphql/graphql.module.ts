@@ -1,9 +1,9 @@
-import path from "path";
 import { Module } from "@nestjs/common";
 import {
-  GraphQLModule as NestGraphQLModule,
   GqlModuleOptions,
+  GraphQLModule as NestGraphQLModule,
 } from "@nestjs/graphql";
+import path from "path";
 import { GraphQLSchemaModule, GraphQLSchemaService } from "../graphql-schema";
 import { GraphQLController } from "./graphql.controller";
 

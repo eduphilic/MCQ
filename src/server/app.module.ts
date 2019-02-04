@@ -1,15 +1,15 @@
 import {
+  MiddlewareConsumer,
   Module,
   NestModule,
-  MiddlewareConsumer,
   RequestMethod,
 } from "@nestjs/common";
 
 import { ConfigModule } from "./config";
 import { GraphQLModule } from "./graphql";
 import { GraphQLSchemaModule } from "./graphql-schema";
-import { NextRendererModule, NextRendererMiddleware } from "./next-renderer";
-import { SessionModule, SessionMiddleware } from "./session";
+import { NextRendererMiddleware, NextRendererModule } from "./next-renderer";
+import { SessionMiddleware, SessionModule } from "./session";
 
 @Module({
   imports: [

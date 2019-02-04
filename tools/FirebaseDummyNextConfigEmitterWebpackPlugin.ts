@@ -1,4 +1,4 @@
-import { Plugin, Compiler } from "webpack";
+import { Compiler, Plugin } from "webpack";
 
 /**
  * Emits an empty "next.config.js".

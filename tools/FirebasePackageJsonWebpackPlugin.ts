@@ -1,7 +1,7 @@
 import fs from "fs";
-import { Plugin, Compiler } from "webpack";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { PackageJson } from "package-json";
+import { Compiler, Plugin } from "webpack";
 
 /**
  * Emits a package.json file for use with Firebase Functions. It copies over the

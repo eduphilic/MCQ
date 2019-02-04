@@ -6,7 +6,7 @@
 // Disable TypeScript module warning due to the "isolatedModules" option being
 // set to true.
 // @ts-ignore
-// eslint-disable-next-line
+// tslint:disable-next-line:no-empty
 if (true) {
 }
 
@@ -24,6 +24,7 @@ const firebaseConfig: import("firebase-admin").AppOptions = firebaseConfigEnv
 process.env.FIREBASE_CONFIG = JSON.stringify(firebaseConfig);
 process.env.IS_FIREBASE_FUNCTION = JSON.stringify(!!firebaseConfigEnv);
 
+// tslint:disable-next-line:no-var-requires
 const main: (typeof import("./main"))["main"] = require("./main").main;
 
 module.exports.main = main;

@@ -1,11 +1,10 @@
-/* eslint-disable import/no-extraneous-dependencies, @typescript-eslint/no-use-before-define */
 import path from "path";
+import StartServerPlugin from "start-server-webpack-plugin";
 import webpack, { Configuration } from "webpack";
 import nodeExternals from "webpack-node-externals";
-import StartServerPlugin from "start-server-webpack-plugin";
-import { FirebasePackageJsonWebpackPlugin } from "./tools/FirebasePackageJsonWebpackPlugin";
-import { FirebaseDummyNextConfigEmitterWebpackPlugin } from "./tools/FirebaseDummyNextConfigEmitterWebpackPlugin";
 import { createFirebaseAdminServiceAccountCredentialsWebpackDefinePlugin } from "./tools/createFirebaseAdminServiceAccountCredentialsWebpackDefinePlugin";
+import { FirebaseDummyNextConfigEmitterWebpackPlugin } from "./tools/FirebaseDummyNextConfigEmitterWebpackPlugin";
+import { FirebasePackageJsonWebpackPlugin } from "./tools/FirebasePackageJsonWebpackPlugin";
 
 export default function(): Configuration {
   return {

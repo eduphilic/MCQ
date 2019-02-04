@@ -1,7 +1,7 @@
+import assert from "assert";
+import childProcess from "child_process";
 import fs from "fs";
 import path from "path";
-import childProcess from "child_process";
-import assert from "assert";
 import { DefinePlugin } from "webpack";
 
 /**
@@ -38,10 +38,11 @@ export function createFirebaseAdminServiceAccountCredentialsWebpackDefinePlugin(
       ([_key, value]) => value === projectAlias,
     );
 
-    if (!activeProjectAlias)
+    if (!activeProjectAlias) {
       throw new Error(
         `current project "${projectAlias}" is not listed in ".firebaserc"'s project aliases.`,
       );
+    }
     activeProject = activeProjectAlias[0] as typeof supportedProjectAliases[0];
     assert(activeProject);
   } catch (e) {

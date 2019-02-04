@@ -1,8 +1,8 @@
-import childProcess from "child_process";
-import path from "path";
-import * as functions from "firebase-functions";
-import * as yup from "yup";
 import { Provider } from "@nestjs/common/interfaces";
+import childProcess from "child_process";
+import * as functions from "firebase-functions";
+import path from "path";
+import * as yup from "yup";
 import { Config } from "./config.dto";
 
 export enum ConfigProviders {

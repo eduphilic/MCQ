@@ -1,6 +1,6 @@
+import { Inject, Injectable, OnModuleInit } from "@nestjs/common";
 import assert from "assert";
 import * as yup from "yup";
-import { Injectable, Inject, OnModuleInit } from "@nestjs/common";
 import { Config } from "./config.dto";
 import { ConfigProviders } from "./config.providers";
 

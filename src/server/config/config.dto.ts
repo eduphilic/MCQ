@@ -4,7 +4,7 @@
  * development emulator, these values are retrieved using the Firebase command
  * line tool.
  */
-export type Config = {
+export interface Config {
   recaptcha: {
     site_key: string;
     secret_key: string;
@@ -13,4 +13,4 @@ export type Config = {
     key: string;
     expire_milliseconds: string;
   };
-};
+}
