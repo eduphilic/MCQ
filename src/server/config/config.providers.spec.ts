@@ -48,6 +48,8 @@ describe("ConfigProviders", () => {
     });
 
     it("should return environment variables from Firebase command line", async () => {
+      // TODO: Fix this typing issue.
+      // @ts-ignore
       childProcess.execSync.mockReturnValueOnce(`Extraneous beginning text.
 ${JSON.stringify(expected, null, 2) /* Expects JSON to be formatted. */}
   Extraneous ending text.`);
@@ -80,6 +82,8 @@ ${JSON.stringify(expected, null, 2) /* Expects JSON to be formatted. */}
     });
 
     it("should return value from command line when in testing environment", async () => {
+      // TODO: Fix this typing issue.
+      // @ts-ignore
       cliConfigProvider.mockReturnValueOnce(expected);
       const provider = await createProvider();
 
@@ -89,6 +93,8 @@ ${JSON.stringify(expected, null, 2) /* Expects JSON to be formatted. */}
     async function createProvider() {
       return createConfigProvider<typeof expected>().useFactory(
         configFromEnvironment,
+        // TODO: Fix this typing issue.
+        // @ts-ignore
         cliConfigProvider,
       );
     }

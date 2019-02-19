@@ -12,6 +12,7 @@ module.exports = {
       displayName: "server",
       testEnvironment: "node",
       roots: ["<rootDir>/server"],
+      setupFiles: ["<rootDir>/setupTests.ts"],
     },
   ],
 };
