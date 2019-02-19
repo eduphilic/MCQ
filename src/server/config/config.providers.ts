@@ -47,6 +47,9 @@ export function createConfigSchemaProvider() {
     return yup
       .object<T>(
         Object.keys(fields).reduce((accumulator, key) => {
+          // TODO: Fix this type error, happened after type definition updates
+          // and/or TypeScript update.
+          // @ts-ignore
           accumulator[key as keyof T] = yup.string().required();
           return accumulator;
         }, initial),
