@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { AsyncSubject, defer, of } from "rxjs";
+import { AsyncSubject, defer, EMPTY, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
+import { useRecaptchaContext } from "./RecaptchaContext";
 
 const RECAPTCHA_ELEMENT_ID = "recaptcha-js";
-// TODO: Pull this from environment variable passed from server.
-const RECAPTCHA_SCRIPT_SRC = "https://www.google.com/recaptcha/api.js?render=6LfE44wUAAAAAEcPLTPdUgi59UoFR5gR4kDON5A4"; // prettier-ignore
+const RECAPTCHA_SCRIPT_SRC = "https://www.google.com/recaptcha/api.js?render=%KEY%"; // prettier-ignore
 
 export function useRecaptcha() {
-  const initialize = useRef(initializeRecaptcha());
+  const recaptchaSiteKey = useRecaptchaContext();
+  const initialize = useRef(initializeRecaptcha(recaptchaSiteKey));
   const [recaptcha, setRecaptcha] = useState<Recaptcha | null>(null);
 
   useEffect(() => {
@@ -17,12 +18,13 @@ export function useRecaptcha() {
       next: () => setRecaptcha(grecaptcha),
     });
     return subscription.unsubscribe.bind(subscription);
-  }, []);
+  }, [recaptchaSiteKey]);
 
   return recaptcha;
 }
 
-function initializeRecaptcha() {
+function initializeRecaptcha(recaptchaSiteKey: string | null) {
+  if (!recaptchaSiteKey) return EMPTY;
   return defer(() => of(document.getElementById(RECAPTCHA_ELEMENT_ID))).pipe(
     switchMap(elementOrNull => {
       if (elementOrNull !== null) of(null);
@@ -31,7 +33,10 @@ function initializeRecaptcha() {
 
       const scriptElement = document.createElement("script");
       scriptElement.id = RECAPTCHA_ELEMENT_ID;
-      scriptElement.src = RECAPTCHA_SCRIPT_SRC;
+      scriptElement.src = RECAPTCHA_SCRIPT_SRC.replace(
+        "%KEY%",
+        recaptchaSiteKey,
+      );
       scriptElement.onload = () => {
         onLoadSubject.next();
         onLoadSubject.complete();

@@ -1,7 +1,7 @@
 import App, { Container } from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
-import { withRecaptcha } from "../src/client/session";
+import { RecaptchaProvider, withRecaptcha } from "../src/client/session";
 import { withReduxStore, WithReduxStore } from "../src/client/store";
 
 class MyApp extends App<WithReduxStore> {
@@ -11,7 +11,9 @@ class MyApp extends App<WithReduxStore> {
     return (
       <Container>
         <Provider store={reduxStore}>
-          <Component {...pageProps} />
+          <RecaptchaProvider>
+            <Component {...pageProps} />
+          </RecaptchaProvider>
         </Provider>
       </Container>
     );
