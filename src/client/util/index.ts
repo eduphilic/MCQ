@@ -1,0 +1,1 @@
+export { isNextComponentType } from "./isNextComponentType";
