@@ -1,5 +1,4 @@
-import { ActionCreatorsMapObject } from "redux";
-import { StoreAction } from "../store/StoreAction";
+import { StoreAction } from "../store";
 
 export enum SessionActionType {
   SET_RECAPTCHA_CLIENT_KEY = "[session] Set Recaptcha Client Key",
@@ -10,8 +9,8 @@ export type SessionAction = {
   payload: { key: string };
 };
 
-export const sessionActions: ActionCreatorsMapObject<StoreAction> = {
-  setRecaptchaClientKey: (key: string) => ({
+export const sessionActions = {
+  setRecaptchaClientKey: (key: string): StoreAction => ({
     type: SessionActionType.SET_RECAPTCHA_CLIENT_KEY,
     payload: { key },
   }),
