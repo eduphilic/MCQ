@@ -1,3 +1,4 @@
+import { makeStyles } from "@material-ui/styles";
 import { useEffect, useRef, useState } from "react";
 import { AsyncSubject, defer, EMPTY, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
@@ -6,10 +7,17 @@ import { useRecaptchaContext } from "./RecaptchaContext";
 const RECAPTCHA_ELEMENT_ID = "recaptcha-js";
 const RECAPTCHA_SCRIPT_SRC = "https://www.google.com/recaptcha/api.js?render=%KEY%"; // prettier-ignore
 
+const useHideRecaptchaBadgeGlobalStyle = makeStyles({
+  "@global .grecaptcha-badge": {
+    display: "none",
+  },
+});
+
 export function useRecaptcha() {
   const recaptchaSiteKey = useRecaptchaContext();
   const initialize = useRef(initializeRecaptcha(recaptchaSiteKey));
   const [recaptcha, setRecaptcha] = useState<Recaptcha | null>(null);
+  useHideRecaptchaBadgeGlobalStyle();
 
   useEffect(() => {
     if (!process.browser) return;
