@@ -44,6 +44,7 @@ export class SessionMiddleware implements NestMiddleware {
       }
 
       function handleCsrfError(err?: any) {
+        // spell-checker:ignore EBADCSRFTOKEN
         if (err && err.code === "EBADCSRFTOKEN") {
           throw new HttpException("Invalid CSRF token", HttpStatus.FORBIDDEN);
         }
