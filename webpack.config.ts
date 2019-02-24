@@ -1,23 +1,19 @@
 import path from "path";
-import StartServerPlugin from "start-server-webpack-plugin";
-import webpack, { Configuration } from "webpack";
+import { Configuration } from "webpack";
 import nodeExternals from "webpack-node-externals";
-import { createFirebaseAdminServiceAccountCredentialsWebpackDefinePlugin } from "./tools/createFirebaseAdminServiceAccountCredentialsWebpackDefinePlugin";
-import { FirebaseDummyNextConfigEmitterWebpackPlugin } from "./tools/FirebaseDummyNextConfigEmitterWebpackPlugin";
-import { FirebasePackageJsonWebpackPlugin } from "./tools/FirebasePackageJsonWebpackPlugin";
+// import { createFirebaseAdminServiceAccountCredentialsWebpackDefinePlugin } from "./tools/createFirebaseAdminServiceAccountCredentialsWebpackDefinePlugin";
+// import { FirebaseDummyNextConfigEmitterWebpackPlugin } from "./tools/FirebaseDummyNextConfigEmitterWebpackPlugin";
 
 export default function(): Configuration {
   return {
     mode,
 
     entry: {
-      index: (mode === "development" ? ["webpack/hot/signal"] : []).concat([
-        "./src/index.ts",
-      ]),
+      index: "./src/server/main.ts",
     },
 
     output: {
-      path: path.join(__dirname, "dist/functions"),
+      path: path.join(__dirname, "dist/api"),
       filename: "[name].js",
       libraryTarget: "this",
     },
@@ -61,24 +57,12 @@ export default function(): Configuration {
       process: false,
     },
 
-    plugins: (mode === "development"
-      ? [
-          new webpack.HotModuleReplacementPlugin(),
-          new StartServerPlugin({
-            name: "index.js",
-            signal: true,
-          }),
-        ]
-      : []
-    ).concat(
-      createFirebaseAdminServiceAccountCredentialsWebpackDefinePlugin(
-        __dirname,
-      ),
-      new FirebasePackageJsonWebpackPlugin(
-        path.join(__dirname, "package.json"),
-      ),
-      new FirebaseDummyNextConfigEmitterWebpackPlugin(),
-    ),
+    plugins: [
+      // createFirebaseAdminServiceAccountCredentialsWebpackDefinePlugin(
+      //   __dirname,
+      // ),
+      // new FirebaseDummyNextConfigEmitterWebpackPlugin(),
+    ],
   };
 }
 

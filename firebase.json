@@ -1,6 +1,6 @@
 {
   "functions": {
-    "source": "dist/functions",
+    "source": "dist",
     "predeploy": ["yarn build"]
   },
   "hosting": {

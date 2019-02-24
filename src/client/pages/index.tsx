@@ -1,5 +1,5 @@
 import React from "react";
-import { useRecaptcha } from "../src/client/session";
+import { useRecaptcha } from "../session";
 
 export default () => {
   // @ts-ignore

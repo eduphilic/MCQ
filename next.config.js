@@ -2,7 +2,8 @@
 const withTypescript = require("@zeit/next-typescript");
 
 module.exports = withTypescript({
-  distDir: "dist/functions/.next",
+  target: "serverless",
+  distDir: "../../dist/frontend",
 
   // Prevent screen clear after builds.
   /* eslint-disable no-param-reassign */

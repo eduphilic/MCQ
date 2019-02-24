@@ -5,17 +5,16 @@ import {
   RequestMethod,
 } from "@nestjs/common";
 import { ConfigModule } from "./config";
-import { NextRendererMiddleware, NextRendererModule } from "./next-renderer";
 import { SessionMiddleware, SessionModule } from "./session";
 import { UserModule } from "./user";
 
 @Module({
-  imports: [ConfigModule, NextRendererModule, SessionModule, UserModule],
+  imports: [ConfigModule, SessionModule, UserModule],
 })
 export class ApplicationModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(SessionMiddleware, NextRendererMiddleware)
+      .apply(SessionMiddleware)
       .forRoutes({ path: "", method: RequestMethod.ALL });
   }
 }
