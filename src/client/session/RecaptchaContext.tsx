@@ -16,6 +16,8 @@ function RecaptchaProvider({ children, recaptchaSiteKey }: Props) {
 }
 
 const RecaptchaProviderProvider = connect((state: StoreState) => ({
+  // FIXME: Correct this data path!
+  // @ts-ignore
   recaptchaSiteKey: state.session.recaptchaSiteKey,
 }))(RecaptchaProvider);
 

@@ -1,17 +1,18 @@
+import { createFetchOperationReducer } from "client/store";
 import produce from "immer";
-import { SessionAction, SessionActionType } from "./actions";
+import { SessionAction } from "./actions";
+import { FETCH_OPERATION_RECAPTCHA } from "./fetchOperations";
 
 type SessionState = {
-  recaptchaSiteKey: string | null;
+  recaptcha: ReturnType<typeof recaptchaReducer>;
 };
 
+const { reducer: recaptchaReducer, initialState: recaptchaInitialState } = createFetchOperationReducer<typeof FETCH_OPERATION_RECAPTCHA, string>(FETCH_OPERATION_RECAPTCHA); // prettier-ignore
+
 const initialState: SessionState = {
-  recaptchaSiteKey: null,
+  recaptcha: recaptchaInitialState,
 };
 
 export const sessionReducer = produce((draft, action: SessionAction) => {
-  switch (action.type) {
-    case SessionActionType.SET_RECAPTCHA_CLIENT_KEY:
-      draft.recaptchaSiteKey = action.payload.key;
-  }
+  draft.recaptcha = recaptchaReducer(draft.recaptcha, action);
 }, initialState);
