@@ -1,3 +1,3 @@
-import { ConfigPublic } from "../interfaces";
+import { ConfigPublic } from "common";
 
 export type GetConfigResponseDto = Partial<ConfigPublic>;
