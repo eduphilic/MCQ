@@ -17,6 +17,7 @@ export class YupValidationPipe implements PipeTransform {
     try {
       validatedValue = await this.schema.validate(value, {
         abortEarly: true,
+        strict: true,
         stripUnknown: true,
       });
     } catch (e) {
