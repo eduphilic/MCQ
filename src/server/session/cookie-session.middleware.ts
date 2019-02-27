@@ -8,9 +8,9 @@ export class CookieSessionMiddleware implements NestMiddleware {
   private cookieSessionMiddleware: RequestHandler;
 
   constructor(configService: ConfigService) {
-    const config = configService.getConfig();
+    const config = configService.getServerConfig();
 
-    const cookieExpireMilliseconds = parseAndVerifyCookieExpireMilliseconds(
+    const cookieExpireMilliseconds = verifyCookieExpireMilliseconds(
       config.session.expire_milliseconds,
     );
 
@@ -39,22 +39,15 @@ export class CookieSessionMiddleware implements NestMiddleware {
 export const MIN_FIREBASE_SESSION_MILLISECONDS = 300000;
 export const MAX_FIREBASE_SESSION_MILLISECONDS = 1209600000;
 
-function parseAndVerifyCookieExpireMilliseconds(expirationString: string) {
-  let expiration: number;
-  try {
-    expiration = parseInt(expirationString, 10);
-    if (
-      expiration < MIN_FIREBASE_SESSION_MILLISECONDS ||
-      expiration > MAX_FIREBASE_SESSION_MILLISECONDS
-    ) {
-      throw new Error(
-        `Cookie expire milliseconds must be between ${MIN_FIREBASE_SESSION_MILLISECONDS} and ${MAX_FIREBASE_SESSION_MILLISECONDS}. Was: ${expiration}.`,
-      );
-    }
-  } catch (e) {
+function verifyCookieExpireMilliseconds(expiration: number) {
+  if (
+    expiration < MIN_FIREBASE_SESSION_MILLISECONDS ||
+    expiration > MAX_FIREBASE_SESSION_MILLISECONDS
+  ) {
     throw new Error(
-      `Cookie expiration milliseconds was set to an invalid value: ${e}`,
+      `Cookie expire milliseconds must be between ${MIN_FIREBASE_SESSION_MILLISECONDS} and ${MAX_FIREBASE_SESSION_MILLISECONDS}. Was: ${expiration}.`,
     );
   }
+
   return expiration;
 }

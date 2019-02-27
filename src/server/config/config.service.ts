@@ -1,23 +1,35 @@
-import { Inject, Injectable, OnModuleInit } from "@nestjs/common";
-import assert from "assert";
-import * as yup from "yup";
-import { Config } from "./config.dto";
-import { ConfigProviders } from "./config.providers";
+import { Injectable } from "@nestjs/common";
+import { Config, ConfigPublic } from "./interfaces";
 
 @Injectable()
-export class ConfigService implements OnModuleInit {
-  constructor(
-    @Inject(ConfigProviders.Combined) private config: Config,
-    @Inject(ConfigProviders.Schema) private configSchema: yup.Schema<Config>,
-  ) {}
-
-  onModuleInit() {
-    this.configSchema.validateSync(this.config);
+export class ConfigService {
+  /**
+   * Returns the server and application configuration. The values returned
+   * contain sensitive server information and should not be exposed directly.
+   */
+  getServerConfig(): Config {
+    return {
+      // spell-checker:disable
+      recaptcha: {
+        secret_key: "6LfE44wUAAAAACXTTT_FhLXDoRk4sZxbF3tPqLal",
+        site_key: "6LfE44wUAAAAAEcPLTPdUgi59UoFR5gR4kDON5A4",
+      },
+      session: {
+        expire_milliseconds: 1209600000,
+        key: "Nus9NV50s5Am",
+      },
+      // spell-checker:enable
+    };
   }
 
-  getConfig() {
-    const config = this.config;
-    assert(config, "Expected server environment variables to be loaded.");
-    return config;
+  /**
+   * Returns application configuration meant to be exposed publicly.
+   */
+  getPublicConfig(): ConfigPublic {
+    const config = this.getServerConfig();
+
+    return {
+      recaptchaSiteKey: config.recaptcha.site_key,
+    };
   }
 }

@@ -44,7 +44,7 @@ describe("CookieSessionMiddleware", () => {
       providers: [CookieSessionMiddleware],
     })
       .overrideProvider(ConfigService)
-      .useValue({ getConfig: getConfigMock })
+      .useValue({ getServerConfig: getConfigMock })
       .compile();
     return module;
   }
