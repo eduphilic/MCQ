@@ -6,6 +6,7 @@
     // by Babel and thus will not be affected by this setting.
     "module": "commonjs",
     "lib": ["esnext", "dom"],
+    "baseUrl": "./src",
     "allowJs": true,
     "checkJs": true,
     "jsx": "react",
@@ -24,10 +25,5 @@
     "skipLibCheck": true,
     "typeRoots": ["./node_modules/@types", "./typings"]
   },
-  "include": [
-    "./webpack.config.ts",
-    "./pages/**/*",
-    "./src/**/*",
-    "./tools/**/*"
-  ]
+  "include": ["./webpack.config.ts", "./src/**/*", "./tools/**/*"]
 }
