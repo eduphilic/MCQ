@@ -1,16 +1,34 @@
 {
   "functions": {
-    "source": "dist",
-    "predeploy": ["yarn build"]
+    "source": "dist"
   },
   "hosting": {
-    "public": "dist/public",
+    "public": "dist/frontend/static",
     "rewrites": [
       {
-        "source": "**/**",
-        "function": "main"
+        "source": "/_app",
+        "function": "pages__app_js"
+      },
+      {
+        "source": "/_document",
+        "function": "pages__document_js"
+      },
+      {
+        "source": "/_error",
+        "function": "pages__error_js"
+      },
+      {
+        "source": "/admin/test",
+        "function": "pages_admin_test_js"
+      },
+      {
+        "source": "/",
+        "function": "pages_index_js"
+      },
+      {
+        "source": "/api/**",
+        "function": "api"
       }
-    ],
-    "predeploy": ["yarn build:public"]
+    ]
   }
 }

@@ -1,3 +1,5 @@
+// @ts-ignore
+import NodemonPlugin from "nodemon-webpack-plugin";
 import path from "path";
 import { Configuration } from "webpack";
 import nodeExternals from "webpack-node-externals";
@@ -58,10 +60,11 @@ export default function(): Configuration {
     },
 
     plugins: [
-      // createFirebaseAdminServiceAccountCredentialsWebpackDefinePlugin(
-      //   __dirname,
-      // ),
-      // new FirebaseDummyNextConfigEmitterWebpackPlugin(),
+      new NodemonPlugin({
+        watch: path.resolve(__dirname, "src/server"),
+        script: path.resolve(__dirname, "dist/index.js"),
+        ext: "ts",
+      }),
     ],
   };
 }

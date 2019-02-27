@@ -2,12 +2,13 @@ import { NestFactory } from "@nestjs/core";
 import express from "express";
 import { IncomingMessage, ServerResponse } from "http";
 import { ConnectableObservable, from, of } from "rxjs";
-import { publishLast, switchMap, switchMapTo } from "rxjs/operators";
+import { publishLast, switchMap, switchMapTo, tap } from "rxjs/operators";
 import { ApplicationModule } from "./app.module";
 
 const expressServer$ = of(express()).pipe(
   switchMap(expressServer => {
     return from(NestFactory.create(ApplicationModule, expressServer)).pipe(
+      tap(nestApp => nestApp.setGlobalPrefix("/api")),
       switchMap(nestApp => from(nestApp.init())),
       switchMapTo(of(expressServer)),
     );
