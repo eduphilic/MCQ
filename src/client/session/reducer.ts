@@ -1,5 +1,5 @@
-import { createFetchOperationReducer } from "client/store";
-import produce from "immer";
+import produce, { original } from "immer";
+import { createFetchOperationReducer } from "../util";
 import { SessionAction } from "./actions";
 import { FETCH_OPERATION_RECAPTCHA } from "./fetchOperations";
 
@@ -14,5 +14,5 @@ const initialState: SessionState = {
 };
 
 export const sessionReducer = produce((draft, action: SessionAction) => {
-  draft.recaptcha = recaptchaReducer(draft.recaptcha, action);
+  draft.recaptcha = recaptchaReducer(original(draft.recaptcha) || draft.recaptcha, action); // prettier-ignore
 }, initialState);

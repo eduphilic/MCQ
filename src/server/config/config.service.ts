@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { ConfigPublic } from "common";
+import { ConfigPublic } from "../../common";
 import { Config } from "./interfaces";
 
 @Injectable()

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies, @typescript-eslint/no-var-requires */
 const withTypescript = require("@zeit/next-typescript");
 
 module.exports = withTypescript({
@@ -6,7 +5,6 @@ module.exports = withTypescript({
   distDir: "../../dist/frontend",
 
   // Prevent screen clear after builds.
-  /* eslint-disable no-param-reassign */
   webpack(config, { dev, isServer }) {
     if (dev && !isServer) {
       const friendlyErrorsPluginInstance = config.plugins.find(
@@ -26,5 +24,4 @@ module.exports = withTypescript({
 
     return config;
   },
-  /* eslint-enable no-param-reassign */
 });

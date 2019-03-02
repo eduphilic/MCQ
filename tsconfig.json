@@ -6,7 +6,6 @@
     // by Babel and thus will not be affected by this setting.
     "module": "commonjs",
     "lib": ["esnext", "dom"],
-    "baseUrl": "./src",
     "allowJs": true,
     "checkJs": true,
     "jsx": "react",

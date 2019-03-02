@@ -15,10 +15,10 @@ function RecaptchaProvider({ children, recaptchaSiteKey }: Props) {
   );
 }
 
-const RecaptchaProviderProvider = connect((state: StoreState) => ({
-  // FIXME: Correct this data path!
-  // @ts-ignore
-  recaptchaSiteKey: state.session.recaptchaSiteKey,
+const RecaptchaProviderProvider = connect((_state: StoreState) => ({
+  // TODO: Handle null.
+  recaptchaSiteKey: "",
+  // recaptchaSiteKey: state.session.recaptcha.data,
 }))(RecaptchaProvider);
 
 export { RecaptchaProviderProvider as RecaptchaProvider };

@@ -1,4 +1,4 @@
-import { createFetchOperationActions, FetchOperationAction } from "../store";
+import { createFetchOperationActions, FetchOperationAction } from "../util";
 import { FETCH_OPERATION_RECAPTCHA } from "./fetchOperations";
 
 export enum SessionActionType {
