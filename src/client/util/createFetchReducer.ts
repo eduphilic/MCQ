@@ -69,8 +69,12 @@ export function createFetchReducer<Payload>(operationName: string) {
       return { type: FetchActionType.FetchBegin, operationName };
     },
 
-    fetchSuccess(payload: Payload): FetchAction {
-      return { type: FetchActionType.FetchSuccess, operationName, payload };
+    fetchSuccess(data: Payload): FetchAction {
+      return {
+        type: FetchActionType.FetchSuccess,
+        operationName,
+        payload: data,
+      };
     },
 
     fetchError(error: Error): FetchAction {

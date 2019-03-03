@@ -4,10 +4,15 @@ import { StoreState } from "../store";
 
 const Context = createContext<string | null>(null);
 
-type Props = {
+type OwnProps = {
   children?: ReactNode;
+};
+
+type StateProps = {
   recaptchaSiteKey: string | null;
 };
+
+type Props = OwnProps & StateProps;
 
 function RecaptchaProvider({ children, recaptchaSiteKey }: Props) {
   return (
@@ -15,11 +20,11 @@ function RecaptchaProvider({ children, recaptchaSiteKey }: Props) {
   );
 }
 
-const RecaptchaProviderProvider = connect((_state: StoreState) => ({
-  // TODO: Handle null.
-  recaptchaSiteKey: "",
-  // recaptchaSiteKey: state.session.recaptcha.data,
-}))(RecaptchaProvider);
+const RecaptchaProviderProvider = connect(
+  ({ session: { config } }: StoreState): StateProps => ({
+    recaptchaSiteKey: config.recaptchaSiteKey,
+  }),
+)(RecaptchaProvider);
 
 export { RecaptchaProviderProvider as RecaptchaProvider };
 
