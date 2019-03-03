@@ -1,10 +1,14 @@
+import Link from "next/link";
 import React from "react";
-import { useRecaptcha } from "../session";
 
 export default () => {
-  const recaptcha = useRecaptcha();
-  /* tslint:disable-next-line:no-console */
-  console.log({ recaptcha });
-
-  return <div>Welcome</div>;
+  return (
+    <div>
+      Welcome
+      <br />
+      <Link href="/signup">
+        <a>Sign Up</a>
+      </Link>
+    </div>
+  );
 };
