@@ -1,3 +1,3 @@
-import { SessionAction } from "../session";
+import { FetchAction } from "../util";
 
-export type StoreAction = SessionAction;
+export type StoreAction = FetchAction;
