@@ -6,6 +6,7 @@
   ],
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
+    "jsdoc-format": false,
     "object-shorthand-properties-first": false,
     "object-literal-sort-keys": false,
     "interface-over-type-literal": false,

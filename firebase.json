@@ -18,12 +18,12 @@
         "function": "pages__error_js"
       },
       {
-        "source": "/admin/test",
-        "function": "pages_admin_test_js"
-      },
-      {
         "source": "/",
         "function": "pages_index_js"
+      },
+      {
+        "source": "/signup",
+        "function": "pages_signup_js"
       },
       {
         "source": "/api/**",
