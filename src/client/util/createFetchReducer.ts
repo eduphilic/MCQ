@@ -25,7 +25,6 @@ export type FetchAction =
     };
 
 export type FetchState<Payload> = {
-  operationName: string;
   fetching: boolean;
   fetched: boolean;
   error: Error | null;
@@ -34,7 +33,6 @@ export type FetchState<Payload> = {
 
 export function createFetchReducer<Payload>(operationName: string) {
   const initialState: FetchState<Payload> = {
-    operationName,
     fetching: false,
     fetched: false,
     error: null,

@@ -5,12 +5,9 @@ import { LayoutLandingStickyFooter } from "./components";
 
 export type LandingPageProps = LandingPageConfig;
 
-export function LandingPage(props: LandingPageProps) {
-  /* tslint:disable-next-line:no-console */
-  console.log({ props });
-
+export function LandingPage({ stickyFooterText }: LandingPageProps) {
   return (
-    <LayoutLandingStickyFooter>
+    <LayoutLandingStickyFooter stickyFooterText={stickyFooterText}>
       Welcome
       <br />
       <Link href="/signup">

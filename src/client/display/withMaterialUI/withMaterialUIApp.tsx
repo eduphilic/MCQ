@@ -1,10 +1,12 @@
 import StylesProvider from "@material-ui/styles/StylesProvider";
+import { NextAppContext } from "next/app";
 import React, {
   Component,
   ComponentClass,
   ComponentType,
   ReactNode,
 } from "react";
+import { isNextComponentType } from "../../util";
 import { getPageContext, PageContext } from "./getPageContext";
 
 type Props = {
@@ -17,6 +19,16 @@ export type WithMaterialUI = {
 
 export function withMaterialUIApp<P>(App: ComponentType<P & WithMaterialUI>) {
   class AppWithMaterialUI extends Component<P & Props> {
+    static async getInitialProps(context: NextAppContext) {
+      let appProps = {};
+
+      if (isNextComponentType(App)) {
+        appProps = await App.getInitialProps!(context);
+      }
+
+      return appProps;
+    }
+
     private pageContext: PageContext;
 
     constructor(props: P & Props) {

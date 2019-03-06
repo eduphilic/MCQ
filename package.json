@@ -46,6 +46,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.4.0",
     "typeface-montserrat": "^0.0.54",
+    "universal-rxjs-ajax": "^2.0.1",
     "yup": "^0.26.10"
   },
   "devDependencies": {
