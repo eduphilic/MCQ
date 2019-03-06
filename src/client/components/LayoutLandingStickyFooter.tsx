@@ -40,4 +40,5 @@ const FooterWrapper = styled("footer")<{ theme: Theme }>(({ theme }) => ({
   alignItems: "center",
   height: theme.spacing(5),
   marginTop: "auto",
+  backgroundColor: theme.palette.background.default,
 }));
