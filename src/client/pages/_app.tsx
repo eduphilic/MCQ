@@ -5,7 +5,12 @@ import "../bootstrapMaterialUIStyles";
 import App, { Container } from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
-import { ThemeBaseline, WithMaterialUI, withMaterialUIApp } from "../display";
+import {
+  PageLoadIndicator,
+  ThemeBaseline,
+  WithMaterialUI,
+  withMaterialUIApp,
+} from "../display";
 import { RecaptchaProvider } from "../session";
 import { withReduxStore, WithReduxStore } from "../store";
 
@@ -17,6 +22,8 @@ class MyApp extends App<WithReduxStore & WithMaterialUI> {
       <Container>
         <StyleProvider>
           <ThemeBaseline>
+            <PageLoadIndicator />
+
             <Provider store={reduxStore}>
               <RecaptchaProvider>
                 <Component {...pageProps} />
