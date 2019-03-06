@@ -5,7 +5,9 @@
   "main": "index.js",
   "repository": "git@github.com:strothj/bhartitest.git",
   "author": "strothj <jason@jasons.io>",
-  "sideEffects": false,
+  "sideEffects": [
+    "./src/client/bootstrapMaterialUIStyles.ts"
+  ],
   "pre-commit": [
     "lint",
     "type-check"
@@ -19,7 +21,7 @@
     "serve": "cross-env NODE_ENV=production npm-run-all build serve:firebase",
     "serve:firebase": "firebase serve",
     "clean": "rimraf dist",
-    "lint": "tslint -p ./tsconfig.json",
+    "lint": "tslint -p ./tsconfig.json -t verbose",
     "type-check": "tsc"
   },
   "dependencies": {

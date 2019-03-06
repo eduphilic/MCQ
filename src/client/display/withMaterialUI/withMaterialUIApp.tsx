@@ -1,39 +1,49 @@
 import StylesProvider from "@material-ui/styles/StylesProvider";
-import { NextAppContext } from "next/app";
-import React, { Component, ComponentType } from "react";
-import { isNextComponentType } from "../../util";
+import React, {
+  Component,
+  ComponentClass,
+  ComponentType,
+  ReactNode,
+} from "react";
 import { getPageContext, PageContext } from "./getPageContext";
 
+type Props = {
+  pageContext?: PageContext;
+};
+
 export type WithMaterialUI = {
-  pageContext: PageContext;
+  StyleProvider: ComponentType;
 };
 
 export function withMaterialUIApp<P>(App: ComponentType<P & WithMaterialUI>) {
-  return class AppWithMaterialUI extends Component<P> {
-    static async getInitialProps(context: NextAppContext) {
-      let appProps = {};
+  class AppWithMaterialUI extends Component<P & Props> {
+    private pageContext: PageContext;
 
-      if (isNextComponentType(App)) {
-        appProps = await App.getInitialProps!(context);
-      }
-      /* tslint:disable-next-line:no-console */
-      console.log({ withMaterialUiApp: "test" });
-      /* tslint:disable-next-line:no-console */
-      console.log({ appProps });
-
-      return {
-        ...appProps,
-      };
+    constructor(props: P & Props) {
+      super(props);
+      this.pageContext = props.pageContext || getPageContext();
+      this.styleProvider = this.styleProvider.bind(this);
     }
 
-    private pageContext = getPageContext();
+    componentDidMount() {
+      // Remove the server-side injected CSS.
+      const jssStyles = document.querySelector("#jss-server-side");
+      if (jssStyles && jssStyles.parentNode) {
+        jssStyles.parentNode.removeChild(jssStyles);
+      }
+    }
 
     render() {
-      return (
-        <StylesProvider {...this.pageContext}>
-          <App {...this.props} pageContext={this.pageContext} />
-        </StylesProvider>
-      );
+      const { pageContext, ...rest } = this.props;
+
+      /* tslint:disable-next-line:no-unbound-method */
+      return <App {...rest as P} StyleProvider={this.styleProvider} />;
     }
-  };
+
+    styleProvider({ children }: { children?: ReactNode }) {
+      return <StylesProvider {...this.pageContext}>{children}</StylesProvider>;
+    }
+  }
+
+  return AppWithMaterialUI as ComponentClass<P>;
 }

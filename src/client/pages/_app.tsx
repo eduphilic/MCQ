@@ -10,26 +10,20 @@ import { RecaptchaProvider } from "../session";
 import { withReduxStore, WithReduxStore } from "../store";
 
 class MyApp extends App<WithReduxStore & WithMaterialUI> {
-  componentDidMount() {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector("#jss-server-side");
-    if (jssStyles && jssStyles.parentNode) {
-      jssStyles.parentNode.removeChild(jssStyles);
-    }
-  }
-
   render() {
-    const { Component, pageProps, reduxStore, pageContext } = this.props;
+    const { Component, StyleProvider, pageProps, reduxStore } = this.props;
 
     return (
       <Container>
-        <ThemeBaseline>
-          <Provider store={reduxStore}>
-            <RecaptchaProvider>
-              <Component {...pageProps} pageContext={pageContext} />
-            </RecaptchaProvider>
-          </Provider>
-        </ThemeBaseline>
+        <StyleProvider>
+          <ThemeBaseline>
+            <Provider store={reduxStore}>
+              <RecaptchaProvider>
+                <Component {...pageProps} />
+              </RecaptchaProvider>
+            </Provider>
+          </ThemeBaseline>
+        </StyleProvider>
       </Container>
     );
   }

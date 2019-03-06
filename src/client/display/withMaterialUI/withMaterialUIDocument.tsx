@@ -5,9 +5,9 @@ import {
 } from "next/document";
 import React, { Component, ComponentType } from "react";
 import flush from "styled-jsx/server";
-import { PageContext } from "./getPageContext";
+import { getPageContext, PageContext } from "./getPageContext";
 
-type PagePropsWithPageContext = AnyPageProps & {
+type AppPropsWithPageContext = AnyPageProps & {
   pageContext: PageContext;
 };
 
@@ -16,38 +16,25 @@ export function withMaterialUIDocument<T>(Document: ComponentType<T>) {
     static async getInitialProps(
       context: NextDocumentContext,
     ): Promise<DefaultDocumentIProps> {
-      let pageContext: PageContext | undefined;
+      const pageContext = getPageContext();
 
-      const enhancedComponent = (
-        PageComponent: ComponentType<PagePropsWithPageContext>,
-      ) => {
-        const WrappedPageComponent = (props: PagePropsWithPageContext) => {
-          pageContext = props.pageContext;
-          /* tslint:disable-next-line:no-console */
-          console.log({ props });
-          return <PageComponent {...props} />;
-        };
+      const enhanceApp = (App: ComponentType<AppPropsWithPageContext>) => {
+        const WrappedApp = (props: AppPropsWithPageContext) => (
+          <App {...props} pageContext={pageContext} />
+        );
 
-        return WrappedPageComponent;
+        return WrappedApp;
       };
-      const page = context.renderPage(enhancedComponent);
 
-      let css: string | undefined;
-      if (pageContext) {
-        css = pageContext.sheetsRegistry.toString();
-      }
-
-      /* tslint:disable-next-line:no-console */
-      console.log({ css });
+      const page = context.renderPage({ enhanceApp });
+      const css = pageContext.sheetsRegistry.toString();
 
       const styles = (
         <>
-          {css && (
-            <style
-              id="jss-server-side"
-              dangerouslySetInnerHTML={{ __html: css }}
-            />
-          )}
+          <style
+            id="jss-server-side"
+            dangerouslySetInnerHTML={{ __html: css }}
+          />
           {flush() || null}
         </>
       );
