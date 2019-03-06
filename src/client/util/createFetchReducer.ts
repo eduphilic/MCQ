@@ -24,7 +24,8 @@ export type FetchAction =
       payload: Error;
     };
 
-type FetchState<Payload> = {
+export type FetchState<Payload> = {
+  operationName: string;
   fetching: boolean;
   fetched: boolean;
   error: Error | null;
@@ -33,6 +34,7 @@ type FetchState<Payload> = {
 
 export function createFetchReducer<Payload>(operationName: string) {
   const initialState: FetchState<Payload> = {
+    operationName,
     fetching: false,
     fetched: false,
     error: null,
@@ -94,7 +96,7 @@ export function createFetchReducer<Payload>(operationName: string) {
     return function operationFilterReducer(
       state: FetchState<Payload> | undefined,
       action: StoreAction,
-    ): FetchState<Payload> | undefined {
+    ): FetchState<Payload> {
       if (!isFetchOperation(operationName, action)) {
         return state || initialState;
       }

@@ -1,7 +1,7 @@
 import { createMuiTheme, Theme, Typography } from "@material-ui/core";
 import { styled, ThemeProvider } from "@material-ui/styles";
 import React, { ReactNode } from "react";
-import { themeOptions } from "../display";
+import { themeOptions } from "../../display";
 
 type Props = {
   children?: ReactNode;

@@ -1,4 +1,4 @@
-export { createStore } from "./createStore";
+export * from "./createStore";
 export { getStoreFromPageContext } from "./getStoreFromPageContext";
 export type StoreAction = import("./StoreAction").StoreAction;
 export type StoreState = import("./StoreState").StoreState;
