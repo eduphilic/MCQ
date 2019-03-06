@@ -130,7 +130,12 @@ function createFirebasePackageJsonOptions(): CreateFileWebpackPluginOptions {
  * routes.
  */
 function createFirebaseJsonPlugin(): Plugin {
-  if (process.env.NODE_ENV !== "production") return class extends Plugin {};
+  if (process.env.NODE_ENV !== "production") {
+    return new class implements Plugin {
+      // tslint:disable-next-line:no-empty
+      apply() {}
+    }();
+  }
 
   const records = generateNextJsPageRecords();
 
