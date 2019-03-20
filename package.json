@@ -18,8 +18,10 @@
     "serve": "cross-env NODE_ENV=production npm-run-all build serve:firebase",
     "serve:firebase": "firebase serve",
     "clean": "rimraf dist",
-    "lint": "tslint -p ./tsconfig.json -t verbose",
-    "type-check": "clear && tsc --noEmit"
+    "lint": "npm-run-all lint:*",
+    "lint:tslint": "tslint -p ./tsconfig.json -t verbose",
+    "lint:eslint": "eslint \"src/**\" --ext .tsx --ext .ts",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@firebase/app-types": "^0.3.6",
@@ -60,10 +62,14 @@
     "@types/webpack-env": "^1.13.9",
     "@types/webpack-node-externals": "^1.6.3",
     "@types/yup": "^0.26.12",
+    "@typescript-eslint/parser": "^1.4.2",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-typescript": "^1.1.1",
     "create-file-webpack": "^1.0.2",
     "cross-env": "^5.2.0",
+    "eslint": "^5.15.3",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "^1.5.1",
     "firebase-tools": "^6.5.0",
     "next-fonts": "^0.17.0",
     "nodemon-webpack-plugin": "^4.0.8",
