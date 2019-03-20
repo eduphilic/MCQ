@@ -2,7 +2,6 @@ import {
   HttpException,
   HttpStatus,
   Injectable,
-  MiddlewareFunction,
   NestMiddleware,
 } from "@nestjs/common";
 import csurf from "csurf";
@@ -11,11 +10,13 @@ import { CookieSessionMiddleware } from "./cookie-session.middleware";
 
 @Injectable()
 export class SessionMiddleware implements NestMiddleware {
-  private cookieSessionMiddleware: MiddlewareFunction<Request, Response>;
+  private cookieSessionMiddleware: RequestHandler;
   private csrfMiddleware: RequestHandler;
 
   constructor(cookieSessionMiddlewareProvider: CookieSessionMiddleware) {
-    this.cookieSessionMiddleware = cookieSessionMiddlewareProvider.resolve();
+    this.cookieSessionMiddleware = cookieSessionMiddlewareProvider.use.bind(
+      cookieSessionMiddlewareProvider,
+    );
     this.csrfMiddleware = csurf({
       cookie: false,
       sessionKey: "session",
@@ -25,32 +26,62 @@ export class SessionMiddleware implements NestMiddleware {
         return Array.isArray(header) ? header[0] : header;
       },
     });
+    /* tslint:disable-next-line:no-console */
+    console.log({ TEST: "TEst" });
   }
 
-  resolve(): MiddlewareFunction<Request, Response> {
-    const cookieSessionMiddleware = this.cookieSessionMiddleware;
-    const csrfMiddleware = this.csrfMiddleware;
+  use(req: Request, res: Response, next: () => void) {
+    composeMiddleware({
+      req,
+      res,
+      next,
+      middlewares: [
+        this.cookieSessionMiddleware.bind(this),
+        this.csrfMiddlewareWithErrorHandler.bind(this),
+      ],
+    });
+  }
 
-    return (req, res, next) => {
-      cookieSessionMiddleware(req!, res!, applyCsrfMiddleware);
-
-      function applyCsrfMiddleware(err?: any) {
-        if (err) {
-          next!(err);
-          return;
-        }
-
-        csrfMiddleware(req!, res!, handleCsrfError);
-      }
-
-      function handleCsrfError(err?: any) {
+  csrfMiddlewareWithErrorHandler(
+    req: Request,
+    res: Response,
+    next: (err?: Error) => void,
+  ) {
+    this.csrfMiddleware(req, res, (err: unknown) => {
+      if (
+        typeof err === "object" &&
+        err != null &&
         // spell-checker:ignore EBADCSRFTOKEN
-        if (err && err.code === "EBADCSRFTOKEN") {
-          throw new HttpException("Invalid CSRF token", HttpStatus.FORBIDDEN);
-        }
-
-        next!(err);
+        (err as { code?: any }).code === "EBADCSRFTOKEN"
+      ) {
+        next(new HttpException("Invalid CSRF token", HttpStatus.FORBIDDEN));
+        return;
       }
-    };
+
+      next();
+    });
   }
 }
+
+function composeMiddleware(options: ComposeMiddlewareConfig) {
+  if (options.middlewares.length > 0) {
+    options.middlewares[0](options.req, options.res, err => {
+      if (err) throw err;
+
+      composeMiddleware({
+        ...options,
+        middlewares: options.middlewares.slice(1),
+      });
+      return;
+    });
+  }
+
+  options.next();
+}
+
+type ComposeMiddlewareConfig<R = Request, S = Response> = {
+  req: R;
+  res: S;
+  next: () => void;
+  middlewares: ((req: R, res: S, next: (err?: Error) => void) => void)[];
+};

@@ -1,4 +1,4 @@
-import { Injectable, MiddlewareFunction, NestMiddleware } from "@nestjs/common";
+import { Injectable, NestMiddleware } from "@nestjs/common";
 import cookieSession from "cookie-session";
 import { NextFunction, Request, RequestHandler, Response } from "express";
 import { ConfigService } from "../config";
@@ -23,14 +23,12 @@ export class CookieSessionMiddleware implements NestMiddleware {
     });
   }
 
-  resolve(): MiddlewareFunction<Request, Response> {
-    return (req, res, next) => {
-      // Set the cache header, otherwise the cookie is discarded.
-      // https://stackoverflow.com/questions/44929653/firebase-cloud-function-wont-store-cookie-named-other-than-session
-      res!.setHeader("Cache-Control", "private");
+  use(req: Request, res: Response, next: () => void) {
+    // Set the cache header, otherwise the cookie is discarded.
+    // https://stackoverflow.com/questions/44929653/firebase-cloud-function-wont-store-cookie-named-other-than-session
+    res.setHeader("Cache-Control", "private");
 
-      this.cookieSessionMiddleware(req!, res!, next as NextFunction);
-    };
+    this.cookieSessionMiddleware(req!, res!, next as NextFunction);
   }
 }
 

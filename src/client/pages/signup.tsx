@@ -1,7 +1,3 @@
-// This needs to be imported first to initialize the new Material UI style
-// engine.
-import "../bootstrapMaterialUIStyles";
-
 import Link from "next/link";
 import React, { FormEvent } from "react";
 

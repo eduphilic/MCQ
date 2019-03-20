@@ -1,7 +1,3 @@
-// This needs to be imported first to initialize the new Material UI style
-// engine.
-import "../bootstrapMaterialUIStyles";
-
 import App, { Container } from "next/app";
 import React from "react";
 import { Provider } from "react-redux";

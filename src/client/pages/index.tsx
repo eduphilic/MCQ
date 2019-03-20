@@ -1,7 +1,3 @@
-// This needs to be imported first to initialize the new Material UI style
-// engine.
-import "../bootstrapMaterialUIStyles";
-
 import { NextFunctionComponent } from "next";
 import React from "react";
 import { actions, LandingPage, LandingPageProps } from "../landing";
