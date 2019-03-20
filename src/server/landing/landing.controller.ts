@@ -1,10 +1,10 @@
 import { Controller, Get } from "@nestjs/common";
-import { LandingPageConfig } from "../../common";
+import { LandingPageConfigModel } from "../../common";
 
 @Controller("landing")
 export class LandingController {
   @Get()
-  getLandingPageConfig(): LandingPageConfig {
+  getLandingPageConfig(): LandingPageConfigModel {
     return {
       stickyFooterText: {
         en: "Copyright : Eduphilic Consultancy Pvt Ltd 2018",

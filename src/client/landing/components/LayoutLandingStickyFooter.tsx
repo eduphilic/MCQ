@@ -1,12 +1,12 @@
 import { createMuiTheme, Theme, Typography } from "@material-ui/core";
 import { styled, ThemeProvider } from "@material-ui/styles";
 import React, { ReactNode } from "react";
-import { LocalizedString } from "../../../common";
+import { LocalizedStringModel } from "../../../common";
 import { themeOptions } from "../../display";
 
 type Props = {
   children?: ReactNode;
-  stickyFooterText: LocalizedString;
+  stickyFooterText: LocalizedStringModel;
 };
 
 export function LayoutLandingStickyFooter({
