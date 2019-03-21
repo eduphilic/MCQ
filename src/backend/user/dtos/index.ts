@@ -1,1 +1,1 @@
-export type CreateUserUsingPhoneNumberDto = import("./create-user-using-phone-number.dto").CreateUserUsingPhoneNumberDto;
+export * from "./CreateUserDto";
