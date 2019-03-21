@@ -1,5 +1,5 @@
 import { Unsubscribe } from "redux";
-import { fromEventPattern, merge, of, throwError } from "rxjs";
+import { fromEventPattern, merge, of } from "rxjs";
 import {
   catchError,
   distinctUntilChanged,
@@ -39,7 +39,7 @@ export function fetchDataForFetchReducer<Payload>(
 
     // Throw previous fetch error.
     switchMap(fetchState => {
-      if (fetchState.error) return throwError(fetchState.error);
+      if (fetchState.error) throw new Error(fetchState.error);
       return of(fetchState);
     }),
 
@@ -57,8 +57,8 @@ export function fetchDataForFetchReducer<Payload>(
       return request({ url: `http://localhost:3000/api/${endpoint}` }).pipe(
         map(ajaxResponse => ajaxResponse.response as Payload),
         catchError(error => {
-          store.dispatch(fetchActions.fetchError(error));
-          return throwError(error);
+          store.dispatch(fetchActions.fetchError(error.message));
+          throw error;
         }),
         tap(payload => {
           store.dispatch(fetchActions.fetchSuccess(payload));

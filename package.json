@@ -16,7 +16,7 @@
     "build:frontend": "next build src/frontend",
     "build:backend": "webpack",
     "serve": "cross-env NODE_ENV=production npm-run-all build serve:firebase",
-    "serve:firebase": "firebase serve",
+    "serve:firebase": "firebase serve --port 3000",
     "clean": "rimraf dist",
     "lint": "npm-run-all lint:*",
     "lint:tslint": "tslint -p ./tsconfig.json -t verbose",

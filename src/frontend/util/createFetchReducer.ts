@@ -21,13 +21,13 @@ export type FetchAction =
   | {
       type: FetchActionType.FetchError;
       operationName: string;
-      payload: Error;
+      payload: string;
     };
 
 export type FetchState<Payload> = {
   fetching: boolean;
   fetched: boolean;
-  error: Error | null;
+  error: string | null;
   data: Payload | null;
 };
 
@@ -77,7 +77,7 @@ export function createFetchReducer<Payload>(operationName: string) {
       };
     },
 
-    fetchError(error: Error): FetchAction {
+    fetchError(error: string): FetchAction {
       return {
         type: FetchActionType.FetchError,
         operationName,
