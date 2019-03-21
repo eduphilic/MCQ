@@ -1,23 +1,10 @@
-import {
-  // MiddlewareConsumer,
-  Module,
-  // NestModule,
-  // RequestMethod,
-} from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import { ConfigModule } from "./config";
 import { LandingModule } from "./landing";
-// import { SessionMiddleware, SessionModule } from "./session";
+import { SecurityModule } from "./security";
 import { UserModule } from "./user";
 
 @Module({
-  // imports: [ConfigModule, SessionModule, UserModule, LandingModule],
-  imports: [ConfigModule, UserModule, LandingModule],
+  imports: [ConfigModule, LandingModule, SecurityModule, UserModule],
 })
-// export class ApplicationModule implements NestModule {
-export class ApplicationModule {
-  // configure(consumer: MiddlewareConsumer) {
-  //   consumer
-  //     .apply(SessionMiddleware)
-  //     .forRoutes({ path: "", method: RequestMethod.ALL });
-  // }
-}
+export class ApplicationModule {}
