@@ -68,7 +68,7 @@ export default function(): Configuration {
     plugins: [
       mode === "development"
         ? new NodemonPlugin({
-            watch: path.resolve(__dirname, "src/server"),
+            watch: path.resolve(__dirname, "src/backend"),
             script: path.resolve(__dirname, "dist/index.js"),
             ext: "ts",
           })
