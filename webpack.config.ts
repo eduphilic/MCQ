@@ -16,8 +16,8 @@ export default function(): Configuration {
     mode,
 
     entry: {
-      "index.js": "./src/index.ts",
-      "api/index.js": "./src/server/main.ts",
+      "index.js": "./src/backend-bootstrap/index.ts",
+      "backend/index.js": "./src/backend/main.ts",
     },
 
     output: {
@@ -66,15 +66,17 @@ export default function(): Configuration {
     },
 
     plugins: [
-      new NodemonPlugin({
-        watch: path.resolve(__dirname, "src/server"),
-        script: path.resolve(__dirname, "dist/index.js"),
-        ext: "ts",
-      }),
+      mode === "development"
+        ? new NodemonPlugin({
+            watch: path.resolve(__dirname, "src/server"),
+            script: path.resolve(__dirname, "dist/index.js"),
+            ext: "ts",
+          })
+        : false,
       new CreateFilePlugin(createFirebasePackageJsonOptions()),
       createNextJsPageImports(),
       createFirebaseJsonPlugin(),
-    ],
+    ].filter((plugin): plugin is Plugin => !!plugin),
   };
 }
 
@@ -87,7 +89,7 @@ const mode: "production" | "development" =
  */
 function bundleExternals(): ExternalsFunctionElement {
   return (_context, request, callback) => {
-    if (request === "./api") {
+    if (request === "./backend") {
       callback(null, `commonjs ${request}`);
       return;
     }

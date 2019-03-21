@@ -21,7 +21,9 @@ if (true) {
 /* tslint:enable:no-empty */
 
 const cookieSession: typeof import("cookie-session") = require("cookie-session");
-const { handleApiRequest }: typeof import("./server/main") = require("./api");
+const {
+  handleApiRequest,
+}: typeof import("../backend/main") = require("./backend");
 
 // This should be false in the Firebase emulator but true in production.
 const isFirebaseFunction = !!process.env.FIREBASE_CONFIG;
@@ -62,7 +64,7 @@ if (process.env.NODE_ENV === "development") {
 
   const nextJsApp = next({
     dev: true,
-    dir: path.resolve(__dirname, "../src/client"),
+    dir: path.resolve(__dirname, "../src/frontend"),
   });
   const nextJsHandler = nextJsApp.getRequestHandler();
 

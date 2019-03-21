@@ -13,7 +13,7 @@
     "start": "cross-env NODE_ENV=development npm-run-all clean start:webpack",
     "start:webpack": "webpack -w",
     "build": "cross-env NODE_ENV=production npm-run-all clean build:frontend build:backend",
-    "build:frontend": "next build src/client",
+    "build:frontend": "next build src/frontend",
     "build:backend": "webpack",
     "serve": "cross-env NODE_ENV=production npm-run-all build serve:firebase",
     "serve:firebase": "firebase serve",
