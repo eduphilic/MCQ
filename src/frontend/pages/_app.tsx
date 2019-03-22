@@ -8,7 +8,12 @@ import {
   withMaterialUIApp,
 } from "../display";
 import { RecaptchaProvider } from "../session";
-import { withReduxStore, WithReduxStore } from "../store";
+import { initializeStore, withReduxStore, WithReduxStore } from "../store";
+
+// TODO: Handle server side rendering store initialization.
+if (process.browser) {
+  initializeStore();
+}
 
 class MyApp extends App<WithReduxStore & WithMaterialUI> {
   render() {

@@ -1,6 +1,6 @@
 import { NextAppContext } from "next/app";
 import React, { Component, ComponentType } from "react";
-import { isNextComponentType } from "../util";
+import { isNextComponentType } from "../../util";
 import { AppStore, createStore } from "./createStore";
 import { StoreState } from "./StoreState";
 

@@ -1,4 +1,4 @@
-import { StoreAction } from "../store/StoreAction";
+import { StoreAction } from "../store/old/StoreAction";
 
 type SupportedAction = StoreAction;
 

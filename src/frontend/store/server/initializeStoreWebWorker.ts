@@ -1,64 +1,47 @@
+import { setItem } from "localforage";
+import {
+  MessagePortStorageAction,
+  storageActions,
+  StorageActionType,
+} from "../common";
+import { dispatch } from "./dispatch";
+import { incomingActions$ } from "./incomingActions";
+
+/**
+ * Initializes the web worker's action handler.
+ */
 export function initializeStoreWebWorker() {
   /* tslint:disable-next-line:no-console */
-  console.log("Placeholder");
+  console.log("Initializing storage web worker...");
+
+  incomingActions$.subscribe({
+    next: handleAction,
+    error: error => {
+      /* tslint:disable-next-line:no-console */
+      console.error("initializeStorageWebWorker(): error", error);
+    },
+    complete: () => {
+      /* tslint:disable-next-line:no-console */
+      console.log("initializeStorageWebWorker(): complete");
+    },
+  });
 }
 
-import { fromEventPattern, merge, Subject } from "rxjs";
-import { map, scan, switchMap } from "rxjs/operators";
-
-type PortTrackingAction =
-  | {
-      type: "add";
-      payload: { port: MessagePort };
+function handleAction({ action }: MessagePortStorageAction) {
+  switch (action.type) {
+    // Store value to one of the storage backends.
+    case StorageActionType.SetItem: {
+      setItem(action.payload.key, action.payload.value).then(
+        updatedValue =>
+          dispatch(
+            storageActions.setItemSuccess(action.payload.key, updatedValue),
+          ),
+        error =>
+          dispatch(
+            storageActions.setItemFailure(action.payload.key, error.toString()),
+          ),
+      );
+      break;
     }
-  | {
-      type: "remove";
-      payload: { port: MessagePort };
-    };
-
-const portsSubject = new Subject<PortTrackingAction>();
-
-const ports$ = portsSubject.pipe(
-  scan<PortTrackingAction, MessagePort[]>(
-    (accumulator, action) =>
-      action.type === "add"
-        ? accumulator.concat(action.payload.port)
-        : accumulator.filter(port => port !== action.payload.port),
-    [],
-  ),
-);
-
-const messages$ = ports$.pipe(
-  switchMap(ports =>
-    merge(
-      ...ports.map(port =>
-        fromEventPattern<MessageEvent>(handler => {
-          port.onmessage = handler;
-        }).pipe(map(messageEvent => ({ port, messageEvent }))),
-      ),
-    ),
-  ),
-);
-
-export function initialize() {
-  self.onconnect = e => {
-    const port = e.ports[0];
-    portsSubject.next({ type: "add", payload: { port } });
-  };
-
-  ports$.subscribe({
-    next: ports => {
-      // tslint:disable-next-line:prefer-template
-      ports[0].postMessage("ports length: " + ports.length);
-    },
-  });
-
-  messages$.subscribe({
-    next: ({ port, messageEvent }) => {
-      // tslint:disable-next-line:prefer-template
-      port.postMessage("Received message: " + messageEvent.data);
-    },
-  });
+  }
 }
-
-declare var self: SharedWorker.SharedWorkerGlobalScope & WorkerGlobalScope;
