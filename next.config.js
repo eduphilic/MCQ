@@ -1,6 +1,7 @@
 const withTypescript = require("@zeit/next-typescript");
 const withFonts = require("next-fonts");
 const withCSS = require("@zeit/next-css");
+const ShellPlugin = require("webpack-shell-plugin-next");
 
 module.exports = withTypescript(
   withFonts(
@@ -24,6 +25,18 @@ module.exports = withTypescript(
               new FriendlyErrorsWebpackPlugin({ clearConsole: false }),
             );
           }
+        }
+
+        // TODO: Consolidate this logic with the version in the backend Webpack
+        // configuration.
+        if (dev && !isServer) {
+          config.plugins.push(
+            new ShellPlugin({
+              onBuildEnd: {
+                scripts: ["yarn start:webworkers"],
+              },
+            }),
+          );
         }
 
         return config;

@@ -24,5 +24,10 @@
     "skipLibCheck": true,
     "typeRoots": ["./node_modules/@types", "./typings"]
   },
-  "include": ["./webpack.config.ts", "./src/**/*", "./tools/**/*"]
+  "include": ["./webpack.config.ts", "./src/**/*", "./tools/**/*"],
+  "exclude": [
+    "node_modules",
+    "./src/frontend/*.webworker.ts",
+    "./src/frontend/store/server/**/*"
+  ]
 }
