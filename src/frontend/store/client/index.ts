@@ -1,3 +1,4 @@
+export * from "./getItem";
 export * from "./incomingActions";
 export * from "./initializeStore";
 export * from "./port";
