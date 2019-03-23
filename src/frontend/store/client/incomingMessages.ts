@@ -6,7 +6,7 @@ import {
   throwError,
 } from "rxjs";
 import { publish, switchMap } from "rxjs/operators";
-import { incomingMessagesFromPort, MessagePortMessageEvent } from "../common";
+import { incomingMessagesFromPort } from "../common";
 import { sharedWorker } from "./sharedWorker";
 
 const sharedWorkerErrors$ = fromEventPattern<ErrorEvent>(handler => {
@@ -16,9 +16,9 @@ const sharedWorkerErrors$ = fromEventPattern<ErrorEvent>(handler => {
 /**
  * Multicasted observable which emits the messages received from the web worker.
  */
-export const incomingMessages$: Observable<MessagePortMessageEvent> = merge(
+export const incomingMessages$: Observable<MessageEvent> = merge(
   sharedWorkerErrors$,
   incomingMessagesFromPort(sharedWorker.port),
 ).pipe(publish());
 
-(incomingMessages$ as ConnectableObservable<MessagePortMessageEvent>).connect();
+(incomingMessages$ as ConnectableObservable<MessageEvent>).connect();

@@ -3,7 +3,7 @@ import { incomingActions$ } from "./incomingActions";
 import { port } from "./port";
 
 /**
- * Storages the provided `value` under the specified `key` and returns the
+ * Stores the provided `value` under the specified `key` and returns the
  * updated value.
  *
  * @param key Storage key to persist value to.
@@ -17,7 +17,7 @@ export async function setItem<Value>(
     port.postMessage(storageActions.setItem(key, value));
 
     const subscription = incomingActions$.subscribe({
-      next: ({ action }) => {
+      next: action => {
         if (
           action.type === StorageActionType.SetItemFailure &&
           action.payload.key === key

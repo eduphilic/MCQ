@@ -1,7 +1,5 @@
 import { EMPTY, Observable, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
-import { MessagePortMessageEvent } from "./MessagePortMessageEvent";
-import { MessagePortStorageAction } from "./MessagePortStorageAction";
 import { StorageAction, StorageActionType } from "./storageActions";
 
 /**
@@ -10,11 +8,9 @@ import { StorageAction, StorageActionType } from "./storageActions";
  *
  * @param source Source observable which emits messages and their source ports.
  */
-export function incomingActionsFromMessages(
-  source: Observable<MessagePortMessageEvent>,
-) {
+export function incomingActionsFromMessages(source: Observable<MessageEvent>) {
   return source.pipe(
-    switchMap(({ port, event }) => {
+    switchMap(event => {
       const action = event.data as unknown;
 
       // Ensure the message contents contains a recognized action.
@@ -24,12 +20,7 @@ export function incomingActionsFromMessages(
         return EMPTY;
       }
 
-      const messagePortStorageAction: MessagePortStorageAction = {
-        port,
-        action,
-      };
-
-      return of(messagePortStorageAction);
+      return of(action);
     }),
   );
 }

@@ -1,4 +1,4 @@
-import { MessagePortStorageAction, StorageActionType } from "../common";
+import { StorageAction, StorageActionType } from "../common";
 import { incomingActions$ } from "./incomingActions";
 
 /**
@@ -10,7 +10,7 @@ export function initializeStore() {
   });
 }
 
-function handleAction({ action }: MessagePortStorageAction) {
+function handleAction(action: StorageAction) {
   switch (action.type) {
     case StorageActionType.ConsoleLog: {
       /* tslint:disable-next-line:no-console */

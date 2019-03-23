@@ -9,12 +9,7 @@ import React, {
   useReducer,
 } from "react";
 import { incomingActions$, port } from "./client";
-import {
-  MessagePortStorageAction,
-  StorageAction,
-  storageActions,
-  StorageActionType,
-} from "./common";
+import { StorageAction, storageActions, StorageActionType } from "./common";
 
 type ResourceValue<T> = {
   /**
@@ -93,7 +88,7 @@ function useResourceState<T>(key: string, initialState: ResourceValue<T>) {
   >(reducer, initialState);
 
   const dispatch = useCallback(
-    ({ action }: MessagePortStorageAction) => {
+    (action: StorageAction) => {
       if (!isFetchResourceResponseAction(action)) return;
       if (action.payload.key !== key) return;
 

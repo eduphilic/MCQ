@@ -1,6 +1,5 @@
 import { EMPTY, fromEventPattern, merge } from "rxjs";
-import { map, switchMap } from "rxjs/operators";
-import { MessagePortMessageEvent } from "./MessagePortMessageEvent";
+import { switchMap } from "rxjs/operators";
 
 /**
  * Returns an observable which emits the received messages from the specified
@@ -23,14 +22,5 @@ export function incomingMessagesFromPort(port: MessagePort) {
     }),
   );
 
-  return merge(messages$, errors$).pipe(
-    map(event => {
-      const messagePortMessageEvent: MessagePortMessageEvent = {
-        port,
-        event,
-      };
-
-      return messagePortMessageEvent;
-    }),
-  );
+  return merge(messages$, errors$);
 }

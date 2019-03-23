@@ -1,24 +1,21 @@
 import { of, PartialObserver, Subject } from "rxjs";
-import { map, switchMap } from "rxjs/operators";
-import { MessagePortStorageAction, storageActions } from "../../common";
+import { switchMap } from "rxjs/operators";
+import { StorageAction, storageActions } from "../../common";
 import { dispatch } from "../dispatch";
 import { filterForFetchResourceAction } from "./filterForFetchResourceAction";
 import { loadFromBackend } from "./loadFromBackend";
 import { loadFromCache } from "./loadFromCache";
 import { lockResourceFetch, unlockResourceFetch } from "./lock";
 
-const subject = new Subject<MessagePortStorageAction>();
+const subject = new Subject<StorageAction>();
 
 /**
  * Resolves requests for remote resources. It returns the resource from cache if
  * available and not expired.
  */
-export const resourceResolver: PartialObserver<
-  MessagePortStorageAction
-> = subject;
+export const resourceResolver: PartialObserver<StorageAction> = subject;
 
 const actions$ = subject.pipe(
-  map(messagePortStorageAction => messagePortStorageAction.action),
   filterForFetchResourceAction(),
   lockResourceFetch(),
   loadFromCache(),

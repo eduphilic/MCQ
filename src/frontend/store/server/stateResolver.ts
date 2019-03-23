@@ -1,20 +1,16 @@
 import { setItem } from "localforage";
 import { PartialObserver } from "rxjs";
-import {
-  MessagePortStorageAction,
-  storageActions,
-  StorageActionType,
-} from "../common";
+import { StorageAction, storageActions, StorageActionType } from "../common";
 import { dispatch } from "./dispatch";
 
 /**
  * Resolves state update and retrieval requests.
  */
-export const stateResolver: PartialObserver<MessagePortStorageAction> = {
+export const stateResolver: PartialObserver<StorageAction> = {
   next: handleAction,
 };
 
-function handleAction({ action }: MessagePortStorageAction) {
+function handleAction(action: StorageAction) {
   switch (action.type) {
     // Store value to one of the storage backends.
     case StorageActionType.SetItem: {
