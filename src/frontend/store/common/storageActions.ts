@@ -8,6 +8,9 @@ export enum StorageActionType {
   SetItem = "[storage] Set Item",
   SetItemSuccess = "[storage] Set Item Success",
   SetItemFailure = "[storage] Set Item Failure",
+  FetchResource = "[storage] Fetch Resource",
+  FetchResourceSuccess = "[storage] Fetch Resource Success",
+  FetchResourceFailure = "[storage] Fetch Resource Failure",
 }
 
 /**
@@ -29,6 +32,29 @@ export type StorageAction =
     }
   | {
       type: StorageActionType.SetItemFailure;
+      payload: {
+        key: string;
+        error: string;
+      };
+    }
+  | {
+      type: StorageActionType.FetchResource;
+      payload: {
+        key: string;
+        url: string;
+        credential?: string;
+        expirationTime: number;
+      };
+    }
+  | {
+      type: StorageActionType.FetchResourceSuccess;
+      payload: {
+        key: string;
+        value: unknown;
+      };
+    }
+  | {
+      type: StorageActionType.FetchResourceFailure;
       payload: {
         key: string;
         error: string;
@@ -75,6 +101,35 @@ export const storageActions = {
    */
   setItemFailure: (key: string, error: string): StorageAction => ({
     type: StorageActionType.SetItemFailure,
+    payload: { key, error },
+  }),
+
+  /**
+   * Start a fetch for the specified resource.
+   */
+  fetchResource: (
+    key: string,
+    url: string,
+    expirationTime: number,
+    credential?: string,
+  ): StorageAction => ({
+    type: StorageActionType.FetchResource,
+    payload: { key, url, credential, expirationTime },
+  }),
+
+  /**
+   * Return the fetched or cached resource.
+   */
+  fetchResourceSuccess: (key: string, value: unknown): StorageAction => ({
+    type: StorageActionType.FetchResourceSuccess,
+    payload: { key, value },
+  }),
+
+  /**
+   * Return the resource fetch error.
+   */
+  fetchResourceFailure: (key: string, error: string): StorageAction => ({
+    type: StorageActionType.FetchResourceFailure,
     payload: { key, error },
   }),
 };

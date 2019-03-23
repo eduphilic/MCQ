@@ -1,2 +1,4 @@
 export * from "./old";
-export * from "./client";
+
+export { initializeStore } from "./client";
+export * from "./createResourceContext";
