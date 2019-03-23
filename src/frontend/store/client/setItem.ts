@@ -1,4 +1,4 @@
-import { storageActions, StorageActionType } from "./common";
+import { storageActions, StorageActionType } from "../common";
 import { incomingActions$ } from "./incomingActions";
 import { port } from "./port";
 

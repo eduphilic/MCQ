@@ -1,3 +1,2 @@
 export * from "./old";
-export * from "./initializeStore";
-export * from "./setItem";
+export * from "./client";

@@ -1,4 +1,4 @@
-import { incomingActionsFromMessages } from "./common";
+import { incomingActionsFromMessages } from "../common";
 import { incomingMessages$ } from "./incomingMessages";
 
 /**

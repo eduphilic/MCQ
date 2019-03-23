@@ -1,4 +1,4 @@
-import { MessagePortStorageAction, StorageActionType } from "./common";
+import { MessagePortStorageAction, StorageActionType } from "../common";
 import { incomingActions$ } from "./incomingActions";
 
 /**
