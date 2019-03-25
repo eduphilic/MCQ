@@ -42,8 +42,8 @@ export type StorageAction =
       payload: {
         key: string;
         url: string;
-        credential?: string;
         expirationTime: number;
+        credential: string | null;
       };
     }
   | {
@@ -111,7 +111,7 @@ export const storageActions = {
     key: string,
     url: string,
     expirationTime: number,
-    credential?: string,
+    credential: string | null,
   ): StorageAction => ({
     type: StorageActionType.FetchResource,
     payload: { key, url, credential, expirationTime },

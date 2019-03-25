@@ -42,7 +42,7 @@ type Config = {
   /**
    * Credential token to access resource from backend.
    */
-  credential?: string;
+  credential: string | null;
 };
 
 type ResourceProviderProps = {

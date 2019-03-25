@@ -19,7 +19,9 @@ export const loadFromBackend = () => (source: Observable<ResourceLoadResult>) =>
       // Retrieve resource from backend.
       return ajax
         .getJSON(resourceLoadResult.action.payload.url, {
-          Authorization: resourceLoadResult.action.payload.credential,
+          Authorization: resourceLoadResult.action.payload.credential
+            ? resourceLoadResult.action.payload.credential
+            : undefined,
         })
         .pipe(
           // Add retrieved resource to resource load result.
