@@ -1,4 +1,4 @@
 export * from "./old";
 
 export { initializeStore } from "./client";
-export * from "./createResourceContext";
+export * from "./createSyncedStateContext";

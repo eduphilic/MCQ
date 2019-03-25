@@ -28,7 +28,7 @@ type ResourceValue<T> = {
   data: T | null;
 };
 
-type CreateResourceContextConfig = {
+type Config = {
   /**
    * Cache key where resource should be stored and retrieved.
    */
@@ -56,7 +56,7 @@ const DEFAULT_RESOURCE_EXPIRATION = 1000 * 60 * 60 * 24; // 24 hours.
  * resource from the backend server. The retrieved resource is cached and reused
  * between browser windows. It is cached for `DEFAULT_RESOURCE_EXPIRATION` time.
  */
-export function createResourceContext<T>(config: CreateResourceContextConfig) {
+export function createSyncedStateContext<T>(config: Config) {
   const defaultValue: ResourceValue<T> = {
     fetching: true,
     error: null,
@@ -105,7 +105,7 @@ function useResourceState<T>(key: string, initialState: ResourceValue<T>) {
   return state;
 }
 
-function useResourceFetchOnMount(config: CreateResourceContextConfig) {
+function useResourceFetchOnMount(config: Config) {
   useEffect(() => {
     port.postMessage(
       storageActions.fetchResource(
