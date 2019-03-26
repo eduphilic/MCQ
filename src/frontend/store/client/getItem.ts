@@ -1,4 +1,4 @@
-import localforage = require("localforage");
+import localforage from "localforage";
 
 /**
  * Retrieves the value stored under the specified `key`.
