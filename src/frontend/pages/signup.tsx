@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { FormEvent } from "react";
-import { CreateUserDto } from "../../backend/user/dtos";
+import { CreateUserDto } from "../../backend/user/CreateUserDto";
 
 export default function SignupPage() {
   return (
