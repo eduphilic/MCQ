@@ -1201,19 +1201,19 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
-"@nestjs/common@^6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-6.0.1.tgz#fe6758c2643c98aa7f295844f9cf7863f5de3342"
-  integrity sha512-+43nUxG9YSF2SnnFFT91/yTbvyfrGWI3a3cTI8jlSQUXOeKQILQhOXlA3N2GgDwYYH8GX8Xy8FXZ4GopJ7lT6A==
+"@nestjs/common@^6.0.3":
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-6.0.3.tgz#4d65f22b8954f65a4816d4c4401e15dde3ff53c5"
+  integrity sha512-OeuMZTBHtP28maKZKU8ADOlWpdjknbviXUpNCV1V6UezcyHo1Dp5L4hHVSvrxjgRAexjJZAc6BmOe3Ce36Ls6g==
   dependencies:
     axios "0.18.0"
     cli-color "1.4.0"
     uuid "3.3.2"
 
-"@nestjs/core@^6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-6.0.1.tgz#7f2455a6258edff812f8ea643cdd589f033d1df7"
-  integrity sha512-1TbB19AE6opDPLoALaJO/ZZHCofKi8pJDJNInlPjRBIeP+Vfrh6LyCl7xw/RjXkrfZZIrMy+SVp0+qxlAZ7HnQ==
+"@nestjs/core@^6.0.3":
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-6.0.3.tgz#2fadd2f207e3297c2ed545644df622db3117d842"
+  integrity sha512-QFf4aTaexM5nY8pCIjo1NGh3VCCam6ng2iI1/PFioFFzKb8wmpHQmQ6yq05N0D10pfZ4IIcoupuuErkbknIEUw==
   dependencies:
     "@nuxtjs/opencollective" "0.2.1"
     fast-safe-stringify "2.0.6"
@@ -1222,10 +1222,10 @@
     optional "0.1.4"
     uuid "3.3.2"
 
-"@nestjs/platform-express@^6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-6.0.1.tgz#cffd3c84d3b2c1686a13e8ca74faee4fabea4826"
-  integrity sha512-KFxK4t2eL0fZ3NpzTEJeWmiDkGwCAfPACadNCmjNGeXrkxK1Z2VJvfJeA2DDmYCNH3Ps8Ro25LO+a0oVYgdqoQ==
+"@nestjs/platform-express@^6.0.3":
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-6.0.3.tgz#231cb79feb1f3d672185c37582ca55ac57cae2d0"
+  integrity sha512-vegvUUtsV6e8w6FQS46ziD4tGLwFU895QSNjTqUJ7Z7i2Iif3ZEKUQpkmxGEux8eVeidLKvwOA7Qum0G+JCMaA==
   dependencies:
     body-parser "1.18.3"
     cors "2.8.5"
