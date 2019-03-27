@@ -5,14 +5,12 @@ const withCSS = require("@zeit/next-css");
 module.exports = withTypescript(
   withFonts(
     withCSS(
-      withSharedWorkers({
-        target: "serverless",
-        distDir: "../../dist/frontend",
-
-        webpack(config) {
-          return config;
-        },
-      }),
+      withSharedWorkers(
+        withoutScreenClear({
+          target: "serverless",
+          distDir: "../../dist/frontend",
+        }),
+      ),
     ),
   ),
 );
@@ -36,6 +34,23 @@ function withSharedWorkers(nextConfig = {}) {
       });
 
       if (nextConfig.webpack) return nextConfig.webpack(config, options);
+      return config;
+    },
+  };
+}
+
+// https://github.com/zeit/next.js/issues/6525
+function withoutScreenClear(nextConfig = {}) {
+  return {
+    ...nextConfig,
+
+    webpack(config, options) {
+      if (options.dev && !options.isServer) {
+        const readline = require("readline");
+        readline.cursorTo = () => {};
+        readline.clearScreenDown = () => {};
+      }
+
       return config;
     },
   };
