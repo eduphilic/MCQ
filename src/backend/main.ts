@@ -32,6 +32,8 @@ export function handleApiRequest(req: IncomingMessage, res: ServerResponse) {
       expressServer(req, res);
     },
     error: error => {
+      /* tslint:disable-next-line:no-console */
+      console.error({ error });
       throw error;
     },
   });

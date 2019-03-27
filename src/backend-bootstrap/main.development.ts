@@ -2,6 +2,7 @@ import { createServer, IncomingMessage, ServerResponse } from "http";
 import next from "next";
 import path from "path";
 import { decorateHandlerWithMiddleware } from "./decorateHandlerWithMiddleware";
+import { handleError } from "./handleError";
 import { NodeHttpRequestHandler } from "./NodeHttpRequestHandler";
 
 export function startDevelopmentServer(apiHandler: NodeHttpRequestHandler) {
@@ -25,13 +26,5 @@ export function startDevelopmentServer(apiHandler: NodeHttpRequestHandler) {
         nextJsHandler(req, res);
       })
       .catch(handleError);
-  }
-}
-
-function handleError(err: unknown) {
-  if (err) {
-    /* tslint:disable-next-line:no-console */
-    console.error(err);
-    process.exit(1);
   }
 }

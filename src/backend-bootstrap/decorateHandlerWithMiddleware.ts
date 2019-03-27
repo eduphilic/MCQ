@@ -1,6 +1,7 @@
 import cookieSession from "cookie-session";
 import express, { NextFunction, Request, Response } from "express";
 import { IncomingMessage, ServerResponse } from "http";
+import { handleError } from "./handleError";
 import { NodeHttpRequestHandler } from "./NodeHttpRequestHandler";
 
 // This should be false in the Firebase emulator but true in production.
@@ -45,9 +46,20 @@ export function decorateHandlerWithMiddleware(
     expressApp.use(urlSlashFixMiddleware);
 
     // Next.js rendering or page function handler:
-    expressApp.get("*", handler);
+    expressApp.get("*", handlerWithPromiseHandler);
 
     return expressApp;
+  }
+
+  // Next.js returns a promise from its web request handler.
+  function handlerWithPromiseHandler(
+    req: IncomingMessage,
+    res: ServerResponse,
+  ) {
+    const result = handler(req, res);
+    if (result instanceof Promise) {
+      result.catch(handleError);
+    }
   }
 }
 
