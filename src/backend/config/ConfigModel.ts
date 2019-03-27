@@ -1,7 +1,7 @@
 /**
  * Server and application configuration.
  */
-export interface Config {
+export interface ConfigModel {
   recaptcha: {
     secret_key: string;
   };
@@ -9,4 +9,6 @@ export interface Config {
     key: string;
     expire_milliseconds: number;
   };
+  serviceAccount: unknown;
+  databaseURL: string;
 }
