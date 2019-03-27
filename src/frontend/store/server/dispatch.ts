@@ -9,7 +9,7 @@ import { ports$ } from "./ports";
  * @param action Action to dispatch.
  */
 export async function dispatch(action: StorageAction) {
-  return new Promise(resolve => {
+  return new Promise<void>(resolve => {
     const subscription = ports$.pipe(subscribeOn(asapScheduler)).subscribe({
       next: ports => {
         subscription.unsubscribe();

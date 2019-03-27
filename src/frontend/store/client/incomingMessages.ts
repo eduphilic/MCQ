@@ -1,5 +1,6 @@
 import {
   ConnectableObservable,
+  EMPTY,
   fromEventPattern,
   merge,
   Observable,
@@ -10,7 +11,7 @@ import { incomingMessagesFromPort } from "../common";
 import { sharedWorker } from "./sharedWorker";
 
 const sharedWorkerErrors$ = fromEventPattern<ErrorEvent>(handler => {
-  sharedWorker.onerror = handler;
+  if (sharedWorker) sharedWorker.onerror = handler;
 }).pipe(switchMap(errorEvent => throwError(errorEvent)));
 
 /**
@@ -18,7 +19,7 @@ const sharedWorkerErrors$ = fromEventPattern<ErrorEvent>(handler => {
  */
 export const incomingMessages$: Observable<MessageEvent> = merge(
   sharedWorkerErrors$,
-  incomingMessagesFromPort(sharedWorker.port),
+  sharedWorker ? incomingMessagesFromPort(sharedWorker.port) : EMPTY,
 ).pipe(publish());
 
 (incomingMessages$ as ConnectableObservable<MessageEvent>).connect();

@@ -14,6 +14,11 @@ export async function setItem<Value>(
   value: Value,
 ): Promise<Value> {
   return new Promise<Value>((resolve, reject) => {
+    if (!port) {
+      reject("Web worker port was not initialized.");
+      return;
+    }
+
     port.postMessage(storageActions.setItem(key, value));
 
     const subscription = incomingActions$.subscribe({

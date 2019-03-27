@@ -107,6 +107,10 @@ function useResourceState<T>(key: string, initialState: ResourceValue<T>) {
 
 function useResourceFetchOnMount(config: Config) {
   useEffect(() => {
+    if (!port) {
+      throw new Error("Web worker port was not initialized.");
+    }
+
     port.postMessage(
       storageActions.fetchResource(
         config.key,

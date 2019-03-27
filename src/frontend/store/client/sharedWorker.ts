@@ -1,15 +1,14 @@
-import { SharedWorkerFromLoaderType } from "*.shared-worker.ts";
+let sharedWorker: SharedWorker.SharedWorker | null = null;
 
-let StoreSharedWorker: SharedWorkerFromLoaderType | null = null;
-
+// Don't initialize web worker in Node.js or testing environments.
 if (process.browser) {
   // tslint:disable-next-line:no-var-requires
-  StoreSharedWorker = require("../../store.shared-worker.ts");
+  sharedWorker = new (require("../../store.shared-worker.ts") as typeof import("../../store.shared-worker.ts")).default(
+    "Storage Worker",
+  );
 }
 
 /**
  * Reference to storage web worker.
  */
-export const sharedWorker = (StoreSharedWorker
-  ? new StoreSharedWorker("Storage Worker")
-  : null)!;
+export { sharedWorker };
