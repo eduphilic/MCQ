@@ -10,135 +10,78 @@ import webpack, {
   Plugin,
 } from "webpack";
 import nodeExternals from "webpack-node-externals";
-import ShellPlugin from "webpack-shell-plugin-next";
 
-export default function(): Configuration[] {
-  return [
-    {
-      mode,
+export default function(): Configuration {
+  return {
+    mode,
 
-      entry: {
-        "index.js": "./src/backend-bootstrap/index.ts",
-        "backend/index.js": "./src/backend/main.ts",
-      },
-
-      output: {
-        path: path.join(__dirname, "dist"),
-        filename: "[name]",
-        libraryTarget: "this",
-      },
-
-      module: {
-        rules: [
-          {
-            test: /\.tsx?$/,
-            exclude: /node_modules/,
-            use: {
-              loader: "ts-loader",
-              options: {
-                compilerOptions: {
-                  target: "es6",
-                  module: "esnext",
-                  noEmit: false,
-                },
-                onlyCompileBundledFiles: true,
-              },
-            },
-          },
-        ],
-      },
-
-      resolve: {
-        extensions: [".ts", ".tsx", ".wasm", ".mjs", ".js", ".json"],
-      },
-
-      optimization: {
-        minimize: false,
-      },
-
-      target: "node",
-
-      externals: [nodeExternals(), bundleExternals()],
-
-      devtool: false,
-
-      node: {
-        __filename: false,
-        __dirname: false,
-        process: false,
-      },
-
-      plugins: [
-        mode === "development"
-          ? new NodemonPlugin({
-              watch: path.resolve(__dirname, "src/backend"),
-              script: path.resolve(__dirname, "dist/index.js"),
-              ext: "ts",
-            })
-          : false,
-        new CreateFilePlugin(createFirebasePackageJsonOptions()),
-        createNextJsPageImports(),
-        createFirebaseJsonPlugin(),
-      ].filter((plugin): plugin is Plugin => !!plugin),
+    entry: {
+      "index.js": "./src/backend-bootstrap/index.ts",
+      "backend/index.js": "./src/backend/main.ts",
     },
-    ...getWebWorkersConfigurations(),
-  ];
-}
 
-function getWebWorkersConfigurations(): Configuration[] {
-  const webworkerEntryFilenames = fs
-    .readdirSync(path.join(__dirname, "src/frontend"), "utf8")
-    .filter(filename => /\.webworker\.ts$/.test(filename));
+    output: {
+      path: path.join(__dirname, "dist"),
+      filename: "[name]",
+      libraryTarget: "this",
+    },
 
-  return webworkerEntryFilenames.map(
-    (filename): Configuration => ({
-      mode,
-
-      entry: `./src/frontend/${filename}`,
-
-      output: {
-        path: path.join(__dirname, "dist/webworkers"),
-        filename: filename.replace(/\.ts$/, ".js"),
-      },
-
-      module: {
-        rules: [
-          {
-            test: /\.tsx?$/,
-            exclude: /node_modules/,
-            use: {
-              loader: "ts-loader",
-              options: {
-                compilerOptions: {
-                  target: "es5",
-                  module: "es2015",
-                  lib: ["esnext", "webworker"],
-                  noEmit: false,
-                },
-                onlyCompileBundledFiles: true,
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "ts-loader",
+            options: {
+              compilerOptions: {
+                target: "es6",
+                module: "esnext",
+                noEmit: false,
               },
+              onlyCompileBundledFiles: true,
             },
           },
-        ],
-      },
+        },
+      ],
+    },
 
-      resolve: {
-        extensions: [".ts", ".tsx", ".wasm", ".mjs", ".js", ".json"],
-      },
+    resolve: {
+      extensions: [".ts", ".tsx", ".wasm", ".mjs", ".js", ".json"],
+    },
 
-      plugins:
-        // TODO: Consolidate this with the version in next.config.js. The build
-        // scripts execute in different depending on whether it is a dev or
-        // production build.
-        [
-          new ShellPlugin({
-            onBuildExit: {
-              scripts: ["yarn start:webworkers"],
-            },
-          }),
-        ],
-    }),
-  );
+    optimization: {
+      minimize: false,
+    },
+
+    target: "node",
+
+    externals: [nodeExternals(), bundleExternals()],
+
+    devtool: false,
+
+    node: {
+      __filename: false,
+      __dirname: false,
+      process: false,
+    },
+
+    plugins: [
+      mode === "development"
+        ? new NodemonPlugin({
+            watch: path.resolve(__dirname, "src/backend"),
+            script: path.resolve(__dirname, "dist/index.js"),
+            nodeArgs: process.env.DEBUG
+              ? ["--nolazy", "--inspect-brk=9229"]
+              : [],
+            ext: "ts",
+          })
+        : false,
+      new CreateFilePlugin(createFirebasePackageJsonOptions()),
+      createNextJsPageImports(),
+      createFirebaseJsonPlugin(),
+    ].filter((plugin): plugin is Plugin => !!plugin),
+  };
 }
 
 const mode: "production" | "development" =

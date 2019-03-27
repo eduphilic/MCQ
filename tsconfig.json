@@ -5,7 +5,7 @@
     // make use of the "import" syntax. Source code compilation will be handled
     // by Babel and thus will not be affected by this setting.
     "module": "commonjs",
-    "lib": ["esnext", "dom"],
+    "lib": ["esnext", "dom", "webworker"],
     "allowJs": true,
     "checkJs": true,
     "jsx": "react",

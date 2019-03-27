@@ -5,6 +5,7 @@ declare module "nodemon-webpack-plugin" {
     watch: string;
     script: string;
     ext: string;
+    nodeArgs?: string[];
   }
 
   export default class NodemonWebpackPlugin extends Plugin {
