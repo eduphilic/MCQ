@@ -5,8 +5,11 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from "@nestjs/common";
-import { ResourceEntity, ResourceGetResponseDto } from "../../common";
-import { ResourceEntityWithUserId } from "../../common/resource/ResourceEntityWithUserId";
+import {
+  ResourceEntity,
+  ResourceEntityWithUserId,
+  ResourceGetResponseDto,
+} from "../../common";
 import { DatabaseService } from "../database";
 import { RESOURCE_OPTIONS_PROVIDER } from "./RESOURCE_OPTIONS_PROVIDER";
 import { ResourceOptions } from "./ResourceOptions";
@@ -28,7 +31,7 @@ export class ResourceService<Resource> {
    * Authenticated user (required if the resource is user restricted).
    */
   async getResource(userId: string | null) {
-    const db = await this.databaseService.getDatabase();
+    const db = this.databaseService.getInstance();
     const collectionReference = db.collection(this.options.resourceName);
 
     // If the resource is a per-user resource, require an authenticated user.

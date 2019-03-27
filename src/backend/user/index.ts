@@ -1,1 +1,3 @@
-export { UserModule } from "./UserModule";
+export * from "./UserEntity";
+export * from "./UserFromRequestDecorator";
+export * from "./UserModule";

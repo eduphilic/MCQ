@@ -1,5 +1,4 @@
 import { Controller, Provider } from "@nestjs/common";
-import { DatabaseService } from "../database";
 import { RESOURCE_OPTIONS_PROVIDER } from "./RESOURCE_OPTIONS_PROVIDER";
 import { ResourceControllerBase } from "./ResourceControllerBase";
 import { ResourceOptions } from "./ResourceOptions";
@@ -20,12 +19,6 @@ export function createResourceProviders<Resource>(options: ResourceOptions) {
     {
       provide: ResourceService,
       useClass: ResourceService,
-      inject: [DatabaseService, "ResourceOptions"],
-    },
-    {
-      provide: ResourceController,
-      useClass: ResourceController,
-      inject: [ResourceService, "ResourceOptions"],
     },
   ];
 
