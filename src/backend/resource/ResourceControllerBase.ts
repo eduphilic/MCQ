@@ -1,4 +1,5 @@
-import { Get, Inject } from "@nestjs/common";
+import { Body, Get, Inject, Post } from "@nestjs/common";
+import { ResourceSetResourceDto } from "../../common";
 import { UserEntity, UserFromRequestDecorator } from "../user";
 import { RESOURCE_OPTIONS_PROVIDER } from "./RESOURCE_OPTIONS_PROVIDER";
 import { ResourceOptions } from "./ResourceOptions";
@@ -22,5 +23,22 @@ export class ResourceControllerBase<Resource> {
     }
 
     return this.resourceService.getResource(userId);
+  }
+
+  @Post()
+  async setResource(
+    @UserFromRequestDecorator() userEntity: UserEntity | null,
+    @Body() resourceSetResourceDto: ResourceSetResourceDto<Resource>,
+  ) {
+    if (!userEntity) {
+      throw new Error(
+        "Expected authentication middleware to throw on authentication failure.",
+      );
+    }
+
+    return this.resourceService.setResource(
+      userEntity.id,
+      resourceSetResourceDto,
+    );
   }
 }

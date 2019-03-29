@@ -1,14 +1,17 @@
 import {
-  ForbiddenException,
+  ConflictException,
   Inject,
   Injectable,
   InternalServerErrorException,
+  MethodNotAllowedException,
   NotFoundException,
 } from "@nestjs/common";
 import {
   ResourceEntity,
   ResourceEntityWithUserId,
   ResourceGetResponseDto,
+  ResourceSetResourceDto,
+  ResourceSetResourceResponseDto,
 } from "../../common";
 import { DatabaseService } from "../database";
 import { RESOURCE_OPTIONS_PROVIDER } from "./RESOURCE_OPTIONS_PROVIDER";
@@ -31,7 +34,7 @@ export class ResourceService<Resource> {
    * Authenticated user (required if the resource is user restricted).
    */
   async getResource(userId: string | null) {
-    const db = this.databaseService.getInstance();
+    const db = this.databaseService.getDatabase();
     const collectionReference = db.collection(this.options.resourceName);
 
     // Retrieve the entity for the authenticated user or return the public
@@ -74,5 +77,58 @@ export class ResourceService<Resource> {
     }
 
     return resourceGetResponseDto;
+  }
+
+  /**
+   * Updates the resource.
+   *
+   * @param userId
+   * Authenticated user (required if the resource is user restricted).
+   */
+  async setResource(
+    userId: string,
+    resourceSetResourceDto: ResourceSetResourceDto<Resource>,
+  ) {
+    const db = await this.databaseService.getDatabase();
+    const collectionReference = db.collection(this.options.resourceName);
+
+    // Public static resources should not be writable.
+    if (!this.options.isUserResource) {
+      throw new MethodNotAllowedException("Resource is readonly.");
+    }
+
+    const querySnapshot = await collectionReference
+      .where("userId", "==", userId)
+      .get();
+
+    let documentId: string;
+    if (!querySnapshot.empty) {
+      if (
+        resourceSetResourceDto.lastUpdateTime !==
+        querySnapshot.docs[0].updateTime.toMillis()
+      ) {
+        throw new ConflictException("Client resource out of date.");
+      }
+
+      documentId = querySnapshot.docs[0].id;
+    } else {
+      documentId = collectionReference.doc().id;
+    }
+
+    const resourceEntityWithUserId: ResourceEntityWithUserId<Resource> = {
+      userId,
+      version: resourceSetResourceDto.version,
+      data: resourceSetResourceDto.data,
+    };
+
+    const writeResult = await collectionReference
+      .doc(documentId)
+      .set(resourceEntityWithUserId);
+
+    const resourceSetResourceResponseDto: ResourceSetResourceResponseDto = {
+      lastUpdateTime: writeResult.writeTime.toMillis(),
+    };
+
+    return resourceSetResourceResponseDto;
   }
 }

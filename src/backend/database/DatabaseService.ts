@@ -26,7 +26,7 @@ export class DatabaseService implements OnModuleInit {
   /**
    * Returns the initialized Firestore database instance.
    */
-  getInstance() {
+  getDatabase() {
     return this.db;
   }
 }
