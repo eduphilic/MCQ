@@ -34,11 +34,6 @@ export class ResourceService<Resource> {
     const db = this.databaseService.getInstance();
     const collectionReference = db.collection(this.options.resourceName);
 
-    // If the resource is a per-user resource, require an authenticated user.
-    if (userId === null && this.options.isUserResource) {
-      throw new ForbiddenException("Resource requires authentication.");
-    }
-
     // Retrieve the entity for the authenticated user or return the public
     // entity.
     let resourceSnapshot: FirebaseFirestore.QuerySnapshot;

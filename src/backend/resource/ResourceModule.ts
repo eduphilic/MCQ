@@ -1,5 +1,6 @@
 import { DynamicModule, Module } from "@nestjs/common";
 import { DatabaseModule } from "../database";
+import { SessionModule } from "../session";
 import { createResourceProviders } from "./createResourceProviders";
 import { ResourceOptions } from "./ResourceOptions";
 
@@ -8,7 +9,7 @@ import { ResourceOptions } from "./ResourceOptions";
  * resource.
  */
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, SessionModule],
 })
 export class ResourceModule {
   static forRoot<Resource>(options: ResourceOptions): DynamicModule {

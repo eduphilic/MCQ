@@ -1128,6 +1128,11 @@
     optional "0.1.4"
     uuid "3.3.2"
 
+"@nestjs/passport@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@nestjs/passport/-/passport-6.0.0.tgz#b92fdf90e055eece02c0378fce98e6f60a864c54"
+  integrity sha512-+82YJTQpmDrcqS65Jgtdv6+n5lWCZtANw7Cy3KWdSKPBbNheIYBWtKMV2uXZXXtVqxgGaCnrJ03XpHc22RX4xA==
+
 "@nestjs/platform-express@^6.0.3":
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-6.0.3.tgz#231cb79feb1f3d672185c37582ca55ac57cae2d0"
