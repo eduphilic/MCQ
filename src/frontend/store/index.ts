@@ -1,3 +1,4 @@
 export * from "./old";
 
-export { initializeStore } from "./client.old";
+export { createStore } from "./createStore";
+export * from "./initializeStores";

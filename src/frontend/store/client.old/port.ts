@@ -1,4 +1,4 @@
-import { sharedWorker } from "./sharedWorker";
+import { sharedWorker } from "../client/sharedWorker";
 
 /**
  * Web worker port.
