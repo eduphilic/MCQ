@@ -26,6 +26,7 @@
     "no-unnecessary-qualifier": true,
     "no-unnecessary-type-assertion": true,
     "no-void-expression": [true, "ignore-arrow-function-shorthand"],
+    "only-arrow-functions": false,
     "promise-function-async": true,
     "prettier": true
   }

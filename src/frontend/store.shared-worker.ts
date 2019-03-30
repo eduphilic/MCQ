@@ -1,7 +1,7 @@
 /**
- * Webpack entry point for the data store web worker.
+ * This module serves as the entry point to the store shared web worker.
  */
 
-import { test } from "./store/server/test";
+import { initializeStoreWebWorker } from "./store/server";
 
-test();
+initializeStoreWebWorker();

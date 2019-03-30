@@ -1,5 +1,5 @@
 import { EMPTY, fromEventPattern, merge } from "rxjs";
-import { mergeMap, publish, refCount, switchMap, tap } from "rxjs/operators";
+import { mergeMap, publish, refCount, switchMap } from "rxjs/operators";
 import { ports$ } from "./portsObservable";
 
 /**
@@ -7,13 +7,7 @@ import { ports$ } from "./portsObservable";
  * connected browser tabs.
  */
 export const messages$ = ports$.pipe(
-  mergeMap(port =>
-    merge(fromPortMessages(port), fromPortErrors(port)).pipe(
-      tap(() => port.start()),
-      // tslint:disable-next-line:no-console
-      tap(() => console.log(port)),
-    ),
-  ),
+  mergeMap(port => merge(fromPortMessages(port), fromPortErrors(port))),
   publish(),
   refCount(),
 );

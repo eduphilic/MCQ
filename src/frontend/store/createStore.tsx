@@ -6,6 +6,13 @@ import React, {
   useMemo,
   useState,
 } from "react";
+// import { dispatch } from "./client";
+// import { storeActions } from "./common";
+
+// type StoreConfig = {
+//   resourceName: string | null;
+//   backendResourceName: string | null;
+// };
 
 type StoreContextValue<State> = {
   state: State;
