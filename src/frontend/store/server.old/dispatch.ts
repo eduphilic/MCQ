@@ -1,6 +1,6 @@
 import { asapScheduler } from "rxjs";
 import { subscribeOn } from "rxjs/operators";
-import { StorageAction } from "../common";
+import { StorageAction } from "../common.old";
 import { ports$ } from "./ports";
 
 /**

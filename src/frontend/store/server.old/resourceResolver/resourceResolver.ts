@@ -1,6 +1,6 @@
 import { of, PartialObserver, Subject } from "rxjs";
 import { switchMap } from "rxjs/operators";
-import { StorageAction, storageActions } from "../../common";
+import { StorageAction, storageActions } from "../../common.old";
 import { dispatch } from "../dispatch";
 import { filterForFetchResourceAction } from "./filterForFetchResourceAction";
 import { loadFromBackend } from "./loadFromBackend";

@@ -3,7 +3,7 @@ import { rootReducer } from "./rootReducer";
 import { StoreAction } from "./StoreAction";
 import { StoreState } from "./StoreState";
 
-export type AppStore = ReturnType<typeof createStore>;
+export type AppStore = ReturnType<typeof createStoreOld>;
 
 const browserDevToolsExtensionEnhancer = (() => {
   if (process.env.NODE_ENV !== "development") return;
@@ -12,7 +12,7 @@ const browserDevToolsExtensionEnhancer = (() => {
   return window.__REDUX_DEVTOOLS_EXTENSION__();
 })();
 
-export function createStore(initialState?: StoreState) {
+export function createStoreOld(initialState?: StoreState) {
   return reduxCreateStore<StoreState, StoreAction, {}, {}>(
     rootReducer,
     initialState,

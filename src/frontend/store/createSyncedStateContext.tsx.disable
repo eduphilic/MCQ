@@ -8,8 +8,8 @@ import React, {
   useEffect,
   useReducer,
 } from "react";
-import { incomingActions$, port } from "./client";
-import { StorageAction, storageActions, StorageActionType } from "./common";
+import { incomingActions$, port } from "./client.old";
+import { StorageAction, storageActions, StorageActionType } from "./common.old";
 
 type ResourceValue<T> = {
   /**

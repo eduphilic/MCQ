@@ -89,7 +89,7 @@ export class ResourceService<Resource> {
     userId: string,
     resourceSetResourceDto: ResourceSetResourceDto<Resource>,
   ) {
-    const db = await this.databaseService.getDatabase();
+    const db = this.databaseService.getDatabase();
     const collectionReference = db.collection(this.options.resourceName);
 
     // Public static resources should not be writable.

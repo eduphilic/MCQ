@@ -1,6 +1,6 @@
 import { merge } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
-import { incomingMessagesFromPort } from "../common";
+import { incomingMessagesFromPort } from "../common.old";
 import { ports$ } from "./ports";
 
 /**

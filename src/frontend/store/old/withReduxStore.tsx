@@ -1,7 +1,7 @@
 import { NextAppContext } from "next/app";
 import React, { Component, ComponentType } from "react";
 import { isNextComponentType } from "../../util";
-import { AppStore, createStore } from "./createStore";
+import { AppStore, createStoreOld } from "./createStore";
 import { StoreState } from "./StoreState";
 
 const __NEXT_REDUX_STORE__ = "__NEXT_REDUX_STORE__";
@@ -10,12 +10,12 @@ function getOrCreateStore(initialState?: StoreState): AppStore {
   // Prevent store from leaking between requests by creating a new instance when
   // running on the server.
   if (!process.browser) {
-    return createStore(initialState);
+    return createStoreOld(initialState);
   }
 
   // Create store if it has not already been initialized.
   if (!window[__NEXT_REDUX_STORE__]) {
-    window[__NEXT_REDUX_STORE__] = createStore(initialState);
+    window[__NEXT_REDUX_STORE__] = createStoreOld(initialState);
   }
 
   return window[__NEXT_REDUX_STORE__]!;

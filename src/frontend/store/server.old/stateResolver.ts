@@ -1,6 +1,10 @@
 import { setItem } from "localforage";
 import { PartialObserver } from "rxjs";
-import { StorageAction, storageActions, StorageActionType } from "../common";
+import {
+  StorageAction,
+  storageActions,
+  StorageActionType,
+} from "../common.old";
 import { dispatch } from "./dispatch";
 
 /**

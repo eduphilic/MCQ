@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 import { filter, tap } from "rxjs/operators";
-import { StorageAction, StorageActionType } from "../../common";
+import { StorageAction, StorageActionType } from "../../common.old";
 import { FetchResourceAction } from "./FetchResourceAction";
 
 const isResourceFetchingByKey = new Set<string>();

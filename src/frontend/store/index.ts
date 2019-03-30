@@ -1,4 +1,3 @@
 export * from "./old";
 
-export { initializeStore } from "./client";
-export * from "./createSyncedStateContext";
+export { initializeStore } from "./client.old";

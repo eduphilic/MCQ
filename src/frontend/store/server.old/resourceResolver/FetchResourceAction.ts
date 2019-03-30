@@ -1,4 +1,4 @@
-import { StorageAction, StorageActionType } from "../../common";
+import { StorageAction, StorageActionType } from "../../common.old";
 
 export type FetchResourceAction = Extract<
   StorageAction,

@@ -7,7 +7,7 @@ import {
   throwError,
 } from "rxjs";
 import { publish, switchMap } from "rxjs/operators";
-import { incomingMessagesFromPort } from "../common";
+import { incomingMessagesFromPort } from "../common.old";
 import { sharedWorker } from "./sharedWorker";
 
 const sharedWorkerErrors$ = fromEventPattern<ErrorEvent>(handler => {
