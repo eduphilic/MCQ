@@ -6,13 +6,16 @@ import React, {
   useMemo,
   useState,
 } from "react";
-// import { dispatch } from "./client";
-// import { storeActions } from "./common";
+import { asapScheduler } from "rxjs";
+import { subscribeOn } from "rxjs/operators";
+import { actions$, dispatch } from "./client";
+import { storeActions, StoreActionType } from "./common";
 
-// type StoreConfig = {
-//   resourceName: string | null;
-//   backendResourceName: string | null;
-// };
+type StoreConfig<State> = {
+  resourceName: string | null;
+  backendResourceName: string | null;
+  defaultState: State | null;
+};
 
 type StoreContextValue<State> = {
   state: State;
@@ -28,11 +31,16 @@ export type Store<State> = {
  * Creates a `Store` backed by memory, IndexDB, or IndexDB with backend
  * synchronization.
  */
-export async function createStore<State>(): Promise<Store<State>> {
-  // TODO: Retrieve from backend/storage or use initial value.
-  const initialState: State = {} as any;
-  const Context = createContext<StoreContextValue<State>>(null as any);
+export async function createStore<State>(
+  config: StoreConfig<State>,
+): Promise<Store<State>> {
+  const initialState: State = await getInitialState(
+    config.resourceName,
+    config.backendResourceName,
+    config.defaultState,
+  );
 
+  const Context = createContext<StoreContextValue<State>>(null as any);
   return { Context, Provider };
 
   function Provider(props: { children?: ReactNode }) {
@@ -54,4 +62,54 @@ export async function createStore<State>(): Promise<Store<State>> {
 
     return <Context.Provider value={value}>{props.children}</Context.Provider>;
   }
+}
+
+async function getInitialState<State>(
+  resourceName: string | null,
+  backendResourceName: string | null,
+  defaultState: State | null,
+) {
+  if (!resourceName) {
+    if (!defaultState) {
+      throw new Error(
+        "Either a resourceName or initialState must be provided.",
+      );
+    }
+
+    return defaultState;
+  }
+
+  const initialState = new Promise<State>((resolve, reject) => {
+    const subscription = actions$.pipe(subscribeOn(asapScheduler)).subscribe({
+      next: action => {
+        if (
+          action.type === StoreActionType.GetStateSuccess &&
+          action.payload.resourceName === resourceName
+        ) {
+          subscription.unsubscribe();
+          resolve(action.payload.data as State);
+          return;
+        }
+
+        if (
+          action.type === StoreActionType.GetStateFailure &&
+          action.payload.resourceName === resourceName
+        ) {
+          subscription.unsubscribe();
+
+          if (defaultState) {
+            resolve(defaultState);
+            return;
+          }
+
+          reject(action.payload.error.payload.message);
+          return;
+        }
+      },
+    });
+  });
+
+  dispatch(storeActions.getState(resourceName, backendResourceName));
+
+  return initialState;
 }

@@ -2,8 +2,6 @@ import { portActions } from "../common";
 import { ports$ } from "./portsObservable";
 
 /**
- * Returns an observable which returns received actions.
- *
- * @param source Source observable which emits web socket messages.
+ * Returns an observable of `StoreAction` returned from the web worker.
  */
 export const actions$ = ports$.pipe(portActions());

@@ -1,16 +1,15 @@
-import { EMPTY, fromEventPattern, merge } from "rxjs";
+import { EMPTY, fromEventPattern, merge, Observable } from "rxjs";
 import { mergeMap, publish, refCount, switchMap } from "rxjs/operators";
-import { ports$ } from "./portsObservable";
 
-/**
- * Returns an `Observable` of `MessageEvent` which emits message events from all
- * connected browser tabs.
- */
-export const messages$ = ports$.pipe(
-  mergeMap(port => merge(fromPortMessages(port), fromPortErrors(port))),
-  publish(),
-  refCount(),
-);
+export function portMessages() {
+  return function(source$: Observable<MessagePort>) {
+    return source$.pipe(
+      mergeMap(port => merge(fromPortMessages(port), fromPortErrors(port))),
+      publish(),
+      refCount(),
+    );
+  };
+}
 
 function fromPortMessages(port: MessagePort) {
   return fromEventPattern<MessageEvent>(handler => {

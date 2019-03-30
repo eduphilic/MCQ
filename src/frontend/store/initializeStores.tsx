@@ -46,23 +46,23 @@ export function initializeStores<StoresConfig extends AnyStoresConfig>(
   return { StoresProvider, useStore };
 
   function StoresProvider(props: { children?: ReactNode }) {
-    const [loading, setLoading] = useState(initialized);
+    const [loaded, setLoaded] = useState(initialized);
 
     useEffect(() => {
-      if (!loading) return;
+      if (loaded) return;
 
       initialization
         .then(() => {
-          setLoading(false);
+          setLoaded(true);
         })
         .catch(error => {
           throw error;
         });
-    }, [loading]);
+    }, [loaded]);
 
     const providers = useMemo(
       () =>
-        !loading
+        loaded
           ? Object.values(initializedStores as Stores<StoresConfig>)
               .map(value => <value.Provider />)
               .concat(
@@ -71,10 +71,10 @@ export function initializeStores<StoresConfig extends AnyStoresConfig>(
                 />,
               )
           : [],
-      [loading],
+      [loaded],
     );
 
-    if (loading) return <p>Loading...</p>;
+    if (!loaded) return <p>Loading...</p>;
 
     return (
       <ComposedContext providers={providers}>{props.children}</ComposedContext>
@@ -95,6 +95,7 @@ export function initializeStores<StoresConfig extends AnyStoresConfig>(
       ? U
       : never;
     const store = useContext(StoresContext)[storeName];
+
     // TODO: Fix type error.
     return useContext<ContextValue>((store.Context as unknown) as Context<
       ContextValue

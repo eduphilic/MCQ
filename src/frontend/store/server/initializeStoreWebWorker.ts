@@ -1,6 +1,7 @@
 import { Observable, Subject } from "rxjs";
 import { StoreAction } from "../common";
 import { actions$ } from "./actionsObservable";
+import { dispatch } from "./dispatch";
 import { getResourceEpic } from "./getResourceEpic";
 
 /**
@@ -16,17 +17,10 @@ function connectEpic(
   const subject = new Subject<StoreAction>();
 
   epic(subject).subscribe({
-    next: action => {
-      /* tslint:disable-next-line:no-console */
-      console.log({ "epic subscription": action });
-    },
+    next: dispatch,
     error: error => {
       /* tslint:disable-next-line:no-console */
-      console.error({ "epic subscription": error });
-    },
-    complete: () => {
-      /* tslint:disable-next-line:no-console */
-      console.log({ "epic subscription": "Complete." });
+      console.error({ "Epic error": error });
     },
   });
 

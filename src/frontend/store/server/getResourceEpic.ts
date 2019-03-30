@@ -1,10 +1,10 @@
 import { Observable, of } from "rxjs";
-import { mergeMap, tap } from "rxjs/operators";
+import { mergeMap } from "rxjs/operators";
 import { StoreAction, storeActions, StoreActionType } from "../common";
 import { filterAction } from "./filterAction";
 import { loadFromBackend } from "./loadFromBackend";
 import { loadFromCache } from "./loadFromCache";
-import { lockResourceFetch } from "./resourceFetchLock";
+import { lockResourceFetch, unlockResourceFetch } from "./resourceFetchLock";
 
 /**
  * Processes requests to load or retrieve resources.
@@ -17,10 +17,6 @@ export function getResourceEpic(actions$: Observable<StoreAction>) {
     lockResourceFetch(),
     loadFromCache(),
     loadFromBackend(),
-    tap(resourceLoadResult => {
-      /* tslint:disable-next-line:no-console */
-      console.log({ resourceLoadResult });
-    }),
     mergeMap(resourceLoadResult => {
       if (resourceLoadResult.resource) {
         return of(
@@ -38,5 +34,6 @@ export function getResourceEpic(actions$: Observable<StoreAction>) {
         ),
       );
     }),
+    unlockResourceFetch(),
   );
 }
