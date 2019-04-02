@@ -9,7 +9,7 @@ import {
 import { CachedResource } from "./CachedResource";
 import { ResourceLoadResult } from "./ResourceLoadResult";
 
-const DEFAULT_RESOURCE_EXPIRATION_TIME = 1000 * 10; // 10 seconds.
+const DEFAULT_RESOURCE_EXPIRATION_TIME = 1000 * 60 * 60 * 24; // 24 hours.
 
 /**
  * Attempts to load the requested resource from cache.

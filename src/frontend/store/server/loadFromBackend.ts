@@ -1,23 +1,16 @@
 import localforage from "localforage";
-import { from, Observable, of } from "rxjs";
+import { EMPTY, from, merge, Observable, of, zip } from "rxjs";
 import { ajax } from "rxjs/ajax";
-import { catchError, map, mapTo, mergeMap } from "rxjs/operators";
+import { catchError, map, mapTo, mergeMap, switchMap } from "rxjs/operators";
 import { ResourceGetResponseDto } from "../../../common";
 import {
   resourceLoadError,
   ResourceLoadError,
   ResourceLoadErrorType,
 } from "../common";
+import { credential$ } from "./credentialObservable";
+import { resourceBaseUrl$ } from "./resourceBaseUrlObservable";
 import { ResourceLoadResult } from "./ResourceLoadResult";
-
-const DEFAULT_BASE_RESOURCE_URL =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:5000/dev"
-    : "https://production";
-// TODO: Wire up credential manager.
-// const DEFAULT_CREDENTIAL: string | undefined = undefined;
-const DEFAULT_CREDENTIAL: string | undefined =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkdUbTV6S3ZPWHVmb3NBUXRqVjhjQzBSdEJNbDIiLCJpYXQiOjE1NTM3OTg3NjksImV4cCI6MTU2MTU3NDc2OX0.AtBeqfcma2rdGglkh_yXEWXzT-lW-iugsLWWBYLwUPE";
 
 /**
  * Updates the `ResourceLoadResult` object using the fetched resource from the
@@ -25,8 +18,6 @@ const DEFAULT_CREDENTIAL: string | undefined =
  */
 export const loadFromBackend = () => (source: Observable<ResourceLoadResult>) =>
   source.pipe(
-    // TODO: Emit cached result even while requesting updated version to improve
-    // initial load app load time.
     mergeMap(resourceLoadResult => {
       // If resource is in cache and not expired, use it.
       if (resourceLoadResult.resource && !resourceLoadResult.expired) {
@@ -40,55 +31,78 @@ export const loadFromBackend = () => (source: Observable<ResourceLoadResult>) =>
       }
 
       // Retrieve resource from backend.
-      return ajax
-        .getJSON<ResourceGetResponseDto<unknown>>(
-          `${DEFAULT_BASE_RESOURCE_URL}${
-            resourceLoadResult.action.payload.backendResourceName
-          }`,
-          {
-            Authorization: DEFAULT_CREDENTIAL
-              ? `Bearer ${DEFAULT_CREDENTIAL}`
-              : undefined,
-          },
-        )
-        .pipe(
-          // Add retrieved resource to resource load result.
-          map(
-            (response): ResourceLoadResult => ({
-              ...resourceLoadResult,
-              expired: false,
-              resource: {
-                version: response.version,
-                data: response.data,
-                lastUpdateTime: response.lastUpdateTime,
-                fetchedAt: Date.now(),
-              },
-            }),
-          ),
-          // Store retrieved resource to cache.
-          mergeMap(updatedResourceLoadResult =>
-            from(
-              localforage.setItem(
-                updatedResourceLoadResult.action.payload.resourceName,
-                updatedResourceLoadResult.resource,
-              ),
-            ).pipe(mapTo(updatedResourceLoadResult)),
-          ),
-          // If retrieval fails, return the existing load result so that cached
-          // result or the error message can be used.
-          // TODO: Handle case where authentication fails (session expired).
-          // TODO: Ignore network error if there was a previous cached result.
-          catchError(error => {
-            /* tslint:disable-next-line:no-console */
-            console.log({ error });
-            const resourceLoadResultWithError: ResourceLoadResult = {
-              ...resourceLoadResult,
-              error: getError(error),
-            };
+      return merge(
+        // Send the cached result while request to backend is in flight to speed
+        // up initial loading.
+        resourceLoadResult.resource ? of(resourceLoadResult) : EMPTY,
+        zip(resourceBaseUrl$, credential$).pipe(
+          switchMap(([resourceBaseUrl, credential]) =>
+            ajax
+              .getJSON<ResourceGetResponseDto<unknown>>(
+                `${resourceBaseUrl}${
+                  resourceLoadResult.action.payload.backendResourceName
+                }`,
+                {
+                  Authorization: credential
+                    ? `Bearer ${credential}`
+                    : undefined,
+                },
+              )
+              .pipe(
+                // Add retrieved resource to resource load result.
+                map(
+                  (response): ResourceLoadResult => ({
+                    ...resourceLoadResult,
+                    expired: false,
+                    resource: {
+                      version: response.version,
+                      data: response.data,
+                      lastUpdateTime: response.lastUpdateTime,
+                      fetchedAt: Date.now(),
+                    },
+                  }),
+                ),
+                // Store retrieved resource to cache.
+                mergeMap(updatedResourceLoadResult =>
+                  from(
+                    localforage.setItem(
+                      updatedResourceLoadResult.action.payload.resourceName,
+                      updatedResourceLoadResult.resource,
+                    ),
+                  ).pipe(mapTo(updatedResourceLoadResult)),
+                ),
+                // If retrieval fails, return the existing load result so that cached
+                // result or the error message can be used.
+                // TODO: Handle case where authentication fails (session expired).
+                catchError(error => {
+                  /* tslint:disable-next-line:no-console */
+                  console.log({ error });
 
-            return of(resourceLoadResultWithError);
-          }),
-        );
+                  const resourceLoadResultWithError: ResourceLoadResult = {
+                    ...resourceLoadResult,
+                    error: getError(error),
+                  };
+
+                  // If there was a cached version, do nothing here because the
+                  // cached version was sent ahead above. The cached version that
+                  // was sent for performance reasons above will also act as the
+                  // fallback during network down time.
+                  // Send along authentication failures though so that the app can
+                  // perform login flow.
+                  if (
+                    resourceLoadResult.resource &&
+                    resourceLoadResultWithError.error.type !==
+                      ResourceLoadErrorType.Unauthenticated
+                  ) {
+                    return EMPTY;
+                  }
+
+                  return of(resourceLoadResultWithError);
+                }),
+              ),
+          ),
+        ),
+      );
     }),
   );
 

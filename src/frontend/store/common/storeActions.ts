@@ -4,12 +4,14 @@ export enum StoreActionType {
   GetState = "[store] Get State",
   GetStateSuccess = "[store] Get State Success",
   GetStateFailure = "[store] Get State Failure",
+  SetState = "[store] Set State",
 }
 
 export type StoreAction =
   | StoreActionGetState
   | StoreActionGetStateSuccess
-  | StoreActionGetStateFailure;
+  | StoreActionGetStateFailure
+  | StoreActionSetState;
 
 /**
  * Sent from the client to the webworker. It requests the state for the
@@ -38,6 +40,18 @@ export type StoreActionGetStateSuccess = {
 export type StoreActionGetStateFailure = {
   type: StoreActionType.GetStateFailure;
   payload: { resourceName: string; error: ResourceLoadError };
+};
+
+/**
+ * Sent from the client to the web worker to set the state of a resource.
+ */
+export type StoreActionSetState = {
+  type: StoreActionType.SetState;
+  payload: {
+    resourceName: string;
+    backendResourceName: string | null;
+    data: unknown;
+  };
 };
 
 export const storeActions = {
@@ -71,6 +85,17 @@ export const storeActions = {
         resourceName,
         error,
       },
+    };
+  },
+
+  setState(
+    resourceName: string,
+    backendResourceName: string | null,
+    data: unknown,
+  ): StoreActionSetState {
+    return {
+      type: StoreActionType.SetState,
+      payload: { resourceName, backendResourceName, data },
     };
   },
 };

@@ -3,12 +3,14 @@ import { StoreAction } from "../common";
 import { actions$ } from "./actionsObservable";
 import { dispatch } from "./dispatch";
 import { getResourceEpic } from "./getResourceEpic";
+import { setResourceEpic } from "./setResourceEpic";
 
 /**
  * Connects the request processing epics to the incoming actions.
  */
 export function initializeStoreWebWorker() {
   connectEpic(getResourceEpic);
+  connectEpic(setResourceEpic);
 }
 
 function connectEpic(

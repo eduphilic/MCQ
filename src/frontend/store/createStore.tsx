@@ -3,6 +3,7 @@ import React, {
   createContext,
   ReactNode,
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -46,12 +47,37 @@ export async function createStore<State>(
   function Provider(props: { children?: ReactNode }) {
     const [state, setLocalState] = useState(initialState);
 
-    // TODO: Dispatch an update event to web worker.
+    // Update the state in the current browser tab and dispatch an event to the
+    // web worker so that state is synced.
     const setState = useCallback((nextState: State) => {
       setLocalState(nextState);
+      if (!config.resourceName) return;
+      dispatch(
+        storeActions.setState(
+          config.resourceName,
+          config.backendResourceName,
+          nextState,
+        ),
+      );
     }, []);
 
-    // TODO: Subscribe to updates from web worker.
+    // Subscribe to state updates from web worker.
+    useEffect(() => {
+      const subscription = actions$.pipe(subscribeOn(asapScheduler)).subscribe({
+        next: action => {
+          if (
+            action.type !== StoreActionType.GetStateSuccess ||
+            action.payload.resourceName !== config.resourceName
+          ) {
+            return;
+          }
+
+          setLocalState(action.payload.data as State);
+        },
+      });
+
+      return subscription.unsubscribe.bind(subscription);
+    }, []);
 
     const value: StoreContextValue<State> = useMemo(() => {
       return {

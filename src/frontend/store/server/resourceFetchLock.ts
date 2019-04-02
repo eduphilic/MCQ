@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 import { filter, tap } from "rxjs/operators";
-import { StoreAction, StoreActionGetState } from "../common";
+import { StoreAction, StoreActionGetState, StoreActionType } from "../common";
 
 const isResourceFetchingByKey = new Set<string>();
 
@@ -40,8 +40,10 @@ export function unlockResourceFetch() {
 function isFetchResourceResponseAction(
   action: StoreAction,
 ): action is FetchResourceResponseAction {
-  return action.type === "[store] Get State Success";
-  // TODO: Add failure type here as well.
+  return (
+    action.type === StoreActionType.GetStateSuccess ||
+    action.type === StoreActionType.GetStateFailure
+  );
 }
 
 type FetchResourceResponseAction = Extract<
