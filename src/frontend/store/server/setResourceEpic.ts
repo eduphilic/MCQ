@@ -1,5 +1,5 @@
 import localforage from "localforage";
-import { BehaviorSubject, from, Observable, of, zip } from "rxjs";
+import { BehaviorSubject, EMPTY, from, Observable, of, zip } from "rxjs";
 import { ajax } from "rxjs/ajax";
 import {
   catchError,
@@ -20,6 +20,7 @@ import {
   StoreActionSetState,
   StoreActionType,
 } from "../common";
+import { actionsSubject } from "./actionsObservable";
 import { CachedResource } from "./CachedResource";
 import { credential$ } from "./credentialObservable";
 import { filterAction } from "./filterAction";
@@ -88,6 +89,18 @@ function submitStateUpdate(action: StoreActionSetState) {
                 /* tslint:disable-next-line:no-console */
                 console.error(error);
 
+                // Client state is out of date.
+                if (error.status === 409) {
+                  actionsSubject.next(
+                    storeActions.getState(
+                      action.payload.resourceName,
+                      action.payload.backendResourceName,
+                      true,
+                    ),
+                  );
+                  throw error;
+                }
+
                 return of({
                   action,
                   lastUpdateTime: resourceSetResourceDto.lastUpdateTime,
@@ -118,5 +131,13 @@ function submitStateUpdate(action: StoreActionSetState) {
         result.payload.data,
       ),
     ),
+    catchError(error => {
+      /* tslint:disable-next-line:no-console */
+      console.log({ error });
+
+      submitting.next(false);
+
+      return EMPTY;
+    }),
   );
 }

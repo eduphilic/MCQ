@@ -19,6 +19,10 @@ import { ResourceLoadResult } from "./ResourceLoadResult";
 export const loadFromBackend = () => (source: Observable<ResourceLoadResult>) =>
   source.pipe(
     mergeMap(resourceLoadResult => {
+      if (resourceLoadResult.action.payload.forceRefetch) {
+        resourceLoadResult.expired = true;
+      }
+
       // If resource is in cache and not expired, use it.
       if (resourceLoadResult.resource && !resourceLoadResult.expired) {
         return of(resourceLoadResult);

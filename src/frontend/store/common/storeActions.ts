@@ -22,6 +22,8 @@ export type StoreActionGetState = {
   payload: {
     resourceName: string;
     backendResourceName: string | null;
+    /** Set to true when an update request returns an error due to conflict. */
+    forceRefetch?: boolean;
   };
 };
 
@@ -58,10 +60,11 @@ export const storeActions = {
   getState(
     resourceName: string,
     backendResourceName: string | null,
+    forceRefetch?: boolean,
   ): StoreActionGetState {
     return {
       type: StoreActionType.GetState,
-      payload: { resourceName, backendResourceName },
+      payload: { resourceName, backendResourceName, forceRefetch },
     };
   },
 
