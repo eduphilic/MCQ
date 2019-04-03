@@ -1,6 +1,5 @@
 import localforage from "localforage";
-import { BehaviorSubject, EMPTY, from, Observable, of, zip } from "rxjs";
-import { ajax } from "rxjs/ajax";
+import { BehaviorSubject, EMPTY, from, Observable, of } from "rxjs";
 import {
   catchError,
   debounce,
@@ -15,6 +14,7 @@ import {
   ResourceSetResourceResponseDto,
 } from "../../../common";
 import {
+  apiClient,
   StoreAction,
   storeActions,
   StoreActionSetState,
@@ -24,7 +24,6 @@ import { actionsSubject } from "./actionsObservable";
 import { CachedResource } from "./CachedResource";
 import { credential$ } from "./credentialObservable";
 import { filterAction } from "./filterAction";
-import { resourceBaseUrl$ } from "./resourceBaseUrlObservable";
 
 const submitting = new BehaviorSubject(false);
 
@@ -67,46 +66,44 @@ function submitStateUpdate(action: StoreActionSetState) {
         });
       }
 
-      return zip(resourceBaseUrl$, credential$).pipe(
-        switchMap(([resourceBaseUrl, credential]) =>
-          ajax
-            .post(
-              `${resourceBaseUrl}${action.payload.backendResourceName}`,
-              resourceSetResourceDto,
-              {
-                Authorization: credential ? `Bearer ${credential}` : undefined,
-                "Content-Type": "application/json",
-              },
-            )
-            .pipe(
-              map(response => {
-                const lastUpdateTime = (response.response as ResourceSetResourceResponseDto)
-                  .lastUpdateTime;
-                return { action, lastUpdateTime };
-              }),
-              catchError(error => {
-                // TODO: Handle authentication expiration.
-                /* tslint:disable-next-line:no-console */
-                console.error(error);
+      return from(credential$).pipe(
+        switchMap(credential =>
+          apiClient(
+            {
+              method: "POST",
+              body: resourceSetResourceDto,
+              endpoint: `/${action.payload.backendResourceName}`,
+            },
+            credential,
+          ).pipe(
+            map(response => {
+              const lastUpdateTime = (response.response as ResourceSetResourceResponseDto)
+                .lastUpdateTime;
+              return { action, lastUpdateTime };
+            }),
+            catchError(error => {
+              // TODO: Handle authentication expiration.
+              /* tslint:disable-next-line:no-console */
+              console.error(error);
 
-                // Client state is out of date.
-                if (error.status === 409) {
-                  actionsSubject.next(
-                    storeActions.getState(
-                      action.payload.resourceName,
-                      action.payload.backendResourceName,
-                      true,
-                    ),
-                  );
-                  throw error;
-                }
+              // Client state is out of date.
+              if (error.status === 409) {
+                actionsSubject.next(
+                  storeActions.getState(
+                    action.payload.resourceName,
+                    action.payload.backendResourceName,
+                    true,
+                  ),
+                );
+                throw error;
+              }
 
-                return of({
-                  action,
-                  lastUpdateTime: resourceSetResourceDto.lastUpdateTime,
-                });
-              }),
-            ),
+              return of({
+                action,
+                lastUpdateTime: resourceSetResourceDto.lastUpdateTime,
+              });
+            }),
+          ),
         ),
       );
     }),
