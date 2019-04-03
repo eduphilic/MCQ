@@ -9,13 +9,15 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { Store } from "./createStore";
+import { createStore, Store } from "./createStore";
 
-type AnyStoresConfig = { [P: string]: Promise<any> };
+type SessionStoreState = { apiKey: string | null };
 
-type Stores<T extends AnyStoresConfig> = {
-  [P in keyof T]: T[P] extends Promise<Store<infer U>> ? Store<U> : never
-};
+const sessionStore = createStore<SessionStoreState>({
+  resourceName: "session",
+  backendResourceName: null,
+  defaultState: { apiKey: null },
+});
 
 /**
  * Initializes each of the provided stores by retrieving their initial states
@@ -26,20 +28,36 @@ type Stores<T extends AnyStoresConfig> = {
  * Object which maps store names to their store config objects (returned from
  * the `createStore` factory).
  */
-export function initializeStores<StoresConfig extends AnyStoresConfig>(
-  storesConfig: StoresConfig,
-) {
-  const StoresContext = createContext<Stores<StoresConfig>>(null as any);
-  const initializedStores: Partial<Stores<StoresConfig>> = {};
+export function initializeStores<
+  StoresConfig extends { [P: string]: Promise<Store<any>> }
+>(storesConfig: StoresConfig) {
+  type Stores = {
+    [P in keyof StoresConfig]: StoresConfig[P] extends Promise<Store<infer U>>
+      ? Store<U>
+      : never
+  } & { session: Store<SessionStoreState> };
 
+  const StoresContext = createContext<Stores>(null as any);
+  const initializedStores = {} as Stores;
+
+  // Create a flag that sets to true once all stores have been initialized by
+  // subscribing to their promises.
   let initialized = false;
-  const initialization = Promise.all(
-    storesConfigEntries().map(async ([storeName, storeValuePromise]) => {
-      // tslint:disable-next-line:await-promise
-      const storeValue = await storeValuePromise;
-      initializedStores[storeName] = storeValue;
+  const initializationPromises: Promise<void>[] = [];
+  for (const key in storesConfig) {
+    if (!storesConfig.hasOwnProperty(key)) continue;
+    initializationPromises.push(
+      storesConfig[key].then(storeValue => {
+        initializedStores[key] = storeValue as any;
+      }),
+    );
+  }
+  initializationPromises.push(
+    sessionStore.then(storeValue => {
+      initializedStores.session = storeValue;
     }),
-  ).then(() => {
+  );
+  const initialization = Promise.all(initializationPromises).then(() => {
     initialized = true;
   });
 
@@ -63,13 +81,9 @@ export function initializeStores<StoresConfig extends AnyStoresConfig>(
     const providers = useMemo(
       () =>
         loaded
-          ? Object.values(initializedStores as Stores<StoresConfig>)
+          ? Object.values(initializedStores)
               .map(value => <value.Provider />)
-              .concat(
-                <StoresContext.Provider
-                  value={initializedStores as Stores<StoresConfig>}
-                />,
-              )
+              .concat(<StoresContext.Provider value={initializedStores} />)
           : [],
       [loaded],
     );
@@ -86,12 +100,8 @@ export function initializeStores<StoresConfig extends AnyStoresConfig>(
    *
    * @param storeName Store name.
    */
-  function useStore<StoreName extends keyof StoresConfig>(
-    storeName: StoreName,
-  ) {
-    type ContextValue = Stores<
-      StoresConfig
-    >[StoreName]["Context"] extends Context<infer U>
+  function useStore<StoreName extends keyof Stores>(storeName: StoreName) {
+    type ContextValue = Stores[StoreName]["Context"] extends Context<infer U>
       ? U
       : never;
     const store = useContext(StoresContext)[storeName];
@@ -100,14 +110,6 @@ export function initializeStores<StoresConfig extends AnyStoresConfig>(
     return useContext<ContextValue>((store.Context as unknown) as Context<
       ContextValue
     >);
-  }
-
-  function storesConfigEntries() {
-    return (Object.entries as (
-      obj: StoresConfig,
-    ) => [keyof StoresConfig, StoresConfig[keyof StoresConfig]][])(
-      storesConfig,
-    );
   }
 }
 
