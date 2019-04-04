@@ -1,6 +1,7 @@
 import React, {
   cloneElement,
   Context,
+  ContextType,
   createContext,
   ReactElement,
   ReactNode,
@@ -61,7 +62,7 @@ export function initializeStores<
     initialized = true;
   });
 
-  return { StoresProvider, useStore };
+  return { StoresProvider, useStore, useRootStore };
 
   function StoresProvider(props: { children?: ReactNode }) {
     const [loaded, setLoaded] = useState(initialized);
@@ -110,6 +111,20 @@ export function initializeStores<
     return useContext<ContextValue>((store.Context as unknown) as Context<
       ContextValue
     >);
+  }
+
+  function useRootStore() {
+    const storesMap = {} as {
+      [P in keyof Stores]: ContextType<Stores[P]["Context"]>
+    };
+
+    for (const key in initializedStores) {
+      if (!initializedStores.hasOwnProperty(key)) continue;
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      storesMap[key] = useStore(key) as any;
+    }
+
+    return storesMap;
   }
 }
 
