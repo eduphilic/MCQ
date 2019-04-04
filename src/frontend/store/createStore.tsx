@@ -1,3 +1,4 @@
+import produce, { Draft } from "immer";
 import React, {
   ComponentType,
   createContext,
@@ -20,7 +21,7 @@ type StoreConfig<State> = {
 
 type StoreContextValue<State> = {
   state: State;
-  setState: (state: State) => void;
+  setState: (updater: (draft: Draft<State>) => void) => void;
 };
 
 export type Store<State> = {
@@ -49,20 +50,27 @@ export async function createStore<State>(
 
     // Update the state in the current browser tab and dispatch an event to the
     // web worker so that state is synced.
-    const setState = useCallback((nextState: State) => {
-      setLocalState(nextState);
-      if (!config.resourceName) return;
-      dispatch(
-        storeActions.setState(
-          config.resourceName,
-          config.backendResourceName,
-          nextState,
-        ),
-      );
+    const setState = useCallback((updater: (draft: Draft<State>) => void) => {
+      setLocalState(prevState => {
+        const nextState = produce(prevState, updater);
+
+        if (config.resourceName) {
+          dispatch(
+            storeActions.setState(
+              config.resourceName,
+              config.backendResourceName,
+              nextState,
+            ),
+          );
+        }
+
+        return nextState;
+      });
     }, []);
 
     // Subscribe to state updates from web worker.
     useEffect(() => {
+      if (!config.resourceName) return;
       const subscription = actions$.pipe(subscribeOn(asapScheduler)).subscribe({
         next: action => {
           if (
