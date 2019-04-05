@@ -1,18 +1,15 @@
 import App, { Container } from "next/app";
 import React from "react";
-import { Provider } from "react-redux";
 import {
   PageLoadIndicator,
   ThemeBaseline,
   WithMaterialUI,
   withMaterialUIApp,
 } from "../display";
-import { RecaptchaProvider } from "../session";
-import { withReduxStore, WithReduxStore } from "../store";
 
-class MyApp extends App<WithReduxStore & WithMaterialUI> {
+class MyApp extends App<WithMaterialUI> {
   render() {
-    const { Component, StyleProvider, pageProps, reduxStore } = this.props;
+    const { Component, StyleProvider, pageProps } = this.props;
 
     return (
       <Container>
@@ -20,11 +17,7 @@ class MyApp extends App<WithReduxStore & WithMaterialUI> {
           <ThemeBaseline>
             <PageLoadIndicator />
 
-            <Provider store={reduxStore}>
-              <RecaptchaProvider>
-                <Component {...pageProps} />
-              </RecaptchaProvider>
-            </Provider>
+            <Component {...pageProps} />
           </ThemeBaseline>
         </StyleProvider>
       </Container>
@@ -32,4 +25,4 @@ class MyApp extends App<WithReduxStore & WithMaterialUI> {
   }
 }
 
-export default withMaterialUIApp(withReduxStore(MyApp));
+export default withMaterialUIApp(MyApp);
