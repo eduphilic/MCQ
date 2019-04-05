@@ -10,12 +10,13 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import { SESSION_STATE_KEY, SessionState } from "./common";
 import { createStore, Store } from "./createStore";
 
-type SessionStoreState = { apiKey: string | null };
+type SessionStoreState = SessionState;
 
 const sessionStore = createStore<SessionStoreState>({
-  resourceName: "session",
+  resourceName: SESSION_STATE_KEY,
   backendResourceName: null,
   defaultState: { apiKey: null },
 });

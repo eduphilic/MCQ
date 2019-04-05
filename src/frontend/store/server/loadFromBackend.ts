@@ -79,7 +79,7 @@ export const loadFromBackend = () => (source: Observable<ResourceLoadResult>) =>
               // TODO: Handle case where authentication fails (session expired).
               catchError(error => {
                 /* tslint:disable-next-line:no-console */
-                console.log({ error });
+                console.log("error:", { error });
 
                 const resourceLoadResultWithError: ResourceLoadResult = {
                   ...resourceLoadResult,
