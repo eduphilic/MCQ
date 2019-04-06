@@ -1,140 +1,47 @@
-import localforage from "localforage";
-import { BehaviorSubject, EMPTY, from, Observable, of } from "rxjs";
-import {
-  catchError,
-  debounce,
-  filter,
-  map,
-  mapTo,
-  switchMap,
-  tap,
-} from "rxjs/operators";
-import {
-  ResourceSetResourceDto,
-  ResourceSetResourceResponseDto,
-} from "../../../common";
-import {
-  apiClient,
-  StoreAction,
-  storeActions,
-  StoreActionSetState,
-  StoreActionType,
-} from "../common";
-import { actionsSubject } from "./actionsObservable";
-import { CachedResource } from "./CachedResource";
-import { credential$ } from "./credentialObservable";
+import { EMPTY, merge, Observable, of, Subject } from "rxjs";
+import { mergeMap } from "rxjs/operators";
+import { StoreAction, StoreActionSetState, StoreActionType } from "../common";
+import { createResourceUpdater } from "./createResourceUpdater";
 import { filterAction } from "./filterAction";
 
-const submitting = new BehaviorSubject(false);
+const resourceUpdaters = new Map<string, Subject<StoreActionSetState>>();
 
 /**
- * Epic to react to local updates to user state. When a state update occurs it
- * submits the updated state to the backend.
+ * Epic which handles state updates. It emits update messages to all subscribed
+ * browser tabs and handles web request debouncing.
  *
- * If a request is already in-flight, it discards all update events until the
- * update request finishes. It will then submit the most recent update.
+ * @param actions$ Incoming store update actions.
  */
 export function setResourceEpic(actions$: Observable<StoreAction>) {
   return actions$.pipe(
     // Respond only to state update actions.
     filterAction(StoreActionType.SetState),
-    // Discard update actions while an update is already in flight. Send along
-    // the most recent action once the current request completes.
-    debounce(() => submitting.pipe(filter(isSubmitting => !isSubmitting))),
-    tap(() => submitting.next(true)),
-    // Submit the state update to the backend.
-    switchMap(action => submitStateUpdate(action)),
-    tap(() => submitting.next(false)),
-  );
-}
-
-function submitStateUpdate(action: StoreActionSetState) {
-  return from(
-    localforage.getItem<CachedResource | null>(action.payload.resourceName),
-  ).pipe(
-    switchMap(cachedResource => {
-      const resourceSetResourceDto: ResourceSetResourceDto<unknown> = {
-        version: 0,
-        lastUpdateTime: cachedResource ? cachedResource.lastUpdateTime : 0,
-        data: action.payload.data,
-      };
-
-      if (!action.payload.backendResourceName) {
-        return of({
-          action,
-          lastUpdateTime: resourceSetResourceDto.lastUpdateTime,
-        });
+    // Create a resource updater for the incoming resource type if it doesn't
+    // already exist. This is to allow the use of a single observable per
+    // resource type so each observable instance can handle its network
+    // debouncing.
+    mergeMap(action => {
+      if (!resourceUpdaters.has(action.payload.resourceName)) {
+        const { subject, observable } = createResourceUpdater();
+        resourceUpdaters.set(action.payload.resourceName, subject);
+        return merge(of(action), observable);
       }
 
-      return from(credential$).pipe(
-        switchMap(credential =>
-          apiClient(
-            {
-              method: "POST",
-              body: resourceSetResourceDto,
-              endpoint: `/${action.payload.backendResourceName}`,
-            },
-            credential,
-          ).pipe(
-            map(response => {
-              const lastUpdateTime = (response.response as ResourceSetResourceResponseDto)
-                .lastUpdateTime;
-              return { action, lastUpdateTime };
-            }),
-            catchError(error => {
-              // TODO: Handle authentication expiration.
-              /* tslint:disable-next-line:no-console */
-              console.error(error);
-
-              // Client state is out of date.
-              if (error.status === 409) {
-                actionsSubject.next(
-                  storeActions.getState(
-                    action.payload.resourceName,
-                    action.payload.backendResourceName,
-                    true,
-                  ),
-                );
-                throw error;
-              }
-
-              return of({
-                action,
-                lastUpdateTime: resourceSetResourceDto.lastUpdateTime,
-              });
-            }),
-          ),
-        ),
-      );
+      return of(action);
     }),
-    switchMap(result => {
-      const cachedResource: CachedResource = {
-        data: result.action.payload.data,
-        fetchedAt: Date.now(),
-        lastUpdateTime: result.lastUpdateTime,
-        version: 0,
-      };
+    // Dispatch the action to the appropriate resource updater.
+    mergeMap(action => {
+      // `SetState` actions are sent to the updater and swallowed. The updater
+      // will handle emitting a success or error action response.
+      if (action.type === StoreActionType.SetState) {
+        setTimeout(() => {
+          resourceUpdaters.get(action.payload.resourceName)!.next(action);
+        });
+        return EMPTY;
+      }
 
-      return from(
-        localforage.setItem<CachedResource>(
-          result.action.payload.resourceName,
-          cachedResource,
-        ),
-      ).pipe(mapTo(result.action));
-    }),
-    map(result =>
-      storeActions.getStateSuccess(
-        result.payload.resourceName,
-        result.payload.data,
-      ),
-    ),
-    catchError(error => {
-      /* tslint:disable-next-line:no-console */
-      console.log({ error });
-
-      submitting.next(false);
-
-      return EMPTY;
+      // Return the responses from the updaters.
+      return of(action);
     }),
   );
 }
