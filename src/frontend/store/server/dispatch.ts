@@ -15,6 +15,9 @@ ports$
   .subscribe(portsSubject);
 
 export async function dispatch(action: StoreAction) {
+  /* tslint:disable-next-line:no-console */
+  console.log("Outgoing action:", action);
+
   return new Promise<void>(resolve => {
     const subscription = portsSubject$
       .pipe(subscribeOn(asapScheduler))

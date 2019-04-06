@@ -1,9 +1,18 @@
 import { Subject } from "rxjs";
+import { tap } from "rxjs/operators";
 import { portActions, StoreAction } from "../common";
 import { ports$ } from "./portsObservable";
 
 export const actionsSubject = new Subject<StoreAction>();
-ports$.pipe(portActions()).subscribe(actionsSubject);
+ports$
+  .pipe(
+    portActions(),
+    tap(action => {
+      /* tslint:disable-next-line:no-console */
+      console.log("Incoming action:", { action });
+    }),
+  )
+  .subscribe(actionsSubject);
 
 /**
  * Returns an observable which returns received actions.
