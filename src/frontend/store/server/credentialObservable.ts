@@ -1,6 +1,6 @@
 import localforage from "localforage";
-import { from, merge } from "rxjs";
-import { filter, map, publishBehavior, refCount } from "rxjs/operators";
+import { ConnectableObservable, from, merge, Observable } from "rxjs";
+import { filter, map, publishBehavior } from "rxjs/operators";
 import { SESSION_STATE_KEY, SessionState, StoreActionType } from "../common";
 import { actions$ } from "./actionsObservable";
 import { CachedResource } from "./CachedResource";
@@ -18,7 +18,10 @@ export const credential$ = merge(
     filter(action => action.payload.resourceName === SESSION_STATE_KEY),
     map(action => (action.payload.data as SessionState).apiKey),
   ),
-).pipe(
-  publishBehavior<string | null>(null),
-  refCount(),
-);
+).pipe(publishBehavior<string | null>(null));
+
+(credential$ as ConnectableObservable<
+  ObservableValue<typeof credential$>
+>).connect();
+
+type ObservableValue<T> = T extends Observable<infer U> ? U : never;
