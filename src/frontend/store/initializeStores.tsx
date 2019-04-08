@@ -90,7 +90,7 @@ export function initializeStores<
       [loaded],
     );
 
-    if (!loaded) return <p>Loading...</p>;
+    if (!loaded) return null;
 
     return (
       <ComposedContext providers={providers}>{props.children}</ComposedContext>
