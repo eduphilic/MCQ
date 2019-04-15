@@ -1,0 +1,14 @@
+{
+  "koa": {
+    "key1": "9Gzv3vgF80HVsjOM@hg",
+    "cookie_expire_seconds": "1209600",
+    "cookie_secret": "I4yKqV32SfhoDSF@8",
+    "key0": "2E9wQY*1K%ddgfJAvgFc"
+  },
+  "cloudinary": {
+    "api_key": "683726151461245",
+    "cloud_name": "https-www-joinuniform-com",
+    "api_secret": "FL5W37YFsmDErqD40DHAdIgt_z4",
+    "username": "joinuniform@gmail.com"
+  }
+}

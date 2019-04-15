@@ -1,0 +1,41 @@
+[debug] [2019-01-20T12:13:04.427Z] ----------------------------------------------------------------------
+[debug] [2019-01-20T12:13:04.429Z] Command:       /home/jason/.nvm/versions/node/v10.15.0/bin/node /home/jason/code/clients/bhartitest/node_modules/.bin/firebase serve --only functions,hosting
+[debug] [2019-01-20T12:13:04.429Z] CLI Version:   6.2.2
+[debug] [2019-01-20T12:13:04.429Z] Platform:      linux
+[debug] [2019-01-20T12:13:04.429Z] Node Version:  v10.15.0
+[debug] [2019-01-20T12:13:04.429Z] Time:          Sun Jan 20 2019 07:13:04 GMT-0500 (Eastern Standard Time)
+[debug] [2019-01-20T12:13:04.429Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-01-20T12:13:04.441Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-01-20T12:13:04.441Z] > authorizing via signed-in user
+[debug] [2019-01-20T12:13:04.442Z] [iam] checking project joinuniformindia for permissions ["firebase.projects.get"]
+[debug] [2019-01-20T12:13:04.443Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-01-20T12:13:04.443Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-01-20T12:13:04.749Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-20T12:13:04.779Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/joinuniformindia:testIamPermissions  
+
+[debug] [2019-01-20T12:13:05.142Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-20T12:13:05.143Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/joinuniformindia  
+ 
+[debug] [2019-01-20T12:13:05.414Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/jason/code/clients/bhartitest'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2019-01-20T12:13:05.975Z] Fetching environment
+[debug] [2019-01-20T12:13:05.977Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/559566448270:getServerAppConfig  
+ 
+[debug] [2019-01-20T12:13:05.978Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/559566448270/clients/_:getWebAppConfig  
+ 
+[debug] [2019-01-20T12:13:06.351Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-20T12:13:06.351Z] Starting @google-cloud/functions-emulator
+[debug] [2019-01-20T12:13:06.442Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist/public
+[info] ✔  hosting: Local server: http://localhost:5000
+[debug] [2019-01-20T12:13:07.415Z] Parsing function triggers
+[info] ✔  functions: main: http://localhost:5001/joinuniformindia/us-central1/main
+[info] [hosting] Rewriting /graphql to local function main
+[info] [hosting] Rewriting /graphql to local function main
+[info] [hosting] Rewriting /graphql to local function main
+[info] [hosting] Rewriting /graphql to local function main

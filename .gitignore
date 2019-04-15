@@ -1,14 +1,2 @@
 node_modules/
-
-# Build assets
-dist/
-.cache/
-.firebase/
-
-# Logs
-*.log
-
-# Firebase configuration
-.runtimeconfig.json
-firebase-admin-service-account.default.json
-firebase-admin-service-account.staging.json
+.next/
