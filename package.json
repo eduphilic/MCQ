@@ -1,6 +1,9 @@
 {
   "private": true,
-  "workspaces": [
-    "package-landing"
-  ]
+  "workspaces": {
+    "packages": [
+      "package-backend",
+      "package-landing"
+    ]
+  }
 }
