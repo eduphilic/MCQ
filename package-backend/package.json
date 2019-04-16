@@ -7,8 +7,8 @@
     "node": "8"
   },
   "scripts": {
-    "start": "npm-run-all clean --parallel start:tsc",
-    "start:tsc": "tsc-watch --onSuccess \"firebase serve\"",
+    "start": "npm-run-all clean start:tsc",
+    "start:tsc": "tsc-watch --onSuccess \"cross-env NODE_ENV=development firebase serve\"",
     "build": "tsc",
     "clean": "rimraf dist",
     "deploy": "npm-run-all clean build deploy:firebase",
@@ -19,16 +19,23 @@
     "@nestjs/common": "^6.1.1",
     "@nestjs/core": "^6.1.1",
     "@nestjs/platform-express": "^6.1.1",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "firebase-admin": "^7.2.0",
     "firebase-functions": "^2.2.1",
+    "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^6.4.0"
+    "rxjs": "^6.4.0",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
+    "@types/dotenv": "^6.1.1",
     "@types/express": "^4.16.1",
     "@types/node": "^11.13.4",
+    "@types/passport-jwt": "^3.0.1",
     "@types/request": "^2.48.1",
+    "@types/yup": "^0.26.12",
+    "cross-env": "^5.2.0",
     "firebase-tools": "^6.6.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^2.6.3",

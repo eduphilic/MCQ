@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
-import { PlaceholderController } from "./PlaceholderController";
+import { ConfigModule } from "./config";
+import { DeploymentModule } from "./deployment";
 
-@Module({ controllers: [PlaceholderController] })
+@Module({ imports: [ConfigModule, DeploymentModule] })
 export class ApplicationModule {}
