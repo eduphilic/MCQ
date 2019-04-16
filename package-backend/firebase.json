@@ -1,5 +1,23 @@
 {
+  "hosting": {
+    "public": "public",
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "app"
+      }
+    ]
+  },
   "functions": {
-    "source": "."
+    "source": ".",
+    "ignore": [
+      "**/.*",
+      "**/node_modules/**",
+      "public/",
+      "src/",
+      "*.log",
+      "firebase.json",
+      "tsconfig.json"
+    ]
   }
 }

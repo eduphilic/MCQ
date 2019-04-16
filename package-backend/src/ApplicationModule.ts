@@ -1,4 +1,5 @@
 import { Module } from "@nestjs/common";
+import { PlaceholderController } from "./PlaceholderController";
 
-@Module({})
+@Module({ controllers: [PlaceholderController] })
 export class ApplicationModule {}

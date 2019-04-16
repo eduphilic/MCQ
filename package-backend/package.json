@@ -8,9 +8,11 @@
   },
   "scripts": {
     "start": "npm-run-all clean --parallel start:tsc",
-    "start:tsc": "tsc-watch --onSuccess \"firebase serve --only functions\"",
+    "start:tsc": "tsc-watch --onSuccess \"firebase serve\"",
     "build": "tsc",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "deploy": "npm-run-all clean build deploy:firebase",
+    "deploy:firebase": "firebase deploy"
   },
   "dependencies": {
     "@firebase/app-types": "0.x",
