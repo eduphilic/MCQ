@@ -1,19 +1,39 @@
-import { Controller, Post, UseGuards } from "@nestjs/common";
-import { ConfigService } from "../config";
+import {
+  Controller,
+  Post,
+  UseGuards,
+  UseInterceptors,
+  UploadedFiles,
+} from "@nestjs/common";
 import { DeploymentApiKeyGuard } from "./DeploymentApiKeyGuard";
+import { FileFieldsInterceptor } from "@nestjs/platform-express";
+import { DeployableAppsEnum } from "./DeployableAppsEnum";
+import { MulterOptions } from "@nestjs/platform-express/multer/interfaces/multer-options.interface";
+
+type UploadedDeploymentZips = { [P in DeployableAppsEnum]?: File[] };
+const deployablePackageNames = Object.values(DeployableAppsEnum) as string[];
 
 @Controller("api/deploy")
 @UseGuards(DeploymentApiKeyGuard)
 export class DeploymentController {
-  constructor(private configService: ConfigService) {}
-
   @Post()
-  async deploy() {
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      deployablePackageNames.map(packageName => ({
+        name: packageName,
+        maxCount: 1,
+      })),
+    ),
+  )
+  deploy(@UploadedFiles() files: UploadedDeploymentZips) {
     /* tslint:disable-next-line:no-console */
-    console.log({ config: this.configService.getConfig() });
-    /* tslint:disable-next-line:no-console */
-    console.log({ env: process.env.FIREBASE_CONFIG });
-    /* tslint:disable-next-line:no-console */
-    console.log({ dev: process.env.NODE_ENV });
+    console.log({ files });
+
+    Object.entries(files).forEach(([key, value]) => {
+      /* tslint:disable-next-line:no-console */
+      console.log({ key, value: value && value[0].originalname });
+    });
   }
 }
+
+type File = Parameters<NonNullable<MulterOptions["fileFilter"]>>["1"];
