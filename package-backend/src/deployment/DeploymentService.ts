@@ -40,9 +40,6 @@ export class DeploymentService {
         });
         const zipReadStream = new ZipEntryReadStream(zipEntry);
 
-        /* tslint:disable-next-line:no-console */
-        console.log("Uploading:", filename);
-
         zipReadStream.pipe(fileWriteStream);
         i += 1;
       }
