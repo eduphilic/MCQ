@@ -9,14 +9,18 @@ import { DeploymentController } from "./DeploymentController";
 import { MulterModule } from "@nestjs/platform-express";
 import { DeploymentMulterFirebaseCompatibilityMiddleware } from "./DeploymentMulterFirebaseCompatibilityMiddleware";
 import { DeploymentMulterConfigService } from "./DeploymentMulterConfigService";
+import { DeploymentService } from "./DeploymentService";
+import { FirebaseAdminModule } from "../firebase-admin";
 
 @Module({
   imports: [
     ConfigModule,
+    FirebaseAdminModule,
     MulterModule.registerAsync({
       useClass: DeploymentMulterConfigService,
     }),
   ],
+  providers: [DeploymentService],
   controllers: [DeploymentController],
 })
 export class DeploymentModule implements NestModule {

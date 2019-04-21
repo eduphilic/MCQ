@@ -4,36 +4,40 @@ import {
   UseGuards,
   UseInterceptors,
   UploadedFiles,
+  UnprocessableEntityException,
 } from "@nestjs/common";
 import { DeploymentApiKeyGuard } from "./DeploymentApiKeyGuard";
 import { FileFieldsInterceptor } from "@nestjs/platform-express";
 import { DeployableAppsEnum } from "./DeployableAppsEnum";
-import { MulterOptions } from "@nestjs/platform-express/multer/interfaces/multer-options.interface";
+import { DeployDto } from "./DeployDto";
+import assert from "assert";
+import { DeploymentService } from "./DeploymentService";
 
-type UploadedDeploymentZips = { [P in DeployableAppsEnum]?: File[] };
-const deployablePackageNames = Object.values(DeployableAppsEnum) as string[];
+const deployFileFields: {
+  name: DeployableAppsEnum;
+  maxCount: 1;
+}[] = [
+  {
+    name: DeployableAppsEnum.PackageLanding,
+    maxCount: 1,
+  },
+];
+
+assert(
+  new Set(deployFileFields.map(f => f.name)).size === deployFileFields.length &&
+    Object.keys(DeployableAppsEnum).length === deployFileFields.length,
+  "Expected all deployable apps to be listed in the file fields array.",
+);
 
 @Controller("api/deploy")
 @UseGuards(DeploymentApiKeyGuard)
 export class DeploymentController {
-  @Post()
-  @UseInterceptors(
-    FileFieldsInterceptor(
-      deployablePackageNames.map(packageName => ({
-        name: packageName,
-        maxCount: 1,
-      })),
-    ),
-  )
-  deploy(@UploadedFiles() files: UploadedDeploymentZips) {
-    /* tslint:disable-next-line:no-console */
-    console.log({ files });
+  constructor(private deploymentService: DeploymentService) {}
 
-    Object.entries(files).forEach(([key, value]) => {
-      /* tslint:disable-next-line:no-console */
-      console.log({ key, value: value && value[0].originalname });
-    });
+  @Post()
+  @UseInterceptors(FileFieldsInterceptor(deployFileFields))
+  async deploy(@UploadedFiles() deployDto: DeployDto | undefined) {
+    if (!deployDto) throw new UnprocessableEntityException();
+    return this.deploymentService.deploy(deployDto);
   }
 }
-
-type File = Parameters<NonNullable<MulterOptions["fileFilter"]>>["1"];
