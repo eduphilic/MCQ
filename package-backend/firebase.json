@@ -16,7 +16,6 @@
       "public/",
       "src/",
       "*.log",
-      "firebase.json",
       "tsconfig.json"
     ]
   }
