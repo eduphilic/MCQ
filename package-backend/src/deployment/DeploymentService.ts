@@ -36,7 +36,12 @@ export class DeploymentService {
         const file = bucket.file(filename);
         const fileWriteStream = file.createWriteStream({
           contentType: mime.lookup(filename) || "application/octet-stream",
-          gzip: true,
+          // TODO: Storage using gzip on cloud storage is not enabled because
+          // the static file middleware needs the uncompressed file size which
+          // is not reported in the meta data during retrieval. Also, gzip
+          // compressed files don't support range header. It also seems that
+          // responses from Firebase Hosting already gzip automatically.
+          // gzip: true,
         });
         const zipReadStream = new ZipEntryReadStream(zipEntry);
 
