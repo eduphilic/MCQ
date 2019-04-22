@@ -3,36 +3,59 @@ import * as functions from "firebase-functions";
 import { NestFactory } from "@nestjs/core";
 import { ApplicationModule } from "./ApplicationModule";
 import { ExpressAdapter } from "@nestjs/platform-express";
+import { INestApplication } from "@nestjs/common";
+import { ConfigService } from "./config";
 
-let initialization: Promise<ReturnType<typeof express>> | null = null;
+const initialize = createInitializer();
 
-export const app = functions.https.onRequest((req, res) => {
-  getExpressServer()
-    .then(expressServer => expressServer(req, res))
-    .catch(error => {
-      /* tslint:disable-next-line:no-console */
-      console.error(error);
+export const app = functions.https.onRequest(async (req, res) => {
+  const result = await initialize();
 
-      res.writeHead(500);
-      res.end();
-    });
+  if (result.type === "FAILURE") {
+    /* tslint:disable-next-line:no-console */
+    console.error(result.error);
+    res.status(500);
+    res.end();
+    return;
+  }
+
+  return result.expressServer(req, res);
 });
 
-function getExpressServer() {
-  if (initialization) return initialization;
+function createInitializer() {
+  let result:
+    | {
+        type: "SUCCESS";
+        expressServer: ReturnType<typeof express>;
+        nestApp: INestApplication;
+      }
+    | {
+        type: "FAILURE";
+        error: unknown;
+      };
 
-  initialization = createExpressServer();
-  return initialization;
-}
+  return async function() {
+    if (result) return result;
 
-async function createExpressServer() {
-  const expressServer = express();
+    try {
+      // Validate server configuration at startup so that Firebase properly logs
+      // the exception. Otherwise the function crashes without proper logging.
+      // TODO: Inject config service into ApplicationModule somehow.
+      new ConfigService().getConfig();
+      const expressServer = express();
 
-  const nestApp = await NestFactory.create(
-    ApplicationModule,
-    new ExpressAdapter(expressServer),
-  );
-  await nestApp.init();
+      const nestApp = await NestFactory.create(
+        ApplicationModule,
+        new ExpressAdapter(expressServer),
+        { logger: console },
+      );
+      await nestApp.init();
 
-  return expressServer;
+      result = { type: "SUCCESS", expressServer, nestApp };
+    } catch (error) {
+      result = { type: "FAILURE", error };
+    }
+
+    return result;
+  };
 }
