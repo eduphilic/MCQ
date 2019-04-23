@@ -22,7 +22,10 @@
       "ban-keywords"
     ],
 
-    "import-name": [true, { "admZip": "Zip", "react": "React" }],
+    "import-name": [
+      true,
+      { "admZip": "Zip", "immer": "produce", "react": "React" }
+    ],
 
     "await-promise": true,
     "no-floating-promises": true,
