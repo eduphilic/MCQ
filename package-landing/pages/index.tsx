@@ -1,6 +1,6 @@
-import Button from "@material-ui/core/Button";
 import React from "react";
+import { LayoutStickyFooter } from "../components";
 
 export default function IndexPage() {
-  return <Button>Placeholder</Button>;
+  return <LayoutStickyFooter title="Test">Placeholder</LayoutStickyFooter>;
 }

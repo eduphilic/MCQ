@@ -4,7 +4,7 @@ import createMuiTheme, {
 } from "@material-ui/core/styles/createMuiTheme";
 import produce from "immer";
 
-type ThemeVariants = "light";
+export type ThemeVariant = "light" | "dark";
 
 const baseThemeOptions: ThemeOptions = {
   typography: {
@@ -12,14 +12,18 @@ const baseThemeOptions: ThemeOptions = {
   },
 };
 
-const themeVariantThemeOptionsMap: Record<ThemeVariants, ThemeOptions> = {
-  light: produce(baseThemeOptions, _draft => {
-    //
+const themeVariantThemeOptionsMap: Record<ThemeVariant, ThemeOptions> = {
+  dark: produce(baseThemeOptions, draft => {
+    draft.palette = draft.palette || {};
+    draft.palette.type = "dark";
   }),
+  // tslint:disable-next-line:no-empty
+  light: produce(baseThemeOptions, _draft => {}),
 };
 
 export type Theme = Theme;
 
-export const themes: Record<ThemeVariants, Theme> = {
+export const themes: Record<ThemeVariant, Theme> = {
+  dark: createMuiTheme(themeVariantThemeOptionsMap.dark),
   light: createMuiTheme(themeVariantThemeOptionsMap.light),
 };
