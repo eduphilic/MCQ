@@ -11,6 +11,9 @@
     "start:tsc": "tsc-watch --onFirstSuccess \"cross-env NODE_ENV=development firebase serve\"",
     "build": "tsc",
     "clean": "rimraf dist",
+    "lint": "npm-run-all lint:*",
+    "lint:tslint": "tslint -p ./tsconfig.json -t verbose",
+    "lint:eslint": "eslint \"src/**\" --ext .tsx --ext .ts",
     "deploy": "npm-run-all clean build deploy:firebase",
     "deploy:firebase": "firebase deploy"
   },
@@ -33,6 +36,7 @@
     "yup": "^0.27.0"
   },
   "devDependencies": {
+    "@join-uniform/tools": "1.0.0",
     "@types/adm-zip": "^0.4.32",
     "@types/busboy": "^0.2.3",
     "@types/dotenv": "^6.1.1",

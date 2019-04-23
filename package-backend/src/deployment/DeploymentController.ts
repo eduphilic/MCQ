@@ -1,25 +1,25 @@
 import {
   Controller,
   Post,
+  UnprocessableEntityException,
+  UploadedFiles,
   UseGuards,
   UseInterceptors,
-  UploadedFiles,
-  UnprocessableEntityException,
 } from "@nestjs/common";
-import { DeploymentApiKeyGuard } from "./DeploymentApiKeyGuard";
 import { FileFieldsInterceptor } from "@nestjs/platform-express";
+import assert from "assert";
 import { DeployableAppsEnum } from "./DeployableAppsEnum";
 import { DeployDto } from "./DeployDto";
-import assert from "assert";
+import { DeploymentApiKeyGuard } from "./DeploymentApiKeyGuard";
 import { DeploymentService } from "./DeploymentService";
 
 const deployFileFields: {
-  name: DeployableAppsEnum;
   maxCount: 1;
+  name: DeployableAppsEnum;
 }[] = [
   {
-    name: DeployableAppsEnum.PackageLanding,
     maxCount: 1,
+    name: DeployableAppsEnum.PackageLanding,
   },
 ];
 

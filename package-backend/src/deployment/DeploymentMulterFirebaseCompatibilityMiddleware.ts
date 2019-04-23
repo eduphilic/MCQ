@@ -1,5 +1,5 @@
 import { Injectable, NestMiddleware } from "@nestjs/common";
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 
 /**
  * Makes Busboy compatible with Firebase. Firebase parses request bodies and
@@ -55,20 +55,20 @@ function createNonPipedDestinationProxyHandler() {
   // the type definition changes in the future due to feature additions to
   // Proxy.
   const proxyHandlerKeyMap: Record<keyof ProxyHandler<any>, boolean> = {
-    getPrototypeOf: true,
-    setPrototypeOf: true,
-    isExtensible: true,
-    preventExtensions: true,
-    getOwnPropertyDescriptor: true,
-    has: true,
-    get: true,
-    set: true,
-    deleteProperty: true,
-    defineProperty: true,
-    enumerate: true,
-    ownKeys: true,
     apply: true,
     construct: true,
+    defineProperty: true,
+    deleteProperty: true,
+    enumerate: true,
+    get: true,
+    getOwnPropertyDescriptor: true,
+    getPrototypeOf: true,
+    has: true,
+    isExtensible: true,
+    ownKeys: true,
+    preventExtensions: true,
+    set: true,
+    setPrototypeOf: true,
   };
   const proxyHandlerKeys = Object.keys(proxyHandlerKeyMap);
 

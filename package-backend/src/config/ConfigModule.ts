@@ -5,7 +5,7 @@ import { ConfigService } from "./ConfigService";
  * Loads and makes available the application config.
  */
 @Module({
-  providers: [ConfigService],
   exports: [ConfigService],
+  providers: [ConfigService],
 })
 export class ConfigModule {}

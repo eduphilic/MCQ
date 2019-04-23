@@ -1,5 +1,5 @@
-import { Readable } from "stream";
 import { IZipEntry } from "adm-zip";
+import { Readable } from "stream";
 
 export class ZipEntryReadStream extends Readable {
   private buffer: Buffer;
@@ -11,6 +11,7 @@ export class ZipEntryReadStream extends Readable {
     this.buffer = zipEntry.getData();
   }
 
+  // tslint:disable-next-line:function-name
   _read(size: number) {
     const chunk = this.buffer.slice(this.offset, this.offset + size);
     const drained = this.push(chunk);

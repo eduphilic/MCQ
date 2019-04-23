@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
+import dotenv from "dotenv";
 import * as functions from "firebase-functions";
-import { ConfigModel } from "./ConfigModel";
 import fs from "fs";
 import path from "path";
-import dotenv from "dotenv";
 import * as yup from "yup";
+import { ConfigModel } from "./ConfigModel";
 
 @Injectable()
 export class ConfigService {

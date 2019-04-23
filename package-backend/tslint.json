@@ -1,0 +1,3 @@
+{
+  "extends": "@join-uniform/tools/tslint-config.json"
+}

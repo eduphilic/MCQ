@@ -1,7 +1,7 @@
-import { CanActivate, Injectable, ExecutionContext } from "@nestjs/common";
+import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Request } from "express";
-import { ConfigService } from "../config";
 import { ExtractJwt } from "passport-jwt";
+import { ConfigService } from "../config";
 
 /**
  * Ensures that the deployment api key is provided for requests accessing the

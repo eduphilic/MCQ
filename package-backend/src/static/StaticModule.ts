@@ -1,4 +1,4 @@
-import { Module, NestModule, MiddlewareConsumer } from "@nestjs/common";
+import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
 import { FirebaseAdminModule } from "../firebase-admin";
 import { StaticMiddleware } from "./StaticMiddleware";
 

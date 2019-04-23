@@ -1,18 +1,19 @@
 import {
+  MiddlewareConsumer,
   Module,
   NestModule,
-  MiddlewareConsumer,
   RequestMethod,
 } from "@nestjs/common";
-import { ConfigModule } from "../config";
-import { DeploymentController } from "./DeploymentController";
 import { MulterModule } from "@nestjs/platform-express";
-import { DeploymentMulterFirebaseCompatibilityMiddleware } from "./DeploymentMulterFirebaseCompatibilityMiddleware";
-import { DeploymentMulterConfigService } from "./DeploymentMulterConfigService";
-import { DeploymentService } from "./DeploymentService";
+import { ConfigModule } from "../config";
 import { FirebaseAdminModule } from "../firebase-admin";
+import { DeploymentController } from "./DeploymentController";
+import { DeploymentMulterConfigService } from "./DeploymentMulterConfigService";
+import { DeploymentMulterFirebaseCompatibilityMiddleware } from "./DeploymentMulterFirebaseCompatibilityMiddleware";
+import { DeploymentService } from "./DeploymentService";
 
 @Module({
+  controllers: [DeploymentController],
   imports: [
     ConfigModule,
     FirebaseAdminModule,
@@ -21,7 +22,6 @@ import { FirebaseAdminModule } from "../firebase-admin";
     }),
   ],
   providers: [DeploymentService],
-  controllers: [DeploymentController],
 })
 export class DeploymentModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

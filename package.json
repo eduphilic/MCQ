@@ -3,7 +3,8 @@
   "workspaces": {
     "packages": [
       "package-backend",
-      "package-landing"
+      "package-landing",
+      "package-tools"
     ]
   }
 }

@@ -1,9 +1,9 @@
+import { INestApplication } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
+import { ExpressAdapter } from "@nestjs/platform-express";
 import express from "express";
 import * as functions from "firebase-functions";
-import { NestFactory } from "@nestjs/core";
 import { ApplicationModule } from "./ApplicationModule";
-import { ExpressAdapter } from "@nestjs/platform-express";
-import { INestApplication } from "@nestjs/common";
 import { ConfigService } from "./config";
 
 const initialize = createInitializer();
@@ -34,7 +34,7 @@ function createInitializer() {
         error: unknown;
       };
 
-  return async function() {
+  return async () => {
     if (result) return result;
 
     try {

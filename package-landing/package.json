@@ -7,7 +7,10 @@
     "build": "npm-run-all clean build:*",
     "build:next": "next build",
     "build:next-export": "next export -o dist",
-    "clean": "rimraf .next dist"
+    "clean": "rimraf .next dist",
+    "lint": "npm-run-all lint:*",
+    "lint:tslint": "tslint -p ./tsconfig.json -t verbose",
+    "lint:eslint": "eslint \"components/**\" \"lib/**\" \"pages/**\" --ext .tsx --ext .ts"
   },
   "dependencies": {
     "next": "^8.1.0",
@@ -16,6 +19,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
+    "@join-uniform/tools": "1.0.0",
     "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",
     "@zeit/next-typescript": "^1.1.1",

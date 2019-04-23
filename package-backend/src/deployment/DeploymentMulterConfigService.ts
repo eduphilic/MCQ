@@ -7,8 +7,8 @@ import { memoryStorage } from "multer";
 export class DeploymentMulterConfigService implements MulterOptionsFactory {
   createMulterOptions(): MulterOptions {
     return {
-      storage: memoryStorage(),
       fileFilter,
+      storage: memoryStorage(),
     };
   }
 }

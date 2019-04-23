@@ -1,11 +1,11 @@
 import { Injectable } from "@nestjs/common";
-import { DeployDto } from "./DeployDto";
 import Zip, { IZipEntry } from "adm-zip";
-import { MulterFile } from "./MulterFile";
 import * as admin from "firebase-admin";
+import mimeTypes from "mime-types";
 import { posix as path } from "path";
+import { DeployDto } from "./DeployDto";
+import { MulterFile } from "./MulterFile";
 import { ZipEntryReadStream } from "./ZipEntryReadStream";
-import mime from "mime-types";
 
 @Injectable()
 export class DeploymentService {
@@ -35,7 +35,7 @@ export class DeploymentService {
         );
         const file = bucket.file(filename);
         const fileWriteStream = file.createWriteStream({
-          contentType: mime.lookup(filename) || "application/octet-stream",
+          contentType: mimeTypes.lookup(filename) || "application/octet-stream",
           // TODO: Storage using gzip on cloud storage is not enabled because
           // the static file middleware needs the uncompressed file size which
           // is not reported in the meta data during retrieval. Also, gzip

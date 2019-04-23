@@ -1,16 +1,18 @@
 import {
   Injectable,
-  NestMiddleware,
   MiddlewareConsumer,
+  NestMiddleware,
   RequestMethod,
 } from "@nestjs/common";
-import { Request, Response, NextFunction, Handler } from "express";
+import { Handler, NextFunction, Request, Response } from "express";
+import { PathLike, ReadStream, Stats } from "fs";
+import { posix as path } from "path";
 import { URL } from "url";
 import { DeployableAppsEnum } from "../deployment";
-import serveStaticModule, { ServeStaticOptions } from "serve-static";
-import { PathLike, Stats, ReadStream } from "fs";
 import { FirebaseAdminService } from "../firebase-admin";
-import { posix as path } from "path";
+
+// tslint:disable-next-line:import-name
+import serveStaticModule, { ServeStaticOptions } from "serve-static";
 
 type Bucket = ReturnType<
   ReturnType<
@@ -44,6 +46,19 @@ const serveStatic = serveStaticModule as (
  */
 @Injectable()
 export class StaticMiddleware implements NestMiddleware {
+  static apply(consumer: MiddlewareConsumer) {
+    consumer.apply(StaticMiddleware).forRoutes(
+      {
+        method: RequestMethod.GET,
+        path: "*",
+      },
+      {
+        method: RequestMethod.HEAD,
+        path: "*",
+      },
+    );
+  }
+
   private bucket: Bucket;
   private handler: Handler;
 
@@ -67,18 +82,19 @@ export class StaticMiddleware implements NestMiddleware {
       // make sense.
       redirect: false,
       // Use file system implementation that wraps Firebase Storage api.
+      // tslint:disable-next-line:object-literal-sort-keys
       fs: {
-        stat: this.stat.bind(this) as any,
         createReadStream: this.createReadStream.bind(this),
+        stat: this.stat.bind(this) as any,
       },
       // Disable the default cache header behavior it is implemented manually
       // below.
       cacheControl: false,
-      setHeaders: (res, path) => {
+      setHeaders: (res, resPath) => {
         // Cache HTML files for 1 hour because they do not have hashes in their
         // filenames. Cache other assets for longer as there will be a hash
         // somewhere in their file paths.
-        const maxAge = path.endsWith(".html") ? 3600 : 31536000;
+        const maxAge = resPath.endsWith(".html") ? 3600 : 31536000;
         const sMaxAge = maxAge;
         res.setHeader(
           "Cache-Control",
@@ -143,12 +159,12 @@ export class StaticMiddleware implements NestMiddleware {
     // - send
     // - etag
     const stats: Partial<Stats> = {
-      isDirectory: () => false,
       ctime: new Date(meta.timeCreated),
-      mtime: new Date(meta.updated),
       // Not really used but checked by `etag` to ensure that the passed `Stats`
       // object is a compatible object.
       ino: 1,
+      isDirectory: () => false,
+      mtime: new Date(meta.updated),
       size: parseInt(meta.size, 10),
     };
 
@@ -179,8 +195,8 @@ export class StaticMiddleware implements NestMiddleware {
     const readStream = file.createReadStream(
       typeof options === "object"
         ? {
-            start: options.start,
             end: options.end,
+            start: options.start,
           }
         : undefined,
     );
@@ -208,18 +224,5 @@ export class StaticMiddleware implements NestMiddleware {
     const error = new Error() as NodeJS.ErrnoException;
     error.code = "ENOENT";
     return error;
-  }
-
-  static apply(consumer: MiddlewareConsumer) {
-    consumer.apply(StaticMiddleware).forRoutes(
-      {
-        path: "*",
-        method: RequestMethod.GET,
-      },
-      {
-        path: "*",
-        method: RequestMethod.HEAD,
-      },
-    );
   }
 }
