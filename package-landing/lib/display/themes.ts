@@ -3,6 +3,7 @@ import createMuiTheme, {
   ThemeOptions,
 } from "@material-ui/core/styles/createMuiTheme";
 import produce from "immer";
+import "typeface-montserrat";
 
 export type ThemeVariant = "light" | "dark";
 
@@ -17,8 +18,7 @@ const themeVariantThemeOptionsMap: Record<ThemeVariant, ThemeOptions> = {
     draft.palette = draft.palette || {};
     draft.palette.type = "dark";
   }),
-  // tslint:disable-next-line:no-empty
-  light: produce(baseThemeOptions, _draft => {}),
+  light: baseThemeOptions,
 };
 
 export type Theme = Theme;
