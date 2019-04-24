@@ -1,5 +1,9 @@
 {
   "private": true,
+  "main": "dist/backend/main.js",
+  "engines": {
+    "node": "8"
+  },
   "workspaces": {
     "packages": [
       "package-backend",

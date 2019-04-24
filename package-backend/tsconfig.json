@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
-    "outDir": "./dist",
+    "outDir": "../dist/backend",
     "noEmit": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

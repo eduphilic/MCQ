@@ -1,16 +1,22 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "./config";
 import { DeployableAppsEnum, DeploymentModule } from "./deployment";
-import { StaticModule } from "./static";
+import { HostingModule } from "./hosting";
+// import { StaticModule } from "./static";
 
 @Module({
   imports: [
     ConfigModule,
     DeploymentModule,
 
-    StaticModule.forRoot({
+    // StaticModule.forRoot({
+    //   app: DeployableAppsEnum.PackageLanding,
+    //   mountPath: "/",
+    // }),
+
+    HostingModule.forRoot({
       app: DeployableAppsEnum.PackageLanding,
-      mountPath: "/",
+      mountPath: "/app",
     }),
   ],
 })
