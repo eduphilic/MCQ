@@ -3,7 +3,7 @@
   "name": "@join-uniform/landing",
   "version": "1.0.0",
   "scripts": {
-    "start": "next",
+    "start": "next -p 5001",
     "build": "npm-run-all clean build:*",
     "build:next": "next build",
     "build:next-export": "next export -o dist",

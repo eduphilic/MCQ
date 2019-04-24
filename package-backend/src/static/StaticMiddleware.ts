@@ -1,4 +1,5 @@
 import {
+  Inject,
   Injectable,
   MiddlewareConsumer,
   NestMiddleware,
@@ -13,6 +14,7 @@ import { FirebaseAdminService } from "../firebase-admin";
 
 // tslint:disable-next-line:import-name
 import serveStaticModule, { ServeStaticOptions } from "serve-static";
+import { STATIC_MIDDLEWARE_CONFIG_PROVIDER } from "./STATIC_MIDDLEWARE_CONFIG_PROVIDER";
 
 type Bucket = ReturnType<
   ReturnType<
@@ -33,8 +35,34 @@ const serveStatic = serveStaticModule as (
   options?: ServeStaticOptions & { fs?: ServeStaticFS },
 ) => Handler;
 
-// TODO: Make this configurable from the module level so multiple configured
-// instances can be used.
+export type StaticMiddlewareConfig = {
+  /**
+   * Deployed application to serve.
+   */
+  app: DeployableAppsEnum;
+
+  /**
+   * Path where app is mounted.
+   */
+  mountPath: string;
+
+  /**
+   * List of routes ignored by the middleware.
+   *
+   * @default ["/api"]
+   */
+  ignoredPaths?: string[];
+
+  /**
+   * Whether or not the app should be treated as a single page app. This means
+   * that all routes without a file extension will be routed will be routed
+   * to the root index.html file.
+   *
+   * @default false
+   */
+  spa?: boolean;
+};
+
 /**
  * Serves static content from Firebase Storage. It sets the cache time for html
  * pages to `1 hour` and assets to `1 year`. Assets are assumed to contain
@@ -61,15 +89,25 @@ export class StaticMiddleware implements NestMiddleware {
 
   private bucket: Bucket;
   private handler: Handler;
+  private config: Required<StaticMiddlewareConfig>;
 
-  constructor(firebaseAdminService: FirebaseAdminService) {
+  constructor(
+    firebaseAdminService: FirebaseAdminService,
+    @Inject(STATIC_MIDDLEWARE_CONFIG_PROVIDER)
+    config: StaticMiddlewareConfig,
+  ) {
     this.bucket = firebaseAdminService
       .getInitializedAdminModule()
       .storage()
       .bucket();
 
-    // TODO: Implement the other app paths.
-    this.handler = serveStatic(`/${DeployableAppsEnum.PackageLanding}`, {
+    this.config = {
+      ...config,
+      ignoredPaths: config.ignoredPaths || ["/api"],
+      spa: config.spa === true,
+    };
+
+    this.handler = serveStatic(`/${config.app}`, {
       // In the event a file or directory which was prefixed with a `.` was
       // uploaded, prevent access to it. This files are usually sensitive.
       dotfiles: "ignore",
@@ -107,13 +145,21 @@ export class StaticMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     const url = new URL(req.originalUrl, "http://localhost");
 
-    // TODO: Use a setting containing a list of ignored paths or some other
-    // similar behavior.
-    if (url.pathname.startsWith("/api")) {
+    // Ignore request if the route doesn't match the app's mount path or it
+    // matches one of the ignored routes.
+    if (
+      !url.pathname.startsWith(this.config.mountPath) ||
+      this.config.ignoredPaths.find(i => url.pathname.startsWith(i))
+    ) {
       next();
       return;
     }
 
+    req.url = req.url.replace(this.config.mountPath, "");
+    req.url = req.url || "/";
+    if (this.config.spa && !req.url.includes(".")) {
+      req.url = "/index.html";
+    }
     this.handler(req, res, next);
   }
 
