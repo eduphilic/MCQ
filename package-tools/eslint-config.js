@@ -1,4 +1,6 @@
-module.exports = {
+const path = require("path");
+
+module.exports = projectRootPath => ({
   parser: "@typescript-eslint/parser",
   env: {
     browser: true,
@@ -15,7 +17,7 @@ module.exports = {
     },
     ecmaVersion: 2018,
     sourceType: "module",
-    project: "tsconfig.json",
+    project: path.join(projectRootPath, "tsconfig.json"),
     warnOnUnsupportedTypeScriptVersion: false,
   },
   plugins: ["react", "react-hooks"],
@@ -23,4 +25,4 @@ module.exports = {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
   },
-};
+});
