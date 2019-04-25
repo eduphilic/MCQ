@@ -11,6 +11,7 @@ import { HostedAppEnum, HostingModule } from "./hosting";
       mountPath: "/",
       spa: false,
       ignoredPaths: [],
+      developmentServerPort: 5003,
     }),
   ],
 })

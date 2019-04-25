@@ -24,4 +24,9 @@ export type HostingModuleConfig = {
    * List of routes to ignore. `/api` is appended to this list automatically.
    */
   ignoredPaths: string[];
+
+  /**
+   * Port on localhost to proxy to when running in development environment.
+   */
+  developmentServerPort: number;
 };

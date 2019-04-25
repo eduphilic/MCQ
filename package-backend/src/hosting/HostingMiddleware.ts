@@ -5,6 +5,7 @@ import {
   RequestMethod,
 } from "@nestjs/common";
 import { Handler, NextFunction, Request, Response } from "express";
+import httpProxyMiddleware from "http-proxy-middleware";
 import path from "path";
 import serveStatic from "serve-static";
 import { HOSTING_MODULE_CONFIG_PROVIDER } from "./HOSTING_MODULE_CONFIG_PROVIDER";
@@ -45,6 +46,15 @@ export class HostingMiddleware implements NestMiddleware {
       config.app.replace(/^package-/, ""),
     );
 
+    this.trimRegex = new RegExp(`^${config.mountPath}`);
+
+    if (process.env.NODE_ENV === "development") {
+      this.handler = httpProxyMiddleware({
+        target: `http://localhost:${config.developmentServerPort}`,
+      });
+      return;
+    }
+
     this.handler = serveStatic(assetsPath, {
       dotfiles: "ignore",
       extensions: config.spa ? undefined : ["html"],
@@ -65,8 +75,6 @@ export class HostingMiddleware implements NestMiddleware {
         );
       },
     });
-
-    this.trimRegex = new RegExp(`^${config.mountPath}`);
   }
 
   use(req: Request, res: Response, next: NextFunction) {
@@ -83,14 +91,20 @@ export class HostingMiddleware implements NestMiddleware {
     // Remove mount prefix.
     req.url = req.url.replace(this.trimRegex, "");
 
-    // If at the mount root, add the index file so that urls without training
-    // slashes work.
-    if (req.url.length === 0) req.url = "/index.html";
+    if (process.env.NODE_ENV === "development") {
+      if (req.url.length === 0) req.url = "/";
+    }
 
-    // Redirect all paths without a file extension to the root index to support
-    // single page applications.
-    if (this.config.spa && path.posix.extname(req.url) === "") {
-      req.url = "/index.html";
+    if (process.env.NODE_ENV !== "development") {
+      // If at the mount root, add the index file so that urls without training
+      // slashes work.
+      if (req.url.length === 0) req.url = "/index.html";
+
+      // Redirect all paths without a file extension to the root index to support
+      // single page applications.
+      if (this.config.spa && path.posix.extname(req.url) === "") {
+        req.url = "/index.html";
+      }
     }
 
     this.handler(req, res, next);
