@@ -20,7 +20,7 @@ export function Logo(props: LogoProps) {
       aria-label="Join Uniform"
     >
       <img src={props.imageUrl} alt="" />
-      <span>Join</span>
+      <span>Join&nbsp;</span>
       <span>Uniform</span>
     </StyledTypography>
   );
@@ -29,6 +29,7 @@ export function Logo(props: LogoProps) {
 const StyledTypography = styled((props: TypographyProps) => (
   <Typography {...props} />
 ))<Theme, {}>(({ theme }) => ({
+  flexGrow: 1,
   display: "flex",
   alignItems: "center",
   fontSize: 22,

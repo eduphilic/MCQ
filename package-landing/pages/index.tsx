@@ -1,8 +1,16 @@
-import { Container, Grid, Theme, Toolbar, Typography } from "@material-ui/core";
+import {
+  Container,
+  Grid,
+  Hidden,
+  Theme,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
 import { styled, ThemeProvider } from "@material-ui/styles";
 import Head from "next/head";
 import React from "react";
 import { LayoutStickyFooter } from "../components";
+import { LanguageSelect } from "../components/LanguageSelect";
 import { Logo } from "../components/Logo";
 import { themes } from "../lib";
 
@@ -31,16 +39,24 @@ export default function IndexPage(props: IndexPageProps) {
           <Container maxWidth="lg">
             <Toolbar disableGutters>
               <Logo component="h1" imageUrl={props.logoImageUrl} />
+
+              <Hidden implementation="css" xsDown>
+                <LanguageSelect />
+              </Hidden>
             </Toolbar>
+
+            <Hidden implementation="css" smUp>
+              <Toolbar disableGutters variant="dense">
+                <LanguageSelect />
+              </Toolbar>
+            </Hidden>
           </Container>
 
           <Container maxWidth="lg">
             <Grid container>
               <Grid item xs={8} />
 
-              <Grid item xs={4}>
-                <Typography color="textPrimary">Language Selection</Typography>
-              </Grid>
+              <Grid item xs={4} />
             </Grid>
           </Container>
         </HeroSectionWrapper>
