@@ -1,14 +1,16 @@
 import { Injectable } from "@nestjs/common";
 import Zip, { IZipEntry } from "adm-zip";
-import * as admin from "firebase-admin";
 import mimeTypes from "mime-types";
 import { posix as path } from "path";
+import { FirebaseAdminService } from "../firebase-admin";
 import { DeployDto } from "./DeployDto";
 import { MulterFile } from "./MulterFile";
 import { ZipEntryReadStream } from "./ZipEntryReadStream";
 
 @Injectable()
 export class DeploymentService {
+  constructor(private firebaseAdminService: FirebaseAdminService) {}
+
   async deploy(deployDto: DeployDto) {
     const appZips = (Object.entries as (
       obj: object,
@@ -17,7 +19,10 @@ export class DeploymentService {
       zipFile: app[1][0],
     }));
 
-    const bucket = admin.storage().bucket();
+    const bucket = this.firebaseAdminService
+      .getInitializedAdminModule()
+      .storage()
+      .bucket();
 
     for (const { appName, zipFile } of appZips) {
       await bucket.deleteFiles({ prefix: appName });
