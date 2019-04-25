@@ -28,8 +28,6 @@ export class HostingModule implements NestModule {
   ) {}
 
   configure(consumer: MiddlewareConsumer) {
-    /* tslint:disable-next-line:no-console */
-    console.log("# configure");
     HostingMiddleware.apply(consumer, this.config);
   }
 }

@@ -32,9 +32,7 @@ function loadAndValidateEnvironmentConfig() {
   }
 
   return yup
-    .object<ConfigModel>({
-      DEPLOYMENT_API_KEY: yup.string().required(),
-    })
+    .object<ConfigModel>({})
     .validateSync(envConfig, { strict: true, stripUnknown: true });
 }
 

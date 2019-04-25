@@ -10,6 +10,10 @@ import serveStatic from "serve-static";
 import { HOSTING_MODULE_CONFIG_PROVIDER } from "./HOSTING_MODULE_CONFIG_PROVIDER";
 import { HostingModuleConfig } from "./HostingModuleConfig";
 
+/**
+ * A wrapper around `serve-static` middleware which serves the frontend
+ * applications. It handles mounting and logic for single page applications.
+ */
 export class HostingMiddleware implements NestMiddleware {
   static apply(consumer: MiddlewareConsumer, config: HostingModuleConfig) {
     let mountPath = config.mountPath.slice(1);
@@ -32,7 +36,7 @@ export class HostingMiddleware implements NestMiddleware {
   ) {
     this.config = {
       ...config,
-      spa: config.spa === true,
+      ignoredPaths: config.ignoredPaths.concat("/api"),
     };
 
     const assetsPath = path.resolve(
@@ -42,13 +46,12 @@ export class HostingMiddleware implements NestMiddleware {
     );
 
     this.handler = serveStatic(assetsPath, {
-      // Disable default cache implementation. The headers are set manually.
-      cacheControl: false,
-      // In the event a file or directory which was prefixed with a `.` was
-      // uploaded, prevent access to it. These files are usually sensitive.
       dotfiles: "ignore",
       extensions: config.spa ? undefined : ["html"],
       redirect: false,
+
+      // Disable default cache implementation. The headers are set manually.
+      cacheControl: false,
       setHeaders: (res, resPath) => {
         // Cache HTML files for 1 hour because they do not have hashes in their
         // filenames. Cache other assets for longer as there will be a hash
@@ -67,6 +70,16 @@ export class HostingMiddleware implements NestMiddleware {
   }
 
   use(req: Request, res: Response, next: NextFunction) {
+    // Don't process ignored paths.
+    if (
+      this.config.ignoredPaths.find(ignoredPath =>
+        req.url.startsWith(ignoredPath),
+      )
+    ) {
+      next();
+      return;
+    }
+
     // Remove mount prefix.
     req.url = req.url.replace(this.trimRegex, "");
 

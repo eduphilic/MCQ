@@ -1,3 +1,3 @@
-export enum DeployableAppsEnum {
+export enum HostedAppEnum {
   PackageLanding = "package-landing",
 }

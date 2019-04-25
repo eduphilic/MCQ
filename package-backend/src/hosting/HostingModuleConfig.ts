@@ -1,10 +1,10 @@
-import { DeployableAppsEnum } from "../deployment";
+import { HostedAppEnum } from "./HostedAppEnum";
 
 export type HostingModuleConfig = {
   /**
    * Deployed application to serve.
    */
-  app: DeployableAppsEnum;
+  app: HostedAppEnum;
 
   /**
    * Path where app is mounted.
@@ -18,5 +18,10 @@ export type HostingModuleConfig = {
    *
    * @default false
    */
-  spa?: boolean;
+  spa: boolean;
+
+  /**
+   * List of routes to ignore. `/api` is appended to this list automatically.
+   */
+  ignoredPaths: string[];
 };
