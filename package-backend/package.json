@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "npm-run-all clean start:tsc",
-    "start:tsc": "tsc-watch --onFirstSuccess \"cross-env NODE_ENV=development firebase serve\"",
+    "start:tsc": "tsc-watch --onFirstSuccess \"cross-env NODE_ENV=development yarn --cwd .. firebase serve\"",
     "build": "tsc",
     "clean": "rimraf ../dist/backend",
     "lint": "npm-run-all lint:*",
