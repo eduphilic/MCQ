@@ -4,6 +4,7 @@
  */
 
 /* tslint:disable:import-name */
+import { CssBaseline } from "@material-ui/core";
 import NextAppPage, {
   AppProps,
   Container,
@@ -11,7 +12,7 @@ import NextAppPage, {
   NextAppContext,
 } from "next/app";
 import React, { useEffect } from "react";
-import { CssBaseline, ThemeProvider } from "../lib";
+import { ThemeProvider } from "../lib";
 
 type AppPageProps = DefaultAppIProps & AppProps;
 

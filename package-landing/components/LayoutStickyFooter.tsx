@@ -1,6 +1,7 @@
+import { Typography } from "@material-ui/core";
+import { styled } from "@material-ui/styles";
 import React, { ReactNode } from "react";
-import { styled, ThemeProvider } from "../lib";
-import { Typography } from "./Typography";
+import { Theme, ThemeProvider } from "../lib";
 
 export type LayoutStickyFooterProps = {
   children?: ReactNode;
@@ -29,7 +30,7 @@ const Wrapper = styled("div")({
   minHeight: "100vh",
 });
 
-const FooterWrapper = styled("footer")(({ theme }) => ({
+const FooterWrapper = styled("footer")<Theme, {}>(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

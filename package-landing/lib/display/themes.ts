@@ -1,7 +1,5 @@
-import createMuiTheme, {
-  Theme,
-  ThemeOptions,
-} from "@material-ui/core/styles/createMuiTheme";
+import { createMuiTheme } from "@material-ui/core";
+import { Theme, ThemeOptions } from "@material-ui/core/styles/createMuiTheme";
 import produce from "immer";
 import "typeface-montserrat";
 
