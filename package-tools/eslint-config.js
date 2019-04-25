@@ -20,9 +20,10 @@ module.exports = projectRootPath => ({
     project: path.join(projectRootPath, "tsconfig.json"),
     warnOnUnsupportedTypeScriptVersion: false,
   },
-  plugins: ["react", "react-hooks"],
+  plugins: ["react", "react-hooks", "jsx-a11y"],
   rules: {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
   },
+  extends: ["plugin:jsx-a11y/strict"],
 });

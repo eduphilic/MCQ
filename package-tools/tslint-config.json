@@ -13,6 +13,7 @@
     "array-type": [true, "array"],
     "interface-name": [true, "never-prefix"],
     "function-name": false,
+    "import-name": false,
     "variable-name": [
       true,
       "check-format",
@@ -20,11 +21,6 @@
       "require-const-for-all-caps",
       "allow-pascal-case",
       "ban-keywords"
-    ],
-
-    "import-name": [
-      true,
-      { "admZip": "Zip", "immer": "produce", "react": "React" }
     ],
 
     "await-promise": true,

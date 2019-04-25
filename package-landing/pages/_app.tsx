@@ -5,6 +5,7 @@
 
 /* tslint:disable:import-name */
 import { CssBaseline } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/styles";
 import NextAppPage, {
   AppProps,
   Container,
@@ -12,7 +13,7 @@ import NextAppPage, {
   NextAppContext,
 } from "next/app";
 import React, { useEffect } from "react";
-import { ThemeProvider } from "../lib";
+import { themes } from "../lib";
 
 type AppPageProps = DefaultAppIProps & AppProps;
 
@@ -29,7 +30,7 @@ function AppPage(props: AppPageProps) {
 
   return (
     <Container>
-      <ThemeProvider theme="light">
+      <ThemeProvider theme={themes.light}>
         <CssBaseline />
         <Component {...pageProps} />
       </ThemeProvider>
