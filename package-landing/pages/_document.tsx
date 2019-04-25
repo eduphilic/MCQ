@@ -13,7 +13,7 @@ import NextDocumentPage, {
   NextDocumentContext,
   NextScript,
 } from "next/document";
-import React from "react";
+import React, { cloneElement, ReactElement } from "react";
 import flush from "styled-jsx/server";
 import { FIREBASE_SDK_VERSION } from "../lib/firebase";
 
@@ -31,11 +31,26 @@ class DocumentPage extends NextDocumentPage {
 
     const initialProps = await NextDocumentPage.getInitialProps(context);
 
+    // Remove superfluous whitespace from CSS.
+    const styleElement = sheets.getStyleElement() as ReactElement<
+      Required<
+        Pick<JSX.IntrinsicElements["style"], "id" | "dangerouslySetInnerHTML">
+      >
+    >;
+    const optimizedStyleElement = cloneElement(styleElement, {
+      dangerouslySetInnerHTML: {
+        __html: styleElement.props.dangerouslySetInnerHTML.__html
+          .split("\n")
+          .map(line => line.trim())
+          .join(""),
+      },
+    });
+
     return {
       ...initialProps,
       styles: (
         <React.Fragment>
-          {sheets.getStyleElement()}
+          {optimizedStyleElement}
           {flush() || null}
         </React.Fragment>
       ),
