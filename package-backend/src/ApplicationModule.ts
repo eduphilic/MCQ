@@ -9,14 +9,9 @@ import { HostingModule } from "./hosting";
     ConfigModule,
     DeploymentModule,
 
-    // StaticModule.forRoot({
-    //   app: DeployableAppsEnum.PackageLanding,
-    //   mountPath: "/",
-    // }),
-
     HostingModule.forRoot({
       app: DeployableAppsEnum.PackageLanding,
-      mountPath: "/app",
+      mountPath: "/",
     }),
   ],
 })

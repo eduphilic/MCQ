@@ -14,8 +14,6 @@ export class HostingMiddleware implements NestMiddleware {
   static apply(consumer: MiddlewareConsumer, config: HostingModuleConfig) {
     let mountPath = config.mountPath.slice(1);
     mountPath = mountPath.length > 0 ? `${mountPath}*` : "*";
-    /* tslint:disable-next-line:no-console */
-    console.log({ mountPath });
 
     consumer
       .apply(HostingMiddleware)
@@ -25,7 +23,6 @@ export class HostingMiddleware implements NestMiddleware {
       );
   }
 
-  // @ts-ignore
   private config: Required<HostingModuleConfig>;
   private handler: Handler;
   private trimRegex: RegExp;
