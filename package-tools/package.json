@@ -3,16 +3,16 @@
   "name": "@join-uniform/tools",
   "version": "1.0.0",
   "dependencies": {
-    "@typescript-eslint/parser": "^1.7.0",
+    "@typescript-eslint/parser": "^1.9.0",
     "eslint": "^5.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-react-hooks": "^1.6.0",
-    "prettier": "^1.17.0",
+    "prettier": "^1.17.1",
     "tslint": "^5.16.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^3.4.4"
+    "typescript": "^3.5.0-dev.20190514"
   }
 }
