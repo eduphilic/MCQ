@@ -1,5 +1,5 @@
 /**
- * Due to a bug in how child processes are handles by the Firebase Emulator, we
+ * Due to a bug in how child processes are handled by the Firebase Emulator, we
  * use this to spawn the emulator to avoid `500` responses from too many
  * connections. Not sure why that is happening.
  *
