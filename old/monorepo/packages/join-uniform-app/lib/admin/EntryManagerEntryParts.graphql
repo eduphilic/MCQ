@@ -1,9 +1,0 @@
-fragment EntryManagerEntryParts on Entry {
-  id
-  name
-  logoUrl
-  description
-  categories {
-    ...EntryManagerCategoryParts
-  }
-}

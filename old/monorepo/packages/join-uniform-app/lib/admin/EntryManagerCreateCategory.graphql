@@ -1,5 +1,0 @@
-mutation EntryManagerCreateCategory($request: CreateCategoryRequest!) {
-  createCategory(request: $request) {
-    ...EntryManagerCategoryParts
-  }
-}

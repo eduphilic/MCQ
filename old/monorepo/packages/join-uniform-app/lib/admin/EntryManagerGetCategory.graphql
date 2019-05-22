@@ -1,5 +1,0 @@
-query EntryManagerGetCategory($id: ID!) {
-  categoriesByIds(ids: [$id]) {
-    ...EntryManagerCategoryParts
-  }
-}

@@ -1,5 +1,0 @@
-query WithLoadingSpinnerAppLogoConfig {
-  logoConfig {
-    url
-  }
-}

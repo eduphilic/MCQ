@@ -1,11 +1,4 @@
-import {
-  Container,
-  Grid,
-  Hidden,
-  Theme,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
+import { Container, Grid, Hidden, Theme, Toolbar } from "@material-ui/core";
 import { styled, ThemeProvider } from "@material-ui/styles";
 import Head from "next/head";
 import React from "react";

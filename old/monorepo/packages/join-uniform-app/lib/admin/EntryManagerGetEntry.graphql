@@ -1,5 +1,0 @@
-query EntryManagerGetEntry($entryId: ID!) {
-  entriesByIds(ids: [$entryId]) {
-    ...EntryManagerEntryParts
-  }
-}

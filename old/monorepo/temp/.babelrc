@@ -1,4 +1,0 @@
-{
-  "presets": ["razzle/babel"],
-  "plugins": ["babel-plugin-styled-components", "babel-plugin-graphql-tag"]
-}

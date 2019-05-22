@@ -1,7 +1,0 @@
-fragment EntryManagerCategoryParts on Category {
-  id
-  name
-  education
-  pricePerPaperRs
-  activated
-}
