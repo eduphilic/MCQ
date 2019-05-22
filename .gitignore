@@ -1,8 +1,3 @@
-node_modules/
-.next/
-*.log
 .firebase/
-.env
-
-**/dist/*
-!/dist/hosting
+node_modules/
+*.log
