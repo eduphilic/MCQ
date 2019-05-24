@@ -2,6 +2,7 @@
 
 // Suppress: Cannot compile namespaces when the '--isolatedModules' flag is provided.ts(1208)
 // @ts-ignore
+// tslint:disable-next-line no-empty
 if (true) {
 }
 

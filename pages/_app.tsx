@@ -1,10 +1,10 @@
-import React from "react";
-import "typeface-montserrat";
-import App, { Container } from "next/app";
-import { theme } from "../src/display";
 import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
+import App, { Container } from "next/app";
 import Head from "next/head";
+import React from "react";
+import "typeface-montserrat";
+import { theme } from "../src/display";
 
 /**
  * Custom Next.js App component. It removes the server side rendered CSS from

@@ -1,13 +1,13 @@
-import React, { ReactElement, cloneElement, DOMAttributes } from "react";
-import Document, {
-  Main,
-  NextScript,
-  Head,
-  NextDocumentContext,
-} from "next/document";
-import { theme } from "../src/display";
 import { ServerStyleSheets } from "@material-ui/styles";
+import Document, {
+  Head,
+  Main,
+  NextDocumentContext,
+  NextScript,
+} from "next/document";
+import React, { cloneElement, DOMAttributes, ReactElement } from "react";
 import flush from "styled-jsx/server";
+import { theme } from "../src/display";
 
 /**
  * Custom Next.js Document component. It adds support for Material UI's CSS
