@@ -1,4 +1,4 @@
-declare module "next" {
+declare module "next-config" {
   import {
     Configuration as WebpackConfiguration,
     RuleSetLoader as WebpackLoader,
@@ -112,7 +112,7 @@ declare module "next" {
      *
      * @see https://nextjs.org/docs#build-time-configuration
      */
-    env: unknown[] | object;
+    env?: unknown[] | object;
 
     /**
      * Customize Webpack configuration.
@@ -121,7 +121,7 @@ declare module "next" {
      * and once for the client. This allows you to distinguish between client
      * and server configuration using the `isServer` property.
      */
-    webpack:
+    webpack?:
       | null
       | ((
           config: WebpackConfiguration,
@@ -133,7 +133,7 @@ declare module "next" {
      *
      * **Important**: return the modified config.
      */
-    webpackDevMiddleware:
+    webpackDevMiddleware?:
       | null
       | ((options: WebpackDevMiddlewareOptions) => WebpackDevMiddlewareOptions);
 
@@ -153,7 +153,7 @@ declare module "next" {
      *
      * @default ".next"
      */
-    distDir: string;
+    distDir?: string;
 
     /**
      * To set up a CDN, you can set up the `assetPrefix` setting and configure
@@ -169,12 +169,12 @@ declare module "next" {
      *
      * @default ""
      */
-    assetPrefix: string;
+    assetPrefix?: string;
 
     /**
      * @internal
      */
-    configOrigin: string;
+    configOrigin?: string;
 
     /**
      * Disable file-system routing.
@@ -209,7 +209,7 @@ declare module "next" {
      * @see https://nextjs.org/docs#disabling-file-system-routing
      * @see https://nextjs.org/docs#intercepting-popstate
      */
-    useFileSystemPublicRoutes: boolean;
+    useFileSystemPublicRoutes?: boolean;
 
     /**
      * Configure the build ID.
@@ -249,7 +249,7 @@ declare module "next" {
      * @default async () => null
      * @see https://nextjs.org/docs#configuring-the-build-id
      */
-    generateBuildId: () => Promise<string | null>;
+    generateBuildId?: () => Promise<string | null>;
 
     /**
      * You can disable etag generation for HTML pages depending on your cache
@@ -266,7 +266,7 @@ declare module "next" {
      * @default true
      * @see https://nextjs.org/docs#disabling-etag-generation
      */
-    generateEtags: boolean;
+    generateEtags?: boolean;
 
     /**
      * Configuring extensions looked for when resolving pages in `pages`.
@@ -285,7 +285,7 @@ declare module "next" {
      * @default ['jsx', 'js']
      * @see https://nextjs.org/docs#configuring-extensions-looked-for-when-resolving-pages-in-pages
      */
-    pageExtensions: string[];
+    pageExtensions?: string[];
 
     /**
      * Serverless deployment dramatically improves reliability and scalability
@@ -334,14 +334,14 @@ declare module "next" {
      * @default "server"
      * @see https://nextjs.org/docs#serverless-deployment
      */
-    target: "server" | "serverless";
+    target?: "server" | "serverless";
 
     /**
      * Adds or disable the `X-Powered-By` header.
      *
      * @default true
      */
-    poweredByHeader: boolean;
+    poweredByHeader?: boolean;
 
     /**
      * Next exposes some options that give you some control over how the server
@@ -367,7 +367,7 @@ declare module "next" {
      * }
      * @see https://nextjs.org/docs#configuring-the-ondemandentries
      */
-    onDemandEntries: {
+    onDemandEntries?: {
       maxInactiveAge: number;
       pagesBufferLength: number;
     };
@@ -391,7 +391,7 @@ declare module "next" {
      * }
      * ```
      */
-    experimental: {
+    experimental?: {
       cpus: number;
       ampBindInitData: boolean;
       exportTrailingSlash: boolean;
@@ -403,10 +403,11 @@ declare module "next" {
   }
 
   export interface NextConfigFactory {
-    (phase: string, options: { defaultConfig: NextConfig }): Partial<
-      NextConfig
-    >;
+    (
+      phase: string,
+      options: { defaultConfig: Required<NextConfig> },
+    ): NextConfig;
   }
 
-  export type NextCustomizedConfig = NextConfigFactory | Partial<NextConfig>;
+  export type NextCustomizedConfig = NextConfigFactory | NextConfig;
 }

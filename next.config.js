@@ -7,9 +7,9 @@ if (true) {
 
 const withTypescript = require("@zeit/next-typescript");
 
-/** @type {import("next").NextCustomizedConfig} */
-const nextConfig = withTypescript({
+/**
+ * @type {import("next-config").NextCustomizedConfig}
+ */
+module.exports = withTypescript({
   poweredByHeader: false,
 });
-
-module.exports = nextConfig;
