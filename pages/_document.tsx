@@ -1,8 +1,9 @@
-import { ServerStyleSheets } from "@material-ui/styles";
+import { ServerStyleSheets as MuiServerStyleSheets } from "@material-ui/styles";
 import Document, { Head, Main, NextScript } from "next/document";
 import React, { cloneElement, DOMAttributes, ReactElement } from "react";
+import { ServerStyleSheet as StyledComponentsServerStyleSheet } from "styled-components";
 import flush from "styled-jsx/server";
-import { theme } from "../src/display";
+import { themes } from "../src/display";
 
 /**
  * Custom Next.js Document component. It adds support for Material UI's CSS
@@ -20,7 +21,10 @@ class CustomDocument extends Document {
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
           />
-          <meta name="theme-color" content={theme.palette.primary.main} />
+          <meta
+            name="theme-color"
+            content={themes.light.palette.primary.main}
+          />
         </Head>
 
         <body>
@@ -33,12 +37,16 @@ class CustomDocument extends Document {
 }
 
 CustomDocument.getInitialProps = async context => {
-  const sheets = new ServerStyleSheets();
+  const muiSheets = new MuiServerStyleSheets();
+  const styledComponentsSheet = new StyledComponentsServerStyleSheet();
   const originalRenderPage = context.renderPage;
 
   context.renderPage = () =>
     originalRenderPage({
-      enhanceApp: App => props => sheets.collect(<App {...props} />),
+      enhanceApp: App => props =>
+        styledComponentsSheet.collectStyles(
+          muiSheets.collect(<App {...props} />),
+        ),
     });
 
   const initialProps = await Document.getInitialProps(context);
@@ -48,8 +56,9 @@ CustomDocument.getInitialProps = async context => {
 
     styles: (
       <>
-        {trimCSSWhitespace(sheets.getStyleElement())}
         {flush() || null}
+        {trimCSSWhitespace(muiSheets.getStyleElement())}
+        {styledComponentsSheet.getStyleElement()}
       </>
     ),
   };

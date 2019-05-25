@@ -1,3 +1,4 @@
 import React from "react";
+import { StickyFooter } from "../src/components";
 
-export default () => <div>Placeholder</div>;
+export default () => <StickyFooter>Placeholder</StickyFooter>;

@@ -1,8 +1,8 @@
 import { CssBaseline } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/styles";
+import { StylesProvider } from "@material-ui/styles";
 import App, { Container } from "next/app";
-import React from "react";
-import { theme } from "../src/display";
+import React, { StrictMode } from "react";
+import { CombinedThemeProvider, themes } from "../src/display";
 
 /**
  * Custom Next.js App component. It removes the server side rendered CSS from
@@ -23,10 +23,16 @@ class CustomApp extends App {
 
     return (
       <Container>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <StrictMode>
+          <StylesProvider injectFirst>
+            <CombinedThemeProvider theme={themes.light}>
+              <>
+                <CssBaseline />
+                <Component {...pageProps} />
+              </>
+            </CombinedThemeProvider>
+          </StylesProvider>
+        </StrictMode>
       </Container>
     );
   }
