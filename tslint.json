@@ -26,5 +26,8 @@
     "await-promise": true,
     "no-floating-promises": true,
     "prettier": true
+  },
+  "jsRules": {
+    "object-literal-sort-keys": false
   }
 }

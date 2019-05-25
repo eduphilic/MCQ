@@ -39,7 +39,7 @@ function withMaterialUITranspileModules(nextConfig = {}) {
   return withTM({
     ...nextConfig,
 
-    transpileModules: modules,
+    transpileModules: modules.map(moduleName => `${moduleName}/es`),
 
     webpack: (config, options) => {
       config.resolve = config.resolve || {};

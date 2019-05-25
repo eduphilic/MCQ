@@ -1,7 +1,6 @@
 import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import App, { Container } from "next/app";
-import Head from "next/head";
 import React from "react";
 import "typeface-montserrat";
 import { theme } from "../src/display";
@@ -25,8 +24,6 @@ class CustomApp extends App {
 
     return (
       <Container>
-        <Head />
-
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Component {...pageProps} />

@@ -6,6 +6,8 @@ declare module "next-config" {
   import { Options as WebpackDevMiddlewareOptions } from "webpack-dev-middleware";
 
   export interface NextWebpackOptions {
+    dir: string;
+
     /**
      * The build id used as a unique identifier between builds.
      */

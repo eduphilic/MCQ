@@ -1,10 +1,5 @@
 import { ServerStyleSheets } from "@material-ui/styles";
-import Document, {
-  Head,
-  Main,
-  NextDocumentContext,
-  NextScript,
-} from "next/document";
+import Document, { Head, Main, NextScript } from "next/document";
 import React, { cloneElement, DOMAttributes, ReactElement } from "react";
 import flush from "styled-jsx/server";
 import { theme } from "../src/display";
@@ -37,7 +32,7 @@ class CustomDocument extends Document {
   }
 }
 
-CustomDocument.getInitialProps = async (context: NextDocumentContext) => {
+CustomDocument.getInitialProps = async context => {
   const sheets = new ServerStyleSheets();
   const originalRenderPage = context.renderPage;
 
