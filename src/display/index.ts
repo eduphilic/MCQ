@@ -1,1 +1,2 @@
-export * from "./theme";
+export * from "./CombinedThemeProvider";
+export * from "./themes";

@@ -2,7 +2,6 @@ import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import App, { Container } from "next/app";
 import React from "react";
-import "typeface-montserrat";
 import { theme } from "../src/display";
 
 /**
