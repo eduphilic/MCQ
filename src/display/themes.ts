@@ -51,6 +51,15 @@ const montserrat = montserratVariants.map(variant => ({
 }));
 
 const baseThemeOptions: ThemeOptions = {
+  palette: {
+    primary: {
+      main: "#f9d017",
+    },
+    secondary: {
+      main: "#00b150",
+    },
+  },
+
   typography: {
     fontFamily: ["Montserrat", "sans-serif"].join(", "),
   },
@@ -74,6 +83,7 @@ export const themes = {
     ...baseThemeOptions,
 
     palette: {
+      ...baseThemeOptions.palette,
       type: "dark",
     },
   }),
