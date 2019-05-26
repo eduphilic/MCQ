@@ -15,11 +15,14 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
     "plugins": [
       {
         "name": "typescript-tslint-plugin"
       }
     ]
   },
-  "include": ["pages/**/*", "src/**/*", "./next.config.js"]
+  "include": ["pages/**/*", "src/**/*", "./next.config.js"],
+  "exclude": ["node_modules"]
 }
