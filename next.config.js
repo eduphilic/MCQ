@@ -9,6 +9,7 @@ if (true) {
 const withTypescript = require("@zeit/next-typescript");
 const withCss = require("@zeit/next-css");
 const withFonts = require("next-fonts");
+const withImages = require("next-images");
 const withTM = require("@weco/next-plugin-transpile-modules");
 
 /**
@@ -17,9 +18,11 @@ const withTM = require("@weco/next-plugin-transpile-modules");
 module.exports = withTypescript(
   withCss(
     withFonts(
-      withMaterialUITranspileModules({
-        poweredByHeader: false,
-      }),
+      withImages(
+        withMaterialUITranspileModules({
+          poweredByHeader: false,
+        }),
+      ),
     ),
   ),
 );

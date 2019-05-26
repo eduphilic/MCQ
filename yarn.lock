@@ -8118,6 +8118,14 @@ next-fonts@^0.17.0:
     file-loader "^2.0.0"
     url-loader "^1.1.1"
 
+next-images@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/next-images/-/next-images-1.1.1.tgz#f756de42234908ce4af038a310689be7ab0666dd"
+  integrity sha512-m236wa7eJgxcDNba8JZZXfm/qtLB3mRkJq2Zms1ksGt3SmskW7fWYynu4+BnOXkR4ld3fcu+o1K2Egep29ApoA==
+  dependencies:
+    file-loader "^3.0.1"
+    url-loader "^1.1.2"
+
 next-server@8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/next-server/-/next-server-8.1.0.tgz#50a9f248ede69fb33d83aa5274ec6c66f421556e"
