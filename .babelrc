@@ -8,5 +8,10 @@
         "pure": true
       }
     ]
-  ]
+  ],
+  "env": {
+    "test": {
+      "plugins": ["require-context-hook"]
+    }
+  }
 }

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots StickyFooter default 1`] = `
+<div
+  className="StickyFooter-pddbet-0 StickyFooter-pddbet-0"
+>
+  StickyFooter
+  <footer
+    className="StickyFooter__StickyFooterText-pddbet-1 bDhSqg"
+  >
+    <span
+      className="MuiTypography-root-1 MuiTypography-caption-4 MuiTypography-colorTextPrimary-26"
+    >
+      Copyright : Eduphilic Consultancy Pvt Ltd 
+      2019
+    </span>
+  </footer>
+</div>
+`;
