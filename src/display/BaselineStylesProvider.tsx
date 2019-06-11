@@ -17,11 +17,9 @@ export function BaselineStylesProvider(props: Props) {
   return (
     <StylesProvider injectFirst>
       <ThemeProvider theme={themes.light}>
-        <>
-          <CssBaseline />
+        <CssBaseline />
 
-          {props.children}
-        </>
+        {props.children}
       </ThemeProvider>
     </StylesProvider>
   );
