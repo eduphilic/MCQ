@@ -7,7 +7,7 @@ import { themes } from "../src/display";
 
 /**
  * Custom Next.js Document component. It adds support for Material UI's CSS
- * engine.
+ * engine and Styled Components.
  *
  * @see https://github.com/mui-org/material-ui/tree/master/examples/nextjs-next-with-typescript
  */
@@ -43,10 +43,14 @@ CustomDocument.getInitialProps = async context => {
 
   context.renderPage = () =>
     originalRenderPage({
-      enhanceApp: App => props =>
-        styledComponentsSheet.collectStyles(
-          muiSheets.collect(<App {...props} />),
-        ),
+      enhanceApp: App => props => {
+        let appElement = <App {...props} />;
+
+        appElement = muiSheets.collect(appElement);
+        appElement = styledComponentsSheet.collectStyles(appElement);
+
+        return appElement;
+      },
     });
 
   const initialProps = await Document.getInitialProps(context);
