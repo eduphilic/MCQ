@@ -1,3 +1,3 @@
 export * from "./BaselineStylesProvider";
-export * from "./CombinedThemeProvider";
+export * from "./ThemeProvider";
 export * from "./themes";

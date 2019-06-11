@@ -8,7 +8,7 @@ type Props = {
   theme: Theme;
 };
 
-export function CombinedThemeProvider(props: Props) {
+export function ThemeProvider(props: Props) {
   return (
     <MaterialUIThemeProvider theme={props.theme}>
       <StyledComponentsThemeProvider theme={props.theme}>

@@ -1,7 +1,7 @@
 import { CssBaseline } from "@material-ui/core";
 import { StylesProvider } from "@material-ui/styles";
 import React, { ReactNode } from "react";
-import { CombinedThemeProvider } from "./CombinedThemeProvider";
+import { ThemeProvider } from "./ThemeProvider";
 import { themes } from "./themes";
 
 type Props = {
@@ -16,13 +16,13 @@ type Props = {
 export function BaselineStylesProvider(props: Props) {
   return (
     <StylesProvider injectFirst>
-      <CombinedThemeProvider theme={themes.light}>
+      <ThemeProvider theme={themes.light}>
         <>
           <CssBaseline />
 
           {props.children}
         </>
-      </CombinedThemeProvider>
+      </ThemeProvider>
     </StylesProvider>
   );
 }
