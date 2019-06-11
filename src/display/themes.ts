@@ -77,6 +77,15 @@ const baseThemeOptions: ThemeOptions = {
 export const themes = {
   light: createMuiTheme({
     ...baseThemeOptions,
+
+    palette: {
+      ...baseThemeOptions.palette,
+
+      background: {
+        // Change the default grey background color to white.
+        default: "#fff",
+      },
+    },
   }),
 
   dark: createMuiTheme({
@@ -84,6 +93,7 @@ export const themes = {
 
     palette: {
       ...baseThemeOptions.palette,
+
       type: "dark",
     },
   }),
