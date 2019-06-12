@@ -7,7 +7,7 @@
     "test": "jest --coverage",
     "lint": "npm-run-all lint:*",
     "lint:tslint": "tslint -p ./tsconfig.json -t verbose",
-    "lint:eslint": "eslint \"pages/**\" \"src/**\" --ext .tsx --ext .ts",
+    "lint:eslint": "eslint --ext .tsx,.ts pages src",
     "storybook": "start-storybook -c src/storybook --quiet --ci -p 9001"
   },
   "dependencies": {
