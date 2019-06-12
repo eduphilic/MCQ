@@ -35,6 +35,7 @@
     "@types/next": "^8.0.5",
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
+    "@types/react-test-renderer": "^16.8.1",
     "@types/storybook__addon-storyshots": "^4.0.1",
     "@types/storybook__addon-viewport": "^4.1.1",
     "@types/storybook__react": "^4.0.2",
