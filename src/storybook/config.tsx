@@ -10,8 +10,11 @@ addDecorator(story => (
   </StrictMode>
 ));
 
+// TODO: Remove the regex adjustment which ignores the stories from the frontend
+// prototype project.
 // Locate all Storybook stories.
-const req = require.context("..", true, /\.stories\.tsx$/);
+// const req = require.context("..", true, /\.stories\.tsx$/);
+const req = require.context("..", true, /^(?!.*prototype).*\.stories\.tsx?$/);
 
 // Load Storybook stories.
 function loadStories() {
