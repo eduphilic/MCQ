@@ -82,7 +82,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const StyledBottomNavigation = styled<BottomNavigationProps>(props => (
+const StyledBottomNavigation = styled((props: BottomNavigationProps) => (
   <StyledPaper square>
     <BottomToolbarDockPortalPlaceholder />
     <BottomNavigation showLabels {...props} />
@@ -97,8 +97,8 @@ const StyledPaper = styled(Paper)`
   z-index: 1;
 `;
 
-const StyledBottomNavigationAction = styled<BottomNavigationActionProps>(
-  ({ classes, ...rest }) => (
+const StyledBottomNavigationAction = styled(
+  ({ classes, ...rest }: BottomNavigationActionProps) => (
     <BottomNavigationAction
       classes={{
         ...classes,
@@ -126,12 +126,14 @@ const StyledBottomNavigationAction = styled<BottomNavigationActionProps>(
   }
 `;
 
-const StyledSwipeableViews = styled<Omit<SwipeableViewsProps, "ref">>(props => (
-  <SwipeableViews
-    {...props}
-    springConfig={{ duration: "0.3s", easeFunction: "linear", delay: "0s" }}
-  />
-))`
+const StyledSwipeableViews = styled(
+  (props: PropsWithoutRef<SwipeableViewsProps>) => (
+    <SwipeableViews
+      {...props}
+      springConfig={{ duration: "0.3s", easeFunction: "linear", delay: "0s" }}
+    />
+  ),
+)`
   height: calc(100% - 56px);
 
   /* Enable Momentum Scrolling on iOS */

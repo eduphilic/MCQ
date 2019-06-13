@@ -9,8 +9,8 @@ export type LanguageButtonProps = ButtonProps & {
   selected: boolean;
 };
 
-export const LanguageButton = styled<LanguageButtonProps>(
-  ({ children, selected, ...rest }) => (
+export const LanguageButton = styled(
+  ({ children, selected, ...rest }: LanguageButtonProps) => (
     <Button
       variant="outlined"
       classes={{ label: "language-button-label" }}

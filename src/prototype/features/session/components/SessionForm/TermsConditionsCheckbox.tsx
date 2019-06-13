@@ -16,8 +16,8 @@ export type TermsConditionsCheckboxProps = CheckboxProps & {
   error: boolean;
 };
 
-export const TermsConditionsCheckbox = styled<TermsConditionsCheckboxProps>(
-  ({ className, disabled, error, ...rest }) => (
+export const TermsConditionsCheckbox = styled(
+  ({ className, disabled, error, ...rest }: TermsConditionsCheckboxProps) => (
     <TextFieldTooltip
       open={Boolean(error)}
       title="Please review the Terms & Conditions."

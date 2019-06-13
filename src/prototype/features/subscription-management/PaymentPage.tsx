@@ -146,18 +146,21 @@ export const PaymentPage = () => (
   </>
 );
 
-const CategoryButton = styled<
-  Omit<ButtonProps, "innerRef"> & {
+const CategoryButton = styled(
+  ({
+    children,
+    ...rest
+  }: ButtonProps & {
     children: string;
-  }
->(({ children, ...rest }) => (
+  }) => (
   <Button {...rest}>
     {children}
     <span className="icon-wrapper">
       <RemoveCircle />
     </span>
   </Button>
-))`
+  ),
+)`
   justify-content: flex-start;
 
   /* Line up with left side card content */
@@ -172,7 +175,7 @@ const CategoryButton = styled<
   }
 `;
 
-const CouponBox = styled<{ className?: string; children: string }>(props => (
+const CouponBox = styled((props: { className?: string; children: string }) => (
   <div className={props.className}>
     <span className="icon">
       <ContentCut />
@@ -236,8 +239,8 @@ const StyledList = styled(List)`
   background-color: #f9f9f9;
 `;
 
-const StyledListItem = styled<ListItemProps>(props => (
-  <ListItem {...props} classes={{ selected: "selected" }} />
+const StyledListItem = styled((props: ListItemProps<"div">) => (
+  <ListItem {...props} button classes={{ selected: "selected" }} />
 ))`
   &.selected {
     background-color: #fff;

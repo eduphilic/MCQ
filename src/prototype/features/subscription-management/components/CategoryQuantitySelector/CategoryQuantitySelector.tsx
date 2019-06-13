@@ -70,18 +70,18 @@ export class CategoryQuantitySelector extends Component<
   }
 }
 
-const QuantityFormGroup = styled<FormGroupProps>(props => (
+const QuantityFormGroup = styled((props: FormGroupProps) => (
   <FormGroup row {...props} />
 ))`
   flex-grow: 1;
   justify-content: space-between;
 `;
 
-const QuantityCheckbox = styled<
-  Omit<FormControlLabelProps, "innerRef" | "control">
->(props => (
+const QuantityCheckbox = styled(
+  (props: OmitStrict<FormControlLabelProps, "control">) => (
   <StyledLabel control={<StyledCheckbox color="primary" />} {...props} />
-))`
+  ),
+)`
   ${({ theme }) => theme.breakpoints.down("sm")} {
     width: 50%;
     margin-left: 0;

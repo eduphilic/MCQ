@@ -17,7 +17,7 @@ export type DisableableLinkProps = {
   disabled: boolean;
 };
 
-export const DisableableLink = styled<DisableableLinkProps>(props => {
+export const DisableableLink = styled((props: DisableableLinkProps) => {
   const { className, label, to, disabled } = props;
 
   const button = (

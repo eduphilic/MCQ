@@ -17,8 +17,8 @@ export type SwipeInstructionsProps = {
   topOffset: string;
 };
 
-export const SwipeInstructions = styled<SwipeInstructionsProps>(
-  ({ className, children }) => (
+export const SwipeInstructions = styled(
+  ({ className, children }: SwipeInstructionsProps) => (
     <div className={className}>
       <StyledSwipeImage />
       <InstructionsText>{children}</InstructionsText>
@@ -42,8 +42,8 @@ type InstructionsTextProps = {
   children: string;
 };
 
-const InstructionsText = styled<InstructionsTextProps>(
-  ({ className, children }) => (
+const InstructionsText = styled(
+  ({ className, children }: InstructionsTextProps) => (
     <Typography className={className}>{children}</Typography>
   ),
 )`

@@ -47,11 +47,14 @@ const StyledDrawerLink = styled(DrawerLink)`
 
 export { StyledDrawerLink as DrawerLink };
 
-const DrawerLinkOptionalIcon = styled<{
+const DrawerLinkOptionalIcon = styled(
+  ({
+    className,
+    iconElement,
+  }: {
   className?: string;
   iconElement: INavigationLink["iconElement"];
-}>(
-  ({ className, iconElement }) =>
+  }) =>
     iconElement ? (
       <ListItemIcon className={className}>{iconElement}</ListItemIcon>
     ) : null,

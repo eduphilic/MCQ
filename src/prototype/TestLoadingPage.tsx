@@ -35,11 +35,7 @@ export const TestLoadingPage: SFC<TestLoadingPageProps> = props => {
   );
 };
 
-const ResponsiveCard: SFC<CardProps & WithWidth> = ({
-  width,
-  innerRef,
-  ...rest
-}) => {
+const ResponsiveCard: SFC<CardProps & WithWidth> = ({ width, ...rest }) => {
   const isMobile = isWidthDown("sm", width);
 
   const Wrapper = isMobile ? <div /> : <Card />;

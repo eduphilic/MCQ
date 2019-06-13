@@ -10,8 +10,12 @@ export type LanguageToggleButtonProps = {
   onLocalizationLanguageChange: (language: "en" | "hi") => any;
 };
 
-export const LanguageToggleButton = styled<LanguageToggleButtonProps>(
-  ({ className, localizationLanguage, onLocalizationLanguageChange }) => (
+export const LanguageToggleButton = styled(
+  ({
+    className,
+    localizationLanguage,
+    onLocalizationLanguageChange,
+  }: LanguageToggleButtonProps) => (
     <div className={className}>
       <LanguageButton
         selected={localizationLanguage === "hi"}

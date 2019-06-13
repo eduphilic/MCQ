@@ -70,8 +70,8 @@ const Wrapper = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const EducationRequirements = styled<{ className?: string }>(
-  ({ className, children }) => (
+const EducationRequirements = styled(
+  ({ className, children }: { children?: ReactNode; className?: string }) => (
     <Typography className={className} variant="body1">
       {children}
     </Typography>

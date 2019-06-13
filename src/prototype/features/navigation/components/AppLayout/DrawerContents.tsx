@@ -34,10 +34,12 @@ export const DrawerContents: SFC<DrawerContentsProps> = props => {
   );
 };
 
-const DrawerList = styled<{ className?: string }>(({ className, children }) => (
-  <List className={className} component="nav">
-    {children}
-  </List>
-))`
+const DrawerList = styled(
+  ({ className, children }: { children?: ReactNode; className?: string }) => (
+    <List className={className} component="nav">
+      {children}
+    </List>
+  ),
+)`
   padding-top: 0;
 `;

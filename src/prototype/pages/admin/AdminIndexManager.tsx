@@ -421,8 +421,8 @@ const ListControls = () => (
   </Grid>
 );
 
-const Images = SortableContainer<{ formikApi: FormikProps<IndexPageSettings> }>(
-  props => (
+const Images = SortableContainer(
+  (props: { formikApi: FormikProps<IndexPageSettings> }) => (
     <div>
       {props.formikApi.values.images.map((_image, index) => (
         <Image
@@ -436,11 +436,12 @@ const Images = SortableContainer<{ formikApi: FormikProps<IndexPageSettings> }>(
   ),
 );
 
-const Image = SortableElement<{
+const Image = SortableElement(
+  (props: {
   formikApi: FormikProps<IndexPageSettings>;
   imageIndex: number;
-}>(props => (
-  <Grid container spacing={16}>
+  }) => (
+    <Grid container spacing={2}>
     <Grid item>
       <ListControls />
     </Grid>
@@ -495,10 +496,10 @@ const Image = SortableElement<{
       </Grid>
     </Grid>
   </Grid>
-));
+);
 
-const Videos = SortableContainer<{ formikApi: FormikProps<IndexPageSettings> }>(
-  props => (
+const Videos = SortableContainer(
+  (props: { formikApi: FormikProps<IndexPageSettings> }) => (
     <div>
       {props.formikApi.values.videos.map((_video, index) => (
         <Video
@@ -514,11 +515,11 @@ const Videos = SortableContainer<{ formikApi: FormikProps<IndexPageSettings> }>(
 
 const entries = ["army", "airforce", "navy"];
 
-const Video = SortableElement<{
+const Video = SortableElement(
+  (props: {
   formikApi: FormikProps<IndexPageSettings>;
   videoIndex: number;
-}>(props => (
-  <Grid container spacing={16} style={{ paddingBottom: 16 }}>
+  }) => (
     <Grid item>
       <ListControls />
     </Grid>
@@ -578,4 +579,5 @@ const Video = SortableElement<{
       </Grid>
     </Grid>
   </Grid>
-));
+  ),
+);

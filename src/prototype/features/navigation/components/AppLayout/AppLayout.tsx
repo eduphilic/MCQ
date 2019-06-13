@@ -67,7 +67,7 @@ const MobileBackgroundColor = styled.div`
   background-color: #fff;
 `;
 
-const TabletDrawer = styled<DrawerProps>(props => (
+const TabletDrawer = styled((props: DrawerProps) => (
   <Drawer
     variant="permanent"
     open

@@ -109,8 +109,8 @@ const Header = styled(Typography)`
   color: #fff;
 `;
 
-const YouTubeSubscriptionButton = styled<{ className?: string }>(
-  ({ className }) => (
+const YouTubeSubscriptionButton = styled(
+  ({ className }: { className?: string }) => (
     <ButtonBase
       className={className}
       component="a"
@@ -163,18 +163,23 @@ const videoDimensions = css`
   max-height: calc(1280px / ${videoRowSplitCount} - 32px);
 `;
 
-const YouTubeVideoIframe = styled<{
-  className?: string;
-  videoId: string;
-  large?: boolean;
-}>(({ className, videoId }) => (
-  <iframe
-    className={className}
-    src={`https://www.youtube.com/embed/${videoId}`}
-    frameBorder={0}
-    allowFullScreen
-  />
-))`
+const YouTubeVideoIframe = styled(
+  ({
+    className,
+    videoId,
+  }: {
+    className?: string;
+    videoId: string;
+    large?: boolean;
+  }) => (
+    <iframe
+      className={className}
+      src={`https://www.youtube.com/embed/${videoId}`}
+      frameBorder={0}
+      allowFullScreen
+    />
+  ),
+)`
   ${({ large }) =>
     !large
       ? css`
@@ -196,7 +201,7 @@ const YouTubeVideoIframe = styled<{
   }
 `;
 
-const ViewMoreVideosButton = styled<{ className?: string }>(({ className }) => (
+const ViewMoreVideosButton = styled(({ className }: { className?: string }) => (
   <Button
     className={className}
     component="a"

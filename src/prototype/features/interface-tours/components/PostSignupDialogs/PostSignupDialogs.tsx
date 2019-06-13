@@ -145,7 +145,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Logo = styled<{ className?: string }>(({ className }) => (
+const Logo = styled(({ className }: { className?: string }) => (
   <div className={className}>
     <LogoImage />
   </div>
@@ -199,12 +199,9 @@ const TextContentWrapper = styled.div`
   }
 `;
 
-const DialogTitleText = styled<{ children: string; className?: string }>(
-  ({ children, className }) => (
-    <Typography
-      className={className}
-      muiTypographyProps={{ variant: "display2" }}
-    >
+const DialogTitleText = styled(
+  ({ children, className }: { children: string; className?: string }) => (
+    <Typography className={className} muiTypographyProps={{ variant: "h4" }}>
       {children}
     </Typography>
   ),
@@ -217,8 +214,8 @@ const DialogTitleText = styled<{ children: string; className?: string }>(
   color: #000;
 `;
 
-const DialogTextContent = styled<{ children: string; className?: string }>(
-  ({ children, className }) => (
+const DialogTextContent = styled(
+  ({ children, className }: { children: string; className?: string }) => (
     <Typography className={className}>{children}</Typography>
   ),
 )`

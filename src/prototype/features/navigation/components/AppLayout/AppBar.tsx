@@ -48,8 +48,8 @@ const AppBarContainer = connect<StateProps, {}, OwnProps, State>(
 )(AppBar);
 export { AppBarContainer as AppBar };
 
-const ResponsiveWidthAppBar = styled<{ className?: string }>(
-  ({ className, children }) => (
+const ResponsiveWidthAppBar = styled(
+  ({ className, children }: { children?: ReactNode; className?: string }) => (
     <MuiAppBar className={className} color="inherit">
       {children}
     </MuiAppBar>

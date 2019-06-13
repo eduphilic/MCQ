@@ -5,7 +5,7 @@ import IconButton, { IconButtonProps } from "@material-ui/core/IconButton";
 import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
 
 /** Logout button. */
-export const LogoutButton = styled<IconButtonProps>(props => (
+export const LogoutButton = styled((props: IconButtonProps) => (
   <IconButton {...props}>
     <PowerSettingsNew />
   </IconButton>

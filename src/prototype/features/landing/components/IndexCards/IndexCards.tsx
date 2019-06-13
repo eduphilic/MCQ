@@ -128,14 +128,21 @@ const mobileBreakpoint: Breakpoint = "sm";
 
 const Wrapper = styled.div`
   & > * {
-    /* margin: ${({ theme }) => theme.spacing.unit}px 0; */
   }
 `;
+/* margin: ${({ theme }) => theme.spacing.unit}px 0; */
 
 const getLightBg = (color: string) => lighten(color, 0.4);
 
-const CardBackgroundColorWrapper = styled.div<{ backgroundColor: string }>`
-  padding: ${props => props.theme.spacing.unit * 2}px;
+const CardBackgroundColorWrapper = styled(
+  ({
+    backgroundColor,
+    ...rest
+  }: ComponentPropsWithoutRef<"div"> & {
+    backgroundColor: string;
+  }) => <div {...rest} />,
+)`
+  padding: ${props => props.theme.spacing(2)}px;
   background-color: ${props => getLightBg(props.backgroundColor)};
 
   > * {
@@ -144,8 +151,12 @@ const CardBackgroundColorWrapper = styled.div<{ backgroundColor: string }>`
   }
 `;
 
-const CardWrapper = styled<{ className?: string; backgroundColor: string }>(
-  props => <div className={props.className}>{props.children}</div>,
+const CardWrapper = styled(
+  (props: {
+    children?: ReactNode;
+    className?: string;
+    backgroundColor: string;
+  }) => <div className={props.className}>{props.children}</div>,
 )`
   display: flex;
   padding-left: ${logoSizePixels}px;
@@ -175,11 +186,16 @@ const CardWrapper = styled<{ className?: string; backgroundColor: string }>(
   `};
 `;
 
-const EntryLogo = styled<{
-  className?: string;
-  src: string;
-  backgroundColor: string;
-}>(({ className, src }) => <BlockImage className={className} src={src} />)`
+const EntryLogo = styled(
+  ({
+    className,
+    src,
+  }: {
+    className?: string;
+    src: string;
+    backgroundColor: string;
+  }) => <BlockImage className={className} src={src} />,
+)`
   width: ${logoSizePixels}px;
   height: ${logoSizePixels}px;
   margin: ${verticalMargin}px 0;
@@ -194,8 +210,8 @@ const TextSectionWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: ${({ theme }) => theme.spacing.unit * 3}px 0;
-  margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
+  padding: ${({ theme }) => theme.spacing(3)}px 0;
+  margin-left: ${({ theme }) => theme.spacing(2)}px;
 
   ${({ theme }) => theme.breakpoints.down(mobileBreakpoint)} {
     margin-left: 0;
@@ -228,16 +244,21 @@ const CategoryPillWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-const CategoryPill = styled<{
-  className?: string;
-  backgroundColor: string;
-  textColor: string;
-  title: string;
-}>(({ className, title }) => (
-  <div className={className}>
-    <Typography>{title}</Typography>
-  </div>
-))`
+const CategoryPill = styled(
+  ({
+    className,
+    title,
+  }: {
+    className?: string;
+    backgroundColor: string;
+    textColor: string;
+    title: string;
+  }) => (
+    <div className={className}>
+      <Typography>{title}</Typography>
+    </div>
+  ),
+)`
   width: calc(100% / 3 - 16px);
   padding: 8px;
   margin: 8px;

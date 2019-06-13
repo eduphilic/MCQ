@@ -5,14 +5,14 @@ import {
   TypographyButtonProps,
 } from "../../../../componentsV0/TypographyButton";
 
-export type TourDismissalButtonProps = Omit<
-  TypographyButtonProps,
+export type TourDismissalButtonProps = OmitStrict<
+  PropsWithoutRef<TypographyButtonProps>,
   "children"
 > & {
   children: string;
 };
 
-export const TourDismissalButton = styled<TourDismissalButtonProps>(props => (
+export const TourDismissalButton = styled((props: TourDismissalButtonProps) => (
   <TypographyButton {...props} color="primary" filled />
 ))`
   position: fixed;

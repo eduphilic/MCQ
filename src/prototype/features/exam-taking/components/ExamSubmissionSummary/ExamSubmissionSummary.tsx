@@ -74,7 +74,7 @@ export const ExamSubmissionSummary: SFC<ExamSubmissionSummaryProps> = props => {
 
 const Wrapper = styled.div`
   > * {
-    margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+    margin-bottom: ${({ theme }) => theme.spacing(2)}px;
   }
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
@@ -89,32 +89,38 @@ const StatWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: ${({ theme }) => theme.spacing.unit}px;
-  margin-right: ${({ theme }) => theme.spacing.unit}px;
+  padding: ${({ theme }) => theme.spacing(1)}px;
+  margin-right: ${({ theme }) => theme.spacing(1)}px;
   background-color: ${whiteDark};
 
   > *:first-child {
-    margin-bottom: ${({ theme }) => theme.spacing.unit}px;
+    margin-bottom: ${({ theme }) => theme.spacing(1)}px;
   }
 
   ${({ theme }) => theme.breakpoints.up("md")} {
     display: inline-flex;
-    width: calc(25% - ${({ theme }) => theme.spacing.unit}px);
+    width: calc(25% - ${({ theme }) => theme.spacing(1)}px);
   }
 `;
 
-const QuestionAndButtonsWrapper = styled<{
-  className?: string;
-  children?: never;
-  questionNode: ReactNode;
-  buttonsNode: ReactNode;
-}>(({ className, questionNode, buttonsNode }) => (
-  <div className={className}>
-    {questionNode}
+const QuestionAndButtonsWrapper = styled(
+  ({
+    className,
+    questionNode,
+    buttonsNode,
+  }: {
+    className?: string;
+    children?: never;
+    questionNode: ReactNode;
+    buttonsNode: ReactNode;
+  }) => (
+    <div className={className}>
+      {questionNode}
 
-    <div className="buttons">{buttonsNode}</div>
-  </div>
-))`
+      <div className="buttons">{buttonsNode}</div>
+    </div>
+  ),
+)`
   display: flex;
   flex-direction: column;
   align-items: center;

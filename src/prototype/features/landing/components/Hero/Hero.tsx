@@ -92,21 +92,23 @@ export const Hero: SFC<HeroProps> = props => {
   );
 };
 
-const Wrapper = withProps<{
-  backgroundAlpha: number;
-  backgroundImage: string;
-}>()(styled.div)`
+const Wrapper = styled(
+  ({
+    backgroundAlpha,
+    backgroundImage,
+    ...rest
+  }: ComponentPropsWithoutRef<"div"> & {
+    backgroundAlpha: number;
+    backgroundImage: string;
+  }) => <div {...rest} />,
+)`
   display: block;
   width: 100%;
-  padding: ${props => props.theme.spacing.unit * 3}px 0;
+  padding: ${props => props.theme.spacing(3)}px 0;
 
   ${props =>
     `
-    background: linear-gradient( rgba(0, 0, 0, ${
-      props.backgroundAlpha
-    }), rgba(0, 0, 0, ${props.backgroundAlpha}) ), url("${
-      props.backgroundImage
-    }");
+    background: linear-gradient( rgba(0, 0, 0, ${props.backgroundAlpha}), rgba(0, 0, 0, ${props.backgroundAlpha}) ), url("${props.backgroundImage}");
     background-size: cover;
     `}
 `;
@@ -114,12 +116,12 @@ const Wrapper = withProps<{
 const DivideWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: ${props => props.theme.spacing.unit * 4}px;
+  margin-bottom: ${props => props.theme.spacing(4)}px;
 
   > div:nth-child(1) {
     flex: 1;
     width: 100%;
-    margin-bottom: ${props => props.theme.spacing.unit * 2}px;
+    margin-bottom: ${props => props.theme.spacing(2)}px;
   }
 
   > div:nth-child(2) {
@@ -134,7 +136,7 @@ const DivideWrapper = styled.div`
 const LogoBottomMargin = styled(Logo).attrs({
   alternateSecondWordColoring: true,
 })`
-  margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+  margin-bottom: ${({ theme }) => theme.spacing(2)}px;
 `;
 
 const HeroTextWrapper = styled.div`
@@ -145,9 +147,9 @@ const HeroTextWrapper = styled.div`
 `;
 
 const HeroPrimaryText = styled(Typography).attrs({
-  variant: "display2",
+  variant: "h2",
 })`
-  margin-bottom: ${props => props.theme.spacing.unit * 2}px;
+  margin-bottom: ${props => props.theme.spacing(2)}px;
   font-size: 36px;
   font-weight: 600;
   text-shadow: 2px 2px #000;
@@ -161,8 +163,8 @@ const HeroPrimaryText = styled(Typography).attrs({
 `;
 
 const HeroSecondaryText = styled.ul`
-  margin-top: ${props => props.theme.spacing.unit * 3}px;
-  margin-bottom: ${props => props.theme.spacing.unit * 7}px;
+  margin-top: ${props => props.theme.spacing(3)}px;
+  margin-bottom: ${props => props.theme.spacing(7)}px;
   font-size: 24px;
   font-weight: 600;
   text-shadow: 2px 2px #000;

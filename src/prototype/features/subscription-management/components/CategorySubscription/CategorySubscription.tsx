@@ -85,8 +85,16 @@ const TypographyRed = styled(Typography)`
   color: ${({ theme }) => theme.palette.error.main};
 `;
 
-const RenewButton = styled<{ className?: string; onClick?: () => void }>(
-  ({ className, children, onClick }) => (
+const RenewButton = styled(
+  ({
+    className,
+    children,
+    onClick,
+  }: {
+    children?: ReactNode;
+    className?: string;
+    onClick?: () => void;
+  }) => (
     <TypographyButton
       className={className}
       variant="raised"

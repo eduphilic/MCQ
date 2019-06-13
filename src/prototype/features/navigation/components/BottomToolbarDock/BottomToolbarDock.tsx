@@ -20,24 +20,30 @@ export type BottomToolbarDockProps = Pick<
  * swipeable interface layout. When a swipeable interface layout is a parent,
  * the toolbar is rendered above the bottom nav bar of the swipe interface.
  */
-export const BottomToolbarDock = styled<BottomToolbarDockProps>(props => {
-  const { className, children, toolbarNode, matchedRoutes } = props;
+export const BottomToolbarDock = styled(
+  (
+    props: BottomToolbarDockProps & {
+      children?: ReactNode;
+    },
+  ) => {
+    const { className, children, toolbarNode, matchedRoutes } = props;
 
-  return (
-    <div className={className}>
-      <BottomToolbarDockPortal
-        matchedRoutes={matchedRoutes}
-        NonPortalWrapperComponent={ToolbarWrapper}
-      >
-        {toolbarNode}
-      </BottomToolbarDockPortal>
+    return (
+      <div className={className}>
+        <BottomToolbarDockPortal
+          matchedRoutes={matchedRoutes}
+          NonPortalWrapperComponent={ToolbarWrapper}
+        >
+          {toolbarNode}
+        </BottomToolbarDockPortal>
 
-      {children}
+        {children}
 
-      <ToolbarSpacer />
-    </div>
-  );
-})`
+        <ToolbarSpacer />
+      </div>
+    );
+  },
+)`
   height: 100%;
   overflow-y: auto;
 

@@ -217,7 +217,8 @@ const StyledTypography = styled(Typography)`
   white-space: nowrap;
 `;
 
-const StyledCarousel = styled<{ className?: string }>(props => (
+const StyledCarousel = styled(
+  (props: { children?: ReactNode; className?: string }) => (
   <div className={props.className}>
     <Carousel
       slideWidth="120px"
@@ -230,7 +231,8 @@ const StyledCarousel = styled<{ className?: string }>(props => (
       {props.children}
     </Carousel>
   </div>
-))`
+  ),
+)`
   width: 100%;
 
   .slider {
@@ -242,9 +244,8 @@ const StyledCarousel = styled<{ className?: string }>(props => (
   }
 `;
 
-const CarouselBottomNav = styled<
-  CarouselSlideRenderControlProps & { className?: string }
->(props => {
+const CarouselBottomNav = styled(
+  (props: CarouselSlideRenderControlProps & { className?: string }) => {
   if (!props.frameWidth || typeof props.frameWidth !== "number") return null;
   const slidesShown = Math.floor((props.frameWidth + 20) / 120);
   if (slidesShown === props.slideCount) return null;
@@ -270,7 +271,8 @@ const CarouselBottomNav = styled<
       ))}
     </div>
   );
-})`
+  },
+)`
   display: flex;
   position: absolute;
   top: 4px;
