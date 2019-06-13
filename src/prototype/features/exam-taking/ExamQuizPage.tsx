@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { State } from "store";
+import { State } from "../../store";
 import { actions } from "./actions";
 
-import { DashboardColumnContainer } from "componentsV0/DashboardColumnContainer";
+import { DashboardColumnContainer } from "../../componentsV0/DashboardColumnContainer";
 
 import {
   ExamOverviewBluePrint,
   ExamOverviewMarkings,
   ExamOverviewMobile,
-} from "features/exam-overview";
-import { ExamTakingTourModal } from "features/interface-tours";
+} from "../exam-overview";
+import { ExamTakingTourModal } from "../interface-tours";
 import { ExamAnswerSelect } from "./components/ExamAnswerSelect";
 import { examAnswerSelectPlaceholderProps } from "./components/ExamAnswerSelect/ExamAnswerSelect.placeholder";
 import { ExamContents } from "./components/ExamContents";
@@ -110,8 +110,9 @@ class ExamQuizPage extends Component<ExamQuizPageProps> {
             paneKeyNodeMap[currentQuestion].node}
         </ExamTemplate>
 
-        {!showOverviewScreen &&
-          !showSubmissionSummaryScreen && <ExamTakingTourModal />}
+        {!showOverviewScreen && !showSubmissionSummaryScreen && (
+          <ExamTakingTourModal />
+        )}
       </>
     );
   }

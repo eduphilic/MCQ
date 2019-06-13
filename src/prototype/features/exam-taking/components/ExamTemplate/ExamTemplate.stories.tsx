@@ -3,7 +3,7 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { createExamPaneKeyNodeMapPlaceholder } from "../../placeholders/createExamPaneKeyNodeMapPlaceholder";
 
-import { PlaceholderProvider } from "store";
+import { PlaceholderProvider } from "../../../../store";
 import { ExamTemplate } from "./ExamTemplate";
 
 storiesOf("Exam Taking", module)

@@ -1,5 +1,5 @@
 import React, { ReactNode, SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 // TODO: Remove Development Snackbar Link
 import { DevelopmentAdminDashboardSnackbar } from "./DevelopmentAdminDashboardSnackbar";

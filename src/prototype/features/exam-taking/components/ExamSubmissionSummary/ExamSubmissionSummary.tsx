@@ -1,12 +1,12 @@
-import { whiteDark } from "css";
 // import lodashOmit from "lodash.omit";
 import lodashPick from "lodash.pick";
 import React, { ReactNode, SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { whiteDark } from "../../../../css";
 
-import { Typography } from "components/Typography";
-import { Typography as TypographyV0 } from "componentsV0/Typography";
-import { TypographyButton } from "componentsV0/TypographyButton";
+import { Typography } from "../../../../components/Typography";
+import { Typography as TypographyV0 } from "../../../../componentsV0/Typography";
+import { TypographyButton } from "../../../../componentsV0/TypographyButton";
 
 export interface ExamStats {
   totalQuestionsCount: number;

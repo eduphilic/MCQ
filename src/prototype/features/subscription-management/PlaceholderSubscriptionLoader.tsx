@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { State } from "store";
-// tslint:disable-next-line:import-name
-import uuidv1 from "uuid/v1";
+import uuid from "uuid/v1";
+import { State } from "../../store";
 import { actions } from "./actions";
 import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
 

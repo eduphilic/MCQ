@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import IconButton, { IconButtonProps } from "@material-ui/core/IconButton";
 import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";

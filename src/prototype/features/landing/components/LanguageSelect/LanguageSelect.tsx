@@ -1,6 +1,6 @@
-import { LocalizationStateConsumer, strings } from "features/localization";
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { LocalizationStateConsumer, strings } from "../../../localization";
 
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";

@@ -1,13 +1,13 @@
-import { fromMobileFlatBorder } from "css";
-import { IEntry } from "models";
 import React, { SFC } from "react";
-import styled, { css, withProps } from "styled";
+import styled, { css } from "styled-components";
+import { fromMobileFlatBorder } from "../../../../css";
+import { IEntry } from "../../../../models";
 
 import Typography from "@material-ui/core/Typography";
 
-import { BlockImage } from "componentsV0/BlockImage";
-import { Button } from "componentsV0/Button";
-import { CheckmarkableCircle } from "componentsV0/CheckmarkableCircle";
+import { BlockImage } from "../../../../componentsV0/BlockImage";
+import { Button, ButtonProps } from "../../../../componentsV0/Button";
+import { CheckmarkableCircle } from "../../../../componentsV0/CheckmarkableCircle";
 
 export type EntrySelectItemProps = {
   /**
@@ -53,17 +53,24 @@ export const EntrySelectItem: SFC<EntrySelectItemProps> = props => {
   );
 };
 
-const StyledButton = withProps<{ selected: boolean }>()(styled(Button)).attrs({
-  classes: { label: "entry-select-item-button-label" },
-})`
+const StyledButton = styled(
+  ({ selected, ...rest }: ButtonProps & { selected: boolean }) => (
+    <Button
+      {...rest}
+      classes={{
+        label: "entry-select-item-button-label",
+      }}
+    />
+  ),
+)`
   ${fromMobileFlatBorder()};
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
   height: 64px;
-  padding: ${props => props.theme.spacing.unit}px !important;
-  padding-right: ${props => props.theme.spacing.unit * 2}px !important;
+  padding: ${props => props.theme.spacing(1)}px !important;
+  padding-right: ${props => props.theme.spacing(2)}px !important;
   background-color: #fff !important;
   text-transform: none;
 
@@ -94,9 +101,9 @@ const StyledBlockImage = styled(BlockImage)`
 `;
 
 const textWrapperSizeAdjustment =
-  48 /* entry logo width */ +
-  8 /* entry logo right margin */ +
-  24 /* selection circle width */;
+    48 /* entry logo width */ +
+    8 /* entry logo right margin */ +
+    24 /* selection circle width */;
 
 const TextWrapper = styled.div`
   display: flex;

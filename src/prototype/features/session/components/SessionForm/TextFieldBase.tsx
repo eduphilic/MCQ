@@ -1,5 +1,5 @@
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 // tslint:disable-next-line:import-name
 import MuiTextField, { TextFieldProps } from "@material-ui/core/TextField";

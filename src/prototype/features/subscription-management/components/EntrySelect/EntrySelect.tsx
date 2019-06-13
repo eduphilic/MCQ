@@ -1,8 +1,8 @@
-import { IEntry } from "models";
 import React, { Component } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { IEntry } from "../../../../models";
 
-import { fromGutters } from "css";
+import { fromGutters } from "../../../../css";
 import { EntrySelectItem } from "./EntrySelectItem";
 
 export type EntrySelectProps = {

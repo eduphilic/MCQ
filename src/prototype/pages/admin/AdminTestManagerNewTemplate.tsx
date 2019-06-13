@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import React, { Component, ReactNode, SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -9,15 +9,15 @@ import Grid from "@material-ui/core/Grid";
 import Add from "@material-ui/icons/Add";
 import RemoveCircleOutline from "@material-ui/icons/RemoveCircleOutline";
 
-import { DashboardSecondaryToolbar } from "componentsV0/DashboardSecondaryToolbar";
-import { FormikCheckbox } from "componentsV0/FormikCheckbox";
-import { FormikTextField } from "componentsV0/FormikTextField";
-import { FormikTextFieldTypeAhead } from "componentsV0/FormikTextFieldTypeAhead";
-import { ResponsiveToolbarTypographyButton } from "componentsV0/ResponsiveToolbarTypographyButton";
-import { TestPreviewDialog } from "componentsV0/TestPreviewDialog";
-import { createPlaceholderTestPreviewFieldsProp } from "componentsV0/TestPreviewDialog/createPlaceholderTestPreviewFieldsProp";
-import { Typography } from "componentsV0/Typography";
-import { TypographyButton } from "componentsV0/TypographyButton";
+import { DashboardSecondaryToolbar } from "../../componentsV0/DashboardSecondaryToolbar";
+import { FormikCheckbox } from "../../componentsV0/FormikCheckbox";
+import { FormikTextField } from "../../componentsV0/FormikTextField";
+import { FormikTextFieldTypeAhead } from "../../componentsV0/FormikTextFieldTypeAhead";
+import { ResponsiveToolbarTypographyButton } from "../../componentsV0/ResponsiveToolbarTypographyButton";
+import { TestPreviewDialog } from "../../componentsV0/TestPreviewDialog";
+import { createPlaceholderTestPreviewFieldsProp } from "../../componentsV0/TestPreviewDialog/createPlaceholderTestPreviewFieldsProp";
+import { Typography } from "../../componentsV0/Typography";
+import { TypographyButton } from "../../componentsV0/TypographyButton";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 

@@ -1,10 +1,10 @@
 import React, { ReactElement, ReactNode, SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 import "./TextFieldTooltip.css";
 
 import Tooltip from "@material-ui/core/Tooltip";
 
-import { TooltipArrow } from "componentsV0/TooltipArrow";
+import { TooltipArrow } from "../../../../componentsV0/TooltipArrow";
 
 export type TextFieldTooltipProps = {
   /** Target element to apply tooltip to. */

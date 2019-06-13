@@ -2,12 +2,12 @@ import CircularProgress, {
   CircularProgressProps,
 } from "@material-ui/core/CircularProgress";
 import withWidth, { isWidthDown, WithWidth } from "@material-ui/core/withWidth";
-import { Card, CardProps } from "components/Card";
-import { CardContent } from "components/CardContent";
-import { Typography } from "components/Typography";
-import { LogoImage } from "componentsV0/LogoImage";
 import React, { cloneElement, SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { Card, CardProps } from "./components/Card";
+import { CardContent } from "./components/CardContent";
+import { Typography } from "./components/Typography";
+import { LogoImage } from "./componentsV0/LogoImage";
 
 export type TestLoadingPageProps = {};
 
@@ -87,9 +87,12 @@ const StyledLogoImage = styled(LogoImage)`
   transform: translate(-50%, -50%);
 `;
 
-const StyledCircularProgress = styled<CircularProgressProps>(props => (
-  <CircularProgress {...props} size={120} thickness={1.2} />
-))`
+const StyledCircularProgress = styled(CircularProgress).attrs(
+  (): Partial<CircularProgressProps> => ({
+    size: 120,
+    thickness: 1.2,
+  }),
+)`
   position: absolute;
   left: -10px;
   top: -10px;

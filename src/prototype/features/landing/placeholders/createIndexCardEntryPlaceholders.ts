@@ -1,4 +1,4 @@
-import { IEntry, IEntryCategory } from "models";
+import { IEntry, IEntryCategory } from "../../../models";
 import { IIndexCardColors } from "../models/IIndexCardColors";
 
 const createLogoUrl = (name: string): IEntry["logoUrlByWidth"] =>

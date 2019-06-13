@@ -1,6 +1,6 @@
 import { Component, ComponentType, ConsumerProps } from "react";
 import { connect } from "react-redux";
-import { State } from "store";
+import { State } from "../../../store";
 import { actions } from "../actions";
 
 type StateProps = {

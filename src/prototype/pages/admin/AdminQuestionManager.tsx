@@ -9,11 +9,11 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Flag from "@material-ui/icons/Flag";
 import InsertDriveFile from "@material-ui/icons/InsertDriveFile";
 
-import { DashboardCard } from "componentsV0/DashboardCard";
-import { FormikFileUploadBase } from "componentsV0/FormikFileUploadBase";
-import { ResponsiveToolbarTypographyButton } from "componentsV0/ResponsiveToolbarTypographyButton";
-import { SideSheetButtonMenu } from "componentsV0/SideSheetButtonMenu";
-import { SideSheetFieldGroup } from "componentsV0/SideSheetFieldGroup";
+import { DashboardCard } from "../../componentsV0/DashboardCard";
+import { FormikFileUploadBase } from "../../componentsV0/FormikFileUploadBase";
+import { ResponsiveToolbarTypographyButton } from "../../componentsV0/ResponsiveToolbarTypographyButton";
+import { SideSheetButtonMenu } from "../../componentsV0/SideSheetButtonMenu";
+import { SideSheetFieldGroup } from "../../componentsV0/SideSheetFieldGroup";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 

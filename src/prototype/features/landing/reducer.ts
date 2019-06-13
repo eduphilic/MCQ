@@ -1,5 +1,5 @@
-import { IEntry, IEntryCategory } from "models";
-import { createReducer } from "utils";
+import { IEntry, IEntryCategory } from "../../models";
+import { createReducer } from "../../utils";
 import { Actions, LandingAction } from "./actions";
 import { IIndexCardColors } from "./models/IIndexCardColors";
 

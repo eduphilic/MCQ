@@ -5,9 +5,9 @@ import { createCategoryQuantitySelectionSettingsPlaceholder } from "../../placeh
 import { createEntryCategoryPlaceholders } from "../../placeholders/createEntryCategoryPlaceholders";
 
 import CardContent from "@material-ui/core/CardContent";
-import { Card } from "components/Card";
-import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
-import { formik } from "componentsV0/storybook/StorybookFormikAddon";
+import { Card } from "../../../../components/Card";
+import { StorybookContentCenterWrapper } from "../../../../componentsV0/storybook/StorybookContentCenterWrapper";
+import { formik } from "../../../../componentsV0/storybook/StorybookFormikAddon";
 import { CategoryQuantitySelector } from "./CategoryQuantitySelector";
 
 const categoryQuantitySelectionSettings = createCategoryQuantitySelectionSettingsPlaceholder();

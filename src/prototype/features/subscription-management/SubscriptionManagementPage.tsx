@@ -1,8 +1,8 @@
-import { LocalizationStateConsumer, strings } from "features/localization";
-import { IEntry } from "models";
 import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";
-import styled from "styled";
+import styled from "styled-components";
+import { IEntry } from "../../models";
+import { LocalizationStateConsumer, strings } from "../localization";
 import { FormState, Page, PropsWithFormState } from "./types";
 
 import CardContent from "@material-ui/core/CardContent";
@@ -10,15 +10,12 @@ import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 
-import { Card } from "components/Card";
-import { CardHeader } from "components/CardHeader";
-import { RupeeFontSpan } from "components/RupeeFontSpan";
-import { Typography } from "componentsV0/Typography";
-import { TypographyButton } from "componentsV0/TypographyButton";
-import {
-  BottomToolbarDock,
-  routePathFromLocalizationKey,
-} from "features/navigation";
+import { Card } from "../../components/Card";
+import { CardHeader } from "../../components/CardHeader";
+import { RupeeFontSpan } from "../../components/RupeeFontSpan";
+import { Typography } from "../../componentsV0/Typography";
+import { TypographyButton } from "../../componentsV0/TypographyButton";
+import { BottomToolbarDock, routePathFromLocalizationKey } from "../navigation";
 import { BottomToolbar } from "./components/BottomToolbar";
 import { CategoryQuantitySelector } from "./components/CategoryQuantitySelector";
 import { CategorySubscription } from "./components/CategorySubscription";

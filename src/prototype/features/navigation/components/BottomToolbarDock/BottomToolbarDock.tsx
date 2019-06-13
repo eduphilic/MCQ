@@ -1,6 +1,6 @@
-import { drawerWidth, fromToolbarHeight } from "css";
 import React, { ReactNode } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { drawerWidth, fromToolbarHeight } from "../../../../css";
 
 import {
   BottomToolbarDockPortal,

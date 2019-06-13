@@ -1,6 +1,6 @@
 import React, { SFC } from "react";
 import { Route, Switch } from "react-router-dom";
-import { AdminAppDrawerTheme, UserAppDrawerTheme } from "theme";
+import { AdminAppDrawerTheme, UserAppDrawerTheme } from "../../../../theme";
 
 export const NavTheme: SFC<{}> = ({ children }) => (
   <Switch>

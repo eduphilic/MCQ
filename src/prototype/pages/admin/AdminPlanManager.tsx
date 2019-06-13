@@ -3,12 +3,12 @@ import React, { SFC } from "react";
 import Grid from "@material-ui/core/Grid";
 import Add from "@material-ui/icons/Add";
 
-import { DashboardCard } from "componentsV0/DashboardCard";
+import { DashboardCard } from "../../componentsV0/DashboardCard";
 import {
   DashboardFormDialog,
   DashboardFormDialogFieldConfigs,
-} from "componentsV0/DashboardFormDialog";
-import { ResponsiveToolbarTypographyButton } from "componentsV0/ResponsiveToolbarTypographyButton";
+} from "../../componentsV0/DashboardFormDialog";
+import { ResponsiveToolbarTypographyButton } from "../../componentsV0/ResponsiveToolbarTypographyButton";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 

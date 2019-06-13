@@ -1,4 +1,4 @@
-import { LocalizedString } from "types";
+import { LocalizedString } from "../types";
 
 /**
  * An Entry (Army, AirForce, Officer).

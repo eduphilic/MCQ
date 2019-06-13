@@ -1,9 +1,9 @@
 import { storiesOf } from "@storybook/react";
-import { drawerWidth } from "css";
 import React from "react";
-import { UserAppDrawerTheme } from "theme";
+import { drawerWidth } from "../../../../css";
+import { UserAppDrawerTheme } from "../../../../theme";
 
-import { PlaceholderProvider } from "store";
+import { PlaceholderProvider } from "../../../../store";
 import { ExamDrawerQuestionSelect } from "./ExamDrawerQuestionSelect";
 
 storiesOf("Exam Taking", module)

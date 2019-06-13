@@ -1,15 +1,15 @@
-import { LocalizationStateConsumer } from "features/localization";
-import React, { Component } from "react";
+import React, { Component, ComponentPropsWithoutRef, ReactNode } from "react";
 import { connect } from "react-redux";
-import { State } from "store";
-import styled from "styled";
+import styled from "styled-components";
+import { State } from "../../../../store";
+import { LocalizationStateConsumer } from "../../../localization";
 import { actions } from "../../actions";
 
 import { lighten } from "@material-ui/core/styles/colorManipulator";
 import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 
-import { BlockImage } from "componentsV0/BlockImage";
-import { Typography } from "componentsV0/Typography";
+import { BlockImage } from "../../../../componentsV0/BlockImage";
+import { Typography } from "../../../../componentsV0/Typography";
 
 import { createIndexCardEntryPlaceholders } from "../../placeholders/createIndexCardEntryPlaceholders";
 

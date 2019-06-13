@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import { createStore } from "store";
+import { createStore } from "./createStore";
 
-import { actions as examTakingActions } from "features/exam-taking";
-import { actions as subscriptionManagementActions } from "features/subscription-management";
+import { actions as examTakingActions } from "../features/exam-taking";
+import { actions as subscriptionManagementActions } from "../features/subscription-management";
 
 export class PlaceholderProvider extends Component {
   private store = createStore();

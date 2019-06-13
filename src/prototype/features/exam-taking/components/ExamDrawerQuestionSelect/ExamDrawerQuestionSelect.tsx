@@ -1,13 +1,13 @@
 import React, { SFC } from "react";
 import { connect } from "react-redux";
-import { State } from "store";
-import styled from "styled";
+import styled from "styled-components";
+import { State } from "../../../../store";
 import { actions } from "../../actions";
 import { IExamQuestion } from "../../models/IExamQuestion";
 import { IExamQuestionCategory } from "../../models/IExamQuestionCategory";
 import { FeatureKey } from "../../types/FeatureKey";
 
-import { Typography } from "componentsV0/Typography";
+import { Typography } from "../../../../componentsV0/Typography";
 import { QuestionButton } from "./QuestionButton";
 
 type StateProps = {

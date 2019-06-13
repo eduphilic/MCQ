@@ -1,5 +1,5 @@
-import { ActionsUnion } from "types";
-import { createAction } from "utils";
+import { ActionsUnion } from "../../types";
+import { createAction } from "../../utils";
 
 export enum NavigationAction {
   UpdateLocation = "[navigation] Update Location",

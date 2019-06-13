@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { createEntryPlaceholders } from "../../placeholders/createEntryPlaceholders";
 
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
+import { ContentCenterWrapper } from "../../../../componentsV0/ContentCenterWrapper";
 import { EntrySelect } from "./EntrySelect";
 
 const entries = createEntryPlaceholders();

@@ -1,5 +1,5 @@
-import React, { SFC } from "react";
-import styled from "styled";
+import React, { ReactNode, SFC } from "react";
+import styled from "styled-components";
 import { INavigationLink } from "../../models/INavigationLink";
 
 import List from "@material-ui/core/List";

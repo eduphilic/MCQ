@@ -1,8 +1,7 @@
-import { IEntry } from "models";
-// tslint:disable-next-line:import-name
 import Carousel, { CarouselSlideRenderControlProps } from "nuka-carousel";
-import React, { SFC } from "react";
-import styled, { css } from "styled";
+import React, { ReactNode, SFC } from "react";
+import styled, { css } from "styled-components";
+import { IEntry } from "../../../../models";
 
 import Avatar from "@material-ui/core/Avatar";
 import Chip from "@material-ui/core/Chip";
@@ -10,9 +9,9 @@ import Hidden from "@material-ui/core/Hidden";
 import Add from "@material-ui/icons/Add";
 import Remove from "@material-ui/icons/Remove";
 
-import { BlockImage } from "componentsV0/BlockImage";
-import { Typography } from "componentsV0/Typography";
-import { TypographyButton } from "componentsV0/TypographyButton";
+import { BlockImage } from "../../../../componentsV0/BlockImage";
+import { Typography } from "../../../../componentsV0/Typography";
+import { TypographyButton } from "../../../../componentsV0/TypographyButton";
 
 export type SelectedEntriesProps = {
   entries: IEntry[];

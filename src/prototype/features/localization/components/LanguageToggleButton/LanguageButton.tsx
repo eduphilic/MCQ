@@ -1,9 +1,9 @@
 import React from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import Button, { ButtonProps } from "@material-ui/core/Button";
 
-import { CheckmarkableCircle } from "componentsV0/CheckmarkableCircle";
+import { CheckmarkableCircle } from "../../../../componentsV0/CheckmarkableCircle";
 
 export type LanguageButtonProps = ButtonProps & {
   selected: boolean;

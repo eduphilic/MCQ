@@ -1,8 +1,8 @@
-import { textGrey, whiteDark } from "css";
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { textGrey, whiteDark } from "../../../../css";
 
-import { Typography } from "componentsV0/Typography";
+import { Typography } from "../../../../componentsV0/Typography";
 
 export interface ExamHeaderProps {
   /**

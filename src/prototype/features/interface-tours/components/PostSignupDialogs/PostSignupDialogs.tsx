@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { State } from "store";
-import styled, { createGlobalStyle } from "styled";
+import styled, { createGlobalStyle } from "styled-components";
+import { State } from "../../../../store";
 import { actions } from "../../actions";
 
 import Dialog from "@material-ui/core/Dialog";
@@ -10,9 +10,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import withMobileDialog, {
   InjectedProps as WithMobileDialogProps,
 } from "@material-ui/core/withMobileDialog";
-import { LogoImage } from "componentsV0/LogoImage";
-import { Typography } from "componentsV0/Typography";
-import { TypographyButton } from "componentsV0/TypographyButton";
+import { LogoImage } from "../../../../componentsV0/LogoImage";
+import { Typography } from "../../../../componentsV0/Typography";
+import { TypographyButton } from "../../../../componentsV0/TypographyButton";
 
 type OwnProps = {};
 export type PostSignupDialogsProps = OwnProps;

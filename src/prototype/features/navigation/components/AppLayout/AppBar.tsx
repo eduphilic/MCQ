@@ -1,15 +1,15 @@
 // tslint:disable:import-name
-import { drawerWidth } from "css";
-import React, { SFC } from "react";
+import { drawerWidth } from "../../../../css";
+import React, { SFC, ReactNode } from "react";
 import { connect } from "react-redux";
-import { State } from "store";
-import styled from "styled";
+import { State } from "../../../../store";
+import styled from "styled-components";
 
 import MuiAppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-import { LanguageToggleButton } from "features/localization";
+import { LanguageToggleButton } from "../../../localization";
 import { LogoutButton } from "./LogoutButton";
 
 type StateProps = {

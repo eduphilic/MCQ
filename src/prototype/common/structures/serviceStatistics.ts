@@ -1,4 +1,4 @@
-import { ServiceStatistics } from "common/types/ServiceStatistics";
+import { ServiceStatistics } from "../types/ServiceStatistics";
 
 const randomNumber = (max = 1000) =>
   Math.floor(Math.random() * Math.floor(max)) + 1;

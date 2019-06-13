@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { createEntryPlaceholders } from "../../placeholders/createEntryPlaceholders";
 
-import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
+import { StorybookContentCenterWrapper } from "../../../../componentsV0/storybook/StorybookContentCenterWrapper";
 import { SelectedEntries } from "./SelectedEntries";
 
 const stories = storiesOf("Subscription Management", module);

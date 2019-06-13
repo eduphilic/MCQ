@@ -1,8 +1,8 @@
-import { strings } from "features/localization";
 import React, { SFC } from "react";
+import { strings } from "../../../localization";
 
-import { CardHeader } from "components/CardHeader";
-import { RupeeFontSpan } from "components/RupeeFontSpan";
+import { CardHeader } from "../../../../components/CardHeader";
+import { RupeeFontSpan } from "../../../../components/RupeeFontSpan";
 
 export type QuantitySelectionCardHeaderProps = {
   /** Card title. */

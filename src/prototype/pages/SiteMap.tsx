@@ -5,16 +5,16 @@ import {
   MultipathRoute,
   PersistentScrollPosition, // Requires access to Router.
   ReduxRouterConnector,
-} from "features/navigation";
+} from "../features/navigation";
 
-import { navigationLinksAdmin } from "common/structures/navigationLinksAdmin";
-import { navigationLinksAdminLogin } from "common/structures/navigationLinksAdminLogin";
-import { navigationLinksExam } from "common/structures/navigationLinksExam";
+import { navigationLinksAdmin } from "../common/structures/navigationLinksAdmin";
+import { navigationLinksAdminLogin } from "../common/structures/navigationLinksAdminLogin";
+import { navigationLinksExam } from "../common/structures/navigationLinksExam";
 import { AdminRoute } from "./AdminRoute";
 
-import { DashboardPages } from "features/dashboard";
-import { pages as examReviewPages } from "features/exam-review";
-import { pages as landingPages } from "features/landing";
+import { DashboardPages } from "../features/dashboard";
+import { pages as examReviewPages } from "../features/exam-review";
+import { pages as landingPages } from "../features/landing";
 
 import { TestLoadingPage } from "../TestLoadingPage";
 

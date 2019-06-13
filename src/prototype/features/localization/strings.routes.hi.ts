@@ -1,4 +1,4 @@
-import { SecondaryTranslation } from "types";
+import { SecondaryTranslation } from "../../types";
 import { routesEn } from "./strings.routes.en";
 
 export const routesHi: SecondaryTranslation<typeof routesEn> = {

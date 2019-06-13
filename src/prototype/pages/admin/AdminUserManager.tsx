@@ -1,5 +1,5 @@
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import Badge from "@material-ui/core/Badge";
 import Grid from "@material-ui/core/Grid";
@@ -13,11 +13,11 @@ import {
   DashboardCard,
   DashboardCardColumnType,
   DashboardCardItem,
-} from "componentsV0/DashboardCard";
-import { ResponsiveToolbarTypographyButton } from "componentsV0/ResponsiveToolbarTypographyButton";
-import { SideSheetButtonMenu } from "componentsV0/SideSheetButtonMenu";
-import { SideSheetFieldGroup } from "componentsV0/SideSheetFieldGroup";
-import { SideSheetSearchField } from "componentsV0/SideSheetSearchField";
+} from "../../componentsV0/DashboardCard";
+import { ResponsiveToolbarTypographyButton } from "../../componentsV0/ResponsiveToolbarTypographyButton";
+import { SideSheetButtonMenu } from "../../componentsV0/SideSheetButtonMenu";
+import { SideSheetFieldGroup } from "../../componentsV0/SideSheetFieldGroup";
+import { SideSheetSearchField } from "../../componentsV0/SideSheetSearchField";
 
 export const AdminUserManager: SFC<{}> = () => {
   // tslint:disable-next-line:no-empty

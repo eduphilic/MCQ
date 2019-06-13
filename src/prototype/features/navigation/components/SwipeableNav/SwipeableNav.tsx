@@ -1,8 +1,8 @@
-import { bottomNavBoxShadow } from "css";
-import { strings } from "features/localization";
-import React, { SFC } from "react";
+import React, { PropsWithoutRef, SFC } from "react";
 import SwipeableViews, { SwipeableViewsProps } from "react-swipeable-views";
-import styled from "styled";
+import styled from "styled-components";
+import { bottomNavBoxShadow } from "../../../../css";
+import { strings } from "../../../localization";
 import { INavigationLink } from "../../models/INavigationLink";
 
 import BottomNavigation, {

@@ -8,12 +8,12 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ImportExport from "@material-ui/icons/ImportExport";
 
-import { DashboardCard } from "componentsV0/DashboardCard";
-import { DashboardSecondaryToolbar } from "componentsV0/DashboardSecondaryToolbar";
-import { DropdownButton } from "componentsV0/DropdownButton";
-import { ResponsiveToolbarTypographyButton } from "componentsV0/ResponsiveToolbarTypographyButton";
-import { Typography } from "componentsV0/Typography";
-import { TypographyButton } from "componentsV0/TypographyButton";
+import { DashboardCard } from "../../componentsV0/DashboardCard";
+import { DashboardSecondaryToolbar } from "../../componentsV0/DashboardSecondaryToolbar";
+import { DropdownButton } from "../../componentsV0/DropdownButton";
+import { ResponsiveToolbarTypographyButton } from "../../componentsV0/ResponsiveToolbarTypographyButton";
+import { Typography } from "../../componentsV0/Typography";
+import { TypographyButton } from "../../componentsV0/TypographyButton";
 
 interface AdminRevenueManagerState {
   financialYearDropdownOpen: boolean;

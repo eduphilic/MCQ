@@ -1,6 +1,6 @@
-import { strings } from "features/localization";
 import React from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { strings } from "../../../localization";
 
 import Checkbox, { CheckboxProps } from "@material-ui/core/Checkbox";
 

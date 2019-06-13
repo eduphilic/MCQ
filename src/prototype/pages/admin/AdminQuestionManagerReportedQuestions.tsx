@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
 import Grid from "@material-ui/core/Grid";
-import { DashboardCard } from "componentsV0/DashboardCard";
-import { SideSheetButtonMenu } from "componentsV0/SideSheetButtonMenu";
-import { SideSheetFieldGroup } from "componentsV0/SideSheetFieldGroup";
+import { DashboardCard } from "../../componentsV0/DashboardCard";
+import { SideSheetButtonMenu } from "../../componentsV0/SideSheetButtonMenu";
+import { SideSheetFieldGroup } from "../../componentsV0/SideSheetFieldGroup";
 
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 

@@ -1,6 +1,6 @@
-import { LocalizationStateConsumer } from "features/localization";
 import React, { ChangeEvent, Component } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { LocalizationStateConsumer } from "../../../localization";
 
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel, {

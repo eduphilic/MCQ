@@ -1,5 +1,5 @@
-import { navigationLinksAll } from "common/structures/navigationLinksAll";
-import { strings } from "features/localization";
+import { navigationLinksAll } from "../../common/structures/navigationLinksAll";
+import { strings } from "../localization";
 import { routes } from "./routes";
 
 const defaultOptions = {
@@ -12,6 +12,8 @@ export const getPageTitleFromLocation = (
 ): string => {
   const page = navigationLinksAll.find(l => l.to === location);
 
+  // TODO: Fix type:
+  // @ts-ignore
   let title = page ? strings[page.titleLocalizationKey] : "";
 
   const route = routes.find(r => r.path === location);

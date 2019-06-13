@@ -6,9 +6,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import TextField from "@material-ui/core/TextField";
-import { Button } from "components/Button";
 import { Formik } from "formik";
 import React, { Component } from "react";
+import { Button } from "../../../../components/Button";
 
 export type ExamQuestionReportModalProps = {};
 

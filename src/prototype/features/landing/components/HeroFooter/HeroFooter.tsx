@@ -1,6 +1,6 @@
-import { strings } from "features/localization";
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { strings } from "../../../localization";
 // import armyGreenPng from "./armyGreen.png";
 
 import Typography from "@material-ui/core/Typography";

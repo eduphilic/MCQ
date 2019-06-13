@@ -1,5 +1,5 @@
-import { ActionsUnion } from "types";
-import { createAction } from "utils";
+import { ActionsUnion } from "../../types";
+import { createAction } from "../../utils";
 import { IUser } from "./models/IUser";
 
 export enum SessionAction {

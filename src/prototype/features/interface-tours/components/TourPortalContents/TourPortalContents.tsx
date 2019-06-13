@@ -1,8 +1,8 @@
-import { fromToolbarHeight } from "css";
-import { routePathFromLocalizationKey } from "features/navigation";
 import React, { Component, ReactNode } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import styled, { css } from "styled";
+import styled, { css } from "styled-components";
+import { fromToolbarHeight } from "../../../../css";
+import { routePathFromLocalizationKey } from "../../../navigation";
 
 type OwnProps = {
   children: ReactNode;

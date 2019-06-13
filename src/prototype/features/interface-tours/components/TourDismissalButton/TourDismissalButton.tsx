@@ -1,9 +1,9 @@
+import React, { PropsWithoutRef } from "react";
+import styled from "styled-components";
 import {
   TypographyButton,
   TypographyButtonProps,
-} from "componentsV0/TypographyButton";
-import React from "react";
-import styled from "styled";
+} from "../../../../componentsV0/TypographyButton";
 
 export type TourDismissalButtonProps = Omit<
   TypographyButtonProps,

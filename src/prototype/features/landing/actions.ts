@@ -1,6 +1,6 @@
-import { IEntry, IEntryCategory } from "models";
-import { ActionsUnion } from "types";
-import { createAction } from "utils";
+import { IEntry, IEntryCategory } from "../../models";
+import { ActionsUnion } from "../../types";
+import { createAction } from "../../utils";
 import { IIndexCardColors } from "./models/IIndexCardColors";
 
 export enum LandingAction {

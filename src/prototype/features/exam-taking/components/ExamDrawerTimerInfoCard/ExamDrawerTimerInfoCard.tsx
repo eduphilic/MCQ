@@ -1,9 +1,9 @@
-import { examDrawerInfoCardBackground, examTimerYellow } from "css";
 import React, { SFC } from "react";
-import styled from "styled";
-import { UserAppDrawerTheme } from "theme";
+import styled from "styled-components";
+import { examDrawerInfoCardBackground, examTimerYellow } from "../../../../css";
+import { UserAppDrawerTheme } from "../../../../theme";
 
-import { Typography } from "componentsV0/Typography";
+import { Typography } from "../../../../componentsV0/Typography";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ExamDrawerTimerInfoCardProps {}

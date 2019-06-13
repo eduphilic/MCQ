@@ -1,5 +1,5 @@
-import { fromToolbarHeight } from "css";
-import styled from "styled";
+import styled from "styled-components";
+import { fromToolbarHeight } from "../../../../css";
 
 export type ArrowTargetRowProps = {
   variant: "exam-half-toolbar" | "toolbar";

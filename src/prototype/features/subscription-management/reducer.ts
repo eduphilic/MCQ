@@ -1,5 +1,5 @@
-import { IEntry, IEntryCategory } from "models";
-import { createReducer } from "utils";
+import { IEntry, IEntryCategory } from "../../models";
+import { createReducer } from "../../utils";
 import { Actions, SubscriptionManagementAction } from "./actions";
 import { ICategoryQuantitySelectionSettings } from "./models/ICategoryQuantitySelectionSettings";
 import { ICategorySubscriptions } from "./models/ICategorySubscriptions";

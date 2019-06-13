@@ -1,8 +1,8 @@
 import React, { Component, ReactNode } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
-import { Button, ButtonProps } from "componentsV0/Button";
-import { Typography, TypographyProps } from "componentsV0/Typography";
+import { Button, ButtonProps } from "../Button";
+import { Typography, TypographyProps } from "../Typography";
 
 import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
 import withWidth, { isWidthDown } from "@material-ui/core/withWidth";

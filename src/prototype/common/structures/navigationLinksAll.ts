@@ -1,4 +1,4 @@
-import { NavigationLinks } from "common/types/NavigationLinks";
+import { NavigationLinks } from "../types/NavigationLinks";
 import { navigationLinksAdmin } from "./navigationLinksAdmin";
 import { navigationLinksAdminLogin } from "./navigationLinksAdminLogin";
 

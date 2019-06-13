@@ -1,23 +1,20 @@
 import React, { SFC } from "react";
-import { AdminAppDrawerTheme } from "theme";
+import { AdminAppDrawerTheme } from "../../theme";
 
 import AppBar from "@material-ui/core/AppBar";
 
-import {
-  DashboardAppBar,
-  DashboardAppBarProps,
-} from "componentsV0/DashboardAppBar";
-import { DashboardTemplate } from "componentsV0/DashboardTemplate";
+import { DrawerContents } from "../../features/navigation";
+import { DashboardAppBar, DashboardAppBarProps } from "../DashboardAppBar";
+import { DashboardTemplate } from "../DashboardTemplate";
 import {
   SideSheet,
   SideSheetProps,
   SideSheetToggleButton,
   SideSheetToggleButtonProps,
   SideSheetToggleStoreProvider,
-} from "componentsV0/SideSheet";
-import { DrawerContents } from "features/navigation";
+} from "../SideSheet";
 
-import { navigationLinksAdmin } from "common/structures/navigationLinksAdmin";
+import { navigationLinksAdmin } from "../../common/structures/navigationLinksAdmin";
 
 export interface AdminDashboardTemplateProps
   extends SideSheetProps,

@@ -1,12 +1,12 @@
+import React, { Component } from "react";
+import styled from "styled-components";
 import {
   examQuestionStatusAnswered,
   examQuestionStatusMarkedForReview,
   examQuestionStatusNotAnswered,
   examQuestionStatusNotVisited,
   examQuestionStatusSelected,
-} from "css";
-import React, { Component } from "react";
-import styled from "styled";
+} from "../../../../css";
 
 import { IExamQuestion } from "../../models/IExamQuestion";
 

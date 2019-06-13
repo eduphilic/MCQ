@@ -1,6 +1,6 @@
 import { ArcherElement, ArcherElementProps } from "@strothj/react-archer";
-import { Typography } from "componentsV0/Typography";
 import React, { SFC } from "react";
+import { Typography } from "../../../../componentsV0/Typography";
 
 type StyleProps = Pick<
   React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,

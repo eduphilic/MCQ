@@ -1,5 +1,5 @@
-import { NavigationLinks } from "common/types/NavigationLinks";
-import { ExamQuizPage } from "features/exam-taking";
+import { ExamQuizPage } from "../../features/exam-taking";
+import { NavigationLinks } from "../types/NavigationLinks";
 
 /**
  * Exam link for in progress exam.

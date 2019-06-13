@@ -1,8 +1,8 @@
 import { withFormik } from "formik";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { State } from "store";
 import uuid from "uuid/v1";
+import { State } from "../../store";
 import { actions } from "./actions";
 import { isOnboardingSelector } from "./selectors";
 import { DispatchProps, FormState, OwnProps, Props, StateProps } from "./types";

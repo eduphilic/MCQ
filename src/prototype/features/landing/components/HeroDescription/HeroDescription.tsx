@@ -1,11 +1,11 @@
 /* tslint:disable:import-name */
-import { LocalizationStateConsumer } from "features/localization";
 import React from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { LocalizationStateConsumer } from "../../../localization";
 
 import Grid from "@material-ui/core/Grid";
-import { Typography } from "components/Typography";
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
+import { Typography } from "../../../../components/Typography";
+import { ContentCenterWrapper } from "../../../../componentsV0/ContentCenterWrapper";
 import jpg1 from "./1.jpg";
 import jpg2 from "./2.jpg";
 

@@ -1,5 +1,5 @@
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";

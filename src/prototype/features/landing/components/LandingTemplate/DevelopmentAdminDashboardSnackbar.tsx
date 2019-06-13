@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import styled from "styled";
+import styled from "styled-components";
 
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";

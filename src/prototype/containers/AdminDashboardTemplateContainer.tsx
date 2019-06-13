@@ -1,17 +1,17 @@
+import React, { SFC } from "react";
 import {
   AdminDashboardTemplate,
   AdminDashboardTemplateProps,
-} from "componentsV0/AdminDashboardTemplate";
-import React, { SFC } from "react";
+} from "../componentsV0/AdminDashboardTemplate";
 
 interface AdminDashboardTemplateContainerOwnProps
   extends Pick<
-      AdminDashboardTemplateProps,
-      | "sideSheetTitle"
-      | "sideSheetContents"
-      | "sideSheetIconElement"
-      | "sideSheetIconTooltipTitle"
-    > {
+    AdminDashboardTemplateProps,
+    | "sideSheetTitle"
+    | "sideSheetContents"
+    | "sideSheetIconElement"
+    | "sideSheetIconTooltipTitle"
+  > {
   actionButtonElements?: AdminDashboardTemplateProps["dashboardAppBarProps"]["actionButtonElements"];
 }
 

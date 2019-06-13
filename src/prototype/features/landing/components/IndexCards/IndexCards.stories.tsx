@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { PlaceholderProvider } from "store";
+import { PlaceholderProvider } from "../../../../store";
 
-import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
+import { StorybookContentCenterWrapper } from "../../../../componentsV0/storybook/StorybookContentCenterWrapper";
 import { IndexCards } from "./IndexCards";
 
 storiesOf("Landing", module)

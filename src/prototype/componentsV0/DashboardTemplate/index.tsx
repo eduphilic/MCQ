@@ -3,7 +3,7 @@ import React, { ComponentType, SFC } from "react";
 import {
   ResponsiveDrawerFrame,
   ResponsiveDrawerFrameProps,
-} from "componentsV0/ResponsiveDrawerFrame";
+} from "../ResponsiveDrawerFrame";
 
 // TODO: Reorganize this file so that it doesn't have to depend on a component
 // from a feature folder.

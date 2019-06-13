@@ -1,7 +1,7 @@
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
-import { SessionForm } from "features/session";
+import { SessionForm } from "../../../session";
 
 export type SigninSignupFormsProps = {};
 

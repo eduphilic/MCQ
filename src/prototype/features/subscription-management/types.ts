@@ -1,6 +1,6 @@
 import { InjectedFormikProps } from "formik";
-import { IEntry, IEntryCategory } from "models";
 import { RouteComponentProps } from "react-router-dom";
+import { IEntry, IEntryCategory } from "../../models";
 import { ICategoryQuantitySelectionSettings } from "./models/ICategoryQuantitySelectionSettings";
 import { ICategorySubscriptions } from "./models/ICategorySubscriptions";
 

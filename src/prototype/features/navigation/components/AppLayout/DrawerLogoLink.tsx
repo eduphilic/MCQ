@@ -1,11 +1,11 @@
 import React, { SFC } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled";
+import styled from "styled-components";
 import { INavigationLink } from "../../models/INavigationLink";
 
 import ListItem from "@material-ui/core/ListItem";
 
-import { DrawerLogo } from "componentsV0/DrawerLogo";
+import { DrawerLogo } from "../../../../componentsV0/DrawerLogo";
 
 export type DrawerLogoLinkProps = INavigationLink & { className?: string };
 

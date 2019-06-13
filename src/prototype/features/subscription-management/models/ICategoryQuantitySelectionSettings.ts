@@ -1,4 +1,4 @@
-import { LocalizedString } from "types";
+import { LocalizedString } from "../../../types";
 
 /**
  * Provides the quantity options for Entry Categories.

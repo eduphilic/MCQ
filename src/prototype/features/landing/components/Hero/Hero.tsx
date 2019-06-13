@@ -1,13 +1,13 @@
-import { strings } from "features/localization";
-import React, { SFC } from "react";
-import styled, { withProps } from "styled";
-import { DarkTheme, LightTheme } from "theme";
+import React, { ComponentPropsWithoutRef, SFC } from "react";
+import styled from "styled-components";
+import { strings } from "../../../../features/localization";
+import { DarkTheme, LightTheme } from "../../../../theme";
 
 import Hidden from "@material-ui/core/Hidden";
 import Typography from "@material-ui/core/Typography";
 
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
-import { Logo } from "componentsV0/Logo";
+import { ContentCenterWrapper } from "../../../../componentsV0/ContentCenterWrapper";
+import { Logo } from "../../../../componentsV0/Logo";
 import { HeroDescription } from "../HeroDescription";
 import { HeroFooter } from "../HeroFooter";
 import { LanguageSelect } from "../LanguageSelect";

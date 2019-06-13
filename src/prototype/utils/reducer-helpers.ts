@@ -1,4 +1,4 @@
-import { ActionsUnion } from "types";
+import { ActionsUnion } from "../types";
 import { Action } from "./action-helpers";
 
 export const createReducer = <

@@ -1,4 +1,4 @@
-import { LocalizationKey } from "types";
+import { LocalizationKey } from "../../types";
 
 export const routes: {
   path: string;

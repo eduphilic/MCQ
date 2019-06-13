@@ -1,10 +1,10 @@
-import { strings } from "features/localization";
 import { Formik } from "formik";
 import React, { cloneElement, ReactElement, SFC } from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { State } from "store";
-import styled from "styled";
+import styled from "styled-components";
+import { State } from "../../../../store";
+import { strings } from "../../../localization";
 import { actions } from "../../actions";
 import { IUser } from "../../models/IUser";
 import { FormType } from "./FormType";
@@ -17,8 +17,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 
-import { Card } from "components/Card";
-import { Button } from "componentsV0/Button";
+import { Card } from "../../../../components/Card";
+import { Button } from "../../../../componentsV0/Button";
 import { FormHeader } from "./FormHeader";
 import { PasswordResetLink } from "./PasswordResetLink";
 import { TermsConditionsCheckbox } from "./TermsConditionsCheckbox";

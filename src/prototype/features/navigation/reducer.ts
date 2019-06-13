@@ -1,4 +1,4 @@
-import { createReducer } from "utils";
+import { createReducer } from "../../utils";
 import { Actions, NavigationAction } from "./actions";
 import { getPageTitleFromLocation } from "./getPageTitleFromLocation";
 

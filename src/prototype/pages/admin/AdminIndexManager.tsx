@@ -8,16 +8,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
 import Add from "@material-ui/icons/Add";
-// tslint:disable-next-line:import-name
 import DragHandleIcon from "@material-ui/icons/DragHandle";
 import Remove from "@material-ui/icons/Remove";
-import { CardContent } from "components/CardContent";
-import { CardHeader, CardHeaderProps } from "components/CardHeader";
-import { DashboardCard } from "componentsV0/DashboardCard";
-import { DashboardSecondaryToolbar } from "componentsV0/DashboardSecondaryToolbar";
-import { FormikFileUploadField } from "componentsV0/FormikFileUploadField";
-import { FormikTextField } from "componentsV0/FormikTextField";
-import { Typography } from "componentsV0/Typography";
 import { Formik, FormikProps } from "formik";
 import React, { SFC } from "react";
 import {
@@ -26,7 +18,14 @@ import {
   SortableElement,
   SortableHandle,
 } from "react-sortable-hoc";
-import styled from "styled";
+import styled from "styled-components";
+import { CardContent } from "../../components/CardContent";
+import { CardHeader, CardHeaderProps } from "../../components/CardHeader";
+import { DashboardCard } from "../../componentsV0/DashboardCard";
+import { DashboardSecondaryToolbar } from "../../componentsV0/DashboardSecondaryToolbar";
+import { FormikFileUploadField } from "../../componentsV0/FormikFileUploadField";
+import { FormikTextField } from "../../componentsV0/FormikTextField";
+import { Typography } from "../../componentsV0/Typography";
 import { AdminDashboardTemplateContainer } from "../../containers/AdminDashboardTemplateContainer";
 
 type IndexPageSettings = {

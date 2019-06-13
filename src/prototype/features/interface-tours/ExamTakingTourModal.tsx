@@ -1,8 +1,8 @@
 import { ArcherElement, ArcherElementProps } from "@strothj/react-archer";
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
-import { Typography } from "componentsV0/Typography";
+import { Typography } from "../../componentsV0/Typography";
 import { ArrowContainer } from "./components/ArrowContainer";
 import { ArrowTargetDescription } from "./components/ArrowTargetDescription";
 import { ArrowTargetRow } from "./components/ArrowTargetRow";

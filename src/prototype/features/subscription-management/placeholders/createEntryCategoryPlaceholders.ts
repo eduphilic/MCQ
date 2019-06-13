@@ -1,4 +1,4 @@
-import { IEntryCategory } from "models";
+import { IEntryCategory } from "../../../models";
 import { createEntryPlaceholders } from "./createEntryPlaceholders";
 import { getCategories } from "./entriesCsv";
 

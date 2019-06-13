@@ -1,12 +1,12 @@
-import { strings } from "features/localization";
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import { strings } from "../../features/localization";
 
 import Typography from "@material-ui/core/Typography";
 
-import { AdminLoginTemplate } from "componentsV0/AdminLoginTemplate";
-import { AuthenticationErrorSnackbar } from "componentsV0/AuthenticationErrorSnackbar";
-import { SessionForm } from "features/session";
+import { AdminLoginTemplate } from "../../componentsV0/AdminLoginTemplate";
+import { AuthenticationErrorSnackbar } from "../../componentsV0/AuthenticationErrorSnackbar";
+import { SessionForm } from "../../features/session";
 
 interface AdminLoginProps {
   authenticating: boolean;

@@ -1,4 +1,4 @@
-import { createReducer } from "utils";
+import { createReducer } from "../../utils";
 import { Actions, ActionTypes } from "./actions";
 
 export type State = {

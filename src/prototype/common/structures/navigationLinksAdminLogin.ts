@@ -1,5 +1,5 @@
-import { NavigationLinks } from "common/types/NavigationLinks";
-import * as adminPages from "pages/admin";
+import * as adminPages from "../../pages/admin";
+import { NavigationLinks } from "../types/NavigationLinks";
 
 export const navigationLinksAdminLogin: NavigationLinks = [
   {

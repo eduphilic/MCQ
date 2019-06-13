@@ -1,4 +1,4 @@
-import { createReducer } from "utils";
+import { createReducer } from "../../utils";
 import { Actions, SessionAction } from "./actions";
 import { IUser } from "./models/IUser";
 

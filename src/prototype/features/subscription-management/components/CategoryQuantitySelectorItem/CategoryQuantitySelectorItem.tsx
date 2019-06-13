@@ -1,7 +1,7 @@
-import { LocalizationStateConsumer } from "features/localization";
-import React, { SFC } from "react";
-import styled from "styled";
-import { LocalizedString } from "types";
+import React, { ReactNode, SFC } from "react";
+import styled from "styled-components";
+import { LocalizedString } from "../../../../types";
+import { LocalizationStateConsumer } from "../../../localization";
 import { ICategoryQuantitySelectionSettings } from "../../models/ICategoryQuantitySelectionSettings";
 
 import Typography from "@material-ui/core/Typography";

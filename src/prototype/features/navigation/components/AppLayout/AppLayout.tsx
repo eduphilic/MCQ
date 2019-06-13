@@ -1,6 +1,6 @@
-import { drawerWidth, fromToolbarHeight } from "css";
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { drawerWidth, fromToolbarHeight } from "../../../../css";
 
 import Drawer, { DrawerProps } from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";

@@ -1,5 +1,5 @@
-import { ActionHandler } from "types";
-import { createReducer } from "utils";
+import { ActionHandler } from "../../types";
+import { createReducer } from "../../utils";
 import { Actions, ExamTakingAction } from "./actions";
 import { IExamQuestion } from "./models/IExamQuestion";
 import { IExamQuestionCategory } from "./models/IExamQuestionCategory";

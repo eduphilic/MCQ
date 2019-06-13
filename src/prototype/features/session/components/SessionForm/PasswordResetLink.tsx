@@ -1,6 +1,6 @@
-import { strings } from "features/localization";
-import { routePathFromLocalizationKey } from "features/navigation";
 import React, { SFC } from "react";
+import { strings } from "../../../localization";
+import { routePathFromLocalizationKey } from "../../../navigation";
 
 import { DisableableLink } from "./DisableableLink";
 

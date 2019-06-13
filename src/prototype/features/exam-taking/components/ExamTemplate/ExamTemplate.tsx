@@ -1,12 +1,12 @@
 import React, { SFC } from "react";
 import { connect } from "react-redux";
 import { Prompt } from "react-router-dom";
-import { State } from "store";
-import { UserAppDrawerTheme } from "theme";
+import { State } from "../../../../store";
+import { UserAppDrawerTheme } from "../../../../theme";
 
 import withWidth, { isWidthDown, WithWidth } from "@material-ui/core/withWidth";
 
-import { DashboardTemplate } from "componentsV0/DashboardTemplate";
+import { DashboardTemplate } from "../../../../componentsV0/DashboardTemplate";
 
 import { FeatureKey } from "../../types/FeatureKey";
 import { ExamAppBar } from "../ExamAppBar";

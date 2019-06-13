@@ -1,6 +1,6 @@
-import { Button, ButtonProps } from "componentsV0/Button";
-import { Typography, TypographyProps } from "componentsV0/Typography";
 import React, { Component } from "react";
+import { Button, ButtonProps } from "../Button";
+import { Typography, TypographyProps } from "../Typography";
 
 export interface TypographyButtonProps extends ButtonProps {
   /** @default buttonBold */

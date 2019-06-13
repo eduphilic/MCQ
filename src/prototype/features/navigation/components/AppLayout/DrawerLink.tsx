@@ -1,7 +1,7 @@
-import { strings } from "features/localization";
 import React, { SFC } from "react";
 import { NavLink } from "react-router-dom";
-import styled from "styled";
+import styled from "styled-components";
+import { strings } from "../../../localization";
 import { INavigationLink } from "../../models/INavigationLink";
 
 import ListItem from "@material-ui/core/ListItem";

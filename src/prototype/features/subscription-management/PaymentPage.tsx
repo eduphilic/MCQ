@@ -8,15 +8,15 @@ import ListItemText from "@material-ui/core/ListItemText";
 import TextField from "@material-ui/core/TextField";
 import AttachMoney from "@material-ui/icons/AttachMoney";
 import RemoveCircle from "@material-ui/icons/RemoveCircle";
-import { Button, ButtonProps } from "components/Button";
-import { Card } from "components/Card";
-import { CardContent } from "components/CardContent";
-import { CardHeader } from "components/CardHeader";
-import { RupeeFontSpan } from "components/RupeeFontSpan";
-import { Typography } from "components/Typography";
-import { ContentCut } from "icons";
 import React, { ReactNode, SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { Button, ButtonProps } from "../../components/Button";
+import { Card } from "../../components/Card";
+import { CardContent } from "../../components/CardContent";
+import { CardHeader } from "../../components/CardHeader";
+import { RupeeFontSpan } from "../../components/RupeeFontSpan";
+import { Typography } from "../../components/Typography";
+import { ContentCut } from "../../icons";
 
 export const PaymentPage = () => (
   <>

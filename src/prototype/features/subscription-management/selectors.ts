@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { State } from "store";
+import { State } from "../../store";
 
 const subscriptionsSelector = (state: State) =>
   state.subscriptionManagement.subscriptions;

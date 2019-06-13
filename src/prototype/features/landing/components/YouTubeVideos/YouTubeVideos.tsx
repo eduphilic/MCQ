@@ -1,11 +1,11 @@
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Hidden from "@material-ui/core/Hidden";
-import { Button } from "components/Button";
-import { Typography } from "components/Typography";
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 import React, { Fragment, SFC } from "react";
 import Loadable from "react-loadable";
-import styled, { css } from "styled";
+import styled, { css } from "styled-components";
+import { Button } from "../../../../components/Button";
+import { Typography } from "../../../../components/Typography";
+import { ContentCenterWrapper } from "../../../../componentsV0/ContentCenterWrapper";
 
 import { fetchVideos, YouTubeVideoList } from "./client";
 import YouTubeSubscribeOptimizedPng from "./YouTubeSubscribeOptimized.png";
