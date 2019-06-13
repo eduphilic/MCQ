@@ -1,5 +1,5 @@
-import { EntryImages } from "common/types/EntryImages";
-import { fromPublicUrl } from "common/utils";
+import { EntryImages } from "../types/EntryImages";
+import { fromPublicUrl } from "../utils";
 
 /**
  * A mapping of "entry" names to their images.

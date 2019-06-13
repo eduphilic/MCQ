@@ -1,7 +1,7 @@
 import React, { cloneElement, ReactElement, SFC } from "react";
 import { connect } from "react-redux";
-import { State } from "store";
-import styled from "styled";
+import styled from "styled-components";
+import { State } from "../../store";
 
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,8 +9,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Menu from "@material-ui/icons/Menu";
 
-import { DrawerStateConsumer } from "componentsV0/ResponsiveDrawerFrame";
-import { LogoutButton } from "features/navigation";
+import { LogoutButton } from "../../features/navigation";
+import { DrawerStateConsumer } from "../ResponsiveDrawerFrame";
 
 type StateProps = {
   locationPageTitleWithoutProductName: string;
@@ -55,8 +55,8 @@ const DashboardAppBar: SFC<Props> = props => {
 
   let actionButtonNodes: typeof outerActionButtonElements;
   if (outerActionButtonElements) {
-    actionButtonNodes = outerActionButtonElements.map(
-      (node, index) => (!node.key ? cloneElement(node, { key: index }) : node),
+    actionButtonNodes = outerActionButtonElements.map((node, index) =>
+      !node.key ? cloneElement(node, { key: index }) : node,
     );
   }
 
@@ -78,7 +78,7 @@ const DashboardAppBar: SFC<Props> = props => {
       )}
 
       <Hidden smDown={!showAppTitleOnMobile} implementation="css">
-        <Typography variant="title" color="inherit" style={{ fontWeight: 400 }}>
+        <Typography variant="h2" color="inherit" style={{ fontWeight: 400 }}>
           {locationPageTitleWithoutProductName}
         </Typography>
       </Hidden>

@@ -4,9 +4,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import Close from "@material-ui/icons/Close";
-import { Typography } from "components/Typography";
-import React, { SFC } from "react";
-import styled from "styled";
+import React, { ReactNode, SFC } from "react";
+import styled from "styled-components";
+import { Typography } from "../Typography";
 
 export type DialogAppBarProps = {
   title: string;
@@ -41,8 +41,8 @@ export const DialogAppBar: SFC<DialogAppBarProps> = props => {
   );
 };
 
-const StyledDialogTitle = styled<{ className?: string }>(
-  ({ children, className }) => (
+const StyledDialogTitle = styled(
+  ({ children, className }: { children?: ReactNode; className?: string }) => (
     <DialogTitle className={className} disableTypography>
       {children}
     </DialogTitle>
@@ -52,8 +52,12 @@ const StyledDialogTitle = styled<{ className?: string }>(
   z-index: ${({ theme }) => theme.zIndex.appBar};
 `;
 
-const CloseButton = styled<{ className?: string; onClick: () => void }>(
-  props => (
+const CloseButton = styled(
+  (props: {
+    children?: ReactNode;
+    className?: string;
+    onClick: () => void;
+  }) => (
     <IconButton
       className={props.className}
       color="inherit"

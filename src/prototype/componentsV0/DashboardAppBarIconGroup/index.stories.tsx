@@ -1,13 +1,13 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 
-import { Button } from "componentsV0/Button";
-import { DashboardAppBarIconStore } from "stores";
 import { DashboardAppBarIconGroup } from ".";
+import { DashboardAppBarIconStore } from "../../stores";
+import { Button } from "../Button";
 
 storiesOf("Components V0", module).add("DashboardAppBarIconGroup", () => {
   //

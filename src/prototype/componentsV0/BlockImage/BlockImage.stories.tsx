@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
-import { storybookPlaceholderImageUrl } from "componentsV0/storybook/storybookPlaceholderImageUrl";
+import { StorybookContentCenterWrapper } from "../storybook/StorybookContentCenterWrapper";
+import { storybookPlaceholderImageUrl } from "../storybook/storybookPlaceholderImageUrl";
 import { BlockImage } from "./BlockImage";
 
 storiesOf("Components V0", module).add("BlockImage", () => {

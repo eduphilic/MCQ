@@ -1,6 +1,6 @@
 import { storiesOf } from "@storybook/react";
-import { Typography } from "components/Typography";
 import React from "react";
+import { Typography } from "../Typography";
 import { RupeeFontSpan } from "./RupeeFontSpan";
 
 const stories = storiesOf("Components", module);

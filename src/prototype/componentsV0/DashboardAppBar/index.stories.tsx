@@ -5,9 +5,9 @@ import { Router } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
 
-import { DrawerStateProvider } from "componentsV0/ResponsiveDrawerFrame";
-import { PlaceholderProvider } from "store";
 import { DashboardAppBar } from ".";
+import { PlaceholderProvider } from "../../store";
+import { DrawerStateProvider } from "../ResponsiveDrawerFrame";
 
 const history = createMemoryHistory();
 history.push("/admin/dashboard");

@@ -2,16 +2,15 @@ import React, { Component } from "react";
 
 import Toolbar from "@material-ui/core/Toolbar";
 
-import { Typography } from "componentsV0/Typography";
+import { Typography } from "../Typography";
 import { DashboardCardPaginationProps } from "./DashboardCardPagination";
 
-export interface DashboardCardPaginationHeaderToolbarProps
-  extends DashboardCardPaginationProps {
+export type DashboardCardPaginationHeaderToolbarProps = DashboardCardPaginationProps & {
   /**
    * Description text of an item, eg. "question".
    */
   listItemType: string;
-}
+};
 
 export class DashboardCardPaginationHeaderToolbar extends Component<
   DashboardCardPaginationHeaderToolbarProps

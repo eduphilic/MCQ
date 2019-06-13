@@ -1,6 +1,6 @@
-import { strings } from "features/localization";
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { strings } from "../../features/localization";
 
 import Button, { ButtonProps } from "@material-ui/core/Button";
 
@@ -13,7 +13,7 @@ export const AttemptButton: SFC<AttemptButtonProps> = props => {
   const { children, ...rest } = props;
 
   return (
-    <StyledAttemptButton {...rest as any}>
+    <StyledAttemptButton {...(rest as any)}>
       {strings.components_AttemptButton_Text}
     </StyledAttemptButton>
   );

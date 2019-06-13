@@ -8,7 +8,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
-import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
+import { StorybookContentCenterWrapper } from "../../componentsV0/storybook/StorybookContentCenterWrapper";
 import { styleTable } from "./styleTable";
 import { Face, Font } from "./types";
 import { Typography, TypographyVariant } from "./Typography";
@@ -27,8 +27,8 @@ storiesOf("Components", module)
 
     const color = select(
       "Color",
-      ["inherit", "primary", "secondary", "default", "textSecondary", "error"],
-      "default",
+      ["inherit", "primary", "secondary", "initial", "textSecondary", "error"],
+      "initial",
     );
 
     const gutterBottom = boolean("Gutter Bottom", false);

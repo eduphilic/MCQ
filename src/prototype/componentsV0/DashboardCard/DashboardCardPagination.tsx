@@ -4,8 +4,7 @@ import TablePagination, {
   TablePaginationProps,
 } from "@material-ui/core/TablePagination";
 
-// tslint:disable-next-line:no-empty-interface
-export interface DashboardCardPaginationProps extends TablePaginationProps {}
+export type DashboardCardPaginationProps = TablePaginationProps;
 
 export class DashboardCardPagination extends Component<
   DashboardCardPaginationProps

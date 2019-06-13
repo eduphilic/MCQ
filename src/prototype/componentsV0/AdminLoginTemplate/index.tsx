@@ -1,13 +1,13 @@
 import React, { ReactNode, SFC } from "react";
-import styled from "styled";
-import { DarkTheme, LightTheme } from "theme";
+import styled from "styled-components";
+import { DarkTheme, LightTheme } from "../../theme";
 
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
-import { Logo } from "componentsV0/Logo";
-import { PageFooter } from "componentsV0/PageFooter";
+import { ContentCenterWrapper } from "../ContentCenterWrapper";
+import { Logo } from "../Logo";
+import { PageFooter } from "../PageFooter";
 
 export interface AdminLoginTemplateProps {
   heroNode: ReactNode;
@@ -55,7 +55,7 @@ const Wrapper = styled.div`
   background-color: #404040;
 
   .appBar {
-    padding: ${({ theme }) => theme.spacing.unit * 2}px 0;
+    padding: ${({ theme }) => theme.spacing(2)}px 0;
     background-image: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.8) 3%,

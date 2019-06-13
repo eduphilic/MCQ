@@ -3,10 +3,10 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import CardContent from "@material-ui/core/CardContent";
-import { Typography } from "components/Typography";
+import { Typography } from "../Typography";
 
-import { CardActionArea } from "components/CardActionArea";
-import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
+import { StorybookContentCenterWrapper } from "../../componentsV0/storybook/StorybookContentCenterWrapper";
+import { CardActionArea } from "../CardActionArea";
 import { Card } from "./Card";
 
 storiesOf("Components", module)

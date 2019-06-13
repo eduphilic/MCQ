@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { StorybookPlaceholderImage } from "componentsV0/storybook/StorybookPlaceholderImage";
-import { ContentCenterWrapper } from ".";
+import { StorybookPlaceholderImage } from "../storybook/StorybookPlaceholderImage";
+import { ContentCenterWrapper } from "./";
 
 storiesOf("Components V0", module).add("ContentCenterWrapper", () => (
   <div style={{ height: 500 }}>

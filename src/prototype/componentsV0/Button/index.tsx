@@ -1,6 +1,6 @@
 import React, { SFC } from "react";
-import styled, { css } from "styled";
-import { Theme } from "theme";
+import styled, { css } from "styled-components";
+import { Theme } from "../../theme";
 
 // tslint:disable-next-line:import-name
 import MuiButton, {
@@ -128,7 +128,7 @@ export const Button: SFC<ButtonProps> = props => {
       // Material UI does not accept the extended colors, passing along default
       // in its place.
       color={usesExtendedColor ? "default" : color}
-      {...rest as any}
+      {...(rest as any)}
     />
   );
 };

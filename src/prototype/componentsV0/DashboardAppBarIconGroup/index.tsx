@@ -2,7 +2,7 @@ import React, { Component, ReactNode } from "react";
 import {
   DashboardAppBarIconStore,
   DashboardAppBarIconStoreState,
-} from "stores";
+} from "../../stores";
 
 /**
  * Adds the supplied node to the dashboard app bar. This is used to add buttons

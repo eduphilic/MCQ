@@ -4,9 +4,9 @@ import React from "react";
 
 import TextField from "@material-ui/core/TextField";
 
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
-import { TypographyButton } from "componentsV0/TypographyButton";
 import { DashboardCard } from ".";
+import { ContentCenterWrapper } from "../ContentCenterWrapper";
+import { TypographyButton } from "../TypographyButton";
 import { DashboardCardColumnType } from "./DashboardCardColumnType";
 import { DashboardCardItem } from "./DashboardCardItem";
 import { DashboardCardPaginationProps } from "./DashboardCardPagination";

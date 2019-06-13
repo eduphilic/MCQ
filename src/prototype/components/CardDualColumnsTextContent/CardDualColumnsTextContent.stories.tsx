@@ -1,9 +1,9 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Card } from "components/Card";
-import { Typography } from "components/Typography";
-import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
+import { StorybookContentCenterWrapper } from "../../componentsV0/storybook/StorybookContentCenterWrapper";
+import { Card } from "../Card";
+import { Typography } from "../Typography";
 import {
   CardDualColumnsTextContent,
   CardDualColumnsTextContentRow,

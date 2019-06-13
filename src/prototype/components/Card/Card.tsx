@@ -1,7 +1,7 @@
-import { CardActionArea } from "components/CardActionArea";
-import { fromMobileFlatBorder } from "css";
 import React, { Children, Component, ReactNode } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { fromMobileFlatBorder } from "../../css";
+import { CardActionArea } from "../CardActionArea";
 
 // tslint:disable-next-line:import-name
 import MuiCard, { CardProps as MuiCardProps } from "@material-ui/core/Card";
@@ -36,18 +36,22 @@ class CardBase extends Component<CardProps> {
  *
  * @param children Children of current tree.
  */
+// FIXME: This will probably explode. Either get rid of this or use "react-is".
 const hasChildCardActionAreaComponent = (children: ReactNode): boolean => {
   return Children.toArray(children).some(child => {
     // Not a text node.
     if (typeof child !== "string" && typeof child !== "number") {
       // Not a native element and display name matches.
       if (
+        // @ts-ignore
         typeof child.type !== "string" &&
+        // @ts-ignore
         child.type.displayName === CardActionArea.displayName
       ) {
         return true;
       }
 
+      // @ts-ignore
       // Native element or component.
       return hasChildCardActionAreaComponent(child.props.children);
     }
