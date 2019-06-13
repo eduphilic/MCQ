@@ -70,7 +70,7 @@ export const SelectedEntries: SFC<SelectedEntriesProps> = props => {
             >
               <TypographyButton
                 color="primary"
-                variant="raised"
+                variant="contained"
                 filled
                 onClick={onAddMoreButtonClick}
                 style={{
@@ -130,7 +130,7 @@ export const SelectedEntries: SFC<SelectedEntriesProps> = props => {
 
 const MobileWrapper = styled.div`
   & > * {
-    margin: ${({ theme }) => theme.spacing.unit}px;
+    margin: ${({ theme }) => theme.spacing(1)}px;
   }
 `;
 
@@ -153,7 +153,7 @@ const StyledChip = styled(Chip).attrs({
 const TabletWrapper = styled.div`
   display: flex;
   width: 100%;
-  padding: ${({ theme }) => theme.spacing.unit / 2}px;
+  padding: ${({ theme }) => theme.spacing(0.5)}px;
 `;
 
 const EntryButton = styled.button`
@@ -172,11 +172,11 @@ const EntryButton = styled.button`
   }
 
   &:not(:last-child) {
-    margin-right: ${({ theme }) => theme.spacing.unit}px;
+    margin-right: ${({ theme }) => theme.spacing(1)}px;
   }
 
   > *:last-child {
-    margin-top: ${({ theme }) => theme.spacing.unit / 2}px;
+    margin-top: ${({ theme }) => theme.spacing(2)}px;
   }
 `;
 
@@ -219,18 +219,18 @@ const StyledTypography = styled(Typography)`
 
 const StyledCarousel = styled(
   (props: { children?: ReactNode; className?: string }) => (
-  <div className={props.className}>
-    <Carousel
-      slideWidth="120px"
-      dragging={false}
-      swiping={false}
-      renderCenterLeftControls={null as any}
-      renderCenterRightControls={null as any}
-      renderBottomCenterControls={api => <CarouselBottomNav {...api} />}
-    >
-      {props.children}
-    </Carousel>
-  </div>
+    <div className={props.className}>
+      <Carousel
+        slideWidth="120px"
+        dragging={false}
+        swiping={false}
+        renderCenterLeftControls={null as any}
+        renderCenterRightControls={null as any}
+        renderBottomCenterControls={api => <CarouselBottomNav {...api} />}
+      >
+        {props.children}
+      </Carousel>
+    </div>
   ),
 )`
   width: 100%;
@@ -246,31 +246,31 @@ const StyledCarousel = styled(
 
 const CarouselBottomNav = styled(
   (props: CarouselSlideRenderControlProps & { className?: string }) => {
-  if (!props.frameWidth || typeof props.frameWidth !== "number") return null;
-  const slidesShown = Math.floor((props.frameWidth + 20) / 120);
-  if (slidesShown === props.slideCount) return null;
+    if (!props.frameWidth || typeof props.frameWidth !== "number") return null;
+    const slidesShown = Math.floor((props.frameWidth + 20) / 120);
+    if (slidesShown === props.slideCount) return null;
 
-  const buttonCount = Math.ceil(props.slideCount / slidesShown);
-  const selectedIndex = Math.floor(props.currentSlide / slidesShown);
-  if (buttonCount === 1) return null;
+    const buttonCount = Math.ceil(props.slideCount / slidesShown);
+    const selectedIndex = Math.floor(props.currentSlide / slidesShown);
+    if (buttonCount === 1) return null;
 
-  return (
-    <div className={props.className}>
-      {Array.from({ length: buttonCount }, (_, index) => (
-        <div
-          key={index}
-          className={`carousel-bottom-nav-button ${
-            index === selectedIndex
-              ? "carousel-bottom-nav-button--selected"
-              : ""
-          }`}
-          onClick={() => props.goToSlide(index * slidesShown)}
-        >
-          <span />
-        </div>
-      ))}
-    </div>
-  );
+    return (
+      <div className={props.className}>
+        {Array.from({ length: buttonCount }, (_, index) => (
+          <div
+            key={index}
+            className={`carousel-bottom-nav-button ${
+              index === selectedIndex
+                ? "carousel-bottom-nav-button--selected"
+                : ""
+            }`}
+            onClick={() => props.goToSlide(index * slidesShown)}
+          >
+            <span />
+          </div>
+        ))}
+      </div>
+    );
   },
 )`
   display: flex;

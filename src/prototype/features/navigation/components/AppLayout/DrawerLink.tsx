@@ -21,6 +21,8 @@ const DrawerLink: SFC<DrawerLinkProps> = props => {
   return (
     <ListItem
       className={className}
+      // TODO: Fix type:
+      // @ts-ignore
       button={!disabled}
       component={linkComponent || undefined}
     >
@@ -52,8 +54,8 @@ const DrawerLinkOptionalIcon = styled(
     className,
     iconElement,
   }: {
-  className?: string;
-  iconElement: INavigationLink["iconElement"];
+    className?: string;
+    iconElement: INavigationLink["iconElement"];
   }) =>
     iconElement ? (
       <ListItemIcon className={className}>{iconElement}</ListItemIcon>

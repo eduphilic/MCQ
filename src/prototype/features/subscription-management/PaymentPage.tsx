@@ -46,7 +46,7 @@ export const PaymentPage = () => (
           Offers &amp; Discount
         </Typography>
 
-        <Grid container spacing={16}>
+        <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <TextField
               variant="outlined"
@@ -109,7 +109,7 @@ export const PaymentPage = () => (
     <Card>
       <CardHeader title="Select Payment Method" />
       <CardContent>
-        <Grid container spacing={16}>
+        <Grid container spacing={2}>
           <Grid item xs={12} md={5} lg={4}>
             <StyledList>
               {[
@@ -118,7 +118,7 @@ export const PaymentPage = () => (
                 "Wallets",
                 "Pay with UPI",
               ].map((title, index) => (
-                <StyledListItem key={title} button selected={index === 0}>
+                <StyledListItem key={title} selected={index === 0}>
                   <ListItemIcon>
                     <AttachMoney />
                   </ListItemIcon>
@@ -153,12 +153,12 @@ const CategoryButton = styled(
   }: ButtonProps & {
     children: string;
   }) => (
-  <Button {...rest}>
-    {children}
-    <span className="icon-wrapper">
-      <RemoveCircle />
-    </span>
-  </Button>
+    <Button {...rest}>
+      {children}
+      <span className="icon-wrapper">
+        <RemoveCircle />
+      </span>
+    </Button>
   ),
 )`
   justify-content: flex-start;
@@ -197,8 +197,8 @@ const CouponBox = styled((props: { className?: string; children: string }) => (
     align-items: center;
     width: 100%;
     height: 100%;
-    padding: ${({ theme }) => theme.spacing.unit}px;
-    padding-left: ${({ theme }) => theme.spacing.unit * 2}px;
+    padding: ${({ theme }) => theme.spacing(1)}px;
+    padding-left: ${({ theme }) => theme.spacing(2)}px;
     border: 2px dashed #eee;
     background-color: #fff;
   }

@@ -9,6 +9,7 @@ export type TextFieldBaseProps = TextFieldProps;
 const TextFieldMuiBase: SFC<TextFieldBaseProps> = props => (
   <MuiTextField
     {...props}
+    variant="standard"
     InputProps={{
       classes: { input: "input", root: "root" },
       disableUnderline: true,
@@ -19,7 +20,7 @@ const TextFieldMuiBase: SFC<TextFieldBaseProps> = props => (
 
 /** Material UI text field styled as a flat square input. */
 export const TextFieldBase = styled(TextFieldMuiBase)`
-  margin: ${props => props.theme.spacing.unit}px 0;
+  margin: ${props => props.theme.spacing(1)}px 0;
 
   .root {
     padding: 0;

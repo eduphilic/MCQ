@@ -69,7 +69,7 @@ export class AdminTestManagerNewTemplate extends Component<
         {api => {
           return (
             <AdminDashboardTemplateContainer>
-              <Grid container spacing={16}>
+              <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <DashboardSecondaryToolbar>
                     <DashboardSecondaryToolbar.Content>
@@ -78,15 +78,15 @@ export class AdminTestManagerNewTemplate extends Component<
                       </Typography>
                     </DashboardSecondaryToolbar.Content>
                     <DashboardSecondaryToolbar.Spacer />
-                    <TypographyButton color="red" variant="flat">
+                    <TypographyButton color="red" variant="text">
                       Cancel
                     </TypographyButton>
                     <TestPreviewDialog fields={testPreviewDialogFields}>
-                      <TypographyButton color="blue" variant="flat">
+                      <TypographyButton color="blue" variant="text">
                         Preview Test
                       </TypographyButton>
                     </TestPreviewDialog>
-                    <TypographyButton color="primary" variant="flat">
+                    <TypographyButton color="primary" variant="text">
                       Save
                     </TypographyButton>
                   </DashboardSecondaryToolbar>
@@ -554,7 +554,7 @@ const TwoColumnRow: SFC<TwoColumnRowProps> = props => {
   const { left, right } = props;
 
   return (
-    <Grid container spacing={24}>
+    <Grid container spacing={3}>
       <Grid item xs={12} sm={6}>
         {left}
       </Grid>

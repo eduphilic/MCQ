@@ -11,7 +11,7 @@ export const createReducer = <
     [P in ActionTypes]: (
       state: State,
       action: Extract<Actions, Action<P>>,
-    ) => State
+    ) => State;
   },
 ) => (state: State = initialState, action: Actions): State => {
   if (handlers.hasOwnProperty(action.type)) {

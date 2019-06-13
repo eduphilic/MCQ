@@ -126,7 +126,7 @@ export const AdminIndexManager: SFC = () => (
       }}
     >
       {formikApi => (
-        <Grid container spacing={16}>
+        <Grid container spacing={2}>
           {/* Logo Image */}
           <Grid item xs={12}>
             <DashboardSecondaryToolbar>
@@ -181,7 +181,7 @@ export const AdminIndexManager: SFC = () => (
                 >
                   Hero Text
                 </Typography>
-                <Grid container spacing={16}>
+                <Grid container spacing={2}>
                   <Grid item xs={12} md={6}>
                     <FormikTextField
                       formikApi={formikApi}
@@ -201,7 +201,7 @@ export const AdminIndexManager: SFC = () => (
 
               <CardContent>
                 <SectionTitle>Hero Features</SectionTitle>
-                <Grid container spacing={16}>
+                <Grid container spacing={2}>
                   <Grid item xs={12} md={6}>
                     <TextField
                       name="heroFeaturesEnglish"
@@ -233,7 +233,7 @@ export const AdminIndexManager: SFC = () => (
               <AdminCardHeader title="About JoinUniform" />
               <CardContent>
                 <SectionTitle>Title</SectionTitle>
-                <Grid container spacing={16}>
+                <Grid container spacing={2}>
                   <Grid item xs={12} md={6}>
                     <FormikTextField
                       formikApi={formikApi}
@@ -398,7 +398,7 @@ const SectionTitle: SFC = props => (
   </Typography>
 );
 
-const DragHandleBase = styled<{ className?: string }>(({ className }) => (
+const DragHandleBase = styled(({ className }: { className?: string }) => (
   <IconButton className={className}>
     <DragHandleIcon />
   </IconButton>
@@ -438,64 +438,67 @@ const Images = SortableContainer(
 
 const Image = SortableElement(
   (props: {
-  formikApi: FormikProps<IndexPageSettings>;
-  imageIndex: number;
+    formikApi: FormikProps<IndexPageSettings>;
+    imageIndex: number;
   }) => (
     <Grid container spacing={2}>
-    <Grid item>
-      <ListControls />
-    </Grid>
-    <Grid item xs>
-      <Grid container spacing={16}>
-        <Grid item xs={12}>
-          <FormikFileUploadField
-            formikApi={props.formikApi}
-            name={`images[${props.imageIndex}].image` as any}
-            label="Image"
-            rawValue={props.formikApi.values.images[props.imageIndex].image}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <FormikTextField
-            formikApi={props.formikApi}
-            name={`images[${props.imageIndex}].titleEnglish` as any}
-            rawValue={
-              props.formikApi.values.images[props.imageIndex].titleEnglish
-            }
-            label="Title (English)"
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <FormikTextField
-            formikApi={props.formikApi}
-            name={`images[${props.imageIndex}].titleHindi` as any}
-            rawValue={
-              props.formikApi.values.images[props.imageIndex].titleHindi
-            }
-            label="Title (Hindi)"
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <FormikTextField
-            formikApi={props.formikApi}
-            name={`images[${props.imageIndex}].textEnglish` as any}
-            rawValue={
-              props.formikApi.values.images[props.imageIndex].textEnglish
-            }
-            label="Text (English)"
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <FormikTextField
-            formikApi={props.formikApi}
-            name={`images[${props.imageIndex}].textHindi` as any}
-            rawValue={props.formikApi.values.images[props.imageIndex].textHindi}
-            label="Text (Hindi)"
-          />
+      <Grid item>
+        <ListControls />
+      </Grid>
+      <Grid item xs>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <FormikFileUploadField
+              formikApi={props.formikApi}
+              name={`images[${props.imageIndex}].image` as any}
+              label="Image"
+              rawValue={props.formikApi.values.images[props.imageIndex].image}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <FormikTextField
+              formikApi={props.formikApi}
+              name={`images[${props.imageIndex}].titleEnglish` as any}
+              rawValue={
+                props.formikApi.values.images[props.imageIndex].titleEnglish
+              }
+              label="Title (English)"
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <FormikTextField
+              formikApi={props.formikApi}
+              name={`images[${props.imageIndex}].titleHindi` as any}
+              rawValue={
+                props.formikApi.values.images[props.imageIndex].titleHindi
+              }
+              label="Title (Hindi)"
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <FormikTextField
+              formikApi={props.formikApi}
+              name={`images[${props.imageIndex}].textEnglish` as any}
+              rawValue={
+                props.formikApi.values.images[props.imageIndex].textEnglish
+              }
+              label="Text (English)"
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <FormikTextField
+              formikApi={props.formikApi}
+              name={`images[${props.imageIndex}].textHindi` as any}
+              rawValue={
+                props.formikApi.values.images[props.imageIndex].textHindi
+              }
+              label="Text (Hindi)"
+            />
+          </Grid>
         </Grid>
       </Grid>
     </Grid>
-  </Grid>
+  ),
 );
 
 const Videos = SortableContainer(
@@ -517,67 +520,68 @@ const entries = ["army", "airforce", "navy"];
 
 const Video = SortableElement(
   (props: {
-  formikApi: FormikProps<IndexPageSettings>;
-  videoIndex: number;
+    formikApi: FormikProps<IndexPageSettings>;
+    videoIndex: number;
   }) => (
-    <Grid item>
-      <ListControls />
-    </Grid>
-    <Grid item xs>
-      <Grid container spacing={16}>
-        <Grid item xs={12}>
-          <FormControl fullWidth>
-            <InputLabel>Category</InputLabel>
-            <Select
-              value={props.formikApi.values.videos[props.videoIndex].entryId}
-              onChange={props.formikApi.handleChange}
-              inputProps={{
-                name: `videos[${props.videoIndex}].entryId`,
-              }}
-            >
-              {entries.map(entry => (
-                <MenuItem key={entry} value={entry}>
-                  {entry.slice(0, 1).toUpperCase()}
-                  {entry.slice(1)}
-                </MenuItem>
-              ))}
-              <MenuItem value="test">Test</MenuItem>
-            </Select>
-            <FormHelperText>Select Entry</FormHelperText>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <FormikTextField
-            formikApi={props.formikApi}
-            name={`videos[${props.videoIndex}].youTubeVideoUrl` as any}
-            rawValue={
-              props.formikApi.values.videos[props.videoIndex].youTubeVideoUrl
-            }
-            label="Insert YouTube Url"
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <FormikTextField
-            formikApi={props.formikApi}
-            name={`videos[${props.videoIndex}].titleEnglish` as any}
-            rawValue={
-              props.formikApi.values.videos[props.videoIndex].titleEnglish
-            }
-            label="Title (English)"
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <FormikTextField
-            formikApi={props.formikApi}
-            name={`videos[${props.videoIndex}].titleHindi` as any}
-            rawValue={
-              props.formikApi.values.videos[props.videoIndex].titleHindi
-            }
-            label="Title (Hindi)"
-          />
+    <Grid container spacing={2} style={{ paddingBottom: 16 }}>
+      <Grid item>
+        <ListControls />
+      </Grid>
+      <Grid item xs>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <FormControl fullWidth>
+              <InputLabel>Category</InputLabel>
+              <Select
+                value={props.formikApi.values.videos[props.videoIndex].entryId}
+                onChange={props.formikApi.handleChange}
+                inputProps={{
+                  name: `videos[${props.videoIndex}].entryId`,
+                }}
+              >
+                {entries.map(entry => (
+                  <MenuItem key={entry} value={entry}>
+                    {entry.slice(0, 1).toUpperCase()}
+                    {entry.slice(1)}
+                  </MenuItem>
+                ))}
+                <MenuItem value="test">Test</MenuItem>
+              </Select>
+              <FormHelperText>Select Entry</FormHelperText>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <FormikTextField
+              formikApi={props.formikApi}
+              name={`videos[${props.videoIndex}].youTubeVideoUrl` as any}
+              rawValue={
+                props.formikApi.values.videos[props.videoIndex].youTubeVideoUrl
+              }
+              label="Insert YouTube Url"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <FormikTextField
+              formikApi={props.formikApi}
+              name={`videos[${props.videoIndex}].titleEnglish` as any}
+              rawValue={
+                props.formikApi.values.videos[props.videoIndex].titleEnglish
+              }
+              label="Title (English)"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <FormikTextField
+              formikApi={props.formikApi}
+              name={`videos[${props.videoIndex}].titleHindi` as any}
+              rawValue={
+                props.formikApi.values.videos[props.videoIndex].titleHindi
+              }
+              label="Title (Hindi)"
+            />
+          </Grid>
         </Grid>
       </Grid>
     </Grid>
-  </Grid>
   ),
 );

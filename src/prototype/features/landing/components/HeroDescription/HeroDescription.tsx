@@ -45,7 +45,7 @@ export const HeroDescription = () => (
         }
       </LocalizationStateConsumer>
 
-      <Grid container spacing={16}>
+      <Grid container spacing={4}>
         {[
           [
             jpg1,

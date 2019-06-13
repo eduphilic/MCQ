@@ -20,10 +20,6 @@ export interface QuestionButtonProps
 }
 
 class QuestionButtonBase extends Component<QuestionButtonProps> {
-  private handleClick = () => {
-    this.props.onNavigate(this.props.questionIndex);
-  };
-
   render() {
     const { className, children } = this.props;
 
@@ -33,6 +29,10 @@ class QuestionButtonBase extends Component<QuestionButtonProps> {
       </button>
     );
   }
+
+  private handleClick = () => {
+    this.props.onNavigate(this.props.questionIndex);
+  };
 }
 
 const statusColorMap: Record<

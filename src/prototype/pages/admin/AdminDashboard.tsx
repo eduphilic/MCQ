@@ -33,7 +33,7 @@ export class AdminDashboard extends Component<AdminDashboardProps> {
 
     return (
       <AdminDashboardTemplateContainer>
-        <Grid container spacing={16}>
+        <Grid container spacing={2}>
           {/* Users */}
           <Grid item xs={12}>
             <Card>

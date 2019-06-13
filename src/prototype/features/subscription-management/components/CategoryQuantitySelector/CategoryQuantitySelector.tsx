@@ -27,15 +27,6 @@ export type CategoryQuantitySelectorProps = CategoryQuantitySelectorItemProps & 
 export class CategoryQuantitySelector extends Component<
   CategoryQuantitySelectorProps
 > {
-  private handleChange = (event: ChangeEvent<{}>, checked: boolean) => {
-    const selectedQuantityIndex = parseInt(
-      (event as ChangeEvent<HTMLInputElement>).target.value,
-      10,
-    );
-
-    this.props.onChange(checked ? selectedQuantityIndex : null);
-  };
-
   render() {
     const {
       categoryQuantitySelectionSettings,
@@ -68,6 +59,14 @@ export class CategoryQuantitySelector extends Component<
       </LocalizationStateConsumer>
     );
   }
+  private handleChange = (event: ChangeEvent<{}>, checked: boolean) => {
+    const selectedQuantityIndex = parseInt(
+      (event as ChangeEvent<HTMLInputElement>).target.value,
+      10,
+    );
+
+    this.props.onChange(checked ? selectedQuantityIndex : null);
+  };
 }
 
 const QuantityFormGroup = styled((props: FormGroupProps) => (
@@ -79,7 +78,7 @@ const QuantityFormGroup = styled((props: FormGroupProps) => (
 
 const QuantityCheckbox = styled(
   (props: OmitStrict<FormControlLabelProps, "control">) => (
-  <StyledLabel control={<StyledCheckbox color="primary" />} {...props} />
+    <StyledLabel control={<StyledCheckbox color="primary" />} {...props} />
   ),
 )`
   ${({ theme }) => theme.breakpoints.down("sm")} {

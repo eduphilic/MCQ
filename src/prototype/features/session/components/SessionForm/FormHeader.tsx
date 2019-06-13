@@ -13,5 +13,5 @@ const FormHeaderBase = styled(Typography)`
 
 /** Capitalized form header. */
 export const FormHeader: SFC<FormHeaderProps> = props => (
-  <FormHeaderBase {...props as any} component="h1" />
+  <FormHeaderBase {...props} component="h1" />
 );

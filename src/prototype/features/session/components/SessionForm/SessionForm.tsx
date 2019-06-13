@@ -230,11 +230,11 @@ const SessionFormContainerWithRouter = withRouter(SessionFormContainer);
 export { SessionFormContainerWithRouter as SessionForm };
 
 const CardActionsMarginBottom = styled(CardActions)`
-  padding-left: ${props => props.theme.spacing.unit * 2}px;
-  padding-bottom: ${props => props.theme.spacing.unit * 2}px;
+  padding-left: ${props => props.theme.spacing(2)}px;
+  padding-bottom: ${props => props.theme.spacing(2)}px;
 
   ${props => props.theme.breakpoints.up("sm")} {
-    padding-left: ${props => props.theme.spacing.unit * 3}px;
+    padding-left: ${props => props.theme.spacing(3)}px;
   }
 `;
 

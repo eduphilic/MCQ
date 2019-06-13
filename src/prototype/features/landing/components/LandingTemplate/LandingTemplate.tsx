@@ -58,6 +58,6 @@ const MainContentBackground = styled.div`
 
 const FooterWrapper = styled.footer`
   display: block;
-  max-height: ${props => props.theme.spacing.unit * 5}px;
+  max-height: ${props => props.theme.spacing(5)}px;
   overflow: hidden;
 `;

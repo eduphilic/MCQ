@@ -28,7 +28,7 @@ const AppBar: SFC<Props> = props => {
     <ResponsiveWidthAppBar>
       <Toolbar>
         {/* Page Title */}
-        <Typography variant="title" color="inherit" style={{ fontWeight: 400 }}>
+        <Typography variant="h3" color="inherit" style={{ fontWeight: 400 }}>
           {locationPageTitleWithoutProductName}
         </Typography>
 

@@ -22,12 +22,6 @@ type Props = StateProps & DispatchProps & OwnProps;
  * Localization store. This is provided as a convenience.
  */
 class LocalizationStateConsumer extends Component<Props, ContextProps> {
-  state: ContextProps = {
-    localizationLanguage: "en",
-    // tslint:disable-next-line:no-empty
-    setLocalizationLanguage: () => {},
-  };
-
   static getDerivedStateFromProps(
     props: Props,
     state: ContextProps,
@@ -44,6 +38,11 @@ class LocalizationStateConsumer extends Component<Props, ContextProps> {
 
     return null;
   }
+  state: ContextProps = {
+    localizationLanguage: "en",
+    // tslint:disable-next-line:no-empty
+    setLocalizationLanguage: () => {},
+  };
 
   render() {
     return this.props.children(this.state);

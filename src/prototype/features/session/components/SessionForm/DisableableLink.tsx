@@ -21,7 +21,7 @@ export const DisableableLink = styled((props: DisableableLinkProps) => {
   const { className, label, to, disabled } = props;
 
   const button = (
-    <TypographyButton variant="flat" disabled={disabled}>
+    <TypographyButton variant="text" disabled={disabled}>
       {label}
     </TypographyButton>
   );

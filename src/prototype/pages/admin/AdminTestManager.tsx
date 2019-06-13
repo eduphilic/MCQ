@@ -19,7 +19,7 @@ export const AdminTestManager: SFC<{}> = () => {
 
   return (
     <AdminDashboardTemplateContainer>
-      <Grid container spacing={16}>
+      <Grid container spacing={2}>
         {["AirForce", "Army", "Navy"].map(title => (
           <Grid key={title} item xs={12}>
             <DashboardCard

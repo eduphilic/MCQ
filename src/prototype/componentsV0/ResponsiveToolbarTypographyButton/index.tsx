@@ -28,7 +28,7 @@ export interface ResponsiveToolbarTypographyButtonProps extends ButtonProps {
   /**
    * Button style (flat/raised).
    *
-   * @default flat
+   * @default text
    */
   variant?: ButtonProps["variant"];
 
@@ -61,7 +61,7 @@ export class ResponsiveToolbarTypographyButton extends Component<
       iconNode,
       tooltipTitle,
       dense,
-      variant = "flat",
+      variant = "text",
       typographyVariant = "buttonBold",
       muiTypographyProps,
       ...rest

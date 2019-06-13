@@ -24,6 +24,6 @@ const Wrapper = styled.article`
   height: 100%;
 
   > form:nth-child(2) {
-    margin-top: ${props => props.theme.spacing.unit * 4}px;
+    margin-top: ${props => props.theme.spacing(4)}px;
   }
 `;

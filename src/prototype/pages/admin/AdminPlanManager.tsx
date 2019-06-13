@@ -57,7 +57,7 @@ export const AdminPlanManager: SFC<{}> = () => {
 
   return (
     <AdminDashboardTemplateContainer actionButtonElements={appBarActionButtons}>
-      <Grid container spacing={16}>
+      <Grid container spacing={2}>
         {["Plans"].map(title => (
           <Grid key={title} item xs={12}>
             <DashboardCard

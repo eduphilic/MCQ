@@ -25,7 +25,7 @@ const reducers = {
 };
 
 export type State = {
-  [P in keyof typeof reducers]: ReturnType<typeof reducers[P]>
+  [P in keyof typeof reducers]: ReturnType<typeof reducers[P]>;
 };
 
 export const rootReducer = combineReducers(reducers);

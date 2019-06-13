@@ -97,7 +97,7 @@ const RenewButton = styled(
   }) => (
     <TypographyButton
       className={className}
-      variant="raised"
+      variant="contained"
       color="primary"
       filled
       size="small"

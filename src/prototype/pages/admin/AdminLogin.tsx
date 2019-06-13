@@ -25,10 +25,10 @@ export class AdminLogin extends Component<AdminLoginProps> {
 
   generateHeroNode = () => (
     <div style={{ marginTop: "10%" }}>
-      <Typography variant="display3" gutterBottom>
+      <Typography variant="h1" gutterBottom>
         {strings.pages_admin_AdminLogin_HeroTextPrimary}
       </Typography>
-      <Typography variant="display1">
+      <Typography variant="h3">
         {strings.pages_admin_AdminLogin_HeroTextSecondary}
       </Typography>
     </div>

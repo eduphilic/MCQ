@@ -76,7 +76,7 @@ class AdminRevenueManager extends Component<
 
     return (
       <AdminDashboardTemplateContainer>
-        <Grid container spacing={16}>
+        <Grid container spacing={2}>
           {/* Financial Year Drop Down / Report Button */}
           <Grid item xs={12}>
             <DashboardSecondaryToolbar>
@@ -133,7 +133,7 @@ class AdminRevenueManager extends Component<
               <Hidden smUp>{reportYearSelect}</Hidden>
 
               <TypographyButton
-                variant="flat"
+                variant="text"
                 color="blue"
                 onClick={this.handleViewReportClick}
               >

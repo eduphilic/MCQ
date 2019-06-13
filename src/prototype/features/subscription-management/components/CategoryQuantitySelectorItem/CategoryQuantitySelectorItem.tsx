@@ -43,7 +43,7 @@ export const CategoryQuantitySelectorItem: SFC<
             <>
               {categoryLabel && (
                 <Typography
-                  variant="subheading"
+                  variant="subtitle1"
                   component="span"
                   style={{ fontSize: 14, fontWeight: 500 }}
                 >
@@ -67,7 +67,7 @@ export const CategoryQuantitySelectorItem: SFC<
 };
 
 const Wrapper = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+  margin-bottom: ${({ theme }) => theme.spacing(2)}px;
 `;
 
 const EducationRequirements = styled(

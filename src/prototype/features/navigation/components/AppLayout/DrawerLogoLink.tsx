@@ -17,6 +17,8 @@ const DrawerLogoLink: SFC<DrawerLogoLinkProps> = props => {
   return (
     <ListItem
       className={className}
+      // TODO: Fix type:
+      // @ts-ignore
       button={!disabled}
       component={linkComponent || undefined}
     >

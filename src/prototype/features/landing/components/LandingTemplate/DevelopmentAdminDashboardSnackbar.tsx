@@ -3,6 +3,7 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 import Button from "@material-ui/core/Button";
+import Fab from "@material-ui/core/Fab";
 import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
@@ -92,8 +93,7 @@ class DevelopmentAdminDashboardSnackbar extends Component<
 
         {!open && (
           <Tooltip title="Development Links">
-            <Button
-              variant="fab"
+            <Fab
               color="secondary"
               style={{
                 position: "fixed",
@@ -104,7 +104,7 @@ class DevelopmentAdminDashboardSnackbar extends Component<
               onClick={() => this.setState({ open: true })}
             >
               <DeveloperBoard />
-            </Button>
+            </Fab>
           </Tooltip>
         )}
       </>

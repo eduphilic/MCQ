@@ -56,16 +56,14 @@ class PlaceholderSubscriptionLoader extends Component<Props> {
     if (!skipOnboardingProcess) return;
 
     if (loaded && !subscriptions) {
-      const subscriptionID = uuidv1();
+      const subscriptionID = uuid();
 
       subscriptionsAdditionSuccess(
-        categories.slice(0, 5).map(
-          (category): ICategorySubscriptions[0] => ({
-            categoryID: category.id,
-            quantityIndex: 3,
-            subscriptionID,
-          }),
-        ),
+        categories.slice(0, 5).map((category): ICategorySubscriptions[0] => ({
+          categoryID: category.id,
+          quantityIndex: 3,
+          subscriptionID,
+        })),
       );
     }
   }

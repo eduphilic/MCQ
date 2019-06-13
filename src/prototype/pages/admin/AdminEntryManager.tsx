@@ -80,7 +80,7 @@ export const AdminEntryManager: SFC<{}> = () => {
 
   return (
     <AdminDashboardTemplateContainer actionButtonElements={appBarActionButtons}>
-      <Grid container spacing={16}>
+      <Grid container spacing={2}>
         {["AirForce", "Army", "Navy"].map(title => (
           <Grid key={title} item xs={12}>
             <DashboardCard
@@ -105,9 +105,7 @@ export const AdminEntryManager: SFC<{}> = () => {
                   columns: [
                     { primaryText: "Soldier GD", secondaryText: "10th" },
                     {
-                      imgUrl: `${
-                        process.env.PUBLIC_URL
-                      }/images/entry/airforce.svg`,
+                      imgUrl: `${process.env.PUBLIC_URL}/images/entry/airforce.svg`,
                     },
                     { primaryText: "10" },
                     {
@@ -138,9 +136,7 @@ export const AdminEntryManager: SFC<{}> = () => {
                       secondaryText: "8th",
                     },
                     {
-                      imgUrl: `${
-                        process.env.PUBLIC_URL
-                      }/images/entry/assamrifles.svg`,
+                      imgUrl: `${process.env.PUBLIC_URL}/images/entry/assamrifles.svg`,
                     },
                     { primaryText: "10" },
                     {

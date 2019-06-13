@@ -203,7 +203,7 @@ export class SubscriptionManagementPage extends Component<PropsWithFormState> {
     });
 
     return (
-      <Grid container spacing={16}>
+      <Grid container spacing={2}>
         {currentPage === "entry-select" ? (
           <Grid item xs={12}>
             <EntrySelect
@@ -482,7 +482,7 @@ const FlexSpacer = styled.div`
 `;
 
 const StyledDivider = styled(Divider)`
-  margin: ${({ theme }) => theme.spacing.unit * 2}px;
+  margin: ${({ theme }) => theme.spacing(2)}px;
 `;
 
 const RightToolbarGroup = styled.div`
@@ -492,6 +492,6 @@ const RightToolbarGroup = styled.div`
   justify-content: flex-end;
 
   > *:first-child {
-    margin-right: ${({ theme }) => theme.spacing.unit * 4}px;
+    margin-right: ${({ theme }) => theme.spacing(4)}px;
   }
 `;

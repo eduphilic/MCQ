@@ -82,6 +82,7 @@ class BottomToolbarDockPortal extends Component<Props, State> {
     }
   }
 
+  // tslint:disable-next-line: member-ordering
   private syncRender = lodashDebounce(() => {
     const { children } = this.props;
     const portalTarget = document.getElementById(portalTargetElementID);

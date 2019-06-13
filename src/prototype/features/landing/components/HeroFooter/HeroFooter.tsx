@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   background-color: #5ba87c;
 
   > * {
-    margin: ${props => props.theme.spacing.unit * 4}px;
+    margin: ${props => props.theme.spacing(4)}px;
   }
 
   > * {
@@ -54,7 +54,7 @@ const Wrapper = styled.div`
 // `;
 
 const Text = styled(Typography).attrs({
-  variant: "title",
+  variant: "h4",
 })`
   /* margin-top: 0 !important; */
   /* font-size: 18px;
