@@ -3,7 +3,7 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
+import { StorybookContentCenterWrapper } from "../../../../componentsV0/storybook/StorybookContentCenterWrapper";
 import { ExamAnswerSelectItem } from "./ExamAnswerSelectItem";
 
 const stories = storiesOf("Exam Taking", module);

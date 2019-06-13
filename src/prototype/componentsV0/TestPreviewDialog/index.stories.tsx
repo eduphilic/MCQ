@@ -1,9 +1,9 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
-import { TypographyButton } from "componentsV0/TypographyButton";
 import { TestPreviewDialog } from ".";
+import { ContentCenterWrapper } from "../ContentCenterWrapper";
+import { TypographyButton } from "../TypographyButton";
 import { createPlaceholderTestPreviewFieldsProp } from "./createPlaceholderTestPreviewFieldsProp";
 
 storiesOf("Components V0", module)

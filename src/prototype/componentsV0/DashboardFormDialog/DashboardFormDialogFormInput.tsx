@@ -1,12 +1,9 @@
 import { FormikProps } from "formik";
 import React, { Component } from "react";
 
-import { FormikFileUploadField } from "componentsV0/FormikFileUploadField";
-import {
-  FormikTextField,
-  FormikTextFieldProps,
-} from "componentsV0/FormikTextField";
-import { FormikTextFieldTypeAhead } from "componentsV0/FormikTextFieldTypeAhead";
+import { FormikFileUploadField } from "../FormikFileUploadField";
+import { FormikTextField, FormikTextFieldProps } from "../FormikTextField";
+import { FormikTextFieldTypeAhead } from "../FormikTextFieldTypeAhead";
 import { DashboardFormDialogFieldConfig } from "./DashboardFormDialogFieldConfig";
 
 export interface DashboardFormDialogFormInputProps<Values extends object> {

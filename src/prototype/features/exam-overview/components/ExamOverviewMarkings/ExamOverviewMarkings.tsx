@@ -1,6 +1,6 @@
 import React, { SFC } from "react";
 import { connect } from "react-redux";
-import { State } from "store";
+import { State } from "../../../../store";
 import { IExamMetaMarkings } from "../../models/IExamMetaMarkings";
 
 import Card from "@material-ui/core/Card";
@@ -12,8 +12,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
-import { DashboardTableRow } from "componentsV0/DashboardTableRow";
-import { Typography } from "componentsV0/Typography";
+import { DashboardTableRow } from "../../../../componentsV0/DashboardTableRow";
+import { Typography } from "../../../../componentsV0/Typography";
 
 const titles = [
   "Total Marks",

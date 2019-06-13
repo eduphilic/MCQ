@@ -1,10 +1,10 @@
+import lodashDebounce from "lodash.debounce";
+import React, { Component, SFC } from "react";
 import {
   ActionsType,
   ContextValue,
   createStore,
-} from "common/utils/contextStore";
-import lodashDebounce from "lodash.debounce";
-import React, { Component, SFC } from "react";
+} from "../../common/utils/contextStore";
 
 interface SideSheetToggleStoreState {
   /**
@@ -79,16 +79,6 @@ class SideSheetToggleStoreResizeListener extends Component<{
     SideSheetToggleStoreActions
   >;
 }> {
-  componentDidMount() {
-    window.addEventListener("resize", this.handleResize);
-    window.addEventListener("orientationchange", this.handleResize);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResize);
-    window.removeEventListener("orientationchange", this.handleResize);
-  }
-
   handleResize = lodashDebounce(() => {
     // https://material.io/design/layout/responsive-layout-grid.html#breakpoints
     // Portrait - Large Tablet - Upper Bound
@@ -99,6 +89,16 @@ class SideSheetToggleStoreResizeListener extends Component<{
       contextValue.setFixedPanelVisibility(fixedPanelVisible);
     }
   }, 166 /* Corresponds to 10 frames at 60 Hz. */);
+
+  componentDidMount() {
+    window.addEventListener("resize", this.handleResize);
+    window.addEventListener("orientationchange", this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+    window.removeEventListener("orientationchange", this.handleResize);
+  }
 
   render() {
     return this.props.children;

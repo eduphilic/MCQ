@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Icon from "@material-ui/core/Icon";
 
-import { Button, ButtonProps } from "componentsV0/Button";
+import { Button, ButtonProps } from "../Button";
 
 export type DropdownButtonProps = ButtonProps;
 

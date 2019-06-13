@@ -1,7 +1,7 @@
-import { LogoImage } from "componentsV0/LogoImage";
+import Typography from "@material-ui/core/Typography";
 import React, { SFC } from "react";
-import styled from "styled";
-import { Typography } from "../../../node_modules/@material-ui/core";
+import styled from "styled-components";
+import { LogoImage } from "../LogoImage";
 
 const logoHeight = 64;
 
@@ -52,18 +52,18 @@ const Wrapper = styled.div`
   }
 
   .text {
-    padding: ${props => props.theme.spacing.unit * 2}px;
+    padding: ${props => props.theme.spacing(2)}px;
     color: #ecd100;
   }
 `;
 
-const LogoText = styled<LogoProps>(({ className }) => (
-  <Typography className={className} variant="headline">
+const LogoText = styled(({ className }: LogoProps) => (
+  <Typography className={className} variant="caption">
     <span>Join</span>
     <span>Uniform</span>
   </Typography>
 ))`
-  padding: ${({ theme }) => theme.spacing.unit * 2}px;
+  padding: ${({ theme }) => theme.spacing(2)}px;
   font-size: 22px;
   font-weight: 700;
   line-height: 27px;

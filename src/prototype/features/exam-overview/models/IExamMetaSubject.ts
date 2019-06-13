@@ -1,4 +1,4 @@
-import { LocalizedString } from "types";
+import { LocalizedString } from "../../../types";
 
 /**
  * Information about one of the subjects covered by an exam. This is displayed

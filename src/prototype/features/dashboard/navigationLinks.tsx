@@ -1,17 +1,14 @@
-import {
-  INavigationLink,
-  routePathFromLocalizationKey,
-} from "features/navigation";
 import React from "react";
+import { INavigationLink, routePathFromLocalizationKey } from "../navigation";
 
 import Assignment from "@material-ui/icons/Assignment";
 import Dashboard from "@material-ui/icons/Dashboard";
 import SettingsOutlined from "@material-ui/icons/SettingsOutlined";
-import { AccountCardDetails } from "icons";
+import { AccountCardDetails } from "../../icons";
 
-import { DashboardOverviewPage } from "features/dashboard-overview";
-import { ExamBoardPage } from "features/exam-board";
-import { SubscriptionManagementPage } from "features/subscription-management";
+import { DashboardOverviewPage } from "../dashboard-overview";
+import { ExamBoardPage } from "../exam-board";
+import { SubscriptionManagementPage } from "../subscription-management";
 import { SettingsPage } from "./SettingsPage";
 
 export const navigationLinks: INavigationLink[] = [

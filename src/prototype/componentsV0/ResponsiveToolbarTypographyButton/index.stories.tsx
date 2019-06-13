@@ -5,8 +5,8 @@ import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
 import Add from "@material-ui/icons/Add";
 
-import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
 import { ResponsiveToolbarTypographyButton } from ".";
+import { StorybookContentCenterWrapper } from "../storybook/StorybookContentCenterWrapper";
 
 storiesOf("Components V0", module)
   .addParameters({

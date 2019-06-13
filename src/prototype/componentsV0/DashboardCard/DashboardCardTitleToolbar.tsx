@@ -1,13 +1,13 @@
 import React, { Component, ReactElement, ReactNode } from "react";
-import styled, { withProps } from "styled";
+import styled from "styled-components";
 
 import Icon from "@material-ui/core/Icon";
 import IconButton from "@material-ui/core/IconButton";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
-import Toolbar from "@material-ui/core/Toolbar";
+import Toolbar, { ToolbarProps } from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 
-import { Typography } from "componentsV0/Typography";
+import { Typography } from "../Typography";
 import {
   DashboardCardModeApi,
   DashboardCardModeConsumer,
@@ -165,7 +165,9 @@ export class DashboardCardTitleToolbar extends Component<
 
 type ModeProp = Pick<DashboardCardModeApi["state"], "mode">;
 
-const ColoredToolbar = withProps<ModeProp>()(styled(Toolbar))`
+const ColoredToolbar = styled(({ mode, ...rest }: ToolbarProps & ModeProp) => (
+  <Toolbar {...rest} />
+))`
   ${({ mode, theme }) => {
     if (mode === "display") return;
 
@@ -192,11 +194,11 @@ const EntryTitleWrapper = styled.div`
   align-items: center;
 
   > *:first-child {
-    margin-right: ${({ theme }) => theme.spacing.unit}px;
+    margin-right: ${({ theme }) => theme.spacing(1)}px;
     color: #757575;
   }
 
   > *:nth-child(3) {
-    margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
+    margin-left: ${({ theme }) => theme.spacing(2)}px;
   }
 `;

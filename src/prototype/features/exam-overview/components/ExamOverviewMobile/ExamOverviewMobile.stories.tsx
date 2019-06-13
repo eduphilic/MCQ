@@ -3,8 +3,8 @@ import React from "react";
 
 import Card from "@material-ui/core/Card";
 
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
-import { PlaceholderProvider } from "store";
+import { ContentCenterWrapper } from "../../../../componentsV0/ContentCenterWrapper";
+import { PlaceholderProvider } from "../../../../store";
 import { ExamOverviewMobile } from "./ExamOverviewMobile";
 
 storiesOf("Exam Overview", module).add("ExamOverviewMobile", () => {

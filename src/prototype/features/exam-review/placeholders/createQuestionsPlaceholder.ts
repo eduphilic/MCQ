@@ -1,4 +1,4 @@
-import { IExamQuestion } from "features/exam-taking";
+import { IExamQuestion } from "../../exam-taking";
 
 const statuses: IExamQuestion["status"][] = [
   "answered",

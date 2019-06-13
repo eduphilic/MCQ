@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 import React from "react";
 import { OnboardingHeader } from ".";
+import { ContentCenterWrapper } from "../ContentCenterWrapper";
 
 storiesOf("Components V0", module).add("OnboardingHeader", () => (
   <ContentCenterWrapper>

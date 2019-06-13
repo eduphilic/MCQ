@@ -2,7 +2,7 @@ import React, { Component, ReactElement } from "react";
 
 import FilterList from "@material-ui/icons/FilterList";
 
-import { ResponsiveToolbarTypographyButton } from "componentsV0/ResponsiveToolbarTypographyButton";
+import { ResponsiveToolbarTypographyButton } from "../ResponsiveToolbarTypographyButton";
 import { SideSheetToggleStoreConsumer } from "./SideSheetToggleStore";
 
 export interface SideSheetToggleButtonProps {

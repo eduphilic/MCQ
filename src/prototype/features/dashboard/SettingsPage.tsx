@@ -1,19 +1,19 @@
 import { Formik } from "formik";
-import React, { ReactNode, SFC } from "react";
-import styled from "styled";
+import React, { PropsWithoutRef, ReactNode, SFC } from "react";
+import styled from "styled-components";
 
 import Grid from "@material-ui/core/Grid";
 import withWidth, { isWidthUp, WithWidth } from "@material-ui/core/withWidth";
-import { Card } from "components/Card";
-import { CardContent } from "components/CardContent";
-import { CardHeader } from "components/CardHeader";
+import { Card } from "../../components/Card";
+import { CardContent } from "../../components/CardContent";
+import { CardHeader } from "../../components/CardHeader";
 
-import { DashboardColumnContainer } from "componentsV0/DashboardColumnContainer";
-import { FormikTextField } from "componentsV0/FormikTextField";
+import { DashboardColumnContainer } from "../../componentsV0/DashboardColumnContainer";
+import { FormikTextField } from "../../componentsV0/FormikTextField";
 import {
   TypographyButton,
   TypographyButtonProps,
-} from "componentsV0/TypographyButton";
+} from "../../componentsV0/TypographyButton";
 
 const initialBasicInformationValues = {
   firstName: "Anupam",
@@ -36,7 +36,7 @@ const SettingsPage: SFC<WithWidth> = props => {
   const interlaceFields = isTabletOrAbove;
 
   return (
-    <Grid container spacing={16}>
+    <Grid container spacing={2}>
       <Formik<typeof initialBasicInformationValues>
         initialValues={initialBasicInformationValues}
         onSubmit={() => alert("Form submission")}
@@ -147,16 +147,18 @@ const FormWrapper = (props: { children: ReactNode }) => (
   </Grid>
 );
 
-const FormButton = styled<TypographyButtonProps>(({ className, ...rest }) => (
-  <div className={className}>
-    <TypographyButton
-      className="form-button"
-      color="primary"
-      filled
-      {...rest}
-    />
-  </div>
-))`
+const FormButton = styled(
+  ({ className, ...rest }: PropsWithoutRef<TypographyButtonProps>) => (
+    <div className={className}>
+      <TypographyButton
+        className="form-button"
+        color="primary"
+        filled
+        {...rest}
+      />
+    </div>
+  ),
+)`
   display: flex;
   justify-content: flex-end;
   margin-top: 12px;

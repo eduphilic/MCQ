@@ -1,10 +1,10 @@
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import Paper from "@material-ui/core/Paper";
 import Assignment from "@material-ui/icons/Assignment";
 
-import { Typography } from "componentsV0/Typography";
+import { Typography } from "../../../../componentsV0/Typography";
 import {
   CardMediaSquareWithMargin,
   FlexRow,

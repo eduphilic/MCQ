@@ -1,25 +1,25 @@
+import React, { Component, SFC } from "react";
+import { connect } from "react-redux";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { State } from "../../store";
 import {
   PostSignupDialogs,
   postSignupDialogsShownSelector,
   UserDashboardTourModal,
-} from "features/interface-tours";
+} from "../interface-tours";
 import {
   AppLayout,
   INavigationLink,
   MultipathRoute,
   PageContentWrapper,
   routePathFromLocalizationKey,
-} from "features/navigation";
+} from "../navigation";
 import {
   isOnboardingSelector,
   PaymentPage,
   PlaceholderSubscriptionLoader,
   SubscriptionManagementPage,
-} from "features/subscription-management";
-import React, { Component, SFC } from "react";
-import { connect } from "react-redux";
-import { Redirect, Route, Switch } from "react-router-dom";
-import { State } from "store";
+} from "../subscription-management";
 import { navigationLinks } from "./navigationLinks";
 
 type StateProps = {

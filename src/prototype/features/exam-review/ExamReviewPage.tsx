@@ -1,3 +1,6 @@
+import React, { SFC } from "react";
+import { connect } from "react-redux";
+import { State } from "../../store";
 import {
   ExamAnalysisPanelMobile,
   ExamAnswerExplanation,
@@ -10,10 +13,7 @@ import {
   examHeaderPlaceholderProps,
   ExamLayout,
   ExamTemplate,
-} from "features/exam-taking";
-import React, { SFC } from "react";
-import { connect } from "react-redux";
-import { State } from "store";
+} from "../exam-taking";
 
 const examAnswerSelectProps: ExamAnswerSelectProps = {
   ...examAnswerSelectPlaceholderProps,

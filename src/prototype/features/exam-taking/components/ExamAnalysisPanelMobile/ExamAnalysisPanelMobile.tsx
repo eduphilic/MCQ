@@ -3,10 +3,10 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Hidden from "@material-ui/core/Hidden";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import { Divider } from "components/Divider";
-import { Typography, TypographyProps } from "components/Typography";
-import React, { SFC } from "react";
-import styled from "styled";
+import React, { ReactNode, SFC } from "react";
+import styled from "styled-components";
+import { Divider } from "../../../../components/Divider";
+import { Typography, TypographyProps } from "../../../../components/Typography";
 import { ExamDrawerPerformanceAnalysis } from "../ExamDrawerPerformanceAnalysis";
 
 export const ExamAnalysisPanelMobile: SFC = props => {
@@ -33,7 +33,7 @@ export const ExamAnalysisPanelMobile: SFC = props => {
   );
 };
 
-const VerticalDivider = styled<{ className?: string }>(props => (
+const VerticalDivider = styled((props: { className?: string }) => (
   <Divider
     className={props.className}
     variant="vertical"
@@ -44,11 +44,13 @@ const VerticalDivider = styled<{ className?: string }>(props => (
   margin-right: 4px;
 `;
 
-const StyledExpansionPanel = styled<{ className?: string }>(props => (
-  <ExpansionPanel className={props.className} elevation={0}>
-    {props.children}
-  </ExpansionPanel>
-))`
+const StyledExpansionPanel = styled(
+  (props: { children?: ReactNode; className?: string }) => (
+    <ExpansionPanel className={props.className} elevation={0}>
+      {props.children}
+    </ExpansionPanel>
+  ),
+)`
   /* Remove the default top margin from the layout. */
   margin-top: 0 !important;
 
@@ -56,13 +58,15 @@ const StyledExpansionPanel = styled<{ className?: string }>(props => (
   margin-bottom: -16px;
 `;
 
-const StyledExpansionPanelSummary = styled<{ className?: string }>(props => (
-  <ExpansionPanelSummary
-    expandIcon={<ExpandMore />}
-    classes={{ content: "content", expandIcon: "expand-icon" }}
-    {...props}
-  />
-))`
+const StyledExpansionPanelSummary = styled(
+  (props: { children?: ReactNode; className?: string }) => (
+    <ExpansionPanelSummary
+      expandIcon={<ExpandMore />}
+      classes={{ content: "content", expandIcon: "expand-icon" }}
+      {...props}
+    />
+  ),
+)`
   padding: 0 8px;
   min-height: inherit !important;
 
@@ -77,27 +81,32 @@ const StyledExpansionPanelSummary = styled<{ className?: string }>(props => (
 // @ts-ignore
 StyledExpansionPanelSummary.muiName = "ExpansionPanelSummary";
 
-const StyledExpansionPanelDetails = styled<{ className?: string }>(props => (
-  <ExpansionPanelDetails {...props} />
-))`
+const StyledExpansionPanelDetails = styled(
+  (props: { children?: ReactNode; className?: string }) => (
+    <ExpansionPanelDetails {...props} />
+  ),
+)`
   padding: 0 8px;
   background-color: #deebf7;
 `;
 // @ts-ignore
 StyledExpansionPanelDetails.muiName = "ExpansionPanelDetails";
 
-const StyledTypography = styled<{
-  className?: string;
-  color?: NonNullable<TypographyProps["color"]>;
-}>(props => (
-  <Typography
-    className={props.className}
-    variant="Subtitle2"
-    color={props.color || "primary"}
-  >
-    {props.children}
-  </Typography>
-))`
+const StyledTypography = styled(
+  (props: {
+    children?: ReactNode;
+    className?: string;
+    color?: NonNullable<TypographyProps["color"]>;
+  }) => (
+    <Typography
+      className={props.className}
+      variant="Subtitle2"
+      color={props.color || "primary"}
+    >
+      {props.children}
+    </Typography>
+  ),
+)`
   font-size: 13px;
 
   &:not(:last-child) {

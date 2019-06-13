@@ -1,15 +1,12 @@
 import React, { Component, MouseEvent } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 
-import { Typography } from "componentsV0/Typography";
-import {
-  TypographyButton,
-  TypographyButtonProps,
-} from "componentsV0/TypographyButton";
+import { Typography } from "../Typography";
+import { TypographyButton } from "../TypographyButton";
 
 export interface SideSheetButtonMenuProps {
   /**
@@ -96,8 +93,8 @@ export class SideSheetButtonMenu extends Component<
   }
 }
 
-const ButtonFullWidth = styled<TypographyButtonProps>(TypographyButton).attrs({
-  variant: "flat",
+const ButtonFullWidth = styled(TypographyButton).attrs({
+  variant: "text",
 })`
   width: 100%;
   padding-left: 16px;

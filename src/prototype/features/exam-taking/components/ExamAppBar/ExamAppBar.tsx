@@ -1,7 +1,7 @@
 import React, { Fragment, SFC } from "react";
 import { connect } from "react-redux";
-import { State } from "store";
-import styled from "styled";
+import styled from "styled-components";
+import { State } from "../../../../store";
 import { actions } from "../../actions";
 import { buttonSelector } from "../../selectors";
 import { FeatureKey } from "../../types/FeatureKey";
@@ -9,10 +9,10 @@ import { FeatureKey } from "../../types/FeatureKey";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 
-import { Divider } from "components/Divider";
-import { Typography } from "components/Typography";
-import { TypographyButton } from "componentsV0/TypographyButton";
-import { LanguageToggleButton } from "features/localization";
+import { Divider } from "../../../../components/Divider";
+import { Typography } from "../../../../components/Typography";
+import { TypographyButton } from "../../../../componentsV0/TypographyButton";
+import { LanguageToggleButton } from "../../../localization";
 
 type StateProps = {
   showStartExamButton: boolean;

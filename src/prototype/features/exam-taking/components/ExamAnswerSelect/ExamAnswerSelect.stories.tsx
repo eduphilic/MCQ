@@ -2,9 +2,9 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
-import { formik } from "componentsV0/storybook/StorybookFormikAddon";
-import { TypographyButton } from "componentsV0/TypographyButton";
+import { StorybookContentCenterWrapper } from "../../../../componentsV0/storybook/StorybookContentCenterWrapper";
+import { formik } from "../../../../componentsV0/storybook/StorybookFormikAddon";
+import { TypographyButton } from "../../../../componentsV0/TypographyButton";
 import { ExamAnswerSelect } from "./ExamAnswerSelect";
 
 const initialValues = { selectedAnswerIndex: null as number | null };

@@ -1,6 +1,6 @@
-import { routePathFromLocalizationKey } from "features/navigation";
 import React from "react";
 import { Route } from "react-router-dom";
+import { routePathFromLocalizationKey } from "../navigation";
 import { ExamReviewPage } from "./ExamReviewPage";
 
 export const pages = [

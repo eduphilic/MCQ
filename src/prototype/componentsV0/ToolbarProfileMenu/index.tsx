@@ -1,6 +1,6 @@
-import { strings } from "features/localization";
 import React, { Component, MouseEvent } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { strings } from "../../features/localization";
 
 import Button from "@material-ui/core/Button";
 import ListItemIcon from "@material-ui/core/ListItemIcon";

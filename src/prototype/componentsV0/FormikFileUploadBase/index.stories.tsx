@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { formik } from "componentsV0/storybook/StorybookFormikAddon";
 import { FormikFileUploadBase } from ".";
+import { formik } from "../storybook/StorybookFormikAddon";
 
 const initialValues = {
   someFile: null as File | null,

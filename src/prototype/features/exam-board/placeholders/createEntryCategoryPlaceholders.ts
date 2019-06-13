@@ -1,4 +1,4 @@
-import { IEntryCategory } from "models/IEntryCategory";
+import { IEntryCategory } from "../../../models/IEntryCategory";
 import { createEntryPlaceholders } from "./createEntryPlaceholders";
 
 const entries = createEntryPlaceholders();

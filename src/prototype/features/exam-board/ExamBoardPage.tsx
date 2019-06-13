@@ -1,24 +1,24 @@
-import { entryImages } from "common/structures/entryImages";
-import { routePathFromLocalizationKey } from "features/navigation";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { State } from "store";
-import styled from "styled";
+import styled from "styled-components";
+import { entryImages } from "../../common/structures/entryImages";
+import { State } from "../../store";
+import { routePathFromLocalizationKey } from "../navigation";
 import { actions } from "./actions";
 
 import CardActions from "@material-ui/core/CardActions";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
-import { Button } from "components/Button";
-import { Card } from "components/Card";
-import { CardContent } from "components/CardContent";
-import { CardHeader } from "components/CardHeader";
-import { Dialog } from "components/Dialog";
-import { DialogAppBar } from "components/DialogAppBar";
-import { DialogContent } from "components/DialogContent";
-import { Typography } from "components/Typography";
-import { freeExamCardBackgroundColor } from "css";
+import { Button } from "../../components/Button";
+import { Card } from "../../components/Card";
+import { CardContent } from "../../components/CardContent";
+import { CardHeader } from "../../components/CardHeader";
+import { Dialog } from "../../components/Dialog";
+import { DialogAppBar } from "../../components/DialogAppBar";
+import { DialogContent } from "../../components/DialogContent";
+import { Typography } from "../../components/Typography";
+import { freeExamCardBackgroundColor } from "../../css";
 
 type StateProps = {
   loading: boolean;
@@ -242,9 +242,9 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
 
     return (
       <>
-        <Grid container spacing={16}>
+        <Grid container spacing={2}>
           <Grid item xs md={6}>
-            <Grid container spacing={16}>
+            <Grid container spacing={2}>
               {subscriptionCards.map((subscriptionCard, index) => (
                 <Grid key={index} item xs={12}>
                   {subscriptionCard}
@@ -254,7 +254,7 @@ class ExamBoardPage extends Component<Props, ExamBoardPageState> {
           </Grid>
           <Hidden smDown>
             <Grid item md={6}>
-              <Grid container spacing={16}>
+              <Grid container spacing={2}>
                 {testCards &&
                   testCards.map((testCard, index) => (
                     <Grid key={index} item xs={12}>
@@ -342,6 +342,6 @@ const StatRow = styled.div`
   }
 
   > *:not(:last-child) {
-    margin-bottom: ${({ theme }) => theme.spacing.unit}px;
+    margin-bottom: ${({ theme }) => theme.spacing(1)}px;
   }
 `;

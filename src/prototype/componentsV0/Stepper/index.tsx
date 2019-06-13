@@ -1,6 +1,6 @@
-import { Step, StepProps } from "componentsV0/Step";
 import React, { SFC } from "react";
-import styled, { withProps } from "styled";
+import styled from "styled-components";
+import { Step, StepProps } from "../Step";
 
 export interface StepperProps {
   /** Step labels. */
@@ -40,7 +40,9 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
-const StepWithProgressBar = withProps<{ width: number }>()(styled(Step))`
+const StepWithProgressBar = styled(
+  ({ width, ...rest }: StepProps & { width: number }) => <Step {...rest} />,
+)`
   position: relative;
   width: ${props => props.width}%;
 

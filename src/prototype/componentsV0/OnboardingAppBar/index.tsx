@@ -3,8 +3,8 @@ import React, { SFC } from "react";
 
 import Toolbar from "@material-ui/core/Toolbar";
 
-import { Logo } from "componentsV0/Logo";
-// import { LogoutButton } from "componentsV0/LogoutButton";
+import { Logo } from "../Logo";
+// import { LogoutButton } from "../LogoutButton";
 
 export interface OnboardingAppBarProps {
   onLogoutButtonClick: () => void;

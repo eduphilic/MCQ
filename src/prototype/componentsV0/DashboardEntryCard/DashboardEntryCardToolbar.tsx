@@ -1,13 +1,13 @@
 import React, { Component, ReactNode } from "react";
-import styled, { withProps } from "styled";
+import styled from "styled-components";
 
 import Icon from "@material-ui/core/Icon";
 import IconButton from "@material-ui/core/IconButton";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
-import Toolbar from "@material-ui/core/Toolbar";
+import Toolbar, { ToolbarProps } from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 
-import { Typography } from "componentsV0/Typography";
+import { Typography } from "../Typography";
 
 export interface DashboardEntryCardToolbarProps {
   entryTitle: string;
@@ -114,7 +114,9 @@ export class DashboardEntryCardToolbar extends Component<
 
 type ModeProp = Pick<DashboardEntryCardToolbarProps, "mode">;
 
-const ColoredToolbar = withProps<ModeProp>()(styled(Toolbar))`
+const ColoredToolbar = styled(({ mode, ...rest }: ToolbarProps & ModeProp) => (
+  <Toolbar {...rest} />
+))`
   ${({ mode, theme }) => {
     if (mode === "display") return;
 
@@ -140,7 +142,7 @@ const EntryTitleWrapper = styled.div`
   display: flex;
 
   > *:first-child {
-    margin-right: ${({ theme }) => theme.spacing.unit}px;
+    margin-right: ${({ theme }) => theme.spacing(1)}px;
     color: #757575;
   }
 `;

@@ -1,11 +1,11 @@
+import produce from "immer";
 import {
   Actions as ExamTakingActions,
   createExamQuestionCategoryPlaceholder,
   ExamTakingAction as ExamTakingActionTypes,
   // reducer as examTakingReducer,
   State as ExamTakingState,
-} from "features/exam-taking";
-import produce from "immer";
+} from "../exam-taking";
 import { createQuestionsPlaceholder } from "./placeholders/createQuestionsPlaceholder";
 
 type State = ExamTakingState;

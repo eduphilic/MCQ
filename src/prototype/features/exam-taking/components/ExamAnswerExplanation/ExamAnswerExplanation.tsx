@@ -1,6 +1,6 @@
-import { Typography } from "componentsV0/Typography";
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { Typography } from "../../../../componentsV0/Typography";
 import { Well } from "../ExamHeader";
 
 export type ExamAnswerExplanationProps = {

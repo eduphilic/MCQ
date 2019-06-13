@@ -1,4 +1,4 @@
-import { IEntry } from "models";
+import { IEntry } from "../../../models";
 
 export const createEntryPlaceholders = (): IEntry[] =>
   ["Officer", "Army", "Airforce"].map(

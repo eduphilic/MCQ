@@ -1,8 +1,8 @@
 import Typography from "@material-ui/core/Typography";
-import { strings } from "features/localization";
 import React, { SFC } from "react";
-import styled from "styled";
-import { DarkTheme } from "theme";
+import styled from "styled-components";
+import { strings } from "../../features/localization";
+import { DarkTheme } from "../../theme";
 
 export const PageFooter: SFC<{}> = () => (
   <DarkTheme>
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: ${props => props.theme.spacing.unit * 5}px;
+  height: ${props => props.theme.spacing(5)}px;
   background-color: #333333;
 `;
 

@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Typography } from "componentsV0/Typography";
 import { SideSheetFieldGroup } from ".";
+import { Typography } from "../Typography";
 
 storiesOf("Components V0", module).add("SideSheetFieldGroup", () => {
   //

@@ -1,7 +1,7 @@
 import React, { SFC } from "react";
 import { connect } from "react-redux";
-import { State } from "store";
-import styled from "styled";
+import styled from "styled-components";
+import { State } from "../../../../store";
 import { IExamMetaSubject } from "../../models/IExamMetaSubject";
 
 import Card from "@material-ui/core/Card";
@@ -12,8 +12,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
-import { DashboardTableRow } from "componentsV0/DashboardTableRow";
-import { Typography } from "componentsV0/Typography";
+import { DashboardTableRow } from "../../../../componentsV0/DashboardTableRow";
+import { Typography } from "../../../../componentsV0/Typography";
 
 interface StateProps {
   subjects: IExamMetaSubject[];

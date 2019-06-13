@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled, { withProps } from "styled";
+import styled from "styled-components";
 
 import Card from "@material-ui/core/Card";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -9,8 +9,11 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
-import { DashboardTableRow } from "componentsV0/DashboardTableRow";
-import { Typography } from "componentsV0/Typography";
+import {
+  DashboardTableRow,
+  DashboardTableRowProps,
+} from "../DashboardTableRow";
+import { Typography } from "../Typography";
 import {
   DashboardEntryCardToolbar,
   DashboardEntryCardToolbarProps,
@@ -171,6 +174,10 @@ const RedCheckbox = styled(Checkbox).attrs({
 
 type ModeProp = Pick<DashboardEntryCardToolbarProps, "mode">;
 
-const ClickableTableRow = withProps<ModeProp>()(styled(DashboardTableRow))`
+const ClickableTableRow = styled(
+  ({ mode, ...rest }: DashboardTableRowProps & ModeProp) => (
+    <DashboardTableRow {...rest} />
+  ),
+)`
   cursor: ${({ mode }) => (mode !== "display" ? "pointer" : "inherit")};
 `;

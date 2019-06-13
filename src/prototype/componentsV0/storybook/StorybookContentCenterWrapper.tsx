@@ -1,6 +1,6 @@
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { ContentCenterWrapper } from "../ContentCenterWrapper";
 
 type GetProps<T> = T extends React.ComponentClass<infer U> ? U : never;
 type ContentCenterWrapperProps = Omit<

@@ -1,9 +1,9 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
-import { formik } from "componentsV0/storybook/StorybookFormikAddon";
 import { FormikFileUploadField } from ".";
+import { ContentCenterWrapper } from "../ContentCenterWrapper";
+import { formik } from "../storybook/StorybookFormikAddon";
 
 const initialValues = {
   logoImage: null as File | null,

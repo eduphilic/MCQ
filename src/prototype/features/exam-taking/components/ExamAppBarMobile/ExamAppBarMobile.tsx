@@ -1,9 +1,9 @@
-import { examAppBarBottomRow, examAppBarTopRow } from "css";
+import { examAppBarBottomRow, examAppBarTopRow } from "../../../../css";
 import React, { SFC } from "react";
 import { connect } from "react-redux";
-import { State } from "store";
-import styled, { withProps } from "styled";
-import { DarkTheme } from "theme";
+import { State } from "../../../../store";
+import styled from "styled";
+import { DarkTheme } from "../../../../theme";
 import { actions } from "../../actions";
 import { buttonSelector } from "../../selectors";
 
@@ -13,12 +13,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Apps from "@material-ui/icons/Apps";
 import Dashboard from "@material-ui/icons/Dashboard";
 
-import { Typography } from "componentsV0/Typography";
+import { Typography } from "../../../../componentsV0/Typography";
 import {
   TypographyButton,
   TypographyButtonProps,
-} from "componentsV0/TypographyButton";
-import { LanguageToggleButton } from "features/localization";
+} from "../../../../componentsV0/TypographyButton";
+import { LanguageToggleButton } from "../../../localization";
 
 import { FeatureKey } from "../../types/FeatureKey";
 import { ExamAppBarTimer } from "../ExamAppBarTimer";
@@ -75,12 +75,11 @@ const ExamAppBarMobile: SFC<Props> = props => {
                 </StartExamButton>
               )}
 
-              {!showStartExamButton &&
-                !showSubmissionSummaryScreen && (
-                  <SubmitExamButton {...{ onClick: onSubmitButtonClick }}>
-                    Submit Exam
-                  </SubmitExamButton>
-                )}
+              {!showStartExamButton && !showSubmissionSummaryScreen && (
+                <SubmitExamButton {...{ onClick: onSubmitButtonClick }}>
+                  Submit Exam
+                </SubmitExamButton>
+              )}
 
               {showSubmissionSummaryScreen && (
                 <>

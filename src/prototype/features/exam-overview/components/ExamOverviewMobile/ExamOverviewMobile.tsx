@@ -3,7 +3,7 @@ import React, { Component, ReactNode } from "react";
 import Tab from "@material-ui/core/Tab";
 import Tabs, { TabsProps } from "@material-ui/core/Tabs";
 
-import { Typography } from "componentsV0/Typography";
+import { Typography } from "../../../../componentsV0/Typography";
 import { ExamOverviewBluePrint } from "../ExamOverviewBluePrint";
 import { ExamOverviewMarkings } from "../ExamOverviewMarkings";
 

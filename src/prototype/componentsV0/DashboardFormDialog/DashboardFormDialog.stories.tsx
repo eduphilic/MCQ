@@ -2,9 +2,9 @@ import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
-import { TypographyButton } from "componentsV0/TypographyButton";
 import { DashboardFormDialog, DashboardFormDialogFieldConfigs } from ".";
+import { ContentCenterWrapper } from "../ContentCenterWrapper";
+import { TypographyButton } from "../TypographyButton";
 
 storiesOf("Components V0", module).add("DashboardFormDialog", () => {
   const onSubmitValue = action("onSubmit");

@@ -1,8 +1,8 @@
 import { number } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
 import React from "react";
 import { Stepper } from ".";
+import { ContentCenterWrapper } from "../ContentCenterWrapper";
 
 storiesOf("Components V0", module)
   .addParameters({ info: { propTablesExclude: [ContentCenterWrapper as any] } })

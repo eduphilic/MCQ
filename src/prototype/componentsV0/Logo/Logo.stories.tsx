@@ -1,7 +1,7 @@
 import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { SplitThemesPreviewer } from "componentsV0/SplitThemesPreviewer";
 import React from "react";
+import { SplitThemesPreviewer } from "../SplitThemesPreviewer";
 
 import { Logo } from "./Logo";
 

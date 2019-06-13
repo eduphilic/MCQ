@@ -1,10 +1,10 @@
 import React, { Component, ReactNode } from "react";
-import styled, { css, withProps } from "styled";
+import styled, { css } from "styled-components";
 
 import Drawer from "@material-ui/core/Drawer";
 import Paper from "@material-ui/core/Paper";
 
-import { Typography } from "componentsV0/Typography";
+import { Typography } from "../Typography";
 // import { SideSheetToggleStateConsumer } from "./SideSheetToggleState";
 import { SideSheetToggleStoreConsumer } from "./SideSheetToggleStore";
 
@@ -80,7 +80,7 @@ interface SheetVisibleProp {
 
 const panelWidthTablet = 320;
 
-const SplitContainer = withProps<SheetVisibleProp>()(styled.div)`
+const SplitContainer = styled.div<SheetVisibleProp>`
   ${({ sheetVisible }) =>
     sheetVisible &&
     `
@@ -91,8 +91,7 @@ const SplitContainer = withProps<SheetVisibleProp>()(styled.div)`
 const PanelContainer = styled.div`
   width: ${panelWidthTablet}px;
   height: 100%;
-  padding: ${({ theme }) =>
-    `${theme.spacing.unit * 3}px ${theme.spacing.unit * 2}px`};
+  padding: ${({ theme }) => `${theme.spacing(3)}px ${theme.spacing(2)}px`};
   background-color: ${({ theme }) => theme.palette.background.paper};
   overflow-y: auto;
 `;
@@ -112,7 +111,7 @@ const PanelFixedPositioning = styled(Paper).attrs({ elevation: 1 })`
 
 const DrawerWithMobileWidth = styled(Drawer)`
   ${PanelContainer} {
-    width: calc(100vw - ${({ theme }) => theme.spacing.unit * 7}px);
+    width: calc(100vw - ${({ theme }) => theme.spacing(7)}px);
   }
 
   ${({ theme }) => theme.breakpoints.up("sm")} {

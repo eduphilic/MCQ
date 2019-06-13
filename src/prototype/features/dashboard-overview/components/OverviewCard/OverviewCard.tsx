@@ -1,13 +1,13 @@
 import Button from "@material-ui/core/Button";
-import { Card } from "components/Card";
+import React, { SFC } from "react";
+import styled from "styled-components";
+import { Card } from "../../../../components/Card";
 import {
   CardDualColumnsTextContent,
   CardDualColumnsTextContentRow,
-} from "components/CardDualColumnsTextContent";
-import { CardHeader } from "components/CardHeader";
-import { Typography } from "components/Typography";
-import React, { SFC } from "react";
-import styled from "styled";
+} from "../../../../components/CardDualColumnsTextContent";
+import { CardHeader } from "../../../../components/CardHeader";
+import { Typography } from "../../../../components/Typography";
 
 export type OverviewCardStat = {
   id: string;

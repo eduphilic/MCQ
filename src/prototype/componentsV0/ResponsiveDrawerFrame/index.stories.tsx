@@ -1,10 +1,10 @@
 import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React, { ReactNode } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
-import { StorybookPlaceholderImage } from "componentsV0/storybook/StorybookPlaceholderImage";
 import { ResponsiveDrawerFrame } from ".";
+import { StorybookPlaceholderImage } from "../storybook/StorybookPlaceholderImage";
 
 storiesOf("Components V0", module)
   .addParameters({ info: { inline: false } })

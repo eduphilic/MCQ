@@ -1,12 +1,12 @@
 import React, { SFC } from "react";
-import styled, { css } from "styled";
+import styled, { css } from "styled-components";
 
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import Check from "@material-ui/icons/Check";
 import Close from "@material-ui/icons/Close";
 
-import { Button } from "componentsV0/Button";
-import { Typography } from "componentsV0/Typography";
+import { Button } from "../../../../componentsV0/Button";
+import { Typography } from "../../../../componentsV0/Typography";
 
 export interface ExamAnswerSelectItemProps {
   className?: string;
@@ -76,7 +76,7 @@ const ExamAnswerSelectItemBase: SFC<ExamAnswerSelectItemProps> = props => {
   return (
     <Button
       className={classNames.join(" ")}
-      variant="flat"
+      variant="text"
       onClick={() => onClick(answerIndex)}
       component={isButton ? "button" : "div"}
       disableRipple={!isButton}

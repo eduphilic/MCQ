@@ -1,6 +1,6 @@
 import React, { SFC } from "react";
-import styled from "styled";
-import { DarkTheme } from "theme";
+import styled from "styled-components";
+import { DarkTheme } from "../../theme";
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ const ComponentWrapper = styled.div`
   border: 8px solid #f7f7f7;
 
   ${Wrapper} &:nth-child(2) {
-    margin-top: ${props => props.theme.spacing.unit * 2}px;
+    margin-top: ${props => props.theme.spacing(2)}px;
   }
 `;
 

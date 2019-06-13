@@ -1,4 +1,4 @@
-import { IEntryCategory } from "models";
+import { IEntryCategory } from "../../../models";
 
 export interface ICategorySubscription {
   /** Subscription ID. */

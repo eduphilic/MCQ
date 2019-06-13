@@ -1,18 +1,18 @@
 import CardActions from "@material-ui/core/CardActions";
 import Hidden from "@material-ui/core/Hidden";
-import { entryImages } from "common/structures/entryImages";
-// import { Typography } from "components/Typography";
-import { Button } from "components/Button";
-import { Card } from "components/Card";
-import { CardActionArea } from "components/CardActionArea";
+import React from "react";
+import styled, { css } from "styled-components";
+import { entryImages } from "../../../../common/structures/entryImages";
+// import { Typography } from "../../../../components/Typography";
+import { Button } from "../../../../components/Button";
+import { Card } from "../../../../components/Card";
+import { CardActionArea } from "../../../../components/CardActionArea";
 // import {
 //   CardDualColumnsTextContent,
 //   CardDualColumnsTextContentRow,
-// } from "components/CardDualColumnsTextContent";
-import { CardHeader } from "components/CardHeader";
-import { freeExamCardBackgroundColor } from "css";
-import React from "react";
-import styled, { css } from "styled";
+// } from "../../../../components/CardDualColumnsTextContent";
+import { CardHeader } from "../../../../components/CardHeader";
+import { freeExamCardBackgroundColor } from "../../../../css";
 
 export const FreeExamCard = () => {
   // const rows: CardDualColumnsTextContentRow[] = [
@@ -54,20 +54,25 @@ const StyledCard = styled(Card)`
   background-color: ${freeExamCardBackgroundColor};
 `;
 
-const AttemptButton = styled<{
-  className?: string;
-  onClick?: () => void;
-  position: "right" | "bottom";
-}>(({ className, onClick }) => (
-  <Button
-    className={className}
-    variant="contained"
-    color="primary"
-    onClick={onClick}
-  >
-    Attempt
-  </Button>
-))`
+const AttemptButton = styled(
+  ({
+    className,
+    onClick,
+  }: {
+    className?: string;
+    onClick?: () => void;
+    position: "right" | "bottom";
+  }) => (
+    <Button
+      className={className}
+      variant="contained"
+      color="primary"
+      onClick={onClick}
+    >
+      Attempt
+    </Button>
+  ),
+)`
   ${({ position }) =>
     position === "right"
       ? css`

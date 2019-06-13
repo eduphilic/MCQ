@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
-import { formik } from "componentsV0/storybook/StorybookFormikAddon";
+import { StorybookContentCenterWrapper } from "../storybook/StorybookContentCenterWrapper";
+import { formik } from "../storybook/StorybookFormikAddon";
 import { FormikTextFieldTypeAhead } from "./FormikTextFieldTypeAhead";
 
 const initialValues = {

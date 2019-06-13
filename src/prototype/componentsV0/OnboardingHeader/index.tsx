@@ -1,10 +1,10 @@
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import Typography from "@material-ui/core/Typography";
 
-import { Logo } from "componentsV0/Logo";
-// import { LogoutButton, LogoutButtonProps } from "componentsV0/LogoutButton";
+import { Logo } from "../Logo";
+// import { LogoutButton, LogoutButtonProps } from "../LogoutButton";
 
 // tslint:disable-next-line:no-empty-interface
 export interface OnboardingHeaderProps {
@@ -32,10 +32,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding-top: ${props => props.theme.spacing.unit * 2}px;
+  padding-top: ${props => props.theme.spacing(2)}px;
 `;
 
-const Text = styled(Typography).attrs({ variant: "headline" })`
+const Text = styled(Typography).attrs({ variant: "caption" })`
   flex: 1;
   font-size: 24px;
   text-align: center;
@@ -43,7 +43,7 @@ const Text = styled(Typography).attrs({ variant: "headline" })`
   ${props => props.theme.breakpoints.down("sm")} {
     flex-basis: 100%;
     order: 2;
-    margin-top: ${props => props.theme.spacing.unit * 2}px;
+    margin-top: ${props => props.theme.spacing(2)}px;
   }
 `;
 

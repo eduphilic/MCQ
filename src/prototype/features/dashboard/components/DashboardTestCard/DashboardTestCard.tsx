@@ -1,12 +1,12 @@
-import React, { Fragment, SFC } from "react";
-import styled, { css } from "styled";
+import React, { Fragment, PropsWithoutRef, SFC } from "react";
+import styled, { css } from "styled-components";
 
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 
-import { Card, CardProps } from "components/Card";
-import { Button } from "componentsV0/Button";
-import { Typography } from "componentsV0/Typography";
+import { Card, CardProps } from "../../../../components/Card";
+import { Button } from "../../../../componentsV0/Button";
+import { Typography } from "../../../../componentsV0/Typography";
 
 export type DashboardTestCardProps = {
   /**
@@ -78,14 +78,14 @@ export const DashboardTestCard: SFC<DashboardTestCardProps> = props => {
         {reviseButtonLabel && (
           <Button
             color="primary"
-            variant="raised"
+            variant="contained"
             disabled={reviseButtonDisabled}
           >
             {reviseButtonLabel}
           </Button>
         )}
         {attemptButtonLabel && (
-          <Button color="primary" variant="raised">
+          <Button color="primary" variant="contained">
             {attemptButtonLabel}
           </Button>
         )}
@@ -165,9 +165,14 @@ const AnnotatedText = styled.span`
   }
 `;
 
-const CardWithBackgroundColor = styled<
-  CardProps & Pick<DashboardTestCardProps, "color" | "variant">
->(({ color, variant, ...rest }) => <Card {...rest} />)`
+const CardWithBackgroundColor = styled(
+  ({
+    color,
+    variant,
+    ...rest
+  }: PropsWithoutRef<CardProps> &
+    Pick<DashboardTestCardProps, "color" | "variant">) => <Card {...rest} />,
+)`
   width: 100%;
   background-color: ${({ color }) => (color === "yellow" ? "#ffcb25" : "#fff")};
 
@@ -195,7 +200,7 @@ export const FlexRow = styled.div`
 export const logoDimensions = css`
   width: 64px;
   height: 64px;
-  margin: ${({ theme }) => theme.spacing.unit * 2}px;
+  margin: ${({ theme }) => theme.spacing(2)}px;
 `;
 
 export const CardMediaSquareWithMargin = styled(CardMedia)`
@@ -215,7 +220,7 @@ const TypographyVerticalFlexContainer = styled.div`
   justify-content: space-evenly;
   width: 100%;
   height: 64px;
-  margin: ${({ theme }) => theme.spacing.unit * 2}px 0;
+  margin: ${({ theme }) => theme.spacing(2)}px 0;
 `;
 
 const StatWrapper = styled.div`
@@ -235,7 +240,7 @@ const ButtonsWrapper = styled.div`
   display: flex;
 
   & > *:not(last-child) {
-    margin-right: ${({ theme }) => theme.spacing.unit}px;
+    margin-right: ${({ theme }) => theme.spacing(1)}px;
   }
 
   ${({ theme }) => theme.breakpoints.up("sm")} {
@@ -243,7 +248,7 @@ const ButtonsWrapper = styled.div`
 
     & > *:not(last-child) {
       margin-right: 0;
-      margin-bottom: ${({ theme }) => theme.spacing.unit}px;
+      margin-bottom: ${({ theme }) => theme.spacing(1)}px;
     }
   }
 `;

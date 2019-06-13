@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
-import { Typography } from "componentsV0/Typography";
 import React from "react";
 import { DropdownButton } from ".";
+import { Typography } from "../Typography";
 
 storiesOf("Components V0", module).add("DropdownButton", () => {
   //

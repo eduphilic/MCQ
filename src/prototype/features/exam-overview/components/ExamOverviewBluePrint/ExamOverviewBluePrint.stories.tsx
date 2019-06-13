@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
-import { PlaceholderProvider } from "store";
+import { ContentCenterWrapper } from "../../../../componentsV0/ContentCenterWrapper";
+import { PlaceholderProvider } from "../../../../store";
 import { ExamOverviewBluePrint } from "./ExamOverviewBluePrint";
 
 const stories = storiesOf("Exam Overview", module);

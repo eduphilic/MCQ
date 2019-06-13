@@ -1,5 +1,7 @@
 import TableRow, { TableRowProps } from "@material-ui/core/TableRow";
-import styled from "styled";
+import styled from "styled-components";
+
+export type DashboardTableRowProps = TableRowProps;
 
 export const DashboardTableRow = styled(TableRow).attrs({
   // Used type assertion here because dependent types were requiring a classes

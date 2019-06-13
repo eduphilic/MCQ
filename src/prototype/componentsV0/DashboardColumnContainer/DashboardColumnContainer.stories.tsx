@@ -2,7 +2,7 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { StorybookContentCenterWrapper } from "componentsV0/storybook/StorybookContentCenterWrapper";
+import { StorybookContentCenterWrapper } from "../storybook/StorybookContentCenterWrapper";
 import { DashboardColumnContainer } from ".";
 
 storiesOf("Components V0", module).add("DashboardColumnContainer", () => {

@@ -1,9 +1,9 @@
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import Grid from "@material-ui/core/Grid";
-import { Card } from "components/Card";
-import { SelectedEntries } from "features/subscription-management";
 import React, { Component, createRef } from "react";
+import { Card } from "../../components/Card";
+import { SelectedEntries } from "../subscription-management";
 import { ExamOverviewDialog } from "./components/ExamOverviewDialog";
 import { FreeExamCard } from "./components/FreeExamCard";
 import { OverviewCard, OverviewCardStat } from "./components/OverviewCard";
@@ -21,7 +21,7 @@ export class DashboardOverviewPage extends Component {
 
   render() {
     return (
-      <Grid container spacing={16}>
+      <Grid container spacing={2}>
         {[
           <FreeExamCard />,
 

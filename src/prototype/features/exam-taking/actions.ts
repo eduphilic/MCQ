@@ -1,5 +1,5 @@
-import { ActionsUnion } from "types";
-import { createAction } from "utils";
+import { ActionsUnion } from "../../types";
+import { createAction } from "../../utils";
 
 export enum ExamTakingAction {
   LoadPlaceholderExam = "[exam-taking] Load Placeholder Exam",

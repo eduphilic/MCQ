@@ -5,7 +5,7 @@ import React, {
   ReactElement,
   ReactNode,
 } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -17,8 +17,8 @@ import withMobileDialog, {
 } from "@material-ui/core/withMobileDialog";
 import { WithWidth } from "@material-ui/core/withWidth";
 
-import { Typography } from "componentsV0/Typography";
-import { TypographyButton } from "componentsV0/TypographyButton";
+import { Typography } from "../Typography";
+import { TypographyButton } from "../TypographyButton";
 
 export interface TestPreviewFieldsSectionSubjectTopic {
   topicName: string;
@@ -218,7 +218,7 @@ function threeColumnFieldRow<T extends object>(
 const FieldRow = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+  margin-bottom: ${({ theme }) => theme.spacing(2)}px;
 `;
 
 const FieldLabelValuePairContainer = styled.div`
@@ -231,9 +231,9 @@ const FieldLabel = styled(Typography)`
 `;
 
 const FieldValue = styled(Typography)`
-  margin-left: ${({ theme }) => theme.spacing.unit}px;
+  margin-left: ${({ theme }) => theme.spacing(1)}px;
 `;
 
 const DividerWithBottomMargin = styled(Divider)`
-  margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+  margin-bottom: ${({ theme }) => theme.spacing(2)}px;
 `;

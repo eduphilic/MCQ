@@ -1,5 +1,5 @@
-import { strings } from "features/localization";
 import React, { Component } from "react";
+import { strings } from "../../features/localization";
 import { Typography, TypographyProps } from "../Typography";
 
 type L10LocalizationKey = keyof typeof strings;

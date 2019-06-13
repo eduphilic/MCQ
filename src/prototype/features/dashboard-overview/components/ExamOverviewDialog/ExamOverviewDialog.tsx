@@ -1,15 +1,15 @@
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
-import { Dialog } from "components/Dialog";
-import { DialogAppBar } from "components/DialogAppBar";
-import { DialogContent } from "components/DialogContent";
+import React, { Component } from "react";
+import styled from "styled-components";
+import { Dialog } from "../../../../components/Dialog";
+import { DialogAppBar } from "../../../../components/DialogAppBar";
+import { DialogContent } from "../../../../components/DialogContent";
 import {
   ExamOverviewBluePrint,
   ExamOverviewMarkings,
   ExamOverviewMobile,
-} from "features/exam-overview";
-import React, { Component } from "react";
-import styled from "styled";
+} from "../../../exam-overview";
 
 type State = {
   open: boolean;
@@ -33,7 +33,7 @@ export class ExamOverviewDialog extends Component<{}, State> {
         />
         <DialogContent>
           <Hidden smDown>
-            <Grid container spacing={16}>
+            <Grid container spacing={2}>
               <Grid item xs={6}>
                 <ExamOverviewBluePrint />
               </Grid>

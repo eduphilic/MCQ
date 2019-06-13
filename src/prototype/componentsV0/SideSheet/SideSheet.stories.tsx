@@ -2,7 +2,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import { AdminDashboardTemplate } from "componentsV0/AdminDashboardTemplate";
+import { AdminDashboardTemplate } from "../AdminDashboardTemplate";
 
 storiesOf("Components V0", module).add("SideSheet", () => {
   //

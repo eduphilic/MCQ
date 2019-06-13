@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { formik } from "componentsV0/storybook/StorybookFormikAddon";
 import { FormikTextField } from ".";
+import { formik } from "../storybook/StorybookFormikAddon";
 
 const initialValues = {
   someField: "",
@@ -14,6 +14,8 @@ storiesOf("Components V0", module)
   .addParameters({
     formik: {
       initialValues,
+      // TODO: Fix type:
+      // @ts-ignore
       validate: values => {
         const errors: Partial<Record<keyof Values, string>> = {};
         if (values.someField.length > 5) errors.someField = "Too long!";

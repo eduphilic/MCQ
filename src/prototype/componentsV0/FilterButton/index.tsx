@@ -1,13 +1,13 @@
-import { strings } from "features/localization";
 import React, { Component } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { strings } from "../../features/localization";
 
 import Hidden from "@material-ui/core/Hidden";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import FilterList from "@material-ui/icons/FilterList";
 
-import { Button } from "componentsV0/Button";
+import { Button } from "../Button";
 
 export interface FilterButtonProps {
   /**
@@ -61,7 +61,7 @@ export class FilterButton extends Component<
 
     return (
       <>
-        <Button onClick={this.handleClick} variant="flat">
+        <Button onClick={this.handleClick} variant="text">
           <IconMarginRight />
           <Hidden xsDown implementation="css">
             {strings.components_FilterButton_MenuCaptionText}
@@ -86,5 +86,5 @@ export class FilterButton extends Component<
 }
 
 const IconMarginRight = styled(FilterList)`
-  margin-right: ${({ theme }) => theme.spacing.unit}px;
+  margin-right: ${({ theme }) => theme.spacing(1)}px;
 `;

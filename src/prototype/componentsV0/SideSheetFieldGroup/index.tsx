@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
-import { Typography } from "componentsV0/Typography";
+import { Typography } from "../Typography";
 
 export interface SideSheetFieldGroupProps {
   /**
@@ -28,6 +28,6 @@ export class SideSheetFieldGroup extends Component<SideSheetFieldGroupProps> {
 
 const Wrapper = styled.div`
   &:not(:last-child) {
-    margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+    margin-bottom: ${({ theme }) => theme.spacing(2)}px;
   }
 `;
