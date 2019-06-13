@@ -1,6 +1,6 @@
-import { MuiThemeProvider, Theme } from "@material-ui/core/styles";
-import React, { SFC } from "react";
-import { ThemeProvider as StyledComponentsThemeProvider } from "./styledComponents";
+import { Theme } from "@material-ui/core/styles";
+import React, { ReactNode } from "react";
+import { ThemeProvider } from "../../display";
 import {
   adminAppDrawerTheme,
   darkTheme,
@@ -32,11 +32,12 @@ function createTheme(
       break;
   }
 
-  return (({ children }) => (
-    <MuiThemeProvider theme={theme}>
-      <StyledComponentsThemeProvider theme={theme}>
-        {children}
-      </StyledComponentsThemeProvider>
-    </MuiThemeProvider>
-  )) as SFC<{}>;
+  StaticThemeProvider.displayName = `StaticThemeProvider(${themeType})`;
+  return StaticThemeProvider;
+
+  function StaticThemeProvider(props: { children?: ReactNode }) {
+    const { children } = props;
+
+    return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  }
 }
