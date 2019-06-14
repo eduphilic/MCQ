@@ -37,12 +37,18 @@ module.exports = withTypescript(
  * @see https://www.npmjs.com/package/@weco/next-plugin-transpile-modules#usage
  */
 function withMaterialUITranspileModules(nextConfig = {}) {
-  const modules = ["@material-ui/core", "@material-ui/styles"];
+  const modules = {
+    "@material-ui/core": "es",
+    "@material-ui/icons": "esm",
+    "@material-ui/styles": "es",
+  };
 
   return withTM({
     ...nextConfig,
 
-    transpileModules: modules.map(moduleName => `${moduleName}/es`),
+    transpileModules: Object.keys(modules).map(
+      moduleName => `${moduleName}/es`,
+    ),
 
     webpack: (config, options) => {
       config.resolve = config.resolve || {};
@@ -50,9 +56,9 @@ function withMaterialUITranspileModules(nextConfig = {}) {
       config.resolve.alias = {
         ...config.resolve.alias,
 
-        ...modules.reduce(
-          (accumulator, moduleName) => {
-            accumulator[moduleName] = `${moduleName}/es`;
+        ...Object.entries(modules).reduce(
+          (accumulator, [moduleName, esDirectory]) => {
+            accumulator[moduleName] = `${moduleName}/${esDirectory}`;
 
             return accumulator;
           },
