@@ -1,5 +1,6 @@
 import { IEntryCategory } from "../../../models";
 
+// tslint:disable-next-line: interface-name
 export interface ICategorySubscription {
   /** Subscription ID. */
   id: string;

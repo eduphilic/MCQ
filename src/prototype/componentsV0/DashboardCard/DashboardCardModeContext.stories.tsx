@@ -57,8 +57,8 @@ storiesOf("Components V0", module)
                           {api.actions.getIsIndeterminate()
                             ? "[-]"
                             : api.actions.getIsAllSelected()
-                              ? "[*]"
-                              : "[ ]"}
+                            ? "[*]"
+                            : "[ ]"}
                           &nbsp;
                         </strong>
                         Selected Count: {api.actions.getSelectedCount()}

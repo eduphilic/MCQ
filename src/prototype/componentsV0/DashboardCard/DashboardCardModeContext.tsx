@@ -76,15 +76,6 @@ export class DashboardCardModeProvider extends Component<
   DashboardCardModeContextProps,
   DashboardCardModeContextState
 > {
-  constructor(props: DashboardCardModeContextProps) {
-    super(props);
-
-    this.state = {
-      ...initialState,
-      ...DashboardCardModeProvider.getResetSelectionStateFromProps(props),
-    };
-  }
-
   /**
    * Returns the card to display mode and sets all items to unselected.
    */
@@ -112,6 +103,15 @@ export class DashboardCardModeProvider extends Component<
     }
 
     return null;
+  }
+
+  constructor(props: DashboardCardModeContextProps) {
+    super(props);
+
+    this.state = {
+      ...initialState,
+      ...DashboardCardModeProvider.getResetSelectionStateFromProps(props),
+    };
   }
 
   /**

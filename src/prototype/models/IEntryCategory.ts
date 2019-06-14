@@ -1,5 +1,6 @@
 import { LocalizedString } from "../types";
 
+// tslint:disable-next-line: interface-name
 export interface IEntryCategory {
   id: string;
 

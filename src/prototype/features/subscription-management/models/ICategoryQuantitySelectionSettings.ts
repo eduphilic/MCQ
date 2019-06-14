@@ -3,6 +3,7 @@ import { LocalizedString } from "../../../types";
 /**
  * Provides the quantity options for Entry Categories.
  */
+// tslint:disable-next-line: interface-name
 export interface ICategoryQuantitySelectionSettings {
   /** Price per exam in (Rs). */
   examPriceRs: number;

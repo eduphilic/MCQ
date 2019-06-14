@@ -125,6 +125,9 @@ class DashboardFormDialogBase<Values extends object> extends Component<
     formikActions,
   ) => {
     try {
+      // TODO: Not sure why this was originally awaited. Maybe there's an error
+      // in the type definition or there was a change between versions.
+      // tslint:disable-next-line: await-promise
       await this.props.onSubmit(values, formikActions);
 
       formikActions.setSubmitting(false);

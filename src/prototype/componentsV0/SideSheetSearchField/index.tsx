@@ -37,8 +37,8 @@ export class SideSheetSearchField extends Component<
   SideSheetSearchFieldProps,
   SideSheetSearchFieldState
 > {
-  private id: number;
   state: SideSheetSearchFieldState = { value: "" };
+  private id: number;
 
   constructor(props: SideSheetSearchFieldProps) {
     super(props);

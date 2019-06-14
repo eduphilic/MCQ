@@ -17,6 +17,7 @@ export class HackCategorySubscriptionRenewalVisibilityToggle extends Component<
     this.setState(state => ({ revealed: !state.revealed }));
   };
 
+  // tslint:disable-next-line: member-ordering
   state: HackCategorySubscriptionRenewalVisibilityToggleState = {
     revealed: false,
     toggleReveal: this.toggleReveal,

@@ -5,15 +5,15 @@ import TextField, { TextFieldProps } from "@material-ui/core/TextField";
 
 export interface FormikTextFieldProps<Values extends object>
   extends Pick<
-      TextFieldProps,
-      | "autoFocus"
-      | "label"
-      | "placeholder"
-      | "fullWidth"
-      | "margin"
-      | "type"
-      | "disabled"
-    > {
+    TextFieldProps,
+    | "autoFocus"
+    | "label"
+    | "placeholder"
+    | "fullWidth"
+    | "margin"
+    | "type"
+    | "disabled"
+  > {
   name: Extract<keyof Values, string>;
 
   rawValue?: any;

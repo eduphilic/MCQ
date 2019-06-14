@@ -1,6 +1,7 @@
 /**
  * Represents a user account.
  */
+// tslint:disable-next-line: interface-name
 export interface IUser {
   /** Account ID. */
   id: string;

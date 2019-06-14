@@ -3,6 +3,7 @@ import { LocalizedString } from "../types";
 /**
  * An Entry (Army, AirForce, Officer).
  */
+// tslint:disable-next-line: interface-name
 export interface IEntry {
   id: string;
 

@@ -14,7 +14,7 @@ export const TextField: SFC<TextFieldProps> = props => {
 
   return (
     <TextFieldTooltip open={open} title={title}>
-      <TextFieldBase {...rest as any} />
+      <TextFieldBase {...(rest as any)} />
     </TextFieldTooltip>
   );
 };

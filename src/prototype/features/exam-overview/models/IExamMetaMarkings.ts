@@ -3,6 +3,7 @@
  * exam duration in minutes. It is displayed to the user before an exam is
  * started.
  */
+// tslint:disable-next-line: interface-name
 export interface IExamMetaMarkings {
   /** Total marks possible from completing an exam. */
   totalMarks: number;

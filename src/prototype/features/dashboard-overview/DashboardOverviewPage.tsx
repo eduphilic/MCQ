@@ -59,6 +59,7 @@ export class DashboardOverviewPage extends Component {
 
   private handleStatClick = (_id: string) => {
     if (this.dialogRef.current) {
+      // tslint:disable-next-line: no-floating-promises
       this.dialogRef.current.openDialogForCategory("some-category-id");
     }
   };

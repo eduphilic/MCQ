@@ -4,6 +4,7 @@ import { IExamMetaSubject } from "./IExamMetaSubject";
 /**
  * Exam information displayed to a user before they start an exam.
  */
+// tslint:disable-next-line: interface-name
 export interface IExamMeta {
   /**
    * Information about the subjects covered by an exam. This is displayed

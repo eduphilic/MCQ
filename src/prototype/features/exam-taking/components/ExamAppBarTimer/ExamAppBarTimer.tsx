@@ -20,7 +20,6 @@ export class ExamAppBarTimer extends Component<
   ExamAppBarTimerProps,
   ExamAppBarTimerState
 > {
-
   state: ExamAppBarTimerState = {
     secondsElapsed: 0,
     timerStarted: true,

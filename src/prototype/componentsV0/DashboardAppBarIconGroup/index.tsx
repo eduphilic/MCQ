@@ -23,11 +23,6 @@ export class DashboardAppBarIconGroup extends Component<{
 }> {
   private store: DashboardAppBarIconStoreState | null = null;
 
-  private grabStoreReference = (store: DashboardAppBarIconStoreState): null => {
-    this.store = store;
-    return null;
-  };
-
   shouldComponentUpdate() {
     return false;
   }
@@ -51,4 +46,9 @@ export class DashboardAppBarIconGroup extends Component<{
       </DashboardAppBarIconStore.Consumer>
     );
   }
+
+  private grabStoreReference = (store: DashboardAppBarIconStoreState): null => {
+    this.store = store;
+    return null;
+  };
 }

@@ -5,6 +5,7 @@ import { LocalizationKey } from "../../../types";
  * Represents a navigation link for use in the side drawer and bottom navigation
  * components.
  */
+// tslint:disable-next-line: interface-name
 export interface INavigationLink {
   /** Link title's localization key. */
   titleLocalizationKey: LocalizationKey;
