@@ -1,6 +1,7 @@
 import { StoreEnhancer } from "redux";
 
 export const createEnhancerDevTools = (): StoreEnhancer | undefined => {
+  if (!process.browser) return undefined;
   if (process.env.NODE_ENV !== "development") return undefined;
 
   return (
