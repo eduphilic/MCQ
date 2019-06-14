@@ -1,5 +1,12 @@
-import React, { SFC } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { ComponentType, SFC } from "react";
+import { MemoryRouterProps } from "react-router";
+import {
+  BrowserRouter,
+  BrowserRouterProps,
+  MemoryRouter,
+  Route,
+  Switch,
+} from "react-router-dom";
 
 import {
   MultipathRoute,
@@ -17,6 +24,11 @@ import { pages as examReviewPages } from "../features/exam-review";
 import { pages as landingPages } from "../features/landing";
 
 import { TestLoadingPage } from "../TestLoadingPage";
+
+// TODO: Remove this once pages are integrated into SSR.
+const Router: ComponentType<
+  BrowserRouterProps | MemoryRouterProps
+> = process.browser ? BrowserRouter : MemoryRouter;
 
 export const SiteMap: SFC<{}> = () => {
   const adminLoginPageNode = navigationLinksAdminLogin.map(l => (
