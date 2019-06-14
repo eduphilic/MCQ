@@ -1,7 +1,7 @@
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 export interface ToolbarAvatarProps {
   /**
@@ -40,11 +40,11 @@ export const ToolbarAvatar: SFC<ToolbarAvatarProps> = props => {
 
 const Wrapper = styled.div`
   display: flex;
-  margin: 0 ${props => props.theme.spacing.unit}px;
+  margin: 0 ${props => props.theme.spacing(1)}px;
   align-items: center;
 
   .avatar {
-    margin-right: ${props => props.theme.spacing.unit}px;
+    margin-right: ${props => props.theme.spacing(1)}px;
   }
 
   .name {

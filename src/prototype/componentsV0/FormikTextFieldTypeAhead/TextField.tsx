@@ -27,6 +27,8 @@ export class TextField extends Component<TextFieldProps> {
               value={formikApi.values[name]}
               fullWidth={fullWidth}
               error={Boolean(formikApi.errors[name])}
+              // TODO: Fix type error:
+              // @ts-ignore
               InputProps={{
                 ...inputProps,
                 inputRef: setInputRef,

@@ -1,7 +1,7 @@
 import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import { Panel } from "./Panel";
 

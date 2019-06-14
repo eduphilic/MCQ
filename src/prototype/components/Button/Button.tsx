@@ -8,7 +8,7 @@ import {
   // lighten,
 } from "@material-ui/core/styles/colorManipulator";
 import React from "react";
-import styled, { css } from "styled";
+import styled, { css } from "styled-components";
 import { styleTable } from "../Typography";
 
 const createCustomColorCss = (colorName: string, color: string) => {
@@ -117,8 +117,8 @@ const typographyCss = css`
   text-transform: none;
 `;
 
-export type ButtonProps = Omit<
-  MuiButtonProps,
+export type ButtonProps<D extends React.ElementType = "button"> = OmitStrict<
+  MuiButtonProps<D>,
   "classes" | "color" | "variant"
 > & {
   classes?: Omit<
@@ -129,39 +129,42 @@ export type ButtonProps = Omit<
   variant?: "text" | "outlined" | "contained" | "fab" | "extendedFab";
 };
 
-export const Button = styled<ButtonProps>(props => {
-  const {
-    className,
-    classes: parentClasses = {},
-    color = "default",
-    variant = "text",
-    ...rest
-  } = props;
+export const Button = styled(
+  // TODO: Fix this generic for the component prop:
+  <D extends React.ElementType = "button">(props: ButtonProps<D>) => {
+    const {
+      className,
+      classes: parentClasses = {},
+      color = "default",
+      variant = "text",
+      ...rest
+    } = props;
 
-  const classNames: string[] = [];
-  if (className) classNames.push(className);
-  classNames.push(`variant-${variant}`);
+    const classNames: string[] = [];
+    if (className) classNames.push(className);
+    classNames.push(`variant-${variant}`);
 
-  if (color !== "default" && color !== "inherit") {
-    classNames.push(`color-${color}`);
-  }
+    if (color !== "default" && color !== "inherit") {
+      classNames.push(`color-${color}`);
+    }
 
-  const classes: MuiButtonProps["classes"] = {
-    ...parentClasses,
-    disabled: "disabled",
-    focusVisible: "focusVisible",
-  };
+    const classes: MuiButtonProps["classes"] = {
+      ...parentClasses,
+      disabled: "disabled",
+      focusVisible: "focusVisible",
+    };
 
-  return (
-    <MuiButton
-      className={classNames.join(" ")}
-      classes={classes}
-      color={color === "inherit" ? "inherit" : "default"}
-      variant={variant}
-      {...rest}
-    />
-  );
-})`
+    return (
+      <MuiButton
+        className={classNames.join(" ")}
+        classes={classes}
+        color={color === "inherit" ? "inherit" : "default"}
+        variant={variant}
+        {...rest}
+      />
+    );
+  },
+)`
   ${typographyCss};
   ${buttonColorsCss};
 `;

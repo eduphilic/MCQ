@@ -1,6 +1,6 @@
 import { Formik, FormikConfig } from "formik";
 import React, { cloneElement, Component, ReactElement } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -14,7 +14,7 @@ import { DashboardFormDialogFieldConfig } from "./DashboardFormDialogFieldConfig
 import { DashboardFormDialogFormInput } from "./DashboardFormDialogFormInput";
 
 export type DashboardFormDialogFieldConfigs<Values extends object> = {
-  [key in keyof Values]: DashboardFormDialogFieldConfig
+  [key in keyof Values]: DashboardFormDialogFieldConfig;
 };
 
 export interface DashboardFormDialogProps<Values extends object>
@@ -53,29 +53,6 @@ class DashboardFormDialogBase<Values extends object> extends Component<
 > {
   state: DashboardFormDialogState = {
     open: false,
-  };
-
-  private handleClickOpen = () => this.setState({ open: true });
-
-  private handleSubmit: FormikConfig<Values>["onSubmit"] = async (
-    values,
-    formikActions,
-  ) => {
-    try {
-      await this.props.onSubmit(values, formikActions);
-
-      formikActions.setSubmitting(false);
-      formikActions.resetForm();
-      this.setState({ open: false });
-    } catch (e) {
-      /* tslint:disable-next-line:no-console */
-      console.log("Submission error:", e);
-    }
-  };
-
-  private handleCancel = (resetForm: () => any) => {
-    this.setState({ open: false });
-    resetForm();
   };
 
   render() {
@@ -140,6 +117,29 @@ class DashboardFormDialogBase<Values extends object> extends Component<
       </>
     );
   }
+
+  private handleClickOpen = () => this.setState({ open: true });
+
+  private handleSubmit: FormikConfig<Values>["onSubmit"] = async (
+    values,
+    formikActions,
+  ) => {
+    try {
+      await this.props.onSubmit(values, formikActions);
+
+      formikActions.setSubmitting(false);
+      formikActions.resetForm();
+      this.setState({ open: false });
+    } catch (e) {
+      /* tslint:disable-next-line:no-console */
+      console.log("Submission error:", e);
+    }
+  };
+
+  private handleCancel = (resetForm: () => any) => {
+    this.setState({ open: false });
+    resetForm();
+  };
 }
 
 const DialogSized = styled(Dialog).attrs({ classes: { paper: "paper" } })`

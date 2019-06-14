@@ -1,4 +1,4 @@
-import { css } from "styled";
+import { css } from "styled-components";
 
 /**
  * Box shadow that casts upward for use on bottom docked navigation components.

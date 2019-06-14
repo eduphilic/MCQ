@@ -34,6 +34,8 @@ export function createStore<State, Actions extends ActionsType<State>>(
   return {
     Provider,
     Consumer,
+    // TODO: Fix type:
+    // @ts-ignore
     createSetter: createSetter.bind(null, Consumer, storeName) as (
       field: keyof State,
     ) => SFC<Pick<State, keyof State>>,

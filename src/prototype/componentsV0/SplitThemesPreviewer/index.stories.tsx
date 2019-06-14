@@ -5,6 +5,6 @@ import { SplitThemesPreviewer } from ".";
 
 storiesOf("Components V0", module).add("SplitThemesPreviewer", () => (
   <SplitThemesPreviewer>
-    <Typography variant="headline">Themed Text</Typography>
+    <Typography variant="h5">Themed Text</Typography>
   </SplitThemesPreviewer>
 ));

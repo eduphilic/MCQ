@@ -1,5 +1,5 @@
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 import { styleTable } from "./styleTable";
 import { Style, Variant } from "./types";
 

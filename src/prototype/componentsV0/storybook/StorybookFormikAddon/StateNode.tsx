@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 type Props = {
   state: unknown;
@@ -69,16 +69,20 @@ const Typography = styled.p`
   font-size: 12px;
 `;
 
-const Arrow = styled<{
-  className?: string;
-  expanded: boolean;
-  visible: boolean;
-  depth: number;
-}>(({ className }) => (
-  <div className={className}>
-    <Typography className="arrow">▶</Typography>
-  </div>
-))`
+const Arrow = styled(
+  ({
+    className,
+  }: {
+    className?: string;
+    expanded: boolean;
+    visible: boolean;
+    depth: number;
+  }) => (
+    <div className={className}>
+      <Typography className="arrow">▶</Typography>
+    </div>
+  ),
+)`
   padding-right: 0.5em;
   margin-left: ${({ depth }) => depth * 0.875}em;
   ${({ visible }) => !visible && "visibility: hidden"};
@@ -91,8 +95,8 @@ const Arrow = styled<{
   }
 `;
 
-const Value = styled<{ className?: string; value: any }>(
-  ({ className, value }) => (
+const Value = styled(
+  ({ className, value }: { className?: string; value: any }) => (
     <>
       <Typography>:&nbsp;</Typography>
       <Typography className={className}>{wrapValue(value)}</Typography>

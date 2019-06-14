@@ -19,6 +19,8 @@ export const bindActions = <State, Actions extends ActionsType<State>>(
       });
     };
 
+    // TODO: Fix type:
+    // @ts-ignore
     boundActions[key] = boundAction as typeof actions[keyof Actions];
   });
 

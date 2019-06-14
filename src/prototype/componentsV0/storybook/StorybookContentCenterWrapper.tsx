@@ -1,11 +1,9 @@
-import React, { SFC } from "react";
+import React, { ComponentPropsWithoutRef, SFC } from "react";
 import styled from "styled-components";
 import { ContentCenterWrapper } from "../ContentCenterWrapper";
 
-type GetProps<T> = T extends React.ComponentClass<infer U> ? U : never;
-type ContentCenterWrapperProps = Omit<
-  GetProps<typeof ContentCenterWrapper>,
-  "ref"
+type ContentCenterWrapperProps = ComponentPropsWithoutRef<
+  typeof ContentCenterWrapper
 >;
 
 export type StorybookContentCenterWrapperProps = ContentCenterWrapperProps & {

@@ -1,5 +1,5 @@
 import React, { ReactNode, SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 export interface DashboardColumnContainerProps {
   /**

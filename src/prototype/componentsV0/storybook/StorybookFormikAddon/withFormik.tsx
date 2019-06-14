@@ -36,10 +36,14 @@ class FormikInstance extends Component<FormikInstanceProps> {
   }
 }
 
+// TODO: Fix type:
+// @ts-ignore
 export const withFormik = makeDecorator<{}, NonNullable<Parameters["formik"]>>({
   name: "withFormik",
   parameterName: "formik",
   skipIfNoParametersOrOptions: true,
+  // TODO: Fix type:
+  // @ts-ignore
   wrapper: (storyFn, context, options) => {
     const { initialValues, validate } = options.parameters;
 

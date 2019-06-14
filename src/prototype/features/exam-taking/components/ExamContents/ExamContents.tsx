@@ -1,9 +1,9 @@
 import React, { ReactNode, SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import withWidth, { isWidthUp, WithWidth } from "@material-ui/core/withWidth";
 
-import { BlockImage } from "componentsV0/BlockImage";
+import { BlockImage } from "../../../../componentsV0/BlockImage";
 
 export interface ExamContentsProps {
   /**
@@ -63,11 +63,11 @@ export { ExamContentsWithWidth as ExamContents };
 const ContainerHorizontal = styled.div`
   display: flex;
   width: 100%;
-  padding-bottom: ${({ theme }) => theme.spacing.unit}px;
+  padding-bottom: ${({ theme }) => theme.spacing(1)}px;
 
   > div {
     width: 100%;
-    padding: ${({ theme }) => theme.spacing.unit}px;
+    padding: ${({ theme }) => theme.spacing(1)}px;
   }
 `;
 

@@ -7,7 +7,7 @@ import React, {
   MouseEvent,
   ReactNode,
 } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 export interface FormikFileUploadBaseProps<Values extends object> {
   /**
@@ -44,9 +44,10 @@ export interface FormikFileUploadBaseChildrenProps {
    * intercepted. It provides a field value taken either from the currently
    * selected file's filename or optional placeholder text.
    */
-  children: (
-    api: { onMouseDown: EventHandler<MouseEvent<any>>; value: string },
-  ) => ReactNode;
+  children: (api: {
+    onMouseDown: EventHandler<MouseEvent<any>>;
+    value: string;
+  }) => ReactNode;
 }
 
 /**
@@ -58,24 +59,6 @@ export class FormikFileUploadBase<Values extends object> extends Component<
   FormikFileUploadBaseProps<Values> & FormikFileUploadBaseChildrenProps
 > {
   private fileInput = createRef<HTMLInputElement>();
-
-  private handleChange: EventHandler<ChangeEvent<HTMLInputElement>> = event => {
-    const { files } = event.target;
-    if (!files || files.length === 0) return;
-
-    const { name, formikApi: api } = this.props;
-    const { setFieldValue } = api;
-
-    setFieldValue(name, files[0]);
-  };
-
-  private handleClick: EventHandler<MouseEvent<HTMLDivElement>> = event => {
-    // Prevent control passed through children prop from gaining focus. This is
-    // a fix for Material UI styling behavior.
-    event.preventDefault();
-
-    if (this.fileInput.current) this.fileInput.current.click();
-  };
 
   render() {
     const {
@@ -110,6 +93,24 @@ export class FormikFileUploadBase<Values extends object> extends Component<
       </>
     );
   }
+
+  private handleChange: EventHandler<ChangeEvent<HTMLInputElement>> = event => {
+    const { files } = event.target;
+    if (!files || files.length === 0) return;
+
+    const { name, formikApi: api } = this.props;
+    const { setFieldValue } = api;
+
+    setFieldValue(name, files[0]);
+  };
+
+  private handleClick: EventHandler<MouseEvent<HTMLDivElement>> = event => {
+    // Prevent control passed through children prop from gaining focus. This is
+    // a fix for Material UI styling behavior.
+    event.preventDefault();
+
+    if (this.fileInput.current) this.fileInput.current.click();
+  };
 }
 
 const NativeInputHidden = styled.input`

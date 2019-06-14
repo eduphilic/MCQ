@@ -1,5 +1,5 @@
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
@@ -81,7 +81,11 @@ export const PanelBottomButtonNav: SFC<PanelBottomButtonNavProps> = props => {
         </LabelWrapper>
 
         {showBackButton && (
-          <Button className="back" variant="raised" onClick={onBackButtonClick}>
+          <Button
+            className="back"
+            variant="contained"
+            onClick={onBackButtonClick}
+          >
             {backButtonLabel}
           </Button>
         )}
@@ -89,7 +93,7 @@ export const PanelBottomButtonNav: SFC<PanelBottomButtonNavProps> = props => {
         {showNextButton && (
           <Button
             className={finalScreenStyle ? "final-screen" : "next"}
-            variant="raised"
+            variant="contained"
             color="secondary"
             onClick={onNextButtonClick}
           >
@@ -104,7 +108,7 @@ export const PanelBottomButtonNav: SFC<PanelBottomButtonNavProps> = props => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: ${props => props.theme.spacing.unit * 4}px;
+  margin-top: ${props => props.theme.spacing(4)}px;
 `;
 
 const LabelWrapper = styled.div`
@@ -114,7 +118,7 @@ const LabelWrapper = styled.div`
 const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin: ${props => props.theme.spacing.unit * 2}px 0;
+  margin: ${props => props.theme.spacing(2)}px 0;
 
   .next {
     color: ${props => props.theme.palette.primary.main};
@@ -135,6 +139,6 @@ const ButtonsWrapper = styled.div`
   }
 
   > button:last-child {
-    margin-left: ${props => props.theme.spacing.unit * 2}px;
+    margin-left: ${props => props.theme.spacing(2)}px;
   }
 `;

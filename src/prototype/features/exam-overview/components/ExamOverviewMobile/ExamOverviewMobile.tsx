@@ -41,7 +41,7 @@ export class ExamOverviewMobile extends Component<
 
     return (
       <>
-        <Tabs fullWidth value={value} onChange={this.handleTabChange}>
+        <Tabs width="100%" value={value} onChange={this.handleTabChange}>
           {tabs.map(([key, label]) => (
             <Tab
               key={key}

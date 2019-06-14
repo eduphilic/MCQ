@@ -30,12 +30,13 @@ export const createSetter = <State, Actions, Field extends keyof State>(
   class Setter extends Component<ContextApiProp & Field> {
     state = {};
 
+    // tslint:disable-next-line: member-ordering
     static getDerivedStateFromProps(props: ContextApiProp & Field) {
       const { contextApi } = props;
       if (!contextApi) throw createOutsideProviderError(storeName);
 
       const { setState } = contextApi as typeof contextApi & {
-        setState: ((update: Partial<State>) => any);
+        setState: (update: Partial<State>) => any;
       };
 
       if (contextApi[field] !== (props as any)[field]) {
@@ -53,7 +54,7 @@ export const createSetter = <State, Actions, Field extends keyof State>(
 
   const Container: SFC<Field> = props => (
     <Consumer>
-      {contextApi => <Setter contextApi={contextApi} {...props as any} />}
+      {contextApi => <Setter contextApi={contextApi} {...(props as any)} />}
     </Consumer>
   );
 

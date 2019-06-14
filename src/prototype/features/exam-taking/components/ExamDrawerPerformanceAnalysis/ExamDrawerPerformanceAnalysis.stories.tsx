@@ -1,8 +1,8 @@
 import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { drawerWidth } from "css";
 import React from "react";
-import { UserAppDrawerTheme } from "theme";
+import { drawerWidth } from "../../../../css";
+import { UserAppDrawerTheme } from "../../../../theme";
 
 import { ExamDrawerPerformanceAnalysis } from "./ExamDrawerPerformanceAnalysis";
 

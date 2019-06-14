@@ -1,6 +1,6 @@
-import React, { Component, ReactNode } from "react";
+import React, { Component, PropsWithoutRef, ReactNode } from "react";
 import SwipeableViews, { SwipeableViewsProps } from "react-swipeable-views";
-import styled from "styled";
+import styled from "styled-components";
 
 export type BaseSwippableTemplateProps = {
   /**
@@ -123,12 +123,14 @@ const StaticViewWrapper = styled.div`
   overflow-y: auto;
 `;
 
-const StyledSwipeableViews = styled<Omit<SwipeableViewsProps, "ref">>(props => (
-  <SwipeableViews
-    {...props}
-    springConfig={{ duration: "0.3s", easeFunction: "linear", delay: "0s" }}
-  />
-))`
+const StyledSwipeableViews = styled(
+  (props: PropsWithoutRef<SwipeableViewsProps>) => (
+    <SwipeableViews
+      {...props}
+      springConfig={{ duration: "0.3s", easeFunction: "linear", delay: "0s" }}
+    />
+  ),
+)`
   flex: 1;
 
   /* Enable Momentum Scrolling on iOS */
@@ -140,10 +142,10 @@ const Pane = styled.div`
   overflow-y: auto;
 
   & > * {
-    margin-top: ${({ theme }) => theme.spacing.unit * 2}px;
+    margin-top: ${({ theme }) => theme.spacing(2)}px;
   }
 
   & > *:last-child {
-    margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+    margin-bottom: ${({ theme }) => theme.spacing(2)}px;
   }
 `;

@@ -82,7 +82,7 @@ const ButtonBase = styled(MuiButton)`
   }
 `;
 
-export interface ButtonProps extends Omit<MuiButtonProps, "color"> {
+export interface ButtonProps extends OmitStrict<MuiButtonProps, "color"> {
   /**
    * Same color options as the Material UI button with the addition of the
    * following additional colors: orange

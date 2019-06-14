@@ -1,4 +1,4 @@
-import styled from "styled";
+import styled from "styled-components";
 
 /**
  * An image element that has the "display" style set to "block" and by default

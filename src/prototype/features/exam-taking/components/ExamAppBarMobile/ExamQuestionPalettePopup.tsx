@@ -1,4 +1,3 @@
-import { drawerWidth } from "css";
 import React, {
   cloneElement,
   Component,
@@ -6,7 +5,8 @@ import React, {
   MouseEvent,
   ReactElement,
 } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { drawerWidth } from "../../../../css";
 
 import Popover from "@material-ui/core/Popover";
 

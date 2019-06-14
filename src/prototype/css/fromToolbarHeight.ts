@@ -1,4 +1,4 @@
-import { css } from "styled";
+import { css } from "styled-components";
 
 const defaultValueBuilder = (height: number) => `${height}px`;
 

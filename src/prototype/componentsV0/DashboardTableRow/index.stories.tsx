@@ -14,7 +14,7 @@ storiesOf("Components V0", module).add("DashboardTableRow", () => {
     cells.push(
       <DashboardTableRow key={i}>
         <TableCell>John</TableCell>
-        <TableCell numeric>500</TableCell>
+        <TableCell align="right">500</TableCell>
       </DashboardTableRow>,
     );
   }

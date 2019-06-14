@@ -1,6 +1,6 @@
 import { storiesOf } from "@storybook/react";
 import React, { cloneElement, Fragment } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import { Button, ButtonProps } from ".";
 import { ContentCenterWrapper } from "../ContentCenterWrapper";

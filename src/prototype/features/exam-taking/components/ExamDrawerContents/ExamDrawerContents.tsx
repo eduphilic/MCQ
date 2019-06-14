@@ -1,7 +1,7 @@
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
-import { DrawerLogo } from "componentsV0/DrawerLogo";
+import { DrawerLogo } from "../../../../componentsV0/DrawerLogo";
 
 import { FeatureKey } from "../../types/FeatureKey";
 import { ExamDrawerPerformanceAnalysis } from "../ExamDrawerPerformanceAnalysis";

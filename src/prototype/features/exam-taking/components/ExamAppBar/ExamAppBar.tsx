@@ -68,7 +68,7 @@ const ExamAppBar: SFC<Props> = props => {
         {featureKey === "examReview" &&
           ["Success - 80%", "Wrong - 14%", "Left - 6%"].map(stat => (
             <Fragment key={stat}>
-              <Divider variant="vertical" verticalVariantHeight="40px" />
+              <Divider direction="vertical" verticalVariantHeight="40px" />
 
               <Typography color="primary">{stat}</Typography>
             </Fragment>
@@ -76,7 +76,7 @@ const ExamAppBar: SFC<Props> = props => {
 
         {featureKey === "examReview" && (
           <>
-            <Divider variant="vertical" verticalVariantHeight="40px" />
+            <Divider direction="vertical" verticalVariantHeight="40px" />
             <Typography>Difficulty - Easy</Typography>
           </>
         )}

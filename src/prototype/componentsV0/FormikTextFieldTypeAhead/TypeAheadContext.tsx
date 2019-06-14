@@ -43,6 +43,7 @@ export class TypeAheadContextProvider<Values extends object> extends Component<
   private setInputRef = (element: HTMLInputElement | null) =>
     this.setState({ inputRef: element });
 
+  // tslint:disable-next-line: member-ordering
   render() {
     const { formikApi, name, children, suggestions, ...rest } = this.props;
     const value = (formikApi.values[name] as any) as string;
@@ -55,7 +56,9 @@ export class TypeAheadContextProvider<Values extends object> extends Component<
 
     return (
       <Downshift
-        defaultInputValue={value}
+        // TODO: Check if this should be here in some way. The prop was removed
+        // from the type definitions:
+        // defaultInputValue={value}
         selectedItem={value}
         onStateChange={downshiftToFormikChangeAdapter(
           name,

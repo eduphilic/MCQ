@@ -1,6 +1,6 @@
 import { storiesOf } from "@storybook/react";
-import { drawerWidth } from "css";
 import React from "react";
+import { drawerWidth } from "../../../../css";
 
 import { ExamDrawerQuestionPalette } from ".";
 

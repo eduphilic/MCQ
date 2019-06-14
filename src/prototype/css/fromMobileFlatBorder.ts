@@ -1,4 +1,4 @@
-import { css } from "styled";
+import { css } from "styled-components";
 
 export const fromMobileFlatBorder = () => css`
   ${({ theme }) => theme.breakpoints.down("sm")} {

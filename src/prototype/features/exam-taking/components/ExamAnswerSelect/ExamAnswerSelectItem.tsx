@@ -40,7 +40,11 @@ export interface ExamAnswerSelectItemProps {
    * Enables item selection. This is set to false in exam review mode to remove
    * the button styling.
    *
+   * TODO: Come up with an alternate solution because the component polymorphism
+   * of the Material UI Button component seems to have changed.
+   *
    * @default true
+   * @deprecated
    */
   isButton?: boolean;
 
@@ -73,12 +77,17 @@ const ExamAnswerSelectItemBase: SFC<ExamAnswerSelectItemProps> = props => {
 
   const Icon = selectionStyle === "user-incorrect" ? Close : Check;
 
+  if (!isButton) {
+    /* tslint:disable-next-line:no-console */
+    console.warn('"isButton" prop is depreciated.');
+  }
+
   return (
     <Button
       className={classNames.join(" ")}
       variant="text"
       onClick={() => onClick(answerIndex)}
-      component={isButton ? "button" : "div"}
+      // component={isButton ? "button" : "div"}
       disableRipple={!isButton}
       disableFocusRipple={!isButton}
     >

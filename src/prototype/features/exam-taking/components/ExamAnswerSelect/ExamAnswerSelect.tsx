@@ -1,5 +1,5 @@
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import {
   ExamAnswerSelectItem,
@@ -77,7 +77,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 
   > *:not(:last-child) {
-    margin-bottom: ${({ theme }) => theme.spacing.unit}px;
+    margin-bottom: ${({ theme }) => theme.spacing(1)}px;
   }
 `;
 

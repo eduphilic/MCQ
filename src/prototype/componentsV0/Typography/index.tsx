@@ -2,8 +2,9 @@
 import MuiTypography, {
   TypographyProps as MuiTypographyProps,
 } from "@material-ui/core/Typography";
-import React, { CSSProperties, SFC } from "react";
-import styled, { ThemedStyledFunction } from "styled";
+import React, { CSSProperties, FC, SFC } from "react";
+import styled, { ThemedStyledFunction } from "styled-components";
+import { Theme } from "../../theme";
 
 export enum Variant {
   body = "body",
@@ -21,35 +22,37 @@ export enum Variant {
   examQuestion = "examQuestion",
 }
 
-type StyledMuiTypography = ReturnType<ThemedStyledFunction<MuiTypographyProps>>;
+type StyledMuiTypography = ReturnType<
+  ThemedStyledFunction<FC<MuiTypographyProps>, Theme>
+>;
 
 // Provide styling overrides for the various typography variants.
 const variants: Record<Variant, StyledMuiTypography> = {
-  body: styled(MuiTypography)``,
+  body: styled(MuiTypography).attrs({ variant: "body1" })``,
 
   cardTitle: styled(MuiTypography)`
     font-size: 18px;
     font-weight: 500;
   `,
 
-  cardLargeStatText: styled(MuiTypography).attrs({ variant: "display1" })``,
+  cardLargeStatText: styled(MuiTypography).attrs({ variant: "h4" })``,
 
   cardStatCaption: styled(MuiTypography).attrs({ variant: "caption" })``,
 
-  tableHeadCell: styled(MuiTypography).attrs({ variant: "body2" })``,
+  tableHeadCell: styled(MuiTypography).attrs({ variant: "body1" })``,
 
-  buttonBold: styled(MuiTypography).attrs({ variant: "body2" })``,
+  buttonBold: styled(MuiTypography).attrs({ variant: "body1" })``,
 
-  formFieldTitle: styled(MuiTypography).attrs({ variant: "body2" })`
+  formFieldTitle: styled(MuiTypography).attrs({ variant: "body1" })`
     color: ${({ theme }) => theme.palette.grey["700"]};
   `,
 
-  examDrawerTitle: styled(MuiTypography).attrs({ variant: "body1" })`
+  examDrawerTitle: styled(MuiTypography).attrs({ variant: "body2" })`
     font-size: 16px;
     font-weight: 500;
   `,
 
-  examDrawerSubtitle: styled(MuiTypography).attrs({ variant: "body1" })`
+  examDrawerSubtitle: styled(MuiTypography).attrs({ variant: "body2" })`
     font-size: 16px;
   `,
 
@@ -116,7 +119,7 @@ export const Typography: SFC<TypographyProps> = props => {
         ...(padLeftToolbarButton ? { paddingLeft: 32 } : {}),
         ...style,
       }}
-      {...muiTypographyProps as any}
+      {...(muiTypographyProps as any)}
     >
       {children}
     </TypographyBase>

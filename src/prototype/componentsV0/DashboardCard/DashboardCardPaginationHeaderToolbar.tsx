@@ -24,7 +24,7 @@ export class DashboardCardPaginationHeaderToolbar extends Component<
 
     return (
       <Toolbar>
-        <Typography muiTypographyProps={{ variant: "subheading" }}>
+        <Typography muiTypographyProps={{ variant: "subtitle1" }}>
           Showing {rowsPerPage} of {count} {listItemType}.
         </Typography>
       </Toolbar>

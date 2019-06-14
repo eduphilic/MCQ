@@ -108,5 +108,5 @@ const StyledButton = (styled(Button)`
 ` as any) as typeof Button;
 
 const RightIconPadding = styled.div`
-  width: ${({ theme }) => theme.spacing.unit}px;
+  width: ${({ theme }) => theme.spacing(1)}px;
 `;

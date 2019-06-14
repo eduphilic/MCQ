@@ -1,6 +1,6 @@
 import { storiesOf } from "@storybook/react";
 import React, { Fragment } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import Add from "@material-ui/icons/Add";
 import { Typography } from "../Typography";

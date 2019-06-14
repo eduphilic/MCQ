@@ -1,12 +1,12 @@
-import { examTimerYellow } from "css";
 import React, { Component } from "react";
-import styled, { css } from "styled";
+import styled, { css } from "styled-components";
+import { examTimerYellow } from "../../../../css";
 
 import Button from "@material-ui/core/Button";
 import Pause from "@material-ui/icons/Pause";
 import PlayArrow from "@material-ui/icons/PlayArrow";
 
-import { Typography } from "componentsV0/Typography";
+import { Typography } from "../../../../componentsV0/Typography";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ExamAppBarTimerProps {}
@@ -20,12 +20,12 @@ export class ExamAppBarTimer extends Component<
   ExamAppBarTimerProps,
   ExamAppBarTimerState
 > {
-  private timer: number | null = null;
 
   state: ExamAppBarTimerState = {
     secondsElapsed: 0,
     timerStarted: true,
   };
+  private timer: number | null = null;
 
   componentDidMount() {
     this.startTimer();
@@ -33,6 +33,27 @@ export class ExamAppBarTimer extends Component<
 
   componentWillUnmount() {
     this.stopTimer();
+  }
+
+  render() {
+    const secondsText = this.generateSecondsText();
+    const icon = this.state.timerStarted ? (
+      <PauseIconLeft />
+    ) : (
+      <ResumeIconLeft />
+    );
+
+    return (
+      <Wrapper>
+        <Button size="small" color="inherit" onClick={this.handleClick}>
+          {icon}
+
+          <Typography variant="examDrawerTitle" style={{ color: "inherit" }}>
+            {secondsText}
+          </Typography>
+        </Button>
+      </Wrapper>
+    );
   }
 
   private startTimer = () => {
@@ -63,27 +84,6 @@ export class ExamAppBarTimer extends Component<
     date.setSeconds(this.state.secondsElapsed);
     return date.toISOString().substr(11, 8);
   };
-
-  render() {
-    const secondsText = this.generateSecondsText();
-    const icon = this.state.timerStarted ? (
-      <PauseIconLeft />
-    ) : (
-      <ResumeIconLeft />
-    );
-
-    return (
-      <Wrapper>
-        <Button size="small" color="inherit" onClick={this.handleClick}>
-          {icon}
-
-          <Typography variant="examDrawerTitle" style={{ color: "inherit" }}>
-            {secondsText}
-          </Typography>
-        </Button>
-      </Wrapper>
-    );
-  }
 }
 
 const Wrapper = styled.div`
@@ -93,7 +93,7 @@ const Wrapper = styled.div`
 `;
 
 const iconMargin = css`
-  margin-right: ${({ theme }) => theme.spacing.unit / 2}px;
+  margin-right: ${({ theme }) => theme.spacing(2)}px;
 `;
 
 const PauseIconLeft = styled(Pause)`

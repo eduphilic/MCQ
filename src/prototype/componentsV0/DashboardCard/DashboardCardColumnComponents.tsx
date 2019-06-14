@@ -58,7 +58,7 @@ export const ColumnItemSingleLine: ColumnItemComponent = ({ itemColumn }) => (
 const StyledSwitch = styled((props: SwitchProps) => (
   <Switch
     color="primary"
-    classes={{ bar: "bar", checked: "checked", disabled: "disabled" }}
+    classes={{ track: "bar", checked: "checked", disabled: "disabled" }}
     {...props}
   />
 ))`

@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import Check from "@material-ui/icons/Check";
 
@@ -23,8 +23,8 @@ export type CheckmarkableCircleProps = {
  * Checkmark with primary and secondary color theme option. Grey when not
  * selected.
  */
-export const CheckmarkableCircle = styled<CheckmarkableCircleProps>(
-  ({ className, checked }) => (
+export const CheckmarkableCircle = styled(
+  ({ className, checked }: CheckmarkableCircleProps) => (
     <div className={className}>{checked && <StyledCheckIcon />}</div>
   ),
 )`

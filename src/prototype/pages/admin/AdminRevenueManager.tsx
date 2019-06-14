@@ -49,7 +49,7 @@ class AdminRevenueManager extends Component<
     const reportYearSelect = (
       <>
         <DropdownButton
-          variant="flat"
+          variant="text"
           onClick={this.handleFinancialYearDropdownButtonClick}
         >
           <Typography variant="buttonBold">Current Year Report</Typography>
@@ -81,7 +81,7 @@ class AdminRevenueManager extends Component<
           <Grid item xs={12}>
             <DashboardSecondaryToolbar>
               <DropdownButton
-                variant="flat"
+                variant="text"
                 onClick={this.handleFinancialYearDropdownButtonClick}
               >
                 <Typography variant="buttonBold">
@@ -105,7 +105,7 @@ class AdminRevenueManager extends Component<
               </Menu>
 
               <DropdownButton
-                variant="flat"
+                variant="text"
                 onClick={this.handleFinancialYearDropdownButtonClick}
               >
                 <Typography variant="buttonBold">

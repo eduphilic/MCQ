@@ -1,4 +1,4 @@
-import { css } from "styled";
+import { css } from "styled-components";
 
 const defaultValueBuilder = (spacing: number) => `${spacing}px`;
 
@@ -17,7 +17,7 @@ export const fromGutters = (
       ${properties
         .map(
           p => `
-            ${p}: ${valueBuilder(spacing.unit * 2)};
+            ${p}: ${valueBuilder(spacing(2))};
           `,
         )
         .join("\n")};
@@ -28,7 +28,7 @@ export const fromGutters = (
         ${properties
           .map(
             p => `
-              ${p}: ${valueBuilder(spacing.unit * 3)};
+              ${p}: ${valueBuilder(spacing(3))};
             `,
           )
           .join("\n")};

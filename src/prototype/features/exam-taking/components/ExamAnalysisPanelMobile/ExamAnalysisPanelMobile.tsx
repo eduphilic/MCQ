@@ -36,7 +36,7 @@ export const ExamAnalysisPanelMobile: SFC = props => {
 const VerticalDivider = styled((props: { className?: string }) => (
   <Divider
     className={props.className}
-    variant="vertical"
+    direction="vertical"
     verticalVariantHeight="16px"
   />
 ))`

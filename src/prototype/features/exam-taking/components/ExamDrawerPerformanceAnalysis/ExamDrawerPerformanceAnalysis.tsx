@@ -1,8 +1,8 @@
 import Hidden from "@material-ui/core/Hidden";
-import { Typography } from "componentsV0/Typography";
-import { examDrawerInfoCardBackground } from "css";
 import React, { Fragment, ReactNode, SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
+import { Typography } from "../../../../componentsV0/Typography";
+import { examDrawerInfoCardBackground } from "../../../../css";
 
 export type ExamDrawerPerformanceAnalysisProps = {
   examResult: "pass" | "fail";
@@ -88,53 +88,55 @@ type SectionTextProps = {
   statColor?: "none" | "green" | "red";
 };
 
-const SectionText = styled<SectionTextProps>(props => {
-  const {
-    children,
-    className,
-    large,
-    bold,
-    bottomMargin,
-    userRankColor,
-    statColor = "none",
-  } = props;
+const SectionText = styled(
+  (props: SectionTextProps & { children?: ReactNode }) => {
+    const {
+      children,
+      className,
+      large,
+      bold,
+      bottomMargin,
+      userRankColor,
+      statColor = "none",
+    } = props;
 
-  const classNames: string[] = [];
-  if (className) classNames.push(className);
-  if (!large) classNames.push("font-small");
-  if (userRankColor) classNames.push("user-rank-color");
+    const classNames: string[] = [];
+    if (className) classNames.push(className);
+    if (!large) classNames.push("font-small");
+    if (userRankColor) classNames.push("user-rank-color");
 
-  if (typeof children !== "string") {
-    throw new Error('Expected string for field "children".');
-  }
+    if (typeof children !== "string") {
+      throw new Error('Expected string for field "children".');
+    }
 
-  let text: ReactNode = children;
+    let text: ReactNode = children;
 
-  if (statColor !== "none") {
-    const result = /.*- */.exec(children);
-    if (!result) throw new Error("Incorrect format for text.");
+    if (statColor !== "none") {
+      const result = /.*- */.exec(children);
+      if (!result) throw new Error("Incorrect format for text.");
 
-    const description = result[0];
-    const stat = children.slice(description.length);
+      const description = result[0];
+      const stat = children.slice(description.length);
 
-    text = [
-      <Fragment key="description">{description}</Fragment>,
-      <Fragment key="stat">
-        <span className={statColor}>{stat}</span>
-      </Fragment>,
-    ];
-  }
+      text = [
+        <Fragment key="description">{description}</Fragment>,
+        <Fragment key="stat">
+          <span className={statColor}>{stat}</span>
+        </Fragment>,
+      ];
+    }
 
-  return (
-    <Typography
-      className={classNames.join(" ")}
-      variant={bold ? "examDrawerTitle" : "examDrawerSubtitle"}
-      muiTypographyProps={{ paragraph: bottomMargin }}
-    >
-      {text}
-    </Typography>
-  );
-})`
+    return (
+      <Typography
+        className={classNames.join(" ")}
+        variant={bold ? "examDrawerTitle" : "examDrawerSubtitle"}
+        muiTypographyProps={{ paragraph: bottomMargin }}
+      >
+        {text}
+      </Typography>
+    );
+  },
+)`
   &.font-small {
     font-size: 14px;
   }

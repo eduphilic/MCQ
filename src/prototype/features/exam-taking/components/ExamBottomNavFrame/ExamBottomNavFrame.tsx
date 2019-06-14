@@ -1,8 +1,8 @@
-import { bottomNavBoxShadow, fromToolbarHeight } from "css";
 import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
-import { State } from "store";
-import styled from "styled";
+import styled from "styled-components";
+import { bottomNavBoxShadow, fromToolbarHeight } from "../../../../css";
+import { State } from "../../../../store";
 import { actions } from "../../actions";
 import { buttonSelector } from "../../selectors";
 import { FeatureKey } from "../../types/FeatureKey";
@@ -10,7 +10,7 @@ import { FeatureKey } from "../../types/FeatureKey";
 import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
 
-import { TypographyButton } from "componentsV0/TypographyButton";
+import { TypographyButton } from "../../../../componentsV0/TypographyButton";
 import { ExamQuestionReportModal } from "../ExamQuestionReportModal";
 
 type StateProps = {

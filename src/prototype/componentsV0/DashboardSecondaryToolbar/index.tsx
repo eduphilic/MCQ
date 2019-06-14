@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -18,8 +18,7 @@ const Content = styled.div`
   padding-right: 24px;
 
   ${({ theme }) => theme.breakpoints.down("xs")} {
-    padding: ${({ theme }) =>
-      `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`};
+    padding: ${({ theme }) => `${theme.spacing(1)}px ${theme.spacing(2)}px`};
   }
 
   &:last-child {
@@ -48,7 +47,7 @@ export class DashboardSecondaryToolbar extends Component<
 const MultilineMobileToolbar = styled(Toolbar)`
   ${({ theme }) => theme.breakpoints.down("xs")} {
     flex-wrap: wrap;
-    padding: ${({ theme }) => theme.spacing.unit}px 0;
+    padding: ${({ theme }) => theme.spacing(1)}px 0;
 
     /* A little bit of a hack. Needs to set 100% width on children but
     it negatively affects the dropdown button component because it

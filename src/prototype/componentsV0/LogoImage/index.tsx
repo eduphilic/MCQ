@@ -1,4 +1,4 @@
-import styled from "styled";
+import styled from "styled-components";
 import { ReactComponent as JoinUniformSvg } from "./joinUniform.svg";
 
 /** Site logo image, takes up 100% of container by default. */

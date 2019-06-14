@@ -1,8 +1,9 @@
+import Box from "@material-ui/core/Box";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import React, { ReactNode, SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 const Item = styled((({ children, className }) => (
   <Grid className={className} item xs={12} sm container justify="center">
@@ -27,9 +28,11 @@ const DashboardCardStatsContentBase = styled((props => {
     <CardContent className={className}>
       <div>
         {leftIcon && (
-          <Hidden className="item-left-icon" xsDown implementation="css">
-            {leftIcon}
-          </Hidden>
+          <Box className="item-left-icon" clone>
+            <Hidden xsDown implementation="css">
+              {leftIcon}
+            </Hidden>
+          </Box>
         )}
 
         <Grid className="item-content" container justify="space-around">

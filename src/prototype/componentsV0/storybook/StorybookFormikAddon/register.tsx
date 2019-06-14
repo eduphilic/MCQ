@@ -1,3 +1,5 @@
+// TODO: Fix type:
+// @ts-ignore
 import addons, { AddonsApi } from "@storybook/addons";
 import { EventEmitter } from "events";
 import React, { Component } from "react";
@@ -51,6 +53,8 @@ addons.register("FORMIK", api => {
     title: "State",
     render: ({ active }) => (
       <PanelController
+        // TODO: Fix type:
+        // @ts-ignore
         channel={addons.getChannel()}
         api={api}
         active={active}

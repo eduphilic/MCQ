@@ -1,8 +1,8 @@
-import { examAppBarBottomRow, examAppBarTopRow } from "../../../../css";
 import React, { SFC } from "react";
 import { connect } from "react-redux";
+import styled from "styled-components";
+import { examAppBarBottomRow, examAppBarTopRow } from "../../../../css";
 import { State } from "../../../../store";
-import styled from "styled";
 import { DarkTheme } from "../../../../theme";
 import { actions } from "../../actions";
 import { buttonSelector } from "../../selectors";
@@ -149,7 +149,7 @@ const AppBarCenterContentWrapper = styled.div`
   justify-content: center;
 `;
 
-const IconButtonGroup = withProps<{ position: "left" | "right" }>()(styled.div)`
+const IconButtonGroup = styled.div<{ position: "left" | "right" }>`
   display: flex;
 
   ${({ position }) =>
@@ -176,6 +176,7 @@ const StartExamButton = styled(TypographyButton).attrs({
 `;
 
 // TODO: Fix this type definition:
+// @ts-ignore
 const SubmitExamButton = styled<TypographyButtonProps>(
   StartExamButton as any,
 ).attrs({

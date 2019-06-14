@@ -1,4 +1,4 @@
-import styled from "styled";
+import styled from "styled-components";
 
 export enum Variant {
   H1 = "H1",

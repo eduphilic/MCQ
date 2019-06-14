@@ -97,7 +97,7 @@ const StyledButton = styled(
 const StyledBlockImage = styled(BlockImage)`
   width: 48px;
   height: 48px;
-  margin-right: ${({ theme }) => theme.spacing.unit}px;
+  margin-right: ${({ theme }) => theme.spacing(1)}px;
 `;
 
 const textWrapperSizeAdjustment =

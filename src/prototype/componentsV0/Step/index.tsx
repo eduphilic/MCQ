@@ -1,7 +1,7 @@
 import { Theme } from "@material-ui/core/styles";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
 import React, { SFC } from "react";
-import styled, { withProps } from "styled";
+import styled from "styled-components";
 
 export interface StepProps {
   className?: string;
@@ -42,10 +42,10 @@ const Wrapper = styled.div`
   width: ${stepWidth}px;
 `;
 
-const Circle = withProps<{ visited: boolean }>()(styled.div)`
+const Circle = styled.div<{ visited: boolean }>`
   position: relative;
-  width: ${props => props.theme.spacing.unit * 4}px; /* 32px */
-  height: ${props => props.theme.spacing.unit * 4}px; /* 32px */
+  width: ${props => props.theme.spacing(4)}px; /* 32px */
+  height: ${props => props.theme.spacing(4)}px; /* 32px */
   border-radius: 50%;
   background-color: ${props =>
     props.visited
@@ -71,7 +71,7 @@ const Label: SFC<TypographyProps & { visited: boolean }> = ({
     // tslint:disable-next-line:object-literal-sort-keys
     style: ({ theme }: { theme: Theme }) => ({
       color: visited ? "#4f4f4f" : theme.palette.grey["500"],
-      marginTop: theme.spacing.unit,
+      marginTop: theme.spacing(1),
     }),
   })`
     font-size: 14px;

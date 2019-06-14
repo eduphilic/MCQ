@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { ContentCenterWrapper } from "componentsV0/ContentCenterWrapper";
-import { PlaceholderProvider } from "store";
+import { ContentCenterWrapper } from "../../../../componentsV0/ContentCenterWrapper";
+import { PlaceholderProvider } from "../../../../store";
 import { ExamBottomNavFrame } from "./ExamBottomNavFrame";
 
 storiesOf("Exam Taking", module)

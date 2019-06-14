@@ -1,6 +1,6 @@
 import TableCell, { TableCellProps } from "@material-ui/core/TableCell";
 import React, { SFC } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 export interface DashboardTableCellProps extends TableCellProps {
   /**

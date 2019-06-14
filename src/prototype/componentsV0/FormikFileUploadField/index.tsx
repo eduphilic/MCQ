@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled from "styled";
+import styled from "styled-components";
 
 import FormControl from "@material-ui/core/FormControl";
 import IconButton from "@material-ui/core/IconButton";

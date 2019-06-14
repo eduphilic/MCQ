@@ -4,7 +4,10 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { StorybookContentCenterWrapper } from "../../../../componentsV0/storybook/StorybookContentCenterWrapper";
-import { ExamAnswerSelectItem } from "./ExamAnswerSelectItem";
+import {
+  ExamAnswerSelectItem,
+  ExamAnswerSelectItemProps,
+} from "./ExamAnswerSelectItem";
 
 const stories = storiesOf("Exam Taking", module);
 
@@ -13,7 +16,7 @@ stories.addParameters({
 });
 
 stories.add("ExamAnswerSelectItem", () => {
-  const selectionStyle = select(
+  const selectionStyle = select<ExamAnswerSelectItemProps["selectionStyle"]>(
     "Selection Style",
     {
       "User Correct": "user-correct",
