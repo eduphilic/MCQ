@@ -18,14 +18,44 @@ const withTM = require("@weco/next-plugin-transpile-modules");
 module.exports = withTypescript(
   withCss(
     withFonts(
-      withImages(
-        withMaterialUITranspileModules({
-          poweredByHeader: false,
-        }),
+      withSvgr(
+        withImages(
+          withMaterialUITranspileModules({
+            poweredByHeader: false,
+          }),
+        ),
       ),
     ),
   ),
 );
+
+/**
+ * @param {import("next-config").NextConfig} nextConfig
+ * @return {import("next-config").NextConfig}
+ */
+function withSvgr(nextConfig = {}) {
+  return {
+    ...nextConfig,
+
+    webpack(config, options) {
+      config.module = config.module || { rules: [] };
+
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: [
+          {
+            loader: require.resolve("@svgr/webpack"),
+            options: {
+              dimensions: false,
+            },
+          },
+        ],
+      });
+
+      return nextConfig.webpack ? nextConfig.webpack(config, options) : config;
+    },
+  };
+}
 
 /**
  * Use the Material UI modules code for improved tree-shaking. This must be
