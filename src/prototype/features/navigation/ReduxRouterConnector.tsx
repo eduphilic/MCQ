@@ -1,5 +1,5 @@
+import Head from "next/head";
 import React, { Component } from "react";
-import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { State } from "../../store";
@@ -44,9 +44,9 @@ class ReduxRouterConnector extends Component<Props> {
 
     return (
       <>
-        <Helmet>
+        <Head>
           <title>{locationPageTitle}</title>
-        </Helmet>
+        </Head>
 
         {children}
       </>
