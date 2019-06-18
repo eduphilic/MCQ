@@ -1,32 +1,23 @@
-import React, { SFC } from "react";
+import TextField, { TextFieldProps } from "@material-ui/core/TextField";
 import styled from "styled-components";
-
-// tslint:disable-next-line:import-name
-import MuiTextField, { TextFieldProps } from "@material-ui/core/TextField";
 
 export type TextFieldBaseProps = TextFieldProps;
 
-const TextFieldMuiBase: SFC<TextFieldBaseProps> = props => (
-  <MuiTextField
-    {...props}
-    variant="standard"
-    InputProps={{
-      classes: { input: "input", root: "root" },
+/**
+ * Material UI text field, styled as a flat square input.
+ */
+export const TextFieldBase = styled(TextField).attrs(
+  (): TextFieldProps => ({
+    variant: "standard",
+    InputProps: {
       disableUnderline: true,
-    }}
-    fullWidth
-  />
-);
-
-/** Material UI text field styled as a flat square input. */
-export const TextFieldBase = styled(TextFieldMuiBase)`
+    },
+    fullWidth: true,
+  }),
+)`
   margin: ${props => props.theme.spacing(1)}px 0;
 
-  .root {
-    padding: 0;
-  }
-
-  .input {
+  .MuiInput-input {
     width: calc(100% - 24px);
     height: inherit;
     padding: 6px 12px;
@@ -38,16 +29,16 @@ export const TextFieldBase = styled(TextFieldMuiBase)`
       props.theme.transitions.create(["border-color", "box-shadow"])};
   }
 
-  .input:disabled {
+  .MuiInput-input:disabled {
     background-color: #eee;
   }
 
-  .input::placeholder {
+  .MuiInput-input::placeholder {
     color: #828282;
     opacity: 1;
   }
 
-  .input:focus {
+  .MuiInput-input:focus {
     border-color: #f9d017;
     box-shadow: 0 0 0 0.05rem rgba(249, 208, 23, 0.25);
   }
