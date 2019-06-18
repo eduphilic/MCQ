@@ -77,7 +77,7 @@ const ButtonBase = styled(MuiButton)`
     background-color: transparent !important;
   }
 
-  &.raised:disabled {
+  &.contained:disabled {
     background-color: rgba(0, 0, 0, 0.12) !important;
   }
 `;
@@ -103,7 +103,7 @@ export const Button: SFC<ButtonProps> = props => {
   const {
     className,
     color = "default",
-    variant = "raised",
+    variant = "contained",
     filled,
     ...rest
   } = props;
@@ -114,7 +114,7 @@ export const Button: SFC<ButtonProps> = props => {
   if (["default", ...extendedColors].includes(color)) {
     classes.push(`color-${color}`);
   }
-  if (variant === "raised") classes.push("raised");
+  if (variant === "contained") classes.push("contained");
   if (filled) classes.push("filled");
 
   return (
@@ -124,7 +124,7 @@ export const Button: SFC<ButtonProps> = props => {
         label: "label",
       }}
       size="small"
-      variant={variant || "raised"}
+      variant={variant}
       // Material UI does not accept the extended colors, passing along default
       // in its place.
       color={usesExtendedColor ? "default" : color}
