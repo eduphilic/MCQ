@@ -22,7 +22,7 @@ class DevelopmentAdminDashboardSnackbar extends Component<
   DevelopmentAdminDashboardSnackbarState
 > {
   state: DevelopmentAdminDashboardSnackbarState = {
-    open: true,
+    open: false,
   };
 
   handleButtonClick = (path: string) => {
