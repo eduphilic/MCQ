@@ -1,7 +1,6 @@
 import { Typography } from "@material-ui/core";
 import { ReactNode } from "react";
 import styled from "styled-components";
-import { ThemeProvider, themes } from "../display";
 
 type Props = {
   children?: ReactNode;
@@ -13,13 +12,11 @@ function StickyFooterImpl(props: Props) {
     <div className={props.className}>
       {props.children}
 
-      <ThemeProvider theme={themes.dark}>
-        <StickyFooterText>
-          <Typography variant="caption" color="textPrimary">
-            Copyright : Eduphilic Consultancy Pvt Ltd {new Date().getFullYear()}
-          </Typography>
-        </StickyFooterText>
-      </ThemeProvider>
+      <StickyFooterText>
+        <Typography variant="caption" color="textPrimary">
+          Copyright : Eduphilic Consultancy Pvt Ltd {new Date().getFullYear()}
+        </Typography>
+      </StickyFooterText>
     </div>
   );
 }

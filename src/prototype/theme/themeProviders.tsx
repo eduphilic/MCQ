@@ -1,6 +1,6 @@
 import { Theme } from "@material-ui/core/styles";
 import React, { ReactNode } from "react";
-import { ThemeProvider } from "../../display";
+// import { ThemeProvider } from "../../display";
 import {
   adminAppDrawerTheme,
   darkTheme,
@@ -8,14 +8,21 @@ import {
   userAppDrawerTheme,
 } from "./themes";
 
+/** @deprecated */
 export const LightTheme = createTheme("light");
+/** @deprecated */
 export const DarkTheme = createTheme("dark");
+/** @deprecated */
 export const AdminAppDrawerTheme = createTheme("adminAppDrawer");
+/** @deprecated */
 export const UserAppDrawerTheme = createTheme("userAppDrawer");
+
+let warned = false;
 
 function createTheme(
   themeType: "light" | "dark" | "adminAppDrawer" | "userAppDrawer",
 ) {
+  // @ts-ignore
   let theme: Theme;
   switch (themeType) {
     case "light":
@@ -38,6 +45,12 @@ function createTheme(
   function StaticThemeProvider(props: { children?: ReactNode }) {
     const { children } = props;
 
-    return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+    if (process.browser && !warned) {
+      warned = true;
+      /* tslint:disable-next-line:no-console */
+      console.trace('Depreciated "StaticThemeProvider" was used.');
+    }
+
+    return <>{children}</>;
   }
 }

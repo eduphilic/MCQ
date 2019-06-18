@@ -3,7 +3,7 @@ import Document, { Head, Main, NextScript } from "next/document";
 import React, { cloneElement, DOMAttributes, ReactElement } from "react";
 import { ServerStyleSheet as StyledComponentsServerStyleSheet } from "styled-components";
 import flush from "styled-jsx/server";
-import { themes } from "../src/display";
+import { theme } from "../src/display";
 
 /**
  * Custom Next.js Document component. It adds support for Material UI's CSS
@@ -21,10 +21,7 @@ class CustomDocument extends Document {
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
           />
-          <meta
-            name="theme-color"
-            content={themes.light.palette.primary.main}
-          />
+          <meta name="theme-color" content={theme.palette.primary.main} />
         </Head>
 
         <body>

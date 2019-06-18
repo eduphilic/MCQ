@@ -1,5 +1,4 @@
 import { createMuiTheme } from "@material-ui/core";
-import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme";
 import { CSSProperties } from "@material-ui/styles";
 import montserratLatin300Woff from "typeface-montserrat/files/montserrat-latin-300.woff";
 import montserratLatin300Woff2 from "typeface-montserrat/files/montserrat-latin-300.woff2";
@@ -50,13 +49,17 @@ const montserrat = montserratVariants.map(variant => ({
   ...variant,
 }));
 
-const baseThemeOptions: ThemeOptions = {
+export const theme = createMuiTheme({
   palette: {
     primary: {
       main: "#f9d017",
     },
     secondary: {
       main: "#00b150",
+    },
+    background: {
+      // Change the default grey background color to white.
+      default: "#fff",
     },
   },
 
@@ -72,29 +75,4 @@ const baseThemeOptions: ThemeOptions = {
       },
     },
   },
-};
-
-export const themes = {
-  light: createMuiTheme({
-    ...baseThemeOptions,
-
-    palette: {
-      ...baseThemeOptions.palette,
-
-      background: {
-        // Change the default grey background color to white.
-        default: "#fff",
-      },
-    },
-  }),
-
-  dark: createMuiTheme({
-    ...baseThemeOptions,
-
-    palette: {
-      ...baseThemeOptions.palette,
-
-      type: "dark",
-    },
-  }),
-};
+});
