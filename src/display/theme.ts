@@ -6,6 +6,8 @@ import montserratLatin400Woff from "typeface-montserrat/files/montserrat-latin-4
 import montserratLatin400Woff2 from "typeface-montserrat/files/montserrat-latin-400.woff2";
 import montserratLatin500Woff from "typeface-montserrat/files/montserrat-latin-500.woff";
 import montserratLatin500Woff2 from "typeface-montserrat/files/montserrat-latin-500.woff2";
+import montserratLatin700Woff from "typeface-montserrat/files/montserrat-latin-700.woff";
+import montserratLatin700Woff2 from "typeface-montserrat/files/montserrat-latin-700.woff2";
 
 // https://material-ui.com/components/typography/#install-with-npm
 const montserratVariants: {
@@ -37,6 +39,15 @@ const montserratVariants: {
       local('Montserrat-Medium'),
       url('${montserratLatin500Woff2}') format('woff2'),
       url('${montserratLatin500Woff}') format('woff')
+    `,
+  },
+  {
+    fontWeight: 700,
+    src: `
+      local('Montserrat Bold '),
+      local('Montserrat-Bold'),
+      url('${montserratLatin700Woff2}') format('woff2'),
+      url('${montserratLatin700Woff}') format('woff')
     `,
   },
 ];
