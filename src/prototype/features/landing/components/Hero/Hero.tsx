@@ -34,9 +34,7 @@ interface HeroProps {
 }
 
 export const Hero: SFC<HeroProps> = props => {
-  const backgroundImage = `${
-    process.env.PUBLIC_URL
-  }/images/hero/${encodeURIComponent(
+  const backgroundImage = `/static/images/hero/${encodeURIComponent(
     props.backgroundImage || defaultBackgroundImage,
   )}`;
   const backgroundAlpha = props.backgroundAlpha || 0.25;
