@@ -151,7 +151,7 @@ const HeroPrimaryText = styled(Typography).attrs({
   font-size: 36px;
   font-weight: 600;
   text-shadow: 2px 2px #000;
-  color: ${({ theme }) => theme.palette.secondary.main};
+  color: ${({ theme }) => theme.palette.primary.main};
 
   ${props => props.theme.breakpoints.down("xs")} {
     font-size: 40px;
@@ -166,7 +166,7 @@ const HeroSecondaryText = styled.ul`
   font-size: 24px;
   font-weight: 600;
   text-shadow: 2px 2px #000;
-  color: #63b760;
+  color: ${({ theme }) => theme.palette.secondary.main};
 
   > li {
     margin-bottom: 8px;
