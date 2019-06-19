@@ -76,17 +76,17 @@ const SideWrapper = styled.div`
 const Heading = styled(Typography).attrs({ variant: "subtitle1" })`
   margin-right: ${props => props.theme.spacing(2)}px;
   white-space: nowrap;
-  color: ${({ theme }) => theme.palette.secondary.main};
+  color: ${({ theme }) => theme.palette.primary.main};
 `;
 
 const StyledFormControlLabel = styled(FormControlLabel).attrs({
   classes: { label: "language-select-form-control-label" },
 })`
   .language-select-form-control-label {
-    color: ${({ theme }) => theme.palette.secondary.main};
+    color: ${({ theme }) => theme.palette.primary.main};
   }
 `;
 
 const StyledRadio = styled(Radio)`
-  color: ${({ theme }) => theme.palette.secondary.main};
+  color: ${({ theme }) => theme.palette.primary.main};
 `;
