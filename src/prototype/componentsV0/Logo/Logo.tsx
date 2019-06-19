@@ -50,15 +50,10 @@ const Wrapper = styled.div`
     width: ${logoHeight}px;
     height: ${logoHeight}px;
   }
-
-  .text {
-    padding: ${props => props.theme.spacing(2)}px;
-    color: #ecd100;
-  }
 `;
 
 const LogoText = styled(({ className }: LogoProps) => (
-  <Typography className={className} variant="caption">
+  <Typography className={className} variant="h5">
     <span>Join</span>
     <span>Uniform</span>
   </Typography>
@@ -69,14 +64,14 @@ const LogoText = styled(({ className }: LogoProps) => (
   line-height: 27px;
 
   > span {
-    color: #ecd100;
+    color: ${({ theme }) => theme.palette.primary.main};
   }
 
-  ${({ alternateSecondWordColoring }) =>
+  ${({ theme, alternateSecondWordColoring }) =>
     alternateSecondWordColoring &&
     `
       > span:last-child {
-        color: #00b150;
+        color: ${theme.palette.secondary.main};
       }
     `};
 
