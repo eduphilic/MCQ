@@ -5,9 +5,8 @@ import { DarkTheme, LightTheme } from "../../theme";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 
-import { PageFooter } from "../../../components";
+import { Logo, PageFooter } from "../../../components";
 import { ContentCenterWrapper } from "../ContentCenterWrapper";
-import { Logo } from "../Logo";
 
 export interface AdminLoginTemplateProps {
   heroNode: ReactNode;

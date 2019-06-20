@@ -12,8 +12,8 @@ stories.add("large", () => {
   return <Logo size={64} />;
 });
 
-stories.add("two tone", () => {
-  return <Logo twoTone />;
+stories.add("single tone", () => {
+  return <Logo singleTone />;
 });
 
 stories.add("shadowed", () => {

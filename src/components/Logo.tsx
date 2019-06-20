@@ -15,12 +15,11 @@ type Props = {
   size?: 48 | 64;
 
   /**
-   * Render logo using both primary and secondary theme colors rather than just
-   * the primary theme color.
+   * Render logo text using only a single color rather than two.
    *
    * @default false
    */
-  twoTone?: boolean;
+  singleTone?: boolean;
 
   /**
    * Add optional text shadow.
@@ -30,8 +29,16 @@ type Props = {
   shadowed?: boolean;
 };
 
-function LogoImpl(props: Props) {
-  const { size = 48, twoTone = false } = props;
+const LogoImage = styled.img<Required<Pick<Props, "size">>>`
+  width: ${props => props.size}px;
+  height: ${props => props.size}px;
+`;
+
+/**
+ * Site logo.
+ */
+export const Logo = styled((props: Props) => {
+  const { size = 48, singleTone = false } = props;
 
   return (
     <div className={props.className}>
@@ -43,22 +50,12 @@ function LogoImpl(props: Props) {
       <LogoText component="span" color="primary">
         Join
       </LogoText>
-      <LogoText component="span" color={twoTone ? "secondary" : "primary"}>
+      <LogoText component="span" color={singleTone ? "primary" : "secondary"}>
         Uniform
       </LogoText>
     </div>
   );
-}
-
-const LogoImage = styled.img<Required<Pick<Props, "size">>>`
-  width: ${props => props.size}px;
-  height: ${props => props.size}px;
-`;
-
-/**
- * Site logo.
- */
-export const Logo = styled(LogoImpl)`
+})`
   display: flex;
   flex-shrink: 0;
   align-items: center;

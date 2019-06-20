@@ -2,8 +2,8 @@ import React, { SFC } from "react";
 // import styled from "styled";
 
 import Toolbar from "@material-ui/core/Toolbar";
+import { Logo } from "../../../components";
 
-import { Logo } from "../Logo";
 // import { LogoutButton } from "../LogoutButton";
 
 export interface OnboardingAppBarProps {

@@ -1,4 +1,5 @@
 import { createMuiTheme, Theme as MuiTheme } from "@material-ui/core";
+import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 import { CSSProperties } from "@material-ui/styles";
 import montserratLatin300Woff from "typeface-montserrat/files/montserrat-latin-300.woff";
 import montserratLatin300Woff2 from "typeface-montserrat/files/montserrat-latin-300.woff2";
@@ -61,35 +62,44 @@ const montserrat = montserratVariants.map(variant => ({
 }));
 
 export type Theme = MuiTheme & {
-};
+  app: {
+    /**
+     * The Material UI breakpoint to use as the maximum width for the containers
+     * wrapping page contents.
+     */
+    maxContentWidthBreakpoint: Breakpoint;
+  };
 };
 
 export const theme: Theme = {
   ...createMuiTheme({
-  palette: {
-    primary: {
-      main: "#f9d017",
-    },
-    secondary: {
-      main: "#00b150",
-    },
-    background: {
-      // Change the default grey background color to white.
-      default: "#fff",
-    },
-  },
-
-  typography: {
-    fontFamily: ["Montserrat", "sans-serif"].join(", "),
-  },
-
-  overrides: {
-    MuiCssBaseline: {
-      "@global": {
-        // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/35614
-        "@font-face": (montserrat as unknown) as CSSProperties,
+    palette: {
+      primary: {
+        main: "#f9d017",
+      },
+      secondary: {
+        main: "#00b150",
+      },
+      background: {
+        // Change the default grey background color to white.
+        default: "#fff",
       },
     },
-  },
+
+    typography: {
+      fontFamily: ["Montserrat", "sans-serif"].join(", "),
+    },
+
+    overrides: {
+      MuiCssBaseline: {
+        "@global": {
+          // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/35614
+          "@font-face": (montserrat as unknown) as CSSProperties,
+        },
+      },
+    },
   }),
+  app: {
+    maxContentWidthBreakpoint: "lg",
+  },
 };

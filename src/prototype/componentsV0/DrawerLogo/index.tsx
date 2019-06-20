@@ -1,6 +1,5 @@
 import styled from "styled-components";
-
-import { Logo } from "../Logo";
+import { Logo } from "../../../components";
 
 /**
  * Logo image for use in navigation drawer.

@@ -1,6 +1,8 @@
+import { Toolbar } from "@material-ui/core";
+import { ToolbarProps } from "@material-ui/core/Toolbar";
 import React from "react";
 import styled, { css } from "styled-components";
-import { PageFooter, pageFooterHeight } from "../src/components";
+import { Logo, PageFooter, pageFooterHeight } from "../src/components";
 
 type LandingPageProps = {
   /**
@@ -39,13 +41,25 @@ export default function LandingPage() {
         heroBackgroundImageUrl={heroBackgroundImageUrl}
         heroBackgroundOpacity={heroBackgroundOpacity}
       >
-        <div>Header</div>
+        <LandingPageHeader>
+          <Logo size={64} shadowed />
+        </LandingPageHeader>
+
         <div style={{ height: "150vh" }}>Content</div>
       </LandingHeroSectionWrapper>
       <PageFooter />
     </LandingPageLayout>
   );
 }
+
+const LandingPageHeader = styled(Toolbar).attrs(
+  (): ToolbarProps => ({ component: "header" }),
+)`
+  width: 100%;
+  max-width: ${({ theme }) =>
+    theme.breakpoints.values[theme.app.maxContentWidthBreakpoint]}px;
+  margin: ${({ theme }) => theme.spacing(3)}px auto 0 auto;
+`;
 
 const heroBackgroundCss = css<
   Pick<LandingPageProps, "heroBackgroundImageUrl" | "heroBackgroundOpacity">

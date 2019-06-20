@@ -2,8 +2,8 @@ import React, { SFC } from "react";
 import styled from "styled-components";
 
 import Typography from "@material-ui/core/Typography";
+import { Logo } from "../../../components";
 
-import { Logo } from "../Logo";
 // import { LogoutButton, LogoutButtonProps } from "../LogoutButton";
 
 // tslint:disable-next-line:no-empty-interface
@@ -19,7 +19,7 @@ export const OnboardingHeader: SFC<OnboardingHeaderProps> = _props => {
 
   return (
     <Wrapper>
-      <Logo hideTextMobile />
+      <Logo size={64} />
       <Text>Welcome Jay, let's setup your account</Text>
       <LogoutButtonWrapper>
         {/* <LogoutButton {...logoutButtonProps} /> */}

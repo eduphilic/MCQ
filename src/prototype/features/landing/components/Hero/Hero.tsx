@@ -6,8 +6,8 @@ import { DarkTheme, LightTheme } from "../../../../theme";
 import Hidden from "@material-ui/core/Hidden";
 import Typography from "@material-ui/core/Typography";
 
+import { Logo } from "../../../../../components";
 import { ContentCenterWrapper } from "../../../../componentsV0/ContentCenterWrapper";
-import { Logo } from "../../../../componentsV0/Logo";
 import { HeroDescription } from "../HeroDescription";
 import { HeroFooter } from "../HeroFooter";
 import { LanguageSelect } from "../LanguageSelect";
