@@ -1,2 +1,2 @@
 export * from "./Logo";
-export * from "./StickyFooter";
+export * from "./PageFooter";
