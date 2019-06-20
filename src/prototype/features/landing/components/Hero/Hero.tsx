@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, SFC } from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
 import { strings } from "../../../../features/localization";
 import { DarkTheme, LightTheme } from "../../../../theme";
@@ -13,39 +13,11 @@ import { HeroFooter } from "../HeroFooter";
 import { LanguageSelect } from "../LanguageSelect";
 import { SigninSignupForms } from "../SigninSignupForms";
 
-const defaultBackgroundImage = "soldier-optimized.png";
-
-interface HeroProps {
-  /**
-   * Background image to use for the hero section of the landing page. It is the
-   * filename for an image in the folder /packages/app/public/images/hero.
-   *
-   * @default "soldier-optimized.png"
-   */
-  backgroundImage?: string;
-
-  /**
-   * Controls how much darkening is performed on the hero image to improve the
-   * legibility of the text.
-   *
-   * @default 0.25
-   */
-  backgroundAlpha?: number;
-}
-
-export const Hero: SFC<HeroProps> = props => {
-  const backgroundImage = `/static/images/hero/${encodeURIComponent(
-    props.backgroundImage || defaultBackgroundImage,
-  )}`;
-  const backgroundAlpha = props.backgroundAlpha || 0.25;
-
+export const Hero: FC = () => {
   return (
     <DarkTheme>
       <>
-        <Wrapper
-          backgroundImage={backgroundImage}
-          backgroundAlpha={backgroundAlpha}
-        >
+        <div>
           <ContentCenterWrapper>
             <DivideWrapper>
               <div>
@@ -80,7 +52,7 @@ export const Hero: SFC<HeroProps> = props => {
               </div>
             </DivideWrapper>
           </ContentCenterWrapper>
-        </Wrapper>
+        </div>
 
         <HeroDescription />
 
@@ -89,27 +61,6 @@ export const Hero: SFC<HeroProps> = props => {
     </DarkTheme>
   );
 };
-
-const Wrapper = styled(
-  ({
-    backgroundAlpha,
-    backgroundImage,
-    ...rest
-  }: ComponentPropsWithoutRef<"div"> & {
-    backgroundAlpha: number;
-    backgroundImage: string;
-  }) => <div {...rest} />,
-)`
-  display: block;
-  width: 100%;
-  padding: ${props => props.theme.spacing(3)}px 0;
-
-  ${props =>
-    `
-    background: linear-gradient( rgba(0, 0, 0, ${props.backgroundAlpha}), rgba(0, 0, 0, ${props.backgroundAlpha}) ), url("${props.backgroundImage}");
-    background-size: cover;
-    `}
-`;
 
 const DivideWrapper = styled.div`
   display: flex;
