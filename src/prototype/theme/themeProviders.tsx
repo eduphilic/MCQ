@@ -1,12 +1,4 @@
-import { Theme } from "@material-ui/core/styles";
 import React, { ReactNode } from "react";
-// import { ThemeProvider } from "../../display";
-import {
-  adminAppDrawerTheme,
-  darkTheme,
-  lightTheme,
-  userAppDrawerTheme,
-} from "./themes";
 
 /** @deprecated */
 export const LightTheme = createTheme("light");
@@ -22,23 +14,6 @@ let warned = false;
 function createTheme(
   themeType: "light" | "dark" | "adminAppDrawer" | "userAppDrawer",
 ) {
-  // @ts-ignore
-  let theme: Theme;
-  switch (themeType) {
-    case "light":
-      theme = lightTheme;
-      break;
-    case "dark":
-      theme = darkTheme;
-      break;
-    case "adminAppDrawer":
-      theme = adminAppDrawerTheme;
-      break;
-    case "userAppDrawer":
-      theme = userAppDrawerTheme;
-      break;
-  }
-
   StaticThemeProvider.displayName = `StaticThemeProvider(${themeType})`;
   return StaticThemeProvider;
 

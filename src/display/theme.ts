@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core";
+import { createMuiTheme, Theme as MuiTheme } from "@material-ui/core";
 import { CSSProperties } from "@material-ui/styles";
 import montserratLatin300Woff from "typeface-montserrat/files/montserrat-latin-300.woff";
 import montserratLatin300Woff2 from "typeface-montserrat/files/montserrat-latin-300.woff2";
@@ -60,7 +60,12 @@ const montserrat = montserratVariants.map(variant => ({
   ...variant,
 }));
 
-export const theme = createMuiTheme({
+export type Theme = MuiTheme & {
+};
+};
+
+export const theme: Theme = {
+  ...createMuiTheme({
   palette: {
     primary: {
       main: "#f9d017",
@@ -86,4 +91,5 @@ export const theme = createMuiTheme({
       },
     },
   },
-});
+  }),
+};

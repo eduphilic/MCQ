@@ -1,4 +1,4 @@
-import { Theme } from "@material-ui/core";
+import { Theme } from "../display";
 import "styled-components";
 
 declare module "styled-components" {

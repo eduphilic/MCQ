@@ -6,6 +6,7 @@
 import createMuiTheme, {
   ThemeOptions,
 } from "@material-ui/core/styles/createMuiTheme";
+import { Theme as CustomTheme } from "../../display/theme";
 
 const theme: ThemeOptions = {
   palette: {
@@ -63,4 +64,4 @@ export const userAppDrawerTheme = createMuiTheme({
   },
 });
 
-export type Theme = typeof lightTheme;
+export type Theme = CustomTheme;
