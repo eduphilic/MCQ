@@ -91,6 +91,13 @@ export const theme: Theme = {
     },
 
     overrides: {
+      // Remove uppercasing on buttons.
+      MuiButton: {
+        text: {
+          textTransform: "none",
+        },
+      },
+      // Set the font.
       MuiCssBaseline: {
         "@global": {
           // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/35614

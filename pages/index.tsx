@@ -1,6 +1,7 @@
-import { Toolbar } from "@material-ui/core";
+import { Button, Dialog, IconButton, Toolbar } from "@material-ui/core";
 import { ToolbarProps } from "@material-ui/core/Toolbar";
-import React from "react";
+import CloseIcon from "@material-ui/icons/Close";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { Logo, PageFooter, pageFooterHeight } from "../src/components";
 
@@ -34,6 +35,16 @@ enum GridTemplateArea {
 
 export default function LandingPage() {
   const { heroBackgroundImageUrl, heroBackgroundOpacity } = props;
+  const [authDialogOpen, setAuthDialogOpen] = useState(false);
+  const [authDialog, setAuthDialog] = useState<"signin" | "signup">("signin");
+
+  const handleSignInButtonClick = () => {
+    setAuthDialogOpen(true);
+  };
+
+  const handleAuthDialogClose = () => {
+    setAuthDialogOpen(false);
+  };
 
   return (
     <LandingPageLayout>
@@ -42,15 +53,38 @@ export default function LandingPage() {
         heroBackgroundOpacity={heroBackgroundOpacity}
       >
         <LandingPageHeader>
-          <Logo size={64} shadowed />
+          <Logo size={64} shadowed hideTextMobile />
+          <LandingPageHeaderSpacer />
+          <Button color="primary" onClick={handleSignInButtonClick}>
+            Sign in
+          </Button>
         </LandingPageHeader>
 
         <div style={{ height: "150vh" }}>Content</div>
       </LandingHeroSectionWrapper>
       <PageFooter />
+
+      <Dialog fullScreen open={authDialogOpen} onClose={handleAuthDialogClose}>
+        <LandingPageHeader>
+          <Logo size={64} />
+          <LandingPageHeaderSpacer />
+          <IconButton
+            edge="end"
+            color="inherit"
+            aria-label="Close"
+            onClick={handleAuthDialogClose}
+          >
+            <CloseIcon />
+          </IconButton>
+        </LandingPageHeader>
+      </Dialog>
     </LandingPageLayout>
   );
 }
+
+const LandingPageHeaderSpacer = styled.div`
+  flex: 1;
+`;
 
 const LandingPageHeader = styled(Toolbar).attrs(
   (): ToolbarProps => ({ component: "header" }),
