@@ -1,6 +1,6 @@
 import React, { SFC } from "react";
 
-import { PageFooter } from "../../componentsV0/PageFooter";
+import { PageFooter } from "../../../components";
 import { Hero } from "./components/Hero";
 import { IndexCards } from "./components/IndexCards";
 import { LandingTemplate } from "./components/LandingTemplate";
