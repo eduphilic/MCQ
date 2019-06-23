@@ -68,7 +68,7 @@ export const Logo = styled((props: Props) => {
         alt=""
       />
       <LogoText component="span" color="primary">
-        Join
+        Join&nbsp;
       </LogoText>
       <LogoText component="span" color={singleTone ? "primary" : "secondary"}>
         Uniform
