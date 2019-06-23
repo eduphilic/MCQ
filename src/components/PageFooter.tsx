@@ -2,7 +2,6 @@ import { Typography } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 import React from "react";
 import styled from "styled-components";
-import { theme } from "../display";
 
 type Props = {
   className?: string;
@@ -18,11 +17,6 @@ const copyrightYear =
     : // Ensure a minimum year is displayed in case of misconfigured computer
       // date.
       (currentYear < 2019 ? 2019 : currentYear).toString();
-
-/**
- * Page footer height, exported for use in grid layouts.
- */
-export const pageFooterHeight = theme.spacing(5);
 
 /**
  * Page copyright notice.
@@ -41,8 +35,7 @@ export const PageFooter = styled((props: Props) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: ${pageFooterHeight}px;
   margin-top: auto;
   color: ${grey[50]};
-  background-color: ${grey[800]};
+  background-color: ${grey[900]};
 `;

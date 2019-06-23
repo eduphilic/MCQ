@@ -3,7 +3,8 @@ import { ToolbarProps } from "@material-ui/core/Toolbar";
 import CloseIcon from "@material-ui/icons/Close";
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import { Logo, PageFooter, pageFooterHeight } from "../src/components";
+import { Logo } from "../src/components";
+import { LandingPageLayout } from "../src/components/LandingPageLayout";
 
 type LandingPageProps = {
   /**
@@ -36,7 +37,7 @@ enum GridTemplateArea {
 export default function LandingPage() {
   const { heroBackgroundImageUrl, heroBackgroundOpacity } = props;
   const [authDialogOpen, setAuthDialogOpen] = useState(false);
-  const [authDialog, setAuthDialog] = useState<"signin" | "signup">("signin");
+  // const [authDialog, setAuthDialog] = useState<"signin" | "signup">("signin");
 
   const handleSignInButtonClick = () => {
     setAuthDialogOpen(true);
@@ -47,23 +48,24 @@ export default function LandingPage() {
   };
 
   return (
-    <LandingPageLayout>
-      <LandingHeroSectionWrapper
-        heroBackgroundImageUrl={heroBackgroundImageUrl}
-        heroBackgroundOpacity={heroBackgroundOpacity}
-      >
-        <LandingPageHeader>
-          <Logo size={64} shadowed hideTextMobile />
-          <LandingPageHeaderSpacer />
-          <Button color="primary" onClick={handleSignInButtonClick}>
-            Sign in
-          </Button>
-        </LandingPageHeader>
-
-        <div style={{ height: "150vh" }}>Content</div>
-      </LandingHeroSectionWrapper>
-      <PageFooter />
-
+    <>
+      <LandingPageLayout
+        sectionFoldAboveElement={
+          <LandingHeroSectionWrapper
+            heroBackgroundImageUrl={heroBackgroundImageUrl}
+            heroBackgroundOpacity={heroBackgroundOpacity}
+          >
+            <LandingPageHeader>
+              <Logo size={64} shadowed hideTextMobile />
+              <LandingPageHeaderSpacer />
+              <Button color="primary" onClick={handleSignInButtonClick}>
+                Sign in
+              </Button>
+            </LandingPageHeader>
+          </LandingHeroSectionWrapper>
+        }
+        sectionFoldBelowElement={<div style={{ height: "150vh" }}>Content</div>}
+      />
       <Dialog fullScreen open={authDialogOpen} onClose={handleAuthDialogClose}>
         <LandingPageHeader>
           <Logo size={64} />
@@ -78,7 +80,7 @@ export default function LandingPage() {
           </IconButton>
         </LandingPageHeader>
       </Dialog>
-    </LandingPageLayout>
+    </>
   );
 }
 
@@ -107,7 +109,6 @@ const heroBackgroundCss = css<
 const LandingHeroSectionWrapper = styled.div<
   Pick<LandingPageProps, "heroBackgroundImageUrl" | "heroBackgroundOpacity">
 >`
-  min-height: 100vh;
   ${heroBackgroundCss};
 
   /* Internet Explorer support. */
@@ -120,29 +121,5 @@ const LandingHeroSectionWrapper = styled.div<
       "${GridTemplateArea.HeroHeader}"
       "${GridTemplateArea.HeroContents}";
     grid-template-rows: 60px 1fr;
-  }
-`;
-
-const LandingPageLayout = styled.div`
-  min-height: 100vh;
-
-  /* Internet Explorer support. */
-  display: flex;
-  flex-direction: column;
-
-  @supports (display: grid) {
-    display: grid;
-    grid-template-areas:
-      "${GridTemplateArea.Hero}"
-      "${GridTemplateArea.Footer}";
-    grid-template-rows: 1fr ${pageFooterHeight}px;
-
-    ${LandingHeroSectionWrapper} {
-      grid-area: ${GridTemplateArea.Hero};
-    }
-
-    ${PageFooter} {
-      grid-area: ${GridTemplateArea.Footer};
-    }
   }
 `;
