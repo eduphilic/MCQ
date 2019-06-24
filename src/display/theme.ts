@@ -68,6 +68,11 @@ export type Theme = MuiTheme & {
      * wrapping page contents.
      */
     maxContentWidthBreakpoint: Breakpoint;
+
+    colors: {
+      greenDark: string;
+      blueLight: string;
+    };
   };
 };
 
@@ -108,5 +113,9 @@ export const theme: Theme = {
   }),
   app: {
     maxContentWidthBreakpoint: "lg",
+    colors: {
+      greenDark: "#385723",
+      blueLight: "#00b0f0",
+    },
   },
 };
