@@ -42,7 +42,9 @@ const singleToneCss = css`
 
 const singleToneMobileCss = css`
   ${({ theme }) => theme.breakpoints.down("sm")} {
-    color: inherit;
+    span:nth-child(2) {
+      color: inherit;
+    }
   }
 `;
 
