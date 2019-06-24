@@ -41,13 +41,13 @@ export const LandingPageLayout = styled((props: LandingPageLayoutProps) => {
   min-height: 100vh;
 
   /* Above the fold content should take up entire screen height at a minimum. */
-  > div:first-child {
+  > *:first-child {
     min-height: 100vh;
   }
 
   /* On tablet viewport, make room at the bottom for sticky footer. */
   ${({ theme }) => theme.breakpoints.up("md")} {
-    > div:first-child {
+    > *:first-child {
       min-height: calc(100vh - ${PAGE_FOOTER_HEIGHT}px);
     }
   }
@@ -58,7 +58,7 @@ export const LandingPageLayout = styled((props: LandingPageLayoutProps) => {
   ${({ sectionFoldBelowElement }) =>
     Boolean(sectionFoldBelowElement) &&
     `
-    > div:first-child {
+    > *:first-child {
       min-height: 100vh !important;
     }
   `}
