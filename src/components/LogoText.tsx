@@ -1,8 +1,9 @@
 import { Typography } from "@material-ui/core";
+import { TypographyProps } from "@material-ui/core/Typography";
 import React from "react";
 import styled, { css } from "styled-components";
 
-export type LogoTextProps = {
+export type LogoTextProps = Pick<TypographyProps, "component"> & {
   className?: string;
 
   /**
@@ -54,8 +55,8 @@ const hideTextMobileCss = css`
   }
 `;
 
-export const LogoText = styled(({ className }: LogoTextProps) => (
-  <Typography className={className} color="primary">
+export const LogoText = styled((props: LogoTextProps) => (
+  <Typography {...props} color="primary">
     <span>Join&nbsp;</span>
     <span>Uniform</span>
   </Typography>
