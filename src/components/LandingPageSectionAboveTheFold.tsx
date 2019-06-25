@@ -1,4 +1,5 @@
 import { Typography } from "@material-ui/core";
+import { TypographyProps } from "@material-ui/core/Typography";
 import React, { ReactNode } from "react";
 import styled, { css } from "styled-components";
 import { Container } from "./Container";
@@ -151,7 +152,9 @@ const HeaderSection = styled.section`
   grid-area: ${GRID_AREA_HEADER_SECTION};
 `;
 
-const H1 = styled(Typography).attrs({ component: "h1" })`
+const H1 = styled(Typography).attrs(
+  (): TypographyProps => ({ component: "h1" }),
+)`
   margin: 24px 0;
   font-size: 16px;
   font-weight: 500;
