@@ -55,12 +55,18 @@ const hideTextMobileCss = css`
   }
 `;
 
-export const LogoText = styled((props: LogoTextProps) => (
-  <Typography {...props} color="primary">
-    <span>Join&nbsp;</span>
-    <span>Uniform</span>
-  </Typography>
-))`
+function LogoTextImpl(props: LogoTextProps) {
+  const { className } = props;
+
+  return (
+    <Typography className={className} color="primary">
+      <span>Join&nbsp;</span>
+      <span>Uniform</span>
+    </Typography>
+  );
+}
+
+export const LogoText = styled(LogoTextImpl)`
   font-size: 22px;
   font-weight: 600;
 
