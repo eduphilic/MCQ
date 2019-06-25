@@ -4,65 +4,106 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
-  Theme,
-  Typography,
 } from "@material-ui/core";
+import { grey } from "@material-ui/core/colors";
 import { FormControlProps } from "@material-ui/core/FormControl";
-import { styled } from "@material-ui/styles";
+import { FormLabelProps } from "@material-ui/core/FormLabel";
+import { RadioGroupProps } from "@material-ui/core/RadioGroup";
 import React, { useState } from "react";
+import styled from "styled-components";
 
-export function LanguageSelect() {
+type Props = {
+  className?: string;
+};
+
+const label = "Select Language";
+
+export function LanguageSelect(props: Props) {
+  const { className } = props;
   const [language, setLanguage] = useState("english");
 
   return (
-    <StyledFormControl aria-label="Preferred Language">
-      <FormLabel component="legend">
-        <Typography variant="subtitle1" color="primary">
-          <span>Preferred&nbsp;</span>
-          <span>Language :</span>
-        </Typography>
-      </FormLabel>
+    <StyledFormControl className={className} aria-label={label}>
+      <FieldSetWrapper>
+        <StyledFormLabel>{label}</StyledFormLabel>
 
-      <RadioGroup
-        row
-        value={language}
-        onChange={(_event, value) => setLanguage(value)}
-      >
-        <FormControlLabel
-          value={"english"}
-          control={<StyledRadio color="primary" />}
-          label="English"
-        />
-        <FormControlLabel
-          value={"hindi"}
-          control={<StyledRadio color="primary" />}
-          label="हिंदी"
-        />
-      </RadioGroup>
+        <StyledRadioGroup
+          value={language}
+          onChange={(_event, value) => setLanguage(value)}
+        >
+          <StyledFormControlLabel
+            value={"english"}
+            control={<StyledRadio color="primary" />}
+            label="English"
+          />
+          <StyledFormControlLabel
+            value={"hindi"}
+            control={<StyledRadio color="primary" />}
+            label="हिंदी"
+          />
+        </StyledRadioGroup>
+      </FieldSetWrapper>
     </StyledFormControl>
   );
 }
 
-const StyledFormControl = styled((props: FormControlProps) => (
-  <FormControl {...props} />
-))<Theme, {}>(({ theme }) => ({
-  flexShrink: 0,
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
-  color: theme.palette.primary.main,
+const StyledFormControl = styled(FormControl).attrs((): FormControlProps & {
+  component: "fieldset";
+} => ({
+  component: "fieldset",
+  fullWidth: true,
+}))`
+  color: #fff;
+`;
 
-  "& > *:first-child": {
-    marginRight: theme.spacing(2),
-  },
+const FieldSetWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 
-  [theme.breakpoints.down("xs")]: {
-    "& legend span:first-child": {
-      display: "none",
-    },
-  },
-}));
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+  }
+`;
 
-const StyledRadio = styled(Radio)({
-  color: "inherit !important",
-});
+const StyledFormLabel = styled(FormLabel).attrs((): FormLabelProps & {
+  component: "legend";
+} => ({ component: "legend" }))`
+  color: ${grey[500]};
+  padding-bottom: 2px;
+
+  &.Mui-focused {
+    color: #fff;
+  }
+`;
+
+const StyledFormControlLabel = styled(FormControlLabel)`
+  margin-right: 0;
+`;
+
+const StyledRadioGroup = styled(RadioGroup).attrs(
+  (): RadioGroupProps => ({ row: true }),
+)`
+  flex: 1;
+
+  ${StyledFormControlLabel} {
+    width: 50%;
+  }
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    justify-content: space-around;
+
+    @supports (justify-content: space-evenly) {
+      justify-content: space-evenly;
+    }
+
+    ${StyledFormControlLabel} {
+      width: auto;
+    }
+  }
+`;
+
+const StyledRadio = styled(Radio)`
+  color: #fff;
+`;

@@ -2,6 +2,7 @@ import { Typography } from "@material-ui/core";
 import React, { ReactNode } from "react";
 import styled, { css } from "styled-components";
 import { Container } from "./Container";
+import { LanguageSelect } from "./LanguageSelect";
 import { LogoImage } from "./LogoImage";
 import { LogoText } from "./LogoText";
 
@@ -60,10 +61,17 @@ export function LandingPageSectionAboveTheFold() {
             ))}
           </UL>
         </HeaderSection>
+
+        <StyledLanguageSelect />
       </Wrapper>
     </Background>
   );
 }
+
+const GRID_AREA_HEADER = "header";
+const GRID_AREA_HEADER_SECTION = "header-section";
+const GRID_AREA_LANGUAGE_SELECT = "language-select";
+const SIDEBAR_WIDTH = 400;
 
 const Wrapper = styled(Container)`
   flex: 1;
@@ -77,10 +85,10 @@ const Wrapper = styled(Container)`
     ${({ theme }) => theme.breakpoints.up("md")} {
       display: grid;
       grid-template-areas:
-        "header aside"
+        "${GRID_AREA_HEADER} ${GRID_AREA_LANGUAGE_SELECT}"
         "header-section section";
       grid-template-rows: 64px 1fr;
-      grid-template-columns: 1fr 400px;
+      grid-template-columns: 1fr ${SIDEBAR_WIDTH}px;
       align-items: unset;
     }
   }
@@ -116,7 +124,7 @@ const Header = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
-  grid-area: header;
+  grid-area: ${GRID_AREA_HEADER};
 
   ${LogoImage} {
     margin-bottom: 8px;
@@ -140,7 +148,7 @@ const HeaderSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  grid-area: header-section;
+  grid-area: ${GRID_AREA_HEADER_SECTION};
 `;
 
 const H1 = styled(Typography).attrs({ component: "h1" })`
@@ -174,4 +182,9 @@ const UL = styled.ul`
   ${({ theme }) => theme.breakpoints.up("md")} {
     display: unset;
   }
+`;
+
+const StyledLanguageSelect = styled(LanguageSelect)`
+  max-width: ${SIDEBAR_WIDTH}px;
+  grid-area: ${GRID_AREA_LANGUAGE_SELECT};
 `;
