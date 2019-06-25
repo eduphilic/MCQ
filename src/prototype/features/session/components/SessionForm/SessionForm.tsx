@@ -15,11 +15,10 @@ import { Values } from "./Values";
 
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
 
+import { AuthenticationFormCardHeader } from "../../../../../components/AuthenticationFormCardHeader";
 import { Card } from "../../../../components/Card";
 import { Button } from "../../../../componentsV0/Button";
-import { FormHeader } from "./FormHeader";
 import { PasswordResetLink } from "./PasswordResetLink";
 import { TermsConditionsCheckbox } from "./TermsConditionsCheckbox";
 import { TextField, TextFieldProps } from "./TextField";
@@ -146,7 +145,9 @@ const SessionForm: SFC<Props> = props => {
       }) => (
         <form onSubmit={handleSubmit}>
           <Card>
-            <CardHeader title={<FormHeader>{formTitle}</FormHeader>} />
+            <AuthenticationFormCardHeader>
+              {formTitle}
+            </AuthenticationFormCardHeader>
 
             <CardContent>
               {textFields.map(({ name, element }) =>
