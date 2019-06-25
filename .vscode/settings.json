@@ -1,7 +1,4 @@
 {
-  "files.watcherExclude": {
-    "old": true
-  },
   "eslint.autoFixOnSave": true,
   "eslint.validate": [
     "javascript",
