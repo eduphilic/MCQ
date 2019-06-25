@@ -1,6 +1,6 @@
 import { Typography } from "@material-ui/core";
 import React, { ReactNode } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Container } from "./Container";
 import { LogoImage } from "./LogoImage";
 import { LogoText } from "./LogoText";
@@ -13,12 +13,23 @@ type LandingPageSectionAboveTheFoldProps = OmitStrict<
    * Header text.
    */
   headerText: string;
+
+  /**
+   * List of features to list under `headerText`.
+   */
+  featureTexts: string[];
 };
 
 const placeholderProps: LandingPageSectionAboveTheFoldProps = {
   backgroundImageUrl: "/static/images/hero/soldier-optimized.png",
   backgroundDarkenFactor: 0.25,
   headerText: "Prepare for Indian Defence Forces Exams",
+  featureTexts: [
+    "Mock test as asked in Armed Forces exams.",
+    "Full length Weekly Mock Test",
+    "Instant result with detail analysis",
+    "All India rank",
+  ],
 };
 
 export function LandingPageSectionAboveTheFold() {
@@ -26,6 +37,7 @@ export function LandingPageSectionAboveTheFold() {
     backgroundImageUrl,
     backgroundDarkenFactor,
     headerText,
+    featureTexts,
   } = placeholderProps;
 
   return (
@@ -41,6 +53,12 @@ export function LandingPageSectionAboveTheFold() {
 
         <HeaderSection>
           <H1>{headerText}</H1>
+
+          <UL>
+            {featureTexts.map(featureText => (
+              <li key={featureText}>{featureText}</li>
+            ))}
+          </UL>
         </HeaderSection>
       </Wrapper>
     </Background>
@@ -114,6 +132,10 @@ const Header = styled.header`
   }
 `;
 
+const textShadowCss = css`
+  text-shadow: 2px 2px #000;
+`;
+
 const HeaderSection = styled.section`
   display: flex;
   flex-direction: column;
@@ -122,7 +144,7 @@ const HeaderSection = styled.section`
 `;
 
 const H1 = styled(Typography).attrs({ component: "h1" })`
-  margin: 16px 0;
+  margin: 24px 0;
   font-size: 16px;
   font-weight: 500;
   text-align: center;
@@ -132,7 +154,24 @@ const H1 = styled(Typography).attrs({ component: "h1" })`
     font-size: 36px;
     font-weight: 600;
     text-align: unset;
-    text-shadow: 2px 2px #000;
     color: ${({ theme }) => theme.palette.primary.main};
+    ${textShadowCss};
+  }
+`;
+
+const UL = styled.ul`
+  display: none;
+  margin: 0 0 56px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.palette.secondary.main};
+  ${textShadowCss};
+
+  li:not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    display: unset;
   }
 `;

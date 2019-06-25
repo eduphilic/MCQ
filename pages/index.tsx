@@ -7,22 +7,7 @@ import { Logo } from "../src/components";
 import { LandingPageLayout } from "../src/components/LandingPageLayout";
 import { LandingPageSectionAboveTheFold } from "../src/components/LandingPageSectionAboveTheFold";
 
-// type LandingPageProps = {};
-
-// const props: LandingPageProps = {};
-
-// enum GridTemplateArea {
-//   // Outer grid.
-//   Hero = "hero",
-//   Footer = "footer",
-
-//   // Inner hero grid.
-//   HeroHeader = "hero-header",
-//   HeroContents = "hero-contents",
-// }
-
 export default function LandingPage() {
-  // const { heroBackgroundImageUrl, heroBackgroundOpacity } = props;
   const [authDialogOpen, setAuthDialogOpen] = useState(false);
   // const [authDialog, setAuthDialog] = useState<"signin" | "signup">("signin");
 
@@ -69,21 +54,3 @@ const LandingPageHeader = styled(Toolbar).attrs(
     theme.breakpoints.values[theme.app.maxContentWidthBreakpoint]}px;
   margin: ${({ theme }) => theme.spacing(3)}px auto 0 auto;
 `;
-
-// const LandingHeroSectionWrapper = styled.div<
-//   Pick<LandingPageProps, "heroBackgroundImageUrl" | "heroBackgroundOpacity">
-// >`
-//   ${heroBackgroundCss};
-
-//   /* Internet Explorer support. */
-//   display: flex;
-//   flex-direction: column;
-
-//   @supports (display: grid) {
-//     display: grid;
-//     grid-template-areas:
-//       "${GridTemplateArea.HeroHeader}"
-//       "${GridTemplateArea.HeroContents}";
-//     grid-template-rows: 60px 1fr;
-//   }
-// `;
