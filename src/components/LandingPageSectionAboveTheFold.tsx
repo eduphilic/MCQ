@@ -134,6 +134,7 @@ const backgroundCss = css<BackgroundProps>`
 
 const Background = styled.section<BackgroundProps>`
   display: flex;
+  flex-direction: column;
   background-color: ${({ theme }) => theme.app.colors.greenDark};
 
   ${({ theme }) => theme.breakpoints.up("md")} {

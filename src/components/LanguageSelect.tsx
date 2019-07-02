@@ -84,13 +84,12 @@ const StyledFormControlLabel = styled(FormControlLabel)`
 const StyledRadioGroup = styled(RadioGroup).attrs(
   (): RadioGroupProps => ({ row: true }),
 )`
-  flex: 1;
-
   ${StyledFormControlLabel} {
     width: 50%;
   }
 
   ${({ theme }) => theme.breakpoints.up("md")} {
+    flex: 1;
     justify-content: space-around;
 
     @supports (justify-content: space-evenly) {
