@@ -17,11 +17,14 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 
 import { AuthenticationFormCardHeader } from "../../../../../components/AuthenticationFormCardHeader";
+import {
+  AuthenticationFormTextField,
+  AuthenticationFormTextFieldProps,
+} from "../../../../../components/AuthenticationFormTextField";
 import { Card } from "../../../../components/Card";
 import { Button } from "../../../../componentsV0/Button";
 import { PasswordResetLink } from "./PasswordResetLink";
 import { TermsConditionsCheckbox } from "./TermsConditionsCheckbox";
-import { TextField, TextFieldProps } from "./TextField";
 
 type OwnProps = {
   type: FormType;
@@ -46,7 +49,7 @@ type StateProps = {
 type Props = OwnProps & DispatchProps & StateProps & RouteComponentProps<{}>;
 
 type TextFields = {
-  element: ReactElement<TextFieldProps>;
+  element: ReactElement<AuthenticationFormTextFieldProps>;
   name: keyof TextFieldValues;
 }[];
 
@@ -122,7 +125,13 @@ const SessionForm: SFC<Props> = props => {
 
       return {
         name,
-        element: <TextField key={name} name={name} {...textFieldProps[name]} />,
+        element: (
+          <AuthenticationFormTextField
+            key={name}
+            name={name}
+            {...textFieldProps[name]}
+          />
+        ),
       };
     })
     .filter(f => f !== null) as TextFields;

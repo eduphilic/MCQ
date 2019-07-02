@@ -1,8 +1,9 @@
-import { Card, Typography } from "@material-ui/core";
+import { Card, CardContent, Typography } from "@material-ui/core";
 import { TypographyProps } from "@material-ui/core/Typography";
 import React, { ReactNode } from "react";
 import styled, { css } from "styled-components";
 import { AuthenticationFormCardHeader } from "./AuthenticationFormCardHeader";
+import { AuthenticationFormTextField } from "./AuthenticationFormTextField";
 import { Container } from "./Container";
 import { LanguageSelect } from "./LanguageSelect";
 import { LogoImage } from "./LogoImage";
@@ -68,16 +69,30 @@ export function LandingPageSectionAboveTheFold() {
           <LanguageSelect />
         </LanguageSelectSection>
 
-        <Card>
-          <AuthenticationFormCardHeader
-            title="Signup"
-            subheader={
-              <span>
-                Already a Member? <strong>Login</strong>
-              </span>
-            }
-          />
-        </Card>
+        <AuthenticationSection>
+          <Card>
+            <AuthenticationFormCardHeader
+              title="Signup"
+              subheader={
+                <span>
+                  Already a Member? <strong>Login</strong>
+                </span>
+              }
+            />
+            <CardContent>
+              <AuthenticationFormTextField
+                label="This is a test error!"
+                placeholder="Enter Email Address"
+                type="email"
+              />
+              <AuthenticationFormTextField
+                label="This is a test error!"
+                placeholder="Enter Password"
+                type="password"
+              />
+            </CardContent>
+          </Card>
+        </AuthenticationSection>
       </Wrapper>
     </Background>
   );
@@ -215,4 +230,10 @@ const LanguageSelectSection = styled.section`
   display: flex;
   width: 100%;
   max-width: ${SIDEBAR_WIDTH}px;
+`;
+
+const AuthenticationSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
