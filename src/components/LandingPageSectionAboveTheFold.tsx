@@ -109,14 +109,21 @@ type BackgroundProps = {
   backgroundDarkenFactor: number;
 };
 
+const backgroundCss = css<BackgroundProps>`
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, ${({ backgroundDarkenFactor }) => backgroundDarkenFactor}),
+      rgba(0, 0, 0, ${({ backgroundDarkenFactor }) => backgroundDarkenFactor})
+    ),
+    url("${({ backgroundImageUrl }) => backgroundImageUrl}");
+`;
+
 const Background = styled.article<BackgroundProps>`
   display: flex;
   background-color: ${({ theme }) => theme.app.colors.greenDark};
 
   ${({ theme }) => theme.breakpoints.up("md")} {
-    ${({ backgroundImageUrl, backgroundDarkenFactor }) => `
-      background: linear-gradient( rgba(0, 0, 0, ${backgroundDarkenFactor}), rgba(0, 0, 0, ${backgroundDarkenFactor}) ), url("${backgroundImageUrl}");
-    `}
+    ${backgroundCss};
     background-size: cover;
   }
 `;
