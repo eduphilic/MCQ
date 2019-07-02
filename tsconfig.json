@@ -23,6 +23,6 @@
       }
     ]
   },
-  "include": ["pages/**/*", "src/**/*", "./next.config.js"],
+  "include": ["pages", "src", "next.config.js"],
   "exclude": ["node_modules", "**/node_modules/*"]
 }
