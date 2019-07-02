@@ -123,8 +123,9 @@ const Background = styled.article<BackgroundProps>`
   background-color: ${({ theme }) => theme.app.colors.greenDark};
 
   ${({ theme }) => theme.breakpoints.up("md")} {
-    ${backgroundCss};
+    background-color: #000;
     background-size: cover;
+    ${backgroundCss};
   }
 `;
 
