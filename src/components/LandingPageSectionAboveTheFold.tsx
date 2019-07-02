@@ -1,7 +1,8 @@
-import { Typography } from "@material-ui/core";
+import { Card, Typography } from "@material-ui/core";
 import { TypographyProps } from "@material-ui/core/Typography";
 import React, { ReactNode } from "react";
 import styled, { css } from "styled-components";
+import { AuthenticationFormCardHeader } from "./AuthenticationFormCardHeader";
 import { Container } from "./Container";
 import { LanguageSelect } from "./LanguageSelect";
 import { LogoImage } from "./LogoImage";
@@ -53,7 +54,7 @@ export function LandingPageSectionAboveTheFold() {
           <LogoText component="h1" singleToneMobile />
         </Header>
 
-        <HeaderSection>
+        <TextSection>
           <H1>{headerText}</H1>
 
           <UL>
@@ -61,9 +62,22 @@ export function LandingPageSectionAboveTheFold() {
               <li key={featureText}>{featureText}</li>
             ))}
           </UL>
-        </HeaderSection>
+        </TextSection>
 
-        <StyledLanguageSelect />
+        <LanguageSelectSection>
+          <LanguageSelect />
+        </LanguageSelectSection>
+
+        <Card>
+          <AuthenticationFormCardHeader
+            title="Signup"
+            subheader={
+              <span>
+                Already a Member? <strong>Login</strong>
+              </span>
+            }
+          />
+        </Card>
       </Wrapper>
     </Background>
   );
@@ -118,7 +132,7 @@ const backgroundCss = css<BackgroundProps>`
     url("${({ backgroundImageUrl }) => backgroundImageUrl}");
 `;
 
-const Background = styled.article<BackgroundProps>`
+const Background = styled.section<BackgroundProps>`
   display: flex;
   background-color: ${({ theme }) => theme.app.colors.greenDark};
 
@@ -153,7 +167,7 @@ const textShadowCss = css`
   text-shadow: 2px 2px #000;
 `;
 
-const HeaderSection = styled.section`
+const TextSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -195,7 +209,9 @@ const UL = styled.ul`
   }
 `;
 
-const StyledLanguageSelect = styled(LanguageSelect)`
-  max-width: ${SIDEBAR_WIDTH}px;
+const LanguageSelectSection = styled.section`
   grid-area: ${GRID_AREA_LANGUAGE_SELECT};
+  display: flex;
+  width: 100%;
+  max-width: ${SIDEBAR_WIDTH}px;
 `;

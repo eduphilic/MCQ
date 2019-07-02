@@ -5,7 +5,6 @@ import {
   Radio,
   RadioGroup,
 } from "@material-ui/core";
-import { grey } from "@material-ui/core/colors";
 import { FormControlProps } from "@material-ui/core/FormControl";
 import { FormLabelProps } from "@material-ui/core/FormLabel";
 import { RadioGroupProps } from "@material-ui/core/RadioGroup";
@@ -70,7 +69,7 @@ const FieldSetWrapper = styled.div`
 const StyledFormLabel = styled(FormLabel).attrs((): FormLabelProps & {
   component: "legend";
 } => ({ component: "legend" }))`
-  color: ${grey[500]};
+  color: #fff;
   padding-bottom: 2px;
 
   &.Mui-focused {
