@@ -4,7 +4,7 @@ import { strings } from "../../../localization";
 
 import Checkbox, { CheckboxProps } from "@material-ui/core/Checkbox";
 
-import { DisableableLink } from "./DisableableLink";
+import { AuthenticationFormLink } from "../../../../../components/AuthenticationFormLink";
 // import { TextFieldTooltip } from "./TextFieldTooltip";
 
 export type TermsConditionsCheckboxProps = CheckboxProps & {
@@ -25,11 +25,9 @@ export const TermsConditionsCheckbox = styled(
     <div className={className}>
       <Checkbox color="primary" disabled={disabled} {...rest} />
 
-      <DisableableLink
-        disabled={disabled}
-        to="/terms-conditions"
-        label={strings.session_SessionForm_TermsConditionsCheckbox_Label}
-      />
+      <AuthenticationFormLink disabled={disabled} to="/terms-conditions">
+        {strings.session_SessionForm_TermsConditionsCheckbox_Label}
+      </AuthenticationFormLink>
     </div>
     // </TextFieldTooltip>
   ),

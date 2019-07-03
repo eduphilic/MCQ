@@ -2,16 +2,17 @@ import React, { SFC } from "react";
 import { strings } from "../../../localization";
 import { routePathFromLocalizationKey } from "../../../navigation";
 
-import { DisableableLink } from "./DisableableLink";
+import { AuthenticationFormLink } from "../../../../../components/AuthenticationFormLink";
 
 export type PasswordResetLinkProps = {
   disabled: boolean;
 };
 
 export const PasswordResetLink: SFC<PasswordResetLinkProps> = props => (
-  <DisableableLink
+  <AuthenticationFormLink
     disabled={props.disabled}
     to={routePathFromLocalizationKey("routes_Landing_PasswordResetPage")}
-    label={strings.session_SessionForm_PasswordResetLinkLabel}
-  />
+  >
+    {strings.session_SessionForm_PasswordResetLinkLabel}
+  </AuthenticationFormLink>
 );
