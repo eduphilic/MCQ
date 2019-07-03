@@ -98,7 +98,7 @@ export const theme: Theme = {
     overrides: {
       // Remove uppercasing on buttons.
       MuiButton: {
-        text: {
+        label: {
           textTransform: "none",
         },
       },
