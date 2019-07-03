@@ -16,13 +16,13 @@ import { Values } from "./Values";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 
+import { AuthenticationFormButton } from "../../../../../components/AuthenticationFormButton";
 import { AuthenticationFormCardHeader } from "../../../../../components/AuthenticationFormCardHeader";
 import {
   AuthenticationFormTextField,
   AuthenticationFormTextFieldProps,
 } from "../../../../../components/AuthenticationFormTextField";
 import { Card } from "../../../../components/Card";
-import { Button } from "../../../../componentsV0/Button";
 import { PasswordResetLink } from "./PasswordResetLink";
 import { TermsConditionsCheckbox } from "./TermsConditionsCheckbox";
 
@@ -171,9 +171,9 @@ const SessionForm: SFC<Props> = props => {
             </CardContent>
 
             <CardActionsMarginBottom>
-              <Button type="submit" disabled={isSubmitting}>
+              <AuthenticationFormButton type="submit" disabled={isSubmitting}>
                 {strings.session_SessionForm_SubmitButtonLabel}
-              </Button>
+              </AuthenticationFormButton>
 
               <SecondaryActionWrapper>
                 {type === "user-sign-in" && (

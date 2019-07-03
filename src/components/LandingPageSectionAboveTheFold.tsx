@@ -2,6 +2,8 @@ import { Card, CardContent, Typography } from "@material-ui/core";
 import { TypographyProps } from "@material-ui/core/Typography";
 import React, { ReactNode } from "react";
 import styled, { css } from "styled-components";
+import { AuthenticationFormButton } from "./AuthenticationFormButton";
+import { AuthenticationFormCardActions } from "./AuthenticationFormCardActions";
 import { AuthenticationFormCardHeader } from "./AuthenticationFormCardHeader";
 import { AuthenticationFormTextField } from "./AuthenticationFormTextField";
 import { Container } from "./Container";
@@ -91,6 +93,11 @@ export function LandingPageSectionAboveTheFold() {
                 type="password"
               />
             </CardContent>
+            <AuthenticationFormCardActions>
+              <AuthenticationFormButton variant="contained">
+                Submit
+              </AuthenticationFormButton>
+            </AuthenticationFormCardActions>
           </Card>
         </AuthenticationSection>
       </Wrapper>
