@@ -6,6 +6,19 @@ declare namespace NodeJS {
      */
     browser: boolean;
   }
+
+  interface ProcessEnv {
+    FIREBASE_CONFIG: {
+      type: "production" | "staging";
+      apiKey: string;
+      authDomain: string;
+      databaseURL: string;
+      projectId: string;
+      storageBucket: string;
+      messagingSenderId: string;
+      appID: string;
+    };
+  }
 }
 
 /**

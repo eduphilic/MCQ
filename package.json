@@ -23,6 +23,7 @@
     "@zeit/next-typescript": "^1.1.1",
     "clsx": "^1.0.4",
     "downshift": "^3.2.10",
+    "firebase": "^6.2.4",
     "formik": "^1.5.7",
     "lodash.debounce": "^4.0.8",
     "lodash.pick": "^4.4.0",

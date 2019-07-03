@@ -37,6 +37,31 @@ function withSvgr(nextConfig = {}) {
   return {
     ...nextConfig,
 
+    env: {
+      FIREBASE_CONFIG:
+        process.env.SITE_ENVIRONMENT === "production"
+          ? {
+              type: "production",
+              apiKey: "",
+              authDomain: "",
+              databaseURL: "",
+              projectId: "",
+              storageBucket: "",
+              messagingSenderId: "",
+              appId: "",
+            }
+          : {
+              type: "staging",
+              apiKey: "AIzaSyDGFumSvAaX6GY6555WeLLUasnkoO-3fEk",
+              authDomain: "joinuniformindia-test.firebaseapp.com",
+              databaseURL: "https://joinuniformindia-test.firebaseio.com",
+              projectId: "joinuniformindia-test",
+              storageBucket: "joinuniformindia-test.appspot.com",
+              messagingSenderId: "31549096619",
+              appId: "1:31549096619:web:be9f5a7fbb904c90",
+            },
+    },
+
     webpack(config, options) {
       config.module = config.module || { rules: [] };
 

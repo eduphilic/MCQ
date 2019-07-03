@@ -1,5 +1,6 @@
 import App, { Container } from "next/app";
 import React, { StrictMode } from "react";
+import { StagingEnvironmentBanner } from "../src/components/StagingEnvironmentBanner";
 import { BaselineStylesProvider } from "../src/display";
 
 /**
@@ -24,6 +25,7 @@ class CustomApp extends App {
         <StrictMode>
           <BaselineStylesProvider>
             <Component {...pageProps} />
+            <StagingEnvironmentBanner />
           </BaselineStylesProvider>
         </StrictMode>
       </Container>
