@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 import { AuthenticationFormButton } from "./AuthenticationFormButton";
 import { AuthenticationFormCardActions } from "./AuthenticationFormCardActions";
 import { AuthenticationFormCardHeader } from "./AuthenticationFormCardHeader";
+import { AuthenticationFormTerms } from "./AuthenticationFormTerms";
 import { AuthenticationFormTextField } from "./AuthenticationFormTextField";
 import { Container } from "./Container";
 import { LanguageSelect } from "./LanguageSelect";
@@ -91,11 +92,13 @@ export function LandingPageSectionAboveTheFold() {
                 label="This is a test error!"
                 placeholder="Enter Password"
                 type="password"
+                error
               />
             </CardContent>
             <AuthenticationFormCardActions>
-              <AuthenticationFormButton variant="contained">
-                Submit
+              <AuthenticationFormTerms error />
+              <AuthenticationFormButton variant="contained" fullWidth>
+                Sign up
               </AuthenticationFormButton>
             </AuthenticationFormCardActions>
           </Card>

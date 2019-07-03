@@ -18,13 +18,13 @@ import CardContent from "@material-ui/core/CardContent";
 
 import { AuthenticationFormButton } from "../../../../../components/AuthenticationFormButton";
 import { AuthenticationFormCardHeader } from "../../../../../components/AuthenticationFormCardHeader";
+import { AuthenticationFormTerms } from "../../../../../components/AuthenticationFormTerms";
 import {
   AuthenticationFormTextField,
   AuthenticationFormTextFieldProps,
 } from "../../../../../components/AuthenticationFormTextField";
 import { Card } from "../../../../components/Card";
 import { PasswordResetLink } from "./PasswordResetLink";
-import { TermsConditionsCheckbox } from "./TermsConditionsCheckbox";
 
 type OwnProps = {
   type: FormType;
@@ -181,7 +181,7 @@ const SessionForm: SFC<Props> = props => {
                 )}
 
                 {type === "user-sign-up" && (
-                  <TermsConditionsCheckbox
+                  <AuthenticationFormTerms
                     name="termsAgreed"
                     checked={values.termsAgreed}
                     onChange={handleChange}

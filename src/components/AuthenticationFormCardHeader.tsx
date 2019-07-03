@@ -14,4 +14,10 @@ export const AuthenticationFormCardHeader = styled(CardHeader)`
     font-size: 12px;
     color: #000;
   }
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    .MuiCardHeader-subheader {
+      font-size: 14px;
+    }
+  }
 `;

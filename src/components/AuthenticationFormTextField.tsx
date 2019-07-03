@@ -1,15 +1,14 @@
-import { TextField, Tooltip } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { StandardTextFieldProps } from "@material-ui/core/TextField";
-import { TooltipProps } from "@material-ui/core/Tooltip";
-import { ArrowDropUp as ArrowIcon } from "@material-ui/icons";
-import { ConsumerProps } from "react";
 import styled from "styled-components";
+import { AuthenticationFormTooltip } from "./AuthenticationFormTooltip";
 
 export type AuthenticationFormTextFieldProps = OmitStrict<
   StandardTextFieldProps,
-  "variant" | "fullWidth" | "InputProps"
+  "variant" | "fullWidth" | "InputProps" | "label"
 > & {
   InputProps?: AuthenticationFormTextFieldInputProps;
+  label?: string;
 };
 
 type AuthenticationFormTextFieldInputProps = OmitStrict<
@@ -29,22 +28,8 @@ export function AuthenticationFormTextField(
 
   const open = !!error;
 
-  const title = label ? (
-    <>
-      {label}
-      <StyledArrowIcon />
-    </>
-  ) : (
-    ""
-  );
-
   return (
-    <StyledTooltip
-      title={title}
-      open={open}
-      placement="bottom-end"
-      disableTouchListener
-    >
+    <AuthenticationFormTooltip title={label} open={open}>
       <StyledTextField
         {...rest}
         variant="standard"
@@ -54,35 +39,7 @@ export function AuthenticationFormTextField(
           disableUnderline: true,
         }}
       />
-    </StyledTooltip>
-  );
-}
-
-const StyledArrowIcon = styled(ArrowIcon)`
-  position: absolute;
-  right: -6px;
-  top: -6px;
-  color: #ff0000;
-`;
-
-const TooltipClassProvider = styled(
-  ({ children, className }: ConsumerProps<string> & { className?: string }) => (
-    <>{children(className!)}</>
-  ),
-)`
-  margin-top: 8px;
-  color: #000;
-  background-color: #fff;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16);
-`;
-
-function StyledTooltip(props: TooltipProps) {
-  return (
-    <TooltipClassProvider>
-      {tooltipClass => (
-        <Tooltip {...props} classes={{ tooltip: tooltipClass }}></Tooltip>
-      )}
-    </TooltipClassProvider>
+    </AuthenticationFormTooltip>
   );
 }
 
