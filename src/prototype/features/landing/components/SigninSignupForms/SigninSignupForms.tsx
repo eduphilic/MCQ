@@ -1,7 +1,7 @@
 import React, { SFC } from "react";
 import styled from "styled-components";
 
-import { SessionForm } from "../../../session";
+// import { SessionForm } from "../../../session";
 
 export type SigninSignupFormsProps = {};
 
@@ -11,8 +11,8 @@ export type SigninSignupFormsProps = {};
 export const SigninSignupForms: SFC<SigninSignupFormsProps> = () => {
   return (
     <Wrapper>
-      <SessionForm type="user-sign-in" />
-      <SessionForm type="user-sign-up" />
+      {/* <SessionForm type="user-sign-in" />
+      <SessionForm type="user-sign-up" /> */}
     </Wrapper>
   );
 };

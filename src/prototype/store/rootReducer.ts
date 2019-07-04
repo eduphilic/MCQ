@@ -8,7 +8,6 @@ import { reducer as interfaceTours } from "../features/interface-tours";
 import { reducer as landing } from "../features/landing";
 import { reducer as localization } from "../features/localization";
 import { reducer as navigation } from "../features/navigation";
-import { reducer as session } from "../features/session";
 import { reducer as subscriptionManagement } from "../features/subscription-management";
 
 const reducers = {
@@ -20,7 +19,6 @@ const reducers = {
   landing,
   localization,
   navigation,
-  session,
   subscriptionManagement,
 };
 
