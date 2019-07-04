@@ -1,5 +1,5 @@
 /* tslint:disable:ordered-imports */
-import firebase from "firebase/app";
+import * as firebase from "firebase/app";
 import "firebase/auth";
 /* tslint:enable:ordered-imports */
 
