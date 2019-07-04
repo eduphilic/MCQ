@@ -102,12 +102,20 @@ export const theme: Theme = {
           textTransform: "none",
         },
       },
+
       // Set the font.
       MuiCssBaseline: {
         "@global": {
           // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/35614
           "@font-face": (montserrat as unknown) as CSSProperties,
         },
+      },
+    },
+
+    props: {
+      // Disable ripple effect due to StrictMode warnings.
+      MuiButtonBase: {
+        disableRipple: true,
       },
     },
   }),
