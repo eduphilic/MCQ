@@ -1,12 +1,8 @@
-import { Card, CardContent, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { TypographyProps } from "@material-ui/core/Typography";
 import React, { ReactNode } from "react";
 import styled, { css } from "styled-components";
-import { AuthenticationFormButton } from "./AuthenticationFormButton";
-import { AuthenticationFormCardActions } from "./AuthenticationFormCardActions";
-import { AuthenticationFormCardHeader } from "./AuthenticationFormCardHeader";
-import { AuthenticationFormTerms } from "./AuthenticationFormTerms";
-import { AuthenticationFormTextField } from "./AuthenticationFormTextField";
+import { AuthenticationForm } from "./AuthenticationForm";
 import { Container } from "./Container";
 import { LanguageSelect } from "./LanguageSelect";
 import { LogoImage } from "./LogoImage";
@@ -73,35 +69,7 @@ export function LandingPageSectionAboveTheFold() {
         </LanguageSelectSection>
 
         <AuthenticationSection>
-          <Card>
-            <AuthenticationFormCardHeader
-              title="Signup"
-              subheader={
-                <span>
-                  Already a Member? <strong>Login</strong>
-                </span>
-              }
-            />
-            <CardContent>
-              <AuthenticationFormTextField
-                label="This is a test error!"
-                placeholder="Enter Email Address"
-                type="email"
-              />
-              <AuthenticationFormTextField
-                label="This is a test error!"
-                placeholder="Enter Password"
-                type="password"
-                error
-              />
-            </CardContent>
-            <AuthenticationFormCardActions>
-              <AuthenticationFormTerms error />
-              <AuthenticationFormButton variant="contained" fullWidth>
-                Sign up
-              </AuthenticationFormButton>
-            </AuthenticationFormCardActions>
-          </Card>
+          <AuthenticationForm />
         </AuthenticationSection>
       </Wrapper>
     </Background>

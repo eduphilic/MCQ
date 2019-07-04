@@ -1,34 +1,43 @@
 import { Checkbox, FormControlLabel } from "@material-ui/core";
-import { CheckboxProps } from "@material-ui/core/Checkbox";
+import { Field, FieldProps } from "formik";
 import React from "react";
 import styled from "styled-components";
 import { AuthenticationFormLink } from "./AuthenticationFormLink";
-import { AuthenticationFormTooltip } from "./AuthenticationFormTooltip";
+import {
+  AuthenticationFormTooltip,
+  AuthenticationFormValues,
+} from "./AuthenticationFormTooltip";
 
-type Props = CheckboxProps & {
-  error?: boolean;
+type Props<V extends AuthenticationFormValues> = {
+  name: keyof V;
 };
 
-export function AuthenticationFormTerms(props: Props) {
-  const { disabled, error, ...rest } = props;
+export function AuthenticationFormTerms<V extends AuthenticationFormValues>(
+  props: Props<V>,
+) {
+  const { name } = props;
 
   return (
-    <AuthenticationFormTooltip
-      open={error}
-      title="Please agree to the terms of service"
-    >
-      <StyledFormControlLabel
-        control={<StyledCheckbox {...rest} disabled={disabled} />}
-        label={
-          <span>
-            I agree to the{" "}
-            <AuthenticationFormLink to="/terms-conditions" disabled={disabled}>
-              Join Uniform Terms
-            </AuthenticationFormLink>
-          </span>
-        }
-      />
-    </AuthenticationFormTooltip>
+    <Field name={name}>
+      {({ field, form }: FieldProps<V>) => (
+        <AuthenticationFormTooltip name={name}>
+          <StyledFormControlLabel
+            control={<StyledCheckbox {...field} disabled={form.isSubmitting} />}
+            label={
+              <span>
+                I agree to the{" "}
+                <AuthenticationFormLink
+                  to="/terms-conditions"
+                  disabled={form.isSubmitting}
+                >
+                  Join Uniform Terms
+                </AuthenticationFormLink>
+              </span>
+            }
+          />
+        </AuthenticationFormTooltip>
+      )}
+    </Field>
   );
 }
 

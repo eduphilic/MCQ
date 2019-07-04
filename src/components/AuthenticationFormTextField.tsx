@@ -1,45 +1,43 @@
 import { TextField } from "@material-ui/core";
 import { StandardTextFieldProps } from "@material-ui/core/TextField";
+import { Field, FieldProps } from "formik";
 import styled from "styled-components";
-import { AuthenticationFormTooltip } from "./AuthenticationFormTooltip";
+import {
+  AuthenticationFormTooltip,
+  AuthenticationFormValues,
+} from "./AuthenticationFormTooltip";
 
-export type AuthenticationFormTextFieldProps = OmitStrict<
-  StandardTextFieldProps,
-  "variant" | "fullWidth" | "InputProps" | "label"
-> & {
-  InputProps?: AuthenticationFormTextFieldInputProps;
-  label?: string;
+type Props<V extends AuthenticationFormValues> = {
+  name: keyof V;
+  placeholder: string;
+  type?: StandardTextFieldProps["type"];
 };
-
-type AuthenticationFormTextFieldInputProps = OmitStrict<
-  NonNullable<StandardTextFieldProps["InputProps"]>,
-  "disableUnderline"
->;
 
 /**
  * Material UI `TextField`, styled as a flat square input. It is set to take the
  * full width of the container and removes the default underline style. It also
  * provides an error tooltip.
  */
-export function AuthenticationFormTextField(
-  props: AuthenticationFormTextFieldProps,
+export function AuthenticationFormTextField<V extends AuthenticationFormValues>(
+  props: Props<V>,
 ) {
-  const { error, label, InputProps, ...rest } = props;
-
-  const open = !!error;
+  const { name, ...rest } = props;
 
   return (
-    <AuthenticationFormTooltip title={label} open={open}>
-      <StyledTextField
-        {...rest}
-        variant="standard"
-        fullWidth
-        InputProps={{
-          ...InputProps,
-          disableUnderline: true,
-        }}
-      />
-    </AuthenticationFormTooltip>
+    <Field name={name}>
+      {({ field, form }: FieldProps<V>) => (
+        <AuthenticationFormTooltip name={name}>
+          <StyledTextField
+            {...rest}
+            {...field}
+            variant="standard"
+            fullWidth
+            disabled={form.isSubmitting}
+            InputProps={{ disableUnderline: true }}
+          />
+        </AuthenticationFormTooltip>
+      )}
+    </Field>
   );
 }
 
