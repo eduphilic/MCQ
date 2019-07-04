@@ -1,10 +1,12 @@
 import { Card, CardContent } from "@material-ui/core";
+import * as firebase from "firebase/app";
 import { Form, withFormik } from "formik";
 import React from "react";
 import * as yup from "yup";
 import { AuthenticationFormButton } from "./AuthenticationFormButton";
 import { AuthenticationFormCardActions } from "./AuthenticationFormCardActions";
 import { AuthenticationFormCardHeader } from "./AuthenticationFormCardHeader";
+import { AuthenticationFormStatus } from "./AuthenticationFormStatus";
 import { AuthenticationFormTerms } from "./AuthenticationFormTerms";
 import { AuthenticationFormTextField } from "./AuthenticationFormTextField";
 
@@ -26,6 +28,7 @@ function AuthenticationFormBase() {
         }
       />
       <CardContent>
+        <AuthenticationFormStatus />
         <AuthenticationFormTextField<FormValues>
           name="email"
           placeholder="Enter Email Address"
@@ -63,8 +66,49 @@ export const AuthenticationForm = withFormik({
     termsAgreed: false,
   }),
   validationSchema: schema,
-  handleSubmit: values => {
-    /* tslint:disable-next-line:no-console */
-    console.log({ values });
+  handleSubmit: async (values, form) => {
+    form.setFieldValue("password", "");
+    form.setFieldTouched("password", false);
+    try {
+      const credential = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(values.email, values.password);
+
+      /* tslint:disable-next-line:no-console */
+      console.log({ credential });
+
+      form.setStatus(null);
+    } catch (error) {
+      switch (error.code) {
+        case "auth/email-already-in-use": {
+          form.setStatus("Email address is unavailable.");
+          break;
+        }
+
+        case "auth/invalid-email": {
+          form.setStatus("Please enter a valid email.");
+          break;
+        }
+
+        case "auth/operation-not-allowed": {
+          form.setStatus("Registrations are currently disabled.");
+          break;
+        }
+
+        case "auth/weak-password": {
+          form.setStatus("Please enter a stronger password.");
+          break;
+        }
+
+        default: {
+          form.setStatus("Authentication is temporarily unavailable.");
+          // tslint:disable-next-line: no-console
+          console.error(error);
+          throw error;
+        }
+      }
+    } finally {
+      form.setSubmitting(false);
+    }
   },
 })(AuthenticationFormBase);
