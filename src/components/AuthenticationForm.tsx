@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { AuthenticationFormButton } from "./AuthenticationFormButton";
 import { AuthenticationFormCardActions } from "./AuthenticationFormCardActions";
 import { AuthenticationFormCardHeader } from "./AuthenticationFormCardHeader";
+import { AuthenticationFormLink } from "./AuthenticationFormLink";
 import { AuthenticationFormStatus } from "./AuthenticationFormStatus";
 import { AuthenticationFormTerms } from "./AuthenticationFormTerms";
 import { AuthenticationFormTextField } from "./AuthenticationFormTextField";
@@ -45,6 +46,9 @@ function AuthenticationFormBase() {
         <AuthenticationFormButton variant="contained" fullWidth type="submit">
           Sign up
         </AuthenticationFormButton>
+        <AuthenticationFormLink to="/recover">
+          Forgot your password?
+        </AuthenticationFormLink>
       </AuthenticationFormCardActions>
     </Card>
   );

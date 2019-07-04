@@ -28,10 +28,7 @@ export function AuthenticationFormTerms<V extends AuthenticationFormValues>(
             label={
               <span>
                 I agree to the{" "}
-                <AuthenticationFormLink
-                  to="/terms-conditions"
-                  disabled={form.isSubmitting}
-                >
+                <AuthenticationFormLink to="/terms-conditions">
                   Join Uniform Terms
                 </AuthenticationFormLink>
               </span>

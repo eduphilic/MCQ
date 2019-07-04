@@ -1,3 +1,4 @@
+import { FormikConsumer } from "formik";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
@@ -5,22 +6,29 @@ import styled from "styled-components";
 type Props = {
   children: string;
   to: string;
-  disabled?: boolean;
 };
 
 export function AuthenticationFormLink(props: Props) {
-  const { children, to, disabled } = props;
-
-  if (disabled) {
-    return <>{children}</>;
-  }
+  const { children, to } = props;
 
   return (
-    <Link href={to} passHref>
-      <StyledA>{children}</StyledA>
-    </Link>
+    <FormikConsumer>
+      {form =>
+        form.isSubmitting ? (
+          <StyledSpan>{children}</StyledSpan>
+        ) : (
+          <Link href={to} passHref>
+            <StyledA>{children}</StyledA>
+          </Link>
+        )
+      }
+    </FormikConsumer>
   );
 }
+
+const StyledSpan = styled.span`
+  color: rgba(0, 0, 0, 0.38);
+`;
 
 const StyledA = styled.a`
   color: #0061ff;

@@ -8,9 +8,8 @@ export type PasswordResetLinkProps = {
   disabled: boolean;
 };
 
-export const PasswordResetLink: SFC<PasswordResetLinkProps> = props => (
+export const PasswordResetLink: SFC<PasswordResetLinkProps> = () => (
   <AuthenticationFormLink
-    disabled={props.disabled}
     to={routePathFromLocalizationKey("routes_Landing_PasswordResetPage")}
   >
     {strings.session_SessionForm_PasswordResetLinkLabel}
