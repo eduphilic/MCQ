@@ -22,7 +22,9 @@ export function AuthenticationFormTerms<V extends AuthenticationFormValues>(
       {({ field, form }: FieldProps<V>) => (
         <AuthenticationFormTooltip name={name}>
           <StyledFormControlLabel
-            control={<StyledCheckbox {...field} disabled={form.isSubmitting} />}
+            {...field}
+            disabled={form.isSubmitting}
+            control={<StyledCheckbox />}
             label={
               <span>
                 I agree to the{" "}
