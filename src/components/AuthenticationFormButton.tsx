@@ -4,10 +4,19 @@ import { grey } from "@material-ui/core/colors";
 import { FormikConsumer } from "formik";
 import styled from "styled-components";
 
-export function AuthenticationFormButton(props: ButtonProps) {
+type Props = OmitStrict<ButtonProps, "disabled" | "variant" | "fullWidth">;
+
+export function AuthenticationFormButton(props: Props) {
   return (
     <FormikConsumer>
-      {form => <StyledButton disabled={form.isSubmitting} {...props} />}
+      {form => (
+        <StyledButton
+          {...props}
+          variant="contained"
+          fullWidth
+          disabled={form.isSubmitting}
+        />
+      )}
     </FormikConsumer>
   );
 }

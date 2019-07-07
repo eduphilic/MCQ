@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { AuthenticationFormButton } from "./AuthenticationFormButton";
 import { AuthenticationFormCardActions } from "./AuthenticationFormCardActions";
 import { AuthenticationFormCardHeader } from "./AuthenticationFormCardHeader";
+// import { AuthenticationFormGoogleButton } from "./AuthenticationFormGoogleButton";
 import { AuthenticationFormLink } from "./AuthenticationFormLink";
 import { AuthenticationFormStatus } from "./AuthenticationFormStatus";
 import { AuthenticationFormTerms } from "./AuthenticationFormTerms";
@@ -43,9 +44,10 @@ function AuthenticationFormBase() {
       </CardContent>
       <AuthenticationFormCardActions>
         <AuthenticationFormTerms<FormValues> name="termsAgreed" />
-        <AuthenticationFormButton variant="contained" fullWidth type="submit">
+        <AuthenticationFormButton type="submit">
           Sign up
         </AuthenticationFormButton>
+        {/* <AuthenticationFormGoogleButton /> */}
         <AuthenticationFormLink to="/recover">
           Forgot your password?
         </AuthenticationFormLink>
