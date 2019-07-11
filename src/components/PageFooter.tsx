@@ -10,7 +10,7 @@ type Props = {
 // Make sure the copyright date is always up to date.
 const currentYear = new Date().getFullYear();
 const copyrightYear =
-	process.env.NODE_ENV === "testing"
+	process.env.NODE_ENV === "test"
 		? // In testing environment, use a static value so snapshot test doesn't
 		  // fail in the future.
 		  "2019"
