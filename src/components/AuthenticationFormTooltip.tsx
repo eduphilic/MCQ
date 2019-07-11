@@ -8,68 +8,71 @@ import styled from "styled-components";
 export type AuthenticationFormValues = Record<string, string | boolean>;
 
 type Props<V extends AuthenticationFormValues> = {
-  children: TooltipProps["children"];
-  name: keyof V;
+	children: TooltipProps["children"];
+	name: keyof V;
 };
 
 export function AuthenticationFormTooltip<V extends AuthenticationFormValues>(
-  props: Props<V>,
+	props: Props<V>,
 ) {
-  const { children, name } = props;
+	const { children, name } = props;
 
-  return (
-    <TooltipClassProvider>
-      {tooltipClass => (
-        <Field name={name}>
-          {({ form }: FieldProps<V>) => (
-            <Tooltip
-              open={!!form.errors[name] && !!form.touched[name]}
-              title={<Title>{form.errors[name]}</Title>}
-              classes={{ tooltip: tooltipClass }}
-              placement="bottom-end"
-              disableFocusListener
-              disableHoverListener
-              disableTouchListener
-              TransitionComponent={NoopTransition}
-            >
-              {children}
-            </Tooltip>
-          )}
-        </Field>
-      )}
-    </TooltipClassProvider>
-  );
+	return (
+		<TooltipClassProvider>
+			{tooltipClass => (
+				<Field name={name}>
+					{({ form }: FieldProps<V>) => (
+						<Tooltip
+							open={!!form.errors[name] && !!form.touched[name]}
+							title={<Title>{form.errors[name]}</Title>}
+							classes={{ tooltip: tooltipClass }}
+							placement="bottom-end"
+							disableFocusListener
+							disableHoverListener
+							disableTouchListener
+							TransitionComponent={NoopTransition}
+						>
+							{children}
+						</Tooltip>
+					)}
+				</Field>
+			)}
+		</TooltipClassProvider>
+	);
 }
 
 const TooltipClassProvider = styled(
-  ({ children, className }: ConsumerProps<string> & { className?: string }) => (
-    <>{children(className!)}</>
-  ),
+	({
+		children,
+		className,
+	}: ConsumerProps<string> & { className?: string }) => (
+		<>{children(className!)}</>
+	),
 )`
-  margin-top: 8px;
-  color: #000;
-  background-color: #fff;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16);
+	margin-top: 8px;
+	color: #000;
+	background-color: #fff;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16);
 `;
 
 const StyledArrowIcon = styled(ArrowIcon)`
-  position: absolute;
-  right: -6px;
-  top: -6px;
-  color: #ff0000;
+	position: absolute;
+	right: -6px;
+	top: -6px;
+	color: #ff0000;
 `;
 
 function Title<V extends AuthenticationFormValues>(props: {
-  children?: FormikErrors<V>[keyof V];
+	children?: FormikErrors<V>[keyof V];
 }) {
-  const { children } = props;
+	const { children } = props;
 
-  return (
-    <>
-      {children}
-      <StyledArrowIcon />
-    </>
-  );
+	return (
+		<>
+			{children}
+			<StyledArrowIcon />
+		</>
+	);
 }
 
 /**
@@ -77,7 +80,7 @@ function Title<V extends AuthenticationFormValues>(props: {
  * warning message.
  */
 function NoopTransition(props: TransitionProps & { children?: ReactNode }) {
-  const { children } = props;
+	const { children } = props;
 
-  return <>{children}</>;
+	return <>{children}</>;
 }

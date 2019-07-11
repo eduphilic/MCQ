@@ -4,7 +4,7 @@ import React, { ReactNode } from "react";
 import { ThemeProvider } from "./ThemeProvider";
 
 type Props = {
-  children?: ReactNode;
+	children?: ReactNode;
 };
 
 /**
@@ -13,13 +13,13 @@ type Props = {
  * CSS styles.
  */
 export function BaselineStylesProvider(props: Props) {
-  return (
-    <StylesProvider injectFirst>
-      <ThemeProvider>
-        <CssBaseline />
+	return (
+		<StylesProvider injectFirst>
+			<ThemeProvider>
+				<CssBaseline />
 
-        {props.children}
-      </ThemeProvider>
-    </StylesProvider>
-  );
+				{props.children}
+			</ThemeProvider>
+		</StylesProvider>
+	);
 }

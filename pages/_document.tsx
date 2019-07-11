@@ -12,57 +12,60 @@ import { theme } from "../src/display";
  * @see https://github.com/mui-org/material-ui/tree/master/examples/nextjs-next-with-typescript
  */
 class CustomDocument extends Document {
-  render() {
-    return (
-      <html lang="en" dir="ltr">
-        <Head>
-          <meta charSet="utf-8" />
-          <meta
-            name="viewport"
-            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
-          />
-          <meta name="theme-color" content={theme.palette.primary.main} />
-        </Head>
+	render() {
+		return (
+			<html lang="en" dir="ltr">
+				<Head>
+					<meta charSet="utf-8" />
+					<meta
+						name="viewport"
+						content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+					/>
+					<meta
+						name="theme-color"
+						content={theme.palette.primary.main}
+					/>
+				</Head>
 
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </html>
-    );
-  }
+				<body>
+					<Main />
+					<NextScript />
+				</body>
+			</html>
+		);
+	}
 }
 
 CustomDocument.getInitialProps = async context => {
-  const muiSheets = new MuiServerStyleSheets();
-  const styledComponentsSheet = new StyledComponentsServerStyleSheet();
-  const originalRenderPage = context.renderPage;
+	const muiSheets = new MuiServerStyleSheets();
+	const styledComponentsSheet = new StyledComponentsServerStyleSheet();
+	const originalRenderPage = context.renderPage;
 
-  context.renderPage = () =>
-    originalRenderPage({
-      enhanceApp: App => props => {
-        let appElement = <App {...props} />;
+	context.renderPage = () =>
+		originalRenderPage({
+			enhanceApp: App => props => {
+				let appElement = <App {...props} />;
 
-        appElement = muiSheets.collect(appElement);
-        appElement = styledComponentsSheet.collectStyles(appElement);
+				appElement = muiSheets.collect(appElement);
+				appElement = styledComponentsSheet.collectStyles(appElement);
 
-        return appElement;
-      },
-    });
+				return appElement;
+			},
+		});
 
-  const initialProps = await Document.getInitialProps(context);
+	const initialProps = await Document.getInitialProps(context);
 
-  return {
-    ...initialProps,
+	return {
+		...initialProps,
 
-    styles: (
-      <>
-        {flush() || null}
-        {trimCSSWhitespace(muiSheets.getStyleElement())}
-        {styledComponentsSheet.getStyleElement()}
-      </>
-    ),
-  };
+		styles: (
+			<>
+				{flush() || null}
+				{trimCSSWhitespace(muiSheets.getStyleElement())}
+				{styledComponentsSheet.getStyleElement()}
+			</>
+		),
+	};
 };
 
 export default CustomDocument;
@@ -73,18 +76,20 @@ export default CustomDocument;
  * @param styleElement Material UI stylesheet element.
  */
 function trimCSSWhitespace(styleElement: ReactElement) {
-  const typedStyledElement: ReactElement<
-    Required<Pick<DOMAttributes<HTMLStyleElement>, "dangerouslySetInnerHTML">>
-  > = styleElement;
+	const typedStyledElement: ReactElement<
+		Required<
+			Pick<DOMAttributes<HTMLStyleElement>, "dangerouslySetInnerHTML">
+		>
+	> = styleElement;
 
-  const clonedStyleElement = cloneElement(typedStyledElement, {
-    dangerouslySetInnerHTML: {
-      __html: typedStyledElement.props.dangerouslySetInnerHTML.__html
-        .split("\n")
-        .map(line => line.trim())
-        .join(""),
-    },
-  });
+	const clonedStyleElement = cloneElement(typedStyledElement, {
+		dangerouslySetInnerHTML: {
+			__html: typedStyledElement.props.dangerouslySetInnerHTML.__html
+				.split("\n")
+				.map(line => line.trim())
+				.join(""),
+		},
+	});
 
-  return clonedStyleElement;
+	return clonedStyleElement;
 }

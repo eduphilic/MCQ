@@ -8,13 +8,13 @@ import React from "react";
 // import { ReactComponent as GoogleIconPressed } from "./__assets__/signin-assets/google_signin_buttons/web/vector/btn_google_dark_pressed_ios.svg";
 
 export function AuthenticationFormGoogleButton() {
-  return (
-    // <StyledButton>
-    //   {/* <StyledGoogleIconNormal /> */}
-    //   <StyledSpan>Sign up with Google</StyledSpan>
-    // </StyledButton>
-    <>{null}</>
-  );
+	return (
+		// <StyledButton>
+		//   {/* <StyledGoogleIconNormal /> */}
+		//   <StyledSpan>Sign up with Google</StyledSpan>
+		// </StyledButton>
+		<>{null}</>
+	);
 }
 
 // const StyledGoogleIconDisabled = styled(GoogleIconDisabled)``;

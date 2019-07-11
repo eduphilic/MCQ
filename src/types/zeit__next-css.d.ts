@@ -1,7 +1,7 @@
 declare module "@zeit/next-css" {
-  import { NextConfig } from "next-config";
+	import { NextConfig } from "next-config";
 
-  function nextCssPlugin(nextConfig?: NextConfig): NextConfig;
+	function nextCssPlugin(nextConfig?: NextConfig): NextConfig;
 
-  export = nextCssPlugin;
+	export = nextCssPlugin;
 }

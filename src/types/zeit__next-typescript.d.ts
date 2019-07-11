@@ -1,7 +1,7 @@
 declare module "@zeit/next-typescript" {
-  import { NextConfig } from "next-config";
+	import { NextConfig } from "next-config";
 
-  function nextTypeScriptPlugin(config?: NextConfig): NextConfig;
+	function nextTypeScriptPlugin(config?: NextConfig): NextConfig;
 
-  export = nextTypeScriptPlugin;
+	export = nextTypeScriptPlugin;
 }

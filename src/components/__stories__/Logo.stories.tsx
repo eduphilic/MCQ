@@ -5,17 +5,17 @@ import { Logo } from "../Logo";
 const stories = storiesOf("Logo", module);
 
 stories.add("default", () => {
-  return <Logo />;
+	return <Logo />;
 });
 
 stories.add("large", () => {
-  return <Logo size={64} />;
+	return <Logo size={64} />;
 });
 
 stories.add("single tone", () => {
-  return <Logo singleTone />;
+	return <Logo singleTone />;
 });
 
 stories.add("shadowed", () => {
-  return <Logo shadowed />;
+	return <Logo shadowed />;
 });

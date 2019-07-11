@@ -8,71 +8,71 @@ import { LogoImage } from "./LogoImage";
 import { LogoText } from "./LogoText";
 
 type LandingPageSectionAboveTheFoldProps = OmitStrict<
-  BackgroundProps,
-  "children"
+	BackgroundProps,
+	"children"
 > & {
-  /**
-   * Header text.
-   */
-  headerText: string;
+	/**
+	 * Header text.
+	 */
+	headerText: string;
 
-  /**
-   * List of features to list under `headerText`.
-   */
-  featureTexts: string[];
+	/**
+	 * List of features to list under `headerText`.
+	 */
+	featureTexts: string[];
 };
 
 const placeholderProps: LandingPageSectionAboveTheFoldProps = {
-  backgroundImageUrl: "/static/images/hero/soldier-optimized.png",
-  backgroundDarkenFactor: 0.25,
-  headerText: "Prepare for Indian Defence Forces Exams",
-  featureTexts: [
-    "Mock test as asked in Armed Forces exams.",
-    "Full length Weekly Mock Test",
-    "Instant result with detail analysis",
-    "All India rank",
-  ],
+	backgroundImageUrl: "/static/images/hero/soldier-optimized.png",
+	backgroundDarkenFactor: 0.25,
+	headerText: "Prepare for Indian Defence Forces Exams",
+	featureTexts: [
+		"Mock test as asked in Armed Forces exams.",
+		"Full length Weekly Mock Test",
+		"Instant result with detail analysis",
+		"All India rank",
+	],
 };
 
 export function LandingPageSectionAboveTheFold() {
-  const {
-    backgroundImageUrl,
-    backgroundDarkenFactor,
-    headerText,
-    featureTexts,
-  } = placeholderProps;
+	const {
+		backgroundImageUrl,
+		backgroundDarkenFactor,
+		headerText,
+		featureTexts,
+	} = placeholderProps;
 
-  return (
-    <Background
-      backgroundImageUrl={backgroundImageUrl}
-      backgroundDarkenFactor={backgroundDarkenFactor}
-    >
-      <Wrapper>
-        <Header>
-          <LogoImage size={64} />
-          <LogoText component="h1" singleToneMobile />
-        </Header>
+	return (
+		<Background
+			backgroundImageUrl={backgroundImageUrl}
+			backgroundDarkenFactor={backgroundDarkenFactor}
+		>
+			<Wrapper>
+				<Header>
+					<LogoImage size={64} />
+					<LogoText component="h1" singleToneMobile />
+				</Header>
 
-        <TextSection>
-          <H1>{headerText}</H1>
+				<TextSection>
+					<H1>{headerText}</H1>
 
-          <UL>
-            {featureTexts.map(featureText => (
-              <li key={featureText}>{featureText}</li>
-            ))}
-          </UL>
-        </TextSection>
+					<UL>
+						{featureTexts.map(featureText => (
+							<li key={featureText}>{featureText}</li>
+						))}
+					</UL>
+				</TextSection>
 
-        <LanguageSelectSection>
-          <LanguageSelect />
-        </LanguageSelectSection>
+				<LanguageSelectSection>
+					<LanguageSelect />
+				</LanguageSelectSection>
 
-        <AuthenticationSection>
-          <AuthenticationForm />
-        </AuthenticationSection>
-      </Wrapper>
-    </Background>
-  );
+				<AuthenticationSection>
+					<AuthenticationForm />
+				</AuthenticationSection>
+			</Wrapper>
+		</Background>
+	);
 }
 
 const GRID_AREA_HEADER = "header";
@@ -102,17 +102,17 @@ const Wrapper = styled(Container)`
 `;
 
 type BackgroundProps = {
-  children?: ReactNode;
+	children?: ReactNode;
 
-  /**
-   * Background image.
-   */
-  backgroundImageUrl: string;
+	/**
+	 * Background image.
+	 */
+	backgroundImageUrl: string;
 
-  /**
-   * Amount to darken the background image for readability.
-   */
-  backgroundDarkenFactor: number;
+	/**
+	 * Amount to darken the background image for readability.
+	 */
+	backgroundDarkenFactor: number;
 };
 
 const backgroundCss = css<BackgroundProps>`
@@ -125,92 +125,92 @@ const backgroundCss = css<BackgroundProps>`
 `;
 
 const Background = styled.section<BackgroundProps>`
-  display: flex;
-  flex-direction: column;
-  background-color: ${({ theme }) => theme.app.colors.greenDark};
+	display: flex;
+	flex-direction: column;
+	background-color: ${({ theme }) => theme.app.colors.greenDark};
 
-  ${({ theme }) => theme.breakpoints.up("md")} {
-    background-color: #000;
-    background-size: cover;
-    ${backgroundCss};
-  }
+	${({ theme }) => theme.breakpoints.up("md")} {
+		background-color: #000;
+		background-size: cover;
+		${backgroundCss};
+	}
 `;
 
 const Header = styled.header`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  grid-area: ${GRID_AREA_HEADER};
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	grid-area: ${GRID_AREA_HEADER};
 
-  ${LogoImage} {
-    margin-bottom: 8px;
-  }
+	${LogoImage} {
+		margin-bottom: 8px;
+	}
 
-  ${({ theme }) => theme.breakpoints.up("md")} {
-    flex-direction: unset;
+	${({ theme }) => theme.breakpoints.up("md")} {
+		flex-direction: unset;
 
-    ${LogoImage} {
-      margin-bottom: unset;
-      margin-right: 16px;
-    }
-  }
+		${LogoImage} {
+			margin-bottom: unset;
+			margin-right: 16px;
+		}
+	}
 `;
 
 const textShadowCss = css`
-  text-shadow: 2px 2px #000;
+	text-shadow: 2px 2px #000;
 `;
 
 const TextSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  grid-area: ${GRID_AREA_HEADER_SECTION};
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	grid-area: ${GRID_AREA_HEADER_SECTION};
 `;
 
 const H1 = styled(Typography).attrs(
-  (): TypographyProps => ({ component: "h1" }),
+	(): TypographyProps => ({ component: "h1" }),
 )`
-  margin: 24px 0;
-  font-size: 16px;
-  font-weight: 500;
-  text-align: center;
-  color: ${({ theme }) => theme.app.colors.blueLight};
+	margin: 24px 0;
+	font-size: 16px;
+	font-weight: 500;
+	text-align: center;
+	color: ${({ theme }) => theme.app.colors.blueLight};
 
-  ${({ theme }) => theme.breakpoints.up("md")} {
-    font-size: 36px;
-    font-weight: 600;
-    text-align: unset;
-    color: ${({ theme }) => theme.palette.primary.main};
-    ${textShadowCss};
-  }
+	${({ theme }) => theme.breakpoints.up("md")} {
+		font-size: 36px;
+		font-weight: 600;
+		text-align: unset;
+		color: ${({ theme }) => theme.palette.primary.main};
+		${textShadowCss};
+	}
 `;
 
 const UL = styled.ul`
-  display: none;
-  margin: 0 0 56px 0;
-  font-size: 24px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.palette.secondary.main};
-  ${textShadowCss};
+	display: none;
+	margin: 0 0 56px 0;
+	font-size: 24px;
+	font-weight: 600;
+	color: ${({ theme }) => theme.palette.secondary.main};
+	${textShadowCss};
 
-  li:not(:last-child) {
-    margin-bottom: 8px;
-  }
+	li:not(:last-child) {
+		margin-bottom: 8px;
+	}
 
-  ${({ theme }) => theme.breakpoints.up("md")} {
-    display: unset;
-  }
+	${({ theme }) => theme.breakpoints.up("md")} {
+		display: unset;
+	}
 `;
 
 const LanguageSelectSection = styled.section`
-  grid-area: ${GRID_AREA_LANGUAGE_SELECT};
-  display: flex;
-  width: 100%;
-  max-width: ${SIDEBAR_WIDTH}px;
+	grid-area: ${GRID_AREA_LANGUAGE_SELECT};
+	display: flex;
+	width: 100%;
+	max-width: ${SIDEBAR_WIDTH}px;
 `;
 
 const AuthenticationSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 `;

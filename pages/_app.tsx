@@ -14,30 +14,30 @@ import { BaselineStylesProvider } from "../src/display";
  * the theme.
  */
 class CustomApp extends App {
-  componentDidMount() {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector("#jss-server-side");
-    if (jssStyles) {
-      jssStyles.parentNode!.removeChild(jssStyles);
-    }
+	componentDidMount() {
+		// Remove the server-side injected CSS.
+		const jssStyles = document.querySelector("#jss-server-side");
+		if (jssStyles) {
+			jssStyles.parentNode!.removeChild(jssStyles);
+		}
 
-    firebase.initializeApp(process.env.FIREBASE_CONFIG);
-  }
+		firebase.initializeApp(process.env.FIREBASE_CONFIG);
+	}
 
-  render() {
-    const { Component, pageProps } = this.props;
+	render() {
+		const { Component, pageProps } = this.props;
 
-    return (
-      <Container>
-        <StrictMode>
-          <BaselineStylesProvider>
-            <Component {...pageProps} />
-            <StagingEnvironmentBanner />
-          </BaselineStylesProvider>
-        </StrictMode>
-      </Container>
-    );
-  }
+		return (
+			<Container>
+				<StrictMode>
+					<BaselineStylesProvider>
+						<Component {...pageProps} />
+						<StagingEnvironmentBanner />
+					</BaselineStylesProvider>
+				</StrictMode>
+			</Container>
+		);
+	}
 }
 
 export default CustomApp;

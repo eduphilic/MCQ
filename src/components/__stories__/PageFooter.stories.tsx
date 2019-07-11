@@ -5,5 +5,5 @@ import { PageFooter } from "../PageFooter";
 const stories = storiesOf("PageFooter", module);
 
 stories.add("default", () => {
-  return <PageFooter />;
+	return <PageFooter />;
 });

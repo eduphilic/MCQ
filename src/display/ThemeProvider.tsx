@@ -4,15 +4,15 @@ import { ThemeProvider as StyledComponentsThemeProvider } from "styled-component
 import { theme } from "./theme";
 
 type Props = {
-  children?: ReactNode;
+	children?: ReactNode;
 };
 
 export function ThemeProvider(props: Props) {
-  return (
-    <MaterialUIThemeProvider theme={theme}>
-      <StyledComponentsThemeProvider theme={theme}>
-        <>{props.children}</>
-      </StyledComponentsThemeProvider>
-    </MaterialUIThemeProvider>
-  );
+	return (
+		<MaterialUIThemeProvider theme={theme}>
+			<StyledComponentsThemeProvider theme={theme}>
+				<>{props.children}</>
+			</StyledComponentsThemeProvider>
+		</MaterialUIThemeProvider>
+	);
 }

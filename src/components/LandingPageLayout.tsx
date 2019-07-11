@@ -5,18 +5,18 @@ import { PageFooter } from "./PageFooter";
 type SectionProps = { className?: string };
 
 type LandingPageLayoutProps = {
-  className?: string;
+	className?: string;
 
-  /**
-   * Content to render "above the fold". That is, content to take up the entire
-   * screen height.
-   */
-  sectionFoldAboveElement: ReactElement<SectionProps>;
+	/**
+	 * Content to render "above the fold". That is, content to take up the entire
+	 * screen height.
+	 */
+	sectionFoldAboveElement: ReactElement<SectionProps>;
 
-  /**
-   * Addition page content which can be scrolled to.
-   */
-  sectionFoldBelowElement?: ReactElement<SectionProps>;
+	/**
+	 * Addition page content which can be scrolled to.
+	 */
+	sectionFoldBelowElement?: ReactElement<SectionProps>;
 };
 
 const PAGE_FOOTER_HEIGHT = 40;
@@ -26,38 +26,42 @@ const PAGE_FOOTER_HEIGHT = 40;
  * height of the viewport. It adds a sticky footer on tablet viewport size.
  */
 export const LandingPageLayout = styled((props: LandingPageLayoutProps) => {
-  const { className, sectionFoldAboveElement, sectionFoldBelowElement } = props;
+	const {
+		className,
+		sectionFoldAboveElement,
+		sectionFoldBelowElement,
+	} = props;
 
-  return (
-    <div className={className}>
-      {sectionFoldAboveElement}
-      {sectionFoldBelowElement}
-      <LandingPageLayoutFooter />
-    </div>
-  );
+	return (
+		<div className={className}>
+			{sectionFoldAboveElement}
+			{sectionFoldBelowElement}
+			<LandingPageLayoutFooter />
+		</div>
+	);
 })`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 
-  /* Above the fold content should take up entire screen height at a minimum. */
-  > *:first-child {
-    min-height: 100vh;
-  }
+	/* Above the fold content should take up entire screen height at a minimum. */
+	> *:first-child {
+		min-height: 100vh;
+	}
 
-  /* On tablet viewport, make room at the bottom for sticky footer. */
-  ${({ theme }) => theme.breakpoints.up("md")} {
-    > *:first-child {
-      min-height: calc(100vh - ${PAGE_FOOTER_HEIGHT}px);
-    }
-  }
+	/* On tablet viewport, make room at the bottom for sticky footer. */
+	${({ theme }) => theme.breakpoints.up("md")} {
+		> *:first-child {
+			min-height: calc(100vh - ${PAGE_FOOTER_HEIGHT}px);
+		}
+	}
 
-  /* If there is content under the fold, remove the bottom margin for the
+	/* If there is content under the fold, remove the bottom margin for the
    * footer. This way, the first page content doesn't have a weird bottom gap.
    */
-  ${({ sectionFoldBelowElement }) =>
-    Boolean(sectionFoldBelowElement) &&
-    `
+	${({ sectionFoldBelowElement }) =>
+		Boolean(sectionFoldBelowElement) &&
+		`
     > *:first-child {
       min-height: 100vh !important;
     }
@@ -65,10 +69,10 @@ export const LandingPageLayout = styled((props: LandingPageLayoutProps) => {
 `;
 
 const LandingPageLayoutFooter = styled(PageFooter)`
-  height: ${PAGE_FOOTER_HEIGHT}px;
+	height: ${PAGE_FOOTER_HEIGHT}px;
 
-  /* Hide the footer on mobile because we use an app like presentation. */
-  ${({ theme }) => theme.breakpoints.down("sm")} {
-    display: none;
-  }
+	/* Hide the footer on mobile because we use an app like presentation. */
+	${({ theme }) => theme.breakpoints.down("sm")} {
+		display: none;
+	}
 `;

@@ -5,9 +5,9 @@ import { BaselineStylesProvider } from "../display";
 // Integrate the Material UI and Styled Components libraries, set the default
 // theme, apply the baseline CSS styles, and enable React's strict mode.
 addDecorator(story => (
-  <StrictMode>
-    <BaselineStylesProvider>{story()}</BaselineStylesProvider>
-  </StrictMode>
+	<StrictMode>
+		<BaselineStylesProvider>{story()}</BaselineStylesProvider>
+	</StrictMode>
 ));
 
 // TODO: Remove the regex adjustment which ignores the stories from the frontend
@@ -18,7 +18,7 @@ const req = require.context("..", true, /^(?!.*prototype).*\.stories\.tsx?$/);
 
 // Load Storybook stories.
 function loadStories() {
-  req.keys().forEach(filename => req(filename));
+	req.keys().forEach(filename => req(filename));
 }
 
 // Bootstrap Storybook.

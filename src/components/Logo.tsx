@@ -9,20 +9,20 @@ type Props = Pick<LogoImageProps, "size"> & LogoTextProps;
  * Site logo.
  */
 export const Logo = styled((props: Props) => {
-  const { className, size, ...rest } = props;
+	const { className, size, ...rest } = props;
 
-  return (
-    <div className={className}>
-      <LogoImage size={size} />
-      <LogoText {...rest} />
-    </div>
-  );
+	return (
+		<div className={className}>
+			<LogoImage size={size} />
+			<LogoText {...rest} />
+		</div>
+	);
 })`
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
 
-  ${LogoImage} {
-    margin-right: 16px;
-  }
+	${LogoImage} {
+		margin-right: 16px;
+	}
 `;

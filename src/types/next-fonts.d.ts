@@ -1,7 +1,7 @@
 declare module "next-fonts" {
-  import { NextConfig } from "next-config";
+	import { NextConfig } from "next-config";
 
-  function nextFontsPlugin(config?: NextConfig): NextConfig;
+	function nextFontsPlugin(config?: NextConfig): NextConfig;
 
-  export = nextFontsPlugin;
+	export = nextFontsPlugin;
 }

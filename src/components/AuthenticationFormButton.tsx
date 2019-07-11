@@ -6,26 +6,26 @@ import styled from "styled-components";
 type Props = OmitStrict<ButtonProps, "disabled" | "variant" | "fullWidth">;
 
 export function AuthenticationFormButton(props: Props) {
-  return (
-    <FormikConsumer>
-      {form => (
-        <StyledButton
-          {...props}
-          variant="contained"
-          fullWidth
-          disabled={form.isSubmitting}
-        />
-      )}
-    </FormikConsumer>
-  );
+	return (
+		<FormikConsumer>
+			{form => (
+				<StyledButton
+					{...props}
+					variant="contained"
+					fullWidth
+					disabled={form.isSubmitting}
+				/>
+			)}
+		</FormikConsumer>
+	);
 }
 
 const StyledButton = styled(Button)`
-  padding: 8px 32px;
-  background-color: ${grey[50]};
-  font-size: 12px;
+	padding: 8px 32px;
+	background-color: ${grey[50]};
+	font-size: 12px;
 
-  :hover {
-    background-color: ${grey[200]};
-  }
+	:hover {
+		background-color: ${grey[200]};
+	}
 `;

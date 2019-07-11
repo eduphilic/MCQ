@@ -5,7 +5,7 @@ import { create } from "react-test-renderer";
 // Extract the shape of "generateClassName" without adding "@types/jss" as a
 // dependency.
 type GenerateId = ComponentPropsWithoutRef<
-  typeof StylesProvider
+	typeof StylesProvider
 >["generateClassName"];
 type GenerateIdParameters = Parameters<NonNullable<GenerateId>>;
 type Rule = GenerateIdParameters[0];
@@ -19,14 +19,14 @@ type StyleSheet = GenerateIdParameters[1];
  * @ref https://github.com/mui-org/material-ui/issues/9492
  */
 function generateClassName(rule: Rule, styleSheet: StyleSheet) {
-  if (!styleSheet) throw new Error("Expected stylesheet.");
-  return `${styleSheet.options.classNamePrefix}-${rule.key}`;
+	if (!styleSheet) throw new Error("Expected stylesheet.");
+	return `${styleSheet.options.classNamePrefix}-${rule.key}`;
 }
 
 export default function render(children: ReactElement) {
-  return create(
-    <StylesProvider generateClassName={generateClassName}>
-      {children}
-    </StylesProvider>,
-  );
+	return create(
+		<StylesProvider generateClassName={generateClassName}>
+			{children}
+		</StylesProvider>,
+	);
 }
