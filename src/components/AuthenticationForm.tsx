@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { AuthenticationFormButton } from "./AuthenticationFormButton";
 import { AuthenticationFormCardActions } from "./AuthenticationFormCardActions";
 import { AuthenticationFormCardHeader } from "./AuthenticationFormCardHeader";
-// import { AuthenticationFormGoogleButton } from "./AuthenticationFormGoogleButton";
+import { AuthenticationFormGoogleButton } from "./AuthenticationFormGoogleButton";
 import { AuthenticationFormLink } from "./AuthenticationFormLink";
 import { AuthenticationFormStatus } from "./AuthenticationFormStatus";
 import { AuthenticationFormTerms } from "./AuthenticationFormTerms";
@@ -48,7 +48,9 @@ function AuthenticationFormBase() {
 				<AuthenticationFormButton type="submit">
 					Sign up
 				</AuthenticationFormButton>
-				{/* <AuthenticationFormGoogleButton /> */}
+				<AuthenticationFormGoogleButton>
+					Sign up with Google
+				</AuthenticationFormGoogleButton>
 				<AuthenticationFormLink to="/recover">
 					Forgot your password?
 				</AuthenticationFormLink>
