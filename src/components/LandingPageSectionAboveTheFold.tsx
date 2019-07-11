@@ -81,24 +81,24 @@ const GRID_AREA_LANGUAGE_SELECT = "language-select";
 const SIDEBAR_WIDTH = 400;
 
 const Wrapper = styled(Container)`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 16px;
-  padding-bottom: 16px;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 16px;
+	padding-bottom: 16px;
 
-  @supports (display: grid) {
-    ${({ theme }) => theme.breakpoints.up("md")} {
-      display: grid;
-      grid-template-areas:
-        "${GRID_AREA_HEADER} ${GRID_AREA_LANGUAGE_SELECT}"
-        "header-section section";
-      grid-template-rows: 64px 1fr;
-      grid-template-columns: 1fr ${SIDEBAR_WIDTH}px;
-      align-items: unset;
-    }
-  }
+	@supports (display: grid) {
+		${({ theme }) => theme.breakpoints.up("md")} {
+		display: grid;
+		grid-template-areas:
+			"${GRID_AREA_HEADER} ${GRID_AREA_LANGUAGE_SELECT}"
+			"header-section section";
+		grid-template-rows: 64px 1fr;
+		grid-template-columns: 1fr ${SIDEBAR_WIDTH}px;
+		align-items: unset;
+		}
+	}
 `;
 
 type BackgroundProps = {
@@ -116,12 +116,12 @@ type BackgroundProps = {
 };
 
 const backgroundCss = css<BackgroundProps>`
-  background-image:
-    linear-gradient(
-      rgba(0, 0, 0, ${({ backgroundDarkenFactor }) => backgroundDarkenFactor}),
-      rgba(0, 0, 0, ${({ backgroundDarkenFactor }) => backgroundDarkenFactor})
-    ),
-    url("${({ backgroundImageUrl }) => backgroundImageUrl}");
+	background-image:
+		linear-gradient(
+			rgba(0, 0, 0, ${({ backgroundDarkenFactor }) => backgroundDarkenFactor}),
+			rgba(0, 0, 0, ${({ backgroundDarkenFactor }) => backgroundDarkenFactor})
+		),
+		url("${({ backgroundImageUrl }) => backgroundImageUrl}");
 `;
 
 const Background = styled.section<BackgroundProps>`
@@ -165,6 +165,10 @@ const TextSection = styled.section`
 	flex-direction: column;
 	justify-content: center;
 	grid-area: ${GRID_AREA_HEADER_SECTION};
+
+	${({ theme }) => theme.breakpoints.up("md")} {
+		padding-right: 32px;
+	}
 `;
 
 const H1 = styled(Typography).attrs(
