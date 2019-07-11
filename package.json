@@ -2,15 +2,27 @@
   "private": true,
   "name": "join-uniform",
   "version": "1.0.0",
+  "engines": {
+    "node": "10"
+  },
+  "main": "index.js",
   "scripts": {
     "start": "next",
+    "build": "npm-run-all clean build:next",
+    "build:next": "next build",
+    "clean": "rimraf .next",
     "test": "jest --coverage",
     "lint": "eslint --ext .tsx,.ts pages src",
     "type-check": "tsc --noEmit",
-    "storybook": "start-storybook -c src/storybook --quiet --ci -p 9001"
+    "storybook": "start-storybook -c src/storybook --quiet --ci -p 9001",
+    "firebase:login": "firebase login",
+    "firebase:list": "firebase list",
+    "firebase:use:staging": "firebase use joinuniformindia-test",
+    "firebase:deploy": "firebase deploy"
   },
   "dependencies": {
     "@babel/core": "^7.5.4",
+    "@firebase/app-types": "^0.4.0",
     "@material-ui/core": "^4.2.0",
     "@material-ui/icons": "^4.2.1",
     "@material-ui/styles": "^4.2.0",
@@ -20,6 +32,8 @@
     "clsx": "^1.0.4",
     "downshift": "^3.2.10",
     "firebase": "^6.2.4",
+    "firebase-admin": "8.0.0",
+    "firebase-functions": "3.1.0",
     "formik": "^1.5.7",
     "lodash.debounce": "^4.0.8",
     "lodash.pick": "^4.4.0",
@@ -85,10 +99,12 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.2",
     "eslint-plugin-react-hooks": "^1.6.1",
+    "firebase-tools": "^7.0.2",
     "jest": "^24.8.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.18.2",
     "react-test-renderer": "^16.8.6",
+    "rimraf": "^2.6.3",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
   }

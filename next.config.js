@@ -18,12 +18,14 @@ module.exports = withoutTypeChecking(
 			withSvgr(
 				withImages({
 					poweredByHeader: false,
+					distDir: "dist",
 				}),
 			),
 		),
 	),
 );
 
+// #region Custom Plugins
 /**
  * @param {import("next-config").NextConfig} nextConfig
  * @return {import("next-config").NextConfig}
@@ -105,3 +107,4 @@ function withoutTypeChecking(nextConfig = {}) {
 		},
 	};
 }
+// #endregion
