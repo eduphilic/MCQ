@@ -25,5 +25,5 @@ module.exports = {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
   },
-  extends: ["plugin:jsx-a11y/strict"],
+  extends: ["plugin:jsx-a11y/strict", "plugin:prettier/recommended"],
 };

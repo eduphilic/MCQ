@@ -5,9 +5,7 @@
   "scripts": {
     "start": "next",
     "test": "jest --coverage",
-    "lint": "npm-run-all lint:*",
-    "lint:tslint": "tslint -p ./tsconfig.json -t verbose",
-    "lint:eslint": "eslint --ext .tsx,.ts pages src",
+    "lint": "eslint --ext .tsx,.ts pages src",
     "type-check": "tsc --noEmit",
     "storybook": "start-storybook -c src/storybook --quiet --ci -p 9001"
   },
@@ -83,7 +81,9 @@
     "babel-plugin-require-context-hook": "^1.0.0",
     "babel-plugin-styled-components": "^1.10.6",
     "eslint": "^6.0.1",
+    "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.2",
     "eslint-plugin-react-hooks": "^1.6.1",
     "jest": "^24.8.0",
@@ -91,10 +91,6 @@
     "prettier": "^1.18.2",
     "react-test-renderer": "^16.8.6",
     "ts-node": "^8.3.0",
-    "tslint": "^5.18.0",
-    "tslint-config-airbnb": "^5.11.1",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-plugin-prettier": "^2.0.1",
     "typescript": "^3.5.2"
   }
 }
