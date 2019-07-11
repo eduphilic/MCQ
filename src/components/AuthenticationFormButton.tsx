@@ -21,6 +21,7 @@ export function AuthenticationFormButton(props: Props) {
 }
 
 const StyledButton = styled(Button)`
+	height: 40px;
 	padding: 8px 32px;
 	background-color: ${grey[50]};
 	font-size: 12px;
