@@ -1,17 +1,17 @@
 {
-  "presets": ["next/babel", "@zeit/next-typescript/babel"],
-  "plugins": [
-    [
-      "babel-plugin-styled-components",
-      {
-        "ssr": true,
-        "pure": true
-      }
-    ]
-  ],
-  "env": {
-    "test": {
-      "plugins": ["require-context-hook"]
-    }
-  }
+	"presets": ["next/babel"],
+	"plugins": [
+		[
+			"babel-plugin-styled-components",
+			{
+				"ssr": true,
+				"pure": true
+			}
+		]
+	],
+	"env": {
+		"test": {
+			"plugins": ["require-context-hook"]
+		}
+	}
 }

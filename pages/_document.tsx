@@ -9,7 +9,7 @@ import { theme } from "../src/display";
  * Custom Next.js Document component. It adds support for Material UI's CSS
  * engine and Styled Components.
  *
- * @see https://github.com/mui-org/material-ui/tree/master/examples/nextjs-next-with-typescript
+ * @see https://github.com/mui-org/material-ui/tree/master/examples/nextjs-with-typescript
  */
 class CustomDocument extends Document {
 	render() {
@@ -58,13 +58,11 @@ CustomDocument.getInitialProps = async context => {
 	return {
 		...initialProps,
 
-		styles: (
-			<>
-				{flush() || null}
-				{trimCSSWhitespace(muiSheets.getStyleElement())}
-				{styledComponentsSheet.getStyleElement()}
-			</>
-		),
+		styles: [
+			...flush(),
+			trimCSSWhitespace(muiSheets.getStyleElement()),
+			...styledComponentsSheet.getStyleElement(),
+		],
 	};
 };
 

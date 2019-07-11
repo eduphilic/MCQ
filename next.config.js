@@ -2,11 +2,9 @@
 
 // Suppress: Cannot compile namespaces when the '--isolatedModules' flag is provided.ts(1208)
 // @ts-ignore
-// tslint:disable-next-line no-empty
 if (true) {
 }
 
-const withTypescript = require("@zeit/next-typescript");
 const withCss = require("@zeit/next-css");
 const withFonts = require("next-fonts");
 const withImages = require("next-images");
@@ -14,7 +12,7 @@ const withImages = require("next-images");
 /**
  * @type {import("next-config").NextCustomizedConfig}
  */
-module.exports = withTypescript(
+module.exports = withoutTypeChecking(
 	withCss(
 		withFonts(
 			withSvgr(
@@ -74,6 +72,32 @@ function withSvgr(nextConfig = {}) {
 					},
 				],
 			});
+
+			return nextConfig.webpack
+				? nextConfig.webpack(config, options)
+				: config;
+		},
+	};
+}
+
+/**
+ * Disables build time type checking.
+ *
+ * @param {import("next-config").NextConfig} nextConfig
+ * @return {import("next-config").NextConfig}
+ * @see https://github.com/zeit/next.js/issues/7687#issuecomment-506440999
+ * @see https://github.com/zeit/next.js/issues/7848
+ */
+function withoutTypeChecking(nextConfig = {}) {
+	return {
+		...nextConfig,
+
+		webpack(config, options) {
+			config.plugins = config.plugins || [];
+			config.plugins = config.plugins.filter(
+				plugin =>
+					plugin.constructor.name !== "ForkTsCheckerWebpackPlugin",
+			);
 
 			return nextConfig.webpack
 				? nextConfig.webpack(config, options)
