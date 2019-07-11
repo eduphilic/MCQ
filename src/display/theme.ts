@@ -1,4 +1,4 @@
-import { createMuiTheme, Theme as MuiTheme } from "@material-ui/core";
+import { createMuiTheme, Theme as MuiTheme } from "@material-ui/core/styles";
 import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 import { CSSProperties } from "@material-ui/styles";
 import montserratLatin300Woff from "typeface-montserrat/files/montserrat-latin-300.woff";

@@ -1,4 +1,4 @@
-import { CssBaseline } from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider } from "@material-ui/styles";
 import React, { ReactNode } from "react";
 import { ThemeProvider } from "./ThemeProvider";

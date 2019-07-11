@@ -1,6 +1,5 @@
+import CardHeader from "@material-ui/core/CardHeader";
 import styled from "styled-components";
-
-import { CardHeader } from "@material-ui/core";
 
 export const AuthenticationFormCardHeader = styled(CardHeader)`
   .MuiCardHeader-title {

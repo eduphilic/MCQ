@@ -1,5 +1,4 @@
-import { TextField } from "@material-ui/core";
-import { StandardTextFieldProps } from "@material-ui/core/TextField";
+import TextField, { StandardTextFieldProps } from "@material-ui/core/TextField";
 import { Field, FieldProps } from "formik";
 import styled from "styled-components";
 import {

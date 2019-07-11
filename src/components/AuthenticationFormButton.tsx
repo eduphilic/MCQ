@@ -1,5 +1,4 @@
-import { Button } from "@material-ui/core";
-import { ButtonProps } from "@material-ui/core/Button";
+import Button, { ButtonProps } from "@material-ui/core/Button";
 import { grey } from "@material-ui/core/colors";
 import { FormikConsumer } from "formik";
 import styled from "styled-components";

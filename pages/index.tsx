@@ -1,11 +1,14 @@
-import { Dialog, IconButton, Toolbar } from "@material-ui/core";
-import { ToolbarProps } from "@material-ui/core/Toolbar";
+import Dialog from "@material-ui/core/Dialog";
+import IconButton from "@material-ui/core/IconButton";
+import Toolbar, { ToolbarProps } from "@material-ui/core/Toolbar";
 import CloseIcon from "@material-ui/icons/Close";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Logo } from "../src/components";
-import { LandingPageLayout } from "../src/components/LandingPageLayout";
-import { LandingPageSectionAboveTheFold } from "../src/components/LandingPageSectionAboveTheFold";
+import {
+  LandingPageLayout,
+  LandingPageSectionAboveTheFold,
+  Logo,
+} from "../src/components";
 
 export default function LandingPage() {
   const [authDialogOpen, setAuthDialogOpen] = useState(false);

@@ -1,4 +1,5 @@
-import { Card, CardContent } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import * as firebase from "firebase/app";
 import { Form, withFormik } from "formik";
 import React from "react";

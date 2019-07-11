@@ -1,4 +1,4 @@
-import { CardActions } from "@material-ui/core";
+import CardActions from "@material-ui/core/CardActions";
 import styled from "styled-components";
 
 export const AuthenticationFormCardActions = styled(CardActions)`

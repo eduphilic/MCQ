@@ -1,5 +1,4 @@
-import { Tooltip } from "@material-ui/core";
-import { TooltipProps } from "@material-ui/core/Tooltip";
+import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
 import { TransitionProps } from "@material-ui/core/transitions/transition";
 import { ArrowDropUp as ArrowIcon } from "@material-ui/icons";
 import { Field, FieldProps, FormikErrors } from "formik";

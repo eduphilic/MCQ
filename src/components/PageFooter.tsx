@@ -1,5 +1,5 @@
-import { Typography } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
+import Typography from "@material-ui/core/Typography";
 import React from "react";
 import styled from "styled-components";
 

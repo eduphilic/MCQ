@@ -1,5 +1,6 @@
-import { Container as MuiContainer } from "@material-ui/core";
-import { ContainerProps as MuiContainerProps } from "@material-ui/core/Container";
+import MuiContainer, {
+  ContainerProps as MuiContainerProps,
+} from "@material-ui/core/Container";
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 
