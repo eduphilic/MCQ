@@ -5,8 +5,8 @@ import "firebase/auth";
 
 import App, { Container } from "next/app";
 import React, { StrictMode } from "react";
-import { StagingEnvironmentBanner } from "../src/components/StagingEnvironmentBanner";
-import { BaselineStylesProvider } from "../src/display";
+import { StagingEnvironmentBanner } from "../src/components";
+import { ThemeProvider } from "../src/display";
 
 /**
  * Custom Next.js App component. It removes the server side rendered CSS from
@@ -30,10 +30,10 @@ class CustomApp extends App {
 		return (
 			<Container>
 				<StrictMode>
-					<BaselineStylesProvider>
+					<ThemeProvider>
 						<Component {...pageProps} />
 						<StagingEnvironmentBanner />
-					</BaselineStylesProvider>
+					</ThemeProvider>
 				</StrictMode>
 			</Container>
 		);
