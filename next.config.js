@@ -13,13 +13,17 @@ const withImages = require("next-images");
  * @type {import("next-config").NextCustomizedConfig}
  */
 module.exports = withoutTypeChecking(
-	withCss(
-		withFonts(
-			withSvgr(
-				withImages({
-					poweredByHeader: false,
-					distDir: "dist",
-				}),
+	withPolyfills(
+		withFirebaseProjectEnv(
+			withCss(
+				withFonts(
+					withSvgr(
+						withImages({
+							poweredByHeader: false,
+							distDir: "dist",
+						}),
+					),
+				),
 			),
 		),
 	),
@@ -30,11 +34,13 @@ module.exports = withoutTypeChecking(
  * @param {import("next-config").NextConfig} nextConfig
  * @return {import("next-config").NextConfig}
  */
-function withSvgr(nextConfig = {}) {
+function withFirebaseProjectEnv(nextConfig = {}) {
 	return {
 		...nextConfig,
 
 		env: {
+			...nextConfig.env,
+
 			FIREBASE_CONFIG:
 				process.env.SITE_ENVIRONMENT === "production"
 					? {
@@ -59,6 +65,16 @@ function withSvgr(nextConfig = {}) {
 							appId: "1:31549096619:web:be9f5a7fbb904c90",
 					  },
 		},
+	};
+}
+
+/**
+ * @param {import("next-config").NextConfig} nextConfig
+ * @return {import("next-config").NextConfig}
+ */
+function withSvgr(nextConfig = {}) {
+	return {
+		...nextConfig,
 
 		webpack(config, options) {
 			config.module = config.module || { rules: [] };
@@ -100,6 +116,43 @@ function withoutTypeChecking(nextConfig = {}) {
 				plugin =>
 					plugin.constructor.name !== "ForkTsCheckerWebpackPlugin",
 			);
+
+			return nextConfig.webpack
+				? nextConfig.webpack(config, options)
+				: config;
+		},
+	};
+}
+
+/**
+ * Adds required polyfills.
+ *
+ * @param {import("next-config").NextConfig} nextConfig
+ * @return {import("next-config").NextConfig}
+ * @see https://nextjs.org/docs#browser-support
+ * @see https://github.com/zeit/next.js/tree/canary/examples/with-polyfills
+ */
+function withPolyfills(nextConfig = {}) {
+	return {
+		...nextConfig,
+
+		webpack(config, options) {
+			/** @type {() => Promise<Record<string, string[]>>} */
+			// @ts-ignore
+			const originalEntry = config.entry;
+
+			config.entry = async () => {
+				const entries = await originalEntry();
+
+				if (
+					entries["main.js"] &&
+					!entries["main.js"].includes("./src/polyfills.ts")
+				) {
+					entries["main.js"].unshift("./src/polyfills.ts");
+				}
+
+				return entries;
+			};
 
 			return nextConfig.webpack
 				? nextConfig.webpack(config, options)

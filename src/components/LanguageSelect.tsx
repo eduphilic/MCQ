@@ -1,19 +1,14 @@
-import {
-	FormControl,
-	FormControlLabel,
-	FormLabel,
-	Radio,
-	RadioGroup,
-} from "@material-ui/core";
-import { FormControlProps } from "@material-ui/core/FormControl";
-import { FormLabelProps } from "@material-ui/core/FormLabel";
-import { RadioGroupProps } from "@material-ui/core/RadioGroup";
+import FormControl, { FormControlProps } from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormLabel, { FormLabelProps } from "@material-ui/core/FormLabel";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup, { RadioGroupProps } from "@material-ui/core/RadioGroup";
 import React, { useState } from "react";
 import styled from "styled-components";
 
-type Props = {
+interface Props {
 	className?: string;
-};
+}
 
 const label = "Select Language";
 
