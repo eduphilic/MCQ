@@ -7,10 +7,8 @@ import { LanguageSelect } from "./LanguageSelect";
 import { LogoImage } from "./LogoImage";
 import { LogoText } from "./LogoText";
 
-type LandingPageSectionAboveTheFoldProps = OmitStrict<
-	BackgroundProps,
-	"children"
-> & {
+interface LandingPageSectionAboveTheFoldProps
+	extends OmitStrict<WrapperBackgroundProps, "children"> {
 	/**
 	 * Header text.
 	 */
@@ -20,7 +18,7 @@ type LandingPageSectionAboveTheFoldProps = OmitStrict<
 	 * List of features to list under `headerText`.
 	 */
 	featureTexts: string[];
-};
+}
 
 const placeholderProps: LandingPageSectionAboveTheFoldProps = {
 	backgroundImageUrl: "/static/images/hero/soldier-optimized.png",
@@ -43,7 +41,7 @@ export function LandingPageSectionAboveTheFold() {
 	} = placeholderProps;
 
 	return (
-		<Background
+		<WrapperBackground
 			backgroundImageUrl={backgroundImageUrl}
 			backgroundDarkenFactor={backgroundDarkenFactor}
 		>
@@ -71,7 +69,7 @@ export function LandingPageSectionAboveTheFold() {
 					<AuthenticationForm />
 				</AuthenticationSection>
 			</Wrapper>
-		</Background>
+		</WrapperBackground>
 	);
 }
 
@@ -80,11 +78,43 @@ const GRID_AREA_HEADER_SECTION = "header-section";
 const GRID_AREA_LANGUAGE_SELECT = "language-select";
 const SIDEBAR_WIDTH = 400;
 
-const Wrapper = styled(Container)`
-	flex: 1;
+interface WrapperBackgroundProps {
+	children?: ReactNode;
+	/**
+	 * Background image.
+	 */
+	backgroundImageUrl: string;
+	/**
+	 * Amount to darken the background image for readability.
+	 */
+	backgroundDarkenFactor: number;
+}
+
+const backgroundCss = css<WrapperBackgroundProps>`
+	background-image:
+		linear-gradient(
+			rgba(0, 0, 0, ${({ backgroundDarkenFactor }) => backgroundDarkenFactor}),
+			rgba(0, 0, 0, ${({ backgroundDarkenFactor }) => backgroundDarkenFactor})
+		),
+		url("${({ backgroundImageUrl }) => backgroundImageUrl}");
+`;
+
+const WrapperBackground = styled.section<WrapperBackgroundProps>`
 	display: flex;
-	flex-direction: column;
-	align-items: center;
+	background-color: ${({ theme }) => theme.app.colors.greenDark};
+
+	${({ theme }) => theme.breakpoints.up("md")} {
+		background-color: #000;
+		background-size: cover;
+		${backgroundCss};
+	}
+`;
+
+const Wrapper = styled(Container)`
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: flex-start;
 	padding-top: 16px;
 	padding-bottom: 16px;
 
@@ -101,46 +131,11 @@ const Wrapper = styled(Container)`
 	}
 `;
 
-type BackgroundProps = {
-	children?: ReactNode;
-
-	/**
-	 * Background image.
-	 */
-	backgroundImageUrl: string;
-
-	/**
-	 * Amount to darken the background image for readability.
-	 */
-	backgroundDarkenFactor: number;
-};
-
-const backgroundCss = css<BackgroundProps>`
-	background-image:
-		linear-gradient(
-			rgba(0, 0, 0, ${({ backgroundDarkenFactor }) => backgroundDarkenFactor}),
-			rgba(0, 0, 0, ${({ backgroundDarkenFactor }) => backgroundDarkenFactor})
-		),
-		url("${({ backgroundImageUrl }) => backgroundImageUrl}");
-`;
-
-const Background = styled.section<BackgroundProps>`
-	display: flex;
-	flex-direction: column;
-	background-color: ${({ theme }) => theme.app.colors.greenDark};
-
-	${({ theme }) => theme.breakpoints.up("md")} {
-		background-color: #000;
-		background-size: cover;
-		${backgroundCss};
-	}
-`;
-
 const Header = styled.header`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
 	grid-area: ${GRID_AREA_HEADER};
+	display: flex;
+	align-items: center;
+	width: 100%;
 
 	${LogoImage} {
 		margin-bottom: 8px;
@@ -158,17 +153,6 @@ const Header = styled.header`
 
 const textShadowCss = css`
 	text-shadow: 2px 2px #000;
-`;
-
-const TextSection = styled.section`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	grid-area: ${GRID_AREA_HEADER_SECTION};
-
-	${({ theme }) => theme.breakpoints.up("md")} {
-		padding-right: 32px;
-	}
 `;
 
 const H1 = styled(Typography).attrs(
@@ -206,15 +190,35 @@ const UL = styled.ul`
 	}
 `;
 
+const TextSection = styled.section`
+	grid-area: ${GRID_AREA_HEADER_SECTION};
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	width: 100%;
+
+	${H1}, ${UL} {
+		width: 100%;
+	}
+
+	${({ theme }) => theme.breakpoints.up("md")} {
+		padding-right: 32px;
+	}
+`;
+
 const LanguageSelectSection = styled.section`
 	grid-area: ${GRID_AREA_LANGUAGE_SELECT};
 	display: flex;
+	justify-content: center;
 	width: 100%;
-	max-width: ${SIDEBAR_WIDTH}px;
+
+	> * {
+		max-width: ${SIDEBAR_WIDTH}px;
+	}
 `;
 
 const AuthenticationSection = styled.section`
-	display: flex;
+	display: inline-flex;
 	flex-direction: column;
 	justify-content: center;
 `;
