@@ -1,12 +1,12 @@
 import { addDecorator, configure } from "@storybook/react";
 import { StrictMode } from "react";
-import { BaselineStylesProvider } from "../display";
+import { ThemeProvider } from "../display";
 
 // Integrate the Material UI and Styled Components libraries, set the default
 // theme, apply the baseline CSS styles, and enable React's strict mode.
 addDecorator(story => (
 	<StrictMode>
-		<BaselineStylesProvider>{story()}</BaselineStylesProvider>
+		<ThemeProvider>{story()}</ThemeProvider>
 	</StrictMode>
 ));
 

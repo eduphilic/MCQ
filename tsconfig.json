@@ -19,6 +19,13 @@
 		"skipLibCheck": true,
 		"resolveJsonModule": true
 	},
-	"include": ["pages", "src", "index.js", "next-env.d.ts", "next.config.js"],
-	"exclude": ["node_modules", "**/node_modules/*", "**/prototype/**"]
+	"include": [
+		"components",
+		"lib",
+		"pages",
+		"index.js",
+		"next-env.d.ts",
+		"next.config.js"
+	],
+	"exclude": ["node_modules", "**/node_modules/*", "prototype"]
 }

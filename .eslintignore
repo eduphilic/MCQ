@@ -1,6 +1,8 @@
 .firebase/
-.next/
 .vscode/
 coverage/
-src/prototype/**/*
+dist/
+firebase-hosting/
 node_modules/
+prototype/**/*
+static/

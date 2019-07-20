@@ -5,8 +5,8 @@ import "firebase/auth";
 
 import App, { Container } from "next/app";
 import React, { StrictMode } from "react";
-import { StagingEnvironmentBanner } from "../src/components";
-import { ThemeProvider } from "../src/display";
+import { StagingEnvironmentBanner } from "../components";
+import { ThemeProvider } from "../lib/display";
 
 /**
  * Custom Next.js App component. It removes the server side rendered CSS from

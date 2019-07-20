@@ -8,7 +8,7 @@ import {
 	LandingPageLayout,
 	LandingPageSectionAboveTheFold,
 	Logo,
-} from "../src/components";
+} from "../components";
 
 export default function LandingPage() {
 	const [authDialogOpen, setAuthDialogOpen] = useState(false);

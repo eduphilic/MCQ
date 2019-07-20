@@ -151,9 +151,9 @@ function withPolyfills(nextConfig = {}) {
 
 				if (
 					entries["main.js"] &&
-					!entries["main.js"].includes("./src/polyfills.ts")
+					!entries["main.js"].includes("./lib/polyfills.ts")
 				) {
-					entries["main.js"].unshift("./src/polyfills.ts");
+					entries["main.js"].unshift("./lib/polyfills.ts");
 				}
 
 				return entries;

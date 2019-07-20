@@ -6,7 +6,7 @@
 import createMuiTheme, {
   ThemeOptions,
 } from "@material-ui/core/styles/createMuiTheme";
-import { Theme as CustomTheme } from "../../display/theme";
+import { Theme as CustomTheme } from "../../lib/display/theme";
 
 const theme: ThemeOptions = {
   palette: {

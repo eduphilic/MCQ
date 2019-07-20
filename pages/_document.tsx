@@ -3,7 +3,7 @@ import Document, { Head, Main, NextScript } from "next/document";
 import React, { cloneElement, DOMAttributes, ReactElement } from "react";
 import { ServerStyleSheet as StyledComponentsServerStyleSheet } from "styled-components";
 import flush from "styled-jsx/server";
-import { theme } from "../src/display";
+import { theme } from "../lib/display";
 
 /**
  * Custom Next.js Document component. It adds support for Material UI's CSS
