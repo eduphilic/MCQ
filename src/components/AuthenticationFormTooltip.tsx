@@ -1,6 +1,6 @@
 import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
 import { TransitionProps } from "@material-ui/core/transitions/transition";
-import { ArrowDropUp as ArrowIcon } from "@material-ui/icons";
+import ArrowIcon from "@material-ui/icons/ArrowDropUp";
 import { Field, FieldProps, FormikErrors } from "formik";
 import React, { ConsumerProps, ReactNode } from "react";
 import styled from "styled-components";

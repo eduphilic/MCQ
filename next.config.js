@@ -8,6 +8,9 @@ if (true) {
 const withCss = require("@zeit/next-css");
 const withFonts = require("next-fonts");
 const withImages = require("next-images");
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+	enabled: process.env.ANALYZE === "true",
+});
 
 /**
  * @type {import("next-config").NextCustomizedConfig}
@@ -18,10 +21,12 @@ module.exports = withoutTypeChecking(
 			withCss(
 				withFonts(
 					withSvgr(
-						withImages({
-							poweredByHeader: false,
-							distDir: "dist",
-						}),
+						withBundleAnalyzer(
+							withImages({
+								poweredByHeader: false,
+								distDir: "dist",
+							}),
+						),
 					),
 				),
 			),

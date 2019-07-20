@@ -4,12 +4,12 @@ import MuiContainer, {
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 
-export type ContainerProps = OmitStrict<MuiContainerProps, "maxWidth">;
+interface Props extends OmitStrict<MuiContainerProps, "maxWidth"> {}
 
 /**
  * Centers the page contents and provides horizontal margins.
  */
-export function Container(props: ContainerProps) {
+export function Container(props: Props) {
 	const theme = useContext(ThemeContext);
 
 	return (

@@ -1,4 +1,4 @@
-import { grey } from "@material-ui/core/colors";
+import grey from "@material-ui/core/colors/grey";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import styled from "styled-components";
