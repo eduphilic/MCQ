@@ -3,7 +3,6 @@ import CardContent from "@material-ui/core/CardContent";
 import * as firebase from "firebase/app";
 import { Form, Formik, FormikActions } from "formik";
 import React from "react";
-import * as yup from "yup";
 import { AuthenticationFormButton } from "./AuthenticationFormButton";
 import { AuthenticationFormCardActions } from "./AuthenticationFormCardActions";
 import { AuthenticationFormCardHeader } from "./AuthenticationFormCardHeader";
@@ -12,31 +11,21 @@ import { AuthenticationFormLink } from "./AuthenticationFormLink";
 import { AuthenticationFormStatus } from "./AuthenticationFormStatus";
 import { AuthenticationFormTerms } from "./AuthenticationFormTerms";
 import { AuthenticationFormTextField } from "./AuthenticationFormTextField";
+import {
+	useValidationSchema,
+	ValidationSchema,
+	SignupFormValues,
+} from "../lib/validation";
 
-type FormValues = {
-	email: string;
-	password: string;
-	termsAgreed: boolean;
-};
-
-const initialValues: FormValues = {
+const initialValues: SignupFormValues = {
 	email: "",
 	password: "",
 	termsAgreed: false,
 };
 
-const schema = yup.object<FormValues>({
-	email: yup.string().required("Please enter an email address"),
-	password: yup.string().required("Please enter a password"),
-	termsAgreed: yup
-		.boolean()
-		.oneOf([true], "Please agree to the terms of service")
-		.required(),
-});
-
 async function handleSubmit(
-	values: FormValues,
-	form: FormikActions<FormValues>,
+	values: SignupFormValues,
+	form: FormikActions<SignupFormValues>,
 ) {
 	form.setFieldValue("password", "");
 	form.setFieldTouched("password", false);
@@ -88,6 +77,8 @@ async function handleSubmit(
 // }
 
 export function AuthenticationForm() {
+	const schema = useValidationSchema(ValidationSchema.Signin);
+
 	return (
 		<Formik
 			initialValues={initialValues}
@@ -105,19 +96,21 @@ export function AuthenticationForm() {
 				/>
 				<CardContent>
 					<AuthenticationFormStatus />
-					<AuthenticationFormTextField<FormValues>
+					<AuthenticationFormTextField<SignupFormValues>
 						name="email"
 						placeholder="Enter Email Address"
 						type="email"
 					/>
-					<AuthenticationFormTextField<FormValues>
+					<AuthenticationFormTextField<SignupFormValues>
 						name="password"
 						placeholder="Enter Password"
 						type="password"
 					/>
 				</CardContent>
 				<AuthenticationFormCardActions>
-					<AuthenticationFormTerms<FormValues> name="termsAgreed" />
+					<AuthenticationFormTerms<
+						SignupFormValues
+					> name="termsAgreed" />
 					<AuthenticationFormButton type="submit">
 						Sign up
 					</AuthenticationFormButton>

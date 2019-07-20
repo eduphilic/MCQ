@@ -4,15 +4,14 @@ import ArrowIcon from "@material-ui/icons/ArrowDropUp";
 import { Field, FieldProps, FormikErrors } from "formik";
 import React, { ConsumerProps, ReactNode } from "react";
 import styled from "styled-components";
+import { FormValues } from "../lib/validation";
 
-export type AuthenticationFormValues = Record<string, string | boolean>;
-
-type Props<V extends AuthenticationFormValues> = {
+interface Props<V extends FormValues> {
 	children: TooltipProps["children"];
 	name: keyof V;
-};
+}
 
-export function AuthenticationFormTooltip<V extends AuthenticationFormValues>(
+export function AuthenticationFormTooltip<V extends FormValues>(
 	props: Props<V>,
 ) {
 	const { children, name } = props;
@@ -62,7 +61,7 @@ const StyledArrowIcon = styled(ArrowIcon)`
 	color: #ff0000;
 `;
 
-function Title<V extends AuthenticationFormValues>(props: {
+function Title<V extends FormValues>(props: {
 	children?: FormikErrors<V>[keyof V];
 }) {
 	const { children } = props;

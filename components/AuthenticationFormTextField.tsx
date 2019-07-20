@@ -1,23 +1,21 @@
 import TextField, { StandardTextFieldProps } from "@material-ui/core/TextField";
 import { Field, FieldProps } from "formik";
 import styled from "styled-components";
-import {
-	AuthenticationFormTooltip,
-	AuthenticationFormValues,
-} from "./AuthenticationFormTooltip";
+import { AuthenticationFormTooltip } from "./AuthenticationFormTooltip";
+import { FormValues } from "../lib/validation";
 
-type Props<V extends AuthenticationFormValues> = {
+interface Props<V extends FormValues> {
 	name: keyof V;
 	placeholder: string;
 	type?: StandardTextFieldProps["type"];
-};
+}
 
 /**
  * Material UI `TextField`, styled as a flat square input. It is set to take the
  * full width of the container and removes the default underline style. It also
  * provides an error tooltip.
  */
-export function AuthenticationFormTextField<V extends AuthenticationFormValues>(
+export function AuthenticationFormTextField<V extends FormValues>(
 	props: Props<V>,
 ) {
 	const { name, ...rest } = props;

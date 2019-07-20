@@ -4,18 +4,14 @@ import { Field, FieldProps } from "formik";
 import React from "react";
 import styled from "styled-components";
 import { AuthenticationFormLink } from "./AuthenticationFormLink";
-import {
-	AuthenticationFormTooltip,
-	AuthenticationFormValues,
-} from "./AuthenticationFormTooltip";
+import { AuthenticationFormTooltip } from "./AuthenticationFormTooltip";
+import { FormValues } from "../lib/validation";
 
-type Props<V extends AuthenticationFormValues> = {
+interface Props<V extends FormValues> {
 	name: keyof V;
-};
+}
 
-export function AuthenticationFormTerms<V extends AuthenticationFormValues>(
-	props: Props<V>,
-) {
+export function AuthenticationFormTerms<V extends FormValues>(props: Props<V>) {
 	const { name } = props;
 
 	return (

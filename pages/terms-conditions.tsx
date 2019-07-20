@@ -1,3 +1,6 @@
 import React from "react";
+import { LandingPageLayout } from "../components";
 
-export default () => <div>Terms &amp; Conditions</div>;
+export default () => (
+	<LandingPageLayout sectionFoldAboveElement={<div>Placeholder</div>} />
+);
