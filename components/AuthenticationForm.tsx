@@ -1,6 +1,5 @@
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import * as firebase from "firebase/app";
 import { Form, Formik, FormikActions } from "formik";
 import React from "react";
 import { AuthenticationFormButton } from "./AuthenticationFormButton";
@@ -16,6 +15,7 @@ import {
 	ValidationSchema,
 	SignupFormValues,
 } from "../lib/validation";
+import { loadFirebase } from "../lib/util";
 
 const initialValues: SignupFormValues = {
 	email: "",
@@ -30,6 +30,7 @@ async function handleSubmit(
 	form.setFieldValue("password", "");
 	form.setFieldTouched("password", false);
 	try {
+		const firebase = await loadFirebase();
 		const credential = await firebase
 			.auth()
 			.createUserWithEmailAndPassword(values.email, values.password);

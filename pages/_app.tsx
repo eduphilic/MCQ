@@ -1,8 +1,3 @@
-/* tslint:disable:ordered-imports */
-import * as firebase from "firebase/app";
-import "firebase/auth";
-/* tslint:enable:ordered-imports */
-
 import App, { Container } from "next/app";
 import React, { StrictMode } from "react";
 import { StagingEnvironmentBanner } from "../components";
@@ -20,8 +15,6 @@ class CustomApp extends App {
 		if (jssStyles) {
 			jssStyles.parentNode!.removeChild(jssStyles);
 		}
-
-		firebase.initializeApp(process.env.FIREBASE_CONFIG);
 	}
 
 	render() {
