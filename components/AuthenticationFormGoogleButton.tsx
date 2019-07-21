@@ -4,9 +4,13 @@ import robotoLatin500Woff from "typeface-roboto/files/roboto-latin-500.woff";
 import robotoLatin500Woff2 from "typeface-roboto/files/roboto-latin-500.woff2";
 import { AuthenticationFormGoogleButtonIcon } from "./AuthenticationFormGoogleButtonIcon";
 import Button, { ButtonProps } from "@material-ui/core/Button";
+import { FormikConsumer } from "formik";
 
 interface Props
-	extends OmitStrict<ButtonProps, "children" | "variant" | "fullWidth"> {
+	extends OmitStrict<
+		ButtonProps,
+		"children" | "variant" | "fullWidth" | "disabled"
+	> {
 	children: string;
 }
 
@@ -17,19 +21,25 @@ interface Props
  * @see https://developers.google.com/identity/branding-guidelines
  */
 export function AuthenticationFormGoogleButton(props: Props) {
-	const { children, disabled, ...rest } = props;
+	const { children, ...rest } = props;
 
 	return (
-		<StyledButton
-			variant="contained"
-			fullWidth
-			disabled={disabled}
-			{...rest}
-		>
-			{/* Pass along the "disabled" prop to render alternate SVG. */}
-			<StyledAuthenticationFormGoogleButtonIcon disabled={disabled} />
-			<StyledSpan>{children}</StyledSpan>
-		</StyledButton>
+		<FormikConsumer>
+			{form => (
+				<StyledButton
+					variant="contained"
+					fullWidth
+					disabled={form.isSubmitting}
+					{...rest}
+				>
+					{/* Pass along the "disabled" prop to render alternate SVG. */}
+					<StyledAuthenticationFormGoogleButtonIcon
+						disabled={form.isSubmitting}
+					/>
+					<StyledSpan>{children}</StyledSpan>
+				</StyledButton>
+			)}
+		</FormikConsumer>
 	);
 }
 
