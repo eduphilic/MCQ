@@ -92,7 +92,7 @@ const JwtSecret = "E7l6u!5fQsSi";
  *
  * @type {JwtSession}
  */
-const JwtDefaultSession = { language: "en" };
+const jwtDefaultSession = { language: "en" };
 
 /**
  * Makes a `jwtSession` key available on the web server's `Request` object. It
@@ -103,46 +103,60 @@ const JwtDefaultSession = { language: "en" };
  * @param {express.NextFunction} next
  */
 function jwtSessionMiddleware(req, _res, next) {
-	const jwt = req.session && req.session.jwt;
-	/** @type {JwtSession} */
-	let jwtSession = { ...JwtDefaultSession };
+	const getSession = () => {
+		if (!req.session) {
+			throw new Error("Session middleware is not present.");
+		}
 
-	// If a JWT is present in the session cookie, verify the signature and
-	// decode it.
-	if (jwt) {
+		return req.session;
+	};
+
+	const readJwt = () => {
+		const session = getSession();
+		const jwt = session.jwt;
+		/** @type {JwtSession} */ let jwtSession;
+
 		try {
-			jwtSession = /** @type {any} */ (jsonwebtoken.verify(
-				jwt,
+			const {
+				iat,
+				exp,
+				...restJwtSession
+			} = /** @type {JwtSession} */ (jsonwebtoken.verify(
+				jwt || "",
 				JwtSecret,
 			));
+			jwtSession = restJwtSession;
 		} catch (err) {
-			console.log("Ignored invalid jwt:", err);
+			jwtSession = { ...jwtDefaultSession };
 		}
-	}
+
+		return jwtSession;
+	};
 
 	/**
-	 * Persists the session values inside of a signed JWT.
+	 * @param {JwtSession} jwtSession
 	 */
-	const writeJwt = () => {
-		if (!req.session) return;
-		req.session.jwt = jsonwebtoken.sign(jwtSession, JwtSecret, {
+	const writeJwt = jwtSession => {
+		const session = getSession();
+		session.jwt = jsonwebtoken.sign(jwtSession, JwtSecret, {
 			expiresIn: cookieMaxAgeMilliseconds / 1000,
 		});
 	};
 
-	// Write the default session values if no valid session was present at the
-	// beginning of the request.
-	if (!jwt) writeJwt();
-
-	// Monitor the `jwtSession` key for changes. Write an updated JWT on change.
-	req.jwtSession = new Proxy(jwtSession, {
-		set(target, property, value) {
-			target[/** @type {keyof JwtSession} */ (property)] = value;
-			writeJwt();
-			return true;
+	req.jwtSession = new Proxy(
+		{},
+		{
+			get(_target, property, _receiver) {
+				return readJwt()[/** @type {keyof JwtSession} */ (property)];
+			},
+			set(_target, property, value, _receiver) {
+				const jwtSession = { ...readJwt() };
+				jwtSession[/** @type {keyof JwtSession} */ (property)] = value;
+				writeJwt(jwtSession);
+				return true;
+			},
 		},
-	});
+	);
 
-	// Continue with the next middleware in the chain.
 	next();
 }

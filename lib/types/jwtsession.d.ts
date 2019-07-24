@@ -8,6 +8,8 @@ declare namespace JwtSessionInterfaces {
 	interface JwtSessionRequest {
 		jwtSession?: Partial<{
 			language: "en" | "hi";
+			iat: number;
+			exp: number;
 		}> | null;
 	}
 }
