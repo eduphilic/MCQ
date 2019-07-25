@@ -1,6 +1,6 @@
 declare namespace NodeJS {
 	interface ProcessEnv {
-		FIREBASE_CONFIG: {
+		FIREBASE_APP_CONFIG: {
 			type: "production" | "staging";
 			apiKey: string;
 			authDomain: string;
@@ -23,3 +23,5 @@ declare namespace NodeJS {
  * @see https://github.com/Microsoft/TypeScript/pull/30552
  */
 type OmitStrict<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+
+type PromiseValue<T> = T extends Promise<infer U> ? U : never;

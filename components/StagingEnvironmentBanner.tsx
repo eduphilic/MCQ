@@ -8,7 +8,7 @@ import styled from "styled-components";
  */
 export let StagingEnvironmentBanner: ComponentType;
 
-if (process.env.FIREBASE_CONFIG.type === "staging") {
+if (process.env.FIREBASE_APP_CONFIG.type === "staging") {
 	const height = 16;
 
 	const StagingEnvironmentBannerBar = styled.div`

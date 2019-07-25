@@ -13,20 +13,18 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 /**
- * @type {import("next-config").NextCustomizedConfig}
+ * @type {import("next-config").NextConfig}
  */
 module.exports = withoutTypeChecking(
 	withPolyfills(
-		withFirebaseProjectEnv(
-			withCss(
-				withFonts(
-					withSvgr(
-						withBundleAnalyzer(
-							withImages({
-								poweredByHeader: false,
-								distDir: "dist",
-							}),
-						),
+		withCss(
+			withFonts(
+				withSvgr(
+					withBundleAnalyzer(
+						withImages({
+							poweredByHeader: false,
+							distDir: "dist",
+						}),
 					),
 				),
 			),
@@ -35,44 +33,6 @@ module.exports = withoutTypeChecking(
 );
 
 // #region Custom Plugins
-/**
- * @param {import("next-config").NextConfig} nextConfig
- * @return {import("next-config").NextConfig}
- */
-function withFirebaseProjectEnv(nextConfig = {}) {
-	return {
-		...nextConfig,
-
-		env: {
-			...nextConfig.env,
-
-			FIREBASE_CONFIG:
-				process.env.SITE_ENVIRONMENT === "production"
-					? {
-							type: "production",
-							apiKey: "",
-							authDomain: "",
-							databaseURL: "",
-							projectId: "",
-							storageBucket: "",
-							messagingSenderId: "",
-							appId: "",
-					  }
-					: {
-							type: "staging",
-							apiKey: "AIzaSyDGFumSvAaX6GY6555WeLLUasnkoO-3fEk",
-							authDomain: "joinuniformindia-test.firebaseapp.com",
-							databaseURL:
-								"https://joinuniformindia-test.firebaseio.com",
-							projectId: "joinuniformindia-test",
-							storageBucket: "joinuniformindia-test.appspot.com",
-							messagingSenderId: "31549096619",
-							appId: "1:31549096619:web:be9f5a7fbb904c90",
-					  },
-		},
-	};
-}
-
 /**
  * @param {import("next-config").NextConfig} nextConfig
  * @return {import("next-config").NextConfig}

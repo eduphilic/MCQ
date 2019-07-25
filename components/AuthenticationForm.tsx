@@ -34,9 +34,9 @@ async function handleSubmit(
 		const credential = await firebase
 			.auth()
 			.createUserWithEmailAndPassword(values.email, values.password);
-
-		/* tslint:disable-next-line:no-console */
-		console.log({ credential });
+		const user = credential.user;
+		if (!user) throw new Error("Credential did not contain user account.");
+		const idToken = await user.getIdToken();
 
 		form.setStatus(null);
 	} catch (error) {

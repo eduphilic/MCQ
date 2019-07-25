@@ -6,8 +6,10 @@ export async function loadFirebase() {
 	const firebaseModule = await import("firebase/app");
 	await import("firebase/auth");
 
-	const app = firebaseModule.initializeApp(process.env.FIREBASE_CONFIG);
+	const app = firebaseModule.initializeApp(process.env.FIREBASE_APP_CONFIG);
 	if (process.browser) cachedApp = app;
+
+	app.auth().setPersistence(firebaseModule.auth.Auth.Persistence.NONE);
 
 	return app;
 }
