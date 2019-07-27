@@ -9,7 +9,7 @@ export async function loadFirebase() {
 	const app = firebaseModule.initializeApp(process.env.FIREBASE_APP_CONFIG);
 	if (process.browser) cachedApp = app;
 
-	app.auth().setPersistence(firebaseModule.auth.Auth.Persistence.NONE);
+	// app.auth().setPersistence(firebaseModule.auth.Auth.Persistence.NONE);
 
 	return app;
 }

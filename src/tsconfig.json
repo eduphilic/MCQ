@@ -17,20 +17,7 @@
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"skipLibCheck": true,
-		"resolveJsonModule": true
-	},
-	"include": [
-		"components",
-		"lib",
-		"pages",
-		"index.js",
-		"next-env.d.ts",
-		"next.config.js"
-	],
-	"exclude": [
-		"node_modules",
-		"**/node_modules/*",
-		"prototype",
-		"**/prototype/*"
-	]
+		"resolveJsonModule": true,
+		"experimentalDecorators": true
+	}
 }

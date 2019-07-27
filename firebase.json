@@ -26,12 +26,12 @@
 		"rewrites": [
 			{
 				"source": "**/**",
-				"function": "next"
+				"function": "app"
 			}
 		]
 	},
 	"functions": {
-		"source": "./",
+		"source": "./dist",
 		"predeploy": ["yarn build"],
 		"ignore": [
 			"**/.firebase/**",
