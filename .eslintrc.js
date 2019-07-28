@@ -17,13 +17,14 @@ module.exports = {
 		},
 		ecmaVersion: 2018,
 		sourceType: "module",
-		project: path.join(__dirname, "tsconfig.json"),
+		// project: path.join(__dirname, "src/tsconfig.json"),
 		warnOnUnsupportedTypeScriptVersion: false,
 	},
 	plugins: ["react", "react-hooks", "jsx-a11y"],
 	rules: {
 		"react-hooks/rules-of-hooks": "error",
 		"react-hooks/exhaustive-deps": "warn",
+		curly: ["error", "multi-line"],
 	},
 	extends: ["plugin:jsx-a11y/strict", "plugin:prettier/recommended"],
 };

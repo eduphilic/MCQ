@@ -25,7 +25,7 @@ class CustomApp extends App {
 				<StrictMode>
 					<ThemeProvider>
 						<Component {...pageProps} />
-						<StagingEnvironmentBanner />
+						{/* <StagingEnvironmentBanner /> */}
 					</ThemeProvider>
 				</StrictMode>
 			</Container>

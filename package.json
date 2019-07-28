@@ -11,9 +11,10 @@
     "build": "npm-run-all clean build:*",
     "build:entry": "babel src/index.ts --out-dir dist --extensions \".ts\"",
     "build:api": "babel src/api --out-dir dist/api --extensions \".ts\"",
+    "build:apiCommon": "babel src/api-common --out-dir dist/api-common --extensions \".ts\"",
     "build:copyPackageJson": "cpx package.json dist",
     "build:copyCredentials": "mkdirp dist/api/credentials && cpx \"src/api/credentials/*.json\" dist/api/credentials",
-    "build_:next": "next build src",
+    "build:next": "next build src",
     "clean": "rimraf dist"
   },
   "dependencies": {
@@ -107,6 +108,7 @@
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-sortable-hoc": "^1.9.1",
+    "react-ssr-prepass": "^1.0.5",
     "react-swipeable-views": "^0.13.3",
     "react-test-renderer": "^16.8.6",
     "redux": "^4.0.4",

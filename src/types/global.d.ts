@@ -1,18 +1,3 @@
-declare namespace NodeJS {
-	interface ProcessEnv {
-		FIREBASE_APP_CONFIG: {
-			type: "production" | "staging";
-			apiKey: string;
-			authDomain: string;
-			databaseURL: string;
-			projectId: string;
-			storageBucket: string;
-			messagingSenderId: string;
-			appID: string;
-		};
-	}
-}
-
 /**
  * Strict version of the built in `Omit` helper. It enforces that the keys to be
  * omitted actually exist on the target type.

@@ -1,1 +1,5 @@
-export * from "./AppModule";
+export {
+	getRuntimeEnvironment,
+	initializeExpressApp,
+	RuntimeEnvironment,
+} from "./core";

@@ -8,7 +8,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 	enabled: process.env.ANALYZE === "true",
 });
 
-export default applyMiddlewares(
+export default applyPlugins(
 	[
 		withoutTypeChecking,
 		withPolyfills,
@@ -20,16 +20,17 @@ export default applyMiddlewares(
 	],
 	{
 		poweredByHeader: false,
+		target: "serverless",
 		distDir: "../dist/next",
 	},
 );
 
-function applyMiddlewares(
-	middlewares: ((nextConfig?: NextConfig) => NextConfig)[],
+function applyPlugins(
+	plugins: ((nextConfig?: NextConfig) => NextConfig)[],
 	config: NextConfig,
 ) {
-	return middlewares.reduceRight((previousConfig, middleware) => {
-		return middleware(previousConfig);
+	return plugins.reduceRight((previousConfig, plugin) => {
+		return plugin(previousConfig);
 	}, config);
 }
 
